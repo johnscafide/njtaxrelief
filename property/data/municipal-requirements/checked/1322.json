@@ -1,0 +1,221 @@
+{
+  "municipality_code": "1322",
+  "municipality": "Interlaken Borough",
+  "county": "MONMOUTH",
+  "resale_co": {
+    "status": "required",
+    "name": "Certificate of Inspection Permitting Occupancy (Certificate of Occupancy for sale)",
+    "issued_by": "Borough of Interlaken Construction Official (Building & Code office)",
+    "lead_time": "",
+    "valid_for": "",
+    "requirements": [
+      "Written application to the Construction Official before transfer of title or occupancy, naming seller, buyer and proposed occupants, with consent to inspect",
+      "Inspection by the Construction Official; the certificate is issued only when the home complies with all Borough ordinances",
+      "All construction permits (building, electric, plumbing, fire) closed out",
+      "Stairs in good repair, guardrails on walking surfaces 30 inches or higher, windows operable with no broken panes",
+      "Fuel-fired appliance venting intact; visible wiring, electric panel and plumbing fixtures without defects; no obvious roof or wall leaks",
+      "Smoke detector on each level (110 volt and/or 10-year sealed battery type) and a carbon monoxide detector on every level with bedrooms",
+      "Fire separation and a minimum 1 3/8 inch solid core door between an attached garage and the living area",
+      "No double-keyed deadbolts (locks must capture the key)",
+      "Sidewalks free of cracks and trip hazards (maximum 3/4 inch height difference at joints)",
+      "Minimum 2A 10BC fire extinguisher mounted within 10 feet of the kitchen (form still lists it)"
+    ],
+    "fees": [
+      {
+        "label": "Certificate of inspection for the sale of a house (Code 10-5.12g)",
+        "amount": "$100",
+        "quote": "For the rental of an apartment or house, the fee shall be $50 per unit and a fee of $100 for the sale of a house.",
+        "source_url": "https://ecode360.com/35522794",
+        "verified": null
+      },
+      {
+        "label": "Certificate of occupancy application fee for a sale (Borough form)",
+        "amount": "$100.00",
+        "quote": "$ 100.00 FOR SALE",
+        "source_url": "https://www.interlakenboro.com/uploads/2/1/3/0/21304132/2026_certificate_of_occupancy_w_rental.docx",
+        "verified": true
+      }
+    ],
+    "how_to_apply": "Download the Certificate of Occupancy form from the Borough Forms page, check SALE, fill in the owner, buyer, dwelling type and requested inspection date, and return it with the fee to the Construction Department at Borough Hall (Monday to Friday, 8:30 to 4:30). The fee must be paid when you apply. Someone must be present to let the inspector in.",
+    "application_url": "https://www.interlakenboro.com/uploads/2/1/3/0/21304132/2026_certificate_of_occupancy_w_rental.docx",
+    "department_url": "https://www.interlakenboro.com/building--code.html",
+    "phone": "732-531-7405",
+    "email": "",
+    "contact_name": "Tom Haege",
+    "contact_title": "Construction Official / Fire Sub-Code Official",
+    "evidence": [
+      {
+        "url": "https://ecode360.com/35522794",
+        "quote": "No person shall occupy, rent, lease, transfer title to, or suffer the occupancy of, the letting of, or allow any person to live in or upon or inhabit as a tenant or occupant or occupy as a new owner or cotenant or co-owner any dwelling house or dwelling unit within the confines of the Borough unless and until that person shall have first obtained from the Construction Official of the Borough, a Certificate of Inspection Permitting Occupancy",
+        "doc_date": "Ord. No. 228; fee amended 4-17-2019 by Ord. No. 2019-3",
+        "via": "page",
+        "verified": null
+      },
+      {
+        "url": "https://ecode360.com/35522794",
+        "quote": "Transfers of title may take place after application of a Certificate of Inspection for Occupancy, but occupancy shall not be permitted until all items designated for correction by the Construction Official are made and completed.",
+        "doc_date": "Ord. No. 228",
+        "via": "page",
+        "verified": null
+      },
+      {
+        "url": "https://ecode360.com/35522794",
+        "quote": "A certificate of inspection permitting occupancy which is issued under the terms of this section, shall be issued solely by the Construction Official of the Borough for both sales and rentals",
+        "doc_date": "4-17-2019 (Ord. No. 2019-3)",
+        "via": "page",
+        "verified": null
+      },
+      {
+        "url": "https://www.interlakenboro.com/forms.html",
+        "quote": "Certificate of Occupancy Form",
+        "doc_date": "2026-10-04 (page fetched)",
+        "via": "page",
+        "verified": true
+      },
+      {
+        "url": "https://www.interlakenboro.com/uploads/2/1/3/0/21304132/2026_certificate_of_occupancy_w_rental.docx",
+        "quote": "FEE MUST BE PAID AT TIME OF APPLICATION",
+        "doc_date": "2026 (file name)",
+        "via": "page",
+        "verified": true
+      },
+      {
+        "url": "https://www.interlakenboro.com/uploads/2/1/3/0/21304132/2026_certificate_of_occupancy_w_rental.docx",
+        "quote": "Sidewalks free of cracks and trip hazards",
+        "doc_date": "2026 (file name)",
+        "via": "page",
+        "verified": true
+      },
+      {
+        "url": "https://www.interlakenboro.com/building--code.html",
+        "quote": "Tom Haege, Construction Official / Fire Sub-Code Official",
+        "doc_date": "2026-10-04 (page fetched)",
+        "via": "page",
+        "verified": true
+      },
+      {
+        "url": "https://www.interlakenboro.com/building--code.html",
+        "quote": "Our telephone number is 732-531-7405 and our FAX number is 732-531-7099.",
+        "doc_date": "2026-10-04 (page fetched)",
+        "via": "page",
+        "verified": true
+      }
+    ],
+    "confidence": "high",
+    "notes": "Borough Code 10-5.12 (Ord. No. 228, read through the ecode360 print view) requires a Certificate of Inspection Permitting Occupancy from the Construction Official before transfer of title or occupancy; title may transfer after the application is filed, but nobody may move in until the listed corrections are made. The Borough's 2026 Certificate of Occupancy form is a Word (.docx) file, so its quotes may not be machine-checkable; it lists $50.00 for rentals and $100.00 for sale and includes the Borough inspection checklist and an old state smoke detector self-certification page. The construction fee schedule (Code 10-1.2) separately lists 'The fee for a continued of certificate of occupancy shall be $200.' It is not clear whether that applies to resales; the $100 sale fee in 10-5.12 and on the form is used here. The office email is hidden behind a protected link on the Borough site, so no email is recorded. Frank DiRoma is the Zoning and Code Enforcement Official (Monday evenings 4:30 to 6:30 pm by appointment). Rental certificates ($50) are not resale requirements."
+  },
+  "fire_cert": {
+    "requirements": [
+      "Smoke alarms on each level of the home, including basements, and outside each separate sleeping area",
+      "Battery smoke alarms must be 10-year sealed units; AC powered or interconnected alarms in homes built after January 1977 must be kept working",
+      "Carbon monoxide alarm on every level with bedrooms (Borough checklist)",
+      "Minimum 2A 10BC fire extinguisher mounted within 10 feet of the kitchen (Borough checklist still lists it)"
+    ],
+    "authorities": [
+      {
+        "name": "NJ Department of Community Affairs, Division of Fire Safety (state-enforced)",
+        "type": "state_dca",
+        "area_served": "Entire municipality",
+        "lead_time": "Fee depends on how many business days before the change of occupant the request is received: more than 10 business days for the lowest fee.",
+        "fees": [
+          {
+            "label": "State smoke/CO certificate (N.J.A.C. 5:70-2.9(d)), received more than 10 business days before the change of occupant",
+            "amount": "$45.00",
+            "quote": "Requests for a CSACMAPFEC received more than 10 business days prior to the change of occupant: $45.00",
+            "source_url": "https://www.nj.gov/dca/divisions/dfs/codes/regulations/r.2018%20d.074%20(50%20n.j.r.%20729(a)).pdf",
+            "verified": true
+          },
+          {
+            "label": "Received four to 10 business days before",
+            "amount": "$90.00",
+            "quote": "Requests for a CSACMAPFEC received four to 10 business days prior to the change of occupant: $90.00",
+            "source_url": "https://www.nj.gov/dca/divisions/dfs/codes/regulations/r.2018%20d.074%20(50%20n.j.r.%20729(a)).pdf",
+            "verified": true
+          },
+          {
+            "label": "Received fewer than four business days before",
+            "amount": "$161.00",
+            "quote": "Requests for a CSACMAPFEC received fewer than four business days prior to the change of occupant: $161.00",
+            "source_url": "https://www.nj.gov/dca/divisions/dfs/codes/regulations/r.2018%20d.074%20(50%20n.j.r.%20729(a)).pdf",
+            "verified": true
+          }
+        ],
+        "how_to_apply": "Apply online through the DCA Service Portal 'Apply For Smoke Certification' (firesolutions.dca.nj.gov), choosing Monmouth County and Interlaken Borough, or call the Division of Fire Safety at (609) 633-6132.",
+        "application_url": "https://firesolutions.dca.nj.gov/ultra-fire-home/smoke-application-create",
+        "department_url": "https://firesolutions.dca.nj.gov",
+        "phone": "(609) 633-6132",
+        "email": "",
+        "contact_name": "Louis Kilmer",
+        "contact_title": "Fire Official (NJ Division of Fire Safety), per state directory",
+        "evidence": [
+          {
+            "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+            "quote": "S Interlaken Borough",
+            "doc_date": "2026-07",
+            "via": "pdf",
+            "verified": true
+          },
+          {
+            "url": "https://firesolutions.dca.nj.gov",
+            "quote": "Apply For Smoke Certification",
+            "doc_date": "2026-10-04 (page fetched)",
+            "via": "page",
+            "verified": true
+          },
+          {
+            "url": "https://www.nj.gov/dca/divisions/dfs/codes/regulations/r.2018%20d.074%20(50%20n.j.r.%20729(a)).pdf",
+            "quote": "Requests for a CSACMAPFEC received more than 10 business days prior to the change of occupant: $45.00",
+            "doc_date": "2018 (50 N.J.R. 729(a))",
+            "via": "pdf",
+            "verified": true
+          },
+          {
+            "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+            "quote": "Interlaken Boro SMOKE DETECTOR COMPLIANCE Name: Interlaken Boro Zoning Office Enf Auth. State Fire Official Louis Kilmer",
+            "doc_date": "6/26/2026 (survey date)",
+            "via": "state_directory",
+            "verified": null
+          },
+          {
+            "url": "https://www.interlakenboro.com/uploads/2/1/3/0/21304132/2026_certificate_of_occupancy_w_rental.docx",
+            "quote": "CERTIFICATE OF SMOKE DETECTOR COMPLIANCE",
+            "doc_date": "2026 (file name)",
+            "via": "page",
+            "verified": true
+          }
+        ],
+        "confidence": "high"
+      }
+    ],
+    "notes": "Interlaken is state-enforced for the Uniform Fire Code (LEA code S, July 2026 registry), so the smoke/CO certificate falls to NJ DCA. The state fire directory (survey 6/26/2026) lists the 'Interlaken Boro Zoning Office' as the smoke detector compliance contact, and the Borough's 2026 Certificate of Occupancy packet includes an old state 'Application for One & Two Family Certificate of Smoke Detector Compliance' (Bureau of Fire Safety, Trenton, (609) 633-6132). Ask the Borough office whether it collects that form with the CO application or whether the seller must apply separately on the DCA portal. Current state fees are $45 / $90 / $161 under N.J.A.C. 5:70-2.9(d). The Borough checklist still lists a fire extinguisher, which state law (P.L.2025, c.19) dropped from the sale certificate in February 2025."
+  },
+  "other_items": [
+    {
+      "label": "Open permits",
+      "detail": "The Borough inspection checklist requires all construction permits (building, electric, plumbing, fire) to be closed out.",
+      "source_url": "https://www.interlakenboro.com/uploads/2/1/3/0/21304132/2026_certificate_of_occupancy_w_rental.docx"
+    },
+    {
+      "label": "Sidewalk condition",
+      "detail": "The resale inspection checks that sidewalks are free of cracks and trip hazards (maximum 3/4 inch height difference at joints).",
+      "source_url": "https://www.interlakenboro.com/uploads/2/1/3/0/21304132/2026_certificate_of_occupancy_w_rental.docx"
+    }
+  ],
+  "open_questions": [
+    "Does the Borough collect the smoke/CO self-certification with its CO application, or must the seller apply to NJ DCA separately?",
+    "Does the $200 'continued certificate of occupancy' fee in Code 10-1.2 ever apply to resales, or only the $100 sale fee?",
+    "How much lead time does the Construction Official need, and is there a reinspection fee?",
+    "Does the Borough still require the fire extinguisher after P.L.2025, c.19?"
+  ],
+  "checked_at": "2026-10-04",
+  "verification": {
+    "fees": 5,
+    "fee_ok": 4,
+    "fee_bad": 0,
+    "fee_unchecked": 1,
+    "quotes": 13,
+    "q_ok": 9,
+    "q_bad": 0,
+    "q_unchecked": 4
+  }
+}

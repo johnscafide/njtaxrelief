@@ -1,0 +1,240 @@
+{
+  "municipality_code": "1343",
+  "municipality": "Sea Girt Borough",
+  "county": "MONMOUTH",
+  "resale_co": {
+    "status": "required",
+    "name": "Certificate for Sale (Certificate of Occupancy / CCO on sale)",
+    "issued_by": "Borough of Sea Girt Zoning and Code Enforcement (Code Official)",
+    "lead_time": "",
+    "valid_for": "",
+    "requirements": [
+      "On-site inspection of the home by the Code Official before any sale or transfer",
+      "Sidewalks, steps, driveways and similar paved areas must be in a proper state of repair before the sale",
+      "Inspection checklist covers the exterior (property clean and orderly, siding, roofing, windows, screens, handrails, decks, gutters, house number visible) and the interior (smoke and CO alarms, GFI outlets, plumbing, electrical, bedroom egress windows and doors, water heater relief valve, dryer venting)",
+      "Bedroom occupancy limits: 70 sq ft for 1 occupant, 100 for 2, 150 for 3, 200 for 4",
+      "Applicant certifies the home and other structures meet Sea Girt zoning and that no rubbish, debris or bulk garbage will be left before the new occupancy",
+      "Smoke alarm / CO alarm certificate (CSACMAPFEC) for the sale, charged separately (see fire certificate)"
+    ],
+    "fees": [
+      {
+        "label": "Certificate of occupancy inspection and issuance on sale, transfer or lease",
+        "amount": "$100",
+        "quote": "The fee for such inspection and issuance of a certificate of occupancy shall be $100, in addition to the fee required by subsection 13-1.3 and subsection 13-1.4.",
+        "source_url": "https://ecode360.com/36176356",
+        "verified": null
+      },
+      {
+        "label": "Certificate of occupancy reinspection, each",
+        "amount": "$50",
+        "quote": "In the event repairs are required, necessitating reinspection, an additional fee of $50 will be charged for each such reinspection.",
+        "source_url": "https://ecode360.com/36176356",
+        "verified": null
+      },
+      {
+        "label": "Sale certificate application fee (online form fee schedule)",
+        "amount": "$100",
+        "quote": "$100 - Sales",
+        "source_url": "https://main.govpilot.com/web/public/1222558b-a2f_CCO-Landlord-Application-seagirt?uid=7257&ust=NJ&pu=1&id=0",
+        "verified": true
+      }
+    ],
+    "how_to_apply": "Apply online with the Borough's Sale and Rental Certificate application on GovPilot (paper applications are no longer accepted). Give the property, owner, agent and new occupant details, the closing (occupancy) date and the inspection contact, and pay the fee. The Code Enforcement office is on the 2nd floor of Borough Hall, 321 Baltimore Blvd.",
+    "application_url": "https://main.govpilot.com/web/public/1222558b-a2f_CCO-Landlord-Application-seagirt?uid=7257&ust=NJ&pu=1&id=0",
+    "department_url": "https://www.seagirt-nj.gov/zoning-and-code-enforcement",
+    "phone": "(732) 449-9433 ext. 118",
+    "email": "",
+    "contact_name": "Chris Willms",
+    "contact_title": "Code Enforcement / Zoning",
+    "evidence": [
+      {
+        "url": "https://ecode360.com/36176356",
+        "quote": "A certificate of occupancy issued by the Borough Code Official will be required prior to any sale, transfer, or leasing of such property, which will be issued only after satisfactory on-site inspection of the premises by the Code Official.",
+        "doc_date": "",
+        "via": "page",
+        "verified": null
+      },
+      {
+        "url": "https://ecode360.com/36176356",
+        "quote": "No person or other entity shall sell, purchase, or rent any residential property unless its sidewalks, steps and driveways, and similar paved areas, or any portion thereof, are in a proper state of repair so as not to constitute a danger to the public safety.",
+        "doc_date": "",
+        "via": "page",
+        "verified": null
+      },
+      {
+        "url": "https://www.seagirt-nj.gov/zoning-and-code-enforcement",
+        "quote": "The Code Enforcement Officers are also responsible for inspections for all properties to be used as a rental and all commercial and residental property sales within the Borough.",
+        "doc_date": "2026-10-04 (page fetched)",
+        "via": "page",
+        "verified": null
+      },
+      {
+        "url": "https://www.seagirt-nj.gov/zoning-and-code-enforcement",
+        "quote": "Mr. Willms' office hours are Tuesday 2:00pm to 5:00pm and Wednesday from 3:00pm to 6:00pm. He can also be reached at (732) 449-9433 ext. 118.",
+        "doc_date": "2026-10-04 (page fetched)",
+        "via": "page",
+        "verified": null
+      },
+      {
+        "url": "https://www.seagirt-nj.gov/zoning-and-code-enforcement/pages/zoning-code-applicationspermits",
+        "quote": "\"Paper\" applications will not longer be accepted for the following applications/permits:",
+        "doc_date": "2026-10-04 (page fetched)",
+        "via": "page",
+        "verified": null
+      },
+      {
+        "url": "https://main.govpilot.com/web/public/1222558b-a2f_CCO-Landlord-Application-seagirt?uid=7257&ust=NJ&pu=1&id=0",
+        "quote": "I certify that this dwelling and all other structures on the property meet the zoning requirements of Sea Girt.",
+        "doc_date": "",
+        "via": "page",
+        "verified": true
+      },
+      {
+        "url": "https://www.seagirt-nj.gov/sites/g/files/vyhlif3791/f/uploads/updated_certificate_requirements.pdf",
+        "quote": "Certificate for Sales and Rentals Guidelines",
+        "doc_date": "Effective Date: 8/31/2018",
+        "via": "pdf",
+        "verified": true
+      }
+    ],
+    "confidence": "high",
+    "notes": "Property Maintenance chapter 13 (Section 13-1.3g, amending IPMC Section 107.5) was read in full through the ecode360 print view. The online GovPilot form lists $100 for Sales; rental fees are higher and rental registration rules (Chapter 11) apply only to rentals. The Borough site blocks some automated readers, so quotes from seagirt-nj.gov may show as unchecked. Mr. Willms' cell (732) 272-7267 is also listed on the Code Enforcement page. No email address is shown on the page apart from a web contact form. A 2/20/2025 revision of the sale/rental certificate guidelines is posted at https://www.seagirt-nj.gov/home/files/inspection-requirements-2-20-2025."
+  },
+  "fire_cert": {
+    "requirements": [
+      "All smoke alarms tested by push button; homes built before 1978 need at least battery alarms on each level; 1978 to 1983 hardwired with battery backup on each level; 1984 to 1990 also interconnected; 1991 and later also one in each bedroom",
+      "Battery-only smoke alarms must be 10-year sealed units; alarms more than 10 years old are not accepted",
+      "If the home has a monitored alarm system, a letter from the owner, agent or monitoring company saying it is maintained and works",
+      "Carbon monoxide alarms outside each separate sleeping area where there are fuel burning appliances or an attached garage; not older than 5 years or past the maker's expiration date",
+      "Fire extinguisher, minimum 2A:10B:C, within 10 feet of the kitchen, mounted in the exit path and serviced within 12 months or newly bought (2018 guidelines still list it)"
+    ],
+    "authorities": [
+      {
+        "name": "Sea Girt Fire Prevention Bureau (Borough of Sea Girt Code Enforcement / Fire Official)",
+        "type": "municipal_fire_bureau",
+        "area_served": "Entire borough (Sea Girt is also the fire code enforcing agency for Brielle and Spring Lake)",
+        "lead_time": "Fee depends on how many days before occupancy (closing) the application is filed: 10 or more days for the lowest fee.",
+        "fees": [
+          {
+            "label": "CSACMAPFEC, application filed 10 or more days before occupancy",
+            "amount": "$100",
+            "quote": "Application filed 10 or more days before occupancy: $100.",
+            "source_url": "https://ecode360.com/36182038",
+            "verified": null
+          },
+          {
+            "label": "Application filed less than 10 and more than 5 days before occupancy",
+            "amount": "$150",
+            "quote": "Application filed less than 10 and more than five days before occupancy: $150.",
+            "source_url": "https://ecode360.com/36182038",
+            "verified": null
+          },
+          {
+            "label": "Application filed less than 5 and more than 2 days before occupancy",
+            "amount": "$200",
+            "quote": "Application filed less than five days and more than two days before occupancy: $200.",
+            "source_url": "https://ecode360.com/36182038",
+            "verified": null
+          },
+          {
+            "label": "Application filed less than 2 days before occupancy",
+            "amount": "$250",
+            "quote": "Application filed less than two days before occupancy: $250.",
+            "source_url": "https://ecode360.com/36182038",
+            "verified": null
+          },
+          {
+            "label": "Reinspection or missed appointment, each",
+            "amount": "$50",
+            "quote": "A charge of $50 to cover the cost of a reinspection with such application shall be paid to the Borough at the time the inspection is requested.",
+            "source_url": "https://ecode360.com/36182038",
+            "verified": null
+          }
+        ],
+        "how_to_apply": "Request it with the Borough's online Sale and Rental Certificate application on GovPilot (the form collects the CO detector details and occupancy date), and pay the fee. Each reinspection is requested and paid separately.",
+        "application_url": "https://main.govpilot.com/web/public/1222558b-a2f_CCO-Landlord-Application-seagirt?uid=7257&ust=NJ&pu=1&id=0",
+        "department_url": "https://www.seagirt-nj.gov/zoning-and-code-enforcement",
+        "phone": "(732) 449-9433 ext. 118",
+        "email": "cwillms@seagirtboro.com",
+        "contact_name": "Christopher Willms",
+        "contact_title": "Fire Official (state fire directory); Code Enforcement / Zoning (Borough page)",
+        "evidence": [
+          {
+            "url": "https://ecode360.com/36182038",
+            "quote": "The fee for any CSACMAPFEC and issuance of a certificate, as required by N.J.A.C. 5:70-2.3, will be indexed to the scheduled inspection date as it relates to the anticipated contract closing date as follows:",
+            "doc_date": "2024-03-13 (Ord. No. 08-2024)",
+            "via": "page",
+            "verified": null
+          },
+          {
+            "url": "https://ecode360.com/36182038",
+            "quote": "This fee will also be charged for failure to maintain the scheduled appointment or entry to the structure.",
+            "doc_date": "2024-03-13 (Ord. No. 08-2024)",
+            "via": "page",
+            "verified": null
+          },
+          {
+            "url": "https://www.seagirt-nj.gov/sites/g/files/vyhlif3791/f/uploads/updated_certificate_requirements.pdf",
+            "quote": "Fire Extinguisher must be present, minimum 2A:10B:C",
+            "doc_date": "Effective Date: 8/31/2018",
+            "via": "pdf",
+            "verified": true
+          },
+          {
+            "url": "https://www.seagirt-nj.gov/sites/g/files/vyhlif3791/f/uploads/updated_certificate_requirements.pdf",
+            "quote": "Any Detectors greater than 10 years of age shall not be accepted.",
+            "doc_date": "Effective Date: 8/31/2018",
+            "via": "pdf",
+            "verified": true
+          },
+          {
+            "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+            "quote": "F Sea Girt Borough",
+            "doc_date": "2026-07",
+            "via": "pdf",
+            "verified": true
+          },
+          {
+            "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+            "quote": "Sea Girt Borough is the LEA for Brielle Borough & Spring Lake Boro",
+            "doc_date": "2026-07",
+            "via": "pdf",
+            "verified": true
+          },
+          {
+            "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+            "quote": "LEAID: 1344-001 Sea Girt Boro SMOKE DETECTOR COMPLIANCE Name: Sea Girt Boro Code Enf Enf Auth. Fire Dept Fire Official Christopher Willms Phone (732) 449-9433 Email cwillms@seagirtboro.com",
+            "doc_date": "2026-08-05 (survey date)",
+            "via": "state_directory",
+            "verified": null
+          }
+        ],
+        "confidence": "high"
+      }
+    ],
+    "notes": "Fee tiers are in Section 20-1.14 (added March 13, 2024 by Ord. No. 08-2024), read in full through the ecode360 print view, and count days between the application and occupancy. The 2018 guidelines still list a fire extinguisher; P.L.2025, c.19 dropped it from the state sale certificate in February 2025. A revised guideline dated 02/20/2025 is posted; the part readable online covers smoke and CO alarms, and it was not confirmed whether the extinguisher was removed. The email cwillms@seagirtboro.com comes from the state fire directory."
+  },
+  "other_items": [
+    {
+      "label": "Sidewalks, steps and driveways",
+      "detail": "No residential property may be sold unless its sidewalks, steps, driveways and similar paved areas are in a proper state of repair; this is checked at the certificate inspection.",
+      "source_url": "https://ecode360.com/36176356"
+    }
+  ],
+  "open_questions": [
+    "Is the $100 smoke/CO certificate fee charged on top of the $100 sale certificate fee, or does the single GovPilot payment cover both?",
+    "Does the 02/20/2025 guideline still require a fire extinguisher at sale?",
+    "How long is the sale certificate valid, and what is the usual inspection lead time?"
+  ],
+  "checked_at": "2026-10-04",
+  "verification": {
+    "fees": 8,
+    "fee_ok": 1,
+    "fee_bad": 0,
+    "fee_unchecked": 7,
+    "quotes": 14,
+    "q_ok": 6,
+    "q_bad": 0,
+    "q_unchecked": 8
+  }
+}

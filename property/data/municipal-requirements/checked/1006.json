@@ -1,0 +1,230 @@
+{
+  "municipality_code": "1006",
+  "municipality": "Clinton Township",
+  "county": "HUNTERDON",
+  "resale_co": {
+    "status": "required",
+    "name": "Certificate of Construction Records Clearance (CRC), described on the Township site as a Municipal Code Compliance Inspection",
+    "issued_by": "Clinton Township Construction Code Enforcement (Building Department)",
+    "lead_time": "The Township processes requests made more than 10 business days ahead within 10 business days; later requests cost more and timing is not guaranteed",
+    "valid_for": "Six months from the date of issuance, provided no change in occupancy has occurred",
+    "requirements": [
+      "Records inspection for open construction permits and pending, open, unabated violations",
+      "All building permits must be closed out (final inspections and prior approvals obtained) and violations cured before the certificate is issued",
+      "Bring the completed application and fee to the Building Department to schedule"
+    ],
+    "fees": [
+      {
+        "label": "Construction Records Clearance, more than 10 business days before closing",
+        "amount": "$75.00",
+        "quote": "$ 75.00 More than 10 business days",
+        "source_url": "https://www.clintontwpnj.gov/_Content/pdf/forms/construction-code/construction-records-clearance-application.pdf",
+        "verified": true
+      },
+      {
+        "label": "Construction Records Clearance, 10 business days or less before closing",
+        "amount": "$100.00",
+        "quote": "$ 100.00 10 business days or less",
+        "source_url": "https://www.clintontwpnj.gov/_Content/pdf/forms/construction-code/construction-records-clearance-application.pdf",
+        "verified": true
+      },
+      {
+        "label": "Updated certificate (update of a prior records inspection within six months)",
+        "amount": "$35.00",
+        "quote": "$ 35.00 Updated Certificate",
+        "source_url": "https://www.clintontwpnj.gov/_Content/pdf/forms/construction-code/construction-records-clearance-application.pdf",
+        "verified": true
+      }
+    ],
+    "how_to_apply": "Complete the Construction Records Clearance Application and bring it with the fee to the Building Department, 1225 Route 31 South, Building D, 1st Floor, Lebanon. Choose call-to-pick-up or email delivery on the form.",
+    "application_url": "https://www.clintontwpnj.gov/_Content/pdf/forms/construction-code/construction-records-clearance-application.pdf",
+    "department_url": "https://www.clintontwpnj.gov/department/construction-code-enforcement",
+    "phone": "908-735-8800 ext. 258",
+    "email": "thowell@clintontwpnj.org",
+    "contact_name": "Terri Howell",
+    "contact_title": "Technical Assistant (Construction Official: Tom Petto, ext. 256, tpetto@clintontwpnj.org)",
+    "evidence": [
+      {
+        "url": "https://www.clintontwpnj.gov/department/construction-code-enforcement",
+        "quote": "Whenever a house, apartment, or any other structure is rented or sold, The Clinton Township Code section 158-8 A requires the current owner to obtain a Municipal Code Compliance Inspection.",
+        "doc_date": "2026-10-04 (page fetched)",
+        "via": "page",
+        "verified": true
+      },
+      {
+        "url": "https://www.clintontwpnj.gov/department/construction-code-enforcement",
+        "quote": "You must complete the following form and bring it to the Building Department with the fee to schedule an inspection.",
+        "doc_date": "2026-10-04 (page fetched)",
+        "via": "page",
+        "verified": true
+      },
+      {
+        "url": "https://www.clintontwpnj.gov/department/construction-code-enforcement",
+        "quote": "All building permits must be closed out before a certificate can be issued.",
+        "doc_date": "2026-10-04 (page fetched)",
+        "via": "page",
+        "verified": true
+      },
+      {
+        "url": "https://ecode360.com/14397153",
+        "quote": "A CRC shall be required prior to the conveyance of any residential building, or individual residential unit within a building.",
+        "doc_date": "2015-12-09 (Ord. No. 1079-15)",
+        "via": "page",
+        "verified": null
+      },
+      {
+        "url": "https://ecode360.com/14397157",
+        "quote": "For requests made more than 10 business days prior to the change in occupancy, it being acknowledged the Township shall process an application for a CRC within 10 business days",
+        "doc_date": "2015-12-09 (Ord. No. 1079-15)",
+        "via": "page",
+        "verified": null
+      },
+      {
+        "url": "https://ecode360.com/14397158",
+        "quote": "Validity. A CRC shall be valid for a period of six months from the date of its issuance, provided no change in occupancy has occurred during said six months.",
+        "doc_date": "2015-12-09 (Ord. No. 1079-15)",
+        "via": "page",
+        "verified": null
+      },
+      {
+        "url": "https://www.clintontwpnj.gov/_Content/pdf/forms/construction-code/construction-records-clearance-application.pdf",
+        "quote": "Application for Construction Records Clearance",
+        "doc_date": "07/20/2020",
+        "via": "pdf",
+        "verified": true
+      }
+    ],
+    "confidence": "high",
+    "notes": "Township Code 155-8C (amended 12-9-2015 by Ord. No. 1079-15) requires a CRC before any residential conveyance, with exemptions such as deed corrections, transfers between spouses or between parent and child, estate distributions, refinancing and any transfer that does not change occupancy. A buyer may agree in writing to take responsibility for the CRC before occupying. The construction page cites 'section 158-8 A', but the CRC is actually in Code 155-8C. The page calls it a Municipal Code Compliance Inspection and says to bring the form in 'to schedule an inspection', while the ordinance describes a records inspection; ask whether a site visit happens. Contacts (Terri Howell, Tom Petto) come from the department page contact block, which loads by script. The packs.json ecode link (CL0749) is the Town of Clinton's code; Clinton Township's code is ecode360.com/CL1920."
+  },
+  "fire_cert": {
+    "requirements": [
+      "Smoke alarm on each level of the home and outside each separate sleeping area",
+      "Battery-only smoke alarms must be 10-year sealed battery units; hardwired alarms from original construction may not be replaced with battery alarms",
+      "Carbon monoxide alarm in the immediate vicinity of the sleeping areas (where there is a fuel-burning appliance or attached garage)",
+      "Secondary power source identification label, only if the home has a secondary power source (added by P.L.2025, c.19)"
+    ],
+    "authorities": [
+      {
+        "name": "Clinton Township Bureau of Fire Safety (Fire Marshal's Office)",
+        "type": "municipal_fire_bureau",
+        "area_served": "Entire municipality",
+        "lead_time": "Allow at least 1 to 2 weeks for mailed applications; fees step up at 10 and 4 business days before the change of occupancy",
+        "fees": [
+          {
+            "label": "Smoke/CO certificate, more than 10 business days before change of occupancy",
+            "amount": "$50.00",
+            "quote": "$ 50.00 Received more than 10 business days before the change of occupancy",
+            "source_url": "https://www.clintontwpnj.gov/_Content/pdf/forms/fire/Smoke-Alarm-Carbon-Monoxide-Alarm-Fire-Extinguisher-Compliance-App.pdf",
+            "verified": true
+          },
+          {
+            "label": "4 to 10 business days before change of occupancy",
+            "amount": "$90.00",
+            "quote": "$ 90.00 Received 4 - 10 business days before the change of occupancy",
+            "source_url": "https://www.clintontwpnj.gov/_Content/pdf/forms/fire/Smoke-Alarm-Carbon-Monoxide-Alarm-Fire-Extinguisher-Compliance-App.pdf",
+            "verified": true
+          },
+          {
+            "label": "Fewer than 4 business days before change of occupancy",
+            "amount": "$161.00",
+            "quote": "$ 161.00 Received fewer than 4 business days before the change of occupancy",
+            "source_url": "https://www.clintontwpnj.gov/_Content/pdf/forms/fire/Smoke-Alarm-Carbon-Monoxide-Alarm-Fire-Extinguisher-Compliance-App.pdf",
+            "verified": true
+          },
+          {
+            "label": "Re-inspection (failed inspection or no-show)",
+            "amount": "$50.00",
+            "quote": "$50.00 Re-inspection Fee [Re-inspection could take up to 10 days]",
+            "source_url": "https://www.clintontwpnj.gov/_Content/pdf/forms/fire/Smoke-Alarm-Carbon-Monoxide-Alarm-Fire-Extinguisher-Compliance-App.pdf",
+            "verified": true
+          }
+        ],
+        "how_to_apply": "Complete the Township application for smoke alarm, carbon monoxide alarm and secondary power source ID (updated 2025-03-26) and send it with a check payable to Township of Clinton Bureau of Fire Safety, 1225 Route 31 South, Suite 411, Lebanon, NJ 08833.",
+        "application_url": "https://www.clintontwpnj.gov/_Content/pdf/forms/fire/Smoke-Alarm-Carbon-Monoxide-Alarm-Fire-Extinguisher-Compliance-App.pdf",
+        "department_url": "https://www.clintontwpnj.gov/department/fire-safety",
+        "phone": "908-735-8800 ext. 254",
+        "email": "firemarshal@clintontwpnj.org",
+        "contact_name": "Frank Ur",
+        "contact_title": "Fire Marshal",
+        "evidence": [
+          {
+            "url": "https://www.clintontwpnj.gov/_Content/pdf/forms/fire/Smoke-Alarm-Carbon-Monoxide-Alarm-Fire-Extinguisher-Compliance-App.pdf",
+            "quote": "Updated 2025-03-26",
+            "doc_date": "2025-03-26",
+            "via": "pdf",
+            "verified": true
+          },
+          {
+            "url": "https://www.clintontwpnj.gov/_Content/pdf/forms/fire/Smoke-Alarm-Carbon-Monoxide-Alarm-Fire-Extinguisher-Compliance-App.pdf",
+            "quote": "Portable Fire Extinguishers are no longer required to be installed and maintained.",
+            "doc_date": "2025-03-26",
+            "via": "pdf",
+            "verified": true
+          },
+          {
+            "url": "https://www.clintontwpnj.gov/_Content/pdf/forms/fire/Smoke-Alarm-Carbon-Monoxide-Alarm-Fire-Extinguisher-Compliance-App.pdf",
+            "quote": "Township of Clinton Bureau of Fire Safety",
+            "doc_date": "2025-03-26",
+            "via": "pdf",
+            "verified": true
+          },
+          {
+            "url": "https://ecode360.com/33022893",
+            "quote": "Requests for CSACMAPFEC received more than 10 business days prior to change of occupancy shall be $50.",
+            "doc_date": "2026-10-04 (Code 133-10A, page fetched)",
+            "via": "page",
+            "verified": null
+          },
+          {
+            "url": "https://ecode360.com/33022895",
+            "quote": "Requests for CSACMAPFEC received fewer than four business days prior to the change of occupancy shall be $161.",
+            "doc_date": "2026-10-04 (Code 133-10C, page fetched)",
+            "via": "page",
+            "verified": null
+          },
+          {
+            "url": "https://www.clintontwpnj.gov/department/fire-safety",
+            "quote": "The Fire Marshal’s Office has the responsibility of inspecting all structures, events, activities, and storage that require a permit, residential homes, and apartments that are changing occupancy or are for resale.",
+            "doc_date": "2026-10-04 (page fetched)",
+            "via": "page",
+            "verified": true
+          },
+          {
+            "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+            "quote": "M Clinton Township",
+            "doc_date": "2026-07",
+            "via": "pdf",
+            "verified": true
+          },
+          {
+            "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+            "quote": "Clinton Township1006 LEAID: 1006-001 Enf Auth. Municipal Fire Official Frank Ur Phone (908) 735-8800 Email fireinspector2@clintontwpnj.org",
+            "doc_date": "7/28/2025 (survey date)",
+            "via": "state_directory",
+            "verified": null
+          }
+        ],
+        "confidence": "high"
+      }
+    ],
+    "notes": "Clinton Township enforces the fire code locally through its Bureau of Fire Safety (LEA code M), which also serves Lebanon Borough. Code 133-10 sets $50 / $90 / $161 plus a $50 reinspection or no-show fee, matching the 2025-03-26 application. The application already reflects P.L.2025, c.19: it drops the portable fire extinguisher and adds the secondary power source identification label. Code 133-10 still names the certificate as including a portable fire extinguisher, but the newer form controls in practice. Fire Marshal contact details (Frank Ur, ext. 254, firemarshal@clintontwpnj.org) come from the Fire Safety page contact block, which loads by script; the state directory lists fireinspector2@clintontwpnj.org."
+  },
+  "other_items": [],
+  "open_questions": [
+    "Does the Municipal Code Compliance Inspection include a site visit, or only a records check?",
+    "Is the 'section 158-8 A' reference on the construction page just a typo for Code 155-8C?",
+    "How far ahead does the Fire Marshal schedule smoke/CO inspections in busy months?"
+  ],
+  "checked_at": "2026-10-04",
+  "verification": {
+    "fees": 7,
+    "fee_ok": 7,
+    "fee_bad": 0,
+    "fee_unchecked": 0,
+    "quotes": 15,
+    "q_ok": 9,
+    "q_bad": 0,
+    "q_unchecked": 6
+  }
+}

@@ -1,0 +1,227 @@
+{
+  "municipality_code": "1331",
+  "municipality": "Matawan Borough",
+  "county": "MONMOUTH",
+  "checked_at": "2026-10-04",
+  "resale_co": {
+    "status": "required",
+    "name": "Resale Certificate of Continued Occupancy (Resale-CCO), including the smoke and CO certificate",
+    "issued_by": "Borough of Matawan Fire Prevention Bureau",
+    "lead_time": "The Bureau suggests filing a month in advance. The fee depends on how many business days before the requested inspection date the application is received (more than 10 business days for the lowest fee). Inspections are held on various days between 10 am and 2 pm; work needing construction permits can delay the closing.",
+    "valid_for": "60 days from the first inspection date",
+    "requirements": [
+      "Resale-CCO inspection by the Fire Prevention Bureau, which includes the Certificate of Smoke Alarm and Carbon Monoxide Detector Compliance",
+      "All buildings and items (boilers, hot water heaters, etc.) must have the proper construction permits on record; missing permits must be taken out and inspected before the CCO is issued",
+      "Email the completed application with the MLS sheet and the realtor's business card, plus a requested inspection date from the Fire Official's calendar",
+      "Closing attorneys must confirm the closing within 5 days of closing",
+      "A temporary CCO (TCCO) is only for unoccupied properties that meet the smoke alarm rules, at the Fire Official's discretion"
+    ],
+    "fees": [
+      {
+        "label": "Resale-CCO, single family, received more than 10 business days before the requested inspection (includes smoke certificate)",
+        "amount": "$110.00",
+        "quote": "RECEIVED PRIOR TO 10 BUSINESS DAYS OF REQUESTED INSPECTION DATE - $110.00",
+        "source_url": "https://www.matawanborough.com/matawan/Departments/Fire%20Prevention%20Bureau/",
+        "verified": true
+      },
+      {
+        "label": "Resale-CCO, single family, received 4 to 10 business days before the requested inspection",
+        "amount": "$135.00",
+        "quote": "RECEIVED 4 TO 10 BUSINESS DAYS OF REQUESTED INSPECTION DATE - $135.00",
+        "source_url": "https://www.matawanborough.com/matawan/Departments/Fire%20Prevention%20Bureau/",
+        "verified": true
+      },
+      {
+        "label": "Resale-CCO, single family, received fewer than 4 business days before the requested inspection",
+        "amount": "$160.00",
+        "quote": "RECEIVED FEWER THAN 4 BUSINESS DAYS OF REQUESTED INSPECTION DATE - $160.00",
+        "source_url": "https://www.matawanborough.com/matawan/Departments/Fire%20Prevention%20Bureau/",
+        "verified": true
+      },
+      {
+        "label": "Resale-CCO, duplex or two family (any date)",
+        "amount": "$185.00",
+        "quote": "DUPLEX OR TWO FAMILY RE-SALE CCO $185.00",
+        "source_url": "https://www.matawanborough.com/matawan/Departments/Fire%20Prevention%20Bureau/",
+        "verified": true
+      },
+      {
+        "label": "Temporary Resale-CCO (additional)",
+        "amount": "$250.00",
+        "quote": "TEMPORARY RESALE-CCO $250.00",
+        "source_url": "https://www.matawanborough.com/matawan/Departments/Fire%20Prevention%20Bureau/",
+        "verified": true
+      },
+      {
+        "label": "Re-inspection",
+        "amount": "$25.00",
+        "quote": "ANY- RE-INSPECTION FEE $25.00",
+        "source_url": "https://www.matawanborough.com/matawan/Departments/Fire%20Prevention%20Bureau/",
+        "verified": true
+      },
+      {
+        "label": "Duplex or two family Resale-CCO, Borough Code 17-2c4 (includes smoke certificate)",
+        "amount": "$185",
+        "quote": "Each duplex or Two Family for a Resale-Certificate of Continued Occupancy This fee includes smoke certificate. | $185",
+        "source_url": "https://ecode360.com/35432278",
+        "verified": null
+      }
+    ],
+    "how_to_apply": "Fill out the Resale-CCO application and email it with the MLS listing sheet, the realtor's business card and a requested inspection date (from the Fire Official's posted schedule) to the Fire Prevention Bureau (Jose Pujols, Lynn Kramer or Lara Calo). Once the forms are checked, the Bureau gives you an inspection number and the fee by phone or email. Pay online through the Borough's Online Payments tab under Fire Prevention (Payment Service Network, description 'RESALE CCO'), or by check payable to 'Matawan Fire Prevention Bureau'. The Bureau then confirms the inspection date and time.",
+    "application_url": "https://www.matawanborough.com/matawan/Departments/Fire%20Prevention%20Bureau/APPLICATION%20FOR%20RESALE-CCO%20NEW.pdf",
+    "department_url": "https://www.matawanborough.com/matawan/Departments/Fire%20Prevention%20Bureau/",
+    "phone": "732-566-3898",
+    "email": "Jose.Pujols@MatawanBorough.com",
+    "contact_name": "Jose Pujols",
+    "contact_title": "Fire Official (x135); Fire Prevention Office Assistant Lynn Kramer (x128, Lynn.Kramer@MatawanBorough.com)",
+    "evidence": [
+      {
+        "url": "https://www.matawanborough.com/matawan/Departments/Fire%20Prevention%20Bureau/",
+        "quote": "The Fire Prevention Bureau is responsible for Continued Certificate of Occupancies(CCO) in all residential change of tenancy(Rentals) and transfer of deeds(Resales).",
+        "doc_date": "2026-10-04 (page fetched)",
+        "via": "page",
+        "verified": true
+      },
+      {
+        "url": "https://www.matawanborough.com/matawan/Departments/Fire%20Prevention%20Bureau/",
+        "quote": "The CCO includes the NJ Uniform Fire Code Certificate of Smoke Alarm and Carbon Monoxode Detector Compliance.",
+        "doc_date": "2026-10-04 (page fetched)",
+        "via": "page",
+        "verified": true
+      },
+      {
+        "url": "https://www.matawanborough.com/matawan/Departments/Fire%20Prevention%20Bureau/",
+        "quote": "ONCE ALL FORMS ARE RECEIVED AND VERIFIED AN INSPECTION NUMBER AND FEE AMOUNT WILL BE ISSUED TO YOU BY PHONE OR EMAIL.",
+        "doc_date": "2026-10-04 (page fetched)",
+        "via": "page",
+        "verified": true
+      },
+      {
+        "url": "https://ecode360.com/35432278",
+        "quote": "Any residential unit that is sold or transferred without a certificate of continued occupancy is in violation, and the buyer and seller are subject to fines.",
+        "doc_date": "2024-06-06 (Ord. No. 2024-12)",
+        "via": "page",
+        "verified": null
+      },
+      {
+        "url": "https://ecode360.com/35432278",
+        "quote": "If any building or items do not have construction permits, new permits must be taken out in that subcode and be inspected before a certificate of continued occupancy can be issued.",
+        "doc_date": "2024-06-06 (Ord. No. 2024-12)",
+        "via": "page",
+        "verified": null
+      },
+      {
+        "url": "https://www.matawanborough.com/matawan/Departments/Fire%20Prevention%20Bureau/APPLICATION%20FOR%20RESALE-CCO%20NEW.pdf",
+        "quote": "A CCO is good for 60 days from the first inspection date.",
+        "doc_date": "",
+        "via": "pdf",
+        "verified": null
+      },
+      {
+        "url": "https://www.matawanborough.com/matawan/Departments/Fire%20Prevention%20Bureau/APPLICATION%20FOR%20RESALE-CCO%20NEW.pdf",
+        "quote": "We suggest that you file for a CCO a MONTH in advance.",
+        "doc_date": "",
+        "via": "pdf",
+        "verified": null
+      }
+    ],
+    "confidence": "high",
+    "notes": "Borough Code Chapter 17, Section 17-2 (fee schedule, amended 6-6-2024 by Ord. No. 2024-12) was read through the ecode360 print view. It splits the single family fee into Resale-CCO plus a $35 smoke certificate ($75 + $35 = $110; $100 + $35 = $135; $125 + $35 = $160). The Bureau page adds a $25 re-inspection fee not in the code table. The resale application PDF is a scanned image (no text layer), so its quotes cannot be machine-checked; it lists a $20.00 returned check fee and says to make checks payable to Matawan Fire Prevention Bureau. Fire Inspectors are Ed Lee and Xavier Romo. Rental registration ($250 per new unit) and rental CCOs are separate rental programs."
+  },
+  "fire_cert": {
+    "requirements": [
+      "Smoke alarms and carbon monoxide alarms per N.J.A.C. 5:70-4.19; battery-only smoke alarms must have a 10-year sealed battery",
+      "Checked during the Resale-CCO inspection; no separate application"
+    ],
+    "authorities": [
+      {
+        "name": "Borough of Matawan Fire Prevention Bureau (Matawan Borough Fire Department)",
+        "type": "municipal_fire_bureau",
+        "area_served": "Entire borough",
+        "lead_time": "Same as the Resale-CCO: fee tiers are counted in business days before the requested inspection date.",
+        "fees": [
+          {
+            "label": "Smoke certificate (CSDCMC) portion of the single family Resale-CCO fee",
+            "amount": "$35",
+            "quote": "Smoke certificate: $35.",
+            "source_url": "https://ecode360.com/35432278",
+            "verified": null
+          }
+        ],
+        "how_to_apply": "Included in the Resale-CCO application and fee (see resale certificate).",
+        "application_url": "https://www.matawanborough.com/matawan/Departments/Fire%20Prevention%20Bureau/APPLICATION%20FOR%20RESALE-CCO%20NEW.pdf",
+        "department_url": "https://www.matawanborough.com/matawan/Departments/Fire%20Prevention%20Bureau/",
+        "phone": "732-566-3898",
+        "email": "Jose.Pujols@MatawanBorough.com",
+        "contact_name": "Jose Pujols",
+        "contact_title": "Fire Official",
+        "evidence": [
+          {
+            "url": "https://ecode360.com/35432278",
+            "quote": "This fee includes the Resale-Certificate of Continued Occupancy (Resale-CCO) and Smoke Certificate (CSDCMC).",
+            "doc_date": "2024-06-06 (Ord. No. 2024-12)",
+            "via": "page",
+            "verified": null
+          },
+          {
+            "url": "https://ecode360.com/35432278",
+            "quote": "The local enforcing agency of the Uniform Fire Safety Act shall be the Matawan Borough Fire Department and the Bureau of Fire Prevention created within that Department.",
+            "doc_date": "2024-06-06",
+            "via": "page",
+            "verified": null
+          },
+          {
+            "url": "https://www.matawanborough.com/matawan/Departments/Fire%20Prevention%20Bureau/",
+            "quote": "The Fire code now requires all battery operated smoke detectors to have a 10 year sealed battery.",
+            "doc_date": "2026-10-04 (page fetched)",
+            "via": "page",
+            "verified": true
+          },
+          {
+            "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+            "quote": "LEAID: 1329-001 Enf Auth. Fire Dept Fire Official Jose E Pujols Phone (732) 566-3898 ... Email jose.pujols@matawanborough.com",
+            "doc_date": "2014 (survey date 3/12/2014)",
+            "via": "state_directory",
+            "verified": null
+          },
+          {
+            "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+            "quote": "F Matawan Borough",
+            "doc_date": "2026-07",
+            "via": "pdf",
+            "verified": true
+          }
+        ],
+        "confidence": "high"
+      }
+    ],
+    "notes": "The smoke/CO certificate is bundled into the Resale-CCO; the Borough code puts $35 of each single family fee toward it, and the two family fee of $185 includes it. No fire extinguisher is mentioned on the Bureau page or the code fee section. Note the Borough code says the fire LEA covers buildings other than owner-occupied one and two family homes, but the Bureau's own page says it handles resale CCOs including the smoke/CO certificate."
+  },
+  "other_items": [
+    {
+      "label": "Construction permits on record",
+      "detail": "Boilers, water heaters and other work must have permits on record; unpermitted items need new permits and inspections before the CCO is issued.",
+      "source_url": "https://ecode360.com/35432278"
+    },
+    {
+      "label": "Closing confirmation",
+      "detail": "Closing attorneys must confirm the closing to the Fire Prevention Bureau within 5 days of closing.",
+      "source_url": "https://www.matawanborough.com/matawan/Departments/Fire%20Prevention%20Bureau/APPLICATION%20FOR%20RESALE-CCO%20NEW.pdf"
+    }
+  ],
+  "open_questions": [
+    "Is a final water or sewer reading needed from the Borough utility before closing?",
+    "Does the Bureau check for a fire extinguisher at resale?",
+    "How far out are resale inspections booking on the Fire Official's schedule?"
+  ],
+  "verification": {
+    "fees": 8,
+    "fee_ok": 6,
+    "fee_bad": 0,
+    "fee_unchecked": 2,
+    "quotes": 12,
+    "q_ok": 5,
+    "q_bad": 0,
+    "q_unchecked": 7
+  }
+}

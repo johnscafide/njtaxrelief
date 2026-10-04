@@ -1,0 +1,183 @@
+{
+  "municipality_code": "1303",
+  "municipality": "Allentown Borough",
+  "county": "MONMOUTH",
+  "resale_co": {
+    "status": "required",
+    "name": "Certificate of Occupancy for re-sale (housing inspection)",
+    "issued_by": "Upper Freehold Township Housing Inspector, under Allentown Borough's shared service agreement with Upper Freehold Township",
+    "lead_time": "An appointment is scheduled with the Housing Inspector after the application and fee are received.",
+    "valid_for": "60 days once issued",
+    "requirements": [
+      "Housing inspection by the Upper Freehold Township Housing Inspector",
+      "Any housing violations must be corrected before the certificate is issued",
+      "For homes on a private well: well water requirements set by the Hamilton Township Health Department, which issues a certificate of compliance",
+      "Smoke detector on each floor including the basement and outside bedroom doors; ten-year sealed battery unless AC powered interconnected",
+      "Carbon monoxide detectors in the vicinity of all bedrooms",
+      "Residential ABC fire extinguisher, no larger than 10 lb, within 10 feet of the kitchen (form still lists it)"
+    ],
+    "fees": [
+      {
+        "label": "Re-sale or rental inspection application",
+        "amount": "$100.00",
+        "quote": "A $100.00 fee is required when applying for re-sale or rental of a house",
+        "source_url": "https://allentownboronj.com/vertical/sites/%7B7748EEEB-2391-4653-8B6A-4A64C85A6D79%7D/uploads/Application.pdf",
+        "verified": null
+      }
+    ],
+    "how_to_apply": "Fill out the 'Upper Freehold Township / Allentown Borough Application for Re-Sale or Rental of Property' (check Resale) and pay the $100.00 fee. The Housing Inspector then schedules the inspection. The Upper Freehold Township Municipal Building is at 314 Route 539, Cream Ridge, NJ 08514, phone 609-758-7738, Monday to Thursday 8:30 AM to 4:15 PM.",
+    "application_url": "https://allentownboronj.com/vertical/sites/%7B7748EEEB-2391-4653-8B6A-4A64C85A6D79%7D/uploads/Application.pdf",
+    "department_url": "https://allentownboronj.com/index.asp?SEC=7808D9E7-82BB-4F21-97A3-C9DB99A7CF28",
+    "phone": "609-758-7738",
+    "email": "rgafgen@uftnj.com",
+    "contact_name": "Ron Gafgen",
+    "contact_title": "Construction Official (Upper Freehold Township, shared service for Allentown)",
+    "evidence": [
+      {
+        "url": "https://allentownboronj.com/vertical/sites/%7B7748EEEB-2391-4653-8B6A-4A64C85A6D79%7D/uploads/Application.pdf",
+        "quote": "APPLICATION FOR RE-SALE OR RENTAL OF PROPERTY",
+        "doc_date": "2019-02-13 (PDF created)",
+        "via": "pdf",
+        "verified": null
+      },
+      {
+        "url": "https://allentownboronj.com/vertical/sites/%7B7748EEEB-2391-4653-8B6A-4A64C85A6D79%7D/uploads/Application.pdf",
+        "quote": "Housing Inspector will issue the CERTIFICATE OF OCCUPANCY for your property.",
+        "doc_date": "2019-02-13 (PDF created)",
+        "via": "pdf",
+        "verified": null
+      },
+      {
+        "url": "https://allentownboronj.com/vertical/sites/%7B7748EEEB-2391-4653-8B6A-4A64C85A6D79%7D/uploads/Application.pdf",
+        "quote": "A certificate of occupancy, once issued, is valid for 60 days",
+        "doc_date": "2019-02-13 (PDF created)",
+        "via": "pdf",
+        "verified": null
+      },
+      {
+        "url": "https://allentownboronj.com/vertical/sites/%7B7748EEEB-2391-4653-8B6A-4A64C85A6D79%7D/uploads/Application.pdf",
+        "quote": "HAMILTON TOWNSHIP HEALTH DEPARTMENT WILL ISSUE A CERTIFICATE OF COMPLIANCE.",
+        "doc_date": "2019-02-13 (PDF created)",
+        "via": "pdf",
+        "verified": null
+      },
+      {
+        "url": "https://allentownboronj.com/index.asp?SEC=FD810ACB-AA5C-494E-8696-E6D815AA346D",
+        "quote": "Certificate of Occupancy Application",
+        "doc_date": "2026-10-04 (page fetched)",
+        "via": "page",
+        "verified": true
+      },
+      {
+        "url": "https://allentownboronj.com/index.asp?SEC=7808D9E7-82BB-4F21-97A3-C9DB99A7CF28",
+        "quote": "Allentown Borough's Construction Office is in Upper Freehold Township.",
+        "doc_date": "2026-10-04 (page fetched)",
+        "via": "page",
+        "verified": true
+      },
+      {
+        "url": "https://allentownboronj.com/index.asp?SEC=7808D9E7-82BB-4F21-97A3-C9DB99A7CF28",
+        "quote": "Allentown Borough has a shared service agreement with Upper Freehold Township for Construction, Buildings and Permits.",
+        "doc_date": "2026-10-04 (page fetched)",
+        "via": "page",
+        "verified": true
+      }
+    ],
+    "confidence": "medium",
+    "notes": "The Borough's Applications and Forms page links a joint Upper Freehold Township / Allentown Borough 'Application for Re-Sale or Rental of Property' ($100.00 fee, 60-day certificate). It is a scanned PDF from 2019, so its quotes cannot be machine-checked, and no Borough ordinance requiring a resale inspection was found in the Allentown code on ecode360 (the $200 'Certificate of Continued Occupancy' fee in Chapter 11 is a construction code fee, not a resale inspection). The Construction page names Construction Official Ron Gafgen (rgafgen@uftnj.com, 609-758-7738 x222) but no housing inspector by name. Landlord registration is rental-only."
+  },
+  "fire_cert": {
+    "requirements": [
+      "Smoke detector on each floor level including the basement and outside bedroom doors",
+      "Smoke detectors must be ten-year sealed battery units unless AC powered interconnected; removable-battery detectors fail",
+      "Carbon monoxide detectors in the vicinity of all bedrooms",
+      "Residential ABC fire extinguisher, no larger than 10 lb, within 10 feet of the kitchen (form still lists it)"
+    ],
+    "authorities": [
+      {
+        "name": "Robbinsville Township Bureau of Fire Prevention (Division of Fire), local enforcing agency for Allentown under a shared services agreement",
+        "type": "municipal_fire_bureau",
+        "area_served": "Entire borough",
+        "lead_time": "",
+        "fees": [],
+        "how_to_apply": "No smoke/CO application or fee schedule for Allentown was found online. Call the fire official listed in the state directory (609-758-7738) to confirm where to apply and pay.",
+        "application_url": "",
+        "department_url": "",
+        "phone": "(609) 758-7738",
+        "email": "bjohnson@robbinsville.net",
+        "contact_name": "Brian Johnson",
+        "contact_title": "Fire Official, per state directory",
+        "evidence": [
+          {
+            "url": "https://ecode360.com/46098830",
+            "quote": "The local enforcement agency (\"LEA\") within the Borough of Allentown shall be the Bureau of Fire Prevention within the Division of Fire of the Township of Robbinsville, as set forth in the shared services agreement executed by the Township of Robbinsville and the Borough of Allentown, effective July 1, 2024.",
+            "doc_date": "2024-11-12 (Ord. No. 15-2024, read via ecode360 print view)",
+            "via": "page",
+            "verified": null
+          },
+          {
+            "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+            "quote": "M Allentown Borough",
+            "doc_date": "2026-07",
+            "via": "pdf",
+            "verified": true
+          },
+          {
+            "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+            "quote": "Allentown Boro is in a Shared Service with Robbinsville",
+            "doc_date": "2026-07",
+            "via": "pdf",
+            "verified": true
+          },
+          {
+            "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+            "quote": "Upper Freehold Township is the LEA for Allentown Borough. NO LONGER SSA AS OF MAY 2026",
+            "doc_date": "2026-07",
+            "via": "pdf",
+            "verified": true
+          },
+          {
+            "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+            "quote": "LEAID: 1302-001 Allentown Borough SMOKE DETECTOR COMPLIANCE Name: Upper Freehold Construction Enf Auth. Municipal Addr: 314 Route 539 Creamridge NJ 08514 Fire Official Brian Johnson Phone (609) 758-7738",
+            "doc_date": "4/28/2025 (survey date)",
+            "via": "state_directory",
+            "verified": null
+          },
+          {
+            "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+            "quote": "SSA with Upper Freehold Twp",
+            "doc_date": "4/28/2025 (survey date)",
+            "via": "state_directory",
+            "verified": null
+          }
+        ],
+        "confidence": "low"
+      }
+    ],
+    "notes": "Who handles the smoke/CO certificate for Allentown is unclear from official sources. Borough Code 13-1.2 (Ord. 15-2024) names the Robbinsville Township Bureau of Fire Prevention as Allentown's fire code LEA under a shared services agreement effective July 1, 2024, and Allentown then defers to Robbinsville's fire code chapter for fees. The July 2026 DCA LEA registry gives Allentown code M and two notes: 'Allentown Boro is in a Shared Service with Robbinsville' and 'Upper Freehold Township is the LEA for Allentown Borough. NO LONGER SSA AS OF MAY 2026'. The state fire directory (survey 4/28/2025) lists fire official Brian Johnson (bjohnson@robbinsville.net) but gives Upper Freehold Construction (314 Route 539, Creamridge) as the smoke detector compliance office. Robbinsville's code fee section (109-6) lists fire permit fees but no CSACMAPFEC fee, so no fee could be quoted. The 2019 resale form still lists a fire extinguisher; the state dropped it from the sale certificate in February 2025 (P.L.2025, c.19)."
+  },
+  "other_items": [
+    {
+      "label": "Private well water (if the home is on a well)",
+      "detail": "The resale form says applicants must follow the Hamilton Township Health Department's well water requirements (609-890-3873); that department issues a certificate of compliance before the Housing Inspector issues the Certificate of Occupancy.",
+      "source_url": "https://allentownboronj.com/vertical/sites/%7B7748EEEB-2391-4653-8B6A-4A64C85A6D79%7D/uploads/Application.pdf"
+    }
+  ],
+  "open_questions": [
+    "Who issues the smoke/CO certificate for Allentown today (Robbinsville Bureau of Fire Prevention or Upper Freehold), what are the fees, and where do sellers apply?",
+    "Is the 2019 $100.00 re-sale inspection fee still current, and who is the Housing Inspector?",
+    "Does the well water certificate apply only to homes on private wells, and what does Hamilton Township Health Department require?",
+    "Is a fire extinguisher still required after P.L.2025, c.19?"
+  ],
+  "checked_at": "2026-10-04",
+  "verification": {
+    "fees": 1,
+    "fee_ok": 0,
+    "fee_bad": 0,
+    "fee_unchecked": 1,
+    "quotes": 13,
+    "q_ok": 6,
+    "q_bad": 0,
+    "q_unchecked": 7
+  }
+}

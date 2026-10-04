@@ -1,0 +1,187 @@
+{
+  "municipality_code": "1347",
+  "municipality": "Spring Lake Borough",
+  "county": "MONMOUTH",
+  "resale_co": {
+    "status": "required",
+    "name": "Certificate of Inspection Permitting Occupancy (Sale Certificate of Occupancy)",
+    "issued_by": "Borough of Spring Lake Code Enforcement Officer",
+    "lead_time": "Inspections are scheduled only after payment; the Code Enforcement Officer needs 48 hours notice and same day appointments are not offered.",
+    "valid_for": "",
+    "requirements": [
+      "Inspection by the Code Enforcement Officer before transfer of title or occupancy; title may transfer first, but no occupancy until all items marked for correction are completed",
+      "Application lists the seller, buyer and new occupants and the number of persons who will occupy the home; each adult occupant signs an affidavit",
+      "Sale and rental checklist: fire extinguisher (2A:10B:C within 10 feet of the kitchen, checklist still lists it), smoke and CO detectors in the basement and on every floor near bedrooms, house number at least 3 inches visible from the street",
+      "Utilities on; appliances and bathroom fixtures clean and working; walls and trim repaired and painted; windows operable with locks and screens; keyless interior deadbolts; handrails on stairs with 2 or more risers",
+      "Sump pumps may not discharge into the sewer system",
+      "Sidewalks in good repair with no trip hazards; exterior clean and safe; proper garbage containers stored at the side or rear",
+      "Home must comply with all other Borough ordinances"
+    ],
+    "fees": [
+      {
+        "label": "Sale certificate, house up to four bedrooms (raised from $100 by Ord. 2026-003)",
+        "amount": "$150",
+        "quote": "Rental or renewal of lease or sale of houses up to four bedrooms: $100 150 per house.",
+        "source_url": "https://springlakeboro.org/government/forms/code-enforcement/835-certificate-of-occupancy-process-rental-rules-procedures/file",
+        "verified": true
+      },
+      {
+        "label": "Sale certificate, house with more than four bedrooms (raised from $150 by Ord. 2026-003)",
+        "amount": "$200",
+        "quote": "Rental or sale of house with more than four bedrooms: $150 200 per house.",
+        "source_url": "https://springlakeboro.org/government/forms/code-enforcement/835-certificate-of-occupancy-process-rental-rules-procedures/file",
+        "verified": true
+      },
+      {
+        "label": "Reinspection",
+        "amount": "$25",
+        "quote": "Reinspection fee: $25.",
+        "source_url": "https://springlakeboro.org/government/forms/code-enforcement/835-certificate-of-occupancy-process-rental-rules-procedures/file",
+        "verified": true
+      },
+      {
+        "label": "GIS update fee charged when the certificate is issued",
+        "amount": "$20",
+        "quote": "At the time of the issuance of a certificate of inspection permitting occupancy there shall be paid an additional fee of $20 for the updating of the geographic information system (GIS).",
+        "source_url": "https://ecode360.com/8207576",
+        "verified": null
+      }
+    ],
+    "how_to_apply": "Apply online through the Borough's SDL portal (create an SDL account and select the Borough of Spring Lake). Once the application is complete, a payment request is emailed; pay online or drop off a check payable to Borough of Spring Lake at Borough Hall, 423 Warren Avenue. After payment the office emails the inspection date and time. Review the Sale and Rental Inspection Checklist before the inspection.",
+    "application_url": "https://www.sdlportal.com/",
+    "department_url": "https://springlakeboro.org/departments/code-enforcement",
+    "phone": "(732) 449-0800 ext. 613",
+    "email": "codeenforcement@springlakeboro.org",
+    "contact_name": "Frank Cinelli",
+    "contact_title": "Code Enforcement Officer",
+    "evidence": [
+      {
+        "url": "https://springlakeboro.org/departments/code-enforcement",
+        "quote": "The Borough Code Enforcement Officer and is responsible for the investigation of complaints and the enforcement of the Borough's zoning and property maintenance laws and regulations, as well as the issuance of Certificates of Occupancy for property sales or rentals.",
+        "doc_date": "2026-10-04 (page fetched)",
+        "via": "page",
+        "verified": true
+      },
+      {
+        "url": "https://springlakeboro.org/departments/code-enforcement",
+        "quote": "All applications must be submitted through the SDL portal.",
+        "doc_date": "2026-10-04 (page fetched)",
+        "via": "page",
+        "verified": true
+      },
+      {
+        "url": "https://ecode360.com/8207576",
+        "quote": "Transfers of title may take place after but no occupancy shall be permitted until all items designated for correction by the Code Enforcement Officer are made and completed.",
+        "doc_date": "",
+        "via": "page",
+        "verified": null
+      },
+      {
+        "url": "https://springlakeboro.org/government/forms/code-enforcement/835-certificate-of-occupancy-process-rental-rules-procedures/file",
+        "quote": "Ordinance 2026-003 was passed on 3/10/26 increasing the inspection fees and penalty for non-compliance.",
+        "doc_date": "03/30/26",
+        "via": "pdf",
+        "verified": true
+      },
+      {
+        "url": "https://springlakeboro.org/government/forms/code-enforcement/835-certificate-of-occupancy-process-rental-rules-procedures/file",
+        "quote": "Code enforcer needs 48 hours notice of any CO inspection requests.",
+        "doc_date": "03/30/26",
+        "via": "pdf",
+        "verified": true
+      },
+      {
+        "url": "https://springlakeboro.org/government/forms/code-enforcement/674-sales-renal-inspection-checklist/file",
+        "quote": "Sidewalks must be in good repair and not present a trip hazard.",
+        "doc_date": "",
+        "via": "pdf",
+        "verified": true
+      }
+    ],
+    "confidence": "high",
+    "notes": "Housing Standards Section 211-13 (read in full through the ecode360 print view) requires a certificate of inspection permitting occupancy before any transfer of title or occupancy. The ecode360 text still shows the older sale fees ($100 up to four bedrooms, $150 over four); the Borough's process document dated 03/30/26 shows them struck through and raised to $150 and $200 after Ordinance 2026-003 (passed 3/10/26). The rental certificate limit (4 per year), lease, insurance and lead-safe items in the process document apply to rentals only. Construction office contacts for CO questions: Kristina Palangi and Kathleen Ertle, 732-449-0800 x609, construction@springlakeboro.org."
+  },
+  "fire_cert": {
+    "requirements": [
+      "Fire extinguisher, minimum 2A:10B:C, within 10 feet of the kitchen and clearly visible (Borough checklist still lists it)",
+      "Carbon monoxide and smoke detectors in the basement and on every floor near the bedrooms"
+    ],
+    "authorities": [
+      {
+        "name": "Sea Girt Borough Fire Prevention (fire code enforcing agency for Spring Lake under a shared service); smoke/CO items are also checked at the Spring Lake sale inspection",
+        "type": "municipal_fire_bureau",
+        "area_served": "Entire borough",
+        "lead_time": "",
+        "fees": [],
+        "how_to_apply": "No separate smoke/CO certificate application or fee is posted by Spring Lake. The Borough's sale inspection checklist covers smoke and CO detectors and the extinguisher. Call Spring Lake Code Enforcement (732-449-0800 ext. 613) to confirm whether a separate smoke/CO certificate from the Sea Girt fire official is needed and what it costs.",
+        "application_url": "",
+        "department_url": "https://springlakeboro.org/departments/code-enforcement",
+        "phone": "(732) 449-0800 ext. 613",
+        "email": "cwillms@seagirtboro.com",
+        "contact_name": "Christopher Willms",
+        "contact_title": "Fire Official (state fire directory)",
+        "evidence": [
+          {
+            "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+            "quote": "Sea Girt Borough is the LEA for Brielle Borough & Spring Lake Boro",
+            "doc_date": "2026-07",
+            "via": "pdf",
+            "verified": true
+          },
+          {
+            "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+            "quote": "M Spring Lake Borough",
+            "doc_date": "2026-07",
+            "via": "pdf",
+            "verified": true
+          },
+          {
+            "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+            "quote": "LEAID: 1348-001 Spring Lake Boro SMOKE DETECTOR COMPLIANCE Name: Spring Lake Boro Enf Auth. Municipal Fire Official Christopher Willms Phone (732) 449-0800 Email cwillms@seagirtboro.com",
+            "doc_date": "2023-02-13 (survey date)",
+            "via": "state_directory",
+            "verified": null
+          },
+          {
+            "url": "https://springlakeboro.org/government/forms/code-enforcement/674-sales-renal-inspection-checklist/file",
+            "quote": "Carbon Monoxide & Smoke Detector(s) are required in basement and on every floor within 6’ of bedrooms.",
+            "doc_date": "",
+            "via": "pdf",
+            "verified": true
+          }
+        ],
+        "confidence": "medium"
+      }
+    ],
+    "notes": "The NJ DCA LEA registry (July 2026) names Sea Girt Borough as the fire code enforcing agency for Spring Lake. The state fire directory (survey 2/13/2023) lists Spring Lake Borough at 5th and Warren Avenues as the smoke detector compliance office with Christopher Willms (cwillms@seagirtboro.com) as fire official. Spring Lake's own code (Chapter 180) creates a Bureau of Fire Prevention within the Spring Lake Fire Department but allows a shared services contract. Sea Girt's own tiered fee ordinance applies in Sea Girt; no fee for Spring Lake homes is published. The Spring Lake checklist still lists a fire extinguisher; P.L.2025, c.19 dropped it from the state sale certificate in February 2025."
+  },
+  "other_items": [
+    {
+      "label": "Sidewalks",
+      "detail": "Sidewalks must be in good repair with no trip hazards; checked at the sale inspection.",
+      "source_url": "https://springlakeboro.org/government/forms/code-enforcement/674-sales-renal-inspection-checklist/file"
+    },
+    {
+      "label": "Sump pump discharge",
+      "detail": "Sump pumps may not discharge into the sewer system; checked at the sale inspection.",
+      "source_url": "https://springlakeboro.org/government/forms/code-enforcement/674-sales-renal-inspection-checklist/file"
+    }
+  ],
+  "open_questions": [
+    "Is a separate smoke/CO certificate (CSACMAPFEC) issued for Spring Lake sales, by whom, and at what fee?",
+    "Does the sale certificate fee of $150 (or $200) already include the smoke/CO check?",
+    "How long is the sale certificate valid?",
+    "Is the fire extinguisher still required after P.L.2025, c.19?"
+  ],
+  "checked_at": "2026-10-04",
+  "verification": {
+    "fees": 4,
+    "fee_ok": 3,
+    "fee_bad": 0,
+    "fee_unchecked": 1,
+    "quotes": 10,
+    "q_ok": 8,
+    "q_bad": 0,
+    "q_unchecked": 2
+  }
+}

@@ -1,0 +1,285 @@
+{
+  "municipality_code": "1335",
+  "municipality": "Neptune Township",
+  "county": "MONMOUTH",
+  "resale_co": {
+    "status": "required",
+    "name": "Residential Certificate of Inspection (CI) for sale",
+    "issued_by": "Neptune Township Code Enforcement Department",
+    "lead_time": "Apply more than five business days before closing to avoid the $50 rush increase. The application must be completed and the inspection finalized within 30 days or the application becomes void.",
+    "valid_for": "A conditional or temporary CI expires within 30 days of issuance (renewable at the code official's discretion).",
+    "requirements": [
+      "Inspection of the dwelling, exterior and accessory structures for compliance with the Township property maintenance code and ordinances",
+      "All construction permits and violations must be closed out before the inspection is scheduled",
+      "Municipal charges (property taxes and sewer) must be paid current",
+      "Smoke detector on each level; carbon monoxide alarms outside each sleeping area in units with fuel-fired appliances or an attached garage",
+      "Wood-burning fireplaces and stoves need a certification from a CSIA certified chimney sweep",
+      "Oil tanks not in use must be removed or filled under a demolition permit",
+      "Sidewalks and stairs free of cracks, holes and hazards",
+      "Estates must submit the surrogate's certificate; corporations must submit formation documents or annual report",
+      "One application per residential building"
+    ],
+    "fees": [
+      {
+        "label": "Certificate of Inspection, detached single-family dwelling or structure with 2 or more dwellings, per structure",
+        "amount": "$150.00",
+        "quote": "$150.00 per structure",
+        "source_url": "https://neptunetownship.org/sites/default/files/documents/Code%20and%20Construction-%20Fee%20Schedule_Updated%2010-18-2022.pdf",
+        "verified": true
+      },
+      {
+        "label": "Certificate of Inspection, sale application (online instructions)",
+        "amount": "$150.00",
+        "quote": "The inspection fee is $150.00 per structure,",
+        "source_url": "https://neptunetownship.org/sites/default/files/documents/Construction/How%20to%20Apply%20for%20a%20Residential%20Sale%20CI.pdf",
+        "verified": true
+      },
+      {
+        "label": "Each additional unit in the same structure (for example the second unit of a 2-family)",
+        "amount": "$75.00",
+        "quote": "plus $75.00 for each additional dwelling or",
+        "source_url": "https://neptunetownship.org/sites/default/files/documents/Construction/How%20to%20Apply%20for%20a%20Residential%20Sale%20CI.pdf",
+        "verified": true
+      },
+      {
+        "label": "Rush increase when applying five or fewer business days before closing, per required inspection",
+        "amount": "$50",
+        "quote": "requested inspection date the fees shall be increased by $50 for each required inspection.",
+        "source_url": "https://neptunetownship.org/sites/default/files/documents/Code%20and%20Construction-%20Fee%20Schedule_Updated%2010-18-2022.pdf",
+        "verified": true
+      },
+      {
+        "label": "Inspection during non-business hours, up to two hours (extra)",
+        "amount": "$150.00",
+        "quote": "additional fee of $150.00 for up to two hours (and $100.00 per hour or fraction of an hour after that) will apply.**",
+        "source_url": "https://neptunetownship.org/sites/default/files/documents/Construction/How%20to%20Apply%20for%20a%20Residential%20Sale%20CI.pdf",
+        "verified": true
+      },
+      {
+        "label": "Reinspection, per structure including the first unit",
+        "amount": "$50.00",
+        "quote": "$50.00 per structure including the",
+        "source_url": "https://neptunetownship.org/sites/default/files/documents/Code%20and%20Construction-%20Fee%20Schedule_Updated%2010-18-2022.pdf",
+        "verified": true
+      },
+      {
+        "label": "Transfer of Title certificate (no occupancy allowed)",
+        "amount": "$85.00",
+        "quote": "Transfer of Title                                                                $85.00",
+        "source_url": "https://neptunetownship.org/sites/default/files/documents/Code%20and%20Construction-%20Fee%20Schedule_Updated%2010-18-2022.pdf",
+        "verified": true
+      }
+    ],
+    "how_to_apply": "Apply online through the Township's Community Portal (Code Enforcement page, Residential Certificate of Inspection - Sale Application). Enter the parcel, buyer and occupant information, sign, and pay online by card (3.25% fee) or e-check ($1.25 fee), or pay by check payable to Township of Neptune or cash in person. Close all permits and violations and pay taxes and sewer before scheduling. Code Enforcement is at 25 Neptune Blvd, 732-988-5200.",
+    "application_url": "https://webgeo.co/prod1/portal/portal.jsp?c=46639958&p=355657208&g=558540796",
+    "department_url": "https://neptunetownship.org/departments/code-enforcement",
+    "phone": "732-988-5200",
+    "email": "jsilvestri@neptunetownship.org",
+    "contact_name": "Donald Clare",
+    "contact_title": "Director of Code & Construction (ext. 263); Janet Silvestri, Departmental Secretary (ext. 261)",
+    "evidence": [
+      {
+        "url": "https://neptunetownship.org/departments/code-enforcement",
+        "quote": "This application is to be used for owner occupancy or sale of the property after a Transfer of Title or the owner occupancy after a Rental CI.",
+        "doc_date": "2026-10-04 (page fetched)",
+        "via": "page",
+        "verified": true
+      },
+      {
+        "url": "https://neptunetownship.org/sites/default/files/ORD21-20.pdf",
+        "quote": "A Certificate of Inspection must be obtained by the owner of real property prior to the sale, transfer, lease, rental or",
+        "doc_date": "2021 (Ordinance No. 21-20)",
+        "via": "pdf",
+        "verified": true
+      },
+      {
+        "url": "https://neptunetownship.org/sites/default/files/documents/CI%20Checklist%202025-4-9.pdf",
+        "quote": "ALL construction pem1its and violations must be closed out before the inspection is scheduled.",
+        "doc_date": "Revised 4/9/2025",
+        "via": "pdf",
+        "verified": true
+      },
+      {
+        "url": "https://neptunetownship.org/sites/default/files/documents/CI%20Checklist%202025-4-9.pdf",
+        "quote": "Municipal charges (i.e., property taxes and sewer) MUST be paid current.",
+        "doc_date": "Revised 4/9/2025",
+        "via": "pdf",
+        "verified": true
+      },
+      {
+        "url": "https://neptunetownship.org/sites/default/files/documents/CI%20Checklist%202025-4-9.pdf",
+        "quote": "You will have 30 days to complete your application. Failure to complete and finalize your inspection within 30 days will",
+        "doc_date": "Revised 4/9/2025",
+        "via": "pdf",
+        "verified": true
+      },
+      {
+        "url": "https://neptunetownship.org/sites/default/files/documents/Code%20and%20Construction-%20Fee%20Schedule_Updated%2010-18-2022.pdf",
+        "quote": "If the application is received five or less business days prior to the anticipated closing date, occupancy date or",
+        "doc_date": "Rev. 03/10/2026",
+        "via": "pdf",
+        "verified": true
+      },
+      {
+        "url": "https://neptunetownship.org/sites/default/files/documents/Construction/How%20to%20Apply%20for%20a%20Residential%20Sale%20CI.pdf",
+        "quote": "Pay Online Now",
+        "doc_date": "",
+        "via": "pdf",
+        "verified": true
+      },
+      {
+        "url": "https://neptunetownship.org/sites/default/files/ORD21-20.pdf",
+        "quote": "notarized application by the occupant(s) in accordance with Section PM 902.2. Any conditional or temporary",
+        "doc_date": "2021 (Ordinance No. 21-20)",
+        "via": "pdf",
+        "verified": true
+      },
+      {
+        "url": "https://neptunetownship.org/departments/code-enforcement",
+        "quote": "Director of Code & Construction",
+        "doc_date": "2026-10-04 (page fetched)",
+        "via": "page",
+        "verified": true
+      }
+    ],
+    "confidence": "high",
+    "notes": "Township Code Chapter XII (Property Maintenance), Section PM 902, as amended by Ordinance 21-20, requires a Certificate of Inspection before any sale, transfer or occupancy. The current fee schedule (revised 03/10/2026) charges $150 per structure plus $75 for each additional unit inspected at the same time, so a 2-family home would be $225 if both units are inspected together (our arithmetic, not a posted figure). The fee schedule PDF is still named 'Updated 10-18-2022' but is marked Rev. 03/10/2026. A Transfer of Title certificate ($85) can be used when the buyer will not occupy at closing; the buyer then needs a CI before moving in. The checklist warns buying, selling or renting without a CI is punishable by fines up to $2,000 and up to 90 days in jail. A 2020 fee schedule also on the Township site (lower fees) is out of date. Code Enforcement staff and extensions come from the Code Enforcement page; emails are from its mailto links (dclare@neptunetownship.org for Donald Clare). Rental-only items (mercantile registration, lead certificate for pre-1978 rentals, short-term rental CIs) do not apply to owner-occupied sales."
+  },
+  "fire_cert": {
+    "requirements": [
+      "Smoke alarms on each level and outside each separate sleeping area; 10-year sealed battery units, hardwired alarms may not be replaced with battery-only units (Township handout quoting N.J.A.C. 5:70-4.19)",
+      "Smoke detectors in or next to a kitchen must be photoelectric (Township CI checklist)",
+      "Carbon monoxide alarms (UL 2034) near sleeping areas in homes with a fuel-burning device or attached garage",
+      "Township handout title still mentions portable fire extinguishers"
+    ],
+    "authorities": [
+      {
+        "name": "Neptune Township Code Enforcement Department (smoke/CO compliance checked as part of the Certificate of Inspection)",
+        "type": "municipal_code_enforcement",
+        "area_served": "Entire township",
+        "lead_time": "Same as the Certificate of Inspection.",
+        "fees": [],
+        "how_to_apply": "No separate smoke/CO application or fee was found. The Township's Certificate of Inspection checklist and Code Enforcement page include the smoke, CO and extinguisher requirements, and an older Township fee schedule describes the CI fees as including the smoke detector and carbon monoxide certificate (CSDCMAC). Confirm with Code Enforcement (732-988-5200) whether the CI also serves as the state smoke/CO certificate or whether the fire district issues one.",
+        "application_url": "https://webgeo.co/prod1/portal/portal.jsp?c=46639958&p=355657208&g=558540796",
+        "department_url": "https://neptunetownship.org/departments/code-enforcement",
+        "phone": "732-988-5200",
+        "email": "",
+        "contact_name": "",
+        "contact_title": "",
+        "evidence": [
+          {
+            "url": "https://neptunetownship.org/sites/default/files/CodeEnforcementFeeSchedule%202020%20Update.pdf",
+            "quote": "and Carbon Monoxide Compliance (CSDCMAC):",
+            "doc_date": "2020 (superseded fee schedule)",
+            "via": "pdf",
+            "verified": true
+          },
+          {
+            "url": "https://neptunetownship.org/departments/code-enforcement",
+            "quote": "Smoke, Carbon Monoxide Alarms and Fire Extinguisher Requirements",
+            "doc_date": "2026-10-04 (page fetched)",
+            "via": "page",
+            "verified": true
+          },
+          {
+            "url": "https://neptunetownship.org/sites/default/files/Fire%20Extinguishers%20%26%20Smoke%20Detectors%202026.pdf",
+            "quote": "(a) In one- and two-family or attached single family dwellings subject to the requirements of",
+            "doc_date": "2026",
+            "via": "pdf",
+            "verified": true
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "name": "Neptune Fire District #1 Fire Prevention Bureau and Ocean Grove Fire District #2 (fire code LEAs)",
+        "type": "fire_district",
+        "area_served": "Fire District #1 enforces one portion of the township; Ocean Grove Fire District #2 enforces the remainder (per the state LEA registry)",
+        "lead_time": "",
+        "fees": [],
+        "how_to_apply": "Neither fire district posts a resale smoke/CO certificate process online. Call the fire district for the property's area if the Township says a separate certificate is needed.",
+        "application_url": "",
+        "department_url": "https://neptunetownship.org/departments/neptune-fire-district-1",
+        "phone": "(732) 774-0306",
+        "email": "ogfdfi@yahoo.com",
+        "contact_name": "Scott V Liddick",
+        "contact_title": "Fire Official, Ocean Grove Fire District #2 (state directory)",
+        "evidence": [
+          {
+            "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+            "quote": "Neptune Township FD #1 enforces only one portion of the Township.",
+            "doc_date": "2026-07",
+            "via": "pdf",
+            "verified": true
+          },
+          {
+            "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+            "quote": "Ocean Grove Township FD#2 enforces in the remainder of Neptune Twp.",
+            "doc_date": "2026-07",
+            "via": "pdf",
+            "verified": true
+          },
+          {
+            "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+            "quote": "Ocean Grove Twp Dist #2 ... SMOKE DETECTOR COMPLIANCE ... Enf Auth. District ... Fire Official Scott V Liddick ... Phone (732) 774-0306 ... Email ogfdfi@yahoo.com",
+            "doc_date": "2025-02 (survey date 2/25/2025)",
+            "via": "state_directory",
+            "verified": null
+          },
+          {
+            "url": "https://neptunetownship.org/departments/neptune-fire-district-1",
+            "quote": "Neptune Fire District #1 is comprised of four Fire Companies, a Fire Prevention Bureau and Board of Fire Commissioners all here to provide a service to the Township of Neptune.",
+            "doc_date": "2026-10-04 (page fetched)",
+            "via": "page",
+            "verified": true
+          }
+        ],
+        "confidence": "low"
+      }
+    ],
+    "notes": "The LEA registry lists Neptune Township as fire district enforced (code D): Neptune Fire District #1 covers one part and Ocean Grove Fire District #2 the rest. The state fire directory lists both entries with Ocean Grove Fire District #2 (Fire Official Scott V Liddick, 50 Olin St, (732) 774-0306) as the smoke detector compliance office, which may be a directory quirk. Neptune Fire District #1's own website (neptunefiredistrict1.org) could not be read. On the Township side, the 2020 Code Enforcement fee schedule said CI fees include the smoke detector and carbon monoxide certificate; the current 2026 schedule does not say either way. The Township's 2026 handout title still mentions portable fire extinguishers even though the state dropped them from the sale certificate in February 2025 (P.L.2025, c.19)."
+  },
+  "other_items": [
+    {
+      "label": "Open permits and violations",
+      "detail": "All construction permits and violations must be closed out before the CI inspection is scheduled.",
+      "source_url": "https://neptunetownship.org/sites/default/files/documents/CI%20Checklist%202025-4-9.pdf"
+    },
+    {
+      "label": "Taxes and sewer paid",
+      "detail": "Property taxes and sewer charges must be paid current before applying.",
+      "source_url": "https://neptunetownship.org/sites/default/files/documents/CI%20Checklist%202025-4-9.pdf"
+    },
+    {
+      "label": "Chimney certification",
+      "detail": "Wood-burning fireplaces and stoves need a certification from a Chimney Safety Institute of America certified chimney sweep.",
+      "source_url": "https://neptunetownship.org/sites/default/files/documents/CI%20Checklist%202025-4-9.pdf"
+    },
+    {
+      "label": "Unused oil tank",
+      "detail": "Oil tanks not in use must be removed or filled under the Uniform Construction Code; a demolition permit is required.",
+      "source_url": "https://neptunetownship.org/sites/default/files/documents/CI%20Checklist%202025-4-9.pdf"
+    },
+    {
+      "label": "Transfer of Title certificate",
+      "detail": "If the buyer will not occupy at closing (for example a renovation), a Transfer of Title certificate ($85) can be used instead; no occupancy is permitted until a CI is issued.",
+      "source_url": "https://neptunetownship.org/departments/code-enforcement"
+    }
+  ],
+  "open_questions": [
+    "Does the Township CI serve as the state smoke/CO certificate, or must the seller also get one from Neptune Fire District #1 or Ocean Grove Fire District #2 (and at what fee)?",
+    "Is a portable fire extinguisher still checked at the CI inspection after P.L.2025, c.19?",
+    "How long is a final CI valid if closing is delayed?"
+  ],
+  "checked_at": "2026-10-04",
+  "verification": {
+    "fees": 7,
+    "fee_ok": 7,
+    "fee_bad": 0,
+    "fee_unchecked": 0,
+    "quotes": 16,
+    "q_ok": 15,
+    "q_bad": 0,
+    "q_unchecked": 1
+  }
+}

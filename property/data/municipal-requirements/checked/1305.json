@@ -1,0 +1,251 @@
+{
+  "municipality_code": "1305",
+  "municipality": "Atlantic Highlands Borough",
+  "county": "MONMOUTH",
+  "resale_co": {
+    "status": "required",
+    "name": "Certificate of Occupancy (Certificate of Inspection) for sale",
+    "issued_by": "Borough of Atlantic Highlands Code Enforcement Officer",
+    "lead_time": "Inspections are done on Wednesdays between 12:00 pm and 2:00 pm. If a re-inspection is needed, contact the office within 30 days or the application is voided.",
+    "valid_for": "",
+    "requirements": [
+      "Visual inspection of the exterior and interior; an adult must be present and gas, water and electric must be on",
+      "Any open permits must be finalized by the Building Department before the C/O inspection",
+      "Exterior items include visible house numbers (at least 4 inches), gutters, roof, windows and screens, handrails on stairs with 4 or more risers, guardrails on porches 30 inches or higher, no peeling paint, pool fencing with self-latching gate",
+      "Separate smoke detector / carbon monoxide alarm compliance inspection (see fire certificate)"
+    ],
+    "fees": [
+      {
+        "label": "Certificate of Occupancy inspection, residential",
+        "amount": "$75.00",
+        "quote": "Residential - $75.00",
+        "source_url": "https://www.ahnj.com/ahnj/Inspections/",
+        "verified": true
+      },
+      {
+        "label": "Certificate of Occupancy application, single family dwelling (form)",
+        "amount": "$75.00",
+        "quote": "Single Family Dwelling $75.00",
+        "source_url": "https://www.ahnj.com/ahnj/Departments/Code%20Enforcement/Residential%20Certificate%20of%20Inspection%20and%20Fire.pdf",
+        "verified": null
+      },
+      {
+        "label": "Certificate of Occupancy application, multi family dwelling (form)",
+        "amount": "$75.00",
+        "quote": "Multi Family Dwelling $75.00",
+        "source_url": "https://www.ahnj.com/ahnj/Departments/Code%20Enforcement/Residential%20Certificate%20of%20Inspection%20and%20Fire.pdf",
+        "verified": null
+      }
+    ],
+    "how_to_apply": "Fill out the Borough's Application for Certificate of Inspection (Ord. 03-2011) with the closing date and buyer names, and pay the non-refundable fee to the Borough of Atlantic Highlands by cash, check or money order. File it at Borough Hall, 100 First Avenue, Atlantic Highlands, NJ 07716 (732-291-1444). The same packet includes the smoke/CO application.",
+    "application_url": "https://www.ahnj.com/ahnj/Departments/Code%20Enforcement/Residential%20Certificate%20of%20Inspection%20and%20Fire.pdf",
+    "department_url": "https://www.ahnj.com/ahnj/Inspections/",
+    "phone": "732-904-5498",
+    "email": "rcolangelo@ahnj.com",
+    "contact_name": "Richard Colangelo",
+    "contact_title": "Code Enforcement Officer",
+    "evidence": [
+      {
+        "url": "https://www.ahnj.com/ahnj/Inspections/",
+        "quote": "Inspections are done on Wednesday's between 12:00pm - 2:00pm",
+        "doc_date": "2026-10-04 (page fetched)",
+        "via": "page",
+        "verified": true
+      },
+      {
+        "url": "https://www.ahnj.com/ahnj/Inspections/",
+        "quote": "Certificate of Occupancy Inspections",
+        "doc_date": "2026-10-04 (page fetched)",
+        "via": "page",
+        "verified": true
+      },
+      {
+        "url": "https://www.ahnj.com/ahnj/Departments/Code%20Enforcement/Residential%20Certificate%20of%20Inspection%20and%20Fire.pdf",
+        "quote": "A Certificate of Occupancy is required to be issued before transfer of title and/or occupancy.",
+        "doc_date": "Ord. 03-2011 form (scanned)",
+        "via": "pdf",
+        "verified": null
+      },
+      {
+        "url": "https://www.ahnj.com/ahnj/Departments/Code%20Enforcement/Residential%20Certificate%20of%20Inspection%20and%20Fire.pdf",
+        "quote": "If permits were taken out on property they MUST be finalized by the Building Department prior to C/O inspection",
+        "doc_date": "Ord. 03-2011 form (scanned)",
+        "via": "pdf",
+        "verified": null
+      },
+      {
+        "url": "https://www.ahnj.com/ahnj/Departments/Code%20Enforcement/",
+        "quote": "Residential Certificate of Inspection and Fire (pdf)",
+        "doc_date": "2026-10-04 (page fetched)",
+        "via": "page",
+        "verified": true
+      },
+      {
+        "url": "https://www.ahnj.com/ahnj/Departments/Code%20Enforcement/",
+        "quote": "Richard Colangelo",
+        "doc_date": "2026-10-04 (page fetched)",
+        "via": "page",
+        "verified": true
+      },
+      {
+        "url": "https://www.ahnj.com/ahnj/Departments/Code%20Enforcement/",
+        "quote": "rcolangelo@ahnj.com 732-904-5498",
+        "doc_date": "2026-10-04 (page fetched)",
+        "via": "page",
+        "verified": true
+      }
+    ],
+    "confidence": "high",
+    "notes": "The Borough's application form (Ord. 03-2011) says a Certificate of Occupancy is required before transfer of title and/or occupancy, and lists $75.00 for single family, multi family, apartment and condominium. It is a scanned PDF, so its quotes cannot be machine-checked; the Inspections page (text) shows Residential - $75.00, Apt / Multi-Family - $75.00 and Commercial - $125.00, with checks payable to the Borough of Atlantic Highlands. The Borough's lead-based paint inspection at C/O time applies to 1 to 4 unit rental properties built before 1978, which is rental-only."
+  },
+  "fire_cert": {
+    "requirements": [
+      "Smoke alarms as required by the state for one and two family homes at change of occupant",
+      "Carbon monoxide alarms within 10 feet of all sleeping rooms if the home has a fuel burning appliance or an attached garage, in the location the manufacturer specifies; battery, hardwired or plug-in allowed"
+    ],
+    "authorities": [
+      {
+        "name": "Borough of Atlantic Highlands Fire Marshal's Office (Division of Fire Prevention)",
+        "type": "municipal_fire_bureau",
+        "area_served": "Entire borough",
+        "lead_time": "Fee depends on business days between receipt of the application and the inspection date. Inspections are Wednesdays 12:00 pm to 2:00 pm and a representative must be present. If the change of occupant does not happen within 30 days of the inspection, a new application and fee are needed.",
+        "fees": [
+          {
+            "label": "Smoke detector certification, inspection more than ten business days after receipt",
+            "amount": "$45.00",
+            "quote": "by more than ten business days, the fee is $45.00",
+            "source_url": "https://www.ahnj.com/ahnj/Departments/Fire%20Marshall%20Office/",
+            "verified": true
+          },
+          {
+            "label": "Fewer than ten but more than four business days",
+            "amount": "$90.00",
+            "quote": "if received fewer than ten but more than four business days, $90.00",
+            "source_url": "https://www.ahnj.com/ahnj/Departments/Fire%20Marshall%20Office/",
+            "verified": true
+          },
+          {
+            "label": "Four business days or fewer",
+            "amount": "$161.00",
+            "quote": "if four business days or fewer, $161.00",
+            "source_url": "https://www.ahnj.com/ahnj/Departments/Fire%20Marshall%20Office/",
+            "verified": true
+          },
+          {
+            "label": "CSDMAC request 10 or more business days before the inspection (as listed on the Borough Inspections page; conflicts with $45.00 on the Fire Marshal page)",
+            "amount": "$54.00",
+            "quote": "Requests for CSDMAC received 10 or more business days prior to the inspection: $54.00",
+            "source_url": "https://www.ahnj.com/ahnj/Inspections/",
+            "verified": true
+          },
+          {
+            "label": "CSDMAC request 4 to 10 business days before the inspection (Inspections page)",
+            "amount": "$90.00",
+            "quote": "Requests for CSDMAC received 4 to 10 business days prior to the inspection: $90.00",
+            "source_url": "https://www.ahnj.com/ahnj/Inspections/",
+            "verified": true
+          },
+          {
+            "label": "CSDMAC request fewer than 4 days before the inspection (Inspections page)",
+            "amount": "$161.00",
+            "quote": "Requests for CSDMAC received fewer than 4 days prior to the inspection: $161.00",
+            "source_url": "https://www.ahnj.com/ahnj/Inspections/",
+            "verified": true
+          }
+        ],
+        "how_to_apply": "Get the smoke detector certification application at the Building Department or print it with the C/O form (Residential Certificate of Inspection and Fire packet). Pay by check or money order made payable to 'Borough of Atlantic Highlands Fire' (the Inspections page says payable to Borough of Atlantic Highlands) and file at Borough Hall, 100 First Avenue.",
+        "application_url": "https://www.ahnj.com/ahnj/Departments/Code%20Enforcement/Residential%20Certificate%20of%20Inspection%20and%20Fire.pdf",
+        "department_url": "https://www.ahnj.com/ahnj/Departments/Fire%20Marshall%20Office/",
+        "phone": "(732) 291-1444",
+        "email": "hawleym4@verizon.net",
+        "contact_name": "Martin O. Hawley, Jr.",
+        "contact_title": "Fire Marshal",
+        "evidence": [
+          {
+            "url": "https://www.ahnj.com/ahnj/Departments/Fire%20Marshall%20Office/",
+            "quote": "When selling your home, a \"smoke detector certification\" is required through the State of New Jersey.",
+            "doc_date": "2026-10-04 (page fetched)",
+            "via": "page",
+            "verified": true
+          },
+          {
+            "url": "https://www.ahnj.com/ahnj/Departments/Fire%20Marshall%20Office/",
+            "quote": "A check or money order made payable to \"Borough of Atlantic Highlands Fire\", must accompany this form.",
+            "doc_date": "2026-10-04 (page fetched)",
+            "via": "page",
+            "verified": true
+          },
+          {
+            "url": "https://www.ahnj.com/ahnj/Departments/Fire%20Marshall%20Office/",
+            "quote": "If the change of occupant does not occur within 30 days of inspection, a new application shall be required as well as fee applied.",
+            "doc_date": "2026-10-04 (page fetched)",
+            "via": "page",
+            "verified": true
+          },
+          {
+            "url": "https://www.ahnj.com/ahnj/Departments/Fire%20Marshall%20Office/",
+            "quote": "Fire Marshal: Martin O. Hawley, Jr.",
+            "doc_date": "2026-10-04 (page fetched)",
+            "via": "page",
+            "verified": true
+          },
+          {
+            "url": "https://www.ahnj.com/ahnj/Inspections/",
+            "quote": "Certificate of Smoke Detector & Carbon Monoxide Alarm Inspections",
+            "doc_date": "2026-10-04 (page fetched)",
+            "via": "page",
+            "verified": true
+          },
+          {
+            "url": "https://www.ahnj.com/ahnj/Departments/Code%20Enforcement/Residential%20Certificate%20of%20Inspection%20and%20Fire.pdf",
+            "quote": "APPLICATION FOR CERTIFICATE OF SMOKE DETECTOR / CARBON MONOXIDE ALARM COMPLIANCE INSPECTION",
+            "doc_date": "Ord. 03-2011 form (scanned)",
+            "via": "pdf",
+            "verified": null
+          },
+          {
+            "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+            "quote": "F Atlantic Highlands Borough",
+            "doc_date": "2026-07",
+            "via": "pdf",
+            "verified": true
+          },
+          {
+            "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+            "quote": "LEAID: 1304-001 Atlantic Highlands Boro SMOKE DETECTOR COMPLIANCE Name: Atlantic Highlands Boro Fire Prev Enf Auth. Fire Dept Addr: 10 E. Highland Ave Atlantic Highlands NJ 07716 Fire Official Martin O Hawley Phone (732) 291-1444",
+            "doc_date": "2/6/2026 (survey date)",
+            "via": "state_directory",
+            "verified": null
+          },
+          {
+            "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+            "quote": "Email hawleym4@verizon.net",
+            "doc_date": "2/6/2026 (survey date)",
+            "via": "state_directory",
+            "verified": null
+          }
+        ],
+        "confidence": "high"
+      }
+    ],
+    "notes": "Two Borough pages disagree on the lowest smoke/CO fee: the Fire Marshal page says $45.00 (more than ten business days), while the Inspections page and the 2011 form say $54.00 (10 or more days). The middle and short-notice fees ($90.00, $161.00) match. $45.00 is the current state default under N.J.A.C. 5:70-2.9(d). The fire marshal's email (hawleym4@verizon.net) and the fire prevention address (10 E. Highland Ave) come from the state fire directory; the Borough phone is 732-291-1444. The Borough's pages do not list a fire extinguisher requirement."
+  },
+  "other_items": [],
+  "open_questions": [
+    "Is the smoke/CO fee for 10 or more business days $45.00 (Fire Marshal page) or $54.00 (Inspections page and form)?",
+    "Is the check payable to 'Borough of Atlantic Highlands Fire' or 'Borough of Atlantic Highlands'?",
+    "How long is the Borough C/O valid after it is issued, and is there a re-inspection fee?",
+    "Is a final water/sewer meter reading needed at closing (the Borough runs its own water and sewer utility)?"
+  ],
+  "checked_at": "2026-10-04",
+  "verification": {
+    "fees": 9,
+    "fee_ok": 7,
+    "fee_bad": 0,
+    "fee_unchecked": 2,
+    "quotes": 16,
+    "q_ok": 11,
+    "q_bad": 0,
+    "q_unchecked": 5
+  }
+}

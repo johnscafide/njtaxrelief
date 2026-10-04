@@ -1,0 +1,309 @@
+{
+  "municipality_code": "1009",
+  "municipality": "Flemington Borough",
+  "county": "HUNTERDON",
+  "resale_co": {
+    "status": "required",
+    "name": "Construction Records Clearance (CRC)",
+    "issued_by": "Borough of Flemington Construction / Zoning Department (Code Enforcement)",
+    "lead_time": "The code says to apply and pay at least two months before the change of ownership; the fee is lowest when filed 16 to 40 business days before closing.",
+    "valid_for": "90 days, and only for permits issued before the CRC application; a new CRC is needed for each sale or occupancy change",
+    "requirements": [
+      "Records search for open construction permits, fines, fees, penalties or any money owed to any Borough entity",
+      "Any open permits must get their inspections and certificates (or be exempted by the Construction Official) before the CRC is issued",
+      "Smoke/CO certificate (CSACMAPFEC) from Flemington Borough Fire Safety; the code says no certificate of occupancy or continued certificate of occupancy is issued for a dwelling unit until that section is met",
+      "Owner and seller must certify in writing to the fire official that the home complies with the smoke/CO rules before the sale"
+    ],
+    "fees": [
+      {
+        "label": "Construction Records Clearance, 16 to 40 business days before closing",
+        "amount": "$50.00",
+        "quote": "$50.00 16 -40 business days",
+        "source_url": "https://www.historicflemington.com/forms-and-documents/forms/department-documents/construction/1446-selling-or-renting-your-home/file",
+        "verified": true
+      },
+      {
+        "label": "Construction Records Clearance, 6 to 15 business days before closing",
+        "amount": "$80.00",
+        "quote": "$80.00 6 - 15 business days",
+        "source_url": "https://www.historicflemington.com/forms-and-documents/forms/department-documents/construction/1446-selling-or-renting-your-home/file",
+        "verified": true
+      },
+      {
+        "label": "Construction Records Clearance, 1 to 5 business days before closing",
+        "amount": "$150.00",
+        "quote": "$150.00 1 - 5 business days",
+        "source_url": "https://www.historicflemington.com/forms-and-documents/forms/department-documents/construction/1446-selling-or-renting-your-home/file",
+        "verified": true
+      },
+      {
+        "label": "Construction Records Clearance, 1 to 5 business days (Borough Code 9A-3j)",
+        "amount": "$150",
+        "quote": "One to five business days: $150.",
+        "source_url": "https://ecode360.com/34748337",
+        "verified": null
+      },
+      {
+        "label": "Construction Records Clearance, 6 to 15 business days (Borough Code 9A-3j)",
+        "amount": "$80",
+        "quote": "Six to 15 business days: $80.",
+        "source_url": "https://ecode360.com/34748337",
+        "verified": null
+      },
+      {
+        "label": "Construction Records Clearance, 16 to 40 business days (Borough Code 9A-3j)",
+        "amount": "$50",
+        "quote": "Sixteen to 40 business days: $50.",
+        "source_url": "https://ecode360.com/34748337",
+        "verified": null
+      }
+    ],
+    "how_to_apply": "Fill out the Application for Construction Records Clearance (in the Borough's 'Selling or Renting Your Home' packet) with the closing date, seller, property and block/lot, and submit it with the fee for the matching time window to Code Enforcement, 38 Park Avenue, Flemington, NJ 08822. Choose call-to-pick-up or email for delivery.",
+    "application_url": "https://www.historicflemington.com/forms-and-documents/forms/department-documents/construction/1446-selling-or-renting-your-home/file",
+    "department_url": "https://www.historicflemington.com/departments/construction",
+    "phone": "908-782-8840 x220",
+    "email": "jtillotson@historicflemington.com",
+    "contact_name": "John Tillotson",
+    "contact_title": "Building Inspector, Construction Official (Technical Assistant: Maureen McIvor, mmcivor@historicflemington.com)",
+    "evidence": [
+      {
+        "url": "https://ecode360.com/34748337",
+        "quote": "A construction records clearance (CRC) shall be required prior to the sale or change of tenant of any residential or commercial structure.",
+        "doc_date": "2026-10-04 (page fetched)",
+        "via": "page",
+        "verified": null
+      },
+      {
+        "url": "https://ecode360.com/34748337",
+        "quote": "The owner or his authorized agent shall submit a written application and payment of fees at least two months prior to the change of ownership and/or occupancy on the form provided by the Borough.",
+        "doc_date": "2026-10-04 (page fetched)",
+        "via": "page",
+        "verified": null
+      },
+      {
+        "url": "https://ecode360.com/34748337",
+        "quote": "The CRC will only be valid for a period of 90 days and shall only apply to any permits issued prior to the CRC application",
+        "doc_date": "2026-10-04 (page fetched)",
+        "via": "page",
+        "verified": null
+      },
+      {
+        "url": "https://www.historicflemington.com/forms-and-documents/forms/department-documents/construction/1446-selling-or-renting-your-home/file",
+        "quote": "APPLICATION FOR CONSTRUCTION RECORDS CLEARANCE",
+        "doc_date": "Revised 2026-04-28",
+        "via": "pdf",
+        "verified": true
+      },
+      {
+        "url": "https://ecode360.com/34748219",
+        "quote": "No continued certificate of occupancy or certificate of occupancy shall be issued by the Construction Official for a dwelling unit unless and until the applicant therefor shall have first complied with all the terms and conditions of this section.",
+        "doc_date": "2026-10-04 (page fetched)",
+        "via": "page",
+        "verified": null
+      },
+      {
+        "url": "https://www.historicflemington.com/departments/construction",
+        "quote": "Building Inspector, Construction Offical",
+        "doc_date": "2026-10-04 (page fetched)",
+        "via": "page",
+        "verified": true
+      },
+      {
+        "url": "https://www.historicflemington.com/departments/construction",
+        "quote": "Phone : 908-782-8840 x220",
+        "doc_date": "2026-10-04 (page fetched)",
+        "via": "page",
+        "verified": true
+      }
+    ],
+    "confidence": "high",
+    "notes": "Borough Code section 9A-3j (read through the ecode360 view) requires a Construction Records Clearance before the sale or change of tenant of any residential or commercial structure, and the Borough's 'Selling or Renting Your Home' packet (revised 2026-04-28) includes the CRC application with the same fees. The CRC is a records search (open permits and money owed), not a full housing inspection. The separate New Owner / New Tenant Certificate (Code section 9-6, Ord. 2025-20, $100 on the form) applies to nonresidential buildings, not 1 and 2 family homes. Rental registration and rental inspections (Code section 9-4/9-5) are rental items, not resale requirements."
+  },
+  "fire_cert": {
+    "requirements": [
+      "Smoke alarms on every level (excluding crawl spaces and unfinished attics) and within 10 feet of each bedroom; homes built 1990 or later also need one in each bedroom",
+      "Alarm type depends on the year built: before 1977, 10-year sealed battery alarms; 1977 to 1983, electric alarms; 1984 to 1989, interconnected electric; 1990 on, interconnected electric with battery backup",
+      "Smoke and CO alarms no older than 10 years from manufacture; listed to ANSI/UL 217, installed per NFPA 72",
+      "Carbon monoxide alarm within 10 feet of each sleeping area (electric, battery or plug-in)",
+      "Fire extinguisher (form still lists it): mounted within 10 feet of the kitchen in the path of egress, top no higher than 5 feet, 2A:10B:C, no more than 10 lbs, with proof of purchase within 1 year or a service tag within 12 months, and the manual left for the new occupant"
+    ],
+    "authorities": [
+      {
+        "name": "Flemington Borough Fire Safety (Bureau of Fire Safety / Fire Marshal)",
+        "type": "municipal_fire_bureau",
+        "area_served": "Entire borough",
+        "lead_time": "Fee depends on business days before closing: more than 10 business days for the lowest fee. The certificate is issued right after a passed inspection and is valid for six months.",
+        "fees": [
+          {
+            "label": "Smoke/CO certificate (CSACMAPFEC), received more than 10 business days before closing",
+            "amount": "$65",
+            "quote": "Requests for CSACMAPFEC received more than 10 business days prior to change of occupancy or closing shall be $65.",
+            "source_url": "https://ecode360.com/35093839",
+            "verified": null
+          },
+          {
+            "label": "Received four to nine business days before closing",
+            "amount": "$100",
+            "quote": "Requests for CSACMAPFEC received four to nine business days prior to the change of occupancy or closing shall be $100.",
+            "source_url": "https://ecode360.com/35093839",
+            "verified": null
+          },
+          {
+            "label": "Received fewer than four business days before closing",
+            "amount": "$200",
+            "quote": "Requests for CSACMAPFEC received fewer than four business days prior to the change of occupancy or closing shall be $200.",
+            "source_url": "https://ecode360.com/35093839",
+            "verified": null
+          },
+          {
+            "label": "Second and later re-inspections (first re-inspection included)",
+            "amount": "$30",
+            "quote": "If any additional re-inspections are required there shall be a $30 fee for each inspection.",
+            "source_url": "https://ecode360.com/35093839",
+            "verified": null
+          },
+          {
+            "label": "Smoke/CO certificate, more than 10 days before closing (Borough packet)",
+            "amount": "$65.00",
+            "quote": "Received more than Ten (10) days before closing/change of occupancy: $65.00",
+            "source_url": "https://www.historicflemington.com/forms-and-documents/forms/department-documents/construction/1446-selling-or-renting-your-home/file",
+            "verified": true
+          },
+          {
+            "label": "Smoke/CO certificate, 10 to 4 days before closing (Borough packet)",
+            "amount": "$100.00",
+            "quote": "Ten to Four (10-4) days before closing/change of occupancy: $100.00",
+            "source_url": "https://www.historicflemington.com/forms-and-documents/forms/department-documents/construction/1446-selling-or-renting-your-home/file",
+            "verified": true
+          },
+          {
+            "label": "Smoke/CO certificate, less than 4 days before closing (Borough packet)",
+            "amount": "$200.00",
+            "quote": "Less than (4) days before closing/change of occupancy: $200.00",
+            "source_url": "https://www.historicflemington.com/forms-and-documents/forms/department-documents/construction/1446-selling-or-renting-your-home/file",
+            "verified": true
+          }
+        ],
+        "how_to_apply": "Complete the 'Request for Certificate of Inspection Smoke & Carbon Monoxide Detector & Fire Extinguisher' form (in the Selling or Renting Your Home packet, or the separate fillable form) and submit it with the full fee, payable to \"Flemington Boro Fire Safety\", to 38 Park Ave, Flemington, NJ 08822. One form per inspection. Test all systems before the inspection. A no-show (no representative within 10 minutes, no power or no access) needs a new fee equal to the original.",
+        "application_url": "https://www.historicflemington.com/forms-and-documents/forms/department-documents/fire-prevention/564-smoke-co-detector-cert-for-change-of-occupancy-in-all-homes-rental-units-fillable/file",
+        "department_url": "https://www.historicflemington.com/departments/fire-prevention",
+        "phone": "908-782-8840 ext. 227",
+        "email": "fireofficial@historicflemington.com",
+        "contact_name": "Ken McCormick",
+        "contact_title": "Fire Marshal (Fire Official)",
+        "evidence": [
+          {
+            "url": "https://ecode360.com/34748219",
+            "quote": "The owner of each dwelling unit that is sold, leased, or otherwise made subject to a change of occupancy for residential purposes shall have a CSACMAPFEC obtained by the owner prior to said change of occupancy in accordance with N.J.A.C. 5:70-2.3 which evidences compliance with N.J.A.C. 5:70-4.19.",
+            "doc_date": "2026-10-04 (page fetched)",
+            "via": "page",
+            "verified": null
+          },
+          {
+            "url": "https://ecode360.com/34748219",
+            "quote": "Prior to the sale of any dwelling unit located in the Borough the owner and seller thereof shall certify in writing to the fire official full and complete compliance of said property with the terms and provisions of this section.",
+            "doc_date": "2026-10-04 (page fetched)",
+            "via": "page",
+            "verified": null
+          },
+          {
+            "url": "https://ecode360.com/35093839",
+            "quote": "Amended 11-27-2023 by Ord. No. 2023-31",
+            "doc_date": "11-27-2023 (Ord. No. 2023-31)",
+            "via": "page",
+            "verified": null
+          },
+          {
+            "url": "https://www.historicflemington.com/forms-and-documents/forms/department-documents/construction/1446-selling-or-renting-your-home/file",
+            "quote": "After inspection is complete, your certification is immediately issued. Each certificate is valid for six (6) months",
+            "doc_date": "Revised 2026-04-28",
+            "via": "pdf",
+            "verified": true
+          },
+          {
+            "url": "https://www.historicflemington.com/forms-and-documents/forms/department-documents/construction/1446-selling-or-renting-your-home/file",
+            "quote": "There will be a five hundred ($500.00) dollar noncompliance penalty issued to anyone not applying for or getting said certification with sale of house or rental of any rental unit.",
+            "doc_date": "Revised 2026-04-28",
+            "via": "pdf",
+            "verified": true
+          },
+          {
+            "url": "https://www.historicflemington.com/forms-and-documents/forms/department-documents/construction/1446-selling-or-renting-your-home/file",
+            "quote": "Make checks payable to:",
+            "doc_date": "Revised 2026-04-28",
+            "via": "pdf",
+            "verified": true
+          },
+          {
+            "url": "https://www.historicflemington.com/forms-and-documents/forms/department-documents/fire-prevention/564-smoke-co-detector-cert-for-change-of-occupancy-in-all-homes-rental-units-fillable/file",
+            "quote": "Phone: 908-782-8840 Ext. 227 E-mail:fireofficial@historicflemington.com",
+            "doc_date": "2023-12-18 (PDF created)",
+            "via": "pdf",
+            "verified": true
+          },
+          {
+            "url": "https://www.historicflemington.com/departments/fire-prevention",
+            "quote": "Fire Marshal Information",
+            "doc_date": "2026-10-04 (page fetched)",
+            "via": "page",
+            "verified": true
+          },
+          {
+            "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+            "quote": "LEAID: 1009-001 Flemington Boro ... Name: Flemington Boro Fire Safety ... Enf Auth. Municipal Addr: 38 Park Av ... Fire Official Kenneth J McCormick II Phone (908) 782-8840 ... Email kmccormick@historicflemington.com",
+            "doc_date": "survey date 8/17/2026",
+            "via": "state_directory",
+            "verified": null
+          },
+          {
+            "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+            "quote": "M Flemington Borough",
+            "doc_date": "2026-07",
+            "via": "pdf",
+            "verified": true
+          }
+        ],
+        "confidence": "high"
+      }
+    ],
+    "notes": "Flemington runs its own fire bureau (LEA code M). Fees in Borough Code section 8-15 (Ord. 2023-31) count business days; the Borough packet says just 'days'. The Borough packet (revised April 2026) still requires a portable fire extinguisher with proof of purchase or a service tag, although state law (P.L.2025, c.19) removed the extinguisher from the sale certificate in February 2025; confirm with the Fire Marshal. The Fire Marshal page lists Ken McCormick at 908-782-8840 and 908-531-6290 (kmccormick@historicflemington.com), office hours Tuesday to Thursday 8 am to 4 pm."
+  },
+  "other_items": [
+    {
+      "label": "Sanitary sewer (sump pump) inspection",
+      "detail": "The Borough Sewer Department inspects before closing. Fee $25.00, payable to Flemington Borough Sewer Department (separate check from the smoke fee). Allow 2 weeks before closing. Non-owner occupied residential, commercial and 5+ unit buildings only need one if not inspected in the last two years. Phone (908) 782-8840 x223.",
+      "source_url": "https://www.historicflemington.com/forms-and-documents/forms/department-documents/construction/1446-selling-or-renting-your-home/file"
+    },
+    {
+      "label": "Water utility (meter) inspection",
+      "detail": "Borough Water Department inspection before closing. Fee $30.00, payable to Flemington Borough Water Department. Allow 2 weeks before closing. Phone (908) 782-8840 x223.",
+      "source_url": "https://www.historicflemington.com/forms-and-documents/forms/department-documents/construction/1446-selling-or-renting-your-home/file"
+    },
+    {
+      "label": "Final water/sewer read",
+      "detail": "Submit the Final Read Request; the final reading is done on the closing date and a $35 fee is added to the final bill. Tell the Borough if the closing date changes.",
+      "source_url": "https://www.historicflemington.com/forms-and-documents/forms/department-documents/construction/1446-selling-or-renting-your-home/file"
+    },
+    {
+      "label": "Open permits and money owed",
+      "detail": "The CRC records search requires open permits to be closed and any money owed to any Borough entity to be paid before the CRC is issued.",
+      "source_url": "https://ecode360.com/34748337"
+    }
+  ],
+  "open_questions": [
+    "Does Flemington still require the portable fire extinguisher (with proof of purchase or service tag) after P.L.2025, c.19?",
+    "Are the sewer (sump pump) and water utility inspections required on every owner-occupied 1 and 2 family sale, and what happens if one fails?",
+    "Does the Construction Office really need the CRC application two months before closing, as the code says, or is the 16 to 40 business day window enough?"
+  ],
+  "checked_at": "2026-10-04",
+  "verification": {
+    "fees": 13,
+    "fee_ok": 6,
+    "fee_bad": 0,
+    "fee_unchecked": 7,
+    "quotes": 17,
+    "q_ok": 9,
+    "q_bad": 0,
+    "q_unchecked": 8
+  }
+}

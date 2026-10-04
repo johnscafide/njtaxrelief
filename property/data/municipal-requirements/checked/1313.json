@@ -1,0 +1,232 @@
+{
+  "municipality_code": "1313",
+  "municipality": "Englishtown Borough",
+  "county": "MONMOUTH",
+  "resale_co": {
+    "status": "required",
+    "name": "Certificate of Continued Occupancy (CCO)",
+    "issued_by": "Borough of Englishtown Department of Code Enforcement (Housing Inspector)",
+    "lead_time": "Apply in reasonable time before closing; the certificate is granted or denied within 10 days of the application.",
+    "valid_for": "90 days after issuance; one 90-day extension may be applied for",
+    "requirements": [
+      "Inspection by the Borough Housing Inspector for compliance with Borough housing and property maintenance ordinances",
+      "Application lists the owner, block and lot, approximate closing date, type of occupancy (single family, apartment, condo/townhouse) and reason (resale)",
+      "Separate smoke and carbon monoxide certificate from the Englishtown Fire District No. 1 Bureau of Fire Prevention (apply after scheduling the CCO inspection)"
+    ],
+    "fees": [
+      {
+        "label": "Certificate of continued occupancy (CCO), all dwelling units",
+        "amount": "$100",
+        "quote": "The fee for a certificate of continued occupancy for all dwelling units shall be $100.",
+        "source_url": "https://ecode360.com/42149011",
+        "verified": null
+      },
+      {
+        "label": "CCO application fee, as printed on the Borough form",
+        "amount": "$100.00",
+        "quote": "A FEE OF $100.00 MUST BE ENCLOSED WITH APPLICATION",
+        "source_url": "https://www.englishtownnj.com/s/UPDATED-CCO-Application.pdf",
+        "verified": null
+      },
+      {
+        "label": "Extension of a CCO for another 90 days",
+        "amount": "$50",
+        "quote": "The fee for an extension of time for a certificate of continued occupancy shall be $50.",
+        "source_url": "https://ecode360.com/42149011",
+        "verified": null
+      }
+    ],
+    "how_to_apply": "Fill out the Borough CCO Application (choose Resale), enclose the $100.00 fee with a check payable to the Borough of Englishtown, and submit it to Borough Hall, 15 Main Street. Schedule the CCO inspection with the Housing Inspector, then apply separately to the Fire District for the smoke/CO certificate.",
+    "application_url": "https://www.englishtownnj.com/s/UPDATED-CCO-Application.pdf",
+    "department_url": "https://www.englishtownnj.com/forms-and-applications",
+    "phone": "(732) 446-9235",
+    "email": "",
+    "contact_name": "Robert Cusic",
+    "contact_title": "Housing Inspector (named on the CCO application)",
+    "evidence": [
+      {
+        "url": "https://ecode360.com/42149011",
+        "quote": "No owner of any dwelling or dwelling unit shall rent, sell, renew the lease of, or otherwise permit occupancy of same or any part thereof by any person not a member of his/her family unless he/she shall first obtain a certificate of continued occupancy from the Department of Code Enforcement of the Borough of Englishtown.",
+        "doc_date": "Legislation through 05-13-2026",
+        "via": "page",
+        "verified": null
+      },
+      {
+        "url": "https://ecode360.com/42149011",
+        "quote": "A certificate of continued occupancy shall be valid 90 days after date of the issuance of the certificate, after which the certificate will expire.",
+        "doc_date": "",
+        "via": "page",
+        "verified": null
+      },
+      {
+        "url": "https://ecode360.com/42149011",
+        "quote": "A certificate of continued occupancy shall not be required when there is no change of occupancy.",
+        "doc_date": "",
+        "via": "page",
+        "verified": null
+      },
+      {
+        "url": "https://ecode360.com/42147516",
+        "quote": "Upon receipt of the application, the certificate of occupancy shall be granted or denied within 10 days of the date of the application.",
+        "doc_date": "",
+        "via": "page",
+        "verified": null
+      },
+      {
+        "url": "https://www.englishtownnj.com/s/UPDATED-CCO-Application.pdf",
+        "quote": "Office (732) 446-9235 Fax (732) 446-4979",
+        "doc_date": "",
+        "via": "pdf",
+        "verified": null
+      },
+      {
+        "url": "https://englishtownbofc.com/docs/Fire%20Bureau/BOE_Fire_Bur_CSACMAPFEC_2026.pdf",
+        "quote": "First, apply for your residential CO with Englishtown Housing & schedule your CO inspection.",
+        "doc_date": "2026",
+        "via": "pdf",
+        "verified": true
+      },
+      {
+        "url": "https://www.englishtownnj.com/forms-and-applications",
+        "quote": "CCO Application andChecklist",
+        "doc_date": "2026-10-04 (page fetched)",
+        "via": "page",
+        "verified": true
+      },
+      {
+        "url": "https://www.englishtownnj.com/forms-and-applications",
+        "quote": "Application for One & Two Family Certificate of Smoke Detector/Alarm and Carbon Monoxide Alarm",
+        "doc_date": "2026-10-04 (page fetched)",
+        "via": "page",
+        "verified": true
+      }
+    ],
+    "confidence": "high",
+    "notes": "Borough Code §400 (Housing Standards) and Chapter 275 were read through ecode360's print view. The CCO application on the Borough Forms page is a scanned image, so its quotes (the $100.00 fee, Housing Inspector Robert Cusic, office (732) 446-9235) cannot be machine-checked. The Fire District FAQ notes a 'Conditional/Transfer of Title Only CO' exists for homes not ready for occupancy; its fee is not published. No email for the Housing Inspector was found. Rental registration ($225 per unit per year) is rental-only."
+  },
+  "fire_cert": {
+    "requirements": [
+      "Ten-year sealed battery single station smoke alarms or AC powered hardwired smoke detectors: one in each bedroom, and one on each level within ten feet of the bedrooms (not crawl spaces or unfinished attics)",
+      "Smoke detectors properly mounted, UL listed, with a test button; AC powered alarms from original construction or rehabilitation cannot be replaced with battery alarms",
+      "Carbon monoxide alarm on each level and within ten feet of the bedrooms (battery, plug-in, or part of a central station alarm system); UL listed",
+      "Central station alarm systems need a letter from the monitoring company that the system works",
+      "No fire extinguisher required (the Fire District FAQ cites the February 2025 change)",
+      "An adult must be present; pets secured"
+    ],
+    "authorities": [
+      {
+        "name": "Englishtown Fire District No. 1, Bureau of Fire Prevention",
+        "type": "fire_district",
+        "area_served": "Englishtown Borough",
+        "lead_time": "Fee depends on business days before closing. Inspections are noon to 3 pm Tuesday to Thursday and are not done at the same time as the CCO inspection.",
+        "fees": [
+          {
+            "label": "Smoke and CO certificate, received more than 10 business days before closing",
+            "amount": "$45.00",
+            "quote": "Received more than ten (10) business days prior to closing/change of occupancy date: $45.00",
+            "source_url": "https://englishtownbofc.com/docs/Fire%20Bureau/BOE_Fire_Bur_CSACMAPFEC_2026.pdf",
+            "verified": true
+          },
+          {
+            "label": "Received 4 to 10 business days before closing",
+            "amount": "$80.00",
+            "quote": "Received four (4) to ten (10) business days prior to closing/change of occupancy date: $80.00",
+            "source_url": "https://englishtownbofc.com/docs/Fire%20Bureau/BOE_Fire_Bur_CSACMAPFEC_2026.pdf",
+            "verified": true
+          },
+          {
+            "label": "Received less than 4 business days before closing",
+            "amount": "$135.00",
+            "quote": "Received less than four (4) business days prior to closing/change of occupancy date: $135.00",
+            "source_url": "https://englishtownbofc.com/docs/Fire%20Bureau/BOE_Fire_Bur_CSACMAPFEC_2026.pdf",
+            "verified": true
+          }
+        ],
+        "how_to_apply": "After applying for the CCO and scheduling that inspection, complete the Fire District's Application for Certificate of Smoke Detector & Carbon Monoxide Compliance (at Town Hall, on the Borough Forms page, or at englishtownbofc.com) and drop it with payment at the firehouse, 3 S. Main St. (secure red drop box at the back). Pay by check or money order to Englishtown Fire Prevention, not the Borough, or exact cash. Office hours Tuesday to Thursday, noon to 4 pm.",
+        "application_url": "https://englishtownbofc.com/docs/Fire%20Bureau/BOE_Fire_Bur_CSACMAPFEC_2026.pdf",
+        "department_url": "https://englishtownbofc.com/inspection-requirements",
+        "phone": "732-786-4477",
+        "email": "firemarshal@englishtownfd.com",
+        "contact_name": "Ken Marr, Jr.",
+        "contact_title": "Fire Marshal",
+        "evidence": [
+          {
+            "url": "https://englishtownbofc.com/docs/Fire%20Bureau/BOE_Fire_Bur_CSACMAPFEC_2026.pdf",
+            "quote": "The owner shall obtain a certificate of compliance from the Englishtown Fire District No.1, Bureau of Fire Prevention",
+            "doc_date": "2026",
+            "via": "pdf",
+            "verified": true
+          },
+          {
+            "url": "https://englishtownbofc.com/docs/Fire%20Bureau/BOE_Fire_Bur_CSACMAPFEC_2026.pdf",
+            "quote": "Check/Money order payable to Englishtown Fire Prevention*. NOT THE BOROUGH OF ENGLISHTOWN",
+            "doc_date": "2026",
+            "via": "pdf",
+            "verified": true
+          },
+          {
+            "url": "https://englishtownbofc.com/docs/Fire%20Bureau/BOE_Fire_Bur_CSACMAPFEC_2026.pdf",
+            "quote": "Is the fire extinguisher still required? No.",
+            "doc_date": "2026",
+            "via": "pdf",
+            "verified": true
+          },
+          {
+            "url": "https://englishtownbofc.com/docs/Fire%20Bureau/BOE_Fire_Bur_CSACMAPFEC_2026.pdf",
+            "quote": "Note: the CO & Smoke Inspectors will NOT come at the same time.",
+            "doc_date": "2026",
+            "via": "pdf",
+            "verified": true
+          },
+          {
+            "url": "https://englishtownbofc.com/docs/Fire%20Bureau/BOE_Fire_Bur_CSACMAPFEC_2026.pdf",
+            "quote": "Phone: 732-786-4477 / Fax: 732-446-8285",
+            "doc_date": "2026",
+            "via": "pdf",
+            "verified": true
+          },
+          {
+            "url": "https://englishtownbofc.com/docs/Fire%20Bureau/BOE_Fire_Bur_CSACMAPFEC_2026.pdf",
+            "quote": "Ken Marr, Jr., Fire Marshal",
+            "doc_date": "2026",
+            "via": "pdf",
+            "verified": true
+          },
+          {
+            "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+            "quote": "LEAID: 1312-001 Englishtown Boro SMOKE DETECTOR COMPLIANCE Name: Englishtown Boro Fire Prev Enf Auth. District Addr: 15 Main St Englishtown NJ 07726 Fire Official Ken Marr, Jr Phone (732) 446-9235 ... Email firemarshal@englishtownfd.com",
+            "doc_date": "7/13/2026 (survey date)",
+            "via": "state_directory",
+            "verified": null
+          },
+          {
+            "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+            "quote": "D Englishtown Borough",
+            "doc_date": "2026-07",
+            "via": "pdf",
+            "verified": true
+          }
+        ],
+        "confidence": "high"
+      }
+    ],
+    "notes": "The Fire District's 2026 form uses $45 / $80 / $135, which differ from the current state schedule ($45 / $90 / $161); the district's own form amounts are shown. The state directory lists the Borough Hall number (732) 446-9235 for the fire official; the district form gives 732-786-4477 and the district website header shows (732) 446-4818. A smoke certificate is not needed for a title-only CO that does not allow occupancy."
+  },
+  "other_items": [],
+  "open_questions": [
+    "What is the fee and process for a Conditional/Transfer of Title Only CO?",
+    "Is there an email address for the Housing Inspector?",
+    "Will the Fire District update its 4 to 10 day and under 4 day fees ($80/$135) to the state amounts ($90/$161)?"
+  ],
+  "checked_at": "2026-10-04",
+  "verification": {
+    "fees": 6,
+    "fee_ok": 3,
+    "fee_bad": 0,
+    "fee_unchecked": 3,
+    "quotes": 16,
+    "q_ok": 10,
+    "q_bad": 0,
+    "q_unchecked": 6
+  }
+}

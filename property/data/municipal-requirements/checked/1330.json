@@ -1,0 +1,235 @@
+{
+  "municipality_code": "1330",
+  "municipality": "Marlboro Township",
+  "county": "MONMOUTH",
+  "checked_at": "2026-10-04",
+  "resale_co": {
+    "status": "required",
+    "name": "Continued Certificate of Occupancy (CCO, Non UCC)",
+    "issued_by": "Marlboro Township Community Development, Zoning Division",
+    "lead_time": "All fees are due with the application before an inspection is booked. The application can go in before the HVAC checklist, chimney report, Board of Health letter and alarm company letter, which can be handed to the inspector on inspection day.",
+    "valid_for": "The application says that if the change of occupancy does not happen within 6 months, a new application is required. HVAC checklists and chimney reports are good for 90 days; the county well/septic certification is good for 6 months.",
+    "requirements": [
+      "Notarized application signed by the owner (or Power of Attorney, executor or trustee certificate) with buyer name and contract closing date",
+      "Notarized Home Improvement Form reviewed by Zoning and Construction; all structures must conform with Township ordinances (pre-1990 nonconforming structures may be exempt by affidavit)",
+      "All open permits closed out; work done without permits must be permitted",
+      "HVAC Furnace Inspection Checklist completed by a licensed HVAC contractor (CO readings of 9 ppm or less)",
+      "Level 1 chimney inspection by a certified chimney sweep for wood or gas fireplaces or stoves",
+      "Well and septic certification from the Monmouth County Board of Health (732-431-7456) if the home has a well or septic",
+      "Letter or report from the alarm monitoring company if smoke or CO alarms are tied to a monitored system",
+      "Inspection items include working heat in all rooms, operable windows, covered outlets, labeled secondary power source, 4 inch house numbers, no sump pump tied to the sanitary sewer, broom-clean rooms, thumb-lock exit doors, pool gates, metal dryer vent, sound decks and exterior",
+      "Smoke and carbon monoxide alarm certificate (see fire certificate)"
+    ],
+    "fees": [
+      {
+        "label": "CCO, single family dwelling (sale or rental)",
+        "amount": "$125",
+        "quote": "Single Family Dwelling: $125",
+        "source_url": "https://www.marlboro-nj.gov/_Content/pdf/forms/CCO-Residential.pdf",
+        "verified": true
+      },
+      {
+        "label": "CCO, apartment (not condo)",
+        "amount": "$100",
+        "quote": "Apartment (Not Condo): $100",
+        "source_url": "https://www.marlboro-nj.gov/_Content/pdf/forms/CCO-Residential.pdf",
+        "verified": true
+      },
+      {
+        "label": "CCO re-inspection (failed inspections only)",
+        "amount": "$75",
+        "quote": "Re-inspection: $75 (Failed Inspections Only)",
+        "source_url": "https://www.marlboro-nj.gov/_Content/pdf/forms/CCO-Residential.pdf",
+        "verified": true
+      },
+      {
+        "label": "Certificate for a single-family dwelling unit (Township Code 278-3B)",
+        "amount": "$125",
+        "quote": "Certificate for a single-family dwelling unit: $125.",
+        "source_url": "https://ecode360.com/12880259",
+        "verified": null
+      }
+    ],
+    "how_to_apply": "Download the Residential CCO packet (application, Home Improvement Form, Fire Bureau smoke/CO application, HVAC checklist and inspection checklist). Have the owner sign and notarize it, and hand it in at the Zoning Office, 1979 Township Drive, Marlboro (8:30 am to 4:30 pm, or the 24-hour drop box) with all fees. Pay by cash, check, money order, certified check or Visa, MasterCard or Discover; checks payable to Marlboro Township. Fees are non-refundable.",
+    "application_url": "https://www.marlboro-nj.gov/_Content/pdf/forms/CCO-Residential.pdf",
+    "department_url": "https://www.marlboro-nj.gov/pages/construction-resources-and-forms",
+    "phone": "732-536-0200 ext. 1809",
+    "email": "zoning@marlboro-nj.gov",
+    "contact_name": "",
+    "contact_title": "Community Development, Zoning Division",
+    "evidence": [
+      {
+        "url": "https://ecode360.com/12880259",
+        "quote": "No person shall sell, transfer, lease or rent any structure located within the Township of Marlboro unless a certificate of continued occupancy certifying that said structure is in compliance with all provisions of the current version of the International Property Maintenance Code adopted by the State of New Jersey and all other applicable ordinances of the Township of Marlboro is issued.",
+        "doc_date": "2024-02-15 (Ord. No. 2024-002)",
+        "via": "page",
+        "verified": null
+      },
+      {
+        "url": "https://www.marlboro-nj.gov/_Content/pdf/forms/CCO-Residential.pdf",
+        "quote": "APPLICATION FOR CONTINUED CERTIFICATE OF OCCUPANCY (Non UCC)",
+        "doc_date": "2025-03-12",
+        "via": "pdf",
+        "verified": true
+      },
+      {
+        "url": "https://www.marlboro-nj.gov/_Content/pdf/forms/CCO-Residential.pdf",
+        "quote": "All open permits must be closed out prior to issuance of a Continued Certificate of Occupancy.",
+        "doc_date": "2025-03-12",
+        "via": "pdf",
+        "verified": true
+      },
+      {
+        "url": "https://www.marlboro-nj.gov/_Content/pdf/forms/CCO-Residential.pdf",
+        "quote": "If the change of occupancy specified does not occur within 6 months, a new application is required.",
+        "doc_date": "2025-03-12",
+        "via": "pdf",
+        "verified": true
+      },
+      {
+        "url": "https://www.marlboro-nj.gov/_Content/pdf/forms/CCO-Residential.pdf",
+        "quote": "zoning@marlboro-nj.gov",
+        "doc_date": "2025-03-12",
+        "via": "pdf",
+        "verified": true
+      }
+    ],
+    "confidence": "high",
+    "notes": "Township Code Chapter 278, Sections 278-2 and 278-3 (amended 2-15-2024 by Ord. No. 2024-002) were read in full through the ecode360 print view. The code and the form agree on $125 single family and $100 apartment; the $75 re-inspection fee is on the form only. The form's footer is dated 03-12-2025. No two-family fee is listed separately; ask whether a two-family pays $125 plus $100 per extra unit. A $20 Lead Hazard Control Assistance Fund fee and lead-safe inspections apply to pre-1978 rentals only. The Township's new website does not have a working CCO page; the form PDF is reachable directly."
+  },
+  "fire_cert": {
+    "requirements": [
+      "Smoke alarm in the basement within 10 feet of the stairway (not in the stairway), on the first floor, outside bedrooms within 10 feet of each bedroom door, and in finished attics",
+      "Hardwired alarms must be replaced like for like and stay interconnected; homes without hardwired alarms need 10-year sealed battery alarms; required hardwiring depends on when the house was built (table on the form)",
+      "No smoke alarm older than 10 years",
+      "Carbon monoxide alarm outside each separate sleeping area; CO alarms not older than 5 years or past the maker's expiration date",
+      "Monitored alarm systems need a letter or report on the alarm company letterhead (a certificate of monitoring is not accepted)"
+    ],
+    "authorities": [
+      {
+        "name": "Marlboro Township Fire Bureau",
+        "type": "municipal_fire_bureau",
+        "area_served": "Entire township",
+        "lead_time": "Fee depends on how many days before the change of occupancy the application is received: more than 10 days for the lowest fee. A new application is needed if the change of occupancy does not happen within 6 months. The CCO housing inspector may sign the certificate during the CCO inspection.",
+        "fees": [
+          {
+            "label": "Smoke and CO alarm certificate, received more than 10 days before the occupancy change",
+            "amount": "$45",
+            "quote": "$45 – Received more than 10 days prior to occupancy change",
+            "source_url": "https://www.marlboro-nj.gov/_Content/pdf/forms/CCO-Residential.pdf",
+            "verified": true
+          },
+          {
+            "label": "Received 4 to 10 days before the occupancy change",
+            "amount": "$90",
+            "quote": "$90 – Received 4-10 days prior to occupancy change",
+            "source_url": "https://www.marlboro-nj.gov/_Content/pdf/forms/CCO-Residential.pdf",
+            "verified": true
+          },
+          {
+            "label": "Received fewer than 4 days before the occupancy change",
+            "amount": "$161",
+            "quote": "$161 – Received fewer than 4 days prior to occupancy change",
+            "source_url": "https://www.marlboro-nj.gov/_Content/pdf/forms/CCO-Residential.pdf",
+            "verified": true
+          }
+        ],
+        "how_to_apply": "Fill out the Fire Bureau's Application for Certificate of Smoke and Carbon Monoxide Alarm Compliance (part of the Residential CCO packet) and submit it with the CCO application and fee at the Zoning Office. The fire certificate fee is in addition to the CCO fee.",
+        "application_url": "https://www.marlboro-nj.gov/_Content/pdf/forms/CCO-Residential.pdf",
+        "department_url": "https://www.marlboro-nj.gov/pages/construction-resources-and-forms",
+        "phone": "732-536-0200 ext. 1802",
+        "email": "cweltner@marlboro-nj.gov",
+        "contact_name": "Christopher C Weltner",
+        "contact_title": "Fire Official (per NJ DCA fire directory)",
+        "evidence": [
+          {
+            "url": "https://www.marlboro-nj.gov/_Content/pdf/forms/CCO-Residential.pdf",
+            "quote": "FIRE CERTIFICATE FEES (This is in addition to the residential sale/rental fees):",
+            "doc_date": "2025-03-12",
+            "via": "pdf",
+            "verified": true
+          },
+          {
+            "url": "https://www.marlboro-nj.gov/_Content/pdf/forms/CCO-Residential.pdf",
+            "quote": "Office: 732-536-0200 Ext 1802",
+            "doc_date": "2025-03-12",
+            "via": "pdf",
+            "verified": true
+          },
+          {
+            "url": "https://ecode360.com/12880259",
+            "quote": "Housing inspectors performing the CCO inspection are authorized to sign the certificate of smoke detector, carbon monoxide alarm and portable fire extinguisher compliance per N.J.A.C. 5:70-2.3(a)1.",
+            "doc_date": "2024-02-15 (Ord. No. 2024-002)",
+            "via": "page",
+            "verified": null
+          },
+          {
+            "url": "https://ecode360.com/12880259",
+            "quote": "Certificate of smoke alarm, carbon monoxide alarm and fire extinguisher compliance for a one- and two-family dwelling: as per N.J.A.C. 5:70-2.9(d) fee schedule.",
+            "doc_date": "2024-02-15",
+            "via": "page",
+            "verified": null
+          },
+          {
+            "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+            "quote": "LEAID: 1328-001 Enf Auth. Municipal Fire Official Christopher C Weltner Phone (732) 536-0200 ... Email cweltner@marlboro-nj.gov",
+            "doc_date": "2025 (survey date 4/25/2025)",
+            "via": "state_directory",
+            "verified": null
+          },
+          {
+            "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+            "quote": "M Marlboro Township",
+            "doc_date": "2026-07",
+            "via": "pdf",
+            "verified": true
+          }
+        ],
+        "confidence": "high"
+      }
+    ],
+    "notes": "The Township is its own fire code enforcing agency (LEA code M). The Township form (dated 03-12-2025) charges the state fee tiers ($45/$90/$161) and does not list a fire extinguisher, but Township Code 278-2C and 278-3F still name the portable fire extinguisher; the state dropped it from the sale certificate in February 2025 (P.L.2025, c.19). The form's smoke/CO page is titled for one and two family dwellings, while the CCO page refers to single family dwellings."
+  },
+  "other_items": [
+    {
+      "label": "Home Improvement Form and zoning review",
+      "detail": "A notarized Home Improvement Form listing fences, patios, pools, decks, sheds, generators and similar items must be approved by Zoning and Construction; the Zoning Officer must find all structures conform before the CCO is issued.",
+      "source_url": "https://ecode360.com/12880259"
+    },
+    {
+      "label": "Open permits",
+      "detail": "All open permits must be closed, and work done without permits must be permitted, before the CCO is issued.",
+      "source_url": "https://www.marlboro-nj.gov/_Content/pdf/forms/CCO-Residential.pdf"
+    },
+    {
+      "label": "HVAC and chimney reports",
+      "detail": "A licensed HVAC contractor's furnace checklist and a certified chimney sweep Level 1 report (for fireplaces or stoves) are required, each good for 90 days.",
+      "source_url": "https://www.marlboro-nj.gov/_Content/pdf/forms/CCO-Residential.pdf"
+    },
+    {
+      "label": "Well and septic",
+      "detail": "Homes on well or septic need a certification from the Monmouth County Board of Health (732-431-7456), good for 6 months.",
+      "source_url": "https://www.marlboro-nj.gov/_Content/pdf/forms/CCO-Residential.pdf"
+    },
+    {
+      "label": "Sump pump",
+      "detail": "No sump pumps may be connected to the sanitary sewer.",
+      "source_url": "https://www.marlboro-nj.gov/_Content/pdf/forms/CCO-Residential.pdf"
+    }
+  ],
+  "open_questions": [
+    "What is the CCO fee for a two-family home (one $125 certificate, or $125 plus $100 per apartment)?",
+    "How far ahead are CCO inspections booking now?",
+    "Does the Fire Bureau still check for a fire extinguisher, since the Township code still lists one?"
+  ],
+  "verification": {
+    "fees": 7,
+    "fee_ok": 6,
+    "fee_bad": 0,
+    "fee_unchecked": 1,
+    "quotes": 11,
+    "q_ok": 7,
+    "q_bad": 0,
+    "q_unchecked": 4
+  }
+}

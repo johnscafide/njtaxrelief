@@ -1,0 +1,288 @@
+{
+  "municipality_code": "1010",
+  "municipality": "Franklin Township",
+  "county": "HUNTERDON",
+  "resale_co": {
+    "status": "required",
+    "name": "Construction Records Clearance (CRC) / resale clearance certification",
+    "issued_by": "Franklin Township (Hunterdon) Construction Department",
+    "lead_time": "Allow 10 business days to process (more if permits need to be closed); the code says to apply at least 10 business days before the change of ownership.",
+    "valid_for": "If the closing does not occur within six months, a new application and payment may be required (per the application form)",
+    "requirements": [
+      "Construction Records Clearance Application - Residential, with a copy of the home's real estate listing",
+      "Records search for open construction permits; open permits need final inspections and certificates before the CRC is issued",
+      "New Jersey Private Well Water Test report",
+      "Water Test sign-off sheet signed by the seller and the purchaser",
+      "Copy of the smoke certificate from the Franklin Township Bureau of Fire Prevention (Fire District #1)",
+      "Application asks about pools, pool fence, hot tub, finished basement, outbuildings, decks and whole house generator"
+    ],
+    "fees": [
+      {
+        "label": "Resale clearance certification records search (Township Code 182-10L)",
+        "amount": "$200",
+        "quote": "the seller shall be charged $200 for a background records search for the seller to verify that permits have been issued",
+        "source_url": "https://ecode360.com/10075192",
+        "verified": null
+      },
+      {
+        "label": "CRC fee as listed in Chapter 157 (2016, older)",
+        "amount": "$150",
+        "quote": "The applicant shall submit with the application a fee for the CRC as follows to cover the administrative cost: $150.",
+        "source_url": "https://ecode360.com/32466714",
+        "verified": null
+      },
+      {
+        "label": "CRC application fee (Township form, 12-1-20)",
+        "amount": "$200.00",
+        "quote": "Please enclose a fee for $200.00 made payable to Franklin Township",
+        "source_url": "https://storage.googleapis.com/proudcity/franklintownshipnj/uploads/2020/06/Updated-CRC-12-1-20.pdf",
+        "verified": null
+      }
+    ],
+    "how_to_apply": "Download the Construction Records Clearance (CRC) Application from the Construction Department's Applications and Forms page, or pick one up at the Municipal Building, 202 Sidney Road, Pittstown, NJ 08867 (Monday to Friday 8 am to 4 pm). Return it to the Building Department with a $200.00 check payable to Franklin Township, a copy of the listing, the private well test report, the signed water test sign-off sheet and a copy of the smoke certificate.",
+    "application_url": "https://storage.googleapis.com/proudcity/franklintownshipnj/uploads/2020/06/Updated-CRC-12-1-20.pdf",
+    "department_url": "https://franklin-twp.org/departments/construction/",
+    "phone": "908-735-5215 ext. 2",
+    "email": "construction@franklin-twp.org",
+    "contact_name": "Mark Fornaciari",
+    "contact_title": "Construction Official (Technical Assistant: Andrea Bergen, abergen@franklin-twp.org)",
+    "evidence": [
+      {
+        "url": "https://ecode360.com/32466714",
+        "quote": "A CRC shall be required prior to the sale of any residential or commercial structure and prior to the rental of any tenant space in a commercial structure within the Township.",
+        "doc_date": "10-13-2016 (Ord. No. 2016-10)",
+        "via": "page",
+        "verified": null
+      },
+      {
+        "url": "https://ecode360.com/32466714",
+        "quote": "The owner or his authorized agent shall submit a written application and payment of fees at least 10 business days prior to the change of ownership and/or occupancy on the form provided by the Township.",
+        "doc_date": "2026-10-04 (page fetched)",
+        "via": "page",
+        "verified": null
+      },
+      {
+        "url": "https://ecode360.com/10075192",
+        "quote": "Upon the resale or transfer of any real estate sold within the Township of Franklin, Hunterdon County, a resale clearance certification shall be required to be obtained by the seller.",
+        "doc_date": "2026-10-04 (page fetched)",
+        "via": "page",
+        "verified": null
+      },
+      {
+        "url": "https://storage.googleapis.com/proudcity/franklintownshipnj/uploads/2020/06/Updated-CRC-12-1-20.pdf",
+        "quote": "Construction Records Clearance Application - Residential",
+        "doc_date": "2020-12-01 (PDF created; scanned)",
+        "via": "pdf",
+        "verified": null
+      },
+      {
+        "url": "https://storage.googleapis.com/proudcity/franklintownshipnj/uploads/2020/06/Updated-CRC-12-1-20.pdf",
+        "quote": "If the closing does not occur within six months, a new application/payment may be required.",
+        "doc_date": "2020-12-01 (PDF created; scanned)",
+        "via": "pdf",
+        "verified": null
+      },
+      {
+        "url": "https://franklin-twp.org/construction-applications-and-forms/",
+        "quote": "Construction Records Clearance (CRC) Application",
+        "doc_date": "2026-10-04 (page fetched)",
+        "via": "page",
+        "verified": true
+      },
+      {
+        "url": "https://franklin-twp.org/departments/construction/",
+        "quote": "Mark Fornaciari Construction Official",
+        "doc_date": "2026-10-04 (page fetched)",
+        "via": "page",
+        "verified": true
+      },
+      {
+        "url": "https://franklin-twp.org/departments/construction/",
+        "quote": "construction@franklin-twp.org",
+        "doc_date": "2026-10-04 (page fetched)",
+        "via": "page",
+        "verified": true
+      }
+    ],
+    "confidence": "high",
+    "notes": "Franklin Township (Hunterdon) Chapter 157 (Ord. 2016-10) and fee section 182-10L both require a records clearance before a home is sold; both were read through the ecode360 print view. The fee differs: Chapter 157 says $150, while section 182-10L and the Township's CRC form (12-1-20) say $200; the form amount is likely current. The CRC form is a scanned PDF, so its quotes cannot be machine-checked. Exemptions in section 157-2 include deed corrections, spousal transfers, estate distributions and refinancing, as long as no change in physical occupancy occurs. Construction Department hours: Monday, Wednesday, Thursday 8 am to 4 pm, Tuesday 8 am to 7:30 pm, Friday 8 am to noon. Do not confuse this Township with Franklin Township in Somerset, Gloucester or Warren County."
+  },
+  "fire_cert": {
+    "requirements": [
+      "Smoke alarms no older than 10 years; type depends on year built: before 1977, 10-year sealed battery alarm on each level including the basement; 1977 to Feb 21, 1983, interconnected electric alarms on the sleeping level and basement plus 10-year sealed battery alarms on other levels",
+      "Built Feb 22, 1983 to Apr 30, 1993: interconnected electric alarms with battery backup on every level including the basement; built May 1, 1993 or later: also in sleeping areas and every bedroom",
+      "Basement smoke alarm on the ceiling at the bottom of the basement stairs",
+      "Carbon monoxide alarm within 10 feet of every bedroom, not past the maker's replacement date",
+      "Secondary power source label (generators, solar, battery storage) within 18 inches of the main electrical panel and meter, not handwritten, e.g. 'CAUTION: MULTIPLE SOURCES OF POWER.'",
+      "No portable fire extinguisher needed (the District's January 2026 packet says they are no longer required)"
+    ],
+    "authorities": [
+      {
+        "name": "Franklin Township Fire District #1, Bureau of Fire Prevention (Fire Marshal)",
+        "type": "fire_district",
+        "area_served": "Entire township",
+        "lead_time": "Fee depends on business days before the change of occupancy: more than 10 business days for the lowest fee. Staff are part-time, so inspections are scheduled at mutually convenient times; fees must be paid when the appointment is scheduled.",
+        "fees": [
+          {
+            "label": "Smoke/CO certificate, more than 10 business days before change of occupancy",
+            "amount": "$60",
+            "quote": "Requests for a CSACMAPFEC received more than 10 business days prior to the change of occupancy: $60.",
+            "source_url": "https://ecode360.com/10075192",
+            "verified": null
+          },
+          {
+            "label": "Four to 10 business days before",
+            "amount": "$100",
+            "quote": "Requests for a CSACMAPFEC received four to 10 business days prior to the change of occupancy: $100.",
+            "source_url": "https://ecode360.com/10075192",
+            "verified": null
+          },
+          {
+            "label": "Fewer than four business days before",
+            "amount": "$170",
+            "quote": "Requests for a CSACMAPFEC received fewer than four business days prior to the change of occupancy: $170.",
+            "source_url": "https://ecode360.com/10075192",
+            "verified": null
+          },
+          {
+            "label": "No-show or failed inspection (reinspection)",
+            "amount": "$25",
+            "quote": "A no-show or failed inspection shall be subject to a $25 reinspection fee.",
+            "source_url": "https://ecode360.com/10075192",
+            "verified": null
+          },
+          {
+            "label": "Smoke/CO certificate, more than 10 business days (District form)",
+            "amount": "$60.00",
+            "quote": "$60.00 - more than ten (10) business days prior to the change of occupancy",
+            "source_url": "https://franklintwpfiredistrict1.com/downloads/bureau-of-fire-prevention/certificate-of-smoke-alarm.pdf",
+            "verified": true
+          },
+          {
+            "label": "Four to 10 business days (District form)",
+            "amount": "$100.00",
+            "quote": "$100.00-between four and ten (4-10) business days prior to the change of occupancy",
+            "source_url": "https://franklintwpfiredistrict1.com/downloads/bureau-of-fire-prevention/certificate-of-smoke-alarm.pdf",
+            "verified": true
+          },
+          {
+            "label": "Less than four business days (District form)",
+            "amount": "$170.00",
+            "quote": "$170.00 - less than four (4) business days prior to the change of occupancy",
+            "source_url": "https://franklintwpfiredistrict1.com/downloads/bureau-of-fire-prevention/certificate-of-smoke-alarm.pdf",
+            "verified": true
+          },
+          {
+            "label": "Re-inspection (District form)",
+            "amount": "$25.00",
+            "quote": "Re-Inspections incur a $25.00 fee",
+            "source_url": "https://franklintwpfiredistrict1.com/downloads/bureau-of-fire-prevention/certificate-of-smoke-alarm.pdf",
+            "verified": true
+          }
+        ],
+        "how_to_apply": "Download the 'Certificate of Smoke Alarm' packet from the Fire District website (or pick one up) and submit it at the Bureau of Fire Prevention, 67 Quakertown Rd, Pittstown, NJ 08867. Staff will call or email to schedule; pay when scheduling by exact cash, check payable to \"Franklin Township Fire District #1\" (checks to \"Franklin Township\" are not accepted) or online invoice (mark it on the application).",
+        "application_url": "https://franklintwpfiredistrict1.com/downloads/bureau-of-fire-prevention/certificate-of-smoke-alarm.pdf",
+        "department_url": "https://franklintwpfiredistrict1.com/bureau-of-fire-prevention",
+        "phone": "908-735-8704",
+        "email": "firesafety@franklintwpfiredistrict1.com",
+        "contact_name": "Richard Dziminski",
+        "contact_title": "Fire Official listed in the NJ DCA fire directory (survey 1/30/2023; may be out of date)",
+        "evidence": [
+          {
+            "url": "https://franklintwpfiredistrict1.com/downloads/bureau-of-fire-prevention/certificate-of-smoke-alarm.pdf",
+            "quote": "Prior to the sale or lease of any residential structure or change in occupancy for residential purposes, the owner shall obtain a CSACMAPFEC from the Franklin Township Fire Marshal.",
+            "doc_date": "2026-01-05 (PDF created)",
+            "via": "pdf",
+            "verified": true
+          },
+          {
+            "url": "https://franklintwpfiredistrict1.com/downloads/bureau-of-fire-prevention/certificate-of-smoke-alarm.pdf",
+            "quote": "Portable Fire Extinguishers are no longer required for the purposes of this certificate",
+            "doc_date": "2026-01-05 (PDF created)",
+            "via": "pdf",
+            "verified": true
+          },
+          {
+            "url": "https://franklintwpfiredistrict1.com/downloads/bureau-of-fire-prevention/certificate-of-smoke-alarm.pdf",
+            "quote": "Checks made payable to “Franklin Township” or other variations cannot be accepted for financial audit reasons.",
+            "doc_date": "2026-01-05 (PDF created)",
+            "via": "pdf",
+            "verified": true
+          },
+          {
+            "url": "https://franklintwpfiredistrict1.com/downloads/bureau-of-fire-prevention/certificate-of-smoke-alarm.pdf",
+            "quote": "Our staff is Part-Time; therefore, inspections are scheduled at mutually convenient times.",
+            "doc_date": "2026-01-05 (PDF created)",
+            "via": "pdf",
+            "verified": true
+          },
+          {
+            "url": "https://ecode360.com/10075192",
+            "quote": "Amended 7-8-2021 by Ord. No. 2021-08",
+            "doc_date": "7-8-2021 (Ord. No. 2021-08)",
+            "via": "page",
+            "verified": null
+          },
+          {
+            "url": "https://franklintwpfiredistrict1.com/bureau-of-fire-prevention",
+            "quote": "Certificate of Smoke Alarm",
+            "doc_date": "2026-10-04 (page fetched)",
+            "via": "page",
+            "verified": true
+          },
+          {
+            "url": "https://franklintwpfiredistrict1.com/bureau-of-fire-prevention",
+            "quote": "Phone: (908) 735-8704",
+            "doc_date": "2026-10-04 (page fetched)",
+            "via": "page",
+            "verified": true
+          },
+          {
+            "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+            "quote": "LEAID: 1010-001 Franklin Twp Fire Dist #1 ... Name: Franklin Twp Fire Prev ... Enf Auth. District Addr: 67 Quakertown Rd Pittstown NJ 08867 ... Fire Official Richard Dziminski Phone (908) 735-8704 ... Email rdziminski@franklintwpfiredistrict1.co",
+            "doc_date": "survey date 1/30/2023",
+            "via": "state_directory",
+            "verified": null
+          },
+          {
+            "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+            "quote": "D Franklin Township",
+            "doc_date": "2026-07",
+            "via": "pdf",
+            "verified": true
+          }
+        ],
+        "confidence": "high"
+      }
+    ],
+    "notes": "Franklin Township (Hunterdon) is served by Fire District #1 (LEA code D); the District's Bureau of Fire Prevention issues the certificate. Fees match Township Code section 182-12B (Ord. 2021-08) and the District's January 2026 packet. The packet gives the technical email once as 'firesafety@frankintwpfiredistrict1.com' (missing an 'l'); the header address firesafety@franklintwpfiredistrict1.com is the correct spelling. The Fire Official name comes only from the 2023 state directory survey."
+  },
+  "other_items": [
+    {
+      "label": "Private well water test",
+      "detail": "The CRC needs a New Jersey Private Well Water Test report and a Water Test sign-off sheet signed by seller and purchaser (Private Well Testing Act).",
+      "source_url": "https://storage.googleapis.com/proudcity/franklintownshipnj/uploads/2020/06/Updated-CRC-12-1-20.pdf"
+    },
+    {
+      "label": "Open permits",
+      "detail": "Any open construction permits must get final inspections and certificates before the CRC is issued.",
+      "source_url": "https://ecode360.com/32466714"
+    }
+  ],
+  "open_questions": [
+    "Which CRC fee is current, $200 (fee chapter and form) or $150 (Chapter 157)?",
+    "Who is the current Fire Marshal for Fire District #1? The state directory entry dates from January 2023.",
+    "Is the CRC still needed 10 business days ahead, and are there extra steps if open permits are found?"
+  ],
+  "checked_at": "2026-10-04",
+  "verification": {
+    "fees": 11,
+    "fee_ok": 4,
+    "fee_bad": 0,
+    "fee_unchecked": 7,
+    "quotes": 17,
+    "q_ok": 10,
+    "q_bad": 0,
+    "q_unchecked": 7
+  }
+}

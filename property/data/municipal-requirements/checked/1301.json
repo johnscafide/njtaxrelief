@@ -1,0 +1,263 @@
+{
+  "municipality_code": "1301",
+  "municipality": "Aberdeen Township",
+  "county": "MONMOUTH",
+  "resale_co": {
+    "status": "required",
+    "name": "Certificate of Occupancy for Resale of Residential Property (Housing Department)",
+    "issued_by": "Aberdeen Township Housing Department (Housing Officer / Housing Inspector), Building/Construction/Housing office",
+    "lead_time": "The Township code says the certificate is granted or denied within 10 days of the application.",
+    "valid_for": "",
+    "requirements": [
+      "Township housing inspection before any new occupancy; a certificate is needed for each new occupant",
+      "Separate fire certificate of occupancy (smoke/CO) from the fire district that covers the property",
+      "Application lists the new owners and any intended occupants over 2 years of age",
+      "Certificate confirms the building and premises comply with all other Township ordinances"
+    ],
+    "fees": [
+      {
+        "label": "Certificate of occupancy for resale of residential property",
+        "amount": "$175.00",
+        "quote": "$175.00 NON REFUNDABLE FEE",
+        "source_url": "https://aberdeennj.org/DocumentCenter/View/2920/RESALE-FORM",
+        "verified": true
+      },
+      {
+        "label": "Residential transfer of ownership inspection (Township Code 12-2.4c, Ord. 17-2023)",
+        "amount": "$175",
+        "quote": "A charge of $150 $175 for residential transfer of ownership",
+        "source_url": "https://www.aberdeennj.org/DocumentCenter/View/2889/17-2023",
+        "verified": true
+      }
+    ],
+    "how_to_apply": "Fill out the Township's Application for Certificate of Occupancy for Resale of Residential Property and pay the $175.00 non-refundable fee to the Housing Department at Town Hall, 1 Aberdeen Square, Aberdeen, NJ 07747. Call 732-583-4200 ext. 177 to schedule. Also apply separately to the fire district for the fire certificate of occupancy.",
+    "application_url": "https://aberdeennj.org/DocumentCenter/View/2920/RESALE-FORM",
+    "department_url": "https://aberdeennj.org/200",
+    "phone": "732-583-4200 ext. 177",
+    "email": "lisa.balletta@aberdeennj.org",
+    "contact_name": "",
+    "contact_title": "",
+    "evidence": [
+      {
+        "url": "https://aberdeennj.org/DocumentCenter/View/2920/RESALE-FORM",
+        "quote": "APPLICATION FOR CERTIFICATE OF OCCUPANCY FOR RESALE OF RESIDENTIAL PROPERTY",
+        "doc_date": "2025-04-15 (PDF modified)",
+        "via": "pdf",
+        "verified": true
+      },
+      {
+        "url": "https://aberdeennj.org/DocumentCenter/View/2920/RESALE-FORM",
+        "quote": "I AM AWARE I MUST OBTAIN A CERTIFICATE OF OCCUPANCY FOR EACH NEW OCCUPANT FROM THE ENFORCING FIRE DISTRICT AND THE ABERDEEN TOWNSHIP HOUSING INSPECTOR PRIOR TO ANY NEW OCCUPANCY.",
+        "doc_date": "2025-04-15 (PDF modified)",
+        "via": "pdf",
+        "verified": true
+      },
+      {
+        "url": "https://aberdeennj.org/DocumentCenter/View/2920/RESALE-FORM",
+        "quote": "EMAIL: lisa.balletta@aberdeennj.org",
+        "doc_date": "2025-04-15 (PDF modified)",
+        "via": "pdf",
+        "verified": true
+      },
+      {
+        "url": "https://www.aberdeennj.org/DocumentCenter/View/2889/17-2023",
+        "quote": "unless a Certificate of Occupancy, certifying the building and premises are in compliance with all other ordinances of the Township, shall first be obtained from the Housing Officer of the Township.",
+        "doc_date": "2023-12-21 (Ord. 17-2023 adopted)",
+        "via": "pdf",
+        "verified": true
+      },
+      {
+        "url": "https://www.aberdeennj.org/DocumentCenter/View/2889/17-2023",
+        "quote": "Such a Certificate of Occupancy shall be granted or denied within ten (10) days from the date of the application for same.",
+        "doc_date": "2023-12-21 (Ord. 17-2023 adopted)",
+        "via": "pdf",
+        "verified": true
+      },
+      {
+        "url": "https://aberdeennj.org/200",
+        "quote": "To date the Housing Department of Aberdeen has issued 704 certificates for resale and rentals and has collected $105,600 in fees.",
+        "doc_date": "2026-10-04 (page fetched)",
+        "via": "page",
+        "verified": true
+      },
+      {
+        "url": "https://aberdeennj.org/200",
+        "quote": "Construction Official, Plumbing Subcode/Inspection",
+        "doc_date": "2026-10-04 (page fetched)",
+        "via": "page",
+        "verified": true
+      }
+    ],
+    "confidence": "high",
+    "notes": "Township Code 12-2.4 (as amended by Ord. 17-2023, adopted December 21, 2023) bars selling or transferring any dwelling unless a Certificate of Occupancy is first obtained from the Housing Officer, and raised the residential transfer-of-ownership fee from $150 to $175; the current resale form also shows $175.00. The form gives phone (732) 583-4200 x177 and lisa.balletta@aberdeennj.org (no title shown). The Construction page lists John Palmer, Construction Official, 732-583-4200 Ext. 177 (john.palmer@aberdeennj.org). Aberdeen also handles code enforcement for Matawan under a shared service, which does not change Aberdeen's own process. Rental-only items (rental certificate of occupancy with a $150 fee under Ord. 18-2023, landlord registration and lead-safe certification for pre-1978 rental units) are not resale requirements."
+  },
+  "fire_cert": {
+    "requirements": [
+      "Smoke alarm on every floor, including basements, and in the hallway outside the bedrooms",
+      "Carbon monoxide alarm in the hallway outside the bedrooms",
+      "Battery smoke alarms (and combination smoke/CO alarms) must be 10-year sealed battery units",
+      "Hardwired smoke or CO alarms over 10 years old must be replaced, and only with hardwired alarms"
+    ],
+    "authorities": [
+      {
+        "name": "Aberdeen Township Fire District No. 1, Bureau of Fire Prevention, Inspections and Fire Safety",
+        "type": "fire_district",
+        "area_served": "Fire District No. 1 part of the Township (490 Lloyd Road firehouse area); confirm which district covers the property",
+        "lead_time": "Fee depends on business days before the inspection; business days start when payment is made. Inspections between 10 a.m. and 12 p.m.",
+        "fees": [
+          {
+            "label": "Fire certificate of occupancy (smoke/CO), 11 or more business days",
+            "amount": "$45.00",
+            "quote": "11 Business days on $ 45.00",
+            "source_url": "https://aberdeenfd1.com/docs/CERTIFICATE_OF_OCCUPANCY.pdf",
+            "verified": true
+          },
+          {
+            "label": "4 to 10 business days",
+            "amount": "$90.00",
+            "quote": "4-10 Business days $ 90.00",
+            "source_url": "https://aberdeenfd1.com/docs/CERTIFICATE_OF_OCCUPANCY.pdf",
+            "verified": true
+          },
+          {
+            "label": "1 to 3 business days",
+            "amount": "$161.00",
+            "quote": "1- 3 Business days $161.00",
+            "source_url": "https://aberdeenfd1.com/docs/CERTIFICATE_OF_OCCUPANCY.pdf",
+            "verified": true
+          }
+        ],
+        "how_to_apply": "Fill out the Fire District No. 1 Fire Certificate of Occupancy Inspection form completely and pay by check made out to Fire District No. 1 (cash, check, money order or bank check). Pick the inspection date you want. The fire district's site also points applicants to the Township Building/Construction/Housing Department at 732-583-4200 ext. 177.",
+        "application_url": "https://aberdeenfd1.com/docs/CERTIFICATE_OF_OCCUPANCY.pdf",
+        "department_url": "https://aberdeenfd1.com/fire-prevention",
+        "phone": "(732) 566-3704",
+        "email": "rdebold@aberdeenfd1.com",
+        "contact_name": "Robert DeBold",
+        "contact_title": "District Chief & District Fire Official",
+        "evidence": [
+          {
+            "url": "https://aberdeenfd1.com/docs/CERTIFICATE_OF_OCCUPANCY.pdf",
+            "quote": "I AM AWARE THAT I MUST OBTAIN A CERTIFICATE OF OCCUPANCY FOR EACH NEW OCCUPANT FROM ABERDEEN FIRE DISTRICT NO. 1 AND THE ABERDEEN TOWNSHIP HOUSING INSPECTOR PRIOR TO ANY NEW OCCUPANCY.",
+            "doc_date": "2026-10-04 (PDF fetched)",
+            "via": "pdf",
+            "verified": true
+          },
+          {
+            "url": "https://aberdeenfd1.com/docs/CERTIFICATE_OF_OCCUPANCY.pdf",
+            "quote": "Business days start when payment is made to the township. Holidays do not count as a business day.",
+            "doc_date": "2026-10-04 (PDF fetched)",
+            "via": "pdf",
+            "verified": true
+          },
+          {
+            "url": "https://aberdeenfd1.com/docs/CERTIFICATE_OF_OCCUPANCY.pdf",
+            "quote": "MAKE CHECK OUT TO FIRE DISTRICT NO. 1",
+            "doc_date": "2026-10-04 (PDF fetched)",
+            "via": "pdf",
+            "verified": true
+          },
+          {
+            "url": "https://aberdeenfd1.com/contact",
+            "quote": "District Chief & District Fire Official",
+            "doc_date": "2026-10-04 (page fetched)",
+            "via": "page",
+            "verified": true
+          },
+          {
+            "url": "https://aberdeenfd1.com/contact",
+            "quote": "Bureau of Fire Prevention, Inspections and Fire Safety",
+            "doc_date": "2026-10-04 (page fetched)",
+            "via": "page",
+            "verified": true
+          },
+          {
+            "url": "https://aberdeenfd1.com/fire-prevention",
+            "quote": "To apply for a Certificate of Occupancy/Inspection:",
+            "doc_date": "2026-10-04 (page fetched)",
+            "via": "page",
+            "verified": true
+          },
+          {
+            "url": "https://aberdeennj.org/DocumentCenter/View/320/07-2020-PDF",
+            "quote": "CSACMAPFEC received more than ten (10) business days prior to the change of occupant",
+            "doc_date": "2020 (Ord. 7-2020)",
+            "via": "pdf",
+            "verified": true
+          },
+          {
+            "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+            "quote": "D Aberdeen Township (1)",
+            "doc_date": "2026-07",
+            "via": "pdf",
+            "verified": true
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "name": "Aberdeen Township Fire District No. 2 (Cliffwood), Bureau of Fire Prevention",
+        "type": "fire_district",
+        "area_served": "Fire District No. 2 part of the Township (Cliffwood area); confirm which district covers the property",
+        "lead_time": "",
+        "fees": [],
+        "how_to_apply": "No District 2 web page or form was found. Contact the District 2 fire official listed in the state fire directory, or start with the Township Housing Department at 732-583-4200 ext. 177.",
+        "application_url": "",
+        "department_url": "",
+        "phone": "(732) 566-8920",
+        "email": "bfp489@optimum.net",
+        "contact_name": "George C Chevalier",
+        "contact_title": "Fire Official, per state directory",
+        "evidence": [
+          {
+            "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+            "quote": "Aberdeen Twp Dist #2 SMOKE DETECTOR COMPLIANCE Name: Aberdeen Twp Fire Dist #2 Enf Auth. District Addr: PO Box 469 Cliffwood NJ 07721 Fire Official George C Chevalier Phone (732) 566-8920",
+            "doc_date": "state fire directory (no survey date shown)",
+            "via": "state_directory",
+            "verified": null
+          },
+          {
+            "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+            "quote": "Email bfp489@optimum.net",
+            "doc_date": "state fire directory",
+            "via": "state_directory",
+            "verified": null
+          },
+          {
+            "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+            "quote": "D Aberdeen Township (2)",
+            "doc_date": "2026-07",
+            "via": "pdf",
+            "verified": true
+          },
+          {
+            "url": "https://aberdeennj.org/DocumentCenter/View/320/07-2020-PDF",
+            "quote": "CSACMAPFEC received four (4) to ten (10) business days prior to the change of occupant",
+            "doc_date": "2020 (Ord. 7-2020)",
+            "via": "pdf",
+            "verified": true
+          }
+        ],
+        "confidence": "medium"
+      }
+    ],
+    "notes": "Aberdeen has two fire districts (LEA registry code D for both). Fire District No. 1 posts a 'Fire Certificate of Occupancy Inspection' form with the state tiers ($45 / $90 / $161) and says a fire certificate is needed for each new occupant along with the Township housing certificate. Township Ordinance 7-2020 also sets the CSACMAPFEC fees at $45 / $90 / $161 in Chapter 14 for the Township. No web page or form was found for Fire District No. 2 (Cliffwood); its contact comes from the NJ DCA fire directory, which lists only District 2's LEA entry. The District 1 form says business days start when payment is made 'to the township' but checks are payable to Fire District No. 1, so confirm where to pay. The District 1 form shown does not list a fire extinguisher; the state dropped it in February 2025 (P.L.2025, c.19)."
+  },
+  "other_items": [],
+  "open_questions": [
+    "Which fire district (No. 1 or No. 2) covers the property, and does District 2 use the same form and $45 / $90 / $161 fees?",
+    "Does the Housing Department need the fire district certificate in hand before it issues the resale certificate?",
+    "How long is the Township resale certificate valid, and is there a reinspection fee?",
+    "Is there a separate Township sewer or water final reading needed at closing?"
+  ],
+  "checked_at": "2026-10-04",
+  "verification": {
+    "fees": 5,
+    "fee_ok": 5,
+    "fee_bad": 0,
+    "fee_unchecked": 0,
+    "quotes": 19,
+    "q_ok": 17,
+    "q_bad": 0,
+    "q_unchecked": 2
+  }
+}

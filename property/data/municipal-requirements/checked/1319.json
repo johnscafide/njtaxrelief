@@ -1,0 +1,228 @@
+{
+  "municipality_code": "1319",
+  "municipality": "Highlands Borough",
+  "county": "MONMOUTH",
+  "resale_co": {
+    "status": "required",
+    "name": "Residential Certificate of Inspection (resale)",
+    "issued_by": "Borough of Highlands Department of Buildings & Housing (Housing Officer), inspected together with the Fire Prevention Division",
+    "lead_time": "Inspections are not scheduled until payment is received. The combined housing and fire fee is lowest when the inspection is scheduled and paid more than 10 days ahead.",
+    "valid_for": "",
+    "requirements": [
+      "Before the inspection is scheduled, the Cashier checks with the Tax Search Officer that taxes and sewer fees are current, with the Technical Assistant for open construction (UCC) permits or violations, and with the Code Enforcement Officer for violations",
+      "Open permits or violations must be inspected and closed before the housing and fire inspections are scheduled; flood-plain homes are checked for substantial improvement",
+      "Housing inspection to the Borough's Property Maintenance Code (exterior property, sidewalks and driveways, exterior structure and paint, roofs, stairs, decks, handrails, windows that open and have screens, doors and locks, interior surfaces, plumbing, heating, electrical)",
+      "Smoke/carbon monoxide inspection by the Fire Prevention Division at the same time (see fire certificate)"
+    ],
+    "fees": [
+      {
+        "label": "Certificate of inspection for resale, with one inspection",
+        "amount": "$100",
+        "quote": "Certificate of inspection for resale with one (1) inspection: one hundred dollars ($100).",
+        "source_url": "https://ecode360.com/35385967",
+        "verified": null
+      },
+      {
+        "label": "Each added reinspection",
+        "amount": "$50",
+        "quote": "Added reinspection for certificate of inspection: fifty dollars ($50).",
+        "source_url": "https://ecode360.com/35385967",
+        "verified": null
+      },
+      {
+        "label": "Combined housing and fire inspection, scheduled and paid more than 10 days ahead",
+        "amount": "$145",
+        "quote": "First Sales/Rental Inspection scheduled more than 10 days from Inspection date: $145",
+        "source_url": "https://highlandsnj.gov/wp-content/uploads/2024/10/Residential-Certificate-of-Inspection-Application-1.pdf",
+        "verified": true
+      },
+      {
+        "label": "Combined expedited inspection, 4 to 9 days ahead",
+        "amount": "$190",
+        "quote": "Expedited Inspection scheduled 4-9 days from Inspection date: $190",
+        "source_url": "https://highlandsnj.gov/wp-content/uploads/2024/10/Residential-Certificate-of-Inspection-Application-1.pdf",
+        "verified": true
+      },
+      {
+        "label": "Combined expedited inspection, 1 to 3 days ahead (Borough web page figure)",
+        "amount": "$261",
+        "quote": "$261",
+        "source_url": "https://highlandsnj.gov/departments/housing-inspections-and-enforcement/",
+        "verified": true
+      },
+      {
+        "label": "Combined expedited inspection, 1 to 3 days ahead (application form figure)",
+        "amount": "$225",
+        "quote": "Expedited Inspections scheduled 1-3 days from Inspection date: $225",
+        "source_url": "https://highlandsnj.gov/wp-content/uploads/2024/10/Residential-Certificate-of-Inspection-Application-1.pdf",
+        "verified": true
+      }
+    ],
+    "how_to_apply": "Complete the Application for Residential Certificate of Inspection (checking \"Sale of Property\" or \"Transfer of Title\") and email it to the Cashier at cashier@highlandsnj.gov. Pay by check in person or by mail to Borough Hall, 151 Navesink Avenue, Highlands, NJ 07732 (one combined payment covers housing and fire). Then call the Housing Secretary at 732-872-1224 ext. 204 to schedule, and give access to the property.",
+    "application_url": "https://highlandsnj.gov/wp-content/uploads/2024/10/Residential-Certificate-of-Inspection-Application-1.pdf",
+    "department_url": "https://highlandsnj.gov/departments/housing-inspections-and-enforcement/",
+    "phone": "732-872-1224 ext. 204",
+    "email": "cashier@highlandsnj.gov",
+    "contact_name": "",
+    "contact_title": "",
+    "evidence": [
+      {
+        "url": "https://highlandsnj.gov/departments/housing-inspections-and-enforcement/",
+        "quote": "Schedule your inspection by calling the Housing Secretary at 732-872-1224, ext. 204.",
+        "doc_date": "2026-10-04 (page fetched)",
+        "via": "page",
+        "verified": true
+      },
+      {
+        "url": "https://highlandsnj.gov/departments/housing-inspections-and-enforcement/",
+        "quote": "INSPECTIONS WILL NOT BE SCHEDULED UNTIL PAYMENT IS RECEIVED",
+        "doc_date": "2026-10-04 (page fetched)",
+        "via": "page",
+        "verified": true
+      },
+      {
+        "url": "https://ecode360.com/35386169",
+        "quote": "A certificate of inspection shall be required for any new rental, rerental, or sale of a space or property.",
+        "doc_date": "2026-10-04 (page fetched)",
+        "via": "page",
+        "verified": null
+      },
+      {
+        "url": "https://highlandsnj.gov/wp-content/uploads/2024/10/Residential-Certificate-of-Inspection-Application-1.pdf",
+        "quote": "□ Rental/Lease of Space □ Transfer of Title □ Sale of Property",
+        "doc_date": "Last Revised 07.01.2025",
+        "via": "pdf",
+        "verified": true
+      },
+      {
+        "url": "https://highlandsnj.gov/wp-content/uploads/2025/01/Housing-Workflow.pdf",
+        "quote": "Cashier checks with Tax Search Officer to confirm taxes and sewer fees are current",
+        "doc_date": "Last Revised 3.13.2026",
+        "via": "pdf",
+        "verified": true
+      }
+    ],
+    "confidence": "high",
+    "notes": "Borough code Chapters 10 and 11 were read through the ecode360 print view (ecode360 code HI4100 is Highlands Borough, not Atlantic Highlands). Section 10-5.2 requires a certificate of inspection for any sale. The combined fee is the $100 housing fee plus the fire tier. The Borough page gives $145 / $190 / $261 (which matches $100 plus $45 / $90 / $161 in the code), while the application form (revised 07.01.2025) shows $225 for the 1 to 3 day tier; confirm which applies. The page also says fire tiers are \"1-4 days\" while the code says \"Less than 4 business days\". No validity period for a resale certificate was found. The workflow names Housing Officers Charlie Wells and Albert Souza, Code Enforcement Officer William Brunt and Cashier Tina Foster. The workflow quote is from a PDF whose text uses ligatures, so exact matching may need care. Short-term and long-term rental rules are rental-only."
+  },
+  "fire_cert": {
+    "requirements": [
+      "Smoke alarms and carbon monoxide alarms per N.J.A.C. 5:70-4.19",
+      "Borough code (Section 11-10a4) says 1 and 2 family homes may not be sold unless hard-wired smoke detection devices are installed, with at least one per level and one within 15 feet of the main heating plant (a heat detector if the heating plant is in a confined space)",
+      "Fire extinguisher (form still lists it): the application and workflow still name a smoke/carbon detector and fire extinguisher certificate"
+    ],
+    "authorities": [
+      {
+        "name": "Highlands Borough Fire Prevention Division (Bureau of Fire Prevention)",
+        "type": "municipal_fire_bureau",
+        "area_served": "Entire borough",
+        "lead_time": "Fee depends on business days between scheduling and the appointment: more than 10 business days for the lowest fee. Inspected together with the housing inspection.",
+        "fees": [
+          {
+            "label": "Smoke detector certificate, scheduled more than 10 business days ahead (CSDC-1)",
+            "amount": "$45",
+            "quote": "CSDC-1 More than 10 business days with a scheduled appointment$45",
+            "source_url": "https://ecode360.com/35764527",
+            "verified": null
+          },
+          {
+            "label": "Scheduled 4 to 9 business days ahead (CSDC-2)",
+            "amount": "$90",
+            "quote": "CSDC-2 4 to 9 business days with a scheduled appointment$90",
+            "source_url": "https://ecode360.com/35764527",
+            "verified": null
+          },
+          {
+            "label": "Scheduled less than 4 business days ahead (CSDC-3)",
+            "amount": "$161",
+            "quote": "CSDC-3 Less than 4 business days with a scheduled appointment$161",
+            "source_url": "https://ecode360.com/35764527",
+            "verified": null
+          },
+          {
+            "label": "Reinspection after a missed appointment or failed detectors (CSDC-4)",
+            "amount": "$45",
+            "quote": "a fee will be added for each reinspection$45",
+            "source_url": "https://ecode360.com/35764527",
+            "verified": null
+          }
+        ],
+        "how_to_apply": "Use the same Borough Application for Residential Certificate of Inspection and Certificate of Smoke/Carbon Detector & Fire Extinguisher; one combined payment covers housing and fire. Email the form to cashier@highlandsnj.gov, pay by check at Borough Hall, and call 732-872-1224 ext. 204 to schedule.",
+        "application_url": "https://highlandsnj.gov/wp-content/uploads/2024/10/Residential-Certificate-of-Inspection-Application-1.pdf",
+        "department_url": "https://highlandsnj.gov/departments/housing-inspections-and-enforcement/",
+        "phone": "732-872-1224",
+        "email": "cwells@highlandsnj.gov",
+        "contact_name": "Charles Wells",
+        "contact_title": "Fire Official (state fire directory); also listed as Housing Officer and Fire Prevention Inspector on the Borough workflow",
+        "evidence": [
+          {
+            "url": "https://highlandsnj.gov/wp-content/uploads/2024/10/Residential-Certificate-of-Inspection-Application-1.pdf",
+            "quote": "Certificate of Smoke/Carbon Detector & Fire Extinguisher",
+            "doc_date": "Last Revised 07.01.2025",
+            "via": "pdf",
+            "verified": true
+          },
+          {
+            "url": "https://highlandsnj.gov/departments/housing-inspections-and-enforcement/",
+            "quote": "Residential Certificate of Occupancy Inspections are conducted in coordination between inspectors from the Department of Buildings & Housing and the Fire Prevention Division.",
+            "doc_date": "2026-10-04 (page fetched)",
+            "via": "page",
+            "verified": true
+          },
+          {
+            "url": "https://ecode360.com/35764536",
+            "quote": "Residential one- and two-family dwellings shall not be sold or rented unless hard-wired smoke detection devices are installed.",
+            "doc_date": "2019-03-20 (Ord. No. O-19-05)",
+            "via": "page",
+            "verified": null
+          },
+          {
+            "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+            "quote": "LEAID: 1317-001 Highlands Boro Fire Prev ... Enf Auth. Municipal ... Fire Official Charles Wells Phone (732) 872-1224 ... Email cwells@highlandsnj.gov",
+            "doc_date": "2025-08-02 (survey date)",
+            "via": "state_directory",
+            "verified": null
+          },
+          {
+            "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+            "quote": "M Highlands Borough",
+            "doc_date": "2026-07",
+            "via": "pdf",
+            "verified": true
+          }
+        ],
+        "confidence": "high"
+      }
+    ],
+    "notes": "Fire tiers come from Borough code Section 11-8 (ecode360 print text runs the amount into the line, as quoted). The Borough's local amendment requiring hard-wired smoke detectors at sale (Section 11-10a4, 2019) is stricter than the state rule, which accepts 10-year sealed battery alarms in older homes; confirm what the inspector enforces. The Borough form and workflow still mention a fire extinguisher certificate, which P.L.2025, c.19 dropped from the state sale certificate in February 2025."
+  },
+  "other_items": [
+    {
+      "label": "Taxes and sewer fees current",
+      "detail": "Before scheduling the inspection, the Cashier confirms with the Tax Search Officer that property taxes and sewer fees are current.",
+      "source_url": "https://highlandsnj.gov/wp-content/uploads/2025/01/Housing-Workflow.pdf"
+    },
+    {
+      "label": "Open permits and violations",
+      "detail": "Open construction permits or code violations must be inspected and closed before the housing and fire inspections are scheduled; homes in the flood plain are checked for substantial improvement.",
+      "source_url": "https://highlandsnj.gov/wp-content/uploads/2025/01/Housing-Workflow.pdf"
+    }
+  ],
+  "open_questions": [
+    "Is the combined 1 to 3 day expedited fee $261 (web page) or $225 (application form)?",
+    "Does the Fire Prevention Division still require hard-wired smoke detectors at sale (Section 11-10a4), or does it accept 10-year sealed battery alarms per state rules?",
+    "Is a fire extinguisher still checked after P.L.2025, c.19?",
+    "How long is a resale Certificate of Inspection valid?"
+  ],
+  "checked_at": "2026-10-04",
+  "verification": {
+    "fees": 10,
+    "fee_ok": 4,
+    "fee_bad": 0,
+    "fee_unchecked": 6,
+    "quotes": 10,
+    "q_ok": 7,
+    "q_bad": 0,
+    "q_unchecked": 3
+  }
+}

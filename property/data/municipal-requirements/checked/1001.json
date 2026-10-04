@@ -1,0 +1,181 @@
+{
+  "municipality_code": "1001",
+  "municipality": "Alexandria Township",
+  "county": "HUNTERDON",
+  "resale_co": {
+    "status": "required",
+    "name": "Construction Records Clearance Certificate (CRC)",
+    "issued_by": "Alexandria Township Building Department (Construction Code Enforcement)",
+    "lead_time": "The Township page says to submit the CRC application at least 30 business days before closing; the ordinance requires the application and fee at least 10 business days before the change of ownership",
+    "valid_for": "",
+    "requirements": [
+      "Records inspection by the construction office: all permits on the block and lot must be inspected and closed by the subcode officials",
+      "If there are open permits, all final inspections and prior approvals must be obtained before the CRC is issued",
+      "Smoke detector certification is required before closing and a copy must be forwarded to the Building Department",
+      "Application lists seller, real estate agent, seller's attorney, block and lot and approximate year built"
+    ],
+    "fees": [
+      {
+        "label": "Construction Records Clearance application",
+        "amount": "$50.00",
+        "quote": "The cost of the application is $50.00 payable to Alexandria Township.",
+        "source_url": "https://alexandrianj.gov/construction-page-list/284-construction-records-clearance-are-you-selling-your-home",
+        "verified": true
+      }
+    ],
+    "how_to_apply": "Get the CRC application from the Building Department (242 Little York-Mt. Pleasant Road, Milford) or download it from the Township site, and submit it with the $50.00 fee payable to Alexandria Township. The seller or the seller's agent files it.",
+    "application_url": "https://alexandrianj.gov/government/forms/construction/26-construction-records-clearance-application/file",
+    "department_url": "https://alexandrianj.gov/departments/construction",
+    "phone": "908-996-7071 ext. 211",
+    "email": "construction@alexandrianj.gov",
+    "contact_name": "Marianna Voorhees",
+    "contact_title": "Technical Assistant to the Construction Official",
+    "evidence": [
+      {
+        "url": "https://alexandrianj.gov/construction-page-list/284-construction-records-clearance-are-you-selling-your-home",
+        "quote": "This certificate is required on the sale of all residential and commercial properties.",
+        "doc_date": "2026-10-04 (page fetched)",
+        "via": "page",
+        "verified": true
+      },
+      {
+        "url": "https://alexandrianj.gov/construction-page-list/284-construction-records-clearance-are-you-selling-your-home",
+        "quote": "The purpose of the CRC is to ensure that all permits obtained through the building department for a particular Block and Lot have been inspected and closed by the appropriate Sub-code (inspector).",
+        "doc_date": "2026-10-04 (page fetched)",
+        "via": "page",
+        "verified": true
+      },
+      {
+        "url": "https://alexandrianj.gov/construction-page-list/284-construction-records-clearance-are-you-selling-your-home",
+        "quote": "The application for a CRC should be submitted at least 30 business days prior to the closing date.",
+        "doc_date": "2026-10-04 (page fetched)",
+        "via": "page",
+        "verified": true
+      },
+      {
+        "url": "https://alexandrianj.gov/construction-page-list/284-construction-records-clearance-are-you-selling-your-home",
+        "quote": "An application for a CRC can be obtained through the Building Department located at 242 Little York-Mt. Pleasant Road, Milford, NJ or by calling Marianna Voorhees at (908) 996-7071 ext. 211.",
+        "doc_date": "2026-10-04 (page fetched)",
+        "via": "page",
+        "verified": true
+      },
+      {
+        "url": "https://ecode360.com/15260359",
+        "quote": "A CRC shall be required prior to the sale of any residential or commercial structure and prior to the rental of any tenant space in a commercial structure within the Township.",
+        "doc_date": "2009-04-08 (Code 64-6, added)",
+        "via": "page",
+        "verified": null
+      },
+      {
+        "url": "https://ecode360.com/15260371",
+        "quote": "The applicant shall submit with the application fees for the CRC as follows to cover the administrative cost: $50.",
+        "doc_date": "2009-04-08 (Code 64-6E)",
+        "via": "page",
+        "verified": null
+      },
+      {
+        "url": "https://alexandrianj.gov/government/forms/construction/26-construction-records-clearance-application/file",
+        "quote": "Failure to obtain a Construction Records Clearance Certificate prior to closing may result in a penalty of $1,000.00.",
+        "doc_date": "2026-10-04 (page fetched)",
+        "via": "page",
+        "verified": true
+      },
+      {
+        "url": "https://alexandrianj.gov/government/forms/construction/26-construction-records-clearance-application/file",
+        "quote": "SMOKE DETECTOR CERTIFICATION IS REQUIRED PRIOR TO CLOSING AND A COPY IS TO BE FORWARDED TO OUR OFFICE.",
+        "doc_date": "2026-10-04 (page fetched)",
+        "via": "page",
+        "verified": true
+      }
+    ],
+    "confidence": "high",
+    "notes": "Alexandria does not do a physical resale inspection; the CRC is a records check of open construction permits (Code 64-6, added 4-8-2009). Exemptions in the ordinance include deed corrections, transfers between spouses, transfers by an estate executor, refinancing and transfers to a bankruptcy trustee, as long as there is no change in physical occupancy. Lead time conflict: the Township page says 30 business days, the ordinance and form say 10 business days; plan on 30. Contact emails come from the Building Department page (Construction Official Mark Farneski: constructionofficial@alexandrianj.gov; technical assistant: construction@alexandrianj.gov). A 2016 copy of the information sheet still named Ginny Colucci; the current web page names Marianna Voorhees."
+  },
+  "fire_cert": {
+    "requirements": [
+      "Smoke alarm on each level of the home and outside each separate sleeping area",
+      "Battery-only smoke alarms must be 10-year sealed battery units; hardwired alarms from original construction may not be replaced with battery alarms",
+      "Carbon monoxide alarm in the immediate vicinity of the sleeping areas (where there is a fuel-burning appliance or attached garage)"
+    ],
+    "authorities": [
+      {
+        "name": "Alexandria Township Bureau of Fire Prevention (Fire Marshal)",
+        "type": "municipal_fire_bureau",
+        "area_served": "Entire municipality",
+        "lead_time": "Call the Fire Marshal to schedule; no lead time published",
+        "fees": [],
+        "how_to_apply": "Call Fire Marshal Mike Giannone at 908-612-3592 to arrange the smoke detector inspection, then forward a copy of the certificate to the Building Department before closing.",
+        "application_url": "",
+        "department_url": "https://alexandrianj.gov/departments/construction",
+        "phone": "908-612-3592",
+        "email": "",
+        "contact_name": "Mike Giannone",
+        "contact_title": "Fire Marshal",
+        "evidence": [
+          {
+            "url": "https://alexandrianj.gov/departments/construction",
+            "quote": "Fire Marshall Mike Giannone (908) 612-3592 Call to arrange smoke detector inspections",
+            "doc_date": "2026-10-04 (page fetched)",
+            "via": "page",
+            "verified": true
+          },
+          {
+            "url": "https://alexandrianj.gov/construction-page-list/284-construction-records-clearance-are-you-selling-your-home",
+            "quote": "A Smoke Detector Certification is also required prior to selling your home.",
+            "doc_date": "2026-10-04 (page fetched)",
+            "via": "page",
+            "verified": true
+          },
+          {
+            "url": "https://ecode360.com/50207659",
+            "quote": "The local enforcing agency shall be the Bureau of Fire Prevention, which is hereby created and established by this chapter.",
+            "doc_date": "2025-11-13 (Ord. No. 2025-006)",
+            "via": "page",
+            "verified": null
+          },
+          {
+            "url": "https://ecode360.com/50207675",
+            "quote": "Smoke detector and carbon monoxide alarm compliance inspection fees shall be in accordance with N.J.A.C. 5:70-2.9(d).",
+            "doc_date": "2025-11-13 (Ord. No. 2025-006)",
+            "via": "page",
+            "verified": null
+          },
+          {
+            "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+            "quote": "M Alexandria Township",
+            "doc_date": "2026-07",
+            "via": "pdf",
+            "verified": true
+          },
+          {
+            "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+            "quote": "Alexandria Township1001 LEAID: 1001-001 Enf Auth. Municipal Fire Official Michael G Giannone Phone (908) 996-7071 Email mggiannone@att.net",
+            "doc_date": "3/6/2023 (survey date)",
+            "via": "state_directory",
+            "verified": null
+          }
+        ],
+        "confidence": "high"
+      }
+    ],
+    "notes": "Alexandria locally enforces the Uniform Fire Code through its Bureau of Fire Prevention (Chapter 24, rewritten 11-13-2025 by Ord. No. 2025-006). The ordinance does not list its own smoke/CO certificate fees; it says they follow the state schedule in N.J.A.C. 5:70-2.9(d), and the Township does not post the dollar amounts, so no fee is recorded here. The state fire directory lists the Fire Official at the Township office line (908) 996-7071 and email mggiannone@att.net; the Township page gives 908-612-3592 for scheduling. The fire extinguisher requirement was dropped from the state sale certificate by P.L.2025, c.19; no Township page says whether it is still checked."
+  },
+  "other_items": [],
+  "open_questions": [
+    "What is the current smoke/CO certificate fee (the ordinance points to the state schedule in N.J.A.C. 5:70-2.9(d) but no amount is posted)?",
+    "How far ahead should the CRC be filed: 30 business days (web page) or 10 business days (ordinance and form)?",
+    "Does the Fire Marshal still check for a portable fire extinguisher after P.L.2025, c.19?",
+    "How long is the CRC valid if the closing is delayed?"
+  ],
+  "checked_at": "2026-10-04",
+  "verification": {
+    "fees": 1,
+    "fee_ok": 1,
+    "fee_bad": 0,
+    "fee_unchecked": 0,
+    "quotes": 14,
+    "q_ok": 9,
+    "q_bad": 0,
+    "q_unchecked": 5
+  }
+}

@@ -1,0 +1,194 @@
+{
+  "municipality_code": "1307",
+  "municipality": "Belmar Borough",
+  "county": "MONMOUTH",
+  "resale_co": {
+    "status": "required",
+    "name": "Certificate of Inspection for Title Transfer (property sale inspection)",
+    "issued_by": "Borough of Belmar Housing Department (Code Official)",
+    "lead_time": "",
+    "valid_for": "",
+    "requirements": [
+      "Certificate of Inspection from the Code Official before anyone occupies the home after a sale or other transfer of title",
+      "Inspection checklist covers exterior items (grading and drainage, sidewalks free of trip hazards, window screens, handrails, guardrail gaps no more than 5 inches, sump pumps, siding and roof, house numbers 4 inches and visible, labeled trash and recycling cans) and interior items",
+      "Smoke and carbon monoxide detectors on each floor, 10-year sealed",
+      "Kitchen stoves must be tip proof; dryers vented outside; bedroom egress windows at least 24 x 20 with sill no higher than 44 inches",
+      "Living space above a garage needs at least 5/8 inch fire code sheetrock on the ceiling"
+    ],
+    "fees": [
+      {
+        "label": "Certificate of Inspection for title transfer, one family (Code 26-5d)",
+        "amount": "$100",
+        "quote": "One family: $100.",
+        "source_url": "https://ecode360.com/35397458",
+        "verified": null
+      },
+      {
+        "label": "Each additional house on the same property (Code 26-5d)",
+        "amount": "$50",
+        "quote": "Two or more houses on the same property per house after the first house: $50.",
+        "source_url": "https://ecode360.com/35397458",
+        "verified": null
+      },
+      {
+        "label": "Title transfer, two family, first unit (Code 26-5d)",
+        "amount": "$100",
+        "quote": "Two family, first unit: $100.",
+        "source_url": "https://ecode360.com/35397458",
+        "verified": null
+      },
+      {
+        "label": "Each additional unit in the same building (Code 26-5d)",
+        "amount": "$50",
+        "quote": "Each additional unit same building: $50.",
+        "source_url": "https://ecode360.com/35397458",
+        "verified": null
+      },
+      {
+        "label": "Re-inspection (Housing Department checklist)",
+        "amount": "$250",
+        "quote": "Re-inspections fee: $250.",
+        "source_url": "https://www.belmar.com/government/forms/housing/920-inspection-checklist/file",
+        "verified": true
+      }
+    ],
+    "how_to_apply": "Apply online through the SDL Portal (Belmar, Property Inspection: Rental Licenses & Property Sales application). Create an account with Sign Up, choose Belmar as the primary town, then file the Title Transfer request and track it online.",
+    "application_url": "https://www.sdlportal.com/towns/nj/monmouth/belmar/requests/certificate",
+    "department_url": "https://www.belmar.com/departments/community-development/housing/property-inspection-rental-sales",
+    "phone": "732-681-3700 ext. 242",
+    "email": "Housing@Belmar.com",
+    "contact_name": "Ray Claudio",
+    "contact_title": "Housing Official",
+    "evidence": [
+      {
+        "url": "https://www.belmar.com/departments/community-development/housing/property-inspection-rental-sales",
+        "quote": "Please click the link below to file for a Winter, Annual or Summer Rental License as well as a Title Transfer for property sales.",
+        "doc_date": "2026-10-04 (page fetched)",
+        "via": "page",
+        "verified": true
+      },
+      {
+        "url": "https://www.belmar.com/departments/community-development/housing",
+        "quote": "The Housing Department is responsible for summer, winter and yearly rental inspections, property sale/transfer inspections, Lead Certification Management, and Affordable Housing.",
+        "doc_date": "2026-10-04 (page fetched)",
+        "via": "page",
+        "verified": true
+      },
+      {
+        "url": "https://www.belmar.com/departments/community-development/housing",
+        "quote": "Housing Official",
+        "doc_date": "2026-10-04 (page fetched)",
+        "via": "page",
+        "verified": true
+      },
+      {
+        "url": "https://ecode360.com/35397304",
+        "quote": "A Certificate of Inspection, issued by the Code Official, shall be required prior to the occupancy or use of any premises when:",
+        "doc_date": "2026-10-04 (Code 26-2.3, read via ecode360 print view)",
+        "via": "page",
+        "verified": null
+      },
+      {
+        "url": "https://ecode360.com/35397304",
+        "quote": "Any sale or any other transfer of title to the premises has occurred; or",
+        "doc_date": "2026-10-04 (Code 26-2.3a)",
+        "via": "page",
+        "verified": null
+      },
+      {
+        "url": "https://www.belmar.com/government/forms/housing/920-inspection-checklist/file",
+        "quote": "The following list of items will be checked on all Certificate of Inspection application inspections.",
+        "doc_date": "2026-01-13 (PDF created)",
+        "via": "pdf",
+        "verified": true
+      }
+    ],
+    "confidence": "high",
+    "notes": "Borough Code 26-2.3a requires a Certificate of Inspection from the Code Official before occupancy after any sale or transfer of title; fees are in Code 26-5d (Ord. 2015-01): one family $100, extra houses on the same lot $50 each, two family $100 for the first unit and $50 for each additional unit. The code text was read through the ecode360 print view. The Housing Department checklist (January 2026) lists a $250 re-inspection fee. Housing office: 601 Main Street, Belmar, NJ 07719, 732-681-3700 ext. 242. Rental licenses, summer rental rules, landlord registration and lead-safe certification for pre-1978 rentals are rental-only."
+  },
+  "fire_cert": {
+    "requirements": [
+      "Smoke and carbon monoxide detectors on each floor, 10-year sealed (Housing inspection checklist)",
+      "Smoke detectors on each floor and the basement; carbon monoxide detectors in homes with fuel-burning appliances or an attached garage (Borough Code 28-1.13.2)"
+    ],
+    "authorities": [
+      {
+        "name": "Borough of Belmar Bureau of Fire Prevention (Fire Marshal)",
+        "type": "municipal_fire_bureau",
+        "area_served": "Entire borough (Belmar is also the LEA for Lake Como)",
+        "lead_time": "",
+        "fees": [],
+        "how_to_apply": "No smoke/CO certificate application or fee schedule was found on the Borough site. Contact the Fire Marshal at 732-681-3700 x 239 or firemarshal@belmar.com, or ask the Housing Department whether the smoke/CO check is part of the title transfer inspection.",
+        "application_url": "",
+        "department_url": "https://www.belmar.com/departments/fire-prevention",
+        "phone": "732-681-3700 x 239",
+        "email": "firemarshal@belmar.com",
+        "contact_name": "Edward Ratyniak",
+        "contact_title": "Fire Marshal",
+        "evidence": [
+          {
+            "url": "https://www.belmar.com/departments/fire-prevention",
+            "quote": "Edward Ratyniak",
+            "doc_date": "2026-10-04 (page fetched)",
+            "via": "page",
+            "verified": true
+          },
+          {
+            "url": "https://www.belmar.com/departments/fire-prevention",
+            "quote": "732.681.3700 x 239",
+            "doc_date": "2026-10-04 (page fetched)",
+            "via": "page",
+            "verified": true
+          },
+          {
+            "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+            "quote": "M Belmar Borough",
+            "doc_date": "2026-07",
+            "via": "pdf",
+            "verified": true
+          },
+          {
+            "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+            "quote": "Belmar Borough is the LEA for Lake Como Boroughs.",
+            "doc_date": "2026-07",
+            "via": "pdf",
+            "verified": true
+          },
+          {
+            "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+            "quote": "LEAID: 1306-001 Belmar Boro SMOKE DETECTOR COMPLIANCE Name: Belmar Boro Code Enf Enf Auth. Municipal Addr: 601 Main St Belmar NJ 07719 Fire Official Edward Ratyniak Phone (732) 681-3700",
+            "doc_date": "3/31/2025 (survey date)",
+            "via": "state_directory",
+            "verified": null
+          },
+          {
+            "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+            "quote": "Email firemarshal@belmar.com",
+            "doc_date": "3/31/2025 (survey date)",
+            "via": "state_directory",
+            "verified": null
+          }
+        ],
+        "confidence": "medium"
+      }
+    ],
+    "notes": "Belmar's fire code LEA is listed as M (multiple) in the July 2026 registry, and Belmar also serves as the LEA for Lake Como. The state fire directory lists 'Belmar Boro Code Enf' at 601 Main St as the smoke detector compliance office, with Fire Official Edward Ratyniak. The Housing Department checklist includes smoke/CO detectors on each floor, so the check may be done in the title transfer inspection, but no separate CSACMAPFEC fee was found in the Borough Code or on the Borough site."
+  },
+  "other_items": [],
+  "open_questions": [
+    "Is the smoke/CO certificate issued as part of the Housing title transfer inspection, or is there a separate Fire Bureau application and fee?",
+    "How long before closing should sellers file, and how long is the title transfer Certificate of Inspection valid?",
+    "Is a final water/sewer reading needed at closing (Belmar runs its own water/sewer utility)?"
+  ],
+  "checked_at": "2026-10-04",
+  "verification": {
+    "fees": 5,
+    "fee_ok": 1,
+    "fee_bad": 0,
+    "fee_unchecked": 4,
+    "quotes": 12,
+    "q_ok": 8,
+    "q_bad": 0,
+    "q_unchecked": 4
+  }
+}

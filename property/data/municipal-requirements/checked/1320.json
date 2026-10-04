@@ -1,0 +1,202 @@
+{
+  "municipality_code": "1320",
+  "municipality": "Holmdel Township",
+  "county": "MONMOUTH",
+  "resale_co": {
+    "status": "required",
+    "name": "Occupancy Certificate of Code Compliance (CCO, Certificate of Continued Occupancy)",
+    "issued_by": "Holmdel Township Department of Community Development (Enforcement Officer; Code Enforcement and Bureau of Fire Prevention staff)",
+    "lead_time": "Submit the application and fees at least 10 business days before the new owner moves in. Inspections can be requested up to 30 days ahead and are scheduled in the order received. A CCO or denial is issued within 10 business days of a complete application; a reinspection is done within 3 business days of the request.",
+    "valid_for": "",
+    "requirements": [
+      "Property history review: all construction permits closed, all violations closed and penalties paid, deed and zoning restrictions checked",
+      "Work done without required construction permits is sent to the Construction Official and cited; the owner must obtain the permits",
+      "Exterior: accessory structures, walks and driveways in good repair; yard free of overgrowth and rubbish; wells and septic maintained or properly abandoned; pool gates self-closing and self-latching at least 54 inches high",
+      "Address numbers at least 3 inches high on the house or mailbox; exterior surfaces free of peeling paint and termite activity; stairs, decks and porches with approved handrails and guards",
+      "Interior: no second kitchen unless deed-restricted and permitted; no basement sleeping quarters without a permitted second exit; windows and doors working with screens; handrails on stairs with more than three risers; guards on landings 30 inches or higher",
+      "Bathroom exhaust fan or window; metal dryer duct vented outside; fuel-fired appliances properly vented; front door opens from inside without a key (no double-keyed deadbolts); sump pump not tied to the sanitary sewer; all utilities on",
+      "All parts of the premises must be accessible for the inspection"
+    ],
+    "fees": [
+      {
+        "label": "CCO, sale of a single-family home, condominium or townhouse, initial inspection",
+        "amount": "$125",
+        "quote": "Initial inspection: $125.",
+        "source_url": "https://ecode360.com/35667860",
+        "verified": null
+      },
+      {
+        "label": "Second and later reinspections, each (first reinspection free)",
+        "amount": "$50",
+        "quote": "Second and subsequent reinspections (each): $50",
+        "source_url": "https://www.holmdeltownship.com/DocumentCenter/View/6584/Occupancy-Type-Fee-Requirements",
+        "verified": null
+      }
+    ],
+    "how_to_apply": "Apply online for a Residential Certificate of Code Compliance through the Township's SDL Portal (link on the Occupancy Certificate page) and pay before the inspection is scheduled. Apply at least 10 business days before the closing or move-in. Download the Residential Occupancy Certificate Checklist to prepare.",
+    "application_url": "https://www.sdlportal.com/towns/nj/monmouth/holmdeltwp/requests/smokealarm",
+    "department_url": "https://www.holmdeltownship.com/422/Occupancy-Certificate-of-Code-Compliance",
+    "phone": "732-946-2820 ext. 1307",
+    "email": "drosado@holmdel.gov",
+    "contact_name": "Dina Rosado",
+    "contact_title": "Technical Assistant, Bureau of Fire Prevention / Community Development",
+    "evidence": [
+      {
+        "url": "https://www.holmdeltownship.com/422/Occupancy-Certificate-of-Code-Compliance",
+        "quote": "Such inspection is required to be conducted at the time a Residential or Commercial property is sold, leased, or rented, or when a Commercial occupancy moves into a new space.",
+        "doc_date": "2026-10-04 (page fetched)",
+        "via": "page",
+        "verified": true
+      },
+      {
+        "url": "https://www.holmdeltownship.com/422/Occupancy-Certificate-of-Code-Compliance",
+        "quote": "A real estate agent licensee who is involved in the sale of any property must obtain or ensure that the seller obtains a Certificate of Code Compliance from the Department of Community Development prior to the sale, transfer of ownership or occupancy",
+        "doc_date": "2026-10-04 (page fetched)",
+        "via": "page",
+        "verified": true
+      },
+      {
+        "url": "https://ecode360.com/35667860",
+        "quote": "No person, agency, corporation, partnership, firm, company, owner, real estate agent, broker or any other individual shall rent, lease, sell, occupy, transfer title of any dwelling, dwelling unit, commercial building or space, or property without first obtaining a CCO certificate from the Enforcement Officer.",
+        "doc_date": "2026-10-04 (page fetched)",
+        "via": "page",
+        "verified": null
+      },
+      {
+        "url": "https://ecode360.com/35667860",
+        "quote": "Within 10 business days of receipt of a complete application, the Enforcement Officer or his designee shall issue either a CCO certificate or a CCO certificate denial.",
+        "doc_date": "2026-10-04 (page fetched)",
+        "via": "page",
+        "verified": null
+      },
+      {
+        "url": "https://www.holmdeltownship.com/DocumentCenter/View/6584/Occupancy-Type-Fee-Requirements",
+        "quote": "Occupancy Type: Single-Family, Condominium, Townhouse (Sales Only)",
+        "doc_date": "Last Revised 3.12.2026",
+        "via": "pdf",
+        "verified": null
+      },
+      {
+        "url": "https://www.holmdeltownship.com/DocumentCenter/View/5019/Code-Enforcement_Fire-Fee-Summary",
+        "quote": "Initial inspection: $125",
+        "doc_date": "Last Revised 3.12.2026",
+        "via": "pdf",
+        "verified": true
+      }
+    ],
+    "confidence": "high",
+    "notes": "Township code Chapter 20 (Residential and Commercial Property Regulations) was read through the ecode360 text reader. The sale fee in the code and both Township fee sheets covers a single-family home, condominium or townhouse; no separate sale fee for a two-family home is published (rental of an apartment in a two-family is $150). No validity period for a sale CCO was found. Staff on the Occupancy Certificate page: David Olsen, Fire Official (ext. 1315, dolsen@holmdel.gov); Dina Rosado, Technical Assistant (ext. 1307); Fire Prevention Specialists Darnell McDonald (ext. 1317), Shawn O'Connor (ext. 1321) and Adalberto Rodriguez (ext. 1319). Landlord registration and rental CCOs are rental-only."
+  },
+  "fire_cert": {
+    "requirements": [
+      "Smoke alarms and carbon monoxide alarms per N.J.A.C. 5:70-4.19",
+      "Fire extinguisher (Township sheets still list it): the fee summary and workflow still call the certificate a smoke alarm, carbon monoxide alarm and portable fire extinguisher certificate (CSACMAPFEC)"
+    ],
+    "authorities": [
+      {
+        "name": "Holmdel Township Bureau of Fire Prevention",
+        "type": "municipal_fire_bureau",
+        "area_served": "Entire township",
+        "lead_time": "Fee depends on business days before the change of occupant. Done alongside the CCO application through the SDL Portal.",
+        "fees": [
+          {
+            "label": "Smoke/CO certificate, request more than four business days before the change of occupant (workflow sheet)",
+            "amount": "$45",
+            "quote": "Requests received more than four business days prior to the change of occupant: $45",
+            "source_url": "https://www.holmdeltownship.com/DocumentCenter/View/6584/Occupancy-Type-Fee-Requirements",
+            "verified": null
+          },
+          {
+            "label": "Request four business days or more before the change of occupant (fee summary sheet)",
+            "amount": "$90",
+            "quote": "4 business or more prior to change of occupant: $90",
+            "source_url": "https://www.holmdeltownship.com/DocumentCenter/View/5019/Code-Enforcement_Fire-Fee-Summary",
+            "verified": true
+          },
+          {
+            "label": "Request fewer than four business days before the change of occupant",
+            "amount": "$161",
+            "quote": "Less than 4 business days prior to change of occupant: $161",
+            "source_url": "https://www.holmdeltownship.com/DocumentCenter/View/5019/Code-Enforcement_Fire-Fee-Summary",
+            "verified": true
+          }
+        ],
+        "how_to_apply": "Apply through the Township's SDL Portal (Residential Certificate of Code Compliance / smoke alarm request) and pay online. Call the Bureau of Fire Prevention at 732-946-2820 with questions.",
+        "application_url": "https://www.sdlportal.com/towns/nj/monmouth/holmdeltwp/requests/smokealarm",
+        "department_url": "https://www.holmdeltownship.com/729/Fire-Prevention",
+        "phone": "732-946-2820 ext. 1315",
+        "email": "dolsen@holmdel.gov",
+        "contact_name": "David Olsen",
+        "contact_title": "Fire Official",
+        "evidence": [
+          {
+            "url": "https://www.holmdeltownship.com/729/Fire-Prevention",
+            "quote": "Resale and rental inspections",
+            "doc_date": "2026-10-04 (page fetched)",
+            "via": "page",
+            "verified": null
+          },
+          {
+            "url": "https://www.holmdeltownship.com/DocumentCenter/View/6584/Occupancy-Type-Fee-Requirements",
+            "quote": "Requests received four business days or less prior to the change of occupant: $90",
+            "doc_date": "Last Revised 3.12.2026",
+            "via": "pdf",
+            "verified": null
+          },
+          {
+            "url": "https://www.holmdeltownship.com/DocumentCenter/View/6584/Occupancy-Type-Fee-Requirements",
+            "quote": "Requests received fewer than four business days prior to the change of occupant: $161",
+            "doc_date": "Last Revised 3.12.2026",
+            "via": "pdf",
+            "verified": null
+          },
+          {
+            "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+            "quote": "LEAID: 1318-001 Holmdel Twp ... Name: Holmdel Twp Fire Prev ... Fire Official David Olsen Phone (732) 946-2820 ... Email dolsen@holmdeltownship-nj.com",
+            "doc_date": "2026-01-14 (survey date)",
+            "via": "state_directory",
+            "verified": null
+          },
+          {
+            "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+            "quote": "M Holmdel Township",
+            "doc_date": "2026-07",
+            "via": "pdf",
+            "verified": true
+          }
+        ],
+        "confidence": "high"
+      }
+    ],
+    "notes": "The two Township fee sheets (both last revised 3.12.2026) disagree. The workflow sheet lists $45 (more than four business days), $90 (four business days or less) and $161 (fewer than four business days), which overlap. The fee summary lists only $90 (4 business days or more) and $161 (less than 4 business days) and points to N.J.A.C. 5:70-2.9. The state fee tiers are $45 / $90 / $161 at 10 and 4 business days, so call to confirm. The Township sheets still name a portable fire extinguisher, which P.L.2025, c.19 dropped from the state sale certificate in February 2025. The state directory email (holmdeltownship-nj.com) is older; the Township page uses dolsen@holmdel.gov."
+  },
+  "other_items": [
+    {
+      "label": "Open permits and violations",
+      "detail": "The CCO review confirms all construction permits are closed and all violations closed with penalties paid; work done without permits is cited and must be permitted.",
+      "source_url": "https://www.holmdeltownship.com/DocumentCenter/View/3870/Certificate-of-Code-Compliance-Insp-Guide"
+    },
+    {
+      "label": "Wells and septic",
+      "detail": "Wells and septic systems must be maintained in good repair or properly abandoned as part of the CCO inspection.",
+      "source_url": "https://www.holmdeltownship.com/DocumentCenter/View/3870/Certificate-of-Code-Compliance-Insp-Guide"
+    }
+  ],
+  "open_questions": [
+    "Which smoke/CO fee tiers apply: $45 / $90 / $161 or $90 / $161?",
+    "What is the sale CCO fee for a two-family home?",
+    "How long is a sale CCO valid?",
+    "Is the portable fire extinguisher still checked after P.L.2025, c.19?"
+  ],
+  "checked_at": "2026-10-04",
+  "verification": {
+    "fees": 5,
+    "fee_ok": 2,
+    "fee_bad": 0,
+    "fee_unchecked": 3,
+    "quotes": 11,
+    "q_ok": 4,
+    "q_bad": 0,
+    "q_unchecked": 7
+  }
+}

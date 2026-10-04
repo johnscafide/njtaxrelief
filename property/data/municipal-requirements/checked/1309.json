@@ -1,0 +1,231 @@
+{
+  "municipality_code": "1309",
+  "municipality": "Brielle Borough",
+  "county": "MONMOUTH",
+  "resale_co": {
+    "status": "required",
+    "name": "Certificate of Occupancy / Certificate of Continued Occupancy (Certificate for Sale or Rental)",
+    "issued_by": "Borough of Brielle (Code Enforcement Officer; Construction Code Official under the Housing Ordinance)",
+    "lead_time": "The certificate must be granted or denied within 10 days of the application; file 10 or more days before occupancy for the lowest fee.",
+    "valid_for": "",
+    "requirements": [
+      "Inspection of the whole property against the Borough's Certificate for Sales and Rentals checklist (exterior, interior, bedroom size and egress)",
+      "Smoke alarms tested by push button; 10-year sealed battery alarms; detectors over 10 years old are not accepted; hardwired, interconnected alarms in newer homes",
+      "Carbon monoxide alarms outside each sleeping area where there are fuel-burning appliances or an attached garage; not older than 5 years or past the maker's expiration date",
+      "Fire extinguisher, minimum 2A:10B:C, permanently mounted within 10 feet of the kitchen and serviced/tagged in the past 12 months or newly bought (form still lists it)",
+      "Monitored alarm systems need an affidavit that the system is maintained and works",
+      "Owner certifies the home meets zoning and no rubbish, debris or bulk garbage will be left before the new occupancy",
+      "Application lists the closing/occupancy date, owners, any mortgage holders, and any deck, fence, shed, pool, garage or finished basement"
+    ],
+    "fees": [
+      {
+        "label": "Certificate of occupancy (sale or rental), application filed 10 or more days before occupancy",
+        "amount": "$100",
+        "quote": "Application filed ten (10) or more days before occupancy$100",
+        "source_url": "https://ecode360.com/36069533",
+        "verified": null
+      },
+      {
+        "label": "Application filed less than 10 and more than 5 days before occupancy",
+        "amount": "$150",
+        "quote": "Application filed less than ten (10) and more than five (5) days before occupancy$150",
+        "source_url": "https://ecode360.com/36069533",
+        "verified": null
+      },
+      {
+        "label": "Application filed less than 5 and more than 2 days before occupancy",
+        "amount": "$200",
+        "quote": "Application filed less than five (5) days and more than two (2) days before occupancy$200",
+        "source_url": "https://ecode360.com/36069533",
+        "verified": null
+      },
+      {
+        "label": "Application filed less than 2 days before occupancy",
+        "amount": "$250",
+        "quote": "Application filed less than two (2) days before occupancy$250",
+        "source_url": "https://ecode360.com/36069533",
+        "verified": null
+      },
+      {
+        "label": "Reinspection, each request",
+        "amount": "$50",
+        "quote": "A charge of $50 to cover the cost of a reinspection with such application shall be paid to the Borough at the time the inspection is requested.",
+        "source_url": "https://ecode360.com/36069533",
+        "verified": null
+      }
+    ],
+    "how_to_apply": "Apply online with the Borough's 'Certificate for Sale or Rental' GovPilot application (listed on the Borough Forms page), choosing Sale and giving the closing/occupancy date, then pay the fee. Review the Certificate for Sales and Rentals checklist before the inspection.",
+    "application_url": "https://main.govpilot.com/web/public/60392c47-4a7_CCO-Application-brielle?uid=7223&ust=NJ&pu=1&id=0",
+    "department_url": "https://www.briellenj.gov/285/Forms",
+    "phone": "732-528-6600 ext. 5119",
+    "email": "cwillms@briellenj.gov",
+    "contact_name": "Christopher Willms",
+    "contact_title": "Code Enforcement Officer (also Fire Inspector for the Sea Girt Fire Bureau)",
+    "evidence": [
+      {
+        "url": "https://ecode360.com/36069533",
+        "quote": "unless a certificate of occupancy certifying that the building and premises are in compliance with all applicable ordinances of the Borough shall first be obtained from the Borough.",
+        "doc_date": "Code includes Ord. No. 1097 (10-26-2020); legislation through 01-27-2025",
+        "via": "page",
+        "verified": null
+      },
+      {
+        "url": "https://ecode360.com/36069533",
+        "quote": "Such a certificate of occupancy shall be granted or denied within 10 days from the date of the application for the same.",
+        "doc_date": "",
+        "via": "page",
+        "verified": null
+      },
+      {
+        "url": "https://main.govpilot.com/web/public/60392c47-4a7_CCO-Application-brielle?uid=7223&ust=NJ&pu=1&id=0",
+        "quote": "Sale and Rental Certificate Applications/Landlord Registration",
+        "doc_date": "2025-06-05 (published)",
+        "via": "page",
+        "verified": true
+      },
+      {
+        "url": "https://main.govpilot.com/web/public/60392c47-4a7_CCO-Application-brielle?uid=7223&ust=NJ&pu=1&id=0",
+        "quote": "Fire Extinguisher must be present, minimum 2A:10B:C",
+        "doc_date": "",
+        "via": "page",
+        "verified": true
+      },
+      {
+        "url": "https://main.govpilot.com/web/public/60392c47-4a7_CCO-Application-brielle?uid=7223&ust=NJ&pu=1&id=0",
+        "quote": "Any Detectors greater than 10 years of age shall not be accepted.",
+        "doc_date": "",
+        "via": "page",
+        "verified": true
+      },
+      {
+        "url": "https://main.govpilot.com/web/public/60392c47-4a7_CCO-Application-brielle?uid=7223&ust=NJ&pu=1&id=0",
+        "quote": "I certify that this dwelling and all other structures on the property meet the zoning requirements of the Borough of Brielle",
+        "doc_date": "",
+        "via": "page",
+        "verified": null
+      },
+      {
+        "url": "https://www.briellenj.gov/DocumentCenter/View/777/Certificate-for-Sale-and-Rental-Guidelines-PDF",
+        "quote": "Certificate for Sales and Rentals Checklist",
+        "doc_date": "",
+        "via": "pdf",
+        "verified": true
+      },
+      {
+        "url": "https://www.briellenj.gov/285/Forms",
+        "quote": "Certificate for Sale or Rental",
+        "doc_date": "2026-10-04 (page fetched)",
+        "via": "page",
+        "verified": true
+      },
+      {
+        "url": "https://www.briellenj.gov/Directory.aspx",
+        "quote": "cwillms@briellenj.gov",
+        "doc_date": "2026-10-04 (page fetched)",
+        "via": "page",
+        "verified": true
+      }
+    ],
+    "confidence": "high",
+    "notes": "Brielle Code §9-2.4 (read in full through ecode360's print view, amended by Ord. No. 1097 in 2020) bars selling or transferring any dwelling without a Borough certificate of occupancy, with fees rising as the occupancy date gets closer. The online form is a GovPilot application shared with rental certificates and landlord registration. The Borough directory lists Christopher Willms as both Code Enforcement Officer (732-528-6600 ext. 5119) and Fire Inspector (732-272-7267), cwillms@briellenj.gov. The Construction Department is a shared service with Spring Lake (construction@springlakeboro.org, 732-449-0800 ext. 5). Landlord registration and rental certificates are rental-only."
+  },
+  "fire_cert": {
+    "requirements": [
+      "Smoke alarms on each level per the year built (battery minimum before 1978; hardwired with battery backup later; interconnected and in each bedroom for 1991 and newer); battery alarms must be 10-year sealed",
+      "Carbon monoxide alarms outside each sleeping area where there are fuel-burning appliances or an attached garage",
+      "Fire extinguisher, minimum 2A:10B:C, mounted within 10 feet of the kitchen (form still lists it)"
+    ],
+    "authorities": [
+      {
+        "name": "Sea Girt Fire Bureau (local enforcing agency for Brielle under a shared service); smoke/CO items are inspected with the Brielle Certificate for Sale",
+        "type": "municipal_fire_bureau",
+        "area_served": "Entire borough (Sea Girt Fire Bureau serves Sea Girt and Brielle)",
+        "lead_time": "Handled with the Borough sale certificate inspection; no separate schedule published.",
+        "fees": [],
+        "how_to_apply": "The smoke alarm, CO alarm and extinguisher requirements are acknowledged and inspected through Brielle's Certificate for Sale or Rental application (GovPilot). No separate smoke certificate form or fee for Brielle was found online; call the Fire Inspector to confirm.",
+        "application_url": "https://main.govpilot.com/web/public/60392c47-4a7_CCO-Application-brielle?uid=7223&ust=NJ&pu=1&id=0",
+        "department_url": "https://www.seagirt-nj.gov/fire-bureau",
+        "phone": "732-449-9433 ext. 118",
+        "email": "cwillms@briellenj.gov",
+        "contact_name": "Christopher Willms",
+        "contact_title": "Fire Inspector, Sea Girt Fire Bureau (also Brielle Code Enforcement Officer)",
+        "evidence": [
+          {
+            "url": "https://www.seagirt-nj.gov/fire-bureau",
+            "quote": "Welcome to the Sea Girt Fire Bureau, serving the communities of Sea Girt, NJ and Brielle, NJ.",
+            "doc_date": "2026-10-04 (page fetched)",
+            "via": "page",
+            "verified": null
+          },
+          {
+            "url": "https://www.seagirt-nj.gov/fire-bureau",
+            "quote": "(732) 449-9433 ext. 118",
+            "doc_date": "2026-10-04 (page fetched)",
+            "via": "page",
+            "verified": null
+          },
+          {
+            "url": "https://ecode360.com/36069533",
+            "quote": "No person shall sell, purchase, rent, transfer or lease any residential dwelling unit, residential condominium or cooperative dwelling unit, motel room, hotel room or apartment unit, unless such structure shall be provided with fire detection and protection devices installed in accordance with N.J.A.C. 5:70-4.19",
+            "doc_date": "Amended 2-20-2020 by Ord. No. 1090",
+            "via": "page",
+            "verified": null
+          },
+          {
+            "url": "https://main.govpilot.com/web/public/60392c47-4a7_CCO-Application-brielle?uid=7223&ust=NJ&pu=1&id=0",
+            "quote": "Carbon Monoxide alarms are required in all premises where fuel burning appliances exist, or if there is an attached garage",
+            "doc_date": "",
+            "via": "page",
+            "verified": true
+          },
+          {
+            "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+            "quote": "LEAID: 1308-001 Brielle Boro SMOKE DETECTOR COMPLIANCE Name: Sea Girt Boro Code Enf Enf Auth. Fire Dept Addr: 321 Baltimore Blvd Sea Girt NJ 08750 Fire Official Christopher Willms Phone (732) 449-9433 ... SSA with Sea Girt",
+            "doc_date": "2/6/2026 (survey date)",
+            "via": "state_directory",
+            "verified": null
+          },
+          {
+            "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+            "quote": "Sea Girt Borough is the LEA for Brielle Borough & Spring Lake Boro",
+            "doc_date": "2026-07",
+            "via": "pdf",
+            "verified": true
+          },
+          {
+            "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+            "quote": "F Brielle Borough",
+            "doc_date": "2026-07",
+            "via": "pdf",
+            "verified": true
+          }
+        ],
+        "confidence": "medium"
+      }
+    ],
+    "notes": "The NJ DCA LEA registry and fire directory say Sea Girt is the fire code enforcing agency for Brielle under a shared service, with Christopher Willms as fire official; he is also Brielle's Code Enforcement Officer. Brielle's sale certificate application includes the smoke, CO and extinguisher requirements, so the smoke/CO check appears to be done with that inspection. No separate CSACMAPFEC fee for Brielle is published. The form still requires a fire extinguisher, which state law (P.L.2025, c.19) dropped from the sale certificate in February 2025."
+  },
+  "other_items": [
+    {
+      "label": "Final water/sewer meter reading",
+      "detail": "Request a final meter reading from the Water & Sewer Department at least 24 hours before closing; a $65.00 reading fee is added to the bill (another $65.00 if the closing date changes after the bill is done). Call Tara at 732-449-6463 or email tvermillion@seagirtboro.com.",
+      "source_url": "https://www.briellenj.gov/DocumentCenter/View/771/Final-Read-Request-Form--PDF"
+    }
+  ],
+  "open_questions": [
+    "Is there a separate smoke/CO certificate fee for Brielle (Sea Girt Fire Bureau), or is it covered by the sale certificate fee?",
+    "Does Brielle still require the fire extinguisher at resale after P.L.2025, c.19?",
+    "How long is the sale certificate valid?"
+  ],
+  "checked_at": "2026-10-04",
+  "verification": {
+    "fees": 5,
+    "fee_ok": 0,
+    "fee_bad": 0,
+    "fee_unchecked": 5,
+    "quotes": 16,
+    "q_ok": 9,
+    "q_bad": 0,
+    "q_unchecked": 7
+  }
+}

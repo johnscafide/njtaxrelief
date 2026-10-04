@@ -1,0 +1,202 @@
+{
+  "municipality_code": "1351",
+  "municipality": "Upper Freehold Township",
+  "county": "MONMOUTH",
+  "resale_co": {
+    "status": "required",
+    "name": "CCO (Continued Certificate of Occupancy) for resale",
+    "issued_by": "Upper Freehold Township Housing Inspector (application to the Construction Office)",
+    "lead_time": "",
+    "valid_for": "",
+    "requirements": [
+      "Onsite inspection by the Housing Inspector for compliance with the Housing Code and applicable safety codes",
+      "Visual inspection of the septic system (if any), scheduled with the Freehold Area Health Department",
+      "Well water test by a State certified laboratory (if the home has a well), with results sent to the Freehold Area Health Department",
+      "Certificate of Compliance from the Freehold Area Health Department before the CCO is issued",
+      "Fee paid by cash or check only, payable to Upper Freehold Township"
+    ],
+    "fees": [
+      {
+        "label": "CCO inspection for resale or rental",
+        "amount": "$100.00",
+        "quote": "A $100.00 fee is required paid by cash or check only (checks made payable to Upper Freehold Township).",
+        "source_url": "https://uftnj.com/departments/housing-department/",
+        "verified": null
+      },
+      {
+        "label": "Resale or rental Certificate of Occupancy inspection fee (Township Code 11-3.7)",
+        "amount": "$100",
+        "quote": "An applicant is required to submit an application for the re-sale or rental of residential property along with a $100 inspection fee to the Construction Office of the Township.",
+        "source_url": "https://ecode360.com/36383567",
+        "verified": null
+      }
+    ],
+    "how_to_apply": "Submit the Township's Resale or Rental Application with the $100 fee (cash or check payable to Upper Freehold Township) to the Construction Office / Housing Department, 314 Route 539, Cream Ridge, NJ 08514. An appointment is then scheduled with the Housing Inspector. If the home has a septic system or well, call the Freehold Area Health Department for the septic inspection and send it the well water test results. Office hours are Monday to Thursday, 8:30 a.m. to 4:15 p.m.",
+    "application_url": "https://uftnj.com/wp-admin/admin-ajax.php?juwpfisadmin=false&action=wpfd&task=file.download&wpfd_category_id=98&wpfd_file_id=3226",
+    "department_url": "https://uftnj.com/departments/housing-department/",
+    "phone": "609-758-7738 ext. 222",
+    "email": "Rgafgen@uftnj.com",
+    "contact_name": "Ronald Gafgen",
+    "contact_title": "Housing Inspector",
+    "evidence": [
+      {
+        "url": "https://uftnj.com/departments/housing-department/",
+        "quote": "A CCO (Continued Certificate of Occupancy) is required any time occupancy changes for all Resale & Rental Properties.",
+        "doc_date": "2026-10-04 (page fetched)",
+        "via": "page",
+        "verified": null
+      },
+      {
+        "url": "https://uftnj.com/departments/housing-department/",
+        "quote": "An onsite inspection will be conducted to assess compliance with applicable safety codes.",
+        "doc_date": "2026-10-04 (page fetched)",
+        "via": "page",
+        "verified": null
+      },
+      {
+        "url": "https://uftnj.com/departments/housing-department/",
+        "quote": "Ronald Gafgen Housing Inspector 609-758-7738 Ext. 222",
+        "doc_date": "2026-10-04 (page fetched)",
+        "via": "page",
+        "verified": null
+      },
+      {
+        "url": "https://ecode360.com/36383567",
+        "quote": "A Certificate of Occupancy is required for the resale or rental of residential property previously issued a Certificate of Occupancy upon initial occupation of the residence.",
+        "doc_date": "Ord. No. 229-09",
+        "via": "page",
+        "verified": null
+      },
+      {
+        "url": "https://ecode360.com/36383567",
+        "quote": "An appointment is scheduled with the Housing Inspector.",
+        "doc_date": "Ord. No. 229-09",
+        "via": "page",
+        "verified": null
+      },
+      {
+        "url": "https://ecode360.com/36383567",
+        "quote": "Upon approval of the septic system inspection and well water results, the Freehold Area Health Department will issue a Certificate of Compliance.",
+        "doc_date": "Ord. No. 229-09",
+        "via": "page",
+        "verified": null
+      }
+    ],
+    "confidence": "high",
+    "notes": "The Housing Department page and Township Code 11-3.7 (read through the ecode360 print view) agree on the $100 fee. The page links a \"2022 RESALE OR RENTAL APPLICATION\" PDF through a document-download widget; the file opens but its text could not be extracted (likely a scan), so its contents were not checked. The site sits behind a bot check and may block automated fetches. Hailey Dries, 609-758-7738 Ext. 212, Hdries@uftnj.com, is also listed on the Housing Department page (no title shown)."
+  },
+  "fire_cert": {
+    "requirements": [
+      "Certificate of smoke detector and carbon monoxide detector compliance required under N.J.A.C. 5:70-2.3 before a 1 or 2 family home changes occupants",
+      "No Township checklist was found online; state rules apply (smoke alarm on each level and outside sleeping areas, 10-year sealed battery units where battery-only, CO alarm near sleeping areas when there is a fuel-burning appliance or attached garage)"
+    ],
+    "authorities": [
+      {
+        "name": "Upper Freehold Township (Bureau of Fire Prevention / Construction office)",
+        "type": "municipal",
+        "area_served": "Entire township (the Township is also the LEA for Allentown Borough)",
+        "lead_time": "Fee depends on business days between the application and the occupant change: more than 10 business days for the lowest fee.",
+        "fees": [
+          {
+            "label": "Smoke and CO certificate, application received more than 10 business days before occupant change",
+            "amount": "$45",
+            "quote": "10 business days before occupant change: $45",
+            "source_url": "https://ecode360.com/36389249",
+            "verified": null
+          },
+          {
+            "label": "Application received 4 to 10 business days before occupant change",
+            "amount": "$90",
+            "quote": "4-10 business days before occupant change: $90",
+            "source_url": "https://ecode360.com/36389249",
+            "verified": null
+          },
+          {
+            "label": "Application received less than 4 business days before occupant change",
+            "amount": "$161",
+            "quote": "Less than 4 business days before occupant change: $161",
+            "source_url": "https://ecode360.com/36389249",
+            "verified": null
+          }
+        ],
+        "how_to_apply": "No online application was found. Call the Township at 609-758-7738 or the Fire Official at 609-259-7665 to request the smoke and CO certificate inspection.",
+        "application_url": "",
+        "department_url": "https://uftnj.com/departments/fire-official/",
+        "phone": "609-259-7665",
+        "email": "fireofficial@uftnj.com",
+        "contact_name": "Alex Nebbia",
+        "contact_title": "Fire Official",
+        "evidence": [
+          {
+            "url": "https://ecode360.com/36389249",
+            "quote": "The application fee for a certificate of smoke detector and carbon monoxide detector compliance as required by N.J.A.C. 5:70-2.3 shall be:",
+            "doc_date": "amended 10-4-2018 by Ord. No. 294-18",
+            "via": "page",
+            "verified": null
+          },
+          {
+            "url": "https://uftnj.com/departments/fire-official/",
+            "quote": "Fire Official Alex Nebbia",
+            "doc_date": "2026-10-04 (page fetched)",
+            "via": "page",
+            "verified": null
+          },
+          {
+            "url": "https://uftnj.com/departments/fire-official/",
+            "quote": "to enforce the New Jersey State Uniform Fire Safety Act in all buildings, structures and premises, other than owner occupied one and two family dwellings, within Upper Freehold Township.",
+            "doc_date": "2026-10-04 (page fetched)",
+            "via": "page",
+            "verified": null
+          },
+          {
+            "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+            "quote": "LEAID: 1351-001 Upper Freehold Twp SMOKE DETECTOR COMPLIANCE Name: Upper Freehold Constructrion Enf Auth. Municipal Addr: 314 Route 539 Creamridge NJ 08514 Fire Official Alex Nebbia Phone (609) 758-7738 ... Email fireofficial@uftnj.com",
+            "doc_date": "2025-04 (survey date 4/28/2025)",
+            "via": "state_directory",
+            "verified": null
+          },
+          {
+            "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+            "quote": "M Upper Freehold Township",
+            "doc_date": "2026-07",
+            "via": "pdf",
+            "verified": true
+          },
+          {
+            "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+            "quote": "Upper Freehold Township is the LEA for Allentown Borough. NO LONGER SSA AS OF MAY 2026",
+            "doc_date": "2026-07",
+            "via": "pdf",
+            "verified": true
+          }
+        ],
+        "confidence": "medium"
+      }
+    ],
+    "notes": "Township Code 14-5 (Fire Prevention, amended by Ord. No. 294-18, read through the ecode360 page) sets the $45 / $90 / $161 fees; the first tier text reads \"When the application is received more than 10 business days before occupant change: $45\". The NJ DCA fire directory lists the smoke detector compliance office as the Upper Freehold Construction office at 314 Route 539 (phone (609) 758-7738), while the Fire Official is Alex Nebbia (609) 259-7665. Which office actually schedules the sale inspection was not stated online."
+  },
+  "other_items": [
+    {
+      "label": "Septic inspection and well water test (Freehold Area Health Department)",
+      "detail": "For homes with a septic system, a visual septic inspection by the Freehold Area Health Department is required; homes on a well need a well water test by a State certified lab. The Health Department then issues a Certificate of Compliance, which the Housing Inspector needs before issuing the CCO.",
+      "source_url": "https://ecode360.com/36383567"
+    }
+  ],
+  "open_questions": [
+    "Which office schedules the smoke and CO certificate for a sale (Housing Inspector with the CCO, the Construction office, or the Fire Official), and is it applied for on the same form?",
+    "What does the Freehold Area Health Department charge for the septic visual inspection and Certificate of Compliance, and how long does it take?",
+    "Lead time for the Housing Inspector appointment and how long the CCO is valid.",
+    "Is the fee different for a 2 family home?"
+  ],
+  "checked_at": "2026-10-04",
+  "verification": {
+    "fees": 5,
+    "fee_ok": 0,
+    "fee_bad": 0,
+    "fee_unchecked": 5,
+    "quotes": 12,
+    "q_ok": 2,
+    "q_bad": 0,
+    "q_unchecked": 10
+  }
+}

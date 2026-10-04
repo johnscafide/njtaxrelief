@@ -1,0 +1,219 @@
+{
+  "municipality_code": "1005",
+  "municipality": "Clinton Town",
+  "county": "HUNTERDON",
+  "resale_co": {
+    "status": "required",
+    "name": "Construction Records Clearance (CRC)",
+    "issued_by": "Town of Clinton Construction Office (Construction & Zoning)",
+    "lead_time": "Submit far enough ahead of closing to allow review and any inspections; the fee rises if the application comes in within 10 business days of closing",
+    "valid_for": "",
+    "requirements": [
+      "Records review for open construction permits (office checks open permits before issuing the Certificate of Records Clearance)",
+      "Application asks whether there is a swimming pool and a pool barrier",
+      "Application asks whether a water heater, HVAC, woodstove or fireplace insert was installed or replaced",
+      "Application asks whether a deck, hot tub, shed or outbuilding, or finished basement was built",
+      "Application asks whether the smoke, carbon monoxide and fire extinguisher application has been filed"
+    ],
+    "fees": [
+      {
+        "label": "Construction Records Clearance application",
+        "amount": "$100.00",
+        "quote": "Application Fee: $100.00",
+        "source_url": "https://www.clintonnj.gov/DocumentCenter/View/558/Construction-Records-Clearance-Application",
+        "verified": true
+      },
+      {
+        "label": "Construction Records Clearance application, submitted within 10 business days of closing",
+        "amount": "$150.00",
+        "quote": "Application Fee: $150.00 if submitted within 10 business days of closing",
+        "source_url": "https://www.clintonnj.gov/DocumentCenter/View/558/Construction-Records-Clearance-Application",
+        "verified": true
+      }
+    ],
+    "how_to_apply": "Download the Construction Records Clearance Application from the Town's Municipal Forms page, fill it out and submit it with the fee to the Construction Office, 43/47 Leigh Street. Questions go to the Technical Assistant to the Construction Official at 908-735-2275.",
+    "application_url": "https://www.clintonnj.gov/DocumentCenter/View/558/Construction-Records-Clearance-Application",
+    "department_url": "https://www.clintonnj.gov/287/Construction-Zoning",
+    "phone": "908-735-2275",
+    "email": "cinnella@clintonnj.gov",
+    "contact_name": "Catherine Innella",
+    "contact_title": "Technical Assistant to the Construction Official",
+    "evidence": [
+      {
+        "url": "https://www.clintonnj.gov/217/Selling-your-Residential-Property",
+        "quote": "Whenever any residential property is sold, the current owner must submit the following two applications and receive final approval from the Town before the sale can occur",
+        "doc_date": "2026-10-04 (page fetched)",
+        "via": "page",
+        "verified": true
+      },
+      {
+        "url": "https://www.clintonnj.gov/217/Selling-your-Residential-Property",
+        "quote": "It is recommended that the applications above be submitted far enough in advance of the scheduled closing to allow sufficient time to review and schedule the applicable inspections.",
+        "doc_date": "2026-10-04 (page fetched)",
+        "via": "page",
+        "verified": true
+      },
+      {
+        "url": "https://www.clintonnj.gov/217/Selling-your-Residential-Property",
+        "quote": "If you have any questions on either of the forms above, please contact Catherine Innella via email or at 908-735-2275.",
+        "doc_date": "2026-10-04 (page fetched)",
+        "via": "page",
+        "verified": true
+      },
+      {
+        "url": "https://www.clintonnj.gov/DocumentCenter/View/558/Construction-Records-Clearance-Application",
+        "quote": "Town of Clinton Construction Records Clearance Application",
+        "doc_date": "2026-10-04 (page fetched)",
+        "via": "page",
+        "verified": true
+      },
+      {
+        "url": "https://ecode360.com/14296566",
+        "quote": "Records clearance fee: $150 (submitted within 10 days of closing).",
+        "doc_date": "2026-10-04 (Code 73-3G(18), page fetched)",
+        "via": "page",
+        "verified": null
+      },
+      {
+        "url": "https://www.clintonnj.gov/287/Construction-Zoning",
+        "quote": "Catherine Innella - Technical Assistant to the Construction Official",
+        "doc_date": "2026-10-04 (page fetched)",
+        "via": "page",
+        "verified": true
+      }
+    ],
+    "confidence": "high",
+    "notes": "The Town's 'Selling your Residential Property' page says the owner must get final approval on two applications before any residential sale: the Construction Records Clearance and the smoke/CO/fire extinguisher certificate. No Town Code section requiring the CRC was found in the ecode360 chapters checked; the Fees chapter (73-3G(18)) lists the $150 late records clearance fee, and the regular $100 fee comes from the application form. The Town's fee chapter also lists a 'certificate of continued occupancy' fee of $200, but no page ties it to 1-2 family sales. The 'Selling' page links the contact name to the email awitt@clintonnj.gov, while the Construction & Zoning page and staff directory give cinnella@clintonnj.gov for Catherine Innella. The rental certificate of occupancy (Code Enforcement Housing Officer, $35) applies to rentals only. The packs.json ecode link CL0749 is the Town of Clinton code (correct for this town)."
+  },
+  "fire_cert": {
+    "requirements": [
+      "Smoke alarm on each level of the home and outside each separate sleeping area",
+      "Battery-only smoke alarms must be 10-year sealed battery units; hardwired alarms from original construction may not be replaced with battery alarms",
+      "Carbon monoxide alarm in the immediate vicinity of the sleeping areas (where there is a fuel-burning appliance or attached garage)",
+      "Portable ABC fire extinguisher within 10 feet of the kitchen along the exit path, no more than 10 pounds, mounted no higher than 5 feet, with a service tag within 1 year or new (form still lists it)"
+    ],
+    "authorities": [
+      {
+        "name": "Town of Clinton Fire Safety & Prevention (Department of Fire Prevention, Fire Marshal)",
+        "type": "municipal_fire_bureau",
+        "area_served": "Entire municipality",
+        "lead_time": "Submit the application 4 to 5 weeks before closing; the inspection is scheduled about 2 weeks before the closing date",
+        "fees": [
+          {
+            "label": "Smoke/CO/extinguisher certificate, application more than 10 business days before change of occupant",
+            "amount": "$45.00",
+            "quote": "Application received more than 10 business days prior to a change of occupant: $45.00",
+            "source_url": "https://www.clintonnj.gov/DocumentCenter/View/563/Smoke-CO-Alarm-Fire-Extinguisher-Application",
+            "verified": true
+          },
+          {
+            "label": "Application 4 to 10 business days before change of occupant",
+            "amount": "$90.00",
+            "quote": "Application received 4 to 10 business days prior to a change of occupant: $90.00",
+            "source_url": "https://www.clintonnj.gov/DocumentCenter/View/563/Smoke-CO-Alarm-Fire-Extinguisher-Application",
+            "verified": true
+          },
+          {
+            "label": "Application fewer than 4 business days before change of occupant",
+            "amount": "$161.00",
+            "quote": "Application received fewer than 4 business days prior to a change of occupant: $161.00",
+            "source_url": "https://www.clintonnj.gov/DocumentCenter/View/563/Smoke-CO-Alarm-Fire-Extinguisher-Application",
+            "verified": true
+          }
+        ],
+        "how_to_apply": "Fill out the Town's 'Smoke-CO Alarm-Fire Extinguisher Application' and send it with a check or money order payable to the Town of Clinton. The owner may either ask the Department of Fire Prevention to inspect, or self-certify the alarms on the form with a notary's authentication if the Fire Official permits it.",
+        "application_url": "https://www.clintonnj.gov/DocumentCenter/View/563/Smoke-CO-Alarm-Fire-Extinguisher-Application",
+        "department_url": "https://www.clintonnj.gov/Directory.aspx",
+        "phone": "908-468-1696",
+        "email": "jdaniels@clintonnj.gov",
+        "contact_name": "Jack Daniels",
+        "contact_title": "Fire Marshal",
+        "evidence": [
+          {
+            "url": "https://www.clintonnj.gov/DocumentCenter/View/563/Smoke-CO-Alarm-Fire-Extinguisher-Application",
+            "quote": "APPLICATION FOR ONE & TWO FAMILY DWELLING CERTIFICATE OF SMOKE ALARM AND CARBON MONOXIDE ALARM AND FIRE EXTINGUISHER COMPLIANCE",
+            "doc_date": "2025-07-19 (form revised)",
+            "via": "pdf",
+            "verified": true
+          },
+          {
+            "url": "https://www.clintonnj.gov/DocumentCenter/View/563/Smoke-CO-Alarm-Fire-Extinguisher-Application",
+            "quote": "Please submit the application 4 to 5 weeks prior to the planned closing date.",
+            "doc_date": "2025-07-19 (form revised)",
+            "via": "pdf",
+            "verified": true
+          },
+          {
+            "url": "https://www.clintonnj.gov/DocumentCenter/View/563/Smoke-CO-Alarm-Fire-Extinguisher-Application",
+            "quote": "*SMOKE DETECTOR/CARBON MONOXIDE CERTIFICATES ARE VALID FOR SIX (6) MONTHS*",
+            "doc_date": "2025-07-19 (form revised)",
+            "via": "pdf",
+            "verified": true
+          },
+          {
+            "url": "https://www.clintonnj.gov/DocumentCenter/View/563/Smoke-CO-Alarm-Fire-Extinguisher-Application",
+            "quote": "The local Department of Fire Prevention may conduct this inspection however an owner, an authorized representative of the owner may be permitted to conduct this inspection provided a notary authenticates that inspection statements made upon this form are true.",
+            "doc_date": "2025-07-19 (form revised)",
+            "via": "pdf",
+            "verified": true
+          },
+          {
+            "url": "https://www.clintonnj.gov/DocumentCenter/View/563/Smoke-CO-Alarm-Fire-Extinguisher-Application",
+            "quote": "A current unobstructed portable ABC type fire extinguisher is hung within 10 feet of the kitchen",
+            "doc_date": "2025-07-19 (form revised)",
+            "via": "pdf",
+            "verified": true
+          },
+          {
+            "url": "https://www.clintonnj.gov/Directory.aspx",
+            "quote": "Fire Safety & Prevention 908-468-1696",
+            "doc_date": "2026-10-04 (page fetched)",
+            "via": "page",
+            "verified": true
+          },
+          {
+            "url": "https://ecode360.com/12167530",
+            "quote": "The application fee for a certificate of smoke detector and carbon monoxide compliance shall be as established by the Uniform Fire Code.",
+            "doc_date": "2026-10-04 (Code 77-8C, page fetched)",
+            "via": "page",
+            "verified": null
+          },
+          {
+            "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+            "quote": "M Clinton Town",
+            "doc_date": "2026-07",
+            "via": "pdf",
+            "verified": true
+          },
+          {
+            "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+            "quote": "Clinton Town1005 LEAID: 1005-001 Enf Auth. Municipal Fire Official John K Daniels Phone (908) 735-2275 Email jdaniels@clintonnj.gov",
+            "doc_date": "4/28/2025 (survey date)",
+            "via": "state_directory",
+            "verified": null
+          }
+        ],
+        "confidence": "high"
+      }
+    ],
+    "notes": "The Town of Clinton enforces the fire code locally (LEA code M). The Town's application (revised 7-19-25) sets fees of $45.00 / $90.00 / $161.00, says certificates are valid for six months and are not transferable, and allows a notarized owner self-certification as an alternative to the Fire Prevention inspection. The form still lists a portable fire extinguisher, although P.L.2025, c.19 dropped it from the state sale certificate in February 2025; confirm with the office. Phone numbers differ: the Town directory lists Fire Safety & Prevention at 908-468-1696, while the state directory lists Fire Official John K Daniels at (908) 735-2275 (the construction office line). The email jdaniels@clintonnj.gov comes from the state directory; the Town directory shows only an email link for Jack Daniels."
+  },
+  "other_items": [],
+  "open_questions": [
+    "Does the Town still require the portable fire extinguisher at resale after P.L.2025, c.19?",
+    "Is the owner self-certification with a notary still accepted for sales, or only for rentals?",
+    "How long is the Construction Records Clearance valid if closing is delayed?",
+    "Is the CRC required by a specific Town Code section (only the fee appears in the Code)?"
+  ],
+  "checked_at": "2026-10-04",
+  "verification": {
+    "fees": 5,
+    "fee_ok": 5,
+    "fee_bad": 0,
+    "fee_unchecked": 0,
+    "quotes": 15,
+    "q_ok": 12,
+    "q_bad": 0,
+    "q_unchecked": 3
+  }
+}
