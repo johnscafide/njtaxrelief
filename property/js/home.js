@@ -1,12 +1,30 @@
-/* Watchdog Property Home single application bundle. Consolidated 2026-09-22. */
+/* 
+     
+     Hi There. I see you are checking the code. I'm sure you have reasons for such. Curiosity would be my guess. 
 
-/* ===== property/js/supabase-runtime.js ===== */
+     My name is John. I've been building sites since I was 10. I was gifted ecommerce website software on floppy disks
+     and fell in love with web developement ever since. I learned to code HTML using just notepad. I took computer science
+     classes (BASIC and Visual Basic in high school). Took a few college classes learning C++, Python, Ruby and Javascript.
+     My very first websites was with Angelfire and Geocities. In college I dabbed in game development, small tools, and
+     graphic design. Database management with SQL by my sophmore year. Joomla and other CMS tools learned by the age of 20. 
+     I have an understanding and experience writing code by hand, studing and analyzing bugs, issues, and corrections. 
+     The introduction of AI is interesting. I can understand the worry and fear. I also see the memes of "Hey I can make 
+     your job obsolete" then show a localhost:3000. haha. But I do believe, if you understand how to use the tools, it's
+     no different than templates, hiring a local kid, outsourcing your work to fivrr or an agency. I code, I understand the
+     backend and frontend. I'm not an expert by all means. But I do have insights. Watchdog was built on real research.
+     Watchdog & it's companion, NJPropertyTaxRelief.com, is from years of listening to real people with real needs in NJ.
+     I hope these sites and tools have benefit to you and/or your business. If you found them useful, the least I ask of
+     you is to share. Sure, I have paid plan options for members, but majority of the site is free to use. I'm a real estate
+     agent, licensed tax professional, and a big fan of the state of New Jersey. It's a great state, but not without its
+     flaws. The idea is to educate more New Jerseyians about their benefits and property taxes in the state. It's possible
+     one day this site will exceed some of the bigger natonal sites. Who knows. But for now, I present to you, Watchdog
+     Property Intelligence.
+
+     */
+
 (function () {
   'use strict';
 
-  /* The public lookup shell loads this runtime synchronously from public-nav.
-     Load the free-first grid imagery translator here so legacy neighborhood
-     card URLs are converted to NJGIN before ownership/lookup spend guards run. */
   if (!window.__WATCHDOG_FREE_IMAGERY_GRID__ && document.readyState === 'loading') {
     document.write('<script src="/property/js/free-imagery-grid-runtime.js"><\/script>');
   }
@@ -397,7 +415,6 @@
   startOnboardingGate();
 })();
 
-/* ===== property/js/plan-context.js ===== */
 (function () {
   'use strict';
 
@@ -477,12 +494,6 @@
 })();
 
 
-/* ===== property/js/ownership-verification.js ===== */
-/* NJW-10: emergency Google Static Street View cost guard.
- * Keep passive property surfaces from creating billable Street View Static requests.
- * This runs before lookup/search/home renderers. Google imagery can be restored later
- * only behind an explicit single-property user action.
- */
 (function () {
   'use strict';
   if (window.__watchdogStreetViewCostGuard) return;
@@ -686,7 +697,7 @@
     if (document.getElementById(id)) { if (next) next(); return; }
     var s = document.createElement('script'); s.id = id; s.src = src; s.onload = function () { if (next) next(); }; document.body.appendChild(s);
   }
-  function loadCss(id, href) { /* bundled into /property/css/home.css */ }
+  function loadCss(id, href) {  }
   function loadRuntime() {
     loadCss('njw96-search-v3-css','/property/css/lookup/09-search-corrections-v3.css');
     loadCss('watchdog-search-uniformity-css','/property/css/search-uniformity.css');
@@ -707,7 +718,6 @@
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', loadRuntime, { once: true }); else loadRuntime();
 })();
 
-/* NJW-212 / NJW-239: public landing enhancements boot from this already-loaded stable runtime. */
 (function () {
   'use strict';
   var path = (window.location.pathname || '').replace(/\/+$/, '');
@@ -716,7 +726,6 @@
   if (path !== '/property' && path !== '/property/index.html' && !cleanWatchdogRoot) return;
 
   function bootIntelligence() {
-    /* landing intelligence CSS is bundled into /property/css/home.css */
     if (document.getElementById('wd-landing-intelligence-loader')) return;
     var intelligence = document.createElement('script');
     intelligence.id = 'wd-landing-intelligence-loader';
@@ -747,7 +756,6 @@
 })();
 
 
-/* ===== property/js/pwa.js ===== */
 (function(){
 'use strict';
 var deferredPrompt;
@@ -757,7 +765,7 @@ function note(text){var n=document.createElement('div');n.className='wd-install-
 function show(){if(!isiOS()||standalone()||sessionStorage.getItem('wdInstallDismissed'))return;var n=note('In Safari, tap Share, then “Add to Home Screen.”');n.querySelector('button').onclick=function(){sessionStorage.setItem('wdInstallDismissed','1');n.remove();};}
 function loadWhyWatchdog(){var page=String(document.body&&document.body.getAttribute('data-sidebar-page')||'');if(page!=='dashboard'&&page!=='agent-desk')return;if(window.WatchdogWhy||document.getElementById('watchdog-why-script'))return;var s=document.createElement('script');s.id='watchdog-why-script';s.src='/property/js/watchdog-why.js';s.defer=true;document.head.appendChild(s);}
 function loadScript(src,key){if(document.querySelector('script['+key+']'))return;var s=document.createElement('script');s.src=src;s.defer=true;s.setAttribute(key,'true');document.body.appendChild(s);}
-function loadPropertyHomeFirstImpression(){var page=String(document.body&&document.body.getAttribute('data-sidebar-page')||'');if(page!=='home')return;/* Prevent the legacy Google Street View hero before the premium loader can request it. */window.__WATCHDOG_HOME_HERO_INTELLIGENCE__=true;loadScript('/property/js/dashboard/home/home-property-first-impression.js?v=20260827d','data-watchdog-home-first-impression');loadScript('/property/js/dashboard/home/home-property-first-impression-compact.js?v=20260827e','data-watchdog-home-first-impression-compact');}
+function loadPropertyHomeFirstImpression(){var page=String(document.body&&document.body.getAttribute('data-sidebar-page')||'');if(page!=='home')return;window.__WATCHDOG_HOME_HERO_INTELLIGENCE__=true;loadScript('/property/js/dashboard/home/home-property-first-impression.js?v=20260827d','data-watchdog-home-first-impression');loadScript('/property/js/dashboard/home/home-property-first-impression-compact.js?v=20260827e','data-watchdog-home-first-impression-compact');}
 function loadPageEnhancements(){var page=String(document.body&&document.body.getAttribute('data-sidebar-page')||'');if(page!=='integrations')return;loadScript('/property/js/integrations-command-center.js','data-watchdog-integrations-command-center');loadScript('/property/js/integrations-recipes.js','data-watchdog-integration-recipes');loadScript('/property/js/integrations-policy-feedback.js','data-watchdog-integration-policy-feedback');loadScript('/property/js/integrations-policy-comparison.js','data-watchdog-integration-policy-comparison');}
 window.addEventListener('beforeinstallprompt',function(event){event.preventDefault();deferredPrompt=event;});
 loadPropertyHomeFirstImpression();
@@ -765,7 +773,6 @@ loadPageEnhancements();
 window.addEventListener('load',function(){if('serviceWorker' in navigator)navigator.serviceWorker.register('/property/sw.js',{scope:'/property/'}).catch(function(){});if(isiOS())window.setTimeout(show,1300);loadPropertyHomeFirstImpression();loadWhyWatchdog();loadPageEnhancements();});
 })();
 
-/* ===== property/js/brand-consistency-runtime.js ===== */
 (function(){
   'use strict';
   if(window.__WATCHDOG_BRAND_CONSISTENCY__)return;
@@ -780,9 +787,6 @@ window.addEventListener('load',function(){if('serviceWorker' in navigator)naviga
   var PROPERTY_IMAGERY='/property/js/property-imagery-runtime.js';
   var MAP_PERSISTENCE='/property/js/map-persistence-runtime.js';
 
-  /* Property Home previously emitted Google Static Street View as an inline
-     background-image. Image-element guards cannot stop CSS URL fetches, so
-     neutralize that legacy path before the Home renderer inserts it. */
   function installStreetViewBackgroundGuard(){
     if(window.__WATCHDOG_STREETVIEW_BACKGROUND_GUARD__)return;
     window.__WATCHDOG_STREETVIEW_BACKGROUND_GUARD__=true;
@@ -804,7 +808,7 @@ window.addEventListener('load',function(){if('serviceWorker' in navigator)naviga
   }
   installStreetViewBackgroundGuard();
 
-  function ensureStylesheet(href){ /* bundled into /property/css/home.css */ }
+  function ensureStylesheet(href){  }
   function ensureScript(src,id){
     if(id&&document.getElementById(id))return;
     if(document.querySelector('script[src="'+src+'"]'))return;
@@ -892,10 +896,6 @@ window.addEventListener('load',function(){if('serviceWorker' in navigator)naviga
   };
 })();
 
-/* ===== property/js/tax-year-intelligence.js ===== */
-/* Shared Watchdog tax-year intelligence.
-   Keeps observed, published and scenario values distinct so a revaluation
-   assessment is never silently multiplied by a tax rate from another year. */
 (function(){
   'use strict';
   function num(v){var n=Number(v);return Number.isFinite(n)?n:null}
@@ -928,7 +928,6 @@ window.addEventListener('load',function(){if('serviceWorker' in navigator)naviga
 })();
 
 
-/* ===== property/js/marker-intelligence.js ===== */
 (function(){'use strict';var registry=null,content={},bubble=null,active=null;
 function esc(v){return String(v==null?'':v).replace(/[&<>"']/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
 function byId(id){return registry&&registry.markers.find(function(m){return m.id===id;});}
@@ -942,19 +941,9 @@ function hide(t){if(active!==t)return;active=null;if(bubble)bubble.classList.rem
 function load(){return Promise.all([fetch('/property/data/marker-registry.json').then(r=>r.json()),fetch('/property/data/marker-content.json').then(r=>r.json()).catch(()=>({markers:{}}))]).then(x=>{registry=x[0];content=x[1].markers||{};window.WatchdogMarkerContent={get:rich,registry:function(){return registry;},curated:content};});}
 document.addEventListener('mouseover',e=>{var t=e.target.closest('[data-marker-id]');if(t&&active!==t)show(t)});document.addEventListener('mouseout',e=>{var t=e.target.closest('[data-marker-id]');if(t&&!t.contains(e.relatedTarget))hide(t)});document.addEventListener('focusin',e=>{var t=e.target.closest('[data-marker-id]');if(t)show(t)});document.addEventListener('focusout',e=>{var t=e.target.closest('[data-marker-id]');if(t)hide(t)});window.addEventListener('scroll',()=>{if(bubble)bubble.classList.remove('on')},{passive:true});load().catch(e=>console.warn('Marker intelligence unavailable',e));})();
 
-/* ===== property/js/dashboard/home/index.js ===== */
-/* ============================================================
-   PROPERTY REPORT
-   njpropertytaxrelief.com/property
-   ============================================================ */
 (function () {
   'use strict';
 
-  // Property Home is intentionally a single JS bundle. Do not dynamically import
-  // dashboard tool modules here: those imports were the remaining second JS layer
-  // and caused partially styled/broken sections when a module failed. The tool
-  // functions the sections call come from /property/js/dashboard/home/home-tools.js
-  // (generated by scripts/build-home-tools.mjs), loaded before this bundle.
   var HOME_MODULE_VERSION = '20260927-tools1';
   function toolsReady() { return window.NJPropertyToolsReady || Promise.resolve(); }
   function loadHomeTool() { return toolsReady().then(function () { return null; }); }
@@ -1013,7 +1002,6 @@ document.addEventListener('mouseover',e=>{var t=e.target.closest('[data-marker-i
       { auth: { persistSession: true, autoRefreshToken: true, detectSessionInUrl: true, flowType: 'pkce', storageKey: 'sb-uvkvaxljhhngydvlrzom-auth-token' } });
     return true;
   }
-  // Governed browser history projection; row ownership is enforced by Supabase RLS.
   window.watchdogScoreHistory = function (r, markerId, modelVersion) {
     if (!sb || !plUser || !r || !r.pams_pin) return Promise.resolve([]);
     markerId=markerId||'watchdog.score';
@@ -1049,7 +1037,6 @@ document.addEventListener('mouseover',e=>{var t=e.target.closest('[data-marker-i
   };
   window.plSignOut = function () { if (sb) sb.auth.signOut().then(function () { location.reload(); }); };
 
-  // Authentication starts once the initial shared modules are ready.
 
   function meta() { return (plUser && plUser.user_metadata) || {}; }
   function name() { return meta().full_name || meta().name || (plUser.email || '').split('@')[0]; }
@@ -1072,8 +1059,6 @@ document.addEventListener('mouseover',e=>{var t=e.target.closest('[data-marker-i
     var m = a.length >> 1;
     return a.length % 2 ? a[m] : (a[m - 1] + a[m]) / 2;
   }
-  // Core reference helpers must live in the single Home bundle. These used to
-  // arrive from the lazy uniformity module; paintReport calls them on first paint.
   var uniData = null, appealData = null;
   function uniFor(r) {
     var d = String((r && r.pams_pin) || '').slice(0, 4);
@@ -1114,9 +1099,6 @@ document.addEventListener('mouseover',e=>{var t=e.target.closest('[data-marker-i
              upper: row && row.upper ? +row.upper / 100 : null };
   }
 
-  // Full multi-year general tax rate history for a town, sorted oldest to
-  // newest. Same name-matching rule as ratioFor: try "TOWN (COUNTY)" first,
-  // fall back to town alone, since a few small towns are unique statewide.
   function rateHistory(town, county) {
     if (!rates) return null;
     var t = (town || '').toUpperCase().trim();
@@ -1130,9 +1112,6 @@ document.addEventListener('mouseover',e=>{var t=e.target.closest('[data-marker-i
     return years.map(function (y) { return { year: y, rate: +hit[String(y)] }; });
   }
 
-  // ══════════════════════════════════════════════
-  // SR1A  ·  verified sales ratios
-  // ══════════════════════════════════════════════
   var sr1a = null;
   function loadSR1A() {
     if (sr1a) return Promise.resolve();
@@ -1146,8 +1125,6 @@ document.addEventListener('mouseover',e=>{var t=e.target.closest('[data-marker-i
     return (row && row.ratio && row.n >= 10) ? row : null;
   }
 
-  // Market value from the state's verified sales, falling back to the
-  // published ratio. This is the number every other figure hangs off.
   function marketValue(r) {
     var s = sr1aFor(r);
     if (s && r.assessed) return { v: r.assessed / s.ratio, ratio: s.ratio, n: s.n, src: 'verified' };
@@ -1157,15 +1134,6 @@ document.addEventListener('mouseover',e=>{var t=e.target.closest('[data-marker-i
     return null;
   }
 
-  // An appeal test needs a market value that did NOT come from the assessment.
-  // Dividing the assessment by the town ratio and then multiplying it back is
-  // circular: the supported assessment always equals the assessment and no
-  // case can ever fire. So we only test when there is an independent anchor.
-  //
-  //   A. watchdog_value  the comps based estimate saved from the lookup page
-  //   B. median price per square foot in town, applied to this home's size
-  //
-  // With neither, we say so rather than showing a number that means nothing.
   var chapterCoverageSeen = Object.create(null);
   function trackChapterCoverage(r, testable, basis) {
     var key = [r && (r.pams_pin || r.id || r.address), testable ? '1' : '0', basis].join('|');
@@ -1211,15 +1179,6 @@ document.addEventListener('mouseover',e=>{var t=e.target.closest('[data-marker-i
     return out;
   }
 
-  // ══════════════════════════════════════════════
-  // PROPERTY DETAIL FROM SR1A
-  //
-  // MOD-IV publishes no square footage and New Jersey publishes no bedroom or
-  // bathroom counts anywhere in the public record. Those live in the MLS.
-  // What the SR1A file does carry, on any parcel that has sold, is living
-  // space and year built, so we look the property up by block and lot and use
-  // what genuinely exists rather than inventing the rest.
-  // ══════════════════════════════════════════════
   var salesCache = {};
 
   function countySales(county) {
@@ -1261,7 +1220,6 @@ document.addEventListener('mouseover',e=>{var t=e.target.closest('[data-marker-i
     });
   }
 
-  // A short factual line. Only what the public record actually holds.
   function detailLine(r) {
     var bits = [];
     if (r._sqft) bits.push('<b>' + r._sqft.toLocaleString() + '</b> sq ft');
@@ -1279,9 +1237,6 @@ document.addEventListener('mouseover',e=>{var t=e.target.closest('[data-marker-i
       d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
   }
 
-  // ══════════════════════════════════════════════
-  // SORTING
-  // ══════════════════════════════════════════════
   var sortBy = 'added';
   var SORTS = {
     added:     { label: 'Recently added',   fn: function (a, b) { return new Date(b.created_at || 0) - new Date(a.created_at || 0); } },
@@ -1314,9 +1269,6 @@ document.addEventListener('mouseover',e=>{var t=e.target.closest('[data-marker-i
     '</div>';
   }
 
-  // ══════════════════════════════════════════════
-  // COMPARE
-  // ══════════════════════════════════════════════
   var picked = [];
 
   window.dbPick = function (id, box) {
@@ -1389,9 +1341,6 @@ document.addEventListener('mouseover',e=>{var t=e.target.closest('[data-marker-i
       'comes from the state sales file and only exists for properties that have sold.</p>');
   };
 
-  // ══════════════════════════════════════════════
-  // PER PROPERTY MENU
-  // ══════════════════════════════════════════════
   window.dbMenu = function (id, ev) {
     ev.stopPropagation();
     var open = document.querySelector('.pm.open');
@@ -1471,18 +1420,6 @@ document.addEventListener('mouseover',e=>{var t=e.target.closest('[data-marker-i
       '</div></div>';
   }
 
-  // ══════════════════════════════════════════════
-  // UNIFORMITY AND APPEAL ODDS
-  //
-  // Two datasets New Jersey publishes and nobody reads, joined to the property
-  // in front of you.
-  //
-  //   uniformity.json  how consistently a town assesses, 558 districts
-  //   appeals.json     what actually happens to appeals, 21 counties, 10 years
-  //
-  // Separately they are trivia. Together with the property's own gap they
-  // answer the only question that matters: is filing worth it.
-  // ══════════════════════════════════════════════
   var uniData = null, appealData = null;
 
   
@@ -1505,7 +1442,6 @@ document.addEventListener('mouseover',e=>{var t=e.target.closest('[data-marker-i
     'excellent': 'good', 'good': 'good', 'fair': 'mid', 'poor': 'bad', 'very poor': 'bad'
   };
 
-  // ── 1 · ASSESSMENT UNIFORMITY ──
   function uniBody(r, u) {
 
     var W = 320, H = 62;
@@ -1517,7 +1453,6 @@ document.addEventListener('mouseover',e=>{var t=e.target.closest('[data-marker-i
       var y = H - 8 - ((v - lo) / ((hi - lo) || 1)) * (H - 20);
       return (i ? 'L' : 'M') + x.toFixed(1) + ' ' + y.toFixed(1);
     }).join(' ');
-    // the IAAO line, which is the only benchmark that means anything
     var iaao = H - 8 - ((15 - lo) / ((hi - lo) || 1)) * (H - 20);
 
     return toolCard('Assessment uniformity', 'fa-ruler-combined',
@@ -1566,7 +1501,6 @@ document.addEventListener('mouseover',e=>{var t=e.target.closest('[data-marker-i
       'one arguable.</div>');
   }
 
-  // ── 2 · APPEAL ODDS ──
   function appealBody(r, a) {
     var L = a.latest, u = uniFor(r);
     var hist = Object.keys(a.history).sort();
@@ -1580,14 +1514,9 @@ document.addEventListener('mouseover',e=>{var t=e.target.closest('[data-marker-i
       return (i ? 'L' : 'M') + x.toFixed(1) + ' ' + y.toFixed(1);
     }).join(' ');
 
-    // Expected value. This is the number nobody else can produce, because it
-    // needs the county outcome record, the town's uniformity, and this
-    // property's own gap, and no one publishes the three together.
     var c = chapter123(r);
     var ev = null;
     if (c && c.testable && c.hasCase && c.saving && L.win_rate_filed != null) {
-      // Expected value uses the outcome of every filed appeal. The merits-only
-      // decided rate excludes dismissals and withdrawals and is context, not odds.
       var p = L.win_rate_filed / 100;
       ev = { p: p, gross: c.saving * 5, net: (c.saving * 5 * p) - 25 };
     }
@@ -1639,23 +1568,13 @@ document.addEventListener('mouseover',e=>{var t=e.target.closest('[data-marker-i
       'is guessing.</div>');
   }
 
-  // ══════════════════════════════════════════════
-  // CONDENSED METRICS
-  //
-  // Every saved property gets its own numbers. The previous build computed
-  // these once from rows[0] and printed them under a list of five properties,
-  // which read as though they applied to all of them. They did not.
-  //
-  // Full depth lives on the per property report at home.html. What sits here
-  // is the short version: four figures, each explained on hover, plus a link
-  // through to the whole thing.
-  // ══════════════════════════════════════════════
 
   
 
   
 
-  // The four numbers worth showing on a card, each one specific to this row.
+  
+
   
 
   
@@ -1664,21 +1583,6 @@ document.addEventListener('mouseover',e=>{var t=e.target.closest('[data-marker-i
 
   
 
-  // Tooltips: one shared bubble, positioned on hover or focus. Cheaper than a
-  // node per tip and it survives the list being rebuilt on every sort.
-  
-
-  // ══════════════════════════════════════════════
-  // CONDENSED METRICS
-  //
-  // Every saved property gets its own numbers. The previous build computed
-  // these once from rows[0] and printed them under a list of five properties,
-  // which read as though they applied to all of them. They did not.
-  //
-  // Full depth lives on the per property report at home.html. What sits here
-  // is the short version: four figures, each explained on hover, plus a link
-  // through to the whole thing.
-  // ══════════════════════════════════════════════
 
   var TIPS = {
     uniformity:
@@ -1710,7 +1614,6 @@ document.addEventListener('mouseover',e=>{var t=e.target.closest('[data-marker-i
       label + '<i class="fas fa-circle-info"></i></span>';
   }
 
-  // The four numbers worth showing on a card, each one specific to this row.
   function metricStrip(r) {
     var u = uniFor(r), a = appealFor(r), s = sr1aFor(r), c = chapter123(r);
     if (!u && !a && !s && !c) return '';
@@ -1749,8 +1652,6 @@ document.addEventListener('mouseover',e=>{var t=e.target.closest('[data-marker-i
     return '/property/home?pin=' + encodeURIComponent(r.pams_pin || '');
   }
 
-  // Tooltips: one shared bubble, positioned on hover or focus. Cheaper than a
-  // node per tip and it survives the list being rebuilt on every sort.
   function initTips() {
     if (document.getElementById('tipbox')) return;
     var box = document.createElement('div');
@@ -1781,16 +1682,10 @@ document.addEventListener('mouseover',e=>{var t=e.target.closest('[data-marker-i
     document.addEventListener('focusout', hide);
   }
 
-  // A section, not a card. A hairline and a small label, then the content.
   function toolCard(title, icon, body) {
     return '<section class="sec"><h4><i class="fas ' + icon + '"></i>' + title + '</h4>' + body + '</section>';
   }
 
-  // Home is a signal browser, not the final technical report. Tool modules
-  // still build their complete analysis so calculations and interactive forms
-  // remain available, but the report initially presents one compact row per
-  // signal. The row opens the sourced marker page; "Use full tool" reveals the
-  // original analysis only when somebody deliberately asks for it.
   var HOME_SIGNAL_MARKERS = [
     [/chapter 123/i, 'watchdog.chapter123_position'],
     [/land and building/i, 'watchdog.improvement_ratio'],
@@ -1897,35 +1792,6 @@ document.addEventListener('mouseover',e=>{var t=e.target.closest('[data-marker-i
   }
 
 
-  // ══════════════════════════════════════════════
-  // REASSESSMENT RISK
-  //
-  // When a home sells, the price becomes public evidence of what it is worth.
-  // The assessment does not automatically follow. In most New Jersey towns it
-  // sits untouched until the assessor gets to it, which can be years, or until
-  // the town revalues, at which point it catches up all at once.
-  //
-  // That gap is visible in the state's own files, and it cuts two ways:
-  //
-  //   A buyer  needs to know the bill is about to jump, because the listing
-  //            shows the seller's tax, not theirs.
-  //   An owner needs to know they are currently under-assessed, which is good
-  //            news worth not drawing attention to, and terrible news if they
-  //            were about to file an appeal.
-  //
-  // THE TRAP, AND WHY THIS IS NOT A NAIVE RATIO SCREEN
-  //
-  //   A naive version flags every sale where assessed/price runs below the
-  //   town norm, and it is wrong roughly a tenth of the time. New construction
-  //   sells for the price of a finished house while still assessed on the bare
-  //   land, which produces ratios near 10% that look spectacular and mean
-  //   nothing. Same for teardowns and land sales.
-  //
-  //   Testing on Winslow: 98 sales looked like lags. 6 were land with no
-  //   building on record, 3 were new construction awaiting an added
-  //   assessment. Calling those "stale" would have been wrong and obvious to
-  //   anyone who knows the market. They are classified separately here.
-  // ══════════════════════════════════════════════
 
   var LAG_CLS = {
     stale: {
@@ -1946,51 +1812,14 @@ document.addEventListener('mouseover',e=>{var t=e.target.closest('[data-marker-i
 
   
 
-  // Classify every recent verified sale in a town against that town's own ratio.
-  
-
-  // Where does THIS property sit? Needs its own verified sale to say anything.
-  
-
-  // the sales loader is named countySales in this file
   
 
   
 
-  // ══════════════════════════════════════════════
-  // REVALUATION RADAR
-  //
-  // A revaluation is the single largest thing that can happen to a New Jersey
-  // property tax bill, and almost nobody sees it coming. Assessments across a
-  // whole town are reset to current market value at once. In a town that has
-  // not revalued in twenty years, assessments can double or triple overnight.
-  //
-  // The bill does not double, because the tax RATE falls to compensate. That is
-  // the part that gets lost in the panic, and the part that matters: a
-  // revaluation redistributes the burden rather than raising it. Whoever has
-  // been under-assessed relative to their neighbours pays more afterwards, and
-  // whoever has been over-assessed pays less. Which side you land on is
-  // knowable in advance, and that is what this works out.
-  //
-  // WHAT ACTUALLY TRIGGERS ONE
-  //
-  //   A county board of taxation may order a revaluation, and the Director may
-  //   compel one. The two figures that drive it are both published:
-  //
-  //     Director's ratio    drifting well below 100% means assessments no
-  //                         longer track market value
-  //     Coefficient of      above 15 means the town assesses unevenly, which is
-  //     deviation           the fairness argument for forcing a reset
-  //
-  // WHAT THIS DOES NOT HAVE, AND WILL NOT PRETEND TO
-  //
-  //   The list of towns currently under a revaluation order, and the date each
-  //   town last revalued. Both exist; neither is published in a machine
-  //   readable form. So this reads pressure, not schedule. A town can sit at
-  //   maximum pressure for years, and a town under low pressure can still
-  //   revalue because its governing body decided to. This is a weather
-  //   forecast, not a calendar.
-  // ══════════════════════════════════════════════
+  
+
+  
+
 
   
 
@@ -2010,49 +1839,30 @@ document.addEventListener('mouseover',e=>{var t=e.target.closest('[data-marker-i
 
   
 
-  // ══════════════════════════════════════════════
-  // NEW JERSEY BENEFIT RULES
-  //
-  // Kept in one place because they change with every state budget, and because
-  // the whole point of these tools is being right about the thresholds. Each
-  // figure below is dated so it is obvious when it went stale.
-  //
-  // Verified against the Division of Taxation, August 2026.
-  // ══════════════════════════════════════════════
   var NJ = {
     asOf: 'October 2026',
     stayNJ: {
-      // The FY2027 Appropriations Act, signed 30 June 2026, cut the income
-      // limit from $500,000 to $200,000 and capped the 2025 benefit (paid
-      // February and May 2027) by income. The state publishes the caps on a
-      // yearly basis. The credit itself is 50% of the tax bill, less ANCHOR
-      // and the Senior Freeze, under P.L.2024, c.88. A great many sites still
-      // quote the old $500,000 limit and a flat $6,500 cap.
       incomeLimit: 200000,
       minAge: 65,
-      share: 0.50,            // 50% of the property tax bill
+      share: 0.50,            
       caps: [[100000, 6500], [150000, 5000], [200000, 4000]],
-      benefitCap: 6500,       // the top cap, for income up to $100,000
+      benefitCap: 6500,       
       homeownersOnly: true
     },
     anchor: {
-      // Homeowners, by age and NJ-1040 line 29 income.
-      // 2025 benefit year: homeowners 65+ get the same amounts as everyone
-      // else. Only renters 65+ still get an extra $250.
       senior:  [[150000, 1500], [250000, 1000]],
       under65: [[150000, 1500], [250000, 1000]],
       renter:  [[150000, 700]],
       hardLimit: 250000
     },
     freeze: {
-      incomeLimit: 172475,    // 2025 filing year
+      incomeLimit: 172475,    
       minAge: 65,
-      // 2025 application: owned and lived in the home since 31 December 2022.
       minYearsOwned: 3,
       minYearsResident: 3
     },
     deduction: {
-      senior: 250,            // annual, age 65+ or permanently disabled
+      senior: 250,            
       seniorIncomeLimit: 10000,
       veteran: 250
     },
@@ -2062,71 +1872,16 @@ document.addEventListener('mouseover',e=>{var t=e.target.closest('[data-marker-i
 
   
 
-  // ══════════════════════════════════════════════
-  // 14 · SENIOR BENEFIT MAXIMIZER
-  //
-  // The stacking is genuinely counterintuitive and it costs people money.
-  //
-  // Stay NJ is a TOP OFF, not an addition. The state works out ANCHOR and the
-  // Senior Freeze first. If those two together already reach 50% of the tax
-  // bill, Stay NJ pays nothing. If they fall short, Stay NJ pays the
-  // difference up to the cap.
-  //
-  // The practical consequence, which nobody explains: claiming ANCHOR does not
-  // increase a senior's total relief once Stay NJ is in play. It changes which
-  // pot the money comes from. What DOES increase the total is the Senior
-  // Freeze, because the freeze amount grows every year the base year holds,
-  // and a large freeze plus Stay NJ can exceed 50% of the bill.
-  //
-  // Which makes the base year the single most valuable thing on this page.
-  // ══════════════════════════════════════════════
-  
-
-  
-
-  // ══════════════════════════════════════════════
-  // 13 · FIRST TIME BUYER TRUE COST
-  //
-  // A listing shows the seller's tax bill. That is not what the buyer will pay,
-  // for two reasons nobody mentions at the open house: the assessment may not
-  // have caught up with what the house is now worth, and the rate moves every
-  // year regardless.
-  // ══════════════════════════════════════════════
   
 
   
 
   
 
-  // ══════════════════════════════════════════════
-  // ABATEMENT EXPOSURE
-  //
-  // Column 3 of the NJ Abstract of Ratables: "Total Taxable Value of Partial
-  // Exemptions and Abatements". The slice of a town's assessment base that has
-  // been granted partial relief and therefore does not pay the full rate.
-  //
-  // WHY IT MATTERS TO EVERYONE ELSE
-  //
-  //   A municipal levy is a fixed dollar amount divided across whatever base
-  //   remains. Take a slice out and the rest covers the same budget. Nobody
-  //   tells the people carrying it.
-  //
-  // WHAT THIS MEASURES, AND WHAT IT DOES NOT
-  //
-  //   Included: five year improvement abatements, fire suppression system
-  //   exemptions, historic site exemptions, Urban Enterprise Zone abatements.
-  //   All are PARTIAL relief on property that is otherwise on the tax roll.
-  //
-  //   NOT included, and this is the honest limit of the tool: PILOT agreements
-  //   and long term tax exemptions, which are FULL exemptions rather than
-  //   partial ones and sit in a different table entirely. Nor fully exempt
-  //   property, meaning churches, schools, government and non-profits.
-  //
-  //   That matters most in exactly the places people assume it matters. A city
-  //   financing redevelopment through PILOTs will look low here, because its
-  //   largest giveaways are not in this column. The tool says so rather than
-  //   letting the number be read as the whole story.
-  // ══════════════════════════════════════════════
+  
+
+  
+
   var abateData = null;
 
   
@@ -2135,46 +1890,12 @@ document.addEventListener('mouseover',e=>{var t=e.target.closest('[data-marker-i
 
   
 
-  // ══════════════════════════════════════════════
-  // TOWN PROFILE  ·  one query, two tools
-  //
-  // Both of the tools below need the same thing: every class 2 parcel in the
-  // municipality with its land and improvement values, plus the class mix of
-  // the whole town. Pulling that once and sharing it keeps a single request on
-  // a free public server rather than two.
-  // ══════════════════════════════════════════════
   var townProfileCache = {};
 
   
 
-  // ══════════════════════════════════════════════
-  // 3 · IMPROVEMENT RATIO ANOMALY
-  //
-  // Every assessment is two numbers: the land and the building on it. Land
-  // value is set by location and lot size and is very hard to argue with,
-  // because the lot next door is worth what your lot is worth. The improvement
-  // figure is the assessor's judgment about a structure, and judgment is what
-  // an appeal actually contests.
-  //
-  // So a property whose IMPROVEMENT share runs well above comparable homes in
-  // the same town is carrying its excess in the one component that can be
-  // argued, which makes it the most winnable kind of case. A property whose
-  // excess is all in the land is a much harder fight.
-  //
-  // This is not a market value estimate. Both sides of the comparison are
-  // assessments from the same roll, so no valuation model is involved and none
-  // of its error comes with it.
-  // ══════════════════════════════════════════════
   
 
-  // ══════════════════════════════════════════════
-  // 11 · CLASS MIX
-  //
-  // Who actually pays for a town. A municipality with a thin commercial base
-  // funds its budget almost entirely from houses, and that is a structural
-  // condition rather than a bad year. It also predicts the future: a town at
-  // 95% residential has nowhere to turn when costs rise except the homeowners.
-  // ══════════════════════════════════════════════
   var CLASS_NAMES = {
     '1':  ['Vacant land', 'vac'],
     '2':  ['Residential', 'res'],
@@ -2196,30 +1917,6 @@ document.addEventListener('mouseover',e=>{var t=e.target.closest('[data-marker-i
 
   
 
-  // ══════════════════════════════════════════════
-  // APPEAL PACKET
-  //
-  // Everything the site knows about one property, assembled in the order a
-  // county board hears it and printed as a document someone can attach to a
-  // filing.
-  //
-  // WHAT THIS IS NOT
-  //
-  //   It is not a completed Form A-1, and it does not file anything. New
-  //   Jersey requires the form itself, the filing fee, and service on the
-  //   assessor and clerk. What it removes is the two hours somebody otherwise
-  //   spends transcribing block and lot numbers, looking up the ratio, finding
-  //   comparable sales and doing the Chapter 123 arithmetic by hand.
-  //
-  //   Every figure carries its source, because a number an attorney cannot
-  //   attribute is a number they cannot use.
-  //
-  // THE ORDER MATTERS
-  //
-  //   Subject property, then the evidence, then the statutory test, then the
-  //   argument. That is the order a board follows, and a packet that arrives
-  //   in a different order makes the reader do work.
-  // ══════════════════════════════════════════════
 
   
 
@@ -2231,16 +1928,6 @@ document.addEventListener('mouseover',e=>{var t=e.target.closest('[data-marker-i
 
   
 
-  // ══════════════════════════════════════════════
-  // 18 · RELOCATION COMPARISON
-  //
-  // The same money buys a very different tax bill depending on which side of a
-  // town line it lands. Nobody compares this before they move, because the
-  // figure a listing shows is the seller's bill on that specific house, not
-  // what the town charges for a given amount of value.
-  //
-  // Everything here runs on data already loaded. No queries.
-  // ══════════════════════════════════════════════
   
 
   
@@ -2251,24 +1938,8 @@ document.addEventListener('mouseover',e=>{var t=e.target.closest('[data-marker-i
 
   
 
-  // ══════════════════════════════════════════════
-  // 15 · INVESTOR SCREENER
-  //
-  // Ranks saved properties on the only measure that compares fairly across
-  // town lines: tax per thousand dollars of market value. Two properties at
-  // the same price in different municipalities can differ by thousands a year,
-  // and assessed value cannot show that because assessment levels differ
-  // everywhere.
-  // ══════════════════════════════════════════════
   
 
-  // ══════════════════════════════════════════════
-  // PROPERTY REPORT
-  //
-  // Everything the site knows about one property, in one place. The dashboard
-  // shows four numbers per property and links here for the rest, which is the
-  // right split: a list should stay scannable and a report should go deep.
-  // ══════════════════════════════════════════════
   var current = null;
   var municipalTaxEvidence = null;
   var municipalTaxEvidencePin = '';
@@ -2477,20 +2148,6 @@ document.addEventListener('mouseover',e=>{var t=e.target.closest('[data-marker-i
   }
 
 
-  // ══════════════════════════════════════════════
-  // PAGE STRUCTURE
-  //
-  // The previous version stacked fourteen tools down one column. Everything was
-  // correct and almost nobody would have read past the third. A tax report has
-  // two readers who want opposite things: a homeowner wants one sentence and a
-  // number, a professional wants every figure at once.
-  //
-  // So the page opens with a scorecard, then collapses everything. Each closed
-  // header carries a one line summary, so the whole page can be scanned without
-  // opening anything. Each opened section leads with the plain reading and
-  // carries a separate note on why a professional would care. Content is built
-  // on open rather than on load, which keeps the first paint fast.
-  // ══════════════════════════════════════════════
   var OPEN = {};
 
   var SECTIONS = [
@@ -2633,7 +2290,6 @@ document.addEventListener('mouseover',e=>{var t=e.target.closest('[data-marker-i
     if (!sum) sum = sec.short || '';
     try { tone = sec.tone ? (sec.tone(r) || '') : ''; } catch (e) {}
     var catClass = String(sec.cat || 'Analysis').toLowerCase().replace(/[^a-z0-9]+/g, '-');
-    // A repaint (for example when saved details arrive) keeps an opened section open.
     return '<section class="sec2 sec2-cat-' + catClass + ' ' + tone + (OPEN[sec.k] ? ' open' : '') + '" data-min-plan="' + (sec.tier || 'standard') + '" id="sec-' + sec.k + '">' +
       '<button class="sec2-h" onclick="hmToggle(\'' + sec.k + '\')">' +
         '<span class="sec2-icon-tile"><i class="fas ' + sec.icon + ' sec2-i"></i></span>' +
@@ -2669,8 +2325,6 @@ document.addEventListener('mouseover',e=>{var t=e.target.closest('[data-marker-i
   function buildSectionNow(k, sec, host) {
     if (!sec || !host || !current) return;
     host.innerHTML = '<div class="tl-note"><div class="pl-spin"></div> Loading this analysis...</div>';
-    // Wait for the tools' reference data (town intelligence, budget pressure,
-    // abatements) so a section never renders from a half-loaded data set.
     loadHomeTools().then(function () { buildSectionReady(k, sec, host); });
   }
   function buildSectionReady(k, sec, host) {
@@ -2727,17 +2381,10 @@ document.addEventListener('mouseover',e=>{var t=e.target.closest('[data-marker-i
     if (e && e.scrollIntoView) e.scrollIntoView({ behavior: 'smooth', block: 'start' });
   };
 
-  // Links into Property Home: #sec-<key> opens that section, and #town-certificates
-  // (where site search sends "CO", "CCO" and the smoke certificate) opens the closing
-  // section at the town CO & fire certificate card.
   var userScrolled = false;
   ['wheel', 'touchstart', 'keydown'].forEach(function (type) {
     window.addEventListener(type, function () { userScrolled = true; }, { passive: true, once: true });
   });
-  // The card loads after the section opens, and the report can repaint once more as details
-  // arrive, so the scroll happens each time the closing section finishes building, until the
-  // person starts scrolling on their own.
-  // Parts of the page above keep loading for a few seconds, so the position is checked again.
   function scrollToTownCertificates() {
     [0, 400, 1200, 2500, 4500].forEach(function (wait) {
       setTimeout(function () {
@@ -2778,7 +2425,6 @@ document.addEventListener('mouseover',e=>{var t=e.target.closest('[data-marker-i
              b.setAttribute('onclick', 'hmExpandAll()'); }
   };
 
-  // ── the scorecard: four numbers, each with a verdict you can act on ──
   function scorecard(r) {
     var c = chapter123(r), u = uniFor(r), a = appealFor(r), s = sr1aFor(r);
     var cards = [];
@@ -2832,8 +2478,6 @@ document.addEventListener('mouseover',e=>{var t=e.target.closest('[data-marker-i
   }
 
 
-  // Reassessment helper is required by the first-paint Analyst Intel. It used to
-  // arrive from a lazy tool module; keep the dependency in the single Home bundle.
   function lagClass(x, saleYear) {
     if (!x.sf && !x.yb) return 'land';
     if (x.yb && x.yb >= (saleYear || x.y) - 4) return 'new';
@@ -2855,8 +2499,6 @@ document.addEventListener('mouseover',e=>{var t=e.target.closest('[data-marker-i
     };
   }
 
-  // The paragraph gives the shape. These are the things an agent would actually
-  // say out loud, and only the ones this property earns.
   function intelPoints(r, c, u, a) {
     var p = [];
     if (c && c.testable && c.hasCase) {
@@ -3067,11 +2709,9 @@ document.addEventListener('mouseover',e=>{var t=e.target.closest('[data-marker-i
     }, { passive: true });
   }
 
-  // Per property versions of the two tools that used to run once for rows[0].
   function toolUniformityFor(r) { var s = uniFor(r); return s ? uniBody(r, s) : ''; }
   function toolAppealOddsFor(r) { var a = appealFor(r); return a ? appealBody(r, a) : ''; }
 
-  // ── boot ──
   function bootHome() {
     if (!getClient()) { setTimeout(bootHome, 120); return; }
     sb.auth.getSession().then(function (res) {
@@ -3084,8 +2724,6 @@ document.addEventListener('mouseover',e=>{var t=e.target.closest('[data-marker-i
       el('hm-loading').style.display = 'none';
       el('hm-gate').style.display = 'none';
       el('hm-main').style.display = '';
-      // Core report queries are isolated: profile/entitlement/reference failures
-      // must never blank a saved property that loaded successfully.
       sb.from('saved_properties').select('*').order('created_at', { ascending: false }).then(function (saved) {
         if (saved && saved.error) throw saved.error;
         rows = (saved && saved.data) || [];
@@ -3125,8 +2763,6 @@ document.addEventListener('mouseover',e=>{var t=e.target.closest('[data-marker-i
     });
   }
   function startHome() {
-    // Property Home owns its own boot. Never wait on a legacy/shared menu promise:
-    // if that promise is pending forever, the entire page remains on the loader.
     if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', bootHome, { once: true });
     else bootHome();
   }
@@ -3152,10 +2788,6 @@ document.addEventListener('mouseover',e=>{var t=e.target.closest('[data-marker-i
 })();
 
 
-/* ===== property/js/dashboard/home/home-2027.js ===== */
-/* Watchdog Property Home 2027 chrome.
-   Dashboard-matched navigation, notifications, profile controls and live property weather.
-   The property intelligence engine remains in /property/js/dashboard/home/index.js. */
 (function(){
 'use strict';
 if(window.__WATCHDOG_HOME_2027__) return;
@@ -3215,7 +2847,6 @@ function avatarUrl(){var m=user&&user.user_metadata||{};return profile.avatar_ur
 function paintAvatar(){var host=document.getElementById('hm27-avatar');if(!host)return;var url=avatarUrl();host.innerHTML=url?'<img src="'+esc(url)+'" alt="">':'<span class="hm27-avatar-fallback">'+esc(firstName().charAt(0).toUpperCase())+'</span>';}
 function planLabel(){var p=String(profile.plan_tier||profile.plan||'standard').toLowerCase().replace('_plus','+');if(profile.account_role==='developer')return'Developer';return p==='standard'?'Standard':p.replace(/\b\w/g,function(c){return c.toUpperCase();});}
 
-/* Main navigation is the one shared Watchdog drawer from watchdog-universal-menu.js. */
 function nav(){return document.getElementById('wd-main-sheet');}
 function navOpen(open){var m=window.WatchdogUniversalMenu;if(!m)return;if(open)m.open();else m.close();}
 window.hmToggleSidebar=function(){var n=nav();navOpen(!(n&&n.classList.contains('open')));};
@@ -3297,10 +2928,6 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
 })();
 
 
-/* ===== property/js/dashboard/home/home-menu-sync.js ===== */
-/* Property Home intelligence bootstrap.
-   Navigation is owned exclusively by /property/js/watchdog-universal-menu.js.
-   This compatibility loader remains only for Home intelligence assets. */
 (function(){
   'use strict';
   if(window.__WATCHDOG_HOME_MENU_SYNC__) return;
@@ -3322,8 +2949,6 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',boot,{once:true});else boot();
 })();
 
-/* ===== property/js/dashboard/home/home-mobile-modal-audit.js ===== */
-/* NJW-246 Run 018: mobile-only modal behavior for /property/home. */
 (function () {
   'use strict';
 
@@ -3453,11 +3078,6 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
   }
 })();
 
-/* ===== property/js/dashboard/home/home-hero-intelligence.js ===== */
-/* Property Home hero intelligence.
-   Keeps the premium property identity Watchdog-first, preserves municipality as
-   tax-jurisdiction context, and renders Street View with the Maps JavaScript API
-   so Property Home does not depend on unsigned Street View Static API images. */
 (function(){
 'use strict';
 if(window.__WATCHDOG_HOME_HERO_INTELLIGENCE__)return;
@@ -3719,9 +3339,6 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
 })();
 
 
-/* ===== property/js/dashboard/home/watchdog-analyst-intel.js ===== */
-/* Watchdog Intelligence for Property Home.
-   Profession-aware, evidence-led property intelligence. */
 (function () {
   'use strict';
   if (window.__WATCHDOG_HOME_ANALYST_INTEL__) return;
@@ -4085,11 +3702,6 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
 })();
 
 
-/* ===== property/js/dashboard/home/home-watchdog-intelligence-brand.js ===== */
-/* Property Home Watchdog Intelligence branding bridge.
-   Customer-facing Intelligence copy uses the canonical product name, the Intelligence
-   spectrum on the word "Intelligence", and the rotating border only on dedicated
-   Intelligence surfaces. */
 (function(){
 'use strict';
 if(window.__WATCHDOG_HOME_INTELLIGENCE_BRAND_V2__)return;
@@ -4242,10 +3854,6 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
 })();
 
 
-/* ===== property/js/dashboard/home/home-watchdog-intelligence.js ===== */
-/* Property Home · Watchdog Intelligence
-   Visible Voice entry for every signed-in plan, server-authoritative entitlement
-   gating on click, Intelligence branding, and Explore workspace polish. */
 (function(){
 'use strict';
 if(window.__WATCHDOG_HOME_INTELLIGENCE__)return;
@@ -4255,7 +3863,7 @@ var mountTimer=0;
 var client=null;
 var depsPromise=null;
 
-function addStyle(href,key){ /* bundled into /property/css/home.css */ }
+function addStyle(href,key){  }
 function loadScript(src,key){
   return new Promise(function(resolve,reject){
     var found=document.querySelector('script[data-wd-intelligence="'+key+'"]');
@@ -4508,9 +4116,6 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
 })();
 
 
-/* ===== property/js/dashboard/home/home-footer-ad-rotator.js ===== */
-/* Property Home rotating ad banner.
-   Mirrors the public Property Lookup rotation treatment while keeping its own slot analytics. */
 (function(){
 'use strict';
 if(window.__WATCHDOG_HOME_FOOTER_ADS__)return;
@@ -4566,10 +4171,6 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
 })();
 
 
-/* ===== property/js/dashboard/home/home-premium-partner.js ===== */
-/* Property Home premium Intelligence + partner composition.
-   Watchdog Intelligence remains primary; the inline Greentree unit is a compact quarter-width rail.
-   A separate rotating sponsor banner is mounted immediately before the official footer. */
 (function(){
 'use strict';
 if(window.__WATCHDOG_HOME_PREMIUM_PARTNER__)return;
@@ -4660,12 +4261,8 @@ window.WatchdogHomePremiumPartner={mount:mount,mountFooterAd:mountFooterAd};
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',boot,{once:true});else boot();
 })();
 
-/* ===== property/js/platform-observability.js ===== */
 (function(){'use strict';var U='https://uvkvaxljhhngydvlrzom.supabase.co',K='sb_publishable_MYX59qCbK3d-21zDfJqkNw_fvmfnexa',R='0.49.0',seen=new Map(),MAX_SEEN=250,TTL=300000;function client(){return window.NJPTRAccess?window.NJPTRAccess.client():(window.supabase&&window.supabase.createClient(U,K,{auth:{persistSession:true,storageKey:'sb-uvkvaxljhhngydvlrzom-auth-token'}}));}function cleanSource(v){try{return String(v||'').split('/').pop().split('?')[0].slice(0,80);}catch(_){return'';}}function prune(){var now=Date.now();seen.forEach(function(t,k){if(now-t>TTL)seen.delete(k)});while(seen.size>MAX_SEEN)seen.delete(seen.keys().next().value)}function send(type,data){prune();data=data||{};var key=type+'|'+(data.message||'')+'|'+(data.source||'');if(seen.has(key))return;seen.set(key,Date.now());var c=client();if(!c)return;c.auth.getSession().then(function(r){var s=r.data&&r.data.session;if(!s)return;return fetch(U+'/functions/v1/report-platform-event',{method:'POST',headers:{Authorization:'Bearer '+s.access_token,apikey:K,'Content-Type':'application/json'},body:JSON.stringify(Object.assign({type:type,route:location.pathname,release:R,viewport:innerWidth<760?'mobile':'desktop'},data))});}).catch(function(){});}window.WatchdogObservability={report:send};document.addEventListener('watchdog:client-error',function(e){var d=e.detail||{};send('client_error',{message:String(d.message||'Client error').slice(0,240),source:cleanSource(d.scope),code:String(d.code||'').slice(0,80),reference:String(d.reference||'').slice(0,40)});});window.addEventListener('error',function(e){if(e.target&&e.target!==window){send('resource_error',{message:'Resource failed to load',source:cleanSource(e.target.src||e.target.href)});return;}send('client_error',{message:String(e.message||'Client error').slice(0,240),source:cleanSource(e.filename),line:e.lineno,column:e.colno});},true);window.addEventListener('unhandledrejection',function(e){var reason=e.reason;send('unhandled_rejection',{message:String(reason&&reason.message||reason||'Unhandled promise rejection').slice(0,240)});});window.addEventListener('load',function(){setTimeout(function(){var n=performance.getEntriesByType&&performance.getEntriesByType('navigation')[0];if(n&&n.duration>8000)send('slow_page',{message:'Page load exceeded 8 seconds',duration_ms:Math.round(n.duration)});},0);});})();
 
-/* External browser analytics are optional. The universal privacy runtime owns
-   Google Analytics + Microsoft Clarity consent and loading. Keep first-party
-   product analytics and authenticated reliability telemetry independent. */
 (function(){
   'use strict';
   var raw=location.pathname.replace(/\/+$/,'')||'/';

@@ -144,7 +144,7 @@ check(
 check('property/home/index.html uses responsive viewport', /name=["']viewport["']/.test(homePage), 'Mobile reflow contract');
 // Property Home ships one CSS bundle (home.css) that compiles mobile-menu.css in.
 const homeCssBundle = read('property/css/home.css');
-const bundledMobileMenu = homeCssBundle.includes('/* ===== property/css/mobile-menu.css ===== */') && homeCssBundle.includes(mobileMenuCss.trim().slice(0, 120));
+const bundledMobileMenu = homeCssBundle.includes(mobileMenuCss.replace(/\/\*[\s\S]*?\*\//g, '').trim().slice(0, 120));
 check('property/home/index.html loads mobile menu styling', homePage.includes('/property/css/mobile-menu.css') || (homePage.includes('/property/css/home.css') && bundledMobileMenu), 'Shared mobile menu remains styled on customer pages');
 check('primary mobile controls meet generous target sizing', mobileCss.includes('min-height:52px') && mobileMenuCss.includes('min-height:52px'), 'Exceeds WCAG 2.2 AA 24px target minimum for primary controls');
 check('mobile menu has keyboard focus treatment', mobileMenuCss.includes(':focus-visible'), 'Visible keyboard focus');

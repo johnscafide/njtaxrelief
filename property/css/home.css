@@ -1,9 +1,30 @@
+/* 
+     
+     Hi There. I see you are checking the code. I'm sure you have reasons for such. Curiosity would be my guess. 
+
+     My name is John. I've been building sites since I was 10. I was gifted ecommerce website software on floppy disks
+     and fell in love with web developement ever since. I learned to code HTML using just notepad. I took computer science
+     classes (BASIC and Visual Basic in high school). Took a few college classes learning C++, Python, Ruby and Javascript.
+     My very first websites was with Angelfire and Geocities. In college I dabbed in game development, small tools, and
+     graphic design. Database management with SQL by my sophmore year. Joomla and other CMS tools learned by the age of 20. 
+     I have an understanding and experience writing code by hand, studing and analyzing bugs, issues, and corrections. 
+     The introduction of AI is interesting. I can understand the worry and fear. I also see the memes of "Hey I can make 
+     your job obsolete" then show a localhost:3000. haha. But I do believe, if you understand how to use the tools, it's
+     no different than templates, hiring a local kid, outsourcing your work to fivrr or an agency. I code, I understand the
+     backend and frontend. I'm not an expert by all means. But I do have insights. Watchdog was built on real research.
+     Watchdog & it's companion, NJPropertyTaxRelief.com, is from years of listening to real people with real needs in NJ.
+     I hope these sites and tools have benefit to you and/or your business. If you found them useful, the least I ask of
+     you is to share. Sure, I have paid plan options for members, but majority of the site is free to use. I'm a real estate
+     agent, licensed tax professional, and a big fan of the state of New Jersey. It's a great state, but not without its
+     flaws. The idea is to educate more New Jerseyians about their benefits and property taxes in the state. It's possible
+     one day this site will exceed some of the bigger natonal sites. Who knows. But for now, I present to you, Watchdog
+     Property Intelligence.
+
+     */
 @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Source+Sans+3:wght@400;500;600;700;800&display=swap');
 @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css');
 @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
-/* Watchdog Property Home single stylesheet. Consolidated 2026-09-22. */
 
-/* ===== styles.css ===== */
 @import url('https://fonts.googleapis.com/css2?family=Mozilla+Text:wght@200..700&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Mozilla+Text:wght@200..700&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Source+Sans+3:ital,wght@0,200..900;1,200..900&display=swap');
@@ -14,7 +35,6 @@
     text-decoration: none;
 }
 
-/* --- DASHBOARD STYLES --- */
 .dashboard-bg { background-color: #f1f5f9; }
 
 .dashboard-header {
@@ -28,16 +48,15 @@
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 20px;
-    margin-top: -30px; /* Pulls cards up into the header slightly */
+    margin-top: -30px; 
 }
 
-/* 2026 Modern Card Style */
 .dash-card {
     background: rgba(255, 255, 255, 0.7);
     backdrop-filter: blur(12px);
     border: 1px solid rgba(255, 255, 255, 0.3);
     box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.07);
-    border-radius: 20px; /* Softer, rounder corners */
+    border-radius: 20px; 
 }
 
 .stat-card { text-align: center; }
@@ -45,7 +64,6 @@
 .stat-value { font-size: 36px; font-weight: 800; margin: 10px 0; color: var(--navy); }
 .stat-desc { font-size: 13px; margin-bottom: 15px; }
 
-/* SOCIAL BUTTON FIXES */
 .social-btn {
     display: inline-flex;
     align-items: center;
@@ -70,7 +88,6 @@
     font-size: 14px;
 }
 
-/* Timeline */
 .timeline { list-style: none; padding: 0; margin-top: 20px; }
 .timeline li { border-left: 2px solid #e2e8f0; padding-left: 20px; position: relative; padding-bottom: 20px; }
 .timeline li.active { border-left-color: var(--gold); }
@@ -78,11 +95,6 @@
 .timeline li.active::before { background: var(--gold); }
 
 
-/* ============================================================
-       TIKTOK VIDEO CARD COMPONENT
-       Used on senior-programs.html and pas-1-guide.html
-       Clickable thumbnail that opens the TikTok in a new tab.
-       ============================================================ */
  
     .video-card-tiktok {
       max-width: 320px;
@@ -103,7 +115,7 @@
       display: block;
       position: relative;
       text-decoration: none;
-      aspect-ratio: 9 / 16;       /* matches TikTok vertical format */
+      aspect-ratio: 9 / 16;       
       overflow: hidden;
       background: #000;
     }
@@ -149,7 +161,7 @@
     .video-play-btn i {
       font-size: 28px;
       color: var(--navy, #0a2540);
-      margin-left: 5px;            /* nudges play triangle to optical center */
+      margin-left: 5px;            
     }
  
     .video-tiktok-badge {
@@ -187,18 +199,12 @@
       line-height: 1.4;
     }
  
-    /* On mobile, let the card breathe to full width but cap it. */
     @media (max-width: 600px) {
       .video-card-tiktok {
         max-width: 92%;
       }
     }
 
-/* ============================================================
-   FAQ + VIDEO TWO-COLUMN LAYOUT
-   Desktop: FAQ on left, video on right
-   Mobile (under 900px): FAQ on top, video below, centered
-   ============================================================ */
 .faq-with-video {
   display: flex;
   gap: 40px;
@@ -214,13 +220,11 @@
   flex: 0 0 320px;
 }
 
-/* Cancel the card's centering margin when it's in the sidebar */
 .faq-with-video .faq-video-side .video-card-tiktok {
   margin: 0;
   max-width: 100%;
 }
 
-/* Mobile: stack vertically, center the video below FAQ */
 @media (max-width: 900px) {
   .faq-with-video {
     flex-direction: column;
@@ -235,17 +239,16 @@
   }
 }
 
-/* --- QUIZ PROMO RIBBON FIX --- */
 .quiz-ribbon {
-    background: #0a1837; /* Navy match */
+    background: #0a1837; 
     color: #fff;
     padding: 12px 20px;
-    border-bottom: 3px solid #d4af37; /* Gold match */
+    border-bottom: 3px solid #d4af37; 
     display: flex;
     justify-content: center;
     align-items: center;
-    position: relative; /* Change to 'fixed' and add 'top: 0' if you want it to stay while scrolling */
-    z-index: 9999; /* Ensures it stays above all other elements */
+    position: relative; 
+    z-index: 9999; 
     width: 100%;
 }
 
@@ -291,7 +294,6 @@
 }
 
 
-/* Mobile Tweak */
 @media (max-width: 768px) {
     .quiz-ribbon-content {
         gap: 12px;
@@ -302,16 +304,15 @@
     }
 }
 
-/* --- CENTERED TOWN DIRECTORY & SEARCH --- */
 .town-section-container {
-    max-width: 1100px; /* Aligns with your hero content */
+    max-width: 1100px; 
     margin: 40px auto;
     padding: 0 20px;
 }
 
 .search-wrapper {
     max-width: 600px;
-    margin: 0 auto 50px auto; /* Centers the search bar */
+    margin: 0 auto 50px auto; 
     position: relative;
 }
 
@@ -331,12 +332,11 @@
     box-shadow: 0 6px 20px rgba(0,0,0,0.1);
 }
 
-/* Updated Directory Grid */
 #townDirectory {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
     gap: 30px;
-    justify-content: center; /* Centers the cards if there are only a few */
+    justify-content: center; 
 }
 
 .town-card {
@@ -344,7 +344,7 @@
     border: 1px solid #eef2f6;
     border-radius: 15px;
     padding: 40px 25px 25px 25px !important;
-    text-align: center; /* Centers text inside the card */
+    text-align: center; 
     display: flex;
     flex-direction: column;
     transition: transform 0.2s, box-shadow 0.2s;
@@ -355,7 +355,6 @@
     box-shadow: 0 10px 25px rgba(26, 58, 107, 0.1);
 }
 
-/* Reval Badge Fix */
 .reval-badge {
     position: absolute;
     top: 0;
@@ -386,9 +385,9 @@
     border-radius: 8px 8px 0 0;
 }
 #backToTop {
-  display: none; /* Hidden by default */
+  display: none; 
   position: fixed;
-  bottom: 90px; /* Sits above the checklist popup */
+  bottom: 90px; 
   right: 35px;
   z-index: 99;
   border: none;
@@ -427,9 +426,6 @@
     white-space: nowrap;
 }
 
-/* ============================================================
-   SERVICES GATEWAY GRID (Professional & Pop)
-   ============================================================ */
 .services-gateway-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -437,7 +433,6 @@
     margin-top: 40px;
 }
 
-/* Base Card Styling */
 .gateway-card {
     display: flex;
     flex-direction: column;
@@ -452,13 +447,11 @@
     overflow: hidden;
 }
 
-/* Subtle border 'glow' on hover */
 .gateway-card:hover {
     transform: translateY(-5px);
     box-shadow: 0 10px 30px rgba(10, 24, 55, 0.15);
 }
 
-/* Icon Wrapper Styling */
 .gateway-icon-wrap {
     width: 70px;
     height: 70px;
@@ -475,7 +468,6 @@
     transform: scale(1.1) rotate(5deg);
 }
 
-/* Content Styling */
 .gateway-title {
     font-family: 'Playfair Display', serif;
     font-size: 19px;
@@ -497,13 +489,9 @@
     gap: 6px;
 }
 
-/* ============================================================
-   COLOR VARIANTS (The 'Pop')
-   ============================================================ */
 
-/* BLUE (Navy Theme) */
 .gateway-card.blue {
-    background: #f0f4fa; /* Very subtle light blue */
+    background: #f0f4fa; 
     border-color: #c0d0e8;
 }
 .gateway-card.blue .gateway-icon-wrap { background: var(--navy); color: #fff; }
@@ -512,9 +500,8 @@
 .gateway-card.blue .gateway-cta { color: var(--navy); }
 .gateway-card.blue:hover { border-color: var(--navy); }
 
-/* GOLD (The Watchdog Accent) */
 .gateway-card.gold {
-    background: #fffdf5; /* Subtle gold tint */
+    background: #fffdf5; 
     border-color: #f0e6b3;
 }
 .gateway-card.gold .gateway-icon-wrap { background: var(--gold); color: var(--navy-dark); }
@@ -523,9 +510,8 @@
 .gateway-card.gold .gateway-cta { color: var(--gold); }
 .gateway-card.gold:hover { border-color: var(--gold); }
 
-/* GREEN (Success/Growth Theme) */
 .gateway-card.green {
-    background: #f0fdf4; /* Subtle green tint */
+    background: #f0fdf4; 
     border-color: #c3e6cb;
 }
 .gateway-card.green .gateway-icon-wrap { background: var(--green); color: #fff; }
@@ -534,24 +520,21 @@
 .gateway-card.green .gateway-cta { color: var(--green); }
 .gateway-card.green:hover { border-color: var(--green); }
 
-/* ============================================================
-   MOBILE RESPONSIVENESS
-   ============================================================ */
 @media (max-width: 992px) {
     .services-gateway-grid {
-        grid-template-columns: 1fr; /* Stack on mobile */
+        grid-template-columns: 1fr; 
         gap: 15px;
     }
     .gateway-card {
         padding: 30px 20px;
-        flex-direction: row; /* Icon left, content right on mobile */
+        flex-direction: row; 
         text-align: left;
         align-items: flex-start;
     }
     .gateway-icon-wrap {
         margin-bottom: 0;
         margin-right: 20px;
-        width: 50px; /* Smaller icon on mobile */
+        width: 50px; 
         height: 50px;
         font-size: 20px;
         flex-shrink: 0;
@@ -844,9 +827,9 @@ nav {
         padding: 20px;
         box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
         z-index: 1000;
-        max-height: calc(100vh - 70px); /* Limits height to the remaining screen space */
-        overflow-y: auto;              /* Adds the scrollbar if the menu is too long */
-        -webkit-overflow-scrolling: touch; /* Makes scrolling smooth on iPhones */
+        max-height: calc(100vh - 70px); 
+        overflow-y: auto;              
+        -webkit-overflow-scrolling: touch; 
     }
     .nav-links.active {
         display: flex;
@@ -2644,7 +2627,6 @@ footer {
     }
 }
 
-/* Shared free application assistance message. */
 .wd-free-help{box-sizing:border-box;display:flex;align-items:center;gap:24px;width:min(1100px,calc(100% - 40px));margin:32px auto;padding:20px;background:#fff;border:1px solid #dce5f0;border-radius:20px;color:#103780;font-family:"Source Sans 3",system-ui,sans-serif;text-align:left}
 .wd-free-help-image{display:block;flex:0 0 220px;overflow:hidden;border-radius:12px;line-height:0}
 .wd-free-help-image img{display:block;width:100%;height:auto}
@@ -2655,15 +2637,8 @@ footer {
 @media(max-width:600px){.wd-free-help{flex-direction:column;align-items:stretch;gap:18px;padding:16px}.wd-free-help-image{flex-basis:auto;width:100%;max-width:320px;margin:0 auto}.wd-free-help-copy strong{font-size:21px}}
 
 
-/* ===== property/css/shared.css ===== */
-/* ----- property/css/shared/00-design-tokens.css ----- */
-/* Watchdog canonical design tokens
-   NJW-74: single source of truth for shared brand/UI primitives.
-   This file must load before other shared CSS so legacy sheets can migrate
-   incrementally without changing production behavior in one risky pass. */
 
 :root {
-  /* Brand */
   --wd-navy-950: #0e2248;
   --wd-navy-900: #142033;
   --wd-navy-700: #1456a0;
@@ -2672,7 +2647,6 @@ footer {
   --wd-green-600: #1e8a4a;
   --wd-red-600: #b42318;
 
-  /* Semantic aliases */
   --navy-dark: var(--wd-navy-950);
   --navy: var(--wd-navy-700);
   --ink: var(--wd-navy-900);
@@ -2687,7 +2661,6 @@ footer {
   --border: #dfe4ea;
   --info-bg: #eef5ff;
 
-  /* Typography */
   --font-ui: "Plus Jakarta Sans", Arial, sans-serif;
   --font-display: "Playfair Display", Georgia, serif;
   --type-xs: 0.75rem;
@@ -2698,7 +2671,6 @@ footer {
   --type-2xl: 2rem;
   --type-3xl: clamp(2.25rem, 5vw, 4rem);
 
-  /* Spacing */
   --space-1: 0.25rem;
   --space-2: 0.5rem;
   --space-3: 0.75rem;
@@ -2708,27 +2680,21 @@ footer {
   --space-7: 3rem;
   --space-8: 4rem;
 
-  /* Radius */
   --radius-sm: 0.5rem;
   --radius-md: 0.75rem;
   --radius-lg: 1rem;
   --radius-xl: 1.5rem;
   --radius-pill: 999px;
 
-  /* Shadows */
   --shadow-sm: 0 2px 10px rgba(14, 34, 72, 0.10);
   --shadow-md: 0 8px 26px rgba(14, 34, 72, 0.16);
   --shadow-lg: 0 24px 64px rgba(6, 16, 38, 0.24);
 
-  /* Four governed container widths */
   --container-narrow: 720px;
   --container-reading: 1080px;
   --container-app: 1280px;
   --container-wide: 1500px;
 
-  /* Breakpoint contract.
-     CSS custom properties cannot be consumed directly in @media conditions;
-     these values are the documented source of truth for CSS/JS migration. */
   --breakpoint-xs: 480px;
   --breakpoint-sm: 768px;
   --breakpoint-md: 1024px;
@@ -2736,11 +2702,6 @@ footer {
   --breakpoint-xl: 1536px;
 }
 
-/* ----- property/css/shared/01-foundation.css ----- */
-/* ============================================================
-   SHARED  ·  loaded by both pages
-   njpropertytaxrelief.com/property
-   ============================================================ */
 
 .pl-hero-inner { position: relative; z-index: 2; width: 100%; max-width: 860px; text-align: center; }
 .pl-eyebrow {
@@ -2760,7 +2721,6 @@ footer {
 .pl-search-btn:hover { background: var(--navy-dark); }
 .pl-search-btn:disabled { opacity: .6; cursor: wait; }
 .pl-hero-note { font-size: 13px; color: #3c4759; margin-top: 16px; font-weight: 500; text-shadow: 0 1px 8px rgba(255,255,255,.9); }
-/* ---------- STATES ---------- */
 .pl-result { max-width: 1060px; margin: 0 auto; }
 .pl-state { text-align: center; padding: 60px 20px; }
 .pl-state > i { font-size: 36px; color: #c3cbdb; margin-bottom: 16px; display: block; }
@@ -2771,7 +2731,6 @@ footer {
   border-radius: 50%; animation: plspin .8s linear infinite; margin: 0 auto 16px;
 }
 @keyframes plspin { to { transform: rotate(360deg); } }
-/* ---------- TRACK ---------- */
 .pl-track { background: #fff; border: 2px solid var(--gold); border-radius: 16px; padding: 28px; margin-bottom: 20px; }
 .pl-track-badge {
   display: inline-flex; align-items: center; gap: 7px; font-size: 11.5px; font-weight: 700;
@@ -2783,7 +2742,6 @@ footer {
 .pl-track ul { list-style: none; padding: 0; margin: 0 0 20px; display: grid; grid-template-columns: repeat(auto-fit, minmax(215px, 1fr)); gap: 9px; }
 .pl-track ul li { font-size: 14px; color: var(--text); display: flex; gap: 9px; align-items: flex-start; line-height: 1.5; }
 .pl-track ul li i { color: var(--green); margin-top: 3px; }
-/* ---------- FORMS ---------- */
 .pl-form { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
 .pl-form input, .pl-form select {
   padding: 13px 15px; font-size: 15px; font-family: inherit;
@@ -2821,9 +2779,6 @@ footer {
   .pl-track, .pl-agent, .pl-card { padding: 20px; }
   .pl-field-2 { grid-template-columns: 1fr; }
 }
-/* ============================================================
-   MODAL OVERLAY  ·  Zillow style property panel
-   ============================================================ */
 .plm-backdrop {
   position: fixed; inset: 0; z-index: 4000; background: rgba(10,20,40,.62);
   backdrop-filter: blur(3px); opacity: 0; pointer-events: none; transition: opacity .22s;
@@ -2857,14 +2812,10 @@ footer {
 .plm-barbtn:hover { background: #f2f5fa; }
 .plm-barbtn i { font-size: 15px; }
 .plm-barbtn.saved i { color: var(--red); }
-/* The scroll area gets its own stacking context. Leaflet assigns z-index up
-   to 1000 to its panes and controls; isolating here keeps all of that
-   contained so the top bar and its dropdown always paint above the map. */
 .plm-scroll {
   overflow-y: auto; overflow-x: hidden; flex: 1; -webkit-overflow-scrolling: touch;
   position: relative; z-index: 1; isolation: isolate;
 }
-/* photo strip */
 .plm-photos { display: grid; grid-template-columns: 1fr 1fr; gap: 4px; background: #e8ecf3; position: relative; }
 .plm-photo { position: relative; height: 340px; background: #dde3ec; overflow: hidden; }
 .plm-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
@@ -2892,7 +2843,6 @@ footer {
   color: #1a1a2e; cursor: pointer; box-shadow: 0 2px 10px rgba(0,0,0,.24);
 }
 .plm-swap:hover { background: #f2f5fa; }
-/* main body */
 .plm-body { display: grid; grid-template-columns: 1fr 348px; gap: 30px; padding: 26px 30px 34px; align-items: start; }
 .plm-main { min-width: 0; }
 .plm-rail { position: sticky; top: 0; }
@@ -2941,7 +2891,6 @@ footer {
 .plm-kpi-n.gold { color: var(--gold); }
 .plm-kpi-l { font-size: 10.5px; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; color: #5a6070; margin-top: 6px; }
 .plm-chartgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
-/* rail cards */
 .plm-rcard { background: #fff; border: 1px solid var(--border); border-radius: 14px; padding: 20px; margin-bottom: 16px; }
 .plm-rcard.gold { border: 2px solid var(--gold); }
 .plm-rcard h4 { font-size: 17px; font-weight: 800; color: #0e2248; margin: 0 0 6px; }
@@ -2992,16 +2941,11 @@ footer {
 .plm-menu hr { border: none; border-top: 1px solid #eef0f5; margin: 6px 4px; }
 body.plm-locked { overflow: hidden; }
 
-/* ----- property/css/shared/02-reports-auth.css ----- */
-/* ---------- WATCHDOG ESTIMATE ---------- */
 .plm-est {
   position: relative; overflow: hidden;
   background: linear-gradient(135deg, #0e2248 0%, #1a3a6b 100%);
   border-radius: 14px; padding: 24px 26px; color: #fff; margin-bottom: 16px;
 }
-/* Faint roofline pattern, drawn as an inline SVG rather than a photo. A
-   headshot behind a 60px number competes with it, and a remote image is one
-   more thing that can fail to load. This always renders and stays back. */
 .plm-est::before {
   content: ''; position: absolute; inset: 0; pointer-events: none; opacity: .16;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='72' viewBox='0 0 120 72'%3E%3Cg fill='none' stroke='%23f0d87a' stroke-width='1.4'%3E%3Cpath d='M0 60 L20 40 L40 60'/%3E%3Cpath d='M40 60 L60 40 L80 60'/%3E%3Cpath d='M80 60 L100 40 L120 60'/%3E%3Cpath d='M-20 24 L0 4 L20 24'/%3E%3Cpath d='M20 24 L40 4 L60 24'/%3E%3Cpath d='M60 24 L80 4 L100 24'/%3E%3Cpath d='M100 24 L120 4 L140 24'/%3E%3C/g%3E%3C/svg%3E");
@@ -3035,7 +2979,6 @@ body.plm-locked { overflow: hidden; }
 .plm-est.loading .plm-est-val { color: #90a4c4; font-size: 22px; }
 .plm-dots::after { content: '...'; animation: pldots 1.4s steps(4,end) infinite; }
 @keyframes pldots { 0%{content:''} 25%{content:'.'} 50%{content:'..'} 75%{content:'...'} }
-/* ---------- VALUATION HERO ---------- */
 .plm-est-hero {
   font-size: clamp(42px, 7vw, 62px); font-weight: 800; letter-spacing: -.035em;
   line-height: 1; margin: 4px 0 8px;
@@ -3048,7 +2991,6 @@ body.plm-locked { overflow: hidden; }
 }
 .plm-est-lbl { font-size: 13px; letter-spacing: .13em; }
 .plm-est-lbl i { font-size: 15px; }
-/* ---------- WATCHDOG SCORE ---------- */
 .score-wrap { display: grid; grid-template-columns: 268px 1fr; gap: 26px; align-items: start;
   background: #fff; border: 1px solid var(--border); border-radius: 14px; padding: 24px; }
 .score-gauge { position: relative; text-align: center; }
@@ -3066,7 +3008,6 @@ body.plm-locked { overflow: hidden; }
 .score-save-n span { font-size: 15px; font-weight: 700; }
 .score-save-l { font-size: 13.5px; color: #6b5514; line-height: 1.65; margin: 6px 0 14px; }
 .score-fine { font-size: 11.5px; color: #8a93a6; line-height: 1.7; margin-top: 12px; }
-/* ---------- TIMELINE ---------- */
 .tl-kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 14px; margin-bottom: 18px; }
 .tl-n { font-size: 20px; font-weight: 800; color: #0e2248; letter-spacing: -.02em; font-variant-numeric: tabular-nums; }
 .tl-l { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; color: #5a6070; margin-top: 4px; }
@@ -3078,7 +3019,6 @@ body.plm-locked { overflow: hidden; }
   .tl-cta { flex-direction: column; align-items: stretch; }
   .plm-est-hero { font-size: 38px; }
 }
-/* ---------- TAX APPEAL FRAMING ---------- */
 .plm-est-purpose {
   display: flex; gap: 11px; align-items: flex-start;
   background: rgba(240,216,122,.12); border: 1px solid rgba(240,216,122,.28);
@@ -3098,13 +3038,11 @@ body.plm-locked { overflow: hidden; }
 .appeal-verdict.yes i { color: var(--gold); }
 .appeal-verdict.no { background: var(--green-light); color: var(--green); }
 .appeal-verdict.no i { color: var(--green); }
-/* ---------- MLS NOTICE ---------- */
 .mls-notice {
   margin-top: 12px; padding-top: 11px; border-top: 1px solid rgba(26,58,107,.16);
   font-size: 12px; line-height: 1.65; color: #4a5568;
 }
 .mls-notice a { color: var(--navy); font-weight: 700; }
-/* ---------- STICKY SECTION NAV ---------- */
 .secnav {
   position: absolute; left: 50%; top: 62px; z-index: 40;
   transform: translate(-50%, -14px); opacity: 0; pointer-events: none;
@@ -3133,7 +3071,6 @@ body.plm-locked { overflow: hidden; }
   .secnav button i { font-size: 14px; }
   .secnav button.here span { display: inline; }
 }
-/* ---------- AUTH ---------- */
 .auth-av { width: 22px; height: 22px; border-radius: 50%; object-fit: cover; }
 .auth-btns { display: grid; gap: 10px; margin: 18px 0 4px; }
 .auth-btn {
@@ -3162,7 +3099,6 @@ body.plm-locked { overflow: hidden; }
 .auth-or { display: flex; align-items: center; gap: 12px; margin: 18px 0 4px; }
 .auth-or::before, .auth-or::after { content: ''; flex: 1; height: 1px; background: #eef0f5; }
 .auth-or span { font-size: 11.5px; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; color: #a0a8b8; }
-/* ---------- ACCOUNT CARD ---------- */
 .acct-cta { background: #fff; border: 1px dashed var(--border); border-radius: 13px; padding: 18px; margin-bottom: 16px; }
 .acct-cta.signed { border-style: solid; border-color: #c8d6ea; }
 .acct-cta-t { font-size: 14.5px; font-weight: 800; color: #0e2248; margin-bottom: 7px; }
@@ -3182,8 +3118,6 @@ body.plm-locked { overflow: hidden; }
   font-size: 13px; font-weight: 700; color: var(--navy); cursor: pointer;
 }
 
-/* ----- property/css/shared/03-dashboard-components.css ----- */
-/* ---------- DASHBOARD ---------- */
 .dash-head { display: flex; align-items: center; gap: 14px; padding-bottom: 16px; margin-bottom: 16px; border-bottom: 1px solid #eef0f5; }
 .dash-head img, .dash-noav { width: 48px; height: 48px; border-radius: 50%; object-fit: cover; flex-shrink: 0; }
 .dash-noav { background: #eef3fa; color: var(--navy); display: flex; align-items: center; justify-content: center; }
@@ -3220,12 +3154,10 @@ body.plm-locked { overflow: hidden; }
 .dash-alert i { margin-top: 3px; flex-shrink: 0; }
 .dash-alert span { flex: 1; min-width: 0; }
 .dash-alert a { color: var(--navy); font-weight: 700; }
-/* ---------- SECTION CARD HEADINGS (align with plm-sec-h) ---------- */
 .pl-card-h4 {
   font-size: 17px; font-weight: 800; color: #1a1a2e; margin: 0 0 4px;
   letter-spacing: -.01em; line-height: 1.3;
 }
-/* ---------- QUICK FACTS STRIP ---------- */
 .plm-quick {
   grid-column: 1 / -1; display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
   gap: 1px; background: var(--border); border-top: 1px solid var(--border);
@@ -3234,7 +3166,6 @@ body.plm-locked { overflow: hidden; }
 .plm-q i { color: var(--navy-light); font-size: 15px; width: 18px; text-align: center; flex-shrink: 0; }
 .plm-q b { display: block; font-size: 15px; font-weight: 800; color: #0e2248; line-height: 1.2; font-variant-numeric: tabular-nums; }
 .plm-q span { font-size: 10.5px; font-weight: 700; text-transform: uppercase; letter-spacing: .05em; color: #8a93a6; }
-/* ---------- DEADLINE BANNER ---------- */
 .dl-banner {
   display: flex; align-items: center; gap: 18px; text-decoration: none;
   background: linear-gradient(120deg, #0e2248, #1a3a6b); border-radius: 12px;
@@ -3254,7 +3185,6 @@ body.plm-locked { overflow: hidden; }
   background: linear-gradient(135deg, #e0bb52, #b8972a); color: #17203a;
   font-size: 13.5px; font-weight: 800; padding: 11px 18px; border-radius: 9px;
 }
-/* ---------- JOHN'S OPINION ---------- */
 .op-box { display: flex; gap: 18px; padding: 20px; border-radius: 12px; margin-bottom: 18px; align-items: flex-start; }
 .op-box.act { background: #fdf6e3; border: 1px solid #e8d9a8; }
 .op-box.clear { background: var(--green-light); border: 1px solid #b8d8c4; }
@@ -3266,7 +3196,6 @@ body.plm-locked { overflow: hidden; }
 .op-body p { font-size: 14.5px; line-height: 1.7; color: #4a5568; margin: 0 0 10px; }
 .op-body p b { color: #0e2248; }
 .op-sig { font-size: 12px; color: #8a93a6; }
-/* ---------- REBATES ---------- */
 .rb-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); gap: 16px; }
 .rb-card { background: #fff; border: 1px solid var(--border); border-radius: 13px; padding: 20px; }
 .rb-card.anchor { border-color: #c8d6ea; }
@@ -3286,7 +3215,6 @@ body.plm-locked { overflow: hidden; }
 .rb-btn { display: inline-flex; align-items: center; gap: 9px; margin-top: 16px; background: var(--navy); color: #fff; font-size: 15px; font-weight: 700; padding: 14px 24px; border-radius: 9px; text-decoration: none; }
 .rb-btn:hover { background: var(--navy-dark); }
 .rb-fine { font-size: 11.5px; color: #8a93a6; line-height: 1.65; margin-top: 12px; }
-/* ---------- TRADE UP ---------- */
 .tu-grid { display: grid; grid-template-columns: 1fr 320px; gap: 26px; align-items: start; }
 .tu-out { background: #f6f8fc; border-radius: 12px; padding: 22px; min-height: 240px; }
 .tu-placeholder { text-align: center; color: #8a93a6; font-size: 13.5px; line-height: 1.6; padding: 30px 10px; }
@@ -3311,7 +3239,6 @@ body.plm-locked { overflow: hidden; }
   .dl-cta { width: 100%; justify-content: center; }
   .op-box { flex-direction: column; align-items: center; text-align: center; }
 }
-/* ---------- HOW WE VALUE GRID ---------- */
 .hv-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; max-width: 1080px; margin: 0 auto; }
 .hv-card { background: #fff; border: 1px solid var(--border); border-radius: 14px; overflow: hidden; display: flex; flex-direction: column; }
 .hv-visual { background: #f6f8fc; border-bottom: 1px solid var(--border); padding: 22px 20px; min-height: 168px; display: flex; flex-direction: column; justify-content: center; gap: 9px; }
@@ -3350,7 +3277,6 @@ body.plm-locked { overflow: hidden; }
 .hv-conf.none { opacity: .65; }
 .hv-blind { display: flex; align-items: center; gap: 10px; font-size: 13px; color: #6b5514; }
 .hv-blind i { width: 20px; text-align: center; opacity: .7; }
-/* ---------- MORTGAGE CALCULATOR ---------- */
 .mtg-eyebrow { font-size: 11px; font-weight: 800; letter-spacing: .09em; text-transform: uppercase; color: #1e6b3a; margin-bottom: 6px; }
 .mtg-card { border-color: #bfe0cb; }
 .mtg-grid { display: grid; grid-template-columns: 1fr 300px; gap: 26px; align-items: start; }
@@ -3368,7 +3294,6 @@ body.plm-locked { overflow: hidden; }
 .mtg-btn { display: flex; align-items: center; justify-content: center; gap: 9px; margin-top: 16px; padding: 14px; border-radius: 9px; background: linear-gradient(135deg, #e0bb52, #b8972a); color: #17203a; font-size: 14.5px; font-weight: 800; text-decoration: none; }
 .mtg-btn:hover { filter: brightness(1.07); }
 .mtg-disc { font-size: 11.5px; color: var(--text-muted); line-height: 1.65; margin-top: 16px; padding-top: 14px; border-top: 1px solid #eef0f5; }
-/* ---------- PREAPPROVAL ---------- */
 .pre-wrap { background: #fff; border: 1px solid #bfe0cb; border-radius: 14px; padding: 26px; display: grid; grid-template-columns: 132px 1fr; gap: 24px; align-items: start; }
 .pre-photo img { width: 132px; height: 132px; border-radius: 12px; object-fit: cover; object-position: center top; border: 3px solid #1e6b3a; display: block; }
 .pre-eyebrow { font-size: 11px; font-weight: 800; letter-spacing: .09em; text-transform: uppercase; color: #1e6b3a; margin-bottom: 6px; }
@@ -3382,7 +3307,6 @@ body.plm-locked { overflow: hidden; }
 .pre-btn:hover { filter: brightness(1.08); }
 .pre-note { font-size: 12.5px; color: #8a93a6; }
 .pre-disc { grid-column: 1 / -1; font-size: 11.5px; color: var(--text-muted); line-height: 1.65; padding-top: 16px; border-top: 1px solid #eef0f5; }
-/* ---------- PROPOSAL ---------- */
 .plm-proposal { background: rgba(240,216,122,.13); border: 1px solid rgba(240,216,122,.3); border-radius: 11px; padding: 15px; margin-bottom: 13px; }
 .plm-proposal-top { display: flex; align-items: center; gap: 9px; font-size: 13px; font-weight: 700; color: #f0d87a; margin-bottom: 10px; }
 .plm-proposal-btn { width: 100%; padding: 13px; border: none; border-radius: 9px; background: linear-gradient(135deg, #e0bb52, #b8972a); color: #17203a; font-size: 15px; font-weight: 800; font-family: inherit; cursor: pointer; }
@@ -3393,7 +3317,6 @@ body.plm-locked { overflow: hidden; }
 .prop-promise { display: flex; gap: 10px; align-items: flex-start; margin-top: 14px; background: var(--green-light); border-radius: 9px; padding: 13px 15px; font-size: 13px; color: var(--green); line-height: 1.6; }
 .prop-promise i { margin-top: 3px; flex-shrink: 0; }
 .prop-promise span { flex: 1; min-width: 0; }
-/* ---------- CREDENTIALS ---------- */
 .plm-creds { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; background: rgba(255,255,255,.14); border-radius: 10px; overflow: hidden; margin-bottom: 13px; }
 .plm-cred { background: rgba(255,255,255,.06); padding: 11px 6px; text-align: center; }
 .plm-cred b { display: block; font-size: 16px; font-weight: 800; color: #fff; }
@@ -3408,8 +3331,6 @@ body.plm-locked { overflow: hidden; }
   .pre-cta { justify-content: center; }
 }
 
-/* ----- property/css/shared/04-marketing-components.css ----- */
-/* ---------- GREENTREE MORTGAGE BANNER ---------- */
 .gt-banner { display: block; max-width: 1060px; margin: 0 auto; text-decoration: none; }
 .gt-banner-inner {
   background: linear-gradient(120deg, #14361f, #1e6b3a 58%, #2b8a4d);
@@ -3448,7 +3369,6 @@ body.plm-locked { overflow: hidden; }
   .gt-banner-inner { flex-direction: column; text-align: center; padding: 26px 22px; }
   .gt-cta { width: 100%; justify-content: center; }
 }
-/* ---------- BROKERAGE ATTRIBUTION ---------- */
 .pl-brokerband {
   display: flex; gap: 22px; align-items: center; flex-wrap: wrap;
   background: #fff; border: 1px solid var(--border); border-radius: 14px;
@@ -3497,7 +3417,6 @@ body.plm-locked { overflow: hidden; }
   color: var(--navy); cursor: pointer;
 }
 .plm-why:hover { background: var(--navy); color: #fff; border-color: var(--navy); }
-/* ---------- EXPLAINER OVERLAY ---------- */
 .plm-note-overlay {
   position: fixed; inset: 0; z-index: 6000; background: rgba(10,20,40,.62);
   display: none; align-items: center; justify-content: center; padding: 24px;
@@ -3518,7 +3437,6 @@ body.note-modal-open .leaflet-container { visibility: hidden; }
   border: none; background: #f2f5fa; color: #5a6070; cursor: pointer; font-size: 15px;
 }
 .plm-note-x:hover { background: #e4e9f2; }
-/* ---------- COMPS TABLE ---------- */
 .comps-wrap { overflow-x: auto; border: 1px solid var(--border); border-radius: 12px; }
 .comps { width: 100%; border-collapse: collapse; font-size: 13.5px; }
 .comps th {
@@ -3535,7 +3453,6 @@ body.note-modal-open .leaflet-container { visibility: hidden; }
   margin-top: 14px; padding: 16px 18px; background: #fbf3dc; border-radius: 11px;
   font-size: 14px; color: #6b5514; line-height: 1.6;
 }
-/* ---------- SELLING OPTIONS ---------- */
 .sell-opts { display: grid; gap: 4px; }
 .sell-opt { display: flex; gap: 20px; padding: 22px 4px; border-bottom: 1px solid #eef0f5; }
 .sell-opt:last-child { border-bottom: none; }
@@ -3572,7 +3489,6 @@ body.note-modal-open .leaflet-container { visibility: hidden; }
   .plm-barbtn span { display: none; }
   .plm-menu { right: 0; min-width: 214px; }
 }
-/* ---------- ZILLOW STYLE AGENT MATCHES ---------- */
 .z-matches-alert {
   background: #eef1f5; border-radius: 9px; padding: 13px 18px; font-size: 14px; color: #1a1a2e;
   display: flex; align-items: center; gap: 12px; margin: 0 0 18px;
@@ -3595,7 +3511,6 @@ body.note-modal-open .leaflet-container { visibility: hidden; }
 .z-match-broker { font-size: 13px; color: #5a6070; margin-bottom: 12px; }
 .z-match-stat { font-size: 14px; color: #5a6070; margin-bottom: 4px; }
 .z-match-stat strong { color: #1a1a2e; }
-/* ---------- ZILLOW STYLE PROCEEDS CALC ---------- */
 .pl-zcalc { max-width: 100%; }
 .pl-zcalc-header { text-align: center; margin-bottom: 22px; }
 .pl-zcalc-header p { color: #5a6070; margin: 0 0 4px; font-size: 14px; }
@@ -3623,7 +3538,6 @@ body.note-modal-open .leaflet-container { visibility: hidden; }
 #pl-appeal .pl-fine { color: #90a4c4; }
 #pl-appeal .pl-sent { background: #1e6b3a; border-color: #2e8d52; color: #fff; }
 
-/* ----- property/css/readability-accessibility.css ----- */
 :root{--fs-2xs:.75rem;--fs-xs:.8125rem;--fs-sm:.875rem;--fs-md:.9375rem;--fs-lg:1.0625rem;--fs-xl:1.25rem;--fs-2xl:1.5rem;--fs-3xl:2rem;--fs-4xl:2.5rem;--focus-ring:#087f80}
 :where(a,button,input,select,textarea,[tabindex]):focus-visible{outline:2px solid var(--focus-ring)!important;outline-offset:2px!important}
 :where(button,[role="button"],input[type="button"],input[type="submit"],input[type="reset"]){min-height:44px}
@@ -3631,9 +3545,6 @@ body.note-modal-open .leaflet-container { visibility: hidden; }
 .pl-toast,.ad-toast{font-size:max(12px,1em)}
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
 
-/* ----- property/css/watchdog-brand-assets.css ----- */
-/* Approved Watchdog logo assets · 2026-08-25
-   Full horizontal lockup where space allows; square mark in constrained UI. */
 
 .wd-nav .wd-logo{
   width:220px!important;
@@ -3672,7 +3583,6 @@ body.md-page .wd-nav .wd-logo{
   box-shadow:none!important;
 }
 
-/* Canonical product topbars and universal drawers. */
 .wd4-brand,.hm27-brand,.wd-universal-brand{
   display:block!important;
   width:224px!important;
@@ -3692,8 +3602,6 @@ body.md-page .wd-nav .wd-logo{
   height:51px!important;
 }
 
-/* Universal-menu CSS is injected at runtime. These higher-specificity rules keep
-   the approved lockup authoritative even when that later stylesheet arrives. */
 html body .wd4-nav-head .wd4-brand,
 html body .hm27-nav-head .hm27-brand,
 html body .wd-universal-nav-head .wd-universal-brand{
@@ -3723,7 +3631,6 @@ html body .wd-universal-nav-head .wd-universal-brand-copy{
   border:0!important;
 }
 
-/* Compact app/sidebar identity uses the square mark, not a squeezed wordmark. */
 .db-side-brand>span,
 .wd4-bootstrap-mark{
   background-color:transparent!important;
@@ -3764,16 +3671,6 @@ html body .wd-universal-nav-head .wd-universal-brand-copy{
 }
 
 
-/* ===== property/css/dashboard.css ===== */
-/* ----- property/css/dashboard/01-dashboard-core.css ----- */
-/* ============================================================
-   DASHBOARD
-   njpropertytaxrelief.com/property
-
-   Deliberately not a wall of cards. Structure comes from hairlines,
-   type weight and whitespace instead of borders, shadows and rounded
-   boxes. Numbers are allowed to sit on the page on their own.
-   ============================================================ */
 
 :root {
   --ink:      #10182b;
@@ -3840,7 +3737,6 @@ body { background: var(--paper); }
   color: var(--neg);
 }
 
-/* ---------- signed out ---------- */
 .gate {
   max-width: 480px; margin: 70px auto; padding: 0 24px; text-align: left;
 }
@@ -3851,7 +3747,6 @@ body { background: var(--paper); }
 .gate p { font-size: 16px; line-height: 1.7; color: var(--ink-2); margin: 0 0 22px; }
 .gate-back { display: block; margin-top: 18px; font-size: 14px; color: var(--ink-3); }
 
-/* ---------- header ---------- */
 .top { border-bottom: 1px solid var(--hair); background: var(--paper); }
 .top-in {
   max-width: 1180px; margin: 0 auto; padding: 20px 24px;
@@ -3885,10 +3780,8 @@ body { background: var(--paper); }
 }
 .vw.on { background: var(--accent); color: #fff; }
 
-/* ---------- page ---------- */
 .wrap { max-width: 1180px; margin: 0 auto; padding: 34px 24px 90px; }
 
-/* The brief. This is prose, and it should read like it. */
 .brief {
   font-size: 12px; line-height: 1.65; color: var(--ink-2);
   max-width: 100%; margin: 0 0 26px; font-weight: 400;
@@ -3900,7 +3793,6 @@ body { background: var(--paper); }
   border-bottom: 2px solid rgba(179,38,30,.25);
 }
 
-/* A thin rail of figures. Not tiles. */
 .rail {
   display: flex; gap: 34px; flex-wrap: wrap;
   padding: 16px 0; border-top: 1px solid var(--hair); border-bottom: 1px solid var(--hair);
@@ -3920,7 +3812,6 @@ body { background: var(--paper); }
 .grp:first-child { margin-top: 0; }
 .lede { font-size: 15.5px; line-height: 1.7; color: var(--ink-2); max-width: 640px; margin: 8px 0 24px; }
 
-/* ---------- a property ---------- */
 .pr { padding: 26px 0; border-top: 1px solid var(--hair); }
 .pr-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 18px; flex-wrap: wrap; }
 .pr-id h3 {
@@ -3939,7 +3830,6 @@ body { background: var(--paper); }
 .pr-line { font-size: 16px; line-height: 1.7; color: var(--ink-2); max-width: 760px; margin: 14px 0 18px; }
 .pr-line b { color: var(--ink); font-weight: 700; }
 
-/* figures sit in a row, separated by space rather than borders */
 .fig { display: flex; flex-wrap: wrap; gap: 0 46px; margin: 0 0 16px; }
 .fig.tight { gap: 0 34px; margin-bottom: 0; }
 .fig > div { padding: 4px 0; }
@@ -3965,7 +3855,6 @@ body { background: var(--paper); }
 .pr-acts .rm { color: var(--ink-3); border-bottom-color: transparent; }
 .pr-acts .rm:hover { color: var(--neg); }
 
-/* ---------- pro table ---------- */
 .pro-wrap { overflow-x: auto; margin-bottom: 10px; }
 .pro { width: 100%; border-collapse: collapse; font-size: 12.5px; font-variant-numeric: tabular-nums; }
 .pro th {
@@ -3981,7 +3870,6 @@ body { background: var(--paper); }
 .pro tbody tr:hover td { background: #f7f9fc; }
 .pro-note { font-size: 11.5px; line-height: 1.65; color: var(--ink-3); max-width: 780px; margin: 0 0 8px; }
 
-/* ---------- sections ---------- */
 .sec { padding: 30px 0 6px; border-top: 1px solid var(--hair); margin-top: 34px; }
 .sec h4 {
   font-family: var(--sans); font-size: 12px; font-weight: 800; text-transform: uppercase;
@@ -3990,7 +3878,6 @@ body { background: var(--paper); }
 }
 .sec h4 i { font-size: 12px; color: var(--gold); }
 
-/* ---------- locked ---------- */
 .lk { position: relative; margin: 8px 0; }
 .lk-in { filter: blur(6px); opacity: .45; pointer-events: none; user-select: none; }
 .lk-over {
@@ -4012,7 +3899,6 @@ body { background: var(--paper); }
 .pro-list b { display: block; font-size: 14.5px; color: var(--ink); margin-bottom: 3px; }
 .pro-list span { font-size: 13px; color: var(--ink-2); line-height: 1.55; }
 
-/* ---------- blank ---------- */
 .blank { padding: 60px 0; max-width: 520px; }
 .blank h3 { font-family: var(--sans); font-size: 22px; font-weight: 800; color: var(--ink); margin: 0 0 10px; }
 .blank p { font-size: 15.5px; line-height: 1.7; color: var(--ink-2); margin: 0 0 20px; }
@@ -4024,7 +3910,6 @@ body { background: var(--paper); }
 }
 .db-btn:hover { background: #17335f; }
 
-/* ---------- tool internals, restrained ---------- */
 .tl-note, .tl-fine, .pro-note { color: var(--ink-3); }
 .tl-note { font-size: 12.5px; line-height: 1.65; margin-top: 12px; max-width: 720px; }
 .tl-fine { font-size: 11.5px; line-height: 1.6; margin-top: 10px; max-width: 720px; }
@@ -4126,7 +4011,6 @@ body { background: var(--paper); }
 
 .ex-btns { display: flex; gap: 10px; flex-wrap: wrap; }
 
-/* ---------- profile ---------- */
 .db-field { max-width: 460px; margin-bottom: 18px; }
 .db-field label { display: block; font-size: 12px; font-weight: 700; text-transform: uppercase;
   letter-spacing: .06em; color: var(--ink-3); margin-bottom: 6px; }
@@ -4137,7 +4021,6 @@ body { background: var(--paper); }
 .db-chks { display: flex; flex-wrap: wrap; gap: 8px 26px; }
 .db-chk { display: flex; align-items: center; gap: 8px; font-size: 14.5px; color: var(--ink-2); cursor: pointer; }
 
-/* ---------- verification and misc ---------- */
 .auth-magic, .auth-or, .auth-btns { max-width: 460px; }
 
 @media (max-width: 820px) {
@@ -4159,14 +4042,7 @@ body { background: var(--paper); }
 .untest { font-size: 13.5px; line-height: 1.65; color: var(--ink-3); max-width: 640px; margin: 0 0 16px; }
 .untest a { color: var(--accent); border-bottom: 1px solid rgba(14,34,72,.25); }
 
-/* ----- property/css/dashboard/02-properties-tools.css ----- */
-/* ============================================================
-   COLOR AND WEIGHT
-   Restrained, but not timid. Color carries meaning here: it only
-   appears where a number needs a verdict attached to it.
-   ============================================================ */
 
-/* header gets a spine of brand color */
 .top { border-bottom: none; box-shadow: inset 0 -1px 0 var(--hair); }
 .top::before { content: ''; display: block; height: 4px;
   background: linear-gradient(90deg, var(--accent) 0%, var(--accent-2) 45%, var(--gold) 100%); }
@@ -4176,7 +4052,6 @@ body { background: var(--paper); }
 .vw.on { background: var(--accent); }
 .pn.on { border-bottom-color: var(--accent-2); }
 
-/* the brief sits on a tinted panel, edge to edge, with a left spine */
 .brief {
   background: var(--accent-bg);
   padding: 22px 26px; max-width: none; border-radius: 0 8px 8px 0;
@@ -4186,12 +4061,10 @@ body { background: var(--paper); }
 .brief a { color: var(--accent-2); font-weight: 700; border-bottom: 1px solid rgba(45,95,184,.35); }
 .brief .urgent { color: var(--neg); border-bottom-color: rgba(192,52,43,.3); }
 
-/* rail figures get colour by meaning */
 .rail { border-top: none; border-bottom: 2px solid var(--hair); padding: 20px 0 18px; }
 .rail b { font-size: 30px; color: var(--accent); }
 .rail span.neg b { color: var(--neg); }
 
-/* ---------- property, with photo ---------- */
 .pr { padding: 0 0 30px; border-top: none; margin-bottom: 30px; border-bottom: 1px solid var(--hair); }
 .pr:last-child { border-bottom: none; }
 
@@ -4228,7 +4101,6 @@ body { background: var(--paper); }
 .tg.hot { background: var(--neg-bg); color: var(--neg); }
 .tg.ok  { background: var(--pos-bg); color: var(--pos); }
 
-/* the figure row becomes a banded strip, which reads faster than bare text */
 .fig {
   background: #f7f9fc; border-radius: 8px; padding: 16px 20px;
   gap: 0 42px; margin-bottom: 16px;
@@ -4244,17 +4116,14 @@ body { background: var(--paper); }
 
 .pr-acts a, .pr-acts button { color: var(--accent-2); border-bottom-color: rgba(45,95,184,.28); }
 
-/* ---------- pro table ---------- */
 .pro th { border-bottom-color: var(--accent); color: var(--accent); }
 .pro td.a { color: var(--accent); }
 .pro tr.hot td { background: var(--neg-bg); }
 .pro td.neg { color: var(--neg); }
 
-/* ---------- sections ---------- */
 .sec h4 { color: var(--accent); }
 .sec h4 i { color: var(--accent-2); }
 
-/* ---------- locked ---------- */
 .lk-over { background: linear-gradient(90deg, rgba(255,255,255,.97) 52%, rgba(255,255,255,.68)); }
 .lk-t i { color: var(--gold); }
 .lk-b { background: var(--accent); }
@@ -4277,9 +4146,6 @@ body { background: var(--paper); }
   .fig { padding: 14px 16px; gap: 0 26px; }
 }
 
-/* ============================================================
-   SORT BAR, COMPARE, MENUS, GROUP BANDS
-   ============================================================ */
 .sortbar {
   display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
   padding: 14px 0 18px; font-size: 13px; color: var(--ink-3);
@@ -4301,30 +4167,25 @@ body { background: var(--paper); }
 .cmp-count button:disabled { background: #c3cbdb; cursor: not-allowed; }
 .cmp-count .clr { background: none; color: var(--ink-3); padding: 8px 4px; }
 
-/* group bands. Your home reads warmer than the watchlist. */
 .band { padding: 4px 26px 10px; border-radius: 12px; margin-bottom: 26px; }
 .band.own { background: linear-gradient(180deg, #f4f8fd 0%, #fbfcfe 100%); }
 .band .grp { margin-top: 20px; }
 .band.own .grp { color: var(--accent-2); }
 .band .pr:last-child { border-bottom: none; padding-bottom: 14px; }
 
-/* title row holds the compare tick and the menu */
 .pr-titlerow { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 6px; }
 .pick { display: inline-flex; align-items: center; gap: 7px; cursor: pointer;
   font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .07em; color: var(--ink-3); }
 .pick input { width: 15px; height: 15px; accent-color: var(--accent-2); cursor: pointer; }
 .pr.picked { outline: 2px solid var(--accent-2); outline-offset: 10px; border-radius: 6px; }
 
-/* photo column with its added-on caption */
 .pr-shotwrap { flex-shrink: 0; }
 .pr-when { font-size: 10.5px; color: var(--ink-3); margin-top: 6px; text-align: center; letter-spacing: .01em; }
 
-/* the factual line under the address */
 .pr-facts { font-size: 13.5px; color: var(--ink-2); margin-top: 7px; }
 .pr-facts b { color: var(--ink); font-weight: 700; }
 .pr-facts .dot { margin: 0 8px; color: var(--hair); }
 
-/* per property menu */
 .pm-wrap { position: relative; }
 .pm-btn {
   background: none; border: 1px solid var(--hair); border-radius: 6px; width: 30px; height: 28px;
@@ -4348,7 +4209,6 @@ body { background: var(--paper); }
 .pm .rm { color: var(--ink-3); }
 .pm .rm:hover { background: var(--neg-bg); color: var(--neg); }
 
-/* compare table */
 .cw { overflow-x: auto; margin: 4px 0 14px; }
 .cmp3 { width: 100%; border-collapse: collapse; font-size: 13.5px; }
 .cmp3 .ch { padding: 0 10px 14px 0; vertical-align: bottom; min-width: 150px; }
@@ -4377,11 +4237,6 @@ body { background: var(--paper); }
   .pr.picked { outline-offset: 4px; }
 }
 
-/* ============================================================
-   PROFILE
-   Collapsible groups. A wall of forty inputs gets abandoned, so each
-   group says what it unlocks and only one or two are open at a time.
-   ============================================================ */
 .pf { max-width: 760px; }
 
 .pf-top { display: flex; align-items: center; gap: 20px; padding-bottom: 24px;
@@ -4464,9 +4319,6 @@ body { background: var(--paper); }
   .pf-top { gap: 14px; }
 }
 
-/* ============================================================
-   UNIFORMITY AND APPEAL ODDS
-   ============================================================ */
 .un-head { display: flex; gap: 22px; align-items: flex-start; margin-bottom: 20px; flex-wrap: wrap; }
 .un-score { flex-shrink: 0; text-align: center; padding: 14px 20px; border-radius: 10px; min-width: 110px; }
 .un-score b { display: block; font-family: var(--sans); font-size: 38px; font-weight: 800;
@@ -4513,14 +4365,8 @@ body { background: var(--paper); }
   .un-score b { font-size: 30px; }
 }
 
-/* ----- property/css/dashboard/03-workspace-shell.css ----- */
-/* ============================================================
-   SAAS APPLICATION SHELL
-   Polished workspace layout layered over the existing dashboard tools.
-   ============================================================ */
 
 :root {
-  /* --saas-bg: #f5f7fa; */
   --saas-bg: #FFFFFF;
   --saas-panel: #ffffff;
   --saas-sidebar: #0f2748;
@@ -4548,7 +4394,6 @@ body {
 .db-auth-check b { color: var(--saas-text); display: block; font-size: 15px; margin-bottom: 3px; }
 .db-auth-check span { color: var(--saas-muted); display: block; font-size: 13px; }
 
-/* Signed-out state */
 .gate {
   background: #fff;
   border: 1px solid var(--saas-border);
@@ -4576,13 +4421,11 @@ body {
 .gate-trust { border-top: 1px solid var(--saas-border); color: var(--saas-muted); font-size: 12.5px; margin-top: 28px; padding-top: 20px; }
 .gate-trust i { color: var(--saas-teal); margin-right: 6px; }
 
-/* Main shell */
 #db-main { background: var(--saas-bg); min-height: 100vh; }
 .db-shell > #property-side-menu { display: contents; }
 .db-shell { display: grid; grid-template-columns: 252px minmax(0, 1fr); min-height: 100vh; }
 .db-workspace { min-width: 0; }
 
-/* Sidebar */
 .db-sidebar {
   align-self: start; background: linear-gradient(180deg, var(--saas-sidebar), #0c203c);
   color: #fff; display: flex; flex-direction: column; height: 100vh; left: 0; padding: 22px 15px;
@@ -4617,7 +4460,6 @@ body {
 .db-side-link em { background: rgba(184,149,24,.18); border-radius: 4px; color: #e1c65d; font-size: 8px; font-style: normal; margin-left: auto; padding: 3px 5px; }
 .db-side-account { border-top: 1px solid rgba(255,255,255,.09); margin-top: auto; padding-top: 14px; }
 
-/* Workspace header */
 .top {
   background: rgba(255,255,255,.96); border-bottom: 1px solid var(--saas-border); position: sticky; top: 0;
   z-index: 100; backdrop-filter: blur(10px);
@@ -4638,7 +4480,6 @@ body {
 }
 .db-add:hover { background: var(--saas-teal-dark); color: #fff; }
 
-/* Page content */
 .wrap { max-width: 1440px; padding: 34px 34px 90px; }
 .brief {
   color: var(--saas-muted); font-size: 12px; line-height: 1.65; margin: 0 0 22px; max-width: 100%;
@@ -4656,7 +4497,6 @@ body {
 .rail b { color: var(--saas-text); font-size: 25px; order: -1; }
 .rail span.neg { background: #fffafa; border-color: #f0d8d5; }
 
-/* Sorting and property groups */
 .sortbar {
   align-items: center; background: #fff; border: 1px solid var(--saas-border); border-radius: 10px;
   margin-bottom: 20px; padding: 10px 12px;
@@ -4665,7 +4505,6 @@ body {
 .band.own { background: transparent; }
 .grp { color: var(--saas-muted); margin: 30px 0 10px; }
 
-/* Property surfaces */
 .pr {
   background: #fff; border: 1px solid var(--saas-border); border-radius: 13px; box-shadow: 0 4px 18px rgba(16,41,75,.045);
   margin: 0 0 14px; overflow: visible; padding: 20px; transition: border-color .18s ease, box-shadow .18s ease, transform .18s ease;
@@ -4684,7 +4523,6 @@ body {
 .fig > div { background: #f7f9fb; border-radius: 8px; min-width: 122px; padding: 10px 12px; }
 .fig dd { font-size: 17px; }
 
-/* Tool cards */
 .sec {
   background: #fff; border: 1px solid var(--saas-border); border-radius: 13px; box-shadow: 0 4px 18px rgba(16,41,75,.04);
   margin-top: 18px; padding: 22px 24px;
@@ -4701,14 +4539,12 @@ body {
 .lk-b:hover, .db-btn:hover { background: var(--saas-teal-dark); }
 .tl-btn { border-radius: 7px; }
 
-/* Tables */
 .pro-wrap, .cw { background: #fff; border: 1px solid var(--saas-border); border-radius: 11px; overflow-x: auto; }
 .pro { min-width: 820px; }
 .pro th { background: #f5f7fa; border-bottom: 1px solid var(--saas-border); color: var(--saas-muted); padding: 11px 13px; }
 .pro td { padding: 11px 13px; }
 .pro th.n, .pro td.n { padding-right: 13px; }
 
-/* Empty state */
 .blank {
   background: #fff; border: 1px dashed #c8d3df; border-radius: 14px; margin-top: 18px; max-width: none;
   padding: 58px 34px; text-align: center;
@@ -4716,7 +4552,6 @@ body {
 .blank h3 { font-size: 23px; }
 .blank p { margin-left: auto; margin-right: auto; max-width: 520px; }
 
-/* Loading and recoverable error states */
 .db-loading-rail span { overflow: hidden; position: relative; }
 .db-loading-rail span::after {
   animation: dbShimmer 1.35s infinite; background: linear-gradient(90deg, transparent, rgba(255,255,255,.78), transparent);
@@ -4733,7 +4568,6 @@ body {
 .db-error-panel p { color: var(--saas-muted); font-size: 14px; margin: 0 0 15px; }
 @keyframes dbShimmer { to { transform: translateX(100%); } }
 
-/* Profile page */
 .db-page-head { align-items: end; border-bottom: 1px solid var(--saas-border); display: flex; gap: 35px; justify-content: space-between; margin-bottom: 24px; padding-bottom: 23px; }
 .db-page-head > div > span { color: var(--saas-teal); font-size: 10px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; }
 .db-page-head h2 { color: var(--saas-text); font-family: var(--sans); font-size: 26px; letter-spacing: -.03em; margin: 4px 0 0; }
@@ -4745,7 +4579,6 @@ body {
 .pf-f input, .pf-f select, .pf-f textarea { background: #fff; border: 1px solid var(--saas-border); border-radius: 7px; padding: 10px 12px; }
 .pf-money { border: 1px solid var(--saas-border); border-radius: 7px; padding-left: 12px; }
 
-/* Responsive shell */
 @media (max-width: 1080px) {
   .db-shell { grid-template-columns: 78px minmax(0, 1fr); }
   .db-sidebar { padding-left: 10px; padding-right: 10px; }
@@ -4793,11 +4626,6 @@ body {
   .pf { border-radius: 10px; padding: 17px; }
 }
 
-/* ----- property/css/dashboard/04-property-intelligence.css ----- */
-/* ============================================================
-   GREENTREE MORTGAGE · STICKY SPONSOR RAIL
-   Desktop: stationary right rail. Tablet/mobile: inline sponsor unit.
-   ============================================================ */
 .db-content-grid {
   align-items: start;
   display: grid;
@@ -4978,10 +4806,6 @@ body {
   .gt-ad-body { padding: 19px 17px 17px; }
 }
 
-/* ============================================================
-   2027 PROPERTY RECORDS
-   Dense, decision-oriented entries with explicit status and actions.
-   ============================================================ */
 
 .sortbar {
   backdrop-filter: blur(12px); background: rgba(255,255,255,.9); border-color: rgba(210,220,231,.9);
@@ -5080,14 +4904,12 @@ body {
 .pr > .fig dd { color: #172d4c; font-size: 18px; font-weight: 780; }
 .pr > .fig dd em { color: #8b96a5; font-size: 9.5px; }
 
-/* Existing metric strip becomes an intelligence ribbon. */
 .pr .ms {
   background: #f7f9fb; border-bottom: 1px solid #e7ecf1; border-top: 1px solid #e7ecf1;
   margin: 0; padding: 14px 23px;
 }
 .pr .ms-c { border-color: #dde4eb; }
 
-/* Property-specific Chapter 123 block. */
 .pr > .lk {
   background: #fbfcfd; border: 0; border-radius: 0; border-top: 1px solid #e7ecf1; margin: 0;
 }
@@ -5113,7 +4935,6 @@ body {
 .pr-acts .prime i { font-size: 10px; transition: transform .18s ease; }
 .pr-acts .prime:hover i { transform: translateX(2px); }
 
-/* Tool entries feel like modules rather than long document sections. */
 .sec { overflow: hidden; position: relative; }
 .sec::before { background: linear-gradient(180deg, var(--saas-teal), #4fb9af); content: ''; inset: 0 auto 0 0; position: absolute; width: 3px; }
 .sec h4 { border-bottom: 1px solid #ebeff3; margin: -4px 0 20px; padding-bottom: 15px; }
@@ -5148,12 +4969,7 @@ body {
   .pr-acts a:not(.prime), .pr-acts button { flex: 1 1 calc(50% - 8px); }
 }
 
-/* ============================================================
-   METRIC ALIGNMENT PATCH
-   Keeps the primary figures and contextual intelligence visually separate.
-   ============================================================ */
 
-/* Primary property figures: one uniform grid, no orphaned final metric. */
 .pr > .fig {
   background: #e5ebf1;
   border: 1px solid #e5ebf1;
@@ -5208,7 +5024,6 @@ body {
   white-space: normal;
 }
 
-/* Secondary intelligence: compact context cards below the primary numbers. */
 .pr .ms {
   background: #f3f6f8;
   border-bottom: 1px solid #e1e7ed;
@@ -5263,7 +5078,6 @@ body {
   overflow-wrap: anywhere;
 }
 
-/* Tooltip trigger: icon is deliberately separated from the label. */
 .pr .tip {
   align-items: center;
   cursor: help;
@@ -5332,10 +5146,6 @@ body {
   .pr .ms { grid-template-columns: 1fr; }
 }
 
-/* ----- property/css/dashboard/05-collections.css ----- */
-/* ============================================================
-   AGENT / PRO INTEL, HEADER STAT LINE, RANKED TILES, WATCHDOG BADGE
-   ============================================================ */
 .ai { position: relative; border: 1.5px solid var(--hair, #e4e7ee); border-radius: 14px;
   padding: 30px 28px 24px; margin: 24px 0 22px; width: 55%; }
 .ai-h { position: absolute; top: -22px; left: 22px; display: flex; align-items: center;
@@ -5353,13 +5163,11 @@ body {
 .ai-star.pro i { animation: wd-twinkle 3.5s ease-in-out infinite; }
 @keyframes wd-twinkle { 0%,100%{transform:scale(1);opacity:1} 50%{transform:scale(1.16);opacity:.82} }
 
-/* header stat line: quiet, present, never competing with the brief */
 .db-stat { display: flex; flex-wrap: wrap; gap: 0 14px; margin-top: 4px; }
 .db-stat span { font-size: 12px; color: var(--ink-3, #7d8798); }
 .db-stat span + span::before { content: '\00b7'; margin-right: 14px; color: #c3cbdb; }
 .db-stat .hot { color: var(--neg, #c0342b); font-weight: 600; }
 
-/* ---------- ranked, flippable tiles ---------- */
 .ms { display: grid; grid-template-columns: repeat(auto-fit, minmax(168px, 1fr));
   gap: 12px; margin-bottom: 18px; }
 .ms-c { position: relative; height: 108px; perspective: 900px; cursor: pointer;
@@ -5398,7 +5206,6 @@ body {
 .ms-c:hover::after { opacity: 1; }
 .ms-c.flip::after { opacity: 0; }
 
-/* ---------- the badge ---------- */
 .wd-badge { position: absolute; bottom: 10px; right: 10px; z-index: 3;
   display: inline-flex; align-items: center; gap: 6px; padding: 5px 11px 5px 9px;
   border-radius: 20px; background: rgba(255,255,255,.96); box-shadow: 0 2px 10px rgba(0,0,0,.24);
@@ -5411,7 +5218,6 @@ body {
 .wd-badge.lg { padding: 8px 16px 8px 13px; }
 .wd-badge.lg i { font-size: 16px; } .wd-badge.lg b { font-size: 22px; }
 
-/* ---------- breakdown ---------- */
 .wd-break { max-width: 620px; }
 .wd-r { display: grid; grid-template-columns: 1fr 110px 34px 38px; gap: 12px; align-items: center;
   padding: 10px 0; border-bottom: 1px solid #eef0f5; font-size: 13px; }
@@ -5432,13 +5238,8 @@ body {
   .ai-h { left: 14px; } .ai-h img { width: 38px; height: 38px; }
 }
 
-/* Collection filters and public-record verification help */
 .commercial-filter{align-items:center;background:#f6f9fb;border:1px solid #dce5ec;border-radius:10px;color:#29445f;cursor:pointer;display:inline-flex;font-size:12px;font-weight:800;gap:8px;min-height:40px;padding:0 12px}.commercial-filter input{accent-color:#078486;height:17px;width:17px}.commercial-filter span{align-items:center;display:inline-flex;gap:6px}.commercial-filter i{color:#078486}.collection-empty{align-items:center;background:#fff;border:1px dashed #cdd9e3;border-radius:16px;color:#6b7b8e;display:flex;flex-direction:column;gap:7px;grid-column:1/-1;justify-content:center;min-height:210px;padding:28px;text-align:center}.collection-empty i{color:#8aa0b4;font-size:28px}.collection-empty b{color:#17304f;font-size:16px}.collection-empty span{font-size:13px}.verify-help{margin-left:auto;position:relative}.verify-help>em{border-bottom:1px dotted currentColor;cursor:help}.verify-help>span{background:#10294b;border-radius:11px;bottom:calc(100% + 9px);box-shadow:0 14px 34px rgba(10,28,51,.24);color:#e9f0f7;display:none;font-size:11px;font-style:normal;font-weight:500;line-height:1.45;padding:12px;position:absolute;right:0;text-align:left;width:min(290px,72vw);z-index:30}.verify-help>span:after{border-left:7px solid transparent;border-right:7px solid transparent;border-top:7px solid #10294b;bottom:-7px;content:"";position:absolute;right:16px}.verify-help>span b{color:#fff;display:block;font-size:11px;margin-bottom:4px;text-transform:capitalize}.verify-help:hover>span,.verify-help:focus>span,.verify-help:focus-within>span{display:block}.verify-help:focus{outline:2px solid #078486;outline-offset:3px}@media(max-width:760px){.commercial-filter{justify-content:center;min-height:48px;width:100%}.verify-help>span{position:fixed;bottom:calc(96px + env(safe-area-inset-bottom));left:18px;right:18px;width:auto}.verify-help>span:after{display:none}}
 
-/* ============================================================
-   FAST SAVED-PROPERTY COLLECTION · 2027
-   Only the active page is rendered. Cards remain deliberately compact.
-   ============================================================ */
 .property-collection {
   scroll-margin-top: 96px;
 }
@@ -5477,7 +5278,6 @@ body {
 }
 
 .pr-card::before {
-  /* background: #90a1b4; */
   border-radius: 16px 16px 0 0;
   content: '';
   height: 3px;
@@ -5488,12 +5288,10 @@ body {
   z-index: 5;
 }
 
-/* .pr-card.ok::before { background: linear-gradient(90deg, #20a174, #71c7a7); } */
 .pr-card.hot::before { background: linear-gradient(90deg, #d94a3f, #e99965); }
 .pr-card:hover { border-color: #c5d3df; box-shadow: 0 18px 42px rgba(13,38,72,.11); transform: translateY(-3px); }
 .pr-card.picked { border-color: var(--saas-teal); box-shadow: 0 0 0 3px rgba(7,132,134,.13), 0 18px 42px rgba(13,38,72,.1); }
 
-/* Persistent comparison tray */
 .compare-tray {
   align-items: center; background: rgba(15,39,72,.97); border: 1px solid rgba(255,255,255,.14);
   border-radius: 14px; bottom: 20px; box-shadow: 0 20px 55px rgba(5,20,40,.28); color: #fff;
@@ -5752,7 +5550,6 @@ body.compare-tray-visible .db-to-top { bottom: 96px; }
 .pr-card-signals-toggle { display: none; }
 .pr-card-context-body > :first-child { margin-top: 0 !important; }
 
-/* Sorting and page-size controls */
 .sortbar { align-items: center; display: flex; gap: 10px; }
 .sortbar-control { align-items: center; display: inline-flex; gap: 7px; }
 .sortbar-control label { color: #7b8798; font-size: 10px; font-weight: 800; letter-spacing: .07em; text-transform: uppercase; }
@@ -5866,21 +5663,15 @@ body.compare-tray-visible .db-to-top { bottom: 96px; }
   .pr-card-actions button { transition: none; }
 }
 
-/* ----- property/css/dashboard/06-responsive-additions.css ----- */
-/* ============================================================
-   RESPONSIVE WORKSPACE CHROME · COLLAPSED RAIL + MOBILE INTEL
-   ============================================================ */
 .db-add-short,
 .mobile-intel-overlay,
 .db-to-top { display: none; }
 .wb-modal[hidden] { display: none !important; }
 
-/* Agent Intel is a sidebar item at every width now, not a mobile fallback. */
 .intel-nav { display: flex !important; position: relative; }
 .intel-nav.seen .intel-nav-dot { display: none; }
 .db-side-mobile { display: none; }
 
-/* Drill-down desktop navigation. The compact rail stays icon-only. */
 .db-side-desktop { min-height: 0; overflow: visible; }
 .db-side-navgroups { padding-bottom: 10px; }
 .db-side-group { margin: 3px 0; }
@@ -5904,7 +5695,6 @@ body.compare-tray-visible .db-to-top { bottom: 96px; }
 .db-side-submenu .db-side-link::before { background: rgba(83,126,165,.28); border-radius: 99px; content: ''; height: 100%; left: -7px; position: absolute; top: 0; width: 1px; }
 .db-side-submenu .db-side-link:hover::before, .db-side-submenu .db-side-link.on::before { background: #45c5be; width: 2px; }
 
-/* The same Agent Intel sheet opens as a centered dialog on desktop. */
 @media (min-width: 761px) {
   .mobile-intel-overlay.open {
     align-items: center; background: rgba(8,20,38,.6); display: flex; inset: 0; justify-content: center;
@@ -6066,8 +5856,6 @@ body.compare-tray-visible .db-to-top { bottom: 96px; }
   .db-shell, .mobile-intel-overlay, .mobile-intel-sheet, .db-to-top { transition: none; }
 }
 
-/* v0.45 navigation: compact by default, searchable when expanded, and
-   organized around customer jobs instead of the underlying page inventory. */
 @media (min-width: 761px) {
   .db-side-desktop { scrollbar-gutter: stable; }
   .db-side-search {
@@ -6095,9 +5883,6 @@ body.compare-tray-visible .db-to-top { bottom: 96px; }
 }
 
 
-/* ============================================================
-   PORTFOLIO STRIP  ·  map plus Watchdog ranking
-   ============================================================ */
 .pf-strip { display: grid; grid-template-columns: 1.15fr 1fr; gap: 18px;
   margin: 22px 0 26px; align-items: stretch; }
 .pf-map { position: relative; min-height: 268px; border-radius: 14px; overflow: hidden; isolation: isolate;
@@ -6144,9 +5929,6 @@ body.compare-tray-visible .db-to-top { bottom: 96px; }
 .pf-b i.good { background: #1c7a4a; } .pf-b i.mid { background: #b8972a; } .pf-b i.bad { background: #c0342b; }
 .pf-foot { font-size: 11px; color: #a0a8b8; padding-top: 12px; border-top: 1px solid #eef0f5; margin-top: 6px; }
 
-/* ============================================================
-   PRO LOCK  ·  shape without substance
-   ============================================================ */
 .prolock { position: relative; border: 1px solid var(--hair, #e4e7ee); border-radius: 14px;
   overflow: clip; margin-bottom: 20px; min-height: 0; }
 .prolock-ghost { inset: 0; overflow: hidden; padding: 24px; filter: blur(2.5px); opacity: .4;
@@ -6168,7 +5950,6 @@ body.compare-tray-visible .db-to-top { bottom: 96px; }
   font-size: 14px; font-weight: 700; padding: 11px 22px; border-radius: 8px; cursor: pointer; }
 .prolock-btn:hover { background: #2d5fb8; }
 
-/* the ghost: geometry only, never real data */
 .gh-t { display: flex; flex-direction: column; gap: 9px; }
 .gh-r { display: flex; gap: 10px; align-items: center; }
 .gh-r i { display: block; height: 11px; border-radius: 3px; background: #d8dee9; flex: 1; }
@@ -6195,8 +5976,6 @@ body.compare-tray-visible .db-to-top { bottom: 96px; }
 .pf-none i { font-size: 24px; color: #c3cbdb; }
 .pf-none span { max-width: 220px; line-height: 1.5; }
 
-/* ----- property/css/dashboard/07-town-intelligence.css ----- */
-/* Shared Town Intelligence surfaces */
 .ti-mini { background:#f6f9fb; border:1px solid #dfe7ee; border-radius:var(--radius-md); display:grid; gap:0; grid-template-columns:repeat(3,minmax(0,1fr)); margin-top:9px; overflow:hidden; }
 .ti-mini > span { border-right:1px solid #e3e9ef; min-width:0; padding:7px 8px; }
 .ti-mini > span:last-child { border-right:0; }
@@ -6262,18 +6041,13 @@ body.compare-tray-visible .db-to-top { bottom: 96px; }
   .tp-controls { grid-template-columns:1fr; }.tp-output { align-items:stretch; flex-direction:column; }.tp-output > i { transform:rotate(90deg); }
 }
 
-/* ----- property/css/dashboard/08-time-machine.css ----- */
 .tm-property,.tm-detail{border:1px solid #dce5ed;border-radius:18px;background:#fff;padding:22px;margin-top:14px}.tm-head{display:flex;align-items:flex-start;justify-content:space-between;gap:20px}.tm-head h3{font:800 20px/1.2 "Plus Jakarta Sans",sans-serif;color:#10294b;margin:3px 0}.tm-head>div>span,.tm-range,.tm-kpis span,.tm-kpis small{color:#78879b;font-size:13px}.tm-range{display:flex;align-items:center;gap:8px}.tm-kpis{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:18px 0}.tm-kpis>div{border-radius:13px;background:#f5f8fb;padding:13px 15px}.tm-kpis span,.tm-kpis small{display:block}.tm-kpis b{display:block;color:#10294b;font:800 20px/1.25 "Plus Jakarta Sans",sans-serif;margin:4px 0}.tm-kpis b.up{color:#b73b32}.tm-kpis b.down{color:#16805d}.tm-chart{height:215px;border:1px solid #e2e9ef;border-radius:14px;padding:12px;background:linear-gradient(180deg,#fbfdff,#f5f8fb)}.tm-chart svg{width:100%;height:165px;overflow:visible}.tm-chart path{fill:none;stroke-width:4;vector-effect:non-scaling-stroke;stroke-linecap:round;stroke-linejoin:round}.tm-chart .tm-assessed{stroke:#078486}.tm-chart .tm-tax{stroke:#d0a514}.tm-grid line{stroke:#dce4eb;stroke-width:1;vector-effect:non-scaling-stroke}.tm-legend{display:flex;gap:18px;font-size:13px;color:#526277}.tm-legend span{display:flex;align-items:center;gap:7px}.tm-legend i{width:18px;height:4px;border-radius:4px}.tm-legend .assessed{background:#078486}.tm-legend .tax{background:#d0a514}.tm-reading{display:flex;gap:11px;align-items:flex-start;background:#eef8f7;border-radius:13px;padding:14px 16px;margin:14px 0;color:#244459}.tm-reading i{color:#078486;margin-top:4px}.tm-reading p{margin:0}.tm-events{list-style:none;margin:18px 0;padding:0 0 0 7px}.tm-events li{display:grid;grid-template-columns:18px 1fr;gap:11px;position:relative;padding:0 0 20px}.tm-events li:not(:last-child):before{content:"";position:absolute;left:6px;top:14px;bottom:0;border-left:2px solid #d8e3ea}.tm-dot{width:14px;height:14px;border-radius:50%;background:#078486;border:3px solid #d8f0ef;position:relative;z-index:1}.tm-events b,.tm-events span,.tm-events small{display:block}.tm-events b{color:#10294b}.tm-events span{color:#415269}.tm-events small{color:#78879b}.tm-open{display:inline-flex;align-items:center;gap:8px;color:#087f81;font-weight:800;text-decoration:none;margin:2px 0 8px}.tm-open:hover{text-decoration:underline}@media(max-width:760px){.tm-property,.tm-detail{padding:16px}.tm-head{display:block}.tm-range{margin-top:7px}.tm-kpis{grid-template-columns:1fr}.tm-chart{height:175px}.tm-chart svg{height:125px}}
 
-/* ----- property/css/dashboard/09-budget-pressure.css ----- */
-/* Municipal Budget Pressure */
 .bp-mini{background:#f7f9fb;border:1px solid #dfe7ee;border-left:3px solid #8090a3;border-radius:10px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));margin-top:7px;overflow:hidden}.bp-mini.low{border-left-color:#1d9a6c}.bp-mini.moderate{border-left-color:#078486}.bp-mini.elevated{border-left-color:#c69222}.bp-mini.high{border-left-color:#cf4c42}.bp-mini>span{border-right:1px solid #e3e9ef;min-width:0;padding:7px 8px}.bp-mini>span:last-child{border-right:0}.bp-mini b,.bp-mini small{display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.bp-mini b{color:#173e75;font-size:11px}.bp-mini small{color:#7a8798;font-size:8.2px;margin-top:1px}
 .bp-report{background:#fff;border:1px solid #dce5ec;border-radius:14px;margin-top:14px;overflow:hidden}.bp-head{align-items:center;background:#f5f8fb;border-bottom:1px solid #e0e7ed;display:flex;gap:18px;justify-content:space-between;padding:21px}.bp-head>div:first-child{min-width:0}.bp-head>div>span{color:#078486;font-size:9px;font-weight:800;letter-spacing:.12em;text-transform:uppercase}.bp-head h4{color:#142944;font-family:var(--sans);font-size:20px;margin:3px 0 5px}.bp-head p{color:#617187;font-size:11.5px;line-height:1.5;margin:0;max-width:700px}.bp-score{align-items:center;background:#fff;border:1px solid #dce5ec;border-radius:12px;display:flex;flex:0 0 78px;flex-direction:column;height:68px;justify-content:center}.bp-score b{color:#173e75;font-size:25px;line-height:1}.bp-score span{color:#6d7b8e;font-size:8px;font-weight:800;letter-spacing:.08em;margin-top:4px;text-transform:uppercase}.bp-report.low .bp-score{border-top:3px solid #1d9a6c}.bp-report.moderate .bp-score{border-top:3px solid #078486}.bp-report.elevated .bp-score{border-top:3px solid #c69222}.bp-report.high .bp-score{border-top:3px solid #cf4c42}
 .bp-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr))}.bp-grid>div{border-bottom:1px solid #e5eaf0;border-right:1px solid #e5eaf0;padding:15px 17px}.bp-grid>div:nth-child(3n){border-right:0}.bp-grid b,.bp-grid span{display:block}.bp-grid b{color:#173e75;font-size:16px}.bp-grid span{color:#768397;font-size:9.5px;line-height:1.35;margin-top:3px}.bp-two{display:grid;gap:24px;grid-template-columns:1fr 1fr;padding:18px 20px}.bp-two h5,.bp-drivers h5{color:#243a55;font-size:10px;letter-spacing:.08em;margin:0 0 10px;text-transform:uppercase}.bp-two p{color:#718096;display:flex;flex-wrap:wrap;font-size:9.5px;gap:10px;margin:7px 0 0}.bp-history{align-items:end;border-bottom:1px solid #d7e0e8;display:flex;gap:6px;height:72px;padding:0 5px}.bp-history span{align-items:center;display:flex;flex:1;flex-direction:column;height:100%;justify-content:flex-end}.bp-history i{background:linear-gradient(#18a4a1,#087d84);border-radius:3px 3px 0 0;display:block;min-height:8px;width:70%}.bp-history b{color:#7b8899;font-size:8px;margin:3px 0 -14px}.bp-mix{border-radius:5px;display:flex;height:20px;margin-top:23px;overflow:hidden}.bp-mix i{display:block;height:100%}.bp-mix .school,.bp-two p .school{background:#173e75;color:#173e75}.bp-mix .municipal,.bp-two p .municipal{background:#078486;color:#078486}.bp-mix .county,.bp-two p .county{background:#c69222;color:#8a6514}.bp-two p span{background:transparent!important}.bp-components{border-bottom:1px solid #e5eaf0;border-top:1px solid #e5eaf0;display:grid;grid-template-columns:repeat(3,1fr)}.bp-components span{color:#758398;font-size:9.5px;padding:12px 16px}.bp-components span+span{border-left:1px solid #e5eaf0}.bp-components b{color:#203957;font-size:12px;margin-right:3px}.bp-drivers{padding:18px 20px}.bp-driver{align-items:center;display:grid;gap:10px;grid-template-columns:minmax(150px,1fr) minmax(90px,2fr) 42px;margin:8px 0}.bp-driver>span{color:#5f6f84;font-size:10px}.bp-driver>div{background:#e8edf2;border-radius:10px;height:6px;overflow:hidden}.bp-driver i{background:#078486;border-radius:10px;display:block;height:100%}.bp-report.elevated .bp-driver i{background:#c69222}.bp-report.high .bp-driver i{background:#cf4c42}.bp-driver>b{color:#203957;font-size:11px;text-align:right}.bp-driver small{font-size:7px}.bp-note{background:#f7f9fb;border-top:1px solid #e5eaf0;color:#7b8798;font-size:9.5px;line-height:1.55;margin:0;padding:13px 20px}
 @media(max-width:760px){.bp-mini>span{padding:7px 5px}.bp-mini b{font-size:10px}.bp-mini small{font-size:7.8px}.bp-head{align-items:flex-start}.bp-head p{font-size:10.5px}.bp-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.bp-grid>div:nth-child(3n){border-right:1px solid #e5eaf0}.bp-grid>div:nth-child(2n){border-right:0}.bp-two{grid-template-columns:1fr}.bp-components{grid-template-columns:1fr}.bp-components span+span{border-left:0;border-top:1px solid #e5eaf0}.bp-driver{grid-template-columns:1fr 1.2fr 36px}}
 
-/* ----- property/css/dashboard/10-special-assessments.css ----- */
-/* Exempt/PILOT, added/omitted and farmland tools. */
 .xp-kpis{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px;margin:15px 0}.xp-kpis>div{background:#f5f8fb;border:1px solid #e0e7ed;border-radius:12px;padding:13px 14px}.xp-kpis>div.high{border-top:3px solid #c94b43}.xp-kpis>div.mid{border-top:3px solid #c39224}.xp-kpis>div.low{border-top:3px solid #168b6b}.xp-kpis span,.xp-kpis small{color:#78869a;display:block;font-size:9px}.xp-kpis b{color:#173e75;display:block;font-size:20px;margin:4px 0}.xp-read{background:#eef7f7;border-left:3px solid #078486;border-radius:0 10px 10px 0;color:#465a70;font-size:11.5px;line-height:1.55;margin:10px 0;padding:12px 14px}.xp-pilot{align-items:flex-start;border:1px solid #e1e8ee;border-radius:11px;display:flex;gap:11px;margin:10px 0;padding:13px 14px}.xp-pilot>i{color:#078486;margin-top:3px}.xp-pilot p{color:#516278;font-size:11px;line-height:1.55;margin:0}.xp-split{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));margin:13px 0}.xp-split span{border-left:1px solid #e2e8ee;color:#78869a;font-size:8.8px;line-height:1.35;padding:2px 12px}.xp-split span:first-child{border-left:0;padding-left:0}.xp-split b{color:#233d5d;display:block;font-size:13px;margin-bottom:3px}
 
 .ao-alert,.fa-status{align-items:flex-start;border:1px solid #dde6ed;border-radius:12px;display:flex;gap:11px;margin:14px 0;padding:14px}.ao-alert>i,.fa-status>i{font-size:18px;margin-top:2px}.ao-alert b,.ao-alert span,.fa-status b,.fa-status span{display:block}.ao-alert b,.fa-status b{color:#1c3555;font-size:12.5px}.ao-alert span,.fa-status span{color:#68788b;font-size:10.5px;line-height:1.5;margin-top:3px}.ao-alert.low,.fa-status.good{background:#f1f9f6;border-color:#cee8df}.ao-alert.low>i,.fa-status.good>i{color:#16805d}.ao-alert.mid{background:#fff9ed;border-color:#ecdcae}.ao-alert.mid>i{color:#b88114}.fa-status.bad{background:#fff5f3;border-color:#eed5d1}.fa-status.bad>i{color:#c94a40}.fa-status.neutral{background:#f5f8fb}.fa-status.neutral>i{color:#6d8094}
@@ -6282,8 +6056,6 @@ body.compare-tray-visible .db-to-top { bottom: 96px; }
 
 @media(max-width:760px){.xp-kpis,.xp-split{grid-template-columns:1fr}.xp-split span{border-left:0;border-top:1px solid #e2e8ee;padding:8px 0}.xp-split span:first-child{border-top:0}.ao-form,.fa-form{grid-template-columns:1fr}.fa-deadline{display:block}.fa-deadline span{margin-top:3px}}
 
-/* ----- property/css/dashboard/11-ui-polish.css ----- */
-/* Small interaction surfaces added after the modular dashboard sheets. */
 .tm-dashboard-disclosure > summary {
   align-items: center; background: #f4f8fa; border-radius: 14px; color: #173e75; cursor: pointer;
   display: flex; justify-content: space-between; list-style: none; padding: 14px 16px;
@@ -6302,7 +6074,6 @@ body.compare-tray-visible .db-to-top { bottom: 96px; }
 .tm-dashboard-body .tm-property:first-child { margin-top: 16px; }
 @keyframes tmReveal { from { opacity: 0; transform: translateY(-6px); } to { opacity: 1; transform: none; } }
 
-/* Dashboard sidebar polish: one navy surface, clearer hierarchy, subtle motion. */
 .db-sidebar {
   background: #0f2748 !important;
 }
@@ -6482,18 +6253,13 @@ body.db-sidebar-expanded .db-side-submenu > div {
   }
 }
 
-/* ----- property/css/dashboard/12-professional-due-diligence.css ----- */
 .dd-tool{background:#fff;border-radius:18px;color:#17304d}.dd-intro{background:linear-gradient(135deg,#102d50,#133c60);border-radius:16px;color:#fff;padding:20px 22px}.dd-pro-badge{color:#64d1c9;font-size:9px;font-weight:850;letter-spacing:.12em}.dd-intro h3{color:#fff;font:800 20px "Plus Jakarta Sans",sans-serif;margin:5px 0}.dd-intro p{color:#b8c8d9;font-size:12.5px;line-height:1.55;margin:0;max-width:780px}.dd-loading,.dd-error{align-items:center;background:#f4f7fa;border-radius:14px;display:flex;gap:13px;margin-top:12px;padding:18px}.dd-loading b,.dd-loading small,.dd-error b,.dd-error span{display:block}.dd-loading small,.dd-error span{color:#738297;font-size:11px;margin-top:3px}.dd-grid{display:grid;gap:12px;grid-template-columns:repeat(2,minmax(0,1fr));margin-top:12px}.dd-signal{background:#f6f9fb;border-radius:15px;padding:16px}.dd-signal.review{background:#fff7f1}.dd-signal.watch{background:#fffaf0}.dd-signal.clear{background:#f0f8f6}.dd-signal-head{align-items:center;display:flex;gap:10px}.dd-signal-head>i{align-items:center;background:#fff;border-radius:10px;color:#078486;display:flex;height:36px;justify-content:center;width:36px}.dd-signal-head>span{flex:1}.dd-signal-head b,.dd-signal-head small{display:block}.dd-signal-head b{color:#18304e;font-size:12.5px}.dd-signal-head small{color:#7d8b9c;font-size:9.5px;margin-top:2px}.dd-signal-head strong{background:#fff;border-radius:99px;color:#40536a;font-size:9px;padding:5px 8px;text-transform:uppercase}.dd-signal.review .dd-signal-head strong,.dd-signal.watch .dd-signal-head strong{color:#a15025}.dd-signal>p{color:#596b80;font-size:11.5px;line-height:1.55;margin:13px 0 0}.dd-records{list-style:none;margin:12px 0 0;padding:0}.dd-records li{align-items:flex-start;border-top:1px solid rgba(30,61,88,.09);display:flex;font-size:10.5px;gap:12px;justify-content:space-between;padding:9px 0}.dd-records li>span:last-child{text-align:right}.dd-records b,.dd-records small{display:block}.dd-records b{color:#263e59}.dd-records small{color:#8290a0;margin-top:2px}.dd-pills{display:flex;flex-wrap:wrap;gap:5px;margin-top:13px}.dd-pills span{background:#fff;border-radius:99px;color:#63758a;font-size:9px;padding:5px 7px}.dd-pills .hit{background:#f4ded3;color:#983f22;font-weight:800}.dd-caveat{align-items:flex-start;background:#f5f7f9;border-radius:12px;color:#718095;display:flex;font-size:10.5px;gap:10px;line-height:1.5;margin-top:12px;padding:12px 14px}.dd-caveat i{color:#078486;margin-top:2px}.dd-caveat p{margin:0}.dd-caveat b{color:#42556b}.dd-sources{display:flex;gap:8px;margin-top:10px}.dd-sources a,.dd-refresh{background:#eef6f5;border:0;border-radius:8px;color:#087f81;font-size:10px;font-weight:800;padding:7px 9px;text-decoration:none}.dd-refresh{cursor:pointer;margin-top:10px}.dd-portfolio-lede{color:#68788b;font-size:12px;line-height:1.55}.dd-portfolio-links{display:grid;gap:6px;grid-template-columns:repeat(2,minmax(0,1fr))}.dd-portfolio-links a{align-items:center;background:#f4f7fa;border-radius:9px;color:#294762;display:flex;font-size:11px;font-weight:750;justify-content:space-between;padding:10px 12px;text-decoration:none}.dd-portfolio-links a:hover{background:#edf6f5;color:#087f81}@media(max-width:760px){.dd-grid,.dd-portfolio-links{grid-template-columns:1fr}.dd-intro{padding:17px}.dd-signal{padding:14px}.dd-records li{display:grid}.dd-records li>span:last-child{text-align:left}}
 .dd-micro{font-size:10px!important;color:#718095!important}.dd-actions{display:flex;gap:10px;margin:10px 0}.pw-stack{display:grid;gap:16px;margin-top:16px}.pw-card{background:#f7f9fb;border-radius:18px;padding:20px}.pw-head{display:flex;gap:13px;align-items:flex-start;margin-bottom:16px}.pw-head>i{width:40px;height:40px;border-radius:13px;background:#078486;color:#fff;display:grid;place-items:center;flex:0 0 auto}.pw-head span{font-size:9px;letter-spacing:.13em;font-weight:900;color:#078486}.pw-head h4{font-size:18px;margin:2px 0 4px;color:#17304d}.pw-head p,.pw-note{margin:0;color:#68788b;line-height:1.5}.pw-inputs{display:grid;grid-template-columns:1fr 1fr;gap:10px}.pw-inputs label{font-size:10px;font-weight:800;text-transform:uppercase;color:#718095}.pw-inputs input,.pw-checklist select{box-sizing:border-box;width:100%;margin-top:5px;border:1px solid #dce4ec;border-radius:10px;padding:9px 10px;background:#fff;color:#17304d}.pw-results{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;margin:13px 0}.pw-results div{background:#fff;border-radius:12px;padding:12px}.pw-results b{display:block;font-size:15px;color:#17304d}.pw-results span{font-size:9px;color:#718095;text-transform:uppercase}.pw-stat{background:#e8f5f3;color:#096d70;border-radius:11px;padding:10px 12px;margin-bottom:10px}.pw-checklist{display:grid;gap:6px}.pw-checklist label{display:grid;grid-template-columns:1fr 180px;align-items:center;gap:10px;background:#fff;border-radius:10px;padding:7px 10px;color:#294762;font-size:11px;font-weight:750}.pw-checklist select{margin:0}.pw-note{font-size:10.5px;margin-top:12px}.dd-warn{color:#ad4f1d!important}@media(max-width:700px){.pw-inputs,.pw-results{grid-template-columns:1fr 1fr}.pw-checklist label{grid-template-columns:1fr}.pw-card{padding:15px}}
 
-/* ----- property/css/dashboard/13-professional-intelligence.css ----- */
 .pci-hero{align-items:center;background:#f6f9fb;border-radius:14px;display:flex;gap:18px;margin:12px 0;padding:15px 17px}.pci-hero>div{align-items:baseline;display:flex;gap:5px;white-space:nowrap}.pci-hero>div b{color:#123b73;font:800 28px/1 "Plus Jakarta Sans",sans-serif}.pci-hero>div span{color:#7d8998;font-size:9px;font-weight:800;text-transform:uppercase}.pci-hero p{color:#516278;font-size:11px;line-height:1.5;margin:0}.pci-grid{display:grid;gap:8px;grid-template-columns:repeat(2,minmax(0,1fr));margin:12px 0}.pci-grid>div{background:#fff;border:1px solid #e4eaf0;border-radius:11px;display:grid;gap:3px;grid-template-columns:minmax(0,1fr) 34px;padding:10px 12px}.pci-grid span{color:#617288;font-size:10px}.pci-grid b{color:#173e75;font-size:11px;text-align:right}.pci-grid i{background:#eaf0f3;border-radius:8px;display:block;grid-column:1/-1;height:4px;overflow:hidden}.pci-grid em{background:#078486;border-radius:8px;display:block;height:100%}.pci-scenarios{display:grid;grid-template-columns:repeat(auto-fit,minmax(105px,1fr));margin:12px 0;overflow:hidden}.pci-scenarios span{border-right:1px solid #e4e9ee;padding:5px 10px}.pci-scenarios span:last-child{border-right:0}.pci-scenarios small,.pci-scenarios b{display:block}.pci-scenarios small{color:#7b8898;font-size:8.5px}.pci-scenarios b{color:#173e75;font-size:13px;margin-top:2px}.pci-portfolio>a{align-items:center;border-top:1px solid #e7edf2;color:#43566c;display:flex;font-size:11px;justify-content:space-between;padding:10px 4px;text-decoration:none}.pci-portfolio>a b{color:#173e75}.rai-grid{display:grid;gap:7px;grid-template-columns:repeat(2,minmax(0,1fr));margin:12px 0}.rai-grid>a{align-items:center;background:#f8fafb;border:1px solid #e4eaf0;border-radius:11px;color:inherit;display:grid;gap:10px;grid-template-columns:minmax(0,1fr) 35px 8px;padding:10px 12px;text-decoration:none}.rai-grid span,.rai-grid b,.rai-grid small{display:block}.rai-grid b{color:#173e75;font-size:10.5px}.rai-grid small{color:#798698;font-size:8.8px;line-height:1.3;margin-top:2px}.rai-grid strong{color:#087f81;font:800 14px "Plus Jakarta Sans",sans-serif;text-align:right}.rai-grid i{color:#a0aab5;font-size:8px}@media(max-width:720px){.pci-hero{align-items:flex-start;display:block}.pci-hero p{margin-top:8px}.pci-grid,.rai-grid{grid-template-columns:1fr}.pci-scenarios{grid-template-columns:repeat(2,minmax(0,1fr))}.pci-scenarios span:nth-child(2n){border-right:0}}
 
-/* ----- property/css/dashboard/14-appeal-opportunity.css ----- */
 .aoi-hero{align-items:center;background:#f5f8fb;border-radius:16px;display:grid;gap:22px;grid-template-columns:150px 1fr;margin:18px 0;padding:20px}.aoi-score{align-items:center;background:#10294b;border-radius:14px;color:#fff;display:flex;flex-direction:column;justify-content:center;min-height:118px}.aoi-score b{font:800 48px/1 "Plus Jakarta Sans",sans-serif;letter-spacing:-.055em}.aoi-score span{color:#b9cada;font-size:10px;font-weight:800;letter-spacing:.05em;margin-top:7px;text-transform:uppercase}.aoi-hero strong{color:#10294b;font:800 18px/1.3 "Plus Jakarta Sans",sans-serif}.aoi-hero p{color:#5f6f82;font-size:13.5px;line-height:1.55;margin:6px 0 10px}.aoi-confidence{background:#e6f5f3;border-radius:99px;color:#087f81;display:inline-block;font-size:10px;font-weight:850;padding:5px 9px}.aoi-parts{display:grid;gap:8px;grid-template-columns:repeat(2,minmax(0,1fr));margin:15px 0}.aoi-parts>div{background:#fff;border:1px solid #e0e7ed;border-radius:11px;display:grid;gap:6px;grid-template-columns:1fr auto;padding:11px 12px}.aoi-parts span{color:#617287;font-size:11px;font-weight:700}.aoi-parts b{color:#173e75;font-size:12px}.aoi-parts i{background:#edf2f5;border-radius:99px;display:block;grid-column:1/-1;height:5px;overflow:hidden}.aoi-parts em{background:linear-gradient(90deg,#078486,#55c8c1);border-radius:inherit;display:block;height:100%}@media(max-width:640px){.aoi-hero{grid-template-columns:1fr}.aoi-score{min-height:100px}.aoi-parts{grid-template-columns:1fr}}
 
-/* ----- property/css/dashboard/15-readability.css ----- */
-/* Readability pass — keep dense data useful without falling into 9–10px UI text. */
 @media (min-width: 761px) {
   .top-eyebrow { font-size: 11px !important; }
   .who h1 { font-size: clamp(24px, 2vw, 31px) !important; line-height: 1.12 !important; }
@@ -6519,7 +6285,6 @@ body.db-sidebar-expanded .db-side-submenu > div {
 
 html.access-pending body { visibility: hidden; }
 
-/* ----- property/css/dashboard/16-title-evidence-graph.css ----- */
 .teg-tool{background:linear-gradient(145deg,#0e2947,#103a55);border-radius:20px;color:#fff;margin:18px 0;overflow:hidden;padding:24px}.teg-intro{max-width:850px}.teg-badge{color:#6fd5cc;font:850 9px 'Plus Jakarta Sans',sans-serif;letter-spacing:.12em;text-transform:uppercase}.teg-intro h3{font:800 26px/1.12 'Plus Jakarta Sans',sans-serif;margin:7px 0 8px}.teg-intro p{color:#c2d1dc;font-size:14px;line-height:1.6;margin:0}.teg-loading{align-items:center;display:flex;gap:14px;margin-top:20px;padding:24px 0}.teg-loading b,.teg-loading small{display:block}.teg-loading small{color:#9fb5c6;margin-top:4px}.teg-summary{display:grid;gap:10px;grid-template-columns:repeat(3,1fr);margin:22px 0 14px}.teg-summary>div{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.09);border-radius:14px;padding:14px}.teg-summary span,.teg-summary small{color:#a9becd;display:block;font-size:10px}.teg-summary span{font-weight:800;letter-spacing:.08em;text-transform:uppercase}.teg-summary b{display:block;font:800 24px 'Plus Jakarta Sans',sans-serif;margin:4px 0}.teg-map{background:#f6f9fa;border-radius:18px;color:#17304e;padding:18px;position:relative}.teg-center{background:#0e8b89;border:4px solid #d8f1ef;border-radius:16px;box-shadow:0 12px 24px rgba(9,60,72,.15);color:#fff;margin:0 auto 22px;max-width:390px;padding:14px 18px;position:relative;text-align:center;z-index:2}.teg-center:after{background:#b8cbd5;bottom:-25px;content:'';height:25px;left:50%;position:absolute;width:2px}.teg-center span,.teg-center small{display:block}.teg-center span{color:#c8f3ef;font-size:9px;font-weight:850;letter-spacing:.1em;text-transform:uppercase}.teg-center b{display:block;font:800 18px 'Plus Jakarta Sans',sans-serif;margin:4px 0}.teg-center small{color:#d2e8e8;font-size:11px}.teg-nodes{display:grid;gap:12px;grid-template-columns:repeat(3,1fr);position:relative}.teg-nodes:before{background:#b8cbd5;content:'';height:2px;left:16.7%;position:absolute;right:16.7%;top:-12px}.teg-node{background:#fff;border:1px solid #dbe5ea;border-radius:14px;box-shadow:0 5px 15px rgba(18,48,78,.04);min-width:0;padding:14px;position:relative}.teg-node:before{background:#b8cbd5;content:'';height:12px;left:50%;position:absolute;top:-13px;width:2px}.teg-node-top{align-items:center;display:flex;gap:9px}.teg-node-icon{align-items:center;background:#eef4f5;border-radius:10px;color:#3a6c79;display:flex;height:35px;justify-content:center;width:35px}.teg-node b{display:block;font:800 12px 'Plus Jakarta Sans',sans-serif}.teg-node small{color:#708397;display:block;font-size:9px;margin-top:2px}.teg-node p{color:#5d7184;font-size:10.5px;line-height:1.5;margin:10px 0}.teg-node a{color:#0c7777;font-size:9.5px;font-weight:800;text-decoration:none}.teg-node.review{border-color:#e8c2b9}.teg-node.review .teg-node-icon{background:#fff0ec;color:#b04732}.teg-node.watch{border-color:#e4d8aa}.teg-node.watch .teg-node-icon{background:#fff8df;color:#8e711d}.teg-node.ok .teg-node-icon{background:#e9f6ef;color:#247b4e}.teg-next{background:rgba(255,255,255,.07);border-radius:14px;display:flex;gap:13px;margin-top:14px;padding:15px}.teg-next>i{color:#6bd1c9;margin-top:3px}.teg-next b{font:800 12px 'Plus Jakarta Sans',sans-serif}.teg-next p{color:#b9cad7;font-size:11px;line-height:1.55;margin:5px 0 0}.teg-actions{display:flex;flex-wrap:wrap;gap:9px;margin-top:14px}.teg-actions button{background:#fff;border:0;border-radius:11px;color:#17304e;cursor:pointer;font:800 11px 'Plus Jakarta Sans',sans-serif;min-height:43px;padding:0 13px}.teg-actions button+button{background:rgba(255,255,255,.1);color:#fff}.teg-error{background:#fff0ec;border-radius:12px;color:#a33f31;margin-top:18px;padding:15px}
 @media(max-width:860px){.teg-nodes{grid-template-columns:1fr 1fr}.teg-nodes:before{display:none}.teg-node:before{display:none}}
 @media(max-width:600px){.teg-tool{border-radius:18px;margin:14px -2px;padding:20px 15px}.teg-intro h3{font-size:23px}.teg-intro p{font-size:14.5px}.teg-summary{grid-template-columns:1fr 1fr}.teg-summary>div:last-child{grid-column:1/-1}.teg-map{padding:14px}.teg-nodes{grid-template-columns:1fr}.teg-center:after{display:none}.teg-node{padding:15px}.teg-node b{font-size:13px}.teg-node small{font-size:10px}.teg-node p{font-size:12px}.teg-node a{font-size:11px}.teg-actions{display:grid;grid-template-columns:1fr}.teg-actions button{font-size:12px;min-height:48px}}
@@ -6527,10 +6292,8 @@ html.access-pending body { visibility: hidden; }
 @media(max-width:860px){.teg-permit-stats,.teg-permit-meta{grid-template-columns:repeat(2,minmax(0,1fr))}.teg-permit-source{grid-template-columns:1fr 1fr}.teg-permit-source a{grid-column:1/-1}}
 @media(max-width:600px){.teg-permits{padding:15px}.teg-permit-head{display:block}.teg-permit-head h4{font-size:18px}.teg-permit-head>strong{display:inline-block;margin-top:9px}.teg-permit-stats,.teg-permit-meta,.teg-source-grid,.teg-permit-source{grid-template-columns:1fr}.teg-permit-card-head{display:block}.teg-permit-status{display:inline-block;margin-top:8px}.teg-permit-source a{grid-column:auto;white-space:normal}}
 
-/* ----- property/css/dashboard/17-evidence-graph-v2.css ----- */
 .teg-fresh{align-items:flex-start;background:#eaf4f4;border-radius:13px;color:#17304e;display:flex;gap:11px;margin-top:14px;padding:13px 15px}.teg-fresh>i{color:#078486;margin-top:2px}.teg-fresh b,.teg-fresh span{display:block}.teg-fresh b{font:800 11px "Plus Jakarta Sans",sans-serif}.teg-fresh span{color:#587081;font-size:10.5px;line-height:1.5;margin-top:4px}.teg-actions a{align-items:center;background:#58c6bd;border-radius:11px;color:#092b3e;display:flex;font:800 11px "Plus Jakarta Sans",sans-serif;gap:7px;justify-content:center;min-height:43px;padding:0 13px;text-decoration:none}@media(max-width:600px){.teg-fresh{padding:13px}.teg-fresh b{font-size:12px}.teg-fresh span{font-size:11.5px}.teg-actions a{font-size:12px;min-height:48px}}
 
-/* ----- property/css/account-pricing.css ----- */
 .ac-success {
   display: flex;
   gap: 14px;
@@ -6699,7 +6462,6 @@ html.access-pending body { visibility: hidden; }
   .ac-popular { margin-top: -31px; }
 }
 
-/* ----- property/css/report-builder-fixes.css ----- */
 .rb-modal { padding: 20px; }
 
 .rb-modal-card {
@@ -6735,12 +6497,6 @@ html.access-pending body { visibility: hidden; }
 }
 
 
-/* ===== property/css/home.css ===== */
-/* ----- property/css/home/01-report-analysis.css ----- */
-/* ============================================================
-   PROPERTY REPORT  +  condensed metrics and tooltips
-   njpropertytaxrelief.com/property
-   ============================================================ */
 .hm-top { border-bottom: 1px solid var(--hair); background: #fff; position: sticky; top: 0; z-index: 40; }
 .hm-top-in { max-width: 1080px; margin: 0 auto; padding: 12px 24px;
   display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
@@ -6793,7 +6549,6 @@ html.access-pending body { visibility: hidden; }
   border-top: 1px solid var(--hair); margin-top: 34px; }
 .hm-acts .tl-btn { margin-top: 0; }
 
-/* ---------- condensed strip on dashboard cards ---------- */
 .ms { display: flex; flex-wrap: wrap; gap: 0 34px; background: #f7f9fc;
   border-radius: 8px; padding: 13px 18px; margin-bottom: 16px; }
 .ms-c { padding: 3px 0; }
@@ -6809,7 +6564,6 @@ html.access-pending body { visibility: hidden; }
 .pr-acts .prime { font-weight: 800; color: var(--accent); border-bottom-color: var(--accent); }
 .pr-acts .prime i { font-size: 10px; margin-left: 5px; }
 
-/* ---------- tooltips ---------- */
 .tip { cursor: help; border-bottom: 1px dotted var(--ink-3); }
 .tip i { font-size: 9px; margin-left: 4px; opacity: .55; }
 .tip:focus { outline: 2px solid var(--accent-2); outline-offset: 2px; border-radius: 2px; }
@@ -6819,7 +6573,6 @@ html.access-pending body { visibility: hidden; }
   pointer-events: none; }
 .tipbox.on { display: block; }
 
-/* ---------- glossary ---------- */
 .gl > div { padding: 12px 0; border-bottom: 1px solid var(--hair-2); }
 .gl > div:last-child { border-bottom: none; }
 .gl b { display: block; font-size: 14.5px; color: var(--accent); margin-bottom: 4px; }
@@ -6838,9 +6591,6 @@ html.access-pending body { visibility: hidden; }
   .hm-hero { background: #0e2248 !important; -webkit-print-color-adjust: exact; }
 }
 
-/* ============================================================
-   REASSESSMENT RISK
-   ============================================================ */
 .rr-flag { border-radius: 10px; padding: 18px 20px; margin-bottom: 20px; }
 .rr-flag.warn { background: var(--neg-bg); border-left: 4px solid var(--neg); }
 .rr-flag.info { background: var(--gold-bg); border-left: 4px solid var(--gold); }
@@ -6871,11 +6621,6 @@ html.access-pending body { visibility: hidden; }
 .rr-say b { color: var(--ink); }
 .comps td.neg { color: var(--neg); font-weight: 700; }
 
-/* ============================================================
-   AGENT INTEL
-   Outlined, not filled. The headshot sits on the border so the panel
-   reads as something a person wrote rather than a system message.
-   ============================================================ */
 .ai {
   position: relative; border: 1.5px solid var(--hair); border-radius: 14px;
   padding: 30px 28px 24px; margin: 26px 0 30px; max-width: 820px;
@@ -6904,9 +6649,6 @@ html.access-pending body { visibility: hidden; }
   .ai .hm-lede { font-size: 16px; }
 }
 
-/* ============================================================
-   REVALUATION RADAR
-   ============================================================ */
 .rv-head { display: flex; gap: 22px; align-items: flex-start; margin-bottom: 24px; flex-wrap: wrap; }
 .rv-score { flex-shrink: 0; text-align: center; padding: 15px 22px; border-radius: 10px; min-width: 104px; }
 .rv-score b { display: block; font-family: var(--sans); font-size: 36px; font-weight: 800;
@@ -6947,10 +6689,6 @@ html.access-pending body { visibility: hidden; }
 .tt-chart { margin: 4px 0 16px; max-width: 620px; }
 .tt-chart-lbl { display: flex; justify-content: space-between; font-size: 11.5px; color: var(--ink-3); margin-top: 4px; }
 
-/* ----- property/css/home/02-benefits-revaluation.css ----- */
-/* ============================================================
-   BENEFIT STACK  +  BUYER TRUE COST
-   ============================================================ */
 .sb-stack { border: 1px solid var(--hair); border-radius: 10px; overflow: hidden; max-width: 620px; }
 .sb-l { display: flex; justify-content: space-between; gap: 18px; align-items: flex-start;
   padding: 13px 18px; border-bottom: 1px solid var(--hair-2); font-size: 14.5px; color: var(--ink-2); }
@@ -7017,9 +6755,6 @@ html.access-pending body { visibility: hidden; }
 .bc-proj td b { color: var(--neg); }
 .bc-proj p { font-size: 12.5px; color: var(--ink-3); line-height: 1.6; margin: 12px 0 0; }
 
-/* ============================================================
-   ABATEMENT EXPOSURE
-   ============================================================ */
 .ab-head { display: flex; gap: 22px; align-items: flex-start; flex-wrap: wrap; margin-bottom: 22px; }
 .ab-n { flex-shrink: 0; text-align: center; padding: 15px 20px; border-radius: 10px; min-width: 118px; }
 .ab-n b { display: block; font-family: var(--sans); font-size: 30px; font-weight: 800;
@@ -7054,10 +6789,6 @@ html.access-pending body { visibility: hidden; }
 .ab-limit p { font-size: 13.5px; line-height: 1.7; color: var(--ink-2); margin: 0 0 10px; }
 .ab-limit p:last-child { margin-bottom: 0; }
 
-/* ----- property/css/home/03-property-tools.css ----- */
-/* ============================================================
-   LAND / BUILDING SPLIT  +  CLASS MIX
-   ============================================================ */
 .ir-split { max-width: 620px; margin-bottom: 22px; }
 .ir-row { display: flex; align-items: center; gap: 14px; margin-bottom: 10px; font-size: 13px; }
 .ir-row > span { width: 150px; flex-shrink: 0; color: var(--ink-2); }
@@ -7111,9 +6842,6 @@ html.access-pending body { visibility: hidden; }
   .ir-key { margin-left: 114px; }
 }
 
-/* ============================================================
-   APPEAL PACKET
-   ============================================================ */
 .pk-ok, .pk-warn { display: flex; gap: 13px; border-radius: 10px; padding: 15px 18px;
   font-size: 14.5px; line-height: 1.7; color: var(--ink-2); max-width: 740px; margin-bottom: 20px; }
 .pk-ok { background: var(--pos-bg); border-left: 4px solid var(--pos); }
@@ -7137,9 +6865,6 @@ html.access-pending body { visibility: hidden; }
 .pk-acts .pk-go { background: var(--accent); color: #fff; border-color: var(--accent); }
 .pk-acts .pk-go:hover { background: var(--accent-2); border-color: var(--accent-2); }
 
-/* ============================================================
-   RELOCATION  +  PORTFOLIO SCREEN
-   ============================================================ */
 .rl-in { display: flex; gap: 18px; align-items: flex-end; flex-wrap: wrap; margin-bottom: 22px; }
 .rl-b label, .rl-t label { display: block; font-size: 11px; font-weight: 700; text-transform: uppercase;
   letter-spacing: .07em; color: var(--ink-3); margin-bottom: 6px; }
@@ -7186,13 +6911,6 @@ table.rl-t .na { color: var(--ink-3); font-size: 12px; }
 
 @media (max-width: 640px) { .rl-sels select { min-width: 100%; } }
 
-/* ----- property/css/home/04-scorecard-workspace.css ----- */
-/* ============================================================
-   SCORECARD  +  ACCORDION
-   The page has to be scannable closed and complete open. The closed
-   state carries a verdict on every header so nothing has to be
-   opened just to find out whether it matters.
-   ============================================================ */
 .sc-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(215px, 1fr));
   gap: 14px; margin: 26px 0 34px; }
 .sc-c { text-align: left; background: #fff; border: 1px solid var(--hair); border-left-width: 4px;
@@ -7241,7 +6959,6 @@ table.rl-t .na { color: var(--ink-3); font-size: 12px; }
   letter-spacing: .09em; color: var(--ink-3); margin-bottom: 5px; }
 .sec2-pro span { font-size: 13.5px; line-height: 1.65; color: var(--ink-2); }
 
-/* inside a section the tool cards lose their own rules; the section provides them */
 .sec2-b .sec { border-top: none; margin-top: 0; padding-top: 0; }
 .sec2-b .sec + .sec { border-top: 1px solid var(--hair-2); margin-top: 26px; padding-top: 26px; }
 
@@ -7256,11 +6973,6 @@ table.rl-t .na { color: var(--ink-3); font-size: 12px; }
 }
 @media (max-width: 420px) { .sc-cards { grid-template-columns: 1fr; } }
 
-/* ============================================================
-   DASHBOARD-INTEGRATED PROPERTY REPORT
-   The report keeps its deep analysis but now lives inside the same Watchdog
-   workspace chrome as the property collection.
-   ============================================================ */
 .hm-dashboard-page { background: var(--saas-bg, #f4f7f9); }
 .hm-dashboard-page #hm-main { background: var(--saas-bg, #f4f7f9); min-height: 100vh; }
 .hm-dashboard-page .db-workspace { background: var(--saas-bg, #f4f7f9); }
@@ -7362,8 +7074,6 @@ table.rl-t .na { color: var(--ink-3); font-size: 12px; }
   .hm-dashboard-page .hm-wrap { padding: 24px; }
 }
 
-/* ----- property/css/home/05-marker-experience.css ----- */
-/* Home signal system: no colored rails; category, icon and summary carry hierarchy. */
 .hm-dashboard-page .sc-c{border-left-width:1px}.hm-dashboard-page .sc-c.good,.hm-dashboard-page .sc-c.bad,.hm-dashboard-page .sc-c.mid,.hm-dashboard-page .sc-c:not(.good):not(.bad):not(.mid){border-left-color:var(--hair)}
 .hm-dashboard-page .sec2{position:relative}.hm-dashboard-page .sec2.open{border-color:#dfe7ec;box-shadow:0 11px 30px rgba(16,41,75,.055)}.hm-dashboard-page .sec2-h{gap:13px}.sec2-icon-tile{align-items:center;background:#edf5f5;border-radius:11px;color:#078486;display:flex;flex:0 0 auto;height:39px;justify-content:center;width:39px}.sec2-icon-tile .sec2-i{color:inherit;font-size:16px;width:auto}.sec2-copy{display:block;flex:1;min-width:0}.sec2-kicker{color:#8290a0;display:block;font-size:8.5px;font-weight:850;letter-spacing:.11em;margin-bottom:3px;text-transform:uppercase}.sec2-copy .sec2-t{display:block}.sec2-copy .sec2-s{display:block;font-size:11.5px;line-height:1.35;margin-top:3px;text-align:left}.sec2-cat-assessment .sec2-icon-tile,.sec2-cat-appeals .sec2-icon-tile{background:#eaf0fa;color:#285b9d}.sec2-cat-benefits .sec2-icon-tile,.sec2-cat-buyer-costs .sec2-icon-tile{background:#fbf4df;color:#8b6b12}.sec2-cat-professional-diligence .sec2-icon-tile{background:#f0ecfa;color:#694aa0}.sec2-cat-land-use .sec2-icon-tile{background:#ebf5eb;color:#367d4a}.sec2-cat-tax-outlook .sec2-icon-tile,.sec2-cat-town-health .sec2-icon-tile{background:#e8f6f4;color:#087f81}.sec2-cat-property-history .sec2-icon-tile{background:#f1f2f4;color:#526276}
 .hm-dashboard-page .sec2-pro,.hm-dashboard-page .rr-flag,.hm-dashboard-page .rv-own,.hm-dashboard-page .bc-warn,.hm-dashboard-page .bc-ok,.hm-dashboard-page .ab-mine,.hm-dashboard-page .ir-say,.hm-dashboard-page .cm-say,.hm-dashboard-page .pk-ok,.hm-dashboard-page .pk-warn,.hm-dashboard-page .rl-say,.hm-dashboard-page .iv-say,.hm-dashboard-page .xp-read,.hm-dashboard-page .ap-ev,.hm-dashboard-page .pf-say,.hm-dashboard-page .un-say,.hm-dashboard-page .ab-say,.hm-dashboard-page .pct-say{border-left:0!important;border-radius:12px!important}.hm-dashboard-page .sec2-pro{background:#f4f7f9;padding:13px 15px}.hm-dashboard-page .sec2.bad .sec2-i,.hm-dashboard-page .sec2.good .sec2-i{color:inherit}
@@ -7375,24 +7085,17 @@ table.rl-t .na { color: var(--ink-3); font-size: 12px; }
 @media(max-width:720px){.hs-signal{align-items:stretch;display:block;padding:10px}.hs-open{grid-template-columns:34px minmax(0,1fr) 10px}.hs-open>strong{display:none}.hs-icon{height:34px;width:34px}.hs-copy small{white-space:normal;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2}.hs-tool{margin-left:45px;margin-top:8px}.hs-full{padding:14px}}
 @media(max-width:720px){.sec2-copy .sec2-s{color:#738297;display:block;font-size:11.5px}.sec2-kicker{font-size:8px}.hm-dashboard-page .sec2-h{align-items:center;gap:11px}.sec2-icon-tile{height:40px;width:40px}.hm-dashboard-page .sc-c{border:0}.sc-main{padding:15px}.sc-data{padding:9px 15px}.hm-figs .dm{padding:5px 3px}}
 
-/* ----- property/css/home/06-statewide-modiv.css ----- */
 .mi-panel{color:#536579}.mi-head{align-items:flex-start;display:flex;gap:20px;justify-content:space-between;margin-bottom:18px}.mi-head>div>span{color:#078486;font-size:9px;font-weight:850;letter-spacing:.12em}.mi-head h3{color:#10294b;font:800 22px/1.15 "Plus Jakarta Sans",sans-serif;margin:5px 0}.mi-head p{font-size:13px;line-height:1.55;margin:0;max-width:720px}.mi-head>a{background:#f2f6f7;border-radius:10px;color:#496276;font-size:10px;font-weight:800;padding:9px 11px;text-decoration:none;white-space:nowrap}.mi-grid{display:grid;gap:9px;grid-template-columns:repeat(3,minmax(0,1fr))}.mi-tile{align-items:center;background:#f7f9fb;border-radius:14px;display:flex;gap:11px;min-width:0;padding:13px;text-decoration:none;transition:background .16s ease,transform .16s ease}.mi-tile:hover{background:#edf6f5;transform:translateY(-1px)}.mi-icon{align-items:center;background:#e7f3f2;border-radius:10px;color:#078486;display:flex;flex:0 0 auto;height:36px;justify-content:center;width:36px}.mi-tile>span:last-child{min-width:0}.mi-tile small{color:#718196;display:block;font-size:9px;font-weight:750;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.mi-tile b{color:#16395f;display:block;font:800 16px/1.2 "Plus Jakarta Sans",sans-serif;margin-top:2px}.mi-tile em{color:#7e8b9c;display:block;font-size:8.5px;font-style:normal;margin-top:4px}.mi-tile em i{font-size:7px;margin-left:3px}.mi-sub{align-items:end;border-top:1px solid #e7ecef;display:flex;gap:10px;justify-content:space-between;margin:19px 0 10px;padding-top:17px}.mi-sub b{color:#173a5d;font-size:12px}.mi-sub span{font-size:10px}.mi-advanced .mi-tile{background:#fbfbfc}.mi-locked{align-items:center;background:#f5f7f9;border-radius:14px;display:flex;gap:12px;margin-top:16px;padding:15px}.mi-locked>i{color:#9a7b20;font-size:18px}.mi-locked b{color:#183756;display:block;font-size:12px}.mi-locked span{display:block;font-size:10.5px;line-height:1.45;margin-top:2px}.mi-note{border-top:1px solid #edf0f2;color:#8592a1!important;font-size:10px!important;line-height:1.5!important;margin:18px 0 0!important;padding-top:13px}.mi-note b{color:#607286}
 @media(max-width:760px){.mi-head{display:block}.mi-head>a{display:inline-block;margin-top:12px}.mi-grid{grid-template-columns:1fr 1fr}.mi-tile{padding:11px}.mi-icon{height:34px;width:34px}.mi-tile b{font-size:14px}.mi-sub{align-items:flex-start;display:block}.mi-sub span{display:block;margin-top:2px}}
 @media(max-width:430px){.mi-grid{grid-template-columns:1fr}.mi-tile small{font-size:10px}.mi-tile b{font-size:16px}.mi-tile em{font-size:9.5px}}
 
 
-/* ===== property/css/mobile-app.css ===== */
-/* ============================================================
-   WATCHDOG MOBILE APP POLISH · Dashboard + Property Report
-   Phone-only hierarchy. Desktop remains unchanged.
-   ============================================================ */
 @media (max-width:768px){
   html{-webkit-text-size-adjust:100%;scroll-padding-bottom:96px}
   body{background:#f4f6f8;-webkit-tap-highlight-color:transparent;font-family:var(--font-ui)}
   button,a,select,input{touch-action:manipulation}
   .db-workspace{padding-bottom:94px}
 
-  /* Floating app navigation: safe-area aware, large touch targets. */
   .db-sidebar{background:rgba(8,29,55,.96);border:1px solid rgba(255,255,255,.09);border-radius:22px;
     bottom:max(9px,env(safe-area-inset-bottom));box-shadow:0 12px 36px rgba(7,23,44,.28);height:72px;
     left:10px;padding:6px 7px;right:10px;width:auto;-webkit-backdrop-filter:blur(18px);backdrop-filter:blur(18px)}
@@ -7403,7 +7106,6 @@ table.rl-t .na { color: var(--ink-3); font-size: 12px; }
   .db-side-mobile .pn.on::after{height:3px;left:34%;right:34%;top:1px}
   .intel-nav-dot{right:calc(50% - 19px);top:7px}
 
-  /* Dashboard: less chrome, more property. */
   .top{background:#fff;border-bottom:1px solid #e6ebef}
   .top-in{align-items:center;gap:12px;min-height:78px;padding:12px 14px}
   .who{align-items:center;gap:10px;min-width:0}
@@ -7440,7 +7142,6 @@ table.rl-t .na { color: var(--ink-3); font-size: 12px; }
   .ti-mini>div,.bp-mini>div{padding:10px 9px!important}.ti-mini b,.bp-mini b{font-size:var(--type-sm)!important}.ti-mini small,.bp-mini small{font-size:var(--type-xs)!important;line-height:1.25!important}
   .pr-card-actions{gap:8px;margin-top:13px}.pr-card-actions a,.pr-card-actions button{border-radius:var(--radius-md);font-size:var(--type-sm);min-height:46px;padding:9px 6px}
 
-  /* Agent Intel becomes a true app sheet instead of a compressed report card. */
   .mobile-intel-overlay,.hm-mobile-intel{align-items:flex-end;background:rgba(5,17,32,.5);display:flex;inset:0;justify-content:center;opacity:0;padding:0;pointer-events:none;position:fixed;z-index:5000}
   .mobile-intel-overlay.open,.hm-mobile-intel.open{opacity:1;pointer-events:auto}
   .mobile-intel-sheet{background:#fff;border:0;border-radius:28px 28px 0 0;box-shadow:0 -18px 50px rgba(7,24,46,.20);box-sizing:border-box;max-height:calc(100dvh - 34px);max-width:none;overflow:auto;overscroll-behavior:contain;padding:50px 22px calc(124px + env(safe-area-inset-bottom));scroll-padding-bottom:142px;transform:translateY(24px);width:100%}
@@ -7452,7 +7153,6 @@ table.rl-t .na { color: var(--ink-3); font-size: 12px; }
   .ai.ai-mobile .ai-h img{height:52px;width:52px}.ai.ai-mobile .ai-h b{font-size:var(--type-xl);line-height:1.2}.ai.ai-mobile .ai-h span{font-size:var(--type-sm);line-height:1.35;margin-top:3px}
   .ai.ai-mobile .hm-lede{font-size:var(--type-lg);line-height:1.62;margin-top:18px!important}.ai.ai-mobile .ai-pts{margin-bottom:16px;margin-top:26px}.ai.ai-mobile .ai-pts li{font-size:var(--type-md);gap:14px;line-height:1.55;padding:17px 0}.ai.ai-mobile .ai-pts i{margin-top:5px}
 
-  /* Home: turn the desktop report header into a compact app header. */
   .hm-dashboard-page .top-in{min-height:78px;padding:11px 14px}
   .hm-dashboard-page .who h1{font-size:var(--type-xl)!important;max-width:min(53vw,260px)}
   .hm-dashboard-page .top-acts{gap:6px}.hm-dashboard-page .hm-head-action{border:0;background:#f0f3f6;border-radius:50%;height:40px;width:40px}
@@ -7493,12 +7193,10 @@ table.rl-t .na { color: var(--ink-3); font-size: 12px; }
 }
 
 @media (prefers-reduced-motion:reduce){.mobile-intel-sheet{transition:none!important}}
-/* Install prompt stays compact and never covers the primary mobile navigation. */
 .wd-install-note{align-items:center;background:#102a4c;border:1px solid #315276;border-radius:var(--radius-lg);bottom:calc(76px + env(safe-area-inset-bottom));box-shadow:var(--shadow-md);color:#fff;display:flex;gap:12px;left:50%;max-width:420px;padding:12px 14px;position:fixed;transform:translateX(-50%);width:calc(100% - 28px);z-index:10050}.wd-install-note span{cursor:pointer;display:grid;grid-template-columns:28px 1fr;gap:0 8px}.wd-install-note i{grid-row:1/3;color:#63d6cf;font-size:var(--type-lg);padding-top:3px}.wd-install-note b{font-size:var(--type-sm)}.wd-install-note small{color:#c1d0df;font-size:var(--type-xs);line-height:1.3}.wd-install-note button{background:transparent;border:0;color:#c1d0df;cursor:pointer;font-size:var(--type-xl);line-height:1;padding:2px}
 @media(max-width:768px){.db-add{height:50px!important;width:50px!important}.pr-card-compare{font-size:var(--type-sm)!important;min-height:48px!important;padding:10px 13px!important}.pr-card-menu .pm-btn{height:48px!important;width:48px!important}.pr-card-actions a,.pr-card-actions button{font-size:var(--type-sm)!important;min-height:52px!important}.hm-dashboard-page .hm-head-action{height:48px!important;width:48px!important}.hm-dashboard-page .hm-back,.hm-dashboard-page #hm-switch{height:52px!important}.hm-dashboard-page .hm-back{width:52px!important}.hm-dashboard-page .hm-acts a,.hm-dashboard-page .hm-acts button{font-size:var(--type-md);min-height:54px!important}.hm-commercial-note{align-items:flex-start;background:#eef6f5;border-radius:var(--radius-lg);color:#29475e;display:flex;gap:12px;margin:0 0 15px;padding:16px}.hm-commercial-note i{background:#d8ece9;border-radius:var(--radius-md);color:#087f81;padding:10px}.hm-commercial-note b{color:#15304f;display:block;font:800 var(--type-md)/1.2 var(--font-ui)}.hm-commercial-note p{font-size:var(--type-sm);line-height:1.48;margin:5px 0 0}.hm-commercial-kind{background:#f6efe1!important;color:#806014!important}}
 
 
-/* ===== property/css/mobile-menu.css ===== */
 @media(max-width:760px){
   body.wd-mobile-menu-open{overflow:hidden}
   .wd-mobile-menu{background:rgba(5,20,39,.48);inset:0;opacity:0;position:fixed;transition:opacity .18s ease;z-index:10020}
@@ -7510,16 +7208,11 @@ table.rl-t .na { color: var(--ink-3); font-size: 12px; }
   .wd-mobile-menu-sheet header button{align-items:center;background:#f1f5f7;border:0;border-radius:50%;color:#28445e;display:flex;font-size:17px;height:44px;justify-content:center;width:44px}
   .wd-mobile-menu-group{border-bottom:1px solid #e7edf1;padding:17px 0}.wd-mobile-menu-group:last-child{border:0}.wd-mobile-menu-group>span{color:#788a9f;display:block;font-size:10px;font-weight:850;letter-spacing:.12em;margin:0 0 8px;padding:0 4px}.wd-mobile-menu-group a,.wd-mobile-menu-group button{align-items:center;background:none;border:0;border-radius:12px;box-sizing:border-box;color:#183451;display:flex;font:700 16px/1.2 "Source Sans 3",sans-serif;gap:13px;min-height:52px;padding:0 10px;text-align:left;text-decoration:none;width:100%}.wd-mobile-menu-group a>i:first-child,.wd-mobile-menu-group button>i:first-child{color:#52708d;font-size:17px;text-align:center;width:21px}.wd-mobile-menu-group button{cursor:pointer}.wd-mobile-menu-group .wd-mobile-pro-link{background:#eff8f7;display:grid;grid-template-columns:21px 1fr auto;gap:13px;margin-top:5px;min-height:66px}.wd-mobile-pro-link b{font-size:16px}.wd-mobile-pro-link small{color:#6f8193;font-size:11.5px;font-weight:600;grid-column:2;line-height:1.25;margin-top:-13px}.wd-mobile-pro-link>i:last-child{color:#7890a5;font-size:12px;grid-column:3;grid-row:1 / 3}.wd-mobile-menu-group a:focus-visible,.wd-mobile-menu-group button:focus-visible,.wd-mobile-menu-sheet header button:focus-visible{outline:3px solid #0a8b8c;outline-offset:2px}
 
-  /* The fragment is shared by every workspace page. Keep the sheet independent
-     from page-specific sidebar/link rules so navigating and reopening it cannot
-     inherit Workbench or dashboard styles. */
   #wd-mobile-menu[hidden]{display:none!important}
   #wd-mobile-menu:not([hidden]){display:block!important}
   #wd-mobile-menu .wd-mobile-menu-sheet{font-family:"Source Sans 3",Arial,sans-serif}
   #wd-mobile-menu .wd-mobile-menu-group a,#wd-mobile-menu .wd-mobile-menu-group button{max-width:none!important;height:auto!important;position:relative!important;right:auto!important;top:auto!important;transform:none!important;box-shadow:none!important}
 
-  /* NJW-92: use the phone width for property imagery and leave a deliberate
-     gutter between Compare and the overflow menu. */
   body[data-sidebar-page="dashboard"] .top,body[data-sidebar-page="dashboard"] .top-in{min-height:0!important}
   body[data-sidebar-page="dashboard"] .top-in{padding-top:12px!important;padding-bottom:12px!important}
   body[data-sidebar-page="dashboard"] .pr-card,body[data-sidebar-page="dashboard"] .pr-card-media{width:100%!important;max-width:none!important}
@@ -7530,22 +7223,17 @@ table.rl-t .na { color: var(--ink-3); font-size: 12px; }
 @media(prefers-reduced-motion:reduce){.wd-mobile-menu,.wd-mobile-menu-sheet{transition:none!important}}
 
 
-/* ===== property/css/marker-intelligence.css ===== */
 .dm{color:inherit;text-decoration:none;position:relative}.dm:hover{color:inherit}.dm dt{align-items:center;display:flex;gap:6px}.dm-info{color:#8b98a8;font-size:9px;opacity:.72}.dm:hover .dm-info,.dm:focus-visible .dm-info{color:#078486;opacity:1}.dm-pop{background:#fff;border:1px solid #dfe6eb;border-radius:18px;box-shadow:0 18px 55px rgba(11,31,55,.18);box-sizing:border-box;color:#42546a;display:none;max-width:370px;padding:17px 18px;position:fixed;width:min(370px,calc(100vw - 28px));z-index:7000}.dm-pop.on{display:block}.dm-pop-top{align-items:flex-start;display:flex;gap:11px}.dm-pop-icon{align-items:center;background:#e8f6f4;border-radius:11px;color:#078486;display:flex;flex:0 0 auto;height:38px;justify-content:center;width:38px}.dm-pop h3{color:#10294b;font:800 16px/1.25 "Plus Jakarta Sans",sans-serif;margin:0}.dm-pop-value{color:#078486;display:block;font-size:13px;font-weight:800;margin-top:3px}.dm-pop p{font-size:12.5px;line-height:1.55;margin:13px 0}.dm-pop-meta{align-items:center;border-top:1px solid #edf1f3;display:flex;gap:7px;padding-top:11px}.dm-pop-meta span{background:#f0f4f6;border-radius:99px;color:#617186;font-size:8.5px;font-weight:800;padding:5px 7px;text-transform:uppercase}.dm-pop-meta b{color:#078486;font-size:10px;margin-left:auto}.dm-detail-link{align-items:center;color:#078486;display:inline-flex;font-size:11px;font-weight:800;gap:5px;margin-top:10px;text-decoration:none}
 .mk-page{background:#f5f7f8;min-height:100vh}.mk-shell{margin:0 auto;max-width:1200px;padding:32px 30px 110px}.mk-back{color:#557086;font-size:13px;font-weight:750;text-decoration:none}.mk-head{background:#fff;border-radius:24px;margin-top:18px;padding:30px}.mk-crumb{color:#738398;font-size:11px;text-transform:uppercase;letter-spacing:.1em}.mk-head h1{color:#10233f;font:800 clamp(28px,4vw,48px)/1.08 "Plus Jakarta Sans",sans-serif;margin:8px 0}.mk-head>p{color:#65758a;font-size:17px;line-height:1.55;margin:0;max-width:800px}.mk-badges{display:flex;flex-wrap:wrap;gap:7px;margin-top:18px}.mk-badges span{background:#eef3f6;border-radius:99px;color:#50657c;font-size:9px;font-weight:850;padding:6px 9px;text-transform:uppercase}.mk-badges .tier{background:#e5f4f2;color:#08797b}.mk-reading{align-items:center;background:linear-gradient(135deg,#102d50,#14506c);border-radius:20px;color:#fff;display:flex;gap:20px;justify-content:space-between;margin-top:16px;padding:22px 26px}.mk-reading span{color:#b9cbd9;font-size:11px;text-transform:uppercase}.mk-reading b{display:block;font:800 30px "Plus Jakarta Sans",sans-serif;margin-top:4px}.mk-reading small{color:#bfd0dc;font-size:12px}.mk-grid{display:grid;gap:18px;grid-template-columns:220px minmax(0,1fr);margin-top:18px}.mk-nav{background:#fff;border-radius:18px;height:max-content;padding:10px;position:sticky;top:18px}.mk-nav a{align-items:center;border-radius:11px;color:#4f6278;display:flex;font-size:12px;font-weight:750;gap:9px;padding:11px;text-decoration:none}.mk-nav a:hover{background:#eef6f5;color:#087f81}.mk-content{display:grid;gap:14px}.mk-card{background:#fff;border-radius:20px;padding:25px}.mk-card h2{color:#142b49;font:800 21px "Plus Jakarta Sans",sans-serif;margin:0 0 11px}.mk-card p,.mk-card li{color:#56697e;font-size:14.5px;line-height:1.7}.mk-source{align-items:flex-start;border-top:1px solid #e9edf0;display:flex;gap:10px;padding:13px 0}.mk-source:first-of-type{border-top:0}.mk-source i{color:#078486;margin-top:4px}.mk-source a{color:#173e75;font-weight:750}.mk-related{display:flex;flex-wrap:wrap;gap:7px}.mk-related a{background:#eef5f5;border-radius:99px;color:#087f81;font-size:10px;font-weight:800;padding:7px 10px;text-decoration:none}.mk-empty{color:#8390a0;font-size:13px}.mk-warning{background:#fff8ee;border-radius:13px;color:#805f29!important;padding:12px 14px}
 @media(max-width:760px){.dm-pop{display:none!important}.mk-shell{padding:18px 12px 105px}.mk-head{border-radius:19px;padding:22px 18px}.mk-head>p{font-size:15px}.mk-reading{align-items:flex-start;display:block;padding:19px}.mk-reading>div+div{margin-top:12px}.mk-grid{display:block}.mk-nav{display:flex;gap:5px;margin-bottom:12px;overflow:auto;padding:7px;position:static;white-space:nowrap}.mk-nav a{flex:0 0 auto}.mk-card{border-radius:17px;padding:20px 17px}}
 
-/* v0.36 marker dossier */
 .mk-section-kicker{color:#078486;display:block;font-size:9px;font-weight:850;letter-spacing:.13em;margin-bottom:5px}.mk-plain{background:linear-gradient(135deg,#fff,#f3f9f8)}.mk-plain p{color:#294866;font-size:17px;font-weight:600;line-height:1.65;margin-bottom:0}.mk-formula{background:#f4f7f9;border-radius:13px;margin-top:15px;padding:14px 16px}.mk-formula>span{color:#7f8d9d;display:block;font-size:8px;font-weight:850;letter-spacing:.12em}.mk-formula code{color:#193d61;display:block;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12px;line-height:1.55;margin-top:6px;overflow-wrap:anywhere;white-space:normal}.mk-formula small{color:#7b8998;display:block;font-size:10px;margin-top:7px}.mk-professions{display:grid;gap:9px;grid-template-columns:repeat(2,minmax(0,1fr))}.mk-professions>span{background:#f7f9fb;border-radius:13px;display:grid;gap:2px;grid-template-columns:28px 1fr;padding:13px}.mk-professions i{color:#078486;grid-row:1/3;margin-top:3px}.mk-professions b{color:#1d3b5a;font-size:12px}.mk-professions small{color:#6d7d8f;font-size:10.5px;line-height:1.45}.mk-refresh{align-items:flex-start;background:#f5f8f9;border-radius:13px;display:flex;gap:10px;margin-top:16px;padding:13px 14px}.mk-refresh i{color:#078486;margin-top:3px}.mk-refresh b{color:#294866;display:block;font-size:11px}.mk-refresh span{color:#768598;display:block;font-size:10.5px;line-height:1.5;margin-top:2px}.mk-source-intro{color:#718094!important;font-size:12.5px!important;margin-top:-3px}.mk-source-list{counter-reset:source;list-style:none;margin:17px 0 0;padding:0}.mk-source-list>li{border-top:1px solid #e7ecef;display:grid;gap:12px;grid-template-columns:120px minmax(0,1fr);padding:17px 0}.mk-source-list>li:first-child{border-top:0}.mk-source-type{color:#8693a1;font-size:8.5px;font-weight:850;letter-spacing:.08em;text-transform:uppercase}.mk-source-body b{color:#173c63;display:block;font-size:13px}.mk-source-body>span{color:#8190a1;display:block;font-size:10px;margin-top:2px}.mk-source-body a{color:#bf694c;display:block;font-size:11px;line-height:1.45;margin-top:7px;overflow-wrap:anywhere;text-decoration:none}.mk-source-body a:hover{text-decoration:underline}.mk-source-body a i{font-size:8px;margin-left:3px}.mk-source-body p{color:#788696;font-size:10.5px;line-height:1.5;margin:7px 0 0}.mk-nav a{transition:background .15s ease,color .15s ease}.mk-nav a i{width:15px;text-align:center}.mk-content section{scroll-margin-top:18px}
 @media(max-width:760px){.mk-plain p{font-size:15.5px}.mk-professions{grid-template-columns:1fr}.mk-source-list>li{display:block}.mk-source-type{margin-bottom:7px}.mk-source-body a{font-size:11.5px}.mk-nav{scrollbar-width:none}.mk-nav::-webkit-scrollbar{display:none}}
 
 
-/* ===== property/css/plan-context.css ===== */
 .dev-view-bar{align-items:center;background:#0e2748;border:1px solid rgba(255,255,255,.14);border-radius:14px;bottom:18px;box-shadow:0 14px 40px rgba(5,23,43,.28);color:#fff;display:flex;gap:10px;left:50%;padding:8px 9px 8px 12px;position:fixed;transform:translateX(-50%);z-index:8500}.dev-view-bar>div{align-items:center;display:flex;gap:9px}.dev-view-bar>div>i{color:#64d2ca}.dev-view-bar span{display:block}.dev-view-bar b{display:block;font:800 10px "Plus Jakarta Sans",sans-serif}.dev-view-bar small{color:#9fb2c8;display:block;font-size:8.5px}.dev-view-bar select{appearance:none;background:#fff;border:0;border-radius:9px;color:#15304f;font-size:11px;font-weight:800;min-width:105px;padding:8px 25px 8px 10px}.dev-view-bar label{position:relative}.dev-view-bar label:after{color:#60728a;content:"⌄";pointer-events:none;position:absolute;right:9px;top:5px}.dev-view-bar button{align-items:center;background:rgba(255,255,255,.1);border:0;border-radius:8px;color:#d5e2ee;cursor:pointer;display:flex;height:30px;justify-content:center;width:30px}.dev-view-bar>#dev-view-toggle{display:none}.plan-locked{filter:saturate(.55);opacity:.64;position:relative}.plan-locked:after{background:#10294b;border-radius:99px;color:#fff;content:"Upgrade";font-size:8px;font-weight:850;padding:4px 7px;position:absolute;right:8px;top:8px}.sr-only{clip:rect(0,0,0,0);clip-path:inset(50%);height:1px;overflow:hidden;position:absolute;white-space:nowrap;width:1px}@media(max-width:760px){.dev-view-bar{bottom:90px;height:46px;left:auto;padding:0;right:14px;transform:none;width:46px}.dev-view-bar>#dev-view-toggle{display:flex;height:46px;width:46px}.dev-view-bar>#dev-view-toggle i{color:#64d2ca;font-size:17px}.dev-view-bar>div,.dev-view-bar>label,.dev-view-bar>#dev-view-reset{display:none}.dev-view-bar.open{gap:9px;left:12px;padding:7px 8px 7px 10px;right:12px;width:auto}.dev-view-bar.open>#dev-view-toggle{height:32px;width:32px}.dev-view-bar.open>#dev-view-toggle i:before{content:"\\f00d"}.dev-view-bar.open>div,.dev-view-bar.open>label,.dev-view-bar.open>#dev-view-reset{display:flex}.dev-view-bar.open>div{flex:1}.dev-view-bar small{display:none}}
 
 
-/* ===== property/css/professional-workflows.css ===== */
-/* v0.24 professional workflows + longitudinal score + contextual agent CTA */
 .re-concierge{margin:28px 0;padding:22px 24px;border-radius:24px;background:linear-gradient(125deg,#102c50 0%,#154d63 72%,#0b8f92 100%);color:#fff;display:grid;grid-template-columns:auto 1fr auto;gap:20px;align-items:center;box-shadow:0 18px 46px rgba(14,43,78,.14)}
 .re-agent-pair{display:flex}.re-agent-pair img{width:54px;height:54px;border-radius:50%;object-fit:cover;border:3px solid #fff}.re-agent-pair img+img{margin-left:-14px}.re-concierge-copy>span,.score-history>div:first-child>span,.blb-lede>span{font-size:11px;font-weight:800;letter-spacing:.14em;color:#77e0d9}.re-concierge h3{margin:4px 0 6px;font-size:20px}.re-concierge p{margin:0;max-width:760px;color:#d9e7f2;font-size:14px;line-height:1.55}.re-concierge button,.blb-actions button,.ces-inputs button,.acw-actions button{border:0;border-radius:12px;padding:12px 16px;background:#fff;color:#123052;font-weight:800;cursor:pointer;white-space:nowrap}
 .score-history{margin:22px 0;padding:20px 22px;border-radius:20px;background:#fff;box-shadow:0 10px 35px rgba(16,43,80,.08)}.score-history h3{margin:3px 0 12px}.sh-ticker{display:flex;align-items:baseline;gap:12px}.sh-ticker b{font-size:38px;color:#102c50}.sh-ticker span{font-weight:800}.sh-ticker .up{color:#17854c}.sh-ticker .down{color:#bf3e35}.sh-ticker .flat{color:#738198}.sh-chart{display:block;width:100%;height:86px;margin:6px 0}.sh-chart path{fill:none;stroke:#0d9697;stroke-width:3;vector-effect:non-scaling-stroke}.score-history small{color:#75849b}
@@ -7554,10 +7242,6 @@ table.rl-t .na { color: var(--ink-3); font-size: 12px; }
 @media(max-width:720px){.re-concierge{grid-template-columns:auto 1fr;padding:18px}.re-concierge button{grid-column:1/-1;width:100%}.re-concierge h3{font-size:18px}.ces-kpis,.dcs-grid,.blb-grid{grid-template-columns:1fr 1fr}.ces-inputs{display:grid;grid-template-columns:1fr 1fr}.ces-inputs button{grid-column:1/-1}.acw-grid{grid-template-columns:1fr}.sh-ticker b{font-size:32px}}
 
 
-/* ===== property/css/home/home-2027.css ===== */
-/* Watchdog Property Home 2027
-   Single-property command center. Loaded last so the legacy analysis engine can
-   stay intact while the page presentation follows the Dashboard v2 system. */
 :root{
   --hm-bg:#f3f6fb;
   --hm-surface:#fff;
@@ -7579,7 +7263,6 @@ body.hm-dashboard-page{margin:0!important;background:var(--hm-bg)!important;colo
 body.hm-dashboard-page .db-shell{display:block!important;min-height:100vh!important}
 body.hm-dashboard-page .db-workspace{margin:0!important;width:100%!important;max-width:none!important;min-width:0!important;background:var(--hm-bg)!important}
 
-/* ---------- dashboard-matched top app bar ---------- */
 .hm27-topbar{position:sticky!important;top:0!important;z-index:1000!important;height:92px!important;background:rgba(255,255,255,.96)!important;border:0!important;border-bottom:1px solid var(--hm-line)!important;backdrop-filter:blur(18px);box-shadow:0 1px 0 rgba(16,33,63,.02)}
 .hm27-top-in{height:100%!important;max-width:none!important;margin:0!important;padding:0 28px!important;display:flex!important;align-items:center!important;justify-content:space-between!important;gap:22px!important}
 .hm27-brand-side,.hm27-top-right,.hm27-date,.hm27-weather,.hm27-profile{display:flex;align-items:center}
@@ -7604,7 +7287,6 @@ body.hm-dashboard-page .db-workspace{margin:0!important;width:100%!important;max
 .hm27-profile>.fa-chevron-down{font-size:10px;color:#8b9ab0}
 .hm27-compat{position:absolute!important;width:1px!important;height:1px!important;overflow:hidden!important;clip:rect(0 0 0 0)!important;white-space:nowrap!important}
 
-/* ---------- same off-canvas menu behavior as Dashboard ---------- */
 .hm27-nav{position:fixed;inset:0;z-index:14000;pointer-events:none;visibility:hidden}
 .hm27-nav.open{pointer-events:auto;visibility:visible}
 .hm27-nav-backdrop{position:absolute;inset:0;border:0;background:rgba(18,32,54,.30);backdrop-filter:blur(4px);opacity:0;transition:opacity .2s ease}
@@ -7624,7 +7306,6 @@ body.hm-dashboard-page .db-workspace{margin:0!important;width:100%!important;max
 .hm27-nav-foot button{width:100%;height:45px;border:0;border-radius:13px;background:#f5f7fb;color:#566780;font-weight:800;cursor:pointer}
 body.hm-nav-open{overflow:hidden}
 
-/* ---------- property selector command row ---------- */
 .hm-top{position:relative!important;top:auto!important;border:0!important;background:transparent!important;z-index:20!important}
 .hm-top-in{max-width:none!important;margin:0!important;padding:22px 28px 16px!important;display:grid!important;grid-template-columns:auto auto minmax(260px,520px) 1fr auto!important;align-items:center!important;gap:12px!important}
 .hm-back{height:44px;padding:0 15px;border:1px solid var(--hm-line);border-radius:13px;background:#fff;color:var(--hm-ink)!important;display:inline-flex!important;align-items:center!important;gap:8px!important;text-decoration:none!important;box-shadow:0 7px 18px rgba(31,55,90,.04)}
@@ -7635,7 +7316,6 @@ body.hm-nav-open{overflow:hidden}
 .hm27-action{height:44px;border:1px solid var(--hm-line);border-radius:13px;background:#fff;color:var(--hm-ink);display:inline-flex;align-items:center;gap:8px;padding:0 15px;font-weight:800;cursor:pointer;text-decoration:none;white-space:nowrap}
 .hm27-action.primary{background:var(--hm-blue);border-color:var(--hm-blue);color:#fff}
 
-/* ---------- property hero ---------- */
 .hm-hero{background:transparent!important;color:inherit!important;padding:0 28px 10px!important}
 .hm-hero-in{max-width:none!important;margin:0!important;padding:0!important;display:grid!important;grid-template-columns:minmax(520px,1.25fr) minmax(390px,.75fr)!important;gap:16px!important;align-items:stretch!important}
 .hm-shot{width:100%!important;height:390px!important;border-radius:var(--hm-radius)!important;box-shadow:var(--hm-shadow);background-color:#dfe6ee!important;background-size:cover!important;background-position:center!important}
@@ -7647,21 +7327,18 @@ body.hm-nav-open{overflow:hidden}
 .hm-val b{font:800 44px/1 "Plus Jakarta Sans",sans-serif!important;color:var(--hm-ink)!important;letter-spacing:-.045em!important}
 .hm-val span{display:block;margin-top:7px;font-size:13px!important;color:var(--hm-muted)!important}
 
-/* ---------- the actual single-property data grid ---------- */
 .hm-wrap,.wrap{max-width:none!important;margin:0!important;padding:14px 28px 36px!important}
 .hm-wrap{display:grid!important;grid-template-columns:repeat(12,minmax(0,1fr))!important;gap:16px!important;align-items:start!important}
 .hm-wrap>*{min-width:0}
 .hm-wrap>.hm-commercial-note{grid-column:1/-1}
 .hm-wrap>.hm-lede{grid-column:1/-1;background:#fff;border:1px solid var(--hm-line);border-radius:18px;padding:20px 22px;margin:0!important;max-width:none!important;font-size:17px!important;line-height:1.55!important;box-shadow:var(--hm-shadow)}
 
-/* core facts */
 .hm-wrap>.hm-figs{grid-column:1/-1;margin:0!important;display:grid!important;grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:12px!important;background:transparent!important;padding:0!important}
 .hm-figs>div{min-height:110px;background:#fff;border:1px solid var(--hm-line);border-radius:18px;padding:18px 20px!important;box-shadow:var(--hm-shadow)}
 .hm-figs dt{font:800 10px/1.2 "Plus Jakarta Sans",sans-serif!important;letter-spacing:.08em!important;color:#8492a7!important;margin-bottom:8px!important}
 .hm-figs dd{font:800 28px/1.1 "Plus Jakarta Sans",sans-serif!important;color:var(--hm-ink)!important;letter-spacing:-.04em!important}
 .hm-figs dd em{font:500 12px/1.35 "Source Sans 3",sans-serif!important;color:var(--hm-muted)!important;margin-top:5px!important}
 
-/* Agent Intel becomes a real full-width briefing rather than a narrow floating box. */
 .hm-wrap>.ai{grid-column:1/-1!important;width:100%!important;max-width:none!important;margin:0!important;padding:0!important;display:grid!important;grid-template-columns:270px minmax(0,1fr)!important;background:#fff!important;border:1px solid var(--hm-line)!important;border-radius:var(--hm-radius)!important;overflow:hidden!important;box-shadow:var(--hm-shadow)!important}
 .hm-wrap>.ai .ai-h{position:static!important;grid-column:1!important;grid-row:1 / span 2!important;min-height:100%!important;background:linear-gradient(150deg,#14315c,#1d4b82)!important;padding:26px!important;display:flex!important;align-items:flex-start!important;gap:14px!important;color:#fff!important}
 .hm-wrap>.ai .ai-h img{width:52px!important;height:52px!important;border:2px solid rgba(255,255,255,.9)!important;box-shadow:0 6px 18px rgba(0,0,0,.16)}
@@ -7670,20 +7347,17 @@ body.hm-nav-open{overflow:hidden}
 .hm-wrap>.ai>.ai-pts{grid-column:2!important;margin:0 28px 24px!important;border-top:1px solid var(--hm-line)!important}
 .hm-wrap>.ai>.ai-pts li{font-size:14.5px!important;line-height:1.55!important;padding:12px 0!important}
 
-/* Score/analysis modules produced before the drill-down list. */
 .hm-wrap>.sec{grid-column:span 6!important;margin:0!important;background:#fff!important;border:1px solid var(--hm-line)!important;border-radius:var(--hm-radius)!important;padding:20px!important;box-shadow:var(--hm-shadow)!important;min-width:0!important;overflow:visible!important}
 .hm-wrap>.sec:has(.comps),.hm-wrap>.sec:has(.ti-report),.hm-wrap>.sec:has(.tm-detail),.hm-wrap>.sec:has(.pw-stack),.hm-wrap>.sec:has(.dd-tool){grid-column:1/-1!important}
 .hm-wrap>.sec h4{font:800 17px/1.25 "Plus Jakarta Sans",sans-serif!important;color:var(--hm-ink)!important;margin:0 0 14px!important}
 .hm-wrap>.sec h4 i{color:var(--hm-blue)!important;margin-right:9px!important}
 .hm-wrap>.sec p,.hm-wrap>.sec li{font-size:14px!important;line-height:1.55!important}
 
-/* Drill-down header */
 .hm-wrap>.hm-secbar{grid-column:1/-1!important;margin:8px 0 0!important;padding:8px 2px 2px!important;display:flex!important;align-items:end!important;justify-content:space-between!important;gap:20px!important;border:0!important}
 .hm-secbar h2{font:800 28px/1.1 "Plus Jakarta Sans",sans-serif!important;letter-spacing:-.04em!important;color:var(--hm-ink)!important;margin:0 0 5px!important}
 .hm-secbar p{font-size:14px!important;color:var(--hm-muted)!important;margin:0!important}
 #hm-all{height:42px!important;border:1px solid var(--hm-line)!important;border-radius:12px!important;background:#fff!important;color:#50617a!important;font-weight:800!important;padding:0 14px!important;cursor:pointer!important}
 
-/* Each single-property drill-down is its own substantial card. */
 .hm-wrap>.sec2{grid-column:span 4!important;margin:0!important;background:#fff!important;border:1px solid var(--hm-line)!important;border-radius:var(--hm-radius)!important;box-shadow:var(--hm-shadow)!important;overflow:hidden!important;min-height:196px!important;transition:box-shadow .18s ease,transform .18s ease,border-color .18s ease!important}
 .hm-wrap>.sec2:hover{transform:translateY(-2px);box-shadow:var(--hm-shadow-hover)!important;border-color:#d7e1ef!important}
 .hm-wrap>.sec2.open{grid-column:1/-1!important;min-height:0!important;transform:none!important;box-shadow:0 18px 55px rgba(27,51,84,.10)!important}
@@ -7701,7 +7375,6 @@ body.hm-nav-open{overflow:hidden}
 .sec2-pro{display:grid!important;grid-template-columns:190px minmax(0,1fr)!important;gap:18px!important;align-items:start!important;margin:0 0 22px!important;padding:16px 18px!important;border-radius:14px!important;background:#f4f7fb!important;color:#5f7088!important;font-size:13.5px!important;line-height:1.5!important}
 .sec2-pro b{font:800 12px/1.4 "Plus Jakarta Sans",sans-serif!important;text-transform:uppercase!important;letter-spacing:.06em!important;color:#34465f!important}
 
-/* compact signal cards generated by the legacy tool modules */
 .hs-signal{min-height:88px!important;display:grid!important;grid-template-columns:minmax(0,1fr) auto!important;gap:12px!important;align-items:center!important}
 .hs-open{min-width:0!important;padding:0!important;border:0!important;background:transparent!important;display:grid!important;grid-template-columns:44px minmax(0,1fr) auto 14px!important;gap:12px!important;align-items:center!important;text-decoration:none!important}
 .hs-icon{width:44px!important;height:44px!important;border-radius:13px!important;background:#eef4ff!important;color:var(--hm-blue)!important;display:grid!important;place-items:center!important}
@@ -7712,7 +7385,6 @@ body.hm-nav-open{overflow:hidden}
 .hm-acts{grid-column:1/-1!important;margin:0!important;padding:18px 0 0!important}
 .hm-dashboard-page table{width:100%;max-width:100%}.hm-dashboard-page .comps-wrap,.hm-dashboard-page .table-wrap,.hm-dashboard-page .rl-wrap{overflow-x:auto;overscroll-behavior:contain}
 
-/* ---------- profile and notification popovers ---------- */
 .hm27-pop{position:fixed;z-index:14500;right:26px;top:82px;width:min(390px,calc(100vw - 28px));background:#fff;border:1px solid var(--hm-line);border-radius:20px;box-shadow:0 28px 80px rgba(16,33,63,.22);padding:10px;opacity:0;transform:translateY(-8px) scale(.98);pointer-events:none;transition:.18s ease}
 .hm27-pop.open{opacity:1;transform:none;pointer-events:auto}
 .hm27-pop header{display:flex;align-items:center;justify-content:space-between;padding:14px 13px;border-bottom:1px solid var(--hm-line)}
@@ -7741,10 +7413,7 @@ body.hm-nav-open{overflow:hidden}
 @media print{.hm27-topbar,.hm-top,.hm27-nav,.hm27-pop,.db-to-top,.hm-acts{display:none!important}.hm-hero{padding:0!important}.hm-wrap{padding:16px 0!important}.sec2-b{display:block!important}.sec2{grid-column:1/-1!important}}
 
 
-/* ===== property/css/home/home-shell-fixes.css ===== */
-/* Property Home shell corrections: Dashboard-matched menu, clean profile, working notifications. */
 
-/* The slide-out navigation now follows the Dashboard shell exactly: white panel, compact links, no navy slab. */
 .hm27-nav{position:fixed!important;inset:0!important;z-index:14000!important;pointer-events:none!important;visibility:visible!important}
 .hm27-nav.open{pointer-events:auto!important}
 .hm27-nav-backdrop{position:absolute!important;inset:0!important;border:0!important;background:rgba(14,27,50,.28)!important;backdrop-filter:blur(3px)!important;opacity:0!important;transition:opacity .18s ease!important}
@@ -7765,14 +7434,12 @@ body.hm-nav-open{overflow:hidden}
 .hm27-nav-foot{margin-top:auto!important;padding:12px 0 0!important;border-top:1px solid #edf1f6!important;background:#fff!important}
 .hm27-nav-foot button{width:100%!important;height:38px!important;border:0!important;border-radius:9px!important;background:#f4f6f9!important;color:#53657b!important;font:600 10px Inter,"Source Sans 3",sans-serif!important;cursor:pointer!important}
 
-/* Shared popover shell. */
 .hm27-pop{position:fixed!important;right:24px!important;top:76px!important;z-index:14500!important;width:min(390px,calc(100vw - 28px))!important;background:#fff!important;border:1px solid #e2e7ef!important;border-radius:16px!important;box-shadow:0 20px 55px rgba(20,36,63,.15)!important;padding:10px!important;opacity:0!important;visibility:hidden!important;transform:translateY(-7px)!important;pointer-events:none!important;transition:opacity .16s ease,transform .16s ease!important;color:#111d38!important}
 .hm27-pop.open{opacity:1!important;visibility:visible!important;transform:none!important;pointer-events:auto!important}
 .hm27-pop header{display:flex!important;align-items:center!important;justify-content:space-between!important;gap:12px!important;padding:11px 10px 12px!important;margin:0!important;border:0!important;border-bottom:1px solid #edf1f6!important;background:#fff!important;box-shadow:none!important}
 .hm27-pop header b{display:block!important;font:700 14px/1.25 Inter,"Plus Jakarta Sans",sans-serif!important;color:#111d38!important}
 .hm27-pop header small{display:block!important;margin-top:3px!important;font-size:10px!important;color:#748198!important}
 
-/* Profile: remove the boxed/shadowed inner navigation seen in the screenshot. */
 #hm27-profile-pop{border:0!important;box-shadow:0 18px 50px rgba(20,36,63,.12)!important;padding:10px!important}
 #hm27-profile-pop nav{display:grid!important;gap:3px!important;margin:0!important;padding:7px 0!important;border:0!important;outline:0!important;background:transparent!important;box-shadow:none!important;border-radius:0!important}
 #hm27-profile-pop nav a,#hm27-profile-pop nav .hm27-menu-row{display:flex!important;align-items:center!important;gap:11px!important;width:100%!important;min-height:52px!important;margin:0!important;padding:8px 9px!important;border:0!important;border-radius:10px!important;background:transparent!important;box-shadow:none!important;color:#263954!important;text-align:left!important;text-decoration:none!important;cursor:pointer!important}
@@ -7782,7 +7449,6 @@ body.hm-nav-open{overflow:hidden}
 #hm27-profile-pop nav span small{font-size:10px!important;line-height:1.3!important;color:#7f8da1!important}
 .hm27-pop-signout{width:100%!important;height:38px!important;margin-top:4px!important;border:0!important;border-radius:9px!important;background:#f4f6f9!important;color:#53657b!important;font:600 10px Inter,"Source Sans 3",sans-serif!important;cursor:pointer!important}
 
-/* Notifications: always render as a real popover and never inherit profile/menu styling. */
 #hm27-notice-pop{width:min(420px,calc(100vw - 28px))!important}
 .hm27-read{border:0!important;background:transparent!important;color:#2f6df6!important;font-size:10px!important;font-weight:700!important;cursor:pointer!important;padding:6px!important}
 .hm27-notice-list{max-height:430px!important;overflow:auto!important;padding:4px 0!important;scrollbar-width:thin!important}
@@ -7794,7 +7460,6 @@ body.hm-nav-open{overflow:hidden}
 .hm27-notice-empty{display:grid!important;place-items:center!important;gap:5px!important;padding:34px 16px!important;color:#8090a4!important;text-align:center!important}.hm27-notice-empty i{font-size:22px!important}.hm27-notice-empty b{font-size:12px!important;color:#3f526c!important}.hm27-notice-empty small{font-size:9px!important}
 .hm27-notice-foot{display:flex!important;align-items:center!important;justify-content:space-between!important;padding:11px 10px 4px!important;color:#2f6df6!important;text-decoration:none!important;font-size:10px!important;font-weight:700!important}
 
-/* Keep the weather chip readable when the live temperature replaces the placeholder. */
 .hm27-weather-temp,#hm27-weather-temp{font-variant-numeric:tabular-nums!important}
 
 @media(max-width:820px){
@@ -7804,10 +7469,8 @@ body.hm-nav-open{overflow:hidden}
 }
 
 
-/* ===== property/css/home/home-menu-sync.css ===== */
 
 
-/* Property Home navigation: match Dashboard menu dimensions and remove nested box treatment. */
 .hm27-nav-panel{
   left:14px!important;
   top:14px!important;
@@ -7902,7 +7565,6 @@ body.hm-nav-open{overflow:hidden}
 @media(max-width:768px){
   .hm27-nav-panel{left:8px!important;top:8px!important;bottom:8px!important;width:calc(100vw - 16px)!important;padding:var(--space-5)!important}
 
-  /* NJW-246: the Property Dashboard module must not inherit desktop microcopy on phones. */
   body.hm-dashboard-page .wdpd-kicker,
   body.hm-dashboard-page .wdpd-metric small,
   body.hm-dashboard-page .wdpd-fact small,
@@ -8007,12 +7669,8 @@ body.hm-nav-open{overflow:hidden}
 }
 
 
-/* ===== property/css/home/home-mobile-audit.css ===== */
-/* NJW-246 mobile certification override for /property/home.
-   Loaded only at phone/tablet widths; desktop Property Home is unchanged. */
 
 @media (max-width: 820px){
-  /* The off-canvas app menu is a critical mobile navigation surface. */
   body.hm-dashboard-page .hm27-nav-panel{
     left:8px;
     top:calc(8px + env(safe-area-inset-top));
@@ -8057,7 +7715,6 @@ body.hm-nav-open{overflow:hidden}
     line-height:1.3!important;
   }
 
-  /* The desktop selector command strip becomes a mobile command stack instead of being compressed. */
   body.hm-dashboard-page .hm-top-in{
     padding:16px 16px 12px!important;
     display:grid!important;
@@ -8130,7 +7787,6 @@ body.hm-nav-open{overflow:hidden}
     touch-action:manipulation;
   }
 
-  /* Profile and notification popovers must behave like mobile sheets, not desktop menus. */
   body.hm-dashboard-page .hm27-pop{
     left:8px!important;
     right:8px!important;
@@ -8223,7 +7879,6 @@ body.hm-nav-open{overflow:hidden}
     padding:8px 10px max(4px,env(safe-area-inset-bottom))!important;
   }
 
-  /* Agent Intel is valuable on mobile, but its compact desktop density is not. Preserve the content and promote it to a readable sheet. */
   body.hm-dashboard-page .hm-mobile-intel .mobile-intel-sheet{
     max-height:calc(100dvh - max(18px,env(safe-area-inset-top)))!important;
     padding-left:18px!important;
@@ -8293,7 +7948,6 @@ body.hm-nav-open{overflow:hidden}
     font-size:16px!important;
   }
 
-  /* Long Property Home drill-downs stay complete, but mobile typography and wrapping take priority over desktop density. */
   body.hm-dashboard-page .hm-kind{
     font-size:12px!important;
     line-height:1.3!important;
@@ -8351,7 +8005,6 @@ body.hm-nav-open{overflow:hidden}
     -webkit-overflow-scrolling:touch;
   }
 
-  /* Marker drill-down rows are operational mobile navigation, not decorative microcopy. */
   body.hm-dashboard-page .sec2-kicker{
     font-size:12px!important;
     line-height:1.3!important;
@@ -8407,7 +8060,6 @@ body.hm-nav-open{overflow:hidden}
     touch-action:manipulation;
   }
 
-  /* Final hero and risk-summary pass: preserve evidence, promote labels that were desktop-dense on phones. */
   body.hm-dashboard-page .hm-id p{
     font-size:15px!important;
     line-height:1.45!important;
@@ -8511,9 +8163,6 @@ body.hm-nav-open{overflow:hidden}
 }
 
 
-/* ===== property/css/home/home-mobile-modal-audit.css ===== */
-/* NJW-246 Run 018: mobile-only modal/readability certification for /property/home.
-   Loaded only at <=820px from property/home/index.html. Desktop is untouched. */
 
 @media (max-width: 820px){
   body.hm-dashboard-page .plm-note-overlay{
@@ -8632,11 +8281,6 @@ body.hm-nav-open{overflow:hidden}
   }
 }
 
-/* ===== property/css/brand-consistency.css ===== */
-/* Watchdog app brand consistency layer
-   Typography/shape authority: /property/css/shared/00-design-tokens.css
-   Identity/palette authority: /property/branding/brand-system.json
-   Scope: current product/app shells only. Public/editorial surfaces keep their documented exceptions. */
 
 
 
@@ -8665,7 +8309,6 @@ body.hm-nav-open{overflow:hidden}
   --wd-focus:0 0 0 3px rgba(47,109,246,.18);
 }
 
-/* Product UI typography. */
 body.wd4-mounted,
 body.hm-dashboard-page,
 body.wdx-modern{
@@ -8686,7 +8329,6 @@ body.wdx-modern :is(button,input,select,textarea){
   font-family:var(--font-ui)!important;
 }
 
-/* Canonical 84px product topbar and 42px Watchdog mark. */
 .hm27-topbar{height:84px!important;background:rgba(255,255,255,.94)!important}
 .hm27-top-in{padding:0 30px!important;gap:20px!important}
 .hm27-brand-side{gap:18px!important}
@@ -8704,7 +8346,6 @@ body.wdx-modern :is(button,input,select,textarea){
 .hm27-profile{margin-left:2px!important;padding:4px 2px 4px 5px!important}
 .hm27-profile img,.hm27-avatar-fallback{width:38px!important;height:38px!important}
 
-/* Canonical off-canvas app navigation shared by Dashboard, Home and secondary shells. */
 .wd4-nav-panel,.hm27-nav-panel{
   left:16px!important;
   top:16px!important;
@@ -8736,7 +8377,6 @@ body.wdx-modern :is(button,input,select,textarea){
 .wd4-nav-foot,.hm27-nav-foot{padding:14px 16px 16px!important;border-top:1px solid var(--wd-line)!important}
 .wd4-nav-foot button,.hm27-nav-foot button{min-height:44px!important;border-radius:var(--radius-md)!important;font-size:var(--type-sm)!important;font-weight:700!important}
 
-/* Readability floor for the active Dashboard and shared product chrome. */
 .wd4-filter-select{font-size:var(--type-sm)!important;min-height:42px!important;border-radius:10px!important}
 .wd4-add-btn,.wd4-export-btn,.wd4-grid-btn{font-size:var(--type-sm)!important}
 .wd4-card-title{font-size:var(--type-sm)!important}
@@ -8748,7 +8388,6 @@ body.wdx-modern :is(button,input,select,textarea){
 .wd4-muni-table :is(th,td){font-size:var(--type-xs)!important}
 .leaflet-control-attribution{font-size:var(--type-xs)!important}
 
-/* Readability and canonical UI font for Property Home. */
 #hm-switch{font:700 var(--type-sm) var(--font-ui)!important}
 .hm-switch-label{font:800 var(--type-xs)/1 var(--font-ui)!important}
 .hm-kind,.hm-figs dt{font-size:var(--type-xs)!important}
@@ -8756,7 +8395,6 @@ body.wdx-modern :is(button,input,select,textarea){
 .hm-wrap>.sec p,.hm-wrap>.sec li{font-size:var(--type-sm)!important}
 .hm27-action,.hm-back{font-size:var(--type-sm)!important}
 
-/* Current secondary shell: consistent control size and readable chrome. */
 body.wdx-modern .wdx-btn,
 body.wdx-modern .wdx-menu,
 body.wdx-modern .wdx-icon,
@@ -8767,8 +8405,6 @@ body.wdx-modern .wdx-weather span{font-size:var(--type-xs)!important}
 body.wdx-modern .wdx-kicker{font-size:var(--type-xs)}
 body.wdx-modern .wdx-pagebar p{font-size:var(--type-sm);line-height:1.55}
 
-/* Dashboard-derived profile/notification chrome was historically much smaller on secondary pages.
-   Preserve compact badges/timestamps, but keep actual labels and actions readable. */
 body:is(.wd4-mounted,.wdx-modern) .wd6-pop header small{font-size:var(--type-xs)!important;line-height:1.35!important}
 body:is(.wd4-mounted,.wdx-modern) .wd6-pop header>button{font-size:var(--type-xs)!important;min-height:36px!important}
 body:is(.wd4-mounted,.wdx-modern) .wd6-pop nav b{font-size:var(--type-sm)!important;line-height:1.3!important}
@@ -8779,19 +8415,16 @@ body:is(.wd4-mounted,.wdx-modern) .wd6-note small{font-size:var(--type-xs)!impor
 body:is(.wd4-mounted,.wdx-modern) .wd6-note em{font-size:var(--type-xs)!important}
 body:is(.wd4-mounted,.wdx-modern) .wd6-nfoot{font-size:var(--type-xs)!important;min-height:44px!important}
 
-/* If legacy shared components surface inside a current app shell, canonical product type wins. */
 body:is(.wd4-mounted,.hm-dashboard-page,.wdx-modern) .pre-body h3{
   font-family:var(--font-ui)!important;
 }
 
-/* Numeric data should scan like financial/product data. */
 body.wd4-mounted :is(.wd4-kpi-value,.wd4-summary strong,.wd4-muni-table td),
 body.hm-dashboard-page :is(.hm-val b,.hm-figs dd,table td),
 body.wdx-modern :is(table td,[data-value]){
   font-variant-numeric:tabular-nums;
 }
 
-/* WCAG 2.2 AA interaction baseline. */
 body.wd4-mounted :is(a,button,input,select,textarea):focus-visible,
 body.hm-dashboard-page :is(a,button,input,select,textarea):focus-visible,
 body.wdx-modern :is(a,button,input,select,textarea):focus-visible{
@@ -8817,17 +8450,12 @@ body.wdx-modern :is(a,button,input,select,textarea):focus-visible{
 }
 
 
-/* ===== property/css/home/home-polish.css ===== */
-/* Property Home polish pass: stable full-width drill-downs and corrected Agent Intel. */
 
-/* Any legacy/top-level analysis module that does not have an explicit grid rule
-   should never collapse into a single 12-column track. */
 .hm-wrap > :not(.hm-figs):not(.ai):not(.sec):not(.sec2):not(.hm-secbar):not(.hm-acts):not(.hm-lede):not(.hm-commercial-note) {
   grid-column: 1 / -1 !important;
   min-width: 0 !important;
 }
 
-/* Core score cards remain compact, but live in a proper full-width row. */
 .hm-wrap > .sc-cards {
   grid-column: 1 / -1 !important;
   display: grid !important;
@@ -8848,7 +8476,6 @@ body.wdx-modern :is(a,button,input,select,textarea):focus-visible{
   text-align: left !important;
 }
 
-/* Agent Intel: remove the inherited pill radius that created the giant circle. */
 .hm-wrap > .ai {
   grid-column: 1 / -1 !important;
   display: grid !important;
@@ -8928,7 +8555,6 @@ body.wdx-modern :is(a,button,input,select,textarea):focus-visible{
   line-height: 1.55 !important;
 }
 
-/* Core fact cards: give captions enough room and keep text from collapsing. */
 .hm-figs dd em {
   display: block !important;
   margin-top: 6px !important;
@@ -8937,7 +8563,6 @@ body.wdx-modern :is(a,button,input,select,textarea):focus-visible{
   letter-spacing: 0 !important;
 }
 
-/* Explore your property goes back to a clean drill-down list rather than a card wall. */
 .hm-wrap > .hm-secbar {
   grid-column: 1 / -1 !important;
   margin: 14px 0 0 !important;
@@ -9065,7 +8690,6 @@ body.wdx-modern :is(a,button,input,select,textarea):focus-visible{
   background: #f7f9fc !important;
 }
 
-/* Profile popover: preserve notifications/menu exactly as-is, but make profile clean and readable. */
 #hm27-profile-pop {
   width: min(390px, calc(100vw - 28px)) !important;
   padding: 10px !important;
@@ -9130,11 +8754,6 @@ body.wdx-modern :is(a,button,input,select,textarea):focus-visible{
   .hm-secbar { align-items: flex-start !important; flex-direction: column !important; }
 }
 
-/* --------------------------------------------------------------------------
-   2026-08-22 premium single-property composition
-   The NJW-214 dashboard is no longer stacked above the original report. This
-   file now owns the final visual pass for one Street View-led property page.
-   -------------------------------------------------------------------------- */
 body.hm-dashboard-page {
   --hm-page-pad: clamp(16px, 2.15vw, 34px);
   --hm-gap: clamp(12px, 1.25vw, 20px);
@@ -9146,7 +8765,6 @@ body.hm-dashboard-page {
     #f4f7fb !important;
 }
 
-/* Keep the utility shell useful without letting it dominate the paid content. */
 .hm27-topbar {
   height: clamp(68px, 5.4vw, 84px) !important;
   box-shadow: 0 1px 0 rgba(16,33,63,.04) !important;
@@ -9185,8 +8803,6 @@ body.hm-dashboard-page {
   font-size: clamp(13px, .9vw, 15px) !important;
 }
 
-/* Street View is the hero. The identity card is intentionally quiet and
-   editorial, so the image and the property itself feel like the product. */
 .hm-hero {
   padding: 0 var(--hm-page-pad) clamp(10px, 1vw, 14px) !important;
 }
@@ -9253,8 +8869,6 @@ body.hm-dashboard-page {
   gap: var(--hm-gap) !important;
 }
 
-/* Four decision metrics only. Detail metrics still exist in the analysis tools
-   below, but they no longer compete with the first screen. */
 .hm-wrap > .hm-figs {
   grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
   gap: clamp(10px, 1vw, 15px) !important;
@@ -9283,7 +8897,6 @@ body.hm-dashboard-page {
   font-size: clamp(12px, .84vw, 14px) !important;
 }
 
-/* Analyst Intel reads like a paid briefing, not a widget. */
 .hm-wrap > .ai {
   grid-template-columns: minmax(210px, 255px) minmax(0, 1fr) !important;
   border-radius: clamp(20px, 1.45vw, 24px) !important;
@@ -9315,7 +8928,6 @@ body.hm-dashboard-page {
   font-size: clamp(14px, .96vw, 16px) !important;
 }
 
-/* Score cards/charts get the same surface language as the hero. */
 .hm-wrap > .sc-cards {
   gap: clamp(10px, 1vw, 15px) !important;
 }
@@ -9368,7 +8980,6 @@ body.hm-dashboard-page {
   padding: 4px 4px clamp(24px, 2vw, 34px) clamp(56px, 4.25vw, 68px) !important;
 }
 
-/* Tablet: preserve the image-first hierarchy and avoid miniature SaaS type. */
 @media (max-width: 1120px) {
   .hm-hero-in {
     grid-template-columns: minmax(0, 1.2fr) minmax(340px, .8fr) !important;
@@ -9510,11 +9121,7 @@ body.hm-dashboard-page {
 }
 
 
-/* ===== property/css/home/home-followup.css ===== */
-/* Property Home follow-up polish · 2026-08-22
-   Small address correction + compact half-width Analyst / partner composition. */
 
-/* The address remains the hero, but should not overpower the property photo. */
 body.hm-dashboard-page .hm-id h1{
   max-width:18ch!important;
   font-size:clamp(28px,3.05vw,52px)!important;
@@ -9522,7 +9129,6 @@ body.hm-dashboard-page .hm-id h1{
   letter-spacing:-.052em!important;
 }
 
-/* Analyst Intel and the mortgage partner form one balanced paid-workspace row. */
 body.hm-dashboard-page .hm-wrap>.ai.wdai.wdai-split{
   grid-column:1/-1!important;
   display:grid!important;
@@ -9555,8 +9161,6 @@ body.hm-dashboard-page .wdai-main{
   background:#fff!important;
 }
 
-/* Remove repeated address and verbose explanatory copy. The property itself is
-   already identified immediately above this row. */
 body.hm-dashboard-page .wdai-main .wdai-head{
   min-height:0!important;
   padding:17px 18px 14px!important;
@@ -9605,7 +9209,6 @@ body.hm-dashboard-page .wdai-main .wdai-role-set{
 }
 body.hm-dashboard-page .wdai-main .wdai-role-set a{font-size:11px!important;white-space:nowrap!important}
 
-/* Keep confirmed research context visible but concise. */
 body.hm-dashboard-page .wdai-main .wd-intent-context.is-confirmed{
   margin:12px 14px 9px!important;
   padding:12px 13px!important;
@@ -9634,7 +9237,6 @@ body.hm-dashboard-page .wdai-main .wd-intent-context.is-confirmed .wd-intent-cha
   border-radius:10px!important;
 }
 
-/* The research lens becomes one title + one decision question. */
 body.hm-dashboard-page .wdai-main .wd-job-analysis{
   margin:0 14px 9px!important;
   padding:12px 13px!important;
@@ -9664,8 +9266,6 @@ body.hm-dashboard-page .wdai-main .wd-job-analysis-question{
   line-height:1.38!important;
 }
 
-/* Decision brief stays action-first. Two compact reasons are enough here; full
-   reasoning remains one click away. */
 body.hm-dashboard-page .wdai-main .wdai-compact-summary{
   margin:0 14px 14px!important;
   padding:13px 14px!important;
@@ -9704,7 +9304,6 @@ body.hm-dashboard-page .wdai-main .wd-density-toggle{
   white-space:nowrap!important;
 }
 
-/* Greentree unit mirrors the established green/gold Watchdog partner treatment. */
 body.hm-dashboard-page .wdai-partner{
   position:relative!important;
   background:linear-gradient(150deg,#14361f,#1e6b3a 70%)!important;
@@ -9854,12 +9453,8 @@ body.hm-dashboard-page .wdai-partner-link:hover .wdai-partner-cta{text-decoratio
 }
 
 
-/* ===== property/css/watchdog-footer.css ===== */
 
 
-/* Official Watchdog website footer
-   Shared, fully scoped version of the footer used on /property/.
-   NJW-73/NJW-74: canonical font, type floor, palette, container and breakpoints. */
 #wd-property-footer{
   display:block;
   clear:both;
@@ -9943,10 +9538,6 @@ body.hm-dashboard-page .wdai-partner-link:hover .wdai-partner-cta{text-decoratio
 @media print{#wd-property-footer{display:none!important}}
 
 
-/* ===== property/css/home/home-ad-quarter.css ===== */
-/* Property Home advertising balance · 2026-08-22
-   Keep Analyst Intel primary, reduce the inline partner to a quarter-width rail,
-   and give the rotating footer banner breathing room before the official footer. */
 
 @media (min-width: 861px){
   body.hm-dashboard-page .hm-wrap>.ai.wdai.wdai-split{
@@ -10072,8 +9663,6 @@ body.hm-dashboard-page .wdai-partner-link:hover .wdai-partner-cta{text-decoratio
 
 
 
-/* ===== Property Home single-bundle hardening · 2026-09-22 =====
-   Final cascade owns the generated Home markup. No legacy button defaults. */
 body.hm-dashboard-page .sc-cards{display:grid!important;grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:16px!important;width:100%!important}
 body.hm-dashboard-page .sc-cards .sc-c{display:flex!important;flex-direction:column!important;min-width:0!important;min-height:164px!important;padding:0!important;overflow:hidden!important;background:#fff!important;border:1px solid #dfe6ef!important;border-radius:20px!important;box-shadow:0 10px 30px rgba(16,33,63,.06)!important}
 body.hm-dashboard-page .sc-cards .sc-main{appearance:none!important;-webkit-appearance:none!important;display:flex!important;flex:1!important;flex-direction:column!important;align-items:flex-start!important;gap:5px!important;width:100%!important;margin:0!important;padding:20px 20px 12px!important;border:0!important;border-radius:0!important;background:transparent!important;color:#10213f!important;font:inherit!important;text-align:left!important;cursor:pointer!important}
@@ -10108,14 +9697,10 @@ body.hm-dashboard-page .sec2 .tl-btn{display:inline-flex!important;align-items:c
 @media(max-width:1100px){body.hm-dashboard-page .sc-cards,body.hm-dashboard-page .hm-tax-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}}
 @media(max-width:640px){body.hm-dashboard-page .sc-cards,body.hm-dashboard-page .hm-tax-grid{grid-template-columns:1fr!important}body.hm-dashboard-page .hm-tax-head{flex-direction:column!important}.hm-tax-item{min-height:88px!important}}
 
-/* ===== inlined property/css/lookup/09-search-corrections-v3.css ===== */
-/* NJW-96 correction v3 */
 
-/* Filter rail remains above map without visually crushing the results surface. */
 body.hood-on .njw-filterbar{z-index:10!important;}
 body.hood-on .hd-right{overscroll-behavior-y:auto!important;scroll-padding-bottom:0!important;padding-bottom:0!important;}
 
-/* Property-list mode has no hero behind the public nav, so use the solid treatment. */
 body.hood-on .wd-nav{
   background:rgba(255,255,255,.98)!important;
   backdrop-filter:blur(10px);
@@ -10130,7 +9715,6 @@ body.hood-on .wd-nav .wd-logo{
 }
 body.hood-on .wd-nav .wd-logo i{color:var(--gold,#b8972a)!important;}
 
-/* White heart halo, no black drop shadow. */
 #pl-hood .hd-heart{
   text-shadow:0 0 2px rgba(255,255,255,1),0 1px 5px rgba(255,255,255,.96),0 0 10px rgba(255,255,255,.72)!important;
   -webkit-text-stroke:1.25px rgba(255,255,255,.98)!important;
@@ -10138,16 +9722,13 @@ body.hood-on .wd-nav .wd-logo i{color:var(--gold,#b8972a)!important;}
 }
 #pl-hood .hd-heart.on{-webkit-text-stroke:1px rgba(255,255,255,.98)!important;}
 
-/* Property cards no longer expose the unused ellipsis menu. */
 .njw-val-row{display:flex!important;align-items:center!important;gap:10px!important;position:relative!important;}
 .njw-val-row .hd-val{flex:1 1 auto!important;min-width:0!important;}
 .njw-card-menu-btn,.njw-card-menu{display:none!important;}
 
-/* Search fields keep the clean pill surface while typing, without a colored focus outline. */
 .pl-input:focus,.pl-input:focus-visible{outline:none!important;border-color:transparent!important;box-shadow:none!important;}
 .pl-input-wrap:focus-within{box-shadow:0 10px 34px rgba(14,34,72,.24),0 2px 6px rgba(14,34,72,.10)!important;}
 
-/* Range controls keep direct entry and add a dual slider. */
 .njw-dual-slider{margin:4px 0 20px;}
 .njw-slider-labels{display:flex;justify-content:space-between;margin:0 1px 8px;color:#6f7989;font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.04em;}
 .njw-slider-track{position:relative;height:30px;}
@@ -10167,11 +9748,9 @@ body.hood-on .wd-nav .wd-logo i{color:var(--gold,#b8972a)!important;}
   width:19px;height:19px;border-radius:50%;border:2px solid #10294b;background:#fff;box-shadow:0 1px 4px rgba(16,41,75,.18);pointer-events:auto;cursor:grab;
 }
 
-/* Score should look like a first-class datum while async calculation completes. */
 .njw-card-score b{min-width:40px;text-align:right!important;}
 .njw-card-score b:empty:after{content:"Calculating…";color:#7b8595;font-weight:700;}
 
-/* The illustration is the literal end of the right-hand scroll container. */
 #pl-hood .hd-right>#njw-search-art{
   display:block!important;width:100%!important;max-width:none!important;min-height:0!important;
   margin:30px 0 0!important;padding:24px 18px 0!important;overflow:visible!important;flex:0 0 auto!important;
@@ -10186,8 +9765,6 @@ body.hood-on .wd-nav .wd-logo i{color:var(--gold,#b8972a)!important;}
 }
 
 
-/* ===== inlined property/css/search-uniformity.css ===== */
-/* Keep every public property-address lookup on the same canonical search UI. */
 body.hood-on #njw-filterbar{
   margin-top:14px!important;
 }
@@ -10223,7 +9800,6 @@ body.hood-on #njw-filterbar .njw-search-slot .pl-input-wrap.njw-uniform-property
   font-size:15px!important;
 }
 
-/* Results and other solid Watchdog navigation states need a visible divider. */
 .wd-nav.solid,
 body.nav-solid .wd-nav,
 body.hood-on .wd-nav{
@@ -10233,8 +9809,6 @@ body.hood-on .wd-nav{
   box-shadow:0 4px 18px rgba(14,34,72,.07)!important;
 }
 
-/* The public solid nav sits at z-index 6200. Property detail panels must sit
-   above it so the modal toolbar and top of the property page are never hidden. */
 .plm-backdrop{
   z-index:7600!important;
 }
@@ -10261,8 +9835,6 @@ body.hood-on .wd-nav{
 }
 
 
-/* ===== inlined property/css/landing-intelligence.css ===== */
-/* NJW-239: live Watchdog Intelligence sample on the public /property landing page */
 #wd-intelligence-glance{padding:34px 34px 88px;background:#f7f8f6;color:#10294b}
 #wd-intelligence-glance *{box-sizing:border-box}
 .wdi-shell{max-width:1680px;margin:0 auto;border-radius:34px;overflow:hidden;background:#071f39;box-shadow:0 32px 80px rgba(8,31,57,.14);position:relative}
@@ -10278,18 +9850,12 @@ body.hood-on .wd-nav{
 .wdi-cta{display:flex;align-items:center;justify-content:space-between;gap:28px;background:linear-gradient(105deg,#078486,#0d6f78);padding:32px 58px;color:#fff}.wdi-cta h3{font:800 24px "Plus Jakarta Sans",sans-serif;margin:0 0 5px}.wdi-cta p{margin:0;color:#d5eeee;font-size:14px}.wdi-cta-actions{display:flex;gap:10px;flex-wrap:wrap;justify-content:flex-end}.wdi-btn{display:inline-flex;align-items:center;gap:9px;border-radius:12px;padding:13px 18px;font:800 13px "Plus Jakarta Sans",sans-serif;text-decoration:none;white-space:nowrap}.wdi-btn.primary{background:#fff;color:#0b6670}.wdi-btn.secondary{border:1px solid rgba(255,255,255,.35);color:#fff}
 .wdi-loading{padding:42px 58px;color:#bdd0df;font-size:15px}.wdi-loading i{margin-right:8px}
 .wdi-note{font-size:11.5px;color:#8897a4;line-height:1.55;margin-top:14px}
-/* Index visual polish: separate Insights title from its hero and center the town directory. */
 html body.wd-consumer-mode .section:has(.ins-grid) .ins-grid{margin:34px 0 0!important}
 .wd-seo-directory .wd-county{text-align:center}
 .wd-seo-directory .wd-town-links{align-items:center}
 @media(max-width:980px){.wdi-head,.wdi-read,.wdi-weights{grid-template-columns:1fr}.wdi-stamp{border-left:0;border-top:1px solid rgba(255,255,255,.15);padding:22px 0 0}.wdi-primary-grid{grid-template-columns:1fr}.wdi-signal-grid{grid-template-columns:1fr}.wdi-signals-head{align-items:start;flex-direction:column}.wdi-signals-head p{text-align:left}.wdi-cta{align-items:flex-start;flex-direction:column}.wdi-cta-actions{justify-content:flex-start}}
 @media(max-width:700px){#wd-intelligence-glance{padding:22px 14px 64px}.wdi-shell{border-radius:24px}.wdi-head,.wdi-signals,.wdi-read,.wdi-weights,.wdi-cta{padding-left:22px;padding-right:22px}.wdi-head{padding-top:34px}.wdi-primary{padding:24px 22px}.wdi-head h2{font-size:39px}.wdi-lead{font-size:16px}.wdi-weight-grid{grid-template-columns:1fr}.wdi-weight-rule{grid-column:auto}.wdi-cta-actions,.wdi-btn{width:100%}.wdi-btn{justify-content:center}html body.wd-consumer-mode .section:has(.ins-grid) .ins-grid{margin-top:24px!important}}
 
-/* ===== inlined property/css/brand-consistency.css ===== */
-/* Watchdog app brand consistency layer
-   Typography/shape authority: /property/css/shared/00-design-tokens.css
-   Identity/palette authority: /property/branding/brand-system.json
-   Scope: current product/app shells only. Public/editorial surfaces keep their documented exceptions. */
 
 @import url("/property/css/shared/00-design-tokens.css");
 @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
@@ -10319,7 +9885,6 @@ html body.wd-consumer-mode .section:has(.ins-grid) .ins-grid{margin:34px 0 0!imp
   --wd-focus:0 0 0 3px rgba(47,109,246,.18);
 }
 
-/* Product UI typography. */
 body.wd4-mounted,
 body.hm-dashboard-page,
 body.wdx-modern{
@@ -10340,7 +9905,6 @@ body.wdx-modern :is(button,input,select,textarea){
   font-family:var(--font-ui)!important;
 }
 
-/* Canonical 84px product topbar and 42px Watchdog mark. */
 .hm27-topbar{height:84px!important;background:rgba(255,255,255,.94)!important}
 .hm27-top-in{padding:0 30px!important;gap:20px!important}
 .hm27-brand-side{gap:18px!important}
@@ -10358,7 +9922,6 @@ body.wdx-modern :is(button,input,select,textarea){
 .hm27-profile{margin-left:2px!important;padding:4px 2px 4px 5px!important}
 .hm27-profile img,.hm27-avatar-fallback{width:38px!important;height:38px!important}
 
-/* Canonical off-canvas app navigation shared by Dashboard, Home and secondary shells. */
 .wd4-nav-panel,.hm27-nav-panel{
   left:16px!important;
   top:16px!important;
@@ -10390,7 +9953,6 @@ body.wdx-modern :is(button,input,select,textarea){
 .wd4-nav-foot,.hm27-nav-foot{padding:14px 16px 16px!important;border-top:1px solid var(--wd-line)!important}
 .wd4-nav-foot button,.hm27-nav-foot button{min-height:44px!important;border-radius:var(--radius-md)!important;font-size:var(--type-sm)!important;font-weight:700!important}
 
-/* Readability floor for the active Dashboard and shared product chrome. */
 .wd4-filter-select{font-size:var(--type-sm)!important;min-height:42px!important;border-radius:10px!important}
 .wd4-add-btn,.wd4-export-btn,.wd4-grid-btn{font-size:var(--type-sm)!important}
 .wd4-card-title{font-size:var(--type-sm)!important}
@@ -10402,7 +9964,6 @@ body.wdx-modern :is(button,input,select,textarea){
 .wd4-muni-table :is(th,td){font-size:var(--type-xs)!important}
 .leaflet-control-attribution{font-size:var(--type-xs)!important}
 
-/* Readability and canonical UI font for Property Home. */
 #hm-switch{font:700 var(--type-sm) var(--font-ui)!important}
 .hm-switch-label{font:800 var(--type-xs)/1 var(--font-ui)!important}
 .hm-kind,.hm-figs dt{font-size:var(--type-xs)!important}
@@ -10410,7 +9971,6 @@ body.wdx-modern :is(button,input,select,textarea){
 .hm-wrap>.sec p,.hm-wrap>.sec li{font-size:var(--type-sm)!important}
 .hm27-action,.hm-back{font-size:var(--type-sm)!important}
 
-/* Current secondary shell: consistent control size and readable chrome. */
 body.wdx-modern .wdx-btn,
 body.wdx-modern .wdx-menu,
 body.wdx-modern .wdx-icon,
@@ -10421,8 +9981,6 @@ body.wdx-modern .wdx-weather span{font-size:var(--type-xs)!important}
 body.wdx-modern .wdx-kicker{font-size:var(--type-xs)}
 body.wdx-modern .wdx-pagebar p{font-size:var(--type-sm);line-height:1.55}
 
-/* Dashboard-derived profile/notification chrome was historically much smaller on secondary pages.
-   Preserve compact badges/timestamps, but keep actual labels and actions readable. */
 body:is(.wd4-mounted,.wdx-modern) .wd6-pop header small{font-size:var(--type-xs)!important;line-height:1.35!important}
 body:is(.wd4-mounted,.wdx-modern) .wd6-pop header>button{font-size:var(--type-xs)!important;min-height:36px!important}
 body:is(.wd4-mounted,.wdx-modern) .wd6-pop nav b{font-size:var(--type-sm)!important;line-height:1.3!important}
@@ -10433,19 +9991,16 @@ body:is(.wd4-mounted,.wdx-modern) .wd6-note small{font-size:var(--type-xs)!impor
 body:is(.wd4-mounted,.wdx-modern) .wd6-note em{font-size:var(--type-xs)!important}
 body:is(.wd4-mounted,.wdx-modern) .wd6-nfoot{font-size:var(--type-xs)!important;min-height:44px!important}
 
-/* If legacy shared components surface inside a current app shell, canonical product type wins. */
 body:is(.wd4-mounted,.hm-dashboard-page,.wdx-modern) .pre-body h3{
   font-family:var(--font-ui)!important;
 }
 
-/* Numeric data should scan like financial/product data. */
 body.wd4-mounted :is(.wd4-kpi-value,.wd4-summary strong,.wd4-muni-table td),
 body.hm-dashboard-page :is(.hm-val b,.hm-figs dd,table td),
 body.wdx-modern :is(table td,[data-value]){
   font-variant-numeric:tabular-nums;
 }
 
-/* WCAG 2.2 AA interaction baseline. */
 body.wd4-mounted :is(a,button,input,select,textarea):focus-visible,
 body.hm-dashboard-page :is(a,button,input,select,textarea):focus-visible,
 body.wdx-modern :is(a,button,input,select,textarea):focus-visible{
@@ -10471,9 +10026,6 @@ body.wdx-modern :is(a,button,input,select,textarea):focus-visible{
 }
 
 
-/* ===== inlined property/css/home/home-watchdog-intelligence.css ===== */
-/* Property Home · Watchdog Intelligence system
-   Shared visual language for Intelligence surfaces plus the premium Explore card. */
 
 @property --wd-intelligence-angle {
   syntax: '<angle>';
@@ -10495,8 +10047,6 @@ body.hm-dashboard-page .wd-intelligence-frame {
   box-shadow: 0 18px 48px rgba(30,57,91,.09) !important;
 }
 
-/* Voice entry: intentionally visible for every signed-in plan. Entitlement is
-   enforced when the user asks to enter Voice, not by hiding the feature. */
 body.hm-dashboard-page .wd-home-voice-entry {
   grid-column: 1 / -1;
   display: flex;
@@ -10568,8 +10118,6 @@ body.hm-dashboard-page .wd-home-voice-button[aria-busy="true"] {
 }
 body.hm-dashboard-page .wd-home-voice-button i { font-size: 17px; }
 
-/* Watchdog Intelligence card. Keep the professional content hierarchy but give
-   the branded surface the same rotating Intelligence signature as Voice. */
 body.hm-dashboard-page .wdai-main.wd-intelligence-frame {
   border-radius: clamp(20px,1.45vw,24px) !important;
 }
@@ -10577,7 +10125,6 @@ body.hm-dashboard-page .wdai-main .wdai-title > span {
   color: #087f83 !important;
 }
 
-/* Explore is a distinct workspace card instead of disappearing into the page. */
 body.hm-dashboard-page .hm-explore-card {
   grid-column: 1 / -1;
   width: 100%;
@@ -10648,7 +10195,6 @@ body.hm-dashboard-page .hm-explore-card .sec2-body {
   background: #fbfcfe !important;
 }
 
-/* Entitlement gate */
 body.hm-dashboard-page .wd-intelligence-gate {
   position: fixed;
   inset: 0;
@@ -10774,11 +10320,9 @@ body.hm-dashboard-page .wd-intelligence-gate-secondary {
 }
 
 
-/* ===== inlined property/css/data-workbench-analyst.css ===== */
 .dwa-trigger{display:inline-flex;align-items:center;gap:8px;border:1px solid #d7e1ea!important;background:#fff!important;color:#0f172a!important;font-weight:800!important}.dwa-trigger i{color:#0c8b8d}.dwa-trigger.value i{color:#9a6700}.dwa-trigger.locked{opacity:.7}.dwa-backdrop{position:fixed;inset:0;background:rgba(15,23,42,.4);backdrop-filter:blur(3px);z-index:10020}.dwa-panel{position:fixed;top:0;right:0;z-index:10021;width:min(760px,100vw);height:100dvh;background:#f7f9fb;box-shadow:-24px 0 70px rgba(15,23,42,.2);display:flex;flex-direction:column;color:#0f172a}.dwa-head{display:flex;justify-content:space-between;gap:20px;align-items:flex-start;padding:22px 24px 18px;background:#fff;border-bottom:1px solid #e2e8f0}.dwa-head span{font:800 11px/1 "Plus Jakarta Sans",sans-serif;letter-spacing:.12em;color:#64748b}.dwa-head h2{margin:7px 0 4px;font:800 24px/1.1 "Plus Jakarta Sans",sans-serif}.dwa-head p{margin:0;color:#64748b;font-size:14px}.dwa-close{border:0;background:#eef2f6;width:40px;height:40px;border-radius:12px;cursor:pointer;color:#0f172a}.dwa-body{padding:18px 20px 28px;overflow:auto}.dwa-note{padding:11px 13px;border:1px solid #dbeafe;background:#eff6ff;border-radius:12px;color:#475569;font-size:12px;line-height:1.45}.dwa-note b{color:#0f172a}.dwa-chips{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0}.dwa-chip{border:1px solid #dbe3ec;background:#fff;border-radius:999px;padding:8px 11px;color:#334155;font:800 12px "Source Sans 3",sans-serif;cursor:pointer}.dwa-chat{display:grid;gap:10px;margin:12px 0 16px}.dwa-msg{max-width:90%;padding:12px 14px;border-radius:15px;background:#fff;border:1px solid #e2e8f0;box-shadow:0 4px 14px rgba(15,23,42,.04)}.dwa-msg.user{justify-self:end;background:#102a4c;color:#fff;border-color:#102a4c}.dwa-msg.assistant{justify-self:start}.dwa-msg b{display:block;margin-bottom:6px}.dwa-msg p{margin:0;line-height:1.48}.dwa-msg ul{margin:8px 0 0;padding-left:18px}.dwa-msg li{margin:4px 0}.dwa-section{margin-top:10px;padding-top:9px;border-top:1px solid #edf1f5}.dwa-section strong{display:block;font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:#64748b}.dwa-source{display:inline-flex;margin:6px 8px 0 0;color:#0b6f72;font-weight:800;text-decoration:none}.dwa-provider{margin-top:8px;color:#64748b;font-size:11px}.dwa-compose{position:sticky;bottom:-28px;background:linear-gradient(transparent,#f7f9fb 18%);padding:22px 0 0}.dwa-compose textarea{width:100%;min-height:92px;resize:vertical;border:1px solid #cbd5e1;border-radius:14px;padding:12px 13px;font:600 14px/1.45 "Source Sans 3",sans-serif;box-sizing:border-box;background:#fff}.dwa-compose-row{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:8px}.dwa-compose-row small{color:#64748b}.dwa-send{border:0;border-radius:11px;background:#0f172a;color:#fff;padding:10px 14px;font-weight:800;cursor:pointer}.dwa-send:disabled{opacity:.55}.dwa-action-row{display:flex;flex-wrap:wrap;gap:7px;margin-top:10px}.dwa-action-row button{border:1px solid #dbe3ec;background:#fff;border-radius:9px;padding:7px 9px;font-weight:800;color:#334155;cursor:pointer}.dwa-value-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:14px 0}.dwa-field{display:grid;gap:5px}.dwa-field label{font-size:12px;font-weight:800;color:#475569}.dwa-field input,.dwa-field select,.dwa-outcome{width:100%;box-sizing:border-box;border:1px solid #cbd5e1;background:#fff;border-radius:10px;padding:9px 10px;color:#0f172a;font:700 13px "Source Sans 3",sans-serif}.dwa-value-live{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;margin:12px 0}.dwa-value-live article{background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:12px}.dwa-value-live b{display:block;font:800 20px "Plus Jakarta Sans",sans-serif}.dwa-value-live span{display:block;color:#64748b;font-size:11px;margin-top:3px}.dwa-save{border:0;border-radius:11px;background:#0f172a;color:#fff;padding:10px 13px;font-weight:800;cursor:pointer}.dwa-profile{display:flex;justify-content:space-between;gap:12px;align-items:center;background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:13px;margin:12px 0}.dwa-profile b{display:block}.dwa-profile small{color:#64748b}.dwa-reset{border:1px solid #dbe3ec;background:#fff;border-radius:9px;padding:7px 9px;font-weight:800;color:#475569;cursor:pointer}.dwa-findings{display:grid;gap:10px;margin-top:12px}.dwa-finding{background:#fff;border:1px solid #e2e8f0;border-radius:15px;padding:13px}.dwa-finding-top{display:grid;grid-template-columns:48px minmax(0,1fr) auto;gap:10px;align-items:start}.dwa-score{width:48px;height:48px;border-radius:13px;background:#ecfdf5;color:#166534;display:grid;place-items:center;font:800 16px "Plus Jakarta Sans",sans-serif}.dwa-finding h3{margin:1px 0 4px;font:800 14px "Plus Jakarta Sans",sans-serif}.dwa-finding p{margin:0;color:#64748b;font-size:12px}.dwa-priority{font:800 12px "Plus Jakarta Sans",sans-serif;color:#0c7476;text-align:right}.dwa-scenario{display:flex;gap:12px;flex-wrap:wrap;margin-top:10px;padding-top:10px;border-top:1px solid #edf1f5}.dwa-scenario span{font-size:11px;color:#64748b}.dwa-scenario b{display:block;color:#0f172a;font-size:13px}.dwa-feedback{display:flex;flex-wrap:wrap;gap:7px;margin-top:10px}.dwa-feedback button{border:1px solid #dbe3ec;background:#fff;border-radius:9px;padding:7px 9px;font-weight:800;color:#334155;cursor:pointer}.dwa-feedback button.good{color:#166534}.dwa-feedback button.bad{color:#9a3412}.dwa-empty{padding:24px;text-align:center;background:#fff;border:1px dashed #cbd5e1;border-radius:14px;color:#64748b}.dwa-status{color:#64748b;font-size:12px;margin-top:8px}.dwa-warning{margin-top:12px;color:#92400e;font-size:12px;line-height:1.45}@media(max-width:720px){.dwa-head{padding:18px 16px}.dwa-body{padding:14px}.dwa-value-grid,.dwa-value-live{grid-template-columns:1fr}.dwa-finding-top{grid-template-columns:44px 1fr}.dwa-score{width:44px;height:44px}.dwa-priority{grid-column:2;text-align:left}.dwa-compose-row{align-items:flex-start;flex-direction:column}.dwa-send{width:100%}}
 
 
-/* ===== inlined property/css/watchdog-contextual-voice.css ===== */
 .wd-contextual-voice-entry{
   display:flex;
   align-items:center;
@@ -10834,8 +10378,6 @@ body.hm-dashboard-page .wd-intelligence-gate-secondary {
 .wd-contextual-voice-open:focus-visible,.wdi-today-voice-open:focus-visible{outline:3px solid rgba(15,118,110,.22);outline-offset:2px}
 .wd-contextual-voice-open span{color:inherit;font:inherit;letter-spacing:0}
 
-/* Dashboard Voice is a command, not a hero. Keep it on the same visual level
-   as the confirmed research context. */
 body[data-sidebar-page="dashboard"] .wd-contextual-voice-entry{
   min-height:68px;
   padding:10px 12px;
@@ -10955,10 +10497,8 @@ body[data-sidebar-page="dashboard"] .wd-contextual-voice-open{
 }
 
 
-/* ===== inlined property/css/watchdog-intelligence-voice.css ===== */
 .dwa-voice-button{display:inline-flex;align-items:center;justify-content:center;gap:7px;border:1px solid #cbd5e1;border-radius:11px;background:#fff;color:#0f172a;padding:9px 12px;font-weight:800;cursor:pointer;white-space:nowrap}.dwa-voice-button:hover{background:#f8fafc}.dwa-voice-button:disabled{opacity:.5;cursor:not-allowed}.dwa-voice-button.recording{border-color:#b91c1c;background:#fff1f2;color:#b91c1c}.dwa-voice-status{margin-top:7px;color:#64748b;font-size:11px;line-height:1.4}.dwa-voice-status[data-state="recording"]{color:#b91c1c;font-weight:700}.dwa-voice-status[data-state="ready"]{color:#0f766e;font-weight:700}.dwa-voice-status[data-state="error"]{color:#9a3412}.dwa-voice-message-tools{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-top:10px;padding-top:9px;border-top:1px solid #edf1f5}.dwa-voice-message-tools button{display:inline-flex;align-items:center;gap:6px;border:1px solid #dbe3ec;background:#fff;border-radius:9px;padding:7px 9px;color:#334155;font-weight:800;cursor:pointer}.dwa-voice-message-tools button:disabled{opacity:.55;cursor:not-allowed}.dwa-voice-message-tools span{color:#64748b;font-size:11px}@media(max-width:720px){.dwa-compose-row{gap:8px}.dwa-voice-button{width:100%}.dwa-voice-message-tools{align-items:flex-start;flex-direction:column}}
 
-/* Town CO & fire certificate (Pro+ closing): person-checked town and fire certificate rules. */
 .tcx-tool{background:#fff;border:1px solid #dbe5ea;border-radius:20px;color:#17304e;margin:18px 0;padding:22px;scroll-margin-top:140px}
 .tcx-badge{color:#0c7777;font:800 12px 'Plus Jakarta Sans',sans-serif;letter-spacing:.1em;text-transform:uppercase}
 .tcx-intro h3{font:800 24px/1.15 'Plus Jakarta Sans',sans-serif;margin:6px 0 6px}

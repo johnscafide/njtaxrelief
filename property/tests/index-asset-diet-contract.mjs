@@ -10,7 +10,8 @@ const contactPolicy = fs.readFileSync('property/js/contact-routing-policy.js', '
 const contactSafe = fs.readFileSync('api/watchdog-index-page-contact-safe.js', 'utf8');
 
 must(
-  publicNav.includes('Never hide/translate the sheet during an anchor\'s activation event.'),
+  publicNav.includes("var closer=e.target&&e.target.closest&&e.target.closest('.wd-public-close,[data-wd-universal=\"close\"]');")
+    && publicNav.includes('if(closer){e.preventDefault();close();return;}'),
   'Public nav must preserve WebKit anchor activation semantics.'
 );
 must(

@@ -1,16 +1,30 @@
-/* ==========================================================================
-   wd-core.js — the only place that talks to Supabase or holds state.
-   Fires 'wd:ready' as soon as saved properties are in; secondary data fills
-   in after first paint. No observers, no polling.
-   Weather, notifications and the account menu belong to app-shell-2027.js.
-   ========================================================================== */
+/* 
+     
+     Hi There. I see you are checking the code. I'm sure you have reasons for such. Curiosity would be my guess. 
+
+     My name is John. I've been building sites since I was 10. I was gifted ecommerce website software on floppy disks
+     and fell in love with web developement ever since. I learned to code HTML using just notepad. I took computer science
+     classes (BASIC and Visual Basic in high school). Took a few college classes learning C++, Python, Ruby and Javascript.
+     My very first websites was with Angelfire and Geocities. In college I dabbed in game development, small tools, and
+     graphic design. Database management with SQL by my sophmore year. Joomla and other CMS tools learned by the age of 20. 
+     I have an understanding and experience writing code by hand, studing and analyzing bugs, issues, and corrections. 
+     The introduction of AI is interesting. I can understand the worry and fear. I also see the memes of "Hey I can make 
+     your job obsolete" then show a localhost:3000. haha. But I do believe, if you understand how to use the tools, it's
+     no different than templates, hiring a local kid, outsourcing your work to fivrr or an agency. I code, I understand the
+     backend and frontend. I'm not an expert by all means. But I do have insights. Watchdog was built on real research.
+     Watchdog & it's companion, NJPropertyTaxRelief.com, is from years of listening to real people with real needs in NJ.
+     I hope these sites and tools have benefit to you and/or your business. If you found them useful, the least I ask of
+     you is to share. Sure, I have paid plan options for members, but majority of the site is free to use. I'm a real estate
+     agent, licensed tax professional, and a big fan of the state of New Jersey. It's a great state, but not without its
+     flaws. The idea is to educate more New Jerseyians about their benefits and property taxes in the state. It's possible
+     one day this site will exceed some of the bigger natonal sites. Who knows. But for now, I present to you, Watchdog
+     Property Intelligence.
+
+     */
 (function (w, d) {
   'use strict';
   if (w.WD) return;
 
-  /* Supabase configuration belongs to the shared Watchdog runtime. Keeping
-     this page on that client preserves preview/production switching, PKCE,
-     onboarding and key rotation in one place. */
   var H = {
     esc: function (v) {
       return String(v == null ? '' : v).replace(/[&<>"']/g, function (c) {
@@ -65,9 +79,6 @@
     return { pct: (assessed / value - 1) * 100, over: over, dollars: rate != null && rate > 0 ? (over * rate) / 100 : null };
   }
   function categoryFor(p) { var g = gapFor(p), s = S.scores[p.pams_pin]; if (g && g.pct >= 15) return 'bad'; if (g && g.pct >= 5) return 'warn'; if (s && s.score != null && s.score < 45) return 'bad'; if (s && s.score != null && s.score < 65) return 'warn'; return 'ok'; }
-  // One score verdict for the whole dashboard. The KPI card, the hero score
-  // panel and anything else that labels a Watchdog Score should call this so
-  // the same number never reads two different ways.
   function verdict(score) {
     if (score == null || !Number.isFinite(Number(score))) return { label: 'Not scored yet', tone: '' };
     score = Number(score);

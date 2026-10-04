@@ -1,11 +1,29 @@
-/* ============================================================
-   PROPERTY LOOKUP
-   watchdogindex.com
-   ============================================================ */
+/* 
+     
+     Hi There. I see you are checking the code. I'm sure you have reasons for such. Curiosity would be my guess. 
+
+     My name is John. I've been building sites since I was 10. I was gifted ecommerce website software on floppy disks
+     and fell in love with web developement ever since. I learned to code HTML using just notepad. I took computer science
+     classes (BASIC and Visual Basic in high school). Took a few college classes learning C++, Python, Ruby and Javascript.
+     My very first websites was with Angelfire and Geocities. In college I dabbed in game development, small tools, and
+     graphic design. Database management with SQL by my sophmore year. Joomla and other CMS tools learned by the age of 20. 
+     I have an understanding and experience writing code by hand, studing and analyzing bugs, issues, and corrections. 
+     The introduction of AI is interesting. I can understand the worry and fear. I also see the memes of "Hey I can make 
+     your job obsolete" then show a localhost:3000. haha. But I do believe, if you understand how to use the tools, it's
+     no different than templates, hiring a local kid, outsourcing your work to fivrr or an agency. I code, I understand the
+     backend and frontend. I'm not an expert by all means. But I do have insights. Watchdog was built on real research.
+     Watchdog & it's companion, NJPropertyTaxRelief.com, is from years of listening to real people with real needs in NJ.
+     I hope these sites and tools have benefit to you and/or your business. If you found them useful, the least I ask of
+     you is to share. Sure, I have paid plan options for members, but majority of the site is free to use. I'm a real estate
+     agent, licensed tax professional, and a big fan of the state of New Jersey. It's a great state, but not without its
+     flaws. The idea is to educate more New Jerseyians about their benefits and property taxes in the state. It's possible
+     one day this site will exceed some of the bigger natonal sites. Who knows. But for now, I present to you, Watchdog
+     Property Intelligence.
+
+     */
 (function () {
   'use strict';
 
-  // ── Public endpoints. Free, no key required. ──────────────
   var NJ_GEOCODE  = 'https://geo.nj.gov/arcgis/rest/services/Tasks/NJ_Geocode/GeocodeServer/findAddressCandidates';
   var NJ_REVERSE  = 'https://geo.nj.gov/arcgis/rest/services/Tasks/NJ_Geocode/GeocodeServer/reverseGeocode';
   var CENSUS      = 'https://geocoding.geo.census.gov/geocoder/locations/onelineaddress';
@@ -13,7 +31,6 @@
   var ESRI_TILES  = 'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}';
   var ESRI_EXPORT = 'https://services.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/export';
 
-  // Google Maps key, Street View Static enabled.
   var GMAPS_KEY = 'AIzaSyCZBo_mj5WXyR-Bsb5yHdekxAxauTYNmlU';
 
   var AGENTS = {
@@ -53,10 +70,6 @@
   var EJS_SERVICE = 'service_gptqbyx';
   var EJS_TMPL    = 'template_contact';
 
-  // ZIP5, ST_ADDRESS and CITY_STATE on this statewide parcel layer are owner
-  // MAILING fields, not property-location fields. They must never participate in
-  // parcel identity, be presented as the searched property's ZIP, or be pulled
-  // into the public browser payload.
   var FIELDS = ['PAMS_PIN','COUNTY','MUN_NAME','PROP_LOC','PCLBLOCK','PCLLOT','PCLQCODE',
     'PROP_CLASS','BLDG_DESC','LAND_DESC','CALC_ACRE','YR_CONSTR','DWELL','COMM_DWELL',
     'LAND_VAL','IMPRVT_VAL','NET_VALUE','LAST_YR_TX','SALE_PRICE','DEED_DATE','DEED_BOOK','DEED_PAGE',
@@ -107,22 +120,7 @@
   }
 
 
-  // ══════════════════════════════════════════════
-  // FETCH WITH A TIMEOUT
-  //
-  // The state endpoints occasionally accept a connection and then never
-  // answer. Plain fetch() has no timeout, so that hangs forever and the
-  // spinner spins forever with no error to catch. Every network call on this
-  // page goes through here so a dead server becomes a failure we can handle
-  // instead of a page that just sits there.
-  // ══════════════════════════════════════════════
 
-  // ══════════════════════════════════════════════
-  // REQUEST CACHE
-  // These are free public servers. Anything we already asked for this session
-  // gets reused instead of asked again. Coordinates are rounded so two lookups
-  // on the same street share one result.
-  // ══════════════════════════════════════════════
   var reqCache = {};
   function cached(key, ms, fn) {
     var hit = reqCache[key];
@@ -130,10 +128,6 @@
     return fn().then(function (v) { reqCache[key] = { t: Date.now(), v: v }; return v; });
   }
 
-  // Same as cached(), but the answer also survives a page reload for a day, so a
-  // second look at the same street does not ask the state parcel server again.
-  // The parcel layer changes monthly. Empty answers are never stored, and only the
-  // newest PERSIST_MAX answers are kept so localStorage stays small.
   var PERSIST_PREFIX = 'pl_px_', PERSIST_INDEX = 'pl_px_index', PERSIST_MAX = 20;
   function persisted(key, ms, fn) {
     var hit = reqCache[key];
@@ -143,7 +137,6 @@
       if (raw && (Date.now() - raw.t) < ms) { reqCache[key] = raw; return Promise.resolve(raw.v); }
     } catch (e) {}
     return fn().then(function (v) {
-      // A failed or empty answer is retried next time, never remembered.
       if (v == null || (Array.isArray(v) && !v.length)) return v;
       var entry = { t: Date.now(), v: v };
       reqCache[key] = entry;
@@ -164,7 +157,6 @@
   function xfetch(url, ms, opts) {
     ms = ms || 12000;
     if (typeof AbortController === 'undefined') {
-      // very old browser: race a timer instead
       return Promise.race([
         fetch(url, opts || {}),
         new Promise(function (_, rej) {
@@ -185,12 +177,6 @@
   }
 
 
-  // ══════════════════════════════════════════════
-  // GLOBAL ERROR SURFACE
-  // Anything that escapes a try/catch, including errors thrown inside event
-  // handlers and third party scripts, gets shown instead of dying silently in
-  // a console nobody has open.
-  // ══════════════════════════════════════════════
   function showFatal(what, detail, where) {
     var b = document.getElementById('pl-fatal');
     if (!b) {
@@ -216,10 +202,6 @@
     showFatal('A request failed and was not handled', (r && r.message) || String(r), '');
   });
 
-  // A missing element must never take the page down. Anyone editing this
-  // template will comment a section out sooner or later, and that should
-  // degrade quietly rather than throw. Missing IDs are logged once each so
-  // they are still findable.
   var _warned = {};
   var _stub = null;
   function stubEl() {
@@ -248,7 +230,6 @@
     }
     return stubEl();
   }
-  // Use this when you genuinely need to know whether the node is real.
   function elReal(id) { return document.getElementById(id); }
   function money(n) { return '$' + Math.round(n).toLocaleString(); }
   function esc(s) {
@@ -310,10 +291,6 @@
     return t === null ? null : Math.floor(t);
   }
 
-  // The US Census geocoder does not send CORS headers, so a browser can never
-  // read its response. It is left defined for a future server side proxy but
-  // is deliberately NOT in the fallback path: calling it only burns seconds on
-  // a request that cannot succeed. NJOGIS answers in about 130ms.
   function geocode(address) {
     var p = new URLSearchParams({ SingleLine: address, outSR: '4326', maxLocations: '1', f: 'json' });
     return xfetch(NJ_GEOCODE + '?' + p, 8000)
@@ -321,7 +298,7 @@
       .then(function (d) {
         if (d && d.error) throw new Error('geo service: ' + (d.error.message || 'error'));
         var c = d.candidates && d.candidates[0];
-        if (!c) return null;                      // genuinely no match, not a failure
+        if (!c) return null;                      
         return { lat: c.location.y, lon: c.location.x, matched: c.address, score: Number(c.score) || 0 };
       });
   }
@@ -346,14 +323,10 @@
   }
 
   function propertyLocationZip(typed, matched) {
-    // The property ZIP comes from the address evidence, never the parcel
-    // layer's owner-mailing ZIP fields.
     return parcelZip(matched) || parcelZip(typed);
   }
 
   function displayStreetAddress(typed, matched, assessor) {
-  // Keep the address the visitor searched as the primary label. NJ's
-  // assessor may use a different street alias for the same tax parcel.
   var source = String(matched || typed || assessor || '').trim();
   var street = source.split(',')[0].trim();
   return street || String(assessor || typed || '').trim();
@@ -381,9 +354,6 @@ function assessorAddressAlias(display, assessor) {
     var house = tokens.shift().replace(/^0+/, '') || '0';
     var streetTokens = tokens.slice();
     var coreTokens = streetTokens.filter(function (token) { return !PARCEL_ADDR_NOISE[token]; });
-    // A real street can be mostly directional/suffix words (for example North
-    // Avenue). If stripping the noise leaves nothing, keep the normalized
-    // street instead of inventing an empty equivalence class.
     if (!coreTokens.length) coreTokens = streetTokens;
     return {
       key: key,
@@ -420,9 +390,6 @@ function assessorAddressAlias(display, assessor) {
     if (!a) return false;
     var candidate = parcelAddressParts(a.PROP_LOC);
     if (!candidate || !candidate.house) return false;
-    // Alias recovery is already constrained by a high-confidence geocode,
-    // block-scale geometry and unique PAMS identity. Do not compare ZIP5 here:
-    // that field belongs to the owner's mailing address, not PROP_LOC.
     return targets.some(function (target) {
       return !!(target.house && target.house === candidate.house);
     });
@@ -452,10 +419,6 @@ function assessorAddressAlias(display, assessor) {
   function parcelNearbyAliasCandidate(lat, lon, targets) {
     if (!targets || !targets.length || !Number.isFinite(lat) || !Number.isFinite(lon)) return Promise.resolve(null);
 
-    // Manual submissions do not always carry a Google-selected coordinate. For
-    // assessor street aliases, search only the immediate block around NJ's own
-    // high-confidence address point and accept exactly one unqualified parcel
-    // sharing the house number at that location. Any ambiguity still fails closed.
     var meters = 250;
     var dLat = meters / 111320;
     var dLon = meters / (111320 * Math.cos(lat * Math.PI / 180));
@@ -475,11 +438,6 @@ function assessorAddressAlias(display, assessor) {
         var matches = (d.features || []).filter(function (feature) {
           return parcelAliasIdentityMatches(feature, targets);
         });
-        // A qualifier is not itself ambiguity. Some ordinary NJ single-family
-        // parcels carry a qualifier (for example lot 3.01). What matters is
-        // whether this bounded address search resolves to one unique tax parcel.
-        // Condos/multi-parcel addresses still produce multiple PAMS_PIN values
-        // here and therefore continue to fail closed.
         var seenPins = Object.create(null);
         matches = matches.filter(function (feature) {
           var a = feature && feature.attributes || {};
@@ -501,18 +459,10 @@ function assessorAddressAlias(display, assessor) {
     if (!targets || !targets.length) return Promise.resolve(null);
     var exactAttrs = exact && exact.attributes || {};
 
-    // A selected Google address gives us a second, independent coordinate.
-    // The NJ address point is allowed to fall on roadway/no parcel: that is the
-    // failure mode this safeguard exists to recover. The selected Google point
-    // must still be tightly corroborated by the NJ geocoder, land on one
-    // unqualified tax parcel, and that parcel must share the searched house number.
     if (selectedGeo && geoMeta && Number(geoMeta.score) >= 95 &&
         lookupPointDistanceMeters(geoMeta, selectedGeo) <= 120) {
       return parcelAtRaw(selectedGeo.lat, selectedGeo.lon).then(function (second) {
         if (!second || !parcelAliasCandidateMatches(second, targets)) return null;
-        // If NJ's coordinate did hit a parcel, both coordinate checks must agree.
-        // If it hit roadway/no polygon, the independently selected Google parcel
-        // is still safe because address identity + ZIP + proximity are all gated.
         if (exact && !sameParcel(exact, second)) return null;
         var a = second.attributes || {};
         console.info('[watchdog] parcel street alias confirmed', {
@@ -524,10 +474,6 @@ function assessorAddressAlias(display, assessor) {
       });
     }
 
-    // Manual searches do not have a second Google coordinate. Keep the strictest
-    // evidence threshold. If NJ itself hits the alias parcel, accept it. If NJ
-    // lands on roadway/no polygon, search only the immediate block and require
-    // one unique parcel with the same house number at that location.
     if (geoMeta && Number(geoMeta.score) >= 99) {
       if (exact && parcelAliasCandidateMatches(exact, targets)) {
         console.info('[watchdog] parcel street alias accepted from high-confidence NJ geocode', {
@@ -536,9 +482,6 @@ function assessorAddressAlias(display, assessor) {
         });
         return Promise.resolve(exact);
       }
-      // Even when the NJ point intersects a parcel, a qualified assessor
-      // alias must still go through the bounded uniqueness check rather than be
-      // accepted from an arbitrary resultRecordCount=1 feature.
       return parcelNearbyAliasCandidate(geoMeta.lat, geoMeta.lon, targets).then(function (nearAlias) {
         if (!nearAlias) return null;
         var a = nearAlias.attributes || {};
@@ -567,8 +510,6 @@ function assessorAddressAlias(display, assessor) {
         if (exact && (!targets.length || parcelCandidateMatches(exact, targets))) return exact;
         if (!targets.length) return null;
 
-        // Exhaust the normal street-address paths before treating a different
-        // assessor street name as an alias.
         return parcelNearbyByAddress(lat, lon, typed, matched).then(function (nearby) {
           if (nearby) return nearby;
           return parcelByAddressRecord(lat, lon, typed, matched);
@@ -607,9 +548,6 @@ function assessorAddressAlias(display, assessor) {
     var targets = parcelTargets(typed, matched);
     if (!targets.length) return Promise.resolve(null);
 
-    // 180m is still a neighborhood-scale bound, but it covers the common NJ
-    // cases where the official address point is on a road centerline or a long
-    // driveway rather than inside the tax polygon.
     var meters = 180;
     var dLat = meters / 111320;
     var dLon = meters / (111320 * Math.cos(lat * Math.PI / 180));
@@ -629,9 +567,6 @@ function assessorAddressAlias(display, assessor) {
         var matches = (d.features || []).filter(function (feature) {
           return parcelCandidateMatches(feature, targets);
         });
-        // Never guess among multiple tax parcels sharing one street address
-        // (common with condos/qualifiers). A safe miss is better than opening
-        // the wrong property.
         if (matches.length !== 1) return null;
         return matches[0];
       });
@@ -666,9 +601,6 @@ function assessorAddressAlias(display, assessor) {
     var target = targets[0];
     if (!target.house) return Promise.resolve(null);
 
-    // Ask the parcel layer by PROP_LOC, but keep the query spatially local.
-    // ZIP5 cannot be used here because NJ's statewide parcel layer defines it
-    // as the OWNER MAILING ZIP, which can legitimately differ from the property.
     var meters = 600;
     var dLat = meters / 111320;
     var dLon = meters / (111320 * Math.cos(lat * Math.PI / 180));
@@ -725,12 +657,7 @@ function assessorAddressAlias(display, assessor) {
            lat + ',' + lon + '&fov=75&pitch=8&source=outdoor&key=' + GMAPS_KEY;
   }
 
-  // ══════════════════════════════════════════════
-  // LOCATE ME
-  // ══════════════════════════════════════════════
 
-  // Look up whatever parcel sits under a coordinate. Used by the locate button
-  // when reverse geocoding is unavailable, and safe to call directly.
   function lookupAtPoint(lat, lon, label) {
     var btn = el('pl-btn');
     var lookupId = ++lookupSeq;
@@ -774,9 +701,6 @@ function assessorAddressAlias(display, assessor) {
     btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
     navigator.geolocation.getCurrentPosition(function (pos) {
       var lat = pos.coords.latitude, lon = pos.coords.longitude;
-      // NJOGIS returns "Unable to complete operation" for reverseGeocode, so
-      // there is no address to fetch. We never needed one: the parcel lookup
-      // works directly from coordinates.
       resetGeoBtn();
       lookupAtPoint(lat, lon, 'Your current location');
     }, function (err) {
@@ -798,9 +722,6 @@ function assessorAddressAlias(display, assessor) {
     return { lat: lat, lon: lon };
   }
 
-  // ══════════════════════════════════════════════
-  // MAIN LOOKUP
-  // ══════════════════════════════════════════════
   window.plLookup = function () {
     var addr = (el('pl-addr').value || '').trim();
     if (!addr) { el('pl-addr').focus(); return; }
@@ -825,7 +746,6 @@ function assessorAddressAlias(display, assessor) {
       '<div class="pl-state-sub">Matching ' + esc(addr) + ' to the New Jersey parcel map.</div></div>';
     if (typeof gtag === 'function') gtag('event', 'property_lookup');
 
-    // Supporting datasets warm in parallel. They never block property identity.
     warmReferenceData();
 
     geocode(addr)
@@ -902,13 +822,6 @@ function assessorAddressAlias(display, assessor) {
       .catch(function () { rateTable = {}; });
   }
 
-  // ══════════════════════════════════════════════
-  // ADDRESS NORMALIZER
-  // The MLS writes "11 Dalton Pl". The assessor writes "11 DALTON PLACE".
-  // Neither matches the other as raw text, so both sides collapse to the same
-  // canonical form before comparing. This must stay in step with the generator
-  // that builds listings.json.
-  // ══════════════════════════════════════════════
   var ADDR_SUF = {
     AVENUE:'AVE', AVE:'AVE', AV:'AVE',
     STREET:'ST', ST:'ST', STR:'ST',
@@ -948,20 +861,8 @@ function assessorAddressAlias(display, assessor) {
     return out.join(' ');
   }
 
-  // ══════════════════════════════════════════════
-  // LISTING STATUS
-  // No free public API reports whether a NJ home is for sale. MLS status
-  // lives behind Bright MLS / IDX. So status resolves in this order:
-  //   1. listings.json override you maintain by hand
-  //   2. recorded deed inside the last 12 months -> Recently sold
-  //   3. otherwise -> Off market, which is what public record supports
-  // When you get an IDX feed, replace this one function.
-  // ══════════════════════════════════════════════
   var listingTable = null;
 
-  // Optional. If /listings.json is absent this simply does nothing, which is
-  // the normal state. Only add entries for listings you will actually keep
-  // current, because a wrong status is worse than no status.
   function loadListings() {
     if (listingTable !== null) return Promise.resolve();
     return xfetch('/listings.json', 6000)
@@ -977,10 +878,6 @@ function assessorAddressAlias(display, assessor) {
   };
 
   function resolveStatus(p, dy) {
-    // Listing status is NOT read from any MLS feed. The only automatic signal
-    // is the recorded deed date in the state assessment file, which is public,
-    // self updating, and cannot go stale in a way that misleads anyone.
-    // listings.json is optional and only holds listings you enter by hand.
     var county = (p.COUNTY || '').toUpperCase().trim();
     var keys = [ p.PAMS_PIN, normAddr(p.PROP_LOC) + '|' + county ];
     for (var i = 0; i < keys.length; i++) {
@@ -996,22 +893,10 @@ function assessorAddressAlias(display, assessor) {
       return { label: 'Recently sold', cls: 'sold', source: 'deed',
                detail: { note: 'Deed recorded ' + dy + ' per the state assessment file' } };
     }
-    // No default tag. Assessment data cannot tell us whether a home is
-    // listed, and guessing "off market" was wrong often enough to be worse
-    // than saying nothing. Tag returns only when we actually know.
     return null;
   }
 
-  // ══════════════════════════════════════════════
-  // PROPERTY LEDGER  (optional Supabase write)
-  // Fill these in after running supabase-property-ledger.sql.
-  // Blank = the page skips it entirely and nothing breaks.
-  // Records the PROPERTY only. Never the visitor.
-  // ══════════════════════════════════════════════
   var LEDGER_URL = 'https://uvkvaxljhhngydvlrzom.supabase.co';
-  // PASTE THE PUBLISHABLE KEY FOR uvkvaxljhhngydvlrzom HERE.
-  // Project Settings -> API Keys -> publishable (starts sb_publishable_).
-  // The old key below belongs to a DIFFERENT project and will be rejected.
   var LEDGER_KEY = 'sb_publishable_MYX59qCbK3d-21zDfJqkNw_fvmfnexa';
 
   function recordLookup(p, geo, rate, dy, propertyZip) {
@@ -1029,18 +914,15 @@ function assessorAddressAlias(display, assessor) {
         lat: geo.lat, lon: geo.lon
       };
 
-      // always keep a local copy so the feature works with or without Supabase
       var local = JSON.parse(localStorage.getItem('pl_seen') || '{}');
       var k = payload.pams_pin || payload.address;
       local[k] = { a: payload.address, t: payload.town, v: payload.assessed_value,
                    x: payload.last_year_tax, n: ((local[k] && local[k].n) || 0) + 1, d: Date.now() };
       localStorage.setItem('pl_seen', JSON.stringify(local));
 
-      // Production record_lookup is authenticated-only by design. Anonymous
-      // property searches keep the local ledger and do not generate a doomed 401.
       if (!plUser || !sb || typeof sb.rpc !== 'function') return;
       sb.rpc('record_lookup', { p: payload }).then(function () {}, function () {});
-    } catch (e) { /* never let logging break a lookup */ }
+    } catch (e) {  }
   }
 
   function timesSeen(pin) {
@@ -1050,25 +932,6 @@ function assessorAddressAlias(display, assessor) {
     } catch (e) { return 0; }
   }
 
-  // ══════════════════════════════════════════════
-  // WATCHDOG ESTIMATE
-  //
-  // How this works, and why it is not made up.
-  //
-  // New Jersey equalizes assessments using a "director's ratio": the median
-  // of assessed value divided by sale price across recent arm's length sales
-  // in a municipality. Divide an assessment by that ratio and you get the
-  // market value the town's own numbers imply.
-  //
-  // The statewide parcel layer carries both NET_VALUE and SALE_PRICE on every
-  // parcel. So instead of hardcoding a ratio table, we compute the town's
-  // ratio live from its own recorded sales, then trim outliers with an
-  // interquartile filter so family transfers, $1 deeds, and foreclosures do
-  // not drag it. Simulated against 40 percent junk sales it still lands
-  // within 2 percent of the true ratio.
-  //
-  // It is an estimate. It is disclosed as an estimate everywhere it appears.
-  // ══════════════════════════════════════════════
 
   var RATIO_CACHE_DAYS = 7;
   var ratioCache = {};
@@ -1098,7 +961,6 @@ function assessorAddressAlias(display, assessor) {
     try { localStorage.setItem('pl_ratio_' + key, JSON.stringify({ t: Date.now(), v: v })); } catch (e) {}
   }
 
-  // Pull this town's residential sales and derive the ratio.
   function townRatio(town, county) {
     var key = (town + '|' + county).toUpperCase().replace(/[^A-Z0-9|]/g, '');
     var hit = cachedRatio(key);
@@ -1119,16 +981,13 @@ function assessorAddressAlias(display, assessor) {
         if (!d.features || !d.features.length) return null;
         var thisYear = new Date().getFullYear();
 
-        // Assessments stay flat while prices move, so the ratio drifts down
-        // over time. A wide window averages in stale ratios and lowballs the
-        // estimate. Start tight, widen only if the sample is too thin.
         function gather(years) {
           var out = [], newest = 0;
           d.features.forEach(function (f) {
             var a = f.attributes, yr = deedYear(a.DEED_DATE);
             if (!yr || yr < thisYear - years) return;
             var v = (+a.NET_VALUE) / (+a.SALE_PRICE);
-            if (!isFinite(v) || v < 0.15 || v > 2.5) return;    // obvious junk
+            if (!isFinite(v) || v < 0.15 || v > 2.5) return;    
             out.push(v);
             if (yr > newest) newest = yr;
           });
@@ -1140,14 +999,12 @@ function assessorAddressAlias(display, assessor) {
         if (g.r.length < 25) g = gather(8);
         var ratios = g.r, newest = g.newest;
 
-        if (ratios.length < 12) return null;                    // not enough to trust
+        if (ratios.length < 12) return null;                    
 
         var q1 = quantile(ratios, 0.25), q3 = quantile(ratios, 0.75), iqr = q3 - q1;
         var trimmed = ratios.filter(function (v) { return v >= q1 - 1.5 * iqr && v <= q3 + 1.5 * iqr; });
         if (trimmed.length < 10) return null;
 
-        // town-wide drift, used when a neighborhood is too thin to measure
-        // its own. median multiplier per year across the whole municipality.
         var mByYear = {};
         d.features.forEach(function (f) {
           var a = f.attributes, yr = deedYear(a.DEED_DATE);
@@ -1179,50 +1036,25 @@ function assessorAddressAlias(display, assessor) {
       .catch(function () { return null; });
   }
 
-  // assessed / ratio = implied market value. Wider ratio spread = wider range.
   function watchdogEstimate(assessed, r) {
     if (!assessed || !r || !r.ratio) return null;
     var mid = assessed / r.ratio;
-    var hi = assessed / Math.max(r.lo, 0.05);   // low ratio  -> high value
-    var lo = assessed / Math.max(r.hi, 0.05);   // high ratio -> low value
+    var hi = assessed / Math.max(r.lo, 0.05);   
+    var lo = assessed / Math.max(r.hi, 0.05);   
     return {
       mid: mid, lo: Math.min(lo, mid), hi: Math.max(hi, mid),
       ratio: r.ratio, n: r.n, through: r.through, span: r.span
     };
   }
 
-  // ══════════════════════════════════════════════
-  // LIVE RATIO
-  //
-  // Measure the assessed-to-market relationship from the SAME file we read the
-  // assessment out of. That is the only way to cancel two separate lags:
-  //
-  //   Timing.    The published tax year 2026 ratio is built from sales sampled
-  //              around mid 2024 to mid 2025. It is priced to early 2025.
-  //   Vintage.   NJGIN ships the parcel layer with 2024 tax year MOD-IV, while
-  //              the published ratio applies to the 2025 assessments. Dividing
-  //              our 2024 assessment by a 2026 ratio mixes denominators.
-  //
-  // Small boroughs do not have enough sales to measure alone, so this widens to
-  // the county rather than giving up. A county ratio is less precise than a town
-  // ratio but it is measured against the right assessment vintage, which beats a
-  // published ratio that is not.
-  // ══════════════════════════════════════════════
 
-  // No assumed appreciation rate. If verified sales cannot measure a trend,
-  // Watchdog applies no time-growth adjustment and labels the evidence gap.
   var liveRatioCache = {};
 
-  // DEED_DATE is not one format. Across counties it arrives as MMDDYY,
-  // YYYYMMDD, and sometimes an epoch millisecond number. My first parser only
-  // accepted 6 digit MMDDYY and threw away 87% of the rows in Woodbury Heights,
-  // which is what starved the sample and let stale sales dominate.
   var THIS_YEAR = new Date().getFullYear();
 
   function deedDecimal(d) {
     if (d === null || d === undefined || d === '') return null;
 
-    // epoch milliseconds, which some services return for date fields
     if (typeof d === 'number' && d > 1e11) {
       var dt = new Date(d);
       var y0 = dt.getUTCFullYear();
@@ -1232,13 +1064,11 @@ function assessorAddressAlias(display, assessor) {
 
     var s = String(d).trim();
 
-    // ISO-ish: 2024-03-15 or 2024/03/15
     var iso = s.match(/^(\d{4})[-\/](\d{1,2})[-\/](\d{1,2})/);
     if (iso) {
       var yi = +iso[1], mi = +iso[2];
       if (mi >= 1 && mi <= 12 && yi >= 1900 && yi <= THIS_YEAR) return yi + (mi - 0.5) / 12;
     }
-    // US-ish: 3/15/2024
     var us = s.match(/^(\d{1,2})[-\/](\d{1,2})[-\/](\d{4})$/);
     if (us) {
       var mu = +us[1], yu = +us[3];
@@ -1247,26 +1077,19 @@ function assessorAddressAlias(display, assessor) {
 
     var n = s.replace(/\D/g, '');
 
-    if (n.length === 8) {                       // YYYYMMDD
+    if (n.length === 8) {                       
       var y8 = +n.slice(0, 4), m8 = +n.slice(4, 6);
       if (m8 >= 1 && m8 <= 12 && y8 >= 1900 && y8 <= THIS_YEAR) return y8 + (m8 - 0.5) / 12;
-      var m8b = +n.slice(0, 2), y8b = +n.slice(4, 8);   // MMDDYYYY
+      var m8b = +n.slice(0, 2), y8b = +n.slice(4, 8);   
       if (m8b >= 1 && m8b <= 12 && y8b >= 1900 && y8b <= THIS_YEAR) return y8b + (m8b - 0.5) / 12;
       return null;
     }
-    // Six digit dates from MOD-IV are YYMMDD, confirmed against a live value of
-    // "231201" which is only valid read that way (month 23 does not exist).
-    // This matters: most dates parse under BOTH readings, so getting the order
-    // wrong silently returns a date years off. "060115" is January 2006 here,
-    // not June 2015.
     if (n.length === 6) {
       var yy = +n.slice(0, 2), mm = +n.slice(2, 4);
       if (mm >= 1 && mm <= 12) {
         var yr = yy > 40 ? 1900 + yy : 2000 + yy;
         if (yr >= 1900 && yr <= THIS_YEAR) return yr + (mm - 0.5) / 12;
       }
-      // Fall back to MMDDYY only when YYMMDD cannot be true, so mixed county
-      // formats still resolve instead of being discarded.
       var m2 = +n.slice(0, 2), y2 = +n.slice(4, 6);
       if (m2 >= 1 && m2 <= 12) {
         var yr2 = y2 > 40 ? 1900 + y2 : 2000 + y2;
@@ -1274,7 +1097,7 @@ function assessorAddressAlias(display, assessor) {
       }
       return null;
     }
-    if (n.length === 4) {                       // bare year
+    if (n.length === 4) {                       
       var y4 = +n;
       if (y4 >= 1900 && y4 <= THIS_YEAR) return y4 + 0.5;
     }
@@ -1304,9 +1127,6 @@ function assessorAddressAlias(display, assessor) {
       .catch(function () { return { rows: [], raw: 0, dated: 0 }; });
   }
 
-  // Given dated rows, measure appreciation then carry every sale forward to
-  // today before taking the median. Without that step the median is measured
-  // against stale prices and reads high, which makes values read low.
   function ratioFromRows(rows, nowDec, minN) {
     function windowed(months) {
       var cut = nowDec - months / 12;
@@ -1318,15 +1138,10 @@ function assessorAddressAlias(display, assessor) {
     if (win.length < minN) { span = 96; win = windowed(96); }
     if (win.length < minN) return null;
 
-    // Appreciation, measured only where there is enough evidence to bother.
-    // A negative rate run backwards through the correction inflates the ratio
-    // and deflates the value, so a noisy negative is worse than no measurement
-    // at all. Require real year buckets, and refuse to believe a decline
-    // unless the sample is large enough to mean it.
     var byYr = {};
     win.forEach(function (x) {
       var y = Math.floor(x.t);
-      (byYr[y] = byYr[y] || []).push(1 / x.r);          // price per dollar assessed
+      (byYr[y] = byYr[y] || []).push(1 / x.r);          
     });
     var yrs = Object.keys(byYr).map(Number).sort(function (a, b) { return a - b; });
     var d = 0, np = 0;
@@ -1340,8 +1155,6 @@ function assessorAddressAlias(display, assessor) {
     if (np >= 2) { appr = d / np; apprMeasured = true; }
     else { appr = 0; }
     if (apprMeasured && appr < 0 && win.length < 120) {
-      // a falling market is possible, but not on a thin sample. Do not let
-      // noise reverse the correction.
       appr = 0; apprMeasured = false;
     }
     appr = Math.max(-0.06, Math.min(0.20, appr));
@@ -1384,12 +1197,6 @@ function assessorAddressAlias(display, assessor) {
       out.source = 'live';
       out.scope = scope;
       out.stats = stats;
-      // Direction check. Our assessments are 2024 vintage and our sale prices
-      // are recent, so a correctly measured live ratio lands BELOW the
-      // published one in a rising market. If it comes out above, old deeds are
-      // still dominating the sample and the measurement is not trustworthy.
-      // Woodbury Heights returned 83.48% against an official 62.28% for exactly
-      // that reason, and it produced a value roughly 25% too low.
       if (official) {
         if (out.ratio > official * 1.05) { out.rejected = 'above official, stale sales'; return null; }
         if (out.ratio < official * 0.35) { out.rejected = 'far below official'; return null; }
@@ -1403,7 +1210,6 @@ function assessorAddressAlias(display, assessor) {
       var out = ratioFromRows(t.rows, nowDec, 15);
       if (out) return finish(out, 'town', { raw: t.raw, dated: t.dated });
       if (!countyWhere) return null;
-      // town too thin, widen to the county. Still the right assessment vintage.
       return fetchRatioRows(countyWhere).then(function (c2) {
         var o2 = ratioFromRows(c2.rows, nowDec, 30);
         return finish(o2, 'county', { raw: c2.raw, dated: c2.dated, townRaw: t.raw, townDated: t.dated });
@@ -1411,26 +1217,8 @@ function assessorAddressAlias(display, assessor) {
     }).catch(function () { return null; });
   }
 
-  // ══════════════════════════════════════════════
-  // SR1A  ·  the state's own verified sales
-  //
-  // This replaces the live ratio machinery entirely. That code existed to work
-  // out, from raw parcel rows, which recorded deeds were real arm's length
-  // sales. The Division of Taxation already makes that judgment on every deed
-  // and publishes it in the SR1A file. We were reconstructing badly what the
-  // state hands over cleanly.
-  //
-  // What went away with it: the town wide ratio query, the county fallback
-  // query, the appreciation back-correction, the direction check against the
-  // published ratio, and the per town calibration fudge. All of it was
-  // compensating for reading unverified deeds.
-  //
-  // Lookup is by the 4 digit district code, which is the first four characters
-  // of PAMS_PIN. No town name matching, so no ambiguity between the two
-  // Washington Twps or the two Greenwich Twps.
-  // ══════════════════════════════════════════════
   var sr1aTable = null;
-  var sr1aSales = {};          // county file cache, loaded only when needed
+  var sr1aSales = {};          
 
   function loadSR1A() {
     if (sr1aTable !== null) return Promise.resolve();
@@ -1460,7 +1248,6 @@ function assessorAddressAlias(display, assessor) {
     };
   }
 
-  // ── verified comparable sales, with square footage ──
   function loadCountySales(county) {
     var key = String(county || '').toLowerCase().replace(/\s+/g, '-');
     if (!key) return Promise.resolve(null);
@@ -1474,9 +1261,6 @@ function assessorAddressAlias(display, assessor) {
       .catch(function () { sr1aSales[key] = []; return []; });
   }
 
-  // Rank verified sales in the same town by how comparable they actually are.
-  // With living space in hand this can finally weight on size, which is what
-  // an appraiser leads with and what we never had before.
   function verifiedComps(p, subject) {
     var d = districtCode(p);
     if (!d) return Promise.resolve([]);
@@ -1508,9 +1292,6 @@ function assessorAddressAlias(display, assessor) {
   }
 
 
-  // Find THIS property inside the verified sales file. MOD-IV does not publish
-  // living space, so the only way to know the subject's square footage is if it
-  // has sold recently and the state recorded it on the SR1A.
   function subjectFromSR1A(p) {
     var d = districtCode(p);
     if (!d) return Promise.resolve(null);
@@ -1576,12 +1357,6 @@ function assessorAddressAlias(display, assessor) {
       '</div>');
   }
 
-  // ══════════════════════════════════════════════
-  // CALIBRATION
-  // A per-town correction factor you set from real closings. Whenever you
-  // know a true sale price and what this page estimated, the ratio of the
-  // two is the correction. See valuation-calibration.json.
-  // ══════════════════════════════════════════════
   var calibration = null;
 
   function loadCalibration() {
@@ -1611,29 +1386,6 @@ function assessorAddressAlias(display, assessor) {
     return null;
   }
 
-  // ══════════════════════════════════════════════
-  // WATCHDOG VALUATION  ·  what it would SELL for
-  //
-  // This is a market value estimate, not a tax number. The two are related by
-  // one figure: the municipal equalization ratio.
-  //
-  //     market value = assessed value / ratio
-  //
-  // A $171,000 assessment in a town assessing at 44% is a $385,000 house.
-  // The same assessment in a town at 100% is a $171,000 house. Getting the
-  // ratio right is the entire job.
-  //
-  // Ratio sources, in order of trust:
-  //   1. equalization-ratios.json, the official Director's Ratio published
-  //      by NJ Treasury. Computed from verified arm's length sales only.
-  //   2. derived from recorded sales in the town, used only when it looks
-  //      sane, and flagged as lower confidence.
-  //
-  // Nearby sales are then used for what they are genuinely good at: measuring
-  // which way local prices have moved since the ratio year, and sizing the
-  // range. They are NOT used to set the level, because the raw SALE_PRICE
-  // field carries too many nominal and estate transfers to trust as a median.
-  // ══════════════════════════════════════════════
 
   var officialRatios = null;
   var chapter123DistrictCache = Object.create(null);
@@ -1667,9 +1419,6 @@ function assessorAddressAlias(display, assessor) {
       .catch(function () { officialRatios = {}; });
   }
 
-  // Primary statutory ratio source: the deployed statewide Chapter 123 provider.
-  // It parses and validates the official 2026 NJ Treasury certification for all
-  // 564 taxing districts, keyed by the first four digits of PAMS_PIN.
   function certifiedChapter123Ratio(record) {
     var code = districtCode(record);
     if (!code) return Promise.resolve(null);
@@ -1697,7 +1446,6 @@ function assessorAddressAlias(display, assessor) {
       .catch(function () { return null; });
   }
 
-  // Look up the published ratio for this town, newest year available.
   function officialRatio(town, county) {
     if (!officialRatios) return null;
     var t = (town || '').toUpperCase().trim();
@@ -1717,8 +1465,6 @@ function assessorAddressAlias(display, assessor) {
     if (!years.length) return null;
     var yr = years[years.length - 1], row = hit[String(yr)];
 
-    // the file supports a bare percentage or the full published row with the
-    // Chapter 123 common level range
     var pct, lower = null, upper = null;
     if (row && typeof row === 'object') {
       pct = +row.ratio;
@@ -1730,15 +1476,13 @@ function assessorAddressAlias(display, assessor) {
     return { ratio: pct / 100, lower: lower, upper: upper, year: yr, source: 'official' };
   }
 
-  // Fallback: derive from recorded sales. Only trusted when the sample is
-  // large and the spread is not absurd, because the SALE_PRICE field is dirty.
   function derivedRatio(comps, thisYear) {
     if (!comps || comps.length < 20) return null;
     var rs = [];
     comps.forEach(function (c) {
       if (!c.price || !c.assessed || !c.year) return;
       if (c.year < thisYear - 4) return;
-      if (c.price < 60000) return;                 // nominal transfers
+      if (c.price < 60000) return;                 
       var v = c.assessed / c.price;
       if (isFinite(v) && v > 0.10 && v < 1.60) rs.push(v);
     });
@@ -1752,13 +1496,8 @@ function assessorAddressAlias(display, assessor) {
              lo: quantile(t, 0.30), hi: quantile(t, 0.70) };
   }
 
-  // How fast have local prices moved? Measured off nearby sales year over year.
   function localDrift(comps, thisYear, anchorRatio) {
     if (!comps || comps.length < 10) return null;
-    // Only measure drift from sales that behave like real arm's length sales
-    // for this town. If the official ratio says homes trade at 2.25x their
-    // assessment, a row sitting at 1.0x is a nominal transfer, and letting it
-    // into the year over year medians drags the drift the wrong way.
     var expected = anchorRatio ? (1 / anchorRatio) : null;
     var byYear = {};
     comps.forEach(function (c) {
@@ -1781,9 +1520,6 @@ function assessorAddressAlias(display, assessor) {
     return Math.max(-0.12, Math.min(0.18, d / n));
   }
 
-  // Adjust for how this home compares to its neighbors on the things the
-  // public record does tell us: vintage and lot size. Assessment already
-  // captures most of it, so this is a light touch, capped at +/- 8%.
   function propertyAdjust(subject, comps) {
     if (!comps || comps.length < 8) return { factor: 1, notes: [] };
     var builts = comps.map(function (c) { return c.built; }).filter(function (b) { return b > 1700; });
@@ -1812,27 +1548,11 @@ function assessorAddressAlias(display, assessor) {
   function watchdogValuation(subject, comps, thisYear, town, county, ratioObj, apprHint) {
     if (!subject || !subject.assessed || subject.assessed < 5000) return null;
 
-    // ratio precedence: live measurement, then published, then derived.
-    // The live one wins because it is measured against the same assessment
-    // vintage we are converting, at today's prices.
     var R = ratioObj || officialRatio(town, county) || derivedRatio(comps, thisYear);
     if (!R || !R.ratio) return null;
 
-    // level: the state's own conversion
     var base = subject.assessed / R.ratio;
 
-    // time: a live ratio is already current, so it needs no adjustment. A
-    // published ratio does. Its effective valuation date is roughly January of
-    // the year BEFORE its label, because the sales sample runs mid year to mid
-    // year, so tax year 2026 is priced around January 2025.
-    // A live ratio is already current and needs no time adjustment. A published
-    // ratio does: its effective valuation date is about January of the year
-    // BEFORE its label, because the sales sample runs mid year to mid year.
-    //
-    // Prefer the appreciation measured across the whole town or county sample.
-    // Drift computed off a few dozen nearby comps is noisy and skews toward
-    // zero when nominal transfers are mixed in, which quietly kills the
-    // adjustment exactly when it is needed most.
     var localD = localDrift(comps, thisYear, R.ratio);
     var localTrendMeasured = localD != null && Math.abs(localD) > 0.015;
     var drift = (apprHint != null) ? apprHint
@@ -1845,19 +1565,17 @@ function assessorAddressAlias(display, assessor) {
     if (R.source !== 'live' && R.source !== 'sr1a') {
       var now2 = new Date();
       var nowDec2 = now2.getFullYear() + now2.getMonth() / 12;
-      var ratioAsOf = (R.year || thisYear) - 1;          // Jan of the prior year
+      var ratioAsOf = (R.year || thisYear) - 1;          
       yearsStale = Math.max(0, Math.min(3.5, nowDec2 - ratioAsOf));
       if (yearsStale > 0.25) timeFactor = Math.pow(1 + drift, yearsStale);
       timeFactor = Math.max(0.94, Math.min(1.45, timeFactor));
     }
 
-    // property: light adjustment for vintage and lot versus neighbors
     var adj = propertyAdjust(subject, comps);
 
     var cal = calibrationFor(town, county) || 1;
     var mid = base * timeFactor * adj.factor * cal;
 
-    // range: driven by how much we trust the ratio and how much data backs it
     var compCount = (comps || []).filter(function (c) { return c.price > 60000 && c.year >= thisYear - 5; }).length;
     var band;
     if (R.source === 'sr1a' && R.n >= 150) band = 0.07;
@@ -1895,7 +1613,6 @@ function assessorAddressAlias(display, assessor) {
     };
   }
 
-  // The nearby sales worth showing. Sorted by similarity, not by price.
   function pickDrivers(subject, comps, thisYear, ratio) {
     if (!comps || !comps.length) return [];
     return comps
@@ -1925,20 +1642,11 @@ function assessorAddressAlias(display, assessor) {
     return attempt(0);
   }
 
-  // ══════════════════════════════════════════════
-  // NEARBY RECORDED SALES
-  // Real comps, from the same free layer. Not MLS, so no photos or
-  // list prices, but these are actual recorded transfers next door.
-  // ══════════════════════════════════════════════
   function nearbySales(lat, lon, meters, muni) {
     return persisted(geoKey(lat, lon, 'sales' + meters + (muni || '')), 864e5,
       function () { return nearbySalesRaw(lat, lon, meters, muni); });
   }
 
-  // Nearby sales, neighborhood medians and the neighbors map read our own
-  // parcel table first (property_lookups, with each parcel's center point from
-  // the monthly state parcel sync). When the area has no parcel points yet, the
-  // call fails, or there is no database client, they ask the state layer as before.
   function warehouseNear(fn, args) {
     if (!authReady() || !sb || typeof sb.rpc !== 'function') return Promise.resolve(null);
     return Promise.resolve(sb.rpc(fn, args))
@@ -1990,7 +1698,6 @@ function assessorAddressAlias(display, assessor) {
         })
         .filter(function (x) {
           if (!x.year || x.year < thisYear - 6 || x.price <= 50000) return false;
-          // belt and braces: anything past 5 miles is a projection error, not a neighbor
           if (x.dist != null && x.dist > 8000) return false;
           return true;
         })
@@ -1999,9 +1706,6 @@ function assessorAddressAlias(display, assessor) {
       .catch(function () { return []; });
   }
 
-  // ══════════════════════════════════════════════
-  // NEIGHBOURHOOD CONTEXT
-  // ══════════════════════════════════════════════
   function neighborhoodStats(lat, lon, meters) {
     return persisted(geoKey(lat, lon, 'hood' + meters), 864e5,
       function () { return neighborhoodStatsRaw(lat, lon, meters); });
@@ -2053,9 +1757,6 @@ function assessorAddressAlias(display, assessor) {
       .catch(function () { return null; });
   }
 
-  // ══════════════════════════════════════════════
-  // SELLING OPTIONS
-  // ══════════════════════════════════════════════
   var SELL_OPTIONS = [
     { key: 'premier', icon: 'fa-trophy',
       title: 'Work with a premier local agent',
@@ -2088,12 +1789,6 @@ function assessorAddressAlias(display, assessor) {
       '</div>';
   }
 
-  // ══════════════════════════════════════════════
-  // ASYNC PAINTERS
-  // ══════════════════════════════════════════════
-  // ══════════════════════════════════════════════
-  // VALUATION PAINTER
-  // ══════════════════════════════════════════════
   var CONF_META = {
     High:   { cls: 'hi',  txt: 'High confidence',   note: 'Plenty of recent nearby sales with a tight spread.' },
     Medium: { cls: 'md',  txt: 'Medium confidence', note: 'Enough nearby sales to work with, but the spread is wide.' },
@@ -2120,16 +1815,10 @@ function assessorAddressAlias(display, assessor) {
     var r = function (n) { return Math.round(n / 1000) * 1000; };
     var cm = CONF_META[v.confidence] || CONF_META.Low;
 
-    // ── the appeal frame ──
-    // Headline is deliberately the conservative end. For a tax appeal you are
-    // arguing what the property is defensibly worth, not what a listing agent
-    // would hope for, and a number you can stand behind in front of a county
-    // board is worth more than an optimistic one.
     var lowEnd  = v.lo;
     var midEnd  = v.mid;
-    var argued  = (lowEnd + midEnd) / 2;          // what we would argue
+    var argued  = (lowEnd + midEnd) / 2;          
 
-    // what the town's own assessment implies the property is worth
     var implied = (v.ratio && v.ratio > 0) ? assessed / v.ratio : null;
     var gap     = implied ? implied - argued : null;
     var gapPct  = (implied && argued) ? (implied - argued) / argued : null;
@@ -2187,16 +1876,10 @@ function assessorAddressAlias(display, assessor) {
     if (v.drivers && v.drivers.length) paintDrivers(v);
   }
 
-  // ══════════════════════════════════════════════
-  // THE APPEAL CASE
-  // ══════════════════════════════════════════════
   function paintAppealCase(assessed, tax, v, comps) {
     var host = el('plm-score-sec');
     if (!host) return;
 
-    // A statutory appeal screen needs independent market-value evidence.
-    // Peer assessments are useful context, but they are not true market value
-    // and must never be put through the Chapter 123 corridor.
     var appr = (v && v.appreciation != null) ? v.appreciation : 0;
     var thisYear = new Date().getFullYear();
     var evidence = [], anchors = [];
@@ -2234,8 +1917,6 @@ function assessorAddressAlias(display, assessor) {
     var reval = revaluationStatus(current);
     var hasMarketAnchor = anchors.length > 0;
 
-    // Revaluation/reassessment year: Chapter 123's common-level range does not
-    // apply. Assessment is compared directly with supported true market value.
     if (reval.isCurrentYear && hasMarketAnchor) {
       var revalMarket = median(anchors);
       var revalOver = assessed - revalMarket;
@@ -2274,8 +1955,6 @@ evidence.map(function (e) { return '<div class="score-row"><span>' + esc(e.label
       return;
     }
 
-    // Chapter 123 path: requires both independent market evidence and the
-    // municipality's certified ratio/common-level range.
     if (hasMarketAnchor && official && official.ratio > 0) {
       var marketValue = median(anchors);
       var target = marketValue * official.ratio;
@@ -2326,8 +2005,6 @@ buildOpinion(hasCase, overBy, saving, target) + rows +
       return;
     }
 
-    // Peer-only evidence path. Never call this Chapter 123, never apply a 15%
-    // corridor, and never project appeal savings from another property's assessment.
     trackChapter123Coverage(false, peerMed !== null ? 'peer-only' : (hasMarketAnchor ? 'missing-certified-ratio' : 'neither'));
     if (peerMed === null) {
       host.innerHTML = '';
@@ -2373,7 +2050,6 @@ buildOpinion(hasCase, overBy, saving, target) + rows +
   }
 
 
-  // the handful of sales that actually moved the number
   function paintDrivers(v) {
     var host = el('plm-drivers');
     if (!host) return;
@@ -2446,7 +2122,6 @@ buildOpinion(hasCase, overBy, saving, target) + rows +
   };
   window.plCloseNote = function () { el('plm-note-overlay').classList.remove('open'); };
 
-  // ---- nearby recorded sales ----
   function paintComps(list) {
     var host = el('plm-comps-sec');
     if (!host) return;
@@ -2478,7 +2153,6 @@ buildOpinion(hasCase, overBy, saving, target) + rows +
       '</div>');
   }
 
-  // ---- neighborhood context ----
   function paintHood(h, assessed, tax) {
     var host = el('plm-hood-sec');
     if (!host || !h) { if (host) host.innerHTML = ''; return; }
@@ -2509,21 +2183,7 @@ buildOpinion(hasCase, overBy, saving, target) + rows +
         : ''));
   }
 
-  // ══════════════════════════════════════════════
-  // WATCHDOG SCORE
-  //
-  // A 0 to 100 read on whether this property looks over-assessed relative to
-  // what the Watchdog Valuation says it is worth, framed the way a NJ tax
-  // appeal actually gets decided.
-  //
-  // Chapter 123: an assessment survives if it sits at or below true market
-  // value times the town ratio times 1.15. Above that upper limit, the county
-  // board is supposed to reduce it. So the score is really "how far past the
-  // upper limit is this assessment".
-  // ══════════════════════════════════════════════
   function watchdogScore(assessed, val, comps) {
-    // Legacy peer-comparison helper retained only for compatibility. It is not
-    // a Chapter 123 calculation and it never marks a property as appealable.
     if (!assessed || !comps || comps.length < 10 || !val) return null;
     var subjBuilt = (current && current.yearBuilt) ? +current.yearBuilt : 0;
     var subjAcres = (current && current.acres) ? +current.acres : 0;
@@ -2550,13 +2210,12 @@ buildOpinion(hasCase, overBy, saving, target) + rows +
     };
   }
 
-  // Annual dollars an appeal down to the fair assessment would save.
   function appealSavings(sc, tax, assessed) {
     if (!sc || !tax || !assessed || !sc.appealable) return null;
-    var effRate = tax / assessed;                       // dollars of tax per dollar assessed
-    var target = sc.fair;                               // what it should be
+    var effRate = tax / assessed;                       
+    var target = sc.fair;                               
     var annual = (assessed - target) * effRate;
-    if (annual < 150) return null;                      // not worth anyone's time
+    if (annual < 150) return null;                      
     return { annual: annual, target: target, fiveYear: annual * 5 };
   }
 
@@ -2569,7 +2228,6 @@ buildOpinion(hasCase, overBy, saving, target) + rows +
     var col = COL[sc.band] || '#5a6070';
     var save = appealSavings(sc, tax, assessed);
 
-    // gauge geometry: 180 degree arc
     var pctOf = Math.max(0, Math.min(100, sc.score)) / 100;
     var ang = Math.PI * (1 - pctOf);
     var cx = 130, cy = 118, rad = 92;
@@ -2619,9 +2277,6 @@ buildOpinion(hasCase, overBy, saving, target) + rows +
       'This is not legal, tax, appraisal, or certified comparative market analysis advice. Verify current records and independent market-value evidence before filing.</div>';
   }
 
-  // ══════════════════════════════════════════════
-  // OWNERSHIP TIMELINE
-  // ══════════════════════════════════════════════
   function paintTimeline(v) {
     var host = el('plm-timeline-sec');
     if (!host) return;
@@ -2685,11 +2340,6 @@ buildOpinion(hasCase, overBy, saving, target) + rows +
   }
 
 
-  // ══════════════════════════════════════════════
-  // DIAGNOSTICS  ·  add ?debug=1 to the URL
-  // Shows exactly what the state service returned so a bad estimate can be
-  // traced to the data instead of guessed at.
-  // ══════════════════════════════════════════════
   function paintDiag(subject, comps, val, town) {
     if (new URLSearchParams(location.search).get('debug') !== '1') return;
     var host = el('plm-diag-sec');
@@ -2759,27 +2409,8 @@ buildOpinion(hasCase, overBy, saving, target) + rows +
       '</div>';
   }
 
-  // ══════════════════════════════════════════════
-  // NEIGHBORHOOD VIEW
-  //
-  // After a lookup, the page behind the panel becomes a map with the
-  // surrounding properties listed beside it. Closing the panel drops you back
-  // here rather than at an empty search box, so comparing four houses on a
-  // street is four clicks instead of four searches.
-  //
-  // These are NOT listings. There is no free feed of what is for sale in New
-  // Jersey. Every card here is a parcel from the state assessment file, which
-  // is the right data for comps anyway: it covers every house, not only the
-  // ones currently on the market.
-  // ══════════════════════════════════════════════
   var hoodMap = null, hoodItems = [], hoodMarkers = {}, hoodSort = 'near';
 
-  // ══════════════════════════════════════════════
-  // BASEMAP STYLES
-  // All free, no API key, no attribution beyond the credit line. Positron is
-  // the default because a pale map lets the price markers carry the colour;
-  // a busy basemap and coloured pins fight each other.
-  // ══════════════════════════════════════════════
   var HOOD_STYLES = {
     light: { name: 'Light',
       url: 'https://{s}.basemaps.cartocdn.com/rastertiles/light_all/{z}/{x}/{y}{r}.png',
@@ -2819,9 +2450,6 @@ buildOpinion(hasCase, overBy, saving, target) + rows +
       }).join('') + '</div>';
   }
 
-  // A price pill with the watchdog mark, rather than a dot. The number is the
-  // annual tax, because that is what this site is actually about and it is the
-  // figure people compare between houses.
   function hoodPin(x, me) {
     var v = x.tax ? '$' + (x.tax >= 10000 ? Math.round(x.tax / 1000) + 'k'
                                           : (Math.round(x.tax / 100) / 10) + 'k') : '-';
@@ -2842,7 +2470,6 @@ buildOpinion(hasCase, overBy, saving, target) + rows +
            '&location=' + encodeURIComponent(loc) + '&fov=78&pitch=6&source=outdoor&key=' + GMAPS_KEY;
   }
 
-  // Every residential parcel around the subject, with its public figures.
   function hoodParcels(lat, lon, meters) {
     return warehouseNear('get_public_neighbor_parcels', { p_lat: lat, p_lon: lon, p_meters: meters })
       .then(function (d) {
@@ -2897,16 +2524,12 @@ buildOpinion(hasCase, overBy, saving, target) + rows +
             rate: av ? (tax / av) * 100 : null
           };
         })
-        // Keep it to the immediate blocks. A map with 150 dots is a heat map,
-        // not a comparison, and nobody scrolls 150 cards.
         .filter(function (x) { return x.addr && x.dist != null && x.dist <= 500; })
         .sort(function (a, b) { return a.dist - b.dist; })
         .slice(0, 24);
       }).catch(function () { return []; });
   }
 
-  // Market value from the SR1A verified ratio, so the cards show what these
-  // homes are actually worth rather than only what they are assessed at.
   function hoodValue(x) {
     if (!sr1aTable) return null;
     var d = String(x.pin || '').slice(0, 4);
@@ -2915,7 +2538,6 @@ buildOpinion(hasCase, overBy, saving, target) + rows +
     return x.assessed / row.ratio;
   }
 
-  // ── which parcels the user has already saved, so hearts render filled ──
   var hoodSaved = {};
 
   function loadHoodSaved() {
@@ -2926,7 +2548,6 @@ buildOpinion(hasCase, overBy, saving, target) + rows +
     }).catch(function () {});
   }
 
-  // Save straight from a card. No need to open the property first.
   window.plHoodSave = function (pin, ev) {
     if (ev) ev.stopPropagation();
     if (!plUser) { plSignInPrompt(); return; }
@@ -2959,11 +2580,6 @@ buildOpinion(hasCase, overBy, saving, target) + rows +
     });
   };
 
-  // ══════════════════════════════════════════════
-  // FILTERS
-  // The same fields the rest of the site curates on, so what you filter here
-  // matches what you see everywhere else.
-  // ══════════════════════════════════════════════
   var hoodF = { vMin: '', vMax: '', tMax: '', built: '', lot: '', appeal: false, sold: false };
 
   window.plHoodFilter = function (k, v) {
@@ -2985,8 +2601,6 @@ buildOpinion(hasCase, overBy, saving, target) + rows +
     if (hoodF.lot && (!x.acres || x.acres * 43560 < +hoodF.lot)) return false;
     if (hoodF.sold && (!x.saleYear || (new Date().getFullYear() - x.saleYear) > 2)) return false;
     if (hoodF.appeal) {
-      // over-assessed relative to its own neighbors, which is the signal that
-      // matters and the one nobody else lets you filter on
       var med = hoodMedianRate();
       if (!med || !x.rate || x.rate <= med * 1.12) return false;
     }
@@ -3041,7 +2655,6 @@ buildOpinion(hasCase, overBy, saving, target) + rows +
       '</div>';
   }
 
-  // ── the Greentree unit. An ad, styled like one, not a property card. ──
   function hoodAd() {
     return '<a class="hd-ad" href="' + GREENTREE_URL + '" target="_blank" rel="noopener">' +
       '<span class="hd-ad-tag">Advertisement</span>' +
@@ -3057,8 +2670,6 @@ buildOpinion(hasCase, overBy, saving, target) + rows +
 
   window.plShowHood = function () {
     var w = elReal('pl-hood');
-    // Never hide the page for a container that is missing or empty. A blank
-    // screen with no way back is worse than not having the feature.
     if (!w || !w.innerHTML || w.innerHTML.length < 200) {
       document.body.classList.remove('hood-on');
       return;
@@ -3161,7 +2772,6 @@ buildOpinion(hasCase, overBy, saving, target) + rows +
       '</article>';
     });
 
-    // drop the ad in after the first row, the way a real results page does
     if (cards.length > 3) cards.splice(3, 0, hoodAd());
     else cards.push(hoodAd());
 
@@ -3228,13 +2838,8 @@ buildOpinion(hasCase, overBy, saving, target) + rows +
     } catch (e) { console.warn('[watchdog] hood map:', e); }
   }
 
-  // ══════════════════════════════════════════════
-  // MODAL
-  // ══════════════════════════════════════════════
   window.plCloseModal = function () {
     var sn = el('secnav'); if (sn) sn.classList.remove('on');
-    // Closing returns to the homepage search. The neighborhood view only exists
-    // if the user explicitly opened it, in which case keep its map sized correctly.
     setTimeout(function () { if (hoodMap) hoodMap.invalidateSize(); }, 260);
     el('plm-backdrop').classList.remove('open');
     el('plm').classList.remove('open');
@@ -3257,9 +2862,6 @@ buildOpinion(hasCase, overBy, saving, target) + rows +
   function frow(k, v) {
     return v ? '<div class="plm-frow"><span class="plm-fk">' + k + '</span><span class="plm-fv">' + esc(v) + '</span></div>' : '';
   }
-  // ══════════════════════════════════════════════
-  // RENDER  ->  modal overlay
-  // ══════════════════════════════════════════════
   function render(feat, geo, typed, lookupId) {
     var p = feat.attributes;
     var rings = (feat.geometry && feat.geometry.rings) ? feat.geometry.rings : null;
@@ -3291,8 +2893,6 @@ buildOpinion(hasCase, overBy, saving, target) + rows +
     if (window.WatchdogPublicNav && typeof window.WatchdogPublicNav.remember === 'function') {
       window.WatchdogPublicNav.remember(current);
     }
-    // The branded header (lookup-summary-enhancements.js) draws the lot outline
-    // map from this, so it doesn't have to query the parcel layer again.
     window.WatchdogLookupParcel = {
       pin: current.pin, address: current.address, block: current.block, lot: current.lot,
       lat: current.lat, lon: current.lon, rings: current.rings
@@ -3301,7 +2901,6 @@ buildOpinion(hasCase, overBy, saving, target) + rows +
     recordLookup(p, geo, rate, dy, propertyZip);
     var seen = timesSeen(p.PAMS_PIN || '');
 
-    // ---------- photo strip ----------
     var bbox = bboxFor(), sv = streetUrl(geo.lat, geo.lon);
     el('plm-photos').innerHTML =
       '<div class="plm-photo">' +
@@ -3325,7 +2924,6 @@ buildOpinion(hasCase, overBy, saving, target) + rows +
         '<div class="plm-q"><i class="fas fa-map-pin"></i><div><b>' + esc((p.PCLBLOCK || '?') + ' / ' + (p.PCLLOT || '?')) + '</b><span>Block / Lot</span></div></div>' +
       '</div>';
 
-    // ---------- headline ----------
     var chips = [];
     if (CLASSES[cls]) chips.push(fchip('fa-building-columns', CLASSES[cls]));
     if (p.YR_CONSTR) chips.push(fchip('fa-hammer', 'Built in ' + p.YR_CONSTR));
@@ -3375,7 +2973,6 @@ buildOpinion(hasCase, overBy, saving, target) + rows +
           : '') + '</div>' +
       '<div class="plm-chips">' + chips.join('') + '</div>' + alert;
 
-    // ---------- body ----------
     el('plm-main').innerHTML =
       '<div class="plm-sec" style="margin-top:26px;">' +
         '<h3 class="plm-sec-h">Tax snapshot</h3>' +
@@ -3500,7 +3097,6 @@ buildOpinion(hasCase, overBy, saving, target) + rows +
         'Aerial imagery from Esri World Imagery. Parcel boundaries are for reference and are not survey or legal descriptions. All calculators produce estimates only. Confirm closing figures with your attorney and title company.' +
       '</div>';
 
-    // ---------- rail ----------
     el('plm-rail').innerHTML =
       '<div id="plm-account"></div>' +
 
@@ -3523,9 +3119,6 @@ buildOpinion(hasCase, overBy, saving, target) + rows +
     if (el('mtg-price')) window.plMortgage();
     refreshSaveState();
 
-    // Everything below runs after the panel is already on screen. Static
-    // reference files may still be warming; each dependent section says so and
-    // repaints itself as soon as its data is ready.
     var renderId = current.lookupId;
     var subject = { assessed: assessed, built: +p.YR_CONSTR || 0, acres: acres };
 
@@ -3589,13 +3182,9 @@ buildOpinion(hasCase, overBy, saving, target) + rows +
       paintHood(h, assessed, tax);
     });
 
-    // Neighborhood view is opt-in. It costs an ArcGIS query, a Supabase call and
-    // a second Leaflet map, none of which the user can see while the modal is up.
-    // Stashed here and run only when plOpenHood() is called.
     window.plOpenHood = function () {
     hoodParcels(geo.lat, geo.lon, 420).then(function (list) {
       if (!list.length) return;
-      // make sure the searched property is in the list even if the envelope missed it
       if (!list.some(function (x) { return x.pin === current.pin; })) {
         list.unshift({ pin: current.pin, addr: current.address, town: current.town,
           county: current.county, zip: current.zip, block: current.block, lot: current.lot,
@@ -3618,9 +3207,6 @@ buildOpinion(hasCase, overBy, saving, target) + rows +
 
     if (typeof gtag === 'function') gtag('event', 'property_lookup_success', { town: current.town });
   }
-  // ══════════════════════════════════════════════
-  // MAP
-  // ══════════════════════════════════════════════
   function drawMap(geo, rings, p) {
     if (typeof L === 'undefined' || !el('plm-map')) return;
     try {
@@ -3680,7 +3266,6 @@ buildOpinion(hasCase, overBy, saving, target) + rows +
     return null;
   }
 
-  // keep axis labels distinct when the range is tight
   function axisLbl(v, span) {
     if (span < 3000) return (v / 1000).toFixed(1) + 'k';
     return Math.round(v / 1000) + 'k';
@@ -3757,12 +3342,6 @@ buildOpinion(hasCase, overBy, saving, target) + rows +
       ' run against ' + esc(current.town) + '\u2019s published general tax rate for each year. It shows what rate changes did to the bill, not reassessment history.';
   }
 
-  // ══════════════════════════════════════════════
-  // NET PROCEEDS
-  // NJ Realty Transfer Fee, seller side. Two schedules: one at or under
-  // $350,000 consideration, a higher one above it. Verified against the
-  // published schedule ($350k -> $2,105.00, $400k -> $3,215.00).
-  // ══════════════════════════════════════════════
   function njRTF(price) {
     if (!price || price <= 0) return 0;
     var f = 0, cap = Math.ceil(price / 500) * 500;
@@ -3779,8 +3358,6 @@ buildOpinion(hasCase, overBy, saving, target) + rows +
     return f;
   }
 
-  // Graduated Percent Fee. Replaced the buyer paid mansion tax for contracts
-  // executed on or after July 10, 2025. Seller pays. Applies to the ENTIRE price.
   function njGPF(price) {
     if (!price || price <= 1000000) return 0;
     var r = price <= 2000000 ? 0.01
@@ -3903,21 +3480,14 @@ buildOpinion(hasCase, overBy, saving, target) + rows +
     var ne = el('pc-note'); if (ne) ne.textContent = note;
   };
 
-  // ══════════════════════════════════════════════
-  // APPEAL DEADLINE
-  // April 1 in most towns, May 1 where the town revalued this year.
-  // ══════════════════════════════════════════════
   function appealDeadline() {
     var now = new Date();
     var yr = now.getFullYear();
     var reval = revaluationStatus(current).isCurrentYear;
-    var currentDue = new Date(yr, reval ? 4 : 3, 1);   // May 1 in current-year reval/reassessment towns
+    var currentDue = new Date(yr, reval ? 4 : 3, 1);   
     var due = currentDue;
     var dueUsesReval = reval;
     if (now > currentDue) {
-      // The next year's approved list may not exist yet. Do not carry a 2026
-      // revaluation flag into 2027; use the general April 1 date until the next
-      // official list is loaded.
       due = new Date(yr + 1, 3, 1);
       dueUsesReval = false;
     }
@@ -3949,10 +3519,6 @@ buildOpinion(hasCase, overBy, saving, target) + rows +
       '</div><div class="dl-cta">Start my review <i class="fas fa-arrow-right"></i></div></a>';
   }
 
-  // ══════════════════════════════════════════════
-  // JOHN'S OPINION
-  // A plain verdict in his own voice, next to his face.
-  // ══════════════════════════════════════════════
   function buildOpinion(hasCase, overBy, saving, target) {
     var a = AGENTS.john;
     var body, cls, head;
@@ -3984,14 +3550,11 @@ buildOpinion(hasCase, overBy, saving, target) + rows +
     '</div>';
   }
 
-  // ══════════════════════════════════════════════
-  // ANCHOR AND STAY NJ REBATES
-  // ══════════════════════════════════════════════
   function buildRebates(tax) {
     if (!tax || tax < 500) return '';
     var anchor = 1500, stay = 6500;
     var afterAnchor = Math.max(0, tax - anchor);
-    var afterStay = Math.max(0, tax - Math.min(stay, tax * 0.5));   // Stay NJ caps at half the bill
+    var afterStay = Math.max(0, tax - Math.min(stay, tax * 0.5));   
 
     function card(cls, badge, title, cut, after, note) {
       return '<div class="rb-card ' + cls + '">' +
@@ -4024,18 +3587,8 @@ buildOpinion(hasCase, overBy, saving, target) + rows +
     '</div>';
   }
 
-  // ══════════════════════════════════════════════
-  // TRADE UP ESTIMATOR
-  // The tax rate in the town you are moving TO is measured live from that
-  // town's own parcels, so this is not a guess from a rate table.
-  // ══════════════════════════════════════════════
   var townRateCache = {};
 
-  // The town's median residential tax / assessment, precomputed monthly from the same
-  // statewide MOD-IV parcels (get_public_town_tax_rate). Every parcel in a town pays the
-  // same general rate on its assessment, so this median divided by the town ratio's
-  // implied market value is the effective rate. Null when unavailable; the caller then
-  // measures it from the state parcel layer as before.
   function townTaxRateFromWarehouse(town, county) {
     if (!authReady() || !sb || typeof sb.rpc !== 'function') return Promise.resolve(null);
     return Promise.resolve(sb.rpc('get_public_town_tax_rate', { p_town: town, p_county: county }))
@@ -4055,7 +3608,6 @@ buildOpinion(hasCase, overBy, saving, target) + rows +
 
     return townTaxRateFromWarehouse(town, county).then(function (row) {
       if (row) {
-        // tax / (assessed / ratio) = (tax / assessed) * ratio; the median scales the same way.
         var rate = +row.median_tax_rate * offR.ratio;
         if (isFinite(rate) && rate > 0.002 && rate < 0.10) {
           var fromStats = { rate: rate, n: +row.rate_peers, ratio: offR.ratio, source: 'town_stats' };
@@ -4182,11 +3734,6 @@ buildOpinion(hasCase, overBy, saving, target) + rows +
   };
 
 
-  // ══════════════════════════════════════════════
-  // STICKY SECTION NAV
-  // Appears once the panel scrolls past the headline, hides on the way back up.
-  // Highlights whichever section you are currently looking at.
-  // ══════════════════════════════════════════════
   var NAV_SECTIONS = [
     { id: 'plm-estimate',    label: 'Value',    icon: 'fa-dog' },
     { id: 'plm-score-sec',   label: 'Appeal',   icon: 'fa-scale-balanced' },
@@ -4217,10 +3764,8 @@ buildOpinion(hasCase, overBy, saving, target) + rows +
     function update() {
       ticking = false;
       var top = scroller.scrollTop;
-      // show it only after the headline has gone by
       nav.classList.toggle('on', top > 260);
 
-      // which section is in view
       var active = null, best = 1e9;
       NAV_SECTIONS.forEach(function (x) {
         var e = el(x.id);
@@ -4242,19 +3787,6 @@ buildOpinion(hasCase, overBy, saving, target) + rows +
   }
 
 
-  // ══════════════════════════════════════════════
-  // GATED CONTENT
-  //
-  // Anonymous visitors receive only a neutral placeholder. The analysis is
-  // held outside the DOM until the account session has been established.
-  //
-  // What stays free, on purpose: the assessment, the tax bill, the parcel
-  // record, and the headline value. Those are the things a homeowner has a
-  // right to see about their own house, and putting a wall in front of them
-  // would be the wrong trade for a few signups.
-  //
-  // What is gated: the analysis we built on top of it.
-  // ══════════════════════════════════════════════
   var gateContent = Object.create(null);
 
   function gateShell(key, title, blurb) {
@@ -4293,14 +3825,6 @@ buildOpinion(hasCase, overBy, saving, target) + rows +
     });
   }
 
-  // ══════════════════════════════════════════════
-  // ACCOUNTS · canonical Watchdog auth runtime
-  //
-  // The property lookup may observe a session and save member data, but it no
-  // longer owns signup UI, magic links, provider buttons or Google One Tap.
-  // Every sign-in entry goes through /property/onboarding/ and the shared
-  // supabase-runtime.js provider configuration.
-  // ══════════════════════════════════════════════
   var DASHBOARD_URL = '/property/dashboard';
   var sb = null, plUser = null;
 
@@ -4419,7 +3943,6 @@ buildOpinion(hasCase, overBy, saving, target) + rows +
     window.location.href = DASHBOARD_URL;
   };
 
-  // ── save / claim from the property panel ──
   function propertyPayload(kind) {
     var v = current.valuation, a = current.appeal;
     return {
@@ -4489,11 +4012,6 @@ buildOpinion(hasCase, overBy, saving, target) + rows +
     });
   }
 
-  // ══════════════════════════════════════════════
-  // DASHBOARD
-  // ══════════════════════════════════════════════
-  // The dashboard is a real page, not an overlay. Signed out visitors get the
-  // sign in prompt first, otherwise they would land on a locked page.
   window.plDashboard = function () {
     if (!plUser) { plSignInPrompt(); return; }
     window.location.href = DASHBOARD_URL;
@@ -4501,11 +4019,6 @@ buildOpinion(hasCase, overBy, saving, target) + rows +
 
 
 
-  // ══════════════════════════════════════════════
-  // MORTGAGE CALCULATOR  ·  Greentree Mortgage
-  // Seeds itself with this property's real tax figure, which is the whole
-  // reason it belongs on a tax page: the escrow line is already known.
-  // ══════════════════════════════════════════════
   function buildMortgageCalc() {
     var v = current.valuation;
     var guess = v && v.mid ? Math.round(v.mid / 1000) * 1000 : (current.assessed || 300000);
@@ -4583,7 +4096,6 @@ buildOpinion(hasCase, overBy, saving, target) + rows +
     var i = rate / 100 / 12, n = term * 12;
     var pi = (i > 0 && n > 0) ? loan * (i * Math.pow(1 + i, n)) / (Math.pow(1 + i, n) - 1) : (n ? loan / n : 0);
 
-    // PMI, roughly, when equity is under 20 percent
     var pmi = downPct < 20 && loan > 0 ? (loan * 0.0055) / 12 : 0;
     var total = pi + tax + ins + pmi;
 
@@ -4606,9 +4118,6 @@ buildOpinion(hasCase, overBy, saving, target) + rows +
     }
   };
 
-  // ══════════════════════════════════════════════
-  // PREAPPROVAL
-  // ══════════════════════════════════════════════
   function buildPreapproval() {
     return '<div class="pre-wrap">' +
       '<div class="pre-photo"><img src="/johnvarano.jpg" alt="John Varano, Branch Manager, Greentree Mortgage an HMA Company" loading="lazy" onerror="this.parentNode.style.display=\'none\'"></div>' +
@@ -4632,10 +4141,6 @@ buildOpinion(hasCase, overBy, saving, target) + rows +
     '</div>';
   }
 
-  // ══════════════════════════════════════════════
-  // LISTING PROPOSAL
-  // Small overlay, never leaves the page.
-  // ══════════════════════════════════════════════
   window.plProposal = function () {
     var a = AGENTS[activeAgentKey];
     plModalNote('Free listing proposal',
@@ -4695,9 +4200,6 @@ buildOpinion(hasCase, overBy, saving, target) + rows +
       '</div>';
   };
 
-  // ══════════════════════════════════════════════
-  // AGENT RAIL
-  // ══════════════════════════════════════════════
   window.plSetAgent = function (key) {
     activeAgentKey = key;
     var s = el('plm-agent-slot');
@@ -4744,9 +4246,6 @@ buildOpinion(hasCase, overBy, saving, target) + rows +
     '</div>';
   }
 
-  // ══════════════════════════════════════════════
-  // ZILLOW STYLE AGENT MATCHES
-  // ══════════════════════════════════════════════
   function buildZillowMatches() {
     var where = (current && current.zip) ? esc(current.zip) : 'this area';
     return '<h3 class="plm-sec-h">Agent matches for ' + where + '</h3>' +
@@ -4787,9 +4286,6 @@ buildOpinion(hasCase, overBy, saving, target) + rows +
     '</div>';
   }
 
-  // ══════════════════════════════════════════════
-  // INTENT FORMS  (rail card swaps in place)
-  // ══════════════════════════════════════════════
   var INTENTS = {
     track: { topic: '[\uD83D\uDCC8 TRACKING] Monthly value report signup', label: 'Track this home',
              blurb: 'One email a month with the current value, nearby sales, and any assessment change.', rel: true },
@@ -4891,9 +4387,6 @@ buildOpinion(hasCase, overBy, saving, target) + rows +
     el('pl-appeal').innerHTML = '<div class="pl-sent"><i class="fas fa-circle-check"></i> Got it.<br>I will review ' + esc(current.address) + ' and get back to you within one business day.</div>';
   };
 
-  // ══════════════════════════════════════════════
-  // TOP BAR ACTIONS
-  // ══════════════════════════════════════════════
   window.plMenu = function (e) { e.stopPropagation(); el('plm-menu').classList.toggle('open'); };
   document.addEventListener('click', function (e) {
     var m = el('plm-menu');
@@ -4913,8 +4406,6 @@ buildOpinion(hasCase, overBy, saving, target) + rows +
     localStorage.setItem('pl_saved', JSON.stringify(saved));
   };
 
-  // Public property page (/nj/property/<pin> redirects to /nj/<town>/<address>/<pin>).
-  // Served on the Watchdog host only; elsewhere fall back to the ?address= link.
   function propertyPageUrl() {
     if (!current || !current.pin || location.hostname !== 'www.watchdogindex.com') return '';
     return location.origin + '/nj/property/' + encodeURIComponent(current.pin);
@@ -4950,7 +4441,6 @@ buildOpinion(hasCase, overBy, saving, target) + rows +
     var t = el(id); if (t) t.scrollIntoView({ behavior: 'smooth', block: 'center' });
   };
 
-  // photo swap
   var showingStreet = true;
   window.plSwapPhoto = function () {
     if (!current) return;
@@ -4974,9 +4464,6 @@ buildOpinion(hasCase, overBy, saving, target) + rows +
     var b = el('plm-swap'); if (b) b.style.display = 'none';
     showingStreet = false;
   };
-  // ══════════════════════════════════════════════
-  // EMAIL
-  // ══════════════════════════════════════════════
   function propertyLines() {
     return [
       'Property: ' + current.address,
@@ -5004,11 +4491,6 @@ buildOpinion(hasCase, overBy, saving, target) + rows +
   scheduleReferenceWarmup();
 
 
-  // ══════════════════════════════════════════════
-  // STICKY LANDING SEARCH
-  // Slides in once the hero search has scrolled out of reach, slides away
-  // again when you come back up to it.
-  // ══════════════════════════════════════════════
   window.ssGo = function () {
     var a = el('ss-addr'), main = el('pl-addr');
     if (!a || !main) return;
@@ -5025,7 +4507,6 @@ buildOpinion(hasCase, overBy, saving, target) + rows +
     function update() {
       ticking = false;
       var r = hero.getBoundingClientRect();
-      // once the hero search box is off the top of the screen, take over
       bar.classList.toggle('on', r.bottom < 8);
     }
     window.addEventListener('scroll', function () {
@@ -5036,7 +4517,6 @@ buildOpinion(hasCase, overBy, saving, target) + rows +
   })();
 
 
-  // Nav goes solid once the hero is behind you.
   (function navScroll() {
     var n = document.getElementById('wd-nav');
     if (!n) return;
@@ -5053,7 +4533,6 @@ buildOpinion(hasCase, overBy, saving, target) + rows +
     upd();
   })();
 
-  // Days to the filing deadline, on the glance panel.
   (function insDays() {
     var e = document.getElementById('ins-days');
     if (!e) return;
