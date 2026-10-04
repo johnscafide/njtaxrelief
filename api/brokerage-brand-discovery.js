@@ -1,5 +1,6 @@
 const dns=require('dns').promises;
 const net=require('net');
+const https=require('https');
 
 function clean(v,n){return String(v??'').trim().slice(0,n)}
 function backend(){const url=process.env.SUPABASE_URL||process.env.NEXT_PUBLIC_SUPABASE_URL,key=process.env.SUPABASE_SERVICE_ROLE_KEY;if(!url||!key)throw new Error('security backend unavailable');return{url,key}}
@@ -29,31 +30,67 @@ function knownPayload(item){
   const host=hostOf(item.website);
   const logo=item.logo||favicon(host);return {website:item.website,brokerage_name:item.name,logo_url:logo,logo_candidates:[logo],colors:[item.primary,item.secondary,item.accent],primary_color:item.primary,secondary_color:item.secondary,accent_color:item.accent,source:'curated_registry',warning:null};
 }
+// Every range that isn't the public internet: private, loopback, link-local,
+// carrier NAT, benchmarking, multicast/reserved, and IPv6 forms of the same.
+const BLOCKED=new net.BlockList();
+for(const [a,p] of [['0.0.0.0',8],['10.0.0.0',8],['100.64.0.0',10],['127.0.0.0',8],['169.254.0.0',16],['172.16.0.0',12],['192.0.0.0',24],['192.0.2.0',24],['192.168.0.0',16],['198.18.0.0',15],['198.51.100.0',24],['203.0.113.0',24],['224.0.0.0',3]])BLOCKED.addSubnet(a,p,'ipv4');
+for(const [a,p] of [['::',127],['64:ff9b::',96],['100::',64],['2001::',23],['2001:db8::',32],['fc00::',7],['fe80::',10],['ff00::',8]])BLOCKED.addSubnet(a,p,'ipv6');
 function isPrivateIp(ip){
-  if(net.isIP(ip)===4){const p=ip.split('.').map(Number);return p[0]===10||p[0]===127||p[0]===0||(p[0]===169&&p[1]===254)||(p[0]===172&&p[1]>=16&&p[1]<=31)||(p[0]===192&&p[1]===168)}
-  const s=String(ip).toLowerCase();return s==='::1'||s.startsWith('fc')||s.startsWith('fd')||s.startsWith('fe80:');
+  const s=String(ip).toLowerCase();
+  const mapped=s.match(/^::ffff:(\d+\.\d+\.\d+\.\d+)$/);
+  if(mapped)return isPrivateIp(mapped[1]);
+  const v=net.isIP(s);
+  if(!v)return true;
+  return BLOCKED.check(s,v===4?'ipv4':'ipv6');
 }
 async function validateUrl(input){
   let u;try{u=new URL(input)}catch(_){throw Object.assign(new Error('Enter a valid brokerage website URL.'),{status:400})}
   if(u.protocol!=='https:')throw Object.assign(new Error('Brokerage website must use HTTPS.'),{status:400});
-  if(!u.hostname||u.username||u.password)throw Object.assign(new Error('Invalid brokerage website URL.'),{status:400});
-  if(net.isIP(u.hostname)&&isPrivateIp(u.hostname))throw Object.assign(new Error('Private network addresses are not allowed.'),{status:400});
-  const addrs=await dns.lookup(u.hostname,{all:true}).catch(()=>[]);
+  if(!u.hostname||u.username||u.password||(u.port&&u.port!=='443'))throw Object.assign(new Error('Invalid brokerage website URL.'),{status:400});
+  const host=u.hostname.replace(/^\[|\]$/g,'');
+  if(net.isIP(host)&&isPrivateIp(host))throw Object.assign(new Error('Private network addresses are not allowed.'),{status:400});
+  const addrs=await dns.lookup(host,{all:true}).catch(()=>[]);
   if(!addrs.length||addrs.some(x=>isPrivateIp(x.address)))throw Object.assign(new Error('Brokerage website could not be resolved safely.'),{status:400});
   return u;
+}
+// Re-checks the address at connect time, so a DNS answer that changes between
+// validateUrl and the request (DNS rebinding) still can't reach a private host.
+function safeLookup(hostname,options,callback){
+  dns.lookup(hostname,{all:true}).then(addrs=>{
+    const ok=addrs.filter(x=>!isPrivateIp(x.address));
+    if(!ok.length||ok.length!==addrs.length)return callback(Object.assign(new Error('Brokerage website could not be resolved safely.'),{status:400}));
+    if(options&&options.all)return callback(null,ok);
+    callback(null,ok[0].address,ok[0].family);
+  },callback);
+}
+function getOnce(url,maxBytes){
+  return new Promise((resolve,reject)=>{
+    const req=https.get(url,{lookup:safeLookup,timeout:7000,headers:{
+      'User-Agent':'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/154 Safari/537.36',
+      'Accept':'text/html,application/xhtml+xml,text/css;q=0.9,*/*;q=0.5',
+      'Accept-Language':'en-US,en;q=0.9','Cache-Control':'no-cache','Pragma':'no-cache'
+    }},r=>{
+      const status=r.statusCode||0;
+      if([301,302,303,307,308].includes(status)){r.resume();return resolve({status,location:r.headers.location||''})}
+      if(status<200||status>=300){r.resume();return resolve({status})}
+      const len=Number(r.headers['content-length']||0);
+      if(len>maxBytes*2){r.destroy();return reject(Object.assign(new Error('Brokerage website response was too large.'),{status:422}))}
+      const chunks=[];let size=0;
+      r.on('data',c=>{size+=c.length;if(size>maxBytes){chunks.push(c);r.destroy();resolve({status,text:Buffer.concat(chunks).toString('utf8').slice(0,maxBytes)})}else chunks.push(c)});
+      r.on('end',()=>resolve({status,text:Buffer.concat(chunks).toString('utf8').slice(0,maxBytes)}));
+      r.on('error',reject);
+    });
+    req.on('timeout',()=>req.destroy(new Error('Brokerage website timed out.')));
+    req.on('error',reject);
+  });
 }
 async function safeFetch(input,maxBytes=850000){
   let url=await validateUrl(input);
   for(let i=0;i<4;i++){
-    const r=await fetch(url,{redirect:'manual',headers:{
-      'User-Agent':'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/154 Safari/537.36',
-      'Accept':'text/html,application/xhtml+xml,text/css;q=0.9,*/*;q=0.5',
-      'Accept-Language':'en-US,en;q=0.9','Cache-Control':'no-cache','Pragma':'no-cache'
-    },signal:AbortSignal.timeout(7000)});
-    if([301,302,303,307,308].includes(r.status)){const loc=r.headers.get('location');if(!loc)throw Object.assign(new Error('Brokerage website redirect was invalid.'),{status:422});url=await validateUrl(new URL(loc,url).toString());continue}
-    if(!r.ok)throw Object.assign(new Error('Brokerage website blocked automated metadata discovery.'),{status:422,upstreamStatus:r.status});
-    const len=Number(r.headers.get('content-length')||0);if(len>maxBytes*2)throw Object.assign(new Error('Brokerage website response was too large.'),{status:422});
-    return {url,text:(await r.text()).slice(0,maxBytes)};
+    const r=await getOnce(url,maxBytes);
+    if([301,302,303,307,308].includes(r.status)){if(!r.location)throw Object.assign(new Error('Brokerage website redirect was invalid.'),{status:422});url=await validateUrl(new URL(r.location,url).toString());continue}
+    if(r.text===undefined)throw Object.assign(new Error('Brokerage website blocked automated metadata discovery.'),{status:422,upstreamStatus:r.status});
+    return {url,text:r.text};
   }
   throw Object.assign(new Error('Brokerage website redirected too many times.'),{status:422});
 }

@@ -71,7 +71,7 @@ function allowedUrl(value) {
 }
 async function safeFetchArticle(startUrl) {
   let current = allowedUrl(startUrl);
-  if (!current) throw Object.assign(new Error('This source is not approved for Watchdog briefing.'), { status: 400 });
+  if (!current) throw Object.assign(new Error('This source is not approved for Watchdog briefing.'), { status: 400, expose: true });
   for (let i = 0; i < 4; i++) {
     const ctl = new AbortController();
     const timer = setTimeout(() => ctl.abort(), 6500);
@@ -88,19 +88,19 @@ async function safeFetchArticle(startUrl) {
     } finally { clearTimeout(timer); }
     if ([301,302,303,307,308].includes(response.status)) {
       const next = allowedUrl(new URL(response.headers.get('location') || '', current).href);
-      if (!next) throw Object.assign(new Error('Source redirected outside the approved publisher domain.'), { status: 400 });
+      if (!next) throw Object.assign(new Error('Source redirected outside the approved publisher domain.'), { status: 400, expose: true });
       current = next;
       continue;
     }
-    if (!response.ok) throw Object.assign(new Error(`Source could not be read (${response.status}).`), { status: 502 });
+    if (!response.ok) throw Object.assign(new Error(`Source could not be read (${response.status}).`), { status: 502, expose: true });
     const type = String(response.headers.get('content-type') || '').toLowerCase();
     if (!type.includes('text/html') && !type.includes('text/plain') && !type.includes('application/xhtml')) {
-      throw Object.assign(new Error('Source format is not supported for a quick briefing.'), { status: 415 });
+      throw Object.assign(new Error('Source format is not supported for a quick briefing.'), { status: 415, expose: true });
     }
     const html = (await response.text()).slice(0, 1800000);
     return { url: current.href, html };
   }
-  throw Object.assign(new Error('Too many source redirects.'), { status: 502 });
+  throw Object.assign(new Error('Too many source redirects.'), { status: 502, expose: true });
 }
 function decodeHtml(input) {
   return String(input || '')
@@ -290,6 +290,20 @@ module.exports = async function handler(req, res) {
     const dailyLimit = LIMITS[plan] || LIMITS.standard;
     if (usageRows.length >= dailyLimit) return res.status(429).json({ error: 'Daily Watchdog briefing limit reached. Try again tomorrow.' });
 
+    // Count this request before the paid OpenAI call, then re-check, so
+    // parallel requests can't slip past the daily limit.
+    await insert('intelligence_usage_events', {
+      user_id: user.id,
+      plan_tier: plan,
+      event_type: 'news_brief_request',
+      provider: 'openai',
+      model: MODEL,
+      request_units: 1,
+      metadata: { feature: 'nj_intelligence_wire_phase_2', stage: 'reserved' }
+    });
+    const usageAfter = await selectMany('intelligence_usage_events', { select: 'id', user_id: `eq.${user.id}`, event_type: 'eq.news_brief_request', created_at: `gte.${new Date(Date.now()-86400000).toISOString()}`, limit: '5000' });
+    if (usageAfter.length > dailyLimit) return res.status(429).json({ error: 'Daily Watchdog briefing limit reached. Try again tomorrow.' });
+
     const fetched = await safeFetchArticle(sourceUrl.href);
     const article = extractArticle(fetched.html);
     if (article.text.length < 220) return res.status(502).json({ error: 'Watchdog could not extract enough readable source text for a reliable briefing.' });
@@ -336,10 +350,10 @@ module.exports = async function handler(req, res) {
     await insert('intelligence_usage_events', {
       user_id: user.id,
       plan_tier: plan,
-      event_type: 'news_brief_request',
+      event_type: 'news_brief_usage',
       provider: 'openai',
       model: MODEL,
-      request_units: 1,
+      request_units: 0,
       input_tokens: Number(ai.usage?.input_tokens || 0) || null,
       output_tokens: Number(ai.usage?.output_tokens || 0) || null,
       latency_ms: Date.now() - started,
@@ -364,6 +378,6 @@ module.exports = async function handler(req, res) {
   } catch (error) {
     const status = Number(error?.status) >= 400 && Number(error.status) < 600 ? Number(error.status) : 500;
     console.error('[NJ News Brief]', clean(error?.message || error, 500));
-    return res.status(status).json({ error: clean(error?.message || 'Watchdog briefing failed.', 500) });
+    return res.status(status).json({ error: error?.expose ? clean(error.message, 500) : 'Watchdog briefing failed. Please try again.' });
   }
 };

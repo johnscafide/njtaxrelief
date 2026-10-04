@@ -117,20 +117,38 @@ async function usageCount(userId, eventType) {
   const response = await fetch(`${SUPABASE_URL}/rest/v1/intelligence_usage_events?${params.toString()}`, {
     headers: adminHeaders({ Prefer: 'count=exact', Range: '0-0' }),
   });
-  if (!response.ok) return 0;
+  if (!response.ok) {
+    const error = new Error('Voice Intelligence usage check is unavailable. Try again shortly.');
+    error.status = 503;
+    throw error;
+  }
   const range = response.headers.get('content-range') || '';
   const total = Number(range.split('/')[1]);
   return Number.isFinite(total) ? total : 0;
 }
-async function enforceDailyLimit(userId, eventType) {
+// Counts the request before the paid provider call, then re-checks, so parallel
+// requests can't slip past the daily limit. logUsage adds the details afterwards.
+async function enforceDailyLimit(userId, eventType, plan) {
   const limit = DAILY_LIMITS[eventType] || 0;
   if (!limit) return;
-  const used = await usageCount(userId, eventType);
-  if (used >= limit) {
+  const limitError = () => {
     const error = new Error('Voice Intelligence pilot daily usage limit reached.');
     error.status = 429;
-    throw error;
-  }
+    return error;
+  };
+  if (await usageCount(userId, eventType) >= limit) throw limitError();
+  await adminInsert('intelligence_usage_events', {
+    user_id: userId,
+    plan_tier: plan,
+    event_type: eventType,
+    provider: 'fish_audio_via_vercel_ai_gateway',
+    request_units: 1,
+    input_tokens: 0,
+    output_tokens: 0,
+    latency_ms: 0,
+    metadata: { stage: 'reserved' },
+  });
+  if (await usageCount(userId, eventType) > limit) throw limitError();
 }
 async function logUsage({ userId, plan, eventType, model, latencyMs, metadata }) {
   if (!SERVICE_KEY) return;
@@ -138,10 +156,10 @@ async function logUsage({ userId, plan, eventType, model, latencyMs, metadata })
     await adminInsert('intelligence_usage_events', {
       user_id: userId,
       plan_tier: plan,
-      event_type: eventType,
+      event_type: `${eventType}_detail`,
       provider: 'fish_audio_via_vercel_ai_gateway',
       model,
-      request_units: 1,
+      request_units: 0,
       input_tokens: 0,
       output_tokens: 0,
       latency_ms: Math.max(0, Math.round(Number(latencyMs || 0))),
@@ -244,7 +262,7 @@ module.exports = async function handler(req, res) {
     if (!GATEWAY_TOKEN) return res.status(503).json({ error: 'Voice Intelligence provider authentication is not configured.' });
 
     if (action === 'transcribe') {
-      await enforceDailyLimit(user.id, 'voice_transcription');
+      await enforceDailyLimit(user.id, 'voice_transcription', plan);
       const mediaType = clean(body.media_type || 'audio/webm', 120).toLowerCase();
       if (!mediaType.startsWith('audio/')) return res.status(415).json({ error: 'Unsupported audio type.' });
       const audio = decodeAudio(body.audio_base64);
@@ -271,7 +289,7 @@ module.exports = async function handler(req, res) {
     }
 
     if (action === 'speak') {
-      await enforceDailyLimit(user.id, 'voice_speech');
+      await enforceDailyLimit(user.id, 'voice_speech', plan);
       const rendered = spokenBrief(body.brief, clean(body.format || body?.brief?.format || 'quick', 40).toLowerCase());
       const { result, latencyMs } = await generateSpeech(rendered.text);
       const audio = base64Payload(result?.audio);

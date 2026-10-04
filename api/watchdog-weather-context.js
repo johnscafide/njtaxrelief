@@ -1,3 +1,5 @@
+const crypto = require('crypto');
+
 const NWS_ROOT = 'https://api.weather.gov';
 const OPEN_METEO_CUSTOMER_ROOT = 'https://customer-api.open-meteo.com/v1/forecast';
 const NJ_BOUNDS = { latMin: 38.8, latMax: 41.4, lonMin: -75.7, lonMax: -73.8 };
@@ -8,12 +10,22 @@ const ALLOWED_ORIGINS = new Set([
   'https://www.njpropertytaxrelief.com'
 ]);
 
+const PREVIEW_HOST = /^njtaxrelief(?:-git)?-[a-z0-9-]+-johnscafides-projects\.vercel\.app$/;
+
+// The paid Open-Meteo key is only spent inside these budgets. Past them, the
+// route falls back to the free NWS feed instead of failing.
+const CLIENT_BUDGETS = [
+  { bucket: 'weather_context_minute', seconds: 60, limit: 10 },
+  { bucket: 'weather_context_hour', seconds: 3600, limit: 60 }
+];
+const GLOBAL_BUDGET = { bucket: 'weather_context_open_meteo_day', seconds: 86400, limit: 5000 };
+
 function corsOrigin(req) {
   const raw = String(req.headers.origin || '');
   if (ALLOWED_ORIGINS.has(raw)) return raw;
   try {
     const host = new URL(raw).hostname.toLowerCase();
-    if (host === 'localhost' || host === '127.0.0.1' || host.endsWith('.vercel.app')) return raw;
+    if (host === 'localhost' || host === '127.0.0.1' || PREVIEW_HOST.test(host)) return raw;
   } catch (_) {}
   return 'https://www.watchdogindex.com';
 }
@@ -30,8 +42,58 @@ function validNj(lat, lon) {
     lon >= NJ_BOUNDS.lonMin && lon <= NJ_BOUNDS.lonMax;
 }
 
+// Two decimals is about 1 km, plenty for a forecast, and keeps the CDN cache
+// useful instead of letting every request become a new paid call.
 function roundCoord(value) {
-  return Math.round(Number(value) * 10000) / 10000;
+  return Math.round(Number(value) * 100) / 100;
+}
+
+function rateLimitBackend() {
+  const url = process.env.SUPABASE_URL || process.env.NEXT_PUBLIC_SUPABASE_URL;
+  const key = process.env.SUPABASE_SERVICE_ROLE_KEY;
+  return url && key ? { url, key } : null;
+}
+
+async function consumeBudget(config, clientHash, budget) {
+  const response = await fetch(`${config.url}/rest/v1/rpc/consume_public_request_budget`, {
+    method: 'POST',
+    headers: {
+      apikey: config.key,
+      Authorization: `Bearer ${config.key}`,
+      'Content-Type': 'application/json',
+      Accept: 'application/json'
+    },
+    body: JSON.stringify({
+      p_client_hash: clientHash,
+      p_bucket: budget.bucket,
+      p_window_seconds: budget.seconds,
+      p_limit: budget.limit
+    }),
+    signal: AbortSignal.timeout(3000)
+  });
+  if (!response.ok) throw new Error(`rate limit ${response.status}`);
+  const rows = await response.json();
+  const row = Array.isArray(rows) ? rows[0] || {} : rows || {};
+  return row.allowed === true;
+}
+
+// True only when this caller and the site as a whole are inside budget.
+// Any limiter failure counts as "no", so the paid key is never spent unchecked.
+async function paidProviderAllowed(req) {
+  const config = rateLimitBackend();
+  if (!config) return false;
+  const forwarded = String(req.headers['x-forwarded-for'] || '').split(',')[0].trim();
+  if (!forwarded) return false;
+  const clientHash = crypto.createHmac('sha256', config.key).update(forwarded).digest('hex');
+  const globalHash = crypto.createHash('sha256').update('weather-context-all').digest('hex');
+  try {
+    for (const budget of CLIENT_BUDGETS) {
+      if (!(await consumeBudget(config, clientHash, budget))) return false;
+    }
+    return await consumeBudget(config, globalHash, GLOBAL_BUDGET);
+  } catch (_) {
+    return false;
+  }
 }
 
 function safeText(value, max = 500) {
@@ -205,12 +267,13 @@ module.exports = async function handler(req, res) {
   const commercialKey = String(process.env.OPEN_METEO_API_KEY || '').trim();
   let commercialError = null;
 
-  if (commercialKey) {
+  if (commercialKey && await paidProviderAllowed(req)) {
     try {
       const result = await openMeteoCommercialContext(safeLat, safeLon, commercialKey);
       return res.status(200).json(result);
     } catch (error) {
-      commercialError = safeText(error?.message || error, 160) || 'Open-Meteo commercial provider unavailable';
+      console.error('watchdog-weather-context open-meteo', safeText(error?.message || error, 160));
+      commercialError = 'Open-Meteo commercial provider unavailable';
     }
   }
 

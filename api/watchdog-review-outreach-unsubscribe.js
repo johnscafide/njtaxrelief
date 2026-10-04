@@ -18,8 +18,8 @@ export default async function handler(req, res) {
   res.setHeader('Cache-Control', 'private, no-store, no-cache, max-age=0, must-revalidate');
   res.setHeader('X-Robots-Tag', 'noindex, nofollow, noarchive');
 
-  if (req.method !== 'GET') {
-    res.setHeader('Allow', 'GET');
+  if (req.method !== 'GET' && req.method !== 'POST') {
+    res.setHeader('Allow', 'GET, POST');
     return res.status(405).send('Method not allowed');
   }
   if (!SERVICE_KEY) {
@@ -29,6 +29,14 @@ export default async function handler(req, res) {
   const token = String(first(req.query && req.query.t) || '').trim();
   if (token.length < 20 || token.length > 180) {
     return res.status(400).send(page('Invalid link', 'This unsubscribe link is not valid.'));
+  }
+
+  // Opening the link only shows a confirm button. Email security scanners
+  // follow links automatically, so the unsubscribe itself needs a POST.
+  if (req.method === 'GET') {
+    const action = `/api/watchdog-review-outreach-unsubscribe?t=${encodeURIComponent(token)}`;
+    const form = `<form method="post" action="${action}" style="margin-top:24px"><button type="submit" style="font:inherit;font-size:17px;font-weight:700;color:#fff;background:#0b4fb3;border:0;border-radius:999px;padding:14px 28px;min-height:44px;cursor:pointer">Unsubscribe</button></form>`;
+    return res.status(200).send(page('Stop review-request emails?', `Press the button to stop Watchdog application review-request emails.${form}`));
   }
 
   const tokenDigest = digest(token);
