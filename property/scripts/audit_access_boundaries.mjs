@@ -29,7 +29,6 @@ const protectedPages = [
   ['property/marketing-studio/recipients/index.html', 'agent'],
   ['property/marketing-studio/review/index.html', 'agent'],
   ['property/property-analysis/index.html', 'developer'],
-  ['property/dashboards/index.html', 'developer'],
   ['property/diagnostics/index.html', 'developer'],
   ['property/tools/assessment-fairness/index.html', 'developer'],
   ['property/tools/appeal-potential/index.html', 'developer'],

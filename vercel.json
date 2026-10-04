@@ -254,11 +254,6 @@
       "permanent": true
     },
     {
-      "source": "/property/dashboards.html",
-      "destination": "/property/dashboards",
-      "permanent": true
-    },
-    {
       "source": "/property/property-analysis.html",
       "destination": "/property/property-analysis",
       "permanent": true
@@ -431,11 +426,6 @@
     {
       "source": "/property/town-compare/index.html",
       "destination": "/property/town-compare",
-      "permanent": true
-    },
-    {
-      "source": "/property/dashboards/index.html",
-      "destination": "/property/dashboards",
       "permanent": true
     },
     {
@@ -804,10 +794,6 @@
     {
       "source": "/property/town-compare",
       "destination": "/property/town-compare/index.html"
-    },
-    {
-      "source": "/property/dashboards",
-      "destination": "/property/dashboards/index.html"
     },
     {
       "source": "/property/property-analysis",
@@ -1235,15 +1221,6 @@
     },
     {
       "source": "/property/town-compare",
-      "headers": [
-        {
-          "key": "Cache-Control",
-          "value": "public, max-age=0, s-maxage=300, stale-while-revalidate=3600"
-        }
-      ]
-    },
-    {
-      "source": "/property/dashboards",
       "headers": [
         {
           "key": "Cache-Control",

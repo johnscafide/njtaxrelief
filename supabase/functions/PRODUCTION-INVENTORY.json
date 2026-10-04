@@ -31,7 +31,8 @@
       "version": 18,
       "sha256": "8dc088b45c3100f5c53a2251cd3443e3023c70554edfc0c1cba1bb2c8c169337",
       "verify_jwt": false,
-      "tracking": "source_snapshot"
+      "tracking": "fingerprint_only",
+      "note": "Repo source removed 2026-10-04 (unused). Still deployed until undeployed by hand."
     },
     "bulk-marker-hydrate": {
       "version": 27,
@@ -61,7 +62,8 @@
       "version": 23,
       "sha256": "2daef3676c854e7be0178ba7061599f9720785f16e44c84c60b72f7ab376874c",
       "verify_jwt": true,
-      "tracking": "source_snapshot"
+      "tracking": "fingerprint_only",
+      "note": "Repo source removed 2026-10-04 (unused). Still deployed until undeployed by hand."
     },
     "farm-intelligence-scan": {
       "version": 28,
@@ -283,7 +285,8 @@
       "version": 2,
       "sha256": "718a4da2fce21689cd32f8680e3bd7dbfaf858f87f906ef3d20e5f00d58ed8ee",
       "verify_jwt": true,
-      "tracking": "source_snapshot"
+      "tracking": "fingerprint_only",
+      "note": "Repo source removed 2026-10-04 (unused). Still deployed until undeployed by hand."
     },
     "intelligence-source-fact-watch": {
       "version": 4,
@@ -505,7 +508,8 @@
       "version": 1,
       "sha256": "82224fe93c9aff6cf234f96786059c0e93b59acedb0b4742a3a0fd6c08f49674",
       "verify_jwt": true,
-      "tracking": "source_snapshot"
+      "tracking": "fingerprint_only",
+      "note": "Repo source removed 2026-10-04 (unused). Still deployed until undeployed by hand."
     },
     "claim-lifetime-purchase": {
       "version": 4,
@@ -517,19 +521,22 @@
       "version": 5,
       "sha256": "51f9979f07dda88e55996bb3783f06f118cfd18fb7cf53361261cd51c0293392",
       "verify_jwt": true,
-      "tracking": "source_snapshot"
+      "tracking": "fingerprint_only",
+      "note": "Repo source removed 2026-10-04 (unused). Still deployed until undeployed by hand."
     },
     "openai-ads-capi-validate": {
       "version": 6,
       "sha256": "4b53c35b0b69cd50c5d355d68e2627f016614fa7050a85b631f6893b531279e5",
       "verify_jwt": true,
-      "tracking": "source_snapshot"
+      "tracking": "fingerprint_only",
+      "note": "Repo source removed 2026-10-04 (unused). Still deployed until undeployed by hand."
     },
     "watchdog-vercel-release-relay": {
       "version": 5,
       "sha256": "d233fe1ca629e40ede3a6bffc2bb6406b416632212c61d7c36ab70c6c1cabe07",
       "verify_jwt": false,
-      "tracking": "source_snapshot"
+      "tracking": "fingerprint_only",
+      "note": "Repo source removed 2026-10-04 (unused). Still deployed until undeployed by hand."
     },
     "pcm-postcard-studio": {
       "version": 4,

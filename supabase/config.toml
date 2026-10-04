@@ -94,9 +94,6 @@ verify_jwt = false
 # Supabase Auth inside the function. Gateway verification remains disabled so
 # missing/expired auth produces deterministic fail-closed 401 responses rather
 # than opaque gateway errors.
-[functions.submit-support-request]
-verify_jwt = false
-
 [functions.export-my-data]
 verify_jwt = false
 
@@ -164,31 +161,11 @@ verify_jwt = true
 [functions.intelligence-closing-holdout-seed]
 verify_jwt = true
 
-# Internal, manual-only aggregate structural shadow for Closing Review v4.
-# Gateway JWT verification is disabled because it validates an environment-local
-# Vault token before any service-role read. It excludes prior calibration pins,
-# persists no property-level output, and has no promotion path or cron schedule.
-[functions.intelligence-closing-v4-structural-shadow]
-verify_jwt = false
-
-# Internal, manual-only Closing Review v5 validation tools. Both validate the
-# same environment-local Vault token before service-role access. The shadow is
-# aggregate-only; the holdout seeder is one-shot, excludes all prior Closing
-# calibration properties, and cannot alter the customer model pointer or promote.
-[functions.intelligence-closing-v5-structural-shadow]
-verify_jwt = false
-
-[functions.intelligence-closing-v5-holdout-seed]
-verify_jwt = false
-
-# Internal, manual-only aggregate Closing Review v6/v7 structural shadows.
-# Gateway JWT verification is disabled because both functions validate the same
+# Internal, manual-only aggregate Closing Review v7 structural shadow.
+# Gateway JWT verification is disabled because the function validates the same
 # environment-local hashed shadow token before service-role access. They exclude
 # prior calibration pins, persist no property-level results, use no human labels,
 # and expose no promotion path.
-[functions.intelligence-closing-v6-structural-shadow]
-verify_jwt = false
-
 [functions.intelligence-closing-v7-structural-shadow]
 verify_jwt = false
 
@@ -313,7 +290,4 @@ verify_jwt = true
 verify_jwt = true
 
 [functions.public-report-share]
-verify_jwt = false
-
-[functions.watchdog-vercel-release-relay]
 verify_jwt = false

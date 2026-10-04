@@ -34,10 +34,8 @@ assert.match(guard, /function looksLikeVercelAuth[\s\S]*<title/, 'the contact-sa
 // Every 404 surface shows the dashboard beagle peeking over the card.
 const fs = require('fs');
 const staticPage = fs.readFileSync('404.html', 'utf8');
-const safeGuard = fs.readFileSync('api/watchdog-index-page-safe.js', 'utf8');
-for (const [name, source] of [['404.html', staticPage], ['watchdog-index-page-safe', safeGuard], ['watchdog-index-page-contact-safe', guard]]) {
+for (const [name, source] of [['404.html', staticPage], ['watchdog-index-page-contact-safe', guard]]) {
   assert.match(source, /<img class="peek" src="\/property\/assets\/beagle\/watchdog-beagle-peek\.webp"/, `${name} 404 shows the peeking beagle`);
 }
 assert.ok(fs.existsSync('property/assets/beagle/watchdog-beagle-peek.webp'), 'the peeking beagle image ships');
-assert.ok(safeGuard.includes(staticPage.trim()), 'the route-guard 404 matches 404.html');
 console.log('Watchdog unknown-route contract passed.');
