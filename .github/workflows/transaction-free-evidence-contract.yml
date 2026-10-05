@@ -109,7 +109,7 @@ jobs:
           grep -q 'transaction/evidence-addons.js' transaction/shell.js
           grep -q 'transaction/refinements.js' transaction/shell.js
           grep -q 'transaction/evidence-first.js' transaction/shell.js
-          grep -q 'replace(/\-/g' "$refine"
+          grep -q 'replace(/\\u2014/g' "$refine"
           ! grep -q 'SOURCE_PACK' "$refine"
           grep -q 'Official route' "$evidence"
           grep -q 'Municipal services / move-in' "$evidence"

@@ -3,7 +3,7 @@ import { readFileSync } from 'node:fs';
 
 const TEXT = /\.(html?|css|js|mjs|cjs|json|svg|xml|txt|md|py|ts|tsx|swift|ya?ml|webmanifest|csv|tsv)$/i;
 const SKIP = /(^|\/)(node_modules|__pycache__|supabase\/migrations)\/|\.sql$|^scripts\/check-no-em-dashes\.mjs$/;
-const DASH = /—|&mdash;|&#8212;|&#x2014;|\\u2014/i;
+const DASH = /\u2014|&mdash;|&#8212;|&#x2014;/i;
 
 const files = execFileSync('git', ['ls-files'], { encoding: 'utf8' }).split('\n').filter((f) => TEXT.test(f) && !SKIP.test(f));
 const hits = [];

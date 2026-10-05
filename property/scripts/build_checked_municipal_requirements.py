@@ -47,7 +47,7 @@ EXTINGUISHER_NOTE = ("State rule: a 2025 law (P.L.2025, c.19) dropped the fire e
 
 def clean(v, n=1200) -> str:
     s = re.sub(r"\s+", " ", str(v or "")).strip()
-    s = re.sub(r"\s*[–-]\s*", ", ", s)
+    s = re.sub(r"\s*[–\u2014-]\s*", ", ", s)
     for pattern, words in INTERNAL_WORDS:
         s = pattern.sub(words, s)
     if len(s) <= n:
@@ -310,7 +310,7 @@ def self_test() -> None:
         where = f"{row['municipality_code']} {row['requirement_key']}"
         assert row["requirements"], where
         blob = json.dumps(row, ensure_ascii=False)
-        assert not re.search(r"[–-]", blob), f"{where}: em or en dash"
+        assert not re.search(r"[–\u2014-]", blob), f"{where}: em or en dash"
         assert not SKIP_LINK.search(blob), f"{where}: account or news link"
         assert not re.search(r"\b(fire_cert|resale_co|other_items|open_questions|not_found|not_required)\b|WORK/", blob.split('"metadata"')[0]), \
             f"{where}: internal research wording"

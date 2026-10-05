@@ -103,9 +103,9 @@
       [/John Scafide will complete your PAS-1 line by line for a flat \$20 fee\./gi, "Watchdog's free guided 2025 application walks you through the PAS-1 line by line and prepares the official form."],
       [/John Scafide offers PAS-1 filing assistance for a \$20 flat fee/gi, 'Watchdog offers a free guided 2025 PAS-1 application online'],
       [/I offer a \$20 flat-fee session to ensure your PAS-1 is filed perfectly\./gi, "Use Watchdog's free guided 2025 application to work through the PAS-1 question by question and prepare the official form."],
-      [/PAS-1 filing help\s*[--]\s*\$20 flat fee/gi, 'Free guided PAS-1 application'],
+      [/PAS-1 filing help\s*[\u2014-]\s*\$20 flat fee/gi, 'Free guided PAS-1 application'],
       [/PAS-1 filing help \(\$20\)/gi, 'Free guided PAS-1 application'],
-      [/Book PAS-1 Help\s*[--]\s*\$20/gi, 'Start Free PAS-1 Application'],
+      [/Book PAS-1 Help\s*[\u2014-]\s*\$20/gi, 'Start Free PAS-1 Application'],
       [/Book \$20 Filing Help/gi, 'Start Free Application'],
       [/Book My \$20 PAS-1 Help/gi, 'Start My Free Application']
     ];

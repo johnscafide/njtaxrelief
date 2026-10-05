@@ -59,7 +59,7 @@ function mutationKind(line) {
 }
 
 function structure(line) {
-  return String(line || '').replace(/[A-Za-z0-9'\u2019&;-]+/g, '').replace(/\s+/g, '');
+  return String(line || '').replace(/[A-Za-z0-9'\u2019&;:,|\u2013\u2014-]+/g, '').replace(/\s+/g, '');
 }
 
 function withoutEyebrows(line) {
