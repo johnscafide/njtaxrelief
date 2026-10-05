@@ -63,7 +63,13 @@ function structure(line) {
 }
 
 function withoutEyebrows(line) {
-  return String(line || '').replace(/<(\w+)\b[^<>]*class=\\?["'][^"']*(?:eyebrow|kicker)[^"']*\\?["'][^<>]*>[\s\S]*?<\/\1>/gi, '');
+  let text = String(line || '');
+  let previous;
+  do {
+    previous = text;
+    text = text.replace(/<(\w+)\b[^<>]*class=\\?["'][^"']*(?:eyebrow|kicker)[^"']*\\?["'][^<>]*>[\s\S]*?<\/\1>/gi, '');
+  } while (text !== previous);
+  return text;
 }
 
 function isWordingOnlyEdit(line) {
