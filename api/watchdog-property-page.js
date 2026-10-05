@@ -677,7 +677,7 @@ const HEAD_ASSETS = `<link rel="icon" href="/favicon-96x96.png">
 <link rel="stylesheet" href="/property/css/public-mobile-nav.css">`;
 
 const FOOT_SCRIPTS = `<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
-<script src="/property/js/watchdog-easter-eggs.js?v=20261004a" defer></script>
+<script src="/property/js/watchdog-easter-eggs.js?v=20261005a" defer></script>
 <script src="/property/js/public-nav.js"></script>
 <script>fetch('/property/partials/footer.html').then(function(r){return r.ok?r.text():''}).then(function(h){var f=document.getElementById('main-footer');if(f&&h)f.innerHTML=h}).catch(function(){});</script>`;
 

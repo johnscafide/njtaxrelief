@@ -62,8 +62,39 @@ html.wd-1999 body img:not(#wd-1999 *){border:2px ridge #c0c0c0}
 #wd-1999 .wd-1999-exit{min-height:44px;padding:0 16px;background:#c0c0c0;border:3px outset #fff;border-radius:0;color:#000;font:700 15px "Times New Roman",Times,serif;cursor:pointer}
 #wd-1999 .wd-1999-exit:active{border-style:inset}
 #wd-1999 .wd-1999-exit:focus-visible,#wd-1999 .wd-1999-ring a:focus-visible{outline:3px dotted #000;outline-offset:2px}
+.wd-oos{position:fixed;inset:0;z-index:2147483100;display:grid;place-items:center;padding:16px;background:rgba(18,16,12,.55);-webkit-backdrop-filter:blur(3px);backdrop-filter:blur(3px);opacity:0;transition:opacity .2s ease}
+.wd-oos.is-on{opacity:1}
+.wd-oos-card{position:relative;width:min(560px,100%);max-height:calc(100vh - 32px);max-height:calc(100dvh - 32px);overflow:auto;background:#fff;border-radius:28px;padding:30px 28px 26px;text-align:center;box-shadow:0 30px 80px rgba(0,0,0,.35);font:400 16px/1.55 Inter,system-ui,sans-serif;color:#16140f;transform:translateY(14px) scale(.97);transition:transform .25s ease}
+.wd-oos.is-on .wd-oos-card{transform:none}
+.wd-oos-sign{margin:-30px -28px 18px;padding:22px 20px 18px;border-radius:28px 28px 0 0;background:#1f4f9c;color:#fff;border-bottom:6px solid #f2c230}
+.wd-oos-sign-frame{border:3px solid #fff;border-radius:12px;padding:12px 10px}
+.wd-oos-sign small{display:block;font:700 13px/1.2 Inter,system-ui,sans-serif;letter-spacing:.14em;text-transform:uppercase}
+.wd-oos-sign strong{display:block;font:900 clamp(26px,6vw,38px)/1.05 "Plus Jakarta Sans",Inter,system-ui,sans-serif}
+.wd-oos-sign em{display:block;margin-top:6px;font:600 14px/1.3 Inter,system-ui,sans-serif;font-style:normal}
+.wd-oos-scene{position:relative;width:min(220px,58vw);aspect-ratio:3/2;margin:0 auto 4px}
+.wd-oos-dog{position:absolute;inset:0;background:url('/property/assets/beagle/watchdog-beagle-frames.webp') 100% 0/400% 100% no-repeat;transform:rotate(-9deg);transform-origin:50% 90%}
+.wd-oos.is-on .wd-oos-dog{animation:wd-oos-tilt 1.6s ease-in-out .3s 1}
+.wd-oos-stamp{position:absolute;left:50%;bottom:2%;padding:6px 12px;border:4px solid #c8262b;border-radius:10px;background:rgba(255,255,255,.88);color:#c8262b;font:900 18px/1 "Plus Jakarta Sans",Inter,system-ui,sans-serif;letter-spacing:.06em;text-transform:uppercase;white-space:nowrap;transform:translateX(-50%) rotate(-7deg)}
+.wd-oos-kicker{margin:0 0 6px;font:700 12px/1.4 Inter,system-ui,sans-serif;letter-spacing:.12em;text-transform:uppercase;color:#0b6e6e}
+.wd-oos-title{margin:0 0 10px;font:800 clamp(26px,5.4vw,36px)/1.1 "Plus Jakarta Sans",Inter,system-ui,sans-serif;letter-spacing:-.03em;color:#16140f}
+.wd-oos-body{margin:0 auto 12px;max-width:440px;color:#4a463d}
+.wd-oos-quiz{margin-top:16px;padding:16px;border-radius:18px;background:#f6f3ec;animation:wd-oos-in .3s ease}
+.wd-oos-quiz[hidden]{display:none}
+.wd-oos-quiz-q{margin:0 0 10px;font:800 18px/1.3 "Plus Jakarta Sans",Inter,system-ui,sans-serif;color:#16140f}
+.wd-oos-answer{margin:12px 0 0;font-weight:600;color:#0b6e6e}
+.wd-oos-answer:empty{display:none}
+.wd-oos-actions{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin-top:18px}
+.wd-oos-quiz-actions{margin-top:0}
+.wd-oos-btn{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:0 22px;border-radius:999px;font:700 15px/1 Inter,system-ui,sans-serif;cursor:pointer}
+.wd-oos-btn-primary{border:0;background:#16140f;color:#fff}
+.wd-oos-btn-secondary{border:1px solid #cfc8ba;background:#fff;color:#16140f}
+.wd-oos-btn[aria-pressed="true"]{border-color:#0b6e6e;background:#e7f3f2}
+.wd-oos-btn:focus-visible{outline:3px solid #6f9ce0;outline-offset:3px}
+@media (max-width:480px){.wd-oos-card{padding:24px 18px 20px;border-radius:24px}.wd-oos-sign{margin:-24px -18px 12px;padding:14px 14px 12px;border-radius:24px 24px 0 0}.wd-oos-sign-frame{padding:8px}.wd-oos-scene{width:min(170px,46vw)}.wd-oos-actions{margin-top:14px}}
+@keyframes wd-oos-tilt{0%,100%{transform:rotate(-9deg)}35%{transform:rotate(6deg)}70%{transform:rotate(-12deg)}}
+@keyframes wd-oos-in{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
 @keyframes wd-1999-scroll{from{transform:translateX(0)}to{transform:translateX(-100%)}}
 @keyframes wd-1999-tape{to{background-position:28.28px 0}}
 @media (max-width:640px){#wd-1999 .wd-1999-construction{bottom:142px;right:6px;transform:rotate(3deg) scale(.8);transform-origin:right bottom}#wd-1999 .wd-1999-tape{width:110px}html.wd-1999 body{padding-bottom:120px!important}}
-@media (prefers-reduced-motion:reduce){#wd-1999 .wd-1999-marquee span{animation:none;padding-left:12px}#wd-1999 .wd-1999-tape{animation:none}.wd-egg-chase{transition:none}}
-@media print{.wd-egg-chase,#wd-1999{display:none!important}}
+@media (prefers-reduced-motion:reduce){.wd-oos,.wd-oos-card{transition:none}.wd-oos.is-on .wd-oos-dog,.wd-oos-quiz{animation:none}#wd-1999 .wd-1999-marquee span{animation:none;padding-left:12px}#wd-1999 .wd-1999-tape{animation:none}.wd-egg-chase{transition:none}}
+@media print{.wd-egg-chase,#wd-1999,.wd-oos{display:none!important}}

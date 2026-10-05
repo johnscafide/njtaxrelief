@@ -190,7 +190,7 @@ ${robots}${canonical}${og}<link rel="icon" type="image/png" href="/favicon-96x96
 ${analytics}${jsonld}</head>
 <body class="results${embed ? ' embed' : ''}">
 ${o.body}
-${embed ? '' : '<script src="/property/js/watchdog-easter-eggs.js?v=20261004a" defer></script>\n'}</body>
+${embed ? '' : '<script src="/property/js/watchdog-easter-eggs.js?v=20261005a" defer></script>\n'}</body>
 </html>
 `;
 }

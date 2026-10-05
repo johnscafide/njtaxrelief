@@ -19,7 +19,7 @@ const SITE_SEARCH_TAGS = '<link rel="stylesheet" href="/property/css/watchdog-si
 const SITE_SEARCH_OFF_PATH = /^\/(?:transaction\/shared|client-room|public-report|open-house|offline)(?:\/|$)/i;
 const SITE_SEARCH_AGENT_PORTAL = /^\/agent\/([a-z0-9][a-z0-9-]{1,38}[a-z0-9])$/i;
 const SITE_SEARCH_AGENT_RESERVED = /^(?:agent|agents|analytics|assets|buyers|client-room|clients|contacts|desk|edit|extension|farm-map|index|leads|listing-prep|new|onboarding|open-house|portal|reports|settings|shared|sphere|team|teams|today|training|workspace)$/i;
-const EASTER_EGGS_SCRIPT = '<script src="/property/js/watchdog-easter-eggs.js?v=20261004a" data-watchdog-easter-eggs="1" defer></script>';
+const EASTER_EGGS_SCRIPT = '<script src="/property/js/watchdog-easter-eggs.js?v=20261005a" data-watchdog-easter-eggs="1" defer></script>';
 const AI_REFERRAL_SCRIPT = '<script src="/property/js/ai-referral-analytics.js" data-watchdog-ai-referral-runtime="1" defer></script>';
 const AI_REFERRAL_PRIVATE_PREFIXES = ['/account','/agent','/agent-control','/agent-desk','/transaction','/analytics','/backoffice','/compare','/dashboard','/data-center','/data-workbench','/developer','/developer-data','/diagnostics','/farm-builder','/growth','/home','/insights/admin','/integrations','/intelligence','/logs','/marketing-studio','/newsletter-studio','/onboarding','/report-builder','/watchlist','/whitepapers','/workbench'];
 const ENTITY_GRAPH_ID = 'watchdog-entity-graph';
