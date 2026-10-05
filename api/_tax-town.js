@@ -16,7 +16,10 @@ const path = require('path');
 const CO = require('./_co-town');
 
 const ROOT = process.cwd();
-const PUBLISHED = new Set(['bergen']);
+const PUBLISHED = new Set([
+  'atlantic', 'bergen', 'burlington', 'camden', 'cape-may', 'cumberland', 'essex', 'gloucester', 'hudson', 'hunterdon', 'mercer',
+  'middlesex', 'monmouth', 'morris', 'ocean', 'passaic', 'salem', 'somerset', 'sussex', 'union', 'warren'
+]);
 const ALTERNATE_CALENDAR = new Set(['burlington', 'gloucester', 'monmouth']);
 
 function readJson(rel) {
