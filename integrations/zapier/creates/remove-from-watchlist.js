@@ -5,7 +5,7 @@ module.exports = {
   noun: 'Watchlist Property',
   display: {
     label: 'Remove Property from Watchlist',
-    description: 'Removes a checked Watchdog property from the connected account Watchlist.',
+    description: 'Removes a governed Watchdog property from the connected account Watchlist.',
   },
   operation: {
     inputFields: [

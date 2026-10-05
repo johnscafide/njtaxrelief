@@ -2,7 +2,7 @@ const { api } = require('../common');
 module.exports = {
   key: 'add_to_watchlist',
   noun: 'Watchlist Property',
-  display: { label: 'Add Property to Watchlist', description: 'Adds a checked Watchdog property to the connected account Watchlist.' },
+  display: { label: 'Add Property to Watchlist', description: 'Adds a governed Watchdog property to the connected account Watchlist.' },
   operation: {
     inputFields: [
       { key: 'pams_pin', label: 'PAMS PIN', type: 'string', required: true },
