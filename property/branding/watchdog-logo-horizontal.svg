@@ -9,7 +9,8 @@
     </linearGradient>
     <linearGradient id="word" x1="0" y1="0" x2="0" y2="1">
       <stop offset="0" stop-color="#082f7d"/>
-     
+       <stop offset=".68" stop-color="#123e9d"/>
+      <stop offset="1" stop-color="#165fe4"/>     
     </linearGradient>
   </defs>
   <rect x="0" y="0" width="331" height="332" rx="78" fill="url(#tile)"/>
