@@ -3,6 +3,7 @@
 // The look matches /co: same logo, search box and facts layout (co/co.css); the browser side is
 // co/co-search.js (search box) and co/co-town.js (share, votes, corrections, measurement).
 const T = require('./_co-town');
+const TAX = require('./_tax-town');
 
 const { ORIGIN, SHARE_IMAGE, esc, countyLabel, fmtDate, STATUS } = T;
 const LOGO = '/property/branding/watchdog-logo-horizontal.svg';
@@ -215,10 +216,10 @@ function embedFoot() {
 
 function description(t, d) {
   const where = `${t.name} (${countyLabel(t.county)})`;
-  if (!d) return `Resale Certificate of Occupancy and smoke / CO alarm certificate requirements for ${where}, New Jersey.`;
-  if (d.co.status === 'required') return `${where} requires a resale Certificate of Occupancy and a smoke and CO alarm certificate. Requirements, fees, timing and who to contact.`;
-  if (d.co.status === 'not_required') return `${where} doesn't require a resale Certificate of Occupancy, but a smoke and CO alarm certificate is required. Requirements, fees, timing and who to contact.`;
-  return `Resale CO and smoke / CO alarm certificate requirements for ${where}: fees, timing and who to contact.`;
+  if (!d) return `Resale certificate of occupancy (CO or CCO) and smoke detector / CO alarm certificate requirements for ${where}, New Jersey.`;
+  if (d.co.status === 'required') return `Selling a home in ${where}? You need a resale certificate of occupancy (CO or CCO) and a smoke detector and CO alarm certificate. Requirements, fees, inspection timing and who to call.`;
+  if (d.co.status === 'not_required') return `${where} doesn't require a resale certificate of occupancy (CO or CCO), but you still need a smoke detector and CO alarm certificate to sell. Requirements, fees, inspection timing and who to call.`;
+  return `Resale certificate of occupancy (CO or CCO) and smoke detector / CO alarm certificate requirements for ${where}: fees, inspection timing and who to call.`;
 }
 
 function crumbs(t, county) {
@@ -234,7 +235,7 @@ function townPage(t, opts) {
   const d = T.townData(t.code);
   const city = String(opts.city || '').replace(/[^A-Za-z .'’-]/g, '').trim().slice(0, 60);
   const lower = (s) => s.toLowerCase().replace(/[^a-z]/g, '');
-  let meta = esc(countyLabel(t.county));
+  let meta = esc(countyLabel(t.county)) + ' · Resale certificate of occupancy and smoke detector certificate';
   if (city && lower(city) !== lower(t.name) && !lower(t.name).startsWith(lower(city))) meta += ` · Mailing address: ${esc(city)}`;
   meta += '<span data-helpful-summary></span>';
   const attrs = `data-co-town data-code="${t.code}" data-name="${esc(t.name)}" data-county="${esc(countyLabel(t.county))}" data-status="${d ? d.co.status : 'not_available'}" data-url="${esc(ORIGIN + t.path)}" data-surface="${embed ? 'embed' : 'page'}"`;
@@ -251,6 +252,8 @@ function townPage(t, opts) {
       out += `<section class="nearby"><h2>Other towns in ${esc(countyLabel(t.county))}</h2><ul class="townlist">` +
         others.map((x) => `<li><a href="${esc(x.path)}">${esc(x.name)}</a></li>`).join('') + '</ul></section>';
     }
+    const tax = TAX.findTown(t.countySlug, t.slug);
+    if (tax) out += `<p class="more"><a href="${esc(tax.path)}">${esc(t.name)} property taxes: typical bill, tax rate and appeal deadline</a></p>`;
     out += '<p class="more"><a href="/">Look up any New Jersey property on Watchdog</a></p>' +
       `<p class="tip"><a href="${TIP_URL}" target="_blank" rel="noopener" data-tip>Found this helpful? Show appreciation with a tip on Venmo</a></p>`;
   }
@@ -264,7 +267,7 @@ ${DIALOG}
 ${scripts(embed, true)}`;
   return shell({
     mode: opts.mode,
-    title: `${t.name}, NJ Resale CO Requirements | Watchdog`,
+    title: `${t.name} NJ Certificate of Occupancy & Smoke Detector Certificate | Watchdog`,
     description: description(t, d),
     canonical: ORIGIN + t.path,
     noindex: embed || !d,
@@ -374,8 +377,8 @@ function countyPage(county) {
     '<p class="more"><a href="/co">Search any New Jersey town or address</a></p>';
   return shell({
     mode: 'page',
-    title: `${label}, NJ Resale CO Requirements by Town | Watchdog`,
-    description: `Resale Certificate of Occupancy and smoke / CO alarm certificate requirements for towns in ${label}, New Jersey.`,
+    title: `${label} NJ Certificate of Occupancy & Smoke Certificate Requirements by Town | Watchdog`,
+    description: `Resale certificate of occupancy (CO or CCO) and smoke detector / CO alarm certificate requirements for every town in ${label}, New Jersey.`,
     canonical: `${ORIGIN}/co/${county.slug}`,
     noindex: !live.length,
     jsonld: breadcrumbLd([['CO lookup', '/co'], [label, `/co/${county.slug}`]]),

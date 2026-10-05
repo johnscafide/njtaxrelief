@@ -21,7 +21,7 @@
       "maxDuration": 10
     },
     "api/watchdog-property-page.js": {
-      "includeFiles": "{tax-rates.json,equalization-ratios.json}",
+      "includeFiles": "{tax-rates.json,equalization-ratios.json,property/data/town-tax/bills.json,chapter123-ratios-2026.json,property/revaluation-reassessment-2026.json,property/data/home-feed-towns.json,property/data/municipal-requirements/approvals.json,co/towns.json}",
       "maxDuration": 10
     },
     "api/watchdog-property-report.js": {
@@ -29,7 +29,7 @@
       "maxDuration": 15
     },
     "api/watchdog-true-cost.js": {
-      "includeFiles": "{tax-rates.json,equalization-ratios.json,chapter123-ratios-2026.json,property/revaluation-reassessment-2026.json}",
+      "includeFiles": "{tax-rates.json,equalization-ratios.json,chapter123-ratios-2026.json,property/revaluation-reassessment-2026.json,property/data/town-tax/bills.json,property/data/home-feed-towns.json,property/data/municipal-requirements/approvals.json,co/towns.json}",
       "maxDuration": 10
     },
     "api/watchdog-checkup.js": {
@@ -45,7 +45,11 @@
       "maxDuration": 10
     },
     "api/co-town-page.js": {
-      "includeFiles": "{property/data/municipal-requirements/approvals.json,property/data/municipal-requirements/checked/*.json,co/towns.json}",
+      "includeFiles": "{property/data/municipal-requirements/approvals.json,property/data/municipal-requirements/checked/*.json,co/towns.json,property/data/town-tax/bills.json,tax-rates.json,chapter123-ratios-2026.json,property/revaluation-reassessment-2026.json,property/data/home-feed-towns.json}",
+      "maxDuration": 10
+    },
+    "api/tax-town-page.js": {
+      "includeFiles": "{property/data/town-tax/bills.json,tax-rates.json,chapter123-ratios-2026.json,property/revaluation-reassessment-2026.json,property/data/home-feed-towns.json,property/data/municipal-requirements/approvals.json,co/towns.json,co/index.html}",
       "maxDuration": 10
     },
     "api/co-embed-page.js": {
@@ -53,7 +57,7 @@
       "maxDuration": 10
     },
     "api/watchdog-index-sitemap.js": {
-      "includeFiles": "{property/data/municipal-requirements/approvals.json,property/data/municipal-requirements/checked/*.json,co/towns.json}",
+      "includeFiles": "{property/data/municipal-requirements/approvals.json,property/data/municipal-requirements/checked/*.json,co/towns.json,property/data/town-tax/bills.json,tax-rates.json,chapter123-ratios-2026.json,property/revaluation-reassessment-2026.json,property/data/home-feed-towns.json}",
       "maxDuration": 10
     },
     "api/watchdog-town-needs.js": {

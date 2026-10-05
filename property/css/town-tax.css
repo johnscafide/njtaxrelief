@@ -1,0 +1,56 @@
+/* 
+     
+     Hi There. I see you are checking the code. I'm sure you have reasons for such. Curiosity would be my guess. 
+
+     My name is John. I've been building sites since I was 10. I was gifted ecommerce website software on floppy disks
+     and fell in love with web developement ever since. I learned to code HTML using just notepad. I took computer science
+     classes (BASIC and Visual Basic in high school). Took a few college classes learning C++, Python, Ruby and Javascript.
+     My very first websites was with Angelfire and Geocities. In college I dabbed in game development, small tools, and
+     graphic design. Database management with SQL by my sophmore year. Joomla and other CMS tools learned by the age of 20. 
+     I have an understanding and experience writing code by hand, studing and analyzing bugs, issues, and corrections. 
+     The introduction of AI is interesting. I can understand the worry and fear. I also see the memes of "Hey I can make 
+     your job obsolete" then show a localhost:3000. haha. But I do believe, if you understand how to use the tools, it's
+     no different than templates, hiring a local kid, outsourcing your work to fivrr or an agency. I code, I understand the
+     backend and frontend. I'm not an expert by all means. But I do have insights. Watchdog was built on real research.
+     Watchdog & it's companion, NJPropertyTaxRelief.com, is from years of listening to real people with real needs in NJ.
+     I hope these sites and tools have benefit to you and/or your business. If you found them useful, the least I ask of
+     you is to share. Sure, I have paid plan options for members, but majority of the site is free to use. I'm a real estate
+     agent, licensed tax professional, and a big fan of the state of New Jersey. It's a great state, but not without its
+     flaws. The idea is to educate more New Jerseyians about their benefits and property taxes in the state. It's possible
+     one day this site will exceed some of the bigger natonal sites. Who knows. But for now, I present to you, Watchdog
+     Property Intelligence.
+
+     */
+
+.tt-app .wdp-head h1{overflow-wrap:anywhere}
+.tt-share{align-items:center}
+.tt-share .tt-icon{width:44px;padding:0;justify-content:center}
+.tt-toast{flex-basis:100%;margin:0;min-height:20px;font-size:14px;font-weight:600;color:#1c7a4a;text-align:right}
+.tt-check form{margin-top:4px}
+.tt-check input{width:100%;box-sizing:border-box;min-height:46px;padding:10px 12px;border:1px solid var(--b-line);border-radius:12px;background:var(--b-surface);font:500 16px "Plus Jakarta Sans",system-ui,sans-serif;color:var(--b-ink)}
+.tt-check input:focus{border-color:var(--b-ink);background:#fff}
+.tt-check input[aria-invalid=true]{border-color:#c0342b}
+.tt-result:empty{display:none}
+.tt-result{margin-top:14px;padding:14px 16px;border-radius:14px;background:var(--b-surface);border:1px solid var(--b-line);line-height:1.55;color:var(--b-ink-2)}
+.tt-result.is-high{background:#fff4e5;border-color:#f0c48a}
+.tt-result.is-ok{background:var(--b-teal);border-color:#bfe0d6}
+.tt-result.is-low{background:var(--b-sky);border-color:#c5d8f3}
+.tt-result.is-error{background:#fdecea;border-color:#f3b8b3;color:#8a1f17;font-weight:600}
+.tt-sub{display:block;margin-top:6px;font-size:14px;color:var(--b-muted)}
+.tt-facts{margin-bottom:4px}
+.tt-facts dd a{color:var(--b-ink)}
+.tt-table-panel{margin-top:16px}
+.tt-filter{display:grid;gap:6px;max-width:360px;margin-bottom:12px;font-size:13px;font-weight:600;color:var(--b-ink-2)}
+.tt-filter input{min-height:46px;padding:10px 12px;border:1px solid var(--b-line);border-radius:12px;background:var(--b-surface);font:500 16px "Plus Jakarta Sans",system-ui,sans-serif;color:var(--b-ink)}
+.tt-table th button{min-height:44px;padding:0;border:0;background:none;font:inherit;letter-spacing:inherit;text-transform:inherit;color:inherit;cursor:pointer}
+.tt-table th[aria-sort] button{color:var(--b-ink)}
+.tt-table th[aria-sort=ascending] button::after{content:" \2191"}
+.tt-table th[aria-sort=descending] button::after{content:" \2193"}
+.tt-table td a{display:inline-flex;align-items:center;min-height:28px}
+.tt-counties{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px;margin-bottom:16px}
+.tt-county{display:grid;gap:4px;text-decoration:none!important;color:var(--b-ink)!important}
+.tt-county b{font:600 18px/1.2 "Plus Jakarta Sans",system-ui,sans-serif}
+.tt-county small{font-size:14px;color:var(--b-muted)}
+.tt-county:hover{border-color:var(--b-ink)}
+@media (max-width:640px){.tt-toast{text-align:left}.tt-share{width:100%}}
+@media print{.tt-share,.tt-toast,.tt-check form{display:none!important}}

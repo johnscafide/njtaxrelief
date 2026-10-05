@@ -10,6 +10,7 @@
 const fs = require('fs');
 const path = require('path');
 const page = require('./watchdog-property-page');
+const { townLinks } = require('./_tax-town');
 
 const { HEAD_ASSETS, STYLE, FOOT_SCRIPTS, chrome, esc } = page.parts;
 const H = page.helpers;
@@ -311,6 +312,7 @@ function renderCard(row, inp, agent) {
         <div class="wdp-pills"><button class="wdp-pill is-dark" type="button" data-tc-copy><i class="fas fa-link" aria-hidden="true"></i>Copy link</button><button class="wdp-pill" type="button" data-tc-native hidden><i class="fas fa-share-nodes" aria-hidden="true"></i>Share</button><button class="wdp-pill" type="button" onclick="window.print()"><i class="fas fa-print" aria-hidden="true"></i>Print</button></div>
         <p class="wdp-form-msg" role="status" aria-live="polite" data-tc-msg></p>
       </section>
+      ${townSection(row)}
     </div>
   </div>
   <p class="wdp-source">Estimates only, not a loan offer. Tax from the New Jersey MOD-IV tax list; tax rates from the NJ Division of Taxation; town ratios from the 2026 Chapter 123 certification. "Usually carry" compares the price with the town's average assessment ratio and latest published tax rate. <a href="/data-methodology">Data methodology</a></p>
@@ -351,6 +353,18 @@ function clientScript(share) {
   var nat=document.querySelector('[data-tc-native]');
   if(nat&&navigator.share){nat.hidden=false;nat.addEventListener('click',function(){navigator.share({title:d.title,url:shareUrl}).catch(function(){})})}
 })();`;
+}
+
+function townSection(row) {
+  const links = townLinks(row.pams_pin);
+  const items = [
+    ['fa-clipboard-check', `${links.name || 'Town'} CO requirements`, 'Resale certificate of occupancy and smoke detector certificate rules, fees and timing.', links.co],
+    links.tax ? ['fa-landmark', `${links.name} property taxes`, 'Typical bill, tax rate and appeal deadline for the town.', links.tax] : null
+  ].filter(Boolean);
+  return `<section class="wdp-panel" aria-labelledby="tc-town-h">
+        <h2 id="tc-town-h">Before closing</h2>
+        <ul class="wdp-tools">${items.map(([icon, title, text, href]) => `<li><a href="${esc(href)}"><i class="fas ${icon}" aria-hidden="true"></i><span><b>${esc(title)}</b><small>${esc(text)}</small></span></a></li>`).join('')}</ul>
+      </section>`;
 }
 
 function shell(title, description, body, canonical) {
