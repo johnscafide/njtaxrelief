@@ -52,6 +52,9 @@ const re = new RegExp(middleware.match(/const TAX_PAGE_PATH = \/(.+)\/;/)[1]);
 ['/property-tax', '/property-tax/', '/property-tax/bergen', '/property-tax/bergen/teaneck-township'].forEach((p) => assert.ok(re.test(p), p));
 ['/property-tax-estimator', '/property-tax/bergen/x/y', '/property-tax/town-tax.css'].forEach((p) => assert.ok(!re.test(p), p));
 
+const vercel = JSON.parse(fs.readFileSync('vercel.json', 'utf8'));
+Object.entries(vercel.functions || {}).forEach(([name, f]) => assert.ok(!f.includeFiles || f.includeFiles.length <= 256, `${name} includeFiles is over Vercel's 256 character limit`));
+
 const deadline = handler.nextDeadline;
 assert.equal(deadline({ alternateCalendar: false }, new Date('2026-10-05T12:00:00Z')).text, 'April 1, 2027');
 assert.equal(deadline({ alternateCalendar: false }, new Date('2027-03-01T12:00:00Z')).text, 'April 1, 2027');
