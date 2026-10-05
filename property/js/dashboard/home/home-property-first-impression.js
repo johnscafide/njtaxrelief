@@ -81,8 +81,8 @@ function render(hero,row,score,changes){
         fact('fa-wave-square','Record changes','Last 12 months',changeValue,'/property/pulse?pin='+encodeURIComponent(row.pams_pin))+
         fact('fa-circle-check','NJ relief check','ANCHOR, Stay NJ and Senior Freeze','Review',null,'relief')+
       '</div>'+
-      '<div class="wdfi-trust"><i class="fas fa-shield-halved"></i><span><b>Public records + governed Watchdog calculations.</b><small>Missing evidence stays missing. Nothing in this first-look card is guessed.</small></span></div>'+
-      '<a class="wdfi-deeper" href="/property/robust/">See evidence &amp; methodology <i class="fas fa-arrow-right"></i></a>'+
+      '<div class="wdfi-trust"><i class="fas fa-shield-halved"></i><span><b>Public records + checked Watchdog calculations.</b><small>Missing evidence stays missing. Nothing in this first-look card is guessed.</small></span></div>'+
+      '<a class="wdfi-deeper" href="/property/robust/">See evidence &amp; method <i class="fas fa-arrow-right"></i></a>'+
     '</div></div>';
   wireHero(hero,row);
   refreshImagery(hero);

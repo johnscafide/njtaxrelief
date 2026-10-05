@@ -43,7 +43,7 @@ for (const contract of ['db-nav-search', 'Research', 'Professional work', 'Platf
 }
 if (!navJs.includes('function activateSearch')) throw new Error('Sidebar tool search is missing');
 if (updates.includes('Object.entries(r.impact')) throw new Error('Version charts still sum arbitrary raw impact metrics');
-for (const area of ['Customer experience', 'Professional workflows', 'Security & reliability', 'Revenue & billing']) {
+for (const area of ['Customer experience', 'Professional tasks', 'Security & reliability', 'Revenue & billing']) {
   if (!updates.includes(area)) throw new Error(`Missing stable release product area: ${area}`);
 }
 if (!versions.releases.some(release => release.version === '0.45.0')) throw new Error('v0.45.0 release record is missing');

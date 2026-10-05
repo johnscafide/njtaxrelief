@@ -20,8 +20,8 @@ const middleware=read('middleware.js');
 function expect(value,message){if(!value)throw new Error(message)}
 
 const pages=[
-  {name:'attorney',html:attorney,hero:'Advise smarter',canonical:'https://www.watchdogindex.com/attorney',audience:'New Jersey property tax attorneys',founding:'Tax Attorney Founding Lifetime'},
-  {name:'investor',html:investor,hero:'Invest smarter',canonical:'https://www.watchdogindex.com/investor',audience:'New Jersey real estate investors',founding:'Investor Founding Lifetime'}
+  {name:'attorney',html:attorney,hero:'Advise better',canonical:'https://www.watchdogindex.com/attorney',audience:'New Jersey property tax attorneys',founding:'Tax Attorney Founding Lifetime'},
+  {name:'investor',html:investor,hero:'Invest better',canonical:'https://www.watchdogindex.com/investor',audience:'New Jersey real estate investors',founding:'Investor Founding Lifetime'}
 ];
 
 for(const page of pages){

@@ -4,7 +4,7 @@
   function toolExport() {
     if (!rows.length) return '';
     return toolCard('Export for your attorney or agent', 'fa-file-export',
-      '<p class="tl-p">A clean parcel sheet with the canonical ROBUST Watchdog Score, evidence coverage, block, lot, PAMS PIN, assessment, town ratio, Uniformity and Chapter 123 context for each property.</p>' +
+      '<p class="tl-p">A clean parcel sheet with the canonical ROBUST Watchdog Score, evidence coverage, block, lot, PAMS PIN, assessment, town ratio, Uniformity and Chapter 123 info for each property.</p>' +
       '<div class="ex-btns">' +
         '<button class="tl-btn" onclick="dbExportCSV()"><i class="fas fa-file-csv"></i> Download CSV</button>' +
         '<button class="tl-btn ghost" onclick="dbExportPrint()"><i class="fas fa-print"></i> Printable sheet</button>' +
@@ -101,7 +101,7 @@
         }).join('') + '</tr>';
       }).join('') +
       '</tbody></table>' +
-      '<div class="f">Watchdog Score is the canonical ROBUST-v1 tax-position signal: Recourse 10%, Overassessment Position 20%, Burden 30%, Uniformity 15%, Stability 15%, Trajectory 10%. Missing evidence lowers coverage and remaining weights are renormalized. It is not a home, neighborhood or person desirability grade. Other figures are drawn from New Jersey public assessment, sales, uniformity and equalization sources. Verify source records before filing.</div>' +
+      '<div class="f">Watchdog Score is the canonical ROBUST-v1 tax-position red flag: Recourse 10%, Overassessment Position 20%, Burden 30%, Uniformity 15%, Stability 15%, Trajectory 10%. Missing evidence lowers coverage and remaining weights are renormalized. It is not a home, neighborhood or person desirability grade. Other figures are drawn from New Jersey public assessment, sales, uniformity and equalization sources. Verify source records before filing.</div>' +
       '</body></html>');
     w.document.close();
     setTimeout(function () { w.print(); }, 400);

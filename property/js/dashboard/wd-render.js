@@ -250,7 +250,7 @@ function start(){
     if(g&&g.dollars&&g.pct>=5)rows.push(['Gap in tax',esc(H.dollars(g.dollars))+' a year<small>Estimate, not guaranteed savings</small>']);
     rows.push(['Latest change',change?esc(change.title||H.pretty(change.event_type))+'<small>'+esc(ago(change.occurred_at))+'</small>':'Nothing in the last 120 days']);
     if(why)rows.push(['Why now',esc(why)]);
-    var gate=WD.isPro()?'':'<p class="wdd-detail-gate">Evidence files and the appeal workflow come with Pro. <a href="'+esc(route('/pro'))+'">Compare plans</a></p>';
+    var gate=WD.isPro()?'':'<p class="wdd-detail-gate">Evidence files and the appeal process come with Pro. <a href="'+esc(route('/pro'))+'">Compare plans</a></p>';
     setHTML('wdd-detail',head+'<div class="wdd-detail-card">'+
       '<div class="wdd-detail-top"><div><a href="'+esc(route('/home')+'?pin='+encodeURIComponent(pin))+'">'+esc(p.address||pin||'Saved property')+'</a><p>'+esc(place(p))+'</p></div>'+(pin?'<span class="wdd-pin" title="Property PIN">PIN '+esc(pin)+'</span>':'')+'</div>'+
       '<div class="wdd-detail-tags">'+tags.join('')+'</div>'+
@@ -321,7 +321,7 @@ function start(){
     '</section>';
   }
   function sponsor(){
-    return '<a class="wdd-sponsor" href="https://johnvarano.com/?utm_source=watchdog&utm_medium=internal_ad&utm_campaign=greentree_financing&utm_content=dashboard_kpi" target="_blank" rel="noopener sponsored" aria-label="Advertisement: Greentree Mortgage. Explore purchase, refinance, and home equity options with John Varano, NMLS 142739.">'+
+    return '<a class="wdd-sponsor" href="https://johnvarano.com/?utm_source=watchdog&utm_medium=internal_ad&utm_campaign=greentree_financing&utm_content=dashboard_kpi" target="_blank" rel="noopener sponsored" aria-label="Advertisement: Greentree Mortgage. See purchase, refinance, and home equity options with John Varano, NMLS 142739.">'+
       '<img src="/johnvarano.jpg" alt="" loading="lazy" width="44" height="44"><em>Advertisement</em><strong>Greentree Mortgage</strong><span>Know the full monthly number before you make an offer. Purchase, refinance or home equity.</span><small>John Varano · NMLS #142739</small></a>';
   }
   function paintSide(){

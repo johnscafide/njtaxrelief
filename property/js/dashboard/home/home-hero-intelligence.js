@@ -149,7 +149,7 @@ function paintScore(hero,row){
   var w=null;
   try{if(typeof window.watchdogScore==='function')w=window.watchdogScore(row);}catch(e){console.warn('Watchdog hero score unavailable',e);}
   if(!w||w.score==null){
-    box.innerHTML='<div class="hm-score-empty"><i class="fas fa-dog"></i><div><b>Watchdog Score is building</b><span>ROBUST will publish a score here when this property has enough governed evidence. No fallback score is substituted.</span></div></div><a class="hm-score-link" href="/property/robust/">How ROBUST works <i class="fas fa-arrow-right"></i></a>';
+    box.innerHTML='<div class="hm-score-empty"><i class="fas fa-dog"></i><div><b>Watchdog Score is building</b><span>ROBUST will publish a score here when this property has enough checked evidence. No fallback score is substituted.</span></div></div><a class="hm-score-link" href="/property/robust/">How ROBUST works <i class="fas fa-arrow-right"></i></a>';
     box.dataset.scoreModel='none';
     return;
   }

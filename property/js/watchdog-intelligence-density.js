@@ -36,7 +36,7 @@ function makeAnalystSummary(panel){
   if(!grid||!next)return;
   var reasons=[reason(motivation),reason(money),reason(evidence)].filter(Boolean).filter(function(v,i,a){return a.indexOf(v)===i}).slice(0,3);
   var action=short(text(next.querySelector('h3')),180)||'Open the evidence before deciding what to do next.';
-  var headline=reasons[0]||'No high-urgency governed finding is present right now.';
+  var headline=reasons[0]||'No high-urgency checked finding is present right now.';
   var trust=trustMetrics(evidence);
   var summary=document.createElement('section');summary.className='wdai-compact-summary';
   summary.innerHTML='<div class="wd-density-copy"><span>WATCHDOG DECISION BRIEF</span><h3>'+escapeHtml(headline)+'</h3>'+(reasons.length?'<ul class="wd-density-reasons">'+reasons.map(function(r){return'<li><i class="fas fa-circle-check"></i><span>'+escapeHtml(r)+'</span></li>'}).join('')+'</ul>':'')+'<div class="wd-density-action"><b>Next:</b> '+escapeHtml(action)+'</div>'+(trust?'<div class="wd-density-trust"><i class="fas fa-shield-halved" aria-hidden="true"></i><span>'+escapeHtml(trust)+'</span><a href="/property/trust/">Trust &amp; sources</a></div>':'')+'</div><button type="button" class="wd-density-toggle" aria-expanded="'+(analystExpanded?'true':'false')+'">'+(analystExpanded?'Collapse reasoning':'Inspect reasoning')+'</button>';

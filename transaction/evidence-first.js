@@ -15,7 +15,7 @@ const invoked=new Map();let client=null,timer=0,busy=false;
 const clean=v=>String(v==null?'':v).trim();
 const esc=v=>String(v==null?'':v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 function payload(item){return item&&item.payload&&typeof item.payload==='object'?item.payload:{}}
-function getClient(){if(client)return client;try{client=window.NJPTRSupabaseRuntime&&window.NJPTRSupabaseRuntime.createClient?window.NJPTRSupabaseRuntime.createClient():null}catch(e){console.warn('Evidence-first client unavailable',e)}return client}
+function getClient(){if(client)return client;try{client=window.NJPTRSupabaseRuntime&&window.NJPTRSupabaseRuntime.createClient?window.NJPTRSupabaseRuntime.createClient():null}catch(e){console.warn('Records-first client unavailable',e)}return client}
 function activeId(){return clean(document.querySelector('.tx-list-card.active')?.dataset?.txId)}
 function fmtDate(v){if(!v)return'';const d=new Date(v);return Number.isFinite(d.getTime())?d.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'}):clean(v)}
 function link(url,label){return url?`<a class="tx-source-link" href="${esc(url)}" target="_blank" rel="noopener">${esc(label)} <i class="fas fa-arrow-up-right-from-square"></i></a>`:''}
@@ -49,9 +49,9 @@ function violationHtml(item){
     return `<div class="tx-evidence-box tx-evidence-first-card"><div class="tx-evidence-kicker">Parcel violation search completed</div><div class="tx-inline-fact-grid">${fact('Block / Lot',[p.block,p.lot].filter(Boolean).join(' / '))}${fact('Records found',String(records.length||Number(p.record_count||0)))}</div>${records.length?`<div class="tx-record-stack">${records.slice(0,8).map(r=>`<div class="tx-record"><b>${esc(r.type||r.violation_type||r.status||'Violation record')}</b><span>${esc(r.date||r.opened_date||'')}</span>${r.description?`<small>${esc(r.description)}</small>`:''}</div>`).join('')}</div>`:'<div class="tx-evidence-empty good"><i class="fas fa-circle-check"></i><div><b>No records returned by the completed official search</b><span>This statement is limited to the source and search time shown on this card.</span></div></div>'}<p class="tx-inline-note">${esc(p.result_semantics||item.description||'Official parcel search result.')}</p></div>`;
   }
   if(route){
-    return `<div class="tx-evidence-box tx-evidence-first-card"><div class="tx-evidence-kicker">Official municipal code route connected</div><div class="tx-inline-fact-grid">${fact('Municipality',p.municipality||'Municipal code office')}${fact('Block / Lot',[p.block,p.lot].filter(Boolean).join(' / '))}${fact('Provider',item.source_label||p.provider_label||'Official code office')}${fact('Parcel search','Manual verification required')}</div><p class="tx-inline-note">Watchdog has the authoritative department route for this property. This municipality does not currently expose a governed parcel-level violation search that Watchdog can safely complete automatically, so the status remains Review instead of incorrectly saying Not connected or None found.</p></div>`;
+    return `<div class="tx-evidence-box tx-evidence-first-card"><div class="tx-evidence-kicker">Official municipal code route connected</div><div class="tx-inline-fact-grid">${fact('Municipality',p.municipality||'Municipal code office')}${fact('Block / Lot',[p.block,p.lot].filter(Boolean).join(' / '))}${fact('Provider',item.source_label||p.provider_label||'Official code office')}${fact('Parcel search','Manual verification required')}</div><p class="tx-inline-note">Watchdog has the official department route for this property. This municipality does not currently expose a checked parcel-level violation search that Watchdog can safely complete automatically, so the status remains Review instead of incorrectly saying Not connected or None found.</p></div>`;
   }
-  return `<p class="tx-source-copy">${esc(item.description||'A governed parcel-level code-violation source has not been connected yet.')}</p>`;
+  return `<p class="tx-source-copy">${esc(item.description||'A checked parcel-level code-violation source has not been connected yet.')}</p>`;
 }
 function patchViolation(item){
   const card=cardByTitle(/code\s*\/\s*violations|open violations/i);if(!card||!item)return;const p=payload(item),searched=p.search_state==='completed'||p.search_completed===true,records=Array.isArray(p.records)?p.records:[],route=Boolean(p.official_code_source_discovered||p.official_code_enforcement_route||item.source_type==='official_manual');
@@ -62,7 +62,7 @@ function patchViolation(item){
 function serviceHtml(item){
   const p=payload(item),resolved=p.address_schedule_resolved===true,co=p.recycling_coordinator&&typeof p.recycling_coordinator==='object'?p.recycling_coordinator:{};
   const specials=Array.isArray(p.special_collections)?p.special_collections:[];
-  return `<div class="tx-evidence-box tx-evidence-first-card"><div class="tx-evidence-kicker">Municipal services retrieved</div><div class="tx-inline-fact-grid">${fact('Municipality',p.municipality)}${fact('Service provider',p.service_provider)}${fact('Regular trash',resolved?p.trash_day:'Route-based; address day not safely resolved')}${fact('Public works',p.phone||co.phone)}</div>${p.recycling?`<p class="tx-inline-note"><b>Recycling:</b> ${esc(p.recycling)}</p>`:''}${p.bulk_trash?`<p class="tx-inline-note"><b>Bulk pickup:</b> ${esc(p.bulk_trash)}</p>`:''}${p.yard_waste?`<p class="tx-inline-note"><b>Yard waste:</b> ${esc(p.yard_waste)}</p>`:''}${specials.length?`<p class="tx-inline-note"><b>Special collections</b></p>${list(specials)}`:''}<p class="tx-inline-note">${esc(p.result_semantics||item.description||'Municipal service information is limited to the authoritative source data retrieved.')}</p></div>`;
+  return `<div class="tx-evidence-box tx-evidence-first-card"><div class="tx-evidence-kicker">Municipal services retrieved</div><div class="tx-inline-fact-grid">${fact('Municipality',p.municipality)}${fact('Service provider',p.service_provider)}${fact('Regular trash',resolved?p.trash_day:'Route-based; address day not safely resolved')}${fact('Public works',p.phone||co.phone)}</div>${p.recycling?`<p class="tx-inline-note"><b>Recycling:</b> ${esc(p.recycling)}</p>`:''}${p.bulk_trash?`<p class="tx-inline-note"><b>Bulk pickup:</b> ${esc(p.bulk_trash)}</p>`:''}${p.yard_waste?`<p class="tx-inline-note"><b>Yard waste:</b> ${esc(p.yard_waste)}</p>`:''}${specials.length?`<p class="tx-inline-note"><b>Special collections</b></p>${list(specials)}`:''}<p class="tx-inline-note">${esc(p.result_semantics||item.description||'Municipal service information is limited to the official source data retrieved.')}</p></div>`;
 }
 function environmentalHtml(item){
   const p=payload(item),nj=p.njdep||{},fe=p.fema||{},records=Array.isArray(nj.records)?nj.records:[];
@@ -97,9 +97,9 @@ async function refresh(){
     const items=await loadItems(txId);
     patchViolation(items.open_violations);patchServices(items.municipal_services);patchEnvironment(items.environmental_controls);
     document.querySelectorAll('#tx-source-sweep .tx-source-card').forEach(demoteLinks);
-    const head=sweep.querySelector('.tx-source-sweep-head h3'),copy=sweep.querySelector('.tx-source-sweep-head p');if(head)head.textContent='Evidence retrieved for this property';if(copy)copy.textContent='Watchdog brings the evidence into this workspace first. A source link is secondary and does not substitute for a completed authoritative search.';
+    const head=sweep.querySelector('.tx-source-sweep-head h3'),copy=sweep.querySelector('.tx-source-sweep-head p');if(head)head.textContent='Evidence retrieved for this property';if(copy)copy.textContent='Watchdog brings the evidence into this dashboard first. A source link is secondary and does not substitute for a completed official search.';
     referenceLibrary();
-  }catch(e){console.warn('Evidence-first render failed',e)}finally{busy=false}
+  }catch(e){console.warn('Records-first render failed',e)}finally{busy=false}
 }
 function schedule(delay){clearTimeout(timer);timer=setTimeout(refresh,delay==null?220:delay)}
 

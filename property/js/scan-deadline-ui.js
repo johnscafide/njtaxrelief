@@ -45,8 +45,8 @@
     var laterRule = countyBoard.choose_later_of_baseline_or_bulk_mailing === true && Number(countyBoard.bulk_mailing_days) > 0;
     var noticeDays = Number(context.change_of_assessment_notice_days);
 
-    return '<section class="sc-method sc-deadline-context" data-deadline-status="verify_current_notice" aria-label="New Jersey appeal filing-window context">' +
-      '<h4><i class="fas fa-calendar-check"></i> Filing-window context <span style="font-weight:600;color:#9a6700">Verify current notice</span></h4>' +
+    return '<section class="sc-method sc-deadline-context" data-deadline-status="verify_current_notice" aria-label="New Jersey appeal filing-window info">' +
+      '<h4><i class="fas fa-calendar-check"></i> Filing-window info <span style="font-weight:600;color:#9a6700">Verify current notice</span></h4>' +
       '<p><b>County Board statutory baseline:</b> ' + (baseline ? esc(baseline) : 'not available') + ' under the ' + esc(calendar) + '.</p>' +
       (laterRule ? '<p>New Jersey rules can make the County Board filing date <b>' + Number(countyBoard.bulk_mailing_days) + ' days after the certified bulk mailing</b> when that date is later than the statutory baseline.</p>' : '') +
       (Number.isFinite(noticeDays) && noticeDays > 0 ? '<p>A qualifying Notification of Change of Assessment can also create a <b>' + noticeDays + '-day filing window</b> from issuance.</p>' : '') +

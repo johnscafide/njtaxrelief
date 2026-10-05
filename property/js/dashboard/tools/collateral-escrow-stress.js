@@ -127,8 +127,8 @@
     return '<div class="ces-kpis">' + v.scenarios.map(scenarioHtml).join('') + '</div>' +
       '<div class="ces-result"><b>' + v.sentence + '</b><span>' +
         ' Current tax escrow ' + money(v.currentMonthlyTax) + '/mo' +
-        (v.revaluationPressure == null ? '' : ' · Revaluation context ' + Math.round(v.revaluationPressure) + '/100') +
-        (v.budgetPressure == null ? '' : ' · Budget pressure context ' + Math.round(v.budgetPressure) + '/100') +
+        (v.revaluationPressure == null ? '' : ' · Revaluation info ' + Math.round(v.revaluationPressure) + '/100') +
+        (v.budgetPressure == null ? '' : ' · Budget pressure info ' + Math.round(v.budgetPressure) + '/100') +
       '</span></div>';
   }
 

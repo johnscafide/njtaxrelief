@@ -12,18 +12,18 @@ for (const id of ['ad-list','ad-stats','ad-focus','ad-import-modal','ad-drawer',
   if (!html.includes(`id="${id}"`)) throw new Error(`Missing Agent Desk UI contract: ${id}`);
 }
 if (!html.includes('data-queue="top"')) throw new Error('Top 10 focused worklist is missing');
-if (!js.includes('Anonymous property signal')) throw new Error('Agent Desk does not disclose the contact-safe property-signal boundary');
+if (!html.includes('Anonymous property red flag')) throw new Error('Agent Desk does not disclose the contact-safe property-signal boundary');
 if (!js.includes('function focusCard()')) throw new Error('Best-next-conversation focus card is missing');
 if (!js.includes("'Evidence ready'")) throw new Error('Evidence-readiness KPI is missing');
 // Host-aware clean route: /home?pin= on WatchdogIndex, /property/home?pin= on preview hosts.
-if (!js.includes("route('/home')+'?pin='")) throw new Error('Matched properties do not deep-link to the property workspace');
-if (!js.includes("ACTIONABLE_TYPES=['assessment_change'")) throw new Error('Actionable event allowlist is missing');
+if (!js.includes("route('/home')+'?pin='")) throw new Error('Matched properties do not deep-link to the property dashboard');
+if (!js.includes("ACTIONABLE_TYPES=['assessment_change'")) throw new Error('Useful event allowlist is missing');
 if (!js.includes("propertyKey(property),e.event_type")) throw new Error('Property/reason deduplication key is missing');
 if (!js.includes("type:'record_review'")) throw new Error('Property-specific baseline review fallback is missing');
 if (/eventWeights[^\n]*source_refresh/.test(digest)) throw new Error('Digest still treats routine source refreshes as agent opportunities');
 if (!digest.includes('agent_farm_properties') || !digest.includes('saved_properties')) throw new Error('Digest is not constrained to the agent sphere');
 for (const reason of ['assessment_change','tax_change','appeal_deadline','permit_change','deed_change']) {
-  if (!js.includes(`${reason}:`)) throw new Error(`Missing authoritative reason: ${reason}`);
+  if (!js.includes(`${reason}:`)) throw new Error(`Missing official reason: ${reason}`);
 }
 for (const action of ['watch','snooze','dismiss','outcome']) {
   if (!js.includes(`data-action="${action}"`)) throw new Error(`Missing action: ${action}`);

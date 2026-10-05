@@ -59,7 +59,7 @@ function evidenceBody(item){
   if(key==='deed_recording_reference'){
     const e=p.evidence&&typeof p.evidence==='object'?p.evidence:p;
     const has=e.book||e.page||p.deed_book||p.deed_page;
-    if(has)return `<div class="tx-evidence-box"><div class="tx-evidence-kicker">Retrieved deed reference</div>${row('Book',e.book||p.deed_book)}${row('Page',e.page||p.deed_page)}${row('Deed date',fmtDate(e.deed_date||p.deed_date))}${row('Block / Lot',[e.block,e.lot].filter(Boolean).join(' / '))}<p>Watchdog retrieved this recording reference from the state parcel/MOD-IV baseline. The county recorder remains authoritative for the document image and recording detail.</p></div>`;
+    if(has)return `<div class="tx-evidence-box"><div class="tx-evidence-kicker">Retrieved deed reference</div>${row('Book',e.book||p.deed_book)}${row('Page',e.page||p.deed_page)}${row('Deed date',fmtDate(e.deed_date||p.deed_date))}${row('Block / Lot',[e.block,e.lot].filter(Boolean).join(' / '))}<p>Watchdog retrieved this recording reference from the state parcel/MOD-IV baseline. The county recorder remains official for the document image and recording detail.</p></div>`;
   }
   if(key==='permit_certificate_lifecycle'){
     const records=Array.isArray(p.candidate_records)?p.candidate_records:[];
@@ -72,7 +72,7 @@ function evidenceBody(item){
       if(!records.length)return '<div class="tx-evidence-empty good"><i class="fas fa-circle-check"></i><div><b>No records found in the checked official source</b><span>This statement is limited to the source, search scope and check time shown below.</span></div></div>';
       return `<div class="tx-record-stack">${records.slice(0,8).map(r=>`<div class="tx-record"><b>${esc(r.document_type||r.type||'Recorded filing')}</b><span>${esc(r.recorded_date||r.date||'Date unavailable')}</span>${r.reference?`<small>${esc(r.reference)}</small>`:''}${r.url?linkHtml(r.url,'View evidence'):''}</div>`).join('')}</div>`;
     }
-    return `<div class="tx-evidence-empty search"><i class="fas fa-magnifying-glass"></i><div><b>Official search not yet run</b><span>${esc(p.reason||item.description||'Watchdog has identified the authoritative source, but has not completed the search.')}</span></div></div>`;
+    return `<div class="tx-evidence-empty search"><i class="fas fa-magnifying-glass"></i><div><b>Official search not yet run</b><span>${esc(p.reason||item.description||'Watchdog has identified the official source, but has not completed the search.')}</span></div></div>`;
   }
   if(key==='resale_cco'||key==='smoke_fire_cert'){
     const req=Array.isArray(p.requirements)?p.requirements:[],fees=Array.isArray(p.fees)?p.fees:[];
@@ -117,7 +117,7 @@ async function renderSourceSweep(id){if(!canUseEvidence())return;
         return `<article class="tx-source-card ${meta.cls}" data-item-key="${esc(key)}"><div class="tx-source-card-top"><span class="tx-source-card-icon"><i class="fas ${icon}"></i></span><span class="tx-source-status">${esc(meta.label)}</span></div><strong>${esc(item.title||label)}</strong>${evidenceBody(item)}<div class="tx-source-provenance"><span>${esc(sourceName(item))}</span>${checked?`<small>Checked ${esc(checked)}</small>`:''}</div><div class="tx-source-actions">${sourceLinks(item)}</div></article>`;
       }).join('');
       const parcel=[tx.pams_pin?'Parcel '+tx.pams_pin:'Parcel not matched',tx.block&&tx.lot?`Block ${tx.block} · Lot ${tx.lot}`:'Block/lot resolving'].join(' · ');
-      box.innerHTML=`<div class="tx-source-sweep-head"><div><span class="tx-eyebrow">ONE-ADDRESS EVIDENCE SWEEP</span><h3>What Watchdog actually found — and what still needs an official search</h3><p>Evidence is shown directly in each card. “None found” appears only after the authoritative source was actually searched successfully.</p></div><span class="tx-source-sweep-meta">${esc(parcel)}</span></div><div class="tx-source-grid">${cards}</div>`;
+      box.innerHTML=`<div class="tx-source-sweep-head"><div><h3>What Watchdog actually found — and what still needs an official search</h3><p>Evidence is shown directly in each card. “None found” appears only after the official source was actually searched successfully.</p></div><span class="tx-source-sweep-meta">${esc(parcel)}</span></div><div class="tx-source-grid">${cards}</div>`;
     }catch(e){console.warn('Evidence sweep panel could not render',e)}
   },120);
 }

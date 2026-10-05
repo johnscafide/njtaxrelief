@@ -72,8 +72,8 @@ function markup(item,w){
   const idx=stepIndex(w.state),next=nextState(w.state),source=item.source_url?`<a href="${esc(item.source_url)}" target="_blank" rel="noopener">Official source <i class="fas fa-arrow-up-right-from-square"></i></a>`:'';
   const steps=STEPS.map(([key,label],i)=>`<span class="tx-clearance-step ${i<idx?'done':i===idx?'current':''}">${esc(label)}</span>`).join('');
   const exceptionButton=['received','completed'].includes(w.state)?`<button type="button" class="warn" data-clearance-action="exceptions">Record exceptions</button>`:'';
-  const reset=w.state!=='not_requested'?`<button type="button" class="secondary" data-clearance-action="reset">Reset workflow</button>`:'';
-  return `<div class="tx-clearance-workflow" data-clearance-item-id="${esc(item.id)}"><div class="tx-clearance-kicker">Certified municipal lien search · ${esc(labelFor(w.state))}</div><div class="tx-clearance-steps">${steps}</div><p class="tx-clearance-copy">Track the formal municipal search separately from live tax, utility, CIT-E, HLS or WIPP account evidence. Workflow completion does not by itself convert the evidence result to “clear.”</p><div class="tx-clearance-actions">${next?`<button type="button" data-clearance-action="advance" data-clearance-next="${esc(next)}">${esc(buttonLabel(w.state))}</button>`:''}${exceptionButton}${reset}${source}<a href="${RULE_URL}" target="_blank" rel="noopener">NJ municipal lien forms <i class="fas fa-arrow-up-right-from-square"></i></a></div><div class="tx-clearance-note"><i class="fas fa-circle-info"></i><span>Use the checklist due date for the municipal follow-up deadline. A returned certificate or authorized closing-party result should be preserved before treating the evidence as cleared.</span></div></div>`;
+  const reset=w.state!=='not_requested'?`<button type="button" class="secondary" data-clearance-action="reset">Reset process</button>`:'';
+  return `<div class="tx-clearance-workflow" data-clearance-item-id="${esc(item.id)}"><div class="tx-clearance-kicker">Certified municipal lien search · ${esc(labelFor(w.state))}</div><div class="tx-clearance-steps">${steps}</div><p class="tx-clearance-copy">Track the formal municipal search separately from live tax, utility, CIT-E, HLS or WIPP account evidence. Process completion does not by itself convert the evidence result to “clear.”</p><div class="tx-clearance-actions">${next?`<button type="button" data-clearance-action="advance" data-clearance-next="${esc(next)}">${esc(buttonLabel(w.state))}</button>`:''}${exceptionButton}${reset}${source}<a href="${RULE_URL}" target="_blank" rel="noopener">NJ municipal lien forms <i class="fas fa-arrow-up-right-from-square"></i></a></div><div class="tx-clearance-note"><i class="fas fa-circle-info"></i><span>Use the checklist due date for the municipal follow-up deadline. A returned certificate or authorized closing-party result should be preserved before treating the evidence as cleared.</span></div></div>`;
 }
 async function loadItem(txId){
   const c=client();if(!c||!txId)return null;
@@ -107,8 +107,8 @@ async function updateWorkflow(itemId,state){
     payload.certified_municipal_lien_search.exception_recorded_at=now;
   }
   const r=await c.from('transaction_items').update(patch).eq('id',item.id).eq('user_id',user.id).select('id,state,evidence_state,severity,payload').single();
-  if(r.error){toast('Could not update municipal lien workflow.','error');return}
-  await c.from('transaction_activity').insert({transaction_id:txId,user_id:user.id,action:'municipal_lien_workflow',message:`Municipal lien search workflow: ${labelFor(state)}`,detail:{item_id:item.id,workflow_state:state,evidence_state:r.data.evidence_state}});
+  if(r.error){toast('Could not update municipal lien process.','error');return}
+  await c.from('transaction_activity').insert({transaction_id:txId,user_id:user.id,action:'municipal_lien_workflow',message:`Municipal lien search process: ${labelFor(state)}`,detail:{item_id:item.id,workflow_state:state,evidence_state:r.data.evidence_state}});
   toast(`Municipal lien search: ${labelFor(state)}.`,'success');
   setTimeout(()=>{const active=document.querySelector('.tx-list-card.active');if(active)active.click();setTimeout(render,450)},80);
 }
@@ -117,12 +117,12 @@ async function handleClick(e){
   const root=btn.closest('.tx-clearance-workflow');if(!root)return;
   const action=btn.dataset.clearanceAction,itemId=root.dataset.clearanceItemId;
   if(action==='reset'){
-    if(!window.confirm('Reset only the municipal lien request workflow? Existing source evidence will be preserved.'))return;
+    if(!window.confirm('Reset only the municipal lien request process? Existing source evidence will be preserved.'))return;
     await updateWorkflow(itemId,'not_requested');return;
   }
   if(action==='exceptions'){await updateWorkflow(itemId,'exceptions_follow_up');return}
   if(action==='advance'){
-    const next=clean(btn.dataset.clearanceNext);if(next==='completed'&&!window.confirm('Mark the request workflow completed? This will not mark municipal lien evidence clear.'))return;
+    const next=clean(btn.dataset.clearanceNext);if(next==='completed'&&!window.confirm('Mark the request process completed? This will not mark municipal lien evidence clear.'))return;
     if(STEPS.some(x=>x[0]===next))await updateWorkflow(itemId,next);
   }
 }

@@ -243,7 +243,7 @@
       var enrich = function () { enrichMunicipalTaxes().catch(function (error) { console.warn('Municipal tax enrichment failed:', error); }); };
       if (typeof w.requestIdleCallback === 'function') w.requestIdleCallback(enrich, { timeout: 2500 });
       else w.setTimeout(enrich, 900);
-    }).catch(function (err) { clearTimeout(guard); console.warn('Watchdog dashboard load failed:', err); fail('We could not load your workspace. Reload to retry.'); });
+    }).catch(function (err) { clearTimeout(guard); console.warn('Watchdog dashboard load failed:', err); fail('We could not load your dashboard. Reload to retry.'); });
   }
   if (d.readyState === 'loading') d.addEventListener('DOMContentLoaded', boot, { once: true }); else boot();
 })(window, document);

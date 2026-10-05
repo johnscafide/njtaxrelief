@@ -383,7 +383,7 @@
   }
 
   function factLock(title, plan, detail) {
-    return '<div class="wdpd-gated-card"><span class="wdpd-lock-icon"><i class="fas fa-lock"></i></span><div><small>' + esc(plan) + ' intelligence</small><b>' + esc(title) + '</b><p>' + esc(detail) + '</p></div><a href="/property/account">Unlock ' + esc(plan) + '</a></div>';
+    return '<div class="wdpd-gated-card"><span class="wdpd-lock-icon"><i class="fas fa-lock"></i></span><div><small>' + esc(plan) + ' intelligence</small><b>' + esc(title) + '</b><p>' + esc(detail) + '</p></div><a href="/property/account">Open ' + esc(plan) + '</a></div>';
   }
 
   function planAccessSummary() {
@@ -409,7 +409,7 @@
       { k: 'Annual tax', v: money(tax), s: 'Latest saved tax figure', i: 'fa-receipt' },
       { k: 'Watchdog value', v: money(value), s: 'Current Watchdog estimate', i: 'fa-house-circle-check' },
       { k: 'Effective rate', v: percent(effective), s: 'Tax ÷ assessment', i: 'fa-percent' },
-      { k: 'Last sale', v: lastSale != null ? compactMoney(lastSale) : (paidPlan() ? '—' : 'Pro'), s: lastSaleYear ? String(lastSaleYear) : (paidPlan() ? 'No governed sale returned' : 'Unlock sale intelligence'), i: 'fa-key', locked: !paidPlan() },
+      { k: 'Last sale', v: lastSale != null ? compactMoney(lastSale) : (paidPlan() ? '—' : 'Pro'), s: lastSaleYear ? String(lastSaleYear) : (paidPlan() ? 'No checked sale returned' : 'Open sale intelligence'), i: 'fa-key', locked: !paidPlan() },
       { k: 'Data access', v: access.allowed.toLocaleString('en-US'), s: access.live.toLocaleString('en-US') + ' live/partial markers in plan', i: 'fa-database' }
     ];
   }
@@ -434,7 +434,7 @@
 
   function checkpointChart() {
     var points = checkpointData();
-    if (!points.length) return '<div class="wdpd-empty-chart"><i class="fas fa-chart-line"></i><b>Value chart is waiting on property figures.</b><span>Watchdog will plot governed value checkpoints here as they become available.</span></div>';
+    if (!points.length) return '<div class="wdpd-empty-chart"><i class="fas fa-chart-line"></i><b>Value chart is waiting on property figures.</b><span>Watchdog will plot checked value checkpoints here as they become available.</span></div>';
     var width = 620, height = 210, padX = 44, padY = 28;
     var values = points.map(function (p) { return p.value; });
     var min = Math.min.apply(Math, values), max = Math.max.apply(Math, values);
@@ -450,7 +450,7 @@
   }
 
   function scoreChart() {
-    if (!scoreHistory.length) return '<div class="wdpd-score-empty"><span class="wdpd-score-orb"><i class="fas fa-wave-square"></i></span><div><b>Score history will build over time.</b><small>Each governed Watchdog observation creates another point in this trend.</small></div></div>';
+    if (!scoreHistory.length) return '<div class="wdpd-score-empty"><span class="wdpd-score-orb"><i class="fas fa-wave-square"></i></span><div><b>Score history will build over time.</b><small>Each checked Watchdog observation creates another point in this trend.</small></div></div>';
     var width = 620, height = 130, px = 26, py = 18;
     var vals = scoreHistory.map(function (x) { return number(x.score); }).filter(function (x) { return x != null; });
     if (!vals.length) return '';
@@ -461,7 +461,7 @@
     function y(v) { return height - py - ((v - min) / range) * (height - py * 2); }
     var path = scoreHistory.map(function (p, i) { return (i ? 'L' : 'M') + x(i).toFixed(1) + ' ' + y(number(p.score) || 0).toFixed(1); }).join(' ');
     var first = vals[0], last = vals[vals.length - 1], delta = last - first;
-    return '<div class="wdpd-score-chart"><div class="wdpd-score-head"><span><small>Latest governed score</small><b>' + esc(last.toLocaleString('en-US', { maximumFractionDigits: 1 })) + '</b></span><em class="' + (delta > 0 ? 'up' : delta < 0 ? 'down' : '') + '">' + (delta > 0 ? '+' : '') + esc(delta.toFixed(1)) + ' since first observation</em></div><svg viewBox="0 0 ' + width + ' ' + height + '" role="img" aria-label="Watchdog score history"><path d="' + path + '"></path></svg></div>';
+    return '<div class="wdpd-score-chart"><div class="wdpd-score-head"><span><small>Latest checked score</small><b>' + esc(last.toLocaleString('en-US', { maximumFractionDigits: 1 })) + '</b></span><em class="' + (delta > 0 ? 'up' : delta < 0 ? 'down' : '') + '">' + (delta > 0 ? '+' : '') + esc(delta.toFixed(1)) + ' since first observation</em></div><svg viewBox="0 0 ' + width + ' ' + height + '" role="img" aria-label="Watchdog score history"><path d="' + path + '"></path></svg></div>';
   }
 
   function opportunityCards() {
@@ -484,8 +484,8 @@
     var tax = number(row.last_year_tax), rate = number(row.effective_rate);
     if (tax != null) cards.push({ icon: 'fa-receipt', label: 'Tax burden', value: money(tax), note: rate != null ? percent(rate) + ' effective rate' : 'Latest saved annual tax', href: '/property/town-compare', action: 'Compare town' });
     if (events.length) cards.push({ icon: 'fa-bolt', label: 'Recent activity', value: String(events.length), note: 'Plan-authorized property changes returned', href: '/property/pulse', action: 'Open changes' });
-    if (paidPlan() && currentRecord && currentRecord.last_sale_price != null) cards.push({ icon: 'fa-key', label: 'Last verified sale', value: money(currentRecord.last_sale_price), note: currentRecord.last_sale_year ? 'Recorded ' + currentRecord.last_sale_year : 'Governed sale record', href: '#wdpd-explorer', action: 'Open sale data' });
-    if (!cards.length) cards.push({ icon: 'fa-shield-dog', label: 'Monitoring', value: 'Active', note: 'No new opportunity signal has been returned yet', href: '/property/pulse', action: 'View monitoring' });
+    if (paidPlan() && currentRecord && currentRecord.last_sale_price != null) cards.push({ icon: 'fa-key', label: 'Last verified sale', value: money(currentRecord.last_sale_price), note: currentRecord.last_sale_year ? 'Recorded ' + currentRecord.last_sale_year : 'Checked sale record', href: '#wdpd-explorer', action: 'Open sale data' });
+    if (!cards.length) cards.push({ icon: 'fa-shield-dog', label: 'Monitoring', value: 'Active', note: 'No new opportunity sign has been returned yet', href: '/property/pulse', action: 'View monitoring' });
     return '<div class="wdpd-opportunities">' + cards.slice(0, 4).map(function (c) {
       return '<a class="wdpd-opportunity" href="' + esc(c.href) + '"><i class="fas ' + esc(c.icon) + '"></i><span><small>' + esc(c.label) + '</small><b>' + esc(c.value) + '</b><em>' + esc(c.note) + '</em></span><u>' + esc(c.action) + ' <i class="fas fa-arrow-right"></i></u></a>';
     }).join('') + '</div>';
@@ -594,9 +594,9 @@
     } else if (!allowed) {
       valueHtml = '<div class="wdpd-marker-state locked"><span><i class="fas fa-lock"></i><b>' + esc(requiredPlan(marker)) + ' data</b><small>Value is not requested for your current plan.</small></span><a href="/property/account">Upgrade</a></div>';
     } else if (hasValue(value)) {
-      valueHtml = '<div class="wdpd-marker-value"><b>' + esc(formatMarkerValue(marker, value)) + '</b><small>' + esc(meta && meta.source || marker.provider_note || marker.source_id || 'Watchdog governed source') + '</small></div>';
+      valueHtml = '<div class="wdpd-marker-value"><b>' + esc(formatMarkerValue(marker, value)) + '</b><small>' + esc(meta && meta.source || marker.provider_note || marker.source_id || 'Watchdog checked source') + '</small></div>';
     } else if (loading) {
-      valueHtml = '<div class="wdpd-marker-state loading"><span class="wdpd-mini-spin"></span><b>Loading governed value…</b></div>';
+      valueHtml = '<div class="wdpd-marker-state loading"><span class="wdpd-mini-spin"></span><b>Loading checked value…</b></div>';
     } else if (meta && meta.status) {
       var copy = {
         source_checked_no_value: 'Source checked; no value for this property',
@@ -612,7 +612,7 @@
     }
 
     return '<article class="wdpd-marker-row" data-marker-id="' + esc(marker.id) + '">' +
-      '<div class="wdpd-marker-main"><span class="wdpd-marker-icon"><i class="fas ' + esc(categoryIcon(marker.category)) + '"></i></span><div><div class="wdpd-marker-title"><b>' + esc(marker.label || marker.id) + '</b><span class="wdpd-tier ' + esc(normalizePlan(marker.tier)) + '">' + esc(planLabel(marker.tier)) + '</span></div><p>' + esc(marker.description || marker.id) + '</p><div class="wdpd-marker-tags"><span>' + esc(pretty(marker.category || 'data')) + '</span>' + markerStatus(marker) + (marker.proprietary ? '<span class="proprietary"><i class="fas fa-sparkles"></i> Watchdog derived</span>' : '<span>Public source</span>') + '</div></div></div>' +
+      '<div class="wdpd-marker-main"><span class="wdpd-marker-icon"><i class="fas ' + esc(categoryIcon(marker.category)) + '"></i></span><div><div class="wdpd-marker-title"><b>' + esc(marker.label || marker.id) + '</b><span class="wdpd-tier ' + esc(normalizePlan(marker.tier)) + '">' + esc(planLabel(marker.tier)) + '</span></div><p>' + esc(marker.description || marker.id) + '</p><div class="wdpd-marker-tags"><span>' + esc(pretty(marker.category || 'data')) + '</span>' + markerStatus(marker) + (marker.proprietary ? '<span class="proprietary"><i class="fas fa-sparkles"></i> Watchdog calculated</span>' : '<span>Public source</span>') + '</div></div></div>' +
       '<div class="wdpd-marker-result">' + valueHtml + '</div>' +
       '</article>';
   }
@@ -638,7 +638,7 @@
     var markers = registry && Array.isArray(registry.markers) ? registry.markers : [];
     var categories = Array.from(new Set(markers.map(function (m) { return String(m.category || 'other'); }))).sort();
     var plan = activePlan();
-    return '<section class="wdpd-explorer" id="wdpd-explorer"><header class="wdpd-section-head"><div><span class="wdpd-kicker">ALL PROPERTY DATA</span><h3>Property Data Explorer</h3><p>Search the full governed marker catalog. Watchdog requests paid values only after entitlement is confirmed and only when a section needs them.</p></div><div class="wdpd-explorer-actions">' + (paidPlan() ? '<button type="button" data-wdpd-load-visible><i class="fas fa-bolt"></i> Load visible data</button>' : '<a href="/property/account"><i class="fas fa-lock-open"></i> Unlock governed data</a>') + '</div></header>' +
+    return '<section class="wdpd-explorer" id="wdpd-explorer"><header class="wdpd-section-head"><div><h3>Property Data Explorer</h3><p>Search the full checked marker catalog. Watchdog requests paid values only after entitlement is confirmed and only when a section needs them.</p></div><div class="wdpd-explorer-actions">' + (paidPlan() ? '<button type="button" data-wdpd-load-visible><i class="fas fa-bolt"></i> Load visible data</button>' : '<a href="/property/account"><i class="fas fa-lock-open"></i> Open checked data</a>') + '</div></header>' +
       tierCounts() +
       '<div class="wdpd-filters"><label class="wdpd-search"><i class="fas fa-magnifying-glass"></i><input type="search" data-wdpd-search placeholder="Search markers, fields, sources…" autocomplete="off"></label><label><span>Category</span><select data-wdpd-category><option value="all">All categories</option>' + categories.map(function (c) { return '<option value="' + esc(c) + '">' + esc(pretty(c)) + '</option>'; }).join('') + '</select></label><label><span>Tier</span><select data-wdpd-tier><option value="all">All tiers</option><option value="standard">Standard</option><option value="pro">Pro</option><option value="pro_plus">Pro+</option></select></label><label><span>Provider</span><select data-wdpd-provider><option value="all">All provider states</option><option value="live">Live</option><option value="partial">Partial</option><option value="planned">Planned</option><option value="unavailable">Unavailable</option></select></label></div>' +
       '<div class="wdpd-access-note"><i class="fas fa-shield-halved"></i><span><b>' + esc(planLabel(plan)) + ' access is active.</b><small>Locked rows show catalog metadata only. Real paid values are never embedded in those rows.</small></span></div>' +
@@ -650,7 +650,7 @@
     var access = planAccessSummary();
     var address = r.address || 'Saved property';
     var loc = [r.town, r.county, r.zip].filter(Boolean).join(' · ');
-    return '<section class="wdpd-hero"><div class="wdpd-hero-glow"></div><div class="wdpd-hero-copy"><span class="wdpd-kicker"><i class="fas fa-shield-dog"></i> PROPERTY INTELLIGENCE</span><h2>' + esc(address) + '</h2><p>' + esc(loc || 'New Jersey property record') + '</p><div class="wdpd-hero-meta"><span><i class="fas fa-location-crosshairs"></i> PIN ' + esc(r.pams_pin || currentPin || '—') + '</span>' + (r.kind ? '<span><i class="fas fa-bookmark"></i> ' + esc(pretty(r.kind)) + '</span>' : '') + '</div></div><div class="wdpd-hero-side"><span class="wdpd-plan-badge ' + esc(activePlan()) + '"><i class="fas fa-crown"></i>' + esc(planLabel(activePlan())) + '</span><div class="wdpd-coverage"><small>Marker access</small><b>' + esc(access.allowed.toLocaleString('en-US')) + '<em>/ ' + esc(access.total.toLocaleString('en-US')) + '</em></b><span>' + esc(access.live.toLocaleString('en-US')) + ' live/partial in plan</span></div><button type="button" data-wdpd-refresh><i class="fas fa-rotate"></i> Refresh intelligence</button></div></section>';
+    return '<section class="wdpd-hero"><div class="wdpd-hero-glow"></div><div class="wdpd-hero-copy"><h2>' + esc(address) + '</h2><p>' + esc(loc || 'New Jersey property record') + '</p><div class="wdpd-hero-meta"><span><i class="fas fa-location-crosshairs"></i> PIN ' + esc(r.pams_pin || currentPin || '—') + '</span>' + (r.kind ? '<span><i class="fas fa-bookmark"></i> ' + esc(pretty(r.kind)) + '</span>' : '') + '</div></div><div class="wdpd-hero-side"><span class="wdpd-plan-badge ' + esc(activePlan()) + '"><i class="fas fa-crown"></i>' + esc(planLabel(activePlan())) + '</span><div class="wdpd-coverage"><small>Marker access</small><b>' + esc(access.allowed.toLocaleString('en-US')) + '<em>/ ' + esc(access.total.toLocaleString('en-US')) + '</em></b><span>' + esc(access.live.toLocaleString('en-US')) + ' live/partial in plan</span></div><button type="button" data-wdpd-refresh><i class="fas fa-rotate"></i> Refresh intelligence</button></div></section>';
   }
 
   function renderDashboard() {
@@ -670,10 +670,10 @@
     root.className = 'wdpd';
     root.setAttribute('data-pin', pin);
     root.innerHTML = headerHtml() + metricCards() +
-      '<div class="wdpd-primary-grid"><article class="wdpd-panel wdpd-value-panel"><header class="wdpd-panel-head"><div><span class="wdpd-kicker">VALUE & TAX</span><h3>Property checkpoints</h3><p>Only figures available to the current plan are plotted.</p></div><i class="fas fa-chart-line"></i></header>' + checkpointChart() + '<div class="wdpd-score-slot"><h4>Watchdog score history</h4>' + scoreChart() + '</div></article>' +
-      '<article class="wdpd-panel"><header class="wdpd-panel-head"><div><span class="wdpd-kicker">OPPORTUNITY</span><h3>Signals worth opening</h3><p>Data-backed reasons to investigate this property, not seller profiling.</p></div><i class="fas fa-crosshairs"></i></header>' + opportunityCards() + '</article></div>' +
-      '<section class="wdpd-section"><header class="wdpd-section-head"><div><span class="wdpd-kicker">PROPERTY RECORD</span><h3>At-a-glance facts</h3><p>Core saved-property facts stay visible while deeper ownership and closing fields follow plan controls.</p></div></header>' + identityFacts() + paidFactModules() + '</section>' +
-      '<div class="wdpd-secondary-grid"><section class="wdpd-panel"><header class="wdpd-panel-head"><div><span class="wdpd-kicker">CHANGE INTELLIGENCE</span><h3>Recent property activity</h3><p>Events are already filtered by server-side plan policies.</p></div><a href="/property/pulse">View all <i class="fas fa-arrow-right"></i></a></header>' + eventFeed() + '</section><section class="wdpd-panel wdpd-catalog-panel"><header class="wdpd-panel-head"><div><span class="wdpd-kicker">DATA COVERAGE</span><h3>Governed marker catalog</h3><p>' + esc(String(registry.summary && registry.summary.total || (registry.markers || []).length)) + ' distinct fields and calculated statistics registered.</p></div><a href="#wdpd-explorer">Explore <i class="fas fa-arrow-down"></i></a></header>' + tierCounts() + '<div class="wdpd-catalog-copy"><i class="fas fa-database"></i><span><b>Every row carries tier, source and provider state.</b><small>Planned or unavailable data is labeled as such rather than presented as an upgrade unlock.</small></span></div></section></div>' +
+      '<div class="wdpd-primary-grid"><article class="wdpd-panel wdpd-value-panel"><header class="wdpd-panel-head"><div><h3>Property checkpoints</h3><p>Only figures available to the current plan are plotted.</p></div><i class="fas fa-chart-line"></i></header>' + checkpointChart() + '<div class="wdpd-score-slot"><h4>Watchdog score history</h4>' + scoreChart() + '</div></article>' +
+      '<article class="wdpd-panel"><header class="wdpd-panel-head"><div><h3>Red flags worth opening</h3><p>Data-backed reasons to investigate this property, not seller profiling.</p></div><i class="fas fa-crosshairs"></i></header>' + opportunityCards() + '</article></div>' +
+      '<section class="wdpd-section"><header class="wdpd-section-head"><div><h3>At-a-glance facts</h3><p>Core saved-property facts stay visible while deeper ownership and closing fields follow plan controls.</p></div></header>' + identityFacts() + paidFactModules() + '</section>' +
+      '<div class="wdpd-secondary-grid"><section class="wdpd-panel"><header class="wdpd-panel-head"><div><h3>Recent property activity</h3><p>Events are already filtered by server-side plan policies.</p></div><a href="/property/pulse">View all <i class="fas fa-arrow-right"></i></a></header>' + eventFeed() + '</section><section class="wdpd-panel wdpd-catalog-panel"><header class="wdpd-panel-head"><div><h3>Checked marker catalog</h3><p>' + esc(String(registry.summary && registry.summary.total || (registry.markers || []).length)) + ' distinct fields and calculated statistics registered.</p></div><a href="#wdpd-explorer">Take a look <i class="fas fa-arrow-down"></i></a></header>' + tierCounts() + '<div class="wdpd-catalog-copy"><i class="fas fa-database"></i><span><b>Every row carries tier, source and provider state.</b><small>Planned or unavailable data is labeled as such rather than presented as an upgrade open.</small></span></div></section></div>' +
       explorerHtml() +
       '<div class="wdpd-legacy-divider"><span>Detailed Watchdog tools continue below</span></div>';
     if (!old) body.insertBefore(root, body.firstChild);

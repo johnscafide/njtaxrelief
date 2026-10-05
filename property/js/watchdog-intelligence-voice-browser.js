@@ -304,7 +304,7 @@
     try { contract = await ensureNarration(); } catch (error) { toast(error.message); return; }
     const brief = extractBrief(message);
     if (!brief.conclusion) {
-      toast('No governed Watchdog response is available to read.');
+      toast('No checked Watchdog response is available to read.');
       return;
     }
     if (activeListenButton) {
@@ -358,7 +358,7 @@
         : 'quick';
     const footer = document.createElement('div');
     footer.className = 'dwa-voice-message-tools dwa-narration-tools';
-    footer.innerHTML = `<label class="dwa-narration-label"><span>Listen as</span><select data-dwa-narration-format aria-label="Choose Watchdog narration format">${keys.map((key) => `<option value="${key}"${key === defaultFormat ? ' selected' : ''}>${contract.FORMATS[key].label}</option>`).join('')}</select></label><button type="button" data-dwa-listen aria-label="${contract.FORMATS[defaultFormat].aria}"><i class="fas fa-volume-high"></i> Listen</button><span class="dwa-narration-note">Spoken only from the written governed response</span>`;
+    footer.innerHTML = `<label class="dwa-narration-label"><span>Listen as</span><select data-dwa-narration-format aria-label="Choose Watchdog narration format">${keys.map((key) => `<option value="${key}"${key === defaultFormat ? ' selected' : ''}>${contract.FORMATS[key].label}</option>`).join('')}</select></label><button type="button" data-dwa-listen aria-label="${contract.FORMATS[defaultFormat].aria}"><i class="fas fa-volume-high"></i> Listen</button><span class="dwa-narration-note">Spoken only from the written checked response</span>`;
     message.appendChild(footer);
     const select = $('[data-dwa-narration-format]', footer);
     const button = $('[data-dwa-listen]', footer);

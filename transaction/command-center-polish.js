@@ -72,7 +72,7 @@ function ensureShell(){
           +'<div class="txv2-property-copy"><div class="txv2-title-row"><h1 id="txv2-property-title">Property</h1><span class="txv2-attention" id="txv2-attention"><i></i><span>Needs attention</span></span></div><p id="txv2-property-meta">New Jersey</p></div>'
           +'<div class="txv2-head-actions"><div class="txv2-action-row"><button class="txv2-refresh txv2-strong-action" type="button" data-v2-action="refresh"><i class="fas fa-rotate" aria-hidden="true"></i><span>Refresh review</span></button><button class="txv2-add txv2-strong-action" type="button" data-tx-action="add"><i class="fas fa-plus" aria-hidden="true"></i><span>Add transaction</span></button><button class="txv2-invite" type="button" data-collab-action="open"><i class="fas fa-user-plus" aria-hidden="true"></i><span>Invite pro</span></button><button class="txv2-invite" type="button" data-client-room="open"><i class="fas fa-house-user" aria-hidden="true"></i><span>Client room</span></button><div class="txv2-overflow-wrap"><button class="txv2-icon-button" type="button" data-v2-action="toggle-overflow" aria-label="Transaction actions" aria-haspopup="true" aria-controls="txv2-overflow-menu" aria-expanded="false"><i class="fas fa-ellipsis" aria-hidden="true"></i></button><div class="txv2-menu" id="txv2-overflow-menu" hidden><button type="button" data-tx-action="edit">Edit transaction</button></div></div></div><small id="txv2-checked">Checked —</small></div>'
         +'</header>'
-        +'<nav class="txv2-tabs" aria-label="Transaction workspace sections">'
+        +'<nav class="txv2-tabs" aria-label="Transaction dashboard sections">'
           +'<button type="button" data-v2-view="overview" aria-current="page">Overview</button><button type="button" data-v2-view="evidence">Evidence</button><button type="button" data-v2-view="documents">Documents</button><button type="button" data-v2-view="timeline">Timeline</button><button type="button" data-v2-view="activity">Activity</button>'
           +'<div class="txv2-more-wrap"><button type="button" data-v2-action="toggle-more" aria-expanded="false">More <i class="fas fa-chevron-down" aria-hidden="true"></i></button><div class="txv2-menu txv2-more-menu" id="txv2-more-menu" hidden><button type="button" data-v2-view="readiness">Readiness</button><button type="button" data-v2-view="disclosures">Client disclosures</button></div></div>'
         +'</nav>'
@@ -89,7 +89,7 @@ function ensureShell(){
                 +'<div class="txv2-source-note"><i class="fas fa-circle-info" aria-hidden="true"></i><span>Public records may be incomplete. Open a category to review its source.</span></div>'
               +'</section>'
             +'</section>'
-            +'<aside class="txv2-context" aria-label="Transaction context">'
+            +'<aside class="txv2-context" aria-label="Transaction info">'
               +'<section><span class="txv2-context-label">CLOSING</span><div class="txv2-close-line"><h2 id="txv2-closing-date">—</h2><span id="txv2-stage">—</span></div><div class="txv2-context-row"><span>Contract date</span><b id="txv2-contract-date">—</b></div></section>'
               +'<section><h2>Readiness score</h2><div class="txv2-score"><strong id="txv2-score">—</strong><span>/ 100</span></div><div class="txv2-meter" role="meter" aria-label="Readiness score" aria-valuemin="0" aria-valuemax="100"><i id="txv2-meter-fill"></i></div><button class="txv2-link" type="button" data-v2-view="readiness">Open readiness checklist <i class="fas fa-arrow-right" aria-hidden="true"></i></button></section>'
               +'<section><h2>Assignments</h2><p class="txv2-context-sub">Open items by team</p><div id="txv2-assignments"></div></section>'
@@ -146,7 +146,7 @@ async function loadAll(){
   var c=client();if(!c)return;
   var auth=await c.auth.getUser();user=auth&&auth.data&&auth.data.user;if(!user)return;
   var r=await c.from('transaction_workspaces').select('*').eq('user_id',user.id).order('closing_date',{ascending:true,nullsFirst:false}).order('created_at',{ascending:false});
-  if(r.error){console.warn('Transaction v2 workspaces could not load',r.error);pendingEvidence='';renderEmpty(true);return}
+  if(r.error){console.warn('Transaction v2 dashboards could not load',r.error);pendingEvidence='';renderEmpty(true);return}
   workspaces=r.data||[];var requested=clean(new URLSearchParams(location.search).get('tx'));var requestedOwned=requested&&workspaces.some(function(t){return t.id===requested})?requested:'';selectedId=requestedOwned||legacySelected()||selectedId||(workspaces[0]&&workspaces[0].id)||'';renderRail();renderPortfolio();if(selectedId)await loadSelected(selectedId);else{pendingEvidence='';renderEmpty(false)}
 }
 
@@ -274,7 +274,7 @@ function findViewNode(view){
   if(view==='disclosures')return $('[data-tx-panel="disclosures"]');
   return null;
 }
-function renderPremiumUpgrade(view){var host=$('#txv2-secondary');if(!host)return;host.hidden=false;host.innerHTML='<section class="txv2-upgrade"><span>PRO+ EVIDENCE</span><h2>'+esc(view==='documents'?'Private closing documents':'Watchdog source evidence')+'</h2><p>This workspace is available with Pro+ while your Agent transaction checklist remains unchanged.</p><a href="/pro#plans">Compare Pro+ evidence <i class="fas fa-arrow-right" aria-hidden="true"></i></a></section>'}
+function renderPremiumUpgrade(view){var host=$('#txv2-secondary');if(!host)return;host.hidden=false;host.innerHTML='<section class="txv2-upgrade"><span>PRO+ EVIDENCE</span><h2>'+esc(view==='documents'?'Private closing documents':'Watchdog source evidence')+'</h2><p>This dashboard is available with Pro+ while your Agent transaction checklist remains unchanged.</p><a href="/pro#plans">Compare Pro+ evidence <i class="fas fa-arrow-right" aria-hidden="true"></i></a></section>'}
 function activateView(view,quiet){
   activeView=view||'overview';if(loading)return;var overview=$('#txv2-overview'),secondary=$('#txv2-secondary');
   $$('.txv2-tabs [data-v2-view]').forEach(function(b){b.toggleAttribute('aria-current',b.dataset.v2View===activeView)});var more=$('.txv2-more-wrap>[data-v2-action="toggle-more"]');if(more)more.classList.toggle('active',['readiness','disclosures'].includes(activeView));

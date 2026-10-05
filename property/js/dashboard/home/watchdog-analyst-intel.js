@@ -118,35 +118,35 @@
   function urgencyCopy(m, suggestion) {
     if (suggestion) {
       var band = suggestion.attention_band === 'act_now' ? 'Act now' : suggestion.attention_band === 'this_week' ? 'This week' : 'Watch';
-      return band + ' signal. Watchdog scored this review finding ' + Math.round(clamp(suggestion.score, 0, 100)) + '/100 with ' + Math.round(clamp(suggestion.evidence_coverage, 0, 100)) + '% evidence coverage. Review the evidence before acting.';
+      return band + ' red flag. Watchdog scored this review finding ' + Math.round(clamp(suggestion.score, 0, 100)) + '/100 with ' + Math.round(clamp(suggestion.evidence_coverage, 0, 100)) + '% evidence coverage. Review the evidence before acting.';
     }
     if (m.appeal) return 'This record already carries an appeal-case indicator. That is a reason to review the supporting assessment evidence, not a guarantee of a reduction.';
-    if (m.taxLoad != null && m.taxLoad >= 2.5) return 'Property taxes equal about ' + pct(m.taxLoad) + ' of the current Watchdog value context each year. That carrying-cost load deserves attention in affordability, yield, or client strategy.';
-    return 'No high-urgency governed finding is present for this property right now. Watchdog will keep monitoring rather than manufacture urgency.';
+    if (m.taxLoad != null && m.taxLoad >= 2.5) return 'Property taxes equal about ' + pct(m.taxLoad) + ' of the current Watchdog value info each year. That carrying-cost load deserves attention in affordability, yield, or client strategy.';
+    return 'No high-urgency checked finding is present for this property right now. Watchdog will keep monitoring rather than manufacture urgency.';
   }
   function financialCopy(role, m) {
-    if (role === 'investor') return 'Annual property tax is ' + money(m.tax) + (m.monthlyTax != null ? ' (' + money(m.monthlyTax) + '/month)' : '') + (m.taxLoad != null ? ', about ' + pct(m.taxLoad) + ' of Watchdog value context. ' : '. ') + (m.onePercentValue != null ? 'A 1% change in property value is roughly ' + money(m.onePercentValue) + '. Use these as real carrying-cost and sensitivity inputs when you model purchase price, rehab, financing, rent, and exit ROI.' : 'Add a verified value before relying on return sensitivity.');
-    if (role === 'real_estate') return 'The property carries ' + money(m.tax) + ' in annual tax' + (m.monthlyTax != null ? ', about ' + money(m.monthlyTax) + ' per month' : '') + '. ' + (m.onePercentValue != null ? 'A 1% pricing movement is roughly ' + money(m.onePercentValue) + ', giving you a concrete scale for pricing and negotiation conversations.' : 'Watchdog will add pricing sensitivity when a usable value context is available.');
-    if (role === 'mortgage_lending') return 'Current annual property tax is ' + money(m.tax) + (m.monthlyTax != null ? ', about ' + money(m.monthlyTax) + ' per month before insurance and other escrow items.' : '.') + (m.taxLoad != null ? ' Tax load is about ' + pct(m.taxLoad) + ' of Watchdog value context.' : '') + ' Use the verified tax figure in affordability and escrow review rather than relying on a generic estimate.';
-    if (role === 'attorney' || role === 'property_tax_professional') return 'Assessment is ' + money(m.assessed) + ' against a Watchdog value context of ' + money(m.value) + (m.assessedToValue != null ? ', an assessment-to-value relationship of about ' + pct(m.assessedToValue) + '.' : '.') + ' Annual tax is ' + money(m.tax) + '. Treat these as review inputs and inspect source lineage before forming a legal or appeal conclusion.';
-    if (role === 'appraiser') return 'Assessment is ' + money(m.assessed) + ' and Watchdog value context is ' + money(m.value) + (m.assessedToValue != null ? ', placing assessment at about ' + pct(m.assessedToValue) + ' of that context.' : '.') + ' This is a screening relationship, not an appraisal or replacement for a supported opinion of value.';
-    if (role === 'title_closing') return 'Annual tax is ' + money(m.tax) + (m.monthlyTax != null ? ', roughly ' + money(m.monthlyTax) + ' per month.' : '.') + ' Keep tax, assessment, and current change signals in the diligence file so settlement assumptions use the current property record.';
-    if (role === 'contractor') return 'Watchdog value context is ' + money(m.value) + (m.onePercentValue != null ? '; 1% of that value is about ' + money(m.onePercentValue) + '.' : '.') + ' Use this only as project-scale context. Renovation ROI still depends on scope, cost, market response, permits, and verified post-work value.';
-    if (role === 'homeowner') return 'Current property tax is ' + money(m.tax) + (m.monthlyTax != null ? ', about ' + money(m.monthlyTax) + ' per month.' : '.') + (m.taxLoad != null ? ' That equals about ' + pct(m.taxLoad) + ' of Watchdog value context per year.' : '') + ' Watchdog will flag meaningful assessment and property-record changes as the evidence changes.';
-    return 'Current assessment is ' + money(m.assessed) + ', annual property tax is ' + money(m.tax) + ', and Watchdog value context is ' + money(m.value) + '. Set your profession to turn these same facts into a workflow-specific financial lens.';
+    if (role === 'investor') return 'Annual property tax is ' + money(m.tax) + (m.monthlyTax != null ? ' (' + money(m.monthlyTax) + '/month)' : '') + (m.taxLoad != null ? ', about ' + pct(m.taxLoad) + ' of Watchdog value info. ' : '. ') + (m.onePercentValue != null ? 'A 1% change in property value is roughly ' + money(m.onePercentValue) + '. Use these as real carrying-cost and sensitivity inputs when you model purchase price, rehab, financing, rent, and exit ROI.' : 'Add a verified value before relying on return sensitivity.');
+    if (role === 'real_estate') return 'The property carries ' + money(m.tax) + ' in annual tax' + (m.monthlyTax != null ? ', about ' + money(m.monthlyTax) + ' per month' : '') + '. ' + (m.onePercentValue != null ? 'A 1% pricing movement is roughly ' + money(m.onePercentValue) + ', giving you a concrete scale for pricing and negotiation conversations.' : 'Watchdog will add pricing sensitivity when a usable value info is available.');
+    if (role === 'mortgage_lending') return 'Current annual property tax is ' + money(m.tax) + (m.monthlyTax != null ? ', about ' + money(m.monthlyTax) + ' per month before insurance and other escrow items.' : '.') + (m.taxLoad != null ? ' Tax load is about ' + pct(m.taxLoad) + ' of Watchdog value info.' : '') + ' Use the verified tax figure in affordability and escrow review rather than relying on a generic estimate.';
+    if (role === 'attorney' || role === 'property_tax_professional') return 'Assessment is ' + money(m.assessed) + ' against a Watchdog value background of ' + money(m.value) + (m.assessedToValue != null ? ', an assessment-to-value relationship of about ' + pct(m.assessedToValue) + '.' : '.') + ' Annual tax is ' + money(m.tax) + '. Treat these as review inputs and inspect source lineage before forming a legal or appeal conclusion.';
+    if (role === 'appraiser') return 'Assessment is ' + money(m.assessed) + ' and Watchdog value info is ' + money(m.value) + (m.assessedToValue != null ? ', placing assessment at about ' + pct(m.assessedToValue) + ' of that context.' : '.') + ' This is a screening relationship, not an appraisal or replacement for a supported opinion of value.';
+    if (role === 'title_closing') return 'Annual tax is ' + money(m.tax) + (m.monthlyTax != null ? ', roughly ' + money(m.monthlyTax) + ' per month.' : '.') + ' Keep tax, assessment, and current change red flags in the diligence file so settlement assumptions use the current property record.';
+    if (role === 'contractor') return 'Watchdog value info is ' + money(m.value) + (m.onePercentValue != null ? '; 1% of that value is about ' + money(m.onePercentValue) + '.' : '.') + ' Use this only as project-scale info. Renovation ROI still depends on scope, cost, market response, permits, and verified post-work value.';
+    if (role === 'homeowner') return 'Current property tax is ' + money(m.tax) + (m.monthlyTax != null ? ', about ' + money(m.monthlyTax) + ' per month.' : '.') + (m.taxLoad != null ? ' That equals about ' + pct(m.taxLoad) + ' of Watchdog value info per year.' : '') + ' Watchdog will flag meaningful assessment and property-record changes as the evidence changes.';
+    return 'Current assessment is ' + money(m.assessed) + ', annual property tax is ' + money(m.tax) + ', and Watchdog value info is ' + money(m.value) + '. Set your profession to turn these same facts into a task-specific financial lens.';
   }
   function innovationCopy(role) {
     var map = {
-      real_estate: 'Turn the property into a client conversation brief: tax carrying cost, assessment context, the current Watchdog finding, and one evidence-backed next question. Use the facts to create a reason to call, not a generic sales script.',
+      real_estate: 'Turn the property into a client conversation brief: tax carrying cost, assessment info, the current Watchdog finding, and one record-based next question. Use the facts to create a reason to call, not a generic sales script.',
       investor: 'Use Watchdog as a pre-underwriting layer. Carry verified annual tax into purchase, rehab, rent, financing, and exit scenarios, then stress-test the deal before spending time on deeper diligence.',
-      attorney: 'Build an evidence-first review packet from source facts, missing evidence, model lineage, and change history. Reduce fact collection time while keeping the professional conclusion human-controlled.',
-      mortgage_lending: 'Use property-tax intelligence before final underwriting. Current tax, monthly escrow equivalent, change signals, and property-record inconsistencies can be reviewed before they become closing surprises.',
+      attorney: 'Build an records-first review packet from source facts, missing evidence, model lineage, and change history. Reduce fact collection time while keeping the professional conclusion human-controlled.',
+      mortgage_lending: 'Use property tax facts before final underwriting. Current tax, monthly escrow equivalent, change warning signs, and property-record inconsistencies can be reviewed before they become closing surprises.',
       appraiser: 'Use Watchdog as a research accelerator. Surface assessment/value divergence, change history, and source-backed anomalies before selecting the records that deserve deeper appraisal analysis.',
-      contractor: 'Pair property context with permit and change intelligence to identify where project assumptions need verification. Watchdog should tell you what to investigate before you price the opportunity.',
-      property_tax_professional: 'Create a repeatable triage queue from assessment relationships, evidence coverage, missing records, and current tax burden. Spend professional time on properties with the strongest review signal.',
-      title_closing: 'Use Watchdog as a pre-closing exception screen. Bring tax, assessment, ownership context, permit/change signals, and missing evidence into one review trail before the file reaches the last mile.',
+      contractor: 'Pair property info with permit and change intelligence to identify where project assumptions need verification. Watchdog should tell you what to investigate before you price the opportunity.',
+      property_tax_professional: 'Create a repeatable triage queue from assessment relationships, evidence coverage, missing records, and current tax burden. Spend professional time on properties with the strongest review warning sign.',
+      title_closing: 'Use Watchdog as a pre-closing exception screen. Bring tax, assessment, ownership info, permit/change numbers, and missing evidence into one review trail before the file reaches the last mile.',
       homeowner: 'Use Watchdog as a property memory. Keep the current tax and assessment baseline, then let monitored changes tell you when there is something worth reviewing instead of repeatedly searching records.',
-      other: 'Use the property as a governed decision file: financial context, current evidence-backed signals, missing evidence, and a documented next action.',
+      other: 'Use the property as a checked decision file: financial info, current record-based red flags, missing evidence, and a documented next action.',
       general: 'Set your profession and Watchdog will rebuild this panel around the financial questions, risks, opportunities, and next actions that matter in your work.'
     };
     return map[role] || map.general;
@@ -156,29 +156,29 @@
     var map = {
       real_estate: 'Review the tax and value story, then decide whether this creates a useful buyer, seller, sphere, or prospect conversation.',
       investor: 'Carry the verified tax into your deal assumptions and test whether the property still clears your required return before deeper underwriting.',
-      attorney: 'Open the evidence trail and identify what is proven, what is derived, and what is still missing before creating a case position.',
+      attorney: 'Open the evidence trail and identify what is proven, what is calculated, and what is still missing before creating a case position.',
       mortgage_lending: 'Carry current tax into escrow and affordability review, then monitor for assessment or municipal changes that can alter the payment story.',
       appraiser: 'Use the divergence screen to choose which records need source verification and comparable research.',
-      contractor: 'Review property and permit context before estimating scope, timeline, or value impact.',
-      property_tax_professional: 'Review assessment evidence and missing inputs before deciding whether this belongs in an appeal or advisory workflow.',
+      contractor: 'Review property and permit info before estimating scope, timeline, or value impact.',
+      property_tax_professional: 'Review assessment evidence and missing inputs before deciding whether this belongs in an appeal or advisory process.',
       title_closing: 'Check the current property record and change timeline before relying on tax or diligence assumptions.',
-      homeowner: 'Keep monitoring. If Watchdog produces a stronger assessment or change signal, open the evidence before taking action.',
+      homeowner: 'Keep monitoring. If Watchdog produces a stronger assessment or change red flag, open the evidence before taking action.',
       other: 'Open Data Workbench to inspect the property record and evidence in detail.',
-      general: 'Choose your profession first. Watchdog will then recommend the workflow-specific next action.'
+      general: 'Choose your profession first. Watchdog will then recommend the task-specific next action.'
     };
     return map[role] || map.general;
   }
   function evidenceCopy(suggestion) {
     if (!suggestion) return can('pro')
-      ? 'No current governed model finding rose into the property queue. This is a valid result. Watchdog continues to monitor the evidence and will surface a finding when the facts justify one.'
-      : 'Your account can use the profession-aware property brief. Governed model scoring and deeper evidence-backed findings begin with Pro.';
+      ? 'No current checked model finding rose into the property queue. This is a valid result. Watchdog continues to monitor the evidence and will show a finding when the facts justify one.'
+      : 'Your account can use the profession-aware property brief. Checked model scoring and deeper record-based findings begin with Pro.';
     return suggestion.why_now + ' Confidence ' + Math.round(clamp(suggestion.confidence, 0, 100)) + '%. Evidence coverage ' + Math.round(clamp(suggestion.evidence_coverage, 0, 100)) + '%.' + (suggestion.limited_evidence ? ' Evidence is limited, so Watchdog is intentionally reducing certainty.' : ' Required evidence coverage is adequate for this review finding.');
   }
   function card(icon, label, title, copy, className) {
     return '<article class="wdai-card ' + (className || '') + '"><div class="wdai-card-icon"><i class="fas ' + icon + '"></i></div><div><span>' + esc(label) + '</span><h3>' + esc(title) + '</h3><p>' + esc(copy) + '</p></div></article>';
   }
   function rolePrompt() {
-    return '<section class="wdai-role-prompt"><div><span>PERSONALIZATION REQUIRED FOR EXACT INTEL</span><h3>What is your primary profession?</h3><p>Without a stated profession, Watchdog keeps this property brief generalized. Choose one and the same governed facts will be rebuilt around your financial, risk, opportunity, and workflow priorities.</p></div><div class="wdai-role-controls"><select id="wdai-profession" aria-label="Primary profession"><option value="">Choose profession</option>' + PROFESSION_OPTIONS.map(function (option) { return '<option value="' + esc(option[0]) + '">' + esc(option[1]) + '</option>'; }).join('') + '</select><button type="button" id="wdai-save-profession">Personalize my Intel</button></div><small id="wdai-role-note" aria-live="polite">Your profession personalizes recommendations. It does not change billing or authorization.</small></section>';
+    return '<section class="wdai-role-prompt"><div><span>PERSONALIZATION REQUIRED FOR EXACT INTEL</span><h3>What is your primary profession?</h3><p>Without a stated profession, Watchdog keeps this property brief generalized. Choose one and the same checked facts will be rebuilt around your financial, risk, opportunity, and process priorities.</p></div><div class="wdai-role-controls"><select id="wdai-profession" aria-label="Primary profession"><option value="">Choose profession</option>' + PROFESSION_OPTIONS.map(function (option) { return '<option value="' + esc(option[0]) + '">' + esc(option[1]) + '</option>'; }).join('') + '</select><button type="button" id="wdai-save-profession">Personalize my Intel</button></div><small id="wdai-role-note" aria-live="polite">Your profession personalizes recommendations. It does not change billing or authorization.</small></section>';
   }
   function render() {
     var panel = document.querySelector('#hm-body .ai');
@@ -188,18 +188,18 @@
     panel.classList.add('wdai');
     panel.setAttribute('data-watchdog-analyst-intel', role);
     panel.innerHTML =
-      '<header class="wdai-head"><div class="wdai-mark"><i class="fas fa-dog"></i><i class="fas fa-wand-magic-sparkles"></i></div><div class="wdai-title"><span>WATCHDOG ANALYST INTEL</span><h2>' + esc(address) + '</h2><p>' + (exact ? 'Built for a ' + esc(def.label) + ' using this property’s governed records.' : 'Generalized property intelligence until you tell Watchdog how you work.') + '</p></div><div class="wdai-persona"><i class="fas ' + esc(def.icon) + '"></i><span><small>Perspective</small><b>' + esc(exact ? def.label : 'Generalized') + '</b></span></div></header>' +
+      '<header class="wdai-head"><div class="wdai-mark"><i class="fas fa-dog"></i><i class="fas fa-wand-magic-sparkles"></i></div><div class="wdai-title"><span>WATCHDOG ANALYST INTEL</span><h2>' + esc(address) + '</h2><p>' + (exact ? 'Built for a ' + esc(def.label) + ' using this property’s checked records.' : 'Generalized property info until you tell Watchdog how you work.') + '</p></div><div class="wdai-persona"><i class="fas ' + esc(def.icon) + '"></i><span><small>Perspective</small><b>' + esc(exact ? def.label : 'Generalized') + '</b></span></div></header>' +
       (exact ? '<div class="wdai-role-set"><i class="fas fa-circle-check"></i><span>Profession-aware Intel is active for <b>' + esc(def.label) + '</b>.</span><a href="/property/account">Change profession</a></div>' : rolePrompt()) +
       '<div class="wdai-grid">' +
         card('fa-coins', 'FINANCIAL LENS', 'What the numbers mean for you', financialCopy(role, m), 'money') +
         card('fa-bolt', 'MOTIVATION', 'Why this property deserves attention', urgencyCopy(m, suggestion), 'motivation') +
-        card('fa-lightbulb', 'INNOVATION', 'A smarter way to use this property', innovationCopy(role), 'innovation') +
+        card('fa-lightbulb', 'INNOVATION', 'A better way to use this property', innovationCopy(role), 'innovation') +
         card('fa-shield-halved', 'EVIDENCE', suggestion ? 'What Watchdog is seeing' : 'What Watchdog can prove now', evidenceCopy(suggestion), 'evidence') +
       '</div>' +
       '<section class="wdai-next"><div><span>NEXT BEST ACTION</span><h3>' + esc(nextActionCopy(role, suggestion)) + '</h3><p>Watchdog is decision support. Source facts, missing evidence, and professional judgment stay visible.</p></div><div class="wdai-actions">' +
         (suggestion ? '<button type="button" id="wdai-open-evidence"><i class="fas fa-magnifying-glass-chart"></i> Why Watchdog?</button>' : '') +
         '<a href="/property/data-workbench"><i class="fas fa-table-list"></i> Open Data Workbench</a>' +
-        (can('pro') ? '<a class="primary" href="/property/intelligence"><i class="fas fa-wand-magic-sparkles"></i> Intelligence Hub</a>' : '<a class="primary" href="/property/pro#plans"><i class="fas fa-lock"></i> Unlock Pro Intelligence</a>') +
+        (can('pro') ? '<a class="primary" href="/property/intelligence"><i class="fas fa-wand-magic-sparkles"></i> Intelligence Hub</a>' : '<a class="primary" href="/property/pro#plans"><i class="fas fa-lock"></i> Open Pro Intelligence</a>') +
       '</div></section>';
 
     var save = document.getElementById('wdai-save-profession');

@@ -94,14 +94,14 @@
       modal.dataset.inviteLink = '';
       return;
     }
-    var subject = 'Try Watchdog Property Intelligence';
+    var subject = 'Try Watchdog Property Info';
     var body = 'I thought you might find Watchdog useful: ' + data.link;
 
     modal.innerHTML =
       '<button class="wd-invite-close" type="button" data-watchdog-invite-action="close" aria-label="Close invite dialog"><i class="fas fa-xmark" aria-hidden="true"></i></button>' +
       '<div class="wd-invite-hero">' +
         '<small>INVITE TO WATCHDOG</small>' +
-        '<h2 id="wd-invite-title">Share better property intelligence.</h2>' +
+        '<h2 id="wd-invite-title">Share better property info.</h2>' +
         '<p>Send your personal Watchdog invite link to a friend, client or colleague.</p>' +
       '</div>' +
       '<div class="wd-invite-body">' +
@@ -181,8 +181,8 @@
     if (!link) return;
     if (navigator.share) {
       navigator.share({
-        title: 'Watchdog Property Intelligence',
-        text: 'Take a look at Watchdog Property Intelligence.',
+        title: 'Watchdog Property Info',
+        text: 'Take a look at Watchdog Property Info.',
         url: link
       }).catch(function () {});
       return;

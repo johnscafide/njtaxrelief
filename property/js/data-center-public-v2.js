@@ -231,13 +231,13 @@
       var text = gate.querySelector('[data-dc-gate-copy]');
       var action = gate.querySelector('[data-dc-gate-action]');
       if (access.proPlus) {
-        if (text) text.textContent = 'Pro+ workspace active. Build against your own saved properties, export governed results and save recurring views.';
-        if (action) { action.textContent = 'Workspace active'; action.setAttribute('href', '#dc-selected-workspace'); action.classList.add('secondary'); }
+        if (text) text.textContent = 'Pro+ dashboard active. Build against your own saved properties, export checked results and save recurring views.';
+        if (action) { action.textContent = 'Dashboard active'; action.setAttribute('href', '#dc-selected-workspace'); action.classList.add('secondary'); }
       } else if (access.signedIn) {
         if (text) text.textContent = 'Catalog browsing is public. Building private datasets, exports, saved views and schedules require Pro+.';
         if (action) { action.textContent = 'See Pro+ access'; action.setAttribute('href', '/pro'); }
       } else {
-        if (text) text.textContent = 'Browse every governed field publicly. Sign in with Pro+ to run these fields against your saved-property workspace.';
+        if (text) text.textContent = 'Browse every checked field publicly. Sign in with Pro+ to run these fields against your saved-property dashboard.';
         if (action) { action.textContent = 'Sign in / view Pro+'; action.setAttribute('href', '/pro'); }
       }
     }
@@ -279,13 +279,13 @@
     var c = coverageFor(id) || {};
     setText('dc-drawer-eyebrow', title(marker.category || 'Data field'));
     setText('dc-drawer-title', marker.label || id);
-    setText('dc-drawer-description', marker.description || 'Governed Watchdog data field.');
-    setText('dc-drawer-why', marker.professional_reason || 'Use this field as one input in a governed property-data workflow; verify the underlying source before making a consequential decision.');
+    setText('dc-drawer-description', marker.description || 'Checked Watchdog data field.');
+    setText('dc-drawer-why', marker.professional_reason || 'Use this field as one input in a checked property-data process; verify the underlying source before making a consequential decision.');
     setText('dc-drawer-status', title(c.value_status || marker.provider_status || 'planned'));
     setText('dc-drawer-verified', formatDate(c.last_verified_at));
     setText('dc-drawer-bulk', c.value_status === 'live' ? (c.bulk_capable ? 'Bulk ready' : 'Single-record / bounded use') : 'Not bulk available');
     setText('dc-drawer-scope', title(marker.scope || 'property'));
-    setText('dc-drawer-origin', marker.origin === 'watchdog-derived' ? 'Watchdog derived' : 'Public source');
+    setText('dc-drawer-origin', marker.origin === 'watchdog-derived' ? 'Watchdog calculated' : 'Public source');
     setText('dc-drawer-tier', marker.tier === 'pro_plus' ? 'Pro+' : title(marker.tier || 'standard'));
     var pageLink = $('dc-drawer-link');
     if (pageLink) pageLink.href = '/marker?id=' + encodeURIComponent(id);

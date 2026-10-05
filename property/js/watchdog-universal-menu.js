@@ -261,10 +261,10 @@
     if(!state.user || !state.ready || isDeveloper()) return null;
     var p = actualPlan();
     if(p === 'standard' || p === 'agent'){
-      return {key:'pro',tone:'pro',href:route('/pro#pricing'),eyebrow:p === 'agent' ? 'READY FOR MORE?' : 'UPGRADE WATCHDOG',title:'Move up to Pro',detail:'Deeper professional research and intelligence.',icon:'fa-arrow-trend-up',cta:'Explore Pro'};
+      return {key:'pro',tone:'pro',href:route('/pro#pricing'),eyebrow:p === 'agent' ? 'READY FOR MORE?' : 'UPGRADE WATCHDOG',title:'Move up to Pro',detail:'Deeper professional research and intelligence.',icon:'fa-arrow-trend-up',cta:'See Pro'};
     }
     if(p === 'pro'){
-      return {key:'pro_plus',tone:'plus',href:route('/pro#pricing'),eyebrow:'GO FURTHER',title:'Unlock Pro+',detail:'Higher-scale data, Scanner and advanced workflows.',icon:'fa-bolt',cta:'Explore Pro+'};
+      return {key:'pro_plus',tone:'plus',href:route('/pro#pricing'),eyebrow:'GO FURTHER',title:'Open Pro+',detail:'Higher-scale data, Scanner and advanced tasks.',icon:'fa-bolt',cta:'See Pro+'};
     }
     if(p === 'pro_plus'){
       return {key:'teams',tone:'teams',href:route('/teams'),eyebrow:'WORK WITH OTHERS?',title:'Part of a team?',detail:'Preview shared intelligence, seats and team controls.',icon:'fa-users',cta:'Preview Teams'};
@@ -321,7 +321,7 @@
     return '<div class="wd-universal-work-locked wd-universal-lens-work" data-wd-work-locked="true">' +
       '<span class="wd-universal-work-locked-icon"><i class="fas fa-lock" aria-hidden="true"></i></span>' +
       '<b>My work is for members</b>' +
-      '<p>Tools for real estate agents and property pros. Unlock them with a Watchdog Agent or Pro membership.</p>' +
+      '<p>Tools for real estate agents and property pros. Open them with a Watchdog Agent or Pro membership.</p>' +
       '<a class="wd-universal-work-locked-cta" href="' + route('/pro#pricing') + '">See membership plans <i class="fas fa-arrow-right" aria-hidden="true"></i></a>' +
       (state.user ? '' : '<button type="button" class="wd-universal-work-locked-link" data-wd-universal="signin">Already a member? Sign in</button>') +
       '<button type="button" class="wd-universal-work-locked-link" data-wd-universal="lens" data-wd-lens-to="home">Back to My home</button>' +
@@ -336,7 +336,7 @@
     return '<div class="wd-universal-lens" data-lens="' + lens + '" role="tablist" aria-label="Show tools for">' + tab('home','fa-house-chimney','My home',false) + tab('work',unlocked ? 'fa-briefcase' : 'fa-lock','My work',!unlocked) + '<span class="wd-universal-lens-thumb" aria-hidden="true"></span></div>';
   }
   function brandHtml(){
-    return '<a class="wd-universal-brand" href="' + route('/dashboard') + '"><span class="wd-universal-brand-mark"><i class="fas fa-dog"></i></span><span class="wd-universal-brand-copy"><strong>Watchdog</strong><small>PROPERTY INTELLIGENCE</small></span></a>';
+    return '<a class="wd-universal-brand" href="' + route('/dashboard') + '"><span class="wd-universal-brand-mark"><i class="fas fa-dog"></i></span><span class="wd-universal-brand-copy"><strong>Watchdog</strong><small>PROPERTY INFO</small></span></a>';
   }
 
   function publicDrawerHtml(){
@@ -394,7 +394,7 @@
         '<header><span><b>Watchdog</b><small>Sign in to your account</small></span><i>Signed out</i></header>' +
         '<nav>' +
           '<button type="button" data-wd-universal="signin"><i class="fas fa-right-to-bracket"></i><span><b>Sign in to Watchdog</b><small>Open your saved properties and account</small></span></button>' +
-          '<a href="' + route('/pro') + '"><i class="fas fa-briefcase"></i><span><b>Plans &amp; professional tools</b><small>Explore Watchdog access levels</small></span></a>' +
+          '<a href="' + route('/pro') + '"><i class="fas fa-briefcase"></i><span><b>Plans &amp; professional tools</b><small>See Watchdog access levels</small></span></a>' +
           '<a href="' + route('/') + '"><i class="fas fa-magnifying-glass"></i><span><b>Property lookup</b><small>Search any New Jersey property</small></span></a>' +
         '</nav>';
     }
@@ -408,8 +408,8 @@
         '<a href="' + route('/account') + '"><i class="fas fa-user-pen"></i><span><b>Edit profile &amp; role</b><small>Profile, profession and preferences</small></span></a>' +
         '<button type="button" data-wd-universal="invite"><i class="fas fa-user-plus"></i><span><b>Invite others</b><small>Share your Watchdog referral link</small></span></button>' +
         '<a href="' + route('/account') + '"><i class="fas fa-credit-card"></i><span><b>Account &amp; billing</b><small>Plan, subscription and billing</small></span></a>' +
-        ((isAgent() || can('agent')) ? '<a href="/agent/training"><i class="fas fa-graduation-cap"></i><span><b>Training Center</b><small>Review Agent and Pro+ workflows anytime</small></span></a>' : '') +
-        '<a href="' + route('/home') + '"><i class="fas fa-house"></i><span><b>Property Home</b><small>Your saved-home workspace</small></span></a>' +
+        ((isAgent() || can('agent')) ? '<a href="/agent/training"><i class="fas fa-graduation-cap"></i><span><b>Training Center</b><small>Review Agent and Pro+ tasks anytime</small></span></a>' : '') +
+        '<a href="' + route('/home') + '"><i class="fas fa-house"></i><span><b>Property Home</b><small>Your saved-home dashboard</small></span></a>' +
         developerToolsHtml() + salesDeskHtml() +
       '</nav><button class="wd-universal-signout" type="button" data-wd-universal="signout"><i class="fas fa-arrow-right-from-bracket"></i> Sign out</button>';
   }
@@ -505,7 +505,7 @@
       nodes.modal.classList.add('open');
       return;
     }
-    nodes.modal.innerHTML = '<button class="wd-universal-invite-x" type="button" data-wd-universal="invite-close" aria-label="Close invite"><i class="fas fa-xmark"></i></button><small>INVITE TO WATCHDOG</small><h2>Share better property intelligence.</h2><p>Send your personal Watchdog invite link to a friend, client or colleague.</p><label>Your invite link</label><div><input id="wd-universal-ref" readonly value="' + esc(d.link) + '"><button type="button" data-wd-universal="copy"><i class="far fa-copy"></i> Copy</button></div><footer><a href="mailto:?subject=' + encodeURIComponent('Try Watchdog Property Intelligence') + '&body=' + encodeURIComponent('I thought you might find Watchdog useful: ' + d.link) + '"><i class="fas fa-envelope"></i>Email invite</a><button type="button" data-wd-universal="share"><i class="fas fa-share-nodes"></i> Share</button></footer><em>Invite code: ' + esc(d.code) + '</em>';
+    nodes.modal.innerHTML = '<button class="wd-universal-invite-x" type="button" data-wd-universal="invite-close" aria-label="Close invite"><i class="fas fa-xmark"></i></button><small>INVITE TO WATCHDOG</small><h2>Share better property info.</h2><p>Send your personal Watchdog invite link to a friend, client or colleague.</p><label>Your invite link</label><div><input id="wd-universal-ref" readonly value="' + esc(d.link) + '"><button type="button" data-wd-universal="copy"><i class="far fa-copy"></i> Copy</button></div><footer><a href="mailto:?subject=' + encodeURIComponent('Try Watchdog Property Info') + '&body=' + encodeURIComponent('I thought you might find Watchdog useful: ' + d.link) + '"><i class="fas fa-envelope"></i>Email invite</a><button type="button" data-wd-universal="share"><i class="fas fa-share-nodes"></i> Share</button></footer><em>Invite code: ' + esc(d.code) + '</em>';
     nodes.shade.classList.add('open');
     nodes.modal.classList.add('open');
   }
@@ -576,7 +576,7 @@
   function shareInvite(){
     var d = inviteLink();
     if(!d) return;
-    if(navigator.share) navigator.share({title:'Watchdog Property Intelligence',text:'Take a look at Watchdog Property Intelligence.',url:d.link}).catch(function(){});
+    if(navigator.share) navigator.share({title:'Watchdog Property Info',text:'Take a look at Watchdog Property Info.',url:d.link}).catch(function(){});
     else copyInvite();
   }
 

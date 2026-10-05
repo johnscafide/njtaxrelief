@@ -25,7 +25,7 @@
   function card(r){
     var v=calc(r);if(!v)return '';
     return toolCard('Investor Carry-Cost Volatility','fa-chart-area',
-      '<p class="tl-p">A Watchdog operating-cost stability signal for investors. It combines municipal fiscal pressure, levy growth that is not being absorbed by new ratables, revaluation pressure, the tax-rate path and exempt/PILOT exposure.</p>'+
+      '<p class="tl-p">A Watchdog operating-cost stability sign for investors. It combines municipal fiscal pressure, levy growth that is not being absorbed by new ratables, revaluation pressure, the tax-rate path and exempt/PILOT exposure.</p>'+
       '<div class="pci-hero"><div><b>'+v.score+'</b><span>/ 100 volatility</span></div><p><strong>'+v.band+' carry-cost uncertainty.</strong> This measures tax-driven variability, not investment quality or a forecast of the next bill.</p></div>'+
       '<div class="pci-grid">'+v.parts.map(function(p){return '<div><span>'+p.label+'</span><b>'+Math.round(p.value)+'</b><i><em style="width:'+p.value+'%"></em></i></div>';}).join('')+'</div>'+
       (v.tax?'<div class="pci-scenarios"><span><small>Current tax</small><b>'+money(v.tax)+'</b></span><span><small>1-year path</small><b>'+money(v.one)+'</b></span><span><small>3-year path</small><b>'+money(v.three)+'</b></span><span><small>5-year path</small><b>'+money(v.five)+'</b></span></div>':'')+

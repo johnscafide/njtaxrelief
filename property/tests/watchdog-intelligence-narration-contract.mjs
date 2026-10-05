@@ -19,12 +19,12 @@ const brief = {
     'MISSING_TWO: one corroborating source is unavailable.',
   ],
   caveats: [
-    'CAVEAT_ONE: this is derived intelligence, not a municipal determination.',
+    'CAVEAT_ONE: this is calculated intelligence, not a municipal determination.',
     'CAVEAT_TWO: evidence can change as sources refresh.',
   ],
   sources: [
     { label: 'SOURCE_ONE: municipal assessment record', url: 'https://example.com/one' },
-    { label: 'SOURCE_TWO: Watchdog governed source record', url: 'https://example.com/two' },
+    { label: 'SOURCE_TWO: Watchdog checked source record', url: 'https://example.com/two' },
   ],
 };
 
@@ -70,7 +70,7 @@ for (const rendered of [quick, professional, evidence, changes]) {
   assert.equal(rendered.version, narration.VERSION);
 }
 
-assert.throws(() => narration.formatBrief({ evidence: ['no conclusion'] }, 'quick'), /governed Watchdog written response/i);
+assert.throws(() => narration.formatBrief({ evidence: ['no conclusion'] }, 'quick'), /checked Watchdog written response/i);
 assert.equal(narration.defaultFormat({ tool: 'inspect_lineage', prompt: 'show source lineage' }), 'evidence');
 assert.equal(narration.defaultFormat({ surface: 'daily', prompt: 'what changed today?' }), 'changes');
 assert.equal(narration.defaultFormat({ surface: 'dashboard', prompt: 'summarize this' }), 'quick');

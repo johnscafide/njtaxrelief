@@ -28,7 +28,7 @@
     'event.type_priority':{label:'Type of change',value:function(v){return String(v||'').replace(/_/g,' ');},why:'Some kinds of record changes matter more than others.'},
     'event.recency':{label:'How recent the change is',value:function(v){var n=num(v);return n==null?String(v||''):Math.round(n)+' out of 100 (higher means more recent)';},why:'Recent changes are the ones most likely to need attention now.'},
     'event.materiality':{label:'Size of the change',value:function(v){return String(v||'').replace(/_/g,' ');},why:'Bigger changes are more likely to affect value or taxes.'},
-    'event.change_count_30d':{label:'Changes in the last 30 days',value:function(v){return count(v,'change','changes');},why:'Several changes close together can signal something worth checking.'}
+    'event.change_count_30d':{label:'Changes in the last 30 days',value:function(v){return count(v,'change','changes');},why:'Several changes close together can point to something worth checking.'}
   };
 
   /* Checks on how complete the record is. They support a finding but are never

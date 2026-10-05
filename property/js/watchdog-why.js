@@ -165,7 +165,7 @@ function render(data,context){
   const sum=window.WatchdogPlain?window.WatchdogPlain.summary(f):{headline:'Review finding',text:'',priority:'',score:Math.round(Number(f.score||0)),confidence:Math.round(Number(f.confidence||0)),coverage:Math.round(Number(f.evidence_coverage||0)),confidenceLevel:''};
   const ordered=window.WatchdogPlain?.order?window.WatchdogPlain.order(f):evidence;
   host.innerHTML=`
-    <section class="wdwhy-plain"><span class="wdwhy-plain-kicker">The short version</span><h3>${esc(sum.headline)}</h3>${sum.text?`<p id="wdwhy-brief">${esc(sum.text)}</p>`:''}<small class="wdwhy-brief-note" id="wdwhy-brief-note" hidden></small>
+    <section class="wdwhy-plain"><h3>${esc(sum.headline)}</h3>${sum.text?`<p id="wdwhy-brief">${esc(sum.text)}</p>`:''}<small class="wdwhy-brief-note" id="wdwhy-brief-note" hidden></small>
       <div class="wdwhy-plain-chips"><span><b>${esc(sum.priority||'')}</b> priority · ${sum.score}/100</span><span><b>${esc(sum.confidenceLevel?sum.confidenceLevel.charAt(0).toUpperCase()+sum.confidenceLevel.slice(1):'')}</b> confidence · ${sum.confidence}%</span><span>${sum.coverage}% of evidence checked</span></div>
     </section>
     <div class="wdwhy-context">${[ctx.municipality,ctx.county?`${ctx.county} County`:null,ctx.property_class?`Class ${ctx.property_class}`:null].filter(Boolean).map(x=>`<span>${esc(x)}</span>`).join('')}</div>

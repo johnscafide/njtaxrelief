@@ -102,7 +102,7 @@
     }else{
       setText(n,'—');
       delete tile.dataset.ready;
-      tile.title='Score publishes when governed ROBUST evidence is sufficient';
+      tile.title='Score publishes when checked ROBUST evidence is sufficient';
     }
   }
 
@@ -118,7 +118,7 @@
     }else{
       setText(n,'—');
       delete tile.dataset.ready;
-      tile.title='Watchdog Tax Value appears when enough defensible sale evidence is available';
+      tile.title='Watchdog Tax Value appears when enough solid sale evidence is available';
     }
   }
 
@@ -140,7 +140,7 @@
     }else{
       setText(value,'—');
       delete tile.dataset.ready;
-      tile.title='ROBUST Burden publishes only when the required governed evidence is available';
+      tile.title='ROBUST Burden publishes only when the required checked evidence is available';
     }
   }
 
@@ -251,7 +251,7 @@
     var scoreHtml=score?'<div class="wd-mapless-score">'+esc(score)+'<em>/100</em></div>':'<div class="wd-mapless-score building">Score building</div>';
     var statusHtml=status?'<span class="wd-mapless-status">'+esc(status)+'</span>':'';
     photos.innerHTML='<div class="wd-mapless-property-hero" data-signature="'+esc(signature)+'"><div class="wd-mapless-property-in">'+
-      '<div><span class="wd-mapless-kicker"><i class="fas fa-dog"></i> Watchdog Property Intelligence</span><h2 class="wd-mapless-address">'+esc(address)+'</h2><p class="wd-mapless-copy">Rendered maps and third-party property imagery are temporarily disabled on this page. The property record, Watchdog Score and governed ROBUST evidence remain available.</p>'+statusHtml+'</div>'+
+      '<div><h2 class="wd-mapless-address">'+esc(address)+'</h2><p class="wd-mapless-copy">Rendered maps and third-party property imagery are temporarily disabled on this page. The property record, Watchdog Score and checked ROBUST evidence remain available.</p>'+statusHtml+'</div>'+
       '<div class="wd-mapless-scorebox"><span class="wd-mapless-scorelabel"><i class="fas fa-shield-dog"></i> Watchdog Score</span>'+scoreHtml+'<div class="wd-mapless-robust-title">ROBUST FRAMEWORK</div><div class="wd-mapless-components">'+componentsMarkup(rows)+'</div></div>'+
       '<div class="wd-mapless-photo-note"><i class="fas fa-camera"></i><span>Owner-submitted property photos are planned as the replacement for third-party rendered imagery.</span></div>'+
       '</div></div>'+(parcel?lotMapMarkup(parcel):'');

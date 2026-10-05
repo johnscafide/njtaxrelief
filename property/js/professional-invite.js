@@ -114,7 +114,7 @@
     section.className = 'ac-section acp-editor api-invite' + (state.profession === 'real_estate' ? ' is-agent' : '');
     section.innerHTML =
       '<div class="api-copy">' +
-        '<span class="api-eyebrow">' + esc(text.eyebrow) + '</span>' +
+        '' +
         '<h2>' + esc(text.title) + '</h2>' +
         '<p>' + esc(text.lead) + '</p>' +
       '</div>' +

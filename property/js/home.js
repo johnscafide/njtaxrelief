@@ -854,7 +854,7 @@ window.addEventListener('load',function(){if('serviceWorker' in navigator)naviga
   }
   function syncBrand(){
     setText('.wd4-brand-copy strong','Watchdog');
-    setText('.wd4-brand-copy small,.hm27-brand-copy small,.wdx-brand-copy small','PROPERTY INTELLIGENCE');
+    setText('.wd4-brand-copy small,.hm27-brand-copy small,.wdx-brand-copy small','PROPERTY INFO');
   }
   function run(){
     ensureStylesheet(STYLE);
@@ -931,12 +931,12 @@ window.addEventListener('load',function(){if('serviceWorker' in navigator)naviga
 (function(){'use strict';var registry=null,content={},bubble=null,active=null;
 function esc(v){return String(v==null?'':v).replace(/[&<>"']/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
 function byId(id){return registry&&registry.markers.find(function(m){return m.id===id;});}
-function sourceName(m){var s=String(m&&m.source_id||'');if(s==='nj-parcels-modiv')return'NJ parcel / MOD-IV public record';if(s==='nj-sr1a')return'NJ Division of Taxation verified sales';if(s==='nj-cod')return'NJ assessment-uniformity data';if(s==='nj-dca-budget')return'NJ DCA municipal budget and levy data';if(s==='nj-tax-court-appeals')return'NJ property-tax appeal outcome data';if(s.indexOf('njdep-')===0)return'NJDEP public GIS record';return m&&m.origin==='watchdog-derived'?'Watchdog derived methodology':'authoritative public record';}
-function fallback(m){var label=m.label||m.id,scope=m.scope||'property',src=sourceName(m),derived=m.origin==='watchdog-derived';return{plain:(m.description&&m.description!==label?m.description:label)+' — a '+scope+'-level field in the Watchdog catalog.',why:derived?'This turns supported upstream facts into an explainable screening signal so a professional can decide what deserves manual review.':'This adds a sourced fact to the property record so users can compare it with assessment, tax, sale, permit or risk context.',method:derived?'Calculated only from declared Watchdog dependencies/methodology; open the marker detail to see the specific formula.':'Read from '+src+' and retained with source context when available.',caution:derived?'A derived marker is a screening aid, not an appraisal, legal conclusion, credit decision or prediction of a person’s intent.':'Public records can be delayed, incomplete or updated after Watchdog reads them. Verify the authoritative source before reliance.',sources:[],related:[]};}
+function sourceName(m){var s=String(m&&m.source_id||'');if(s==='nj-parcels-modiv')return'NJ parcel / MOD-IV public record';if(s==='nj-sr1a')return'NJ Division of Taxation verified sales';if(s==='nj-cod')return'NJ assessment-uniformity data';if(s==='nj-dca-budget')return'NJ DCA municipal budget and levy data';if(s==='nj-tax-court-appeals')return'NJ property-tax appeal outcome data';if(s.indexOf('njdep-')===0)return'NJDEP public GIS record';return m&&m.origin==='watchdog-derived'?'Watchdog calculated method':'official public record';}
+function fallback(m){var label=m.label||m.id,scope=m.scope||'property',src=sourceName(m),derived=m.origin==='watchdog-derived';return{plain:(m.description&&m.description!==label?m.description:label)+' — a '+scope+'-level field in the Watchdog catalog.',why:derived?'This turns supported upstream facts into an clear screening red flag so a professional can decide what deserves manual review.':'This adds a sourced fact to the property record so users can compare it with assessment, tax, sale, permit or risk info.',method:derived?'Calculated only from declared Watchdog dependencies/methodology; open the marker detail to see the specific formula.':'Read from '+src+' and retained with source context when available.',caution:derived?'A calculated marker is a screening aid, not an appraisal, legal conclusion, credit decision or prediction of a person’s intent.':'Public records can be delayed, incomplete or updated after Watchdog reads them. Verify the official source before reliance.',sources:[],related:[]};}
 function rich(id){var m=byId(id);if(!m)return{};return content[id]||fallback(m);}
 function ensure(){if(bubble)return bubble;bubble=document.createElement('aside');bubble.className='dm-pop';bubble.setAttribute('role','tooltip');document.body.appendChild(bubble);return bubble;}
 function place(target){var b=ensure(),r=target.getBoundingClientRect(),w=Math.min(390,window.innerWidth-28),left=Math.max(14,Math.min(window.innerWidth-w-14,r.left+r.width/2-w/2)),top=r.bottom+10;if(top+b.offsetHeight>window.innerHeight-12)top=Math.max(12,r.top-b.offsetHeight-10);b.style.left=left+'px';b.style.top=top+'px';}
-function show(target){if(!window.matchMedia('(hover:hover) and (pointer:fine)').matches)return;var id=target.dataset.markerId,m=byId(id);if(!m)return;var r=rich(id),value=target.dataset.markerValue||'',note=target.dataset.markerNote||'';var b=ensure();b.innerHTML='<div class="dm-pop-top"><span class="dm-pop-icon"><i class="fas fa-chart-simple"></i></span><div><h3>'+esc(m.label)+'</h3>'+(value?'<span class="dm-pop-value">'+esc(value)+'</span>':'')+'</div></div><p>'+esc(r.plain)+(note?' '+esc(note):'')+'</p><p><strong>Why it matters:</strong> '+esc(r.why)+'</p><div class="dm-pop-meta"><span>'+esc(m.scope||'property')+'</span><span>'+esc(m.origin==='public'?'Public source':'Watchdog derived')+'</span><b>Click for full detail →</b></div>';b.classList.add('on');active=target;requestAnimationFrame(function(){place(target);});}
+function show(target){if(!window.matchMedia('(hover:hover) and (pointer:fine)').matches)return;var id=target.dataset.markerId,m=byId(id);if(!m)return;var r=rich(id),value=target.dataset.markerValue||'',note=target.dataset.markerNote||'';var b=ensure();b.innerHTML='<div class="dm-pop-top"><span class="dm-pop-icon"><i class="fas fa-chart-simple"></i></span><div><h3>'+esc(m.label)+'</h3>'+(value?'<span class="dm-pop-value">'+esc(value)+'</span>':'')+'</div></div><p>'+esc(r.plain)+(note?' '+esc(note):'')+'</p><p><strong>Why it matters:</strong> '+esc(r.why)+'</p><div class="dm-pop-meta"><span>'+esc(m.scope||'property')+'</span><span>'+esc(m.origin==='public'?'Public source':'Watchdog calculated')+'</span><b>Click for full detail →</b></div>';b.classList.add('on');active=target;requestAnimationFrame(function(){place(target);});}
 function hide(t){if(active!==t)return;active=null;if(bubble)bubble.classList.remove('on');}
 function load(){return Promise.all([fetch('/property/data/marker-registry.json').then(r=>r.json()),fetch('/property/data/marker-content.json').then(r=>r.json()).catch(()=>({markers:{}}))]).then(x=>{registry=x[0];content=x[1].markers||{};window.WatchdogMarkerContent={get:rich,registry:function(){return registry;},curated:content};});}
 document.addEventListener('mouseover',e=>{var t=e.target.closest('[data-marker-id]');if(t&&active!==t)show(t)});document.addEventListener('mouseout',e=>{var t=e.target.closest('[data-marker-id]');if(t&&!t.contains(e.relatedTarget))hide(t)});document.addEventListener('focusin',e=>{var t=e.target.closest('[data-marker-id]');if(t)show(t)});document.addEventListener('focusout',e=>{var t=e.target.closest('[data-marker-id]');if(t)hide(t)});window.addEventListener('scroll',()=>{if(bubble)bubble.classList.remove('on')},{passive:true});load().catch(e=>console.warn('Marker intelligence unavailable',e));})();
@@ -1724,7 +1724,7 @@ document.addEventListener('mouseover',e=>{var t=e.target.closest('[data-marker-i
   function signalSummary(node) {
     var preferred = node.querySelector('.ir-say,.rr-flag,.rv-own,.bc-warn,.bc-ok,.ap-ev,.tl-p,.tm-reading,p');
     var text = preferred ? preferred.textContent.replace(/\s+/g, ' ').trim() : '';
-    if (!text) text = 'Open for the current reading, methodology and source trail.';
+    if (!text) text = 'Open for the current reading, method and source trail.';
     return text.length > 145 ? text.slice(0, 142).replace(/\s+\S*$/, '') + '…' : text;
   }
 
@@ -1736,11 +1736,11 @@ document.addEventListener('mouseover',e=>{var t=e.target.closest('[data-marker-i
       compare: 'watchdog.effective_tax_rate', trend: 'watchdog.tax_trajectory', history: 'property.assessed_value'
     }[sectionKey];
     var looseBlocks = [
-      ['.ti-report', 'Town intelligence', 'fa-chart-column'],
+      ['.ti-report', 'Town info', 'fa-chart-column'],
       ['.bp-report', 'Municipal budget pressure', 'fa-building-columns'],
       ['.tm-detail', 'Historical Property Time Machine', 'fa-clock-rotate-left'],
       ['.dd-tool', 'Closing and collateral preflight', 'fa-shield-halved'],
-      ['.pw-stack', 'Professional closing workflows', 'fa-briefcase']
+      ['.pw-stack', 'Professional closing tasks', 'fa-briefcase']
     ];
     looseBlocks.forEach(function (config) {
       host.querySelectorAll(':scope > ' + config[0]).forEach(function (block) {
@@ -2011,7 +2011,7 @@ document.addEventListener('mouseover',e=>{var t=e.target.closest('[data-marker-i
     if (t.tax != null) items.push(item(t.taxYear ? t.taxYear + ' annual tax' : 'Saved annual tax', money(t.tax), t.live ? 'Municipal bill evidence' : 'Saved state record'));
     if (t.rate != null) items.push(item(t.taxYear ? t.taxYear + ' tax rate' : 'Tax rate', t.rate.toFixed(3) + '%', 'Municipal evidence'));
     if (t.mismatch) items.push(item('Tax-year alignment', 'Protected', 'Assessment year is not inferred'));
-    return '<section class="hm-tax-timeline" id="hm-current-tax-evidence"><div class="hm-tax-head"><div><span class="hm-tax-kicker">TAX TIMELINE</span><h2>Current municipal tax evidence</h2><p>Observed bill, assessment and rate stay aligned by tax year. Watchdog does not mix a revaluation assessment with an older rate.</p></div>' + (t.source ? '<a href="' + esc(t.source) + '" target="_blank" rel="noopener">Official source ↗</a>' : '') + '</div><div class="hm-tax-grid">' + items.join('') + '</div>' + (t.provider ? '<p class="hm-tax-source">Source: ' + esc(t.provider) + '</p>' : '') + '</section>';
+    return '<section class="hm-tax-timeline" id="hm-current-tax-evidence"><div class="hm-tax-head"><div><h2>Current municipal tax evidence</h2><p>Observed bill, assessment and rate stay aligned by tax year. Watchdog does not mix a revaluation assessment with an older rate.</p></div>' + (t.source ? '<a href="' + esc(t.source) + '" target="_blank" rel="noopener">Official source ↗</a>' : '') + '</div><div class="hm-tax-grid">' + items.join('') + '</div>' + (t.provider ? '<p class="hm-tax-source">Source: ' + esc(t.provider) + '</p>' : '') + '</section>';
   }
 
   window.hmSwitch = function (pin) {
@@ -2108,7 +2108,7 @@ document.addEventListener('mouseover',e=>{var t=e.target.closest('[data-marker-i
       '</header>' +
 
       '<div class="wrap hm-wrap">' +
-        (commercial ? '<section class="hm-commercial-note"><i class="fas fa-building"></i><div><b>Commercial property workspace</b><p>This record is kept separate from homeowner benefit and residential comparable logic. Use the assessment, tax, parcel and diligence data here; confirm valuation and appeal strategy with commercial-specific evidence.</p></div></section>' : '') +
+        (commercial ? '<section class="hm-commercial-note"><i class="fas fa-building"></i><div><b>Commercial property dashboard</b><p>This record is kept separate from homeowner benefit and residential comparable logic. Use the assessment, tax, parcel and diligence data here; confirm valuation and appeal strategy with commercial-specific evidence.</p></div></section>' : '') +
         '<section class="ai">' +
           '<div class="ai-h">' +
             '<img src="/johnprofile.jpg" alt="" onerror="this.style.display=\'none\'">' +
@@ -2132,7 +2132,7 @@ document.addEventListener('mouseover',e=>{var t=e.target.closest('[data-marker-i
         (typeof toolScoreHistory === 'function' ? toolScoreHistory(r) : '') +
         (typeof toolRealEstateConcierge === 'function' ? toolRealEstateConcierge(r) : '') +
 
-        '<div class="hm-secbar"><div><h2>Explore your property</h2><p>Start with a signal. Open only what matters to you.</p></div>' +
+        '<div class="hm-secbar"><div><h2>See your property</h2><p>Start with a warning sign. Open only what matters to you.</p></div>' +
           '<button id="hm-all" onclick="hmExpandAll()"><i class="fas fa-expand"></i> Expand all</button></div>' +
 
         SECTIONS.map(function (sec) { return sectionShell(sec, r); }).join('') +
@@ -2241,12 +2241,12 @@ document.addEventListener('mouseover',e=>{var t=e.target.closest('[data-marker-i
     },
     {
       k: 'broker', tier: 'pro', cat: 'Professional intelligence', icon: 'fa-house-circle-check', title: 'Real Estate Professional Intelligence',
-      pro: 'A broker-ready layer that condenses assessment, tax, market-confidence and municipal signals into ten attributable client-conversation markers instead of another wall of raw numbers.',
+      pro: 'A broker-ready layer that condenses assessment, tax, market-confidence and municipal red flags into ten attributable client-conversation markers instead of another wall of raw numbers.',
       build: function (r) { return toolRealEstateIntelligence(r) + toolBrokerListingBrief(r); },
       sum: function () { return '10 agent-specific Watchdog markers'; }
     },
     {
-      k: 'decision', tier: 'pro_plus', cat: 'Professional intelligence', icon: 'fa-compass-drafting', title: 'Cross-Professional Decision Signals',
+      k: 'decision', tier: 'pro_plus', cat: 'Professional intelligence', icon: 'fa-compass-drafting', title: 'Cross-Professional Decision Numbers',
       pro: 'These scores compress several independently sourced facts into a consistent triage layer for attorneys, lenders, appraisers, agents and investors while keeping the underlying formula visible.',
       build: function (r) { return toolProfessionalDecisionSignals(r); },
       sum: function () { return '5 new formula-backed professional signals'; }
@@ -2258,7 +2258,7 @@ document.addEventListener('mouseover',e=>{var t=e.target.closest('[data-marker-i
       sum: function (r) { return typeof statewideModivSummary === 'function' ? statewideModivSummary(r) : '2026 statewide MOD-IV baseline'; }
     },
     {
-      k: 'compare', tier: 'pro', cat: 'Market context', short: 'Tax burden across municipalities', icon: 'fa-route', title: 'Compare against other towns',
+      k: 'compare', tier: 'pro', cat: 'Market info', short: 'Tax burden across municipalities', icon: 'fa-route', title: 'Compare against other towns',
       pro: 'Tax per dollar of value is the only measure that travels across municipal lines. Useful for a ' +
            'relocation conversation and for ranking a portfolio.',
       build: function (r) { return toolRelocation(r) + toolInvestorScreen() + toolCarryCostVolatility(r); }
@@ -2293,7 +2293,7 @@ document.addEventListener('mouseover',e=>{var t=e.target.closest('[data-marker-i
     return '<section class="sec2 sec2-cat-' + catClass + ' ' + tone + (OPEN[sec.k] ? ' open' : '') + '" data-min-plan="' + (sec.tier || 'standard') + '" id="sec-' + sec.k + '">' +
       '<button class="sec2-h" onclick="hmToggle(\'' + sec.k + '\')">' +
         '<span class="sec2-icon-tile"><i class="fas ' + sec.icon + ' sec2-i"></i></span>' +
-        '<span class="sec2-copy"><small class="sec2-kicker">' + esc(sec.cat || 'Analysis') + '</small><span class="sec2-t">' + sec.title + '</span>' +
+        '<span class="sec2-copy"><span class="sec2-t">' + sec.title + '</span>' +
         (sum ? '<span class="sec2-s">' + sum + '</span>' : '') + '</span>' +
         '<i class="fas fa-chevron-down sec2-c"></i>' +
       '</button>' +
@@ -2513,7 +2513,7 @@ document.addEventListener('mouseover',e=>{var t=e.target.closest('[data-marker-i
     } else if (u && u.coefficient < 10) {
       p.push(['fa-ruler-combined', 'good',
         'The town assesses tightly, at a coefficient of ' + u.coefficient +
-        '. A board here will be harder to persuade, because the roll is defensible.']);
+        '. A board here will be harder to persuade, because the roll is solid.']);
     }
     if (a && a.latest && a.latest.win_rate_filed >= 50) {
       p.push(['fa-gavel', 'good',
@@ -2749,7 +2749,7 @@ document.addEventListener('mouseover',e=>{var t=e.target.closest('[data-marker-i
         }
         openFromHash();
       }).catch(function (error) {
-        console.error('Property report workspace failed:', error);
+        console.error('Property report dashboard failed:', error);
         el('hm-loading').style.display = 'none';
         el('hm-main').style.display = '';
         el('hm-body').innerHTML = '<div class="wrap"><div class="db-error-panel"><i class="fas fa-triangle-exclamation"></i>' +
@@ -2859,7 +2859,7 @@ function paintProfile(){ensurePopovers();var p=document.getElementById('hm27-pro
 '<a href="/property/account"><i class="fas fa-user-pen"></i><span><b>Edit profile & role</b><small>Profile, profession and preferences</small></span></a>'+
 '<button class="hm27-menu-row" type="button" data-hm27="invite"><i class="fas fa-user-plus"></i><span><b>Invite others</b><small>Share Watchdog with someone</small></span></button>'+
 '<a href="/property/account"><i class="fas fa-credit-card"></i><span><b>Account & billing</b><small>Plan, subscription and billing</small></span></a>'+
-'<a href="/property/home"><i class="fas fa-house"></i><span><b>Property Home</b><small>Single-property intelligence</small></span></a>'+
+'<a href="/property/home"><i class="fas fa-house"></i><span><b>Property Home</b><small>Single-property info</small></span></a>'+
 '</nav><button class="hm27-pop-signout" type="button" data-hm27="signout"><i class="fas fa-arrow-right-from-bracket"></i> Sign out</button>';}
 function unreadCount(){var read=getReadAt()?new Date(getReadAt()).getTime():0;return events.filter(function(x){return(new Date(x.occurred_at).getTime()||0)>read;}).length;}
 function iconFor(e){var t=String(e.event_type||e.marker_id||'').toLowerCase(),s=String(e.severity||'').toLowerCase();if(/high|critical/.test(s))return'fa-triangle-exclamation';if(/tax|assessment/.test(t))return'fa-receipt';if(/market|value/.test(t))return'fa-chart-line';if(/permit/.test(t))return'fa-hammer';return'fa-house';}
@@ -2904,7 +2904,7 @@ function loadWeather(){
   });
 }
 
-function shareInvite(){var code=user?'WD-'+String(user.id).replace(/-/g,'').slice(0,10).toUpperCase():'WATCHDOG',link=location.origin+'/property/?ref='+encodeURIComponent(code);if(navigator.share){navigator.share({title:'Watchdog Property Intelligence',text:'Take a look at Watchdog Property Intelligence.',url:link}).catch(function(){});}else if(navigator.clipboard){navigator.clipboard.writeText(link).then(function(){alert('Invite link copied.');});}}
+function shareInvite(){var code=user?'WD-'+String(user.id).replace(/-/g,'').slice(0,10).toUpperCase():'WATCHDOG',link=location.origin+'/property/?ref='+encodeURIComponent(code);if(navigator.share){navigator.share({title:'Watchdog Property Info',text:'Take a look at Watchdog Property Info.',url:link}).catch(function(){});}else if(navigator.clipboard){navigator.clipboard.writeText(link).then(function(){alert('Invite link copied.');});}}
 function refreshContext(){return loadCurrentProperty().then(function(){return Promise.all([loadEvents(),loadWeather()]);});}
 
 function bind(){
@@ -3226,7 +3226,7 @@ function paintScore(hero,row){
   var w=null;
   try{if(typeof window.watchdogScore==='function')w=window.watchdogScore(row);}catch(e){console.warn('Watchdog hero score unavailable',e);}
   if(!w||w.score==null){
-    box.innerHTML='<div class="hm-score-empty"><i class="fas fa-dog"></i><div><b>Watchdog Score is building</b><span>ROBUST will publish a score here when this property has enough governed evidence. No fallback score is substituted.</span></div></div><a class="hm-score-link" href="/property/robust/">How ROBUST works <i class="fas fa-arrow-right"></i></a>';
+    box.innerHTML='<div class="hm-score-empty"><i class="fas fa-dog"></i><div><b>Watchdog Score is building</b><span>ROBUST will publish a score here when this property has enough checked evidence. No fallback score is substituted.</span></div></div><a class="hm-score-link" href="/property/robust/">How ROBUST works <i class="fas fa-arrow-right"></i></a>';
     box.dataset.scoreModel='none';
     return;
   }
@@ -3457,35 +3457,35 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
   function urgencyCopy(m, suggestion) {
     if (suggestion) {
       var band = suggestion.attention_band === 'act_now' ? 'Act now' : suggestion.attention_band === 'this_week' ? 'This week' : 'Watch';
-      return band + ' signal. Watchdog scored this review finding ' + Math.round(clamp(suggestion.score, 0, 100)) + '/100 with ' + Math.round(clamp(suggestion.evidence_coverage, 0, 100)) + '% evidence coverage. Review the evidence before acting.';
+      return band + ' red flag. Watchdog scored this review finding ' + Math.round(clamp(suggestion.score, 0, 100)) + '/100 with ' + Math.round(clamp(suggestion.evidence_coverage, 0, 100)) + '% evidence coverage. Review the evidence before acting.';
     }
     if (m.appeal) return 'This record already carries an appeal-case indicator. That is a reason to review the supporting assessment evidence, not a guarantee of a reduction.';
-    if (m.taxLoad != null && m.taxLoad >= 2.5) return 'Property taxes equal about ' + pct(m.taxLoad) + ' of the current Watchdog value context each year. That carrying-cost load deserves attention in affordability, yield, or client strategy.';
-    return 'No high-urgency governed finding is present for this property right now. Watchdog will keep monitoring rather than manufacture urgency.';
+    if (m.taxLoad != null && m.taxLoad >= 2.5) return 'Property taxes equal about ' + pct(m.taxLoad) + ' of the current Watchdog value info each year. That carrying-cost load deserves attention in affordability, yield, or client strategy.';
+    return 'No high-urgency checked finding is present for this property right now. Watchdog will keep monitoring rather than manufacture urgency.';
   }
   function financialCopy(role, m) {
-    if (role === 'investor') return 'Annual property tax is ' + money(m.tax) + (m.monthlyTax != null ? ' (' + money(m.monthlyTax) + '/month)' : '') + (m.taxLoad != null ? ', about ' + pct(m.taxLoad) + ' of Watchdog value context. ' : '. ') + (m.onePercentValue != null ? 'A 1% change in property value is roughly ' + money(m.onePercentValue) + '. Use these as real carrying-cost and sensitivity inputs when you model purchase price, rehab, financing, rent, and exit ROI.' : 'Add a verified value before relying on return sensitivity.');
-    if (role === 'real_estate') return 'The property carries ' + money(m.tax) + ' in annual tax' + (m.monthlyTax != null ? ', about ' + money(m.monthlyTax) + ' per month' : '') + '. ' + (m.onePercentValue != null ? 'A 1% pricing movement is roughly ' + money(m.onePercentValue) + ', giving you a concrete scale for pricing and negotiation conversations.' : 'Watchdog will add pricing sensitivity when a usable value context is available.');
-    if (role === 'mortgage_lending') return 'Current annual property tax is ' + money(m.tax) + (m.monthlyTax != null ? ', about ' + money(m.monthlyTax) + ' per month before insurance and other escrow items.' : '.') + (m.taxLoad != null ? ' Tax load is about ' + pct(m.taxLoad) + ' of Watchdog value context.' : '') + ' Use the verified tax figure in affordability and escrow review rather than relying on a generic estimate.';
-    if (role === 'attorney' || role === 'property_tax_professional') return 'Assessment is ' + money(m.assessed) + ' against a Watchdog value context of ' + money(m.value) + (m.assessedToValue != null ? ', an assessment-to-value relationship of about ' + pct(m.assessedToValue) + '.' : '.') + ' Annual tax is ' + money(m.tax) + '. Treat these as review inputs and inspect source lineage before forming a legal or appeal conclusion.';
-    if (role === 'appraiser') return 'Assessment is ' + money(m.assessed) + ' and Watchdog value context is ' + money(m.value) + (m.assessedToValue != null ? ', placing assessment at about ' + pct(m.assessedToValue) + ' of that context.' : '.') + ' This is a screening relationship, not an appraisal or replacement for a supported opinion of value.';
-    if (role === 'title_closing') return 'Annual tax is ' + money(m.tax) + (m.monthlyTax != null ? ', roughly ' + money(m.monthlyTax) + ' per month.' : '.') + ' Keep tax, assessment, and current change signals in the diligence file so settlement assumptions use the current property record.';
-    if (role === 'contractor') return 'Watchdog value context is ' + money(m.value) + (m.onePercentValue != null ? '; 1% of that value is about ' + money(m.onePercentValue) + '.' : '.') + ' Use this only as project-scale context. Renovation ROI still depends on scope, cost, market response, permits, and verified post-work value.';
-    if (role === 'homeowner') return 'Current property tax is ' + money(m.tax) + (m.monthlyTax != null ? ', about ' + money(m.monthlyTax) + ' per month.' : '.') + (m.taxLoad != null ? ' That equals about ' + pct(m.taxLoad) + ' of Watchdog value context per year.' : '') + ' Watchdog will flag meaningful assessment and property-record changes as the evidence changes.';
-    return 'Current assessment is ' + money(m.assessed) + ', annual property tax is ' + money(m.tax) + ', and Watchdog value context is ' + money(m.value) + '. Set your profession to turn these same facts into a workflow-specific financial lens.';
+    if (role === 'investor') return 'Annual property tax is ' + money(m.tax) + (m.monthlyTax != null ? ' (' + money(m.monthlyTax) + '/month)' : '') + (m.taxLoad != null ? ', about ' + pct(m.taxLoad) + ' of Watchdog value info. ' : '. ') + (m.onePercentValue != null ? 'A 1% change in property value is roughly ' + money(m.onePercentValue) + '. Use these as real carrying-cost and sensitivity inputs when you model purchase price, rehab, financing, rent, and exit ROI.' : 'Add a verified value before relying on return sensitivity.');
+    if (role === 'real_estate') return 'The property carries ' + money(m.tax) + ' in annual tax' + (m.monthlyTax != null ? ', about ' + money(m.monthlyTax) + ' per month' : '') + '. ' + (m.onePercentValue != null ? 'A 1% pricing movement is roughly ' + money(m.onePercentValue) + ', giving you a concrete scale for pricing and negotiation conversations.' : 'Watchdog will add pricing sensitivity when a usable value info is available.');
+    if (role === 'mortgage_lending') return 'Current annual property tax is ' + money(m.tax) + (m.monthlyTax != null ? ', about ' + money(m.monthlyTax) + ' per month before insurance and other escrow items.' : '.') + (m.taxLoad != null ? ' Tax load is about ' + pct(m.taxLoad) + ' of Watchdog value info.' : '') + ' Use the verified tax figure in affordability and escrow review rather than relying on a generic estimate.';
+    if (role === 'attorney' || role === 'property_tax_professional') return 'Assessment is ' + money(m.assessed) + ' against a Watchdog value background of ' + money(m.value) + (m.assessedToValue != null ? ', an assessment-to-value relationship of about ' + pct(m.assessedToValue) + '.' : '.') + ' Annual tax is ' + money(m.tax) + '. Treat these as review inputs and inspect source lineage before forming a legal or appeal conclusion.';
+    if (role === 'appraiser') return 'Assessment is ' + money(m.assessed) + ' and Watchdog value info is ' + money(m.value) + (m.assessedToValue != null ? ', placing assessment at about ' + pct(m.assessedToValue) + ' of that context.' : '.') + ' This is a screening relationship, not an appraisal or replacement for a supported opinion of value.';
+    if (role === 'title_closing') return 'Annual tax is ' + money(m.tax) + (m.monthlyTax != null ? ', roughly ' + money(m.monthlyTax) + ' per month.' : '.') + ' Keep tax, assessment, and current change red flags in the diligence file so settlement assumptions use the current property record.';
+    if (role === 'contractor') return 'Watchdog value info is ' + money(m.value) + (m.onePercentValue != null ? '; 1% of that value is about ' + money(m.onePercentValue) + '.' : '.') + ' Use this only as project-scale info. Renovation ROI still depends on scope, cost, market response, permits, and verified post-work value.';
+    if (role === 'homeowner') return 'Current property tax is ' + money(m.tax) + (m.monthlyTax != null ? ', about ' + money(m.monthlyTax) + ' per month.' : '.') + (m.taxLoad != null ? ' That equals about ' + pct(m.taxLoad) + ' of Watchdog value info per year.' : '') + ' Watchdog will flag meaningful assessment and property-record changes as the evidence changes.';
+    return 'Current assessment is ' + money(m.assessed) + ', annual property tax is ' + money(m.tax) + ', and Watchdog value info is ' + money(m.value) + '. Set your profession to turn these same facts into a task-specific financial lens.';
   }
   function innovationCopy(role) {
     var map = {
-      real_estate: 'Turn the property into a client conversation brief: tax carrying cost, assessment context, the current Watchdog finding, and one evidence-backed next question. Use the facts to create a reason to call, not a generic sales script.',
+      real_estate: 'Turn the property into a client conversation brief: tax carrying cost, assessment info, the current Watchdog finding, and one record-based next question. Use the facts to create a reason to call, not a generic sales script.',
       investor: 'Use Watchdog as a pre-underwriting layer. Carry verified annual tax into purchase, rehab, rent, financing, and exit scenarios, then stress-test the deal before spending time on deeper diligence.',
-      attorney: 'Build an evidence-first review packet from source facts, missing evidence, model lineage, and change history. Reduce fact collection time while keeping the professional conclusion human-controlled.',
-      mortgage_lending: 'Use property-tax intelligence before final underwriting. Current tax, monthly escrow equivalent, change signals, and property-record inconsistencies can be reviewed before they become closing surprises.',
+      attorney: 'Build an records-first review packet from source facts, missing evidence, model lineage, and change history. Reduce fact collection time while keeping the professional conclusion human-controlled.',
+      mortgage_lending: 'Use property tax facts before final underwriting. Current tax, monthly escrow equivalent, change warning signs, and property-record inconsistencies can be reviewed before they become closing surprises.',
       appraiser: 'Use Watchdog as a research accelerator. Surface assessment/value divergence, change history, and source-backed anomalies before selecting the records that deserve deeper appraisal analysis.',
-      contractor: 'Pair property context with permit and change intelligence to identify where project assumptions need verification. Watchdog should tell you what to investigate before you price the opportunity.',
-      property_tax_professional: 'Create a repeatable triage queue from assessment relationships, evidence coverage, missing records, and current tax burden. Spend professional time on properties with the strongest review signal.',
-      title_closing: 'Use Watchdog as a pre-closing exception screen. Bring tax, assessment, ownership context, permit/change signals, and missing evidence into one review trail before the file reaches the last mile.',
+      contractor: 'Pair property info with permit and change intelligence to identify where project assumptions need verification. Watchdog should tell you what to investigate before you price the opportunity.',
+      property_tax_professional: 'Create a repeatable triage queue from assessment relationships, evidence coverage, missing records, and current tax burden. Spend professional time on properties with the strongest review warning sign.',
+      title_closing: 'Use Watchdog as a pre-closing exception screen. Bring tax, assessment, ownership info, permit/change numbers, and missing evidence into one review trail before the file reaches the last mile.',
       homeowner: 'Use Watchdog as a property memory. Keep the current tax and assessment baseline, then let monitored changes tell you when there is something worth reviewing instead of repeatedly searching records.',
-      other: 'Use the property as a governed decision file: financial context, current evidence-backed signals, missing evidence, and a documented next action.',
+      other: 'Use the property as a checked decision file: financial info, current record-based red flags, missing evidence, and a documented next action.',
       general: 'Set your profession and Watchdog will rebuild this panel around the financial questions, risks, opportunities, and next actions that matter in your work.'
     };
     return map[role] || map.general;
@@ -3495,29 +3495,29 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
     var map = {
       real_estate: 'Review the tax and value story, then decide whether this creates a useful buyer, seller, sphere, or prospect conversation.',
       investor: 'Carry the verified tax into your deal assumptions and test whether the property still clears your required return before deeper underwriting.',
-      attorney: 'Open the evidence trail and identify what is proven, what is derived, and what is still missing before creating a case position.',
+      attorney: 'Open the evidence trail and identify what is proven, what is calculated, and what is still missing before creating a case position.',
       mortgage_lending: 'Carry current tax into escrow and affordability review, then monitor for assessment or municipal changes that can alter the payment story.',
       appraiser: 'Use the divergence screen to choose which records need source verification and comparable research.',
-      contractor: 'Review property and permit context before estimating scope, timeline, or value impact.',
-      property_tax_professional: 'Review assessment evidence and missing inputs before deciding whether this belongs in an appeal or advisory workflow.',
+      contractor: 'Review property and permit info before estimating scope, timeline, or value impact.',
+      property_tax_professional: 'Review assessment evidence and missing inputs before deciding whether this belongs in an appeal or advisory process.',
       title_closing: 'Check the current property record and change timeline before relying on tax or diligence assumptions.',
-      homeowner: 'Keep monitoring. If Watchdog produces a stronger assessment or change signal, open the evidence before taking action.',
+      homeowner: 'Keep monitoring. If Watchdog produces a stronger assessment or change red flag, open the evidence before taking action.',
       other: 'Open Data Workbench to inspect the property record and evidence in detail.',
-      general: 'Choose your profession first. Watchdog will then recommend the workflow-specific next action.'
+      general: 'Choose your profession first. Watchdog will then recommend the task-specific next action.'
     };
     return map[role] || map.general;
   }
   function evidenceCopy(suggestion) {
     if (!suggestion) return can('pro')
-      ? 'No current governed model finding rose into the property queue. This is a valid result. Watchdog continues to monitor the evidence and will surface a finding when the facts justify one.'
-      : 'Your account can use the profession-aware property brief. Governed model scoring and deeper evidence-backed findings begin with Pro.';
+      ? 'No current checked model finding rose into the property queue. This is a valid result. Watchdog continues to monitor the evidence and will show a finding when the facts justify one.'
+      : 'Your account can use the profession-aware property brief. Checked model scoring and deeper record-based findings begin with Pro.';
     return suggestion.why_now + ' Confidence ' + Math.round(clamp(suggestion.confidence, 0, 100)) + '%. Evidence coverage ' + Math.round(clamp(suggestion.evidence_coverage, 0, 100)) + '%.' + (suggestion.limited_evidence ? ' Evidence is limited, so Watchdog is intentionally reducing certainty.' : ' Required evidence coverage is adequate for this review finding.');
   }
   function card(icon, label, title, copy, className) {
     return '<article class="wdai-card ' + (className || '') + '"><div class="wdai-card-icon"><i class="fas ' + icon + '"></i></div><div><span>' + esc(label) + '</span><h3>' + esc(title) + '</h3><p>' + esc(copy) + '</p></div></article>';
   }
   function rolePrompt() {
-    return '<section class="wdai-role-prompt"><div><span>PERSONALIZATION REQUIRED FOR EXACT INTEL</span><h3>What is your primary profession?</h3><p>Without a stated profession, Watchdog keeps this property brief generalized. Choose one and the same governed facts will be rebuilt around your financial, risk, opportunity, and workflow priorities.</p></div><div class="wdai-role-controls"><select id="wdai-profession" aria-label="Primary profession"><option value="">Choose profession</option>' + PROFESSION_OPTIONS.map(function (option) { return '<option value="' + esc(option[0]) + '">' + esc(option[1]) + '</option>'; }).join('') + '</select><button type="button" id="wdai-save-profession">Personalize my Intel</button></div><small id="wdai-role-note" aria-live="polite">Your profession personalizes recommendations. It does not change billing or authorization.</small></section>';
+    return '<section class="wdai-role-prompt"><div><span>PERSONALIZATION REQUIRED FOR EXACT INTEL</span><h3>What is your primary profession?</h3><p>Without a stated profession, Watchdog keeps this property brief generalized. Choose one and the same checked facts will be rebuilt around your financial, risk, opportunity, and process priorities.</p></div><div class="wdai-role-controls"><select id="wdai-profession" aria-label="Primary profession"><option value="">Choose profession</option>' + PROFESSION_OPTIONS.map(function (option) { return '<option value="' + esc(option[0]) + '">' + esc(option[1]) + '</option>'; }).join('') + '</select><button type="button" id="wdai-save-profession">Personalize my Intel</button></div><small id="wdai-role-note" aria-live="polite">Your profession personalizes recommendations. It does not change billing or authorization.</small></section>';
   }
   function render() {
     var panel = document.querySelector('#hm-body .ai');
@@ -3527,18 +3527,18 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
     panel.classList.add('wdai');
     panel.setAttribute('data-watchdog-analyst-intel', role);
     panel.innerHTML =
-      '<header class="wdai-head"><div class="wdai-mark"><i class="fas fa-dog"></i><i class="fas fa-wand-magic-sparkles"></i></div><div class="wdai-title"><span>WATCHDOG ANALYST INTEL</span><h2>' + esc(address) + '</h2><p>' + (exact ? 'Built for a ' + esc(def.label) + ' using this property’s governed records.' : 'Generalized property intelligence until you tell Watchdog how you work.') + '</p></div><div class="wdai-persona"><i class="fas ' + esc(def.icon) + '"></i><span><small>Perspective</small><b>' + esc(exact ? def.label : 'Generalized') + '</b></span></div></header>' +
+      '<header class="wdai-head"><div class="wdai-mark"><i class="fas fa-dog"></i><i class="fas fa-wand-magic-sparkles"></i></div><div class="wdai-title"><span>WATCHDOG ANALYST INTEL</span><h2>' + esc(address) + '</h2><p>' + (exact ? 'Built for a ' + esc(def.label) + ' using this property’s checked records.' : 'Generalized property info until you tell Watchdog how you work.') + '</p></div><div class="wdai-persona"><i class="fas ' + esc(def.icon) + '"></i><span><small>Perspective</small><b>' + esc(exact ? def.label : 'Generalized') + '</b></span></div></header>' +
       (exact ? '<div class="wdai-role-set"><i class="fas fa-circle-check"></i><span>Profession-aware Intel is active for <b>' + esc(def.label) + '</b>.</span><a href="/property/account">Change profession</a></div>' : rolePrompt()) +
       '<div class="wdai-grid">' +
         card('fa-coins', 'FINANCIAL LENS', 'What the numbers mean for you', financialCopy(role, m), 'money') +
         card('fa-bolt', 'MOTIVATION', 'Why this property deserves attention', urgencyCopy(m, suggestion), 'motivation') +
-        card('fa-lightbulb', 'INNOVATION', 'A smarter way to use this property', innovationCopy(role), 'innovation') +
+        card('fa-lightbulb', 'INNOVATION', 'A better way to use this property', innovationCopy(role), 'innovation') +
         card('fa-shield-halved', 'EVIDENCE', suggestion ? 'What Watchdog is seeing' : 'What Watchdog can prove now', evidenceCopy(suggestion), 'evidence') +
       '</div>' +
       '<section class="wdai-next"><div><span>NEXT BEST ACTION</span><h3>' + esc(nextActionCopy(role, suggestion)) + '</h3><p>Watchdog is decision support. Source facts, missing evidence, and professional judgment stay visible.</p></div><div class="wdai-actions">' +
         (suggestion ? '<button type="button" id="wdai-open-evidence"><i class="fas fa-magnifying-glass-chart"></i> Why Watchdog?</button>' : '') +
         '<a href="/property/data-workbench"><i class="fas fa-table-list"></i> Open Data Workbench</a>' +
-        (can('pro') ? '<a class="primary" href="/property/intelligence"><i class="fas fa-wand-magic-sparkles"></i> Intelligence Hub</a>' : '<a class="primary" href="/property/pro#plans"><i class="fas fa-lock"></i> Unlock Pro Intelligence</a>') +
+        (can('pro') ? '<a class="primary" href="/property/intelligence"><i class="fas fa-wand-magic-sparkles"></i> Intelligence Hub</a>' : '<a class="primary" href="/property/pro#plans"><i class="fas fa-lock"></i> Open Pro Intelligence</a>') +
       '</div></section>';
 
     var save = document.getElementById('wdai-save-profession');
@@ -3949,7 +3949,7 @@ function gateMarkup(){
     '<section class="wd-intelligence-gate-card" role="dialog" aria-modal="true" aria-labelledby="wd-intelligence-gate-title">'+
       '<button class="wd-intelligence-gate-close" type="button" data-wd-intelligence-close aria-label="Close"><i class="fas fa-xmark"></i></button>'+
       '<div class="wd-intelligence-gate-mark"><i class="fas fa-microphone-lines"></i></div>'+
-      '<span class="wd-intelligence-gate-kicker">Watchdog Intelligence · Voice</span>'+
+      ''+
       '<h2 id="wd-intelligence-gate-title">Watchdog Intelligence Voice</h2>'+
       '<p id="wd-intelligence-gate-copy"></p>'+
       '<div class="wd-intelligence-gate-actions" id="wd-intelligence-gate-actions"></div>'+
@@ -3984,7 +3984,7 @@ function showGate(status){
   var unavailable=status && status.ok && status.eligible && !status.enabled;
   if(status && status.http_status===401){
     title.textContent='Sign in to use Watchdog Intelligence Voice';
-    copy.textContent='Voice uses your saved-property context and is available only inside an authenticated Watchdog workspace.';
+    copy.textContent='Voice uses your saved-property info and is available only inside an authenticated Watchdog dashboard.';
     actions.innerHTML='<a class="wd-intelligence-gate-primary" href="/property/account">Open account</a><button class="wd-intelligence-gate-secondary" type="button" data-wd-intelligence-close>Not now</button>';
   }else if(unavailable){
     title.textContent='Voice is temporarily unavailable';
@@ -4007,9 +4007,9 @@ function showGate(status){
 function voiceMarkup(){
   return '<section class="wd-home-voice-entry wd-intelligence-frame" id="wd-home-voice-entry" aria-label="Watchdog Intelligence Voice">'+
     '<div class="wd-home-voice-copy">'+
-      '<span class="wd-home-voice-kicker">Watchdog Intelligence · Voice</span>'+
+      ''+
       '<h2 class="wd-home-voice-title">Ask about what needs attention now.</h2>'+
-      '<p class="wd-home-voice-sub">Uses this saved property’s governed context so you can ask a focused question without starting over.</p>'+
+      '<p class="wd-home-voice-sub">Uses this saved property’s checked info so you can ask a focused question without starting over.</p>'+
     '</div>'+
     '<button class="wd-home-voice-button" id="wd-home-voice-button" type="button"><i class="fas fa-microphone"></i><span>Ask Watchdog</span></button>'+
   '</section>';
@@ -4033,7 +4033,7 @@ async function openVoice(){
       surface:'property_home',
       title:'Ask Watchdog Intelligence',
       kicker:'WATCHDOG INTELLIGENCE',
-      subtitle:'Ask a focused question about this saved property. Watchdog keeps the governed property context attached.',
+      subtitle:'Ask a focused question about this saved property. Watchdog keeps the checked property info attached.',
       pams_pins:property.pams_pin ? [property.pams_pin] : [],
       contextLabel:property.address || 'This saved property',
       context:property,
@@ -4087,7 +4087,7 @@ function mountExplore(){
   var parent=header.parentNode;
   var wrap=document.createElement('section');
   wrap.className='hm-explore-card';
-  wrap.setAttribute('aria-label','Explore your property');
+  wrap.setAttribute('aria-label','See your property');
   parent.insertBefore(wrap,header);
   wrap.appendChild(header);
   rows.forEach(function(row){wrap.appendChild(row)});
@@ -4128,7 +4128,7 @@ var HEATHER='Advertisement. Heather Scafide is a licensed New Jersey real estate
 var RELIEF='Advertisement for NJPropertyTaxRelief.com. This website is not affiliated with the State of New Jersey or any government agency. Estimates are informational and final eligibility depends on the official program rules and application.';
 var ADS=[
  {id:'greentree-payment-before-house',advertiser:'Greentree Mortgage',campaign:'financing_context',eyebrow:'Greentree Mortgage, an HMA Company · John Varano, Branch Manager',headline:'Know the payment before you fall in love with the house.',sub:'Taxes are only part of the monthly number. Review principal, interest, taxes, insurance and escrow before you make a move.',cta:'Talk Financing',href:'https://johnvarano.com/?utm_source=watchdog&utm_medium=internal_ad&utm_campaign=greentree_financing&utm_content=property_home_payment',photo:'/johnvarano.jpg',alt:'John Varano, Branch Manager, Greentree Mortgage an HMA Company',disclosure:GREENTREE,theme:'greentree'},
- {id:'greentree-full-monthly-number',advertiser:'Greentree Mortgage',campaign:'financing_context',eyebrow:'Greentree Mortgage, an HMA Company · John Varano, Branch Manager',headline:'Know the full monthly number before you start making offers.',sub:'A payment conversation can put taxes, insurance and escrow into context before the home search gets serious.',cta:'Run the Numbers',href:'https://johnvarano.com/?utm_source=watchdog&utm_medium=internal_ad&utm_campaign=greentree_financing&utm_content=property_home_full_payment',photo:'/johnvarano.jpg',alt:'John Varano, Branch Manager, Greentree Mortgage an HMA Company',disclosure:GREENTREE,theme:'greentree'},
+ {id:'greentree-full-monthly-number',advertiser:'Greentree Mortgage',campaign:'financing_context',eyebrow:'Greentree Mortgage, an HMA Company · John Varano, Branch Manager',headline:'Know the full monthly number before you start making offers.',sub:'A payment conversation can put taxes, insurance and escrow into perspective before the home search gets serious.',cta:'Run the Numbers',href:'https://johnvarano.com/?utm_source=watchdog&utm_medium=internal_ad&utm_campaign=greentree_financing&utm_content=property_home_full_payment',photo:'/johnvarano.jpg',alt:'John Varano, Branch Manager, Greentree Mortgage an HMA Company',disclosure:GREENTREE,theme:'greentree'},
  {id:'john-buyer-mls',advertiser:'John Scafide Realtor',campaign:'realtor_buyer',eyebrow:'John Scafide · Licensed NJ Real Estate Agent · Opus Elite Real Estate',headline:'Found a property worth watching? See what is actually for sale.',sub:'Public records explain the property. MLS access shows what you can buy right now across New Jersey.',cta:'Search Homes',href:'/search-homes.html?utm_source=watchdog&utm_medium=internal_ad&utm_campaign=john_buyer&utm_content=property_home_mls',photo:'/johnprofile.jpg',alt:'John Scafide, licensed New Jersey real estate agent',disclosure:JOHN,theme:'john'},
  {id:'john-seller-value',advertiser:'John Scafide Realtor',campaign:'realtor_seller',eyebrow:'John Scafide · Licensed NJ Real Estate Agent · Opus Elite Real Estate',headline:'Your tax record is one piece of your home’s story. Market value is another.',sub:'If selling is on your radar, start with a current value estimate and a practical conversation about the market.',cta:'Check Home Value',href:'/home-value.html?utm_source=watchdog&utm_medium=internal_ad&utm_campaign=john_seller&utm_content=property_home_value',photo:'/johnprofile.jpg',alt:'John Scafide, licensed New Jersey real estate agent',disclosure:JOHN,theme:'john'},
  {id:'heather-buyer-guidance',advertiser:'Heather Scafide Realtor',campaign:'realtor_buyer',eyebrow:'Heather Scafide · Licensed NJ Real Estate Agent · Opus Elite Real Estate',headline:'Buying a home should feel informed, not rushed.',sub:'Move from property research to a focused South Jersey home search with a licensed professional on your side.',cta:'Ask Heather',href:'mailto:heather@heatherscafide.com?subject=Watchdog%20Buyer%20Inquiry',photo:'/heatherheadshot.png',alt:'Heather Scafide, licensed New Jersey real estate agent',disclosure:HEATHER,theme:'heather'},
@@ -4220,7 +4220,7 @@ function partner(){
 }
 
 function footerAdMarkup(){
-  return '<section class="hm-footer-ad" id="hm-footer-ad" aria-label="Watchdog advertising"><div class="hm-footer-ad-in"><a href="https://johnvarano.com/" target="_blank" rel="noopener sponsored" class="gt-banner" aria-label="Sponsored Watchdog partner"><div class="gt-banner-inner"><div class="gt-photo"><img src="/johnvarano.jpg" alt="John Varano, Branch Manager, Greentree Mortgage an HMA Company" loading="lazy" onerror="this.parentNode.style.display=\'none\'"></div><div class="gt-text"><div class="gt-eyebrow">Greentree Mortgage, an HMA Company · John Varano, Branch Manager</div><div class="gt-headline">Know the payment before you fall in love with the house.</div><div class="gt-sub">Taxes are only part of the monthly number. Review principal, interest, taxes, insurance and escrow before you make a move.</div></div><div class="gt-cta">Talk Financing <i class="fas fa-arrow-right"></i></div></div><div class="gt-disc">Advertisement. Greentree Mortgage, an HMA Company, is a separate company and is not affiliated with Opus Elite Real Estate. You are never required to use any particular lender, and you are free to shop for a mortgage. Nothing here is a loan commitment, an offer of credit, or a guarantee of terms.</div></a></div></section>';
+  return '<section class="hm-footer-ad" id="hm-footer-ad" aria-label="Watchdog advertising"><div class="hm-footer-ad-in"><a href="https://johnvarano.com/" target="_blank" rel="noopener sponsored" class="gt-banner" aria-label="Sponsored Watchdog partner"><div class="gt-banner-inner"><div class="gt-photo"><img src="/johnvarano.jpg" alt="John Varano, Branch Manager, Greentree Mortgage an HMA Company" loading="lazy" onerror="this.parentNode.style.display=\'none\'"></div><div class="gt-text"><div class="gt-headline">Know the payment before you fall in love with the house.</div><div class="gt-sub">Taxes are only part of the monthly number. Review principal, interest, taxes, insurance and escrow before you make a move.</div></div><div class="gt-cta">Talk Financing <i class="fas fa-arrow-right"></i></div></div><div class="gt-disc">Advertisement. Greentree Mortgage, an HMA Company, is a separate company and is not affiliated with Opus Elite Real Estate. You are never required to use any particular lender, and you are free to shop for a mortgage. Nothing here is a loan commitment, an offer of credit, or a guarantee of terms.</div></a></div></section>';
 }
 
 function mountFooterAd(){

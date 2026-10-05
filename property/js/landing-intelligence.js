@@ -68,10 +68,10 @@
       sec.innerHTML =
         '<div class="wdi-shell">' +
           '<div class="wdi-head">' +
-            '<div><div class="wdi-kicker">Watchdog Intelligence</div>' +
+            '<div>' +
             '<h2 id="wdi-title">Watchdog <em>right now.</em></h2>' +
-            '<p class="wdi-lead">Evidence first backed sources.</p></div>' +
-            '<div class="wdi-stamp"><b id="wdi-asof">Live data is refreshing</b><span id="wdi-scope">Only current, defensible evidence is summarized. No customer names, addresses or private CRM data appear here.</span><a href="/property/data-methodology">See data methodology <i class="fas fa-arrow-right"></i></a></div>' +
+            '<p class="wdi-lead">Records-first backed sources.</p></div>' +
+            '<div class="wdi-stamp"><b id="wdi-asof">Live data is refreshing</b><span id="wdi-scope">Only current, solid evidence is summarized. No customer names, addresses or private CRM data appear here.</span><a href="/property/data-methodology">See how we get our numbers <i class="fas fa-arrow-right"></i></a></div>' +
           '</div>' +
           '<div id="wdi-live"><div class="wdi-loading"><i class="fas fa-circle-notch fa-spin"></i> Reading the latest Watchdog scoring and source-monitoring run…</div></div>' +
         '</div>';
@@ -83,8 +83,8 @@
     var insightGrid = q('.ins-grid');
     var insights = insightGrid && insightGrid.closest('.section');
     if (!recent || !insights) return null;
-    sec.setAttribute('aria-label', 'Watchdog Score methodology');
-    sec.innerHTML = '<div class="wdi-shell"><div id="wdi-live"><div class="wdi-loading"><i class="fas fa-circle-notch fa-spin"></i> Reading the current Watchdog Score methodology…</div></div></div>';
+    sec.setAttribute('aria-label', 'How the Watchdog Score works');
+    sec.innerHTML = '<div class="wdi-shell"><div id="wdi-live"><div class="wdi-loading"><i class="fas fa-circle-notch fa-spin"></i> Reading how the Watchdog Score works…</div></div></div>';
     recent.insertAdjacentElement('afterend', sec);
     if (sec.nextElementSibling !== insights) sec.insertAdjacentElement('afterend', insights);
     return sec;
@@ -97,7 +97,7 @@
     var coverage = Number(c.evidence_coverage);
     var breadth = share >= 50 ? 'broad across this cohort' : (share >= 25 ? 'concentrated rather than universal' : 'limited to a smaller slice of this cohort');
     var confidence = coverage >= 90 ? 'very strong' : (coverage >= 75 ? 'substantial' : 'still developing');
-    return 'In the current scored cohort, <strong>' + esc(num(share, 1)) + '%</strong> of properties are at 60+ and the median Watchdog Score is <strong>' + esc(num(median, 1)) + '</strong>. The higher-score signal is ' + breadth + '. Average evidence coverage is <strong>' + esc(num(coverage, 1)) + '%</strong>, so the underlying support is ' + confidence + '. Watchdog uses this as a prioritization layer for deeper research, not as a prediction, appraisal or guaranteed outcome.';
+    return 'In the current scored cohort, <strong>' + esc(num(share, 1)) + '%</strong> of properties are at 60+ and the median Watchdog Score is <strong>' + esc(num(median, 1)) + '</strong>. The higher-score sign is ' + breadth + '. Average evidence coverage is <strong>' + esc(num(coverage, 1)) + '%</strong>, so the underlying support is ' + confidence + '. Watchdog uses this as a prioritization layer for deeper research, not as a prediction, appraisal or guaranteed outcome.';
   }
 
   function signalCard(label, value, note, evidence) {
@@ -136,7 +136,7 @@
         '<article class="wdi-primary"><span class="wdi-label">Median Watchdog Score</span><div class="wdi-number"><strong>' + esc(num(c.median_score,1)) + '</strong><small>/ 100</small></div></article>' +
         '<article class="wdi-primary"><div class="wdi-number"><strong>' + esc(num(sourceFacts)) + '</strong><small>source facts checked</small></div><p>' + esc(sourceCopy) + '</p><div class="wdi-mini"><span>Checked ' + esc(timeLabel(w.completed_at) || 'recently') + '</span><span>' + esc(num(e.runs_24h)) + ' downstream analyses / 24h</span></div></article>' +
       '</div>' +
-      '<div class="wdi-signals"><div class="wdi-signals-head"><h3>Signals inside the score.</h3></div>' +
+      '<div class="wdi-signals"><div class="wdi-signals-head"><h3>What stands out inside the score.</h3></div>' +
         '<div class="wdi-signal-grid">' +
           signalCard('Municipal tax pressure', tax.median_score, 'Tax rate changes measured as stress.', tax.evidence_coverage) +
           signalCard('Revaluation pressure', rev.median_score, 'Tax fairness lost over time.', rev.evidence_coverage) +
@@ -160,7 +160,7 @@
     var c = data.cohort || {}, m = data.methodology || {};
     host.innerHTML =
       '<div class="wdi-weights"><div class="wdi-weights-copy"><h3>Exactly what the current Watchdog Score weighs.</h3></div><div class="wdi-weight-grid">' + weightsHtml(m) + '<div class="wdi-weight-rule"><i class="fas fa-scale-balanced"></i><span><b>Missing evidence rule</b>' + esc(m.missing_input_rule || 'Missing inputs are dropped and the remaining weights are renormalized.') + '</span></div></div></div>' +
-      '<div class="wdi-cta"><div><h3>Unlock deeper findings, monitoring, professional workflows and the evidence behind each recommendation.</h3></div><div class="wdi-cta-actions"><a class="wdi-btn secondary" href="/property/data-methodology">How the scoring works</a><a class="wdi-btn primary" id="wdi-plans" href="/property/pro#plans">See Watchdog Intelligence plans <i class="fas fa-arrow-right"></i></a></div></div>';
+      '<div class="wdi-cta"><div><h3>Open deeper findings, monitoring, professional tasks and the evidence behind each recommendation.</h3></div><div class="wdi-cta-actions"><a class="wdi-btn secondary" href="/property/data-methodology">How the scoring works</a><a class="wdi-btn primary" id="wdi-plans" href="/property/pro#plans">See Watchdog Intelligence plans <i class="fas fa-arrow-right"></i></a></div></div>';
 
     var plans = document.getElementById('wdi-plans');
     if (plans) plans.addEventListener('click', function () {
@@ -177,10 +177,10 @@
     var host = document.getElementById('wdi-live');
     if (!host) return;
     if (isPro) {
-      host.innerHTML = '<div class="wdi-read"><article class="wdi-read-card"><span class="wdi-label">Live metrics refreshing</span><h3>Watchdog will not substitute stale numbers.</h3><p>The current scoring snapshot could not be verified in this browser session, so the numeric sample is withheld. The paid product follows the same rule: unavailable evidence does not quietly become zero, safe or favorable.</p></article><article class="wdi-read-card"><span class="wdi-label">Still available</span><div class="wdi-method"><div><i class="fas fa-book-open"></i><span><b>Methodology</b>See the governed score components and public-data sources.</span></div><div><i class="fas fa-arrow-up-right-dots"></i><span><b>Plans</b>Pricing remains available directly below this sample.</span></div></div></article></div>';
+      host.innerHTML = '<div class="wdi-read"><article class="wdi-read-card"><span class="wdi-label">Live metrics refreshing</span><h3>Watchdog will not substitute stale numbers.</h3><p>The current scoring snapshot could not be verified in this browser session, so the numeric sample is withheld. The paid product follows the same rule: unavailable evidence does not quietly become zero, safe or favorable.</p></article><article class="wdi-read-card"><span class="wdi-label">Still available</span><div class="wdi-method"><div><i class="fas fa-book-open"></i><span><b>How it works</b>See the checked score components and public-data sources.</span></div><div><i class="fas fa-arrow-up-right-dots"></i><span><b>Plans</b>Pricing remains available directly below this sample.</span></div></div></article></div>';
       return;
     }
-    host.innerHTML = '<div class="wdi-weights"><div class="wdi-weights-copy"><h3>Exactly what the current Watchdog Score weighs.</h3></div><div class="wdi-weight-grid"><div class="wdi-weight-rule"><i class="fas fa-scale-balanced"></i><span><b>Current methodology refreshing</b>The live score components could not be verified in this browser session.</span></div></div></div><div class="wdi-cta"><div><h3>Unlock deeper findings, monitoring, professional workflows and the evidence behind each recommendation.</h3></div><div class="wdi-cta-actions"><a class="wdi-btn secondary" href="/property/data-methodology">How the scoring works</a><a class="wdi-btn primary" href="/property/pro#plans">See Watchdog Intelligence plans <i class="fas fa-arrow-right"></i></a></div></div>';
+    host.innerHTML = '<div class="wdi-weights"><div class="wdi-weights-copy"><h3>Exactly what the current Watchdog Score weighs.</h3></div><div class="wdi-weight-grid"><div class="wdi-weight-rule"><i class="fas fa-scale-balanced"></i><span><b>Current method refreshing</b>The live score components could not be verified in this browser session.</span></div></div></div><div class="wdi-cta"><div><h3>Open deeper findings, monitoring, professional tasks and the evidence behind each recommendation.</h3></div><div class="wdi-cta-actions"><a class="wdi-btn secondary" href="/property/data-methodology">How the scoring works</a><a class="wdi-btn primary" href="/property/pro#plans">See Watchdog Intelligence plans <i class="fas fa-arrow-right"></i></a></div></div>';
   }
 
   var HOMEOWNER_RESOURCES = [

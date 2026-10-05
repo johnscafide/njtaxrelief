@@ -77,8 +77,8 @@
     host.innerHTML =
       '<header class="acp-header acp-header-clean"><div><h2>Choose the profile you want to edit</h2></div></header>' +
       '<div class="acp-profile-route-grid">' +
-        '<a class="acp-profile-route-card personal" href="/account/profile"><span class="acp-route-icon compact"><i class="fa-regular fa-user"></i></span><div><small>PERSONAL</small><h3>Homeowner profile</h3><p>Contact details, home area, property goals, preferences and optional household context.</p><b>Edit homeowner profile <i class="fas fa-arrow-right"></i></b></div></a>' +
-        '<a class="acp-profile-route-card professional" href="/account/professional-profile"><span class="acp-route-icon compact"><i class="fa-regular fa-address-card"></i></span><div><small>' + (isAgent ? 'AGENT' : 'PROFESSIONAL') + '</small><h3>' + (isAgent ? 'Agent profile' : 'Professional profile') + '</h3><p>' + (professional ? esc(professionLabel(profession)) + '. Manage professional workflow context' + (isAgent ? ', brokerage identity, license and Agent portal settings.' : ' and Watchdog Intelligence preferences.') : 'Set up a professional role only if you use Watchdog for your work.') + '</p><b>' + (professional ? 'Edit professional profile' : 'Set up professional profile') + ' <i class="fas fa-arrow-right"></i></b></div></a>' +
+        '<a class="acp-profile-route-card personal" href="/account/profile"><span class="acp-route-icon compact"><i class="fa-regular fa-user"></i></span><div><small>PERSONAL</small><h3>Homeowner profile</h3><p>Contact details, home area, property goals, preferences and optional household info.</p><b>Edit homeowner profile <i class="fas fa-arrow-right"></i></b></div></a>' +
+        '<a class="acp-profile-route-card professional" href="/account/professional-profile"><span class="acp-route-icon compact"><i class="fa-regular fa-address-card"></i></span><div><small>' + (isAgent ? 'AGENT' : 'PROFESSIONAL') + '</small><h3>' + (isAgent ? 'Agent profile' : 'Professional profile') + '</h3><p>' + (professional ? esc(professionLabel(profession)) + '. Manage professional process info' + (isAgent ? ', brokerage identity, license and Agent portal settings.' : ' and Watchdog Intelligence preferences.') : 'Set up a professional role only if you use Watchdog for your work.') + '</p><b>' + (professional ? 'Edit professional profile' : 'Set up professional profile') + ' <i class="fas fa-arrow-right"></i></b></div></a>' +
       '</div>' +
       (isAgent ? '<div class="acp-agent-confirmed"><i class="fas fa-circle-check"></i><span><b>Real estate agent profile enabled</b><small>Agent-only fields appear only because your user-confirmed profession is Real estate agent / broker.</small></span></div>' : '');
   }
@@ -138,10 +138,10 @@
     var note = '<div class="acp-private-note"><i class="fas fa-shield-halved"></i><p>These optional household details stay in your private first-party profile. Watchdog does not copy income, age, household composition or residence history into professional Intelligence or housing-targeting assumptions.</p></div>';
 
     if (mode === 'homeowner') {
-      return '<section class="acp-panel acp-demographics"><div class="acp-panel-head"><i class="fas fa-people-roof"></i><div><b>Household &amp; demographic context</b><small>Optional details that help keep your homeowner profile complete</small></div></div>' + note + '<div class="acp-fields">' + fields + '</div></section>';
+      return '<section class="acp-panel acp-demographics"><div class="acp-panel-head"><i class="fas fa-people-roof"></i><div><b>Household &amp; demographic info</b><small>Optional details that help keep your homeowner profile complete</small></div></div>' + note + '<div class="acp-fields">' + fields + '</div></section>';
     }
 
-    return '<details class="acp-private"><summary><div><i class="fas fa-lock"></i><span><b>Private household context</b><small>Optional-to-disclose household and residence details</small></span></div><i class="fas fa-chevron-down"></i></summary>' + note + '<div class="acp-fields">' + fields + '</div></details>';
+    return '<details class="acp-private"><summary><div><i class="fas fa-lock"></i><span><b>Private household info</b><small>Optional-to-disclose household and residence details</small></span></div><i class="fas fa-chevron-down"></i></summary>' + note + '<div class="acp-fields">' + fields + '</div></details>';
   }
 
   function renderEditor(host) {
@@ -157,7 +157,7 @@
     host.className = 'ac-section acp-editor';
     host.id = 'ac-profile-editor';
     host.innerHTML =
-      '<header class="acp-header"><div><span>' + (mode === 'professional' ? 'PROFESSIONAL PROFILE' : mode === 'homeowner' ? 'HOMEOWNER PROFILE' : 'ABOUT YOU') + '</span><h2>' + (mode === 'professional' ? 'Your professional profile' : mode === 'homeowner' ? 'Your homeowner profile' : 'Your Watchdog profile') + '</h2><p>' + (mode === 'professional' ? 'Set the professional role and workflow context Watchdog uses for work tools. Real-estate-agent fields only appear when you identify your profession as real estate.' : mode === 'homeowner' ? 'Keep your personal property goals, contact details and homeowner context current without professional or agent-only settings.' : 'Keep the context Watchdog uses to personalize your workspace current. Property facts and paid access remain governed separately.') + '</p></div><div class="acp-source"><i class="fas fa-user-check"></i><span>User-confirmed</span></div></header>' +
+      '<header class="acp-header"><div><span>' + (mode === 'professional' ? 'PROFESSIONAL PROFILE' : mode === 'homeowner' ? 'HOMEOWNER PROFILE' : 'ABOUT YOU') + '</span><h2>' + (mode === 'professional' ? 'Your professional profile' : mode === 'homeowner' ? 'Your homeowner profile' : 'Your Watchdog profile') + '</h2><p>' + (mode === 'professional' ? 'Set the professional role and process info Watchdog uses for work tools. Real-estate-agent fields only appear when you identify your profession as real estate.' : mode === 'homeowner' ? 'Keep your personal property goals, contact details and homeowner info current without professional or agent-only settings.' : 'Keep the info Watchdog uses to personalize your dashboard current. Property facts and paid access remain checked separately.') + '</p></div><div class="acp-source"><i class="fas fa-user-check"></i><span>User-confirmed</span></div></header>' +
       '<div class="acp-grid">' +
         '<section class="acp-panel"><div class="acp-panel-head"><i class="fas fa-address-card"></i><div><b>Account &amp; contact</b><small>How Watchdog knows and contacts you</small></div></div><div class="acp-fields">' +
           inputField('acp-name','Preferred name',meta.preferred_name || (currentUser && currentUser.user_metadata && currentUser.user_metadata.full_name) || '','text','Your name','Display preference only.','autocomplete="name" maxlength="80"') +
@@ -165,25 +165,25 @@
           inputField('acp-phone','Phone',meta.phone || '','tel','(555) 555-5555','Optional profile contact detail.','autocomplete="tel" maxlength="40"') +
           inputField('acp-zip','Main NJ ZIP',row.location_zip || '','text','08081','Sets your geographic starting point.','inputmode="numeric" maxlength="5"') +
         '</div></section>' +
-        '<section class="acp-panel"><div class="acp-panel-head"><i class="fas fa-compass"></i><div><b>How you use Watchdog</b><small>Your default workspace and property focus</small></div></div><div class="acp-fields">' +
+        '<section class="acp-panel"><div class="acp-panel-head"><i class="fas fa-compass"></i><div><b>How you use Watchdog</b><small>Your default dashboard and property focus</small></div></div><div class="acp-fields">' +
           (mode === 'homeowner' ? '<input id="acp-persona" type="hidden" value="' + esc(persona) + '"><div class="acp-profile-context"><span>PROFILE TYPE</span><b>Personal / homeowner</b><small>Professional role settings are edited separately.</small></div>' : selectField('acp-persona','Account use',persona,[['homeowner','Homeowner'],['renter','Renter'],['professional','Professional'],['both','Personal + professional'],['investor','Investor'],['planning_to_buy','Planning to buy']])) +
           '<div data-acp-housing>' + selectField('acp-home-status','Housing situation',row.home_status || '',[['','Not specified'],['own','Own my home'],['rent','Rent'],['own_and_invest','Own + invest'],['rent_and_invest','Rent + own investments'],['planning_to_buy','Planning to buy'],['other','Other']]) + '</div>' +
-          selectField('acp-time','Time horizon',row.time_horizon || 'researching',[['now','Right now'],['0_3_months','Next 3 months'],['3_6_months','3–6 months'],['6_12_months','6–12 months'],['12_plus_months','More than a year'],['researching','Exploring / researching']]) +
+          selectField('acp-time','Time horizon',row.time_horizon || 'researching',[['now','Right now'],['0_3_months','Next 3 months'],['3_6_months','3–6 months'],['6_12_months','6–12 months'],['12_plus_months','More than a year'],['researching','Looking into / researching']]) +
           '<label class="acp-field acp-wide"><span>Markets, towns or counties</span><input id="acp-markets" value="' + esc(marketsText) + '" placeholder="Camden County, Gloucester County"><small>Separate multiple markets with commas.</small></label>' +
         '</div></section>' +
       '</div>' +
       '<section class="acp-choice-panel"><div class="acp-panel-head"><i class="fas fa-bullseye"></i><div><b>What matters most</b><small>Watchdog uses these choices to organize recommendations and defaults</small></div></div><div class="acp-choice-group"><span>Goals</span>' +
-        chips('goals',row.goals || [],[['monitor_property','Monitor property changes'],['lower_property_tax','Understand property taxes'],['buy','Buy smarter'],['sell','Prepare to sell'],['invest','Find opportunities'],['client_research','Research for clients'],['prospecting','Prospecting / farming'],['due_diligence','Property due diligence'],['appeals','Assessment / appeal work']]) +
+        chips('goals',row.goals || [],[['monitor_property','Monitor property changes'],['lower_property_tax','Understand property taxes'],['buy','Buy better'],['sell','Prepare to sell'],['invest','Find opportunities'],['client_research','Research for clients'],['prospecting','Prospecting / farming'],['due_diligence','Property due diligence'],['appeals','Assessment / appeal work']]) +
         '</div><div class="acp-choice-group"><span>Property focus</span>' +
         chips('property_types',row.property_types || [],[['single_family','Single-family'],['condo_townhome','Condo / townhome'],['multifamily','Multi-family'],['commercial','Commercial'],['land','Land'],['mixed','A mix of property types']]) + '</div></section>' +
-      '<section class="acp-panel acp-professional" data-acp-professional' + (isProfessional ? '' : ' hidden') + '><div class="acp-panel-head"><i class="fas fa-briefcase"></i><div><b>Professional Intelligence</b><small>Role and workflow context used by Watchdog Intelligence</small></div></div><div class="acp-fields">' +
+      '<section class="acp-panel acp-professional" data-acp-professional' + (isProfessional ? '' : ' hidden') + '><div class="acp-panel-head"><i class="fas fa-briefcase"></i><div><b>Professional Intelligence</b><small>Role and process info used by Watchdog Intelligence</small></div></div><div class="acp-fields">' +
         selectField('acp-profession','Primary profession',row.primary_profession || 'real_estate',[['real_estate','Real estate agent / broker'],['mortgage_lending','Mortgage lender / broker'],['attorney','Attorney'],['appraiser','Appraiser'],['property_tax_professional','Property tax professional'],['title_closing','Title / closing'],['contractor','Contractor / developer'],['accountant','Accountant / CPA'],['insurance','Insurance professional'],['property_manager','Property manager'],['investor','Real estate investor'],['other','Other professional']]) +
         selectField('acp-years','Experience',row.professional_years_band || 'new',[['new','Less than 1 year'],['1_3','1–3 years'],['4_7','4–7 years'],['8_15','8–15 years'],['16_plus','16+ years']]) +
-        selectField('acp-volume','Monthly workflow volume',row.professional_volume_band || 'not_applicable',[['under_5','Under 5'],['5_14','5–14'],['15_29','15–29'],['30_59','30–59'],['60_plus','60+'],['not_applicable','Not measured this way']]) +
+        selectField('acp-volume','Monthly process volume',row.professional_volume_band || 'not_applicable',[['under_5','Under 5'],['5_14','5–14'],['15_29','15–29'],['30_59','30–59'],['60_plus','60+'],['not_applicable','Not measured this way']]) +
         '<div class="acp-field acp-wide"><span>Where should Intelligence help first?</span>' + chips('professional_priorities',row.professional_priorities || [],[['lead_prioritization','Prioritize opportunities'],['client_briefs','Build client briefs'],['property_change','Catch property changes'],['tax_assessment','Assessment / tax analysis'],['listing_prep','Listing preparation'],['buyer_diligence','Buyer due diligence'],['portfolio_monitoring','Portfolio monitoring'],['workflow_automation','Reduce repetitive research']]) + '</div>' +
       '</div></section>' +
       householdContextMarkup(mode,row) +
-      '<div class="acp-intel"><label><input id="acp-intel" type="checkbox"' + (row.intelligence_personalization !== false ? ' checked' : '') + '><span><b>Personalize Watchdog Intelligence with my approved profile context</b><small>Only operational context such as role, markets, goals and workflow priorities is used. This never changes source facts or plan access.</small></span></label></div>' +
+      '<div class="acp-intel"><label><input id="acp-intel" type="checkbox"' + (row.intelligence_personalization !== false ? ' checked' : '') + '><span><b>Personalize Watchdog Intelligence with my approved profile info</b><small>Only operational info such as role, markets, goals and process priorities is used. This never changes source facts or plan access.</small></span></label></div>' +
       '<div class="ac-save-row acp-save"><button id="acp-save" type="button"><i class="fas fa-check"></i> ' + (mode === 'professional' ? 'Save professional profile' : mode === 'homeowner' ? 'Save homeowner profile' : 'Save Watchdog profile') + '</button><span id="acp-note" aria-live="polite"></span></div>';
 
     var personaSelect = document.getElementById('acp-persona');
@@ -221,7 +221,7 @@
       legacy = replacement;
     }
     if (profile && currentUser) renderEditor(legacy);
-    else legacy.innerHTML = '<header><div><span>ABOUT YOU</span><h2>Your Watchdog profile</h2><p>Loading your confirmed onboarding context…</p></div></header>';
+    else legacy.innerHTML = '<header><div><span>ABOUT YOU</span><h2>Your Watchdog profile</h2><p>Loading your confirmed onboarding info…</p></div></header>';
   }
 
   function valuesFor(group) {
@@ -302,7 +302,7 @@
       await loadProfile(true);
       document.dispatchEvent(new CustomEvent('watchdog:profile-updated',{detail:{persona:payload.persona,primaryProfession:payload.primary_profession,mode:mode}}));
       var freshNote = document.getElementById('acp-note');
-      if (freshNote) freshNote.textContent = 'Saved. Watchdog Intelligence has refreshed your approved context.';
+      if (freshNote) freshNote.textContent = 'Saved. Watchdog Intelligence has refreshed your approved info.';
     } catch (error) {
       if (note) note.textContent = error && error.message || 'Could not save your Watchdog profile.';
     } finally {

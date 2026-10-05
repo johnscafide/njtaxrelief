@@ -67,7 +67,7 @@
         '<span><b>' + money(d.pilot_billing) + '</b>Annual PILOT billing reported by DCA</span>' +
         '<span><b>' + money(d.tax_if_conventional) + '</b>Tax if PILOT value were billed conventionally</span></div>' +
       '<div class="tl-fine">Sources: NJ Division of Taxation 2025 Abstract of Ratables and NJ DCA/DLGS 2026 PILOT Database and Viewer. ' +
-      'The exempt share is derived by subtracting Abstract taxable land/improvement value from DCA assessed valuation including exempt property. ' +
+      'The exempt share is calculated by subtracting Abstract taxable land/improvement value from DCA assessed valuation including exempt property. ' +
       'Exempt property includes public, charitable and other legally exempt property; it is not synonymous with a subsidy or PILOT. DCA\'s municipal-subsidy estimate is shown as published.</div>');
   }
 

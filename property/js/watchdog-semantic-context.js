@@ -30,7 +30,7 @@ async function get(options){
     cache.set(key,{at:now,data:res.data});
     window.dispatchEvent(new CustomEvent('watchdog:semantic-context',{detail:{pins:pins,packs:packs,marker_ids:markerIds,data:res.data}}));
     return res.data;
-  }catch(error){console.warn('Watchdog Semantic Context unavailable:',error&&error.message||error);return null;}
+  }catch(error){console.warn('Watchdog Semantic Info unavailable:',error&&error.message||error);return null;}
 }
 function snapshot(data,pin){var rows=data&&Array.isArray(data.snapshots)?data.snapshots:[];if(!pin)return rows[0]||null;return rows.find(function(x){return String(x.pams_pin)===String(pin);})||null;}
 function marker(snap,id){if(!snap||!Array.isArray(snap.markers))return null;return snap.markers.find(function(x){return x.id===id;})||null;}

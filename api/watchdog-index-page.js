@@ -179,7 +179,7 @@ function normalizeWatchdogFooterIdentity(html) {
     )
     .replace(
       /Watchdog\s*\/\s*NJPropertyTaxRelief\.com\. All rights reserved\./gi,
-      'Watchdog Property Intelligence. All rights reserved.'
+      'Watchdog Property Info. All rights reserved.'
     );
 }
 

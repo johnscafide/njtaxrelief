@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="robots" content="noindex,nofollow">
-  <title>Web Signals | Watchdog Analytics</title>
+  <title>Web Warning Signs | Watchdog Analytics</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700;800&family=Source+Sans+3:wght@400;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
@@ -16,8 +16,8 @@
 <body>
 <main class="shell">
   <header class="head">
-    <div><div class="kicker">DEVELOPER · EXTERNAL SIGNALS</div><h1>Search &amp; web performance</h1><p>Operational signals from Google Search Console and PageSpeed/Lighthouse, plus a governed weather-provider check. These sources measure distribution and context; they do not alter Watchdog Score.</p></div>
-    <div class="actions"><a class="btn" href="/property/analytics/"><i class="fas fa-arrow-left"></i> Analytics</a><button class="btn primary" id="refresh"><i class="fas fa-rotate"></i> Refresh signals</button></div>
+    <div><h1>Search &amp; web performance</h1><p>Operational numbers from Google Search Console and PageSpeed/Lighthouse, plus a checked weather-provider check. These sources measure distribution and info; they do not alter Watchdog Score.</p></div>
+    <div class="actions"><a class="btn" href="/property/analytics/"><i class="fas fa-arrow-left"></i> Analytics</a><button class="btn primary" id="refresh"><i class="fas fa-rotate"></i> Refresh signs</button></div>
   </header>
   <div id="error" class="error"></div>
   <div class="status"><b id="freshness">Waiting for developer session…</b><span id="status-detail"></span></div>
@@ -38,13 +38,13 @@
     </article>
 
     <article class="panel wide">
-      <div class="panel-head"><div><h2>Weather context provider</h2><p>Tests the production weather-context boundary with New Jersey coordinates. NOAA/NWS is the free commercial-safe default. Open-Meteo is used only when a commercial customer API key is configured.</p></div><span class="tag"><i class="fas fa-cloud-sun"></i> CONTEXT ONLY</span></div>
+      <div class="panel-head"><div><h2>Weather info provider</h2><p>Tests the production weather-context boundary with New Jersey coordinates. NOAA/NWS is the free commercial-safe default. Open-Meteo is used only when a commercial customer API key is configured.</p></div><span class="tag"><i class="fas fa-cloud-sun"></i> INFO ONLY</span></div>
       <div class="weather-form"><label>Latitude<input id="weather-lat" value="39.8274" inputmode="decimal"></label><label>Longitude<input id="weather-lon" value="-75.1527" inputmode="decimal"></label><button class="btn teal" id="weather-check"><i class="fas fa-location-dot"></i> Check Deptford area</button></div>
       <div id="weather-result" class="notice" style="margin-top:12px">No weather request yet.</div>
     </article>
   </section>
 
-  <div class="status" style="margin-top:16px"><b>Governance:</b> Search Console is read-only and developer-only. Opportunity labels are planning aids only. PageSpeed evaluates public URLs. Weather is contextual and explicitly excluded from property-condition, insurance-risk and Watchdog Score evidence. No user search terms, property addresses, PAMS PINs or identities are sent to these three provider calls from this console.</div>
+  <div class="status" style="margin-top:16px"><b>Oversight:</b> Search Console is read-only and developer-only. Opportunity labels are planning aids only. PageSpeed evaluates public URLs. Weather is background and explicitly excluded from property-condition, insurance-risk and Watchdog Score evidence. No user search terms, property addresses, PAMS PINs or identities are sent to these three provider calls from this console.</div>
 </main>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
 <script src="/property/js/supabase-runtime.js"></script>
@@ -131,22 +131,22 @@ async function connectGsc(){
 }
 function showError(message){var b=document.getElementById('error');b.style.display='block';b.textContent=message;}
 async function loadSignals(){
- var refresh=document.getElementById('refresh');refresh.disabled=true;document.getElementById('error').style.display='none';document.getElementById('freshness').textContent='Loading external signals…';
+ var refresh=document.getElementById('refresh');refresh.disabled=true;document.getElementById('error').style.display='none';document.getElementById('freshness').textContent='Loading external signs…';
  try{
    var r=await client.functions.invoke('product-analytics-report',{body:{external_signals_only:true}});
-   if(r.error||!r.data||!r.data.ok)throw new Error((r.data&&r.data.error)||(r.error&&r.error.message)||'External signals unavailable');
+   if(r.error||!r.data||!r.data.ok)throw new Error((r.data&&r.data.error)||(r.error&&r.error.message)||'External numbers unavailable');
    var d=r.data.external_signals||{};renderGsc(d.search_console);renderPsi(d.pagespeed);
-   document.getElementById('freshness').textContent='External signals loaded';document.getElementById('status-detail').textContent=' · '+new Date(r.data.generated_at).toLocaleString();
- }catch(e){showError(e.message||String(e));document.getElementById('freshness').textContent='External signals failed';}
+   document.getElementById('freshness').textContent='External numbers loaded';document.getElementById('status-detail').textContent=' · '+new Date(r.data.generated_at).toLocaleString();
+ }catch(e){showError(e.message||String(e));document.getElementById('freshness').textContent='External numbers failed';}
  finally{refresh.disabled=false;}
 }
 async function checkWeather(){
- var b=document.getElementById('weather-check'),out=document.getElementById('weather-result');b.disabled=true;out.className='notice';out.textContent='Checking governed provider…';
+ var b=document.getElementById('weather-check'),out=document.getElementById('weather-result');b.disabled=true;out.className='notice';out.textContent='Checking checked provider…';
  try{
    var lat=Number(document.getElementById('weather-lat').value),lon=Number(document.getElementById('weather-lon').value);
-   var r=await fetch('/api/watchdog-weather-context',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({lat:lat,lon:lon})});var d=await r.json();if(!r.ok||!d.ok)throw new Error(d.error||'Weather context unavailable');
+   var r=await fetch('/api/watchdog-weather-context',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({lat:lat,lon:lon})});var d=await r.json();if(!r.ok||!d.ok)throw new Error(d.error||'Weather info unavailable');
    var now=d.near_term||{},forecast=d.forecast||[];
-   out.innerHTML='<b>'+esc(d.provider_label||d.provider)+'</b><br>'+esc(now.summary||'Provider response received')+(now.temperature!=null?' · '+esc(String(now.temperature))+'°'+esc(now.temperature_unit||''):'')+(now.precipitation_probability!=null?' · '+esc(String(now.precipitation_probability))+'% precip':'')+'<div class="forecast">'+forecast.slice(0,3).map(function(x){return '<div><b>'+esc(x.name||x.day||'Forecast')+'</b><span>'+esc(x.summary||((x.temperature_max!=null?x.temperature_max+'° high':'')+(x.temperature_min!=null?' / '+x.temperature_min+'° low':''))||'Forecast data')+'</span></div>';}).join('')+'</div><p class="muted">'+esc(d.note||'Context only.')+' · Score impact: '+esc(String(d.score_impact))+'</p>';
+   out.innerHTML='<b>'+esc(d.provider_label||d.provider)+'</b><br>'+esc(now.summary||'Provider response received')+(now.temperature!=null?' · '+esc(String(now.temperature))+'°'+esc(now.temperature_unit||''):'')+(now.precipitation_probability!=null?' · '+esc(String(now.precipitation_probability))+'% precip':'')+'<div class="forecast">'+forecast.slice(0,3).map(function(x){return '<div><b>'+esc(x.name||x.day||'Forecast')+'</b><span>'+esc(x.summary||((x.temperature_max!=null?x.temperature_max+'° high':'')+(x.temperature_min!=null?' / '+x.temperature_min+'° low':''))||'Forecast data')+'</span></div>';}).join('')+'</div><p class="muted">'+esc(d.note||'Info only.')+' · Score impact: '+esc(String(d.score_impact))+'</p>';
  }catch(e){out.className='notice bad';out.textContent=e.message||String(e);}finally{b.disabled=false;}
 }
 Promise.resolve(window.njptrAccessReady).then(function(ctx){if(!ctx||ctx.developer!==true)throw new Error('Developer access required');client=window.NJPTRAccess.client();document.getElementById('refresh').onclick=loadSignals;document.getElementById('weather-check').onclick=checkWeather;var q=new URLSearchParams(location.search);if(q.get('oauth'))document.getElementById('status-detail').textContent=' · Google OAuth: '+q.get('oauth');loadSignals();}).catch(function(e){showError(e.message||String(e));});

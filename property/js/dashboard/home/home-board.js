@@ -55,13 +55,13 @@
     if (s === 'nj-dca-budget') return 'NJ DCA municipal budget and levy data';
     if (s === 'nj-tax-court-appeals') return 'NJ property-tax appeal outcome data';
     if (s.indexOf('njdep-') === 0) return 'NJDEP public GIS record';
-    return m && m.origin === 'watchdog-derived' ? 'Watchdog methodology' : 'Public record';
+    return m && m.origin === 'watchdog-derived' ? 'Watchdog method' : 'Public record';
   }
   function sourceFor(markerId) {
     var mc = w.WatchdogMarkerContent, reg = mc && typeof mc.registry === 'function' ? mc.registry() : null;
     var m = reg && Array.isArray(reg.markers) ? reg.markers.filter(function (x) { return x.id === markerId; })[0] : null;
     if (m) return sourceName(m);
-    if (/^watchdog\./.test(markerId)) return 'Watchdog methodology';
+    if (/^watchdog\./.test(markerId)) return 'Watchdog method';
     if (/^uniformity\./.test(markerId)) return 'NJ assessment-uniformity data';
     if (/^sales\./.test(markerId)) return 'NJ Division of Taxation verified sales';
     return 'Public record';

@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="index,follow">
 <title>NJ Property Tax Insights | Watchdog</title>
-<meta name="description" content="New Jersey property tax insights, relief updates, assessment explainers, homeowner deadlines and Watchdog research.">
+<meta name="description" content="New Jersey property tax findings, relief updates, assessment explainers, homeowner deadlines and Watchdog research.">
 <!-- 
      
      Hi There. I see you are checking the code. I'm sure you have reasons for such. Curiosity would be my guess. 
@@ -66,7 +66,7 @@ body{margin:0;font-family:"Source Sans 3",sans-serif;color:#14243b}
 @media(max-width:640px){.in-prefer{align-items:flex-start;flex-direction:column}.in-prefer a{width:100%;text-align:center}}
 @media(max-width:560px){.in-grid{grid-template-columns:1fr}.in-hero{padding-top:100px}}
 </style>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"Blog","@id":"https://www.watchdogindex.com/insights#blog","name":"Watchdog Insights","alternateName":"NJ Property Tax Insights","url":"https://www.watchdogindex.com/insights","inLanguage":"en-US","isPartOf":{"@id":"https://www.watchdogindex.com/#website"},"publisher":{"@type":"Organization","@id":"https://www.watchdogindex.com/#organization","name":"Watchdog","alternateName":"Watchdog Property Intelligence","url":"https://www.watchdogindex.com/"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Blog","@id":"https://www.watchdogindex.com/insights#blog","name":"Watchdog Insights","alternateName":"NJ Property Tax Insights","url":"https://www.watchdogindex.com/insights","inLanguage":"en-US","isPartOf":{"@id":"https://www.watchdogindex.com/#website"},"publisher":{"@type":"Organization","@id":"https://www.watchdogindex.com/#organization","name":"Watchdog","alternateName":"Watchdog Property Info","url":"https://www.watchdogindex.com/"}}</script>
 </head>
 <body>
 
@@ -98,7 +98,7 @@ body{margin:0;font-family:"Source Sans 3",sans-serif;color:#14243b}
     <div><strong>Prefer Watchdog in Google Search</strong><span>Add Watchdog as a preferred source where Google's source preferences are available.</span></div>
     <a href="https://www.google.com/preferences/source?q=watchdogindex.com" target="_blank" rel="noopener">Add Watchdog on Google</a>
   </div>
-  <section class="in-grid" id="insights-grid"><div class="in-empty">Loading latest insights…</div></section>
+  <section class="in-grid" id="insights-grid"><div class="in-empty">Loading latest findings…</div></section>
 </main>
 
 <script src="/property/js/public-nav.js" defer></script>
@@ -112,9 +112,9 @@ body{margin:0;font-family:"Source Sans 3",sans-serif;color:#14243b}
       g.innerHTML=rows.map(function(a){
         return '<a class="in-card" href="/insights/'+encodeURIComponent(a.slug)+'">'
           +(a.hero_image_url?'<img loading="lazy" src="'+e(a.hero_image_url)+'" alt="'+e(a.hero_image_alt||a.title)+'">':'')
-          +'<div class="in-body"><span class="in-kicker">'+e(a.kicker)+'</span><h2>'+e(a.title)
+          +'<div class="in-body"><h2>'+e(a.title)
           +'<div class="in-meta">'+new Date(a.published_at).toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'})+' · '+(a.reading_minutes||5)+' min read</div></div></a>';
-      }).join('') || '<div class="in-empty">New insights are being prepared.</div>';
+      }).join('') || '<div class="in-empty">New findings are being prepared.</div>';
     })
     .catch(function(){g.innerHTML='<div class="in-empty">Latest articles are temporarily unavailable. Try again shortly.</div>'});
 })();

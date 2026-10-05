@@ -217,7 +217,7 @@ for (const opts of [{ width: 320, height: 720 }, { width: 390, height: 844 }, { 
   }
   await page.waitForFunction(() => window.__dataFixtureCalls.rpc.has_watchdog_plan >= 1);
   await page.click('#dc-build');
-  await page.waitForFunction(() => /^\d+ governed /.test(document.getElementById('dc-result-note').textContent));
+  await page.waitForFunction(() => /^\d+ checked /.test(document.getElementById('dc-result-note').textContent));
   const c = await calls(page);
   assert.equal(c.functions['workbench-hydrate'], 1);
   assert.equal(c.functions['workbench-derived'], 1, 'every selected field is offered to the derived resolver once');

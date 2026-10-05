@@ -12,7 +12,7 @@ const weather = await read('api/watchdog-weather-context.js');
 assert.match(page, /data-access-require="developer"/);
 assert.match(page, /external_signals_only:true|seo-growth-report/);
 assert.match(page, /provider:'search_console'/);
-assert.match(page, /Weather context provider/);
+assert.match(page, /Weather info provider/);
 assert.match(page, /Search opportunities/);
 assert.match(page, /function classifyOpportunity\(row\)/);
 assert.match(page, /position>=8&&position<=25/);

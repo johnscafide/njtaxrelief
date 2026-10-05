@@ -6,7 +6,7 @@
   window.__WATCHDOG_UNTESTABLE_SUPPORT__=true;
 
   var HELP_URL='/property/help/why-property-cannot-be-tested/';
-  var COPY='Watchdog cannot run a defensible Chapter 123 test from this record yet because the test needs independent market evidence, usually a usable verified sale or comparable sales. The assessment and town ratio cannot be used to create a market value and then test that same assessment; that would be circular. This does not mean the property cannot be appealed. It means Watchdog does not have enough independent evidence to show the test here without guessing.';
+  var COPY='Watchdog cannot run a solid Chapter 123 test from this record yet because the test needs independent market evidence, usually a usable verified sale or comparable sales. The assessment and town ratio cannot be used to create a market value and then test that same assessment; that would be circular. This does not mean the property cannot be appealed. It means Watchdog does not have enough independent evidence to show the test here without guessing.';
 
   function enhanceSection(section){
     if(!section||!section.matches||!section.matches('section.sec'))return;

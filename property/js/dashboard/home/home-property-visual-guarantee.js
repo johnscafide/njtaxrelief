@@ -44,7 +44,7 @@ function ensureScoreHost(hero){
   box.className='hm-score-hero';
   var legacy=id.querySelector(':scope > .hm-val');
   if(legacy)legacy.replaceWith(box);else id.appendChild(box);
-  box.innerHTML='<div class="hm-score-empty"><i class="fas fa-dog"></i><div><b>Loading Watchdog Score</b><span>Building this property summary from governed evidence.</span></div></div>';
+  box.innerHTML='<div class="hm-score-empty"><i class="fas fa-dog"></i><div><b>Loading Watchdog Score</b><span>Building this property summary from checked evidence.</span></div></div>';
   return box;
 }
 

@@ -103,7 +103,7 @@ function gateMarkup(){
     '<section class="wd-intelligence-gate-card" role="dialog" aria-modal="true" aria-labelledby="wd-intelligence-gate-title">'+
       '<button class="wd-intelligence-gate-close" type="button" data-wd-intelligence-close aria-label="Close"><i class="fas fa-xmark"></i></button>'+
       '<div class="wd-intelligence-gate-mark"><i class="fas fa-microphone-lines"></i></div>'+
-      '<span class="wd-intelligence-gate-kicker">Watchdog Intelligence · Voice</span>'+
+      ''+
       '<h2 id="wd-intelligence-gate-title">Watchdog Intelligence Voice</h2>'+
       '<p id="wd-intelligence-gate-copy"></p>'+
       '<div class="wd-intelligence-gate-actions" id="wd-intelligence-gate-actions"></div>'+
@@ -138,7 +138,7 @@ function showGate(status){
   var unavailable=status && status.ok && status.eligible && !status.enabled;
   if(status && status.http_status===401){
     title.textContent='Sign in to use Watchdog Intelligence Voice';
-    copy.textContent='Voice uses your saved-property context and is available only inside an authenticated Watchdog workspace.';
+    copy.textContent='Voice uses your saved-property info and is available only inside an authenticated Watchdog dashboard.';
     actions.innerHTML='<a class="wd-intelligence-gate-primary" href="/property/account">Open account</a><button class="wd-intelligence-gate-secondary" type="button" data-wd-intelligence-close>Not now</button>';
   }else if(unavailable){
     title.textContent='Voice is temporarily unavailable';
@@ -161,9 +161,9 @@ function showGate(status){
 function voiceMarkup(){
   return '<section class="wd-home-voice-entry wd-intelligence-frame" id="wd-home-voice-entry" aria-label="Watchdog Intelligence Voice">'+
     '<div class="wd-home-voice-copy">'+
-      '<span class="wd-home-voice-kicker">Watchdog Intelligence · Voice</span>'+
+      ''+
       '<h2 class="wd-home-voice-title">Ask about what needs attention now.</h2>'+
-      '<p class="wd-home-voice-sub">Uses this saved property’s governed context so you can ask a focused question without starting over.</p>'+
+      '<p class="wd-home-voice-sub">Uses this saved property’s checked info so you can ask a focused question without starting over.</p>'+
     '</div>'+
     '<button class="wd-home-voice-button" id="wd-home-voice-button" type="button"><i class="fas fa-microphone"></i><span>Ask Watchdog</span></button>'+
   '</section>';
@@ -187,7 +187,7 @@ async function openVoice(){
       surface:'property_home',
       title:'Ask Watchdog Intelligence',
       kicker:'WATCHDOG INTELLIGENCE',
-      subtitle:'Ask a focused question about this saved property. Watchdog keeps the governed property context attached.',
+      subtitle:'Ask a focused question about this saved property. Watchdog keeps the checked property info attached.',
       pams_pins:property.pams_pin ? [property.pams_pin] : [],
       contextLabel:property.address || 'This saved property',
       context:property,
@@ -241,7 +241,7 @@ function mountExplore(){
   var parent=header.parentNode;
   var wrap=document.createElement('section');
   wrap.className='hm-explore-card';
-  wrap.setAttribute('aria-label','Explore your property');
+  wrap.setAttribute('aria-label','See your property');
   parent.insertBefore(wrap,header);
   wrap.appendChild(header);
   rows.forEach(function(row){wrap.appendChild(row)});

@@ -7,9 +7,9 @@ function paint(){
   var bar=document.querySelector('.wdx-pagebar');
   if(bar){
     var kicker=bar.querySelector('.wdx-kicker'),title=bar.querySelector('h1'),desc=bar.querySelector('p'),actions=bar.querySelector('.wdx-page-actions');
-    if(kicker)kicker.textContent='PRO+ · governed intelligence';
+    if(kicker)kicker.textContent='PRO+ · checked intelligence';
     if(title)title.textContent='Data Center';
-    if(desc)desc.textContent='Build, save and export governed New Jersey property datasets from Watchdog’s source-backed marker catalog.';
+    if(desc)desc.textContent='Build, save and export checked New Jersey property datasets from Watchdog’s source-backed marker catalog.';
     // Page actions are authored in the Data Center HTML (root-level URLs) and cloned into the shared page bar.
     var tpl=document.getElementById('dc-pagebar-actions');
     if(actions&&tpl&&tpl.content&&!actions.querySelector('[data-dc-pagebar-action]'))actions.replaceChildren(tpl.content.cloneNode(true));

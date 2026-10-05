@@ -21,7 +21,7 @@
     block.id='wd-farm-showcase';
     block.className='wd-farm-showcase';
     block.setAttribute('aria-labelledby','wd-farm-showcase-title');
-    block.innerHTML='<div class="wd-farm-showcase-copy"><span class="wd-section-kicker">Professional farming</span><h2 id="wd-farm-showcase-title">Farm the areas that matter.</h2><p>Professional plans let you draw exact neighborhoods, layer Watchdog intelligence over the parcels, and save smarter target areas for follow-up.</p></div><div class="wd-farm-showcase-visual" role="img" aria-label="Illustrative Watchdog farming map centered on Deptford, New Jersey"></div>';
+    block.innerHTML='<div class="wd-farm-showcase-copy"><h2 id="wd-farm-showcase-title">Farm the areas that matter.</h2><p>Professional plans let you draw exact neighborhoods, layer Watchdog intelligence over the parcels, and save better target areas for follow-up.</p></div><div class="wd-farm-showcase-visual" role="img" aria-label="Illustrative Watchdog farming map centered on Deptford, New Jersey"></div>';
     guide.insertAdjacentElement('beforebegin',block);
     return true;
   }

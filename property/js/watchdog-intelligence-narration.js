@@ -39,7 +39,7 @@
 
   function requireConclusion(brief) {
     if (!brief.conclusion) {
-      const error = new Error('A governed Watchdog written response is required before narration.');
+      const error = new Error('A checked Watchdog written response is required before narration.');
       error.code = 'WATCHDOG_NARRATION_NO_CONCLUSION';
       throw error;
     }
@@ -52,7 +52,7 @@
   function formatQuick(brief) {
     const parts = ['Watchdog Intelligence, 30-second brief.', brief.conclusion];
     pushList(parts, 'Key evidence.', brief.evidence.slice(0, 2));
-    if (brief.caveats[0]) parts.push(`Important context. ${brief.caveats[0]}`);
+    if (brief.caveats[0]) parts.push(`Important background. ${brief.caveats[0]}`);
     else if (brief.missingEvidence[0]) parts.push(`Evidence gap. ${brief.missingEvidence[0]}`);
     return parts;
   }
@@ -61,7 +61,7 @@
     const parts = ['Watchdog Intelligence, professional brief.', brief.conclusion];
     pushList(parts, 'Key evidence.', brief.evidence.slice(0, 4));
     pushList(parts, 'Missing evidence.', brief.missingEvidence.slice(0, 2));
-    pushList(parts, 'Important context.', brief.caveats.slice(0, 2));
+    pushList(parts, 'Important background.', brief.caveats.slice(0, 2));
     return parts;
   }
 
@@ -78,7 +78,7 @@
     const parts = ['Watchdog Intelligence, what changed brief.', brief.conclusion];
     pushList(parts, 'Material evidence.', brief.evidence.slice(0, 3));
     pushList(parts, 'Unresolved or missing evidence.', brief.missingEvidence.slice(0, 2));
-    if (brief.caveats[0]) parts.push(`Important context. ${brief.caveats[0]}`);
+    if (brief.caveats[0]) parts.push(`Important background. ${brief.caveats[0]}`);
     return parts;
   }
 

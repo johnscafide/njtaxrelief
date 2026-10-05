@@ -99,10 +99,10 @@ import '../../watchdog-score-core.js';
                : rel > 1.15 ? clamp01(1.15 - (rel - 1) * 0.8)
                : 1;
       add('trajectory', traj,
-          'assessed at ' + (implied * 100).toFixed(0) + '% of its defensible sale, town runs ' +
+          'assessed at ' + (implied * 100).toFixed(0) + '% of its solid sale, town runs ' +
           (s.ratio * 100).toFixed(0) + '%');
     } else {
-      add('trajectory', null, 'needs a defensible sale on record; nominal deed transfers are excluded');
+      add('trajectory', null, 'needs a solid sale on record; nominal deed transfers are excluded');
     }
 
     // R - Recourse, 10
@@ -157,7 +157,7 @@ import '../../watchdog-score-core.js';
 
   if (document.body && document.body.getAttribute('data-sidebar-page') === 'dashboard') {
     import('../dashboard-workspace.js').catch(function (error) {
-      console.error('Modern dashboard workspace could not load:', error);
+      console.error('Modern dashboard dashboard could not load:', error);
     });
   }
 })();

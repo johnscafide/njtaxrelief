@@ -25,7 +25,7 @@
         }).join('') + '</div>' +
       '<div class="ti-matrix-legend"><span><i style="background:#cf4c42"></i>Uneven and fast rising</span>' +
         '<span><i style="background:#c69222"></i>Watch</span><span><i style="background:#1d9a6c"></i>Stronger position</span></div>' +
-      '<div class="tl-fine">Each marker is a saved property. Its label is the Watchdog Score when available. This is municipal context, not an appeal prediction.</div>');
+      '<div class="tl-fine">Each marker is a saved property. Its label is the Watchdog Score when available. This is municipal info, not an appeal prediction.</div>');
   }
 
   Object.assign(window, { toolTownRiskMatrix: toolTownRiskMatrix });

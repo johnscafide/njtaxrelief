@@ -113,7 +113,7 @@ function handoffPrompt(section,item,index){
     'HANDOFF: '+title,
     'TASK: '+task
   ];
-  if(detailText)lines.push('CONTEXT: '+detailText);
+  if(detailText)lines.push('INFO: '+detailText);
   if(ids.length)lines.push('LINEAR: '+ids.join(', '));
   if(special)lines.push('SPECIAL HANDOFF NOTE: '+special);
   lines=lines.concat([
@@ -125,7 +125,7 @@ function handoffPrompt(section,item,index){
     'Operating requirements:',
     '- Re-fetch current main and current file SHAs immediately before every GitHub write so concurrent work is never overwritten.',
     '- Reuse and update the mapped Linear issue(s). Do not create a duplicate issue unless the current scope genuinely has no appropriate existing issue.',
-    '- Preserve entitlement, RLS, privacy, billing, security, compliance, evidence-lineage, provenance, accessibility, and data-governance boundaries.',
+    '- Preserve entitlement, RLS, privacy, billing, security, compliance, evidence-lineage, source history, accessibility, and data-governance boundaries.',
     '- Do not fabricate completion, sources, LIVE status, provider behavior, customer outcomes, test evidence, or external certification.',
     '- If an owner/provider/external dependency blocks part of the work, document exactly what is blocked, complete every safe adjacent step that can be done now, and leave the issue status truthful.',
     '- Run the relevant tests, canaries, contracts, visual checks, or production verification for the work you change.',
@@ -145,7 +145,7 @@ function ensureModal(){
   modal.id='wr-handoff-modal';
   modal.className='wr-handoff-modal';
   modal.hidden=true;
-  modal.innerHTML='<div class="wr-handoff-backdrop" data-handoff-close></div><section class="wr-handoff-dialog" role="dialog" aria-modal="true" aria-labelledby="wr-handoff-title"><button type="button" class="wr-handoff-close" data-handoff-close aria-label="Close handoff"><i class="fas fa-xmark"></i></button><span class="wr-kicker">WATCHDOG PROJECT HANDOFF</span><h2 id="wr-handoff-title">Ready to continue this task</h2><p class="wr-handoff-intro">The task-specific prompt is already prepared. Save your Watchdog ChatGPT Project URL once, then future Handoff buttons will copy the prompt and open that Project automatically.</p><div class="wr-handoff-issue-row" id="wr-handoff-issues"></div><label class="wr-handoff-field"><span>Prepared prompt</span><textarea id="wr-handoff-prompt" rows="16" spellcheck="false"></textarea></label><div class="wr-project-config" id="wr-project-config"><label class="wr-handoff-field"><span>Watchdog ChatGPT Project URL</span><input id="wr-project-url" type="url" inputmode="url" placeholder="Paste the URL of your Watchdog Project in ChatGPT"></label><small>This stays only in this browser via local storage; it is not written to GitHub or Supabase.</small></div><div class="wr-handoff-error" id="wr-handoff-error" hidden></div><div class="wr-handoff-actions"><button type="button" class="wr-button wr-button-secondary" data-handoff-copy><i class="fas fa-copy"></i> Copy prompt</button><button type="button" class="wr-button wr-button-primary" data-handoff-open><i class="fas fa-arrow-up-right-from-square"></i> Copy + open Watchdog Project</button></div></section>';
+  modal.innerHTML='<div class="wr-handoff-backdrop" data-handoff-close></div><section class="wr-handoff-dialog" role="dialog" aria-modal="true" aria-labelledby="wr-handoff-title"><button type="button" class="wr-handoff-close" data-handoff-close aria-label="Close handoff"><i class="fas fa-xmark"></i></button><h2 id="wr-handoff-title">Ready to continue this task</h2><p class="wr-handoff-intro">The task-specific prompt is already prepared. Save your Watchdog ChatGPT Project URL once, then future Handoff buttons will copy the prompt and open that Project automatically.</p><div class="wr-handoff-issue-row" id="wr-handoff-issues"></div><label class="wr-handoff-field"><span>Prepared prompt</span><textarea id="wr-handoff-prompt" rows="16" spellcheck="false"></textarea></label><div class="wr-project-config" id="wr-project-config"><label class="wr-handoff-field"><span>Watchdog ChatGPT Project URL</span><input id="wr-project-url" type="url" inputmode="url" placeholder="Paste the URL of your Watchdog Project in ChatGPT"></label><small>This stays only in this browser via local storage; it is not written to GitHub or Supabase.</small></div><div class="wr-handoff-error" id="wr-handoff-error" hidden></div><div class="wr-handoff-actions"><button type="button" class="wr-button wr-button-secondary" data-handoff-copy><i class="fas fa-copy"></i> Copy prompt</button><button type="button" class="wr-button wr-button-primary" data-handoff-open><i class="fas fa-arrow-up-right-from-square"></i> Copy + open Watchdog Project</button></div></section>';
   document.body.appendChild(modal);
   return modal;
 }

@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="robots" content="noindex,nofollow"><meta name="theme-color" content="#ffffff">
-<title>Listing Prep | Watchdog Agent Workspace</title>
+<title>Listing Prep | Watchdog Agent Dashboard</title>
 <link rel="icon" href="/favicon.ico"><link rel="manifest" href="/property/manifest.webmanifest">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
@@ -14,7 +14,7 @@
 <main class="ag-page" id="lp-app">
   <div class="ag-utility"><nav class="wd-crumbs" aria-label="Breadcrumb"><a class="wd-crumbs-desk" href="/agent-desk" data-wd-route><i class="fas fa-arrow-left" aria-hidden="true"></i><span>Agent Desk</span></a><span class="wd-crumbs-sep" aria-hidden="true">/</span><a href="/agent-desk#clients" data-wd-route>Clients</a><span class="wd-crumbs-sep" aria-hidden="true">/</span><span class="wd-crumbs-here" aria-current="page">Listing Prep</span></nav></div>
   <header class="ag-header">
-    <div class="ag-header-copy"><div class="ag-kicker"><i class="fa-solid fa-house-chimney"></i> LISTING APPOINTMENT</div><h1>Listing Prep Pack</h1><p>Start with one New Jersey address and keep the public property facts, tax context, seller conversation notes, municipal diligence and transaction handoff together. Watchdog does not replace an MLS CMA, inspection, title work or legal advice.</p></div>
+    <div class="ag-header-copy"><h1>Listing Prep Pack</h1><p>Start with one New Jersey address and keep the public property facts, tax info, seller conversation notes, municipal diligence and transaction handoff together. Watchdog does not replace an MLS CMA, inspection, title work or legal advice.</p></div>
     <div class="ag-header-actions"><button class="ag-btn primary" id="lp-new" type="button"><i class="fa-solid fa-plus"></i> New prep pack</button></div>
   </header>
   <nav class="ag-tabs" aria-label="Clients tools">
@@ -33,7 +33,7 @@
             <div class="ag-search"><input id="lp-search" type="search" placeholder="Enter a street address, e.g. 5 Glenn Ave" autocomplete="off"><button class="ag-btn primary" id="lp-search-btn" type="button"><i class="fa-solid fa-magnifying-glass"></i> Search</button></div>
             <div id="lp-results" class="ag-results" hidden></div>
             <form class="ag-form" id="lp-create-form" hidden>
-              <div class="wide"><span class="ag-section-kicker">SELECTED PROPERTY</span><h3 id="lp-picked-address" style="margin:4px 0 0;font-size:16px"></h3><p id="lp-picked-place" style="margin:3px 0 12px;color:#646971;font-size:12px"></p></div>
+              <div class="wide"><h3 id="lp-picked-address" style="margin:4px 0 0;font-size:16px"></h3><p id="lp-picked-place" style="margin:3px 0 12px;color:#646971;font-size:12px"></p></div>
               <label>Client / seller label<input id="lp-client" maxlength="120" placeholder="Smith listing appointment"></label>
               <label>Appointment status<select id="lp-status"><option value="draft">Preparing</option><option value="ready">Ready for appointment</option><option value="won">Listing won</option><option value="lost">Not moving forward</option></select></label>
               <label class="wide">Private notes<textarea id="lp-notes" maxlength="4000" placeholder="What the seller told you, questions to ask, pricing/condition notes…"></textarea></label>
@@ -66,8 +66,8 @@
         <section class="ag-card" id="lp-checklist" hidden>
           <div class="ag-card-head"><div><span>APPOINTMENT CHECKLIST</span><h2>What to verify before you price or promise</h2></div></div>
           <div class="ag-card-body"><div class="ag-checks">
-            <div class="ag-check"><i class="fa-solid fa-building-columns"></i><div><b>Tax & assessment context</b><small>Use the current Watchdog record and source dates; do not treat assessed value as market value.</small></div><em>Watchdog</em></div>
-            <div class="ag-check"><i class="fa-solid fa-hammer"></i><div><b>Permits and property changes</b><small>Open the full property workspace and review available permit/change evidence before the appointment.</small></div><em>Review</em></div>
+            <div class="ag-check"><i class="fa-solid fa-building-columns"></i><div><b>Tax & assessment info</b><small>Use the current Watchdog record and source dates; do not treat assessed value as market value.</small></div><em>Watchdog</em></div>
+            <div class="ag-check"><i class="fa-solid fa-hammer"></i><div><b>Permits and property changes</b><small>Open the full property dashboard and review available permit/change evidence before the appointment.</small></div><em>Review</em></div>
             <div class="ag-check"><i class="fa-solid fa-city"></i><div><b>Municipal resale / CO requirements</b><small>Confirm current municipal requirements before setting seller expectations or a closing timeline.</small></div><em>Closing</em></div>
             <div class="ag-check"><i class="fa-solid fa-camera"></i><div><b>MLS/CMA, condition and marketing plan</b><small>Complete your brokerage pricing work, condition walk-through, photography and launch strategy outside the public-record layer.</small></div><em>Agent</em></div>
           </div></div>

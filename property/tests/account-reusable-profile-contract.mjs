@@ -21,7 +21,7 @@ assert.match(account,/^.*Saved\\\./m);
 // Disclaimer rewritten in NJW-431 (4fb2e3d9) when optional household income/age bands moved to the
 // separate private homeowner context section. Sensitive tax data must still be excluded here.
 assert.match(partial,/This section is only for reusable name and mailing details\./);
-assert.match(partial,/Household income, age and other demographics belong in the private homeowner context section/i);
+assert.match(partial,/Household income, age and other demographics belong in the private homeowner info section/i);
 assert.match(partial,/Social Security numbers, tax amounts, recovery keys and tax-year filing answers are never stored here/i);
 assert.doesNotMatch(account,/gross_income|nj_taxable_income|social_security|\.ssn|birth_year/i);
 assert.doesNotMatch(account,/p_(?:gross_income|nj_taxable_income|filing_status|birth_year|ssn|disability)/i);

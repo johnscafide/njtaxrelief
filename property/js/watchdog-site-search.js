@@ -611,9 +611,9 @@
       (state.contentFor === raw ? state.content || [] : []).forEach(function(d){
         if(!d || !d.url) return;
         var title = String(d.meta && d.meta.title || '').replace(/\s*[|–—-]\s*Watchdog.*$/i,'') || 'Watchdog guide';
-        content.push({type:'content', label:title, href:route(d.url), where:'Guides and insights', html:safeExcerpt(d.excerpt), icon:'fa-book-open'});
+        content.push({type:'content', label:title, href:route(d.url), where:'Guides and findings', html:safeExcerpt(d.excerpt), icon:'fa-book-open'});
       });
-      group('Guides and insights',content);
+      group('Guides and findings',content);
       if(raw.length >= 2){
         group('More',[{type:'action', label:'Search all guides for "' + shortText(raw,40) + '"', href:route('/search') + '?q=' + encodeURIComponent(raw), where:'', summary:'', icon:'fa-magnifying-glass'}]);
       }

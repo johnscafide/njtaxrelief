@@ -84,7 +84,7 @@ function briefHtml(payload,response,toolName){
   ensureBriefCss();
   var cards=Array.isArray(response.cards)?response.cards.slice(0,5):[];
   var written=payload&&payload.provider==='openai'&&payload.provider_status==='complete';
-  return '<b class="dwa-brief-kicker">Watchdog <span class="wd-intelligence-brand-word">Intelligence</span> brief</b><p class="dwa-brief-lead">'+esc(response.conclusion||'')+'</p>'+
+  return '<p class="dwa-brief-lead">'+esc(response.conclusion||'')+'</p>'+
     (cards.length?'<div class="dwa-brief-cards"><strong class="dwa-brief-label">Needs your attention</strong>'+cards.map(briefCard).join('')+'</div>':'')+
     '<details class="dwa-brief-tech"><summary>Evidence and sources</summary>'+listSection('Evidence',response.evidence,'evidence')+listSection('Missing evidence',response.missing_evidence,'missing')+listSection('Caveats',response.caveats,'caveats')+sourcesSection(response.sources)+'</details>'+
     evidenceWorkflowHtml(toolName)+
@@ -99,12 +99,12 @@ function openWhy(pin,address){
 }
 function responseHtml(payload){
   var response=payload&&payload.response?payload.response:payload||{};
-  var provider=payload&&payload.provider?String(payload.provider):'Watchdog governed Analyst';
+  var provider=payload&&payload.provider?String(payload.provider):'Watchdog checked Analyst';
   var providerStatus=payload&&payload.provider_status?String(payload.provider_status):'';
   var toolName=payload&&payload.tool&&payload.tool.name?String(payload.tool.name):'';
   var conclusion=response.conclusion||'Watchdog completed the request.';
   if(Array.isArray(response.cards))return briefHtml(payload,response,toolName);
-  return '<b>Watchdog</b><p>'+esc(conclusion)+'</p>'+listSection('Evidence',response.evidence,'evidence')+listSection('Missing evidence',response.missing_evidence,'missing')+listSection('Caveats',response.caveats,'caveats')+sourcesSection(response.sources)+evidenceWorkflowHtml(toolName)+'<div class="dwa-provider" data-dwa-provider-note>Governed Analyst · '+esc(provider)+(providerStatus?' · '+esc(providerStatus):'')+'</div>';
+  return '<b>Watchdog</b><p>'+esc(conclusion)+'</p>'+listSection('Evidence',response.evidence,'evidence')+listSection('Missing evidence',response.missing_evidence,'missing')+listSection('Caveats',response.caveats,'caveats')+sourcesSection(response.sources)+evidenceWorkflowHtml(toolName)+'<div class="dwa-provider" data-dwa-provider-note>Checked Analyst · '+esc(provider)+(providerStatus?' · '+esc(providerStatus):'')+'</div>';
 }
 function appendMessage(kind,html){
   var chat=document.getElementById('dwa-chat');if(!chat)return null;
@@ -118,7 +118,7 @@ function errorText(error){
 }
 function commandResultNote(mode){
   if(mode==='prepare_only')return '<div class="dwa-command-result approval">Proposal only · No external, paid, destructive, legal, marketing, communication, billing, or provider-side action was executed.</div>';
-  if(mode==='confirmed')return '<div class="dwa-command-result reversible">Confirmation recorded for the governed request. Voice confirmation is not authorization, and no write is considered complete unless an approved Watchdog tool records it.</div>';
+  if(mode==='confirmed')return '<div class="dwa-command-result reversible">Confirmation recorded for the checked request. Voice confirmation is not authorization, and no write is considered complete unless an approved Watchdog tool records it.</div>';
   return'';
 }
 function showCommandGate(prompt,confirmation){
@@ -128,12 +128,12 @@ function showCommandGate(prompt,confirmation){
   state.pendingCommands[id]={prompt:String(prompt||'').slice(0,1800),mode:mode};
   var commandClass=String(confirmation.command_class||'').slice(0,50);
   var className=commandClass==='approval_required'?'approval':'reversible';
-  var html='<div class="dwa-command-gate '+className+'" data-command-gate="'+esc(id)+'" role="group" aria-label="'+esc(confirmation.title||'Command confirmation')+'"><strong>'+esc(confirmation.title||'Confirmation required')+'</strong><p>'+esc(confirmation.body||'Confirm this request before continuing.')+'</p><div class="dwa-command-actions"><button type="button" class="dwa-command-confirm" data-command-confirm="'+esc(id)+'">'+esc(confirmation.confirm_label||'Continue')+'</button><button type="button" class="dwa-command-cancel" data-command-cancel="'+esc(id)+'">Cancel</button></div><small>'+esc(commandClass==='approval_required'?'This prepares a proposal only. Existing Watchdog approval controls remain authoritative.':'This confirmation only releases the request into governed Watchdog tools. It does not expand permissions or guarantee that a write occurred.')+'</small></div>';
+  var html='<div class="dwa-command-gate '+className+'" data-command-gate="'+esc(id)+'" role="group" aria-label="'+esc(confirmation.title||'Command confirmation')+'"><strong>'+esc(confirmation.title||'Confirmation required')+'</strong><p>'+esc(confirmation.body||'Confirm this request before continuing.')+'</p><div class="dwa-command-actions"><button type="button" class="dwa-command-confirm" data-command-confirm="'+esc(id)+'">'+esc(confirmation.confirm_label||'Continue')+'</button><button type="button" class="dwa-command-cancel" data-command-cancel="'+esc(id)+'">Cancel</button></div><small>'+esc(commandClass==='approval_required'?'This prepares a proposal only. Existing Watchdog approval controls remain official.':'This confirmation only releases the request into checked Watchdog tools. It does not expand permissions or guarantee that a write occurred.')+'</small></div>';
   return appendMessage('assistant',html);
 }
 function showBlockedCommand(data){
   var message=data&&data.message?String(data.message):'This command is blocked by Watchdog policy.';
-  return appendMessage('assistant','<b>Watchdog</b><div class="dwa-command-gate prohibited" role="alert"><strong>Command blocked</strong><p>'+esc(message)+'</p><small>No request was sent to the governed Analyst and no action was taken.</small></div>');
+  return appendMessage('assistant','<b>Watchdog</b><div class="dwa-command-gate prohibited" role="alert"><strong>Command blocked</strong><p>'+esc(message)+'</p><small>No request was sent to the checked Analyst and no action was taken.</small></div>');
 }
 async function tryLocalReadOnly(prompt,options){
   if(options&&options.commandConfirmation)return false;
@@ -195,9 +195,9 @@ function open(options){
 
   var backdrop=document.createElement('div');backdrop.id='dwa-backdrop';backdrop.className='dwa-backdrop';backdrop.dataset.contextualAnalyst='true';
   var panel=document.createElement('aside');panel.id='dwa-panel';panel.className='dwa-panel';panel.dataset.contextualAnalyst='true';panel.dataset.watchdogSurface=surface;panel.setAttribute('role','dialog');panel.setAttribute('aria-modal','true');panel.setAttribute('aria-label',options.title||'Ask Watchdog');
-  var contextText=options.contextLabel||((pins.length===1?'1 property':pins.length+' properties')+' in the current Watchdog context');
+  var contextText=options.contextLabel||((pins.length===1?'1 property':pins.length+' properties')+' in the current Watchdog info');
   // content-architecture: dynamic — shell text, suggestions and context count come from each surface's open() options.
-  panel.innerHTML='<div class="dwa-head"><div><span>'+esc(options.kicker||'WATCHDOG INTELLIGENCE')+'</span><h2>'+esc(options.title||'Ask Watchdog')+'</h2><p>'+esc(options.subtitle||'Ask, follow up, inspect evidence, or use Voice without leaving this page.')+'</p></div><button class="dwa-close" type="button" aria-label="Close Ask Watchdog"><i class="fas fa-xmark"></i></button></div><div class="dwa-body" id="dwa-body"><div class="dwa-note"><b>Current context:</b> '+esc(contextText)+'. Watchdog answers only from checked public records and says when something is missing.</div><div class="dwa-chips">'+chipList(options)+'</div><div class="dwa-chat" id="dwa-chat"></div><div class="dwa-compose"><textarea id="dwa-input" aria-label="Ask Watchdog" placeholder="'+esc(options.placeholder||'Ask Watchdog about the current context...')+'"></textarea><div class="dwa-compose-row"><small>Ask in your own words or use Voice. You always see what will be sent, and nothing changes without your OK.</small><button class="dwa-send" id="dwa-send" type="button">Ask Watchdog</button></div></div></div>';
+  panel.innerHTML='<div class="dwa-head"><div><span>'+esc(options.kicker||'WATCHDOG INTELLIGENCE')+'</span><h2>'+esc(options.title||'Ask Watchdog')+'</h2><p>'+esc(options.subtitle||'Ask, follow up, inspect evidence, or use Voice without leaving this page.')+'</p></div><button class="dwa-close" type="button" aria-label="Close Ask Watchdog"><i class="fas fa-xmark"></i></button></div><div class="dwa-body" id="dwa-body"><div class="dwa-note"><b>Current info:</b> '+esc(contextText)+'. Watchdog answers only from checked public records and says when something is missing.</div><div class="dwa-chips">'+chipList(options)+'</div><div class="dwa-chat" id="dwa-chat"></div><div class="dwa-compose"><textarea id="dwa-input" aria-label="Ask Watchdog" placeholder="'+esc(options.placeholder||'Ask Watchdog about the current info...')+'"></textarea><div class="dwa-compose-row"><small>Ask in your own words or use Voice. You always see what will be sent, and nothing changes without your OK.</small><button class="dwa-send" id="dwa-send" type="button">Ask Watchdog</button></div></div></div>';
   document.body.appendChild(backdrop);document.body.appendChild(panel);document.documentElement.classList.add('watchdog-contextual-analyst-open');
   backdrop.addEventListener('click',close);panel.querySelector('.dwa-close').addEventListener('click',close);
   panel.querySelectorAll('[data-contextual-chip]').forEach(function(button){button.addEventListener('click',function(){var input=document.getElementById('dwa-input');if(input){input.value=button.dataset.contextualChip||'';input.focus();}});});

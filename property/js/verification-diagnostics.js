@@ -7,14 +7,14 @@
   function card(icon, title, text, status, ok) { return '<article class="vd-card ' + (ok === true ? 'ok' : ok === false ? 'bad' : '') + '"><i class="fas ' + icon + '"></i><h3>' + esc(title) + '</h3><p>' + esc(text) + '</p><strong>' + esc(status) + '</strong></article>'; }
   async function platform() {
     var grid=document.getElementById('vd-platform-grid'),body=document.getElementById('vd-events-body'),incidents=document.getElementById('vd-incidents-body'),checks=document.getElementById('vd-billing-checks');
-    grid.innerHTML=card('fa-spinner fa-spin','Loading telemetry','Reading sanitized customer-facing signals…','In progress');
+    grid.innerHTML=card('fa-spinner fa-spin','Loading telemetry','Reading sanitized customer-facing signs…','In progress');
     checks.innerHTML='<div class="vd-check"><i class="fas fa-spinner fa-spin"></i> Loading billing evidence…</div>';
     try {
       var session=await sb.auth.getSession(),token=session.data&&session.data.session&&session.data.session.access_token;
       var response=await fetch(URL+'/functions/v1/get-platform-health',{method:'POST',headers:{apikey:KEY,Authorization:'Bearer '+token,'Content-Type':'application/json'},body:'{}'}),result=await response.json();
       if(!response.ok)throw new Error(result.error||'Reliability service unavailable');
       var c=result.counts||{};
-      grid.innerHTML=card('fa-triangle-exclamation','Open incidents','Aggregated customer-facing failures requiring review.',String(c.open_incidents||0),c.open_incidents===0)+card('fa-shield-halved','Critical incidents','Unhandled failures or repeated warning signals.',String(c.critical_incidents||0),c.critical_incidents===0)+card('fa-calendar-week','Signals · 7 days','Sanitized errors and slow-page samples retained for triage.',String(c.last_7d||0),null);
+      grid.innerHTML=card('fa-triangle-exclamation','Open incidents','Aggregated customer-facing failures requiring review.',String(c.open_incidents||0),c.open_incidents===0)+card('fa-shield-halved','Critical incidents','Unhandled failures or repeated warning signs.',String(c.critical_incidents||0),c.critical_incidents===0)+card('fa-calendar-week','Warning signs · 7 days','Sanitized errors and slow-page samples retained for triage.',String(c.last_7d||0),null);
       document.getElementById('vd-generated').textContent='Release '+result.release+' · '+new Date(result.generated_at).toLocaleString();
       incidents.innerHTML=(result.incidents||[]).map(function(row){return '<tr><td>'+esc(new Date(row.last_seen_at).toLocaleString())+'</td><td><span class="vd-severity '+esc(row.severity)+'">'+esc(row.severity)+'</span></td><td>'+esc(row.status)+'</td><td><code>'+esc(row.route||'—')+'</code></td><td>'+esc(row.event_count)+'</td></tr>';}).join('')||'<tr><td colspan="5">No reliability incidents recorded.</td></tr>';
       body.innerHTML=(result.events||[]).map(function(row){var m=row.metadata||{};return '<tr><td>'+esc(new Date(row.created_at).toLocaleString())+'</td><td>'+esc(String(row.event_type||'').replace('platform.','').replaceAll('_',' '))+'</td><td><code>'+esc(row.resource_id||'')+'</code></td><td>'+esc(m.message||'')+'</td><td>'+esc(m.release||'—')+'</td></tr>';}).join('')||'<tr><td colspan="5">No customer-facing reliability events in the last seven days.</td></tr>';

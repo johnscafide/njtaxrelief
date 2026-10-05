@@ -21,7 +21,7 @@
 
   var steps=[
     {title:'Choose a municipality',body:'Start with the county and municipality you want to review.',list:['Choose a county','Choose a municipality','Scan only that area']},
-    {title:'Set your filters',body:'Use sale recency and minimum annual tax reduction to narrow the results.',list:['Verified New Jersey sales','Current assessment context','Chapter 123 screening']},
+    {title:'Set your filters',body:'Use sale recency and minimum annual tax reduction to narrow the results.',list:['Verified New Jersey sales','Current assessment info','Chapter 123 screening']},
     {title:'Review the results',body:'Use the ranking to decide which files to open first, then verify the evidence before acting.',list:['Ranked for review','Evidence quality stays visible','No outcome is guaranteed']}
   ];
   function openTour(){

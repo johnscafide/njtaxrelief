@@ -71,7 +71,7 @@
     <h1>Insights admin</h1>
     <button class="btn gold" onclick="openEditor(null)"><i class="fas fa-plus"></i> New article</button>
   </div>
-  <p class="prepared-hint">Prepared editorial drafts from the governed Watchdog workflow appear at the top until they are saved or published into the CMS.</p>
+  <p class="prepared-hint">Prepared editorial drafts from the checked Watchdog process appear at the top until they are saved or published into the CMS.</p>
   <table>
     <thead><tr><th>Title</th><th>Kicker</th><th>Status</th><th>Updated</th><th></th></tr></thead>
     <tbody id="list-body"></tbody>
@@ -176,7 +176,7 @@
     if(!pw){err.textContent='Enter the editorial admin password.';return;}
     button.disabled=true;
     try{await refreshList();document.getElementById('gate').style.display='none';document.getElementById('app').style.display='block';}
-    catch(error){err.textContent=error.message||'Unable to unlock Insights admin.';}
+    catch(error){err.textContent=error.message||'Unable to open Insights admin.';}
     finally{button.disabled=false;}
   }
 

@@ -182,7 +182,7 @@
       sec.id = 'wd-consumer-recents';
       sec.className = 'wd-consumer-recents';
       sec.setAttribute('aria-labelledby', 'wd-recent-title');
-      sec.innerHTML = '<div class="wd-consumer-wrap"><div class="wd-section-head"><div><h2 id="wd-recent-title">Recently explored</h2></div><a href="/property/dashboard" class="wd-section-link">My properties <i class="fas fa-arrow-right"></i></a></div><div class="wd-property-grid" id="wd-property-grid"><div class="wd-card-loading"></div><div class="wd-card-loading"></div><div class="wd-card-loading"></div></div></div>';
+      sec.innerHTML = '<div class="wd-consumer-wrap"><div class="wd-section-head"><div><h2 id="wd-recent-title">Recently looked into</h2></div><a href="/property/dashboard" class="wd-section-link">My properties <i class="fas fa-arrow-right"></i></a></div><div class="wd-property-grid" id="wd-property-grid"><div class="wd-card-loading"></div><div class="wd-card-loading"></div><div class="wd-card-loading"></div></div></div>';
       hero.insertAdjacentElement('afterend', sec);
     }
     return sec;
@@ -194,7 +194,7 @@
     var grid = document.getElementById('wd-property-grid');
     var title = document.getElementById('wd-recent-title');
     var topLink = q('.wd-section-link', sec);
-    if (title) title.textContent = signedIn ? 'Your recent properties' : 'Explore a few New Jersey homes';
+    if (title) title.textContent = signedIn ? 'Your recent properties' : 'See a few New Jersey homes';
     if (topLink) {
       topLink.href = signedIn ? '/property/dashboard' : '/towns/';
       topLink.innerHTML = signedIn ? 'My properties <i class="fas fa-arrow-right"></i>' : 'Browse New Jersey towns <i class="fas fa-arrow-right"></i>';
@@ -325,7 +325,7 @@
       eyebrow: 'Greentree Mortgage, an HMA Company · John Varano, Branch Manager',
       headline: 'Offer with your eyes open, not just your preapproval in hand.',
       sub: 'A preapproval can tell you what you may qualify for. A payment conversation helps you decide what you actually want to spend each month.',
-      cta: 'Get Payment Context', href: 'https://johnvarano.com/?utm_source=watchdog&utm_medium=internal_ad&utm_campaign=greentree_financing&utm_content=offer_eyes_open',
+      cta: 'Get Payment Info', href: 'https://johnvarano.com/?utm_source=watchdog&utm_medium=internal_ad&utm_campaign=greentree_financing&utm_content=offer_eyes_open',
       photo: '/johnvarano.jpg', alt: 'John Varano, Branch Manager, Greentree Mortgage an HMA Company', disclosure: AD_DISCLOSURE_GREENTREE, theme: 'greentree'
     },
     {
@@ -556,7 +556,7 @@
     var sec = document.createElement('section');
     sec.id = 'wd-seo-directory';
     sec.className = 'wd-seo-directory';
-    sec.innerHTML = '<div class="wd-consumer-wrap"><div class="wd-directory-head"><span class="wd-section-kicker">Explore New Jersey</span><h2>Property information, town by town.</h2><p>Start with your county, then open the local property-tax report for the municipality you care about.</p></div><div class="wd-county-grid" id="wd-county-grid">' + fallbackCountyHtml() + '</div><div class="wd-directory-more"><a href="/towns/">Browse all 564 New Jersey municipal reports <i class="fas fa-arrow-right"></i></a></div><div class="wd-guide-band"><div><span class="wd-section-kicker">Professional library</span><h2>Property guides built for the work you do.</h2><p>Practical ways to use New Jersey property records, assessments and Watchdog data in a professional workflow.</p></div><div class="wd-guide-links">' + guideLinks(professionalGuides) + '</div><a class="wd-guide-all" href="/property/professionals/">Browse the professional resource library <i class="fas fa-arrow-right"></i></a></div><div class="wd-homeowner-links"><div><span class="wd-section-kicker">Homeowner resources</span><h2>Start with the question you have.</h2></div><div class="wd-guide-links">' + guideLinks(homeownerGuides) + '</div></div></div>';
+    sec.innerHTML = '<div class="wd-consumer-wrap"><div class="wd-directory-head"><h2>Property information, town by town.</h2><p>Start with your county, then open the local property-tax report for the municipality you care about.</p></div><div class="wd-county-grid" id="wd-county-grid">' + fallbackCountyHtml() + '</div><div class="wd-directory-more"><a href="/towns/">Browse all 564 New Jersey municipal reports <i class="fas fa-arrow-right"></i></a></div><div class="wd-guide-band"><div><h2>Property guides built for the work you do.</h2><p>Practical ways to use New Jersey property records, assessments and Watchdog data in a professional process.</p></div><div class="wd-guide-links">' + guideLinks(professionalGuides) + '</div><a class="wd-guide-all" href="/property/professionals/">Browse the professional resource library <i class="fas fa-arrow-right"></i></a></div><div class="wd-homeowner-links"><div><h2>Start with the question you have.</h2></div><div class="wd-guide-links">' + guideLinks(homeownerGuides) + '</div></div></div>';
     if (gtSection) gtSection.insertAdjacentElement('beforebegin', sec);
     else if (insightSection) insightSection.insertAdjacentElement('afterend', sec);
     return sec;

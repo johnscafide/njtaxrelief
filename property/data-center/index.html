@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-  <title>Data Center | Watchdog Property Intelligence</title>
-  <meta name="description" content="Explore Watchdog's New Jersey property data catalog, coverage and source freshness. Pro+ members can build, save, export and monitor custom property datasets.">
+  <title>Data Center | Watchdog Property Info</title>
+  <meta name="description" content="See Watchdog's New Jersey property data catalog, coverage and source freshness. Pro+ members can build, save, export and monitor custom property datasets.">
 <!-- 
      
      Hi There. I see you are checking the code. I'm sure you have reasons for such. Curiosity would be my guess. 
@@ -57,11 +57,11 @@
       <div class="db-workspace">
         <div class="dcv2-page">
           <section class="dcv2-hero" aria-labelledby="dc-page-title">
-            <span class="dcv2-eyebrow"><i class="fas fa-table-cells-large"></i> Data Center · Pro+ workspace</span>
+            
             <h1 id="dc-page-title">Build, analyze and monitor property datasets.</h1>
             <p>Browse available data fields, check coverage and freshness, then use Pro+ to build, export and monitor datasets from your saved properties.</p>
             <div class="dcv2-hero-actions">
-              <button class="dcv2-btn primary" type="button" data-dc-tab="build"><i class="fas fa-sliders"></i> Explore the field catalog</button>
+              <button class="dcv2-btn primary" type="button" data-dc-tab="build"><i class="fas fa-sliders"></i> See the field catalog</button>
               <a class="dcv2-btn secondary" href="/pro"><i class="fas fa-bolt"></i> Data Center with Pro+</a>
             </div>
           </section>
@@ -135,7 +135,7 @@
             </div>
 
             <div class="dcv2-usecases">
-              <article class="dcv2-usecase"><i class="fas fa-magnifying-glass-chart"></i><h3>Find the signal behind the record</h3><p>Combine tax, assessment, sales, appeal, development, environmental and Watchdog-derived fields instead of reading one metric in isolation.</p></article>
+              <article class="dcv2-usecase"><i class="fas fa-magnifying-glass-chart"></i><h3>Find the red flag behind the record</h3><p>Combine tax, assessment, sales, appeal, development, environmental and Watchdog-calculated fields instead of reading one metric in isolation.</p></article>
               <article class="dcv2-usecase"><i class="fas fa-chart-column"></i><h3>Turn rows into analysis</h3><p>Pro+ result sheets summarize coverage, missing values, ranges and common categories before you export.</p></article>
               <article class="dcv2-usecase"><i class="fas fa-clock-rotate-left"></i><h3>Save and monitor repeat work</h3><p>Save useful field sets across devices and schedule recurring deliveries.</p></article>
             </div>
@@ -154,7 +154,7 @@
                 <label>Profession<select id="dc-prof"><option value="">All professions</option></select></label>
                 <input id="dc-tier" type="hidden" value="pro_plus">
                 <label>Category<select id="dc-category"><option value="">All categories</option></select></label>
-                <label>Origin<select id="dc-origin"><option value="">Public + derived</option><option value="public">Public source</option><option value="watchdog-derived">Watchdog derived</option></select></label>
+                <label>Origin<select id="dc-origin"><option value="">Public + calculated</option><option value="public">Public source</option><option value="watchdog-derived">Watchdog calculated</option></select></label>
                 <button id="dc-clear" type="button">Clear selected fields</button>
               </aside>
               <section class="dc-main">
@@ -169,7 +169,7 @@
                   <button type="button" class="dcv2-btn secondary" data-dc-retry>Try again</button>
                 </div>
                 <div class="dc-private-gate" id="dc-private-gate">
-                  <div><strong>Public catalog, private workspace</strong><p data-dc-gate-copy>Browse all fields. Sign in with Pro+ to use them with your saved properties.</p></div>
+                  <div><strong>Public catalog, private dashboard</strong><p data-dc-gate-copy>Browse all fields. Sign in with Pro+ to use them with your saved properties.</p></div>
                   <a class="dcv2-btn" data-dc-gate-action href="/pro">Sign in / view Pro+</a>
                 </div>
                 <div class="dc-table-wrap">
@@ -204,7 +204,7 @@
 
   <aside id="dc-marker-drawer" class="dc-drawer" aria-hidden="true" aria-labelledby="dc-drawer-title" role="dialog" tabindex="-1">
     <button class="dc-drawer-close" type="button" data-dc-drawer-close aria-label="Close marker details"><i class="fas fa-xmark"></i></button>
-    <span class="eyebrow" id="dc-drawer-eyebrow">Data field</span>
+    <span class="eyebrow" id="dc-drawer-eyebrow" hidden style="display:none">Data field</span>
     <h2 id="dc-drawer-title">Marker details</h2>
     <p id="dc-drawer-description"></p>
     <dl>

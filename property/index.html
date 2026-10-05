@@ -135,7 +135,7 @@
       "featureList": ["Property tax lookup by address", "Assessed value breakdown", "Parcel boundary map", "Tax history chart", "Seller net proceeds calculator", "NJ realty transfer fee calculator"],
       "provider": {
         "@type": "Organization",
-        "name": "Watchdog Property Intelligence",
+        "name": "Watchdog Property Info",
         "url": "https://njpropertytaxrelief.com/property/",
         "areaServed": { "@type": "State", "name": "New Jersey" }
       }
@@ -357,7 +357,7 @@
         <template id="wdh-tpl-claim-out">
           <article class="wdh-card wdh-feed-card wdh-fc no-media" data-tabs="home">
             <div class="wdh-fc-main">
-              <div class="wdh-krow"><span class="wdh-ico"><i class="fas fa-house" aria-hidden="true"></i></span><span class="wdh-kicker">Your home</span><span class="wdh-dot" aria-hidden="true">&middot;</span><span class="wdh-meta">Free account</span></div>
+              <div class="wdh-krow"><span class="wdh-ico"><i class="fas fa-house" aria-hidden="true"></i></span><span class="wdh-dot" aria-hidden="true">&middot;</span><span class="wdh-meta">Free account</span></div>
               <h3 class="wdh-h3 wdh-fc-title">Follow your home</h3>
               <p class="wdh-fc-facts"><span>Your tax vs. the town</span><span>Record changes</span><span>Distances from your street</span></p>
             </div>
@@ -367,7 +367,7 @@
         <template id="wdh-tpl-claim-in">
           <article class="wdh-card wdh-feed-card wdh-fc no-media" data-tabs="home">
             <div class="wdh-fc-main">
-              <div class="wdh-krow"><span class="wdh-ico"><i class="fas fa-house" aria-hidden="true"></i></span><span class="wdh-kicker">Your home</span></div>
+              <div class="wdh-krow"><span class="wdh-ico"><i class="fas fa-house" aria-hidden="true"></i></span></div>
               <h3 class="wdh-h3 wdh-fc-title">Add your home</h3>
               <p class="wdh-fc-facts"><span>Search your address, then save it</span></p>
             </div>
@@ -376,7 +376,7 @@
         </template>
         <template id="wdh-tpl-games">
           <article class="wdh-card wdh-feed-card wdh-games-card" data-tabs="games">
-            <div class="wdh-krow"><span class="wdh-ico"><i class="fas fa-table-cells-large" aria-hidden="true"></i></span><span class="wdh-kicker">Watchdog Games</span><span class="wdh-dot" aria-hidden="true">&middot;</span><span class="wdh-meta" data-games-day>New puzzles every day</span></div>
+            <div class="wdh-krow"><span class="wdh-ico"><i class="fas fa-table-cells-large" aria-hidden="true"></i></span><span class="wdh-dot" aria-hidden="true">&middot;</span><span class="wdh-meta" data-games-day>New puzzles every day</span></div>
             <h3 class="wdh-h3" data-games-head>Today's puzzles are built from real New Jersey records</h3>
             <div class="wdh-games">
               <a class="wdh-game" href="/games/sold" data-game="sold">
@@ -413,7 +413,7 @@
         <template id="wdh-tpl-pick">
           <article class="wdh-card wdh-feed-card wdh-fc no-media wdh-pick" data-tabs="all">
             <div class="wdh-fc-main">
-              <div class="wdh-krow"><span class="wdh-ico"><i class="fas fa-location-dot" aria-hidden="true"></i></span><span class="wdh-kicker">Start here</span></div>
+              <div class="wdh-krow"><span class="wdh-ico"><i class="fas fa-location-dot" aria-hidden="true"></i></span></div>
               <h3 class="wdh-h3 wdh-fc-title">Pick your town</h3>
               <p class="wdh-fc-facts"><span>Sales</span><span>Permits</span><span>Taxes</span><span>Local news</span></p>
             </div>
@@ -475,7 +475,7 @@
       </section>
 
       <section class="wdh-card wdh-rail-card" id="wdh-glance-card" aria-labelledby="wdh-glance-title" hidden>
-        <p class="wdh-kicker wdh-kicker-muted">Your town</p>
+        
         <h2 id="wdh-glance-title" class="wdh-h2s">Your town</h2>
         <p class="wdh-meta" id="wdh-glance-county"></p>
         <dl class="wdh-glance" id="wdh-glance"></dl>
@@ -483,7 +483,7 @@
       </section>
 
       <section class="wdh-card wdh-rail-card" aria-labelledby="wdh-co-title">
-        <p class="wdh-kicker wdh-kicker-muted">Free tool</p>
+        
         <h2 id="wdh-co-title" class="wdh-h2s">Selling? Check your town’s CO rules</h2>
         <p class="wdh-meta">Resale CO and smoke / CO alarm certificate requirements for New Jersey towns, with fees, timing and who to call.</p>
         <a class="wdh-btn wdh-btn-secondary wdh-btn-block" href="/co">Look up CO requirements</a>
@@ -492,15 +492,15 @@
       <section class="wdh-card wdh-rail-card" aria-labelledby="wdh-news-title">
         <h2 id="wdh-news-title" class="wdh-h2s">From Watchdog</h2>
         <div class="wdh-news">
-          <a class="wdh-article" href="/property/insights/south-jersey-housing-market-summer-2026.html"><span class="wdh-kicker wdh-kicker-muted">Housing market</span><span class="wdh-article-t">South Jersey home prices are still rising, but the market is starting to look different</span></a>
-          <a class="wdh-article" href="/property/insights/anchor-benefit-confirmation-letter-2026.html"><span class="wdh-kicker wdh-kicker-muted">2025 ANCHOR</span><span class="wdh-article-t">Got an ANCHOR confirmation letter? Here is what it means</span></a>
-          <a class="wdh-article" href="/property/insights/2026-revaluation-reassessment-list.html"><span class="wdh-kicker wdh-kicker-muted">2026 assessments</span><span class="wdh-article-t">140 New Jersey towns are on the 2026 revaluation or reassessment list</span></a>
+          <a class="wdh-article" href="/property/insights/south-jersey-housing-market-summer-2026.html"><span class="wdh-article-t">South Jersey home prices are still rising, but the market is starting to look different</span></a>
+          <a class="wdh-article" href="/property/insights/anchor-benefit-confirmation-letter-2026.html"><span class="wdh-article-t">Got an ANCHOR confirmation letter? Here is what it means</span></a>
+          <a class="wdh-article" href="/property/insights/2026-revaluation-reassessment-list.html"><span class="wdh-article-t">140 New Jersey towns are on the 2026 revaluation or reassessment list</span></a>
         </div>
         <a class="wdh-link" href="/property/insights/">All Watchdog Insights <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
       </section>
 
       <section class="wdh-card wdh-rail-card wdh-pros" aria-labelledby="wdh-pros-title">
-        <p class="wdh-kicker wdh-kicker-muted">Thinking of moving?</p>
+        
         <h2 id="wdh-pros-title" class="wdh-h2s">Your local real estate agents</h2>
         <div class="wdh-pros-faces">
           <img src="/johnprofile.jpg" alt="John Scafide, Licensed NJ Real Estate Agent" loading="lazy" width="56" height="56">
@@ -514,10 +514,10 @@
       <!-- Brother from another mother. But... not from another father! haha, Interestingly, we just found each other in 2025. Crazy right? Ancestry DNA for the win. Who knew we'd be in the same industry of real estate -->
       <section class="wdh-card wdh-rail-card wdh-ad" aria-label="Advertisement">
         <a href="https://johnvarano.com/" target="_blank" rel="noopener" class="wdh-ad-link">
-          <span class="wdh-kicker wdh-kicker-muted">Advertisement</span>
+          
           <span class="wdh-ad-row">
             <img src="/johnvarano.jpg" alt="John Varano, Branch Manager, Greentree Mortgage an HMA Company" loading="lazy" width="56" height="56" onerror="this.style.display='none'">
-            <span class="wdh-ad-eyebrow">Greentree Mortgage an HMA Company &middot; John Varano, Branch Manager</span>
+            
           </span>
           <span class="wdh-ad-headline">Know the payment before you fall in love with the house.</span>
           <span class="wdh-meta">Taxes are only half of what you pay every month. John Varano, Branch Manager at Greentree Mortgage, an HMA Company, will tell you what the real number looks like, including escrow, before you make a move.</span>
@@ -545,7 +545,7 @@
 
 <section class="wdh-explore" aria-labelledby="wdh-explore-title">
   <div class="wdh-explore-in">
-    <p class="wdh-kicker">Explore New Jersey</p>
+    
     <h2 id="wdh-explore-title" class="wdh-h2">Property information, town by town</h2>
     <p class="wdh-body">Start with your county, then open the local property-tax report for any of New Jersey's 564 municipalities.</p>
     <ul class="wdh-counties">

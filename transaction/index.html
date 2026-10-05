@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
   <title>Transactions | Watchdog</title>
-  <meta name="description" content="Agent transaction coordination with optional Pro+ evidence, closing readiness, disclosures, assignments and Watchdog property intelligence for New Jersey real estate professionals.">
+  <meta name="description" content="Agent transaction coordination with optional Pro+ evidence, closing readiness, disclosures, assignments and Watchdog property info for New Jersey real estate professionals.">
   <meta name="robots" content="noindex,nofollow">
   <meta name="theme-color" content="#f4f7f8">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -30,7 +30,7 @@
   <main class="tx-page">
     <section class="tx-gate" id="tx-gate">
       <div class="tx-gate-icon"><i class="fas fa-shield-halved"></i></div>
-      <span class="tx-eyebrow">AGENT TRANSACTION WORKSPACE</span>
+      
       <h2>One place to see what can still slow down a closing.</h2>
       <p id="tx-gate-copy">Checking your Watchdog access…</p>
       <div class="tx-gate-actions">
@@ -42,7 +42,7 @@
     <section class="tx-app" id="tx-app" hidden>
       <section class="tx-command-strip">
         <div class="tx-command-copy">
-          <span class="tx-eyebrow">TRANSACTION OPERATIONS</span>
+          
           <h2>Closing readiness across every active deal.</h2>
           <p>Manage closing dates, private disclosures, assignments and follow-ups with Agent. Pro+ adds automated source evidence and Watchdog Closing Review.</p>
         </div>
@@ -62,7 +62,7 @@
       <div class="tx-shell">
         <aside class="tx-portfolio" aria-label="Transactions">
           <div class="tx-portfolio-head">
-            <div><span class="tx-eyebrow">PORTFOLIO</span><h3>Transactions</h3></div>
+            <div><h3>Transactions</h3></div>
             <button type="button" class="tx-icon-btn" data-tx-action="add" aria-label="Add transaction"><i class="fas fa-plus"></i></button>
           </div>
           <div class="tx-filter-row">
@@ -81,9 +81,9 @@
         <section class="tx-workspace">
           <div class="tx-empty" id="tx-empty">
             <div class="tx-empty-visual"><i class="fas fa-route"></i></div>
-            <span class="tx-eyebrow">TRANSACTION READINESS</span>
+            
             <h2>Select a transaction or start a new one.</h2>
-            <p>Track early-warning items, ownership/title follow-up, tax and municipal checks, permits and certificates, client disclosures, lender milestones and closing assignments from one workspace.</p>
+            <p>Track early-warning items, ownership/title follow-up, tax and municipal checks, permits and certificates, client disclosures, lender milestones and closing assignments from one dashboard.</p>
             <div><button class="tx-btn tx-btn-primary" type="button" data-tx-action="add"><i class="fas fa-plus"></i> Add first transaction</button><button class="tx-btn" type="button" data-tx-action="bulk"><i class="fas fa-layer-group"></i> Add multiple addresses</button></div>
           </div>
 
@@ -103,19 +103,19 @@
 
             <div class="tx-alert" id="tx-intel-alert">
               <span class="tx-alert-icon"><i class="fas fa-shield-halved"></i></span>
-              <div><b id="tx-intel-title">Watchdog transaction screening</b><p id="tx-intel-copy">Resolve the address to a New Jersey parcel to connect governed Closing Review evidence.</p></div>
+              <div><b id="tx-intel-title">Watchdog transaction screening</b><p id="tx-intel-copy">Resolve the address to a New Jersey parcel to connect checked Closing Review evidence.</p></div>
               <button class="tx-btn tx-btn-small" id="tx-run-review" type="button"><i class="fas fa-magnifying-glass-chart"></i> Run review</button>
             </div>
 
             <section id="tx-agent-evidence" class="tx-panel tx-agent-evidence" hidden aria-labelledby="tx-agent-evidence-title">
-  <h3 id="tx-agent-evidence-title">Manual transaction workspace</h3>
+  <h3 id="tx-agent-evidence-title">Manual transaction dashboard</h3>
   <p>Dates, disclosures, assignments and manual follow-ups are included with Agent. Pro+ source checks are separate from your checklist progress.</p>
   <details><summary>See Pro+ evidence options</summary>
   <ul><li>Municipal tax balances and delinquency evidence <b>Pro+</b></li><li>Ownership, deed, judgment and lien evidence <b>Pro+</b></li><li>Permits, CO and fire certificate requirements <b>Pro+</b></li><li>Water, sewer, electric and solar source evidence <b>Pro+</b></li><li>Private closing document vault <b>Pro+</b></li><li>Automated evidence sweeps and Watchdog Closing Review <b>Pro+</b></li></ul>
   <a class="tx-btn tx-btn-primary" href="/pro#plans">Compare Pro+ evidence</a>
   </details>
 </section>
-<nav class="tx-tabs" aria-label="Transaction workspace sections">
+<nav class="tx-tabs" aria-label="Transaction dashboard sections">
               <button type="button" data-tx-tab="overview" aria-selected="true"><i class="fas fa-grid-2"></i> Overview</button>
               <button type="button" data-tx-tab="checklist" aria-selected="false"><i class="fas fa-list-check"></i> Readiness <span id="tx-open-count">0</span></button>
               <button type="button" data-tx-tab="disclosures" aria-selected="false"><i class="fas fa-comments"></i> Client disclosures</button>
@@ -126,19 +126,19 @@
             <section class="tx-panel" data-tx-panel="overview">
               <div class="tx-overview-grid">
                 <article class="tx-card tx-card-wide">
-                  <div class="tx-card-head"><div><span class="tx-eyebrow">DEAL HEALTH</span><h3>What needs attention now</h3></div><button class="tx-link-btn" type="button" data-jump-tab="checklist">Open checklist <i class="fas fa-arrow-right"></i></button></div>
+                  <div class="tx-card-head"><div><h3>What needs attention now</h3></div><button class="tx-link-btn" type="button" data-jump-tab="checklist">Open checklist <i class="fas fa-arrow-right"></i></button></div>
                   <div id="tx-priority-list" class="tx-priority-list"></div>
                 </article>
                 <article class="tx-card">
-                  <div class="tx-card-head"><div><span class="tx-eyebrow">CLOSING CLOCK</span><h3>Key dates</h3></div></div>
+                  <div class="tx-card-head"><div><h3>Key dates</h3></div></div>
                   <div class="tx-date-grid" id="tx-date-grid"></div>
                 </article>
                 <article class="tx-card">
-                  <div class="tx-card-head"><div><span class="tx-eyebrow">RESPONSIBILITY</span><h3>Assignments</h3></div></div>
+                  <div class="tx-card-head"><div><h3>Assignments</h3></div></div>
                   <div class="tx-assignment-summary" id="tx-assignment-summary"></div>
                 </article>
                 <article class="tx-card tx-card-wide">
-                  <div class="tx-card-head"><div><span class="tx-eyebrow">SOURCE AWARE</span><h3>Evidence coverage</h3></div><span class="tx-source-badge">Preliminary screening</span></div>
+                  <div class="tx-card-head"><div><h3>Evidence coverage</h3></div><span class="tx-source-badge">Preliminary screening</span></div>
                   <div class="tx-evidence-grid" id="tx-evidence-grid"></div>
                   <p class="tx-footnote">“No issue observed” only describes the sources actually checked. Provider missing, unavailable, or incomplete coverage stays visible and never becomes a clean finding.</p>
                 </article>
@@ -146,22 +146,22 @@
             </section>
 
             <section class="tx-panel" data-tx-panel="checklist" hidden>
-              <div class="tx-panel-head"><div><span class="tx-eyebrow">DEAL READINESS</span><h3>Transaction checklist</h3><p>Work from the items most likely to affect timing. Assign each follow-up and preserve the evidence state separately from task completion.</p></div><div class="tx-panel-actions"><select id="tx-check-filter"><option value="open">Open / verify</option><option value="attention">Attention only</option><option value="all">All items</option><option value="resolved">Resolved</option></select><button class="tx-btn tx-btn-small" type="button" data-tx-action="add-item"><i class="fas fa-plus"></i> Add item</button></div></div>
+              <div class="tx-panel-head"><div><h3>Transaction checklist</h3><p>Work from the items most likely to affect timing. Assign each follow-up and preserve the evidence state separately from task completion.</p></div><div class="tx-panel-actions"><select id="tx-check-filter"><option value="open">Open / verify</option><option value="attention">Attention only</option><option value="all">All items</option><option value="resolved">Resolved</option></select><button class="tx-btn tx-btn-small" type="button" data-tx-action="add-item"><i class="fas fa-plus"></i> Add item</button></div></div>
               <div id="tx-checklist" class="tx-checklist"></div>
             </section>
 
             <section class="tx-panel" data-tx-panel="disclosures" hidden>
-              <div class="tx-panel-head"><div><span class="tx-eyebrow">CLIENT INPUT</span><h3>Seller / buyer disclosures</h3><p>Capture what the client tells the team, then reconcile it with independently sourced evidence when available. Private-life answers are never inferred by Watchdog.</p></div><span class="tx-private-pill"><i class="fas fa-lock"></i> Private to your account</span></div>
+              <div class="tx-panel-head"><div><h3>Seller / buyer disclosures</h3><p>Capture what the client tells the team, then reconcile it with independently sourced evidence when available. Private-life answers are never inferred by Watchdog.</p></div><span class="tx-private-pill"><i class="fas fa-lock"></i> Private to your account</span></div>
               <div id="tx-disclosures" class="tx-disclosures"></div>
             </section>
 
             <section class="tx-panel" data-tx-panel="timeline" hidden>
-              <div class="tx-panel-head"><div><span class="tx-eyebrow">CLOSING PATH</span><h3>Transaction timeline</h3><p>Advance the file as work is completed. Watchdog keeps unresolved follow-up visible even when the transaction stage moves forward.</p></div></div>
+              <div class="tx-panel-head"><div><h3>Transaction timeline</h3><p>Advance the file as work is completed. Watchdog keeps unresolved follow-up visible even when the transaction stage moves forward.</p></div></div>
               <div class="tx-stage-track" id="tx-stage-track"></div>
             </section>
 
             <section class="tx-panel" data-tx-panel="activity" hidden>
-              <div class="tx-panel-head"><div><span class="tx-eyebrow">AUDIT TRAIL</span><h3>Recent activity</h3><p>Changes to the transaction workspace are recorded here for continuity.</p></div></div>
+              <div class="tx-panel-head"><div><h3>Recent activity</h3><p>Changes to the transaction dashboard are recorded here for continuity.</p></div></div>
               <div id="tx-activity" class="tx-activity"></div>
             </section>
           </article>

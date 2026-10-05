@@ -897,7 +897,7 @@
   function signalSummary(node) {
     var preferred = node.querySelector('.ir-say,.rr-flag,.rv-own,.bc-warn,.bc-ok,.ap-ev,.tl-p,.tm-reading,p');
     var text = preferred ? preferred.textContent.replace(/\s+/g, ' ').trim() : '';
-    if (!text) text = 'Open for the current reading, methodology and source trail.';
+    if (!text) text = 'Open for the current reading, method and source trail.';
     return text.length > 145 ? text.slice(0, 142).replace(/\s+\S*$/, '') + '…' : text;
   }
 
@@ -909,11 +909,11 @@
       compare: 'watchdog.effective_tax_rate', trend: 'watchdog.tax_trajectory', history: 'property.assessed_value'
     }[sectionKey];
     var looseBlocks = [
-      ['.ti-report', 'Town intelligence', 'fa-chart-column'],
+      ['.ti-report', 'Town info', 'fa-chart-column'],
       ['.bp-report', 'Municipal budget pressure', 'fa-building-columns'],
       ['.tm-detail', 'Historical Property Time Machine', 'fa-clock-rotate-left'],
       ['.dd-tool', 'Closing and collateral preflight', 'fa-shield-halved'],
-      ['.pw-stack', 'Professional closing workflows', 'fa-briefcase']
+      ['.pw-stack', 'Professional closing tasks', 'fa-briefcase']
     ];
     looseBlocks.forEach(function (config) {
       host.querySelectorAll(':scope > ' + config[0]).forEach(function (block) {
@@ -1499,7 +1499,7 @@
       '</header>' +
 
       '<div class="wrap hm-wrap">' +
-        (commercial ? '<section class="hm-commercial-note"><i class="fas fa-building"></i><div><b>Commercial property workspace</b><p>This record is kept separate from homeowner benefit and residential comparable logic. Use the assessment, tax, parcel and diligence data here; confirm valuation and appeal strategy with commercial-specific evidence.</p></div></section>' : '') +
+        (commercial ? '<section class="hm-commercial-note"><i class="fas fa-building"></i><div><b>Commercial property dashboard</b><p>This record is kept separate from homeowner benefit and residential comparable logic. Use the assessment, tax, parcel and diligence data here; confirm valuation and appeal strategy with commercial-specific evidence.</p></div></section>' : '') +
         '<section class="ai">' +
           '<div class="ai-h">' +
             '<img src="/johnprofile.jpg" alt="" onerror="this.style.display=\'none\'">' +
@@ -1523,7 +1523,7 @@
         (typeof toolScoreHistory === 'function' ? toolScoreHistory(r) : '') +
         (typeof toolRealEstateConcierge === 'function' ? toolRealEstateConcierge(r) : '') +
 
-        '<div class="hm-secbar"><div><h2>Explore your property</h2><p>Start with a signal. Open only what matters to you.</p></div>' +
+        '<div class="hm-secbar"><div><h2>See your property</h2><p>Start with a warning sign. Open only what matters to you.</p></div>' +
           '<button id="hm-all" onclick="hmExpandAll()"><i class="fas fa-expand"></i> Expand all</button></div>' +
 
         SECTIONS.map(function (sec) { return sectionShell(sec, r); }).join('') +
@@ -1645,12 +1645,12 @@
     },
     {
       k: 'broker', tier: 'pro', cat: 'Professional intelligence', icon: 'fa-house-circle-check', title: 'Real Estate Professional Intelligence',
-      pro: 'A broker-ready layer that condenses assessment, tax, market-confidence and municipal signals into ten attributable client-conversation markers instead of another wall of raw numbers.',
+      pro: 'A broker-ready layer that condenses assessment, tax, market-confidence and municipal red flags into ten attributable client-conversation markers instead of another wall of raw numbers.',
       build: function (r) { return toolRealEstateIntelligence(r) + toolBrokerListingBrief(r); },
       sum: function () { return '10 agent-specific Watchdog markers'; }
     },
     {
-      k: 'decision', tier: 'pro_plus', cat: 'Professional intelligence', icon: 'fa-compass-drafting', title: 'Cross-Professional Decision Signals',
+      k: 'decision', tier: 'pro_plus', cat: 'Professional intelligence', icon: 'fa-compass-drafting', title: 'Cross-Professional Decision Numbers',
       pro: 'These scores compress several independently sourced facts into a consistent triage layer for attorneys, lenders, appraisers, agents and investors while keeping the underlying formula visible.',
       build: function (r) { return toolProfessionalDecisionSignals(r); },
       sum: function () { return '5 new formula-backed professional signals'; }
@@ -1662,7 +1662,7 @@
       sum: function (r) { return typeof statewideModivSummary === 'function' ? statewideModivSummary(r) : '2026 statewide MOD-IV baseline'; }
     },
     {
-      k: 'compare', tier: 'pro', cat: 'Market context', short: 'Tax burden across municipalities', icon: 'fa-route', title: 'Compare against other towns',
+      k: 'compare', tier: 'pro', cat: 'Market info', short: 'Tax burden across municipalities', icon: 'fa-route', title: 'Compare against other towns',
       pro: 'Tax per dollar of value is the only measure that travels across municipal lines. Useful for a ' +
            'relocation conversation and for ranking a portfolio.',
       build: function (r) { return toolRelocation(r) + toolInvestorScreen() + toolCarryCostVolatility(r); }
@@ -1698,7 +1698,7 @@
     return '<section class="sec2 sec2-cat-' + catClass + ' ' + tone + (OPEN[sec.k] ? ' open' : '') + '" data-min-plan="' + (sec.tier || 'standard') + '" id="sec-' + sec.k + '">' +
       '<button class="sec2-h" onclick="hmToggle(\'' + sec.k + '\')">' +
         '<span class="sec2-icon-tile"><i class="fas ' + sec.icon + ' sec2-i"></i></span>' +
-        '<span class="sec2-copy"><small class="sec2-kicker">' + esc(sec.cat || 'Analysis') + '</small><span class="sec2-t">' + sec.title + '</span>' +
+        '<span class="sec2-copy"><span class="sec2-t">' + sec.title + '</span>' +
         (sum ? '<span class="sec2-s">' + sum + '</span>' : '') + '</span>' +
         '<i class="fas fa-chevron-down sec2-c"></i>' +
       '</button>' +
@@ -1887,7 +1887,7 @@
     } else if (u && u.coefficient < 10) {
       p.push(['fa-ruler-combined', 'good',
         'The town assesses tightly, at a coefficient of ' + u.coefficient +
-        '. A board here will be harder to persuade, because the roll is defensible.']);
+        '. A board here will be harder to persuade, because the roll is solid.']);
     }
     if (a && a.latest && a.latest.win_rate_filed >= 50) {
       p.push(['fa-gavel', 'good',
@@ -2126,7 +2126,7 @@
         // SR1A county file, which is too large to block the first paint on.
         hydrateDetails().then(function () { paintReport(); paintHomeChrome(); });
       }).catch(function (error) {
-        console.error('Property report workspace failed:', error);
+        console.error('Property report dashboard failed:', error);
         el('hm-body').innerHTML = '<div class="wrap"><div class="db-error-panel"><i class="fas fa-triangle-exclamation"></i>' +
           '<div><h3>We could not finish loading this property report.</h3><p>Your saved information has not been changed.</p>' +
           '<button class="db-btn" onclick="location.reload()">Try again</button></div></div></div>';

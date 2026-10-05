@@ -23,7 +23,7 @@
   function cleanUrl(){try{history.replaceState(null,'','/anchor/results/');}catch(_){}}
   function root(){return document.getElementById('wd-anchor-result');}
   function loading(){var el=root();if(!el)return;el.innerHTML='<div class="wd-ar-card wd-ar-loading"><div class="wd-ar-spinner"></div><h2>Opening your result</h2><p>Watchdog is loading your ANCHOR estimate and matching the residence you entered to New Jersey public property records.</p></div>';}
-  function error(message){var el=root();if(!el)return;el.innerHTML='<div class="wd-ar-card wd-ar-error"><h2>This result is no longer available.</h2><p>'+esc(message||'Run the estimator again to create a fresh result.')+'</p><div class="wd-ar-actions" style="justify-content:center"><a class="wd-ar-btn primary" href="https://njpropertytaxrelief.com/anchor-estimator.html">Run the estimator again</a><a class="wd-ar-btn secondary" href="/">Explore Watchdog</a></div></div>';}
+  function error(message){var el=root();if(!el)return;el.innerHTML='<div class="wd-ar-card wd-ar-error"><h2>This result is no longer available.</h2><p>'+esc(message||'Run the estimator again to create a fresh result.')+'</p><div class="wd-ar-actions" style="justify-content:center"><a class="wd-ar-btn primary" href="https://njpropertytaxrelief.com/anchor-estimator.html">Run the estimator again</a><a class="wd-ar-btn secondary" href="/">See Watchdog</a></div></div>';}
   function fact(value,label){return '<div class="wd-ar-fact"><b>'+esc(value)+'</b><span>'+esc(label)+'</span></div>';}
   function stat(value,label){return '<div class="wd-ar-stat"><b>'+esc(value)+'</b><span>'+esc(label)+'</span></div>';}
   function robust(){return ROBUST.map(function(d){return '<div class="wd-ar-dim"><span class="wd-ar-letter">'+d[0]+'</span><span><b>'+esc(d[1])+'</b><span>'+esc(d[2])+'</span></span></div>';}).join('');}
@@ -45,11 +45,11 @@
       +fact(result.answers&&result.answers.age==='yes'?'65 or older':'Under 65 / not selected','Age answer')
       +fact(result.qualifies?'Likely eligible':'Review eligibility','Estimator outcome')
       +'</div></div>'
-      +'<div class="wd-ar-section"><h2>See the property behind the estimate.</h2><p>Watchdog can also show the public assessment, tax record and property signals for the residence you entered.</p></div>'
+      +'<div class="wd-ar-section"><h2>See the property behind the estimate.</h2><p>Watchdog can also show the public assessment, tax record and property red flags for the residence you entered.</p></div>'
       +'</section>'
-      +'<aside class="wd-ar-card wd-ar-property" id="wd-ar-property"><div class="wd-ar-property-head"><div><h2>Watchdog property intelligence</h2><div class="wd-ar-address">'+esc(result.address)+'</div></div><div class="wd-ar-public">NJ public record</div></div><div class="wd-ar-loading" style="padding:28px 10px"><div class="wd-ar-spinner"></div><p>Matching this residence to public property records…</p></div></aside>'
+      +'<aside class="wd-ar-card wd-ar-property" id="wd-ar-property"><div class="wd-ar-property-head"><div><h2>Watchdog property info</h2><div class="wd-ar-address">'+esc(result.address)+'</div></div><div class="wd-ar-public">NJ public record</div></div><div class="wd-ar-loading" style="padding:28px 10px"><div class="wd-ar-spinner"></div><p>Matching this residence to public property records…</p></div></aside>'
       +'</div>'
-      +'<section class="wd-ar-next"><h2>Explore the property.</h2><p>Use Watchdog to review property records, taxes, assessments, scores and other New Jersey property information.</p><div class="wd-ar-actions"><a class="wd-ar-btn primary" href="/" data-wd-next="home">Explore Watchdog</a><a class="wd-ar-btn secondary" href="/insights/">Read Watchdog Insights</a></div></section>'
+      +'<section class="wd-ar-next"><h2>See the property.</h2><p>Use Watchdog to review property records, taxes, assessments, scores and other New Jersey property information.</p><div class="wd-ar-actions"><a class="wd-ar-btn primary" href="/" data-wd-next="home">See Watchdog</a><a class="wd-ar-btn secondary" href="/insights/">Read Watchdog Insights</a></div></section>'
       +'<div class="wd-ar-disclaimer">ANCHOR eligibility and benefit amounts are set by the State of New Jersey and can change. Watchdog and NJPropertyTaxRelief.com are independent resources and are not affiliated with or endorsed by the State of New Jersey. Property-record data can lag real-world changes. Watchdog Score is shown only when enough ROBUST evidence is available.</div>';
     Array.prototype.slice.call(document.querySelectorAll('[data-wd-next]')).forEach(function(a){a.addEventListener('click',function(){track('anchor_watchdog_continue',{destination:'watchdog_home'});});});
   }
@@ -67,12 +67,12 @@
   function renderProperty(result,subject,scoreRow){
     var el=document.getElementById('wd-ar-property');if(!el)return;
     if(!subject||subject.status!=='ok'||!subject.pamsPin){
-      el.innerHTML='<div class="wd-ar-property-head"><div><h2>Watchdog property intelligence</h2><div class="wd-ar-address">'+esc(result.address)+'</div></div><div class="wd-ar-public">NJ public record</div></div><p>Watchdog could not confidently match this residence to a state parcel record. Your ANCHOR estimate above is unaffected.</p><div class="wd-ar-actions"><a class="wd-ar-btn primary" href="/">Try Watchdog property search</a></div>';
+      el.innerHTML='<div class="wd-ar-property-head"><div><h2>Watchdog property info</h2><div class="wd-ar-address">'+esc(result.address)+'</div></div><div class="wd-ar-public">NJ public record</div></div><p>Watchdog could not confidently match this residence to a state parcel record. Your ANCHOR estimate above is unaffected.</p><div class="wd-ar-actions"><a class="wd-ar-btn primary" href="/">Try Watchdog property search</a></div>';
       return;
     }
     var score=scoreRow&&Number(scoreRow.watchdog_score);var hasScore=Number.isFinite(score);
     el.innerHTML=''
-      +'<div class="wd-ar-property-head"><div><h2>Watchdog property intelligence</h2><div class="wd-ar-address">'+esc(subject.propertyLocation||result.address)+' · '+esc(subject.municipality||'New Jersey')+(subject.county?' · '+esc(subject.county)+' County':'')+'</div></div><div class="wd-ar-public">NJ public record</div></div>'
+      +'<div class="wd-ar-property-head"><div><h2>Watchdog property info</h2><div class="wd-ar-address">'+esc(subject.propertyLocation||result.address)+' · '+esc(subject.municipality||'New Jersey')+(subject.county?' · '+esc(subject.county)+' County':'')+'</div></div><div class="wd-ar-public">NJ public record</div></div>'
       +'<div class="wd-ar-score"><div class="wd-ar-score-ring"><span>'+(hasScore?Math.round(score):'—')+'<small>'+(hasScore?'/ 100':'PENDING')+'</small></span></div><div class="wd-ar-score-copy"><b>'+(hasScore?'Watchdog Score':'Score not available yet')+'</b><span>'+(hasScore?'Watchdog shows where the property stands. ROBUST explains what drives the score.':'Watchdog will not show a score when there is not enough evidence.')+'</span></div></div>'
       +'<div class="wd-ar-stats">'
       +stat(money(subject.assessedValue),'Assessed value')

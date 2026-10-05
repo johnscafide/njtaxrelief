@@ -46,7 +46,7 @@ module.exports = async function handler(req, res) {
     return res.status(409).json({ error: 'Confirmation required.', command_policy: policy, confirmation: confirmationPayload(policy) });
   }
   if (policy.class === commandPolicy.CLASSES.approval_required && confirmation !== 'prepare_only') {
-    return res.status(409).json({ error: 'Approval workflow required.', command_policy: policy, confirmation: confirmationPayload(policy) });
+    return res.status(409).json({ error: 'Approval process required.', command_policy: policy, confirmation: confirmationPayload(policy) });
   }
 
   const context = safeContext(input.context);

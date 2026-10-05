@@ -763,7 +763,7 @@ ${chrome()}
   ${reportSection(row, v)}
   <div class="wdp-share-wrap">${shareSection(row, v)}</div>
   ${faqSection(row, v)}
-  <p class="wdp-source">Source: New Jersey MOD-IV tax list and NJ Office of GIS parcel data, refreshed monthly${updated ? ` (last refresh ${esc(updated)})` : ''}. Town tax rates from the NJ Division of Taxation. Watchdog does not show owner names. <a href="/data-methodology">Data methodology</a></p>
+  <p class="wdp-source">Source: New Jersey MOD-IV tax list and NJ Office of GIS parcel data, refreshed monthly${updated ? ` (last refresh ${esc(updated)})` : ''}. Town tax rates from the NJ Division of Taxation. Watchdog does not show owner names. <a href="/data-methodology">How we get our numbers</a></p>
 </main>
 <div id="main-footer"></div>
 <script id="wdp-data" type="application/json">${pageData}</script>
