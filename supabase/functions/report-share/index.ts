@@ -71,7 +71,7 @@ function token() {
 
 function safeText(value: unknown) {
   return String(value ?? "")
-    .replace(/[–—]/g, "-")
+    .replace(/[–\u2014]/g, "-")
     .replace(/[•·]/g, "-")
     .replace(/[“”]/g, '"')
     .replace(/[‘’]/g, "'")

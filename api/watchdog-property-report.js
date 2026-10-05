@@ -86,7 +86,7 @@ async function saveRequest(b, v, row, hash, ua) {
 // Standard PDF fonts cover WinAnsi only; map common typography and drop the rest.
 function pdfText(value) {
   return String(value == null ? '' : value)
-    .replace(/[‘’]/g, "'").replace(/[“”]/g, '"').replace(/[–—]/g, '-')
+    .replace(/[‘’]/g, "'").replace(/[“”]/g, '"').replace(/[–\u2014]/g, '-')
     .replace(/[·•]/g, '-').replace(/›/g, '>').replace(/…/g, '...')
     .replace(/[^\x20-\x7e -ÿ]/g, '');
 }

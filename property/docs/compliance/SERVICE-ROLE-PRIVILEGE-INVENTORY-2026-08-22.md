@@ -1,4 +1,4 @@
-# Watchdog Service-Role Privilege Inventory — 2026-08-22
+# Watchdog Service-Role Privilege Inventory: 2026-08-22
 
 **Status:** Initial repository-derived inventory; not a claim of complete production coverage.  
 **Budget:** $0  
@@ -33,11 +33,11 @@ The search result is a discovery seed, not proof that every reference is deploye
 
 Each service-role-backed path should be classified into one of these authorization models:
 
-1. **Provider-authenticated webhook** — caller authenticity is established by provider signature/secret verification before privileged mutation.
-2. **Authenticated end-user action** — bearer session is validated and the operation is restricted to that user's authorized scope before service-role access is used.
-3. **Developer/admin action** — authenticated caller receives an independent server-side developer/admin authorization decision before privileged operation.
-4. **Internal scheduled/system job** — invocation channel is not public customer input and is protected by deployment/runtime secrets or platform controls.
-5. **Public ingestion with constrained privilege** — endpoint may accept unauthenticated input only when payload, rate, destination, and privileged effects are tightly bounded and abuse-resistant.
+1. **Provider-authenticated webhook**, caller authenticity is established by provider signature/secret verification before privileged mutation.
+2. **Authenticated end-user action**, bearer session is validated and the operation is restricted to that user's authorized scope before service-role access is used.
+3. **Developer/admin action**, authenticated caller receives an independent server-side developer/admin authorization decision before privileged operation.
+4. **Internal scheduled/system job**, invocation channel is not public customer input and is protected by deployment/runtime secrets or platform controls.
+5. **Public ingestion with constrained privilege**, endpoint may accept unauthenticated input only when payload, rate, destination, and privileged effects are tightly bounded and abuse-resistant.
 
 Any path that cannot be assigned and evidenced should remain an open compliance finding.
 

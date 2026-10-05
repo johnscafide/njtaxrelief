@@ -5,7 +5,7 @@
   border: 1px solid #dfe6ef;
   border-radius: 20px;
   background: #fff;
-  box-shadow: 0 10px 30px rgba(16,43,78,.06);
+  box-shadow: 0 2px 6px rgba(15,23,42,.08);
 }
 
 .wd-anchor-testimonials[hidden] { display: none !important; }
@@ -45,13 +45,13 @@
 
 .wd-anchor-review-panel .wd-anchor-testimonials-head span {
   color: #8a650d;
-  font: 800 10px/1.2 "Plus Jakarta Sans",Arial,sans-serif;
+  font: 800 10px/1.2 "Libre Franklin",Arial,sans-serif;
   letter-spacing: .11em;
 }
 
 .wd-anchor-review-panel .wd-anchor-testimonials-head strong {
   color: #102b4e;
-  font: 800 17px/1.2 "Plus Jakarta Sans",Arial,sans-serif;
+  font: 800 17px/1.2 "Libre Franklin",Arial,sans-serif;
 }
 
 .wd-anchor-review-panel .wd-anchor-testimonial {
@@ -115,7 +115,7 @@
   border-radius: 999px;
   background: #fff;
   color: #123b70;
-  font: 800 18px/1 "Plus Jakarta Sans",Arial,sans-serif;
+  font: 800 18px/1 "Libre Franklin",Arial,sans-serif;
   cursor: pointer;
   transition: border-color .16s ease,background-color .16s ease,transform .16s ease;
 }
@@ -146,14 +146,14 @@
   border-radius: 999px;
   background: #e7f0ff;
   color: #0e57be;
-  font: 800 10px/1 "Plus Jakarta Sans",Arial,sans-serif;
+  font: 800 10px/1 "Libre Franklin",Arial,sans-serif;
   letter-spacing: .095em;
 }
 
 .wd-anchor-status-panel > strong {
   margin: 0;
   color: #0d2e5d;
-  font: 800 20px/1.2 "Plus Jakarta Sans",Arial,sans-serif;
+  font: 800 20px/1.2 "Libre Franklin",Arial,sans-serif;
   letter-spacing: -.35px;
 }
 
@@ -190,9 +190,9 @@
   border-radius: 10px;
   background: #1466d8;
   color: #fff;
-  font: 800 13.5px/1.2 "Plus Jakarta Sans",Arial,sans-serif;
+  font: 800 13.5px/1.2 "Libre Franklin",Arial,sans-serif;
   text-decoration: none;
-  box-shadow: 0 8px 20px rgba(20,102,216,.16);
+  box-shadow: 0 2px 6px rgba(15,23,42,.08);
 }
 
 .wd-anchor-status-link:hover {

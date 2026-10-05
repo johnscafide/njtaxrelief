@@ -174,16 +174,16 @@
       '#plm-robust-score-sec{margin:22px 0}' +
       '.wdps{background:#fff;border:1px solid #e2e7ef;border-radius:18px;padding:22px;color:#111d38}' +
       '.wdps-head{display:grid;grid-template-columns:1fr auto;gap:18px;align-items:center;margin-bottom:18px}' +
-      '.wdps-k{font:800 10px/1.2 "Plus Jakarta Sans",sans-serif;letter-spacing:.11em;text-transform:uppercase;color:#2f6df6}' +
-      '.wdps h3{font:800 24px/1.15 "Plus Jakarta Sans",sans-serif;margin:5px 0 6px;color:#111d38}' +
+      '.wdps-k{font:800 10px/1.2 "Libre Franklin",sans-serif;letter-spacing:.11em;text-transform:uppercase;color:#2f6df6}' +
+      '.wdps h3{font:800 24px/1.15 "Libre Franklin",sans-serif;margin:5px 0 6px;color:#111d38}' +
       '.wdps-sub{font:500 14px/1.55 "Source Sans 3",sans-serif;color:#5d6d82;margin:0}' +
       '.wdps-score{width:92px;height:92px;border-radius:50%;display:grid;place-items:center;background:#edf1f6;text-align:center}' +
-      '.wdps-score b{font:800 34px/1 "Plus Jakarta Sans",sans-serif;color:#183b84}.wdps-score span{display:block;font:700 10px/1.2 "Source Sans 3",sans-serif;color:#748198;margin-top:4px}' +
+      '.wdps-score b{font:800 34px/1 "Libre Franklin",sans-serif;color:#183b84}.wdps-score span{display:block;font:700 10px/1.2 "Source Sans 3",sans-serif;color:#748198;margin-top:4px}' +
       '.wdps-meta{display:flex;gap:10px;flex-wrap:wrap;margin:0 0 18px}.wdps-meta span{background:#f5f7fb;border-radius:999px;padding:7px 10px;font:700 12px/1 "Source Sans 3",sans-serif;color:#31435c}' +
       '.wdps-grid{display:grid;gap:9px}.wdps-row{display:grid;grid-template-columns:minmax(150px,1fr) minmax(90px,1.1fr) 38px;gap:12px;align-items:center}' +
       '.wdps-label a{font:800 13px/1.25 "Source Sans 3",sans-serif;color:#111d38;text-decoration:none}.wdps-label small{display:block;font:500 11px/1.3 "Source Sans 3",sans-serif;color:#748198;margin-top:2px}' +
       '.wdps-bar{height:8px;border-radius:999px;background:#edf1f6;overflow:hidden}.wdps-bar i{display:block;height:100%;background:#2f6df6;border-radius:inherit}' +
-      '.wdps-n{font:800 13px/1 "Plus Jakarta Sans",sans-serif;text-align:right;color:#183b84}.wdps-row.off{opacity:.58}' +
+      '.wdps-n{font:800 13px/1 "Libre Franklin",sans-serif;text-align:right;color:#183b84}.wdps-row.off{opacity:.58}' +
       '.wdps-foot{margin-top:17px;padding-top:15px;border-top:1px solid #e2e7ef;font:500 12px/1.55 "Source Sans 3",sans-serif;color:#5d6d82}.wdps-foot a{font-weight:800;color:#183b84}' +
       '@media(max-width:620px){.wdps{padding:18px}.wdps-head{grid-template-columns:1fr 76px}.wdps-score{width:76px;height:76px}.wdps-score b{font-size:28px}.wdps-row{grid-template-columns:1fr 74px 32px}.wdps-label small{grid-column:1/-1}.wdps-bar{height:7px}}';
     document.head.appendChild(style);
@@ -229,7 +229,7 @@
         return '<div class="wdps-row' + (has ? '' : ' off') + '">' +
           '<div class="wdps-label"><a href="/property/robust/' + esc(d.slug) + '/">' + esc(d.label) + '</a><small>' + esc(d.note || '') + '</small></div>' +
           '<div class="wdps-bar"><i style="width:' + (has ? d.score : 0) + '%"></i></div>' +
-          '<div class="wdps-n">' + (has ? esc(d.score) : '—') + '</div>' +
+          '<div class="wdps-n">' + (has ? esc(d.score) : '-') + '</div>' +
         '</div>';
       }).join('') + '</div>' +
       '<div class="wdps-foot">Built from the best current evidence available for this parcel. Missing evidence lowers coverage. <a href="/property/robust/">How the ROBUST Framework works</a>.</div></section>';

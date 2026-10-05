@@ -445,7 +445,7 @@
 .lu-list { list-style: none; margin: var(--space-2) 0; padding: 0; display: grid; gap: 8px; }
 .lu-list.is-shake { animation: gm-shake 380ms ease 1; }
 .lu-item { position: relative; display: grid; grid-template-columns: 28px minmax(0, 1fr) auto auto 28px; align-items: center; gap: var(--space-2); min-height: 60px; padding: 0 var(--space-2) 0 var(--space-3); border: 2px solid var(--wg-ink); border-radius: 14px; background: #fff; font-weight: 800; user-select: none; touch-action: manipulation; transition: background 200ms ease, border-color 200ms ease; }
-.lu-item.is-dragging { z-index: 5; box-shadow: 0 8px 20px rgba(14, 34, 72, 0.22); cursor: grabbing; transition: none; }
+.lu-item.is-dragging { z-index: 5; box-shadow: 0 2px 6px rgba(15,23,42,.08); cursor: grabbing; transition: none; }
 .lu-rank { display: grid; place-items: center; width: 28px; height: 28px; border-radius: 50%; background: var(--wg-soft); font-size: var(--type-sm); font-variant-numeric: tabular-nums; }
 .lu-name { min-width: 0; line-height: 1.2; overflow-wrap: anywhere; }
 .lu-value { font-variant-numeric: tabular-nums; white-space: nowrap; }

@@ -61,7 +61,7 @@ Do not use sandbox history, manual entitlement edits, browser state, or legacy P
 
 ---
 
-## Historical v0.40 Paddle record — archived, not current authority
+## Historical v0.40 Paddle record, archived, not current authority
 
 **Historical update:** 2026-08-08 · v0.40
 

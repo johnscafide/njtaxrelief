@@ -24,7 +24,7 @@ async function studio(action,extra={}){const r=await client.functions.invoke('pc
 
 function paintCampaigns(){
   const sel=qs('#ps-campaign');sel.replaceChildren();
-  // content-architecture: dynamic — one option per saved audience, labeled with its live home count.
+  // content-architecture: dynamic, one option per saved audience, labeled with its live home count.
   campaigns.forEach(c=>{const o=document.createElement('option');o.value=c.id;o.textContent=`${c.name||'Untitled'} · ${Number(c.audience_count||0).toLocaleString()} homes`;sel.append(o)});
   show('#ps-no-campaigns',!campaigns.length);sel.disabled=!campaigns.length;
   if(campaigns.length){const want=new URLSearchParams(location.search).get('campaign');campaignId=campaigns.some(c=>c.id===want)?want:campaigns[0].id;sel.value=campaignId}
@@ -32,7 +32,7 @@ function paintCampaigns(){
 
 function paint(){
   if(!st)return;
-  // content-architecture: dynamic — environment and credit come from the live PCM connection and the agent's credit ledger.
+  // content-architecture: dynamic, environment and credit come from the live PCM connection and the agent's credit ledger.
   fill('env',st.environment==='live'?'Live printing':'Sandbox · nothing is printed');
   qs('[data-f="env"]').classList.toggle('live',st.environment==='live');
   const credit=qs('[data-f="credit"]');credit.hidden=!st.mail_credit_cents;credit.textContent=`${money(st.mail_credit_cents)} mail credit`;

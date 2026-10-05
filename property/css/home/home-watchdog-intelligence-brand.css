@@ -45,12 +45,12 @@ body.hm-dashboard-page .wd-intelligence-modal-frame {
     linear-gradient(#fff,#fff) padding-box,
     conic-gradient(from var(--wd-intelligence-angle),#15b7c9 0deg,#2478ff 90deg,#7857ff 175deg,#e84bc4 265deg,#15b7c9 360deg) border-box !important;
   animation: wd-intelligence-border-rotate 7s linear infinite;
-  box-shadow: 0 30px 90px rgba(7,28,61,.24),0 0 34px rgba(72,91,255,.08) !important;
+  box-shadow: 0 2px 6px rgba(15,23,42,.08) !important;
 }
 
 body.hm-dashboard-page .wdai-role-prompt.wd-intelligence-modal-frame {
   border-radius: 18px !important;
-  box-shadow: 0 12px 36px rgba(30,57,91,.10),0 0 24px rgba(72,91,255,.06) !important;
+  box-shadow: 0 2px 6px rgba(15,23,42,.08) !important;
 }
 
 body.hm-dashboard-page .wd-home-voice-kicker .wd-intelligence-brand-word,

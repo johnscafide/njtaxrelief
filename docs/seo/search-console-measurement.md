@@ -1,4 +1,4 @@
-# NJW-135 — Search Console measurement and pruning policy
+# NJW-135: Search Console measurement and pruning policy
 
 Repository-side guardrails are automated by `.github/workflows/seo-content-guard.yml`. Google Search Console itself requires access to the verified property and therefore is an account-side measurement step.
 

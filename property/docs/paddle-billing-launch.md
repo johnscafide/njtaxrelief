@@ -1,4 +1,4 @@
-# Paddle launch checklist — Watchdog v0.40
+# Paddle launch checklist: Watchdog v0.40
 
 Status: **Sandbox lifecycle validated through purchase, portal, scheduled cancellation and resume; public activation remains intentionally gated**.
 

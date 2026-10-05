@@ -4,7 +4,7 @@ if(window.__WATCHDOG_ZAPIER_PHASE7__)return;window.__WATCHDOG_ZAPIER_PHASE7__=tr
 var db=null,editingKeyId=null,currentKeys=[];
 var $=function(id){return document.getElementById(id);};
 function esc(v){return String(v==null?'':v).replace(/[&<>"']/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
-function fmt(v){if(!v)return'—';var d=new Date(v);return Number.isFinite(d.getTime())?d.toLocaleString('en-US',{month:'short',day:'numeric',hour:'numeric',minute:'2-digit'}):'—';}
+function fmt(v){if(!v)return'-';var d=new Date(v);return Number.isFinite(d.getTime())?d.toLocaleString('en-US',{month:'short',day:'numeric',hour:'numeric',minute:'2-digit'}):'-';}
 function show(id,on){var n=$(id);if(n)n.hidden=!on;}
 function text(id,v){var n=$(id);if(n)n.textContent=v;}
 function note(v,error){var n=$('ig-key-note');if(!n)return;n.textContent=v||'';n.classList.toggle('error',!!error);}

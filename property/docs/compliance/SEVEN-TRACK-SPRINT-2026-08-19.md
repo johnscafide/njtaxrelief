@@ -1,4 +1,4 @@
-# Watchdog Seven-Track Compliance Readiness Sprint — 2026-08-19
+# Watchdog Seven-Track Compliance Readiness Sprint: 2026-08-19
 
 **Budget constraint:** $0  
 **Assurance status:** Internal readiness only; no new certification or third-party assurance claim is created by this sprint.

@@ -1,4 +1,4 @@
-# ROBUST-v1 Trajectory Provenance Decision — 2026-08-23
+# ROBUST-v1 Trajectory Provenance Decision: 2026-08-23
 
 ## Decision
 
@@ -41,7 +41,7 @@ Recomputing T only where `lookup_sr1a_subject_evidence` supplies the verified pa
 - Mean evidence coverage rises from 71.63% to 73.04%.
 - Ten properties reach full six-dimension coverage.
 
-The same subject-evidence path expands O — Overassessment Position from 21 to 31 properties in the bounded cohort. Those 10 added O cases also use exact parcel matches.
+The same subject-evidence path expands O: Overassessment Position from 21 to 31 properties in the bounded cohort. Those 10 added O cases also use exact parcel matches.
 
 These 10 governed T observations are sufficient to prove the lineage path and run bounded canaries. They are **not** sufficiently representative to calibrate or change the T weight. The calibration cohort remains geographically concentrated and O/T evidence is still too sparse for a statewide model-version decision.
 

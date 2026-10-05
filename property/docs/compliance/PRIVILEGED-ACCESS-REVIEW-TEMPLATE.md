@@ -1,4 +1,4 @@
-# Watchdog Privileged Access Review — Evidence Template
+# Watchdog Privileged Access Review: Evidence Template
 
 Use this template for periodic and out-of-cycle privileged-access reviews. Keep committed copies sanitized: do not include names, emails, user IDs, tokens, credentials, private provider URLs, or exploit-enabling detail.
 

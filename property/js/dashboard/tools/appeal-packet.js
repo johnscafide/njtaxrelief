@@ -177,9 +177,9 @@
       return '<tr><td>' + esc(x.a) + '</td><td>' + esc(x.b) + '/' + esc(x.l) + '</td>' +
         '<td>' + (x.m ? String(x.m).padStart(2, '0') + '/' : '') + x.y + '</td>' +
         '<td class="n">' + money(x.p) + '</td>' +
-        '<td class="n">' + (x.sf ? x.sf.toLocaleString() : '\u2014') + '</td>' +
-        '<td class="n">' + (x.ppsf ? '$' + x.ppsf : '\u2014') + '</td>' +
-        '<td class="n">' + (x.yb || '\u2014') + '</td>' +
+        '<td class="n">' + (x.sf ? x.sf.toLocaleString() : '-') + '</td>' +
+        '<td class="n">' + (x.ppsf ? '$' + x.ppsf : '-') + '</td>' +
+        '<td class="n">' + (x.yb || '-') + '</td>' +
         '<td>' + esc(x.fit || '') + '</td></tr>';
     }).join('');
 

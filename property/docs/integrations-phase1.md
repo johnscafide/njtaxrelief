@@ -1,4 +1,4 @@
-# Watchdog Integrations — Phase 1 contract
+# Watchdog Integrations: Phase 1 contract
 
 **Status:** Production live on 2026-08-19  
 **Plan boundary:** Pro+, Teams, Developer  

@@ -46,7 +46,7 @@
     {"id":"town-profile","name":"Town Profile","description":"Review a concise municipality profile alongside the property.","category":"Municipal & Market","plan":"agent","property_types":["all"]},
     {"id":"town-risk-matrix","name":"Town Risk Matrix","description":"Compare municipality-level risk and pressure indicators.","category":"Municipal & Market","plan":"pro","property_types":["all"]},
     {"id":"true-cost","name":"True Property Cost","description":"Combine taxes and relevant property costs into a clearer ownership-cost view.","category":"Investment & Risk","plan":"agent","property_types":["all"]},
-    {"id":"uniformity","name":"U · Assessment Uniformity","description":"Review U — Uniformity using municipality assessment consistency and ratio context.","category":"Appeal & Assessment","plan":"pro","property_types":["all"],"robust_dimension":"U"},
+    {"id":"uniformity","name":"U · Assessment Uniformity","description":"Review U: Uniformity using municipality assessment consistency and ratio context.","category":"Appeal & Assessment","plan":"pro","property_types":["all"],"robust_dimension":"U"},
     {"id":"watchdog-score","name":"Watchdog Score · ROBUST","description":"Review the Watchdog Score and its R · O · B · U · S · T component evidence.","category":"Appeal & Assessment","plan":"agent","property_types":["all"],"framework":"ROBUST-v1"}
   ]
 }

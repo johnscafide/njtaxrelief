@@ -48,8 +48,8 @@ html body[data-sidebar-page="pulse"]{
   --b-fair:#d5efe6;
   --b-fair-soft:#e6f5ef;
   --b-radius:24px;
-  --b-display:"Plus Jakarta Sans",Inter,system-ui,-apple-system,"Segoe UI",sans-serif;
-  --b-body:"Plus Jakarta Sans",Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  --b-display:"Libre Franklin",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --b-body:"Libre Franklin",system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
   background:var(--b-bg);
   color:var(--b-ink);
   font-family:var(--b-body);
@@ -57,7 +57,7 @@ html body[data-sidebar-page="pulse"]{
 body[data-sidebar-page="dashboard"] .wdx-pagebar,body[data-sidebar-page="pulse"] .wdx-pagebar{display:none!important}
 body[data-sidebar-page="dashboard"] .wdx-topbar,body[data-sidebar-page="pulse"] .wdx-topbar{background:rgba(251,250,247,.94);border-bottom-color:var(--b-line)}
 
-.wdd-boot{position:fixed;inset:0;z-index:2000;display:grid;place-items:center;padding:24px 16px;background:radial-gradient(120% 90% at 50% 38%,#fcfbf8 0%,#f3f1ec 58%,#ebe7df 100%);color:#16140f;font-family:"Plus Jakarta Sans",Inter,system-ui,sans-serif;opacity:1;transition:opacity .26s ease}
+.wdd-boot{position:fixed;inset:0;z-index:2000;display:grid;place-items:center;padding:24px 16px;background:radial-gradient(120% 90% at 50% 38%,#fcfbf8 0%,#f3f1ec 58%,#ebe7df 100%);color:#16140f;font-family:"Libre Franklin",system-ui,sans-serif;opacity:1;transition:opacity .26s ease}
 .wdd-boot[hidden]{display:none}
 body:has(#wdd-boot:not([hidden])) .wd-public-backdrop:not(.open){transition:none!important}
 .wdd-boot.is-leaving{opacity:0;pointer-events:none}
@@ -77,9 +77,9 @@ body:has(#wdd-boot:not([hidden])) .wd-public-backdrop:not(.open){transition:none
 .wdd-boot-treat{position:absolute;left:0;bottom:var(--ground);width:calc(var(--dog) * .14);line-height:0;z-index:2;will-change:transform;filter:drop-shadow(0 2px 1.5px rgba(70,52,30,.28))}
 .wdd-boot.has-treat .wdd-boot-treat{filter:none}
 .wdd-boot-treat svg{display:block;width:100%;height:auto;overflow:visible}
-.wdd-boot-title{margin:0 0 6px;font:700 22px/1.2 "Plus Jakarta Sans",Inter,system-ui,sans-serif;letter-spacing:-.02em;color:#16140f}
-.wdd-boot-msg{margin:0 auto;max-width:420px;font:500 14px/1.5 Inter,system-ui,sans-serif;color:#6b665b}
-.wdd-boot-retry{margin-top:16px;min-height:44px;padding:0 22px;border:0;border-radius:999px;background:#16140f;color:#fff;font:700 14px Inter,system-ui,sans-serif;cursor:pointer}
+.wdd-boot-title{margin:0 0 6px;font:700 22px/1.2 "Libre Franklin",system-ui,sans-serif;letter-spacing:-.02em;color:#16140f}
+.wdd-boot-msg{margin:0 auto;max-width:420px;font:500 14px/1.5 Libre Franklin,system-ui,sans-serif;color:#6b665b}
+.wdd-boot-retry{margin-top:16px;min-height:44px;padding:0 22px;border:0;border-radius:999px;background:#16140f;color:#fff;font:700 14px Libre Franklin,system-ui,sans-serif;cursor:pointer}
 .wdd-boot-retry[hidden]{display:none}
 .wdd-boot-retry:focus-visible{outline:3px solid #6f9ce0;outline-offset:3px}
 @keyframes wdd-boot-breathe{0%,100%{transform:scale(1,1)}50%{transform:scale(1.008,1.018)}}
@@ -102,7 +102,7 @@ body:has(#wdd-boot:not([hidden])) .wd-public-backdrop:not(.open){transition:none
 .wdd-top-row{display:flex;align-items:center;gap:12px}
 .wdd-top-search{flex:1;min-width:0}
 .wdd-search{display:flex;align-items:center;gap:10px;height:56px;padding:0 10px 0 8px;border:1px solid var(--b-line);border-radius:999px;background:var(--b-white);transition:border-color .15s ease,box-shadow .15s ease}
-.wdd-search:focus-within{border-color:#cfc8ba;box-shadow:0 6px 22px rgba(60,48,26,.08)}
+.wdd-search:focus-within{border-color:#cfc8ba;box-shadow:0 2px 6px rgba(15,23,42,.08)}
 .wdd-search-icon{width:40px;height:40px;flex:none;display:grid;place-items:center;border-radius:50%;background:var(--b-sky);color:var(--b-blue);font-size:15px}
 .wdd-search input{flex:1;min-width:0;height:100%;border:0;outline:0;background:transparent;font-size:15px;color:var(--b-ink)}
 .wdd-search input::placeholder{color:#8d877a}
@@ -275,22 +275,22 @@ body:has(#wdd-boot:not([hidden])) .wd-public-backdrop:not(.open){transition:none
 .wdd-foot{max-width:1460px;margin:34px auto 0;padding-top:18px;border-top:1px solid var(--b-line);font-size:12px;line-height:1.55;color:var(--b-muted)}
 .wdd-foot b{color:var(--b-ink-2)}
 
-.wdd-pull{flex:none;display:inline-flex;align-items:center;justify-content:center;gap:9px;height:56px;padding:0 22px;border:0;border-radius:999px;background:var(--b-ink,#0e2248);color:#fff;font:700 14px var(--b-body,Inter,sans-serif);word-spacing:.1em;cursor:pointer}
+.wdd-pull{flex:none;display:inline-flex;align-items:center;justify-content:center;gap:9px;height:56px;padding:0 22px;border:0;border-radius:999px;background:var(--b-ink,#0e2248);color:#fff;font:700 14px var(--b-body,Libre Franklin,sans-serif);word-spacing:.1em;cursor:pointer}
 .wdd-pull[hidden]{display:none}
 .wdd-pull:hover{background:#1456a0}
 .wdd-pull:focus-visible{outline:3px solid var(--b-blue-bright,#6f9ce0);outline-offset:3px}
 .wdd-drawer{position:fixed;inset:0;z-index:1800;display:grid;grid-template-columns:minmax(0,1fr) min(600px,100%)}
 .wdd-drawer[hidden]{display:none}
 .wdd-drawer-scrim{border:0;background:rgba(22,20,15,.4)}
-.wdd-drawer-panel{display:flex;flex-direction:column;min-width:0;background:#fff;border-radius:24px 0 0 24px;overflow:hidden;box-shadow:-20px 0 60px rgba(22,20,15,.18);animation:wdd-drawer-in .24s cubic-bezier(.2,.8,.2,1)}
+.wdd-drawer-panel{display:flex;flex-direction:column;min-width:0;background:#fff;border-radius:24px 0 0 24px;overflow:hidden;box-shadow:0 2px 6px rgba(15,23,42,.08);animation:wdd-drawer-in .24s cubic-bezier(.2,.8,.2,1)}
 .wdd-drawer-head{display:flex;align-items:center;gap:10px;padding:18px 20px;border-bottom:1px solid #ece8e0}
-.wdd-drawer-head span{display:block;font:700 12px/1.2 Inter,sans-serif;letter-spacing:.06em;text-transform:uppercase;color:#6b665b}
-.wdd-drawer-head b{display:block;margin-top:4px;font:700 16px "Plus Jakarta Sans",Inter,sans-serif}
+.wdd-drawer-head span{display:block;font:700 12px/1.2 Libre Franklin,sans-serif;letter-spacing:.06em;text-transform:uppercase;color:#6b665b}
+.wdd-drawer-head b{display:block;margin-top:4px;font:700 16px "Libre Franklin",sans-serif}
 .wdd-drawer-head .wdd-fill{flex:1}
 .wdd-drawer-head a,.wdd-drawer-head button{width:44px;height:44px;display:grid;place-items:center;border:1px solid #e3dfd6;border-radius:50%;background:#fff;color:#16140f;cursor:pointer}
 .wdd-drawer-panel iframe{flex:1;width:100%;border:0}
 @keyframes wdd-drawer-in{from{transform:translateX(30px);opacity:0}to{transform:none;opacity:1}}
-.wdd-toast{position:fixed;left:50%;bottom:28px;z-index:1900;max-width:calc(100vw - 32px);padding:12px 18px;border-radius:999px;background:#16140f;color:#fff;font:600 14px Inter,sans-serif;opacity:0;transform:translate(-50%,10px);pointer-events:none;transition:opacity .18s ease,transform .18s ease}
+.wdd-toast{position:fixed;left:50%;bottom:28px;z-index:1900;max-width:calc(100vw - 32px);padding:12px 18px;border-radius:999px;background:#16140f;color:#fff;font:600 14px Libre Franklin,sans-serif;opacity:0;transform:translate(-50%,10px);pointer-events:none;transition:opacity .18s ease,transform .18s ease}
 .wdd-toast.is-on{opacity:1;transform:translate(-50%,0)}
 
 .wdd-lower.has-bridge .wdd-detail{position:relative;z-index:1}

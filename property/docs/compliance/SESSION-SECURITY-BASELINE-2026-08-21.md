@@ -1,4 +1,4 @@
-# Watchdog Session Security Baseline — 2026-08-21
+# Watchdog Session Security Baseline: 2026-08-21
 
 **Budget constraint:** $0  
 **Assurance status:** Internal security-readiness evidence. This document is not an external certification or penetration-test result.
@@ -9,10 +9,10 @@ Establish an explicit, testable session-security position for the Watchdog `/pro
 
 ## Framework mapping
 
-- OWASP ASVS 5.0.0 Level 2 — Authentication and Session Management
-- NIST CSF 2.0 — Protect / Identity Management, Authentication and Access Control
-- SOC 2 — Security
-- ISO/IEC 27001 readiness — identity and access management
+- OWASP ASVS 5.0.0 Level 2: Authentication and Session Management
+- NIST CSF 2.0: Protect / Identity Management, Authentication and Access Control
+- SOC 2: Security
+- ISO/IEC 27001 readiness, identity and access management
 
 ## Current repository evidence
 
@@ -104,6 +104,6 @@ Those controls remain future options if available within the then-current produc
 
 ## Official platform references reviewed
 
-- Supabase Auth — Signing out: global/local/others session scopes and refresh-token revocation behavior.
-- Supabase Auth — User sessions: access/refresh token lifecycle, session lifetime controls and post-signout access-token residual validity.
-- Supabase Auth — Multi-Factor Authentication: AAL1/AAL2 and server/database enforcement guidance.
+- Supabase Auth: Signing out: global/local/others session scopes and refresh-token revocation behavior.
+- Supabase Auth: User sessions: access/refresh token lifecycle, session lifetime controls and post-signout access-token residual validity.
+- Supabase Auth: Multi-Factor Authentication: AAL1/AAL2 and server/database enforcement guidance.

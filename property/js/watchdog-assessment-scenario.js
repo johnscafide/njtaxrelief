@@ -4,7 +4,7 @@ var active=null,lastSemantic=null;
 function esc(v){return String(v==null?'':v).replace(/[&<>"']/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
 function css(){if(document.querySelector('link[data-wd-semantic-tools-css]'))return;var l=document.createElement('link');l.rel='stylesheet';l.href='/property/css/watchdog-semantic-tools.css';l.dataset.wdSemanticToolsCss='1';document.head.appendChild(l);}
 function money(v){var n=Number(v);return Number.isFinite(n)?n.toLocaleString(undefined,{style:'currency',currency:'USD',maximumFractionDigits:2}):'Not available';}
-function pct(v){var n=Number(v);return Number.isFinite(n)?(n>=0?'+':'')+n.toFixed(2)+'%':'—';}
+function pct(v){var n=Number(v);return Number.isFinite(n)?(n>=0?'+':'')+n.toFixed(2)+'%':'-';}
 function rank(plan){return({standard:0,agent:1,pro:2,pro_plus:3,teams:4,developer:5})[String(plan||'standard')]||0;}
 function host(){var anchor=document.getElementById('wdcx-root');if(anchor&&anchor.parentNode)return{host:anchor.parentNode,anchor:anchor};var h=document.getElementById('hm-body')||document.getElementById('db-panel-main')||document.getElementById('ad-app')||document.querySelector('.dw-shell,main');return h?{host:h,anchor:null}:null;}
 function clear(){var n=document.getElementById('wd-tax-scenario');if(n)n.remove();}

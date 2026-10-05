@@ -76,7 +76,7 @@
 .tip:focus { outline: 2px solid var(--accent-2); outline-offset: 2px; border-radius: 2px; }
 .tipbox { position: absolute; z-index: 9999; display: none; width: 300px;
   background: #10182b; color: #e8edf6; font-size: 12.5px; line-height: 1.6;
-  padding: 11px 14px; border-radius: 8px; box-shadow: 0 10px 30px rgba(16,24,43,.3);
+  padding: 11px 14px; border-radius: 8px; box-shadow: 0 2px 6px rgba(15,23,42,.08);
   pointer-events: none; }
 .tipbox.on { display: block; }
 

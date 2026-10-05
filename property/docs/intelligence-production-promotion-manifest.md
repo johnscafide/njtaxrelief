@@ -17,7 +17,7 @@ There are two distinct readiness questions:
 
 A commercial gate may remain closed without making the Intelligence engineering release unsafe to promote privately. It must remain enforced until its own acceptance evidence exists.
 
-## Gate A — freeze the exact release
+## Gate A, freeze the exact release
 
 1. Freeze the exact PR #63 head.
 2. Reconcile the feature branch against the current `main`.
@@ -26,7 +26,7 @@ A commercial gate may remain closed without making the Intelligence engineering 
 5. Record the frozen SHA in Linear and release evidence.
 6. Confirm production Intelligence has not been partially promoted outside this runbook. If it has, reconcile actual state before continuing.
 
-## Gate B — technical production prerequisites
+## Gate B, technical production prerequisites
 
 All of the following must be true before Intelligence production mutation begins:
 
@@ -47,7 +47,7 @@ These do **not** substitute for the technical gates above and must not be silent
 - **Counsel, insurance, entity/liability and data-rights review:** these are external business-governance gates for broad commercialization. Repository code cannot truthfully complete them.
 - **Teams self-service:** remains commercially gated until separately authorized.
 
-## Gate C — protect the current production entitlement contract
+## Gate C, protect the current production entitlement contract
 
 Production already contains current entitlement helper migrations. Do **not** overwrite those objects simply because the release branch contains compatibility-source migrations with different timestamps.
 
@@ -63,15 +63,15 @@ Before applying Intelligence SQL:
 
 Current production lineage observed during the August 18 freeze includes:
 
-- `20260818214156` — live full-tier entitlement contract;
-- `20260818234619` — live Standard entitlement access fix.
+- `20260818214156` - live full-tier entitlement contract;
+- `20260818234619` - live Standard entitlement access fix.
 
 The two narrow plan-RLS migrations below **are** part of the Intelligence apply list after their prerequisite Intelligence organization/workbench objects exist:
 
 - `20260818221624_watchdog_teams_org_plan_boundary.sql`
 - `20260818221753_watchdog_agent_workbench_plan_boundary.sql`.
 
-## Gate D — apply database migrations in exact manifest order
+## Gate D, apply database migrations in exact manifest order
 
 Use `migrations.apply_in_order` from `supabase/intelligence-production-manifest.json` as the only allowlist.
 
@@ -94,7 +94,7 @@ After SQL completes, verify:
 - no anonymous entitlement escalation is possible;
 - no staging fixtures or test accounts were introduced.
 
-## Gate E — deploy only allowlisted Edge Functions
+## Gate E, deploy only allowlisted Edge Functions
 
 Deploy exactly the 23 functions in `edge_functions.deploy_allowlist` from the machine manifest, using the `verify_jwt` value pinned in `supabase/config.toml`.
 
@@ -102,7 +102,7 @@ Never bulk-promote staging. The manifest explicitly excludes preview-review/acco
 
 The population worker deliberately uses `verify_jwt = false` at the gateway because it performs its own one-time worker-token/developer/optional automation authorization. This exception is source-controlled and must not be generalized to other Intelligence functions.
 
-## Gate F — configure the worker fail closed
+## Gate F, configure the worker fail closed
 
 The scheduler reads the environment-local Vault entry:
 
@@ -118,7 +118,7 @@ Scheduled dispatch uses a new one-time worker token stored only as a hash with a
 
 Optional Analyst prose configuration is not a launch requirement. `OPENAI_API_KEY` and `WATCHDOG_ANALYST_MODEL`, if configured, affect only the bounded prose rewrite. Deterministic governed Intelligence must remain useful with those absent.
 
-## Gate G — authenticated plan smoke matrix
+## Gate G, authenticated plan smoke matrix
 
 Run real authenticated acceptance for every tier.
 
@@ -161,7 +161,7 @@ Run real authenticated acceptance for every tier.
 - developer operational bypass remains explicit and audited;
 - customer tiers must never inherit Developer privileges.
 
-## Gate H — deterministic runtime smoke
+## Gate H, deterministic runtime smoke
 
 Before scheduling recurring jobs or enabling customer visibility:
 
@@ -174,7 +174,7 @@ Before scheduling recurring jobs or enabling customer visibility:
 
 The August 18 staging certification already proved the real Analyst remains complete with 18 evidence items and an identical stable governed payload when the prose provider is absent. Production still receives a post-deploy smoke.
 
-## Gate I — controlled population canary
+## Gate I, controlled population canary
 
 Keep broad scheduler/customer visibility off.
 
@@ -188,7 +188,7 @@ Keep broad scheduler/customer visibility off.
 8. verify one-time worker-token fields are cleared on completion/failure;
 9. remove canary data if it is not intended to persist.
 
-## Gate J — stop/rollback acceptance
+## Gate J, stop/rollback acceptance
 
 Before activating recurring delivery, prove the operator can stop it.
 
@@ -205,7 +205,7 @@ Primary stop order:
 
 The August 18 staging certification proved both per-scope stop and global cron deactivate/restore behavior.
 
-## Gate K — post-promotion review
+## Gate K, post-promotion review
 
 Run and record:
 
@@ -222,7 +222,7 @@ Run and record:
 
 Review advisor **delta** rather than mechanically trying to reach zero warnings. Intentional closed service tables and reviewed SECURITY DEFINER boundaries must not be opened merely to silence a lint.
 
-## Gate L — customer visibility last
+## Gate L, customer visibility last
 
 Only after every technical gate passes **and** explicit customer-launch authorization is given:
 

@@ -4,7 +4,7 @@ This runbook governs production promotion of the complete Watchdog Intelligence 
 
 Production promotion is intentionally fail-closed. Merging code is not the same as launching Intelligence to customers.
 
-## Current production status — Gate 5 accepted 2026-08-18
+## Current production status: Gate 5 accepted 2026-08-18
 
 The **technical/private production Intelligence promotion is complete and accepted**. This does not mean public customer launch is complete.
 

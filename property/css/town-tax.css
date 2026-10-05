@@ -27,7 +27,7 @@
 .tt-share .tt-icon{width:44px;padding:0;justify-content:center}
 .tt-toast{flex-basis:100%;margin:0;min-height:20px;font-size:14px;font-weight:600;color:#1c7a4a;text-align:right}
 .tt-check form{margin-top:4px}
-.tt-check input{width:100%;box-sizing:border-box;min-height:46px;padding:10px 12px;border:1px solid var(--b-line);border-radius:12px;background:var(--b-surface);font:500 16px "Plus Jakarta Sans",system-ui,sans-serif;color:var(--b-ink)}
+.tt-check input{width:100%;box-sizing:border-box;min-height:46px;padding:10px 12px;border:1px solid var(--b-line);border-radius:12px;background:var(--b-surface);font:500 16px "Libre Franklin",system-ui,sans-serif;color:var(--b-ink)}
 .tt-check input:focus{border-color:var(--b-ink);background:#fff}
 .tt-check input[aria-invalid=true]{border-color:#c0342b}
 .tt-result:empty{display:none}
@@ -41,7 +41,7 @@
 .tt-facts dd a{color:var(--b-ink)}
 .tt-table-panel{margin-top:16px}
 .tt-filter{display:grid;gap:6px;max-width:360px;margin-bottom:12px;font-size:13px;font-weight:600;color:var(--b-ink-2)}
-.tt-filter input{min-height:46px;padding:10px 12px;border:1px solid var(--b-line);border-radius:12px;background:var(--b-surface);font:500 16px "Plus Jakarta Sans",system-ui,sans-serif;color:var(--b-ink)}
+.tt-filter input{min-height:46px;padding:10px 12px;border:1px solid var(--b-line);border-radius:12px;background:var(--b-surface);font:500 16px "Libre Franklin",system-ui,sans-serif;color:var(--b-ink)}
 .tt-table th button{min-height:44px;padding:0;border:0;background:none;font:inherit;letter-spacing:inherit;text-transform:inherit;color:inherit;cursor:pointer}
 .tt-table th[aria-sort] button{color:var(--b-ink)}
 .tt-table th[aria-sort=ascending] button::after{content:" \2191"}
@@ -49,7 +49,7 @@
 .tt-table td a{display:inline-flex;align-items:center;min-height:28px}
 .tt-counties{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px;margin-bottom:16px}
 .tt-county{display:grid;gap:4px;text-decoration:none!important;color:var(--b-ink)!important}
-.tt-county b{font:600 18px/1.2 "Plus Jakarta Sans",system-ui,sans-serif}
+.tt-county b{font:600 18px/1.2 "Libre Franklin",system-ui,sans-serif}
 .tt-county small{font-size:14px;color:var(--b-muted)}
 .tt-county:hover{border-color:var(--b-ink)}
 @media (max-width:640px){.tt-toast{text-align:left}.tt-share{width:100%}}

@@ -7,7 +7,7 @@ body[data-sidebar-page="email-updates"]{background:#f3f1ec}
   --eu-navy:#0e2248;--eu-blue:#1456a0;--eu-gold:#b8972a;--eu-ink:#14213d;--eu-muted:#5d6678;
   --eu-line:#e3dfd6;--eu-surface:#fbfaf7;--eu-teal:#dff1ec;--eu-teal-ink:#0f6e5c;--eu-sand:#f6efd9;--eu-sand-ink:#7a5d0c;
   --eu-red:#9f2a1d;--eu-radius:22px;
-  max-width:1180px;margin:0 auto;padding:20px 24px 80px;color:var(--eu-ink);font-family:"Plus Jakarta Sans",Arial,sans-serif
+  max-width:1180px;margin:0 auto;padding:20px 24px 80px;color:var(--eu-ink);font-family:"Libre Franklin",Arial,sans-serif
 }
 .eu-shell h1,.eu-shell h2{letter-spacing:-.015em}
 .eu-shell .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
@@ -54,7 +54,7 @@ html.aw27-page .eu-hero h1{margin:8px 0 6px;color:#fff;font-size:clamp(28px,3.6v
 
 /* Controls */
 .eu-actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
-.eu-btn{display:inline-flex;align-items:center;justify-content:center;gap:7px;min-height:42px;padding:0 16px;border:1px solid var(--eu-line);border-radius:999px;background:#fff;color:var(--eu-ink);font:700 14px/1 "Plus Jakarta Sans",Arial,sans-serif;text-decoration:none;cursor:pointer}
+.eu-btn{display:inline-flex;align-items:center;justify-content:center;gap:7px;min-height:42px;padding:0 16px;border:1px solid var(--eu-line);border-radius:999px;background:#fff;color:var(--eu-ink);font:700 14px/1 "Libre Franklin",Arial,sans-serif;text-decoration:none;cursor:pointer}
 .eu-btn:hover{background:var(--eu-surface);border-color:#cfc9bc}
 .eu-btn.dark{background:var(--eu-navy);border-color:var(--eu-navy);color:#fff}
 .eu-btn.dark:hover{background:var(--eu-blue);border-color:var(--eu-blue)}
@@ -67,7 +67,7 @@ html.aw27-page .eu-hero h1{margin:8px 0 6px;color:#fff;font-size:clamp(28px,3.6v
 .eu-btn:focus-visible,.eu-link:focus-visible,.eu-starter:focus-visible,.eu-seg button:focus-visible,.eu-field input:focus-visible,.eu-field select:focus-visible,.eu-field textarea:focus-visible,.eu-choice input:focus-visible,.eu-check input:focus-visible,.eu-more summary:focus-visible,.eu-tips summary:focus-visible{outline:2px solid var(--eu-blue);outline-offset:2px}
 .eu-field{display:flex;flex-direction:column;gap:6px;min-width:0;font-size:13px;font-weight:700;color:var(--eu-muted)}
 .eu-field em{font-style:normal;font-weight:500}
-.eu-field input,.eu-field select,.eu-field textarea{min-height:42px;padding:0 12px;border:1px solid var(--eu-line);border-radius:12px;background:#fff;color:var(--eu-ink);font:500 15px "Plus Jakarta Sans",Arial,sans-serif;max-width:100%;width:100%;box-sizing:border-box}
+.eu-field input,.eu-field select,.eu-field textarea{min-height:42px;padding:0 12px;border:1px solid var(--eu-line);border-radius:12px;background:#fff;color:var(--eu-ink);font:500 15px "Libre Franklin",Arial,sans-serif;max-width:100%;width:100%;box-sizing:border-box}
 .eu-field textarea{padding:10px 12px;line-height:1.55;resize:vertical;min-height:180px}
 .eu-pick{max-width:420px;margin-top:12px}
 .eu-form{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;max-width:680px;margin-top:14px}
@@ -91,7 +91,7 @@ html.aw27-page .eu-hero h1{margin:8px 0 6px;color:#fff;font-size:clamp(28px,3.6v
 
 /* Write + live preview */
 .eu-starters{display:flex;flex-wrap:wrap;gap:8px}
-.eu-starter{display:inline-flex;align-items:center;gap:7px;min-height:42px;padding:0 14px;border:1px solid var(--eu-line);border-radius:999px;background:#fff;color:var(--eu-ink);font:700 14px "Plus Jakarta Sans",Arial,sans-serif;cursor:pointer}
+.eu-starter{display:inline-flex;align-items:center;gap:7px;min-height:42px;padding:0 14px;border:1px solid var(--eu-line);border-radius:999px;background:#fff;color:var(--eu-ink);font:700 14px "Libre Franklin",Arial,sans-serif;cursor:pointer}
 .eu-starter:hover{background:var(--eu-surface)}
 .eu-starter.on{background:var(--eu-navy);border-color:var(--eu-navy);color:#fff}
 .eu-restored{margin:12px 0 0;font-size:14px;color:var(--eu-muted)}

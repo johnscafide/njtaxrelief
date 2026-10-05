@@ -18,7 +18,7 @@ body.hm-dashboard-page .wd-intelligence-frame {
     linear-gradient(#fff,#fff) padding-box,
     conic-gradient(from var(--wd-intelligence-angle),#15b7c9 0deg,#2478ff 90deg,#7857ff 170deg,#e84bc4 260deg,#15b7c9 360deg) border-box !important;
   animation: wd-intelligence-border-rotate 7s linear infinite;
-  box-shadow: 0 18px 48px rgba(30,57,91,.09) !important;
+  box-shadow: 0 2px 6px rgba(15,23,42,.08) !important;
 }
 
 /* Voice entry: intentionally visible for every signed-in plan. Entitlement is
@@ -42,14 +42,14 @@ body.hm-dashboard-page .wd-home-voice-copy {
   gap: 3px;
 }
 body.hm-dashboard-page .wd-home-voice-kicker {
-  font: 800 11px/1.2 "Plus Jakarta Sans",sans-serif;
+  font: 800 11px/1.2 "Libre Franklin",sans-serif;
   letter-spacing: .105em;
   text-transform: uppercase;
   color: #087f83;
 }
 body.hm-dashboard-page .wd-home-voice-title {
   margin: 0;
-  font: 800 clamp(18px,1.55vw,25px)/1.16 "Plus Jakarta Sans",sans-serif;
+  font: 800 clamp(18px,1.55vw,25px)/1.16 "Libre Franklin",sans-serif;
   letter-spacing: -.035em;
   color: #10294b;
 }
@@ -74,15 +74,15 @@ body.hm-dashboard-page .wd-home-voice-button {
   border-radius: 15px;
   background: #087f7d;
   color: #fff;
-  font: 800 16px/1 "Plus Jakarta Sans",sans-serif;
+  font: 800 16px/1 "Libre Franklin",sans-serif;
   cursor: pointer;
   transition: transform .16s ease,box-shadow .16s ease,background .16s ease;
-  box-shadow: 0 8px 22px rgba(8,127,125,.16);
+  box-shadow: 0 2px 6px rgba(15,23,42,.08);
 }
 body.hm-dashboard-page .wd-home-voice-button:hover {
   transform: translateY(-1px);
   background: #066f6d;
-  box-shadow: 0 12px 28px rgba(8,127,125,.22);
+  box-shadow: 0 2px 6px rgba(15,23,42,.08);
 }
 body.hm-dashboard-page .wd-home-voice-button:focus-visible {
   outline: 3px solid rgba(36,120,255,.24);
@@ -112,7 +112,7 @@ body.hm-dashboard-page .hm-explore-card {
   border: 1px solid #dfe6ef;
   border-radius: 24px;
   background: #fff;
-  box-shadow: 0 15px 42px rgba(30,57,91,.065);
+  box-shadow: 0 2px 6px rgba(15,23,42,.08);
 }
 body.hm-dashboard-page .hm-explore-card .hm-secbar {
   margin: 0 !important;
@@ -184,7 +184,7 @@ body.hm-dashboard-page .wd-intelligence-gate {
   justify-content: center;
   padding: 22px;
   background: rgba(7,21,42,.62);
-  backdrop-filter: blur(6px);
+  
 }
 body.hm-dashboard-page .wd-intelligence-gate.open { display: flex; }
 body.hm-dashboard-page .wd-intelligence-gate-card {
@@ -198,7 +198,7 @@ body.hm-dashboard-page .wd-intelligence-gate-card {
     linear-gradient(#fff,#fff) padding-box,
     conic-gradient(from var(--wd-intelligence-angle),#15b7c9,#2478ff,#7857ff,#e84bc4,#15b7c9) border-box;
   animation: wd-intelligence-border-rotate 7s linear infinite;
-  box-shadow: 0 30px 80px rgba(4,17,39,.3);
+  box-shadow: 0 2px 6px rgba(15,23,42,.08);
 }
 body.hm-dashboard-page .wd-intelligence-gate-close {
   position: absolute;
@@ -226,14 +226,14 @@ body.hm-dashboard-page .wd-intelligence-gate-mark {
 body.hm-dashboard-page .wd-intelligence-gate-kicker {
   display: block;
   margin-bottom: 7px;
-  font: 800 10px/1.2 "Plus Jakarta Sans",sans-serif;
+  font: 800 10px/1.2 "Libre Franklin",sans-serif;
   letter-spacing: .11em;
   text-transform: uppercase;
   color: #087f83;
 }
 body.hm-dashboard-page .wd-intelligence-gate-card h2 {
   margin: 0 38px 10px 0;
-  font: 800 25px/1.18 "Plus Jakarta Sans",sans-serif;
+  font: 800 25px/1.18 "Libre Franklin",sans-serif;
   letter-spacing: -.04em;
   color: #10294b;
 }
@@ -256,7 +256,7 @@ body.hm-dashboard-page .wd-intelligence-gate-actions button {
   justify-content: center;
   padding: 0 16px;
   border-radius: 11px;
-  font: 800 13px/1 "Plus Jakarta Sans",sans-serif;
+  font: 800 13px/1 "Libre Franklin",sans-serif;
   text-decoration: none;
   cursor: pointer;
 }

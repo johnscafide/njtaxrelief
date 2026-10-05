@@ -10,7 +10,7 @@ var $=function(s,r){return (r||document).querySelector(s)};
 
 function esc(value){return String(value==null?'':value).replace(/[&<>"']/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})}
 function stars(value){var n=Math.max(1,Math.min(5,Number(value)||0));return '★★★★★'.slice(0,n)}
-function date(value){if(!value)return '—';var d=new Date(value);return Number.isNaN(d.getTime())?'—':d.toLocaleString('en-US',{month:'short',day:'numeric',year:'numeric',hour:'numeric',minute:'2-digit'})}
+function date(value){if(!value)return '-';var d=new Date(value);return Number.isNaN(d.getTime())?'-':d.toLocaleString('en-US',{month:'short',day:'numeric',year:'numeric',hour:'numeric',minute:'2-digit'})}
 function toast(message){var el=$('#br-toast');if(!el)return;el.textContent=message;el.classList.add('show');clearTimeout(toast.t);toast.t=setTimeout(function(){el.classList.remove('show')},2600)}
 
 async function token(){

@@ -141,7 +141,7 @@ function renderProShots(){
   if(steps.length<5||panels.length<5)return;
 
   var copy=[
-    ['01 / Property dashboard','Keep property research<br>in one place.','See the property image, assessment, tax info, Watchdog Score and next actions together.'],
+    ['01 / Property dashboard','All your property research<br>on one screen.','See the property image, assessment, tax info, Watchdog Score and next actions together.'],
     ['02 / Watchdog Score + ROBUST','See what drives<br>the score.','The ROBUST Framework shows the six dimensions behind the Watchdog Score.'],
     ['03 / Change intelligence','See what changed.','Saved properties return to your attention when important property facts change.'],
     ['04 / Professional dashboard','Build the working file.','Data Workbench brings property data and professional research into one dashboard.'],

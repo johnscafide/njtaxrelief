@@ -5,7 +5,7 @@
   background: linear-gradient(120deg, #14361f, #1e6b3a 58%, #2b8a4d);
   border-radius: 18px; padding: 30px 34px;
   display: flex; align-items: center; gap: 26px;
-  box-shadow: 0 20px 50px rgba(16,60,32,.28);
+  box-shadow: 0 2px 6px rgba(15,23,42,.08);
   border: 1px solid rgba(184,151,42,.35);
   transition: transform .2s ease;
 }
@@ -95,7 +95,7 @@
 .plm-note-overlay.open { display: flex; }
 .plm-note-box {
   background: #fff; border-radius: 14px; padding: 28px; max-width: 620px;
-  max-height: min(86vh, 900px); overflow-y: auto; position: relative; box-shadow: 0 20px 60px rgba(6,16,38,.4);
+  max-height: min(86vh, 900px); overflow-y: auto; position: relative; box-shadow: 0 2px 6px rgba(15,23,42,.08);
 }
 .plm-note-overlay.comparison-open .plm-note-box { max-width: 1080px; width: min(1080px, calc(100vw - 48px)); }
 body.note-modal-open { overflow: hidden; }

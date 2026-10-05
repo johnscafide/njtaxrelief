@@ -193,8 +193,8 @@ def marker_pack(a: dict[str, Any]) -> dict[str, Any]:
     return {"schema_version": 1, "version": "0.38.0", "released": "2026-08-27", "definition": "46 governed municipality markers from the NJ DCA Development Trends Viewer: 34 public-source facts/series and 12 deterministic Watchdog arithmetic markers.", "activation_rule": "New markers enter planned. Live state requires the source artifact, authenticated production canary, provider coverage and static governance reconciliation.", "source_contract": {"source_id": SOURCE_ID, "source_release": RELEASE, "source_as_of": SOURCE_AS_OF, "latest_data_year": LATEST_YEAR, "municipality_count": EXPECTED_MUNICIPALITIES, "source_artifact": "property/data/dca-development-trends-v038.json", "warning": "DCA annual permit/development reporting. Do not interpret these facts as code compliance, zoning approval, legal status, construction completion, appraisal, lending, insurance, eligibility, or transaction determinations."}, "markers": markers}
 
 def manifest(a: dict[str, Any]) -> str:
-    direct_lines = "\n".join(f"- `{field}` — {a['fields'][field]['source_heading']} (category code {code})" for field, code, _, _ in LATEST_FIELDS)
-    series_lines = "\n".join(f"- `{field}` — {heading}" for field, _, heading, _ in SERIES_FIELDS)
+    direct_lines = "\n".join(f"- `{field}` - {a['fields'][field]['source_heading']} (category code {code})" for field, code, _, _ in LATEST_FIELDS)
+    series_lines = "\n".join(f"- `{field}` - {heading}" for field, _, heading, _ in SERIES_FIELDS)
     return f"""# NJ DCA Development Trends Viewer v0.38 source manifest
 
 ## Source identity

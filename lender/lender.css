@@ -23,7 +23,7 @@
   margin: 0;
   padding: 31px 25px 20px;
   border: 1px solid #c9def4;
-  box-shadow: 0 10px 32px #24577a2b;
+  box-shadow: 0 2px 6px rgba(15,23,42,.08);
 }
 
 .lender-proplus-card .price-ribbon {
@@ -76,7 +76,7 @@
   border: 1px solid #dbe6f0;
   border-radius: 10px;
   background: rgba(255,255,255,.92);
-  box-shadow: 0 5px 18px #24577a17;
+  box-shadow: 0 2px 6px rgba(15,23,42,.08);
   text-align: center;
 }
 

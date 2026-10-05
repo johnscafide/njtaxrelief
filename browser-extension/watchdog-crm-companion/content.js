@@ -142,9 +142,9 @@
     block:['watchdog block','block'],lot:['watchdog lot','lot'],property_class:['watchdog property class','property class'],
     year_built:['watchdog year built','year built'],last_sale_price:['watchdog last sale price','last sale price'],last_sale_year:['watchdog last sale year','last sale year']
   };
-  function sourceLine(src){const label=text(src.kind||'Public record source').replace(/_/g,' ');const date=src.recorded_at?new Date(src.recorded_at).toLocaleDateString():'';return`• ${label}${date?` (${date})`:''}${src.url?` — ${src.url}`:''}`;}
+  function sourceLine(src){const label=text(src.kind||'Public record source').replace(/_/g,' ');const date=src.recorded_at?new Date(src.recorded_at).toLocaleDateString():'';return`• ${label}${date?` (${date})`:''}${src.url?` - ${src.url}`:''}`;}
   function noteBlock(payload,selected){
-    const f=payload.facts||{},lines=['WATCHDOG VERIFIED PROPERTY — public-record research'];
+    const f=payload.facts||{},lines=['WATCHDOG VERIFIED PROPERTY, public-record research'];
     lines.push(`Property: ${[f.address,f.municipality,'NJ',f.zip].filter(Boolean).join(', ')}`);
     if(selected.includes('assessed_value')&&f.assessed_value!=null)lines.push(`Assessment: ${fmtMoney(f.assessed_value)}`);
     if(selected.includes('annual_property_tax')&&f.annual_property_tax!=null)lines.push(`Annual property tax: ${fmtMoney(f.annual_property_tax)}`);

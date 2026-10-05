@@ -145,15 +145,15 @@
         rlRow('Town ratio', rows2, function (x) { return (x.ratio * 100).toFixed(1) + '%'; }) +
         rlRow('Estimated annual tax', rows2, function (x) {
           return x.tax ? '<b>' + money(x.tax) + '</b>' : '<span class="na">no rate on file</span>'; }) +
-        rlRow('Per month', rows2, function (x) { return x.tax ? money(x.tax / 12) : '\u2014'; }) +
-        rlRow('Median sale price', rows2, function (x) { return x.medPrice ? money(x.medPrice) : '\u2014'; }) +
-        rlRow('Price per sq ft', rows2, function (x) { return x.ppsf ? '$' + x.ppsf : '\u2014'; }) +
+        rlRow('Per month', rows2, function (x) { return x.tax ? money(x.tax / 12) : '-'; }) +
+        rlRow('Median sale price', rows2, function (x) { return x.medPrice ? money(x.medPrice) : '-'; }) +
+        rlRow('Price per sq ft', rows2, function (x) { return x.ppsf ? '$' + x.ppsf : '-'; }) +
         rlRow('Square feet this buys', rows2, function (x) {
-          return x.afford ? x.afford.toLocaleString() + ' sq ft' : '\u2014'; }) +
+          return x.afford ? x.afford.toLocaleString() + ' sq ft' : '-'; }) +
         rlRow('Assessment uniformity', rows2, function (x) {
-          return x.uniformity != null ? x.uniformity + ' of 100' : '\u2014'; }) +
+          return x.uniformity != null ? x.uniformity + ' of 100' : '-'; }) +
         rlRow('County appeal win rate', rows2, function (x) {
-          return x.winRate != null ? x.winRate + '%' : '\u2014'; }) +
+          return x.winRate != null ? x.winRate + '%' : '-'; }) +
       '</tbody></table></div>' +
 
       (best && worst && worst.tax > best.tax * 1.05

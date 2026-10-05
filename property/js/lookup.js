@@ -2385,7 +2385,7 @@ buildOpinion(hasCase, overBy, saving, target) + rows +
         '<div><b>Sale price appreciation applied</b>: ' +
           (val && val.appreciation != null
             ? (val.appreciation * 100).toFixed(2) + '%/yr (' + esc(val.appreciationSource || 'none') + ')' +
-              (val.appreciationSource === 'none' ? ' — no trend adjustment because evidence was insufficient' : '') +
+              (val.appreciationSource === 'none' ? ' - no trend adjustment because evidence was insufficient' : '') +
               ', median sale age ' + (val.medSaleAge != null ? val.medSaleAge.toFixed(2) + ' yrs' : '?')
             : 'n/a') + '</div>' +
         '<div><b>Tuning factor</b>: ' + (val ? val.calibration.toFixed(3) : '-') +

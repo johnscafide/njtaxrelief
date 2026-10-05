@@ -19,11 +19,11 @@ The production serving topology verified on August 22, 2026 is:
 
 The public/master brand remains **Watchdog**. The domain does not rename the company to “Watchdog Index.” Product naming remains governed by `watchdog-brand-architecture.md`:
 
-- Watchdog — master brand/platform;
-- Watchdog Score — canonical result;
-- ROBUST Framework — methodology;
-- Watchdog Index — geographic/time-series measurement family;
-- Watchdog Atlas — public exploration experience.
+- Watchdog, master brand/platform;
+- Watchdog Score, canonical result;
+- ROBUST Framework, methodology;
+- Watchdog Index, geographic/time-series measurement family;
+- Watchdog Atlas, public exploration experience.
 
 ## Migration posture
 

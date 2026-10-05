@@ -151,7 +151,7 @@ async function main() {
   const responseBody = await response.text();
 
   if (response.status !== 200 && response.status !== 202) {
-    throw new Error(`IndexNow submission failed: HTTP ${response.status}${responseBody ? ` — ${responseBody.slice(0, 500)}` : ''}`);
+    throw new Error(`IndexNow submission failed: HTTP ${response.status}${responseBody ? ` - ${responseBody.slice(0, 500)}` : ''}`);
   }
 
   console.log(`IndexNow accepted ${urlList.length} URL(s) with HTTP ${response.status}.`);

@@ -225,7 +225,7 @@
     var box = document.createElement('section');
     box.className = 'dc-result-builder';
     box.innerHTML = '<div class="dc-result-controls">' +
-      '<label>Scope<select id="dc-scope"><option value="property">Property rows</option><option value="town">Town rollup — my saved properties</option><option value="county">County rollup — my saved properties</option></select></label>' +
+      '<label>Scope<select id="dc-scope"><option value="property">Property rows</option><option value="town">Town rollup, my saved properties</option><option value="county">County rollup, my saved properties</option></select></label>' +
       '<button id="dc-build" type="button">Build private sheet</button><button id="dc-export" type="button" disabled>Export CSV</button><button id="dc-schedule" type="button">Schedule</button></div>' +
       '<p id="dc-result-note">Select fields, then build a checked result sheet from your own saved properties. Missing or unsupported values remain explicit.</p>' +
       '<div id="dc-result-analytics" class="dc-result-analytics" hidden></div><div id="dc-results" class="dc-results" hidden></div>';
@@ -347,7 +347,7 @@
     return sorted.length % 2 ? sorted[mid] : (sorted[mid - 1] + sorted[mid]) / 2;
   }
   function formatCompact(n) {
-    if (!Number.isFinite(n)) return '—';
+    if (!Number.isFinite(n)) return '-';
     return Intl.NumberFormat(undefined, { maximumFractionDigits: 2, notation: Math.abs(n) >= 1000000 ? 'compact' : 'standard' }).format(n);
   }
   function renderAnalysis(rows) {

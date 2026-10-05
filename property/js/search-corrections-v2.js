@@ -82,11 +82,11 @@
       var map=Object.create(null);if(!r.error)(r.data||[]).forEach(function(x){map[x.pams_pin]=x;});
       cards.forEach(function(card){var rec=map[pinOf(card)],b=card.querySelector('.njw-card-score b');if(!b)return;
         if(rec){b.textContent=String(Math.round(+rec.watchdog_score));b.title=rec.score_source==='observed'?'Latest observed Watchdog score':'Calculated live from current property tax data';card.dataset.watchdogScore=String(rec.watchdog_score);}
-        else{b.textContent='—';}
+        else{b.textContent='-';}
         card.dataset.njwRealtimeDone='1';
       });
       var sel=document.getElementById('njw-sort-select');if(sel&&/score/i.test(sel.value))sel.dispatchEvent(new Event('change'));
-    }).catch(function(){cards.forEach(function(card){var b=card.querySelector('.njw-card-score b');if(b)b.textContent='—';});}).finally(function(){busy=false;});
+    }).catch(function(){cards.forEach(function(card){var b=card.querySelector('.njw-card-score b');if(b)b.textContent='-';});}).finally(function(){busy=false;});
   }
 
   function scan(){injectCorrectionCss();forceFooterOutside();ensureArtEndsRight();}

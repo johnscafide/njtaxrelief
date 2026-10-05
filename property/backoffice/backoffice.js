@@ -1,4 +1,4 @@
-/* Watchdog Backoffice — Lead Intelligence.
+/* Watchdog Backoffice: Lead Intelligence.
    One auth flow: the signed-in Watchdog account (access-guard's client) is
    exchanged for a 12-hour Backoffice session through the same-origin gateway,
    and every lead call sends that session token. Nothing here reloads the page.
@@ -37,7 +37,7 @@ function store(method,key,value){
   }catch(_){/* storage blocked: the session just isn't remembered across reloads */}
   return '';
 }
-function text(v,fallback='—'){return v===null||v===undefined||String(v).trim()===''?fallback:String(v).trim()}
+function text(v,fallback='-'){return v===null||v===undefined||String(v).trim()===''?fallback:String(v).trim()}
 function num(v){if(v===null||v===undefined||v==='')return null;const n=Number(v);return Number.isFinite(n)?n:null}
 function digits(v){return String(v||'').replace(/\D/g,'')}
 function slug(v){return String(v||'').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'')}
@@ -47,7 +47,7 @@ function todayIso(){const d=new Date();return d.getFullYear()+'-'+pad(d.getMonth
 function tenDigits(v){const d=digits(v);return d.length===11&&d.startsWith('1')?d.slice(1):d}
 function fmtPhone(v){const d=tenDigits(v);return d.length===10?'('+d.slice(0,3)+') '+d.slice(3,6)+'-'+d.slice(6):text(v,'')}
 function dialable(v){const d=tenDigits(v);return d.length===10?'+1'+d:digits(v)}
-function money(v){const n=num(v);return n===null?'—':new Intl.NumberFormat('en-US',{style:'currency',currency:'USD',maximumFractionDigits:0}).format(n)}
+function money(v){const n=num(v);return n===null?'-':new Intl.NumberFormat('en-US',{style:'currency',currency:'USD',maximumFractionDigits:0}).format(n)}
 function when(v){if(!v)return '';const d=new Date(v);return Number.isNaN(d.getTime())?'':d.toLocaleString('en-US',{month:'short',day:'numeric',year:'numeric',hour:'numeric',minute:'2-digit'})}
 function clock(v){if(!v)return '';const d=new Date(v);return Number.isNaN(d.getTime())?'':d.toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit'})}
 function ago(v){if(!v)return '';const t=new Date(v).getTime();if(Number.isNaN(t))return '';const m=Math.max(0,Math.floor((Date.now()-t)/60000));if(m<1)return 'now';if(m<60)return m+'m';const h=Math.floor(m/60);if(h<24)return h+'h';const days=Math.floor(h/24);return days<7?days+'d':new Date(v).toLocaleDateString('en-US',{month:'short',day:'numeric'})}
@@ -391,8 +391,8 @@ function renderHandoff(){
 
 function renderSettings(){
   const i=state.integrations||{},bt=i.boldtrail||{};
-  setText($('[data-s="who"]'),state.actorLabel||'—');
-  setText($('[data-s="expires"]'),when(state.expiresAt)||'—');
+  setText($('[data-s="who"]'),state.actorLabel||'-');
+  setText($('[data-s="expires"]'),when(state.expiresAt)||'-');
   setText($('[data-s="google"]'),i.google_address_validation?'Connected':'Not connected');
   const host=$('#bo-settings-boldtrail'),frag=document.createDocumentFragment();
   for(const o of state.operators){const dt=document.createElement('dt'),dd=document.createElement('dd');dt.textContent=o.label;dd.textContent=bt[o.key]?'Connected':'Not connected (CSV export still works)';frag.append(dt,dd)}
@@ -523,15 +523,15 @@ function renderDetail(){
 
   // What they submitted
   dlText('submitted-address',text(l.submitted_address));
-  dlText('google-address',text(l.standardized_address,l.submitted_address?'Not checked yet':'—'));
+  dlText('google-address',text(l.standardized_address,l.submitted_address?'Not checked yet':'-'));
   const st=$('[data-f="address-status"]'),as=l.address_status;
   if(as&&!['pending','skipped'].includes(as)&&(l.address_validated_at||l.standardized_address)){st.hidden=false;st.className='bo-pill is-'+(as==='verified'?'good':as==='review'?'warn':'bad');st.textContent=as==='verified'?'Confirmed':as==='review'?'Needs a look':'No match'}else st.hidden=true;
-  dlText('phone',fmtPhone(l.phone)||'—');dlText('email',text(l.email));
+  dlText('phone',fmtPhone(l.phone)||'-');dlText('email',text(l.email));
   dlText('tenure',text(l.tenure));dlText('income',text(l.household_income));dlText('program',text(l.program));
-  dlText('intent',l.intent_score===null||l.intent_score===undefined?'—':l.intent_score+(l.intent_label?' · '+humanize(String(l.intent_label).toLowerCase()):''));
+  dlText('intent',l.intent_score===null||l.intent_score===undefined?'-':l.intent_score+(l.intent_label?' · '+humanize(String(l.intent_label).toLowerCase()):''));
   dlText('benefit',money(l.estimated_benefit));dlText('source',sourceLabel(l.source));
-  dlText('referral',l.referral_source?referralLabel(l.referral_source)+(l.referral_source_detail?' — '+l.referral_source_detail:''):'Not given');
-  dlText('created',when(l.created_at)||'—');
+  dlText('referral',l.referral_source?referralLabel(l.referral_source)+(l.referral_source_detail?' - '+l.referral_source_detail:''):'Not given');
+  dlText('created',when(l.created_at)||'-');
   const v=$('#bo-validate');v.disabled=!l.submitted_address;setText(v,l.address_validated_at?'Re-check address with Google':'Check address with Google');
 
   renderTimeline();

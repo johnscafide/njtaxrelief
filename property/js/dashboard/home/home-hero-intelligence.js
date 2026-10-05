@@ -13,7 +13,7 @@ var observer=null,scorePromise=null,mapsPromise=null,retryTimer=0,taxEvidenceByP
 function esc(v){return String(v==null?'':v).replace(/[&<>\"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','\"':'&quot;'}[c]});}
 function title(v){return String(v||'').toLowerCase().replace(/\b\w/g,function(c){return c.toUpperCase();});}
 function num(v){v=Number(v);return Number.isFinite(v)?v:null;}
-function money(v){v=num(v);return v==null?'—':v.toLocaleString('en-US',{style:'currency',currency:'USD',maximumFractionDigits:0});}
+function money(v){v=num(v);return v==null?'-':v.toLocaleString('en-US',{style:'currency',currency:'USD',maximumFractionDigits:0});}
 function resolvePin(){try{return new URL(location.href).searchParams.get('pin')||((document.getElementById('hm-switch')||{}).value||'');}catch(_){return((document.getElementById('hm-switch')||{}).value||'');}}
 function currentRow(){
   var rows=window.rows,pin=resolvePin();
@@ -33,35 +33,35 @@ function ensureStyles(){
     '.hm-id>.hm-jurisdiction{margin:5px 0 0!important;color:#8796aa!important;font-size:clamp(11px,.78vw,13px)!important;font-weight:650!important;line-height:1.45!important}',
     '.hm-id>.hm-score-hero{margin-top:clamp(22px,2.2vw,34px)!important;padding-top:clamp(20px,1.8vw,28px)!important;border-top:1px solid #e5ebf3!important}',
     '.hm-score-top{display:grid;grid-template-columns:auto minmax(0,1fr);gap:clamp(15px,1.5vw,22px);align-items:center}',
-    '.hm-score-badge{width:clamp(104px,8.3vw,132px);height:clamp(104px,8.3vw,132px);border-radius:30px;display:grid;grid-template-columns:1fr auto;grid-template-rows:auto 1fr auto;align-items:center;padding:14px 16px;background:linear-gradient(145deg,#10294b 0%,#1f5cc7 100%);box-shadow:0 16px 34px rgba(21,64,130,.2);color:#fff;position:relative;overflow:hidden}',
+    '.hm-score-badge{width:clamp(104px,8.3vw,132px);height:clamp(104px,8.3vw,132px);border-radius:30px;display:grid;grid-template-columns:1fr auto;grid-template-rows:auto 1fr auto;align-items:center;padding:14px 16px;background:linear-gradient(145deg,#10294b 0%,#1f5cc7 100%);box-shadow:0 2px 6px rgba(15,23,42,.08);color:#fff;position:relative;overflow:hidden}',
     '.hm-score-badge:after{content:"";position:absolute;width:74px;height:74px;border-radius:50%;right:-28px;top:-26px;background:rgba(255,255,255,.09)}',
     '.hm-score-badge>i{grid-column:1/-1;justify-self:start;width:30px;height:30px;border-radius:10px;display:grid;place-items:center;background:rgba(255,255,255,.14);font-size:14px}',
-    '.hm-score-badge>b{font:800 clamp(43px,3.7vw,58px)/.92 "Plus Jakarta Sans",sans-serif;letter-spacing:-.065em;align-self:end}',
-    '.hm-score-badge>small{font:800 11px/1 "Plus Jakarta Sans",sans-serif;opacity:.75;align-self:end;padding-bottom:7px;margin-left:5px}',
+    '.hm-score-badge>b{font:800 clamp(43px,3.7vw,58px)/.92 "Libre Franklin",sans-serif;letter-spacing:-.065em;align-self:end}',
+    '.hm-score-badge>small{font:800 11px/1 "Libre Franklin",sans-serif;opacity:.75;align-self:end;padding-bottom:7px;margin-left:5px}',
     '.hm-score-copy{min-width:0}',
-    '.hm-score-kicker{display:block;color:#2d6df6;font:850 10px/1.2 "Plus Jakarta Sans",sans-serif;letter-spacing:.115em;text-transform:uppercase}',
-    '.hm-score-copy>strong{display:block;margin-top:7px;color:#10213f;font:800 clamp(19px,1.55vw,25px)/1.18 "Plus Jakarta Sans",sans-serif;letter-spacing:-.035em}',
+    '.hm-score-kicker{display:block;color:#2d6df6;font:850 10px/1.2 "Libre Franklin",sans-serif;letter-spacing:.115em;text-transform:uppercase}',
+    '.hm-score-copy>strong{display:block;margin-top:7px;color:#10213f;font:800 clamp(19px,1.55vw,25px)/1.18 "Libre Franklin",sans-serif;letter-spacing:-.035em}',
     '.hm-score-copy>small{display:block;margin-top:8px;color:#73849c;font-size:12px;font-weight:650;line-height:1.5}',
     '.hm-score-copy>small b{color:#425774;font-weight:800}',
     '.hm-robust-mini{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:7px;margin-top:16px}',
     '.hm-robust-cell{min-width:0;padding:9px 7px 8px;border:1px solid #e5ebf3;border-radius:12px;background:#f8fafd;text-align:center}',
-    '.hm-robust-cell>b{display:block;color:#2d6df6;font:900 11px/1 "Plus Jakarta Sans",sans-serif}',
-    '.hm-robust-cell>em{display:block;margin-top:5px;color:#10213f;font:800 14px/1 "Plus Jakarta Sans",sans-serif;font-style:normal}',
+    '.hm-robust-cell>b{display:block;color:#2d6df6;font:900 11px/1 "Libre Franklin",sans-serif}',
+    '.hm-robust-cell>em{display:block;margin-top:5px;color:#10213f;font:800 14px/1 "Libre Franklin",sans-serif;font-style:normal}',
     '.hm-robust-cell>small{display:block;margin-top:5px;overflow:hidden;text-overflow:ellipsis;color:#8a98aa;font-size:8px;font-weight:800;letter-spacing:.02em;white-space:nowrap}',
-    '.hm-score-link{display:inline-flex;align-items:center;gap:7px;margin-top:13px;color:#2d6df6!important;font:800 11px/1.2 "Plus Jakarta Sans",sans-serif;text-decoration:none!important}',
+    '.hm-score-link{display:inline-flex;align-items:center;gap:7px;margin-top:13px;color:#2d6df6!important;font:800 11px/1.2 "Libre Franklin",sans-serif;text-decoration:none!important}',
     '.hm-score-link:hover{text-decoration:underline!important}',
     '.hm-score-empty{display:flex;gap:13px;align-items:center;padding:17px 0 1px}',
     '.hm-score-empty>i{width:46px;height:46px;border-radius:15px;display:grid;place-items:center;background:#edf3ff;color:#2d6df6;font-size:18px}',
-    '.hm-score-empty b{display:block;color:#10213f;font:800 17px/1.2 "Plus Jakarta Sans",sans-serif}',
+    '.hm-score-empty b{display:block;color:#10213f;font:800 17px/1.2 "Libre Franklin",sans-serif}',
     '.hm-score-empty span{display:block;margin-top:4px;color:#78889d;font-size:12px;line-height:1.45}',
     '.hm-current-tax{margin-top:16px;padding:14px 15px;border:1px solid #d8e5f5;border-radius:16px;background:#f8fbff}',
-    '.hm-current-tax-head{display:flex;align-items:center;justify-content:space-between;gap:12px}.hm-current-tax-head b{color:#10213f;font:850 12px/1.2 "Plus Jakarta Sans",sans-serif}.hm-current-tax-head span{padding:5px 8px;border-radius:999px;background:#e6f7f3;color:#008d82;font:850 9px/1 "Plus Jakarta Sans",sans-serif;letter-spacing:.06em;text-transform:uppercase}',
-    '.hm-current-tax-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-top:11px}.hm-current-tax-grid div{padding:9px 10px;border-radius:12px;background:#fff;border:1px solid #e7edf5}.hm-current-tax-grid small{display:block;color:#8290a3;font-size:9px;font-weight:800;text-transform:uppercase;letter-spacing:.04em}.hm-current-tax-grid strong{display:block;margin-top:4px;color:#10213f;font:850 16px/1.1 "Plus Jakarta Sans",sans-serif}.hm-current-tax-foot{display:flex;justify-content:space-between;gap:10px;margin-top:9px;color:#708198;font-size:10px;font-weight:650}.hm-current-tax-foot a{color:#008d82!important;font-weight:850;text-decoration:none!important}',
+    '.hm-current-tax-head{display:flex;align-items:center;justify-content:space-between;gap:12px}.hm-current-tax-head b{color:#10213f;font:850 12px/1.2 "Libre Franklin",sans-serif}.hm-current-tax-head span{padding:5px 8px;border-radius:999px;background:#e6f7f3;color:#008d82;font:850 9px/1 "Libre Franklin",sans-serif;letter-spacing:.06em;text-transform:uppercase}',
+    '.hm-current-tax-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-top:11px}.hm-current-tax-grid div{padding:9px 10px;border-radius:12px;background:#fff;border:1px solid #e7edf5}.hm-current-tax-grid small{display:block;color:#8290a3;font-size:9px;font-weight:800;text-transform:uppercase;letter-spacing:.04em}.hm-current-tax-grid strong{display:block;margin-top:4px;color:#10213f;font:850 16px/1.1 "Libre Franklin",sans-serif}.hm-current-tax-foot{display:flex;justify-content:space-between;gap:10px;margin-top:9px;color:#708198;font-size:10px;font-weight:650}.hm-current-tax-foot a{color:#008d82!important;font-weight:850;text-decoration:none!important}',
     '.hm-shot.wd-streetview-host{position:relative!important;overflow:hidden!important;background-image:none!important;background-color:#e9eef5!important}',
     '.hm-shot.wd-streetview-host .wd-streetview-state{position:absolute;inset:0;display:grid;place-items:center;padding:26px;text-align:center;background:linear-gradient(145deg,#eef3f8,#dde7f0);color:#53677f}',
     '.wd-streetview-state>div{max-width:340px}',
-    '.wd-streetview-state i{display:grid;place-items:center;margin:0 auto 12px;width:52px;height:52px;border-radius:16px;background:#fff;color:#2d6df6;box-shadow:0 8px 24px rgba(36,62,91,.08);font-size:20px}',
-    '.wd-streetview-state b{display:block;color:#17304f;font:800 15px/1.25 "Plus Jakarta Sans",sans-serif}',
+    '.wd-streetview-state i{display:grid;place-items:center;margin:0 auto 12px;width:52px;height:52px;border-radius:16px;background:#fff;color:#2d6df6;box-shadow:0 2px 6px rgba(15,23,42,.08);font-size:20px}',
+    '.wd-streetview-state b{display:block;color:#17304f;font:800 15px/1.25 "Libre Franklin",sans-serif}',
     '.wd-streetview-state span{display:block;margin-top:6px;font-size:12px;line-height:1.45}',
     '.wd-streetview-state a{display:inline-flex;margin-top:12px;color:#2d6df6;font-weight:800;text-decoration:none}',
     '.hm-shot.wd-streetview-live .gm-style{border-radius:inherit}',
@@ -112,7 +112,7 @@ function robustCells(w){
   return order.map(function(key){
     var d=w&&w.detail&&w.detail[key]||{},letter=d.letter||({recourse:'R',fairness:'O',burden:'B',uniformity:'U',stability:'S',trajectory:'T'}[key]||'?');
     var name=d.name||({recourse:'Recourse',fairness:'Overassessment',burden:'Burden',uniformity:'Uniformity',stability:'Stability',trajectory:'Trajectory'}[key]||key);
-    var value=d.score==null?'—':Math.round(Number(d.score));
+    var value=d.score==null?'-':Math.round(Number(d.score));
     return '<span class="hm-robust-cell" title="'+esc(letter+' · '+name)+'"><b>'+esc(letter)+'</b><em>'+esc(value)+'</em><small>'+esc(name)+'</small></span>';
   }).join('');
 }
@@ -137,7 +137,7 @@ function currentTaxMarkup(e){
   var cur=e&&e.current||{},prop=e&&e.property||{},year=cur.tax_year||'',assessment=num(prop.total_assessed_value),tax=num(cur.annual_tax),rate=num(cur.tax_rate);
   if(!year&&!assessment&&!tax)return'';
   return '<div class="hm-current-tax"><div class="hm-current-tax-head"><b>Current municipal tax record</b><span>'+esc(year?year+' official':'Live municipal')+'</span></div>'+
-    '<div class="hm-current-tax-grid"><div><small>Assessment</small><strong>'+esc(money(assessment))+'</strong></div><div><small>Annual tax</small><strong>'+esc(money(tax))+'</strong></div><div><small>Tax rate</small><strong>'+(rate==null?'—':esc(rate.toFixed(3)+'%'))+'</strong></div></div>'+
+    '<div class="hm-current-tax-grid"><div><small>Assessment</small><strong>'+esc(money(assessment))+'</strong></div><div><small>Annual tax</small><strong>'+esc(money(tax))+'</strong></div><div><small>Tax rate</small><strong>'+(rate==null?'-':esc(rate.toFixed(3)+'%'))+'</strong></div></div>'+
     '<div class="hm-current-tax-foot"><span>'+esc(e.provider_label||'Official municipal tax source')+'</span>'+(e.source&&e.source.url?'<a href="'+esc(e.source.url)+'" target="_blank" rel="noopener">Official source ↗</a>':'')+'</div></div>';
 }
 

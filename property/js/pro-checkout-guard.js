@@ -38,7 +38,7 @@
       cta.removeAttribute('data-lifetime-plan');
       cta.dataset.billingPlan=plan;cta.dataset.billingCadence=normalCadence;cta.dataset.billingTrial=trialOffered?'1':'0';cta.href='#';
       var label=plan==='pro_plus'?'Pro+':plan.charAt(0).toUpperCase()+plan.slice(1);
-      // content-architecture: dynamic — the button reads as a trial or a plain plan choice depending on this account's trial eligibility from the checkout server.
+      // content-architecture: dynamic, the button reads as a trial or a plain plan choice depending on this account's trial eligibility from the checkout server.
       cta.innerHTML=(trialOffered?'Try '+label+' free for 14 days':'Choose '+label)+' <i class="fas fa-arrow-right"></i>';
     });
     var pricing=document.getElementById('pricing');if(pricing)pricing.classList.remove('is-lifetime-mode');

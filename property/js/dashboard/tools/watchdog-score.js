@@ -139,7 +139,7 @@ import '../../watchdog-score-core.js';
         return '<div class="wd-r' + (has ? '' : ' off') + '">' +
           '<span class="wd-rl"><a href="/property/robust/' + d.slug + '/" style="color:inherit;text-decoration:none">' + d.label + '</a><em>' + (d.note || '') + '</em></span>' +
           '<span class="wd-rb"><i style="width:' + (has ? d.score : 0) + '%"></i></span>' +
-          '<span class="wd-rn">' + (has ? d.score : '\u2014') + '</span>' +
+          '<span class="wd-rn">' + (has ? d.score : '-') + '</span>' +
           '<span class="wd-rw">' + d.weight + '%</span>' +
         '</div>';
       }).join('') +

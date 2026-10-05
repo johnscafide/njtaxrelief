@@ -22,7 +22,7 @@
   }
   function num(value, decimals) {
     var n = Number(value);
-    if (!Number.isFinite(n)) return '—';
+    if (!Number.isFinite(n)) return '-';
     return n.toLocaleString('en-US', { minimumFractionDigits: decimals || 0, maximumFractionDigits: decimals || 0 });
   }
   function pct(value) {

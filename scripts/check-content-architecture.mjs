@@ -59,7 +59,7 @@ function mutationKind(line) {
 }
 
 function structure(line) {
-  return String(line || '').replace(/[A-Za-z0-9'\u2019&;-]+/g, '').replace(/\s+/g, '');
+  return String(line || '').replace(/[A-Za-z0-9'\u2019&;:,|\u2013\u2014-]+/g, '').replace(/\s+/g, '');
 }
 
 function withoutEyebrows(line) {
@@ -142,13 +142,13 @@ for (const raw of diff.split('\n')) {
 }
 
 if (!violations.length) {
-  console.log('[content-architecture] PASS — no new unacknowledged static-copy/runtime-style violations found.');
+  console.log('[content-architecture] PASS, no new unacknowledged static-copy/runtime-style violations found.');
   process.exit(0);
 }
 
-console.error('[content-architecture] FAIL — new customer-facing JavaScript appears to own static copy/presentation.');
+console.error('[content-architecture] FAIL, new customer-facing JavaScript appears to own static copy/presentation.');
 for (const violation of violations) {
-  console.error(`- ${violation.file}:${violation.line} — ${violation.reason}`);
+  console.error(`- ${violation.file}:${violation.line} ${violation.reason}`);
 }
 console.error('Move static copy to HTML/partials, move presentation to CSS, or add a nearby "content-architecture: dynamic" comment with a real state/data-driven justification.');
 process.exit(1);

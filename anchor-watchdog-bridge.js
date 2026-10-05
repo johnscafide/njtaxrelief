@@ -215,7 +215,7 @@
     style.id = 'anchor-watchdog-intelligence-styles';
     style.textContent = [
       '.awd-search-host{position:relative!important}',
-      '.awd-search-box{position:absolute;left:0;right:0;top:calc(100% + 9px);z-index:8000;display:none;max-height:min(540px,64vh);overflow:auto;background:#fff;border:1px solid #dfe7ec;border-radius:18px;box-shadow:0 24px 60px rgba(10,34,64,.22);text-align:left}',
+      '.awd-search-box{position:absolute;left:0;right:0;top:calc(100% + 9px);z-index:8000;display:none;max-height:min(540px,64vh);overflow:auto;background:#fff;border:1px solid #dfe7ec;border-radius:18px;box-shadow:0 2px 6px rgba(15,23,42,.08);text-align:left}',
       '.awd-search-box.open{display:block}',
       '.awd-search-county{display:flex;align-items:center;justify-content:space-between;padding:10px 14px 7px;background:#f5f9f8;color:#087f82;border-top:1px solid #e8eeee;font-size:10px;font-weight:900;letter-spacing:.08em;text-transform:uppercase}',
       '.awd-search-county:first-child{border-top:0}',
@@ -235,7 +235,7 @@
       '.awd-search-credit{height:28px;border-top:1px solid #edf1f3;background:#fff url("https://maps.gstatic.com/mapfiles/api-3/images/powered-by-google-on-white3.png") no-repeat right 10px center;background-size:112px auto}',
       '.awd-search-empty{padding:14px;color:#6f7d8d;font-size:12px;font-weight:650}',
       'body.est-page .pac-container{display:none!important}',
-      '.awdx-shell{margin:20px 0;border-radius:20px;overflow:hidden;background:#fff;border:1px solid #dfe7ec;box-shadow:0 18px 42px rgba(14,34,72,.12);text-align:left}',
+      '.awdx-shell{margin:20px 0;border-radius:20px;overflow:hidden;background:#fff;border:1px solid #dfe7ec;box-shadow:0 2px 6px rgba(15,23,42,.08);text-align:left}',
       '.awdx-head{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;padding:18px 20px;background:linear-gradient(135deg,#0e2248,#173d6d);color:#fff}',
       '.awdx-brand{display:flex;align-items:center;gap:11px;min-width:0}',
       '.awdx-mark{width:40px;height:40px;flex:0 0 40px;border-radius:12px;display:grid;place-items:center;background:#0a9598;color:#fff;font-size:18px;box-shadow:inset 0 0 0 1px rgba(255,255,255,.18)}',
@@ -457,7 +457,7 @@
           if (scoreEl) {
             scoreEl.hidden = false;
             var hasScore = Number.isFinite(scoreInfo.score);
-            scoreEl.querySelector('b').textContent = hasScore ? String(Math.round(scoreInfo.score)) : '—';
+            scoreEl.querySelector('b').textContent = hasScore ? String(Math.round(scoreInfo.score)) : '-';
             scoreEl.querySelector('span').textContent = hasScore ? 'Watchdog score' : 'Score pending';
           }
         });
@@ -492,7 +492,7 @@
           + '<span><span class="awd-search-main">' + highlight(text(prediction.mainText) || text(prediction.text),needle) + '</span>'
           + '<span class="awd-search-secondary">' + esc(text(prediction.secondaryText)) + '</span>'
           + '<span class="awd-search-intel">Checking NJ public record…</span></span>'
-          + '<span class="awd-search-score" hidden><b>—</b><span>Score pending</span></span></button>';
+          + '<span class="awd-search-score" hidden><b>-</b><span>Score pending</span></span></button>';
       });
     });
     html += '<div class="awd-search-credit" aria-label="Powered by Google"></div>';
@@ -768,7 +768,7 @@
 
   function renderPropertyCard(el,subject,scoreInfo,tenure,address) {
     var hasScore = !!(scoreInfo && Number.isFinite(scoreInfo.score));
-    var scoreValue = hasScore ? String(Math.round(scoreInfo.score)) : '—';
+    var scoreValue = hasScore ? String(Math.round(scoreInfo.score)) : '-';
     var type = PROPERTY_TYPES[String(subject.propertyClass || '').toUpperCase()] ||
       (subject.propertyClass ? 'Class ' + subject.propertyClass : 'Not on file');
     var place = [

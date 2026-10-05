@@ -14,12 +14,12 @@ enum WDTheme {
     static let lime = Color(red: 0.82, green: 0.94, blue: 0.43)
 
     static func money(_ value: Double?) -> String {
-        guard let value, value.isFinite else { return "—" }
+        guard let value, value.isFinite else { return "-" }
         return value.formatted(.currency(code: "USD").precision(.fractionLength(0)))
     }
 
     static func compactMoney(_ value: Double?) -> String {
-        guard let value, value.isFinite else { return "—" }
+        guard let value, value.isFinite else { return "-" }
         let magnitude = abs(value)
         if magnitude >= 1_000_000 {
             return "$" + (value / 1_000_000).formatted(.number.precision(.fractionLength(0...2))) + "M"
@@ -32,7 +32,7 @@ enum WDTheme {
 
     /// Values passed here are ratios (0.25 is 25%), never already scaled percentages.
     static func percent(_ value: Double?) -> String {
-        guard let value, value.isFinite else { return "—" }
+        guard let value, value.isFinite else { return "-" }
         return value.formatted(.percent.precision(.fractionLength(0...2)))
     }
 

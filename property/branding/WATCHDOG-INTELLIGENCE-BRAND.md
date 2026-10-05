@@ -95,12 +95,12 @@ Preferred public language:
 
 The six canonical dimensions and current framework weights are:
 
-- **R — Recourse — 10%**
-- **O — Overassessment Position — 20%**
-- **B — Burden — 30%**
-- **U — Uniformity — 15%**
-- **S — Stability — 15%**
-- **T — Trajectory — 10%**
+- **R: Recourse: 10%**
+- **O: Overassessment Position: 20%**
+- **B: Burden: 30%**
+- **U: Uniformity: 15%**
+- **S: Stability: 15%**
+- **T: Trajectory: 10%**
 
 Do not rename the product “ROBUST Score.” ROBUST explains the Watchdog Score.
 
@@ -120,8 +120,8 @@ Rules:
 
 Use these classes instead of recreating the treatment on each page:
 
-- `.wd-intelligence-word` — gradient word treatment.
-- `.wd-intelligence-surface` — light surface with 1px Intelligence border.
-- `.wd-intelligence-surface-dark` — dark surface with 1px Intelligence border.
+- `.wd-intelligence-word` - gradient word treatment.
+- `.wd-intelligence-surface` - light surface with 1px Intelligence border.
+- `.wd-intelligence-surface-dark` - dark surface with 1px Intelligence border.
 
 Source: `/property/css/watchdog-intelligence-brand.css`.

@@ -24,12 +24,11 @@ assert.match(js, /addEventListener\('scroll',onScroll,\{passive:true\}\)/, 'scro
 assert.doesNotMatch(js, /removeEventListener\('scroll'/, 'the scroll check must not stop after the first bar is found');
 assert.match(js, /el\.style\.transition='none';[\s\S]*?el\.style\.transition=transition;/, 'state switches never animate a fade between frosted and clear');
 
-// The blur sits on the child layer, never on the bar itself, so fixed menus
-// inside a bar keep positioning against the viewport.
-assert.match(css, /\[data-wd-glass\]\{[^}]*backdrop-filter:none!important/);
-assert.match(css, /\[data-wd-glass\]>\.wd-glass-layer\{[^}]*backdrop-filter:blur\(/);
-assert.match(css, /prefers-reduced-transparency:reduce/, 'reduced transparency gets a near-solid bar');
-assert.match(css, /@supports not/, 'browsers without backdrop-filter get a near-solid bar');
+// The top bar is solid now (no frosted glass). The fill sits on the child
+// layer, never on the bar itself, so fixed menus inside a bar keep
+// positioning against the viewport.
+assert.doesNotMatch(css, /backdrop-filter/, 'no frosted glass on the top bar');
+assert.match(css, /\[data-wd-glass\]>\.wd-glass-layer\{[^}]*background:rgb\(var\(--wd-glass-rgb/, 'the bar layer is a solid fill');
 assert.match(css, /@media print/);
 
 // Home's header sits over the hero. The hero's photo is scaled 3%, so the hero

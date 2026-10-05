@@ -610,7 +610,7 @@
       var content = [];
       (state.contentFor === raw ? state.content || [] : []).forEach(function(d){
         if(!d || !d.url) return;
-        var title = String(d.meta && d.meta.title || '').replace(/\s*[|–—-]\s*Watchdog.*$/i,'') || 'Watchdog guide';
+        var title = String(d.meta && d.meta.title || '').replace(/\s*[|–\u2014-]\s*Watchdog.*$/i,'') || 'Watchdog guide';
         content.push({type:'content', label:title, href:route(d.url), where:'Guides and findings', html:safeExcerpt(d.excerpt), icon:'fa-book-open'});
       });
       group('Guides and findings',content);

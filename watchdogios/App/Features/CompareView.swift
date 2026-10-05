@@ -31,7 +31,7 @@ struct CompareView: View {
                                 Label("Compare like with like", systemImage: "info.circle").font(.headline)
                                 Text("Assessments and taxes can relate to different years and municipal systems. Review the year on each record. A difference in assessment does not establish a difference in market value or an error in the tax record.")
                                     .font(.subheadline).foregroundStyle(WDTheme.muted)
-                                Text("— means the source did not report a value.")
+                                Text("- means the source did not report a value.")
                                     .font(.caption).foregroundStyle(WDTheme.muted)
                             }
                         }

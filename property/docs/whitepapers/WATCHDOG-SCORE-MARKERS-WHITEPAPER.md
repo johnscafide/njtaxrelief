@@ -59,7 +59,7 @@ The current property-level Watchdog Score already demonstrates this idea. Its im
 | **S** | **Stability** | 15% | How much evidence of assessment-reset or revaluation pressure is present? |
 | **T** | **Trajectory** | 10% | Is the property's assessment relationship moving in step with verified market evidence? |
 
-The underlying weights have **not** changed merely because the methodology has been branded. The former internal/public label **Assessment fairness** maps to **O — Overassessment Position**. “Overassessment Position” is intentionally a neutral measurement label. It describes where the assessment sits relative to supported evidence; it does **not** presume that a property is legally or factually overassessed.
+The underlying weights have **not** changed merely because the methodology has been branded. The former internal/public label **Assessment fairness** maps to **O: Overassessment Position**. “Overassessment Position” is intentionally a neutral measurement label. It describes where the assessment sits relative to supported evidence; it does **not** presume that a property is legally or factually overassessed.
 
 The simplest public explanation is:
 
@@ -141,7 +141,7 @@ Watchdog should also expose at least three summary dimensions wherever space per
 
 The first number describes current position. The second describes evidence sufficiency. The third describes change in the headline score over time.
 
-**Momentum is not the same thing as T — Trajectory.** Trajectory is one ROBUST component measuring the direction of underlying assessment/value relationships inside the score. Momentum describes the change in the headline Watchdog Score itself over a stated period.
+**Momentum is not the same thing as T: Trajectory.** Trajectory is one ROBUST component measuring the direction of underlying assessment/value relationships inside the score. Momentum describes the change in the headline Watchdog Score itself over a stated period.
 
 That combination can become far more useful than a naked rating.
 
@@ -200,11 +200,11 @@ A score should help someone know where to look next.
 
 Examples:
 
-- A homeowner sees that **B — Burden** and **O — Overassessment Position** are the largest downward drivers and opens the evidence behind those components.
-- A buyer sees favorable Burden but negative Momentum caused by rising **S — Stability** pressure and plans for a higher future carrying-cost scenario.
-- An agent sees that a property's overall score is ordinary but its **T — Trajectory** is unusual and prepares for that buyer conversation.
-- An attorney filters a portfolio to lower-scoring properties with high evidence coverage and strong **R — Recourse** markers.
-- A municipal professional sees that the municipality's aggregate score changed little, but **U — Uniformity** widened sharply, suggesting that the assessment roll deserves investigation.
+- A homeowner sees that **B: Burden** and **O: Overassessment Position** are the largest downward drivers and opens the evidence behind those components.
+- A buyer sees favorable Burden but negative Momentum caused by rising **S: Stability** pressure and plans for a higher future carrying-cost scenario.
+- An agent sees that a property's overall score is ordinary but its **T: Trajectory** is unusual and prepares for that buyer conversation.
+- An attorney filters a portfolio to lower-scoring properties with high evidence coverage and strong **R: Recourse** markers.
+- A municipal professional sees that the municipality's aggregate score changed little, but **U: Uniformity** widened sharply, suggesting that the assessment roll deserves investigation.
 - A journalist sees a county score improve while one ROBUST dimension worsens and reports the trade-off rather than reducing the story to a league table.
 
 In each example, the score begins the inquiry. ROBUST explains the structure. The evidence explains the result.
@@ -267,7 +267,7 @@ The current implementation reports:
 
 Those thresholds should be treated as the current product contract, not as scientifically permanent constants. Future validation should test whether different minimums are warranted for different uses.
 
-### 4.2 R — Recourse, 10%
+### 4.2 R: Recourse, 10%
 
 Recourse asks what the available appeal and correction context suggests about practical avenues for review.
 
@@ -277,7 +277,7 @@ This component deserves continuing research. Historical county win rates are not
 
 The right long-term use is contextual, calibrated, and modest. It should never be shown as a promise that a specific appeal will succeed.
 
-### 4.3 O — Overassessment Position, 20%
+### 4.3 O: Overassessment Position, 20%
 
 Overassessment Position is the official ROBUST name for the current assessment-fairness concept.
 
@@ -289,7 +289,7 @@ New Jersey's Division of Taxation publishes the common level range for each taxi
 
 Watchdog can use these official relationships as evidence. It must not imply that its screening calculation itself determines an appeal outcome or legally establishes overassessment.
 
-### 4.4 B — Burden, 30%
+### 4.4 B: Burden, 30%
 
 Burden asks how much property tax is being carried relative to the property's estimated market value.
 
@@ -299,7 +299,7 @@ The current score code uses fixed burden anchors rather than calculating percent
 
 Long term, the burden normalization should be governed from statewide evidence, versioned, and periodically validated against the current distribution of equalized property values and taxes.
 
-### 4.5 U — Uniformity, 15%
+### 4.5 U: Uniformity, 15%
 
 Uniformity describes how consistently the municipality assesses properties.
 
@@ -311,7 +311,7 @@ This is valuable because an individual property exists inside an assessment syst
 
 Uniformity is therefore not a judgment about whether a town is good or bad. It is evidence about the consistency of one public valuation process.
 
-### 4.6 S — Stability, 15%
+### 4.6 S: Stability, 15%
 
 Stability incorporates Watchdog's governed revaluation-pressure work.
 
@@ -321,7 +321,7 @@ New Jersey itself identifies assessment-sales ratios, coefficients of deviation,
 
 Watchdog's marker is therefore a **screening model for pressure**, not a prediction that a municipality will order or complete a revaluation on a specific date.
 
-### 4.7 T — Trajectory, 10%
+### 4.7 T: Trajectory, 10%
 
 Trajectory asks whether a property's assessment relationship is keeping pace with verified market evidence relative to its municipal context.
 
@@ -391,7 +391,7 @@ Watchdog's broader data methodology distinguishes four useful concepts:
 
 The marker library should remain broader than the top-level Watchdog Score.
 
-A user may care about `watchdog.appeal_evidence_strength` even when it has modest influence on R — Recourse. An appraiser may care about comparable-evidence reliability. An investor may care about carry-cost volatility. A buyer may care about tax-reset exposure. A title professional may care about permit and public-record exceptions.
+A user may care about `watchdog.appeal_evidence_strength` even when it has modest influence on R: Recourse. An appraiser may care about comparable-evidence reliability. An investor may care about carry-cost volatility. A buyer may care about tax-reset exposure. A title professional may care about permit and public-record exceptions.
 
 These markers are not competitors to the Watchdog Score. They are the detailed vocabulary beneath ROBUST.
 
@@ -516,7 +516,7 @@ Score 72 | Confidence 91 | Momentum -7 over 12 months
 
 Those two properties have the same current score and very different stories.
 
-Momentum must remain distinct from T — Trajectory, which is an input dimension rather than the headline score's own change history.
+Momentum must remain distinct from T: Trajectory, which is an input dimension rather than the headline score's own change history.
 
 ### Rule 8: The comparison frame must be named
 
@@ -651,12 +651,12 @@ A municipality's 67 and a property's 67 should not be interpreted as the same ca
 
 The preferred long-range architecture is that all geographic Watchdog Scores continue to explain themselves through the same six top-level dimensions:
 
-- **R — Recourse**
-- **O — Overassessment Position**
-- **B — Burden**
-- **U — Uniformity**
-- **S — Stability**
-- **T — Trajectory**
+- **R: Recourse**
+- **O: Overassessment Position**
+- **B: Burden**
+- **U: Uniformity**
+- **S: Stability**
+- **T: Trajectory**
 
 The underlying markers and weights can differ by scope.
 
@@ -773,7 +773,7 @@ The numbers above are illustrative only. They are not current Watchdog calculati
 
 ROBUST should become the recognizable explanatory grammar across Watchdog Score scopes.
 
-### 8.1 R — Recourse
+### 8.1 R: Recourse
 
 What credible process or correction context exists when a measured condition deserves review?
 
@@ -781,7 +781,7 @@ At property level this may include appeal context. At broader levels it may incl
 
 Recourse is not a prediction of success.
 
-### 8.2 O — Overassessment Position
+### 8.2 O: Overassessment Position
 
 Where does the subject sit relative to supported assessment/value evidence?
 
@@ -789,25 +789,25 @@ At property level, this emphasizes Chapter 123 and supported-value position wher
 
 At municipal, county, and state levels, the emphasis shifts toward the distribution, prevalence, and severity of parcel-level assessment positions rather than a single parcel judgment.
 
-### 8.3 B — Burden
+### 8.3 B: Burden
 
 What recurring property-tax cost is being carried relative to supported value or another appropriate base?
 
 At broader scopes, distribution matters as much as the average.
 
-### 8.4 U — Uniformity
+### 8.4 U: Uniformity
 
 How consistently does the relevant assessment system treat comparable property/value relationships?
 
 At municipal level, COD and other dispersion measures may be central. At higher levels, Watchdog should summarize distributions without washing out local inconsistency.
 
-### 8.5 S — Stability
+### 8.5 S: Stability
 
 How much evidence suggests that the current condition is structurally stable versus exposed to reset, revaluation, fiscal, or assessment pressure?
 
 Watchdog already has governed markers related to revaluation risk, fiscal resilience, municipal cost absorption, levy/base relationships, collection rates, and other municipal finance conditions. Where validated, those markers can feed S rather than creating an unrelated top-level score vocabulary.
 
-### 8.6 T — Trajectory
+### 8.6 T: Trajectory
 
 Which direction are the important relationships moving?
 
@@ -988,7 +988,7 @@ The professional advantage comes from the **drivers**, not from reciting the num
 
 ### 11.2 Attorneys and tax professionals
 
-The score can help rank matters for review, especially when paired with O — Overassessment Position, R — Recourse, evidence coverage, Chapter 123 context, appeal evidence strength, and deadline context.
+The score can help rank matters for review, especially when paired with O: Overassessment Position, R: Recourse, evidence coverage, Chapter 123 context, appeal evidence strength, and deadline context.
 
 It should never be described as a legal conclusion or guaranteed appeal outcome.
 
@@ -1000,7 +1000,7 @@ The Watchdog Score itself is not an appraisal and should never be represented as
 
 ### 11.4 Mortgage and lending professionals
 
-B — Burden, S — Stability, and T — Trajectory can be useful for property-cost and collateral conversations.
+B: Burden, S: Stability, and T: Trajectory can be useful for property-cost and collateral conversations.
 
 The score should not become a borrower credit score or an automated credit-eligibility factor. Where lenders use Watchdog data, the product should distinguish property intelligence from borrower underwriting.
 
@@ -1651,16 +1651,16 @@ People often act after a bill changes, after a buyer objects, after an appeal de
 Watchdog can move those decisions earlier.
 
 **Reactive:** “Why did my taxes jump?”  
-**Proactive:** “My S — Stability and T — Trajectory have changed for three consecutive periods. What should I review?”
+**Proactive:** “My S: Stability and T: Trajectory have changed for three consecutive periods. What should I review?”
 
 **Reactive:** “Is this town expensive?”  
-**Proactive:** “B — Burden is high, but U — Uniformity and S — Stability are strong. Which part matters to my decision?”
+**Proactive:** “B: Burden is high, but U: Uniformity and S: Stability are strong. Which part matters to my decision?”
 
 **Reactive:** “This politician says taxes improved.”  
 **Proactive:** “The municipal Watchdog Score improved four points. ROBUST shows that Trajectory improved while household Burden barely moved.”
 
 **Reactive:** “This property has a low score, so avoid it.”  
-**Proactive:** “The score is pressured because of one municipal Stability factor. The property's O — Overassessment Position is actually favorable.”
+**Proactive:** “The score is pressured because of one municipal Stability factor. The property's O: Overassessment Position is actually favorable.”
 
 This is the long-term purpose of the score:
 
@@ -1749,10 +1749,10 @@ Before a future Watchdog Score v2 or geographic score family is promoted, Watchd
 - Inspect property-class differences.
 - Inspect score and component distributions by county and municipality.
 - Test current normalization anchors.
-- Test the influence of R — Recourse.
+- Test the influence of R: Recourse.
 - Test whether missingness renormalization creates material bias.
 - Establish a minimum evidence threshold.
-- Confirm that O — Overassessment Position is interpreted neutrally and accurately by users.
+- Confirm that O: Overassessment Position is interpreted neutrally and accurately by users.
 
 ### B. Weight sensitivity
 
@@ -1828,11 +1828,11 @@ Because the Watchdog Score is expected to become a primary marketing asset, the 
 
 The canonical hierarchy is:
 
-1. **Watchdog** — the brand and platform.
-2. **Watchdog Score** — the 0–100 product/result.
-3. **ROBUST Framework** — the branded methodology that explains the Score.
-4. **R / O / B / U / S / T dimensions** — the six top-level explanatory components.
-5. **Markers and evidence** — the governed calculations and source facts beneath each dimension.
+1. **Watchdog**, the brand and platform.
+2. **Watchdog Score**, the 0–100 product/result.
+3. **ROBUST Framework**, the branded methodology that explains the Score.
+4. **R / O / B / U / S / T dimensions**, the six top-level explanatory components.
+5. **Markers and evidence**, the governed calculations and source facts beneath each dimension.
 
 Preferred public construction:
 
@@ -1844,12 +1844,12 @@ Do not collapse the hierarchy by casually replacing “Watchdog Score” with �
 
 The official expansion is fixed unless a future governed methodology version explicitly changes it:
 
-- **R — Recourse**
-- **O — Overassessment Position**
-- **B — Burden**
-- **U — Uniformity**
-- **S — Stability**
-- **T — Trajectory**
+- **R: Recourse**
+- **O: Overassessment Position**
+- **B: Burden**
+- **U: Uniformity**
+- **S: Stability**
+- **T: Trajectory**
 
 Use **Overassessment Position**, not simply “Overassessment,” in formal methodology and consumer explanation. The additional word prevents the framework from implying a conclusion before evidence is evaluated.
 
@@ -2164,12 +2164,12 @@ status
 
 ### Official expansion
 
-**R** — Recourse  
-**O** — Overassessment Position  
-**B** — Burden  
-**U** — Uniformity  
-**S** — Stability  
-**T** — Trajectory
+**R**: Recourse  
+**O**: Overassessment Position  
+**B**: Burden  
+**U**: Uniformity  
+**S**: Stability  
+**T**: Trajectory
 
 ### Preferred descriptors
 
@@ -2194,7 +2194,7 @@ The whitepaper establishes the philosophy, ROBUST branding, and research directi
 
 1. Should the current ROBUST weights remain unchanged after statewide sensitivity testing?
 2. What is the minimum evidence coverage required before Watchdog withholds a property score?
-3. Should R — Recourse remain a core property-score component or become contextual only?
+3. Should R: Recourse remain a core property-score component or become contextual only?
 4. Which normalization anchors should replace or update fixed Burden anchors over time?
 5. What exact scope-specific marker sets and weights should define the Municipal Watchdog Score while preserving ROBUST as the public language?
 6. How should residential, commercial, vacant, farm, and exempt classes be handled in geographic aggregates?

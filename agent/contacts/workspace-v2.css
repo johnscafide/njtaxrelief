@@ -1,4 +1,4 @@
-/* NJW-385 — CRM Contact Cleanup in the canonical Agent Workspace shell.
+/* NJW-385: CRM Contact Cleanup in the canonical Agent Workspace shell.
    This is a visual/presentation layer only; contacts.js remains the workflow/data runtime. */
 body[data-sidebar-page="agent-contacts"]{
   --acx-bg:#fff;
@@ -188,9 +188,9 @@ body[data-sidebar-page="agent-contacts"] .acx-future-disabled{border:0;backgroun
 
 /* Dialogs and overlays are restrained and readable. */
 body[data-sidebar-page="agent-contacts"] .acx-guide-backdrop,
-body[data-sidebar-page="agent-contacts"] .acx-name-backdrop{background:rgba(25,28,32,.42);backdrop-filter:none}
+body[data-sidebar-page="agent-contacts"] .acx-name-backdrop{background:rgba(25,28,32,.97);}
 body[data-sidebar-page="agent-contacts"] .acx-guide>aside,
-body[data-sidebar-page="agent-contacts"] .acx-name-modal>section{border-radius:10px;box-shadow:0 22px 64px rgba(28,31,36,.22)}
+body[data-sidebar-page="agent-contacts"] .acx-name-modal>section{border-radius:10px;box-shadow:0 2px 6px rgba(15,23,42,.08)}
 body[data-sidebar-page="agent-contacts"] .acx-name-modal-icon{border-radius:7px;background:#eff0f1;color:#5c646c}
 body[data-sidebar-page="agent-contacts"] .acx-name-choice{border-radius:8px;box-shadow:none}
 body[data-sidebar-page="agent-contacts"] .acx-name-choice.selected{border-color:#9fb1c5;background:#f6f8fa;box-shadow:0 0 0 2px rgba(25,103,210,.05)}
@@ -263,8 +263,8 @@ body[data-sidebar-page="agent-contacts"] .acx-crm-secondary{border-color:#d8dbe0
 body[data-sidebar-page="agent-contacts"] .acx-crm-secondary:hover{background:#f2f3f4}
 body[data-sidebar-page="agent-contacts"] .acx-crm-status{border-color:#dde0e2;background:#fff;color:#626970}
 body[data-sidebar-page="agent-contacts"] .acx-crm-status.installed{border-color:#d3ded6;background:#edf2ee;color:#42624d}
-body[data-sidebar-page="agent-contacts"] .acx-crm-backdrop{background:rgba(25,28,32,.42);backdrop-filter:none}
-body[data-sidebar-page="agent-contacts"] .acx-crm-dialog{border-radius:10px;box-shadow:0 22px 64px rgba(28,31,36,.22);color:var(--acx-text)}
+body[data-sidebar-page="agent-contacts"] .acx-crm-backdrop{background:rgba(25,28,32,.97);}
+body[data-sidebar-page="agent-contacts"] .acx-crm-dialog{border-radius:10px;box-shadow:0 2px 6px rgba(15,23,42,.08);color:var(--acx-text)}
 body[data-sidebar-page="agent-contacts"] .acx-crm-dialog-head{border-color:var(--acx-border)}
 body[data-sidebar-page="agent-contacts"] .acx-crm-close{border-radius:6px}
 body[data-sidebar-page="agent-contacts"] .acx-crm-dialog-body>span{color:#687078;font-size:10px;letter-spacing:.08em}

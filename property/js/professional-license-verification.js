@@ -15,9 +15,9 @@
   }
 
   function dateLabel(value) {
-    if (!value) return '—';
+    if (!value) return '-';
     var d = new Date(value);
-    return isNaN(d.getTime()) ? '—' : d.toLocaleDateString(undefined,{year:'numeric',month:'short',day:'numeric'});
+    return isNaN(d.getTime()) ? '-' : d.toLocaleDateString(undefined,{year:'numeric',month:'short',day:'numeric'});
   }
 
   function normalizeLicense(value) {

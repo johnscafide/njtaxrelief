@@ -149,7 +149,7 @@ MIGRATED_CANONICAL_FILES = {
             "@media (max-width: 900px)",
             "@media (max-width: 820px)",
             "@media (max-width: 560px)",
-            "font-family: 'Plus Jakarta Sans'",
+            "font-family: 'Libre Franklin'",
             "border: 2px solid #b8972a",
         },
     },
@@ -231,7 +231,7 @@ MIGRATED_CANONICAL_JS = {
 }
 REQUIRED_TOKEN_LINES = {
     '--wd-gold-500: #b8972a;',
-    '--font-ui: "Plus Jakarta Sans", Arial, sans-serif;',
+    '--font-ui: "Libre Franklin", Arial, sans-serif;',
     '--font-display: "Playfair Display", Georgia, serif;',
     '--container-narrow: 720px;',
     '--container-reading: 1080px;',

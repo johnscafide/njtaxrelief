@@ -1,4 +1,4 @@
-/* NJW-293 — rotating county intelligence for the consumer landing page.
+/* NJW-293, rotating county intelligence for the consumer landing page.
    Three county cards are shown at a time from a shuffled 21-county deck. The
    full deck is exhausted before any county repeats, then it is shuffled again.
    Every card points at the existing canonical county hub and has a unique,
@@ -114,15 +114,15 @@
       '.wd-county-intel-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;transition:opacity .18s ease,transform .18s ease}',
       '.wd-county-intel-grid.is-changing{opacity:.16;transform:translateY(4px)}',
       '.wd-county-intel-card{min-width:0;overflow:hidden;border-radius:24px;background:#f5f7f7;color:#172234;text-decoration:none;transition:transform .18s ease,box-shadow .18s ease}',
-      '.wd-county-intel-card:hover,.wd-county-intel-card:focus-visible{transform:translateY(-2px);box-shadow:0 18px 36px rgba(16,41,75,.10);outline:none}',
+      '.wd-county-intel-card:hover,.wd-county-intel-card:focus-visible{transform:translateY(-2px);box-shadow:0 2px 6px rgba(15,23,42,.08);outline:none}',
       '.wd-county-intel-image{position:relative;display:block;height:190px;margin-bottom:10px;overflow:hidden;background:#dfe6e6}',
       '.wd-county-intel-image img{width:100%;height:100%;display:block;object-fit:cover;transition:transform .35s ease}',
       '.wd-county-intel-card:hover .wd-county-intel-image img,.wd-county-intel-card:focus-visible .wd-county-intel-image img{transform:scale(1.025)}',
       '.wd-county-intel-image:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(8,28,51,.02),rgba(8,28,51,.36))}',
       '.wd-county-intel-copy{display:block;padding:20px 20px 22px}',
-      '.wd-county-intel-county{display:block;color:#087f82;font:800 11px/1.2 "Plus Jakarta Sans",sans-serif;letter-spacing:.07em;text-transform:uppercase}',
-      '.wd-county-intel-card h3{margin:0;color:#10294b;padding:20px 20px 22px;font:800 21px/1.22 "Plus Jakarta Sans",sans-serif;letter-spacing:-.025em}',
-      '.wd-county-intel-hook{display:block;margin:11px 0 0;color:#10294b;font:750 15.5px/1.35 "Plus Jakarta Sans",sans-serif}',
+      '.wd-county-intel-county{display:block;color:#087f82;font:800 11px/1.2 "Libre Franklin",sans-serif;letter-spacing:.07em;text-transform:uppercase}',
+      '.wd-county-intel-card h3{margin:0;color:#10294b;padding:20px 20px 22px;font:800 21px/1.22 "Libre Franklin",sans-serif;letter-spacing:-.025em}',
+      '.wd-county-intel-hook{display:block;margin:11px 0 0;color:#10294b;font:750 15.5px/1.35 "Libre Franklin",sans-serif}',
       '.wd-county-intel-card p{margin:0 20px 0;color:#61717a;font-size:15.5px;line-height:1.5}',
       '.wd-county-intel-open{display:inline-flex;align-items:center;gap:8px;margin-top:17px;margin: 20px;color:#087f82;font-size:14.5px;font-weight:800}',
       '@media(max-width:940px){html,body{width:100%;max-width:100%;overflow-x:hidden;overflow-x:clip}body{overscroll-behavior-x:none}.wd-county-intel,.wd-county-intel .wd-county-intel-wrap,.wd-county-intel-grid,.wd-county-intel-card{max-width:100%;box-sizing:border-box}}',

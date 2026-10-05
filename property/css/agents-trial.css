@@ -10,7 +10,7 @@
 *,*::before,*::after{box-sizing:border-box}
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
 html[data-trial-variant] body{visibility:visible}
-body.wt-page{margin:0;background:var(--wt-bg);color:var(--wt-text);font-family:"Plus Jakarta Sans",system-ui,-apple-system,"Segoe UI",Arial,sans-serif;font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+body.wt-page{margin:0;background:var(--wt-bg);color:var(--wt-text);font-family:"Libre Franklin",system-ui,-apple-system,"Segoe UI",Arial,sans-serif;font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
 .wt-page a{color:var(--wt-blue)}
 .wt-page h1,.wt-page h2,.wt-page h3,.wt-page p{margin-top:0}
 .wt-page h1{font-size:clamp(30px,6vw,44px);line-height:1.08;font-weight:800;letter-spacing:-.02em;color:var(--wt-ink);margin-bottom:16px;text-wrap:balance}
@@ -61,7 +61,7 @@ html:not([data-trial-variant="b"]) [data-variant-b]{display:none!important}
 .wt-notice.is-error{background:#fdecee;color:#7a1f2b}
 
 /* Sample Opportunity Desk card (real HTML, not an image) */
-.wt-sample{position:relative;background:var(--wt-surface);border:1px solid var(--wt-line);border-radius:18px;padding:20px;box-shadow:0 10px 30px rgba(17,29,56,.06)}
+.wt-sample{position:relative;background:var(--wt-surface);border:1px solid var(--wt-line);border-radius:18px;padding:20px;box-shadow:0 2px 6px rgba(15,23,42,.08)}
 .wt-sample-tag{position:absolute;top:14px;right:14px;font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--wt-navy);background:#fff;border:1px solid var(--wt-navy);border-radius:999px;padding:3px 10px;line-height:1.4}
 .wt-sample-rank{display:inline-flex;align-items:center;gap:8px;margin-bottom:10px;font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--wt-navy)}
 .wt-sample-rank span{display:inline-block;padding:4px 10px;border-radius:8px;background:var(--wt-navy);color:#fff}
@@ -156,7 +156,7 @@ html:not([data-trial-variant="b"]) [data-variant-b]{display:none!important}
 .wt-modal-close{position:absolute;top:10px;right:10px;width:44px;height:44px;border:0;background:var(--wt-soft);border-radius:10px;font-size:22px;line-height:1;cursor:pointer;color:var(--wt-ink)}
 
 /* Sticky bottom bar (mobile) */
-.wt-sticky{position:fixed;left:0;right:0;bottom:0;z-index:100;padding:10px 16px calc(10px + env(safe-area-inset-bottom));background:rgba(255,255,255,.96);border-top:1px solid var(--wt-line);backdrop-filter:saturate(1.2) blur(6px)}
+.wt-sticky{position:fixed;left:0;right:0;bottom:0;z-index:100;padding:10px 16px calc(10px + env(safe-area-inset-bottom));background:rgba(255,255,255,.96);border-top:1px solid var(--wt-line);}
 .wt-sticky[hidden]{display:none}
 body.wt-has-sticky{padding-bottom:84px}
 
@@ -169,7 +169,7 @@ body.wt-has-sticky{padding-bottom:84px}
 .wt-thanks-state[hidden]{display:none}
 
 /* Motion */
-@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.wt-sticky{backdrop-filter:none}}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.wt-sticky{}}
 
 /* Tablet and up */
 @media (min-width:640px){

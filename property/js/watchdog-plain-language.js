@@ -1,4 +1,4 @@
-// content-architecture: dynamic — plain-English labels for governed Watchdog Intelligence signals.
+// content-architecture: dynamic, plain-English labels for governed Watchdog Intelligence signals.
 /* Watchdog Intelligence in plain English.
    Turns governed signal ids (watchdog.tax_to_assessment_rate, event.recency...)
    into a label a client understands, the value in everyday units, and one line

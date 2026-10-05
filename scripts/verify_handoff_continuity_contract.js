@@ -5,7 +5,7 @@ const root = path.resolve(__dirname, '..');
 const handoffPath = path.join(root, 'HANDOFF.md');
 
 function fail(message) {
-  console.error(`HANDOFF continuity contract: FAIL — ${message}`);
+  console.error(`HANDOFF continuity contract: FAIL: ${message}`);
   process.exit(1);
 }
 

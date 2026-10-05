@@ -1,4 +1,4 @@
-# ROBUST-v1 Evidence-Gate Calibration Addendum — 2026-08-23
+# ROBUST-v1 Evidence-Gate Calibration Addendum: 2026-08-23
 
 Issues: NJW-273 / NJW-270
 

@@ -32,7 +32,7 @@ for (const e of dict.entries) {
   assert.match(String(e.icon || ''), /^fa-[a-z0-9-]+$/, `${where}: Font Awesome icon name`);
   assert.ok(!e.summary || e.summary.length <= 160, `${where}: summary stays short`);
 }
-assert.ok(!/[–—]/.test(read('property/data/site-search.json')), 'no em or en dashes in customer copy');
+assert.ok(!/[–\u2014]/.test(read('property/data/site-search.json')), 'no em or en dashes in customer copy');
 assert.ok(!/ROBUST Score/i.test(read('property/data/site-search.json')), 'never "ROBUST Score"');
 assert.ok(!/Watchdog Intel\b/.test(read('property/data/site-search.json')), 'product name is "Watchdog Intelligence"');
 

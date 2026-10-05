@@ -6,7 +6,7 @@ html body[data-sidebar-page="fairness"]{
   --fair-bg:#f3f1ec;--fair-surface:#fbfaf7;--fair-line:#e3dfd6;--fair-ink:#0e2248;--fair-muted:#5d6877;
   --fair-navy:#0e2248;--fair-blue:#1456a0;--fair-blue-bright:#2f6df6;--fair-gold:#b8972a;
   --fair-sky:#e3edfb;--fair-sky-deep:#b9d0f2;--fair-teal:#dff1ec;--fair-teal-deep:#9fd3c5;--fair-sand:#f6efd9;--fair-sand-deep:#e4cf8e;
-  --fair-display:"Plus Jakarta Sans",Inter,system-ui,sans-serif;
+  --fair-display:"Libre Franklin",system-ui,sans-serif;
 }
 html body[data-sidebar-page="fairness"],
 html body[data-sidebar-page="fairness"] .db-workspace,
@@ -21,7 +21,7 @@ html body[data-sidebar-page="fairness"] #fi-main .fb-cards{display:grid;grid-tem
 html body[data-sidebar-page="fairness"] #fi-main .fb-cards:empty{display:none}
 html body[data-sidebar-page="fairness"] #fi-main .fb-card{position:relative;isolation:isolate;overflow:hidden;display:flex;flex-direction:column;align-items:flex-start;gap:4px;min-height:176px;margin:0;padding:22px;border:0;border-radius:24px;color:var(--fair-ink);font:inherit;text-align:left}
 html body[data-sidebar-page="fairness"] #fi-main button.fb-card{cursor:pointer}
-html body[data-sidebar-page="fairness"] #fi-main button.fb-card:hover{box-shadow:0 10px 26px rgba(14,34,72,.10)}
+html body[data-sidebar-page="fairness"] #fi-main button.fb-card:hover{box-shadow:0 2px 6px rgba(15,23,42,.08)}
 html body[data-sidebar-page="fairness"] #fi-main .fb-card:focus-visible{outline:3px solid var(--fair-blue-bright);outline-offset:3px}
 html body[data-sidebar-page="fairness"] #fi-main .fb-card>*{position:relative;z-index:1}
 html body[data-sidebar-page="fairness"] #fi-main .fb-card--navy{background:var(--fair-navy);color:#fff}

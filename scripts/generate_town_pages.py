@@ -108,7 +108,7 @@ def page_head(title: str, description: str, canonical: str, schema: dict, hero: 
   <meta name="twitter:card" content="summary_large_image">
   <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preconnect" href="https://images.unsplash.com"><link rel="preload" as="image" href="{hero}" fetchpriority="high">
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700;800&family=Source+Sans+3:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@600;700;800&family=Source+Sans+3:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/towns/town-pages.css?v=20260828a">
   <script type="application/ld+json">{json.dumps(schema, separators=(",", ":"))}</script>
 </head>'''
@@ -219,16 +219,16 @@ def town_page(
     faq_html = "".join(
         f'<details><summary>{esc(q)}</summary><p>{esc(a)}</p></details>' for q, a in faqs
     )
-    rate_stat = f"{current_rate:.3f}%" if current_rate is not None else "—"
+    rate_stat = f"{current_rate:.3f}%" if current_rate is not None else "-"
     rate_sub = f"{current_year} municipal rate" if current_year else "public rate pending"
-    consistency = f"{float(current_score):.1f}/100" if current_score is not None else "—"
+    consistency = f"{float(current_score):.1f}/100" if current_score is not None else "-"
     consistency_sub = "assessment consistency" if current_score is not None else "not in current release"
     budget_score = row.get("score")
-    budget_stat = f"{float(budget_score):.0f}/100" if budget_score is not None else "—"
+    budget_stat = f"{float(budget_score):.0f}/100" if budget_score is not None else "-"
     budget_sub = f"{row.get('band', 'municipal')} budget pressure"
     exempt_share = pilot_row.get("exempt_share")
-    exempt_stat = f"{float(exempt_share) * 100:.1f}%" if isinstance(exempt_share, (int, float)) else "—"
-    exempt_sub = "exempt assessed value share" if exempt_stat != "—" else "not in current release"
+    exempt_stat = f"{float(exempt_share) * 100:.1f}%" if isinstance(exempt_share, (int, float)) else "-"
+    exempt_sub = "exempt assessed value share" if exempt_stat != "-" else "not in current release"
     tax_base = (row.get("history") or [{}])[-1].get("tax_base")
     assessment_note = (
         f"The reported assessment consistency score is {float(current_score):.1f} out of 100. "

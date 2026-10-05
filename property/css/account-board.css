@@ -8,7 +8,7 @@ html body[data-sidebar-page="account"]{
   --ab-bg:#f3f1ec;--ab-surface:#fbfaf7;--ab-line:#e3dfd6;--ab-ink:#0e2248;--ab-muted:#5d6877;
   --ab-navy:#0e2248;--ab-blue:#1456a0;--ab-blue-bright:#2f6df6;--ab-gold:#b8972a;
   --ab-sky:#e3edfb;--ab-sky-deep:#b9d0f2;--ab-teal:#dff1ec;--ab-teal-deep:#9fd3c5;--ab-sand:#f6efd9;--ab-sand-deep:#e4cf8e;
-  --ab-display:"Plus Jakarta Sans",Inter,system-ui,sans-serif;
+  --ab-display:"Libre Franklin",system-ui,sans-serif;
 }
 html body[data-sidebar-page="account"],
 html body[data-sidebar-page="account"] .db-workspace,

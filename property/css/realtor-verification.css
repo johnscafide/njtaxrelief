@@ -13,7 +13,7 @@
 .acr-fields{display:grid;grid-template-columns:1fr 1fr;gap:12px}
 .acr-fields label>span{display:block;margin-bottom:6px;color:#53647a;font-size:10px;font-weight:850}
 .acr-fields label em{color:#94a0ad;font-style:normal;font-weight:700}
-.acr-fields input,.acr-fields textarea{width:100%;border:1px solid #d9e1e8;border-radius:7px;background:#fff;color:#10294b;font:700 12px/1.35 var(--font-ui,"Plus Jakarta Sans"),sans-serif}
+.acr-fields input,.acr-fields textarea{width:100%;border:1px solid #d9e1e8;border-radius:7px;background:#fff;color:#10294b;font:700 12px/1.35 var(--font-ui,"Libre Franklin"),sans-serif}
 .acr-fields input{height:40px;padding:0 10px}.acr-fields textarea{padding:10px;resize:vertical}
 .acr-fields .wide{grid-column:1/-1}
 .acr-submit{display:flex;align-items:center;gap:10px;margin-top:14px;padding-top:13px;border-top:1px solid #e5eaee}

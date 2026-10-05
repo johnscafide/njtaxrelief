@@ -25,14 +25,14 @@ async function open(){try{await Promise.resolve(window.njptrAccessReady);}catch(
 var BRIEF_PROMPT='Give me a 30-second professional brief.',BRIEF_STALE_MS=6*60*60*1000,briefNode=null,briefRefreshing=false;
 function agoLabel(iso){var t=Date.parse(iso||'');if(!Number.isFinite(t))return'';var m=Math.max(0,Math.round((Date.now()-t)/60000));if(m<1)return'just now';if(m<60)return m+' min ago';var h=Math.round(m/60);if(h<24)return h+' hr ago';var d=Math.round(h/24);return d+' day'+(d===1?'':'s')+' ago';}
 function statusLine(node,text,showRefresh){if(!node)return;var line=q('[data-wi-brief-status]',node);if(!line){line=document.createElement('div');line.className='dwa-brief-status';line.setAttribute('data-wi-brief-status','');var lead=q('.dwa-brief-lead',node);if(lead)lead.insertAdjacentElement('beforebegin',line);else node.insertBefore(line,node.firstChild);}
-  // content-architecture: dynamic — freshness text ("Updated 40 min ago", "Updating…") reflects the saved brief's live state.
+  // content-architecture: dynamic, freshness text ("Updated 40 min ago", "Updating…") reflects the saved brief's live state.
   line.textContent=text;if(showRefresh){var b=document.createElement('button');b.type='button';b.textContent='Refresh';b.setAttribute('data-wi-brief-refresh','');b.addEventListener('click',function(){refreshBrief();});line.appendChild(document.createTextNode(' \u00b7 '));line.appendChild(b);}}
 async function savedBrief(){try{var sb=window.NJPTRAccess&&typeof window.NJPTRAccess.client==='function'?window.NJPTRAccess.client():null;if(!sb)return null;var r=await sb.from('intelligence_saved_briefs').select('payload,property_count,created_at').maybeSingle();return r.error?null:r.data;}catch(_e){return null;}}
 function refreshBrief(){
   if(briefRefreshing||!window.WatchdogContextualAnalyst)return;briefRefreshing=true;
   var old=briefNode;
   if(old)statusLine(old,'Updating your brief\u2026',false);
-  // content-architecture: dynamic — first-run state only: shown while an account has no saved brief yet.
+  // content-architecture: dynamic, first-run state only: shown while an account has no saved brief yet.
   else{var chat=q('#dwa-chat');if(chat){chat.insertAdjacentHTML('beforeend','<div class="dwa-msg assistant dwa-brief-loading" data-wi-brief-loading><p>Writing your first brief. This one takes a little while; after that it opens instantly.</p></div>');}}
   var done=function(){briefRefreshing=false;var l=q('[data-wi-brief-loading]');if(l)l.remove();var rows=document.querySelectorAll('#dwa-chat .dwa-msg.assistant');var latest=rows.length?rows[rows.length-1]:null;if(latest&&q('.dwa-brief-lead',latest)){briefNode=latest;statusLine(latest,'Updated just now',true);}else if(old&&old.parentNode){statusLine(old,'Could not update right now',true);}setTimeout(syncRail,120);};
   Promise.resolve(window.WatchdogContextualAnalyst.ask(BRIEF_PROMPT,{suppressUser:true,saveBrief:true,replace:old||null})).then(done,done);

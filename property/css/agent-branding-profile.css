@@ -8,7 +8,7 @@ body[data-account-profile-mode="professional"] .acb-editor{padding:24px!importan
 .acb-panel{overflow:hidden;border:1px solid #dfe6ec;border-radius:12px;background:#f8fafb}
 .acb-brand-preview{position:relative;display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:14px;align-items:center;min-height:124px;padding:20px;background:linear-gradient(125deg,var(--broker-primary),color-mix(in srgb,var(--broker-primary) 78%,var(--broker-accent)));color:#fff}
 .acb-brand-preview::after{content:"";position:absolute;inset:auto 0 0;height:5px;background:linear-gradient(90deg,var(--broker-secondary),var(--broker-secondary) 42%,var(--broker-accent) 42%)}
-.acb-brand-mark{width:72px;height:72px;display:grid;place-items:center;padding:9px;border-radius:12px;background:rgba(255,255,255,.94);box-shadow:0 9px 28px rgba(5,24,40,.18)}
+.acb-brand-mark{width:72px;height:72px;display:grid;place-items:center;padding:9px;border-radius:12px;background:rgba(255,255,255,.94);box-shadow:0 2px 6px rgba(15,23,42,.08)}
 .acb-brand-mark img{max-width:100%;max-height:100%;object-fit:contain}.acb-brand-mark span{color:var(--broker-primary);font-size:30px;font-weight:900}
 .acb-brand-preview small{display:block;color:rgba(255,255,255,.72);font-size:9px;font-weight:900;letter-spacing:.13em}
 .acb-brand-preview h3{margin:5px 0 3px;color:#fff;font-size:23px;line-height:1.1;letter-spacing:-.03em}
@@ -16,11 +16,11 @@ body[data-account-profile-mode="professional"] .acb-editor{padding:24px!importan
 .acb-swatches{display:flex;gap:5px;align-self:flex-start}.acb-swatches i{width:17px;height:17px;border:2px solid rgba(255,255,255,.7);border-radius:50%;box-shadow:0 2px 5px rgba(0,0,0,.18)}
 .acb-discovery{padding:16px 16px 10px;border-bottom:1px solid #e4e9ee;background:#fff}
 .acb-discovery>label>span,.acb-fields label>span{display:block;margin-bottom:6px;color:#53647a;font-size:10px;font-weight:850}
-.acb-discovery select,.acb-discovery input,.acb-fields input,.acb-fields textarea{width:100%;border:1px solid #d9e1e8;border-radius:7px;background:#fff;color:#10294b;font:700 12px/1.2 var(--font-ui,"Plus Jakarta Sans"),sans-serif}
+.acb-discovery select,.acb-discovery input,.acb-fields input,.acb-fields textarea{width:100%;border:1px solid #d9e1e8;border-radius:7px;background:#fff;color:#10294b;font:700 12px/1.2 var(--font-ui,"Libre Franklin"),sans-serif}
 .acb-discovery select,.acb-discovery input,.acb-fields input{height:40px;padding:0 10px}
 .acb-discovery select{margin-bottom:10px}
 .acb-website>div{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:7px}
-.acb-website button,.acb-inline button,.acb-license-search button{min-height:40px;border:1px solid #0c8d87;border-radius:7px;background:#0c8d87;color:#fff;padding:0 12px;font:800 10px/1 var(--font-ui,"Plus Jakarta Sans"),sans-serif;cursor:pointer}
+.acb-website button,.acb-inline button,.acb-license-search button{min-height:40px;border:1px solid #0c8d87;border-radius:7px;background:#0c8d87;color:#fff;padding:0 12px;font:800 10px/1 var(--font-ui,"Libre Franklin"),sans-serif;cursor:pointer}
 .acb-discovery>small{display:block;margin-top:8px;color:#7e8c9d;font-size:9px;line-height:1.4}
 .acb-fields{display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:16px}
 .acb-inline{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:7px}

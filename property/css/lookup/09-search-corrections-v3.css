@@ -7,9 +7,9 @@ body.hood-on .hd-right{overscroll-behavior-y:auto!important;scroll-padding-botto
 /* Property-list mode has no hero behind the public nav, so use the solid treatment. */
 body.hood-on .wd-nav{
   background:rgba(255,255,255,.98)!important;
-  backdrop-filter:blur(10px);
-  -webkit-backdrop-filter:blur(10px);
-  box-shadow:0 1px 0 rgba(14,34,72,.10),0 4px 18px rgba(14,34,72,.07)!important;
+  
+  
+  box-shadow:0 1px 0 rgba(14,34,72,.10),0 2px 6px rgba(15,23,42,.08)!important;
 }
 body.hood-on .wd-nav a,
 body.hood-on .wd-nav button,
@@ -34,7 +34,7 @@ body.hood-on .wd-nav .wd-logo i{color:var(--gold,#b8972a)!important;}
 
 /* Search fields keep the clean pill surface while typing, without a colored focus outline. */
 .pl-input:focus,.pl-input:focus-visible{outline:none!important;border-color:transparent!important;box-shadow:none!important;}
-.pl-input-wrap:focus-within{box-shadow:0 10px 34px rgba(14,34,72,.24),0 2px 6px rgba(14,34,72,.10)!important;}
+.pl-input-wrap:focus-within{box-shadow:0 2px 6px rgba(15,23,42,.08),0 2px 6px rgba(14,34,72,.10)!important;}
 
 /* Range controls keep direct entry and add a dual slider. */
 .njw-dual-slider{margin:4px 0 20px;}

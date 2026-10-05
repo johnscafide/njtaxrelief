@@ -7,7 +7,7 @@ const LEGACY_PROPERTY_ORIGIN = 'https://njpropertytaxrelief.com/property/';
 const WATCHDOG_PROPERTY_ORIGIN = 'https://www.watchdogindex.com/property/';
 const SOCIAL_IMAGE_URL = 'https://www.watchdogindex.com/watchdog-social-share.jpg';
 const SOCIAL_TITLE = 'Watchdog | New Jersey Property Info';
-const SOCIAL_DESCRIPTION = 'Search New Jersey property data and numbers in one place. See Watchdog Score, taxes, assessments, and property info.';
+const SOCIAL_DESCRIPTION = 'Search New Jersey property data and numbers. See Watchdog Score, taxes, assessments, and property info.';
 const SOCIAL_IMAGE_META = `  <meta property="og:image" content="${SOCIAL_IMAGE_URL}">\n  <meta property="og:image:secure_url" content="${SOCIAL_IMAGE_URL}">\n  <meta property="og:image:type" content="image/jpeg">\n  <meta property="og:image:width" content="600">\n  <meta property="og:image:height" content="315">\n  <meta property="og:image:alt" content="Watchdog property info for New Jersey">\n  <meta name="twitter:image" content="${SOCIAL_IMAGE_URL}">\n  <meta name="twitter:image:alt" content="Watchdog property info for New Jersey">\n`;
 const GA_TAG = '  <script async src="https://www.googletagmanager.com/gtag/js?id=G-ENP9182L0J"></script>\n';
 const GA_CONFIG = '  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag(\'js\',new Date());gtag(\'config\',\'G-ENP9182L0J\');</script>\n';

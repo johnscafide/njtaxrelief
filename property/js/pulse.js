@@ -83,7 +83,7 @@
   function scoreCard() {
     var pin = trendPin(), p = propFor(pin), pts = scoreHistory.slice(-17), bars, s = '', head;
     if (!pts.length) {
-      head = stat('—', '', 'Latest', true) + stat('—', '', 'Change') + stat('0', '', 'Observations');
+      head = stat('-', '', 'Latest', true) + stat('-', '', 'Change') + stat('0', '', 'Observations');
       bars = '<div class="wdd-bars" aria-hidden="true">' + [40, 52, 46, 60, 55, 62, 58].map(function (h) { return '<span class="wdd-bar is-empty"><i style="height:' + h + '%"></i></span>'; }).join('') + '</div>';
       s = 'No trusted score history has been captured for this property yet.';
     } else {
@@ -169,7 +169,7 @@
     if (e.summary) rows.push(['What happened', esc(e.summary)]);
     if (e.old_value != null || e.new_value != null) {
       var arrow = e.delta_numeric > 0 ? '↑' : e.delta_numeric < 0 ? '↓' : '→';
-      rows.push(['Before → after', esc(e.old_value || '—') + ' <span class="pulse-arrow">' + arrow + '</span> ' + esc(e.new_value || '—')]);
+      rows.push(['Before → after', esc(e.old_value || '-') + ' <span class="pulse-arrow">' + arrow + '</span> ' + esc(e.new_value || '-')]);
     }
     rows.push(['Recorded', esc(date(e.occurred_at))]);
     if (e.marker_id) rows.push(['Watchdog marker', '<a href="' + esc(route('/marker') + '?id=' + encodeURIComponent(e.marker_id)) + '">' + esc(e.marker_id) + '</a>']);

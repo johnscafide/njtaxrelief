@@ -1,6 +1,6 @@
 /* Watchdog public tool pages (/mortgage-calculator, /home-value, /search-homes,
    /home-improvement-abatement). Uses the shared public header (public-nav.js). */
-.tp-page{--tp-navy:#0e2849;--tp-navy-2:#12375b;--tp-teal:#078486;--tp-ink:#14202b;--tp-muted:#5c6b78;--tp-line:#dde4ea;--tp-bg:#f4f6f9;background:var(--tp-bg);color:var(--tp-ink);font-family:"Plus Jakarta Sans",system-ui,-apple-system,"Segoe UI",sans-serif}
+.tp-page{--tp-navy:#0e2849;--tp-navy-2:#12375b;--tp-teal:#078486;--tp-ink:#14202b;--tp-muted:#5c6b78;--tp-line:#dde4ea;--tp-bg:#f4f6f9;background:var(--tp-bg);color:var(--tp-ink);font-family:"Libre Franklin",system-ui,-apple-system,"Segoe UI",sans-serif}
 .tp-shell{width:min(1180px,calc(100% - 48px));margin:0 auto}
 .tp-hero{position:relative;overflow:hidden;background:linear-gradient(135deg,var(--tp-navy) 0%,var(--tp-navy-2) 58%,#086f73 135%);color:#fff;padding:64px 0 88px}
 .tp-hero:before{content:"";position:absolute;width:520px;height:520px;border:1px solid rgba(255,255,255,.12);border-radius:50%;right:-160px;top:-260px;box-shadow:0 0 0 90px rgba(255,255,255,.025),0 0 0 180px rgba(255,255,255,.02)}
@@ -10,13 +10,13 @@
 .tp-hero p{margin:0;max-width:720px;color:#d8e5ed;font-size:18px;line-height:1.55}
 .tp-main{margin-top:-48px;padding-bottom:56px;position:relative}
 .tp-grid{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:20px;align-items:start}
-.tp-card{background:#fff;border:1px solid var(--tp-line);border-radius:20px;box-shadow:0 14px 40px rgba(14,40,73,.08);padding:clamp(20px,3vw,32px)}
+.tp-card{background:#fff;border:1px solid var(--tp-line);border-radius:20px;box-shadow:0 2px 6px rgba(15,23,42,.08);padding:clamp(20px,3vw,32px)}
 .tp-card h2{margin:0 0 8px;font-size:22px;letter-spacing:-.01em}
 .tp-card>p{margin:0 0 16px;color:var(--tp-muted);line-height:1.55}
 .tp-fields{display:grid;grid-template-columns:1fr 1fr;gap:14px}
 .tp-fields .wide{grid-column:1/-1}
 .tp-field{display:grid;gap:6px;font-size:13px;font-weight:700;color:var(--tp-muted);letter-spacing:.02em}
-.tp-field input,.tp-field select{width:100%;min-height:48px;padding:10px 12px;border:1px solid var(--tp-line);border-radius:12px;background:#f8fafc;color:var(--tp-ink);font:600 16px "Plus Jakarta Sans",system-ui,sans-serif}
+.tp-field input,.tp-field select{width:100%;min-height:48px;padding:10px 12px;border:1px solid var(--tp-line);border-radius:12px;background:#f8fafc;color:var(--tp-ink);font:600 16px "Libre Franklin",system-ui,sans-serif}
 .tp-field input:focus,.tp-field select:focus{outline:3px solid #cde9e6;border-color:var(--tp-teal);background:#fff}
 .tp-field small{font-weight:500;color:var(--tp-muted);letter-spacing:0}
 .tp-result{background:var(--tp-navy);color:#fff;border-color:var(--tp-navy)}
@@ -31,7 +31,7 @@
 .tp-legend span:before{content:"";display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:6px;background:var(--c)}
 .tp-note{margin:16px 0 0;font-size:13px;color:var(--tp-muted);line-height:1.5}
 .tp-result .tp-note{color:#a9bdd1}
-.tp-btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:48px;padding:0 20px;border-radius:12px;border:1px solid var(--tp-navy);background:var(--tp-navy);color:#fff;font:800 15px "Plus Jakarta Sans",system-ui,sans-serif;text-decoration:none;cursor:pointer}
+.tp-btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:48px;padding:0 20px;border-radius:12px;border:1px solid var(--tp-navy);background:var(--tp-navy);color:#fff;font:800 15px "Libre Franklin",system-ui,sans-serif;text-decoration:none;cursor:pointer}
 .tp-btn.light{background:#fff;color:var(--tp-navy);border-color:#fff}
 .tp-btn.ghost{background:#fff;color:var(--tp-navy);border-color:var(--tp-line)}
 .tp-search{display:flex;gap:10px;flex-wrap:wrap}

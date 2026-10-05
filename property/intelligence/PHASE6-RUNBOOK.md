@@ -91,7 +91,7 @@ Production-only worker tokens, OpenAI/API secrets and model-selection configurat
 
 If the optional Analyst provider is not configured at launch, launch may proceed only if the product is intentionally accepted in deterministic-only Analyst mode and that state is visible/understood. Provider absence must not affect deterministic facts/models/scenarios.
 
-## Read-only production preflight baseline — August 17, 2026
+## Read-only production preflight baseline: August 17, 2026
 
 Production project: `uvkvaxljhhngydvlrzom`.
 

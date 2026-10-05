@@ -195,7 +195,7 @@ const TC_STYLE = `
 .tc-agent-links{grid-column:1/-1;display:flex;flex-wrap:wrap;gap:8px;margin-top:6px}
 .tc-agent-note{grid-column:1/-1;margin:6px 0 0;font-size:12px;color:var(--b-muted)}
 .tc-total{display:flex;align-items:baseline;gap:6px;margin:4px 0 14px}
-.tc-total b{font:700 52px/1 "Plus Jakarta Sans",system-ui,sans-serif;letter-spacing:-.04em;padding-bottom:6px;border-bottom:2px solid var(--b-gold)}
+.tc-total b{font:700 52px/1 "Libre Franklin",system-ui,sans-serif;letter-spacing:-.04em;padding-bottom:6px;border-bottom:2px solid var(--b-gold)}
 .tc-total span{font-size:15px;color:rgba(255,255,255,.74)}
 .tc-lines{list-style:none;margin:0;padding:0;display:grid;gap:8px}
 .tc-lines li{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 12px;align-items:center;font-size:14px}
@@ -215,14 +215,14 @@ const TC_STYLE = `
 .tc-list p{margin:0!important;font-size:14px}
 .tc-form{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
 .tc-form label{display:grid;gap:6px;font-size:13px;font-weight:600;color:var(--b-ink-2)}
-.tc-form input,.tc-form select{width:100%;box-sizing:border-box;min-height:46px;padding:10px 12px;border:1px solid var(--b-line);border-radius:12px;background:var(--b-surface);font:500 16px "Plus Jakarta Sans",system-ui,sans-serif;color:var(--b-ink)}
+.tc-form input,.tc-form select{width:100%;box-sizing:border-box;min-height:46px;padding:10px 12px;border:1px solid var(--b-line);border-radius:12px;background:var(--b-surface);font:500 16px "Libre Franklin",system-ui,sans-serif;color:var(--b-ink)}
 .tc-form input:focus,.tc-form select:focus{border-color:var(--b-ink);background:#fff}
 .tc-form .wdp-wide{grid-column:1/-1}
 .tc-hint{font-size:12px;font-weight:500;color:var(--b-muted)}
 .tc-pick{position:relative}
 .tc-matches{list-style:none;margin:6px 0 0;padding:0;border:1px solid var(--b-line);border-radius:14px;background:#fff;overflow:hidden}
 .tc-matches:empty{display:none}
-.tc-matches button{display:block;width:100%;text-align:left;min-height:48px;padding:10px 14px;border:0;border-bottom:1px solid var(--b-line);background:#fff;font:500 15px "Plus Jakarta Sans",system-ui,sans-serif;color:var(--b-ink);cursor:pointer}
+.tc-matches button{display:block;width:100%;text-align:left;min-height:48px;padding:10px 14px;border:0;border-bottom:1px solid var(--b-line);background:#fff;font:500 15px "Libre Franklin",system-ui,sans-serif;color:var(--b-ink);cursor:pointer}
 .tc-matches button small{display:block;font-size:13px;color:var(--b-muted)}
 .tc-matches button:hover,.tc-matches button:focus{background:var(--b-surface)}
 .tc-chosen{font-weight:600;margin:0}
@@ -263,7 +263,7 @@ function renderCard(row, inp, agent) {
   <div class="wdp-cards">
     <section class="wdp-card wdp-card--score" aria-labelledby="tc-month-h">
       <div class="wdp-card-head"><h2 id="tc-month-h">Monthly cost</h2></div>
-      <div class="tc-total"><b id="tc-total">${inp.price ? money(mc.total) : '—'}</b><span>a month</span></div>
+      <div class="tc-total"><b id="tc-total">${inp.price ? money(mc.total) : '-'}</b><span>a month</span></div>
       <ul class="tc-lines" id="tc-lines">
         ${line('pi', 'Mortgage', mc.pi, `${inp.term} yrs at ${inp.rate}%`)}
         ${line('tax', 'Property tax', mc.tax)}
@@ -335,7 +335,7 @@ function clientScript(share) {
   function run(){
     var i={price:n('price',0),down:Math.min(100,n('down',20)),rate:Math.min(20,n('rate',0)),term:Number(form.elements.term.value)||30,ins:n('ins',0),hoa:n('hoa',0),tax:d.tax};
     var c=monthlyCost(i);
-    document.getElementById('tc-total').textContent=i.price?m(c.total):'—';
+    document.getElementById('tc-total').textContent=i.price?m(c.total):'-';
     ['pi','tax','ins','hoa'].forEach(function(k){var li=document.querySelector('[data-tc-line="'+k+'"]');if(!li)return;li.querySelector('b').textContent=m(c[k]);li.querySelector('s').style.width=(c.total>0?Math.round(c[k]/c.total*100):0)+'%'});
     var pi=document.querySelector('[data-tc-line="pi"] .tc-muted');if(pi)pi.textContent=i.term+' yrs at '+i.rate+'%';
     document.getElementById('tc-cash').textContent=i.price?(m(c.cash)+' down, '+m(c.loan)+' loan.'+(i.down<20?' With less than 20% down, lenders usually add mortgage insurance, not shown here.':'')):'';

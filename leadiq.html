@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>LeadIQ: Real Estate Contact Intelligence</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
 
 /* ── TOKENS ── */
@@ -26,7 +26,7 @@
   --shadow-sm:0 1px 2px rgba(0,0,0,0.05);
   --shadow:0 1px 3px rgba(0,0,0,0.08),0 1px 2px rgba(0,0,0,0.04);
   --shadow-md:0 4px 12px rgba(0,0,0,0.08),0 2px 4px rgba(0,0,0,0.04);
-  --shadow-lg:0 8px 24px rgba(0,0,0,0.1),0 4px 8px rgba(0,0,0,0.04);
+  --shadow-lg:0 2px 6px rgba(15,23,42,.08),0 4px 8px rgba(0,0,0,0.04);
 }
 [data-theme="dark"]{
   --bg:#0d0f14;--surface:#161a22;--surface2:#1c212c;--surface3:#232a38;
@@ -40,7 +40,7 @@
   --shadow-sm:0 1px 2px rgba(0,0,0,0.3);
   --shadow:0 1px 3px rgba(0,0,0,0.4),0 1px 2px rgba(0,0,0,0.2);
   --shadow-md:0 4px 12px rgba(0,0,0,0.4);
-  --shadow-lg:0 8px 24px rgba(0,0,0,0.5);
+  --shadow-lg:0 2px 6px rgba(15,23,42,.08);
 }
 
 html{font-size:15px;-webkit-font-smoothing:antialiased;}
@@ -557,7 +557,7 @@ body{font-family:var(--sans);background:var(--bg);color:var(--text);min-height:1
     <div style="margin-bottom:16px;">
       <div style="font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:0.07em;color:var(--text3);margin-bottom:6px;">Analyze</div>
       <h1 style="font-size:24px;font-weight:600;letter-spacing:-0.025em;margin-bottom:4px;">Contact <span style="color:var(--accent);">Intelligence</span></h1>
-      <p style="font-size:13px;color:var(--text2);">Upload once and run all analysis tools from one place.</p>
+      <p style="font-size:13px;color:var(--text2);">Upload once and run every analysis tool on it.</p>
     </div>
     <!-- SHARED UPLOAD ZONE (used by Analyze and Reach Out sections) -->
 <div id="shared-upload-zone" class="card" style="margin-bottom:16px;">
@@ -1622,7 +1622,7 @@ function saveToHistory(fname,count,csv){
 }
 function clearHistory(){localStorage.removeItem('bt_history');updateHistoryBadge();}
 function updateHistoryBadge(){
-  // No badge element in new nav — no-op kept for compatibility
+  // No badge element in new nav, no-op kept for compatibility
 }
 function renderHistory(){
   updateHistoryBadge();

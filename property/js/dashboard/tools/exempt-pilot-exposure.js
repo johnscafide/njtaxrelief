@@ -28,7 +28,7 @@
   }
 
   function pct(value, digits) {
-    return value == null ? '—' : (value * 100).toFixed(digits == null ? 1 : digits) + '%';
+    return value == null ? '-' : (value * 100).toFixed(digits == null ? 1 : digits) + '%';
   }
 
   function exposureBand(value) {

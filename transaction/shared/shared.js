@@ -9,8 +9,8 @@ function title(v){return clean(v).replace(/_/g,' ').replace(/\b\w/g,function(c){
    that predates the CO type keeps it readable (and the migration can backfill it). */
 var CO_LABEL='Certificate of Occupancy (CO / CCO)';
 function docLabel(d){return clean(d.document_label)||(d.document_type==='certificate_of_occupancy'?CO_LABEL:title(d.document_type))}
-function fmtDate(v){if(!v)return'—';var d=new Date(String(v).slice(0,10)+'T12:00:00');return Number.isFinite(d.getTime())?d.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'}):'—'}
-function fmtDateTime(v){if(!v)return'—';var d=new Date(v);return Number.isFinite(d.getTime())?d.toLocaleString('en-US',{month:'short',day:'numeric',hour:'numeric',minute:'2-digit'}):'—'}
+function fmtDate(v){if(!v)return'-';var d=new Date(String(v).slice(0,10)+'T12:00:00');return Number.isFinite(d.getTime())?d.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'}):'-'}
+function fmtDateTime(v){if(!v)return'-';var d=new Date(v);return Number.isFinite(d.getTime())?d.toLocaleString('en-US',{month:'short',day:'numeric',hour:'numeric',minute:'2-digit'}):'-'}
 function fmtSize(n){n=Number(n)||0;if(n<1024)return n+' B';if(n<1048576)return(n/1024).toFixed(1)+' KB';return(n/1048576).toFixed(1)+' MB'}
 function roleLabel(v){return ({title:'Title / settlement',lender:'Lender',tc:'Transaction coordinator',attorney:'Attorney',other:'Professional guest'}[v]||title(v))}
 function toast(m){var n=$('#sg-toast');n.textContent=m;n.hidden=false;clearTimeout(n._t);n._t=setTimeout(function(){n.hidden=true},2600)}

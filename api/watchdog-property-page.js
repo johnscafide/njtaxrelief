@@ -475,17 +475,17 @@ function jsonLd(row, v) {
 
 // Dashboard board tokens (property/css/dashboard/watchdog-dashboard-board.css).
 const STYLE = `
-.wdp{--b-bg:#f3f1ec;--b-surface:#fbfaf7;--b-white:#fff;--b-ink:#0e2248;--b-ink-2:#142033;--b-muted:#5d6877;--b-line:#e3dfd6;--b-navy:#0e2248;--b-blue:#1456a0;--b-gold:#b8972a;--b-sky:#e3edfb;--b-teal:#dff1ec;--b-sand:#f6efd9;--b-radius:24px;background:var(--b-bg)!important;color:var(--b-ink);font-family:"Plus Jakarta Sans",Inter,system-ui,-apple-system,"Segoe UI",sans-serif}
+.wdp{--b-bg:#f3f1ec;--b-surface:#fbfaf7;--b-white:#fff;--b-ink:#0e2248;--b-ink-2:#142033;--b-muted:#5d6877;--b-line:#e3dfd6;--b-navy:#0e2248;--b-blue:#1456a0;--b-gold:#b8972a;--b-sky:#e3edfb;--b-teal:#dff1ec;--b-sand:#f6efd9;--b-radius:24px;background:var(--b-bg)!important;color:var(--b-ink);font-family:"Libre Franklin",system-ui,-apple-system,"Segoe UI",sans-serif}
 .wdp .wd-nav.solid,.wdp.nav-solid .wd-nav{background:rgba(251,250,247,.94)}
 .wdp a:focus-visible,.wdp button:focus-visible,.wdp summary:focus-visible,.wdp input:focus-visible{outline:3px solid var(--b-gold);outline-offset:2px}
 .wdp-app{width:100%;max-width:1240px;margin:0 auto;padding:96px 30px 56px;box-sizing:border-box}
 .wdp-crumbs{font-size:13px;color:var(--b-muted);margin:0 0 10px}
 .wdp-crumbs a{color:var(--b-muted)}
 .wdp-head{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:16px 24px;margin-bottom:22px}
-.wdp-head h1{margin:0;font:600 clamp(28px,3.3vw,42px)/1.08 "Plus Jakarta Sans",system-ui,sans-serif;letter-spacing:-.035em;color:var(--b-ink)}
+.wdp-head h1{margin:0;font:600 clamp(28px,3.3vw,42px)/1.08 "Libre Franklin",system-ui,sans-serif;letter-spacing:-.035em;color:var(--b-ink)}
 .wdp-head p{margin:8px 0 0;font-size:15px;color:var(--b-muted)}
 .wdp-pills{display:flex;flex-wrap:wrap;gap:8px}
-.wdp-pill{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 16px;border-radius:999px;border:1px solid var(--b-line);background:var(--b-white);color:var(--b-ink)!important;font:600 14px "Plus Jakarta Sans",system-ui,sans-serif;text-decoration:none!important;cursor:pointer;white-space:nowrap}
+.wdp-pill{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 16px;border-radius:999px;border:1px solid var(--b-line);background:var(--b-white);color:var(--b-ink)!important;font:600 14px "Libre Franklin",system-ui,sans-serif;text-decoration:none!important;cursor:pointer;white-space:nowrap}
 .wdp-pill:hover{border-color:var(--b-ink)}
 .wdp-pill.is-dark{background:var(--b-navy);border-color:var(--b-navy);color:#fff!important}
 .wdp-pill[hidden]{display:none}
@@ -499,18 +499,18 @@ const STYLE = `
 .wdp-card--sales{grid-column:span 6;background:var(--b-sand)}
 .wdp-card--home{grid-column:span 6;background:var(--b-teal)}
 .wdp-card-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:14px}
-.wdp-card-head h2{margin:0;font:600 19px/1.2 "Plus Jakarta Sans",system-ui,sans-serif;letter-spacing:-.01em}
+.wdp-card-head h2{margin:0;font:600 19px/1.2 "Libre Franklin",system-ui,sans-serif;letter-spacing:-.01em}
 .wdp-card-link{display:inline-flex;align-items:center;min-height:44px;padding:0 12px;border-radius:999px;background:rgba(255,255,255,.55);color:inherit!important;font-size:13px;font-weight:600;text-decoration:none!important;white-space:nowrap}
 .wdp-card--score .wdp-card-link{background:rgba(255,255,255,.14)}
 .wdp-card-note{margin:12px 0 0;font-size:13px;line-height:1.5;color:rgba(22,20,15,.72)}
 .wdp-card--score .wdp-card-note{color:rgba(255,255,255,.74)}
 .wdp-stats{display:flex;flex-wrap:wrap;gap:12px 28px;margin-top:4px}
 .wdp-stat{display:grid;gap:4px;min-width:0}
-.wdp-stat b{font:700 20px/1.15 "Plus Jakarta Sans",system-ui,sans-serif;letter-spacing:-.02em;overflow-wrap:anywhere}
+.wdp-stat b{font:700 20px/1.15 "Libre Franklin",system-ui,sans-serif;letter-spacing:-.02em;overflow-wrap:anywhere}
 .wdp-stat span{font-size:12px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:rgba(22,20,15,.66)}
 .wdp-stat.is-lead b{padding-bottom:6px;border-bottom:2px solid var(--b-ink);justify-self:start}
 .wdp-score-lead{display:flex;align-items:baseline;gap:4px}
-.wdp-score-lead b{font:700 56px/1 "Plus Jakarta Sans",system-ui,sans-serif;letter-spacing:-.04em;padding-bottom:6px;border-bottom:2px solid var(--b-gold)}
+.wdp-score-lead b{font:700 56px/1 "Libre Franklin",system-ui,sans-serif;letter-spacing:-.04em;padding-bottom:6px;border-bottom:2px solid var(--b-gold)}
 .wdp-score-lead span{font-size:16px;color:rgba(255,255,255,.74)}
 .wdp-score-verdict{margin:12px 0 0;font-size:16px;font-weight:600}
 .wdp-dims{list-style:none;margin:14px 0 0;padding:0;display:grid;gap:2px}
@@ -530,7 +530,7 @@ const STYLE = `
 .wdp-grid{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:16px;margin-top:16px;align-items:start}
 .wdp-col{display:grid;gap:16px;min-width:0}
 .wdp-panel{background:var(--b-white);border:1px solid var(--b-line);border-radius:var(--b-radius);padding:20px 22px;min-width:0}
-.wdp-panel h2{margin:0 0 12px;font:600 19px/1.2 "Plus Jakarta Sans",system-ui,sans-serif;letter-spacing:-.01em;color:var(--b-ink)}
+.wdp-panel h2{margin:0 0 12px;font:600 19px/1.2 "Libre Franklin",system-ui,sans-serif;letter-spacing:-.01em;color:var(--b-ink)}
 .wdp-panel p{margin:0 0 10px;line-height:1.55;color:var(--b-ink-2)}
 .wdp-fine{font-size:13px!important;color:var(--b-muted)!important;margin:12px 0 0!important}
 .wdp-table-wrap{overflow-x:auto}
@@ -556,7 +556,7 @@ const STYLE = `
 .wdp-report{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:20px;margin-top:16px}
 .wdp-form{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
 .wdp-form label{display:grid;gap:6px;font-size:13px;font-weight:600;color:var(--b-ink-2)}
-.wdp-form input:not([type=checkbox]){width:100%;box-sizing:border-box;min-height:46px;padding:10px 12px;border:1px solid var(--b-line);border-radius:12px;background:var(--b-surface);font:500 16px "Plus Jakarta Sans",system-ui,sans-serif;color:var(--b-ink)}
+.wdp-form input:not([type=checkbox]){width:100%;box-sizing:border-box;min-height:46px;padding:10px 12px;border:1px solid var(--b-line);border-radius:12px;background:var(--b-surface);font:500 16px "Libre Franklin",system-ui,sans-serif;color:var(--b-ink)}
 .wdp-form input:focus{border-color:var(--b-ink);background:#fff}
 .wdp-form input[aria-invalid=true]{border-color:#c0342b}
 .wdp-wide{grid-column:1/-1}
@@ -568,7 +568,7 @@ const STYLE = `
 .wdp-form-msg.is-ok{color:#1c7a4a}
 .wdp-alert-form{display:flex;flex-wrap:wrap;gap:10px;margin:4px 0 8px}
 .wdp-alert-form label{flex:1 1 220px;display:block}
-.wdp-alert-form input{width:100%;box-sizing:border-box;min-height:46px;padding:10px 12px;border:1px solid var(--b-line);border-radius:12px;background:var(--b-surface);font:500 16px "Plus Jakarta Sans",system-ui,sans-serif;color:var(--b-ink)}
+.wdp-alert-form input{width:100%;box-sizing:border-box;min-height:46px;padding:10px 12px;border:1px solid var(--b-line);border-radius:12px;background:var(--b-surface);font:500 16px "Libre Franklin",system-ui,sans-serif;color:var(--b-ink)}
 .wdp-alert-form input:focus{border-color:var(--b-ink);background:#fff}
 .wdp-alert-form input[aria-invalid=true]{border-color:#c0342b}
 .wdp-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
@@ -675,7 +675,7 @@ function chrome() {
 
 const HEAD_ASSETS = `<link rel="icon" href="/favicon-96x96.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 <link rel="stylesheet" href="/styles.css">
 <link rel="stylesheet" href="/property/css/shared.css">

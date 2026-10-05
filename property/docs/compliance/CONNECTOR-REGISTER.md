@@ -128,15 +128,15 @@ Copy this section for each approved connector or maintain the same fields in a f
 
 ## Risk-tier guidance
 
-### Tier 1 — High materiality
+### Tier 1: High materiality
 
 Payments, authentication, sensitive financial/profile data, CRM/contact data, voice/SMS/email communications, AI providers receiving non-public information, privileged infrastructure or any provider capable of changing account entitlements or production data.
 
-### Tier 2 — Moderate materiality
+### Tier 2: Moderate materiality
 
 Analytics, marketing platforms, address services and non-sensitive user-context integrations where privacy, tracking or account metadata may be transmitted.
 
-### Tier 3 — Lower materiality
+### Tier 3: Lower materiality
 
 Public-data feeds that do not receive account/user data. These still require provenance, licensing/terms, integrity, availability and change-management review.
 

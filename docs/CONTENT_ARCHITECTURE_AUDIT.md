@@ -7,10 +7,10 @@ This is a living audit, not a claim that every customer-facing JavaScript string
 
 ## Classification
 
-- **STATIC** — editable human-written page copy; move to route HTML or an HTML partial.
-- **SHARED** — canonical shared chrome/component copy; may remain component-driven when duplication would cause drift.
-- **DYNAMIC** — wording or markup genuinely produced from user state, auth/entitlement state, live catalog state or runtime interaction.
-- **DATA/CMS** — governed content/data that belongs in Supabase or another canonical data source.
+- **STATIC**, editable human-written page copy; move to route HTML or an HTML partial.
+- **SHARED**, canonical shared chrome/component copy; may remain component-driven when duplication would cause drift.
+- **DYNAMIC**, wording or markup genuinely produced from user state, auth/entitlement state, live catalog state or runtime interaction.
+- **DATA/CMS**, governed content/data that belongs in Supabase or another canonical data source.
 
 ## Completed in NJW-296
 
@@ -35,7 +35,7 @@ This is a living audit, not a claim that every customer-facing JavaScript string
 
 ## Next cleanup queue
 
-### P1 — property landing presentation ownership
+### P1, property landing presentation ownership
 
 `property/js/robust-public-brand.js`
 
@@ -50,7 +50,7 @@ Target:
 - move photo CTA styles to CSS;
 - keep only runtime address/href binding and compatibility behavior in JS.
 
-### P1 — landing showcase/static cards
+### P1, landing showcase/static cards
 
 `property/js/landing-showcase.js`
 
@@ -63,7 +63,7 @@ Target:
 - keep property/CMS data binding in JS;
 - move ad creative/disclosures to a governed content/config source instead of application logic.
 
-### P1 — public navigation runtime style hotfixes
+### P1, public navigation runtime style hotfixes
 
 `property/js/public-nav.js`
 
@@ -74,7 +74,7 @@ Target:
 - move stable presentation contracts into the canonical stylesheet after confirming the cache/compatibility workaround is no longer required;
 - retain menu state, recent-property persistence and interaction code in JS.
 
-### P2 — professional surfaces
+### P2, professional surfaces
 
 Audit `data-center-public-v2.js`, `data-center-runtime-v2.js`, `scan-case-value-ui.js`, `scan.js`, `agent-vanity-profile.js`, `agent-portal-qr.js` and related professional components for static headings/instructions embedded alongside real data rendering.
 
@@ -82,7 +82,7 @@ Target:
 - stable UI shell and explanatory copy in HTML/templates;
 - dynamic values, state and entitlement-controlled rendering in JS.
 
-### P2 — intelligence/landing enhancement scripts
+### P2, intelligence/landing enhancement scripts
 
 Audit `landing-recent-intelligence.js`, `lookup-summary-enhancements.js`, `watchdog-intelligence-voice.js` and `watchdog-intelligence-voice-browser.js`.
 

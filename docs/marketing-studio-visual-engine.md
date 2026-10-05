@@ -1,4 +1,4 @@
-# Watchdog Marketing Studio — Visual Engine 1.0
+# Watchdog Marketing Studio: Visual Engine 1.0
 
 Status: production creative + handoff foundation live; provider production asset mapping intentionally gated
 
@@ -16,7 +16,7 @@ Initial provider contract remains:
 
 ## Customer flow
 
-### Phase A — one-click farm setup
+### Phase A, one-click farm setup
 
 `Build campaign` safely automates:
 
@@ -28,15 +28,15 @@ Initial provider contract remains:
 
 No Phase A action can capture payment or submit an order to the provider.
 
-### Phase B — creative quality ladder
+### Phase B, creative quality ladder
 
-- **Smart** — included. Clean template-assisted creative direction.
-- **Signature** — paid creative service. Three Intelligence-directed concepts.
-- **Studio** — paid premium creative service. Five Intelligence-directed concepts plus campaign-specific generated preview art.
+- **Smart**, included. Clean template-assisted creative direction.
+- **Signature**, paid creative service. Three Intelligence-directed concepts.
+- **Studio**, paid premium creative service. Five Intelligence-directed concepts plus campaign-specific generated preview art.
 
 Current creative fees remain server-owned in `marketing_creative_service_tiers`; provider print/postage economics remain separate.
 
-### Phase C — production handoff
+### Phase C, production handoff
 
 Once a Studio visual is selected:
 
@@ -102,7 +102,7 @@ The combined path verifies the Watchdog Supabase session, campaign ownership and
 
 Normal users are capped at 8 generated previews per Studio brief and 2 per concept. Developer accounts have higher development limits.
 
-## Phase E — governed Brand & Media inputs
+## Phase E, governed Brand & Media inputs
 
 Studio can now use the reusable Brand & Media system during generation without exposing the full media library or weakening the provider boundary.
 

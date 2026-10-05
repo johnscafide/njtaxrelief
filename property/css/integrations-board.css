@@ -6,7 +6,7 @@ html body[data-sidebar-page="integrations"]{
   --ixb-bg:#f3f1ec;--ixb-surface:#fbfaf7;--ixb-line:#e3dfd6;--ixb-navy:#0e2248;--ixb-ink:#142033;--ixb-muted:#5d6877;
   --ixb-blue:#1456a0;--ixb-blue-bright:#2f6df6;--ixb-gold:#b8972a;--ixb-sky:#e3edfb;--ixb-sky-line:#b9d0f2;
   --ixb-teal:#dff1ec;--ixb-teal-line:#9fd3c5;--ixb-sand:#f6efd9;--ixb-sand-line:#e4cf8e;--ixb-review:#fde2e0;--ixb-good:#0b7356;--ixb-bad:#b42318;
-  --ixb-radius:24px;--ixb-font:"Plus Jakarta Sans",Inter,system-ui,-apple-system,"Segoe UI",sans-serif;
+  --ixb-radius:24px;--ixb-font:"Libre Franklin",system-ui,-apple-system,"Segoe UI",sans-serif;
   /* Re-theme the legacy and module tokens so everything reads as one board. */
   --ig-navy:var(--ixb-navy);--ig-teal:var(--ixb-blue);--ig-ink:var(--ixb-ink);--ig-muted:var(--ixb-muted);--ig-line:var(--ixb-line);--ig-soft:var(--ixb-bg);
   --igd-blue:var(--ixb-blue);--igd-violet:var(--ixb-navy);--igd-soft:var(--ixb-bg);--igd-line:var(--ixb-line);--igd-ink:var(--ixb-ink);--igd-muted:var(--ixb-muted);
@@ -143,7 +143,7 @@ html body[data-sidebar-page="integrations"] :is(button,a,input,select,summary):f
 .igx-breakdown b{display:block;font:800 22px/1 var(--ixb-font);color:var(--ixb-navy)}
 .igx-breakdown span{display:block;margin-top:6px;font-size:13px;color:var(--ixb-muted);line-height:1.4}
 
-.igx-toast{position:fixed;left:50%;bottom:22px;transform:translateX(-50%);z-index:60;max-width:min(560px,calc(100vw - 32px));background:var(--ixb-navy);color:#fff;border-radius:18px;padding:13px 18px;font:700 14px/1.45 var(--ixb-font);box-shadow:0 16px 40px rgba(14,34,72,.25)}
+.igx-toast{position:fixed;left:50%;bottom:22px;transform:translateX(-50%);z-index:60;max-width:min(560px,calc(100vw - 32px));background:var(--ixb-navy);color:#fff;border-radius:18px;padding:13px 18px;font:700 14px/1.45 var(--ixb-font);box-shadow:0 2px 6px rgba(15,23,42,.08)}
 .igx-toast.is-error{background:var(--ixb-bad)}
 .igx-skeleton{height:84px;border-radius:18px;background:linear-gradient(90deg,var(--ixb-surface),#efece5,var(--ixb-surface));background-size:200% 100%;animation:igx-shimmer 1.4s ease-in-out infinite}
 @keyframes igx-shimmer{to{background-position:-200% 0}}

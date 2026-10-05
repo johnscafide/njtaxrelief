@@ -67,7 +67,7 @@ struct WDScoreBadge: View {
     let score: Double?
 
     private var value: String {
-        guard let score, score.isFinite, (0...100).contains(score) else { return "—" }
+        guard let score, score.isFinite, (0...100).contains(score) else { return "-" }
         return score.formatted(.number.precision(.fractionLength(0)))
     }
 
@@ -81,7 +81,7 @@ struct WDScoreBadge: View {
         .padding(.vertical, 10)
         .background(WDTheme.accent.opacity(0.10), in: RoundedRectangle(cornerRadius: 16, style: .continuous))
         .accessibilityElement(children: .ignore)
-        .accessibilityLabel(value == "—" ? "Watchdog Score unavailable" : "Watchdog Score \(value)")
+        .accessibilityLabel(value == "-" ? "Watchdog Score unavailable" : "Watchdog Score \(value)")
     }
 }
 

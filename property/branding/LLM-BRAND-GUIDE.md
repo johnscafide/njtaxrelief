@@ -13,7 +13,7 @@ The product should feel precise, modern, calm, trustworthy, and useful. It shoul
 1. Show useful property information before the sales pitch.
 2. Prefer clarity and hierarchy over visual decoration.
 3. Use the existing Watchdog blue/navy system. Do not invent a new accent palette.
-4. Use Plus Jakarta Sans for display and for product UI/body text on new product surfaces.
+4. Use Libre Franklin for display and for product UI/body text on new product surfaces.
 5. Keep cards quiet: white surfaces, restrained borders/shadows, 10–18px radii, generous spacing.
 6. Avoid excessive gradients, glowing backgrounds, glassmorphism, pill spam, colored side stripes, and decorative outlines.
 7. Do not use an icon beside every line of copy.
@@ -27,10 +27,10 @@ The product should feel precise, modern, calm, trustworthy, and useful. It shoul
 
 The canonical naming hierarchy is:
 
-1. **Watchdog** — platform and brand.
-2. **Watchdog Score** — the public 0–100 score/result.
-3. **ROBUST Framework** — the branded methodology and explanation layer beneath the Watchdog Score.
-4. **R / O / B / U / S / T** — the six current property-score dimensions.
+1. **Watchdog**, platform and brand.
+2. **Watchdog Score**, the public 0–100 score/result.
+3. **ROBUST Framework**, the branded methodology and explanation layer beneath the Watchdog Score.
+4. **R / O / B / U / S / T**, the six current property-score dimensions.
 5. Governed markers and source evidence beneath each dimension.
 
 Preferred public language:
@@ -97,8 +97,8 @@ Semantic colors are not decorative colors. Red, amber, and green need actual mea
 
 ### New product UI
 
-- Display/headings: **Plus Jakarta Sans**, 600–800
-- Body/UI: **Plus Jakarta Sans**, 400–800
+- Display/headings: **Libre Franklin**, 600–800
+- Body/UI: **Libre Franklin**, 400–800
 
 ### Existing exceptions
 
@@ -279,8 +279,8 @@ Ask:
 
 - Does this look like the same product as the current Watchdog Dashboard and Home surfaces?
 - If the Watchdog Score appears, does ROBUST explain the six dimensions correctly?
-- Did I accidentally call municipal COD “Assessment Fairness” instead of U — Uniformity?
-- Did I preserve O — Overassessment Position as a neutral property-specific concept?
+- Did I accidentally call municipal COD “Assessment Fairness” instead of U: Uniformity?
+- Did I preserve O: Overassessment Position as a neutral property-specific concept?
 - Is the main task obvious above the fold?
 - Did I add decoration with no information purpose?
 - Are typography, spacing, color, and radii on-system?

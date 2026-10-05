@@ -269,7 +269,7 @@
 /* ---------- import modal ---------- */
 .ad-modal{position:fixed;inset:0;z-index:9600;display:grid;place-items:center;padding:16px;background:rgba(10,22,40,.5)}
 .ad-modal[hidden]{display:none}
-.ad-modal-card{position:relative;width:min(640px,100%);max-height:calc(100dvh - 32px);overflow:auto;background:#fff;border-radius:14px;padding:22px;box-shadow:0 30px 80px rgba(10,22,40,.3)}
+.ad-modal-card{position:relative;width:min(640px,100%);max-height:calc(100dvh - 32px);overflow:auto;background:#fff;border-radius:14px;padding:22px;box-shadow:0 2px 6px rgba(15,23,42,.08)}
 .ad-modal-card h2{margin:0 0 6px;font-size:1.2rem}
 .ad-modal-card>p{margin:0 0 14px;color:var(--aw-muted)}
 .ad-modal-x{position:absolute;top:12px;right:12px;width:42px;height:42px;border:0;border-radius:50%;background:var(--aw-soft);color:#4a5b74;cursor:pointer}
@@ -295,7 +295,7 @@
 .ad-drawer{position:fixed;inset:0;z-index:9600}
 .ad-drawer[hidden]{display:none}
 .ad-drawer-backdrop{position:absolute;inset:0;border:0;background:rgba(10,22,40,.45);cursor:pointer}
-.ad-drawer aside{position:absolute;top:0;right:0;bottom:0;width:min(520px,100%);overflow:auto;background:#fff;padding:24px;box-shadow:-20px 0 60px rgba(10,22,40,.2)}
+.ad-drawer aside{position:absolute;top:0;right:0;bottom:0;width:min(520px,100%);overflow:auto;background:#fff;padding:24px;box-shadow:0 2px 6px rgba(15,23,42,.08)}
 #ad-drawer-close{position:absolute;top:14px;right:14px;width:42px;height:42px;border:0;border-radius:50%;background:var(--aw-soft);color:#4a5b74;cursor:pointer}
 #ad-drawer-content>.aw27-eyebrow{padding-right:52px}
 #ad-drawer-content h2{margin:4px 44px 8px 0;font-size:1.2rem}

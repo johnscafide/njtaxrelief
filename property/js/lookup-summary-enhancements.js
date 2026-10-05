@@ -31,20 +31,20 @@
       '#plm-photos .wd-mapless-property-hero{position:relative;min-height:320px;width:100%;overflow:hidden;display:grid;align-items:stretch;background:radial-gradient(circle at 78% 14%,rgba(92,161,255,.48),transparent 34%),linear-gradient(145deg,#071a35 0%,#123e82 52%,#2468d8 100%);color:#fff}',
       '#plm-photos .wd-mapless-property-hero:after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(180deg,rgba(255,255,255,.035),rgba(0,8,24,.28))}',
       '#plm-photos .wd-mapless-property-in{position:relative;z-index:2;display:grid;grid-template-columns:minmax(0,1.25fr) minmax(260px,.75fr);gap:28px;align-items:center;padding:36px clamp(24px,4vw,54px)}',
-      '#plm-photos .wd-mapless-kicker{display:inline-flex;align-items:center;gap:9px;color:#9eece4;font:850 11px/1.2 "Plus Jakarta Sans",sans-serif;letter-spacing:.105em;text-transform:uppercase}',
-      '#plm-photos .wd-mapless-address{margin:13px 0 7px;color:#fff;font:850 clamp(24px,3.3vw,40px)/1.05 "Plus Jakarta Sans",sans-serif;letter-spacing:-.045em}',
+      '#plm-photos .wd-mapless-kicker{display:inline-flex;align-items:center;gap:9px;color:#9eece4;font:850 11px/1.2 "Libre Franklin",sans-serif;letter-spacing:.105em;text-transform:uppercase}',
+      '#plm-photos .wd-mapless-address{margin:13px 0 7px;color:#fff;font:850 clamp(24px,3.3vw,40px)/1.05 "Libre Franklin",sans-serif;letter-spacing:-.045em}',
       '#plm-photos .wd-mapless-copy{max-width:670px;margin:0;color:rgba(255,255,255,.72);font-size:15px;line-height:1.55}',
       '#plm-photos .wd-mapless-status{display:inline-flex;margin-top:18px;padding:8px 11px;border:1px solid rgba(255,255,255,.2);border-radius:999px;background:rgba(255,255,255,.08);font-size:12px;font-weight:800}',
-      '#plm-photos .wd-mapless-scorebox{justify-self:end;width:min(100%,330px);padding:22px;border:1px solid rgba(255,255,255,.24);border-radius:24px;background:rgba(4,22,51,.38);box-shadow:0 18px 44px rgba(2,12,31,.24);backdrop-filter:blur(10px)}',
-      '#plm-photos .wd-mapless-scorelabel{display:flex;align-items:center;gap:9px;color:rgba(255,255,255,.74);font:850 10px/1.1 "Plus Jakarta Sans",sans-serif;letter-spacing:.08em;text-transform:uppercase}',
-      '#plm-photos .wd-mapless-score{display:flex;align-items:flex-end;gap:5px;margin-top:10px;color:#fff;font:900 clamp(46px,7vw,72px)/.86 "Plus Jakarta Sans",sans-serif;letter-spacing:-.07em}',
-      '#plm-photos .wd-mapless-score em{padding-bottom:7px;color:rgba(255,255,255,.55);font:800 14px/1 "Plus Jakarta Sans",sans-serif;font-style:normal;letter-spacing:0}',
+      '#plm-photos .wd-mapless-scorebox{justify-self:end;width:min(100%,330px);padding:22px;border:1px solid rgba(255,255,255,.24);border-radius:24px;background:rgba(4,22,51,.97);box-shadow:0 2px 6px rgba(15,23,42,.08);}',
+      '#plm-photos .wd-mapless-scorelabel{display:flex;align-items:center;gap:9px;color:rgba(255,255,255,.74);font:850 10px/1.1 "Libre Franklin",sans-serif;letter-spacing:.08em;text-transform:uppercase}',
+      '#plm-photos .wd-mapless-score{display:flex;align-items:flex-end;gap:5px;margin-top:10px;color:#fff;font:900 clamp(46px,7vw,72px)/.86 "Libre Franklin",sans-serif;letter-spacing:-.07em}',
+      '#plm-photos .wd-mapless-score em{padding-bottom:7px;color:rgba(255,255,255,.55);font:800 14px/1 "Libre Franklin",sans-serif;font-style:normal;letter-spacing:0}',
       '#plm-photos .wd-mapless-score.building{font-size:28px;line-height:1;letter-spacing:-.025em}',
-      '#plm-photos .wd-mapless-robust-title{margin-top:18px;padding-top:16px;border-top:1px solid rgba(255,255,255,.14);color:#9eece4;font:900 10px/1 "Plus Jakarta Sans",sans-serif;letter-spacing:.12em}',
+      '#plm-photos .wd-mapless-robust-title{margin-top:18px;padding-top:16px;border-top:1px solid rgba(255,255,255,.14);color:#9eece4;font:900 10px/1 "Libre Franklin",sans-serif;letter-spacing:.12em}',
       '#plm-photos .wd-mapless-components{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:6px;margin-top:10px}',
       '#plm-photos .wd-mapless-components span{text-align:center;min-width:0;padding:8px 3px;border-radius:10px;background:rgba(255,255,255,.07)}',
-      '#plm-photos .wd-mapless-components b{display:block;color:#9eece4;font:900 9px/1 "Plus Jakarta Sans",sans-serif}',
-      '#plm-photos .wd-mapless-components em{display:block;margin-top:5px;color:#fff;font:850 11px/1 "Plus Jakarta Sans",sans-serif;font-style:normal}',
+      '#plm-photos .wd-mapless-components b{display:block;color:#9eece4;font:900 9px/1 "Libre Franklin",sans-serif}',
+      '#plm-photos .wd-mapless-components em{display:block;margin-top:5px;color:#fff;font:850 11px/1 "Libre Franklin",sans-serif;font-style:normal}',
       '#plm-photos .wd-mapless-photo-note{grid-column:1/-1;display:flex;align-items:center;gap:9px;margin-top:2px;color:rgba(255,255,255,.62);font-size:12px;line-height:1.4}',
       '#plm-photos .wd-mapless-photo-link{color:#9eece4;font-weight:850;text-decoration:underline;text-underline-offset:3px}',
       '#plm-photos .wd-mapless-photo-link:hover,#plm-photos .wd-mapless-photo-link:focus-visible{color:#fff}',
@@ -58,8 +58,8 @@
       '#plm-photos .wd-lot-map .wd-lot-neighbors path{fill:none;stroke:#8f9bab;stroke-width:1;opacity:.75;vector-effect:non-scaling-stroke}',
       '#plm-photos .wd-lot-map .wd-lot-shape{fill:rgba(36,104,216,.2);stroke:#1452a4;stroke-width:3;stroke-linejoin:round;vector-effect:non-scaling-stroke}',
       '#plm-photos .wd-lot-map .wd-lot-pin{fill:#1452a4;stroke:#fff;stroke-width:2;vector-effect:non-scaling-stroke}',
-      '#plm-photos .wd-lot-map-label{position:absolute;left:12px;top:12px;padding:6px 10px;border-radius:10px;background:rgba(7,26,53,.78);color:#fff;font:800 12px/1.2 "Plus Jakarta Sans",sans-serif}',
-      '#plm-photos .wd-lot-map-source{position:absolute;right:10px;bottom:10px;padding:4px 8px;border-radius:8px;background:rgba(255,255,255,.88);color:#52627a;font:700 10px/1.1 Inter,Arial,sans-serif}',
+      '#plm-photos .wd-lot-map-label{position:absolute;left:12px;top:12px;padding:6px 10px;border-radius:10px;background:rgba(7,26,53,.78);color:#fff;font:800 12px/1.2 "Libre Franklin",sans-serif}',
+      '#plm-photos .wd-lot-map-source{position:absolute;right:10px;bottom:10px;padding:4px 8px;border-radius:8px;background:rgba(255,255,255,.88);color:#52627a;font:700 10px/1.1 Libre Franklin,Arial,sans-serif}',
       '@media(max-width:1020px){html body #plm-photos.wd-has-lot-map .wd-mapless-property-in{grid-template-columns:1fr}html body #plm-photos.wd-has-lot-map .wd-mapless-scorebox{justify-self:stretch;width:auto}}',
       '@media(max-width:700px){html body #plm-photos.wd-has-lot-map{grid-template-columns:1fr!important}#plm-photos .wd-lot-map{min-height:240px}}',
       '@media(max-width:760px){#plm-photos .wd-mapless-property-hero{min-height:360px}#plm-photos .wd-mapless-property-in{grid-template-columns:1fr;gap:22px;padding:28px 20px}#plm-photos .wd-mapless-scorebox{justify-self:stretch;width:auto}#plm-photos .wd-mapless-score{font-size:58px}}',
@@ -72,23 +72,23 @@
     var grid=document.querySelector('#plm .plm-quick');
     if(!grid)return;
     if(!document.getElementById('plm-q-watchdog-score')){
-      grid.insertAdjacentHTML('beforeend','<div class="plm-q wd-pl-proprietary" id="plm-q-watchdog-score"><i class="fas fa-dog"></i><div><b>—</b><span>Watchdog score</span></div></div>');
+      grid.insertAdjacentHTML('beforeend','<div class="plm-q wd-pl-proprietary" id="plm-q-watchdog-score"><i class="fas fa-dog"></i><div><b>-</b><span>Watchdog score</span></div></div>');
     }
     if(!document.getElementById('plm-q-tax-value')){
-      grid.insertAdjacentHTML('beforeend','<div class="plm-q wd-pl-proprietary" id="plm-q-tax-value"><i class="fas fa-scale-balanced"></i><div><b>—</b><span>Watchdog tax value</span></div></div>');
+      grid.insertAdjacentHTML('beforeend','<div class="plm-q wd-pl-proprietary" id="plm-q-tax-value"><i class="fas fa-scale-balanced"></i><div><b>-</b><span>Watchdog tax value</span></div></div>');
     }
   }
 
   function ensureTaxBurden(){
     var grid=document.querySelector('#plm .plm-kpis');
     if(!grid||document.getElementById('plm-kpi-burden'))return;
-    grid.insertAdjacentHTML('beforeend','<div class="plm-kpi wd-pl-proprietary" id="plm-kpi-burden"><div class="plm-kpi-n">—</div><div class="plm-kpi-l">B · Tax burden</div></div>');
+    grid.insertAdjacentHTML('beforeend','<div class="plm-kpi wd-pl-proprietary" id="plm-kpi-burden"><div class="plm-kpi-n">-</div><div class="plm-kpi-l">B · Tax burden</div></div>');
   }
 
   function canonicalScore(){
     var score=document.querySelector('#plm-robust-score-sec .wdps-score b');
     var value=score&&clean(score.textContent);
-    return value&&value!=='—'?value:'';
+    return value&&value!=='-'?value:'';
   }
   function syncWatchdogScore(){
     var tile=document.getElementById('plm-q-watchdog-score');
@@ -100,7 +100,7 @@
       tile.dataset.ready='1';
       tile.title='Canonical Watchdog Score powered by the ROBUST Framework';
     }else{
-      setText(n,'—');
+      setText(n,'-');
       delete tile.dataset.ready;
       tile.title='Score publishes when checked ROBUST evidence is sufficient';
     }
@@ -116,7 +116,7 @@
       tile.dataset.ready='1';
       tile.title='Watchdog Tax Value: appeal-screening estimate, not a listing price or appraisal';
     }else{
-      setText(n,'—');
+      setText(n,'-');
       delete tile.dataset.ready;
       tile.title='Watchdog Tax Value appears when enough solid sale evidence is available';
     }
@@ -133,12 +133,12 @@
       if(label&&/^B\s*·\s*/i.test(clean(label.textContent))){found=rows[i];break;}
     }
     var score=found&&found.querySelector('.wdps-n');
-    if(score&&clean(score.textContent)&&clean(score.textContent)!=='—'){
+    if(score&&clean(score.textContent)&&clean(score.textContent)!=='-'){
       setText(value,clean(score.textContent)+'/100');
       tile.dataset.ready='1';
       tile.title='ROBUST B · Burden component. Higher is a more favorable tax-burden position.';
     }else{
-      setText(value,'—');
+      setText(value,'-');
       delete tile.dataset.ready;
       tile.title='ROBUST Burden publishes only when the required checked evidence is available';
     }
@@ -156,9 +156,9 @@
     document.querySelectorAll('#plm-robust-score-sec .wdps-row').forEach(function(row){
       var label=row.querySelector('.wdps-label a'),score=row.querySelector('.wdps-n');
       var match=clean(label&&label.textContent).match(/^([ROBUST])\s*·/i);
-      if(match)values[match[1].toUpperCase()]=clean(score&&score.textContent)||'—';
+      if(match)values[match[1].toUpperCase()]=clean(score&&score.textContent)||'-';
     });
-    return order.map(function(letter){return{letter:letter,value:values[letter]||'—'};});
+    return order.map(function(letter){return{letter:letter,value:values[letter]||'-'};});
   }
   function componentsMarkup(rows){
     return rows.map(function(item){return'<span><b>'+esc(item.letter)+'</b><em>'+esc(item.value)+'</em></span>';}).join('');

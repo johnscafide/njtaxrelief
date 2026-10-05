@@ -1,4 +1,4 @@
-/* NJW-96 — live map/search completion layer.
+/* NJW-96, live map/search completion layer.
    Loaded by ownership-verification.js after the core lookup bundle. */
 (function () {
   'use strict';

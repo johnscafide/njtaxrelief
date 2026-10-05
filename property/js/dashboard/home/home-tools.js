@@ -1723,7 +1723,7 @@ Object.assign(window, {
   }
 
   function pct(value, digits) {
-    return value == null ? '—' : (value * 100).toFixed(digits == null ? 1 : digits) + '%';
+    return value == null ? '-' : (value * 100).toFixed(digits == null ? 1 : digits) + '%';
   }
 
   function exposureBand(value) {
@@ -1833,7 +1833,7 @@ Object.assign(window, {
   }
 
   function card(r) {
-    var v = calc(r), score = v.score == null ? '&mdash;' : v.score;
+    var v = calc(r), score = v.score == null ? '-' : v.score;
     var message = v.score == null
       ? 'The current record does not contain enough independent evidence to rank this property yet.'
       : v.caseSignal
@@ -2032,9 +2032,9 @@ Object.assign(window, {
       return '<tr><td>' + esc(x.a) + '</td><td>' + esc(x.b) + '/' + esc(x.l) + '</td>' +
         '<td>' + (x.m ? String(x.m).padStart(2, '0') + '/' : '') + x.y + '</td>' +
         '<td class="n">' + money(x.p) + '</td>' +
-        '<td class="n">' + (x.sf ? x.sf.toLocaleString() : '\u2014') + '</td>' +
-        '<td class="n">' + (x.ppsf ? '$' + x.ppsf : '\u2014') + '</td>' +
-        '<td class="n">' + (x.yb || '\u2014') + '</td>' +
+        '<td class="n">' + (x.sf ? x.sf.toLocaleString() : '-') + '</td>' +
+        '<td class="n">' + (x.ppsf ? '$' + x.ppsf : '-') + '</td>' +
+        '<td class="n">' + (x.yb || '-') + '</td>' +
         '<td>' + esc(x.fit || '') + '</td></tr>';
     }).join('');
 
@@ -2761,9 +2761,9 @@ window.acwSave=function(btn){var box=btn.closest('.acw'),pin=box&&box.getAttribu
   function card(row,label){
     var st=status(row),lines=(row.requirements||[]).map(String),fees=row.fees||[];
     var keyLines=lines.filter(lineKind),items=lines.filter(function(l){return!lineKind(l);});
-    // content-architecture: dynamic — every line, fee and link is the town's checked data for this parcel.
+    // content-architecture: dynamic, every line, fee and link is the town's checked data for this parcel.
     var keys='<ul class="tcx-key">'+keyLines.map(function(l){var k=lineKind(l);return '<li class="'+k+'"><i class="fas '+ICON[k]+'" aria-hidden="true"></i><span>'+linkify(esc(l))+'</span></li>';}).join('')+'</ul>';
-    // content-architecture: dynamic — fee labels and amounts are quoted from the town or fire office.
+    // content-architecture: dynamic, fee labels and amounts are quoted from the town or fire office.
     var feeHtml=fees.length?'<div class="tcx-fees">'+fees.map(function(f){return '<div><span>'+esc(f.label)+'</span><b>'+esc(f.amount)+'</b></div>';}).join('')+'</div>':'<p class="tcx-muted">No fee published online.</p>';
     var itemHtml=items.length?'<details class="tcx-items"><summary>What the inspection checks ('+items.length+')</summary><ul>'+items.map(function(l){return '<li>'+linkify(esc(l))+'</li>';}).join('')+'</ul></details>':'';
     return '<article class="tcx-card '+st[0]+'"><div class="tcx-card-head"><span class="tcx-label">'+esc(label)+'</span><span class="tcx-chip '+st[0]+'">'+esc(st[1])+'</span></div><h4>'+esc(row.title||label)+'</h4>'+keys+feeHtml+itemHtml+links(row)+'</article>';
@@ -2776,7 +2776,7 @@ window.acwSave=function(btn){var box=btn.closest('.acw'),pin=box&&box.getAttribu
     if(data.status!=='ok'){host.innerHTML=message('fa-hourglass-half','Watchdog hasn’t checked this town’s certificate rules yet. Towns are being added county by county.');return;}
     var rows=data.rows||[],co=rows.filter(function(x){return x.requirement_key==='resale_cco';})[0],fire=rows.filter(function(x){return x.requirement_key==='smoke_fire_cert';})[0];
     var checked=date(rows[0]&&rows[0].last_verified_at),flag=rows.some(function(x){return x.needs_lookup;});
-    // content-architecture: dynamic — town name, check date and red-flag state come from the checked rows.
+    // content-architecture: dynamic, town name, check date and red-flag state come from the checked rows.
     host.innerHTML='<p class="tcx-when">'+esc(data.municipality_name||'This town')+' · checked by Watchdog from official town and fire sources'+(checked?' on '+esc(checked):'')+'. Rules and fees can change, so confirm with the office before closing.'+(flag?' <b>Some details still need a call to the office.</b>':'')+'</p><div class="tcx-grid">'+(co?card(co,'Town resale certificate'):'')+(fire?card(fire,'Fire certificate'):'')+'</div>';
   }
   var cache={},records={};
@@ -2788,11 +2788,11 @@ window.acwSave=function(btn){var box=btn.closest('.acw'),pin=box&&box.getAttribu
     if(!client){render(k,{status:'error'});return;}
     client.rpc('watchdog_town_certificates',{p_municipality_code:code}).then(function(res){var d=res&&!res.error&&res.data?res.data:{status:'error'};if(d.status!=='error')cache[code]=d;render(k,d);},function(){render(k,{status:'error'});});
   }
-  // content-architecture: dynamic — the loading row replaces a failed request for this parcel's town.
+  // content-architecture: dynamic, the loading row replaces a failed request for this parcel's town.
   function retry(k){var host=document.getElementById('tcx-body-'+k);if(host)host.innerHTML='<div class="tcx-loading"><span class="pl-spin"></span> Loading town certificate details</div>';load(k,true);}
   function tool(r){
     var k=key(r);records[k]=r;setTimeout(function(){load(k,false);},0);
-    // content-architecture: dynamic — the body is filled from the parcel's town rows after the server plan check.
+    // content-architecture: dynamic, the body is filled from the parcel's town rows after the server plan check.
     return '<section class="tcx-tool" id="tcx-'+k+'"><div class="tcx-intro"><span class="tcx-badge">PRO+ · CLOSING</span><h3>Town CO &amp; fire certificate</h3><p>What this town requires before closing, what it costs and who to call.</p></div><div id="tcx-body-'+k+'"><div class="tcx-loading"><span class="pl-spin"></span> Loading town certificate details</div></div></section>';
   }
   Object.assign(window,{toolTownCertificates:tool,tcxRetry:retry});
@@ -2888,7 +2888,7 @@ window.acwSave=function(btn){var box=btn.closest('.acw'),pin=box&&box.getAttribu
     var list=p.rows||[],summary=permitLifecycleSummary(list),verify=summary.verification;
     var tone=verify?'review':list.length?'clear':'quiet';
     var detail=summary.lifecycles.slice(0,6).map(function(x){var state=x.verification?'Verify municipality':'Certificate shown';var when=x.certificateDate||x.permitDate;return'<li><span><b>'+safe(x.permitNumber||'Permit')+'</b><small>'+safe(x.type||'Permit activity')+'</small></span><span>'+safe(state)+'<small>'+date(when)+'</small></span></li>';}).join('');
-    // content-architecture: dynamic — this summary is generated from live parcel-specific DCA permit lifecycle state and dates.
+    // content-architecture: dynamic, this summary is generated from live parcel-specific DCA permit lifecycle state and dates.
     return '<article class="dd-signal '+tone+'"><div class="dd-signal-head"><i class="fas fa-helmet-safety"></i><span><b>Permit &amp; certificate review</b><small>NJ DCA · block + lot match</small></span><strong>'+(verify?verify+' verify':list.length?'state history':'no records')+'</strong></div>'+
       '<p>'+(p.unavailable?safe(p.unavailable):verify?verify+' permit lifecycle'+(verify===1?' needs':'s need')+' municipal verification because the matching state rows do not currently show a certificate date, or cannot be safely joined by permit number. This is not a legal open-permit finding.':list.length?'No permit-number lifecycle currently lacks a certificate date in the matching state feed. Municipal records still control clearance.':'No matching record appears in DCA’s rolling permit feed; that does not prove no permit activity exists.')+'</p>'+
       (detail?'<ul class="dd-records">'+detail+'</ul>':'')+'</article>';
@@ -3052,7 +3052,7 @@ window.acwSave=function(btn){var box=btn.closest('.acw'),pin=box&&box.getAttribu
     var lede=verify?verify+' permit lifecycle'+(verify===1?' needs':'s need')+' municipal verification based on the matching state feed. Review the records below before calling the municipality.':items.length?'Watchdog matched '+items.length+' permit lifecycle'+(items.length===1?'':'s')+'. No permit-number lifecycle currently lacks a certificate date in the state feed.':'No matching permit row was returned by the NJ DCA feed for this parcel. That does not prove no permit activity exists.';
     var first=items.slice(0,8),older=items.slice(8),unmatchable=summary.unmatchableIssued;
     var extra=unmatchable.length?'<div class="teg-unmatched"><b>'+unmatchable.length+' issued state row'+(unmatchable.length===1?'':'s')+' without a usable permit number</b><p>These rows cannot be safely joined into a permit-number lifecycle, so Watchdog flags them for municipal verification rather than treating them as open permits.</p><details><summary>View unmatched state row'+(unmatchable.length===1?'':'s')+'</summary><div class="teg-source-rows">'+unmatchable.map(rowDetails).join('')+'</div></details></div>':'';
-    return'<section class="teg-permits" id="teg-permits-'+key(r)+'"><div class="teg-permit-head"><div><span>STATE PERMIT HISTORY · PRELIMINARY MUNICIPAL REVIEW</span><h4>Permit &amp; certificate history</h4></div><strong>'+s(verify?verify+' to verify':items.length?'State history checked':'No state match')+'</strong></div><p class="teg-permit-lede">'+s(lede)+'</p><div class="teg-permit-stats"><div><span>Matched lifecycles</span><b>'+items.length+'</b></div><div><span>Certificate shown</span><b>'+summary.certified+'</b></div><div><span>Verify municipality</span><b>'+verify+'</b></div><div><span>DCA rows</span><b>'+permitData.rows.length+'</b></div></div><div class="teg-permit-list">'+first.map(permitCard).join('')+(older.length?'<details class="teg-permit-more"><summary>Show '+older.length+' older permit lifecycle'+(older.length===1?'':'s')+'</summary><div class="teg-permit-list teg-permit-list-nested">'+older.map(permitCard).join('')+'</div></details>':'')+extra+'</div><div class="teg-permit-source"><div><b>NJ DCA checked</b><span>'+s(new Date(permitData.checked_at).toLocaleString())+'</span></div><div><b>Parcel match</b><span>Treasury '+s(id.code||'—')+' · Block '+s(id.block||'—')+' · Lot '+s(id.lot||'—')+'</span></div><a href="'+DCA_SOURCE+'" target="_blank" rel="noopener">Open official NJ DCA source <i class="fas fa-arrow-up-right-from-square"></i></a></div>'+(permitData.full?'':'<div class="teg-permit-data-note"><i class="fas fa-circle-info"></i><span>'+s(permitData.unavailable||'Complete row details were not available during this check.')+'</span></div>')+'<div class="teg-permit-caveat"><i class="fas fa-building-shield"></i><p><b>Preliminary state screening, not municipal clearance.</b> Watchdog shows matching records currently reported to NJ DCA. Municipal construction records remain official and may contain newer, older, corrected or additional information. The state feed is rolling, generally monthly, does not include every municipality, recent records may still be under review, and older records are eventually purged.</p></div></section>';
+    return'<section class="teg-permits" id="teg-permits-'+key(r)+'"><div class="teg-permit-head"><div><span>STATE PERMIT HISTORY · PRELIMINARY MUNICIPAL REVIEW</span><h4>Permit &amp; certificate history</h4></div><strong>'+s(verify?verify+' to verify':items.length?'State history checked':'No state match')+'</strong></div><p class="teg-permit-lede">'+s(lede)+'</p><div class="teg-permit-stats"><div><span>Matched lifecycles</span><b>'+items.length+'</b></div><div><span>Certificate shown</span><b>'+summary.certified+'</b></div><div><span>Verify municipality</span><b>'+verify+'</b></div><div><span>DCA rows</span><b>'+permitData.rows.length+'</b></div></div><div class="teg-permit-list">'+first.map(permitCard).join('')+(older.length?'<details class="teg-permit-more"><summary>Show '+older.length+' older permit lifecycle'+(older.length===1?'':'s')+'</summary><div class="teg-permit-list teg-permit-list-nested">'+older.map(permitCard).join('')+'</div></details>':'')+extra+'</div><div class="teg-permit-source"><div><b>NJ DCA checked</b><span>'+s(new Date(permitData.checked_at).toLocaleString())+'</span></div><div><b>Parcel match</b><span>Treasury '+s(id.code||'-')+' · Block '+s(id.block||'-')+' · Lot '+s(id.lot||'-')+'</span></div><a href="'+DCA_SOURCE+'" target="_blank" rel="noopener">Open official NJ DCA source <i class="fas fa-arrow-up-right-from-square"></i></a></div>'+(permitData.full?'':'<div class="teg-permit-data-note"><i class="fas fa-circle-info"></i><span>'+s(permitData.unavailable||'Complete row details were not available during this check.')+'</span></div>')+'<div class="teg-permit-caveat"><i class="fas fa-building-shield"></i><p><b>Preliminary state screening, not municipal clearance.</b> Watchdog shows matching records currently reported to NJ DCA. Municipal construction records remain official and may contain newer, older, corrected or additional information. The state feed is rolling, generally monthly, does not include every municipality, recent records may still be under review, and older records are eventually purged.</p></div></section>';
   }
   function build(r,d,permitData){
     var permitSummary=lifecycleSummary(permitData.rows),permitReview=permitSummary.verificationCandidates+permitSummary.unmatchableIssued.length;
@@ -3081,19 +3081,19 @@ window.acwSave=function(btn){var box=btn.closest('.acw'),pin=box&&box.getAttribu
     payloads[key(r)]={coverage:coverage,review:review,nodes:nodes.length,generated_at:generatedAt,pams_pin:r.pams_pin||null,version:3,permit_lifecycles:permitSummary.lifecycles.length,permit_verification_candidates:permitReview};
     return summary+'<div class="teg-map">'+center+'<div class="teg-nodes">'+nodes.join('')+'</div></div>'+permitPanel(r,permitData,permitSummary)+
       '<div class="teg-fresh"><i class="fas fa-clock-rotate-left"></i><div><b>Evidence checked '+s(new Date(generatedAt).toLocaleString())+'</b><span>Save the property to a Workbench case to preserve a dated working snapshot, then use Change Intelligence to see later source and score movement.</span></div></div>'+ 
-      '<div class="teg-next"><i class="fas fa-scale-balanced"></i><div><b>What this graph does — and does not do</b><p>It connects the public evidence Watchdog can source to one parcel so a professional can see what to verify next. It does <strong>not</strong> establish ownership, lien priority, marketable title, insurability, survey boundaries, environmental compliance, municipal permit clearance or legal clearance. Recorded instruments, municipal searches and qualified professionals control those conclusions.</p></div></div>'+ 
+      '<div class="teg-next"><i class="fas fa-scale-balanced"></i><div><b>What this graph does, and does not do</b><p>It connects the public evidence Watchdog can source to one parcel so a professional can see what to verify next. It does <strong>not</strong> establish ownership, lien priority, marketable title, insurability, survey boundaries, environmental compliance, municipal permit clearance or legal clearance. Recorded instruments, municipal searches and qualified professionals control those conclusions.</p></div></div>'+ 
       '<div class="teg-actions"><button type="button" onclick="tegRefresh(\''+key(r)+'\')"><i class="fas fa-rotate"></i> Refresh evidence graph</button><button type="button" onclick="ddEvidence(\''+key(r)+'\')"><i class="fas fa-file-arrow-down"></i> Download source evidence</button><a href="/property/workbench"><i class="fas fa-folder-tree"></i> Open Case Workbench</a></div>';
   }
   function render(r,force){
     var k=key(r),host=document.getElementById('teg-'+k);if(!host)return;
     if(typeof window.ddInspect!=='function'){host.innerHTML='<div class="teg-error">Evidence source engine is not available. Close and reopen this section.</div>';return;}
-    // content-architecture: dynamic — this loading state is shared across property surfaces and rendered only while live parcel evidence is resolving.
+    // content-architecture: dynamic, this loading state is shared across property surfaces and rendered only while live parcel evidence is resolving.
     host.innerHTML='<div class="teg-loading"><span class="pl-spin"></span><div><b>Connecting the evidence graph</b><small>Parcel identity · DCA permits · NJDEP constraints · where data comes from</small></div></div>';
     var inspect=force&&typeof window.ddInspectFresh==='function'?window.ddInspectFresh:window.ddInspect;
-    // content-architecture: dynamic — this error state renders only when live parcel evidence or the parcel-level DCA follow-up request fails.
+    // content-architecture: dynamic, this error state renders only when live parcel evidence or the parcel-level DCA follow-up request fails.
     inspect(r).then(function(d){return fullPermitRows(r,d,force).then(function(permitData){host.innerHTML=build(r,d,permitData);});}).catch(function(e){console.warn('Title Evidence Graph',e);host.innerHTML='<div class="teg-error">Live evidence sources did not answer. The saved property has not been changed.</div>';});
   }
-  // content-architecture: dynamic — this tool shell is only the mount point for parcel-specific live evidence rendered by build().
+  // content-architecture: dynamic, this tool shell is only the mount point for parcel-specific live evidence rendered by build().
   function tool(r){var k=key(r);records[k]=r;setTimeout(function(){render(r,false);},0);return '<section class="teg-tool"><div class="teg-intro"><span class="teg-badge">PRO+ · EVIDENCE GRAPH 3.0</span><h3>Title &amp; closing evidence graph</h3><p>One property-centered view of the public records that can change a closing conversation, including plain-language permit and certificate history before municipal follow-up.</p></div><div id="teg-'+k+'"></div></section>';}
   function refresh(k){var r=records[k];if(r)render(r,true);}
   Object.assign(window,{toolTitleEvidenceGraph:tool,tegRefresh:refresh});
@@ -3146,8 +3146,8 @@ Object.assign(window,{developmentConstraintMetrics:calc,toolDevelopmentConstrain
   }
   function render(r,payload){
     var host=document.getElementById('pli-'+key(r));if(!host)return;var v=calc(payload,r);
-    // content-architecture: dynamic — this shared tool renders live permit lifecycle metrics and wording from parcel-specific DCA state.
-    host.innerHTML='<div class="pci-hero"><div><b>'+v.score+'</b><span>/ 100 lifecycle review</span></div><p><strong>'+v.band+'.</strong> '+(v.verification?v.verification+' permit lifecycle'+(v.verification===1?' needs':'s need')+' certificate or municipal verification in the state feed.':'No permit-number lifecycle currently lacks a certificate date in the matching state feed.')+'</p></div><div class="pci-scenarios"><span><small>Matched lifecycles</small><b>'+v.lifecycles+'</b></span><span><small>Verify municipality</small><b>'+v.verification+'</b></span><span><small>Oldest candidate</small><b>'+(v.verification?v.oldest+' days':'—')+'</b></span><span><small>Median permit → cert.</small><b>'+(v.median==null?'—':v.median+' days')+'</b></span><span><small>Improvement intensity</small><b>'+v.intensity+'/100</b></span><span><small>Post-sale permits</small><b>'+(v.postSale==null?'sale date unavailable':v.postSale)+'</b></span></div><div class="tl-fine">Watchdog groups the live NJ DCA Construction Permit feed by permit number before evaluating certificate state. “Verify municipality” means the matching state lifecycle does not currently show a certificate date, or cannot be safely joined by permit number. It is a preliminary review flag, not proof that work remains legally open; municipal records control.</div>';
+    // content-architecture: dynamic, this shared tool renders live permit lifecycle metrics and wording from parcel-specific DCA state.
+    host.innerHTML='<div class="pci-hero"><div><b>'+v.score+'</b><span>/ 100 lifecycle review</span></div><p><strong>'+v.band+'.</strong> '+(v.verification?v.verification+' permit lifecycle'+(v.verification===1?' needs':'s need')+' certificate or municipal verification in the state feed.':'No permit-number lifecycle currently lacks a certificate date in the matching state feed.')+'</p></div><div class="pci-scenarios"><span><small>Matched lifecycles</small><b>'+v.lifecycles+'</b></span><span><small>Verify municipality</small><b>'+v.verification+'</b></span><span><small>Oldest candidate</small><b>'+(v.verification?v.oldest+' days':'-')+'</b></span><span><small>Median permit → cert.</small><b>'+(v.median==null?'-':v.median+' days')+'</b></span><span><small>Improvement intensity</small><b>'+v.intensity+'/100</b></span><span><small>Post-sale permits</small><b>'+(v.postSale==null?'sale date unavailable':v.postSale)+'</b></span></div><div class="tl-fine">Watchdog groups the live NJ DCA Construction Permit feed by permit number before evaluating certificate state. “Verify municipality” means the matching state lifecycle does not currently show a certificate date, or cannot be safely joined by permit number. It is a preliminary review flag, not proof that work remains legally open; municipal records control.</div>';
   }
   function hydrate(r){var host=document.getElementById('pli-'+key(r));if(!host||typeof ddPermitRecords!=='function')return;ddPermitRecords(r).then(function(p){render(r,p);}).catch(function(){host.innerHTML='<div class="tl-note">The live NJ DCA permit feed could not be checked right now.</div>';});}
   function card(r){records[key(r)]=r;setTimeout(function(){hydrate(r);},0);return toolCard('Permit Lifecycle Intelligence','fa-helmet-safety','<p class="tl-p">Turns raw permit rows into a permit-number lifecycle screen: certificate verification, age, completion time and recent activity.</p><div id="pli-'+key(r)+'"><div class="dd-loading"><span class="pl-spin"></span><div><b>Building permit lifecycle</b><small>Checking live NJ DCA records</small></div></div></div>');}
@@ -3506,7 +3506,7 @@ window.toolStatewideModivIntelligence = function (record) {
   var basic = SIGNALS.filter(function (signal) { return signal[3] === 'pro'; }).map(function (signal) { return tile(record, profile, signal); }).join('');
   var advanced = SIGNALS.filter(function (signal) { return signal[3] === 'pro_plus'; }).map(function (signal) { return tile(record, profile, signal); }).join('');
   return '<div class="mi-panel"><div class="mi-head"><div><span>2026 MOD-IV MUNICIPAL BASELINE</span><h3>' + esc(profile.name) + '</h3><p>' +
-    Number(profile.property_count || 0).toLocaleString() + ' parcel records condensed into comparable town-level warning signs. Percentile means higher or lower than other municipalities—it does not mean better or worse.</p></div>' +
+    Number(profile.property_count || 0).toLocaleString() + ' parcel records condensed into comparable town-level warning signs. Percentile means higher or lower than other municipalities, it does not mean better or worse.</p></div>' +
     '<a href="/property/data-methodology">How it works <i class="fas fa-arrow-up-right-from-square"></i></a></div><div class="mi-grid">' + basic + '</div>' +
     (proPlus ? '<div class="mi-sub"><b>Pro+ diagnostics</b><span>Deeper distribution, turnover, composition and assessment warning signs.</span></div><div class="mi-grid mi-advanced">' + advanced + '</div>' :
       '<div class="mi-locked"><i class="fas fa-layer-group"></i><div><b>18 deeper Pro+ municipal warning signs</b><span>Distribution, turnover, property-class mix, age exposure and sale-assessment info are available in Pro+.</span></div></div>') +
@@ -3664,15 +3664,15 @@ window.toolStatewideModivIntelligence = function (record) {
         rlRow('Town ratio', rows2, function (x) { return (x.ratio * 100).toFixed(1) + '%'; }) +
         rlRow('Estimated annual tax', rows2, function (x) {
           return x.tax ? '<b>' + money(x.tax) + '</b>' : '<span class="na">no rate on file</span>'; }) +
-        rlRow('Per month', rows2, function (x) { return x.tax ? money(x.tax / 12) : '\u2014'; }) +
-        rlRow('Median sale price', rows2, function (x) { return x.medPrice ? money(x.medPrice) : '\u2014'; }) +
-        rlRow('Price per sq ft', rows2, function (x) { return x.ppsf ? '$' + x.ppsf : '\u2014'; }) +
+        rlRow('Per month', rows2, function (x) { return x.tax ? money(x.tax / 12) : '-'; }) +
+        rlRow('Median sale price', rows2, function (x) { return x.medPrice ? money(x.medPrice) : '-'; }) +
+        rlRow('Price per sq ft', rows2, function (x) { return x.ppsf ? '$' + x.ppsf : '-'; }) +
         rlRow('Square feet this buys', rows2, function (x) {
-          return x.afford ? x.afford.toLocaleString() + ' sq ft' : '\u2014'; }) +
+          return x.afford ? x.afford.toLocaleString() + ' sq ft' : '-'; }) +
         rlRow('Assessment uniformity', rows2, function (x) {
-          return x.uniformity != null ? x.uniformity + ' of 100' : '\u2014'; }) +
+          return x.uniformity != null ? x.uniformity + ' of 100' : '-'; }) +
         rlRow('County appeal win rate', rows2, function (x) {
-          return x.winRate != null ? x.winRate + '%' : '\u2014'; }) +
+          return x.winRate != null ? x.winRate + '%' : '-'; }) +
       '</tbody></table></div>' +
 
       (best && worst && worst.tax > best.tax * 1.05
@@ -3763,8 +3763,8 @@ window.toolStatewideModivIntelligence = function (record) {
           '<td class="num">' + money(x.r.last_year_tax) + '</td>' +
           '<td class="num"><b>$' + x.burden.toFixed(2) + '</b></td>' +
           '<td class="num' + (x.overBy > 0 ? ' neg' : '') + '">' +
-            (x.overBy > 0 ? money(x.overBy) : '\u2014') + '</td>' +
-          '<td class="num">' + (x.uniformity != null ? x.uniformity : '\u2014') + '</td></tr>';
+            (x.overBy > 0 ? money(x.overBy) : '-') + '</td>' +
+          '<td class="num">' + (x.uniformity != null ? x.uniformity : '-') + '</td></tr>';
       }).join('') + '</tbody></table></div>' +
 
       (worst.burden > best.burden * 1.15
@@ -3794,7 +3794,7 @@ window.toolStatewideModivIntelligence = function (record) {
 (function () {
   'use strict';
   function clamp(v){return Math.max(0,Math.min(100,+v||0));}
-  function pct(v){return v==null?'—':((+v)*100).toFixed(1)+'%';}
+  function pct(v){return v==null?'-':((+v)*100).toFixed(1)+'%';}
   function calc(r){
     var b=typeof budgetPressureFor==='function'?budgetPressureFor(r):null;
     var t=typeof trajectory==='function'?trajectory(r):null;
@@ -3828,7 +3828,7 @@ window.toolStatewideModivIntelligence = function (record) {
     if(!vals.length)return '';
     var avg=Math.round(vals.reduce(function(a,x){return a+x.v.score;},0)/vals.length);
     var byTown={};vals.forEach(function(x){var k=String(x.r.town||x.r.municipality||'Unknown');byTown[k]=(byTown[k]||0)+Math.max(1,x.v.tax);});var total=Object.keys(byTown).reduce(function(a,k){return a+byTown[k];},0),shares=Object.keys(byTown).map(function(k){return{town:k,share:byTown[k]/total};}).sort(function(a,b){return b.share-a.share;}),hhi=Math.round(shares.reduce(function(a,x){return a+x.share*x.share;},0)*100),top=shares[0];
-    return '<section class="sec"><h4><i class="fas fa-chart-area"></i> Investor Carry-Cost Volatility</h4><div class="pci-portfolio"><div class="pci-hero"><div><b>'+avg+'</b><span>/ 100 portfolio average</span></div><p>Tax-driven operating-cost uncertainty across '+vals.length+' saved propert'+(vals.length===1?'y':'ies')+'.</p></div><div class="pci-scenarios"><span><small>Municipal concentration</small><b>'+hhi+'/100</b></span><span><small>Largest town share</small><b>'+(top?Math.round(top.share*100)+'%':'—')+'</b></span><span><small>Largest exposure</small><b>'+(top?top.town:'—')+'</b></span></div>'+vals.slice(0,8).map(function(x){return '<a href="/property/home?pin='+encodeURIComponent(x.r.pams_pin||'')+'#sec-compare"><span>'+String(x.r.address||'Saved property')+'</span><b>'+x.v.score+' · '+x.v.band+'</b></a>';}).join('')+'</div></section>';
+    return '<section class="sec"><h4><i class="fas fa-chart-area"></i> Investor Carry-Cost Volatility</h4><div class="pci-portfolio"><div class="pci-hero"><div><b>'+avg+'</b><span>/ 100 portfolio average</span></div><p>Tax-driven operating-cost uncertainty across '+vals.length+' saved propert'+(vals.length===1?'y':'ies')+'.</p></div><div class="pci-scenarios"><span><small>Municipal concentration</small><b>'+hhi+'/100</b></span><span><small>Largest town share</small><b>'+(top?Math.round(top.share*100)+'%':'-')+'</b></span><span><small>Largest exposure</small><b>'+(top?top.town:'-')+'</b></span></div>'+vals.slice(0,8).map(function(x){return '<a href="/property/home?pin='+encodeURIComponent(x.r.pams_pin||'')+'#sec-compare"><span>'+String(x.r.address||'Saved property')+'</span><b>'+x.v.score+' · '+x.v.band+'</b></a>';}).join('')+'</div></section>';
   }
   Object.assign(window,{carryCostVolatility:calc,toolCarryCostVolatility:card,toolCarryCostPortfolio:portfolio});
 })();
@@ -4035,7 +4035,7 @@ window.toolStatewideModivIntelligence = function (record) {
         return '<div class="wd-r' + (has ? '' : ' off') + '">' +
           '<span class="wd-rl"><a href="/property/robust/' + d.slug + '/" style="color:inherit;text-decoration:none">' + d.label + '</a><em>' + (d.note || '') + '</em></span>' +
           '<span class="wd-rb"><i style="width:' + (has ? d.score : 0) + '%"></i></span>' +
-          '<span class="wd-rn">' + (has ? d.score : '\u2014') + '</span>' +
+          '<span class="wd-rn">' + (has ? d.score : '-') + '</span>' +
           '<span class="wd-rw">' + d.weight + '%</span>' +
         '</div>';
       }).join('') +

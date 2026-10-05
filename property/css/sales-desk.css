@@ -1,7 +1,7 @@
 /* Watchdog Sales Desk: the consultant's own scoped view, and the owner view. */
 :root{--sd-bg:#f5f7fb;--sd-surface:#fff;--sd-ink:#111d38;--sd-text:#31435c;--sd-muted:#748198;--sd-line:#e2e7ef;--sd-soft:#edf1f6;--sd-blue:#2f6df6;--sd-navy:#183b84;--sd-blue-soft:#e9f0ff;--sd-success:#18a966;--sd-warning:#f5a20a;--sd-danger:#e34f5f}
 *,*::before,*::after{box-sizing:border-box}
-body.sd-page{margin:0;background:var(--sd-bg);color:var(--sd-text);font-family:"Plus Jakarta Sans",system-ui,-apple-system,"Segoe UI",Arial,sans-serif;font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+body.sd-page{margin:0;background:var(--sd-bg);color:var(--sd-text);font-family:"Libre Franklin",system-ui,-apple-system,"Segoe UI",Arial,sans-serif;font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden}
 .sd-page a{color:var(--sd-blue)}
 .sd-page h1,.sd-page h2,.sd-page h3,.sd-page p{margin-top:0}
 .sd-page h1{font-size:clamp(26px,5vw,36px);line-height:1.1;font-weight:800;letter-spacing:-.02em;color:var(--sd-ink);margin-bottom:8px}

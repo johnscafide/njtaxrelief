@@ -37,7 +37,7 @@ for (const x of G.terms) {
   if (!categories.has(x.category)) errors.push(x.slug + ' has unknown category ' + x.category);
   if (x.example.length < 70) errors.push(x.slug + ' example too thin');
   if (x.definition.length > 300) errors.push(x.slug + ' definition is too long for a card');
-  if (/[–—]/.test(x.term + x.definition + x.example)) errors.push(x.slug + ' uses an em or en dash');
+  if (/[–\u2014]/.test(x.term + x.definition + x.example)) errors.push(x.slug + ' uses an em or en dash');
   if (x.aliases && (!Array.isArray(x.aliases) || x.aliases.some((a) => a !== String(a).toLowerCase()))) errors.push(x.slug + ' aliases must be lowercase strings');
   if (!index.includes(`href="/glossary/${x.slug}"`)) errors.push(x.slug + ' is missing from the glossary page');
   if (!sitemap.includes(`/glossary/${x.slug}</loc>`)) errors.push(x.slug + ' is missing from sitemap-glossary.xml');

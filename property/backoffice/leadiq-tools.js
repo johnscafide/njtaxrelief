@@ -151,10 +151,10 @@ function rowElement(r,labels){
   const tr=document.createElement('tr');
   const name=document.createElement('b');name.className='li-name';name.textContent=r.full||'Unnamed';
   cell(tr,'',name);
-  cell(tr,labels[1],r.email||muted('—'));
-  cell(tr,labels[2],r.phone||muted('—'));
+  cell(tr,labels[1],r.email||muted('-'));
+  cell(tr,labels[2],r.phone||muted('-'));
   const addr=document.createElement('span');
-  if(r.street){addr.append(r.street);const sub=muted([r.city,r.state,r.zip].filter(Boolean).join(', '));sub.classList.add('li-sub');addr.append(sub)}else addr.append(muted('—'));
+  if(r.street){addr.append(r.street);const sub=muted([r.city,r.state,r.zip].filter(Boolean).join(', '));sub.classList.add('li-sub');addr.append(sub)}else addr.append(muted('-'));
   cell(tr,labels[3],addr);
   cell(tr,labels[4],r.source);
   cell(tr,labels[5],optInLabel(r.emailOptIn));

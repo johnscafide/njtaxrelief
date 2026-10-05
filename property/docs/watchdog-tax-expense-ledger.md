@@ -1,4 +1,4 @@
-# Watchdog Property Intelligence LLC — tax and expense ledger
+# Watchdog Property Intelligence LLC, tax and expense ledger
 
 _Last updated: 2026-08-25_
 
@@ -11,7 +11,7 @@ This is the working tax-time and business-expense record for Watchdog Property I
 - Formation date: **2026-08-25**
 - State: New Jersey
 - Management posture: single-member / member-managed
-- Primary NAICS used at formation: **513210 — Software Publishers**
+- Primary NAICS used at formation: **513210: Software Publishers**
 - EIN status: **issued 2026-08-25; IRS CP575G received; value intentionally not stored here**
 - NJ-REG: **completed 2026-08-25**
 - New Jersey business status: **active**
@@ -24,9 +24,9 @@ This is the working tax-time and business-expense record for Watchdog Property I
 
 | Date | Vendor / item | Business purpose | Tax-time category | Amount | Evidence / status |
 |---|---|---|---|---:|---|
-| 2026-08-25 | New Jersey Division of Revenue & Enterprise Services — LLC formation | Formation of Watchdog Property Intelligence LLC | Organizational / startup cost | TBD from actual receipt/charge | Formation completed. NJ statutory LLC certificate-of-formation fee is currently $100; record the actual amount paid, including any card/e-check convenience fee, from the receipt or posted transaction rather than assuming the total. |
-| 2026-08-25 | Internal Revenue Service — EIN application | Federal tax identification for the LLC | Administrative setup | $0 | EIN issued successfully; official CP575G notice received and retained outside the repository. IRS EIN application itself is free. |
-| 2026-08-25 | New Jersey Division of Revenue & Enterprise Services — NJ-REG / Sales Tax registration | State business and Sales & Use Tax registration | Administrative / tax registration | $0 | Registration completed; business confirmed active; Sales Tax Certificate of Authority made available for download. No registration fee was charged in the online process. |
+| 2026-08-25 | New Jersey Division of Revenue & Enterprise Services: LLC formation | Formation of Watchdog Property Intelligence LLC | Organizational / startup cost | TBD from actual receipt/charge | Formation completed. NJ statutory LLC certificate-of-formation fee is currently $100; record the actual amount paid, including any card/e-check convenience fee, from the receipt or posted transaction rather than assuming the total. |
+| 2026-08-25 | Internal Revenue Service: EIN application | Federal tax identification for the LLC | Administrative setup | $0 | EIN issued successfully; official CP575G notice received and retained outside the repository. IRS EIN application itself is free. |
+| 2026-08-25 | New Jersey Division of Revenue & Enterprise Services: NJ-REG / Sales Tax registration | State business and Sales & Use Tax registration | Administrative / tax registration | $0 | Registration completed; business confirmed active; Sales Tax Certificate of Authority made available for download. No registration fee was charged in the online process. |
 
 ## Items to track going forward
 

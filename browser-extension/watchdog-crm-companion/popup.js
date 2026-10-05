@@ -3,11 +3,11 @@ const VERSION='0.2.0';
 const CONNECT_URL='https://watchdogindex.com/agent/extension/connect/';
 const state={token:null,plan:null,contact:null,result:null,pairing:null,selectedFields:new Set(),fieldSearch:'',fieldCategory:'all',fieldSort:'recommended'};
 const $=(id)=>document.getElementById(id);
-const money=(v)=>Number.isFinite(Number(v))?new Intl.NumberFormat('en-US',{style:'currency',currency:'USD',maximumFractionDigits:0}).format(Number(v)):'—';
-const plain=(v)=>v===null||v===undefined||v===''?'—':String(v);
-const rate=(v)=>{const n=Number(v);if(!Number.isFinite(n))return'—';const pct=Math.abs(n)<1?n*100:n;return `${pct.toFixed(3).replace(/\.?0+$/,'')}%`;};
-const acres=(v)=>Number.isFinite(Number(v))?`${Number(v).toLocaleString('en-US',{maximumFractionDigits:3})} ac`:'—';
-const score=(v)=>{const n=Number(v);if(!Number.isFinite(n))return'—';return `${Math.round(n<=1?n*100:n)}/100`;};
+const money=(v)=>Number.isFinite(Number(v))?new Intl.NumberFormat('en-US',{style:'currency',currency:'USD',maximumFractionDigits:0}).format(Number(v)):'-';
+const plain=(v)=>v===null||v===undefined||v===''?'-':String(v);
+const rate=(v)=>{const n=Number(v);if(!Number.isFinite(n))return'-';const pct=Math.abs(n)<1?n*100:n;return `${pct.toFixed(3).replace(/\.?0+$/,'')}%`;};
+const acres=(v)=>Number.isFinite(Number(v))?`${Number(v).toLocaleString('en-US',{maximumFractionDigits:3})} ac`:'-';
+const score=(v)=>{const n=Number(v);if(!Number.isFinite(n))return'-';return `${Math.round(n<=1?n*100:n)}/100`;};
 const planLabel=(p)=>({agent:'Agent',pro:'Pro',pro_plus:'Pro+',teams:'Teams',developer:'Developer'})[p]||'Paid';
 const CATEGORY_ORDER=['Watchdog','Tax & assessment','Property','Sale history','Parcel & location','CRM note'];
 
@@ -137,15 +137,15 @@ function renderAlternatives(items){
 function renderMatch(result){
   show('wdc-state',false);show('wdc-error',false);show('wdc-match',true);const f=result.facts||{};
   $('wdc-address').textContent=f.address||'Matched property';$('wdc-place').textContent=[f.municipality,'NJ',f.zip].filter(Boolean).join(', ');$('wdc-confidence').textContent=`${Math.round((result.confidence||0)*100)}% match`;
-  const factRows=[['Watchdog Score',score(f.watchdog_score)],['Assessment',money(f.assessed_value)],['Annual tax',money(f.annual_property_tax)],['Block / Lot',[f.block,f.lot].filter(Boolean).join(' / ')||'—']];
-  const facts=$('wdc-facts');facts.innerHTML='';factRows.forEach(([label,value])=>{if(value==='—')return;const d=document.createElement('div');d.className='wdc-fact';const s=document.createElement('small');s.textContent=label;const b=document.createElement('b');b.textContent=value;d.append(s,b);facts.appendChild(d);});
+  const factRows=[['Watchdog Score',score(f.watchdog_score)],['Assessment',money(f.assessed_value)],['Annual tax',money(f.annual_property_tax)],['Block / Lot',[f.block,f.lot].filter(Boolean).join(' / ')||'-']];
+  const facts=$('wdc-facts');facts.innerHTML='';factRows.forEach(([label,value])=>{if(value==='-')return;const d=document.createElement('div');d.className='wdc-fact';const s=document.createElement('small');s.textContent=label;const b=document.createElement('b');b.textContent=value;d.append(s,b);facts.appendChild(d);});
   const sources=$('wdc-source-list');sources.innerHTML='';if(!(result.sources||[]).length){const d=document.createElement('div');d.className='wdc-source';d.textContent=result.source_summary||'Watchdog public-record warehouse';sources.appendChild(d);}else(result.sources||[]).forEach(src=>{const d=document.createElement('div');d.className='wdc-source';const label=src.kind?src.kind.replace(/_/g,' '):'Public record source';if(src.url){const a=document.createElement('a');a.href=src.url;a.target='_blank';a.rel='noreferrer';a.textContent=label;d.appendChild(a);}else d.textContent=label;if(src.recorded_at){const t=document.createElement('span');t.textContent=` · ${new Date(src.recorded_at).toLocaleDateString()}`;d.appendChild(t);}sources.appendChild(d);});
   renderAlternatives(result.alternatives||[]);
   initializeSelection(f);populateCategories(f);renderFields(f);
   track('field_previewed',{fields_count:availableDefs(f).length,match_status:'match'});
 }
 function availableDefs(f){
-  return FIELD_DEFS.filter(def=>def.key==='source_note'||(f[def.key]!==null&&f[def.key]!==undefined&&f[def.key]!==''&&def.format(f[def.key])!=='—'));
+  return FIELD_DEFS.filter(def=>def.key==='source_note'||(f[def.key]!==null&&f[def.key]!==undefined&&f[def.key]!==''&&def.format(f[def.key])!=='-'));
 }
 function initializeSelection(f){
   state.selectedFields=new Set(availableDefs(f).filter(def=>def.recommended).map(def=>def.key));

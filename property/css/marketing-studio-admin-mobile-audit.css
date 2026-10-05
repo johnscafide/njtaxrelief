@@ -53,7 +53,7 @@
   .dmaa-error p{font-size:15px;line-height:1.5}
   .dmaa-retry{display:inline-flex;align-items:center;justify-content:center;min-height:48px;margin-top:10px;padding:0 18px;border:0;border-radius:11px;background:#172033;color:#fff;font-size:15px;font-weight:800;text-decoration:none;cursor:pointer;touch-action:manipulation}
   .dmaa-retry:focus-visible,.dmaa-period button:focus-visible,.dmaa-segment:focus-visible,.dmaa-top nav a:focus-visible{outline:3px solid #2f6fed;outline-offset:2px}
-  #pl-toast.dmaa-toast-active{position:fixed;left:max(14px,env(safe-area-inset-left));right:max(14px,env(safe-area-inset-right));bottom:max(16px,env(safe-area-inset-bottom));z-index:80;display:block;max-width:none;padding:12px 14px;border-radius:12px;background:#172033;color:#fff;font-size:14px;line-height:1.4;font-weight:700;box-shadow:0 12px 30px rgba(18,32,55,.2);overflow-wrap:anywhere}
+  #pl-toast.dmaa-toast-active{position:fixed;left:max(14px,env(safe-area-inset-left));right:max(14px,env(safe-area-inset-right));bottom:max(16px,env(safe-area-inset-bottom));z-index:80;display:block;max-width:none;padding:12px 14px;border-radius:12px;background:#172033;color:#fff;font-size:14px;line-height:1.4;font-weight:700;box-shadow:0 2px 6px rgba(15,23,42,.08);overflow-wrap:anywhere}
 }
 @media (max-width:440px){
   .dmaa-top>a b{font-size:16px}

@@ -90,7 +90,7 @@ ul.items li { margin: 3px 0; }
 .fix { display: inline-flex; align-items: center; min-height: 44px; margin-top: 4px; padding: 0; border: 0; background: none; color: var(--muted); font: inherit; font-size: 14px; text-decoration: underline; text-underline-offset: 2px; cursor: pointer; }
 .fix:hover { color: var(--ink); }
 .add:focus-visible, .fix:focus-visible, dialog button:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
-dialog { width: min(520px, calc(100vw - 32px)); max-height: calc(100vh - 32px); padding: 0; border: 0; border-radius: 16px; box-shadow: 0 12px 40px rgba(16,24,40,.25); color: var(--ink); }
+dialog { width: min(520px, calc(100vw - 32px)); max-height: calc(100vh - 32px); padding: 0; border: 0; border-radius: 16px; box-shadow: 0 2px 6px rgba(15,23,42,.08); color: var(--ink); }
 dialog::backdrop { background: rgba(16,24,40,.45); }
 .dlg { padding: 22px 22px 18px; }
 .dlg h2 { margin: 0; font-size: 20px; font-weight: 600; }
@@ -137,7 +137,7 @@ dialog::backdrop { background: rgba(16,24,40,.45); }
 .chip.icon { width: 44px; padding: 0; justify-content: center; }
 .chip:focus-visible, .vote:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
 .chip[hidden] { display: none; }
-.toast { position: fixed; z-index: 20; left: 50%; bottom: 24px; transform: translateX(-50%); padding: 10px 18px; border-radius: 22px; background: var(--ink); color: #fff; font-size: 14px; box-shadow: 0 6px 20px rgba(16,24,40,.25); }
+.toast { position: fixed; z-index: 20; left: 50%; bottom: 24px; transform: translateX(-50%); padding: 10px 18px; border-radius: 22px; background: var(--ink); color: #fff; font-size: 14px; box-shadow: 0 2px 6px rgba(15,23,42,.08); }
 .toast[hidden] { display: none; }
 
 /* Helpful votes, Reddit-style, next to the town name. Buttons look small but keep a 44px tap area. */

@@ -20,7 +20,7 @@ This is property-triggered relationship intelligence. It is not a list of people
 4. The desk ranks `Now`, `This week`, and `Watch` queues.
 5. Each card explains the reason, confidence, source date, homeowner-safe language, and next action.
 6. The agent can open the property, add it to a watchlist/case, copy a conversation starter, snooze it, or record an outcome.
-7. The performance panel reports touches, replies, valuation requests, appointments, and listings—not vanity “lead” counts.
+7. The performance panel reports touches, replies, valuation requests, appointments, and listings, not vanity “lead” counts.
 
 ## Focus rules
 

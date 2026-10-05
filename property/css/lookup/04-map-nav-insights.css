@@ -8,7 +8,7 @@
   display: inline-flex; align-items: center; gap: 5px; white-space: nowrap;
   background: #fff; color: #0e2248; border: 1.5px solid #0e2248;
   border-radius: 20px; padding: 4px 10px 4px 7px;
-  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+  font-family: 'Libre Franklin', system-ui, sans-serif;
   font-size: 12px; font-weight: 800; letter-spacing: -.01em;
   box-shadow: 0 2px 8px rgba(14,34,72,.28); cursor: pointer;
   transition: transform .12s ease, background .12s ease, color .12s ease;
@@ -31,7 +31,7 @@
 .hd-stylebox { position: absolute; left: 12px; bottom: 24px; z-index: 500; }
 .hd-style {
   display: inline-flex; background: rgba(255,255,255,.96); border-radius: 8px;
-  padding: 3px; box-shadow: 0 3px 12px rgba(14,34,72,.22); backdrop-filter: blur(6px);
+  padding: 3px; box-shadow: 0 3px 12px rgba(14,34,72,.22); 
 }
 .hd-style button {
   border: none; background: none; font-family: inherit; font-size: 11.5px; font-weight: 700;
@@ -78,7 +78,7 @@ body.map-dark .hd-pin::after { border-top-color: #fff; }
 .wd-left, .wd-right { display: flex; align-items: center; gap: 26px; }
 .wd-right { justify-content: flex-end; }
 .wd-nav a, .wd-nav button {
-  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+  font-family: 'Libre Franklin', system-ui, sans-serif;
   font-size: 14.5px; font-weight: 600; color: #fff; text-decoration: none;
   background: none; border: none; padding: 0; cursor: pointer; white-space: nowrap;
   text-shadow: 0 1px 10px rgba(0,0,0,.45); transition: opacity .15s;
@@ -87,15 +87,15 @@ body.map-dark .hd-pin::after { border-top-color: #fff; }
 
 .wd-logo {
   display: inline-flex; align-items: center; gap: 9px; justify-self: center;
-  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+  font-family: 'Libre Franklin', system-ui, sans-serif;
   font-size: 21px !important; font-weight: 800 !important; letter-spacing: -.03em;
 }
 .wd-logo i { color: var(--gold); font-size: 22px; }
 
 /* solid state, set by script once past the hero */
 .wd-nav.solid {
-  position: fixed; background: rgba(255,255,255,.97); backdrop-filter: blur(10px);
-  box-shadow: 0 1px 0 var(--border), 0 4px 18px rgba(14,34,72,.07);
+  position: fixed; background: rgba(255,255,255,.97); 
+  box-shadow: 0 1px 0 var(--border), 0 2px 6px rgba(15,23,42,.08);
 }
 .wd-nav.solid .wd-nav-in { padding: 13px 26px; }
 .wd-nav.solid a, .wd-nav.solid button { color: var(--navy-dark); text-shadow: none; }
@@ -129,7 +129,7 @@ body.nav-solid .wd-nav a, body.nav-solid .wd-nav button, body.nav-solid .wd-logo
   margin-bottom: 16px; }
 .ins-kicker { display: inline-block; font-size: 10.5px; font-weight: 800; text-transform: uppercase;
   letter-spacing: .1em; color: var(--gold-dark, #8a6f14); margin-bottom: 8px; }
-.ins-lead h3 { font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+.ins-lead h3 { font-family: 'Libre Franklin', system-ui, sans-serif;
   font-size: 25px; font-weight: 800; letter-spacing: -.028em; line-height: 1.22;
   color: var(--navy-dark); margin: 0 0 10px; }
 .ins-lead p { font-size: 15px; line-height: 1.7; color: #5a6070; margin: 0 0 10px; }
@@ -143,7 +143,7 @@ body.nav-solid .wd-nav a, body.nav-solid .wd-nav button, body.nav-solid .wd-logo
 .ins-list > a:first-child, .ins-list > article:first-child { padding-top: 0; }
 .ins-thumb { width: 128px; height: 86px; flex-shrink: 0; border-radius: 8px;
   background-size: cover; background-position: center; }
-.ins-list h4 { font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+.ins-list h4 { font-family: 'Libre Franklin', system-ui, sans-serif;
   font-size: 16px; font-weight: 700; letter-spacing: -.02em; line-height: 1.32;
   color: var(--navy-dark); margin: 0 0 7px; }
 .ins-list a:hover h4 { color: var(--navy); }
@@ -154,14 +154,14 @@ body.nav-solid .wd-nav a, body.nav-solid .wd-nav button, body.nav-solid .wd-logo
 .ins-glance { max-width: 1120px; margin: 40px auto 0; background: #f6f8fc;
   border-radius: 14px; padding: 26px 30px; }
 .ins-glance-h { margin-bottom: 22px; }
-.ins-glance-h b { display: block; font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+.ins-glance-h b { display: block; font-family: 'Libre Franklin', system-ui, sans-serif;
   font-size: 19px; font-weight: 800; letter-spacing: -.02em; color: var(--navy-dark); }
 .ins-glance-h span { font-size: 13px; color: #8a93a6; }
 .ins-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 24px; }
 .ins-stats > div { display: flex; align-items: center; gap: 13px; }
 .ins-stats i { width: 38px; height: 38px; flex-shrink: 0; border-radius: 50%; background: #fff;
   display: flex; align-items: center; justify-content: center; color: var(--navy); font-size: 15px; }
-.ins-stats b { display: block; font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+.ins-stats b { display: block; font-family: 'Libre Franklin', system-ui, sans-serif;
   font-size: 22px; font-weight: 800; letter-spacing: -.03em; color: var(--navy-dark); line-height: 1.1; }
 .ins-stats span { font-size: 12px; color: #5a6070; }
 .ins-src { font-size: 12px; color: #8a93a6; margin-top: 22px; padding-top: 16px;

@@ -1,11 +1,11 @@
-/* Property-detail map — compact contextual card in the supporting rail. */
+/* Property-detail map, compact contextual card in the supporting rail. */
 #plm-rail .wd-property-map-view{
   margin-top:16px;
   overflow:hidden;
   border:1px solid #e4e9f1;
   border-radius:16px;
   background:#fff;
-  box-shadow:0 8px 22px rgba(10,34,72,.06);
+  box-shadow:0 2px 6px rgba(15,23,42,.08);
 }
 #plm-rail .wd-property-map-head{
   display:flex;
@@ -17,12 +17,12 @@
 #plm-rail .wd-property-map-head>div{min-width:0;display:grid;gap:3px}
 #plm-rail .wd-property-map-head small{
   color:#66738a;
-  font:800 9px/1.1 "Plus Jakarta Sans",sans-serif;
+  font:800 9px/1.1 "Libre Franklin",sans-serif;
   letter-spacing:.12em;
 }
 #plm-rail .wd-property-map-head strong{
   color:#10294b;
-  font:800 16px/1.2 "Plus Jakarta Sans",sans-serif;
+  font:800 16px/1.2 "Libre Franklin",sans-serif;
   letter-spacing:-.025em;
 }
 #plm-rail .wd-property-map-head span{
@@ -82,7 +82,7 @@ html.wd-index-mapless #plm-rail .wd-property-map-leaflet.leaflet-container{
   border-radius:50%;
   background:#fff;
   color:#153d7c;
-  box-shadow:0 10px 26px rgba(4,18,39,.34);
+  box-shadow:0 2px 6px rgba(15,23,42,.08);
   font-size:21px;
 }
 #plm-rail .wd-property-leaflet-pin:after{

@@ -8,7 +8,7 @@ html body[data-sidebar-page="scan"]{
   --sb-bg:#f3f1ec;--sb-surface:#fbfaf7;--sb-line:#e3dfd6;--sb-ink:#0e2248;--sb-muted:#5d6877;
   --sb-navy:#0e2248;--sb-blue:#1456a0;--sb-blue-bright:#2f6df6;--sb-gold:#b8972a;
   --sb-sky:#e3edfb;--sb-sky-deep:#b9d0f2;--sb-teal:#dff1ec;--sb-teal-deep:#9fd3c5;--sb-sand:#f6efd9;--sb-sand-deep:#e4cf8e;
-  --sb-display:"Plus Jakarta Sans",Inter,system-ui,sans-serif;
+  --sb-display:"Libre Franklin",system-ui,sans-serif;
 }
 html body[data-sidebar-page="scan"],
 html body[data-sidebar-page="scan"] .db-workspace,

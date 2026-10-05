@@ -10,7 +10,7 @@
   background: #fff; border: 1px solid var(--border); border-radius: 16px;
   transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
 }
-.lp-tool:hover { transform: translateY(-3px); box-shadow: 0 14px 34px rgba(14,34,72,.13); border-color: var(--navy-light); }
+.lp-tool:hover { transform: translateY(-3px); box-shadow: 0 2px 6px rgba(15,23,42,.08); border-color: var(--navy-light); }
 .lp-tool.feat { grid-column: span 2; flex-direction: row; }
 .lp-tool.feat .lp-tool-img { flex: 0 0 46%; background-size: cover; background-position: center; min-height: 240px; }
 .lp-tool-body { padding: 24px; flex: 1; display: flex; flex-direction: column; }

@@ -51,8 +51,8 @@ assert.equal(
 assert.match(migration, /where not t\.curated_override/, 'cleanup leaves person-checked rows alone');
 assert.match(migration, /coalesce\(t\.metadata->'unchecked'/, 'cleanup is safe to re-run');
 assert.match(migration, /and i\.payload \? 'requirement_state'/, 'hand-entered transaction evidence is untouched');
-assert.doesNotMatch(migration, /[–—]/, 'no em or en dashes in customer copy');
-assert.doesNotMatch(fn.match(/const note=[^\n]+/)[0], /[–—]/, 'no em or en dashes in customer copy');
+assert.doesNotMatch(migration, /[–\u2014]/, 'no em or en dashes in customer copy');
+assert.doesNotMatch(fn.match(/const note=[^\n]+/)[0], /[–\u2014]/, 'no em or en dashes in customer copy');
 
 // ---------- where agents see checked towns ----------
 // Transactions evidence view: status comes from the checked state, contacts become links after escaping.

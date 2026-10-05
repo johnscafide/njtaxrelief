@@ -4,7 +4,7 @@ body[data-sidebar-page="data-center"].wdx-modern .dc-shell{display:grid!importan
 body[data-sidebar-page="data-center"].wdx-modern .dc-filter{position:sticky!important;top:100px!important;height:auto!important;max-height:calc(100vh - 118px)!important;overflow:auto!important;padding:20px!important;border:1px solid var(--wdx-line)!important;border-radius:16px!important;background:#fff!important;box-shadow:var(--wdx-shadow)!important}
 body[data-sidebar-page="data-center"] .dc-brand{padding-bottom:14px;border-bottom:1px solid var(--wdx-soft)}
 body[data-sidebar-page="data-center"] .dc-brand span,body[data-sidebar-page="data-center"] .dc-hero span{display:block!important;font-size:9px!important;letter-spacing:.13em!important;color:#7d8ba0!important;font-weight:800!important}
-body[data-sidebar-page="data-center"] .dc-brand h2{font:800 24px/1.08 "Plus Jakarta Sans",sans-serif!important;letter-spacing:-.035em!important;color:#182944!important;margin:6px 0 8px!important}
+body[data-sidebar-page="data-center"] .dc-brand h2{font:800 24px/1.08 "Libre Franklin",sans-serif!important;letter-spacing:-.035em!important;color:#182944!important;margin:6px 0 8px!important}
 body[data-sidebar-page="data-center"] .dc-brand p{font-size:11px!important;line-height:1.55!important;color:#78869a!important;margin:0!important}
 body[data-sidebar-page="data-center"] .dc-filter label{display:block!important;margin-top:15px!important;font-size:9px!important;font-weight:800!important;text-transform:uppercase!important;color:#728198!important;letter-spacing:.08em!important}
 body[data-sidebar-page="data-center"] .dc-filter input,body[data-sidebar-page="data-center"] .dc-filter select{width:100%!important;min-height:44px!important;margin-top:6px!important;border:1px solid var(--wdx-line)!important;border-radius:10px!important;padding:0 12px!important;background:#fbfcfe!important;color:#263954!important;font-size:12px!important;font-weight:600!important;box-shadow:none!important}
@@ -13,21 +13,21 @@ body[data-sidebar-page="data-center"] #dc-clear{width:100%!important;min-height:
 body[data-sidebar-page="data-center"] #dc-clear:hover{background:#edf2f8!important;color:#28405f!important}
 
 body[data-sidebar-page="data-center"].wdx-modern .dc-main{padding:0!important;min-width:0!important}
-body[data-sidebar-page="data-center"] .dc-hero{display:grid!important;grid-template-columns:minmax(0,1fr) 260px!important;gap:28px!important;align-items:center!important;min-height:190px!important;padding:28px 30px!important;border:1px solid #dfe7f0!important;border-radius:18px!important;background:linear-gradient(135deg,#142b50 0%,#234a86 54%,#3769d9 100%)!important;color:#fff!important;box-shadow:0 14px 38px rgba(30,59,111,.13)!important;overflow:hidden!important;position:relative!important}
+body[data-sidebar-page="data-center"] .dc-hero{display:grid!important;grid-template-columns:minmax(0,1fr) 260px!important;gap:28px!important;align-items:center!important;min-height:190px!important;padding:28px 30px!important;border:1px solid #dfe7f0!important;border-radius:18px!important;background:linear-gradient(135deg,#142b50 0%,#234a86 54%,#3769d9 100%)!important;color:#fff!important;box-shadow:0 2px 6px rgba(15,23,42,.08)!important;overflow:hidden!important;position:relative!important}
 body[data-sidebar-page="data-center"] .dc-hero:after{content:"";position:absolute;width:280px;height:280px;border-radius:50%;right:-105px;top:-130px;background:rgba(255,255,255,.075);pointer-events:none}
 body[data-sidebar-page="data-center"] .dc-hero span{color:#b9cdf7!important}
-body[data-sidebar-page="data-center"] .dc-hero h2{font:800 clamp(28px,3vw,44px)/1.02 "Plus Jakarta Sans",sans-serif!important;letter-spacing:-.05em!important;color:#fff!important;margin:8px 0 10px!important}
+body[data-sidebar-page="data-center"] .dc-hero h2{font:800 clamp(28px,3vw,44px)/1.02 "Libre Franklin",sans-serif!important;letter-spacing:-.05em!important;color:#fff!important;margin:8px 0 10px!important}
 body[data-sidebar-page="data-center"] .dc-hero h2 b{font:inherit!important;color:#fff!important}
 body[data-sidebar-page="data-center"] .dc-hero p{margin:0!important;max-width:760px!important;color:#d5e1fb!important;font-size:13px!important;line-height:1.55!important}
-body[data-sidebar-page="data-center"] .dc-progress{min-width:0!important;position:relative!important;z-index:2!important;padding:18px!important;border:1px solid rgba(255,255,255,.14)!important;border-radius:14px!important;background:rgba(255,255,255,.09)!important;backdrop-filter:blur(8px)!important}
-body[data-sidebar-page="data-center"] .dc-progress>b{display:block!important;font:800 36px/1 "Plus Jakarta Sans",sans-serif!important;letter-spacing:-.045em!important;color:#fff!important}
+body[data-sidebar-page="data-center"] .dc-progress{min-width:0!important;position:relative!important;z-index:2!important;padding:18px!important;border:1px solid rgba(255,255,255,.14)!important;border-radius:14px!important;background:rgba(255,255,255,.97)!important;}
+body[data-sidebar-page="data-center"] .dc-progress>b{display:block!important;font:800 36px/1 "Libre Franklin",sans-serif!important;letter-spacing:-.045em!important;color:#fff!important}
 body[data-sidebar-page="data-center"] .dc-progress span{display:block!important;margin-top:5px!important;font-size:10px!important;color:#c9d7f5!important}
 body[data-sidebar-page="data-center"] .dc-progress i{display:block!important;height:8px!important;background:rgba(255,255,255,.18)!important;border-radius:999px!important;margin-top:15px!important;overflow:hidden!important}
 body[data-sidebar-page="data-center"] .dc-progress em{display:block!important;height:100%!important;background:linear-gradient(90deg,#75b8ff,#9be7cb)!important;border-radius:inherit!important}
 
 body[data-sidebar-page="data-center"] .dc-stats{display:grid!important;grid-template-columns:repeat(5,minmax(0,1fr))!important;gap:10px!important;margin:12px 0!important}
 body[data-sidebar-page="data-center"] .dc-stat{min-height:92px!important;padding:16px!important;border:1px solid var(--wdx-line)!important;border-radius:14px!important;background:#fff!important;box-shadow:var(--wdx-shadow)!important;display:flex!important;flex-direction:column!important;justify-content:center!important}
-body[data-sidebar-page="data-center"] .dc-stat b{display:block!important;font:800 24px/1 "Plus Jakarta Sans",sans-serif!important;color:#172943!important;letter-spacing:-.04em!important}
+body[data-sidebar-page="data-center"] .dc-stat b{display:block!important;font:800 24px/1 "Libre Franklin",sans-serif!important;color:#172943!important;letter-spacing:-.04em!important}
 body[data-sidebar-page="data-center"] .dc-stat span{display:block!important;margin-top:8px!important;font-size:9px!important;color:#7e8ca0!important;text-transform:uppercase!important;letter-spacing:.06em!important}
 
 body[data-sidebar-page="data-center"] .dc-selected{margin:0 0 12px!important;padding:17px 18px!important;border:1px solid var(--wdx-line)!important;border-radius:15px!important;background:#fff!important;box-shadow:var(--wdx-shadow)!important}

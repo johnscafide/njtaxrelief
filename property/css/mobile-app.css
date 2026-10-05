@@ -10,8 +10,8 @@
 
   /* Floating app navigation: safe-area aware, large touch targets. */
   .db-sidebar{background:rgba(8,29,55,.96);border:1px solid rgba(255,255,255,.09);border-radius:22px;
-    bottom:max(9px,env(safe-area-inset-bottom));box-shadow:0 12px 36px rgba(7,23,44,.28);height:72px;
-    left:10px;padding:6px 7px;right:10px;width:auto;-webkit-backdrop-filter:blur(18px);backdrop-filter:blur(18px)}
+    bottom:max(9px,env(safe-area-inset-bottom));box-shadow:0 2px 6px rgba(15,23,42,.08);height:72px;
+    left:10px;padding:6px 7px;right:10px;width:auto;}
   .db-sidebar .pn,.db-side-link{border-radius:var(--radius-lg);color:#9fb0c5;font-size:var(--type-xs);font-weight:750;gap:5px;min-height:58px;max-width:none;padding:7px 3px}
   .db-sidebar .pn i,.db-side-link i{font-size:var(--type-lg)}
   .db-side-mobile .pn.on{background:rgba(45,118,137,.31);color:#fff}
@@ -59,7 +59,7 @@
   /* Agent Intel becomes a true app sheet instead of a compressed report card. */
   .mobile-intel-overlay,.hm-mobile-intel{align-items:flex-end;background:rgba(5,17,32,.5);display:flex;inset:0;justify-content:center;opacity:0;padding:0;pointer-events:none;position:fixed;z-index:5000}
   .mobile-intel-overlay.open,.hm-mobile-intel.open{opacity:1;pointer-events:auto}
-  .mobile-intel-sheet{background:#fff;border:0;border-radius:28px 28px 0 0;box-shadow:0 -18px 50px rgba(7,24,46,.20);box-sizing:border-box;max-height:calc(100dvh - 34px);max-width:none;overflow:auto;overscroll-behavior:contain;padding:50px 22px calc(124px + env(safe-area-inset-bottom));scroll-padding-bottom:142px;transform:translateY(24px);width:100%}
+  .mobile-intel-sheet{background:#fff;border:0;border-radius:28px 28px 0 0;box-shadow:0 2px 6px rgba(15,23,42,.08);box-sizing:border-box;max-height:calc(100dvh - 34px);max-width:none;overflow:auto;overscroll-behavior:contain;padding:50px 22px calc(124px + env(safe-area-inset-bottom));scroll-padding-bottom:142px;transform:translateY(24px);width:100%}
   .mobile-intel-overlay.open .mobile-intel-sheet{transform:none}
   .mobile-intel-bar{height:5px;top:10px;width:46px}
   .mobile-intel-close{background:#edf1f4;height:44px;right:18px;top:20px;width:44px}

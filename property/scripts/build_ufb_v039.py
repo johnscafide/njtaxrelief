@@ -146,7 +146,7 @@ def main():
     def add(c, field_id, label, category, unit, professions, glossary_term=None):
         group = group_by_col[c]
         heading = rows[5].get(c)
-        desc = f"NJ DCA User Friendly Budget 2025 Summary source field: {group} — {heading}."
+        desc = f"NJ DCA User Friendly Budget 2025 Summary source field: {group} - {heading}."
         if glossary_term:
             gd = glossary.get(slug(glossary_term))
             if gd:

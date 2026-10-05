@@ -301,7 +301,7 @@ function countyPage(c) {
     <div class="wdp-table-wrap">
       <table class="wdp-table tt-table" data-sortable>
         <thead><tr><th scope="col"><button type="button" data-sort="name">Town</button></th><th scope="col" class="wdp-num"><button type="button" data-sort="bill">Typical bill</button></th><th scope="col" class="wdp-num"><button type="button" data-sort="rate">Tax rate</button></th><th scope="col">2026 revaluation</th></tr></thead>
-        <tbody>${rows.map(({ t, f }) => `<tr data-name="${esc(t.name.toLowerCase())}" data-bill="${f.bill.median}" data-rate="${f.rate ? f.rate.value : ''}"><td><a href="${esc(t.path)}">${esc(t.name)}</a></td><td class="wdp-num">${money(f.bill.median)}</td><td class="wdp-num">${f.rate ? rate(f.rate.value) : '—'}</td><td>${f.reval2026 ? 'Yes' : ''}</td></tr>`).join('')}</tbody>
+        <tbody>${rows.map(({ t, f }) => `<tr data-name="${esc(t.name.toLowerCase())}" data-bill="${f.bill.median}" data-rate="${f.rate ? f.rate.value : ''}"><td><a href="${esc(t.path)}">${esc(t.name)}</a></td><td class="wdp-num">${money(f.bill.median)}</td><td class="wdp-num">${f.rate ? rate(f.rate.value) : '-'}</td><td>${f.reval2026 ? 'Yes' : ''}</td></tr>`).join('')}</tbody>
       </table>
     </div>
     <p class="wdp-fine">Tax rate is the ${rows[0] && rows[0].f.rate ? rows[0].f.rate.year : 'latest'} general rate per $100 of assessed value. Rates aren't comparable town to town because towns assess at different levels; the bill is the better comparison.</p>

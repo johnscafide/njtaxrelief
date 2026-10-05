@@ -13,11 +13,11 @@ This folder is the authoritative internal handoff for Watchdog branding, product
 
 ## Files
 
-- `index.html` — developer-only visual brand center.
-- `brand-center.css` — styles for the internal brand center itself.
-- `brand-center.js` — protected-page reveal, copy helpers, and machine-spec status.
-- `brand-system.json` — machine-readable source of truth for tokens and implementation rules.
-- `LLM-BRAND-GUIDE.md` — concise instructions to place in context before another LLM edits Watchdog.
+- `index.html` - developer-only visual brand center.
+- `brand-center.css` - styles for the internal brand center itself.
+- `brand-center.js` - protected-page reveal, copy helpers, and machine-spec status.
+- `brand-system.json` - machine-readable source of truth for tokens and implementation rules.
+- `LLM-BRAND-GUIDE.md` - concise instructions to place in context before another LLM edits Watchdog.
 
 ## Authority order
 
@@ -42,7 +42,7 @@ The default visual language is:
 - deep navy ink
 - Watchdog blue as the main action color
 - restrained semantic green / amber / red
-- Plus Jakarta Sans for display and product UI/body text
+- Libre Franklin for display and product UI/body text
 - subtle borders and shadows rather than heavy card chrome
 - rounded geometry, generally 8–18px
 - strong information hierarchy and generous whitespace

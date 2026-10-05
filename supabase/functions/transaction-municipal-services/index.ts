@@ -13,7 +13,7 @@ const respond=(r:Request,s:number,b:unknown)=>new Response(JSON.stringify(b),{st
 const district=(tx:Row)=>{const p=clean(tx.pams_pin,100);return /^\d{4}/.test(p)?p.slice(0,4):""};
 const families=(r:Row)=>Array.isArray(r.evidence_families)?r.evidence_families.map((x:unknown)=>clean(x,80)):[];
 const normalize=(v:unknown)=>clean(v,160).toUpperCase().replace(/\b(TOWNSHIP|TWP\.?|BOROUGH|BORO\.?|CITY|TOWN|VILLAGE)\b/g,"").replace(/[^A-Z0-9]/g,"");
-function decodeHtml(s:string){return s.replace(/&amp;/gi,"&").replace(/&nbsp;/gi," ").replace(/&#8217;|&rsquo;/gi,"'").replace(/&#8211;|&ndash;/gi,"-").replace(/&#8212;|&mdash;/gi,"-").replace(/&#\d+;/g," ").replace(/\s+/g," ").trim()}
+function decodeHtml(s:string){return s.replace(/&amp;/gi,"&").replace(/&nbsp;/gi," ").replace(/&#8217;|&rsquo;/gi,"'").replace(/&#8211;|&ndash;/gi,"-").replace(/-|-/gi,"-").replace(/&#\d+;/g," ").replace(/\s+/g," ").trim()}
 function textCell(s:string){return decodeHtml(s.replace(/<br\s*\/?\s*>/gi," ").replace(/<[^>]+>/g," "))}
 let coordinatorHtml:string|null=null;
 async function coordinatorFor(tx:Row){

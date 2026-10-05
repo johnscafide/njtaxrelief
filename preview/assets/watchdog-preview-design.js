@@ -191,7 +191,7 @@
   }
   function renderKpi(metric) {
     var coverage = metric.available_count + ' of ' + metric.property_count + ' properties';
-    return '<article class="wdp-kpi"><span>' + escape(metric.label) + '</span><strong>' + (metric.value == null ? '—' : currency(metric.value)) + '</strong><small>' + escape(metric.method) + ' ' + escape(coverage) + ' have an available value' + (metric.complete ? '' : '; incomplete values are excluded') + '</small></article>';
+    return '<article class="wdp-kpi"><span>' + escape(metric.label) + '</span><strong>' + (metric.value == null ? '-' : currency(metric.value)) + '</strong><small>' + escape(metric.method) + ' ' + escape(coverage) + ' have an available value' + (metric.complete ? '' : '; incomplete values are excluded') + '</small></article>';
   }
   function renderDashboard(data) {
     var heading = byId('wdp-heading');
@@ -211,7 +211,7 @@
     byId('wdp-governance').innerHTML = governanceFootnote(data);
   }
   function renderFact(label, marker) {
-    if (!marker) return '<div class="wdp-fact"><span>' + escape(label) + '</span><strong>—</strong><small>Marker not returned</small></div>';
+    if (!marker) return '<div class="wdp-fact"><span>' + escape(label) + '</span><strong>-</strong><small>Marker not returned</small></div>';
     var currencyFact = /assessment|property tax|market value/i.test(label);
     return '<div class="wdp-fact"><span>' + escape(label) + '</span><strong>' + markerValue(marker, currencyFact ? 'currency' : '') + '</strong><small>' + escape(stateLabel(marker)) + ' · ' + escape(sourceLabel(marker)) + '</small></div>';
   }

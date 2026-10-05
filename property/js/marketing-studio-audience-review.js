@@ -2,16 +2,16 @@
 const $=(s,r=document)=>r.querySelector(s),$$=(s,r=document)=>Array.from(r.querySelectorAll(s));
 const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const fmt=n=>Number(n||0).toLocaleString();
-const money=n=>n==null||n===''?'—':'$'+Number(n).toLocaleString('en-US',{maximumFractionDigits:0});
-const num=n=>n==null||n===''?'—':Number(n).toLocaleString('en-US',{maximumFractionDigits:2});
-const score=n=>n==null||n===''?'—':Number(n).toLocaleString('en-US',{maximumFractionDigits:1});
+const money=n=>n==null||n===''?'-':'$'+Number(n).toLocaleString('en-US',{maximumFractionDigits:0});
+const num=n=>n==null||n===''?'-':Number(n).toLocaleString('en-US',{maximumFractionDigits:2});
+const score=n=>n==null||n===''?'-':Number(n).toLocaleString('en-US',{maximumFractionDigits:1});
 const emptyFilters=()=>({classes:[],tenure_buckets:[],include_unknown:false,year_built_min:null,year_built_max:null,assessment_min:null,assessment_max:null,tax_min:null,tax_max:null,acres_min:null,acres_max:null,units_min:null,units_max:null,sale_year_min:null,sale_year_max:null,watchdog_score_min:null,tax_pressure_min:null,revaluation_risk_min:null,uniformity_score_min:null,keyword:''});
 const S={client:null,campaignId:null,keys:[],filteredKeys:[],selected:new Set(),page:1,pageSize:50,search:'',sort:'address',dir:'asc',rows:[],total:0,pages:1,sourceLabel:'Current campaign audience',loading:false,filters:emptyFilters(),insights:{}};
 
 function toast(m){const t=$('#pl-toast')||$('#ms-toast');if(!t)return;t.textContent=m;t.style.display='block';clearTimeout(window.__msarToast);window.__msarToast=setTimeout(()=>t.style.display='none',3800)}
 async function rpc(name,args={}){const r=await S.client.rpc(name,args);if(r.error)throw r.error;return r.data}
 function campaign(){return S.campaignId||new URLSearchParams(location.search).get('campaign')||''}
-function propClassLabel(v){return v==='2'?'Residential':v==='4A'?'Commercial':v==='4B'?'Industrial':v==='4C'?'Apartments':v||'—'}
+function propClassLabel(v){return v==='2'?'Residential':v==='4A'?'Commercial':v==='4B'?'Industrial':v==='4C'?'Apartments':v||'-'}
 function fieldNum(id){const el=$(id),raw=String(el?.value??'').trim();if(raw==='')return null;const n=Number(raw.replace(/[$,]/g,''));return Number.isFinite(n)?n:null}
 function activeFilterCount(){
   let n=0;
@@ -166,7 +166,7 @@ function insight(label,value,sub=''){return `<div><span>${esc(label)}</span><b>$
 function paintInsights(){
  const i=S.insights||{},host=$('#msar-insights');if(!host)return;
  const fc=Number(i.filtered_count||0),owned=Number(i.owned_15_plus||0),ownedPct=fc?Math.round(owned/fc*100):0;
- host.innerHTML=`${insight('Matching properties',fmt(fc),'after current filters')}${insight('Median assessment',money(i.median_assessment))}${insight('Median annual tax',money(i.median_tax))}${insight('Median year built',i.median_year_built==null?'—':String(Math.round(Number(i.median_year_built))))}${insight('Avg Watchdog score',score(i.avg_watchdog_score),'when observed')}${insight('15+ years since sale',fmt(owned),fc?`${ownedPct}% of matches`:'')}`;
+ host.innerHTML=`${insight('Matching properties',fmt(fc),'after current filters')}${insight('Median assessment',money(i.median_assessment))}${insight('Median annual tax',money(i.median_tax))}${insight('Median year built',i.median_year_built==null?'-':String(Math.round(Number(i.median_year_built))))}${insight('Avg Watchdog score',score(i.avg_watchdog_score),'when observed')}${insight('15+ years since sale',fmt(owned),fc?`${ownedPct}% of matches`:'')}`;
 }
 async function loadPage(){
  if(S.loading)return;S.loading=true;
@@ -179,8 +179,8 @@ async function loadPage(){
  finally{S.loading=false}
 }
 function rowHTML(r){
- const checked=S.selected.has(r.pams_pin),sale=r.last_sale_year?`${r.last_sale_year}${r.last_sale_price?` · ${money(r.last_sale_price)}`:''}`:'—';
- return `<tr data-msar-row="${esc(r.pams_pin)}" class="${checked?'is-included':'is-excluded'}"><td class="check"><input type="checkbox" data-msar-check="${esc(r.pams_pin)}" ${checked?'checked':''}></td><td><b>${esc(r.address||'Address unavailable')}</b><small>${esc(r.pams_pin)}</small></td><td>${esc(r.town||'—')}<small>${esc([r.county,r.zip].filter(Boolean).join(' · '))}</small></td><td>${esc(propClassLabel(r.prop_class))}</td><td>${r.year_built||'—'}</td><td>${esc(r.building_desc||'—')}</td><td>${num(r.acres)}</td><td>${r.dwelling_units??'—'}</td><td>${money(r.assessed_value)}</td><td>${money(r.last_year_tax)}</td><td>${esc(sale)}</td><td>${r.years_since_sale??'—'}</td><td><strong class="msar-signal">${score(r.watchdog_score)}</strong></td><td><strong class="msar-signal">${score(r.tax_pressure)}</strong></td><td><button type="button" class="msar-inspect" data-msar-inspect="${esc(r.pams_pin)}">Inspect</button></td></tr>`;
+ const checked=S.selected.has(r.pams_pin),sale=r.last_sale_year?`${r.last_sale_year}${r.last_sale_price?` · ${money(r.last_sale_price)}`:''}`:'-';
+ return `<tr data-msar-row="${esc(r.pams_pin)}" class="${checked?'is-included':'is-excluded'}"><td class="check"><input type="checkbox" data-msar-check="${esc(r.pams_pin)}" ${checked?'checked':''}></td><td><b>${esc(r.address||'Address unavailable')}</b><small>${esc(r.pams_pin)}</small></td><td>${esc(r.town||'-')}<small>${esc([r.county,r.zip].filter(Boolean).join(' · '))}</small></td><td>${esc(propClassLabel(r.prop_class))}</td><td>${r.year_built||'-'}</td><td>${esc(r.building_desc||'-')}</td><td>${num(r.acres)}</td><td>${r.dwelling_units??'-'}</td><td>${money(r.assessed_value)}</td><td>${money(r.last_year_tax)}</td><td>${esc(sale)}</td><td>${r.years_since_sale??'-'}</td><td><strong class="msar-signal">${score(r.watchdog_score)}</strong></td><td><strong class="msar-signal">${score(r.tax_pressure)}</strong></td><td><button type="button" class="msar-inspect" data-msar-inspect="${esc(r.pams_pin)}">Inspect</button></td></tr>`;
 }
 function paintRows(){
  const body=$('#msar-body');if(!body)return;
@@ -189,13 +189,13 @@ function paintRows(){
  $$('[data-msar-inspect]',body).forEach(x=>x.onclick=()=>inspect(x.dataset.msarInspect));
 }
 function paintPager(){$('#msar-page').textContent=`Page ${S.page} of ${S.pages} · ${fmt(S.total)} matching`;$('#msar-prev').disabled=S.page<=1;$('#msar-next').disabled=S.page>=S.pages}
-function stat(label,value){return `<div><span>${esc(label)}</span><b>${esc(value==null||value===''?'—':value)}</b></div>`}
+function stat(label,value){return `<div><span>${esc(label)}</span><b>${esc(value==null||value===''?'-':value)}</b></div>`}
 function inspect(pin){
  const r=S.rows.find(x=>x.pams_pin===pin),host=$('#msar-detail');if(!r||!host)return;
  const deed=r.years_since_sale!=null?`${r.years_since_sale} years since recorded sale`:'Recorded sale date unavailable';
- const eff=Number(r.assessed_value)>0&&r.last_year_tax!=null?`${(Number(r.last_year_tax)/Number(r.assessed_value)*100).toFixed(3)}%`:'—';
+ const eff=Number(r.assessed_value)>0&&r.last_year_tax!=null?`${(Number(r.last_year_tax)/Number(r.assessed_value)*100).toFixed(3)}%`:'-';
  host.hidden=false;
- host.innerHTML=`<div class="msar-detail-head"><div><span>PROPERTY DETAIL</span><h3>${esc(r.address||r.pams_pin)}</h3><p>${esc([r.town,r.county,r.zip].filter(Boolean).join(' · '))}</p></div><button type="button" id="msar-detail-close">×</button></div><div class="msar-detail-grid">${stat('Watchdog score',score(r.watchdog_score))}${stat('Tax pressure',score(r.tax_pressure))}${stat('Revaluation risk',score(r.revaluation_risk))}${stat('Uniformity score',score(r.uniformity_score))}${stat('Property class',propClassLabel(r.prop_class))}${stat('Year built',r.year_built)}${stat('Building',r.building_desc)}${stat('Square feet',r.square_feet?fmt(r.square_feet):'Not in current statewide parcel feed')}${stat('Acres',r.acres)}${stat('Dwelling units',r.dwelling_units)}${stat('Assessment',money(r.assessed_value))}${stat('Land value',money(r.land_value))}${stat('Improvement value',money(r.improvement_value))}${stat('Last year tax',money(r.last_year_tax))}${stat('Tax / assessment rate',eff)}${stat('Last sale',r.last_sale_year?`${r.last_sale_year}${r.last_sale_price?` · ${money(r.last_sale_price)}`:''}`:'—')}${stat('Recorded-sale tenure signal',deed)}${stat('Block / Lot',[r.block,r.lot,r.qualifier].filter(Boolean).join(' / '))}</div><div class="msar-detail-note"><i class="fas fa-circle-info"></i><span>Years since sale comes from recorded deed data. It is useful as an ownership-duration signal, but it does not prove the current owner has occupied the property for that full period. Watchdog signals appear only when a current observation is available.</span></div>`;
+ host.innerHTML=`<div class="msar-detail-head"><div><span>PROPERTY DETAIL</span><h3>${esc(r.address||r.pams_pin)}</h3><p>${esc([r.town,r.county,r.zip].filter(Boolean).join(' · '))}</p></div><button type="button" id="msar-detail-close">×</button></div><div class="msar-detail-grid">${stat('Watchdog score',score(r.watchdog_score))}${stat('Tax pressure',score(r.tax_pressure))}${stat('Revaluation risk',score(r.revaluation_risk))}${stat('Uniformity score',score(r.uniformity_score))}${stat('Property class',propClassLabel(r.prop_class))}${stat('Year built',r.year_built)}${stat('Building',r.building_desc)}${stat('Square feet',r.square_feet?fmt(r.square_feet):'Not in current statewide parcel feed')}${stat('Acres',r.acres)}${stat('Dwelling units',r.dwelling_units)}${stat('Assessment',money(r.assessed_value))}${stat('Land value',money(r.land_value))}${stat('Improvement value',money(r.improvement_value))}${stat('Last year tax',money(r.last_year_tax))}${stat('Tax / assessment rate',eff)}${stat('Last sale',r.last_sale_year?`${r.last_sale_year}${r.last_sale_price?` · ${money(r.last_sale_price)}`:''}`:'-')}${stat('Recorded-sale tenure signal',deed)}${stat('Block / Lot',[r.block,r.lot,r.qualifier].filter(Boolean).join(' / '))}</div><div class="msar-detail-note"><i class="fas fa-circle-info"></i><span>Years since sale comes from recorded deed data. It is useful as an ownership-duration signal, but it does not prove the current owner has occupied the property for that full period. Watchdog signals appear only when a current observation is available.</span></div>`;
  $('#msar-detail-close').onclick=()=>host.hidden=true;host.scrollIntoView({behavior:'smooth',block:'nearest'});
 }
 async function saveAndContinue(go){

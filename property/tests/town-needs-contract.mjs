@@ -49,7 +49,7 @@ assert.ok(!/<a\b[^>]*href="\/property\//.test(page), 'no /property/ links');
 assert.match(page, /A document or a link to the town's page is required\. A typed answer alone isn't enough\./, 'the rule is stated');
 assert.match(page, /name="website" tabindex="-1"/, 'spam trap field');
 assert.match(pageJs, /API = '\/api\/watchdog-town-needs'/, 'posts to the same-origin route');
-assert.ok((pageJs.match(/innerHTML/g) || []).length === 1 && /content-architecture: dynamic — the shared site footer partial\.\n\s*host\.innerHTML = html;/.test(pageJs), 'town data is set with textContent; only the shared footer uses innerHTML');
+assert.ok((pageJs.match(/innerHTML/g) || []).length === 1 && /content-architecture: dynamic, the shared site footer partial\.\n\s*host\.innerHTML = html;/.test(pageJs), 'town data is set with textContent; only the shared footer uses innerHTML');
 assert.match(pageJs, /if \(!file && !link\) return status\(form,/, 'the form asks for a document or link before sending');
 
 // ---------- Backoffice ----------

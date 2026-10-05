@@ -8,7 +8,7 @@
 <link id="art-canonical" rel="canonical" href="https://njpropertytaxrelief.com/insights/">
 <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Libre+Franklin:wght@600;700;800&family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 <link rel="stylesheet" href="/styles.css">
 <link rel="stylesheet" href="/property/css/lookup.css">
@@ -20,13 +20,13 @@
   .art-meta { display: flex; gap: 16px; align-items: center; font-size: 13px; color: var(--text-muted); padding-bottom: 26px; border-bottom: 1px solid var(--border); margin-bottom: 30px; }
   .art-hero { width: 100%; aspect-ratio: 16/9; object-fit: cover; border-radius: 14px; margin-bottom: 34px; background: #eef0f5; }
   .art-body { font-size: 17px; line-height: 1.8; color: var(--text); }
-  .art-body h2 { font-family: 'Plus Jakarta Sans', system-ui, sans-serif; font-size: 23px; color: var(--navy-dark); margin: 38px 0 14px; }
+  .art-body h2 { font-family: 'Libre Franklin', system-ui, sans-serif; font-size: 23px; color: var(--navy-dark); margin: 38px 0 14px; }
   .art-body p { margin: 0 0 20px; }
   .art-body ul, .art-body ol { margin: 0 0 20px; padding-left: 24px; }
   .art-body li { margin-bottom: 10px; line-height: 1.7; }
   .art-body b { color: var(--navy-dark); }
   .art-faq { margin-top: 48px; padding-top: 32px; border-top: 1px solid var(--border); }
-  .art-faq h2 { font-family: 'Plus Jakarta Sans', system-ui, sans-serif; font-size: 22px; color: var(--navy-dark); margin: 0 0 20px; }
+  .art-faq h2 { font-family: 'Libre Franklin', system-ui, sans-serif; font-size: 22px; color: var(--navy-dark); margin: 0 0 20px; }
   .art-faq-item { padding: 18px 0; border-bottom: 1px solid var(--border); }
   .art-faq-item:last-child { border-bottom: none; }
   .art-faq-item h3 { font-size: 16px; color: var(--navy-dark); margin: 0 0 8px; }
@@ -92,7 +92,7 @@
 (function () {
   'use strict';
   var SUPA_URL = 'https://uvkvaxljhhngydvlrzom.supabase.co';
-  // Public publishable key — safe in client code, read-only per RLS (published articles only).
+  // Public publishable key, safe in client code, read-only per RLS (published articles only).
   var SUPA_ANON = 'sb_publishable_MYX59qCbK3d-21zDfJqkNw_fvmfnexa';
 
   function esc(s) {
@@ -129,7 +129,7 @@
       hero.style.display = 'none';
     }
 
-    // body_html is hand-authored only via the password-gated admin panel —
+    // body_html is hand-authored only via the password-gated admin panel
     // never user-submitted, so direct injection is acceptable here.
     document.getElementById('art-body').innerHTML = a.body_html;
 
@@ -153,7 +153,7 @@
     var s1 = document.createElement('script'); s1.type = 'application/ld+json'; s1.textContent = JSON.stringify(ldArticle);
     document.head.appendChild(s1);
 
-    // FAQPage schema — this is the AEO/GEO piece: answer engines lift Q&A
+    // FAQPage schema, this is the AEO/GEO piece: answer engines lift Q&A
     // pairs directly from this markup.
     if (faq.length) {
       var ldFaq = {

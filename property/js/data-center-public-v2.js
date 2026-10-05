@@ -84,8 +84,8 @@
     var markers = catalog && Array.isArray(catalog.markers) ? catalog.markers : null;
     var live = markers ? markers.filter(function (m) { return effectiveStatus(m) === 'live'; }) : null;
     var bulk = live ? live.filter(function (m) { var c = coverageFor(m.id); return !!(c && c.bulk_capable); }).length : null;
-    setText('dc-kpi-live', live ? live.length.toLocaleString() : (summary.live_fields == null ? '—' : Number(summary.live_fields).toLocaleString()));
-    setText('dc-kpi-bulk', overview && live ? bulk.toLocaleString() : (summary.bulk_ready_fields == null ? '—' : Number(summary.bulk_ready_fields).toLocaleString()));
+    setText('dc-kpi-live', live ? live.length.toLocaleString() : (summary.live_fields == null ? '-' : Number(summary.live_fields).toLocaleString()));
+    setText('dc-kpi-bulk', overview && live ? bulk.toLocaleString() : (summary.bulk_ready_fields == null ? '-' : Number(summary.bulk_ready_fields).toLocaleString()));
     setText('dc-kpi-verified', overview ? formatDate(summary.newest_live_verified_at) : 'Unavailable');
     var selected = 0;
     try {
@@ -126,8 +126,8 @@
     var bulkPct = percentage(bulk, live.length);
     var recentPct = percentage(recent, live.length);
     setText('dc-coverage-live-pct', livePct);
-    setText('dc-coverage-bulk-pct', loadState.overview === 'ready' ? bulkPct : '—');
-    setText('dc-coverage-recent-pct', loadState.overview === 'ready' ? recentPct : '—');
+    setText('dc-coverage-bulk-pct', loadState.overview === 'ready' ? bulkPct : '-');
+    setText('dc-coverage-recent-pct', loadState.overview === 'ready' ? recentPct : '-');
     setWidth('dc-coverage-bar-bulk', percentage(bulk, connected.length));
     setWidth('dc-coverage-bar-live', percentage(Math.max(0, live.length - bulk), connected.length));
     setWidth('dc-coverage-bar-not-live', percentage(Math.max(0, connected.length - live.length), connected.length));
@@ -168,7 +168,7 @@
     // Live catalog fields without a governed coverage row count as "without a verification date".
     // Without the live status check there are no verification dates to count, so show dashes.
     if (loadState.overview !== 'ready') {
-      ['dc-recency-recent-pct', 'dc-recency-recent', 'dc-recency-review', 'dc-recency-older', 'dc-recency-unverified'].forEach(function (id) { setText(id, '—'); });
+      ['dc-recency-recent-pct', 'dc-recency-recent', 'dc-recency-review', 'dc-recency-older', 'dc-recency-unverified'].forEach(function (id) { setText(id, '-'); });
     }
     var live = loadState.overview !== 'ready' ? [] : catalog && Array.isArray(catalog.markers)
       ? catalog.markers.filter(function (m) { return effectiveStatus(m) === 'live'; }).map(function (m) { return coverageFor(m.id) || {}; })

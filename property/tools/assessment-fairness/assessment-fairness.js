@@ -111,7 +111,7 @@
       for (const record of records) {
         const option = document.createElement('option');
         option.value = record.id;
-        option.textContent = `${record.municipality} — ${record.county} County`;
+        option.textContent = `${record.municipality} ${record.county} County`;
         select.appendChild(option);
       }
       status.textContent = `${records.length} municipalities loaded · ${payload.sourceLabel || 'COD dataset'}`;

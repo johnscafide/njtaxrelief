@@ -115,7 +115,7 @@ assert.match(acquisition, /out=injectScript\(out,'\/watchdog-promo\.js'\)/);
 assert.match(acquisition, /if\(pathname==='\/anchor-estimator\.html'\) out=injectScript\(out,'\/anchor-watchdog-handoff\.js'\)/);
 assert.match(acquisition, /private, no-store, max-age=0/);
 
-// Saving is owner-only and the database—not browser JavaScript—owns the saved benefit calculation.
+// Saving is owner-only and the database, not browser JavaScript, owns the saved benefit calculation.
 assert.match(estimateMigration, /estimated_amount integer generated always as/i);
 assert.match(estimateMigration, /qualifies boolean generated always as/i);
 assert.match(estimateMigration, /enable row level security/i);

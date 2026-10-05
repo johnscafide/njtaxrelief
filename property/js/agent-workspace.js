@@ -37,7 +37,7 @@
 
   function esc(v){return String(v==null?'':v).replace(/[&<>"']/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
 
-  // content-architecture: dynamic — navigation chrome bound from the page's data-active key to its IA area and canonical tool name; no page copy lives here.
+  // content-architecture: dynamic, navigation chrome bound from the page's data-active key to its IA area and canonical tool name; no page copy lives here.
   function crumbsHtml(active){
     var page=PAGES[active]||{area:'home',label:''};
     var sep='<span class="wd-crumbs-sep" aria-hidden="true">/</span>';

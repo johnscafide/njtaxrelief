@@ -9,7 +9,7 @@
   --wdum-soft:#edf1f6;
   --wdum-blue:#2f6df6;
   --wdum-blue-soft:#eef4ff;
-  --wdum-font:Inter,"Plus Jakarta Sans",system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  --wdum-font:Libre Franklin,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
 }
 
 /* ---------- one brand treatment ---------- */
@@ -35,7 +35,7 @@
   color:#fff!important;
   display:grid!important;
   place-items:center!important;
-  box-shadow:0 8px 18px rgba(47,109,246,.2)!important;
+  box-shadow:0 2px 6px rgba(15,23,42,.08)!important;
   font-size:17px!important;
 }
 .wd-universal-brand-copy,
@@ -86,7 +86,7 @@ html body .wd-universal-nav-head .wd-universal-brand>span{
   background:#fff!important;
   border:1px solid var(--wdum-line)!important;
   border-radius:18px!important;
-  box-shadow:0 28px 80px rgba(18,34,60,.18)!important;
+  box-shadow:0 2px 6px rgba(15,23,42,.08)!important;
   padding:18px!important;
   overflow:hidden!important;
   transform:translateX(calc(-100% - 30px))!important;
@@ -107,7 +107,7 @@ html body .wd-universal-nav-head .wd-universal-brand>span{
   background:#fff!important;
   border:1px solid var(--wdum-line)!important;
   border-radius:18px!important;
-  box-shadow:0 28px 80px rgba(18,34,60,.18)!important;
+  box-shadow:0 2px 6px rgba(15,23,42,.08)!important;
   padding:18px!important;
   overflow:hidden!important;
   display:flex!important;
@@ -235,7 +235,7 @@ html body .wd-universal-nav-head .wd-universal-brand>span{
   left:auto!important;right:14px!important;top:82px!important;bottom:auto!important;
   width:min(390px,calc(100vw - 28px))!important;height:auto!important;max-height:calc(100vh - 96px)!important;
   background:#fff!important;border:1px solid #dfe6ef!important;border-radius:17px!important;
-  box-shadow:0 24px 65px rgba(18,36,63,.19)!important;padding:0!important;overflow:auto!important;
+  box-shadow:0 2px 6px rgba(15,23,42,.08)!important;padding:0!important;overflow:auto!important;
   transform:translateY(-8px) scale(.985)!important;transform-origin:top right!important;
   opacity:0!important;visibility:hidden!important;transition:.16s!important;font-family:var(--wdum-font)!important;
 }
@@ -279,7 +279,7 @@ html body .wd-universal-nav-head .wd-universal-brand>span{
   border-radius:16px!important;
   overflow:hidden!important;
   color:#fff!important;
-  box-shadow:0 13px 32px rgba(16,41,75,.20)!important;
+  box-shadow:0 2px 6px rgba(15,23,42,.08)!important;
   text-decoration:none!important;
   isolation:isolate!important;
   transition:transform .16s ease,filter .16s ease,box-shadow .16s ease!important;
@@ -298,7 +298,7 @@ html body .wd-universal-nav-head .wd-universal-brand>span{
 .wd-universal-profile>nav>a.wd-universal-plan-promo:hover{
   transform:translateY(-1px)!important;
   filter:saturate(1.08)!important;
-  box-shadow:0 16px 36px rgba(16,41,75,.24)!important;
+  box-shadow:0 2px 6px rgba(15,23,42,.08)!important;
 }
 .wd-universal-profile>nav>a.wd-universal-plan-promo-pro{background:linear-gradient(135deg,#142c55 0%,#2f6df6 100%)!important}
 .wd-universal-profile>nav>a.wd-universal-plan-promo-plus{background:linear-gradient(135deg,#10294b 0%,#087f7a 100%)!important}
@@ -375,9 +375,9 @@ html body .wd-universal-nav-head .wd-universal-brand>span{
 #wd6-profile.wd-universal-profile,.hm27-pop.wd-universal-profile{width:min(355px,calc(100vw - 28px))!important;max-height:calc(100vh - 96px)!important;overflow:auto!important}
 
 /* ---------- invite ---------- */
-.wd-universal-invite-shade{position:fixed;inset:0;border:0;background:rgba(15,29,50,.36);backdrop-filter:blur(3px);opacity:0;pointer-events:none;z-index:9700;transition:.16s}
+.wd-universal-invite-shade{position:fixed;inset:0;border:0;background:rgba(15,29,50,.36);opacity:0;pointer-events:none;z-index:9700;transition:.16s}
 .wd-universal-invite-shade.open{opacity:1;pointer-events:auto}
-.wd-universal-invite{position:fixed;left:50%;top:50%;width:min(570px,calc(100vw - 34px));transform:translate(-50%,-47%) scale(.98);background:#fff;border:1px solid #dce4ed;border-radius:20px;box-shadow:0 30px 90px rgba(17,35,62,.24);padding:28px;z-index:9800;opacity:0;visibility:hidden;transition:.18s;font-family:var(--wdum-font);color:var(--wdum-ink)}
+.wd-universal-invite{position:fixed;left:50%;top:50%;width:min(570px,calc(100vw - 34px));transform:translate(-50%,-47%) scale(.98);background:#fff;border:1px solid #dce4ed;border-radius:20px;box-shadow:0 2px 6px rgba(15,23,42,.08);padding:28px;z-index:9800;opacity:0;visibility:hidden;transition:.18s;font-family:var(--wdum-font);color:var(--wdum-ink)}
 .wd-universal-invite.open{opacity:1;visibility:visible;transform:translate(-50%,-50%) scale(1)}
 .wd-universal-invite-x{position:absolute;right:17px;top:16px;width:34px;height:34px;border:0;border-radius:50%;background:#eff3f7;color:#607087;cursor:pointer}
 .wd-universal-invite>small{font-size:8px;font-weight:900;letter-spacing:.15em;color:var(--wdum-blue)}
@@ -434,7 +434,7 @@ html body .wd-universal-nav-head .wd-universal-brand>span{
   --wdum-gold:#b8972a;
   --wdum-warm:#f3f1ec;
   --wdum-warm-line:#e3dfd6;
-  --wdum-head:"Plus Jakarta Sans",Inter,system-ui,sans-serif;
+  --wdum-head:"Libre Franklin",system-ui,sans-serif;
 }
 
 /* ---------- site search row (opens watchdog-site-search.js) ---------- */
@@ -458,7 +458,7 @@ html body .wd-universal-nav-head .wd-universal-brand>span{
 }
 .wd-universal-lens-thumb{
   position:absolute;top:4px;bottom:4px;left:4px;width:calc(50% - 4px);
-  border-radius:11px;background:var(--wdum-navy);box-shadow:0 6px 16px rgba(14,34,72,.22);
+  border-radius:11px;background:var(--wdum-navy);box-shadow:0 2px 6px rgba(15,23,42,.08);
   transition:transform .26s cubic-bezier(.2,.8,.2,1);pointer-events:none;
 }
 .wd-universal-lens[data-lens="work"] .wd-universal-lens-thumb{transform:translateX(100%)}
@@ -554,7 +554,7 @@ html body .wd-universal-nav-head .wd-universal-brand>span{
 .wd-public-sheet.right.wd-universal-public-profile,
 #wd6-profile.wd-universal-profile,.hm27-pop.wd-universal-profile{
   border-radius:20px!important;border-color:var(--wdum-warm-line)!important;background:#fff!important;
-  box-shadow:0 26px 70px rgba(14,34,72,.2)!important;
+  box-shadow:0 2px 6px rgba(15,23,42,.08)!important;
 }
 .wd-universal-profile>header{
   display:grid!important;grid-template-columns:48px minmax(0,1fr) auto!important;align-items:center!important;gap:12px!important;

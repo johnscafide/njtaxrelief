@@ -27,9 +27,9 @@ Required secret credentials for production Live acceptance:
 
 Operational configuration:
 
-- `PUBLIC_SITE_URL` — canonical public site/return URL. The runtime currently has a legacy production fallback, but the final domain cutover must set this explicitly.
-- `BILLING_CHECKOUT_MODE` — explicit `closed`, `controlled`, or `open` operator override when needed.
-- `BILLING_CONTROLLED_USER_IDS` — comma-separated Supabase user IDs permitted while checkout mode is `controlled` when the environment override is used.
+- `PUBLIC_SITE_URL` - canonical public site/return URL. The runtime currently has a legacy production fallback, but the final domain cutover must set this explicitly.
+- `BILLING_CHECKOUT_MODE` - explicit `closed`, `controlled`, or `open` operator override when needed.
+- `BILLING_CONTROLLED_USER_IDS` - comma-separated Supabase user IDs permitted while checkout mode is `controlled` when the environment override is used.
 
 Optional Stripe Price-ID overrides:
 
@@ -48,9 +48,9 @@ Optional tax configuration:
 
 `BILLING_CHECKOUT_MODE` is the emergency/operator launch override:
 
-- `closed` — no new paid Checkout sessions
-- `controlled` — only allowlisted launch/test user IDs can create Checkout sessions
-- `open` — public paid enrollment, but only when the server-owned Live billing gate is also passed
+- `closed` - no new paid Checkout sessions
+- `controlled` - only allowlisted launch/test user IDs can create Checkout sessions
+- `open` - public paid enrollment, but only when the server-owned Live billing gate is also passed
 
 Normal launch control is also persisted in `platform_release_gates.live_billing_lifecycle`, so production can remain auditable without relying only on environment rotation. If no valid environment or gate mode exists, checkout fails closed.
 

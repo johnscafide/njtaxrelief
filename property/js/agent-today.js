@@ -1,4 +1,4 @@
-// content-architecture: dynamic — Agent Desk Today is rendered from the signed-in agent's live transaction, listing-prep, buyer and open-house state.
+// content-architecture: dynamic: Agent Desk Today is rendered from the signed-in agent's live transaction, listing-prep, buyer and open-house state.
 /* Fills the "Today" task list and the Workflows counts on Agent Desk.
    Uses the canonical access-guard client (window.NJPTRAccess), the same one every
    other Agent Desk runtime uses, so it works on every page that loads the guard. */
@@ -14,9 +14,9 @@ function esc(v){return String(v==null?'':v).replace(/[&<>"']/g,function(c){retur
 function dt(v){if(!v)return null;var d=new Date(v);return Number.isFinite(d.getTime())?d:null;}
 function days(v){var d=dt(v);if(!d)return null;return Math.ceil((d-Date.now())/86400000);}
 function card(id,count,sub){var n=$('#ad-today-'+id);if(n)n.textContent=String(count);var s=$('#ad-today-'+id+'-sub');if(s)s.textContent=sub;}
-// content-architecture: dynamic — Each task row is built from one flagged transaction, open house or listing-prep record; the empty/recovery line reflects the live query result.
+// content-architecture: dynamic: Each task row is built from one flagged transaction, open house or listing-prep record; the empty/recovery line reflects the live query result.
 function task(t){return'<a class="ad-today-task" href="'+esc(t.href)+'"><i class="fas '+esc(t.icon)+'" aria-hidden="true"></i><span><b>'+esc(t.title)+'</b><small>'+esc(t.sub)+'</small></span><em>'+esc(t.tag)+'</em></a>';}
-// content-architecture: dynamic — Status line whose text is chosen by the live query outcome (nothing flagged vs. request failed).
+// content-architecture: dynamic: Status line whose text is chosen by the live query outcome (nothing flagged vs. request failed).
 function empty(text){queue.innerHTML='<div class="ad-today-empty"><i class="fas fa-circle-check" aria-hidden="true"></i> '+esc(text)+'</div>';}
 
 function render(tx,lp,buyers,oh){
@@ -31,7 +31,7 @@ function render(tx,lp,buyers,oh){
   lp.filter(function(x){return x.status==='ready';}).forEach(function(x){tasks.push({p:8,title:x.address,sub:(x.client_label?x.client_label+' · ':'')+'Listing prep marked ready',href:'/agent/listing-prep?id='+encodeURIComponent(x.id),icon:'fa-house-chimney',tag:'Listing prep'});});
   tasks.sort(function(a,b){return a.p-b.p;});
   if(!tasks.length){empty('Nothing dated or flagged today.');return;}
-  // content-architecture: dynamic — this queue markup is selected from the signed-in agent's computed cross-workspace task state.
+  // content-architecture: dynamic, this queue markup is selected from the signed-in agent's computed cross-workspace task state.
   queue.innerHTML=tasks.slice(0,6).map(task).join('')+(tasks.length>6?'<div class="ad-today-more">+'+(tasks.length-6)+' more in your tasks</div>':'');
 }
 
@@ -50,7 +50,7 @@ function load(ctx){
 }
 
 Promise.resolve(window.njptrAccessReady).then(load).catch(function(){
-  // content-architecture: dynamic — this recovery state replaces the live Today queue only when its authenticated data requests fail.
+  // content-architecture: dynamic, this recovery state replaces the live Today queue only when its authenticated data requests fail.
   empty('Today’s summary could not load. Your worklist below is unaffected.');
 });
 })();

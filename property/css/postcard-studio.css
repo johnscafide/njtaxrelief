@@ -7,7 +7,7 @@ body[data-sidebar-page="postcard-studio"]{background:#f3f1ec}
   --ps-navy:#0e2248;--ps-blue:#1456a0;--ps-gold:#b8972a;--ps-ink:#14213d;--ps-muted:#5d6678;
   --ps-line:#e3dfd6;--ps-surface:#fbfaf7;--ps-teal:#dff1ec;--ps-teal-ink:#0f6e5c;--ps-sand:#f6efd9;--ps-sand-ink:#7a5d0c;
   --ps-red:#9f2a1d;--ps-radius:22px;
-  max-width:1040px;margin:0 auto;padding:20px 24px 80px;color:var(--ps-ink);font-family:"Plus Jakarta Sans",Arial,sans-serif
+  max-width:1040px;margin:0 auto;padding:20px 24px 80px;color:var(--ps-ink);font-family:"Libre Franklin",Arial,sans-serif
 }
 .ps-shell h1,.ps-shell h2{letter-spacing:-.015em}
 .ps-loading{text-align:center;padding:80px 20px;color:var(--ps-muted)}
@@ -48,7 +48,7 @@ html.aw27-page .ps-hero h1{margin:8px 0 6px;color:#fff;font-size:clamp(28px,3.6v
 
 /* Controls */
 .ps-actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
-.ps-btn{display:inline-flex;align-items:center;justify-content:center;gap:7px;min-height:42px;padding:0 16px;border:1px solid var(--ps-line);border-radius:999px;background:#fff;color:var(--ps-ink);font:700 14px/1 "Plus Jakarta Sans",Arial,sans-serif;text-decoration:none;cursor:pointer}
+.ps-btn{display:inline-flex;align-items:center;justify-content:center;gap:7px;min-height:42px;padding:0 16px;border:1px solid var(--ps-line);border-radius:999px;background:#fff;color:var(--ps-ink);font:700 14px/1 "Libre Franklin",Arial,sans-serif;text-decoration:none;cursor:pointer}
 .ps-btn:hover{background:var(--ps-surface);border-color:#cfc9bc}
 .ps-btn:focus-visible,.ps-field input:focus-visible,.ps-field select:focus-visible,.ps-check input:focus-visible,.ps-tips summary:focus-visible{outline:2px solid var(--ps-blue);outline-offset:2px}
 .ps-btn.dark{background:var(--ps-navy);border-color:var(--ps-navy);color:#fff}
@@ -59,7 +59,7 @@ html.aw27-page .ps-hero h1{margin:8px 0 6px;color:#fff;font-size:clamp(28px,3.6v
 .ps-btn[aria-busy="true"]{cursor:wait}
 .ps-field{display:flex;flex-direction:column;gap:6px;min-width:0;font-size:13px;font-weight:700;color:var(--ps-muted)}
 .ps-field em{font-style:normal;font-weight:500}
-.ps-field input,.ps-field select{min-height:42px;padding:0 12px;border:1px solid var(--ps-line);border-radius:12px;background:#fff;color:var(--ps-ink);font:500 15px "Plus Jakarta Sans",Arial,sans-serif;max-width:100%}
+.ps-field input,.ps-field select{min-height:42px;padding:0 12px;border:1px solid var(--ps-line);border-radius:12px;background:#fff;color:var(--ps-ink);font:500 15px "Libre Franklin",Arial,sans-serif;max-width:100%}
 .ps-step[data-step="audience"] .ps-field{max-width:520px}
 .ps-form{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;max-width:680px}
 .ps-form .wide{grid-column:1/-1}
@@ -76,7 +76,7 @@ html.aw27-page .ps-hero h1{margin:8px 0 6px;color:#fff;font-size:clamp(28px,3.6v
 .ps-quote .total{margin-top:4px;padding-top:8px;border-top:1px solid var(--ps-line);font-size:17px}
 
 /* Editor dialog */
-.ps-editor{width:min(1400px,100vw - 24px);height:min(940px,100dvh - 24px);max-width:none;max-height:none;padding:0;border:0;border-radius:18px;overflow:hidden;background:#fff;color:var(--ps-ink);font-family:"Plus Jakarta Sans",Arial,sans-serif}
+.ps-editor{width:min(1400px,100vw - 24px);height:min(940px,100dvh - 24px);max-width:none;max-height:none;padding:0;border:0;border-radius:18px;overflow:hidden;background:#fff;color:var(--ps-ink);font-family:"Libre Franklin",Arial,sans-serif}
 .ps-editor[open]{display:flex;flex-direction:column}
 .ps-editor::backdrop{background:rgba(14,34,72,.55)}
 .ps-editor-bar{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:10px 14px;border-bottom:1px solid var(--ps-line)}

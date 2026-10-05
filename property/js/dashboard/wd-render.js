@@ -105,8 +105,8 @@ function start(){
     return '<article class="wdd-card wdd-card--score">'+DECO.shield+
       '<div class="wdd-card-head"><h2>Watchdog Score:</h2><a class="wdd-card-info" href="'+esc(route('/data-methodology'))+'#robust" aria-label="How the Watchdog Score works" title="The Watchdog Score, powered by the ROBUST Framework."><i class="fas fa-info" aria-hidden="true"></i></a></div>'+
       '<div class="wdd-stats">'+
-        stat(avg==null?'—':String(avg),avg==null?'':'/100','Your average',true)+
-        stat(peer==null?'—':String(peer),'','Town median')+
+        stat(avg==null?'-':String(avg),avg==null?'':'/100','Your average',true)+
+        stat(peer==null?'-':String(peer),'','Town median')+
         stat(String(scored.length),props.length?'of '+props.length:'','Scored')+
       '</div>'+
       '<div class="wdd-bars-wrap">'+bars+'</div>'+
@@ -177,9 +177,9 @@ function start(){
     return '<article class="wdd-card wdd-card--value">'+DECO.pin+
       '<div class="wdd-card-head"><h2>Portfolio value:</h2></div>'+
       '<div class="wdd-stats">'+
-        stat(st.value?esc(H.money(st.value)):'—','','Market est.',true)+
-        stat(st.assessed?esc(H.money(st.assessed)):'—','','Assessed')+
-        stat(st.tax?esc(H.money(st.tax)):'—','','Annual tax')+
+        stat(st.value?esc(H.money(st.value)):'-','','Market est.',true)+
+        stat(st.assessed?esc(H.money(st.assessed)):'-','','Assessed')+
+        stat(st.tax?esc(H.money(st.tax)):'-','','Annual tax')+
       '</div>'+
       (st.atStake?'<p class="wdd-card-note">About <b>'+esc(H.dollars(st.atStake))+'</b> a year sits in assessments above market evidence.</p>':'')+
     '</article>';

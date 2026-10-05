@@ -21,9 +21,9 @@
   function card(row,label){
     var st=status(row),lines=(row.requirements||[]).map(String),fees=row.fees||[];
     var keyLines=lines.filter(lineKind),items=lines.filter(function(l){return!lineKind(l);});
-    // content-architecture: dynamic — every line, fee and link is the town's checked data for this parcel.
+    // content-architecture: dynamic, every line, fee and link is the town's checked data for this parcel.
     var keys='<ul class="tcx-key">'+keyLines.map(function(l){var k=lineKind(l);return '<li class="'+k+'"><i class="fas '+ICON[k]+'" aria-hidden="true"></i><span>'+linkify(esc(l))+'</span></li>';}).join('')+'</ul>';
-    // content-architecture: dynamic — fee labels and amounts are quoted from the town or fire office.
+    // content-architecture: dynamic, fee labels and amounts are quoted from the town or fire office.
     var feeHtml=fees.length?'<div class="tcx-fees">'+fees.map(function(f){return '<div><span>'+esc(f.label)+'</span><b>'+esc(f.amount)+'</b></div>';}).join('')+'</div>':'<p class="tcx-muted">No fee published online.</p>';
     var itemHtml=items.length?'<details class="tcx-items"><summary>What the inspection checks ('+items.length+')</summary><ul>'+items.map(function(l){return '<li>'+linkify(esc(l))+'</li>';}).join('')+'</ul></details>':'';
     return '<article class="tcx-card '+st[0]+'"><div class="tcx-card-head"><span class="tcx-label">'+esc(label)+'</span><span class="tcx-chip '+st[0]+'">'+esc(st[1])+'</span></div><h4>'+esc(row.title||label)+'</h4>'+keys+feeHtml+itemHtml+links(row)+'</article>';
@@ -36,7 +36,7 @@
     if(data.status!=='ok'){host.innerHTML=message('fa-hourglass-half','Watchdog hasn’t checked this town’s certificate rules yet. Towns are being added county by county.');return;}
     var rows=data.rows||[],co=rows.filter(function(x){return x.requirement_key==='resale_cco';})[0],fire=rows.filter(function(x){return x.requirement_key==='smoke_fire_cert';})[0];
     var checked=date(rows[0]&&rows[0].last_verified_at),flag=rows.some(function(x){return x.needs_lookup;});
-    // content-architecture: dynamic — town name, check date and red-flag state come from the checked rows.
+    // content-architecture: dynamic, town name, check date and red-flag state come from the checked rows.
     host.innerHTML='<p class="tcx-when">'+esc(data.municipality_name||'This town')+' · checked by Watchdog from official town and fire sources'+(checked?' on '+esc(checked):'')+'. Rules and fees can change, so confirm with the office before closing.'+(flag?' <b>Some details still need a call to the office.</b>':'')+'</p><div class="tcx-grid">'+(co?card(co,'Town resale certificate'):'')+(fire?card(fire,'Fire certificate'):'')+'</div>';
   }
   var cache={},records={};
@@ -48,11 +48,11 @@
     if(!client){render(k,{status:'error'});return;}
     client.rpc('watchdog_town_certificates',{p_municipality_code:code}).then(function(res){var d=res&&!res.error&&res.data?res.data:{status:'error'};if(d.status!=='error')cache[code]=d;render(k,d);},function(){render(k,{status:'error'});});
   }
-  // content-architecture: dynamic — the loading row replaces a failed request for this parcel's town.
+  // content-architecture: dynamic, the loading row replaces a failed request for this parcel's town.
   function retry(k){var host=document.getElementById('tcx-body-'+k);if(host)host.innerHTML='<div class="tcx-loading"><span class="pl-spin"></span> Loading town certificate details</div>';load(k,true);}
   function tool(r){
     var k=key(r);records[k]=r;setTimeout(function(){load(k,false);},0);
-    // content-architecture: dynamic — the body is filled from the parcel's town rows after the server plan check.
+    // content-architecture: dynamic, the body is filled from the parcel's town rows after the server plan check.
     return '<section class="tcx-tool" id="tcx-'+k+'"><div class="tcx-intro"><span class="tcx-badge">PRO+ · CLOSING</span><h3>Town CO &amp; fire certificate</h3><p>What this town requires before closing, what it costs and who to call.</p></div><div id="tcx-body-'+k+'"><div class="tcx-loading"><span class="pl-spin"></span> Loading town certificate details</div></div></section>';
   }
   Object.assign(window,{toolTownCertificates:tool,tcxRetry:retry});

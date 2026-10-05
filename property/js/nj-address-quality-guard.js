@@ -135,7 +135,7 @@
       var record=button.querySelector('.wd-nj-record'),score=button.querySelector('.wd-nj-score');
       if(!record||!score||!score.hidden)return;
       var value=score.querySelector('b'),label=score.querySelector('span');
-      if(value)value.textContent='—';
+      if(value)value.textContent='-';
       if(label)label.textContent='Score building';
       score.hidden=false;
       score.setAttribute('data-score-state','insufficient-canonical-evidence');

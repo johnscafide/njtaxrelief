@@ -2,7 +2,7 @@
 function selectedKeys(){return Array.from(document.querySelectorAll('#dw-rows input[data-row]:checked')).map(x=>x.dataset.row).filter(Boolean)}
 function handoff(){
   const keys=selectedKeys();
-  // content-architecture: dynamic — validation toast shown only when no row is selected (moved line; existing copy).
+  // content-architecture: dynamic, validation toast shown only when no row is selected (moved line; existing copy).
   if(!keys.length){const t=document.querySelector('#pl-toast');if(t){t.textContent='Select at least one visible property first.';t.style.display='block';setTimeout(()=>t.style.display='none',3200)}return}
   sessionStorage.setItem('watchdog_marketing_handoff',JSON.stringify({source:'workbench',property_keys:keys,qualification_summary:'Selected from Data Workbench for professional marketing review.',created_at:Date.now()}));
   location.href='/marketing-studio?source=workbench';

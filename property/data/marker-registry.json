@@ -10743,7 +10743,7 @@
   {
    "id": "watchdog.agent.offer_question_density",
    "label": "Offer Question Density",
-   "description": "Counts pre-offer diligence questions—not defects or deal outcomes.",
+   "description": "Counts pre-offer diligence questions, not defects or deal outcomes.",
    "category": "broker intelligence",
    "scope": "property",
    "tier": "pro",
@@ -10754,7 +10754,7 @@
    ],
    "source_id": "watchdog-professional-v030",
    "field": "offer_question_density",
-   "professional_reason": "Counts pre-offer diligence questions—not defects or deal outcomes.",
+   "professional_reason": "Counts pre-offer diligence questions, not defects or deal outcomes.",
    "formula": "count(permit, flood, environmental, title questions)",
    "unit": "score / 100",
    "provider_status": "live",
@@ -14572,7 +14572,7 @@
   {
    "id": "watchdog.njplus.zoning_research_readiness",
    "label": "Zoning Research Readiness",
-   "description": "Measures the completeness of linked public zoning resources—not permitted use.",
+   "description": "Measures the completeness of linked public zoning resources, not permitted use.",
    "category": "planning",
    "scope": "municipality",
    "tier": "pro_plus",
@@ -14588,7 +14588,7 @@
    ],
    "source_id": "watchdog-nj-source-v031",
    "field": "zoning_research_readiness",
-   "professional_reason": "Measures the completeness of linked public zoning resources—not permitted use.",
+   "professional_reason": "Measures the completeness of linked public zoning resources, not permitted use.",
    "formula": "coverage(zoning_map_url, zoning_ordinance_url, zoning_officer_contact, master_plan_link)",
    "unit": "score / 100",
    "dependencies": [
@@ -14996,7 +14996,7 @@
   {
    "id": "watchdog.njplus.pilot_forecast_confidence",
    "label": "PILOT Forecast Confidence",
-   "description": "Shows the completeness of an available public forecast—not a revenue prediction.",
+   "description": "Shows the completeness of an available public forecast, not a revenue prediction.",
    "category": "municipal finance",
    "scope": "municipality",
    "tier": "pro_plus",
@@ -15012,7 +15012,7 @@
    ],
    "source_id": "watchdog-nj-source-v031",
    "field": "pilot_forecast_confidence",
-   "professional_reason": "Shows the completeness of an available public forecast—not a revenue prediction.",
+   "professional_reason": "Shows the completeness of an available public forecast, not a revenue prediction.",
    "formula": "coverage(payment_schedule, term_remaining, forecast_year)",
    "unit": "score / 100",
    "dependencies": [
@@ -19952,7 +19952,7 @@
   {
    "field": "rut_tax_collection_pct",
    "label": "RUT tax collection percentage",
-   "description": "NJ DCA User Friendly Budget 2025 Summary source field: Tax Collections and Delinquent Taxes — % of Tax Collections used to Calculate RUT. DCA glossary: The percentage of tax collections used to calculate the reserve for uncollected taxes in the current budget year.  The reserve for uncollected taxes is designed to ensure sufficient cash receipts to support municipal operations and property taxes due to school, county, local, and special districts.",
+   "description": "NJ DCA User Friendly Budget 2025 Summary source field: Tax Collections and Delinquent Taxes % of Tax Collections used to Calculate RUT. DCA glossary: The percentage of tax collections used to calculate the reserve for uncollected taxes in the current budget year.  The reserve for uncollected taxes is designed to ensure sufficient cash receipts to support municipal operations and property taxes due to school, county, local, and special districts.",
    "category": "municipal_tax",
    "scope": "municipality",
    "tier": "pro_plus",
@@ -19980,7 +19980,7 @@
   {
    "field": "prior_year_total_tax_revenue_collections",
    "label": "Prior-year total tax revenue collected",
-   "description": "NJ DCA User Friendly Budget 2025 Summary source field: Tax Collections and Delinquent Taxes — Total Tax Revenue, Collections CY 2024. DCA glossary: Total tax revenues collected in the previous calendar year",
+   "description": "NJ DCA User Friendly Budget 2025 Summary source field: Tax Collections and Delinquent Taxes: Total Tax Revenue, Collections CY 2024. DCA glossary: Total tax revenues collected in the previous calendar year",
    "category": "municipal_tax",
    "scope": "municipality",
    "tier": "pro_plus",
@@ -20008,7 +20008,7 @@
   {
    "field": "prior_year_total_tax_levy",
    "label": "Prior-year total tax levy",
-   "description": "NJ DCA User Friendly Budget 2025 Summary source field: Tax Collections and Delinquent Taxes — Total Tax Levy, CY 2024. DCA glossary: Total tax levy for the previous calendar year",
+   "description": "NJ DCA User Friendly Budget 2025 Summary source field: Tax Collections and Delinquent Taxes: Total Tax Levy, CY 2024. DCA glossary: Total tax levy for the previous calendar year",
    "category": "municipal_tax",
    "scope": "municipality",
    "tier": "pro_plus",
@@ -20036,7 +20036,7 @@
   {
    "field": "prior_year_tax_collection_pct",
    "label": "Prior-year tax collection percentage",
-   "description": "NJ DCA User Friendly Budget 2025 Summary source field: Tax Collections and Delinquent Taxes — % of Taxes Collected, CY 2024. DCA glossary: The percentage of the previous calendar year's tax levy that was actually collected",
+   "description": "NJ DCA User Friendly Budget 2025 Summary source field: Tax Collections and Delinquent Taxes % of Taxes Collected, CY 2024. DCA glossary: The percentage of the previous calendar year's tax levy that was actually collected",
    "category": "municipal_tax",
    "scope": "municipality",
    "tier": "pro_plus",
@@ -20064,7 +20064,7 @@
   {
    "field": "prior_year_delinquent_taxes",
    "label": "Prior-year-end delinquent taxes",
-   "description": "NJ DCA User Friendly Budget 2025 Summary source field: Tax Collections and Delinquent Taxes — Delinquent Taxes - December 31, 2024. DCA glossary: Delinquent taxes at the end of the prior calendar year",
+   "description": "NJ DCA User Friendly Budget 2025 Summary source field: Tax Collections and Delinquent Taxes: Delinquent Taxes - December 31, 2024. DCA glossary: Delinquent taxes at the end of the prior calendar year",
    "category": "municipal_tax",
    "scope": "municipality",
    "tier": "pro_plus",
@@ -20092,7 +20092,7 @@
   {
    "field": "prior_year_realized_revenue_surplus",
    "label": "Prior-year realized revenue: Surplus",
-   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2024 Total Realized Revenues (Actual) — Surplus. DCA glossary: Surplus used as revenue in the budget",
+   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2024 Total Realized Revenues (Actual): Surplus. DCA glossary: Surplus used as revenue in the budget",
    "category": "municipal_revenue",
    "scope": "municipality",
    "tier": "pro_plus",
@@ -20120,7 +20120,7 @@
   {
    "field": "prior_year_realized_revenue_local_revenue",
    "label": "Prior-year realized revenue: Local Revenue",
-   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2024 Total Realized Revenues (Actual) — Local Revenue. DCA glossary: Local, own-source revenue (i.e. license fees, interest, fines, utility operating surplus, etc.)",
+   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2024 Total Realized Revenues (Actual): Local Revenue. DCA glossary: Local, own-source revenue (i.e. license fees, interest, fines, utility operating surplus, etc.)",
    "category": "municipal_revenue",
    "scope": "municipality",
    "tier": "pro_plus",
@@ -20148,7 +20148,7 @@
   {
    "field": "prior_year_realized_revenue_state_aid",
    "label": "Prior-year realized revenue: State Aid (without offsetting appropriation)",
-   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2024 Total Realized Revenues (Actual) — State Aid (without offsetting appropriation). DCA glossary: State aid (i.e. Energy Tax Receipts, CMPTRA, Transitional Aid)",
+   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2024 Total Realized Revenues (Actual): State Aid (without offsetting appropriation). DCA glossary: State aid (i.e. Energy Tax Receipts, CMPTRA, Transitional Aid)",
    "category": "municipal_revenue",
    "scope": "municipality",
    "tier": "pro_plus",
@@ -20176,7 +20176,7 @@
   {
    "field": "prior_year_realized_revenue_uniform_construction_code_fees",
    "label": "Prior-year realized revenue: Uniform Construction Code Fees",
-   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2024 Total Realized Revenues (Actual) — Uniform Construction Code Fees. DCA glossary: Unform construction code fees (i.e. permit fees)",
+   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2024 Total Realized Revenues (Actual): Uniform Construction Code Fees. DCA glossary: Unform construction code fees (i.e. permit fees)",
    "category": "municipal_revenue",
    "scope": "municipality",
    "tier": "pro_plus",
@@ -20204,7 +20204,7 @@
   {
    "field": "prior_year_realized_revenue_shared_services_agreements",
    "label": "Prior-year realized revenue: Shared Services Agreements",
-   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2024 Total Realized Revenues (Actual) — Shared Services Agreements. DCA glossary: Revenues received pursuant to a shared services agreement with another local government unit",
+   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2024 Total Realized Revenues (Actual): Shared Services Agreements. DCA glossary: Revenues received pursuant to a shared services agreement with another local government unit",
    "category": "municipal_revenue",
    "scope": "municipality",
    "tier": "pro_plus",
@@ -20232,7 +20232,7 @@
   {
    "field": "prior_year_realized_revenue_additional_revenue_offset_by_appropriations",
    "label": "Prior-year realized revenue: Additional Revenue Offset by Appropriations",
-   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2024 Total Realized Revenues (Actual) — Additional Revenue Offset by Appropriations. DCA glossary: Additional revenues with offsetting appropriations",
+   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2024 Total Realized Revenues (Actual): Additional Revenue Offset by Appropriations. DCA glossary: Additional revenues with offsetting appropriations",
    "category": "municipal_revenue",
    "scope": "municipality",
    "tier": "pro_plus",
@@ -20260,7 +20260,7 @@
   {
    "field": "prior_year_realized_revenue_public_private_revenue",
    "label": "Prior-year realized revenue: Public and Private Revenue",
-   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2024 Total Realized Revenues (Actual) — Public and Private Revenue. DCA glossary: Public and private revenues (i.e. grant revenues)",
+   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2024 Total Realized Revenues (Actual): Public and Private Revenue. DCA glossary: Public and private revenues (i.e. grant revenues)",
    "category": "municipal_revenue",
    "scope": "municipality",
    "tier": "pro_plus",
@@ -20288,7 +20288,7 @@
   {
    "field": "prior_year_realized_revenue_other_special_items",
    "label": "Prior-year realized revenue: Other Special Items",
-   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2024 Total Realized Revenues (Actual) — Other Special Items. DCA glossary: Miscellaneous items including hotel taxes, cable TV franchising fees, sale of municipal assets, payments-in-lieu-of taxes, and debt payment reserves",
+   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2024 Total Realized Revenues (Actual): Other Special Items. DCA glossary: Miscellaneous items including hotel taxes, cable TV franchising fees, sale of municipal assets, payments-in-lieu-of taxes, and debt payment reserves",
    "category": "municipal_revenue",
    "scope": "municipality",
    "tier": "pro_plus",
@@ -20316,7 +20316,7 @@
   {
    "field": "prior_year_realized_revenue_receipts_from_delinquent_taxes",
    "label": "Prior-year realized revenue: Receipts from Delinquent Taxes",
-   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2024 Total Realized Revenues (Actual) — Receipts from Delinquent Taxes. DCA glossary: Receipts from the collection of delinquent taxes corresponding to prior years",
+   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2024 Total Realized Revenues (Actual): Receipts from Delinquent Taxes. DCA glossary: Receipts from the collection of delinquent taxes corresponding to prior years",
    "category": "municipal_revenue",
    "scope": "municipality",
    "tier": "pro_plus",
@@ -20344,7 +20344,7 @@
   {
    "field": "prior_year_realized_revenue_local_tax_for_municipal_purposes",
    "label": "Prior-year realized revenue: Local Tax for Municipal Purposes",
-   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2024 Total Realized Revenues (Actual) — Local Tax for Municipal Purposes. DCA glossary: Local municipal purpose property tax levy",
+   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2024 Total Realized Revenues (Actual): Local Tax for Municipal Purposes. DCA glossary: Local municipal purpose property tax levy",
    "category": "municipal_revenue",
    "scope": "municipality",
    "tier": "pro_plus",
@@ -20372,7 +20372,7 @@
   {
    "field": "prior_year_realized_revenue_minimum_library_tax",
    "label": "Prior-year realized revenue: Minimum Library Tax",
-   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2024 Total Realized Revenues (Actual) — Minimum Library Tax. DCA glossary: Municipal library property tax levy",
+   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2024 Total Realized Revenues (Actual): Minimum Library Tax. DCA glossary: Municipal library property tax levy",
    "category": "municipal_revenue",
    "scope": "municipality",
    "tier": "pro_plus",
@@ -20400,7 +20400,7 @@
   {
    "field": "prior_year_realized_revenue_open_space_levy_tax",
    "label": "Prior-year realized revenue: Open Space Levy Tax",
-   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2024 Total Realized Revenues (Actual) — Open Space Levy Tax. DCA glossary: Open space preservation property tax levy",
+   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2024 Total Realized Revenues (Actual): Open Space Levy Tax. DCA glossary: Open space preservation property tax levy",
    "category": "municipal_revenue",
    "scope": "municipality",
    "tier": "pro_plus",
@@ -20428,7 +20428,7 @@
   {
    "field": "prior_year_realized_revenue_arts_cultural_levy_tax",
    "label": "Prior-year realized revenue: Arts and Cultural Levy Tax",
-   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2024 Total Realized Revenues (Actual) — Arts and Cultural Levy Tax.",
+   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2024 Total Realized Revenues (Actual): Arts and Cultural Levy Tax.",
    "category": "municipal_revenue",
    "scope": "municipality",
    "tier": "pro_plus",
@@ -20456,7 +20456,7 @@
   {
    "field": "prior_year_realized_revenue_addition_to_local_district_school_tax",
    "label": "Prior-year realized revenue: Addition to Local District School Tax",
-   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2024 Total Realized Revenues (Actual) — Addition to Local District School Tax. DCA glossary: Additional municipal levy to support local school district",
+   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2024 Total Realized Revenues (Actual): Addition to Local District School Tax. DCA glossary: Additional municipal levy to support local school district",
    "category": "municipal_revenue",
    "scope": "municipality",
    "tier": "pro_plus",
@@ -20484,7 +20484,7 @@
   {
    "field": "prior_year_realized_revenue_deficit_general_budget",
    "label": "Prior-year realized revenue: Deficit General Budget",
-   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2024 Total Realized Revenues (Actual) — Deficit General Budget. DCA glossary: Carry-over of a previous year's general budget deficit",
+   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2024 Total Realized Revenues (Actual): Deficit General Budget. DCA glossary: Carry-over of a previous year's general budget deficit",
    "category": "municipal_revenue",
    "scope": "municipality",
    "tier": "pro_plus",
@@ -20512,7 +20512,7 @@
   {
    "field": "prior_year_realized_revenue_total",
    "label": "Prior-year realized revenue: Total",
-   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2024 Total Realized Revenues (Actual) — Total.",
+   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2024 Total Realized Revenues (Actual): Total.",
    "category": "municipal_revenue",
    "scope": "municipality",
    "tier": "pro_plus",
@@ -20540,7 +20540,7 @@
   {
    "field": "current_year_anticipated_revenue_surplus",
    "label": "Current-year anticipated revenue: Surplus",
-   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2025 Total Anticipated Revenues Current Year (Budgeted) — Surplus. DCA glossary: Surplus used as revenue in the budget",
+   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2025 Total Anticipated Revenues Current Year (Budgeted): Surplus. DCA glossary: Surplus used as revenue in the budget",
    "category": "municipal_revenue",
    "scope": "municipality",
    "tier": "pro_plus",
@@ -20568,7 +20568,7 @@
   {
    "field": "current_year_anticipated_revenue_local_revenue",
    "label": "Current-year anticipated revenue: Local Revenue",
-   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2025 Total Anticipated Revenues Current Year (Budgeted) — Local Revenue. DCA glossary: Local, own-source revenue (i.e. license fees, interest, fines, utility operating surplus, etc.)",
+   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2025 Total Anticipated Revenues Current Year (Budgeted): Local Revenue. DCA glossary: Local, own-source revenue (i.e. license fees, interest, fines, utility operating surplus, etc.)",
    "category": "municipal_revenue",
    "scope": "municipality",
    "tier": "pro_plus",
@@ -20596,7 +20596,7 @@
   {
    "field": "current_year_anticipated_revenue_state_aid",
    "label": "Current-year anticipated revenue: State Aid (without offsetting appropriation)",
-   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2025 Total Anticipated Revenues Current Year (Budgeted) — State Aid (without offsetting appropriation). DCA glossary: State aid (i.e. Energy Tax Receipts, CMPTRA, Transitional Aid)",
+   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2025 Total Anticipated Revenues Current Year (Budgeted): State Aid (without offsetting appropriation). DCA glossary: State aid (i.e. Energy Tax Receipts, CMPTRA, Transitional Aid)",
    "category": "municipal_revenue",
    "scope": "municipality",
    "tier": "pro_plus",
@@ -20624,7 +20624,7 @@
   {
    "field": "current_year_anticipated_revenue_uniform_construction_code_fees",
    "label": "Current-year anticipated revenue: Uniform Construction Code Fees",
-   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2025 Total Anticipated Revenues Current Year (Budgeted) — Uniform Construction Code Fees. DCA glossary: Unform construction code fees (i.e. permit fees)",
+   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2025 Total Anticipated Revenues Current Year (Budgeted): Uniform Construction Code Fees. DCA glossary: Unform construction code fees (i.e. permit fees)",
    "category": "municipal_revenue",
    "scope": "municipality",
    "tier": "pro_plus",
@@ -20652,7 +20652,7 @@
   {
    "field": "current_year_anticipated_revenue_shared_services_agreements",
    "label": "Current-year anticipated revenue: Shared Services Agreements",
-   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2025 Total Anticipated Revenues Current Year (Budgeted) — Shared Services Agreements. DCA glossary: Revenues received pursuant to a shared services agreement with another local government unit",
+   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2025 Total Anticipated Revenues Current Year (Budgeted): Shared Services Agreements. DCA glossary: Revenues received pursuant to a shared services agreement with another local government unit",
    "category": "municipal_revenue",
    "scope": "municipality",
    "tier": "pro_plus",
@@ -20680,7 +20680,7 @@
   {
    "field": "current_year_anticipated_revenue_additional_revenue_offset_by_appropriations",
    "label": "Current-year anticipated revenue: Additional Revenue Offset by Appropriations",
-   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2025 Total Anticipated Revenues Current Year (Budgeted) — Additional Revenue Offset by Appropriations. DCA glossary: Additional revenues with offsetting appropriations",
+   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2025 Total Anticipated Revenues Current Year (Budgeted): Additional Revenue Offset by Appropriations. DCA glossary: Additional revenues with offsetting appropriations",
    "category": "municipal_revenue",
    "scope": "municipality",
    "tier": "pro_plus",
@@ -20708,7 +20708,7 @@
   {
    "field": "current_year_anticipated_revenue_public_private_revenue",
    "label": "Current-year anticipated revenue: Public and Private Revenue",
-   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2025 Total Anticipated Revenues Current Year (Budgeted) — Public and Private Revenue. DCA glossary: Public and private revenues (i.e. grant revenues)",
+   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2025 Total Anticipated Revenues Current Year (Budgeted): Public and Private Revenue. DCA glossary: Public and private revenues (i.e. grant revenues)",
    "category": "municipal_revenue",
    "scope": "municipality",
    "tier": "pro_plus",
@@ -20736,7 +20736,7 @@
   {
    "field": "current_year_anticipated_revenue_other_special_items",
    "label": "Current-year anticipated revenue: Other Special Items",
-   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2025 Total Anticipated Revenues Current Year (Budgeted) — Other Special Items. DCA glossary: Miscellaneous items including hotel taxes, cable TV franchising fees, sale of municipal assets, payments-in-lieu-of taxes, and debt payment reserves",
+   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2025 Total Anticipated Revenues Current Year (Budgeted): Other Special Items. DCA glossary: Miscellaneous items including hotel taxes, cable TV franchising fees, sale of municipal assets, payments-in-lieu-of taxes, and debt payment reserves",
    "category": "municipal_revenue",
    "scope": "municipality",
    "tier": "pro_plus",
@@ -20764,7 +20764,7 @@
   {
    "field": "current_year_anticipated_revenue_receipts_from_delinquent_taxes",
    "label": "Current-year anticipated revenue: Receipts from Delinquent Taxes",
-   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2025 Total Anticipated Revenues Current Year (Budgeted) — Receipts from Delinquent Taxes. DCA glossary: Receipts from the collection of delinquent taxes corresponding to prior years",
+   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2025 Total Anticipated Revenues Current Year (Budgeted): Receipts from Delinquent Taxes. DCA glossary: Receipts from the collection of delinquent taxes corresponding to prior years",
    "category": "municipal_revenue",
    "scope": "municipality",
    "tier": "pro_plus",
@@ -20792,7 +20792,7 @@
   {
    "field": "current_year_anticipated_revenue_local_tax_for_municipal_purposes",
    "label": "Current-year anticipated revenue: Local Tax for Municipal Purposes",
-   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2025 Total Anticipated Revenues Current Year (Budgeted) — Local Tax for Municipal Purposes. DCA glossary: Local municipal purpose property tax levy",
+   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2025 Total Anticipated Revenues Current Year (Budgeted): Local Tax for Municipal Purposes. DCA glossary: Local municipal purpose property tax levy",
    "category": "municipal_revenue",
    "scope": "municipality",
    "tier": "pro_plus",
@@ -20820,7 +20820,7 @@
   {
    "field": "current_year_anticipated_revenue_minimum_library_tax",
    "label": "Current-year anticipated revenue: Minimum Library Tax",
-   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2025 Total Anticipated Revenues Current Year (Budgeted) — Minimum Library Tax. DCA glossary: Municipal library property tax levy",
+   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2025 Total Anticipated Revenues Current Year (Budgeted): Minimum Library Tax. DCA glossary: Municipal library property tax levy",
    "category": "municipal_revenue",
    "scope": "municipality",
    "tier": "pro_plus",
@@ -20848,7 +20848,7 @@
   {
    "field": "current_year_anticipated_revenue_open_space_levy_tax",
    "label": "Current-year anticipated revenue: Open Space Levy Tax",
-   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2025 Total Anticipated Revenues Current Year (Budgeted) — Open Space Levy Tax. DCA glossary: Open space preservation property tax levy",
+   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2025 Total Anticipated Revenues Current Year (Budgeted): Open Space Levy Tax. DCA glossary: Open space preservation property tax levy",
    "category": "municipal_revenue",
    "scope": "municipality",
    "tier": "pro_plus",
@@ -20876,7 +20876,7 @@
   {
    "field": "current_year_anticipated_revenue_arts_cultural_levy_tax",
    "label": "Current-year anticipated revenue: Arts and Cultural Levy Tax",
-   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2025 Total Anticipated Revenues Current Year (Budgeted) — Arts and Cultural Levy Tax.",
+   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2025 Total Anticipated Revenues Current Year (Budgeted): Arts and Cultural Levy Tax.",
    "category": "municipal_revenue",
    "scope": "municipality",
    "tier": "pro_plus",
@@ -20904,7 +20904,7 @@
   {
    "field": "current_year_anticipated_revenue_addition_to_local_district_school_tax",
    "label": "Current-year anticipated revenue: Addition to Local District School Tax",
-   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2025 Total Anticipated Revenues Current Year (Budgeted) — Addition to Local District School Tax. DCA glossary: Additional municipal levy to support local school district",
+   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2025 Total Anticipated Revenues Current Year (Budgeted): Addition to Local District School Tax. DCA glossary: Additional municipal levy to support local school district",
    "category": "municipal_revenue",
    "scope": "municipality",
    "tier": "pro_plus",
@@ -20932,7 +20932,7 @@
   {
    "field": "current_year_anticipated_revenue_deficit_general_budget",
    "label": "Current-year anticipated revenue: Deficit General Budget",
-   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2025 Total Anticipated Revenues Current Year (Budgeted) — Deficit General Budget. DCA glossary: Carry-over of a previous year's general budget deficit",
+   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2025 Total Anticipated Revenues Current Year (Budgeted): Deficit General Budget. DCA glossary: Carry-over of a previous year's general budget deficit",
    "category": "municipal_revenue",
    "scope": "municipality",
    "tier": "pro_plus",
@@ -20960,7 +20960,7 @@
   {
    "field": "current_year_anticipated_revenue_total",
    "label": "Current-year anticipated revenue: Total",
-   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2025 Total Anticipated Revenues Current Year (Budgeted) — Total.",
+   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2025 Total Anticipated Revenues Current Year (Budgeted): Total.",
    "category": "municipal_revenue",
    "scope": "municipality",
    "tier": "pro_plus",
@@ -20988,7 +20988,7 @@
   {
    "field": "current_year_general_budget_revenue_surplus",
    "label": "Current-year general budget revenue: Surplus",
-   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2025 Total General Budget Revenues Current Year — Surplus. DCA glossary: Surplus used as revenue in the budget",
+   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2025 Total General Budget Revenues Current Year: Surplus. DCA glossary: Surplus used as revenue in the budget",
    "category": "municipal_revenue",
    "scope": "municipality",
    "tier": "pro_plus",
@@ -21016,7 +21016,7 @@
   {
    "field": "current_year_general_budget_revenue_local_revenue",
    "label": "Current-year general budget revenue: Local Revenue",
-   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2025 Total General Budget Revenues Current Year — Local Revenue. DCA glossary: Local, own-source revenue (i.e. license fees, interest, fines, utility operating surplus, etc.)",
+   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2025 Total General Budget Revenues Current Year: Local Revenue. DCA glossary: Local, own-source revenue (i.e. license fees, interest, fines, utility operating surplus, etc.)",
    "category": "municipal_revenue",
    "scope": "municipality",
    "tier": "pro_plus",
@@ -21044,7 +21044,7 @@
   {
    "field": "current_year_general_budget_revenue_state_aid",
    "label": "Current-year general budget revenue: State Aid (without offsetting appropriation)",
-   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2025 Total General Budget Revenues Current Year — State Aid (without offsetting appropriation). DCA glossary: State aid (i.e. Energy Tax Receipts, CMPTRA, Transitional Aid)",
+   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2025 Total General Budget Revenues Current Year: State Aid (without offsetting appropriation). DCA glossary: State aid (i.e. Energy Tax Receipts, CMPTRA, Transitional Aid)",
    "category": "municipal_revenue",
    "scope": "municipality",
    "tier": "pro_plus",
@@ -21072,7 +21072,7 @@
   {
    "field": "current_year_general_budget_revenue_uniform_construction_code_fees",
    "label": "Current-year general budget revenue: Uniform Construction Code Fees",
-   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2025 Total General Budget Revenues Current Year — Uniform Construction Code Fees. DCA glossary: Unform construction code fees (i.e. permit fees)",
+   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2025 Total General Budget Revenues Current Year: Uniform Construction Code Fees. DCA glossary: Unform construction code fees (i.e. permit fees)",
    "category": "municipal_revenue",
    "scope": "municipality",
    "tier": "pro_plus",
@@ -21100,7 +21100,7 @@
   {
    "field": "current_year_general_budget_revenue_shared_services_agreements",
    "label": "Current-year general budget revenue: Shared Services Agreements",
-   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2025 Total General Budget Revenues Current Year — Shared Services Agreements. DCA glossary: Revenues received pursuant to a shared services agreement with another local government unit",
+   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2025 Total General Budget Revenues Current Year: Shared Services Agreements. DCA glossary: Revenues received pursuant to a shared services agreement with another local government unit",
    "category": "municipal_revenue",
    "scope": "municipality",
    "tier": "pro_plus",
@@ -21128,7 +21128,7 @@
   {
    "field": "current_year_general_budget_revenue_additional_revenue_offset_by_appropriations",
    "label": "Current-year general budget revenue: Additional Revenue Offset by Appropriations",
-   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2025 Total General Budget Revenues Current Year — Additional Revenue Offset by Appropriations. DCA glossary: Additional revenues with offsetting appropriations",
+   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2025 Total General Budget Revenues Current Year: Additional Revenue Offset by Appropriations. DCA glossary: Additional revenues with offsetting appropriations",
    "category": "municipal_revenue",
    "scope": "municipality",
    "tier": "pro_plus",
@@ -21156,7 +21156,7 @@
   {
    "field": "current_year_general_budget_revenue_public_private_revenue",
    "label": "Current-year general budget revenue: Public and Private Revenue",
-   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2025 Total General Budget Revenues Current Year — Public and Private Revenue. DCA glossary: Public and private revenues (i.e. grant revenues)",
+   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2025 Total General Budget Revenues Current Year: Public and Private Revenue. DCA glossary: Public and private revenues (i.e. grant revenues)",
    "category": "municipal_revenue",
    "scope": "municipality",
    "tier": "pro_plus",
@@ -21184,7 +21184,7 @@
   {
    "field": "current_year_general_budget_revenue_other_special_items",
    "label": "Current-year general budget revenue: Other Special Items",
-   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2025 Total General Budget Revenues Current Year — Other Special Items. DCA glossary: Miscellaneous items including hotel taxes, cable TV franchising fees, sale of municipal assets, payments-in-lieu-of taxes, and debt payment reserves",
+   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2025 Total General Budget Revenues Current Year: Other Special Items. DCA glossary: Miscellaneous items including hotel taxes, cable TV franchising fees, sale of municipal assets, payments-in-lieu-of taxes, and debt payment reserves",
    "category": "municipal_revenue",
    "scope": "municipality",
    "tier": "pro_plus",
@@ -21212,7 +21212,7 @@
   {
    "field": "current_year_general_budget_revenue_receipts_from_delinquent_taxes",
    "label": "Current-year general budget revenue: Receipts from Delinquent Taxes",
-   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2025 Total General Budget Revenues Current Year — Receipts from Delinquent Taxes. DCA glossary: Receipts from the collection of delinquent taxes corresponding to prior years",
+   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2025 Total General Budget Revenues Current Year: Receipts from Delinquent Taxes. DCA glossary: Receipts from the collection of delinquent taxes corresponding to prior years",
    "category": "municipal_revenue",
    "scope": "municipality",
    "tier": "pro_plus",
@@ -21240,7 +21240,7 @@
   {
    "field": "current_year_general_budget_revenue_local_tax_for_municipal_purposes",
    "label": "Current-year general budget revenue: Local Tax for Municipal Purposes",
-   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2025 Total General Budget Revenues Current Year — Local Tax for Municipal Purposes. DCA glossary: Local municipal purpose property tax levy",
+   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2025 Total General Budget Revenues Current Year: Local Tax for Municipal Purposes. DCA glossary: Local municipal purpose property tax levy",
    "category": "municipal_revenue",
    "scope": "municipality",
    "tier": "pro_plus",
@@ -21268,7 +21268,7 @@
   {
    "field": "current_year_general_budget_revenue_minimum_library_tax",
    "label": "Current-year general budget revenue: Minimum Library Tax",
-   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2025 Total General Budget Revenues Current Year — Minimum Library Tax. DCA glossary: Municipal library property tax levy",
+   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2025 Total General Budget Revenues Current Year: Minimum Library Tax. DCA glossary: Municipal library property tax levy",
    "category": "municipal_revenue",
    "scope": "municipality",
    "tier": "pro_plus",
@@ -21296,7 +21296,7 @@
   {
    "field": "current_year_general_budget_revenue_open_space_levy_tax",
    "label": "Current-year general budget revenue: Open Space Levy Tax",
-   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2025 Total General Budget Revenues Current Year — Open Space Levy Tax. DCA glossary: Open space preservation property tax levy",
+   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2025 Total General Budget Revenues Current Year: Open Space Levy Tax. DCA glossary: Open space preservation property tax levy",
    "category": "municipal_revenue",
    "scope": "municipality",
    "tier": "pro_plus",
@@ -21324,7 +21324,7 @@
   {
    "field": "current_year_general_budget_revenue_arts_cultural_levy_tax",
    "label": "Current-year general budget revenue: Arts and Cultural Levy Tax",
-   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2025 Total General Budget Revenues Current Year — Arts and Cultural Levy Tax.",
+   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2025 Total General Budget Revenues Current Year: Arts and Cultural Levy Tax.",
    "category": "municipal_revenue",
    "scope": "municipality",
    "tier": "pro_plus",
@@ -21352,7 +21352,7 @@
   {
    "field": "current_year_general_budget_revenue_addition_to_local_district_school_tax",
    "label": "Current-year general budget revenue: Addition to Local District School Tax",
-   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2025 Total General Budget Revenues Current Year — Addition to Local District School Tax. DCA glossary: Additional municipal levy to support local school district",
+   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2025 Total General Budget Revenues Current Year: Addition to Local District School Tax. DCA glossary: Additional municipal levy to support local school district",
    "category": "municipal_revenue",
    "scope": "municipality",
    "tier": "pro_plus",
@@ -21380,7 +21380,7 @@
   {
    "field": "current_year_general_budget_revenue_deficit_general_budget",
    "label": "Current-year general budget revenue: Deficit General Budget",
-   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2025 Total General Budget Revenues Current Year — Deficit General Budget. DCA glossary: Carry-over of a previous year's general budget deficit",
+   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2025 Total General Budget Revenues Current Year: Deficit General Budget. DCA glossary: Carry-over of a previous year's general budget deficit",
    "category": "municipal_revenue",
    "scope": "municipality",
    "tier": "pro_plus",
@@ -21408,7 +21408,7 @@
   {
    "field": "current_year_general_budget_revenue_total",
    "label": "Current-year general budget revenue: Total",
-   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2025 Total General Budget Revenues Current Year — Total.",
+   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2025 Total General Budget Revenues Current Year: Total.",
    "category": "municipal_revenue",
    "scope": "municipality",
    "tier": "pro_plus",
@@ -21436,7 +21436,7 @@
   {
    "field": "prior_year_modified_appropriation_general_government",
    "label": "Prior-year modified appropriation: General Government",
-   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2024 Total Modified Appropriations by Service Type (Prior Year) — General Government. DCA glossary: Includes Elected Officials, Clerk, Business Administrator, Financial Administration, Technology, Legal, Economic Development and municipal office employees not included in other listed budget categories.",
+   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2024 Total Modified Appropriations by Service Type (Prior Year): General Government. DCA glossary: Includes Elected Officials, Clerk, Business Administrator, Financial Administration, Technology, Legal, Economic Development and municipal office employees not included in other listed budget categories.",
    "category": "municipal_appropriation",
    "scope": "municipality",
    "tier": "pro_plus",
@@ -21464,7 +21464,7 @@
   {
    "field": "prior_year_modified_appropriation_land_use_administration",
    "label": "Prior-year modified appropriation: Land-Use Administration",
-   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2024 Total Modified Appropriations by Service Type (Prior Year) — Land-Use Administration. DCA glossary: Includes the Planning Board, Zoning Board of Adjustment, and Affordable Housing.",
+   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2024 Total Modified Appropriations by Service Type (Prior Year): Land-Use Administration. DCA glossary: Includes the Planning Board, Zoning Board of Adjustment, and Affordable Housing.",
    "category": "municipal_appropriation",
    "scope": "municipality",
    "tier": "pro_plus",
@@ -21492,7 +21492,7 @@
   {
    "field": "prior_year_modified_appropriation_uniform_construction_code",
    "label": "Prior-year modified appropriation: Uniform Construction Code",
-   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2024 Total Modified Appropriations by Service Type (Prior Year) — Uniform Construction Code. DCA glossary: Includes the budget for all building sub-code officials who enforce the Uniform Construction Code, as well as other code enforcement functions outside the scope of the UCC.",
+   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2024 Total Modified Appropriations by Service Type (Prior Year): Uniform Construction Code. DCA glossary: Includes the budget for all building sub-code officials who enforce the Uniform Construction Code, as well as other code enforcement functions outside the scope of the UCC.",
    "category": "municipal_appropriation",
    "scope": "municipality",
    "tier": "pro_plus",
@@ -21520,7 +21520,7 @@
   {
    "field": "prior_year_modified_appropriation_insurance",
    "label": "Prior-year modified appropriation: Insurance",
-   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2024 Total Modified Appropriations by Service Type (Prior Year) — Insurance. DCA glossary: Includes Employee Health Benefits (medical, dental, prescription health coverage and other health-related benefits), Liability, Property Casualty, Workers Compensation and any other insurance costs.",
+   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2024 Total Modified Appropriations by Service Type (Prior Year): Insurance. DCA glossary: Includes Employee Health Benefits (medical, dental, prescription health coverage and other health-related benefits), Liability, Property Casualty, Workers Compensation and any other insurance costs.",
    "category": "municipal_appropriation",
    "scope": "municipality",
    "tier": "pro_plus",
@@ -21548,7 +21548,7 @@
   {
    "field": "prior_year_modified_appropriation_public_safety",
    "label": "Prior-year modified appropriation: Public Safety",
-   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2024 Total Modified Appropriations by Service Type (Prior Year) — Public Safety. DCA glossary: includes 911 Communications, Police, Fire, Ambulance/Rescue, Emergency Management and any other public safety costs.",
+   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2024 Total Modified Appropriations by Service Type (Prior Year): Public Safety. DCA glossary: includes 911 Communications, Police, Fire, Ambulance/Rescue, Emergency Management and any other public safety costs.",
    "category": "municipal_appropriation",
    "scope": "municipality",
    "tier": "pro_plus",
@@ -21576,7 +21576,7 @@
   {
    "field": "prior_year_modified_appropriation_public_works",
    "label": "Prior-year modified appropriation: Public Works",
-   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2024 Total Modified Appropriations by Service Type (Prior Year) — Public Works. DCA glossary: Includes Street and Road Maintenance, Sanitary Sewer Services, Stormwater Management, Solid Waste, Recycling, Vehicle Maintenance and other miscellaneous public works functions.",
+   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2024 Total Modified Appropriations by Service Type (Prior Year): Public Works. DCA glossary: Includes Street and Road Maintenance, Sanitary Sewer Services, Stormwater Management, Solid Waste, Recycling, Vehicle Maintenance and other miscellaneous public works functions.",
    "category": "municipal_appropriation",
    "scope": "municipality",
    "tier": "pro_plus",
@@ -21604,7 +21604,7 @@
   {
    "field": "prior_year_modified_appropriation_health_human_services",
    "label": "Prior-year modified appropriation: Health and Human Services",
-   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2024 Total Modified Appropriations by Service Type (Prior Year) — Health and Human Services. DCA glossary: Includes Animal Control, Board of Health and various health, human services and social services programs provided by your municipality for veterans, senior citizens, teens or other groups.",
+   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2024 Total Modified Appropriations by Service Type (Prior Year): Health and Human Services. DCA glossary: Includes Animal Control, Board of Health and various health, human services and social services programs provided by your municipality for veterans, senior citizens, teens or other groups.",
    "category": "municipal_appropriation",
    "scope": "municipality",
    "tier": "pro_plus",
@@ -21632,7 +21632,7 @@
   {
    "field": "prior_year_modified_appropriation_parks_recreation",
    "label": "Prior-year modified appropriation: Parks and Recreation",
-   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2024 Total Modified Appropriations by Service Type (Prior Year) — Parks and Recreation. DCA glossary: Includes park maintenance, administration of recreation programs and community centers, as well as special community events/celebrations and other similar functions",
+   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2024 Total Modified Appropriations by Service Type (Prior Year): Parks and Recreation. DCA glossary: Includes park maintenance, administration of recreation programs and community centers, as well as special community events/celebrations and other similar functions",
    "category": "municipal_appropriation",
    "scope": "municipality",
    "tier": "pro_plus",
@@ -21660,7 +21660,7 @@
   {
    "field": "prior_year_modified_appropriation_education_library",
    "label": "Prior-year modified appropriation: Education (including Library)",
-   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2024 Total Modified Appropriations by Service Type (Prior Year) — Education (including Library). DCA glossary: Includes Library and other similar educational functions.",
+   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2024 Total Modified Appropriations by Service Type (Prior Year): Education (including Library). DCA glossary: Includes Library and other similar educational functions.",
    "category": "municipal_appropriation",
    "scope": "municipality",
    "tier": "pro_plus",
@@ -21688,7 +21688,7 @@
   {
    "field": "prior_year_modified_appropriation_unclassified",
    "label": "Prior-year modified appropriation: Unclassified",
-   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2024 Total Modified Appropriations by Service Type (Prior Year) — Unclassified. DCA glossary: All other unclassified expenditures",
+   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2024 Total Modified Appropriations by Service Type (Prior Year): Unclassified. DCA glossary: All other unclassified expenditures",
    "category": "municipal_appropriation",
    "scope": "municipality",
    "tier": "pro_plus",
@@ -21716,7 +21716,7 @@
   {
    "field": "prior_year_modified_appropriation_utilities_bulk_purchases",
    "label": "Prior-year modified appropriation: Utilities and Bulk Purchases",
-   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2024 Total Modified Appropriations by Service Type (Prior Year) — Utilities and Bulk Purchases. DCA glossary: Includes all utility costs paid through the municipal budget - gas, electric, water, sewer, etc.",
+   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2024 Total Modified Appropriations by Service Type (Prior Year): Utilities and Bulk Purchases. DCA glossary: Includes all utility costs paid through the municipal budget - gas, electric, water, sewer, etc.",
    "category": "municipal_appropriation",
    "scope": "municipality",
    "tier": "pro_plus",
@@ -21744,7 +21744,7 @@
   {
    "field": "prior_year_modified_appropriation_landfill_solid_waste_disposal",
    "label": "Prior-year modified appropriation: Landfill / Solid Waste Disposal ",
-   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2024 Total Modified Appropriations by Service Type (Prior Year) — Landfill / Solid Waste Disposal . DCA glossary: Includes all costs relating to landfill and solid waste disposal.",
+   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2024 Total Modified Appropriations by Service Type (Prior Year): Landfill / Solid Waste Disposal . DCA glossary: Includes all costs relating to landfill and solid waste disposal.",
    "category": "municipal_appropriation",
    "scope": "municipality",
    "tier": "pro_plus",
@@ -21772,7 +21772,7 @@
   {
    "field": "prior_year_modified_appropriation_contingency",
    "label": "Prior-year modified appropriation: Contingency",
-   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2024 Total Modified Appropriations by Service Type (Prior Year) — Contingency. DCA glossary: Contingency expenses for which no other appropriation was made",
+   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2024 Total Modified Appropriations by Service Type (Prior Year): Contingency. DCA glossary: Contingency expenses for which no other appropriation was made",
    "category": "municipal_appropriation",
    "scope": "municipality",
    "tier": "pro_plus",
@@ -21800,7 +21800,7 @@
   {
    "field": "prior_year_modified_appropriation_statutory_expenditures",
    "label": "Prior-year modified appropriation: Statutory Expenditures",
-   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2024 Total Modified Appropriations by Service Type (Prior Year) — Statutory Expenditures. DCA glossary: Includes Pension, Social Security, Unemployment, and other related payroll taxes.",
+   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2024 Total Modified Appropriations by Service Type (Prior Year): Statutory Expenditures. DCA glossary: Includes Pension, Social Security, Unemployment, and other related payroll taxes.",
    "category": "municipal_appropriation",
    "scope": "municipality",
    "tier": "pro_plus",
@@ -21828,7 +21828,7 @@
   {
    "field": "prior_year_modified_appropriation_judgements",
    "label": "Prior-year modified appropriation: Judgements",
-   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2024 Total Modified Appropriations by Service Type (Prior Year) — Judgements. DCA glossary: Expenditures related to payment of court judgements",
+   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2024 Total Modified Appropriations by Service Type (Prior Year): Judgements. DCA glossary: Expenditures related to payment of court judgements",
    "category": "municipal_appropriation",
    "scope": "municipality",
    "tier": "pro_plus",
@@ -21856,7 +21856,7 @@
   {
    "field": "prior_year_modified_appropriation_shared_services",
    "label": "Prior-year modified appropriation: Shared Services",
-   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2024 Total Modified Appropriations by Service Type (Prior Year) — Shared Services. DCA glossary: Expenditures made pursuant to a shared services agreement with another local government unit",
+   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2024 Total Modified Appropriations by Service Type (Prior Year): Shared Services. DCA glossary: Expenditures made pursuant to a shared services agreement with another local government unit",
    "category": "municipal_appropriation",
    "scope": "municipality",
    "tier": "pro_plus",
@@ -21884,7 +21884,7 @@
   {
    "field": "prior_year_modified_appropriation_court_public_defender",
    "label": "Prior-year modified appropriation: Court and Public Defender",
-   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2024 Total Modified Appropriations by Service Type (Prior Year) — Court and Public Defender. DCA glossary: Municipal court and public defender costs",
+   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2024 Total Modified Appropriations by Service Type (Prior Year): Court and Public Defender. DCA glossary: Municipal court and public defender costs",
    "category": "municipal_appropriation",
    "scope": "municipality",
    "tier": "pro_plus",
@@ -21912,7 +21912,7 @@
   {
    "field": "prior_year_modified_appropriation_capital",
    "label": "Prior-year modified appropriation: Capital",
-   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2024 Total Modified Appropriations by Service Type (Prior Year) — Capital. DCA glossary: Capital expenditures",
+   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2024 Total Modified Appropriations by Service Type (Prior Year): Capital. DCA glossary: Capital expenditures",
    "category": "municipal_appropriation",
    "scope": "municipality",
    "tier": "pro_plus",
@@ -21940,7 +21940,7 @@
   {
    "field": "prior_year_modified_appropriation_debt",
    "label": "Prior-year modified appropriation: Debt",
-   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2024 Total Modified Appropriations by Service Type (Prior Year) — Debt. DCA glossary: Debt service payments",
+   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2024 Total Modified Appropriations by Service Type (Prior Year): Debt. DCA glossary: Debt service payments",
    "category": "municipal_appropriation",
    "scope": "municipality",
    "tier": "pro_plus",
@@ -21968,7 +21968,7 @@
   {
    "field": "prior_year_modified_appropriation_deferred_charges",
    "label": "Prior-year modified appropriation: Deferred Charges",
-   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2024 Total Modified Appropriations by Service Type (Prior Year) — Deferred Charges. DCA glossary: Current year funding of deferred charges from a previous year corresponding to overexpenditures and emergency appropriations",
+   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2024 Total Modified Appropriations by Service Type (Prior Year): Deferred Charges. DCA glossary: Current year funding of deferred charges from a previous year corresponding to overexpenditures and emergency appropriations",
    "category": "municipal_appropriation",
    "scope": "municipality",
    "tier": "pro_plus",
@@ -21996,7 +21996,7 @@
   {
    "field": "prior_year_modified_appropriation_debt_type_1_school_district",
    "label": "Prior-year modified appropriation: Debt - Type 1 School District",
-   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2024 Total Modified Appropriations by Service Type (Prior Year) — Debt - Type 1 School District. DCA glossary: Debt service of payments on behalf of a Type 1 School District",
+   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2024 Total Modified Appropriations by Service Type (Prior Year): Debt - Type 1 School District. DCA glossary: Debt service of payments on behalf of a Type 1 School District",
    "category": "municipal_appropriation",
    "scope": "municipality",
    "tier": "pro_plus",
@@ -22024,7 +22024,7 @@
   {
    "field": "prior_year_modified_appropriation_reserve_for_uncollected_taxes",
    "label": "Prior-year modified appropriation: Reserve for Uncollected Taxes",
-   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2024 Total Modified Appropriations by Service Type (Prior Year) — Reserve for Uncollected Taxes. DCA glossary: Budget appropriation reserve for uncollected property taxes",
+   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2024 Total Modified Appropriations by Service Type (Prior Year): Reserve for Uncollected Taxes. DCA glossary: Budget appropriation reserve for uncollected property taxes",
    "category": "municipal_appropriation",
    "scope": "municipality",
    "tier": "pro_plus",
@@ -22052,7 +22052,7 @@
   {
    "field": "prior_year_modified_appropriation_surplus_general_budget",
    "label": "Prior-year modified appropriation: Surplus General Budget",
-   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2024 Total Modified Appropriations by Service Type (Prior Year) — Surplus General Budget. DCA glossary: Carry-over of a previous year's general budget surplus",
+   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2024 Total Modified Appropriations by Service Type (Prior Year): Surplus General Budget. DCA glossary: Carry-over of a previous year's general budget surplus",
    "category": "municipal_appropriation",
    "scope": "municipality",
    "tier": "pro_plus",
@@ -22080,7 +22080,7 @@
   {
    "field": "prior_year_modified_appropriation_total",
    "label": "Prior-year modified appropriation: TOTAL APPROPRIATION",
-   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2024 Total Modified Appropriations by Service Type (Prior Year) — TOTAL APPROPRIATION. DCA glossary: All budget appropriations including utility and enterprise funds",
+   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2024 Total Modified Appropriations by Service Type (Prior Year): TOTAL APPROPRIATION. DCA glossary: All budget appropriations including utility and enterprise funds",
    "category": "municipal_appropriation",
    "scope": "municipality",
    "tier": "pro_plus",
@@ -22108,7 +22108,7 @@
   {
    "field": "current_year_appropriation_general_government",
    "label": "Current-year appropriation: General Government",
-   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2025 Total Appropriations by Service Type (Current Year) — General Government. DCA glossary: Includes Elected Officials, Clerk, Business Administrator, Financial Administration, Technology, Legal, Economic Development and municipal office employees not included in other listed budget categories.",
+   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2025 Total Appropriations by Service Type (Current Year): General Government. DCA glossary: Includes Elected Officials, Clerk, Business Administrator, Financial Administration, Technology, Legal, Economic Development and municipal office employees not included in other listed budget categories.",
    "category": "municipal_appropriation",
    "scope": "municipality",
    "tier": "pro_plus",
@@ -22136,7 +22136,7 @@
   {
    "field": "current_year_appropriation_land_use_administration",
    "label": "Current-year appropriation: Land-Use Administration",
-   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2025 Total Appropriations by Service Type (Current Year) — Land-Use Administration. DCA glossary: Includes the Planning Board, Zoning Board of Adjustment, and Affordable Housing.",
+   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2025 Total Appropriations by Service Type (Current Year): Land-Use Administration. DCA glossary: Includes the Planning Board, Zoning Board of Adjustment, and Affordable Housing.",
    "category": "municipal_appropriation",
    "scope": "municipality",
    "tier": "pro_plus",
@@ -22164,7 +22164,7 @@
   {
    "field": "current_year_appropriation_uniform_construction_code",
    "label": "Current-year appropriation: Uniform Construction Code",
-   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2025 Total Appropriations by Service Type (Current Year) — Uniform Construction Code. DCA glossary: Includes the budget for all building sub-code officials who enforce the Uniform Construction Code, as well as other code enforcement functions outside the scope of the UCC.",
+   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2025 Total Appropriations by Service Type (Current Year): Uniform Construction Code. DCA glossary: Includes the budget for all building sub-code officials who enforce the Uniform Construction Code, as well as other code enforcement functions outside the scope of the UCC.",
    "category": "municipal_appropriation",
    "scope": "municipality",
    "tier": "pro_plus",
@@ -22192,7 +22192,7 @@
   {
    "field": "current_year_appropriation_insurance",
    "label": "Current-year appropriation: Insurance",
-   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2025 Total Appropriations by Service Type (Current Year) — Insurance. DCA glossary: Includes Employee Health Benefits (medical, dental, prescription health coverage and other health-related benefits), Liability, Property Casualty, Workers Compensation and any other insurance costs.",
+   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2025 Total Appropriations by Service Type (Current Year): Insurance. DCA glossary: Includes Employee Health Benefits (medical, dental, prescription health coverage and other health-related benefits), Liability, Property Casualty, Workers Compensation and any other insurance costs.",
    "category": "municipal_appropriation",
    "scope": "municipality",
    "tier": "pro_plus",
@@ -22220,7 +22220,7 @@
   {
    "field": "current_year_appropriation_public_safety",
    "label": "Current-year appropriation: Public Safety",
-   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2025 Total Appropriations by Service Type (Current Year) — Public Safety. DCA glossary: includes 911 Communications, Police, Fire, Ambulance/Rescue, Emergency Management and any other public safety costs.",
+   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2025 Total Appropriations by Service Type (Current Year): Public Safety. DCA glossary: includes 911 Communications, Police, Fire, Ambulance/Rescue, Emergency Management and any other public safety costs.",
    "category": "municipal_appropriation",
    "scope": "municipality",
    "tier": "pro_plus",
@@ -22248,7 +22248,7 @@
   {
    "field": "current_year_appropriation_public_works",
    "label": "Current-year appropriation: Public Works",
-   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2025 Total Appropriations by Service Type (Current Year) — Public Works. DCA glossary: Includes Street and Road Maintenance, Sanitary Sewer Services, Stormwater Management, Solid Waste, Recycling, Vehicle Maintenance and other miscellaneous public works functions.",
+   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2025 Total Appropriations by Service Type (Current Year): Public Works. DCA glossary: Includes Street and Road Maintenance, Sanitary Sewer Services, Stormwater Management, Solid Waste, Recycling, Vehicle Maintenance and other miscellaneous public works functions.",
    "category": "municipal_appropriation",
    "scope": "municipality",
    "tier": "pro_plus",
@@ -22276,7 +22276,7 @@
   {
    "field": "current_year_appropriation_health_human_services",
    "label": "Current-year appropriation: Health and Human Services",
-   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2025 Total Appropriations by Service Type (Current Year) — Health and Human Services. DCA glossary: Includes Animal Control, Board of Health and various health, human services and social services programs provided by your municipality for veterans, senior citizens, teens or other groups.",
+   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2025 Total Appropriations by Service Type (Current Year): Health and Human Services. DCA glossary: Includes Animal Control, Board of Health and various health, human services and social services programs provided by your municipality for veterans, senior citizens, teens or other groups.",
    "category": "municipal_appropriation",
    "scope": "municipality",
    "tier": "pro_plus",
@@ -22304,7 +22304,7 @@
   {
    "field": "current_year_appropriation_parks_recreation",
    "label": "Current-year appropriation: Parks and Recreation",
-   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2025 Total Appropriations by Service Type (Current Year) — Parks and Recreation. DCA glossary: Includes park maintenance, administration of recreation programs and community centers, as well as special community events/celebrations and other similar functions",
+   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2025 Total Appropriations by Service Type (Current Year): Parks and Recreation. DCA glossary: Includes park maintenance, administration of recreation programs and community centers, as well as special community events/celebrations and other similar functions",
    "category": "municipal_appropriation",
    "scope": "municipality",
    "tier": "pro_plus",
@@ -22332,7 +22332,7 @@
   {
    "field": "current_year_appropriation_education_library",
    "label": "Current-year appropriation: Education (including Library)",
-   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2025 Total Appropriations by Service Type (Current Year) — Education (including Library). DCA glossary: Includes Library and other similar educational functions.",
+   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2025 Total Appropriations by Service Type (Current Year): Education (including Library). DCA glossary: Includes Library and other similar educational functions.",
    "category": "municipal_appropriation",
    "scope": "municipality",
    "tier": "pro_plus",
@@ -22360,7 +22360,7 @@
   {
    "field": "current_year_appropriation_unclassified",
    "label": "Current-year appropriation: Unclassified",
-   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2025 Total Appropriations by Service Type (Current Year) — Unclassified. DCA glossary: All other unclassified expenditures",
+   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2025 Total Appropriations by Service Type (Current Year): Unclassified. DCA glossary: All other unclassified expenditures",
    "category": "municipal_appropriation",
    "scope": "municipality",
    "tier": "pro_plus",
@@ -22388,7 +22388,7 @@
   {
    "field": "current_year_appropriation_utilities_bulk_purchases",
    "label": "Current-year appropriation: Utilities and Bulk Purchases",
-   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2025 Total Appropriations by Service Type (Current Year) — Utilities and Bulk Purchases. DCA glossary: Includes all utility costs paid through the municipal budget - gas, electric, water, sewer, etc.",
+   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2025 Total Appropriations by Service Type (Current Year): Utilities and Bulk Purchases. DCA glossary: Includes all utility costs paid through the municipal budget - gas, electric, water, sewer, etc.",
    "category": "municipal_appropriation",
    "scope": "municipality",
    "tier": "pro_plus",
@@ -22416,7 +22416,7 @@
   {
    "field": "current_year_appropriation_landfill_solid_waste_disposal",
    "label": "Current-year appropriation: Landfill / Solid Waste Disposal ",
-   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2025 Total Appropriations by Service Type (Current Year) — Landfill / Solid Waste Disposal . DCA glossary: Includes all costs relating to landfill and solid waste disposal.",
+   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2025 Total Appropriations by Service Type (Current Year): Landfill / Solid Waste Disposal . DCA glossary: Includes all costs relating to landfill and solid waste disposal.",
    "category": "municipal_appropriation",
    "scope": "municipality",
    "tier": "pro_plus",
@@ -22444,7 +22444,7 @@
   {
    "field": "current_year_appropriation_contingency",
    "label": "Current-year appropriation: Contingency",
-   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2025 Total Appropriations by Service Type (Current Year) — Contingency. DCA glossary: Contingency expenses for which no other appropriation was made",
+   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2025 Total Appropriations by Service Type (Current Year): Contingency. DCA glossary: Contingency expenses for which no other appropriation was made",
    "category": "municipal_appropriation",
    "scope": "municipality",
    "tier": "pro_plus",
@@ -22472,7 +22472,7 @@
   {
    "field": "current_year_appropriation_statutory_expenditures",
    "label": "Current-year appropriation: Statutory Expenditures",
-   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2025 Total Appropriations by Service Type (Current Year) — Statutory Expenditures. DCA glossary: Includes Pension, Social Security, Unemployment, and other related payroll taxes.",
+   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2025 Total Appropriations by Service Type (Current Year): Statutory Expenditures. DCA glossary: Includes Pension, Social Security, Unemployment, and other related payroll taxes.",
    "category": "municipal_appropriation",
    "scope": "municipality",
    "tier": "pro_plus",
@@ -22500,7 +22500,7 @@
   {
    "field": "current_year_appropriation_judgements",
    "label": "Current-year appropriation: Judgements",
-   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2025 Total Appropriations by Service Type (Current Year) — Judgements. DCA glossary: Expenditures related to payment of court judgements",
+   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2025 Total Appropriations by Service Type (Current Year): Judgements. DCA glossary: Expenditures related to payment of court judgements",
    "category": "municipal_appropriation",
    "scope": "municipality",
    "tier": "pro_plus",
@@ -22528,7 +22528,7 @@
   {
    "field": "current_year_appropriation_shared_services",
    "label": "Current-year appropriation: Shared Services",
-   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2025 Total Appropriations by Service Type (Current Year) — Shared Services. DCA glossary: Expenditures made pursuant to a shared services agreement with another local government unit",
+   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2025 Total Appropriations by Service Type (Current Year): Shared Services. DCA glossary: Expenditures made pursuant to a shared services agreement with another local government unit",
    "category": "municipal_appropriation",
    "scope": "municipality",
    "tier": "pro_plus",
@@ -22556,7 +22556,7 @@
   {
    "field": "current_year_appropriation_court_public_defender",
    "label": "Current-year appropriation: Court and Public Defender",
-   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2025 Total Appropriations by Service Type (Current Year) — Court and Public Defender. DCA glossary: Municipal court and public defender costs",
+   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2025 Total Appropriations by Service Type (Current Year): Court and Public Defender. DCA glossary: Municipal court and public defender costs",
    "category": "municipal_appropriation",
    "scope": "municipality",
    "tier": "pro_plus",
@@ -22584,7 +22584,7 @@
   {
    "field": "current_year_appropriation_capital",
    "label": "Current-year appropriation: Capital",
-   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2025 Total Appropriations by Service Type (Current Year) — Capital. DCA glossary: Capital expenditures",
+   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2025 Total Appropriations by Service Type (Current Year): Capital. DCA glossary: Capital expenditures",
    "category": "municipal_appropriation",
    "scope": "municipality",
    "tier": "pro_plus",
@@ -22612,7 +22612,7 @@
   {
    "field": "current_year_appropriation_debt",
    "label": "Current-year appropriation: Debt",
-   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2025 Total Appropriations by Service Type (Current Year) — Debt. DCA glossary: Debt service payments",
+   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2025 Total Appropriations by Service Type (Current Year): Debt. DCA glossary: Debt service payments",
    "category": "municipal_appropriation",
    "scope": "municipality",
    "tier": "pro_plus",
@@ -22640,7 +22640,7 @@
   {
    "field": "current_year_appropriation_deferred_charges",
    "label": "Current-year appropriation: Deferred Charges",
-   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2025 Total Appropriations by Service Type (Current Year) — Deferred Charges. DCA glossary: Current year funding of deferred charges from a previous year corresponding to overexpenditures and emergency appropriations",
+   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2025 Total Appropriations by Service Type (Current Year): Deferred Charges. DCA glossary: Current year funding of deferred charges from a previous year corresponding to overexpenditures and emergency appropriations",
    "category": "municipal_appropriation",
    "scope": "municipality",
    "tier": "pro_plus",
@@ -22668,7 +22668,7 @@
   {
    "field": "current_year_appropriation_debt_type_1_school_district",
    "label": "Current-year appropriation: Debt - Type 1 School District",
-   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2025 Total Appropriations by Service Type (Current Year) — Debt - Type 1 School District. DCA glossary: Debt service of payments on behalf of a Type 1 School District",
+   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2025 Total Appropriations by Service Type (Current Year): Debt - Type 1 School District. DCA glossary: Debt service of payments on behalf of a Type 1 School District",
    "category": "municipal_appropriation",
    "scope": "municipality",
    "tier": "pro_plus",
@@ -22696,7 +22696,7 @@
   {
    "field": "current_year_appropriation_reserve_for_uncollected_taxes",
    "label": "Current-year appropriation: Reserve for Uncollected Taxes",
-   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2025 Total Appropriations by Service Type (Current Year) — Reserve for Uncollected Taxes. DCA glossary: Budget appropriation reserve for uncollected property taxes",
+   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2025 Total Appropriations by Service Type (Current Year): Reserve for Uncollected Taxes. DCA glossary: Budget appropriation reserve for uncollected property taxes",
    "category": "municipal_appropriation",
    "scope": "municipality",
    "tier": "pro_plus",
@@ -22724,7 +22724,7 @@
   {
    "field": "current_year_appropriation_surplus_general_budget",
    "label": "Current-year appropriation: Surplus General Budget",
-   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2025 Total Appropriations by Service Type (Current Year) — Surplus General Budget. DCA glossary: Carry-over of a previous year's general budget surplus",
+   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2025 Total Appropriations by Service Type (Current Year): Surplus General Budget. DCA glossary: Carry-over of a previous year's general budget surplus",
    "category": "municipal_appropriation",
    "scope": "municipality",
    "tier": "pro_plus",
@@ -22752,7 +22752,7 @@
   {
    "field": "current_year_appropriation_total",
    "label": "Current-year appropriation: TOTAL APPROPRIATION",
-   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2025 Total Appropriations by Service Type (Current Year) — TOTAL APPROPRIATION. DCA glossary: All budget appropriations including utility and enterprise funds",
+   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2025 Total Appropriations by Service Type (Current Year): TOTAL APPROPRIATION. DCA glossary: All budget appropriations including utility and enterprise funds",
    "category": "municipal_appropriation",
    "scope": "municipality",
    "tier": "pro_plus",
@@ -22780,7 +22780,7 @@
   {
    "field": "current_year_general_budget_appropriation_general_government",
    "label": "Current-year general budget appropriation: General Government",
-   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2025 General Budget Appropriations — General Government. DCA glossary: Includes Elected Officials, Clerk, Business Administrator, Financial Administration, Technology, Legal, Economic Development and municipal office employees not included in other listed budget categories.",
+   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2025 General Budget Appropriations: General Government. DCA glossary: Includes Elected Officials, Clerk, Business Administrator, Financial Administration, Technology, Legal, Economic Development and municipal office employees not included in other listed budget categories.",
    "category": "municipal_appropriation",
    "scope": "municipality",
    "tier": "pro_plus",
@@ -22808,7 +22808,7 @@
   {
    "field": "current_year_general_budget_appropriation_land_use_administration",
    "label": "Current-year general budget appropriation: Land-Use Administration",
-   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2025 General Budget Appropriations — Land-Use Administration. DCA glossary: Includes the Planning Board, Zoning Board of Adjustment, and Affordable Housing.",
+   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2025 General Budget Appropriations: Land-Use Administration. DCA glossary: Includes the Planning Board, Zoning Board of Adjustment, and Affordable Housing.",
    "category": "municipal_appropriation",
    "scope": "municipality",
    "tier": "pro_plus",
@@ -22836,7 +22836,7 @@
   {
    "field": "current_year_general_budget_appropriation_uniform_construction_code",
    "label": "Current-year general budget appropriation: Uniform Construction Code",
-   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2025 General Budget Appropriations — Uniform Construction Code. DCA glossary: Includes the budget for all building sub-code officials who enforce the Uniform Construction Code, as well as other code enforcement functions outside the scope of the UCC.",
+   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2025 General Budget Appropriations: Uniform Construction Code. DCA glossary: Includes the budget for all building sub-code officials who enforce the Uniform Construction Code, as well as other code enforcement functions outside the scope of the UCC.",
    "category": "municipal_appropriation",
    "scope": "municipality",
    "tier": "pro_plus",
@@ -22864,7 +22864,7 @@
   {
    "field": "current_year_general_budget_appropriation_insurance",
    "label": "Current-year general budget appropriation: Insurance",
-   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2025 General Budget Appropriations — Insurance. DCA glossary: Includes Employee Health Benefits (medical, dental, prescription health coverage and other health-related benefits), Liability, Property Casualty, Workers Compensation and any other insurance costs.",
+   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2025 General Budget Appropriations: Insurance. DCA glossary: Includes Employee Health Benefits (medical, dental, prescription health coverage and other health-related benefits), Liability, Property Casualty, Workers Compensation and any other insurance costs.",
    "category": "municipal_appropriation",
    "scope": "municipality",
    "tier": "pro_plus",
@@ -22892,7 +22892,7 @@
   {
    "field": "current_year_general_budget_appropriation_public_safety",
    "label": "Current-year general budget appropriation: Public Safety",
-   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2025 General Budget Appropriations — Public Safety. DCA glossary: includes 911 Communications, Police, Fire, Ambulance/Rescue, Emergency Management and any other public safety costs.",
+   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2025 General Budget Appropriations: Public Safety. DCA glossary: includes 911 Communications, Police, Fire, Ambulance/Rescue, Emergency Management and any other public safety costs.",
    "category": "municipal_appropriation",
    "scope": "municipality",
    "tier": "pro_plus",
@@ -22920,7 +22920,7 @@
   {
    "field": "current_year_general_budget_appropriation_public_works",
    "label": "Current-year general budget appropriation: Public Works",
-   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2025 General Budget Appropriations — Public Works. DCA glossary: Includes Street and Road Maintenance, Sanitary Sewer Services, Stormwater Management, Solid Waste, Recycling, Vehicle Maintenance and other miscellaneous public works functions.",
+   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2025 General Budget Appropriations: Public Works. DCA glossary: Includes Street and Road Maintenance, Sanitary Sewer Services, Stormwater Management, Solid Waste, Recycling, Vehicle Maintenance and other miscellaneous public works functions.",
    "category": "municipal_appropriation",
    "scope": "municipality",
    "tier": "pro_plus",
@@ -22948,7 +22948,7 @@
   {
    "field": "current_year_general_budget_appropriation_health_human_services",
    "label": "Current-year general budget appropriation: Health and Human Services",
-   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2025 General Budget Appropriations — Health and Human Services. DCA glossary: Includes Animal Control, Board of Health and various health, human services and social services programs provided by your municipality for veterans, senior citizens, teens or other groups.",
+   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2025 General Budget Appropriations: Health and Human Services. DCA glossary: Includes Animal Control, Board of Health and various health, human services and social services programs provided by your municipality for veterans, senior citizens, teens or other groups.",
    "category": "municipal_appropriation",
    "scope": "municipality",
    "tier": "pro_plus",
@@ -22976,7 +22976,7 @@
   {
    "field": "current_year_general_budget_appropriation_parks_recreation",
    "label": "Current-year general budget appropriation: Parks and Recreation",
-   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2025 General Budget Appropriations — Parks and Recreation. DCA glossary: Includes park maintenance, administration of recreation programs and community centers, as well as special community events/celebrations and other similar functions",
+   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2025 General Budget Appropriations: Parks and Recreation. DCA glossary: Includes park maintenance, administration of recreation programs and community centers, as well as special community events/celebrations and other similar functions",
    "category": "municipal_appropriation",
    "scope": "municipality",
    "tier": "pro_plus",
@@ -23004,7 +23004,7 @@
   {
    "field": "current_year_general_budget_appropriation_education_library",
    "label": "Current-year general budget appropriation: Education (including Library)",
-   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2025 General Budget Appropriations — Education (including Library). DCA glossary: Includes Library and other similar educational functions.",
+   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2025 General Budget Appropriations: Education (including Library). DCA glossary: Includes Library and other similar educational functions.",
    "category": "municipal_appropriation",
    "scope": "municipality",
    "tier": "pro_plus",
@@ -23032,7 +23032,7 @@
   {
    "field": "current_year_general_budget_appropriation_unclassified",
    "label": "Current-year general budget appropriation: Unclassified",
-   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2025 General Budget Appropriations — Unclassified. DCA glossary: All other unclassified expenditures",
+   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2025 General Budget Appropriations: Unclassified. DCA glossary: All other unclassified expenditures",
    "category": "municipal_appropriation",
    "scope": "municipality",
    "tier": "pro_plus",
@@ -23060,7 +23060,7 @@
   {
    "field": "current_year_general_budget_appropriation_utilities_bulk_purchases",
    "label": "Current-year general budget appropriation: Utilities and Bulk Purchases",
-   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2025 General Budget Appropriations — Utilities and Bulk Purchases. DCA glossary: Includes all utility costs paid through the municipal budget - gas, electric, water, sewer, etc.",
+   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2025 General Budget Appropriations: Utilities and Bulk Purchases. DCA glossary: Includes all utility costs paid through the municipal budget - gas, electric, water, sewer, etc.",
    "category": "municipal_appropriation",
    "scope": "municipality",
    "tier": "pro_plus",
@@ -23088,7 +23088,7 @@
   {
    "field": "current_year_general_budget_appropriation_landfill_solid_waste_disposal",
    "label": "Current-year general budget appropriation: Landfill / Solid Waste Disposal ",
-   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2025 General Budget Appropriations — Landfill / Solid Waste Disposal . DCA glossary: Includes all costs relating to landfill and solid waste disposal.",
+   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2025 General Budget Appropriations: Landfill / Solid Waste Disposal . DCA glossary: Includes all costs relating to landfill and solid waste disposal.",
    "category": "municipal_appropriation",
    "scope": "municipality",
    "tier": "pro_plus",
@@ -23116,7 +23116,7 @@
   {
    "field": "current_year_general_budget_appropriation_contingency",
    "label": "Current-year general budget appropriation: Contingency",
-   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2025 General Budget Appropriations — Contingency. DCA glossary: Contingency expenses for which no other appropriation was made",
+   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2025 General Budget Appropriations: Contingency. DCA glossary: Contingency expenses for which no other appropriation was made",
    "category": "municipal_appropriation",
    "scope": "municipality",
    "tier": "pro_plus",
@@ -23144,7 +23144,7 @@
   {
    "field": "current_year_general_budget_appropriation_statutory_expenditures",
    "label": "Current-year general budget appropriation: Statutory Expenditures",
-   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2025 General Budget Appropriations — Statutory Expenditures. DCA glossary: Includes Pension, Social Security, Unemployment, and other related payroll taxes.",
+   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2025 General Budget Appropriations: Statutory Expenditures. DCA glossary: Includes Pension, Social Security, Unemployment, and other related payroll taxes.",
    "category": "municipal_appropriation",
    "scope": "municipality",
    "tier": "pro_plus",
@@ -23172,7 +23172,7 @@
   {
    "field": "current_year_general_budget_appropriation_judgements",
    "label": "Current-year general budget appropriation: Judgements",
-   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2025 General Budget Appropriations — Judgements. DCA glossary: Expenditures related to payment of court judgements",
+   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2025 General Budget Appropriations: Judgements. DCA glossary: Expenditures related to payment of court judgements",
    "category": "municipal_appropriation",
    "scope": "municipality",
    "tier": "pro_plus",
@@ -23200,7 +23200,7 @@
   {
    "field": "current_year_general_budget_appropriation_shared_services",
    "label": "Current-year general budget appropriation: Shared Services",
-   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2025 General Budget Appropriations — Shared Services. DCA glossary: Expenditures made pursuant to a shared services agreement with another local government unit",
+   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2025 General Budget Appropriations: Shared Services. DCA glossary: Expenditures made pursuant to a shared services agreement with another local government unit",
    "category": "municipal_appropriation",
    "scope": "municipality",
    "tier": "pro_plus",
@@ -23228,7 +23228,7 @@
   {
    "field": "current_year_general_budget_appropriation_court_public_defender",
    "label": "Current-year general budget appropriation: Court and Public Defender",
-   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2025 General Budget Appropriations — Court and Public Defender. DCA glossary: Municipal court and public defender costs",
+   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2025 General Budget Appropriations: Court and Public Defender. DCA glossary: Municipal court and public defender costs",
    "category": "municipal_appropriation",
    "scope": "municipality",
    "tier": "pro_plus",
@@ -23256,7 +23256,7 @@
   {
    "field": "current_year_general_budget_appropriation_capital",
    "label": "Current-year general budget appropriation: Capital",
-   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2025 General Budget Appropriations — Capital. DCA glossary: Capital expenditures",
+   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2025 General Budget Appropriations: Capital. DCA glossary: Capital expenditures",
    "category": "municipal_appropriation",
    "scope": "municipality",
    "tier": "pro_plus",
@@ -23284,7 +23284,7 @@
   {
    "field": "current_year_general_budget_appropriation_debt",
    "label": "Current-year general budget appropriation: Debt",
-   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2025 General Budget Appropriations — Debt. DCA glossary: Debt service payments",
+   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2025 General Budget Appropriations: Debt. DCA glossary: Debt service payments",
    "category": "municipal_appropriation",
    "scope": "municipality",
    "tier": "pro_plus",
@@ -23312,7 +23312,7 @@
   {
    "field": "current_year_general_budget_appropriation_deferred_charges",
    "label": "Current-year general budget appropriation: Deferred Charges",
-   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2025 General Budget Appropriations — Deferred Charges. DCA glossary: Current year funding of deferred charges from a previous year corresponding to overexpenditures and emergency appropriations",
+   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2025 General Budget Appropriations: Deferred Charges. DCA glossary: Current year funding of deferred charges from a previous year corresponding to overexpenditures and emergency appropriations",
    "category": "municipal_appropriation",
    "scope": "municipality",
    "tier": "pro_plus",
@@ -23340,7 +23340,7 @@
   {
    "field": "current_year_general_budget_appropriation_debt_type_1_school_district",
    "label": "Current-year general budget appropriation: Debt - Type 1 School District",
-   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2025 General Budget Appropriations — Debt - Type 1 School District. DCA glossary: Debt service of payments on behalf of a Type 1 School District",
+   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2025 General Budget Appropriations: Debt - Type 1 School District. DCA glossary: Debt service of payments on behalf of a Type 1 School District",
    "category": "municipal_appropriation",
    "scope": "municipality",
    "tier": "pro_plus",
@@ -23368,7 +23368,7 @@
   {
    "field": "current_year_general_budget_appropriation_reserve_for_uncollected_taxes",
    "label": "Current-year general budget appropriation: Reserve for Uncollected Taxes",
-   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2025 General Budget Appropriations — Reserve for Uncollected Taxes. DCA glossary: Budget appropriation reserve for uncollected property taxes",
+   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2025 General Budget Appropriations: Reserve for Uncollected Taxes. DCA glossary: Budget appropriation reserve for uncollected property taxes",
    "category": "municipal_appropriation",
    "scope": "municipality",
    "tier": "pro_plus",
@@ -23396,7 +23396,7 @@
   {
    "field": "current_year_general_budget_appropriation_surplus_general_budget",
    "label": "Current-year general budget appropriation: Surplus General Budget",
-   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2025 General Budget Appropriations — Surplus General Budget. DCA glossary: Carry-over of a previous year's general budget surplus",
+   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2025 General Budget Appropriations: Surplus General Budget. DCA glossary: Carry-over of a previous year's general budget surplus",
    "category": "municipal_appropriation",
    "scope": "municipality",
    "tier": "pro_plus",
@@ -23424,7 +23424,7 @@
   {
    "field": "current_year_general_budget_appropriation_total",
    "label": "Current-year general budget appropriation: Total General Budget",
-   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2025 General Budget Appropriations — Total General Budget. DCA glossary: All budget appropriations including utility and enterprise funds",
+   "description": "NJ DCA User Friendly Budget 2025 Summary source field: 2025 General Budget Appropriations: Total General Budget. DCA glossary: All budget appropriations including utility and enterprise funds",
    "category": "municipal_appropriation",
    "scope": "municipality",
    "tier": "pro_plus",
@@ -23452,7 +23452,7 @@
   {
    "field": "total_full_time_employees",
    "label": "Total full-time employees",
-   "description": "NJ DCA User Friendly Budget 2025 Summary source field: Total Personnel Costs — Total Full-Time Employees.",
+   "description": "NJ DCA User Friendly Budget 2025 Summary source field: Total Personnel Costs: Total Full-Time Employees.",
    "category": "municipal_personnel",
    "scope": "municipality",
    "tier": "pro_plus",
@@ -23477,7 +23477,7 @@
   {
    "field": "total_part_time_employees",
    "label": "Total part-time employees",
-   "description": "NJ DCA User Friendly Budget 2025 Summary source field: Total Personnel Costs — Total Part-Time Employees.",
+   "description": "NJ DCA User Friendly Budget 2025 Summary source field: Total Personnel Costs: Total Part-Time Employees.",
    "category": "municipal_personnel",
    "scope": "municipality",
    "tier": "pro_plus",
@@ -23502,7 +23502,7 @@
   {
    "field": "total_personnel_cost",
    "label": "Total personnel cost",
-   "description": "NJ DCA User Friendly Budget 2025 Summary source field: Total Personnel Costs — Total Personnel Cost. DCA glossary: Sum of base pay, overtime, pension, health benefits, employment taxes, and other benefit and compensation costs",
+   "description": "NJ DCA User Friendly Budget 2025 Summary source field: Total Personnel Costs: Total Personnel Cost. DCA glossary: Sum of base pay, overtime, pension, health benefits, employment taxes, and other benefit and compensation costs",
    "category": "municipal_personnel",
    "scope": "municipality",
    "tier": "pro_plus",
@@ -23527,7 +23527,7 @@
   {
    "field": "total_base_pay",
    "label": "Total base pay",
-   "description": "NJ DCA User Friendly Budget 2025 Summary source field: Total Personnel Costs — Total Base Pay. DCA glossary: The annualized rate of pay to which overtime (if eligible) and/or\npension is calculated",
+   "description": "NJ DCA User Friendly Budget 2025 Summary source field: Total Personnel Costs: Total Base Pay. DCA glossary: The annualized rate of pay to which overtime (if eligible) and/or\npension is calculated",
    "category": "municipal_personnel",
    "scope": "municipality",
    "tier": "pro_plus",
@@ -23552,7 +23552,7 @@
   {
    "field": "total_overtime_other_compensation",
    "label": "Total overtime and other compensation",
-   "description": "NJ DCA User Friendly Budget 2025 Summary source field: Total Personnel Costs — Total Overtime and other Compensation. DCA glossary: Any other item that is charged as a salary and wage expense but not included in base pay",
+   "description": "NJ DCA User Friendly Budget 2025 Summary source field: Total Personnel Costs: Total Overtime and other Compensation. DCA glossary: Any other item that is charged as a salary and wage expense but not included in base pay",
    "category": "municipal_personnel",
    "scope": "municipality",
    "tier": "pro_plus",
@@ -23577,7 +23577,7 @@
   {
    "field": "total_pension_estimate",
    "label": "Total pension estimate",
-   "description": "NJ DCA User Friendly Budget 2025 Summary source field: Total Personnel Costs — Total Pension (Estimate) . DCA glossary: Estimated pension costs as listed on the Division of Pension and Benefits website",
+   "description": "NJ DCA User Friendly Budget 2025 Summary source field: Total Personnel Costs: Total Pension (Estimate) . DCA glossary: Estimated pension costs as listed on the Division of Pension and Benefits website",
    "category": "municipal_personnel",
    "scope": "municipality",
    "tier": "pro_plus",
@@ -23602,7 +23602,7 @@
   {
    "field": "total_health_benefits_net_cost_share",
    "label": "Total health benefits net of cost share",
-   "description": "NJ DCA User Friendly Budget 2025 Summary source field: Total Personnel Costs — Total Health Benefits Net of Cost Share. DCA glossary: Health benefit costs net of employee contribution",
+   "description": "NJ DCA User Friendly Budget 2025 Summary source field: Total Personnel Costs: Total Health Benefits Net of Cost Share. DCA glossary: Health benefit costs net of employee contribution",
    "category": "municipal_personnel",
    "scope": "municipality",
    "tier": "pro_plus",
@@ -23627,7 +23627,7 @@
   {
    "field": "total_employment_taxes_other_benefits",
    "label": "Total employment taxes and other benefits",
-   "description": "NJ DCA User Friendly Budget 2025 Summary source field: Total Personnel Costs — Total Employment Taxes and Other Benefits. DCA glossary: Employment taxes and other benefits.",
+   "description": "NJ DCA User Friendly Budget 2025 Summary source field: Total Personnel Costs: Total Employment Taxes and Other Benefits. DCA glossary: Employment taxes and other benefits.",
    "category": "municipal_personnel",
    "scope": "municipality",
    "tier": "pro_plus",
@@ -23652,7 +23652,7 @@
   {
    "field": "gross_debt_local_school",
    "label": "Gross debt: local school debt",
-   "description": "NJ DCA User Friendly Budget 2025 Summary source field: Gross Debt — Local School Debt. DCA glossary: Debt issued by local school districts",
+   "description": "NJ DCA User Friendly Budget 2025 Summary source field: Gross Debt: Local School Debt. DCA glossary: Debt issued by local school districts",
    "category": "municipal_debt",
    "scope": "municipality",
    "tier": "pro_plus",
@@ -23681,7 +23681,7 @@
   {
    "field": "gross_debt_regional_school",
    "label": "Gross debt: regional school debt",
-   "description": "NJ DCA User Friendly Budget 2025 Summary source field: Gross Debt — Regional School Debt. DCA glossary: Debt issued by regional school districts",
+   "description": "NJ DCA User Friendly Budget 2025 Summary source field: Gross Debt: Regional School Debt. DCA glossary: Debt issued by regional school districts",
    "category": "municipal_debt",
    "scope": "municipality",
    "tier": "pro_plus",
@@ -23710,7 +23710,7 @@
   {
    "field": "gross_debt_utility_fund",
    "label": "Gross debt: utility fund debt",
-   "description": "NJ DCA User Friendly Budget 2025 Summary source field: Gross Debt — Utility Fund Debt. DCA glossary: Debt issued by or on behalf of municipal utility funds (i.e. water, sewer, etc.)",
+   "description": "NJ DCA User Friendly Budget 2025 Summary source field: Gross Debt: Utility Fund Debt. DCA glossary: Debt issued by or on behalf of municipal utility funds (i.e. water, sewer, etc.)",
    "category": "municipal_debt",
    "scope": "municipality",
    "tier": "pro_plus",
@@ -23739,7 +23739,7 @@
   {
    "field": "gross_debt_authorized",
    "label": "Gross debt: debt authorized",
-   "description": "NJ DCA User Friendly Budget 2025 Summary source field: Gross Debt — Debt Authorized. DCA glossary: Total of all authorized municipal debt",
+   "description": "NJ DCA User Friendly Budget 2025 Summary source field: Gross Debt: Debt Authorized. DCA glossary: Total of all authorized municipal debt",
    "category": "municipal_debt",
    "scope": "municipality",
    "tier": "pro_plus",
@@ -23768,7 +23768,7 @@
   {
    "field": "gross_debt_notes_outstanding",
    "label": "Gross debt: notes outstanding",
-   "description": "NJ DCA User Friendly Budget 2025 Summary source field: Gross Debt — Notes Outstanding. DCA glossary: Total of all outstanding municipal note debt (short-term borrowing)",
+   "description": "NJ DCA User Friendly Budget 2025 Summary source field: Gross Debt: Notes Outstanding. DCA glossary: Total of all outstanding municipal note debt (short-term borrowing)",
    "category": "municipal_debt",
    "scope": "municipality",
    "tier": "pro_plus",
@@ -23797,7 +23797,7 @@
   {
    "field": "gross_debt_bonds_outstanding",
    "label": "Gross debt: bonds outstanding",
-   "description": "NJ DCA User Friendly Budget 2025 Summary source field: Gross Debt — Bonds Outstanding. DCA glossary: Total of all outstanding municipal bond debt (long-term borrowing)",
+   "description": "NJ DCA User Friendly Budget 2025 Summary source field: Gross Debt: Bonds Outstanding. DCA glossary: Total of all outstanding municipal bond debt (long-term borrowing)",
    "category": "municipal_debt",
    "scope": "municipality",
    "tier": "pro_plus",
@@ -23826,7 +23826,7 @@
   {
    "field": "gross_debt_loans_other",
    "label": "Gross debt: loans and other debt",
-   "description": "NJ DCA User Friendly Budget 2025 Summary source field: Gross Debt — Loans and Other Debt. DCA glossary: Total of all outstanding loans and all other kinds of debt",
+   "description": "NJ DCA User Friendly Budget 2025 Summary source field: Gross Debt: Loans and Other Debt. DCA glossary: Total of all outstanding loans and all other kinds of debt",
    "category": "municipal_debt",
    "scope": "municipality",
    "tier": "pro_plus",
@@ -23855,7 +23855,7 @@
   {
    "field": "gross_debt_total",
    "label": "Gross debt",
-   "description": "NJ DCA User Friendly Budget 2025 Summary source field: Gross Debt — Gross Debt. DCA glossary: All bonds and notes issued and authorized but not issued or guaranteed by the local unit, except tax anticipation notes, emergency notes, special emergency notes and utility revenue notes.",
+   "description": "NJ DCA User Friendly Budget 2025 Summary source field: Gross Debt: Gross Debt. DCA glossary: All bonds and notes issued and authorized but not issued or guaranteed by the local unit, except tax anticipation notes, emergency notes, special emergency notes and utility revenue notes.",
    "category": "municipal_debt",
    "scope": "municipality",
    "tier": "pro_plus",
@@ -23884,7 +23884,7 @@
   {
    "field": "gross_debt_per_capita",
    "label": "Per-capita gross debt",
-   "description": "NJ DCA User Friendly Budget 2025 Summary source field: Gross Debt — Per Capita Gross Debt. DCA glossary: Gross debt divided by the population of the municipality (Census)",
+   "description": "NJ DCA User Friendly Budget 2025 Summary source field: Gross Debt: Per Capita Gross Debt. DCA glossary: Gross debt divided by the population of the municipality (Census)",
    "category": "municipal_debt",
    "scope": "municipality",
    "tier": "pro_plus",
@@ -23913,7 +23913,7 @@
   {
    "field": "gross_debt_deductions",
    "label": "Gross debt deductions",
-   "description": "NJ DCA User Friendly Budget 2025 Summary source field: Deductions — Deductions. DCA glossary: Deductions from gross debt including but not limited to school purposes by a regional school district, self-liquidating purposes, debt issued by another public entity and backed by the municipality,  bond anticipation notes in anticipation of authorized or issued bonds, and funds on hand or sinking funds applicable only to the payment of debt.",
+   "description": "NJ DCA User Friendly Budget 2025 Summary source field: Deductions: Deductions. DCA glossary: Deductions from gross debt including but not limited to school purposes by a regional school district, self-liquidating purposes, debt issued by another public entity and backed by the municipality,  bond anticipation notes in anticipation of authorized or issued bonds, and funds on hand or sinking funds applicable only to the payment of debt.",
    "category": "municipal_debt",
    "scope": "municipality",
    "tier": "pro_plus",
@@ -23942,7 +23942,7 @@
   {
    "field": "net_debt_local_school",
    "label": "Net-debt section: local school debt",
-   "description": "NJ DCA User Friendly Budget 2025 Summary source field: Net Debt — Local School Debt. DCA glossary: Debt issued by local school districts",
+   "description": "NJ DCA User Friendly Budget 2025 Summary source field: Net Debt: Local School Debt. DCA glossary: Debt issued by local school districts",
    "category": "municipal_debt",
    "scope": "municipality",
    "tier": "pro_plus",
@@ -23971,7 +23971,7 @@
   {
    "field": "net_debt_regional_school",
    "label": "Net-debt section: regional school debt",
-   "description": "NJ DCA User Friendly Budget 2025 Summary source field: Net Debt — Regional School Debt. DCA glossary: Debt issued by regional school districts",
+   "description": "NJ DCA User Friendly Budget 2025 Summary source field: Net Debt: Regional School Debt. DCA glossary: Debt issued by regional school districts",
    "category": "municipal_debt",
    "scope": "municipality",
    "tier": "pro_plus",
@@ -24000,7 +24000,7 @@
   {
    "field": "net_debt_utility_fund",
    "label": "Net-debt section: utility fund debt",
-   "description": "NJ DCA User Friendly Budget 2025 Summary source field: Net Debt — Utility Fund Debt. DCA glossary: Debt issued by or on behalf of municipal utility funds (i.e. water, sewer, etc.)",
+   "description": "NJ DCA User Friendly Budget 2025 Summary source field: Net Debt: Utility Fund Debt. DCA glossary: Debt issued by or on behalf of municipal utility funds (i.e. water, sewer, etc.)",
    "category": "municipal_debt",
    "scope": "municipality",
    "tier": "pro_plus",
@@ -24029,7 +24029,7 @@
   {
    "field": "net_debt_authorized",
    "label": "Net-debt section: debt authorized",
-   "description": "NJ DCA User Friendly Budget 2025 Summary source field: Net Debt — Debt Authorized. DCA glossary: Total of all authorized municipal debt",
+   "description": "NJ DCA User Friendly Budget 2025 Summary source field: Net Debt: Debt Authorized. DCA glossary: Total of all authorized municipal debt",
    "category": "municipal_debt",
    "scope": "municipality",
    "tier": "pro_plus",
@@ -24058,7 +24058,7 @@
   {
    "field": "net_debt_notes_outstanding",
    "label": "Net-debt section: notes outstanding",
-   "description": "NJ DCA User Friendly Budget 2025 Summary source field: Net Debt — Notes Outstanding. DCA glossary: Total of all outstanding municipal note debt (short-term borrowing)",
+   "description": "NJ DCA User Friendly Budget 2025 Summary source field: Net Debt: Notes Outstanding. DCA glossary: Total of all outstanding municipal note debt (short-term borrowing)",
    "category": "municipal_debt",
    "scope": "municipality",
    "tier": "pro_plus",
@@ -24087,7 +24087,7 @@
   {
    "field": "net_debt_bonds_outstanding",
    "label": "Net-debt section: bonds outstanding",
-   "description": "NJ DCA User Friendly Budget 2025 Summary source field: Net Debt — Bonds Outstanding. DCA glossary: Total of all outstanding municipal bond debt (long-term borrowing)",
+   "description": "NJ DCA User Friendly Budget 2025 Summary source field: Net Debt: Bonds Outstanding. DCA glossary: Total of all outstanding municipal bond debt (long-term borrowing)",
    "category": "municipal_debt",
    "scope": "municipality",
    "tier": "pro_plus",
@@ -24116,7 +24116,7 @@
   {
    "field": "net_debt_loans_other",
    "label": "Net-debt section: loans and other debt",
-   "description": "NJ DCA User Friendly Budget 2025 Summary source field: Net Debt — Loans and Other Debt. DCA glossary: Total of all outstanding loans and all other kinds of debt",
+   "description": "NJ DCA User Friendly Budget 2025 Summary source field: Net Debt: Loans and Other Debt. DCA glossary: Total of all outstanding loans and all other kinds of debt",
    "category": "municipal_debt",
    "scope": "municipality",
    "tier": "pro_plus",
@@ -24145,7 +24145,7 @@
   {
    "field": "net_debt_total",
    "label": "Net debt",
-   "description": "NJ DCA User Friendly Budget 2025 Summary source field: Net Debt — Net Debt. DCA glossary: Gross debt less deductions",
+   "description": "NJ DCA User Friendly Budget 2025 Summary source field: Net Debt: Net Debt. DCA glossary: Gross debt less deductions",
    "category": "municipal_debt",
    "scope": "municipality",
    "tier": "pro_plus",
@@ -24174,7 +24174,7 @@
   {
    "field": "net_debt_per_capita",
    "label": "Per-capita net debt",
-   "description": "NJ DCA User Friendly Budget 2025 Summary source field: Net Debt — Per Capita Net Debt. DCA glossary: Net debt divided by the population of the municipality (Census)",
+   "description": "NJ DCA User Friendly Budget 2025 Summary source field: Net Debt: Per Capita Net Debt. DCA glossary: Net debt divided by the population of the municipality (Census)",
    "category": "municipal_debt",
    "scope": "municipality",
    "tier": "pro_plus",
@@ -24203,7 +24203,7 @@
   {
    "field": "net_debt_three_year_avg_property_valuation",
    "label": "Three-year average property valuation",
-   "description": "NJ DCA User Friendly Budget 2025 Summary source field: Net Debt — 3 Yr. Average Property Valuation. DCA glossary: Three-year average of total property valuation in the municipality",
+   "description": "NJ DCA User Friendly Budget 2025 Summary source field: Net Debt: 3 Yr. Average Property Valuation. DCA glossary: Three-year average of total property valuation in the municipality",
    "category": "municipal_debt",
    "scope": "municipality",
    "tier": "pro_plus",
@@ -24232,7 +24232,7 @@
   {
    "field": "net_debt_share_three_year_avg_property_valuation",
    "label": "Net debt as share of three-year average property valuation",
-   "description": "NJ DCA User Friendly Budget 2025 Summary source field: Net Debt — Net Debt as % of 3 Year Avg Property Valuation. DCA glossary: Net debt divided by three-year average of total property valuation in the municipality. A measure of debt burden.",
+   "description": "NJ DCA User Friendly Budget 2025 Summary source field: Net Debt: Net Debt as % of 3 Year Avg Property Valuation. DCA glossary: Net debt divided by three-year average of total property valuation in the municipality. A measure of debt burden.",
    "category": "municipal_debt",
    "scope": "municipality",
    "tier": "pro_plus",
@@ -24261,7 +24261,7 @@
   {
    "field": "debt_service_utility_fund_principal",
    "label": "Debt service: utility fund principal",
-   "description": "NJ DCA User Friendly Budget 2025 Summary source field: Debt Service — Utility Fund - Principal. DCA glossary: Total principal payments for utility fund debt",
+   "description": "NJ DCA User Friendly Budget 2025 Summary source field: Debt Service: Utility Fund - Principal. DCA glossary: Total principal payments for utility fund debt",
    "category": "municipal_debt",
    "scope": "municipality",
    "tier": "pro_plus",
@@ -24290,7 +24290,7 @@
   {
    "field": "debt_service_utility_fund_interest",
    "label": "Debt service: utility fund interest",
-   "description": "NJ DCA User Friendly Budget 2025 Summary source field: Debt Service — Utility Fund - Interest. DCA glossary: Total interest payments for utility fund debt",
+   "description": "NJ DCA User Friendly Budget 2025 Summary source field: Debt Service: Utility Fund - Interest. DCA glossary: Total interest payments for utility fund debt",
    "category": "municipal_debt",
    "scope": "municipality",
    "tier": "pro_plus",
@@ -24319,7 +24319,7 @@
   {
    "field": "debt_service_bond_anticipation_notes_principal",
    "label": "Debt service: bond anticipation notes principal",
-   "description": "NJ DCA User Friendly Budget 2025 Summary source field: Debt Service — Bond Anticipation Notes - Principal. DCA glossary: Total principal payments for bond anticipation notes",
+   "description": "NJ DCA User Friendly Budget 2025 Summary source field: Debt Service: Bond Anticipation Notes - Principal. DCA glossary: Total principal payments for bond anticipation notes",
    "category": "municipal_debt",
    "scope": "municipality",
    "tier": "pro_plus",
@@ -24348,7 +24348,7 @@
   {
    "field": "debt_service_bond_anticipation_notes_interest",
    "label": "Debt service: bond anticipation notes interest",
-   "description": "NJ DCA User Friendly Budget 2025 Summary source field: Debt Service — Bond Anticipation Notes - Interest. DCA glossary: Total interest payments for bond anticipation notes",
+   "description": "NJ DCA User Friendly Budget 2025 Summary source field: Debt Service: Bond Anticipation Notes - Interest. DCA glossary: Total interest payments for bond anticipation notes",
    "category": "municipal_debt",
    "scope": "municipality",
    "tier": "pro_plus",
@@ -24377,7 +24377,7 @@
   {
    "field": "debt_service_bonds_principal",
    "label": "Debt service: bonds principal",
-   "description": "NJ DCA User Friendly Budget 2025 Summary source field: Debt Service — Bonds - Principal. DCA glossary: Total principal payments for bonds",
+   "description": "NJ DCA User Friendly Budget 2025 Summary source field: Debt Service: Bonds - Principal. DCA glossary: Total principal payments for bonds",
    "category": "municipal_debt",
    "scope": "municipality",
    "tier": "pro_plus",
@@ -24406,7 +24406,7 @@
   {
    "field": "debt_service_bonds_interest",
    "label": "Debt service: bonds interest",
-   "description": "NJ DCA User Friendly Budget 2025 Summary source field: Debt Service — Bonds - Interest. DCA glossary: Total interest payments for bonds",
+   "description": "NJ DCA User Friendly Budget 2025 Summary source field: Debt Service: Bonds - Interest. DCA glossary: Total interest payments for bonds",
    "category": "municipal_debt",
    "scope": "municipality",
    "tier": "pro_plus",
@@ -24435,7 +24435,7 @@
   {
    "field": "debt_service_loans_other_principal",
    "label": "Debt service: loans and other debt principal",
-   "description": "NJ DCA User Friendly Budget 2025 Summary source field: Debt Service — Loans & Other Debt - Principal. DCA glossary: Total principal payments for loans and other debt",
+   "description": "NJ DCA User Friendly Budget 2025 Summary source field: Debt Service: Loans & Other Debt - Principal. DCA glossary: Total principal payments for loans and other debt",
    "category": "municipal_debt",
    "scope": "municipality",
    "tier": "pro_plus",
@@ -24464,7 +24464,7 @@
   {
    "field": "debt_service_loans_other_interest",
    "label": "Debt service: loans and other debt interest",
-   "description": "NJ DCA User Friendly Budget 2025 Summary source field: Debt Service — Loans & Other Debt - Interest. DCA glossary: Total interest payments for loans and other debt",
+   "description": "NJ DCA User Friendly Budget 2025 Summary source field: Debt Service: Loans & Other Debt - Interest. DCA glossary: Total interest payments for loans and other debt",
    "category": "municipal_debt",
    "scope": "municipality",
    "tier": "pro_plus",
@@ -24493,7 +24493,7 @@
   {
    "field": "debt_service_total_principal",
    "label": "Debt service: total principal",
-   "description": "NJ DCA User Friendly Budget 2025 Summary source field: Debt Service — Total Principal. DCA glossary: Total principal payments for bonds, notes, loans, and other kinds of debt",
+   "description": "NJ DCA User Friendly Budget 2025 Summary source field: Debt Service: Total Principal. DCA glossary: Total principal payments for bonds, notes, loans, and other kinds of debt",
    "category": "municipal_debt",
    "scope": "municipality",
    "tier": "pro_plus",
@@ -24522,7 +24522,7 @@
   {
    "field": "debt_service_total_interest",
    "label": "Debt service: total interest",
-   "description": "NJ DCA User Friendly Budget 2025 Summary source field: Debt Service — Total Interest. DCA glossary: Total interest payments for bonds, notes, loans, and other kinds of debt",
+   "description": "NJ DCA User Friendly Budget 2025 Summary source field: Debt Service: Total Interest. DCA glossary: Total interest payments for bonds, notes, loans, and other kinds of debt",
    "category": "municipal_debt",
    "scope": "municipality",
    "tier": "pro_plus",
@@ -24551,7 +24551,7 @@
   {
    "field": "debt_service_current_year_budget_payment",
    "label": "Current-year budget debt payment",
-   "description": "NJ DCA User Friendly Budget 2025 Summary source field: Debt Service — CY Budget Debt Pmt. DCA glossary: Current year budgeted debt payment for existing debt",
+   "description": "NJ DCA User Friendly Budget 2025 Summary source field: Debt Service: CY Budget Debt Pmt. DCA glossary: Current year budgeted debt payment for existing debt",
    "category": "municipal_debt",
    "scope": "municipality",
    "tier": "pro_plus",
@@ -24580,7 +24580,7 @@
   {
    "field": "debt_service_second_year_budget_payment",
    "label": "Second-year budget debt payment",
-   "description": "NJ DCA User Friendly Budget 2025 Summary source field: Debt Service — 2026 Budget Debt Pmt. DCA glossary: Second year estimated budgeted debt payment for existing debt",
+   "description": "NJ DCA User Friendly Budget 2025 Summary source field: Debt Service: 2026 Budget Debt Pmt. DCA glossary: Second year estimated budgeted debt payment for existing debt",
    "category": "municipal_debt",
    "scope": "municipality",
    "tier": "pro_plus",
@@ -24609,7 +24609,7 @@
   {
    "field": "debt_service_third_year_budget_payment",
    "label": "Third-year budget debt payment",
-   "description": "NJ DCA User Friendly Budget 2025 Summary source field: Debt Service — 2027 Budget Debt Pmt. DCA glossary: Third year estimated budgeted debt payment for existing debt",
+   "description": "NJ DCA User Friendly Budget 2025 Summary source field: Debt Service: 2027 Budget Debt Pmt. DCA glossary: Third year estimated budgeted debt payment for existing debt",
    "category": "municipal_debt",
    "scope": "municipality",
    "tier": "pro_plus",
@@ -24638,7 +24638,7 @@
   {
    "field": "debt_service_future_year_budget_payment",
    "label": "Future-year budget debt payment",
-   "description": "NJ DCA User Friendly Budget 2025 Summary source field: Debt Service — Future Year Budget Debt Pmt. DCA glossary: Estimated budgeted debt payments for all future years beyond the third year for existing debt",
+   "description": "NJ DCA User Friendly Budget 2025 Summary source field: Debt Service: Future Year Budget Debt Pmt. DCA glossary: Estimated budgeted debt payments for all future years beyond the third year for existing debt",
    "category": "municipal_debt",
    "scope": "municipality",
    "tier": "pro_plus",
@@ -24667,7 +24667,7 @@
   {
    "field": "debt_service_total_governmental_guarantees",
    "label": "Total governmental guarantees",
-   "description": "NJ DCA User Friendly Budget 2025 Summary source field: Debt Service — Total Guarantees - Governmental. DCA glossary: Total debt service guaranteed by the municipality relating to governmental purposes",
+   "description": "NJ DCA User Friendly Budget 2025 Summary source field: Debt Service: Total Guarantees - Governmental. DCA glossary: Total debt service guaranteed by the municipality relating to governmental purposes",
    "category": "municipal_debt",
    "scope": "municipality",
    "tier": "pro_plus",
@@ -24696,7 +24696,7 @@
   {
    "field": "debt_service_total_other_guarantees",
    "label": "Total other guarantees",
-   "description": "NJ DCA User Friendly Budget 2025 Summary source field: Debt Service — Total Guarantees - Other. DCA glossary: Total debt service guaranteed by the municipality relating to all other purposes",
+   "description": "NJ DCA User Friendly Budget 2025 Summary source field: Debt Service: Total Guarantees - Other. DCA glossary: Total debt service guaranteed by the municipality relating to all other purposes",
    "category": "municipal_debt",
    "scope": "municipality",
    "tier": "pro_plus",
@@ -24725,7 +24725,7 @@
   {
    "field": "debt_service_total_capital_equipment_leases",
    "label": "Total capital/equipment leases",
-   "description": "NJ DCA User Friendly Budget 2025 Summary source field: Debt Service — Total Capital/Equipment Leases. DCA glossary: Total capital and equipment lease payments",
+   "description": "NJ DCA User Friendly Budget 2025 Summary source field: Debt Service: Total Capital/Equipment Leases. DCA glossary: Total capital and equipment lease payments",
    "category": "municipal_debt",
    "scope": "municipality",
    "tier": "pro_plus",
@@ -24754,7 +24754,7 @@
   {
    "field": "debt_service_total_other",
    "label": "Total other debt payments",
-   "description": "NJ DCA User Friendly Budget 2025 Summary source field: Debt Service — Total Other. DCA glossary: All other debt payments not captured in previous categories",
+   "description": "NJ DCA User Friendly Budget 2025 Summary source field: Debt Service: Total Other. DCA glossary: All other debt payments not captured in previous categories",
    "category": "municipal_debt",
    "scope": "municipality",
    "tier": "pro_plus",
@@ -24783,7 +24783,7 @@
   {
    "field": "accumulated_absence_gross_days",
    "label": "Gross days of accumulated absence",
-   "description": "NJ DCA User Friendly Budget 2025 Summary source field: Absences — Gross Days of Accumulated Absence. DCA glossary: Gross number of days of accumulated employee absence eligible for compensation",
+   "description": "NJ DCA User Friendly Budget 2025 Summary source field: Absences: Gross Days of Accumulated Absence. DCA glossary: Gross number of days of accumulated employee absence eligible for compensation",
    "category": "municipal_personnel",
    "scope": "municipality",
    "tier": "pro_plus",
@@ -24808,7 +24808,7 @@
   {
    "field": "accumulated_absence_compensated_value",
    "label": "Dollar value of compensated absences",
-   "description": "NJ DCA User Friendly Budget 2025 Summary source field: Absences — Dollar Value of Compensated Absences. DCA glossary: The dollar value of the gross number of days of accumulated employee absences",
+   "description": "NJ DCA User Friendly Budget 2025 Summary source field: Absences: Dollar Value of Compensated Absences. DCA glossary: The dollar value of the gross number of days of accumulated employee absences",
    "category": "municipal_personnel",
    "scope": "municipality",
    "tier": "pro_plus",
@@ -24833,7 +24833,7 @@
   {
    "field": "structural_revenues_at_risk",
    "label": "Structural imbalance: revenues at risk",
-   "description": "NJ DCA User Friendly Budget 2025 Summary source field: Structural Imbalances — Revenues at Risk. DCA glossary: Anticipated revenues that will not recur in the next budget year, or that are known to be declining over time (i.e.  revenues from one time land sales; concession fees or deposits associated with agreements, including redevelopment agreements or utility agreements; short term or expiring grants that support operating costs; transfers of funds from authorities that are not expected to continue; awards of Transitional Aid from the State; and other revenues that are known to be temporary in nature).",
+   "description": "NJ DCA User Friendly Budget 2025 Summary source field: Structural Imbalances: Revenues at Risk. DCA glossary: Anticipated revenues that will not recur in the next budget year, or that are known to be declining over time (i.e.  revenues from one time land sales; concession fees or deposits associated with agreements, including redevelopment agreements or utility agreements; short term or expiring grants that support operating costs; transfers of funds from authorities that are not expected to continue; awards of Transitional Aid from the State; and other revenues that are known to be temporary in nature).",
    "category": "municipal_structural_balance",
    "scope": "municipality",
    "tier": "pro_plus",
@@ -24861,7 +24861,7 @@
   {
    "field": "structural_nonrecurring_appropriation_reductions",
    "label": "Structural imbalance: non-recurring appropriation reductions",
-   "description": "NJ DCA User Friendly Budget 2025 Summary source field: Structural Imbalances — Non-recurring Appropriation Reductions. DCA glossary: Proposed reductions in line items that will not recur in the next budget year, or that are known to be declining over time (i.e. non-recurring cost reductions, short term savings in debt service payments attributable to refunding issues that allow for a skipped debt service payment or reductions in short term maturities; and savings in expenses made possible through contractual short term concessions that result in later increased payments)",
+   "description": "NJ DCA User Friendly Budget 2025 Summary source field: Structural Imbalances: Non-recurring Appropriation Reductions. DCA glossary: Proposed reductions in line items that will not recur in the next budget year, or that are known to be declining over time (i.e. non-recurring cost reductions, short term savings in debt service payments attributable to refunding issues that allow for a skipped debt service payment or reductions in short term maturities; and savings in expenses made possible through contractual short term concessions that result in later increased payments)",
    "category": "municipal_structural_balance",
    "scope": "municipality",
    "tier": "pro_plus",
@@ -24889,7 +24889,7 @@
   {
    "field": "structural_future_year_appropriation_increases",
    "label": "Structural imbalance: future-year appropriation increases",
-   "description": "NJ DCA User Friendly Budget 2025 Summary source field: Structural Imbalances — Future Year Appropriation Increases. DCA glossary: Reasonable projections of appropriation increases for the next budget year (i.e. : increases in debt service payments due to new or restructured debt; increases in lease payments due to new or restructured leases; increased salary or compensation payments attributable to contractual obligations; and other increases in items of expenditure for which policy changes or decisions will necessitate increased appropriations)",
+   "description": "NJ DCA User Friendly Budget 2025 Summary source field: Structural Imbalances: Future Year Appropriation Increases. DCA glossary: Reasonable projections of appropriation increases for the next budget year (i.e. : increases in debt service payments due to new or restructured debt; increases in lease payments due to new or restructured leases; increased salary or compensation payments attributable to contractual obligations; and other increases in items of expenditure for which policy changes or decisions will necessitate increased appropriations)",
    "category": "municipal_structural_balance",
    "scope": "municipality",
    "tier": "pro_plus",
@@ -24917,7 +24917,7 @@
   {
    "field": "structural_imbalance_offsets",
    "label": "Structural imbalance offsets",
-   "description": "NJ DCA User Friendly Budget 2025 Summary source field: Structural Imbalances — Structural Imbalance Offsets. DCA glossary: Budget changes that are expected to occur in the next budget year that offset the impact of the three above-referenced categories (i.e. new or one-time current year appropriations or non-recurring increases in current year appropriations that will not appear in the next budget year and out-year budgets)",
+   "description": "NJ DCA User Friendly Budget 2025 Summary source field: Structural Imbalances: Structural Imbalance Offsets. DCA glossary: Budget changes that are expected to occur in the next budget year that offset the impact of the three above-referenced categories (i.e. new or one-time current year appropriations or non-recurring increases in current year appropriations that will not appear in the next budget year and out-year budgets)",
    "category": "municipal_structural_balance",
    "scope": "municipality",
    "tier": "pro_plus",
@@ -24945,7 +24945,7 @@
   {
    "field": "structural_total_imbalances",
    "label": "Total identified structural imbalances",
-   "description": "NJ DCA User Friendly Budget 2025 Summary source field: Structural Imbalances — Total Imbalances. DCA glossary: Total of all identified structural imbalances including offsets.",
+   "description": "NJ DCA User Friendly Budget 2025 Summary source field: Structural Imbalances: Total Imbalances. DCA glossary: Total of all identified structural imbalances including offsets.",
    "category": "municipal_structural_balance",
    "scope": "municipality",
    "tier": "pro_plus",

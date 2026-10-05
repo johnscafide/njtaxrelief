@@ -12,7 +12,7 @@ enum DossierExport {
     static func text(for property: PropertyRecord) -> String {
         var lines = [
             "WATCHDOG · PROPERTY RECORD",
-            property.isSample ? "ILLUSTRATIVE SAMPLE — not a real-property report" : "Public property record",
+            property.isSample ? "ILLUSTRATIVE SAMPLE, not a real-property report" : "Public property record",
             "",
             property.displayAddress,
             "\(property.town), NJ \(property.postalCode)",
@@ -96,7 +96,7 @@ enum DossierExport {
         let bounds = CGRect(x: 0, y: 0, width: 612, height: 792)
         let format = UIGraphicsPDFRendererFormat()
         format.documentInfo = [
-            kCGPDFContextTitle as String: "Watchdog — \(property.displayAddress)",
+            kCGPDFContextTitle as String: "Watchdog \(property.displayAddress)",
             kCGPDFContextCreator as String: "Watchdog for iOS"
         ]
         let renderer = UIGraphicsPDFRenderer(bounds: bounds, format: format)

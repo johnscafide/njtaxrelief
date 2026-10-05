@@ -146,8 +146,8 @@
   function propertyCard(x, label) {
     var href = '/property/?address=' + encodeURIComponent(queryFor(x));
     var state = x._landing_state || label || 'Public record';
-    var assessed = money(x.assessed) || '—';
-    var annualTax = money(x.last_year_tax) || '—';
+    var assessed = money(x.assessed) || '-';
+    var annualTax = money(x.last_year_tax) || '-';
     return '<a class="wd-property-card" href="' + href + '" data-pams-pin="' + esc(x.pams_pin || '') + '">' +
       '<div class="wd-property-photo">' + propertyPhoto(x) +
         '<span class="wd-property-label">' + stateIcon(state) + esc(state) + '</span>' +
@@ -167,7 +167,7 @@
   function freeCard() {
     return '<a class="wd-free-card" href="/property/free/">' +
       '<div><span class="wd-free-label">Free Watchdog account</span>' +
-      '<h3>Keep the homes you care about in one place.</h3>' +
+      '<h3>Save the homes you care about and check them anytime.</h3>' +
       '<p>Save properties, claim your home, build a watchlist and come back to the same research from your account.</p></div>' +
       '<b>See what is included <i class="fas fa-arrow-right"></i></b>' +
     '</a>';
