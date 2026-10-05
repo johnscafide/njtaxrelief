@@ -1,4 +1,5 @@
 const { sitemapRows: coSitemapRows } = require('./_co-town');
+const { sitemapRows: taxSitemapRows } = require('./_tax-town');
 
 const CANONICAL_HOST = 'www.watchdogindex.com';
 const CANONICAL_ORIGIN = `https://${CANONICAL_HOST}`;
@@ -301,6 +302,14 @@ module.exports = async function handler(req, res) {
     }
   } catch (error) {
     console.warn('WATCHDOG_SITEMAP_CO_ROWS_FAILED', String(error?.message || error));
+  }
+
+  try {
+    for (const item of taxSitemapRows()) {
+      addRow(byLoc, { loc: `${CANONICAL_ORIGIN}${item.path}`, lastmod: item.lastmod || '', changefreq: item.changefreq, priority: item.priority });
+    }
+  } catch (error) {
+    console.warn('WATCHDOG_SITEMAP_TAX_ROWS_FAILED', String(error?.message || error));
   }
 
   const rows = Array.from(byLoc.values()).sort((a, b) => {

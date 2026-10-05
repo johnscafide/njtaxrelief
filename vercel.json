@@ -48,12 +48,16 @@
       "includeFiles": "{property/data/municipal-requirements/approvals.json,property/data/municipal-requirements/checked/*.json,co/towns.json}",
       "maxDuration": 10
     },
+    "api/tax-town-page.js": {
+      "includeFiles": "{property/data/town-tax/bills.json,tax-rates.json,chapter123-ratios-2026.json,property/revaluation-reassessment-2026.json,property/data/home-feed-towns.json,property/data/municipal-requirements/approvals.json,co/towns.json,co/index.html}",
+      "maxDuration": 10
+    },
     "api/co-embed-page.js": {
       "includeFiles": "{property/data/municipal-requirements/approvals.json,property/data/municipal-requirements/checked/*.json,co/towns.json}",
       "maxDuration": 10
     },
     "api/watchdog-index-sitemap.js": {
-      "includeFiles": "{property/data/municipal-requirements/approvals.json,property/data/municipal-requirements/checked/*.json,co/towns.json}",
+      "includeFiles": "{property/data/municipal-requirements/approvals.json,property/data/municipal-requirements/checked/*.json,co/towns.json,property/data/town-tax/bills.json,tax-rates.json,chapter123-ratios-2026.json,property/revaluation-reassessment-2026.json,property/data/home-feed-towns.json}",
       "maxDuration": 10
     },
     "api/watchdog-town-needs.js": {

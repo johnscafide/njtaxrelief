@@ -1,0 +1,362 @@
+{
+ "_readme": [
+  "Typical residential (MOD-IV property class 2) property tax bill and assessment per town, keyed by Treasury taxing-district code.",
+  "homes = residential parcels with a positive bill, tax = median annual tax bill, assessed = median assessed value.",
+  "The bills are calendar-year 2024 bills: bill / assessment matches each town's 2024 general tax rate in tax-rates.json.",
+  "Built by scripts/build-town-tax-bills.mjs from public.public_town_class_stats (production Supabase)."
+ ],
+ "bill_year": 2024,
+ "built": "2026-10-05",
+ "towns": {
+  "0201": {
+   "homes": 2161,
+   "tax": 15959,
+   "assessed": 814900
+  },
+  "0202": {
+   "homes": 666,
+   "tax": 18271,
+   "assessed": 2283800
+  },
+  "0203": {
+   "homes": 6870,
+   "tax": 10775,
+   "assessed": 305600
+  },
+  "0204": {
+   "homes": 2022,
+   "tax": 11353,
+   "assessed": 488550
+  },
+  "0205": {
+   "homes": 1559,
+   "tax": 8134,
+   "assessed": 511600
+  },
+  "0206": {
+   "homes": 6848,
+   "tax": 9840,
+   "assessed": 358150
+  },
+  "0207": {
+   "homes": 2696,
+   "tax": 16504,
+   "assessed": 837050
+  },
+  "0208": {
+   "homes": 2809,
+   "tax": 15006,
+   "assessed": 699900
+  },
+  "0209": {
+   "homes": 1676,
+   "tax": 19524,
+   "assessed": 1162750
+  },
+  "0210": {
+   "homes": 4923,
+   "tax": 12228,
+   "assessed": 546000
+  },
+  "0211": {
+   "homes": 4811,
+   "tax": 9505,
+   "assessed": 310200
+  },
+  "0212": {
+   "homes": 1940,
+   "tax": 7796,
+   "assessed": 507400
+  },
+  "0213": {
+   "homes": 3893,
+   "tax": 8827,
+   "assessed": 574500
+  },
+  "0214": {
+   "homes": 2322,
+   "tax": 13932,
+   "assessed": 422250
+  },
+  "0215": {
+   "homes": 6759,
+   "tax": 9345,
+   "assessed": 304700
+  },
+  "0216": {
+   "homes": 1900,
+   "tax": 13216,
+   "assessed": 1145450
+  },
+  "0217": {
+   "homes": 10358,
+   "tax": 11210,
+   "assessed": 316200
+  },
+  "0218": {
+   "homes": 2200,
+   "tax": 10905,
+   "assessed": 491650
+  },
+  "0219": {
+   "homes": 8349,
+   "tax": 11210,
+   "assessed": 430000
+  },
+  "0220": {
+   "homes": 3726,
+   "tax": 17235,
+   "assessed": 959650
+  },
+  "0221": {
+   "homes": 5676,
+   "tax": 9130,
+   "assessed": 274150
+  },
+  "0222": {
+   "homes": 3872,
+   "tax": 18122,
+   "assessed": 551350
+  },
+  "0223": {
+   "homes": 8025,
+   "tax": 9498,
+   "assessed": 311100
+  },
+  "0224": {
+   "homes": 1586,
+   "tax": 16401,
+   "assessed": 524950
+  },
+  "0225": {
+   "homes": 3343,
+   "tax": 12532,
+   "assessed": 490800
+  },
+  "0226": {
+   "homes": 1180,
+   "tax": 18662,
+   "assessed": 603550
+  },
+  "0227": {
+   "homes": 3327,
+   "tax": 14474,
+   "assessed": 456600
+  },
+  "0228": {
+   "homes": 1440,
+   "tax": 16205,
+   "assessed": 674550
+  },
+  "0229": {
+   "homes": 2429,
+   "tax": 14747,
+   "assessed": 432700
+  },
+  "0230": {
+   "homes": 2246,
+   "tax": 10004,
+   "assessed": 431600
+  },
+  "0231": {
+   "homes": 4458,
+   "tax": 10455,
+   "assessed": 312400
+  },
+  "0232": {
+   "homes": 5110,
+   "tax": 10181,
+   "assessed": 494750
+  },
+  "0233": {
+   "homes": 9360,
+   "tax": 8297,
+   "assessed": 402600
+  },
+  "0234": {
+   "homes": 2722,
+   "tax": 10701,
+   "assessed": 534500
+  },
+  "0235": {
+   "homes": 2187,
+   "tax": 13475,
+   "assessed": 387700
+  },
+  "0236": {
+   "homes": 2993,
+   "tax": 12439,
+   "assessed": 494600
+  },
+  "0237": {
+   "homes": 592,
+   "tax": 8562,
+   "assessed": 493500
+  },
+  "0238": {
+   "homes": 4125,
+   "tax": 12605,
+   "assessed": 611500
+  },
+  "0239": {
+   "homes": 3718,
+   "tax": 10237,
+   "assessed": 481050
+  },
+  "0240": {
+   "homes": 1549,
+   "tax": 12350,
+   "assessed": 386600
+  },
+  "0241": {
+   "homes": 1828,
+   "tax": 13441,
+   "assessed": 489050
+  },
+  "0242": {
+   "homes": 4379,
+   "tax": 12535,
+   "assessed": 592500
+  },
+  "0243": {
+   "homes": 2057,
+   "tax": 16205,
+   "assessed": 734400
+  },
+  "0244": {
+   "homes": 2639,
+   "tax": 16523,
+   "assessed": 766000
+  },
+  "0245": {
+   "homes": 3865,
+   "tax": 10851,
+   "assessed": 783000
+  },
+  "0246": {
+   "homes": 8134,
+   "tax": 10926,
+   "assessed": 781000
+  },
+  "0247": {
+   "homes": 2934,
+   "tax": 14316,
+   "assessed": 441500
+  },
+  "0248": {
+   "homes": 5160,
+   "tax": 14371,
+   "assessed": 693300
+  },
+  "0249": {
+   "homes": 2522,
+   "tax": 10084,
+   "assessed": 618700
+  },
+  "0250": {
+   "homes": 2845,
+   "tax": 12286,
+   "assessed": 424400
+  },
+  "0251": {
+   "homes": 7438,
+   "tax": 17416,
+   "assessed": 608100
+  },
+  "0252": {
+   "homes": 3219,
+   "tax": 14631,
+   "assessed": 622100
+  },
+  "0253": {
+   "homes": 3496,
+   "tax": 16241,
+   "assessed": 597150
+  },
+  "0254": {
+   "homes": 1798,
+   "tax": 9225,
+   "assessed": 326850
+  },
+  "0255": {
+   "homes": 75,
+   "tax": 12562,
+   "assessed": 1506200
+  },
+  "0256": {
+   "homes": 5010,
+   "tax": 13498,
+   "assessed": 434200
+  },
+  "0257": {
+   "homes": 4089,
+   "tax": 10105,
+   "assessed": 452400
+  },
+  "0258": {
+   "homes": 1285,
+   "tax": 17164,
+   "assessed": 1660500
+  },
+  "0259": {
+   "homes": 526,
+   "tax": 10751,
+   "assessed": 597000
+  },
+  "0260": {
+   "homes": 11067,
+   "tax": 11811,
+   "assessed": 540500
+  },
+  "0261": {
+   "homes": 4353,
+   "tax": 20026,
+   "assessed": 704500
+  },
+  "0262": {
+   "homes": 7,
+   "tax": 1965,
+   "assessed": 191800
+  },
+  "0263": {
+   "homes": 2879,
+   "tax": 17895,
+   "assessed": 708300
+  },
+  "0264": {
+   "homes": 3343,
+   "tax": 12088,
+   "assessed": 547900
+  },
+  "0265": {
+   "homes": 2179,
+   "tax": 10325,
+   "assessed": 564500
+  },
+  "0266": {
+   "homes": 3374,
+   "tax": 12152,
+   "assessed": 439150
+  },
+  "0267": {
+   "homes": 3109,
+   "tax": 11190,
+   "assessed": 548000
+  },
+  "0268": {
+   "homes": 1939,
+   "tax": 18204,
+   "assessed": 874900
+  },
+  "0269": {
+   "homes": 3087,
+   "tax": 10173,
+   "assessed": 356000
+  },
+  "0270": {
+   "homes": 5507,
+   "tax": 14253,
+   "assessed": 731200
+  }
+ }
+}

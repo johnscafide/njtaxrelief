@@ -28,6 +28,8 @@ const PROPERTY_PAGE_PATH = /^\/nj\/[^/]+\/[^/]+(?:\/[^/]+)?\/?$/i;
 // /co itself, /co/embed and the files under /co/ are static.
 const CO_EMBED_TOWN_PATH = /^\/co\/embed\/([a-z0-9-]{1,80})\/([a-z0-9-]{1,80})\/?$/;
 const CO_PAGE_PATH = /^\/co\/([a-z0-9-]{1,80})(?:\/([a-z0-9-]{1,80})(?:\/(print))?)?\/?$/;
+// Town property tax pages: /property-tax, /property-tax/<county> and /property-tax/<county>/<town>.
+const TAX_PAGE_PATH = /^\/property-tax(?:\/([a-z0-9-]{1,80})(?:\/([a-z0-9-]{1,80}))?)?\/?$/;
 const AUTOMATION_UA = /\b(?:curl|wget|python-requests|scrapy|go-http-client|libwww-perl|httpclient)\b/i;
 const ROOT_STATIC_PAGES = new Set(['/move', '/contact', '/search', '/agent', '/lender', '/attorney', '/investor', '/developer/communications', '/transaction', '/transaction/shared', '/account/profile', '/account/professional-profile', '/agent/listing-prep', '/agent/buyers', '/agent/open-house', '/agent/training', '/open-house', '/client-room', '/preview', '/preview/home', '/co']);
 const ROOT_COMPAT_REDIRECTS = new Map([['/contact.html', '/contact']]);
@@ -62,6 +64,7 @@ if(REPO_NOTES_FILE.test(url.pathname))return blockedDataResponse(404,'Not found.
 if(url.pathname===SALES_API_PATH&&AUTOMATION_UA.test(userAgent)){console.warn('watchdog-data-edge',JSON.stringify({event:'automation_client_blocked',path:url.pathname}));await recordEdgeSecurityEvent(request,'automation_client_blocked',url.pathname,true);return blockedDataResponse(403,'Automated bulk extraction is not permitted on this endpoint.','no-store');}
 // CO town pages work on the Watchdog host and on preview deployments (NJPropertyTaxRelief was redirected above).
 // Files like /co/co.css never match the page patterns, so coPageRewrite leaves them to the static checks below.
+const taxMatch=url.pathname.match(TAX_PAGE_PATH);if(taxMatch){if(LEGACY_NJPTR_HOSTS.has(host)){const destination=new URL(url.pathname,`https://${WATCHDOG_HOST}`);destination.search=url.search;return Response.redirect(destination,308);}const d=new URL('/api/tax-town-page',request.url);if(taxMatch[1])d.searchParams.set('county',taxMatch[1]);if(taxMatch[2])d.searchParams.set('town',taxMatch[2]);return rewrite(d);}
 if(url.pathname.startsWith('/co/')){if(url.pathname==='/co/embed'||url.pathname==='/co/embed/')return next();const co=coPageRewrite(request,url);if(co)return co;}
 if(host!==WATCHDOG_HOST)return next();
 if(WATCHDOG_TOOL_REDIRECTS.has(url.pathname))return redirectCanonical(request,url,WATCHDOG_TOOL_REDIRECTS.get(url.pathname));
