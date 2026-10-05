@@ -169,7 +169,7 @@
 
   <header class="md-hero">
     <div class="md-shell">
-      <span class="md-kicker"><i class="fas fa-diagram-project"></i> How we get our numbers</span>
+      
       <h1>How Watchdog builds a <em>property record.</em></h1>
       <p class="md-hero-lead">Watchdog combines public records from New Jersey agencies into one property record. We identify the parcel, keep the original source attached, standardize the fields, check the data, and calculate checked Watchdog markers only when the required inputs are available. That same source-and-evidence discipline now governs the Watchdog Score through ROBUST-v1. This page explains each step.</p>
       <div class="md-hero-actions">
@@ -213,7 +213,7 @@
 
     <main class="md-main">
       <section class="md-intro" id="chain">
-        <div class="md-eyebrow"><i class="fas fa-route"></i> The data chain</div>
+        
         <h2>How a property record is built</h2>
         <p>Watchdog keeps the original agency field, the parcel or geography it belongs to, any transformation applied to it, and the confidence of the resulting red flag as separate concepts. A Watchdog calculation does not become an official government fact just because it appears beside one.</p>
         <div class="md-chain" aria-label="Watchdog data processing chain">
@@ -228,7 +228,7 @@
       </section>
 
       <section class="md-section" id="source-vs-derived">
-        <div class="md-eyebrow"><i class="fas fa-layer-group"></i> Source vs. calculated</div>
+        
         <h2>Source data and Watchdog calculations</h2>
         <p>Watchdog uses four broad evidence classes. Keeping them separate prevents a useful calculation from being mistaken for a government record.</p>
         <div class="md-principles">
@@ -240,7 +240,7 @@
       </section>
 
       <section class="md-section" id="source-registry">
-        <div class="md-eyebrow"><i class="fas fa-database"></i> Data sources</div>
+        
         <h2>Where the data comes from</h2>
         <p>Source status is operational. <strong>Live</strong> means the source is currently checked for production use in the relevant process. <strong>Partial</strong> means the source exists but a coverage, vintage, schema or delivery issue limits activation. <strong>Planned</strong> means an official source has been identified but the mapping is not yet production-ready. <strong>Unavailable</strong> means Watchdog has not confirmed a solid official dataset for that concept.</p>
 
@@ -264,7 +264,7 @@
       </section>
 
       <section class="md-section" id="parcels">
-        <div class="md-eyebrow"><i class="fas fa-vector-square"></i> Property matching</div>
+        
         <h2>How we identify a property</h2>
         <p>Watchdog's property process is organized around the New Jersey parcel framework rather than around a person's name. The preferred stable identifier is the statewide parcel/PAMS key, with municipality, block, lot and qualifier info used to resolve and validate records. Address text is useful for finding a parcel; parcel identity is what keeps separate sources attached to the same property.</p>
         <div class="md-cards">
@@ -278,7 +278,7 @@
       </section>
 
       <section class="md-section" id="sales">
-        <div class="md-eyebrow"><i class="fas fa-file-signature"></i> Sales &amp; equalization</div>
+        
         <h2>Sales and equalization</h2>
         <p>New Jersey's Division of Taxation publishes SR1A sales files, equalization tables, Common Level Ranges, general/effective tax-rate tables and MOD-IV assessment files. Watchdog uses those source families for recorded-sale info, assessment-to-sale relationships, municipal equalization and appeal screening. A deed consideration is a recorded fact; deciding whether it is a meaningful arm's-length comparable is a separate analytical step.</p>
         <div class="md-flow">
@@ -291,7 +291,7 @@
       </section>
 
       <section class="md-section" id="chapter123">
-        <div class="md-eyebrow"><i class="fas fa-scale-balanced"></i> Chapter 123</div>
+        
         <h2>How Chapter 123 screening works</h2>
         <p>The Division of Taxation publishes annual Chapter 123 Common Level Range reference tables. Watchdog uses the certified common-level ratio and certified range with parcel assessment and solid market evidence. The current implementation reads the certified upper limit where available, treats a legal upper limit above 100% as 100%, and does not apply the Chapter 123 range in a revaluation or reassessment year.</p>
         <div class="md-formulas">
@@ -305,7 +305,7 @@
       </section>
 
       <section class="md-section" id="permits">
-        <div class="md-eyebrow"><i class="fas fa-person-digging"></i> Permits &amp; development</div>
+        
         <h2>What permit data can tell you</h2>
         <p>New Jersey DCA's open construction-permit dataset is reported monthly by municipalities and currently retains roughly five years of data. DCA states that most, but not all, permit-issuing municipalities report; recent records may be unreviewed; and the raw data can contain errors or omissions. Watchdog carries those limitations forward.</p>
         <div class="md-cards">
@@ -317,7 +317,7 @@
       </section>
 
       <section class="md-section" id="spatial">
-        <div class="md-eyebrow"><i class="fas fa-map"></i> Mapped data</div>
+        
         <h2>Flood and environmental data</h2>
         <p>Watchdog performs checked spatial checks against identified FEMA and NJDEP public GIS layers. The purpose is to show conditions that deserve attention before a user discovers them late in a transaction or project.</p>
         <div class="md-source-table">
@@ -331,7 +331,7 @@
       </section>
 
       <section class="md-section" id="normalization">
-        <div class="md-eyebrow"><i class="fas fa-code-branch"></i> Record matching</div>
+        
         <h2>How records are matched</h2>
         <p>New Jersey sources are published at different geographic levels and with different identifiers. Watchdog standardizes those relationships before it calculates a warning sign.</p>
         <div class="md-flow">
@@ -343,7 +343,7 @@
       </section>
 
       <section class="md-section" id="provenance">
-        <div class="md-eyebrow"><i class="fas fa-fingerprint"></i> Data point tracking</div>
+        
         <h2>How we track each data point</h2>
         <p>Production oversight currently contains <strong>289 provider-to-marker mappings</strong> spanning 28 provider keys. Of those mappings, 285 are currently live, three are partial and one is unavailable. A mapping can identify the provider type, provider key, source keys, original source fields, calculation key, value status, freshness/cache policy and whether the marker is suitable for bulk tasks. This metadata lets a user trace a value back to the source or formula that produced it.</p>
         <div class="md-code"><span class="muted">illustrative source history record</span><br>{<br>&nbsp;&nbsp;<span class="key">marker</span>: <span class="op">"property.assessed_value"</span>,<br>&nbsp;&nbsp;<span class="key">provider_kind</span>: <span class="op">"authoritative_source"</span>,<br>&nbsp;&nbsp;<span class="key">source_keys</span>: [<span class="op">"NJ MOD-IV"</span>, <span class="op">"NJOGIS Parcels"</span>],<br>&nbsp;&nbsp;<span class="key">source_fields</span>: [<span class="op">"NET_VALUE"</span>],<br>&nbsp;&nbsp;<span class="key">value_status</span>: <span class="op">"live"</span><br>}<br><br><span class="muted">calculated markers replace source_fields with a checked calculation/dependency chain where appropriate.</span></div>
@@ -356,7 +356,7 @@
       </section>
 
       <section class="md-section" id="derived">
-        <div class="md-eyebrow"><i class="fas fa-function"></i> Watchdog formulas</div>
+        
         <h2>How Watchdog calculations work</h2>
         <p>The current checked formula registry contains <strong>112 live formulas</strong> across versioned engine families. Thirty-one remain under <code>watchdog-derived-v3</code>; newer checked families cover additional fiscal, revaluation, subject-evidence, score-product, Chapter 123, closing and other production calculations. The canonical property Watchdog Score is registered separately as <code>watchdog.watchdog_score / ROBUST-v1</code>. Each formula entry records its operation, dependencies, confidence, status, explanation and configuration.</p>
         <div class="md-formulas">
@@ -377,7 +377,7 @@
       </section>
 
       <section class="md-section" id="robust">
-        <div class="md-eyebrow"><i class="fas fa-gauge-high"></i> Watchdog Score</div>
+        
         <h2>Watchdog Score and the ROBUST Framework</h2>
         <p><strong>The Watchdog Score is powered by the ROBUST Framework.</strong> The current canonical property model is <code>ROBUST-v1</code>, a 0–100 property-tax and assessment info warning sign organized into six named dimensions. The product is called the Watchdog Score, not the “ROBUST Score.”</p>
         <div class="md-cards">
@@ -400,7 +400,7 @@
       </section>
 
       <section class="md-section" id="confidence">
-        <div class="md-eyebrow"><i class="fas fa-signal"></i> Confidence &amp; missing data</div>
+        
         <h2>Missing data stays missing</h2>
         <p>Confidence describes the quality or completeness of the evidence supporting a result. Missing inputs should lower completeness, reduce confidence, neutralize a dependency or stop a calculation. They should not silently become zero, “no risk,” or “good.” For ROBUST-v1, an unavailable dimension is omitted and the remaining available weights are renormalized; evidence coverage remains visible as a separate measure.</p>
         <div class="md-principles">
@@ -413,7 +413,7 @@
       </section>
 
       <section class="md-section" id="freshness">
-        <div class="md-eyebrow"><i class="fas fa-clock-rotate-left"></i> Data freshness</div>
+        
         <h2>How current is the data?</h2>
         <p>Freshness has several meanings. Watchdog keeps the source's own date and publication schedule separate from when Watchdog last checked or served the value.</p>
         <div class="md-cards">
@@ -427,14 +427,14 @@
       </section>
 
       <section class="md-section" id="privacy">
-        <div class="md-eyebrow"><i class="fas fa-user-shield"></i> Privacy</div>
+        
         <h2>Privacy and Daniel's Law</h2>
         <p>NJOGIS states that owner names have been redacted from its hosted parcels and tax-list downloads, map services and applications in response to Daniel's Law protections. Watchdog does not try to defeat that public-data choice by rebuilding the missing owner-name field from unrelated personal-data brokers. In current provider oversight, owner name is explicitly marked unavailable from the connected statewide public source.</p>
         <div class="md-callout"><h3>Watchdog is organized around the property record.</h3><p>Assessment, tax, block and lot, parcel geometry, sale/deed references, municipal info and mapped due-diligence layers are about the property record. Where a user voluntarily submits a document or account-specific information, that is handled under Watchdog's privacy terms and remains conceptually separate from the statewide public parcel baseline.</p></div>
       </section>
 
       <section class="md-section" id="limits">
-        <div class="md-eyebrow"><i class="fas fa-triangle-exclamation"></i> Limits</div>
+        
         <h2>What Watchdog does not do</h2>
         <p>Watchdog is a research and screening tool. It does not replace the controlling government record or a professional determination where one is required.</p>
         <div class="md-limits">
@@ -453,7 +453,7 @@
       </section>
 
       <section class="md-section" id="audit">
-        <div class="md-eyebrow"><i class="fas fa-magnifying-glass-chart"></i> Check a result</div>
+        
         <h2>How to check a Watchdog result</h2>
         <p>When a Watchdog value matters to a decision, work backward from the result to the parcel, source and calculation.</p>
         <div class="md-audit">
@@ -471,7 +471,7 @@
       </section>
 
       <section class="md-section" id="faq">
-        <div class="md-eyebrow"><i class="fas fa-circle-question"></i> FAQ</div>
+        
         <h2>Common questions about the data</h2>
         <div class="md-faq">
           <details><summary>What is the ROBUST Framework?</summary><p>The Watchdog Score is powered by the ROBUST Framework: Recourse, Overassessment Position, Burden, Uniformity, Stability and Trajectory. ROBUST explains the six dimensions behind the canonical property Watchdog Score; it is not a separate “ROBUST Score.”</p></details>

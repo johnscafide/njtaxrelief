@@ -785,7 +785,7 @@
     var title = tenure === 'rent' ? 'Residence property record' : 'Your residence in Watchdog';
 
     el.innerHTML = '<section class="awdx-shell">'
-      + '<div class="awdx-head"><div class="awdx-brand"><div class="awdx-mark"><i class="fas fa-dog"></i></div><div><div class="awdx-kicker">Watchdog property info</div><div class="awdx-title">' + esc(title) + '</div><div class="awdx-address">' + esc(place || address) + '</div></div></div><div class="awdx-public">NJ public record</div></div>'
+      + '<div class="awdx-head"><div class="awdx-brand"><div class="awdx-mark"><i class="fas fa-dog"></i></div><div><div class="awdx-title">' + esc(title) + '</div><div class="awdx-address">' + esc(place || address) + '</div></div></div><div class="awdx-public">NJ public record</div></div>'
       + '<div class="awdx-body"><p class="awdx-intro">' + esc(intro) + '</p>'
       + '<div class="awdx-score-card"><div class="awdx-score"><span><b>' + scoreValue + '</b><small>' + (hasScore ? '/ 100' : 'PENDING') + '</small></span></div><div class="awdx-score-copy"><div class="awdx-score-label">Watchdog Score</div><strong>' + (hasScore ? 'Canonical property score' : 'Canonical score not yet available') + '</strong><p>' + esc(scoreCopy) + '</p><span class="awdx-score-source">' + esc(sourceLabel(scoreInfo)) + '</span></div></div>'
       + '<div class="awdx-stats">'
@@ -814,12 +814,12 @@
     var tenure = options.tenure === 'rent' ? 'rent' : 'own';
     if (!el || !address || typeof window.enrichLead !== 'function') return;
 
-    el.innerHTML = '<section class="awdx-shell"><div class="awdx-head"><div class="awdx-brand"><div class="awdx-mark"><i class="fas fa-dog"></i></div><div><div class="awdx-kicker">Watchdog property info</div><div class="awdx-title">Matching your residence</div><div class="awdx-address">' + esc(address) + '</div></div></div></div><div class="awdx-loading"><span class="awdx-spinner"></span><span>Matching the verified address to NJ public records and canonical ROBUST evidence…</span></div></section>';
+    el.innerHTML = '<section class="awdx-shell"><div class="awdx-head"><div class="awdx-brand"><div class="awdx-mark"><i class="fas fa-dog"></i></div><div><div class="awdx-title">Matching your residence</div><div class="awdx-address">' + esc(address) + '</div></div></div></div><div class="awdx-loading"><span class="awdx-spinner"></span><span>Matching the verified address to NJ public records and canonical ROBUST evidence…</span></div></section>';
     track('anchor_watchdog_preview_started',{tenure:tenure,experience:'robust_property_card'});
 
     window.enrichLead(address).then(function (subject) {
       if (!subject || subject.status !== 'ok' || !subject.pamsPin) {
-        el.innerHTML = '<section class="awdx-shell"><div class="awdx-head"><div class="awdx-brand"><div class="awdx-mark"><i class="fas fa-dog"></i></div><div><div class="awdx-kicker">Watchdog property info</div><div class="awdx-title">Residence record not confidently matched</div><div class="awdx-address">' + esc(address) + '</div></div></div></div><div class="awdx-body"><p class="awdx-intro">Your ANCHOR result is unaffected. Watchdog did not find enough state parcel evidence to attach a property score or ROBUST foundation to this address without guessing.</p><div class="awdx-actions"><a class="awdx-cta" href="/property/?address=' + encodeURIComponent(address) + '">Try the full Watchdog lookup</a></div></div></section>';
+        el.innerHTML = '<section class="awdx-shell"><div class="awdx-head"><div class="awdx-brand"><div class="awdx-mark"><i class="fas fa-dog"></i></div><div><div class="awdx-title">Residence record not confidently matched</div><div class="awdx-address">' + esc(address) + '</div></div></div></div><div class="awdx-body"><p class="awdx-intro">Your ANCHOR result is unaffected. Watchdog did not find enough state parcel evidence to attach a property score or ROBUST foundation to this address without guessing.</p><div class="awdx-actions"><a class="awdx-cta" href="/property/?address=' + encodeURIComponent(address) + '">Try the full Watchdog lookup</a></div></div></section>';
         return;
       }
       return scoreSubjects([subject]).then(function (scores) {

@@ -1698,7 +1698,7 @@
     return '<section class="sec2 sec2-cat-' + catClass + ' ' + tone + (OPEN[sec.k] ? ' open' : '') + '" data-min-plan="' + (sec.tier || 'standard') + '" id="sec-' + sec.k + '">' +
       '<button class="sec2-h" onclick="hmToggle(\'' + sec.k + '\')">' +
         '<span class="sec2-icon-tile"><i class="fas ' + sec.icon + ' sec2-i"></i></span>' +
-        '<span class="sec2-copy"><small class="sec2-kicker">' + esc(sec.cat || 'Analysis') + '</small><span class="sec2-t">' + sec.title + '</span>' +
+        '<span class="sec2-copy"><span class="sec2-t">' + sec.title + '</span>' +
         (sum ? '<span class="sec2-s">' + sum + '</span>' : '') + '</span>' +
         '<i class="fas fa-chevron-down sec2-c"></i>' +
       '</button>' +

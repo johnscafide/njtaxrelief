@@ -128,7 +128,7 @@ assert(css.includes('@media(max-width:390px)'), 'Small-phone graphical promo fal
 
 // Teams is an honest preview page, not a false self-service sales surface.
 assert(teams.includes('<title>Watchdog Teams | Shared Property Info</title>'), 'Teams preview page title is missing');
-assert(teams.includes('Watchdog Teams · Preview'), 'Teams page does not visibly identify itself as a preview');
+assert(teams.includes('Watchdog Teams is in preview.'), 'Teams page does not visibly identify itself as a preview');
 assert(teams.includes('not a self-service plan for purchase today'), 'Teams page does not disclose current purchase status');
 assert(teams.includes('Seats &amp; invitations'), 'Teams roadmap is missing seat/invite planning');
 assert(teams.includes('Roles &amp; permissions'), 'Teams roadmap is missing role/permission planning');

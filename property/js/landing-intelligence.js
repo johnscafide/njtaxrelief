@@ -68,7 +68,7 @@
       sec.innerHTML =
         '<div class="wdi-shell">' +
           '<div class="wdi-head">' +
-            '<div><div class="wdi-kicker">Watchdog Intelligence</div>' +
+            '<div>' +
             '<h2 id="wdi-title">Watchdog <em>right now.</em></h2>' +
             '<p class="wdi-lead">Records-first backed sources.</p></div>' +
             '<div class="wdi-stamp"><b id="wdi-asof">Live data is refreshing</b><span id="wdi-scope">Only current, solid evidence is summarized. No customer names, addresses or private CRM data appear here.</span><a href="/property/data-methodology">See how we get our numbers <i class="fas fa-arrow-right"></i></a></div>' +

@@ -112,7 +112,7 @@ body{margin:0;font-family:"Source Sans 3",sans-serif;color:#14243b}
       g.innerHTML=rows.map(function(a){
         return '<a class="in-card" href="/insights/'+encodeURIComponent(a.slug)+'">'
           +(a.hero_image_url?'<img loading="lazy" src="'+e(a.hero_image_url)+'" alt="'+e(a.hero_image_alt||a.title)+'">':'')
-          +'<div class="in-body"><span class="in-kicker">'+e(a.kicker)+'</span><h2>'+e(a.title)
+          +'<div class="in-body"><h2>'+e(a.title)
           +'<div class="in-meta">'+new Date(a.published_at).toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'})+' · '+(a.reading_minutes||5)+' min read</div></div></a>';
       }).join('') || '<div class="in-empty">New findings are being prepared.</div>';
     })

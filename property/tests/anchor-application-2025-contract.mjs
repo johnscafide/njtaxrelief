@@ -37,7 +37,7 @@ assert.match(appHtml, /Support Watchdog/);
 assert.match(appHtml, /disabled>Support Watchdog/);
 assert.match(enhancementsPartial, /Find code from address/);
 assert.match(enhancementsPartial, /cntycode\.pdf/);
-assert.match(enhancementsPartial, /PROPERTY TAX HELP/);
+assert.match(enhancementsPartial, /Verify the full-year amount before you enter it\./);
 assert.match(enhancementsPartial, /Preview only/);
 assert.match(enhancementsJs, /slice\(0,4\)/);
 assert.match(enhancementsJs, /toolbar=0/);

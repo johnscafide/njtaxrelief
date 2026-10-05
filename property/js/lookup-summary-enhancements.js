@@ -251,7 +251,7 @@
     var scoreHtml=score?'<div class="wd-mapless-score">'+esc(score)+'<em>/100</em></div>':'<div class="wd-mapless-score building">Score building</div>';
     var statusHtml=status?'<span class="wd-mapless-status">'+esc(status)+'</span>':'';
     photos.innerHTML='<div class="wd-mapless-property-hero" data-signature="'+esc(signature)+'"><div class="wd-mapless-property-in">'+
-      '<div><span class="wd-mapless-kicker"><i class="fas fa-dog"></i> Watchdog Property Info</span><h2 class="wd-mapless-address">'+esc(address)+'</h2><p class="wd-mapless-copy">Rendered maps and third-party property imagery are temporarily disabled on this page. The property record, Watchdog Score and checked ROBUST evidence remain available.</p>'+statusHtml+'</div>'+
+      '<div><h2 class="wd-mapless-address">'+esc(address)+'</h2><p class="wd-mapless-copy">Rendered maps and third-party property imagery are temporarily disabled on this page. The property record, Watchdog Score and checked ROBUST evidence remain available.</p>'+statusHtml+'</div>'+
       '<div class="wd-mapless-scorebox"><span class="wd-mapless-scorelabel"><i class="fas fa-shield-dog"></i> Watchdog Score</span>'+scoreHtml+'<div class="wd-mapless-robust-title">ROBUST FRAMEWORK</div><div class="wd-mapless-components">'+componentsMarkup(rows)+'</div></div>'+
       '<div class="wd-mapless-photo-note"><i class="fas fa-camera"></i><span>Owner-submitted property photos are planned as the replacement for third-party rendered imagery.</span></div>'+
       '</div></div>'+(parcel?lotMapMarkup(parcel):'');

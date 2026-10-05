@@ -25,7 +25,7 @@
     host.setAttribute('role', 'alert');
     host.setAttribute('aria-live', 'assertive');
     host.innerHTML =
-      '<span class="dc-mobile-recovery-kicker">DATA CENTER</span>' +
+      '' +
       '<h2>Data could not finish loading</h2>' +
       '<p>The checked marker catalog did not become ready. This may be a temporary connection issue.</p>' +
       '<button type="button" id="dc-mobile-retry">Retry Data Center</button>';

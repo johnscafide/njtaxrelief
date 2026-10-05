@@ -117,7 +117,7 @@ async function renderSourceSweep(id){if(!canUseEvidence())return;
         return `<article class="tx-source-card ${meta.cls}" data-item-key="${esc(key)}"><div class="tx-source-card-top"><span class="tx-source-card-icon"><i class="fas ${icon}"></i></span><span class="tx-source-status">${esc(meta.label)}</span></div><strong>${esc(item.title||label)}</strong>${evidenceBody(item)}<div class="tx-source-provenance"><span>${esc(sourceName(item))}</span>${checked?`<small>Checked ${esc(checked)}</small>`:''}</div><div class="tx-source-actions">${sourceLinks(item)}</div></article>`;
       }).join('');
       const parcel=[tx.pams_pin?'Parcel '+tx.pams_pin:'Parcel not matched',tx.block&&tx.lot?`Block ${tx.block} · Lot ${tx.lot}`:'Block/lot resolving'].join(' · ');
-      box.innerHTML=`<div class="tx-source-sweep-head"><div><span class="tx-eyebrow">ONE-ADDRESS EVIDENCE SWEEP</span><h3>What Watchdog actually found — and what still needs an official search</h3><p>Evidence is shown directly in each card. “None found” appears only after the official source was actually searched successfully.</p></div><span class="tx-source-sweep-meta">${esc(parcel)}</span></div><div class="tx-source-grid">${cards}</div>`;
+      box.innerHTML=`<div class="tx-source-sweep-head"><div><h3>What Watchdog actually found — and what still needs an official search</h3><p>Evidence is shown directly in each card. “None found” appears only after the official source was actually searched successfully.</p></div><span class="tx-source-sweep-meta">${esc(parcel)}</span></div><div class="tx-source-grid">${cards}</div>`;
     }catch(e){console.warn('Evidence sweep panel could not render',e)}
   },120);
 }

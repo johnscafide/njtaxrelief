@@ -103,7 +103,7 @@ function gateMarkup(){
     '<section class="wd-intelligence-gate-card" role="dialog" aria-modal="true" aria-labelledby="wd-intelligence-gate-title">'+
       '<button class="wd-intelligence-gate-close" type="button" data-wd-intelligence-close aria-label="Close"><i class="fas fa-xmark"></i></button>'+
       '<div class="wd-intelligence-gate-mark"><i class="fas fa-microphone-lines"></i></div>'+
-      '<span class="wd-intelligence-gate-kicker">Watchdog Intelligence · Voice</span>'+
+      ''+
       '<h2 id="wd-intelligence-gate-title">Watchdog Intelligence Voice</h2>'+
       '<p id="wd-intelligence-gate-copy"></p>'+
       '<div class="wd-intelligence-gate-actions" id="wd-intelligence-gate-actions"></div>'+
@@ -161,7 +161,7 @@ function showGate(status){
 function voiceMarkup(){
   return '<section class="wd-home-voice-entry wd-intelligence-frame" id="wd-home-voice-entry" aria-label="Watchdog Intelligence Voice">'+
     '<div class="wd-home-voice-copy">'+
-      '<span class="wd-home-voice-kicker">Watchdog Intelligence · Voice</span>'+
+      ''+
       '<h2 class="wd-home-voice-title">Ask about what needs attention now.</h2>'+
       '<p class="wd-home-voice-sub">Uses this saved property’s checked info so you can ask a focused question without starting over.</p>'+
     '</div>'+

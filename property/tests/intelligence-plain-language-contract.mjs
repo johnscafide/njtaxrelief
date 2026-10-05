@@ -33,7 +33,7 @@ for (const id of ['watchdog.sale_recency_confidence','watchdog.assessment_to_sal
   assert.equal(P.signal({ signal_id: id }).known, true, `${id} has a plain label`);
 }
 
-assert.match(why, /The short version/);
+assert.match(why, /<section class="wdwhy-plain"><h3>/);
 assert.match(why, /<details class="wdwhy-tech"><summary>Technical details<\/summary>/, 'signal ids and lineage stay available, folded away');
 assert.match(why, /not a valuation, legal opinion or guaranteed outcome/);
 

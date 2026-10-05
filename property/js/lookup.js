@@ -4027,7 +4027,7 @@ buildOpinion(hasCase, overBy, saving, target) + rows +
     return '<div class="mtg-wrap">' +
       '<div class="mtg-head">' +
         '<div>' +
-          '<div class="mtg-eyebrow">Sponsored by Greentree Mortgage, an HMA Company</div>' +
+          '' +
           '<h3 class="plm-sec-h" style="margin:0;">What would the monthly payment be?</h3>' +
           '<p class="plm-sec-s" style="margin:6px 0 0;">Most calculators guess at your taxes. This one already knows them, because it just read them off the assessment for ' +
           esc(current.address) + '.</p>' +
@@ -4122,7 +4122,7 @@ buildOpinion(hasCase, overBy, saving, target) + rows +
     return '<div class="pre-wrap">' +
       '<div class="pre-photo"><img src="/johnvarano.jpg" alt="John Varano, Branch Manager, Greentree Mortgage an HMA Company" loading="lazy" onerror="this.parentNode.style.display=\'none\'"></div>' +
       '<div class="pre-body">' +
-        '<div class="pre-eyebrow">Greentree Mortgage &middot; Advertisement</div>' +
+        '' +
         '<h3>Get preapproved before you shop</h3>' +
         '<p>A preapproval letter tells you the real number you can spend and makes your offer count when there is competition. ' +
         '<b>John Varano</b> is Branch Manager at Greentree Mortgage, an HMA Company, and handles the loan side for buyers across South Jersey.</p>' +

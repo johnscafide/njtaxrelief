@@ -28,7 +28,7 @@ assert.match(signals, /Town\/county tax & records section/);
 
 // Durable town generator keeps one canonical entity page and answers proven tax/record intent.
 assert.match(generator, /Property Taxes, Assessments & Records \| Watchdog/);
-assert.match(generator, /Property tax &amp; records/);
+assert.doesNotMatch(generator, /tp-kicker|tp-eyebrow/);
 assert.match(generator, /property tax, assessment and record lookup/);
 assert.match(generator, /Search .* property records →/);
 assert.match(generator, /Watchdog is not the municipal tax collector/);

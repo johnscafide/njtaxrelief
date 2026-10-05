@@ -84,7 +84,7 @@ function briefHtml(payload,response,toolName){
   ensureBriefCss();
   var cards=Array.isArray(response.cards)?response.cards.slice(0,5):[];
   var written=payload&&payload.provider==='openai'&&payload.provider_status==='complete';
-  return '<b class="dwa-brief-kicker">Watchdog <span class="wd-intelligence-brand-word">Intelligence</span> brief</b><p class="dwa-brief-lead">'+esc(response.conclusion||'')+'</p>'+
+  return '<p class="dwa-brief-lead">'+esc(response.conclusion||'')+'</p>'+
     (cards.length?'<div class="dwa-brief-cards"><strong class="dwa-brief-label">Needs your attention</strong>'+cards.map(briefCard).join('')+'</div>':'')+
     '<details class="dwa-brief-tech"><summary>Evidence and sources</summary>'+listSection('Evidence',response.evidence,'evidence')+listSection('Missing evidence',response.missing_evidence,'missing')+listSection('Caveats',response.caveats,'caveats')+sourcesSection(response.sources)+'</details>'+
     evidenceWorkflowHtml(toolName)+

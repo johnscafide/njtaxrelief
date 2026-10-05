@@ -2011,7 +2011,7 @@ document.addEventListener('mouseover',e=>{var t=e.target.closest('[data-marker-i
     if (t.tax != null) items.push(item(t.taxYear ? t.taxYear + ' annual tax' : 'Saved annual tax', money(t.tax), t.live ? 'Municipal bill evidence' : 'Saved state record'));
     if (t.rate != null) items.push(item(t.taxYear ? t.taxYear + ' tax rate' : 'Tax rate', t.rate.toFixed(3) + '%', 'Municipal evidence'));
     if (t.mismatch) items.push(item('Tax-year alignment', 'Protected', 'Assessment year is not inferred'));
-    return '<section class="hm-tax-timeline" id="hm-current-tax-evidence"><div class="hm-tax-head"><div><span class="hm-tax-kicker">TAX TIMELINE</span><h2>Current municipal tax evidence</h2><p>Observed bill, assessment and rate stay aligned by tax year. Watchdog does not mix a revaluation assessment with an older rate.</p></div>' + (t.source ? '<a href="' + esc(t.source) + '" target="_blank" rel="noopener">Official source ↗</a>' : '') + '</div><div class="hm-tax-grid">' + items.join('') + '</div>' + (t.provider ? '<p class="hm-tax-source">Source: ' + esc(t.provider) + '</p>' : '') + '</section>';
+    return '<section class="hm-tax-timeline" id="hm-current-tax-evidence"><div class="hm-tax-head"><div><h2>Current municipal tax evidence</h2><p>Observed bill, assessment and rate stay aligned by tax year. Watchdog does not mix a revaluation assessment with an older rate.</p></div>' + (t.source ? '<a href="' + esc(t.source) + '" target="_blank" rel="noopener">Official source ↗</a>' : '') + '</div><div class="hm-tax-grid">' + items.join('') + '</div>' + (t.provider ? '<p class="hm-tax-source">Source: ' + esc(t.provider) + '</p>' : '') + '</section>';
   }
 
   window.hmSwitch = function (pin) {
@@ -2293,7 +2293,7 @@ document.addEventListener('mouseover',e=>{var t=e.target.closest('[data-marker-i
     return '<section class="sec2 sec2-cat-' + catClass + ' ' + tone + (OPEN[sec.k] ? ' open' : '') + '" data-min-plan="' + (sec.tier || 'standard') + '" id="sec-' + sec.k + '">' +
       '<button class="sec2-h" onclick="hmToggle(\'' + sec.k + '\')">' +
         '<span class="sec2-icon-tile"><i class="fas ' + sec.icon + ' sec2-i"></i></span>' +
-        '<span class="sec2-copy"><small class="sec2-kicker">' + esc(sec.cat || 'Analysis') + '</small><span class="sec2-t">' + sec.title + '</span>' +
+        '<span class="sec2-copy"><span class="sec2-t">' + sec.title + '</span>' +
         (sum ? '<span class="sec2-s">' + sum + '</span>' : '') + '</span>' +
         '<i class="fas fa-chevron-down sec2-c"></i>' +
       '</button>' +
@@ -3949,7 +3949,7 @@ function gateMarkup(){
     '<section class="wd-intelligence-gate-card" role="dialog" aria-modal="true" aria-labelledby="wd-intelligence-gate-title">'+
       '<button class="wd-intelligence-gate-close" type="button" data-wd-intelligence-close aria-label="Close"><i class="fas fa-xmark"></i></button>'+
       '<div class="wd-intelligence-gate-mark"><i class="fas fa-microphone-lines"></i></div>'+
-      '<span class="wd-intelligence-gate-kicker">Watchdog Intelligence · Voice</span>'+
+      ''+
       '<h2 id="wd-intelligence-gate-title">Watchdog Intelligence Voice</h2>'+
       '<p id="wd-intelligence-gate-copy"></p>'+
       '<div class="wd-intelligence-gate-actions" id="wd-intelligence-gate-actions"></div>'+
@@ -4007,7 +4007,7 @@ function showGate(status){
 function voiceMarkup(){
   return '<section class="wd-home-voice-entry wd-intelligence-frame" id="wd-home-voice-entry" aria-label="Watchdog Intelligence Voice">'+
     '<div class="wd-home-voice-copy">'+
-      '<span class="wd-home-voice-kicker">Watchdog Intelligence · Voice</span>'+
+      ''+
       '<h2 class="wd-home-voice-title">Ask about what needs attention now.</h2>'+
       '<p class="wd-home-voice-sub">Uses this saved property’s checked info so you can ask a focused question without starting over.</p>'+
     '</div>'+
@@ -4220,7 +4220,7 @@ function partner(){
 }
 
 function footerAdMarkup(){
-  return '<section class="hm-footer-ad" id="hm-footer-ad" aria-label="Watchdog advertising"><div class="hm-footer-ad-in"><a href="https://johnvarano.com/" target="_blank" rel="noopener sponsored" class="gt-banner" aria-label="Sponsored Watchdog partner"><div class="gt-banner-inner"><div class="gt-photo"><img src="/johnvarano.jpg" alt="John Varano, Branch Manager, Greentree Mortgage an HMA Company" loading="lazy" onerror="this.parentNode.style.display=\'none\'"></div><div class="gt-text"><div class="gt-eyebrow">Greentree Mortgage, an HMA Company · John Varano, Branch Manager</div><div class="gt-headline">Know the payment before you fall in love with the house.</div><div class="gt-sub">Taxes are only part of the monthly number. Review principal, interest, taxes, insurance and escrow before you make a move.</div></div><div class="gt-cta">Talk Financing <i class="fas fa-arrow-right"></i></div></div><div class="gt-disc">Advertisement. Greentree Mortgage, an HMA Company, is a separate company and is not affiliated with Opus Elite Real Estate. You are never required to use any particular lender, and you are free to shop for a mortgage. Nothing here is a loan commitment, an offer of credit, or a guarantee of terms.</div></a></div></section>';
+  return '<section class="hm-footer-ad" id="hm-footer-ad" aria-label="Watchdog advertising"><div class="hm-footer-ad-in"><a href="https://johnvarano.com/" target="_blank" rel="noopener sponsored" class="gt-banner" aria-label="Sponsored Watchdog partner"><div class="gt-banner-inner"><div class="gt-photo"><img src="/johnvarano.jpg" alt="John Varano, Branch Manager, Greentree Mortgage an HMA Company" loading="lazy" onerror="this.parentNode.style.display=\'none\'"></div><div class="gt-text"><div class="gt-headline">Know the payment before you fall in love with the house.</div><div class="gt-sub">Taxes are only part of the monthly number. Review principal, interest, taxes, insurance and escrow before you make a move.</div></div><div class="gt-cta">Talk Financing <i class="fas fa-arrow-right"></i></div></div><div class="gt-disc">Advertisement. Greentree Mortgage, an HMA Company, is a separate company and is not affiliated with Opus Elite Real Estate. You are never required to use any particular lender, and you are free to shop for a mortgage. Nothing here is a loan commitment, an offer of credit, or a guarantee of terms.</div></a></div></section>';
 }
 
 function mountFooterAd(){
