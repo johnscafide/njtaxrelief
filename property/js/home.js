@@ -2859,7 +2859,7 @@ function paintProfile(){ensurePopovers();var p=document.getElementById('hm27-pro
 '<a href="/property/account"><i class="fas fa-user-pen"></i><span><b>Edit profile & role</b><small>Profile, profession and preferences</small></span></a>'+
 '<button class="hm27-menu-row" type="button" data-hm27="invite"><i class="fas fa-user-plus"></i><span><b>Invite others</b><small>Share Watchdog with someone</small></span></button>'+
 '<a href="/property/account"><i class="fas fa-credit-card"></i><span><b>Account & billing</b><small>Plan, subscription and billing</small></span></a>'+
-'<a href="/property/home"><i class="fas fa-house"></i><span><b>Property Home</b><small>Single-property intelligence</small></span></a>'+
+'<a href="/property/home"><i class="fas fa-house"></i><span><b>Property Home</b><small>Single-property info</small></span></a>'+
 '</nav><button class="hm27-pop-signout" type="button" data-hm27="signout"><i class="fas fa-arrow-right-from-bracket"></i> Sign out</button>';}
 function unreadCount(){var read=getReadAt()?new Date(getReadAt()).getTime():0;return events.filter(function(x){return(new Date(x.occurred_at).getTime()||0)>read;}).length;}
 function iconFor(e){var t=String(e.event_type||e.marker_id||'').toLowerCase(),s=String(e.severity||'').toLowerCase();if(/high|critical/.test(s))return'fa-triangle-exclamation';if(/tax|assessment/.test(t))return'fa-receipt';if(/market|value/.test(t))return'fa-chart-line';if(/permit/.test(t))return'fa-hammer';return'fa-house';}
