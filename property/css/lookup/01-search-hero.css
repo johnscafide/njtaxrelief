@@ -25,7 +25,7 @@
   position: absolute; inset: 0;
 }
 .pl-hero h1 {
-  font-family: 'Plus Jakarta Sans', 'Source Sans 3', system-ui, sans-serif;
+  font-family: 'Libre Franklin', 'Source Sans 3', system-ui, sans-serif;
   font-size: clamp(2.1rem, 5.2vw, 3.4rem); font-weight: 800; line-height: 1.08;
   letter-spacing: -.032em; color: #fff; margin: 0 0 26px;
   text-shadow: 0 2px 22px rgba(0,0,0,.42);
@@ -38,7 +38,7 @@
 .pl-inline-status .pl-state {
   display: flex; align-items: center; justify-content: center; gap: 10px; flex-wrap: wrap;
   padding: 9px 14px; border-radius: 14px; background: rgba(255,255,255,.95);
-  box-shadow: 0 6px 22px rgba(14,34,72,.16); color: var(--navy-dark);
+  box-shadow: 0 2px 6px rgba(15,23,42,.08); color: var(--navy-dark);
 }
 .pl-inline-status .pl-spin {
   width: 16px; height: 16px; flex: 0 0 16px; border-radius: 50%;
@@ -57,11 +57,11 @@
 .pl-input-wrap {
   display: flex; align-items: center; gap: 4px;
   background: #fff; border-radius: 999px; padding: 7px 8px 7px 6px;
-  box-shadow: 0 10px 34px rgba(14,34,72,.24), 0 2px 6px rgba(14,34,72,.10);
+  box-shadow: 0 2px 6px rgba(15,23,42,.08), 0 2px 6px rgba(14,34,72,.10);
   max-width: 720px; margin: 0 auto;
   transition: box-shadow .18s ease;
 }
-.pl-input-wrap:focus-within { box-shadow: 0 12px 40px rgba(14,34,72,.30), 0 0 0 3px rgba(42,79,143,.18); }
+.pl-input-wrap:focus-within { box-shadow: 0 2px 6px rgba(15,23,42,.08), 0 0 0 3px rgba(42,79,143,.18); }
 .pl-input {
   flex: 1; min-width: 0; padding: 14px 10px; font-size: 16.5px; font-family: inherit;
   border: none; background: transparent; color: var(--text); border-radius: 0;
@@ -83,7 +83,7 @@
 }
 .pl-fatal {
   position: fixed; left: 0; right: 0; bottom: 0; z-index: 99999; display: none;
-  background: #7a1f16; color: #fff; box-shadow: 0 -6px 30px rgba(0,0,0,.35);
+  background: #7a1f16; color: #fff; box-shadow: 0 2px 6px rgba(15,23,42,.08);
 }
 .pl-fatal-in {
   max-width: 1080px; margin: 0 auto; padding: 14px 20px;
@@ -98,9 +98,9 @@
 /* ---------- STICKY LANDING SEARCH ---------- */
 .ssearch {
   position: fixed; top: 0; left: 0; right: 0; z-index: 900;
-  background: rgba(255,255,255,.97); backdrop-filter: blur(12px);
+  background: rgba(255,255,255,.97); 
   border-bottom: 1px solid var(--border);
-  box-shadow: 0 4px 20px rgba(14,34,72,.10);
+  box-shadow: 0 2px 6px rgba(15,23,42,.08);
   transform: translateY(-100%); transition: transform .26s cubic-bezier(.16,.84,.44,1);
 }
 .ssearch.on { transform: translateY(0); }
@@ -111,7 +111,7 @@
 .ssearch-brand {
   display: inline-flex; align-items: center; gap: 8px; flex-shrink: 0;
   font-size: 14px; font-weight: 800; color: var(--navy-dark); text-decoration: none;
-  font-family: 'Plus Jakarta Sans', system-ui, sans-serif; letter-spacing: -.01em;
+  font-family: 'Libre Franklin', system-ui, sans-serif; letter-spacing: -.01em;
 }
 .ssearch-brand i { color: var(--gold); font-size: 17px; }
 .ssearch-pill {
@@ -175,7 +175,7 @@ body.plm-locked .ssearch { transform: translateY(-100%) !important; }
 .gate-cta { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; padding: 20px; }
 .gate-card {
   background: #fff; border: 1px solid var(--border); border-radius: 16px;
-  box-shadow: 0 18px 44px rgba(14,34,72,.18);
+  box-shadow: 0 2px 6px rgba(15,23,42,.08);
   padding: 28px 30px; max-width: 420px; text-align: center;
 }
 .gate-icon {
@@ -200,7 +200,7 @@ body.pl-signedin .gate-cta { display: none; }
 }
 /* ---------- SECTION HEADINGS ---------- */
 .lp-h2 {
-  font-family: 'Plus Jakarta Sans', 'Source Sans 3', system-ui, sans-serif;
+  font-family: 'Libre Franklin', 'Source Sans 3', system-ui, sans-serif;
   font-weight: 800 !important; letter-spacing: -.028em;
   font-size: clamp(28px, 3.6vw, 38px); font-weight: 700; color: var(--navy-dark);
   letter-spacing: -.02em; line-height: 1.15; margin: 0 0 18px; text-align: left;
@@ -273,7 +273,7 @@ body.pl-signedin .gate-cta { display: none; }
   background: #fff; border: 1px solid var(--border); border-radius: 16px;
   transition: transform .18s ease, box-shadow .18s ease;
 }
-.lp-tool:hover { transform: translateY(-3px); box-shadow: 0 16px 38px rgba(14,34,72,.16); }
+.lp-tool:hover { transform: translateY(-3px); box-shadow: 0 2px 6px rgba(15,23,42,.08); }
 .lp-tool.feat { grid-column: span 2; grid-row: span 2; }
 .lp-tool.feat .lp-photo { flex: 1; min-height: 100%; }
 .lp-tool.wide { grid-column: span 2; }
@@ -283,7 +283,7 @@ body.pl-signedin .gate-cta { display: none; }
 .lp-paths { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 14px; max-width: 1120px; margin: 0 auto; }
 .lp-path { display: block; text-decoration: none; border-radius: 16px; overflow: hidden;
   transition: transform .18s ease, box-shadow .18s ease; }
-.lp-path:hover { transform: translateY(-3px); box-shadow: 0 16px 38px rgba(14,34,72,.16); }
+.lp-path:hover { transform: translateY(-3px); box-shadow: 0 2px 6px rgba(15,23,42,.08); }
 .lp-tool.span3 { grid-column: span 3; }
 .lp-photo.band { min-height: 210px; align-items: center; }
 .lp-photo.band::after {
@@ -311,7 +311,7 @@ body.pl-signedin .gate-cta { display: none; }
 
 
 /* current Watchdog controls inside sticky search */
-.ssearch .wd-public-trigger{position:static;display:inline-flex;align-items:center;justify-content:center;gap:7px;flex-shrink:0;background:transparent;border:0;color:var(--navy-dark);font-family:'Plus Jakarta Sans',system-ui,sans-serif;font-size:13px;font-weight:800;cursor:pointer;padding:9px 10px;border-radius:9px}
+.ssearch .wd-public-trigger{position:static;display:inline-flex;align-items:center;justify-content:center;gap:7px;flex-shrink:0;background:transparent;border:0;color:var(--navy-dark);font-family:'Libre Franklin',system-ui,sans-serif;font-size:13px;font-weight:800;cursor:pointer;padding:9px 10px;border-radius:9px}
 .ssearch .wd-public-trigger:hover{background:#eef3fc}
 .ssearch .wd-public-trigger i{color:var(--navy-light)}
 .ssearch-menu-trigger{order:-2}.ssearch-brand{order:-1}.ssearch-profile-trigger{margin-left:auto}
@@ -342,7 +342,7 @@ body.pl-signedin .gate-cta { display: none; }
 .lp-faces img {
   width: 74px; height: 74px; border-radius: 50%; object-fit: cover;
   border: 3px solid var(--gold); background: #dbe3f0;
-  box-shadow: 0 6px 18px rgba(0,0,0,.32);
+  box-shadow: 0 2px 6px rgba(15,23,42,.08);
 }
 .lp-tool.agent .lp-body h3 { margin-bottom: 4px; }
 .lp-tool.agent .lp-body p.lp-agent-role,

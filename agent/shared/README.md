@@ -26,11 +26,11 @@ Every new Agent workspace should:
 
 Canonical order for the Agent product tabs:
 
-- Contacts — `/agent/contacts`
-- Transactions — `/transaction/`
-- Agent Desk — staged / coming soon
-- Marketing — staged / coming soon
-- Integrations — staged / coming soon
+- Contacts: `/agent/contacts`
+- Transactions: `/transaction/`
+- Agent Desk, staged / coming soon
+- Marketing, staged / coming soon
+- Integrations, staged / coming soon
 
 Page-specific workflows may have their own secondary tabs or rails below this shell.
 

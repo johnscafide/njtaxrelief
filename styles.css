@@ -27,10 +27,10 @@
 
 /* 2026 Modern Card Style */
 .dash-card {
-    background: rgba(255, 255, 255, 0.7);
-    backdrop-filter: blur(12px);
+    background: rgba(255, 255, 255, .97);
+    
     border: 1px solid rgba(255, 255, 255, 0.3);
-    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.07);
+    box-shadow: 0 2px 6px rgba(15,23,42,.08);
     border-radius: 20px; /* Softer, rounder corners */
 }
 
@@ -84,13 +84,13 @@
       border-radius: 14px;
       overflow: hidden;
       background: #fff;
-      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+      box-shadow: 0 2px 6px rgba(15,23,42,.08);
       transition: transform 0.25s ease, box-shadow 0.25s ease;
     }
  
     .video-card-tiktok:hover {
       transform: translateY(-4px);
-      box-shadow: 0 10px 28px rgba(0, 0, 0, 0.16);
+      box-shadow: 0 2px 6px rgba(15,23,42,.08);
     }
  
     .video-thumb-link {
@@ -132,7 +132,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      box-shadow: 0 4px 18px rgba(0, 0, 0, 0.35);
+      box-shadow: 0 2px 6px rgba(15,23,42,.08);
       transition: transform 0.25s ease;
     }
  
@@ -265,7 +265,7 @@
 .quiz-ribbon p {
     font-size: 14px;
     margin: 0;
-    font-family: 'Inter', sans-serif;
+    font-family: 'Libre Franklin', sans-serif;
 }
 
 .quiz-btn {
@@ -322,7 +322,7 @@
 
 #townSearch:focus {
     border-color: var(--gold);
-    box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 6px rgba(15,23,42,.08);
 }
 
 /* Updated Directory Grid */
@@ -346,7 +346,7 @@
 
 .town-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 10px 25px rgba(26, 58, 107, 0.1);
+    box-shadow: 0 2px 6px rgba(15,23,42,.08);
 }
 
 /* Reval Badge Fix */
@@ -449,7 +449,7 @@
 /* Subtle border 'glow' on hover */
 .gateway-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 10px 30px rgba(10, 24, 55, 0.15);
+    box-shadow: 0 2px 6px rgba(15,23,42,.08);
 }
 
 /* Icon Wrapper Styling */
@@ -682,7 +682,7 @@ h4 {
     left: 0;
     width: 100%;
     background: #fff;
-    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 2px 6px rgba(15,23,42,.08);
     z-index: 1000;
     padding: 40px 0;
     border-top: 3px solid var(--gold);
@@ -836,7 +836,7 @@ nav {
         width: 100%;
         background: var(--navy-dark);
         padding: 20px;
-        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        box-shadow: 0 2px 6px rgba(15,23,42,.08);
         z-index: 1000;
         max-height: calc(100vh - 70px); /* Limits height to the remaining screen space */
         overflow-y: auto;              /* Adds the scrollbar if the menu is too long */
@@ -1478,7 +1478,7 @@ nav {
     max-height: 200px;
     object-fit: contain;
     border-radius: 4px;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+    box-shadow: 0 2px 6px rgba(15,23,42,.08);
 }
 .detail-card-body,
 .mail-doc-body {
@@ -2518,7 +2518,7 @@ footer {
     width: 340px;
     background: #fff;
     border-radius: 12px;
-    box-shadow: 0 15px 35px rgba(10, 24, 55, 0.2);
+    box-shadow: 0 2px 6px rgba(15,23,42,.08);
     z-index: 9999;
     border: 1px solid var(--border);
     transition: 0.3s;

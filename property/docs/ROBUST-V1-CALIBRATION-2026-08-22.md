@@ -1,4 +1,4 @@
-# ROBUST-v1 Calibration Decision — August 22, 2026
+# ROBUST-v1 Calibration Decision: August 22, 2026
 
 **Program:** NJW-270  
 **Execution issue:** NJW-273  
@@ -11,12 +11,12 @@ Keep the current ROBUST-v1 weights unchanged:
 
 | Dimension | Weight |
 | --- | ---: |
-| R — Recourse | 10% |
-| O — Overassessment Position | 20% |
-| B — Burden | 30% |
-| U — Uniformity | 15% |
-| S — Stability | 15% |
-| T — Trajectory | 10% |
+| R: Recourse | 10% |
+| O: Overassessment Position | 20% |
+| B: Burden | 30% |
+| U: Uniformity | 15% |
+| S: Stability | 15% |
+| T: Trajectory | 10% |
 
 Do **not** create ROBUST-v2 from the current persisted cohort.
 

@@ -30,7 +30,7 @@ Current public-language review targets still include material operator drift:
 
 - Terms currently describe the agreement as being with the “operator of Watchdog Property Intelligence” rather than naming the LLC.
 - Privacy currently identifies John Scafide and Opus Elite Real Estate in its “Who we are” section.
-- Refund Policy is still explicitly labeled `Commercial policy draft — subject to counsel review`.
+- Refund Policy is still explicitly labeled `Commercial policy draft, subject to counsel review`.
 
 Do not silently replace those statements based only on this packet. Counsel must resolve the correct final SaaS operator language and the relationship, if any, to separately provided licensed real-estate or tax/professional services.
 
@@ -54,7 +54,7 @@ See `property/docs/public-paid-launch-tax-advisor-brief.md` for the narrowed adv
 
 ## Remaining blocking controls
 
-### 1. Counsel review and final operator language — PENDING
+### 1. Counsel review and final operator language: PENDING
 
 Counsel must review the production versions of:
 
@@ -76,7 +76,7 @@ Minimum evidence before this control can pass:
 
 Use `property/docs/public-paid-launch-counsel-insurance-checklist.md` as the intake packet. The packet itself is not approval evidence.
 
-### 2. E&O / technology liability / cyber insurance decision — PENDING
+### 2. E&O / technology liability / cyber insurance decision: PENDING
 
 The owner explicitly deferred this as a pre-public-launch task on 2026-08-25. The intended named insured is Watchdog Property Intelligence LLC.
 
@@ -87,7 +87,7 @@ A completion record must show either:
 
 Do not mark this control passed merely because a quote was requested.
 
-### 3. Written NJ sales-tax classification — PENDING
+### 3. Written NJ sales-tax classification: PENDING
 
 Official New Jersey guidance distinguishes ordinary SaaS from taxable information services. It specifically describes paid access to information such as property values and marketing trends as an information-service example, while TB-72 also says most SaaS is not taxable unless it meets the information-service definition.
 
@@ -109,13 +109,13 @@ Official references used for the handoff:
 - https://www.nj.gov/treasury/taxation/pdf/pubs/tb/tb72.pdf
 - https://www.nj.gov/treasury/taxation/businesses/salestax/
 
-### 4. First controlled NJ Stripe Tax calculation — PENDING / DATE-BOUND
+### 4. First controlled NJ Stripe Tax calculation: PENDING / DATE-BOUND
 
 Do not run or claim this acceptance before 2026-09-16.
 
 On or after that date, use a controlled account and verify a New Jersey Checkout calculation without opening public enrollment. Record the Stripe mode, plan/cadence, taxable address state, tax calculation outcome, session/invoice evidence reference, and cleanup/reconciliation result. Avoid copying payment credentials or sensitive registration identifiers into GitHub/Linear.
 
-### 5. Explicit public cutover decision — NO-GO
+### 5. Explicit public cutover decision: NO-GO
 
 Broad public paid enrollment remains unauthorized. An explicit owner decision is required **after** the blocking controls above are satisfied or, where the acceptance criteria permit it, a specific residual risk is expressly accepted and evidenced.
 

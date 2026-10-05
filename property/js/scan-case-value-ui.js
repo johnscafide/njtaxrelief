@@ -27,7 +27,7 @@
   }
   function money(value) {
     var n = Number(value);
-    return Number.isFinite(n) ? '$' + Math.round(n).toLocaleString() : '—';
+    return Number.isFinite(n) ? '$' + Math.round(n).toLocaleString() : '-';
   }
 
   function readAssumptions() {
@@ -139,7 +139,7 @@
       }
       var hit = hits[rowKey(tr)];
       var value = estimate(hit, assumptions);
-      cell.textContent = value == null ? '—' : money(value);
+      cell.textContent = value == null ? '-' : money(value);
       cell.title = assumptions.ready ? 'User-supplied working assumptions; not fee advice' : 'Enter optional working assumptions above';
     });
   }

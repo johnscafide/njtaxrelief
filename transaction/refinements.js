@@ -18,10 +18,10 @@ function replaceEmDashes(root){
   const walker=document.createTreeWalker(root,NodeFilter.SHOW_TEXT,{acceptNode(node){
     const p=node.parentElement;
     if(!p||/^(SCRIPT|STYLE|TEXTAREA|INPUT)$/.test(p.tagName))return NodeFilter.FILTER_REJECT;
-    return node.nodeValue&&node.nodeValue.includes('\u2014')?NodeFilter.FILTER_ACCEPT:NodeFilter.FILTER_REJECT;
+    return node.nodeValue&&node.nodeValue.includes('-')?NodeFilter.FILTER_ACCEPT:NodeFilter.FILTER_REJECT;
   }});
   const nodes=[];while(walker.nextNode())nodes.push(walker.currentNode);
-  nodes.forEach(n=>{n.nodeValue=n.nodeValue.replace(/\u2014/g,' - ')});
+  nodes.forEach(n=>{n.nodeValue=n.nodeValue.replace(/-/g,' - ')});
 }
 
 function enhanceEmptyVisual(){

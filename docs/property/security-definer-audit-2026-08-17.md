@@ -1,4 +1,4 @@
-# NJW-167 SECURITY DEFINER audit — 2026-08-17
+# NJW-167 SECURITY DEFINER audit: 2026-08-17
 
 Project: `uvkvaxljhhngydvlrzom`
 
@@ -6,21 +6,21 @@ This document classifies the Supabase Security Advisor `security_definer_view`, 
 
 ## Remediated in NJW-167
 
-- `workbench_provider_registry_summary` — **authenticated Data Workbench read**. Convert from security-definer view to `security_invoker=true`; the base `data_center_provider_coverage` table currently has RLS enabled with no policy, so add an explicit entitled-user SELECT policy and grant authenticated callers only the three base columns needed by the summary.
-- `watchdog_effective_plan(uuid)` — **service/internal helper**. Revoke browser execution. Authenticated browser code must use an owner-scoped entitlement API instead of passing an arbitrary UUID.
-- `can_use_data_workbench(uuid)` — **authenticated owner-scoped entitlement helper**. It must remain executable because RLS policies depend on it, but authenticated callers are restricted to `auth.uid()`; only service-role requests may evaluate an explicit target UUID.
-- `save_public_watchdog_score_cache(jsonb)` — **service-only global write**. Revoke `PUBLIC`, `anon`, and `authenticated`; retain `service_role` only.
-- `marketing_direct_mail_quote(...)` — **authenticated compatibility wrapper**. Convert the wrapper to `SECURITY INVOKER`; the delegated `marketing_direct_mail_product_quote(...)` remains the owner/plan-enforcing privileged API.
+- `workbench_provider_registry_summary` - **authenticated Data Workbench read**. Convert from security-definer view to `security_invoker=true`; the base `data_center_provider_coverage` table currently has RLS enabled with no policy, so add an explicit entitled-user SELECT policy and grant authenticated callers only the three base columns needed by the summary.
+- `watchdog_effective_plan(uuid)` - **service/internal helper**. Revoke browser execution. Authenticated browser code must use an owner-scoped entitlement API instead of passing an arbitrary UUID.
+- `can_use_data_workbench(uuid)` - **authenticated owner-scoped entitlement helper**. It must remain executable because RLS policies depend on it, but authenticated callers are restricted to `auth.uid()`; only service-role requests may evaluate an explicit target UUID.
+- `save_public_watchdog_score_cache(jsonb)` - **service-only global write**. Revoke `PUBLIC`, `anon`, and `authenticated`; retain `service_role` only.
+- `marketing_direct_mail_quote(...)` - **authenticated compatibility wrapper**. Convert the wrapper to `SECURITY INVOKER`; the delegated `marketing_direct_mail_product_quote(...)` remains the owner/plan-enforcing privileged API.
 
 ## Intentional public SECURITY DEFINER API
 
 These functions expose public/non-user-specific score data or sanitized product telemetry. They remain callable by `anon` and `authenticated`; their advisor warnings are accepted rather than breaking public property/town surfaces.
 
-- `get_public_property_watchdog_scores(text[])` — public property score rows only.
-- `get_public_realtime_watchdog_scores(jsonb)` — public score computation; input is bounded by the function contract.
-- `get_public_town_watchdog_scores()` — public town-level score output.
-- `get_public_watchdog_score_cache(text[])` — public cached score output.
-- `record_product_event(...)` — public product telemetry ingest; no privileged customer data is returned. Abuse/rate-limit hardening, if needed, is operational hardening rather than a reason to expose underlying tables.
+- `get_public_property_watchdog_scores(text[])` - public property score rows only.
+- `get_public_realtime_watchdog_scores(jsonb)` - public score computation; input is bounded by the function contract.
+- `get_public_town_watchdog_scores()` - public town-level score output.
+- `get_public_watchdog_score_cache(text[])` - public cached score output.
+- `record_product_event(...)` - public product telemetry ingest; no privileged customer data is returned. Abuse/rate-limit hardening, if needed, is operational hardening rather than a reason to expose underlying tables.
 
 ## Intentional authenticated owner-scoped/core APIs
 
@@ -65,9 +65,9 @@ The Security Advisor flags these because signed-in users can execute a definer f
 - `marketing_credit_quote_adjustment(uuid)`
 - `marketing_credit_summary()`
 - `marketing_delete_saved_area(uuid)`
-- `marketing_direct_mail_admin_customers(...)` — developer-gated.
-- `marketing_direct_mail_admin_orders(...)` — developer-gated.
-- `marketing_direct_mail_admin_summary(integer)` — developer-gated.
+- `marketing_direct_mail_admin_customers(...)` - developer-gated.
+- `marketing_direct_mail_admin_orders(...)` - developer-gated.
+- `marketing_direct_mail_admin_summary(integer)` - developer-gated.
 - `marketing_direct_mail_product_options(text)`
 - `marketing_direct_mail_product_quote(...)`
 - `marketing_direct_mail_recipient_page(...)`

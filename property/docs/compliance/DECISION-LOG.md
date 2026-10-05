@@ -6,7 +6,7 @@ Do not place credentials, customer data, tokens, private keys, raw production pa
 
 ---
 
-## 2026-08-18 — Establish compliance readiness before formal certification
+## 2026-08-18: Establish compliance readiness before formal certification
 
 **Decision ID:** WCR-2026-08-18-001  
 **Frameworks:** SOC 2, NIST CSF 2.0, OWASP ASVS 5.0, ISO/IEC 27001  
@@ -22,7 +22,7 @@ Do not place credentials, customer data, tokens, private keys, raw production pa
 
 ---
 
-## 2026-08-18 — Defer paid formal audits until architecture is substantially stable
+## 2026-08-18: Defer paid formal audits until architecture is substantially stable
 
 **Decision ID:** WCR-2026-08-18-002  
 **Frameworks:** SOC 2, ISO/IEC 27001, ISO/IEC 27701, ISO/IEC 42001  
@@ -36,7 +36,7 @@ Do not place credentials, customer data, tokens, private keys, raw production pa
 
 ---
 
-## 2026-08-18 — Treat every material connector as a compliance change
+## 2026-08-18: Treat every material connector as a compliance change
 
 **Decision ID:** WCR-2026-08-18-003  
 **Frameworks:** SOC 2, NIST CSF 2.0, NJDPA, ISO/IEC 27001, ISO/IEC 27701  
@@ -48,7 +48,7 @@ Do not place credentials, customer data, tokens, private keys, raw production pa
 
 ---
 
-## 2026-08-18 — Existing automated security contracts are formal evidence
+## 2026-08-18: Existing automated security contracts are formal evidence
 
 **Decision ID:** WCR-2026-08-18-004  
 **Frameworks:** SOC 2, OWASP ASVS 5.0, NIST CSF 2.0  
@@ -58,7 +58,7 @@ Do not place credentials, customer data, tokens, private keys, raw production pa
 
 ---
 
-## 2026-08-18 — Keep detailed logs useful but sanitized
+## 2026-08-18: Keep detailed logs useful but sanitized
 
 **Decision ID:** WCR-2026-08-18-005  
 **Frameworks:** SOC 2, NJDPA, NIST CSF 2.0, ISO/IEC 27001  
@@ -68,7 +68,7 @@ Do not place credentials, customer data, tokens, private keys, raw production pa
 
 ---
 
-## 2026-08-18 — Require server-side developer verification for operational compliance evidence
+## 2026-08-18: Require server-side developer verification for operational compliance evidence
 
 **Decision ID:** WCR-2026-08-18-006  
 **Frameworks:** SOC 2, NIST CSF 2.0, OWASP ASVS 5.0, ISO/IEC 27001  
@@ -80,7 +80,7 @@ Do not place credentials, customer data, tokens, private keys, raw production pa
 
 ---
 
-## 2026-08-18 — Run compliance improvement sessions twice daily
+## 2026-08-18: Run compliance improvement sessions twice daily
 
 **Decision ID:** WCR-2026-08-18-007  
 **Frameworks:** SOC 2, NIST CSF 2.0, ISO/IEC 27001  
@@ -90,7 +90,7 @@ Do not place credentials, customer data, tokens, private keys, raw production pa
 
 ---
 
-## 2026-08-19 — Exercise incident response before a real incident
+## 2026-08-19: Exercise incident response before a real incident
 
 **Decision ID:** WCR-2026-08-19-001  
 **Frameworks:** SOC 2 Security/Availability, NIST CSF 2.0 Respond/Recover, ISO/IEC 27001, OWASP ASVS 5.0  
@@ -102,7 +102,7 @@ Do not place credentials, customer data, tokens, private keys, raw production pa
 
 ---
 
-## 2026-08-19 — Establish risk register and expose ASVS identity target gaps
+## 2026-08-19: Establish risk register and expose ASVS identity target gaps
 
 **Decision ID:** WCR-2026-08-19-003  
 **Frameworks:** NIST CSF 2.0 Govern/Identify/Protect, SOC 2 Security, OWASP ASVS 5.0.0 Level 2, ISO/IEC 27001  
@@ -114,7 +114,7 @@ Do not place credentials, customer data, tokens, private keys, raw production pa
 
 ---
 
-## 2026-08-20 — Establish field-level privacy inventory and minimize demographic/profile use
+## 2026-08-20: Establish field-level privacy inventory and minimize demographic/profile use
 
 **Decision ID:** WCR-2026-08-20-002  
 **Frameworks:** NJDPA, SOC 2 Privacy/Confidentiality, NIST CSF Govern/Identify/Protect, ISO/IEC 27701  
@@ -134,7 +134,7 @@ Do not place credentials, customer data, tokens, private keys, raw production pa
 
 ---
 
-## 2026-08-21 — Preserve global logout semantics and make session residual risk explicit
+## 2026-08-21: Preserve global logout semantics and make session residual risk explicit
 
 **Decision ID:** WCR-2026-08-21-001  
 **Frameworks:** OWASP ASVS 5.0.0 Session Management, NIST CSF 2.0 Protect, SOC 2 Security, ISO/IEC 27001  
@@ -155,7 +155,7 @@ Do not place credentials, customer data, tokens, private keys, raw production pa
 
 ---
 
-## 2026-08-22 — Establish privileged-access governance and periodic review discipline
+## 2026-08-22: Establish privileged-access governance and periodic review discipline
 
 **Decision ID:** WCR-2026-08-22-001  
 **Frameworks:** SOC 2 Security, NIST CSF 2.0 Govern/Protect, OWASP ASVS 5.0 Access Control, ISO/IEC 27001  

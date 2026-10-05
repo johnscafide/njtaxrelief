@@ -1,4 +1,4 @@
-# Watchdog Incident Response Tabletop — 2026-08-19
+# Watchdog Incident Response Tabletop: 2026-08-19
 
 **Exercise ID:** WCR-IR-TTX-2026-08-19-001  
 **Status:** Completed internal tabletop  

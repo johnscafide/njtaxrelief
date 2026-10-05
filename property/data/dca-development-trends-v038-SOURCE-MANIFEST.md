@@ -30,44 +30,44 @@ No other municipality remapping is inferred.
 
 ## Certified direct 2024 fields
 
-- `latest_annual_housing_units_authorized` — TOTAL HOUSING UNITS - BUILDING PERMITS (category code 100000)
-- `latest_annual_one_two_family_units_authorized` — TOTAL 1&2 FAMILY HOUSING UNITS (category code 200000)
-- `latest_annual_multifamily_units_authorized` — TOTAL MULTI-FAMILY HOUSING UNITS (category code 300000)
-- `latest_annual_mixed_use_units_authorized` — TOTAL MIXED USE HOUSING UNITS (category code 400000)
-- `latest_annual_new_housing_units_authorized` — TOTAL NEW CONSTRUCTION HOUSING UNITS - BUILDING PERMITS (category code 600000)
-- `latest_annual_new_one_two_family_units_authorized` — TOTAL 1&2 FAMILY HOUSING UNITS (category code 700000)
-- `latest_annual_new_multifamily_units_authorized` — TOTAL MULTI-FAMILY HOUSING UNITS (category code 800000)
-- `latest_annual_new_mixed_use_units_authorized` — TOTAL MIXED USE HOUSING UNITS (category code 900000)
-- `latest_annual_residential_addition_alteration_units_authorized` — TOTAL RESIDENTIAL ADDITIONS/ALTERATIONS - BUILDING PERMITS (category code 1000000)
-- `latest_annual_construction_cost_authorized` — All Construction Costs (category code 1400000)
-- `latest_annual_residential_new_construction_cost` — Cost- Residential new construction (category code 1500000)
-- `latest_annual_residential_addition_alteration_cost` — Cost- Residential additions and alterations (category code 1600000)
-- `latest_annual_nonresidential_new_construction_cost` — Cost- Nonresidential new construction (category code 1700000)
-- `latest_annual_nonresidential_addition_alteration_cost` — Cost- Nonresidential additions and alterations (category code 1800000)
-- `latest_annual_office_new_construction_square_feet` — Office Space - New Constr. SF (category code 1900000)
-- `latest_annual_office_addition_square_feet` — Office Space - Additions SF (category code 2000000)
-- `latest_annual_retail_new_construction_square_feet` — Retail - New Constr. SF (category code 2100000)
-- `latest_annual_retail_addition_square_feet` — Retail - Additions SF (category code 2200000)
-- `latest_annual_total_nonresidential_square_feet` — Total Nonres. SF (category code 1850000)
-- `latest_annual_demolitions` — TOTAL DEMOLITIONS (category code 3600000)
-- `latest_annual_one_two_family_demolitions` — TOTAL DEMOLITIONS  - 1&2 Family Units (category code 3700000)
-- `latest_annual_multifamily_demolitions` — TOTAL DEMOLITIONS  - Multifamily Units (category code 3800000)
-- `latest_annual_mixed_use_demolitions` — TOTAL DEMOLITIONS  - Mixed Use Housing (category code 3900000)
-- `latest_annual_net_housing_unit_change` — Net Change in Housing Units - TOTAL (category code 4000000)
-- `latest_annual_net_one_two_family_unit_change` — Net Change in Housing Units - 1 & 2 Family (category code 4100000)
-- `latest_annual_net_multifamily_unit_change` — Net Change in Housing Units - Multifamily (category code 4200000)
-- `latest_annual_net_mixed_use_unit_change` — Net Change in Housing Units - Mixed-Use (category code 4300000)
+- `latest_annual_housing_units_authorized` - TOTAL HOUSING UNITS - BUILDING PERMITS (category code 100000)
+- `latest_annual_one_two_family_units_authorized` - TOTAL 1&2 FAMILY HOUSING UNITS (category code 200000)
+- `latest_annual_multifamily_units_authorized` - TOTAL MULTI-FAMILY HOUSING UNITS (category code 300000)
+- `latest_annual_mixed_use_units_authorized` - TOTAL MIXED USE HOUSING UNITS (category code 400000)
+- `latest_annual_new_housing_units_authorized` - TOTAL NEW CONSTRUCTION HOUSING UNITS - BUILDING PERMITS (category code 600000)
+- `latest_annual_new_one_two_family_units_authorized` - TOTAL 1&2 FAMILY HOUSING UNITS (category code 700000)
+- `latest_annual_new_multifamily_units_authorized` - TOTAL MULTI-FAMILY HOUSING UNITS (category code 800000)
+- `latest_annual_new_mixed_use_units_authorized` - TOTAL MIXED USE HOUSING UNITS (category code 900000)
+- `latest_annual_residential_addition_alteration_units_authorized` - TOTAL RESIDENTIAL ADDITIONS/ALTERATIONS - BUILDING PERMITS (category code 1000000)
+- `latest_annual_construction_cost_authorized` - All Construction Costs (category code 1400000)
+- `latest_annual_residential_new_construction_cost` - Cost- Residential new construction (category code 1500000)
+- `latest_annual_residential_addition_alteration_cost` - Cost- Residential additions and alterations (category code 1600000)
+- `latest_annual_nonresidential_new_construction_cost` - Cost- Nonresidential new construction (category code 1700000)
+- `latest_annual_nonresidential_addition_alteration_cost` - Cost- Nonresidential additions and alterations (category code 1800000)
+- `latest_annual_office_new_construction_square_feet` - Office Space - New Constr. SF (category code 1900000)
+- `latest_annual_office_addition_square_feet` - Office Space - Additions SF (category code 2000000)
+- `latest_annual_retail_new_construction_square_feet` - Retail - New Constr. SF (category code 2100000)
+- `latest_annual_retail_addition_square_feet` - Retail - Additions SF (category code 2200000)
+- `latest_annual_total_nonresidential_square_feet` - Total Nonres. SF (category code 1850000)
+- `latest_annual_demolitions` - TOTAL DEMOLITIONS (category code 3600000)
+- `latest_annual_one_two_family_demolitions` - TOTAL DEMOLITIONS  - 1&2 Family Units (category code 3700000)
+- `latest_annual_multifamily_demolitions` - TOTAL DEMOLITIONS  - Multifamily Units (category code 3800000)
+- `latest_annual_mixed_use_demolitions` - TOTAL DEMOLITIONS  - Mixed Use Housing (category code 3900000)
+- `latest_annual_net_housing_unit_change` - Net Change in Housing Units - TOTAL (category code 4000000)
+- `latest_annual_net_one_two_family_unit_change` - Net Change in Housing Units - 1 & 2 Family (category code 4100000)
+- `latest_annual_net_multifamily_unit_change` - Net Change in Housing Units - Multifamily (category code 4200000)
+- `latest_annual_net_mixed_use_unit_change` - Net Change in Housing Units - Mixed-Use (category code 4300000)
 
 `latest_data_year = 2024` is exposed from the workbook metadata.
 
 ## Certified 2020–2024 source series
 
-- `housing_units_authorized` — TOTAL HOUSING UNITS - BUILDING PERMITS
-- `new_housing_units_authorized` — TOTAL NEW CONSTRUCTION HOUSING UNITS - BUILDING PERMITS
-- `construction_cost_authorized` — All Construction Costs
-- `total_nonresidential_square_feet` — Total Nonres. SF
-- `demolitions` — TOTAL DEMOLITIONS
-- `net_housing_unit_change` — Net Change in Housing Units - TOTAL
+- `housing_units_authorized` - TOTAL HOUSING UNITS - BUILDING PERMITS
+- `new_housing_units_authorized` - TOTAL NEW CONSTRUCTION HOUSING UNITS - BUILDING PERMITS
+- `construction_cost_authorized` - All Construction Costs
+- `total_nonresidential_square_feet` - Total Nonres. SF
+- `demolitions` - TOTAL DEMOLITIONS
+- `net_housing_unit_change` - Net Change in Housing Units - TOTAL
 
 The six history markers may support only deterministic governed arithmetic such as explicit five-year sums and latest-year deltas. Weighted or qualitative momentum, priority, risk, or compliance scores are not certified by this source contract.
 

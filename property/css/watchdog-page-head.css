@@ -17,12 +17,12 @@
        <span class="wd-crumbs-here" aria-current="page">Farm Map</span>
      </nav>
 
-   Board language: navy pill back link, Plus Jakarta Sans, 44px touch targets,
+   Board language: navy pill back link, Libre Franklin, 44px touch targets,
    12px minimum text, visible focus ring. Inside the Agent Desk tool frame the
    desk's own Back bar replaces this row (agent-hub.js hides it there). */
 .wd-crumbs{
   display:flex;flex-wrap:wrap;align-items:center;gap:2px 8px;min-width:0;margin:0;padding:0;
-  color:#5d6877;font:700 13px/1.2 "Plus Jakarta Sans",Inter,system-ui,-apple-system,"Segoe UI",sans-serif;
+  color:#5d6877;font:700 13px/1.2 "Libre Franklin",system-ui,-apple-system,"Segoe UI",sans-serif;
   letter-spacing:0;text-transform:none;
   /* The legacy root styles.css turns every <nav> into a sticky navy bar; undo that here. */
   position:static;z-index:auto;background:transparent;box-shadow:none;

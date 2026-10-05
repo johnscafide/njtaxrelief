@@ -15,6 +15,6 @@ Add three disposable staging accounts and extend the smoke suite with these chec
 
 - Standard user can view own saved work and Standard marker detail, but cannot reach developer routes or Pro+/Data Center saved views.
 - Pro user receives professional tools without upgrade prompts.
-- Developer can access the internal route set, while View As changes presentation only—not server entitlements.
+- Developer can access the internal route set, while View As changes presentation only, not server entitlements.
 
 Do not use a real customer account or production data in this workflow.

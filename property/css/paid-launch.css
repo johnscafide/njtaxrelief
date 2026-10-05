@@ -1,5 +1,5 @@
 /* NJW-296: paid-plan launch presentation. Static copy/markup lives in property/partials/paid-launch.html. */
-#wd-paid-launch-banner{position:relative;z-index:4990;background:var(--wd-navy-950,#0e2248);color:var(--surface,#fff);font-family:var(--font-ui,"Plus Jakarta Sans",Arial,sans-serif);border-bottom:1px solid rgba(255,255,255,.12)}
+#wd-paid-launch-banner{position:relative;z-index:4990;background:var(--wd-navy-950,#0e2248);color:var(--surface,#fff);font-family:var(--font-ui,"Libre Franklin",Arial,sans-serif);border-bottom:1px solid rgba(255,255,255,.12)}
 #wd-paid-launch-banner *{box-sizing:border-box}
 #wd-paid-launch-banner .wdpl-inner{min-height:46px;max-width:var(--container-wide,1500px);margin:0 auto;padding:var(--space-2,8px) 28px;display:flex;align-items:center;justify-content:center;gap:var(--space-3,12px)}
 #wd-paid-launch-banner .wdpl-copy{display:flex;align-items:center;justify-content:center;gap:10px;min-width:0;font-size:var(--type-sm,.875rem);line-height:1.35}
@@ -9,9 +9,9 @@
 #wd-paid-launch-banner .wdpl-cta:hover,#wd-paid-launch-banner .wdpl-cta:focus-visible{filter:brightness(.9);transform:translateY(-1px);outline:none}
 #wd-paid-launch-banner .wdpl-close{position:absolute;right:10px;top:50%;transform:translateY(-50%);width:34px;height:34px;border:0;border-radius:.5rem;background:transparent;color:#aebbd0;cursor:pointer;display:grid;place-items:center}
 #wd-paid-launch-banner .wdpl-close:hover,#wd-paid-launch-banner .wdpl-close:focus-visible{background:rgba(255,255,255,.09);color:#fff;outline:none}
-#wd-paid-launch-hero{box-sizing:border-box;position:relative;z-index:4;width:min(430px,100%);margin:14px auto 0;color:#fff;font-family:var(--font-ui,"Plus Jakarta Sans",Arial,sans-serif);pointer-events:auto}
+#wd-paid-launch-hero{box-sizing:border-box;position:relative;z-index:4;width:min(430px,100%);margin:14px auto 0;color:#fff;font-family:var(--font-ui,"Libre Franklin",Arial,sans-serif);pointer-events:auto}
 #wd-paid-launch-hero *{box-sizing:border-box}
-#wd-paid-launch-hero .wdpl-hero-chip{display:flex;align-items:center;gap:10px;min-height:44px;padding:7px 8px 7px 12px;border-radius:999px;background:rgba(5,22,43,.74);border:1px solid rgba(255,255,255,.18);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);box-shadow:0 8px 24px rgba(3,14,29,.16)}
+#wd-paid-launch-hero .wdpl-hero-chip{display:flex;align-items:center;gap:10px;min-height:44px;padding:7px 8px 7px 12px;border-radius:999px;background:rgba(5,22,43,.97);border:1px solid rgba(255,255,255,.18);box-shadow:0 2px 6px rgba(15,23,42,.08)}
 #wd-paid-launch-hero .wdpl-hero-dot{width:7px;height:7px;flex:0 0 auto;border-radius:50%;background:#e7c866;box-shadow:0 0 0 3px rgba(231,200,102,.15)}
 #wd-paid-launch-hero .wdpl-hero-copy{min-width:0;flex:1;display:flex;align-items:baseline;gap:7px;white-space:nowrap;text-shadow:0 1px 8px rgba(0,0,0,.38)}
 #wd-paid-launch-hero strong{color:#fff;font-size:11.5px;font-weight:800;line-height:1.15;letter-spacing:-.015em}

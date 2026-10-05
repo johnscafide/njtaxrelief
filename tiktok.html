@@ -8,7 +8,7 @@
 <title>Free NJ Property Tax Guides | NJPropertyTaxRelief.com</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;0,9..144,700;0,9..144,900;1,9..144,500&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;0,9..144,700;0,9..144,900;1,9..144,500&family=Libre+Franklin:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <style>
   :root{
@@ -26,7 +26,7 @@
   html{scroll-behavior:smooth;}
   body{
     margin:0;
-    font-family:'Inter',sans-serif;
+    font-family:'Libre Franklin',sans-serif;
     color:var(--ink);
     background:var(--cream);
     -webkit-font-smoothing:antialiased;
@@ -124,14 +124,14 @@
     padding:18px 44px;
     border-radius:8px;
     text-decoration:none;
-    box-shadow:0 12px 30px rgba(201,161,58,0.35);
+    box-shadow:0 2px 6px rgba(15,23,42,.08);
     border:none;
     cursor:pointer;
     transition:transform 0.15s ease, box-shadow 0.15s ease;
   }
   .btn-gold:hover{
     transform:translateY(-2px);
-    box-shadow:0 16px 36px rgba(201,161,58,0.45);
+    box-shadow:0 2px 6px rgba(15,23,42,.08);
   }
   .hero-note{
     margin-top:16px;
@@ -183,7 +183,7 @@
     width:100%;
     border-radius:18px;
     padding:56px 44px;
-    box-shadow:0 30px 70px rgba(13,27,61,0.25);
+    box-shadow:0 2px 6px rgba(15,23,42,.08);
     position:relative;
     overflow:hidden;
   }
@@ -226,7 +226,7 @@
     background:rgba(255,255,255,0.06);
     color:#fff;
     font-size:16px;
-    font-family:'Inter',sans-serif;
+    font-family:'Libre Franklin',sans-serif;
   }
   .field input::placeholder{color:rgba(247,242,231,0.35);}
   .field input:focus{
@@ -369,7 +369,7 @@
   }
   .trust-copy .sig span{
     display:block;
-    font-family:'Inter',sans-serif;
+    font-family:'Libre Franklin',sans-serif;
     font-weight:500;
     font-size:13px;
     color:var(--ink-soft);
@@ -436,7 +436,7 @@
 </head>
 <body>
 
-<div class="topbar">🎥 <span>@thetaxwatchdog</span> sent you here on TikTok. Thanks for the follow — here's your gift.</div>
+<div class="topbar">🎥 <span>@thetaxwatchdog</span> sent you here on TikTok. Thanks for the follow, here's your gift.</div>
 
 <section class="hero">
   <div class="hero-bg"></div>
@@ -508,28 +508,28 @@
       <div class="guide-list">
         <div class="guide-row">
           <div>
-            <div class="meta">Guide 1 of 4 — 14 pages</div>
+            <div class="meta">Guide 1 of 4: 14 pages</div>
             <div class="name">NJ Property Tax Relief Master Guide</div>
           </div>
           <a href="https://njpropertytaxrelief.com/Guide1_NJ_Property_Tax_Relief_Master_Guide.pdf" download>Download</a>
         </div>
         <div class="guide-row">
           <div>
-            <div class="meta">Guide 2 of 4 — 7 pages</div>
+            <div class="meta">Guide 2 of 4: 7 pages</div>
             <div class="name">PAS-1 Application Walkthrough</div>
           </div>
           <a href="https://njpropertytaxrelief.com/Guide2_PAS1_Complete_Walkthrough.pdf" download>Download</a>
         </div>
         <div class="guide-row">
           <div>
-            <div class="meta">Guide 3 of 4 — 6 pages</div>
+            <div class="meta">Guide 3 of 4: 6 pages</div>
             <div class="name">Property Tax Appeal Prep Kit</div>
           </div>
           <a href="https://njpropertytaxrelief.com/Guide3_Property_Tax_Appeal_Prep_Kit.pdf" download>Download</a>
         </div>
         <div class="guide-row">
           <div>
-            <div class="meta">Guide 4 of 4 — 6 pages</div>
+            <div class="meta">Guide 4 of 4: 6 pages</div>
             <div class="name">NJ Senior Benefits Checklist</div>
           </div>
           <a href="https://njpropertytaxrelief.com/Guide4_NJ_Senior_Benefits_Checklist.pdf" download>Download</a>
@@ -589,10 +589,10 @@
         name: name,
         email: 'Not provided',
         phone: phone || 'Not provided',
-        topic: reHelp.length ? 'Free TikTok Guide Download Lead — wants help to ' + reText.toLowerCase() : 'Free TikTok Guide Download Lead',
+        topic: reHelp.length ? 'Free TikTok Guide Download Lead, wants help to ' + reText.toLowerCase() : 'Free TikTok Guide Download Lead',
         town: address || 'Not provided',
         address: address || 'Not provided',
-        message: ['Free Guide Download — TikTok Follower','Name: ' + name,'Address: ' + (address || 'Not provided'),'Phone: ' + (phone || 'Not provided'),'Real estate help wanted: ' + reText,'Source: @thetaxwatchdog TikTok'].join('\n')
+        message: ['Free Guide Download: TikTok Follower','Name: ' + name,'Address: ' + (address || 'Not provided'),'Phone: ' + (phone || 'Not provided'),'Real estate help wanted: ' + reText,'Source: @thetaxwatchdog TikTok'].join('\n')
       }).catch(function(err){ console.warn('EmailJS:', err); });
     }
 

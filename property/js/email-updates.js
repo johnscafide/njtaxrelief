@@ -22,7 +22,7 @@ const word=k=>words[k]||'';
 const esc=v=>String(v==null?'':v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const httpsUrl=v=>{const x=String(v||'').trim();return /^https:\/\/[^\s"'<>]{3,500}$/i.test(x)?x:''};
 const fmtDate=v=>{const d=new Date(v);return Number.isFinite(d.getTime())?d.toLocaleString('en-US',{month:'short',day:'numeric',hour:'numeric',minute:'2-digit'}):''};
-const pct=v=>{const n=Number(v);return Number.isFinite(n)?`${Math.round(n*10)/10}%`:'—'};
+const pct=v=>{const n=Number(v);return Number.isFinite(n)?`${Math.round(n*10)/10}%`:'-'};
 
 function toast(m){const n=qs('#pl-toast');if(!n)return;n.textContent=m;n.style.display='block';clearTimeout(window.__eu);window.__eu=setTimeout(()=>n.style.display='none',4600)}
 function fill(key,text){qsa(`[data-f="${key}"]`).forEach(n=>n.textContent=text)}
@@ -43,10 +43,10 @@ function when(){return(qs('input[name="when"]:checked')||{}).value||'now'}
 /* ---------- Step 1: Kit connection ---------- */
 function paintConnection(){
   const on=connected();
-  // content-architecture: dynamic — connection label and account name come from the live Kit connection.
+  // content-architecture: dynamic, connection label and account name come from the live Kit connection.
   const label=qs('[data-f="connLabel"]');label.textContent=on?word('connected'):word('notConnected');label.classList.toggle('on',on);
   show('#eu-connected',on);show('#eu-connect',!on);
-  fill('kitAccount',st?.provider?.account_name||'Kit');fill('senderLine',senderLine()||'—');
+  fill('kitAccount',st?.provider?.account_name||'Kit');fill('senderLine',senderLine()||'-');
   stepState('connect',on?'done':'todo',on?word('done'):word('todo'));
   const cf=qs('#eu-connect-form');if(cf&&!cf.elements.sender_name.value&&st?.brand?.name)cf.elements.sender_name.value=st.brand.name;
   if(cf&&!cf.elements.sender_email.value&&st?.brand?.email)cf.elements.sender_email.value=st.brand.email;
@@ -72,7 +72,7 @@ async function loadCatalog(){if(!connected())return;try{catalog=await gateway('k
 function paintCatalog(){
   [['#eu-tag','tags','#eu-no-tags'],['#eu-segment','segments','#eu-no-segments']].forEach(([sel,key,empty])=>{
     const box=qs(sel),keep=box.value,list=(catalog[key]||[]).slice().sort((a,b)=>String(a.name).localeCompare(String(b.name)));box.replaceChildren();
-    // content-architecture: dynamic — one option per tag or segment in the agent's Kit account.
+    // content-architecture: dynamic, one option per tag or segment in the agent's Kit account.
     list.forEach(x=>{const o=document.createElement('option');o.value=x.id;o.textContent=x.name;box.append(o)});
     if(list.some(x=>String(x.id)===keep))box.value=keep;box.disabled=!list.length;box.dataset.empty=list.length?'':'1';
   });
@@ -89,7 +89,7 @@ function paintAudience(){
 async function countAudience(){
   const a=audience(),out=qs('#eu-count'),seq=++countSeq;count={type:a.type,id:a.id,n:null,counted:false};
   if(!connected()||(a.type!=='all'&&!a.id)){out.textContent='';updateSend();return}
-  // content-architecture: dynamic — live subscriber count from Kit for the chosen audience.
+  // content-architecture: dynamic, live subscriber count from Kit for the chosen audience.
   if(a.type==='segment'){out.textContent=word('segmentCount');updateSend();return}
   out.textContent=word('counting');
   try{const r=await gateway('kit.audience',{target_type:a.type,target_id:a.id});if(seq!==countSeq)return;count.n=r.counted?Number(r.count):null;count.counted=Boolean(r.counted);
@@ -111,9 +111,9 @@ function useStarter(key){
 }
 function paintSig(){
   const b=st?.brand||{},s=sender();
-  // content-architecture: dynamic — signature assembled from the agent's saved brand profile.
+  // content-architecture: dynamic, signature assembled from the agent's saved brand profile.
   const parts=[b.name||s.name,b.company,b.phone,b.email||s.email,b.license?`License ${b.license}`:''].filter(Boolean);
-  fill('sigLine',parts.join(' · ')||'—');show('#eu-sig-missing',!b.company||!b.phone);show('#eu-cta-default',Boolean(b.agent_url));
+  fill('sigLine',parts.join(' · ')||'-');show('#eu-sig-missing',!b.company||!b.phone);show('#eu-cta-default',Boolean(b.agent_url));
 }
 function saveDraftSoon(){clearTimeout(draftTimer);draftTimer=setTimeout(()=>{try{const d=fields();if(d.subject||d.body)localStorage.setItem(DRAFT_KEY+user.id,JSON.stringify({...d,starter,at:Date.now()}));else localStorage.removeItem(DRAFT_KEY+user.id)}catch(_){}},400)}
 function restoreDraft(){let d=null;try{d=JSON.parse(localStorage.getItem(DRAFT_KEY+user.id)||'null')}catch(_){}if(!d||!(d.subject||d.body))return;const f=form();FIELDS.forEach(k=>{if(typeof d[k]==='string')f.elements[k].value=d[k]});f.elements.greeting.checked=d.greeting!==false;starter=d.starter||'';show('#eu-restored',true)}
@@ -126,7 +126,7 @@ async function loadTowns(){
   if(towns)return;towns=[];
   try{const [r1,r2]=await Promise.all([fetch('/tax-rates.json').then(r=>r.ok?r.json():null),fetch('/equalization-ratios.json').then(r=>r.ok?r.json():null)]);rates=r1?.rates||{};ratios=r2?.ratios||{}}catch(_){rates={};ratios={}}
   const list=qs('#eu-towns');list.replaceChildren();
-  // content-architecture: dynamic — one option per municipality in the state tax-rate table.
+  // content-architecture: dynamic, one option per municipality in the state tax-rate table.
   Object.keys(rates).sort().forEach(k=>{const label=prettyTown(k);townKeys.set(label.toLowerCase(),k);towns.push(label);const o=document.createElement('option');o.value=label;list.append(o)});
 }
 function snapshot(){
@@ -175,8 +175,8 @@ function emailHtml(forPreview){
 }
 function renderPreview(){
   const d=fields(),s=sender(),frame=qs('#eu-frame');if(!frame)return;
-  // content-architecture: dynamic — inbox preview mirrors the agent's own subject, preview text and sender.
-  fill('pvFrom',s.name||s.email||'—');fill('pvSubject',d.subject||'—');fill('pvPreview',d.preview_text||'');
+  // content-architecture: dynamic, inbox preview mirrors the agent's own subject, preview text and sender.
+  fill('pvFrom',s.name||s.email||'-');fill('pvSubject',d.subject||'-');fill('pvPreview',d.preview_text||'');
   frame.srcdoc=`<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><base target="_blank"><style>body{margin:0;padding:24px 20px;background:#fff}img{max-width:100%}</style></head><body>${emailHtml(true)}</body></html>`;
 }
 
@@ -196,10 +196,10 @@ function updateSend(){
   const a=audience(),w=when(),d=fields(),list=blockers();
   show('#eu-when-field',w==='later');show('#eu-consent-row',w!=='draft');
   const input=qs('#eu-send-at');input.min=localInput(minSchedule());if(w==='later'&&!input.value)input.value=localInput(new Date(minSchedule().getTime()+50*60000));
-  // content-architecture: dynamic — summary and button label reflect the live audience, sender and schedule.
+  // content-architecture: dynamic, summary and button label reflect the live audience, sender and schedule.
   const n=count.counted&&count.type===a.type&&String(count.id)===String(a.id)?count.n:null;
-  fill('sumTo',[a.label||'—',n!=null?`${n.toLocaleString()} ${n===1?'person':'people'}`:''].filter(Boolean).join(' · '));
-  fill('sumFrom',senderLine()||'—');fill('sumSubject',d.subject||'—');
+  fill('sumTo',[a.label||'-',n!=null?`${n.toLocaleString()} ${n===1?'person':'people'}`:''].filter(Boolean).join(' · '));
+  fill('sumFrom',senderLine()||'-');fill('sumSubject',d.subject||'-');
   fill('sendLabel',w==='draft'?word('saveDraft'):w==='later'?`Schedule for ${fmtDate(input.value)||'…'}`:n!=null?`Send to ${n.toLocaleString()} ${n===1?'person':'people'}`:word('sendNow'));
   btn.disabled=list.length>0;
   const why=qs('#eu-send-blocked');why.hidden=!list.length;if(list.length){const t=qs(`[data-why="${list[0]}"]`,qs('#eu-blockers').content);why.textContent=t?t.textContent:''}
@@ -228,8 +228,8 @@ function paintSent(){
   const list=st?.recent_broadcasts||[],ul=qs('#eu-sent'),tpl=qs('#eu-row');ul.replaceChildren();show('#eu-sent-empty',!list.length);
   list.forEach(b=>{
     const li=tpl.content.firstElementChild.cloneNode(true),r=k=>qs(`[data-r="${k}"]`,li),t=b.target_definition||{};
-    // content-architecture: dynamic — one row per broadcast with live status and Kit stats.
-    r('subject').textContent=b.subject||'—';const pill=r('status');pill.textContent=statusWord(b);pill.dataset.status=b.status;
+    // content-architecture: dynamic, one row per broadcast with live status and Kit stats.
+    r('subject').textContent=b.subject||'-';const pill=r('status');pill.textContent=statusWord(b);pill.dataset.status=b.status;
     const to=t.label||(t.all_subscribers?word('everyone'):t.type==='tag'?'A tag':t.type==='segment'?'A segment':'');
     const whenText=b.status==='scheduled'?`${word('scheduled')} ${fmtDate(b.send_at)}`:b.status==='sent'||b.status==='sending'?fmtDate(b.send_at||b.created_at):fmtDate(b.created_at);
     r('meta').textContent=[whenText,to].filter(Boolean).join(' · ');

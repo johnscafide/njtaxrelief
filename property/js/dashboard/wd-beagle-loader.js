@@ -1,5 +1,5 @@
 /* ==========================================================================
-   wd-beagle-loader.js — the dashboard loading scene.
+   wd-beagle-loader.js, the dashboard loading scene.
    A beagle walks in from the left after her treat while wd-core.js loads the
    workspace. When 'wd:ready' fires she runs the rest of the way, pounces,
    picks the treat up and the scene fades out over the finished dashboard.

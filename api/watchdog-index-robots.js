@@ -73,7 +73,7 @@ module.exports = function handler(req, res) {
   }
 
   const body = [
-    '# robots.txt — Watchdog',
+    '# robots.txt: Watchdog',
     '# Canonical public host: www.watchdogindex.com',
     '# Public search and answer-engine discovery stays open. Private/member/developer application routes are excluded.',
     '# Model-training permissions for public Watchdog content are not changed by this crawl-boundary update.',

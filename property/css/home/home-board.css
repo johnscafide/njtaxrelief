@@ -38,7 +38,7 @@ html body.hm-dashboard-page{
   --hb-sand:#f6efd9;
   --hb-sand-deep:#e4cf8e;
   --hb-radius:24px;
-  --hb-display:"Plus Jakarta Sans",Inter,system-ui,-apple-system,"Segoe UI",sans-serif;
+  --hb-display:"Libre Franklin",system-ui,-apple-system,"Segoe UI",sans-serif;
 }
 html body.hm-dashboard-page.hb-board,
 html body.hm-dashboard-page.hb-board #hm-main,
@@ -51,7 +51,7 @@ html body.hb-board #hm-body .hm-hero .hm-shot{border-radius:var(--hb-radius)!imp
 
 html body.hb-board #hm-body .hb-cards{display:grid!important;grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:16px!important;margin:6px 0 16px!important}
 html body.hb-board #hm-body .hb-card{position:relative!important;isolation:isolate;overflow:hidden!important;display:flex!important;flex-direction:column!important;border:0!important;border-radius:var(--hb-radius)!important;box-shadow:none!important;padding:0!important;transform:none!important;color:var(--hb-ink)}
-html body.hb-board #hm-body .hb-card:hover{box-shadow:0 10px 26px rgba(14,34,72,.10)!important}
+html body.hb-board #hm-body .hb-card:hover{box-shadow:0 2px 6px rgba(15,23,42,.08)!important}
 html body.hb-board #hm-body .hb-card--score{background:var(--hb-navy)!important;color:#fff}
 html body.hb-board #hm-body .hb-card--changes{background:var(--hb-sky)!important}
 html body.hb-board #hm-body .hb-card--status{background:var(--hb-teal)!important}

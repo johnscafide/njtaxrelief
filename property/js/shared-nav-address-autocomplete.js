@@ -38,13 +38,13 @@
     style.id='wd-shared-nav-autocomplete-style';
     style.textContent=[
       '#wd-property-nav .wdn-search{position:relative!important;overflow:visible!important}',
-      '.wdn-google-suggestions{position:absolute;left:0;right:0;top:calc(100% + 9px);z-index:7600;display:none;max-height:min(500px,62vh);overflow:auto;border:1px solid #dfe6ee;border-radius:16px;background:#fff;box-shadow:0 22px 58px rgba(11,34,66,.2);text-align:left}',
+      '.wdn-google-suggestions{position:absolute;left:0;right:0;top:calc(100% + 9px);z-index:7600;display:none;max-height:min(500px,62vh);overflow:auto;border:1px solid #dfe6ee;border-radius:16px;background:#fff;box-shadow:0 2px 6px rgba(15,23,42,.08);text-align:left}',
       '.wdn-google-suggestions.open{display:block}',
       '.wdn-google-option{appearance:none;display:grid;grid-template-columns:34px minmax(0,1fr);gap:11px;width:100%;padding:13px 14px;border:0;border-top:1px solid #edf1f4;background:#fff;color:#10294b;text-align:left;cursor:pointer}',
       '.wdn-google-option:first-child{border-top:0}',
       '.wdn-google-option:hover,.wdn-google-option.active,.wdn-google-option:focus-visible{background:#f2f7fb;outline:none}',
       '.wdn-google-option>i{display:flex;align-items:center;justify-content:center;width:32px;height:32px;border-radius:50%;background:#eef4fb;color:#2458a6}',
-      '.wdn-google-main{display:block;font:800 14px/1.25 "Plus Jakarta Sans",Arial,sans-serif;color:#10294b}',
+      '.wdn-google-main{display:block;font:800 14px/1.25 "Libre Franklin",Arial,sans-serif;color:#10294b}',
       '.wdn-google-secondary{display:block;margin-top:3px;color:#718094;font:600 12px/1.35 "Source Sans 3",Arial,sans-serif}',
       '.wdn-google-empty{padding:14px;color:#718094;font:650 12px/1.4 "Source Sans 3",Arial,sans-serif}',
       '.wdn-google-credit{height:29px;border-top:1px solid #edf1f4;background:#fff url("https://maps.gstatic.com/mapfiles/api-3/images/powered-by-google-on-white3.png") no-repeat right 10px center;background-size:118px auto}',

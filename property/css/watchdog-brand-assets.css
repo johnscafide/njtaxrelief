@@ -13,7 +13,7 @@
   background-position:center!important;
   background-repeat:no-repeat!important;
   background-size:calc(100% - 16px) auto!important;
-  box-shadow:0 8px 24px rgba(13,42,88,.16)!important;
+  box-shadow:0 2px 6px rgba(15,23,42,.08)!important;
   text-shadow:none!important;
   overflow:hidden!important;
 }
@@ -97,7 +97,7 @@ html body .wd-universal-nav-head .wd-universal-brand-copy{
   background-position:center!important;
   background-repeat:no-repeat!important;
   background-size:cover!important;
-  box-shadow:0 8px 18px rgba(47,109,246,.20)!important;
+  box-shadow:0 2px 6px rgba(15,23,42,.08)!important;
   overflow:hidden!important;
 }
 .db-side-brand>span i,.wd4-bootstrap-mark i{display:none!important}
@@ -121,7 +121,7 @@ html body .wd-universal-nav-head .wd-universal-brand-copy{
     background-color:#fff!important;
     background-image:url('/property/branding/watchdog-mark.svg')!important;
     background-size:cover!important;
-    box-shadow:0 6px 18px rgba(11,49,131,.20)!important;
+    box-shadow:0 2px 6px rgba(15,23,42,.08)!important;
   }
   .wd-nav.solid .wd-logo,body.nav-solid .wd-nav .wd-logo,body.md-page .wd-nav .wd-logo{
     background-color:#fff!important;

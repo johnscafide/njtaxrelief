@@ -107,7 +107,7 @@ async function getText(url, ms) {
   return (await fetchWithTimeout(url, ms, 'application/rss+xml, application/xml;q=0.9, */*;q=0.5')).text();
 }
 
-const NAMED = { amp: '&', lt: '<', gt: '>', quot: '"', apos: "'", nbsp: ' ', hellip: '…', mdash: '—', ndash: '–', rsquo: '’', lsquo: '‘', rdquo: '”', ldquo: '“' };
+const NAMED = { amp: '&', lt: '<', gt: '>', quot: '"', apos: "'", nbsp: ' ', hellip: '…', mdash: '-', ndash: '–', rsquo: '’', lsquo: '‘', rdquo: '”', ldquo: '“' };
 function decode(value) {
   return String(value == null ? '' : value)
     .replace(/&#(\d+);/g, (_, n) => String.fromCodePoint(Number(n)))

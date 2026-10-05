@@ -13,7 +13,7 @@
   position:relative;overflow:hidden;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:28px;align-items:center;
   padding:32px 34px;border-radius:26px;
   background:radial-gradient(circle at 88% 10%,rgba(66,143,255,.24),transparent 34%),linear-gradient(135deg,#071d49 0%,#0b2f75 58%,#0d3dbe 135%);
-  box-shadow:0 24px 65px rgba(8,38,92,.22);color:#fff
+  box-shadow:0 2px 6px rgba(15,23,42,.08);color:#fff
 }
 .wdx-promo-card:after{content:'';position:absolute;right:-72px;top:-90px;width:300px;height:300px;border:1px solid rgba(255,255,255,.09);border-radius:50%;box-shadow:0 0 0 38px rgba(255,255,255,.025),0 0 0 76px rgba(255,255,255,.018);pointer-events:none}
 .wdx-promo-copy{position:relative;z-index:1}
@@ -26,7 +26,7 @@
 .wdx-promo-actions{display:flex;gap:10px;align-items:center;position:relative;z-index:1}
 .wdx-promo-btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:48px;padding:12px 18px;border-radius:13px;text-decoration:none;font-weight:850;font-size:13px;white-space:nowrap;transition:transform .16s ease,box-shadow .16s ease,background .16s ease}
 .wdx-promo-btn:hover{transform:translateY(-1px)}
-.wdx-promo-btn.primary{background:#fff;color:#0d3dbe;box-shadow:0 10px 24px rgba(0,0,0,.14)}
+.wdx-promo-btn.primary{background:#fff;color:#0d3dbe;box-shadow:0 2px 6px rgba(15,23,42,.08)}
 .wdx-promo-btn.secondary{border:1px solid rgba(255,255,255,.26);color:#fff;background:rgba(255,255,255,.07)}
 
 /* ANCHOR estimator: first-class Watchdog bridge inside the elevated estimator stack */
@@ -37,7 +37,7 @@
 .wdx-anchor-brand-inner{
   overflow:hidden;position:relative;padding:17px 18px 13px;border:0;border-radius:18px;
   background:linear-gradient(145deg,#fff 0%,#f8fbff 62%,#eef4ff 100%);
-  box-shadow:0 16px 42px rgba(14,34,72,.16),0 0 0 1px rgba(13,61,190,.09)
+  box-shadow:0 2px 6px rgba(15,23,42,.08),0 0 0 1px rgba(13,61,190,.09)
 }
 .wdx-anchor-brand-inner:before{content:'';position:absolute;inset:0 0 auto 0;height:4px;background:linear-gradient(90deg,#0d3dbe,#176eff,#57a1ff)}
 .wdx-anchor-brand-inner:after{content:'';position:absolute;right:-52px;top:-78px;width:190px;height:190px;border-radius:50%;background:radial-gradient(circle,rgba(23,110,255,.12),rgba(23,110,255,0) 68%);pointer-events:none}
@@ -55,13 +55,13 @@
 /* Acquisition modal */
 .wdx-modal-backdrop{
   position:fixed;inset:0;z-index:99998;display:grid;place-items:center;padding:22px;
-  background:rgba(3,13,34,.72);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+  background:rgba(3,13,34,.72);
   opacity:0;pointer-events:none;transition:opacity .22s ease
 }
 .wdx-modal-backdrop.open{opacity:1;pointer-events:auto}
 .wdx-modal{
   width:min(920px,100%);position:relative;border-radius:30px;overflow:hidden;background:#fff;
-  box-shadow:0 38px 110px rgba(0,0,0,.38);transform:translateY(18px) scale(.985);transition:transform .22s ease;
+  box-shadow:0 2px 6px rgba(15,23,42,.08);transform:translateY(18px) scale(.985);transition:transform .22s ease;
   font-family:"Source Sans 3",system-ui,sans-serif
 }
 .wdx-modal-backdrop.open .wdx-modal{transform:none}
@@ -76,13 +76,13 @@
 .wdx-modal-lede{margin:0;color:#596983;line-height:1.62;font-size:15.5px;max-width:440px}
 .wdx-modal-actions{display:flex;gap:10px;margin-top:27px}
 .wdx-modal-actions a,.wdx-modal-actions button{min-height:49px;border-radius:13px;padding:12px 17px;font:inherit;font-weight:850;font-size:13px;cursor:pointer;transition:transform .16s ease,box-shadow .16s ease,background .16s ease}
-.wdx-modal-actions a{display:flex;gap:9px;align-items:center;justify-content:center;flex:1;text-decoration:none;text-align:center;background:linear-gradient(135deg,#0d3dbe,#176eff);color:#fff;box-shadow:0 12px 26px rgba(13,61,190,.24)}
+.wdx-modal-actions a{display:flex;gap:9px;align-items:center;justify-content:center;flex:1;text-decoration:none;text-align:center;background:linear-gradient(135deg,#0d3dbe,#176eff);color:#fff;box-shadow:0 2px 6px rgba(15,23,42,.08)}
 .wdx-modal-actions button{border:1px solid #dce4ef;background:#fff;color:#52617a}
 .wdx-modal-actions a:hover,.wdx-modal-actions button:hover{transform:translateY(-1px)}
 .wdx-modal-footnote{margin-top:13px;color:#8a95a8;font-size:10.5px;line-height:1.4}
 .wdx-modal-close{
   position:absolute;z-index:5;right:16px;top:16px;width:38px;height:38px;border:1px solid rgba(255,255,255,.25);border-radius:50%;
-  display:grid;place-items:center;background:rgba(5,24,62,.48);backdrop-filter:blur(8px);color:#fff;font-size:21px;line-height:1;cursor:pointer;
+  display:grid;place-items:center;background:rgba(5,24,62,.97);color:#fff;font-size:21px;line-height:1;cursor:pointer;
   transition:background .16s ease,transform .16s ease
 }
 .wdx-modal-close:hover{background:rgba(5,24,62,.72);transform:rotate(4deg)}
@@ -103,12 +103,12 @@
 .wdx-visual-label{font-size:9px;font-weight:900;letter-spacing:.16em;color:#a9c6ff}
 .wdx-visual-live{display:flex;align-items:center;gap:6px;font-size:8px;font-weight:900;letter-spacing:.11em;color:#dce8ff}
 .wdx-visual-live i{display:block;width:7px;height:7px;border-radius:50%;background:#69a8ff;box-shadow:0 0 0 5px rgba(105,168,255,.12)}
-.wdx-visual-property{display:flex;align-items:center;gap:12px;padding:14px;border:1px solid rgba(255,255,255,.13);border-radius:15px;background:rgba(255,255,255,.08);box-shadow:0 12px 30px rgba(0,0,0,.12)}
+.wdx-visual-property{display:flex;align-items:center;gap:12px;padding:14px;border:1px solid rgba(255,255,255,.13);border-radius:15px;background:rgba(255,255,255,.08);box-shadow:0 2px 6px rgba(15,23,42,.08)}
 .wdx-visual-home{width:40px;height:40px;flex:0 0 40px;border-radius:12px;display:grid;place-items:center;background:linear-gradient(145deg,#2f77ff,#65a7ff)}
 .wdx-visual-home svg{width:21px;height:21px;fill:#fff}
 .wdx-visual-property small,.wdx-visual-score small,.wdx-signal-row small{display:block;color:#9fb9ea;font-size:8px;font-weight:850;letter-spacing:.11em}
 .wdx-visual-property strong{display:block;margin-top:2px;font-size:13px;color:#fff}
-.wdx-visual-score{display:grid;grid-template-columns:86px 1fr;gap:16px;align-items:center;margin:16px 0;padding:16px;border-radius:17px;background:#fff;color:#0a214b;box-shadow:0 20px 38px rgba(0,0,0,.18)}
+.wdx-visual-score{display:grid;grid-template-columns:86px 1fr;gap:16px;align-items:center;margin:16px 0;padding:16px;border-radius:17px;background:#fff;color:#0a214b;box-shadow:0 2px 6px rgba(15,23,42,.08)}
 .wdx-score-ring{width:82px;height:82px;border-radius:50%;display:grid;place-content:center;text-align:center;background:radial-gradient(circle at center,#fff 57%,transparent 59%),conic-gradient(#176eff 0 73%,#dfe8f8 73% 100%);box-shadow:inset 0 0 0 1px #e6edf8}
 .wdx-score-ring span{font-family:"Mozilla Text",Arial,sans-serif;color:#0d3dbe;font-size:25px;line-height:1;font-weight:800}
 .wdx-score-ring small{margin-top:3px;color:#7b8ba7;font-size:7px}
@@ -126,11 +126,10 @@
 /* Secure cross-domain handoff overlay */
 .wdx-handoff-overlay{
   position:fixed;inset:0;z-index:100000;display:grid;place-items:center;padding:20px;
-  background:rgba(3,15,39,.84);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)
-}
+  background:rgba(3,15,39,.84);}
 .wdx-handoff-card{
   position:relative;overflow:hidden;width:min(560px,100%);padding:34px 34px 30px;border-radius:26px;background:#fff;
-  box-shadow:0 34px 90px rgba(0,0,0,.38);text-align:center;font-family:"Source Sans 3",system-ui,sans-serif
+  box-shadow:0 2px 6px rgba(15,23,42,.08);text-align:center;font-family:"Source Sans 3",system-ui,sans-serif
 }
 .wdx-handoff-card:before{content:'';position:absolute;left:0;top:0;width:100%;height:5px;background:linear-gradient(90deg,#0d3dbe,#176eff,#64a8ff)}
 .wdx-handoff-brand{display:flex;align-items:center;justify-content:center;margin:0 auto 16px}

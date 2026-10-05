@@ -1,4 +1,4 @@
-// content-architecture: dynamic — authenticated professional invite panel on the Professional Profile page.
+// content-architecture: dynamic, authenticated professional invite panel on the Professional Profile page.
 /* Invite your peers from the Professional Profile.
    Real estate agents see "Invite fellow co-op agents"; every other declared
    professional sees "Invite your professional sphere". Watchdog never sends

@@ -16,7 +16,7 @@
   function render() {
     var host = $('ad-capacity');
     if (!host || !usage) return;
-    // content-architecture: dynamic — Plan name, every meter total and each warning state come from the authenticated get_agent_usage RPC, not a static plan catalog.
+    // content-architecture: dynamic: Plan name, every meter total and each warning state come from the authenticated get_agent_usage RPC, not a static plan catalog.
     var html = '<header class="ad27-card-head"><h2>' + plan(usage.plan) + ' plan capacity</h2><a href="/pro#plans">Compare plans</a></header>' + meter('Properties', 'properties') + meter('Live lists', 'lists') + meter('Territories', 'territories');
     if (host.__agentCapacityHtml !== html) {
       host.__agentCapacityHtml = html;
@@ -38,7 +38,7 @@
         var host = $('ad-capacity');
         if (host) {
           host.__agentCapacityHtml = null;
-          // content-architecture: dynamic — The failed usage request determines the sanitized recovery message; no plan capacity is invented when the RPC fails.
+          // content-architecture: dynamic: The failed usage request determines the sanitized recovery message; no plan capacity is invented when the RPC fails.
           host.innerHTML = '<div class="ad-control-error" data-retry-ready="1"><b>Capacity unavailable</b><span>' + safe(e, 'get_agent_usage') + '</span><button type="button" data-agent-retry>Retry</button></div>';
         }
         return null;

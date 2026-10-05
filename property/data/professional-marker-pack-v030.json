@@ -568,7 +568,7 @@
     {
       "id": "watchdog.agent.offer_question_density",
       "label": "Offer Question Density",
-      "description": "Counts pre-offer diligence questions\u2014not defects or deal outcomes.",
+      "description": "Counts pre-offer diligence questions, not defects or deal outcomes.",
       "category": "broker intelligence",
       "scope": "property",
       "tier": "pro",
@@ -579,7 +579,7 @@
       "source_id": "watchdog-professional-v030",
       "field": "offer_question_density",
       "formula": "count(permit, flood, environmental, title questions)",
-      "professional_reason": "Counts pre-offer diligence questions\u2014not defects or deal outcomes.",
+      "professional_reason": "Counts pre-offer diligence questions, not defects or deal outcomes.",
       "unit": "score / 100"
     },
     {

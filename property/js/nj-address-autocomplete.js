@@ -201,7 +201,7 @@
     style.id='wd-nj-address-autocomplete-style';
     style.textContent=[
       '.pl-input-wrap,.ssearch-pill{position:relative}',
-      '.wd-nj-predictions{background:#fff;border:1px solid #e4eaee;border-radius:20px;box-shadow:0 24px 65px rgba(8,31,55,.24);display:none;left:0;max-height:min(590px,68vh);overflow:auto;position:absolute;right:0;top:calc(100% + 10px);z-index:7300;text-align:left;font-family:"Plus Jakarta Sans",system-ui,sans-serif}',
+      '.wd-nj-predictions{background:#fff;border:1px solid #e4eaee;border-radius:20px;box-shadow:0 2px 6px rgba(15,23,42,.08);display:none;left:0;max-height:min(590px,68vh);overflow:auto;position:absolute;right:0;top:calc(100% + 10px);z-index:7300;text-align:left;font-family:"Libre Franklin",system-ui,sans-serif}',
       '.wd-nj-predictions.open{display:block}',
       '.wd-nj-county{align-items:center;background:#f7faf9;border-top:1px solid #e8eeee;color:#078486;display:flex;font-size:11px;font-weight:900;justify-content:space-between;letter-spacing:.09em;padding:12px 15px 8px;text-transform:uppercase}',
       '.wd-nj-county:first-child{border-top:0}',

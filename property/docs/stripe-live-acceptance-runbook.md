@@ -26,14 +26,14 @@ Current public catalog:
 
 Current server components:
 
-- `create-checkout-session` — Stripe Checkout, lookup-key price resolution, release-gate enforcement.
-- `stripe-webhook` — signed Stripe event boundary and idempotency ledger.
-- `create-portal-session` — Stripe Customer Portal plus legacy Paddle management only.
-- `billing-price-catalog` — public display catalog.
-- `get-platform-health` — sanitized Stripe readiness/catalog/gate status.
-- `account_entitlements` — server-owned authorization truth.
-- `billing_webhook_events` — Stripe webhook idempotency evidence.
-- `platform_release_gates.live_billing_lifecycle` — final public paid-enrollment gate.
+- `create-checkout-session` - Stripe Checkout, lookup-key price resolution, release-gate enforcement.
+- `stripe-webhook` - signed Stripe event boundary and idempotency ledger.
+- `create-portal-session` - Stripe Customer Portal plus legacy Paddle management only.
+- `billing-price-catalog` - public display catalog.
+- `get-platform-health` - sanitized Stripe readiness/catalog/gate status.
+- `account_entitlements` - server-owned authorization truth.
+- `billing_webhook_events` - Stripe webhook idempotency evidence.
+- `platform_release_gates.live_billing_lifecycle` - final public paid-enrollment gate.
 
 ## Preconditions
 

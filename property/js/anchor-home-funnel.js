@@ -23,8 +23,8 @@
   function qa(sel,root){return Array.prototype.slice.call((root||document).querySelectorAll(sel));}
   function esc(value){return String(value==null?'':value).replace(/[&<>"']/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]||c;});}
   function money(value){var n=Number(value);return Number.isFinite(n)?'$'+Math.round(n).toLocaleString():'$0';}
-  function moneyOrDash(value){var n=Number(value);return Number.isFinite(n)&&n>0?'$'+Math.round(n).toLocaleString():'—';}
-  function pct(value){var n=Number(value);return Number.isFinite(n)?n.toFixed(2)+'%':'—';}
+  function moneyOrDash(value){var n=Number(value);return Number.isFinite(n)&&n>0?'$'+Math.round(n).toLocaleString():'-';}
+  function pct(value){var n=Number(value);return Number.isFinite(n)?n.toFixed(2)+'%':'-';}
   function clean(value,max){return String(value==null?'':value).trim().slice(0,max||500);}
   function track(name,params){try{if(typeof window.gtag==='function')window.gtag('event',name,params||{});}catch(_){} }
 
@@ -208,7 +208,7 @@
     if(!subject){host.innerHTML='<div class="wd-anchor-property-empty"><span>WATCHDOG PROPERTY INFO</span><strong>Property match unavailable</strong><p>We will not guess when a New Jersey parcel cannot be matched confidently.</p><a href="/?address='+encodeURIComponent(result.address||'')+'">Open property search →</a></div>';return;}
     var scoreValue=score&&Number(score.watchdog_score),hasScore=Number.isFinite(scoreValue);
     host.innerHTML='<div class="wd-anchor-property-head"><span>WATCHDOG PROPERTY INFO</span><b>'+esc(subject.propertyLocation||result.address)+'</b><small>'+esc(subject.municipality||'New Jersey')+(subject.county?' · '+esc(subject.county)+' County':'')+'</small></div>'+
-      '<div class="wd-anchor-property-score"><div><strong>'+(hasScore?Math.round(scoreValue):'—')+'</strong><span>Watchdog Score</span></div><p>'+(hasScore?'Canonical score shown when ROBUST evidence supports it.':'Canonical score not yet available for this property.')+'</p></div>'+
+      '<div class="wd-anchor-property-score"><div><strong>'+(hasScore?Math.round(scoreValue):'-')+'</strong><span>Watchdog Score</span></div><p>'+(hasScore?'Canonical score shown when ROBUST evidence supports it.':'Canonical score not yet available for this property.')+'</p></div>'+
       '<div class="wd-anchor-property-stats"><div><b>'+moneyOrDash(subject.assessedValue)+'</b><span>Assessment</span></div><div><b>'+moneyOrDash(subject.lastYearTax)+'</b><span>Prior-year tax</span></div><div><b>'+pct(subject.effectiveTaxRatePct)+'</b><span>Effective rate</span></div></div>'+
       '<a class="wd-anchor-property-open" href="/?address='+encodeURIComponent(result.address||'')+'">Open full property record →</a>';
     track('anchor_watchdog_home_property_loaded',{parcel_matched:true,score_available:hasScore});

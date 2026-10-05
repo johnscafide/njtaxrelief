@@ -73,7 +73,7 @@
     var score=scoreRow&&Number(scoreRow.watchdog_score);var hasScore=Number.isFinite(score);
     el.innerHTML=''
       +'<div class="wd-ar-property-head"><div><h2>Watchdog property info</h2><div class="wd-ar-address">'+esc(subject.propertyLocation||result.address)+' · '+esc(subject.municipality||'New Jersey')+(subject.county?' · '+esc(subject.county)+' County':'')+'</div></div><div class="wd-ar-public">NJ public record</div></div>'
-      +'<div class="wd-ar-score"><div class="wd-ar-score-ring"><span>'+(hasScore?Math.round(score):'—')+'<small>'+(hasScore?'/ 100':'PENDING')+'</small></span></div><div class="wd-ar-score-copy"><b>'+(hasScore?'Watchdog Score':'Score not available yet')+'</b><span>'+(hasScore?'Watchdog shows where the property stands. ROBUST explains what drives the score.':'Watchdog will not show a score when there is not enough evidence.')+'</span></div></div>'
+      +'<div class="wd-ar-score"><div class="wd-ar-score-ring"><span>'+(hasScore?Math.round(score):'-')+'<small>'+(hasScore?'/ 100':'PENDING')+'</small></span></div><div class="wd-ar-score-copy"><b>'+(hasScore?'Watchdog Score':'Score not available yet')+'</b><span>'+(hasScore?'Watchdog shows where the property stands. ROBUST explains what drives the score.':'Watchdog will not show a score when there is not enough evidence.')+'</span></div></div>'
       +'<div class="wd-ar-stats">'
       +stat(money(subject.assessedValue),'Assessed value')
       +stat(money(subject.lastYearTax),'Prior-year tax')

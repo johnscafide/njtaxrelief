@@ -48,7 +48,7 @@ html.wd-index-lean-runtime #wd-consumer-recents .wd-property-label{
   background:#fff!important;
   color:#3f4a5c!important;
   box-shadow:none!important;
-  font:600 12px/1.2 "Plus Jakarta Sans",sans-serif!important;
+  font:600 12px/1.2 "Libre Franklin",sans-serif!important;
 }
 html.wd-index-lean-runtime #wd-consumer-recents .wd-property-label i{margin-right:4px!important;font-size:11px!important}
 html.wd-index-lean-runtime #wd-consumer-recents .wd-recent-score{
@@ -69,12 +69,12 @@ html.wd-index-lean-runtime #wd-consumer-recents .wd-recent-score{
   background:#0e2248!important;
   color:#fff!important;
   box-shadow:none!important;
-  backdrop-filter:none!important;
+  
 }
 html.wd-index-lean-runtime #wd-consumer-recents .wd-recent-score b{
   display:block!important;
   color:#fff!important;
-  font:700 24px/1 "Plus Jakarta Sans",sans-serif!important;
+  font:700 24px/1 "Libre Franklin",sans-serif!important;
   letter-spacing:0!important;
   text-shadow:none!important;
 }
@@ -82,7 +82,7 @@ html.wd-index-lean-runtime #wd-consumer-recents .wd-recent-score small{
   display:block!important;
   margin:0!important;
   color:#c9d2df!important;
-  font:500 11px/1.25 "Plus Jakarta Sans",sans-serif!important;
+  font:500 11px/1.25 "Libre Franklin",sans-serif!important;
   letter-spacing:0!important;
   text-transform:none!important;
 }
@@ -98,13 +98,13 @@ html.wd-index-lean-runtime #wd-consumer-recents .wd-property-copy{padding:18px 2
 html.wd-index-lean-runtime #wd-consumer-recents .wd-property-copy h3{
   margin:0!important;
   color:#0e2248!important;
-  font:700 19px/1.2 "Plus Jakarta Sans",sans-serif!important;
+  font:700 19px/1.2 "Libre Franklin",sans-serif!important;
   letter-spacing:0!important;
 }
 html.wd-index-lean-runtime #wd-consumer-recents .wd-property-copy>p{
   margin:3px 0 16px!important;
   color:#5a6577!important;
-  font:400 14px/1.4 "Plus Jakarta Sans",sans-serif!important;
+  font:400 14px/1.4 "Libre Franklin",sans-serif!important;
 }
 html.wd-index-lean-runtime #wd-consumer-recents .wd-property-facts{display:none!important}
 html.wd-index-lean-runtime #wd-consumer-recents .wd-property-stats{
@@ -118,13 +118,13 @@ html.wd-index-lean-runtime #wd-consumer-recents .wd-property-stats span{
   display:block!important;
   margin:0 0 3px!important;
   color:#6b7686!important;
-  font:400 12px/1.3 "Plus Jakarta Sans",sans-serif!important;
+  font:400 12px/1.3 "Libre Franklin",sans-serif!important;
 }
 html.wd-index-lean-runtime #wd-consumer-recents .wd-property-stats strong{
   display:block!important;
   overflow:hidden!important;
   color:#142033!important;
-  font:600 17px/1.25 "Plus Jakarta Sans",sans-serif!important;
+  font:600 17px/1.25 "Libre Franklin",sans-serif!important;
   text-overflow:ellipsis!important;
   white-space:nowrap!important;
 }
@@ -142,7 +142,7 @@ html.wd-index-lean-runtime #wd-consumer-recents .wd-property-open{
   display:block!important;
   margin:0!important;
   color:#1456a0!important;
-  font:600 14px/1.3 "Plus Jakarta Sans",sans-serif!important;
+  font:600 14px/1.3 "Libre Franklin",sans-serif!important;
 }
 html.wd-index-lean-runtime #wd-consumer-recents .wd-property-footer>i{flex:0 0 auto!important;color:#1456a0!important;font-size:14px!important}
 
@@ -175,9 +175,9 @@ html.wd-index-lean-runtime #plm-photos .wd-mapless-property-hero:after{
 }
 html.wd-index-lean-runtime #plm-photos .wd-mapless-scorebox{
   border-color:rgba(206,226,255,.25)!important;
-  background:linear-gradient(180deg,rgba(11,46,95,.78),rgba(6,30,68,.74))!important;
-  box-shadow:0 22px 54px rgba(1,10,28,.30),inset 0 1px 0 rgba(255,255,255,.06)!important;
-  backdrop-filter:blur(12px) saturate(112%)!important;
+  background:linear-gradient(180deg,rgba(11,46,95,.97),rgba(6,30,68,.97))!important;
+  box-shadow:0 2px 6px rgba(15,23,42,.08),inset 0 1px 0 rgba(255,255,255,.06)!important;
+  
 }
 html.wd-index-lean-runtime #plm-photos .wd-mapless-photo-note{
   width:max-content!important;
@@ -185,8 +185,8 @@ html.wd-index-lean-runtime #plm-photos .wd-mapless-photo-note{
   padding:9px 12px!important;
   border:1px solid rgba(255,255,255,.12)!important;
   border-radius:12px!important;
-  background:rgba(2,17,41,.24)!important;
-  backdrop-filter:blur(6px)!important;
+  background:rgba(2,17,41,.97)!important;
+  
 }
 html.wd-index-lean-runtime #plm-photos .wd-mapless-copy{display:none!important}
 html.wd-index-lean-runtime #plm-photos .wd-mapless-photo-note{margin-top:8px!important}

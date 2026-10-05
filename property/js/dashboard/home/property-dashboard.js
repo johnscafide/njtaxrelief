@@ -50,13 +50,13 @@
 
   function money(value) {
     var n = number(value);
-    if (n == null) return '—';
+    if (n == null) return '-';
     return n.toLocaleString('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 });
   }
 
   function compactMoney(value) {
     var n = number(value);
-    if (n == null) return '—';
+    if (n == null) return '-';
     if (Math.abs(n) >= 1000000) return '$' + (n / 1000000).toFixed(Math.abs(n) >= 10000000 ? 1 : 2).replace(/\.0+$/, '') + 'M';
     if (Math.abs(n) >= 1000) return '$' + (n / 1000).toFixed(Math.abs(n) >= 100000 ? 0 : 1).replace(/\.0$/, '') + 'K';
     return money(n);
@@ -64,7 +64,7 @@
 
   function percent(value) {
     var n = number(value);
-    if (n == null) return '—';
+    if (n == null) return '-';
     if (Math.abs(n) > 0 && Math.abs(n) < 1) n *= 100;
     return n.toLocaleString('en-US', { maximumFractionDigits: 2 }) + '%';
   }
@@ -352,7 +352,7 @@
   }
 
   function formatMarkerValue(marker, value) {
-    if (!hasValue(value)) return '—';
+    if (!hasValue(value)) return '-';
     if (typeof value === 'boolean') return value ? 'Yes' : 'No';
     if (Array.isArray(value)) return value.length ? value.slice(0, 3).map(function (x) { return String(x); }).join(', ') + (value.length > 3 ? ' +' + (value.length - 3) : '') : 'None';
     if (typeof value === 'object') {
@@ -362,7 +362,7 @@
         return String(formatMarkerValue(marker, inner)) + (value.unit ? ' ' + String(value.unit) : '');
       }
       var keys = Object.keys(value).slice(0, 4);
-      if (!keys.length) return '—';
+      if (!keys.length) return '-';
       return keys.map(function (k) { return pretty(k) + ': ' + String(value[k]); }).join(' · ');
     }
     var n = number(value);
@@ -379,7 +379,7 @@
   }
 
   function safeFact(label, value, icon, sub) {
-    return '<div class="wdpd-fact"><i class="fas ' + esc(icon || 'fa-circle-info') + '"></i><span><small>' + esc(label) + '</small><b>' + esc(value || '—') + '</b>' + (sub ? '<em>' + esc(sub) + '</em>' : '') + '</span></div>';
+    return '<div class="wdpd-fact"><i class="fas ' + esc(icon || 'fa-circle-info') + '"></i><span><small>' + esc(label) + '</small><b>' + esc(value || '-') + '</b>' + (sub ? '<em>' + esc(sub) + '</em>' : '') + '</span></div>';
   }
 
   function factLock(title, plan, detail) {
@@ -409,7 +409,7 @@
       { k: 'Annual tax', v: money(tax), s: 'Latest saved tax figure', i: 'fa-receipt' },
       { k: 'Watchdog value', v: money(value), s: 'Current Watchdog estimate', i: 'fa-house-circle-check' },
       { k: 'Effective rate', v: percent(effective), s: 'Tax ÷ assessment', i: 'fa-percent' },
-      { k: 'Last sale', v: lastSale != null ? compactMoney(lastSale) : (paidPlan() ? '—' : 'Pro'), s: lastSaleYear ? String(lastSaleYear) : (paidPlan() ? 'No checked sale returned' : 'Open sale intelligence'), i: 'fa-key', locked: !paidPlan() },
+      { k: 'Last sale', v: lastSale != null ? compactMoney(lastSale) : (paidPlan() ? '-' : 'Pro'), s: lastSaleYear ? String(lastSaleYear) : (paidPlan() ? 'No checked sale returned' : 'Open sale intelligence'), i: 'fa-key', locked: !paidPlan() },
       { k: 'Data access', v: access.allowed.toLocaleString('en-US'), s: access.live.toLocaleString('en-US') + ' live/partial markers in plan', i: 'fa-database' }
     ];
   }
@@ -494,10 +494,10 @@
   function identityFacts() {
     var r = currentSaved || {};
     var parts = [];
-    parts.push(safeFact('Municipality', r.town || '—', 'fa-city'));
-    parts.push(safeFact('County', r.county || '—', 'fa-map-location-dot'));
-    parts.push(safeFact('Block / lot', [r.block, r.lot].filter(Boolean).join(' / ') || '—', 'fa-vector-square'));
-    parts.push(safeFact('ZIP', r.zip || '—', 'fa-location-dot'));
+    parts.push(safeFact('Municipality', r.town || '-', 'fa-city'));
+    parts.push(safeFact('County', r.county || '-', 'fa-map-location-dot'));
+    parts.push(safeFact('Block / lot', [r.block, r.lot].filter(Boolean).join(' / ') || '-', 'fa-vector-square'));
+    parts.push(safeFact('ZIP', r.zip || '-', 'fa-location-dot'));
     if (paidPlan() && currentRecord) {
       if (currentRecord.prop_class) parts.push(safeFact('Property class', currentRecord.prop_class, 'fa-house-chimney'));
       if (currentRecord.year_built) parts.push(safeFact('Year built', String(currentRecord.year_built), 'fa-calendar'));
@@ -526,9 +526,9 @@
       var x = currentRecord || {};
       html += '<article class="wdpd-paid-module"><header><span><small>Pro+ intelligence</small><b>Deed & closing details</b></span><i class="fas fa-file-signature"></i></header><div class="wdpd-mini-grid">' +
         safeFact('Mailing address', x.mailing_address || 'No mailing address returned', 'fa-envelope') +
-        safeFact('Mailing city/state', x.mailing_city_state || '—', 'fa-location-dot') +
-        safeFact('Deed book / page', [x.deed_book, x.deed_page].filter(Boolean).join(' / ') || '—', 'fa-book') +
-        safeFact('Parcel updated', x.parcel_last_update ? String(x.parcel_last_update) : '—', 'fa-rotate') +
+        safeFact('Mailing city/state', x.mailing_city_state || '-', 'fa-location-dot') +
+        safeFact('Deed book / page', [x.deed_book, x.deed_page].filter(Boolean).join(' / ') || '-', 'fa-book') +
+        safeFact('Parcel updated', x.parcel_last_update ? String(x.parcel_last_update) : '-', 'fa-rotate') +
         '</div></article>';
     } else {
       html += factLock('Deed & closing details', 'Pro+', 'Deep closing, mailing and deed fields are never sent to lower-tier clients by this dashboard.');
@@ -650,7 +650,7 @@
     var access = planAccessSummary();
     var address = r.address || 'Saved property';
     var loc = [r.town, r.county, r.zip].filter(Boolean).join(' · ');
-    return '<section class="wdpd-hero"><div class="wdpd-hero-glow"></div><div class="wdpd-hero-copy"><h2>' + esc(address) + '</h2><p>' + esc(loc || 'New Jersey property record') + '</p><div class="wdpd-hero-meta"><span><i class="fas fa-location-crosshairs"></i> PIN ' + esc(r.pams_pin || currentPin || '—') + '</span>' + (r.kind ? '<span><i class="fas fa-bookmark"></i> ' + esc(pretty(r.kind)) + '</span>' : '') + '</div></div><div class="wdpd-hero-side"><span class="wdpd-plan-badge ' + esc(activePlan()) + '"><i class="fas fa-crown"></i>' + esc(planLabel(activePlan())) + '</span><div class="wdpd-coverage"><small>Marker access</small><b>' + esc(access.allowed.toLocaleString('en-US')) + '<em>/ ' + esc(access.total.toLocaleString('en-US')) + '</em></b><span>' + esc(access.live.toLocaleString('en-US')) + ' live/partial in plan</span></div><button type="button" data-wdpd-refresh><i class="fas fa-rotate"></i> Refresh intelligence</button></div></section>';
+    return '<section class="wdpd-hero"><div class="wdpd-hero-glow"></div><div class="wdpd-hero-copy"><h2>' + esc(address) + '</h2><p>' + esc(loc || 'New Jersey property record') + '</p><div class="wdpd-hero-meta"><span><i class="fas fa-location-crosshairs"></i> PIN ' + esc(r.pams_pin || currentPin || '-') + '</span>' + (r.kind ? '<span><i class="fas fa-bookmark"></i> ' + esc(pretty(r.kind)) + '</span>' : '') + '</div></div><div class="wdpd-hero-side"><span class="wdpd-plan-badge ' + esc(activePlan()) + '"><i class="fas fa-crown"></i>' + esc(planLabel(activePlan())) + '</span><div class="wdpd-coverage"><small>Marker access</small><b>' + esc(access.allowed.toLocaleString('en-US')) + '<em>/ ' + esc(access.total.toLocaleString('en-US')) + '</em></b><span>' + esc(access.live.toLocaleString('en-US')) + ' live/partial in plan</span></div><button type="button" data-wdpd-refresh><i class="fas fa-rotate"></i> Refresh intelligence</button></div></section>';
   }
 
   function renderDashboard() {

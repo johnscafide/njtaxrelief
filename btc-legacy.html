@@ -13,7 +13,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>LeadIQ: Real Estate Contact Intelligence</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
 
 :root {
@@ -135,12 +135,12 @@ body::before {
 }
 .pw-card {
   background: var(--grad-card);
-  backdrop-filter: blur(20px);
+  
   border: 1px solid var(--border2);
   border-radius: var(--radius-2xl);
   padding: 48px 44px;
   max-width: 420px; width: 100%;
-  box-shadow: 0 24px 60px rgba(0,0,0,0.4), 0 0 0 1px var(--border);
+  box-shadow: 0 2px 6px rgba(15,23,42,.08), 0 0 0 1px var(--border);
   text-align: center;
   position: relative; overflow: hidden;
 }
@@ -158,7 +158,7 @@ body::before {
   background: var(--grad-brand);
   border-radius: 12px;
   display: flex; align-items: center; justify-content: center;
-  box-shadow: 0 8px 24px var(--blue-glow);
+  box-shadow: 0 2px 6px rgba(15,23,42,.08);
 }
 .pw-logo-icon svg { width: 22px; height: 22px; fill: white; }
 .pw-logo-name { font-size: 22px; font-weight: 700; letter-spacing: -0.03em; }
@@ -181,16 +181,16 @@ body::before {
   color: white; border: none; border-radius: var(--radius);
   font-size: 14px; font-weight: 600; font-family: var(--sans);
   cursor: pointer; transition: all 0.2s;
-  box-shadow: 0 4px 16px var(--blue-glow);
+  box-shadow: 0 2px 6px rgba(15,23,42,.08);
 }
-.pw-btn:hover { transform: translateY(-1px); box-shadow: 0 8px 24px var(--blue-glow); }
+.pw-btn:hover { transform: translateY(-1px); box-shadow: 0 2px 6px rgba(15,23,42,.08); }
 .pw-footer { font-size: 11px; color: var(--text3); margin-top: 20px; }
 
 /* ── TOP NAV ── */
 #topnav {
   position: fixed; top: 0; left: 0; right: 0; height: var(--nav-h);
   background: rgba(8,11,20,0.8);
-  backdrop-filter: blur(20px);
+  
   border-bottom: 1px solid var(--border);
   z-index: 100;
   display: flex; align-items: center; padding: 0 20px; gap: 0;
@@ -256,7 +256,7 @@ body::before {
 /* ── GLASS CARDS ── */
 .glass-card {
   background: var(--grad-card);
-  backdrop-filter: blur(16px);
+  
   border: 1px solid var(--border);
   border-radius: var(--radius-lg);
   padding: 22px 24px;
@@ -286,7 +286,7 @@ body::before {
 .kpi-row { display: grid; grid-template-columns: repeat(4,1fr); gap: 12px; margin-bottom: 28px; }
 .kpi {
   background: var(--grad-card);
-  backdrop-filter: blur(16px);
+  
   border: 1px solid var(--border);
   border-radius: var(--radius-lg);
   padding: 18px 20px;
@@ -308,7 +308,7 @@ body::before {
 .tool-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; }
 .tool-card {
   background: var(--grad-card);
-  backdrop-filter: blur(16px);
+  
   border: 1px solid var(--border);
   border-radius: var(--radius-lg);
   padding: 18px 18px 16px;
@@ -323,7 +323,7 @@ body::before {
   opacity: 0; transition: opacity 0.2s;
   border-radius: inherit;
 }
-.tool-card:hover { border-color: var(--blue); transform: translateY(-2px); box-shadow: 0 8px 32px rgba(79,142,247,0.15); }
+.tool-card:hover { border-color: var(--blue); transform: translateY(-2px); box-shadow: 0 2px 6px rgba(15,23,42,.08); }
 .tool-card:hover::before { opacity: 0.04; }
 .tool-card-icon { font-size: 22px; margin-bottom: 10px; position: relative; }
 .tool-card-title { font-size: 13px; font-weight: 600; margin-bottom: 4px; position: relative; }
@@ -376,7 +376,7 @@ body::before {
   border-radius: var(--radius-xl);
   padding: 16px 20px;
   display: flex; align-items: center; justify-content: space-between; gap: 12px;
-  box-shadow: 0 0 0 1px rgba(34,211,165,0.1), 0 4px 16px rgba(34,211,165,0.06);
+  box-shadow: 0 0 0 1px rgba(34,211,165,0.1), 0 2px 6px rgba(15,23,42,.08);
 }
 .upload-loaded-icon { width: 38px; height: 38px; background: var(--green-glow); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
 .upload-loaded-name { font-size: 13px; font-weight: 600; }
@@ -419,7 +419,7 @@ body::before {
 }
 .liq-btn svg { width: 14px; height: 14px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
 .liq-btn-primary { background: var(--grad-brand); color: white; box-shadow: 0 4px 14px var(--blue-glow); }
-.liq-btn-primary:hover { transform: translateY(-1px); box-shadow: 0 6px 20px var(--blue-glow); }
+.liq-btn-primary:hover { transform: translateY(-1px); box-shadow: 0 2px 6px rgba(15,23,42,.08); }
 .liq-btn-secondary { background: var(--surface2); color: var(--text2); border: 1px solid var(--border2); }
 .liq-btn-secondary:hover { color: var(--text); border-color: var(--blue); }
 .liq-btn-success { background: rgba(34,211,165,0.12); color: var(--green); border: 1px solid rgba(34,211,165,0.25); }
@@ -599,7 +599,7 @@ body::before {
 .dm-conf-badge { font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 100px; }
 
 /* ── OH FORM ── */
-.oh-header-card { background: var(--grad-brand); border-radius: var(--radius-xl); padding: 24px; color: white; text-align: center; margin-bottom: 16px; box-shadow: 0 8px 32px var(--blue-glow); }
+.oh-header-card { background: var(--grad-brand); border-radius: var(--radius-xl); padding: 24px; color: white; text-align: center; margin-bottom: 16px; box-shadow: 0 2px 6px rgba(15,23,42,.08); }
 .oh-property-name { font-size: 20px; font-weight: 700; margin-bottom: 4px; }
 .oh-property-meta { font-size: 13px; opacity: 0.85; }
 .oh-tablet { max-width: 540px; margin: 0 auto; }
@@ -648,7 +648,7 @@ body::before {
     <div>
       <!-- Logo -->
       <div style="display:flex;align-items:center;gap:10px;margin-bottom:56px;">
-        <div style="width:38px;height:38px;background:linear-gradient(135deg,#4f8ef7,#8b5cf6);border-radius:10px;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 16px rgba(79,142,247,0.35);">
+        <div style="width:38px;height:38px;background:linear-gradient(135deg,#4f8ef7,#8b5cf6);border-radius:10px;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 6px rgba(15,23,42,.08);">
           <svg width="20" height="20" viewBox="0 0 20 20" fill="white"><path d="M3 4h14v1.5a2 2 0 01-2 2H5a2 2 0 01-2-2V4zm0 5h14l-1.5 8H4.5L3 9z"/></svg>
         </div>
         <span style="font-size:18px;font-weight:800;letter-spacing:-0.03em;color:var(--text);">Lead<span style="background:linear-gradient(135deg,#4f8ef7,#8b5cf6);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">IQ</span></span>
@@ -707,7 +707,7 @@ body::before {
     </div>
 
     <!-- RIGHT: Login card -->
-    <div style="background:rgba(255,255,255,0.04);backdrop-filter:blur(24px);border:1px solid rgba(255,255,255,0.1);border-radius:24px;padding:40px 36px;box-shadow:0 32px 80px rgba(0,0,0,0.4),0 0 0 1px rgba(255,255,255,0.05);position:relative;overflow:hidden;">
+    <div style="background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);border-radius:24px;padding:40px 36px;box-shadow:0 2px 6px rgba(15,23,42,.08),0 0 0 1px rgba(255,255,255,0.05);position:relative;overflow:hidden;">
       <div style="position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.15),transparent);"></div>
       <div style="position:absolute;top:-40px;right:-40px;width:120px;height:120px;background:radial-gradient(circle,rgba(79,142,247,0.15),transparent);pointer-events:none;"></div>
       
@@ -947,7 +947,7 @@ body::before {
   <div class="section-inner">
     <div class="page-eyebrow">Analyze</div>
     <h1 class="page-title">Contact <span class="grad">Intelligence</span></h1>
-    <p class="page-sub">Upload once and run all analysis tools from one place.</p>
+    <p class="page-sub">Upload once and run every analysis tool on it.</p>
     <div class="glass-card" style="margin-bottom:16px;" id="shared-upload-zone-card">
   <div id="shared-drop" class="upload-zone"
     onclick="document.getElementById('shared-file-input').click()"
@@ -1076,7 +1076,7 @@ body::before {
         <div id="tl-profile" style="display:none;">
           <div class="glass-card">
             <div style="display:flex;align-items:center;gap:14px;margin-bottom:18px;flex-wrap:wrap;">
-              <div style="width:48px;height:48px;border-radius:50%;background:var(--grad-brand);display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:700;color:white;flex-shrink:0;box-shadow:0 4px 16px var(--blue-glow);" id="tl-avatar"></div>
+              <div style="width:48px;height:48px;border-radius:50%;background:var(--grad-brand);display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:700;color:white;flex-shrink:0;box-shadow:0 2px 6px rgba(15,23,42,.08);" id="tl-avatar"></div>
               <div style="flex:1;"><div style="font-size:18px;font-weight:600;letter-spacing:-0.01em;" id="tl-name"></div><div style="font-size:12px;color:var(--text2);margin-top:2px;" id="tl-contact-info"></div></div>
               <div style="display:flex;gap:6px;flex-wrap:wrap;" id="tl-badges"></div>
             </div>

@@ -4,7 +4,7 @@
 (function(){
   'use strict';
   function num(v){var n=Number(v);return Number.isFinite(n)?n:null}
-  function money(v){var n=num(v);return n==null?'—':n.toLocaleString('en-US',{style:'currency',currency:'USD',maximumFractionDigits:0})}
+  function money(v){var n=num(v);return n==null?'-':n.toLocaleString('en-US',{style:'currency',currency:'USD',maximumFractionDigits:0})}
   function year(v){var n=parseInt(v,10);return Number.isFinite(n)?n:null}
   function rateForYear(town,county,target,rates){
     if(!rates||!target)return null;var t=String(town||'').toUpperCase().trim(),tc=t+' ('+String(county||'').toUpperCase().trim()+')',hit=null;

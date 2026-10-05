@@ -1,4 +1,4 @@
-# Exact derived Data Center batch — 2026-08-20
+# Exact derived Data Center batch: 2026-08-20
 
 Production authenticated release canary passed for the 13-marker exact-derived batch using control parcel `0505_824.02_12`.
 

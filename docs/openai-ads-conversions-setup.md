@@ -16,9 +16,9 @@ Paid surfaces covered:
 
 Events:
 
-- `page_viewed` — browser Pixel on covered paid surfaces after optional measurement consent.
-- `checkout_started` — browser Pixel after Watchdog successfully creates a governed Stripe Founding Lifetime checkout session.
-- `order_created` — server CAPI after Stripe payment is verified and entitlement activation succeeds, plus browser Pixel with the same event ID for deduplication.
+- `page_viewed` - browser Pixel on covered paid surfaces after optional measurement consent.
+- `checkout_started` - browser Pixel after Watchdog successfully creates a governed Stripe Founding Lifetime checkout session.
+- `order_created` - server CAPI after Stripe payment is verified and entitlement activation succeeds, plus browser Pixel with the same event ID for deduplication.
 
 `registration_completed` is not included in this first pass because the professional paid flow does not currently expose one single canonical account-registration success boundary. Add it only after that boundary is identified rather than firing from a click or redirect.
 
@@ -48,9 +48,9 @@ The runtime loads the official SDK from:
 
 Configure these secrets for `complete-lifetime-checkout`:
 
-- `OPENAI_ADS_PIXEL_ID` — set to `JbuLmCdaMe4wTASd8o5ops` so server CAPI uses the same Pixel ID as the browser runtime.
-- `OPENAI_ADS_CAPI_KEY` — server-only Conversions API key. Never commit, print, return, or expose it to browser code.
-- `OPENAI_ADS_VALIDATE_ONLY` — set to `true` for initial validation, then remove or set to `false` before production measurement.
+- `OPENAI_ADS_PIXEL_ID` - set to `JbuLmCdaMe4wTASd8o5ops` so server CAPI uses the same Pixel ID as the browser runtime.
+- `OPENAI_ADS_CAPI_KEY` - server-only Conversions API key. Never commit, print, return, or expose it to browser code.
+- `OPENAI_ADS_VALIDATE_ONLY` - set to `true` for initial validation, then remove or set to `false` before production measurement.
 
 The server posts only to:
 

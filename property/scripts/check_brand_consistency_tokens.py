@@ -4,7 +4,7 @@
 NJW-73/NJW-74 migrated brand-consistency.css onto the canonical typography
 and responsive contracts without changing its compatibility color palette.
 This check prevents the shared Dashboard/Home/secondary-shell layer from
-drifting back to raw microtype, Inter, or the retired 760px breakpoint.
+drifting back to raw microtype, Inter, Plus Jakarta Sans, or the retired 760px breakpoint.
 """
 from __future__ import annotations
 
@@ -30,6 +30,8 @@ FORBIDDEN = {
     "family=Inter",
     "font-family:Inter",
     "Inter,sans-serif",
+    "Plus Jakarta Sans",
+    "family=Plus+Jakarta+Sans",
     "@media (max-width:760px)",
     "Source Sans 3",
 }

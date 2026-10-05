@@ -5,7 +5,7 @@ var db=window.NJPTRSupabaseRuntime.createClient(),user=null,state=null,busy=fals
 
 function esc(v){return String(v==null?'':v).replace(/[&<>"']/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})}
 function val(id){var n=document.getElementById(id);return n?String(n.value||'').trim():''}
-function dateLabel(v){if(!v)return'—';var d=new Date(v);return Number.isFinite(d.getTime())?d.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'}):'—'}
+function dateLabel(v){if(!v)return'-';var d=new Date(v);return Number.isFinite(d.getTime())?d.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'}):'-'}
 function currentVerified(row){
   if(!row||!row.verified_realtor||row.verification_status!=='verified')return false;
   if(!row.verification_due_at)return true;

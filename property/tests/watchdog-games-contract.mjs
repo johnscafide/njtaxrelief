@@ -226,7 +226,7 @@ for (const [file, canonical] of Object.entries(pages)) {
 }
 for (const file of copyFiles) {
   const text = read(file);
-  assert.ok(!/[–—]/.test(text), `${file}: no em or en dashes`);
+  assert.ok(!/[–-]/.test(text), `${file}: no em or en dashes`);
   assert.ok(!/[\u{1F300}-\u{1FAFF}\u{2600}-\u{27BF}]/u.test(text), `${file}: no emoji`);
   assert.ok(!/ROBUST Score|Watchdog Intel\b/.test(text), `${file}: brand names are correct`);
 }

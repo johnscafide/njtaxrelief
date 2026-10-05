@@ -1,4 +1,4 @@
-# Integrations Phase 8 Certification — 2026-08-20
+# Integrations Phase 8 Certification: 2026-08-20
 
 **Related:** NJW-234, NJW-52  
 **Status:** Production acceptance passed

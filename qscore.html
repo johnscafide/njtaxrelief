@@ -171,7 +171,7 @@
   .card {
     background: var(--card);
     border-radius: 18px;
-    box-shadow: 0 6px 28px rgba(0,0,0,0.12);
+    box-shadow: 0 2px 6px rgba(15,23,42,.08);
     padding: 14px 10px 18px;
     width: 100%;
   }
@@ -380,7 +380,7 @@
     background: #2c2c54; color: #fff;
     font-family: 'Nunito', sans-serif; font-weight: 700; font-size: 0.82rem;
     padding: 10px 20px; border-radius: 30px;
-    box-shadow: 0 4px 16px rgba(0,0,0,0.25);
+    box-shadow: 0 2px 6px rgba(15,23,42,.08);
     transition: transform 0.3s ease;
     z-index: 999; white-space: nowrap; pointer-events: none;
   }
@@ -409,7 +409,7 @@
     </div>
     <div class="opp-score-box">
       <div class="opp-score-label">Score</div>
-      <div class="opp-score-val" id="opp-score">—</div>
+      <div class="opp-score-val" id="opp-score">-</div>
     </div>
   </div>
 
@@ -528,7 +528,7 @@ async function startGame() {
   if (!raw) { toast('Enter your name first!'); return; }
   myName = raw;
 
-  // Check if this name already exists — reuse that row
+  // Check if this name already exists, reuse that row
   const { data: existing } = await sb
     .from('qwixx_players')
     .select('*')
@@ -546,7 +546,7 @@ async function startGame() {
       .insert({ name: myName })
       .select()
       .single();
-    if (error) { toast('Connection error — check Supabase setup.'); console.error(error); return; }
+    if (error) { toast('Connection error, check Supabase setup.'); console.error(error); return; }
     myId = inserted.id;
   }
 
@@ -601,7 +601,7 @@ function restoreVisual(rowId) {
   const container = document.getElementById('numbers-' + rowId);
   const cells = Array.from(container.querySelectorAll('.cell'));
   const s = state[rowId];
-  // Rebuild crossed from lastIdx — we need the actual cell list stored
+  // Rebuild crossed from lastIdx, we need the actual cell list stored
   // Since we store indexes, re-apply
   cells.forEach((c, i) => {
     c.classList.remove('crossed', 'disabled');
@@ -809,7 +809,7 @@ async function loadOpponent() {
 // ── RENDER OPPONENT MINI VIEW ─────────────────────────────
 function renderOpponent(row) {
   document.getElementById('opp-name').textContent = row.name;
-  document.getElementById('opp-score').textContent = row.score ?? '—';
+  document.getElementById('opp-score').textContent = row.score ?? '-';
 
   const mini = document.getElementById('opp-mini');
   mini.innerHTML = '';

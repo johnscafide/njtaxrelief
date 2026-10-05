@@ -87,9 +87,9 @@
   function greet() {
     if (!w.console || typeof w.console.log !== 'function') return;
     var mono = 'font-family:Menlo,Consolas,monospace;font-size:12px;line-height:1.25;color:#8a531f';
-    var big = 'font:800 20px/1.3 "Plus Jakarta Sans",Inter,system-ui,sans-serif;color:#16140f';
-    var body = 'font:500 13px/1.6 Inter,system-ui,sans-serif;color:#4a463d';
-    var tip = 'font:600 13px/1.6 Inter,system-ui,sans-serif;color:#0b6e6e';
+    var big = 'font:800 20px/1.3 "Libre Franklin",system-ui,sans-serif;color:#16140f';
+    var body = 'font:500 13px/1.6 Libre Franklin,system-ui,sans-serif;color:#4a463d';
+    var tip = 'font:600 13px/1.6 Libre Franklin,system-ui,sans-serif;color:#0b6e6e';
     console.log('%c' + BEAGLE, mono);
     console.log('%cWoof. You found the back room.', big);
     console.log('%cWatchdog was built by John, in New Jersey. Curious people are our favorite people.', body);
@@ -102,7 +102,7 @@
     console.log('%cReading Disk 2 of 3...', 'font:600 13px/1.6 Menlo,Consolas,monospace;color:#0b6e6e');
     parts().then(function (doc) {
       var story = part(doc, 'wd-egg-story');
-      console.log('%c' + (story ? story.textContent.trim() : ''), 'font:500 13px/1.6 Inter,system-ui,sans-serif;color:#16140f');
+      console.log('%c' + (story ? story.textContent.trim() : ''), 'font:500 13px/1.6 Libre Franklin,system-ui,sans-serif;color:#16140f');
       console.log('%cInsert Disk 3 of 3 to finish setup...  type  watchdog.disk3()', 'font:600 13px/1.6 Menlo,Consolas,monospace;color:#0b6e6e');
     }, function () {
       console.log('%cDisk 2 of 3 could not be read. Try again in a moment.', 'font:600 13px/1.6 Menlo,Consolas,monospace;color:#8a531f');

@@ -34,7 +34,7 @@ var CLEAN_HOST=/^(?:www\.)?watchdogindex\.com$/i.test(location.hostname||'');
 function route(p){p=String(p||'/');if(p.indexOf('/property/')===0)p=p.slice(9);else if(p==='/property')p='/';return CLEAN_HOST?p:(p==='/'?'/property/':'/property'+p);}
 var configs={
   'town-compare':{kicker:'Town info',title:'Town Compare',desc:'Compare New Jersey municipalities across assessment fairness, tax-rate direction and fiscal pressure.',action:'/',actionLabel:'Property Lookup'},
-  fairness:{kicker:'ROBUST Framework · U — Uniformity',title:'Uniformity Index',desc:'See how evenly New Jersey municipalities assess property and how current those assessments appear.',action:'/town-compare',actionLabel:'Compare towns'},
+  fairness:{kicker:'ROBUST Framework · U: Uniformity',title:'Uniformity Index',desc:'See how evenly New Jersey municipalities assess property and how current those assessments appear.',action:'/town-compare',actionLabel:'Compare towns'},
   pulse:{kicker:'Property tracking',title:'Property Pulse',desc:'Track verified changes, score history, assessment movement and source activity across your saved properties.',action:'/',actionLabel:'Add property'},
   scan:{kicker:'Pro+ process',title:'Appeal Scanner',desc:'Screen a municipality for assessment appeal opportunities using verified New Jersey sales and current assessment evidence.',action:'/pro',actionLabel:'Plans & Pricing'},
   account:{kicker:'Account',title:'Account & Billing',desc:'Manage your Watchdog access, billing, professional role and account preferences.',action:'/dashboard',actionLabel:'Dashboard'},

@@ -84,7 +84,7 @@
     var list=p.rows||[],summary=permitLifecycleSummary(list),verify=summary.verification;
     var tone=verify?'review':list.length?'clear':'quiet';
     var detail=summary.lifecycles.slice(0,6).map(function(x){var state=x.verification?'Verify municipality':'Certificate shown';var when=x.certificateDate||x.permitDate;return'<li><span><b>'+safe(x.permitNumber||'Permit')+'</b><small>'+safe(x.type||'Permit activity')+'</small></span><span>'+safe(state)+'<small>'+date(when)+'</small></span></li>';}).join('');
-    // content-architecture: dynamic — this summary is generated from live parcel-specific DCA permit lifecycle state and dates.
+    // content-architecture: dynamic, this summary is generated from live parcel-specific DCA permit lifecycle state and dates.
     return '<article class="dd-signal '+tone+'"><div class="dd-signal-head"><i class="fas fa-helmet-safety"></i><span><b>Permit &amp; certificate review</b><small>NJ DCA · block + lot match</small></span><strong>'+(verify?verify+' verify':list.length?'state history':'no records')+'</strong></div>'+
       '<p>'+(p.unavailable?safe(p.unavailable):verify?verify+' permit lifecycle'+(verify===1?' needs':'s need')+' municipal verification because the matching state rows do not currently show a certificate date, or cannot be safely joined by permit number. This is not a legal open-permit finding.':list.length?'No permit-number lifecycle currently lacks a certificate date in the matching state feed. Municipal records still control clearance.':'No matching record appears in DCA’s rolling permit feed; that does not prove no permit activity exists.')+'</p>'+
       (detail?'<ul class="dd-records">'+detail+'</ul>':'')+'</article>';

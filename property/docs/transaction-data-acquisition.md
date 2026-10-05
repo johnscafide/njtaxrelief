@@ -46,16 +46,16 @@ Provider starting points:
 
 - Sunrun customer portal: https://my.sunrun.com/
 - Sunrun service transfer: https://servicetransfer.sunrun.com/signin
-- Sunrun Customer OnDemand API: https://docs.customer-api.sunrun.com/ — public documentation currently describes site/telemetry data; do not assume billing/payoff access without a billing/partner contract.
+- Sunrun Customer OnDemand API: https://docs.customer-api.sunrun.com/ public documentation currently describes site/telemetry data; do not assume billing/payoff access without a billing/partner contract.
 - Tesla account: https://www.tesla.com/teslaaccount
 - Tesla solar billing support: https://www.tesla.com/support/energy/solar-panels/after-installation/billing
 - Tesla property/title support: https://www.tesla.com/support/energy/solar-panels/documents/property-title
-- Sunnova customer portal / guest pay: https://account.sunnova.com/guest-pay — current guest-pay flow accepts a System ID or Account Number plus account ZIP, making it a promising provider-specific verification path, subject to permitted automation and what the next authenticated step exposes.
-- Enphase developer API: https://developer-v4.enphase.com/ — OAuth system-owner authorization; telemetry/system data is not financing payoff data.
+- Sunnova customer portal / guest pay: https://account.sunnova.com/guest-pay, current guest-pay flow accepts a System ID or Account Number plus account ZIP, making it a promising provider-specific verification path, subject to permitted automation and what the next authenticated step exposes.
+- Enphase developer API: https://developer-v4.enphase.com/ OAuth system-owner authorization; telemetry/system data is not financing payoff data.
 
 **Account number alone is not a safe universal authentication method.** A provider may require account holder name, ZIP, one-time code, login authorization, or OAuth. Watchdog must use the provider's supported customer-consent flow rather than store customer passwords. The solar installer/system operator and the financing company should be modeled separately because the live payoff balance may belong to a financier rather than the equipment provider.
 
-## Owner names — professional test policy
+## Owner names, professional test policy
 
 For the current test phase, owner-name display is allowed only for professional plans: `agent`, `pro`, `pro_plus`, `teams`, and `developer`. Standard/homeowner users do not receive owner names. Owner mailing address remains a separate, more sensitive field and is not automatically opened by this policy.
 

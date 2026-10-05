@@ -8,11 +8,11 @@ AI is not a factual source of truth. Watchdog first resolves governed property f
 
 ## Architecture
 
-1. **Truth layer** — authoritative/public property records, snapshots, source lineage and user-authorized data.
-2. **Derived intelligence layer** — versioned Watchdog formulas and governed signals.
-3. **Opportunity layer** — profession-specific deterministic ranking and evidence coverage.
-4. **Analyst layer** — grounded narrative explanation and natural-language tool orchestration.
-5. **Action layer** — cases, reports, saved lists, monitoring, CRM/direct mail/ads and outcome attribution.
+1. **Truth layer**, authoritative/public property records, snapshots, source lineage and user-authorized data.
+2. **Derived intelligence layer**, versioned Watchdog formulas and governed signals.
+3. **Opportunity layer**, profession-specific deterministic ranking and evidence coverage.
+4. **Analyst layer**, grounded narrative explanation and natural-language tool orchestration.
+5. **Action layer**, cases, reports, saved lists, monitoring, CRM/direct mail/ads and outcome attribution.
 
 ## Initial customer-facing experiences
 
@@ -67,35 +67,35 @@ Runs and findings are service-written and customer read-only. Feedback and assum
 
 Seed preview models:
 
-- `assessment_anomaly` — Pro
-- `closing_review` — Pro
-- `property_change_priority` — Pro+
+- `assessment_anomaly` - Pro
+- `closing_review` - Pro
+- `property_change_priority` - Pro+
 
 All seed models begin in `uncalibrated` state. They must move through testing/calibration before customer-facing claims are enabled.
 
 ## Build sequence
 
-### Milestone 1 — Foundation
+### Milestone 1: Foundation
 
 Schema, model registry, evidence contract, feature branch, staging-only preview.
 
-### Milestone 2 — Deterministic engine
+### Milestone 2: Deterministic engine
 
 Build candidate hydration, cohort context, scoring, confidence, evidence coverage, facts hashing and reproducible ranking using existing Workbench/derived-marker infrastructure.
 
-### Milestone 3 — Workbench Intelligence UX
+### Milestone 3: Workbench Intelligence UX
 
 Add Intelligence mode, result queue, Evidence Drawer, Why Now, missing-evidence display and actions. Keep the spreadsheet/table mode intact.
 
-### Milestone 4 — Watchdog Analyst
+### Milestone 4: Watchdog Analyst
 
 Add tool-gated natural-language orchestration. The model gets approved tools, not raw SQL. First tools should include property explanation, comparison, score/change history, model runs and report/list actions.
 
-### Milestone 5 — Opportunity value + outcomes
+### Milestone 5: Opportunity value + outcomes
 
 User-controlled assumptions, expected-value scenarios, useful/not-relevant feedback and business outcomes (contacted, appointment, client, under contract, closed). Use outcomes to personalize ranking without altering source facts.
 
-### Milestone 6 — Pro+ scale + automation
+### Milestone 6: Pro+ scale + automation
 
 Bulk county/farm scans, change-triggered reruns, digests, caching, usage limits, cost controls, monitoring and model calibration dashboards.
 

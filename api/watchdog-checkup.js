@@ -36,7 +36,7 @@ function holdsUp(assessed, ratio, upper) {
 
 const CK_STYLE = `
 .ck-floor{display:grid;gap:6px;margin:6px 0 12px}
-.ck-floor b{font:700 48px/1 "Plus Jakarta Sans",system-ui,sans-serif;letter-spacing:-.04em;padding-bottom:6px;border-bottom:2px solid var(--b-gold);justify-self:start}
+.ck-floor b{font:700 48px/1 "Libre Franklin",system-ui,sans-serif;letter-spacing:-.04em;padding-bottom:6px;border-bottom:2px solid var(--b-gold);justify-self:start}
 .ck-floor span{font-size:15px;color:rgba(255,255,255,.8)}
 .ck-steps{list-style:none;margin:0;padding:0;display:grid;gap:14px;counter-reset:ck}
 .ck-steps li{display:grid;grid-template-columns:32px minmax(0,1fr);gap:12px;counter-increment:ck}

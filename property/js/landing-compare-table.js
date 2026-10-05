@@ -82,7 +82,7 @@
         background:#fff;
         border-radius:34px;
         overflow:hidden;
-        box-shadow:0 16px 54px rgba(24,31,42,.065);
+        box-shadow:0 2px 6px rgba(15,23,42,.08);
       }
       #wd-showcase .wds-cmp-title{
         display:grid;

@@ -29,7 +29,7 @@ Current status: **PENDING EXTERNAL REVIEW**. This packet is an intake/checklist.
 
 - Terms currently say the agreement is with the “operator of Watchdog Property Intelligence” and do not name the LLC in the agreement paragraph.
 - Privacy currently says Watchdog is operated by John Scafide and references Opus Elite Real Estate in the “Who we are” section.
-- Refund Policy remains labeled `Commercial policy draft — subject to counsel review`.
+- Refund Policy remains labeled `Commercial policy draft, subject to counsel review`.
 - The LLC formation/registration milestone is recorded complete, but no repository artifact should be treated as counsel approval of the final SaaS operator wording.
 
 ### Counsel questions
@@ -45,7 +45,7 @@ Current status: **PENDING EXTERNAL REVIEW**. This packet is an intake/checklist.
 9. Are there required governing-law, venue, arbitration, class-action, notice, accessibility, consumer-protection, or state-specific provisions missing from the current agreement?
 10. May the `subject to counsel review` qualifier be removed from the Refund Policy after the requested changes are implemented?
 
-### Counsel evidence record — leave PENDING until real evidence exists
+### Counsel evidence record, leave PENDING until real evidence exists
 
 - Reviewer / firm: `PENDING`
 - Review date: `PENDING`
@@ -82,7 +82,7 @@ Suggested factual description for the broker/underwriter:
 9. Is the correct named insured **Watchdog Property Intelligence LLC**, and are any affiliates/additional insureds required?
 10. Are there exclusions that materially conflict with Watchdog's actual product or planned professional customer base?
 
-### Insurance evidence record — leave PENDING until real evidence exists
+### Insurance evidence record, leave PENDING until real evidence exists
 
 - Broker / carrier: `PENDING`
 - Quote or policy date: `PENDING`

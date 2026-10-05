@@ -1,4 +1,4 @@
-# Marketing Studio — Studio to PCM Production Handoff
+# Marketing Studio: Studio to PCM Production Handoff
 
 Status: Watchdog-side Phase C live; provider asset delivery/mapping, authoritative-proof retention, webhook signature certification, cancellation and live spend remain fail-closed until their exact production contracts are certified.
 

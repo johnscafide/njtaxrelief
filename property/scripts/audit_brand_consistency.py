@@ -266,16 +266,16 @@ def main() -> int:
 
     # Playfair remains measurable raw debt, but do not call the known shared
     # preapproval heading a live app defect when the canonical current-shell layer
-    # explicitly replaces it with Plus Jakarta Sans.
+    # explicitly replaces it with Libre Franklin.
     preapproval_override = bool(
         consistency_text
         and ".pre-body h3" in consistency_text
-        and 'font-family:"Plus Jakarta Sans",Inter,sans-serif!important' in consistency_text
+        and 'font-family:"Libre Franklin",sans-serif!important' in consistency_text
     )
     for rel in sorted(playfair_app_files):
         if rel == "property/css/shared/03-dashboard-components.css" and preapproval_override:
             continue
-        findings.append(Finding("warning", rel, "Playfair Display can render in an app/data surface; product UI should use Plus Jakarta Sans."))
+        findings.append(Finding("warning", rel, "Playfair Display can render in an app/data surface; product UI should use Libre Franklin."))
 
     for rel in sorted(set(bad_brand_files)):
         findings.append(Finding("warning", rel, "Non-canonical Watchdog casing found (WatchDog/Watch Dog)."))
@@ -283,10 +283,10 @@ def main() -> int:
     # Machine-readable typography authority sanity checks.
     try:
         typography = brand.get("typography", {}).get("canonical_product", {})
-        if typography.get("display", {}).get("family") != "Plus Jakarta Sans":
-            findings.append(Finding("critical", relative(BRAND_JSON), "Canonical display font is not Plus Jakarta Sans."))
-        if typography.get("body_ui", {}).get("family") != "Plus Jakarta Sans":
-            findings.append(Finding("critical", relative(BRAND_JSON), "Canonical body/UI font is not Plus Jakarta Sans."))
+        if typography.get("display", {}).get("family") != "Libre Franklin":
+            findings.append(Finding("critical", relative(BRAND_JSON), "Canonical display font is not Libre Franklin."))
+        if typography.get("body_ui", {}).get("family") != "Libre Franklin":
+            findings.append(Finding("critical", relative(BRAND_JSON), "Canonical body/UI font is not Libre Franklin."))
     except AttributeError:
         findings.append(Finding("critical", relative(BRAND_JSON), "Typography contract is malformed."))
 

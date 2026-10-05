@@ -1825,7 +1825,7 @@
     if (c) {
       var over = c.testable && c.hasCase;
       cards.push({ k: 'fair', marker: 'watchdog.chapter123_position',
-        n: c.testable ? (over ? money(c.over) : 'None') : '\u2014',
+        n: c.testable ? (over ? money(c.over) : 'None') : '-',
         l: 'Over the Chapter 123 limit',
         v: !c.testable ? 'Needs comparable sales to test'
            : over ? (c.saving ? 'Worth about ' + money(c.saving) + ' a year' : 'There is a case here')

@@ -19,13 +19,13 @@ This profile uses the six NIST CSF 2.0 Functions: **Govern, Identify, Protect, D
 
 ## Initial risk themes
 
-1. **Identity and privilege risk** — developer/service-role access can create high impact if mis-scoped.
-2. **Connector expansion risk** — each new provider may change data flow, privacy, availability and credential exposure.
-3. **Sensitive/profile data risk** — user-entered financial and household details require minimization and clear purpose/retention controls even when they do not meet a statutory sensitive-data definition.
-4. **Billing integrity risk** — subscription and marketing payment flows require provider authenticity, server-authoritative pricing and lifecycle reconciliation.
-5. **Public-record/product inference risk** — public property data may be combined into derived intelligence; use cases must avoid misleading claims, prohibited profiling or accidental person-level exposure.
-6. **Availability/recovery risk** — auth, Supabase, hosting and data-provider failures can block paid workflows.
-7. **AI governance risk** — future AI features can create data leakage, explainability, hallucination and automated-decision risks unless scoped and tested.
+1. **Identity and privilege risk**, developer/service-role access can create high impact if mis-scoped.
+2. **Connector expansion risk**, each new provider may change data flow, privacy, availability and credential exposure.
+3. **Sensitive/profile data risk**, user-entered financial and household details require minimization and clear purpose/retention controls even when they do not meet a statutory sensitive-data definition.
+4. **Billing integrity risk**, subscription and marketing payment flows require provider authenticity, server-authoritative pricing and lifecycle reconciliation.
+5. **Public-record/product inference risk**, public property data may be combined into derived intelligence; use cases must avoid misleading claims, prohibited profiling or accidental person-level exposure.
+6. **Availability/recovery risk**, auth, Supabase, hosting and data-provider failures can block paid workflows.
+7. **AI governance risk**, future AI features can create data leakage, explainability, hallucination and automated-decision risks unless scoped and tested.
 
 ## Target maturity before external SOC/ISO work
 

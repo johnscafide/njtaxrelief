@@ -12,7 +12,7 @@
   function shareCard(card){
     var addr=(card.querySelector('.hd-addr')||{}).textContent||card.textContent.trim().split('\n').slice(0,3).join(' '),url=location.href;
     if(navigator.share){navigator.share({title:addr,text:addr,url:url}).catch(function(){});return;}
-    if(navigator.clipboard)navigator.clipboard.writeText(addr+' — '+url);
+    if(navigator.clipboard)navigator.clipboard.writeText(addr+' - '+url);
   }
 
   function installGlobalSearch(){

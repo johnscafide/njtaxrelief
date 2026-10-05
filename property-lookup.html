@@ -88,7 +88,7 @@
 /* ---------- SEARCH ---------- */
 .pl-search-card {
   background: #fff; border: 1px solid rgba(216,220,232,.9); border-radius: 16px;
-  padding: 12px; box-shadow: 0 22px 60px rgba(14,34,72,.22); max-width: 690px; margin: 0 auto;
+  padding: 12px; box-shadow: 0 2px 6px rgba(15,23,42,.08); max-width: 690px; margin: 0 auto;
 }
 .pl-search-row { display: flex; gap: 9px; }
 .pl-input-wrap { flex: 1; position: relative; display: flex; }
@@ -164,7 +164,7 @@
 .pl-toast {
   position: fixed; bottom: 26px; left: 50%; transform: translateX(-50%); z-index: 9999;
   background: var(--navy-dark); color: #fff; padding: 12px 22px; border-radius: 10px;
-  font-size: 14px; font-weight: 600; box-shadow: 0 8px 26px rgba(0,0,0,.28); display: none;
+  font-size: 14px; font-weight: 600; box-shadow: 0 2px 6px rgba(15,23,42,.08); display: none;
 }
 
 @media (max-width: 880px) {
@@ -184,14 +184,14 @@
    ============================================================ */
 .plm-backdrop {
   position: fixed; inset: 0; z-index: 4000; background: rgba(10,20,40,.62);
-  backdrop-filter: blur(3px); opacity: 0; pointer-events: none; transition: opacity .22s;
+   opacity: 0; pointer-events: none; transition: opacity .22s;
 }
 .plm-backdrop.open { opacity: 1; pointer-events: auto; }
 
 .plm {
   position: fixed; z-index: 4001; inset: 24px; max-width: 1180px; margin: 0 auto;
   background: #fff; border-radius: 16px; overflow: hidden;
-  box-shadow: 0 30px 90px rgba(6,16,38,.45);
+  box-shadow: 0 2px 6px rgba(15,23,42,.08);
   display: flex; flex-direction: column;
   transform: translateY(22px) scale(.985); opacity: 0;
   pointer-events: none; transition: transform .26s cubic-bezier(.16,.84,.44,1), opacity .22s;
@@ -354,7 +354,7 @@
   position: absolute; right: 0; top: calc(100% + 6px); z-index: 3; min-width: 258px;
   max-height: calc(100vh - 120px); overflow-y: auto;
   background: #fff; border: 1px solid var(--border); border-radius: 12px;
-  box-shadow: 0 14px 44px rgba(14,34,72,.24); padding: 7px; display: none;
+  box-shadow: 0 2px 6px rgba(15,23,42,.08); padding: 7px; display: none;
 }
 .plm-menu.open { display: block; }
 .plm-menu button, .plm-menu a {
@@ -772,7 +772,7 @@ body.plm-locked { overflow: hidden; }
   background: linear-gradient(120deg, #14361f, #1e6b3a 58%, #2b8a4d);
   border-radius: 18px; padding: 30px 34px;
   display: flex; align-items: center; gap: 26px;
-  box-shadow: 0 20px 50px rgba(16,60,32,.28);
+  box-shadow: 0 2px 6px rgba(15,23,42,.08);
   border: 1px solid rgba(184,151,42,.35);
   transition: transform .2s ease;
 }
@@ -868,7 +868,7 @@ body.plm-locked { overflow: hidden; }
 .plm-note-overlay.open { display: flex; }
 .plm-note-box {
   background: #fff; border-radius: 14px; padding: 28px; max-width: 620px;
-  max-height: 80%; overflow-y: auto; position: relative; box-shadow: 0 20px 60px rgba(6,16,38,.4);
+  max-height: 80%; overflow-y: auto; position: relative; box-shadow: 0 2px 6px rgba(15,23,42,.08);
 }
 .plm-note-box h3 { font-family: 'Playfair Display', Georgia, serif; font-size: 24px; color: #0e2248; margin: 0 0 14px; }
 .plm-note-box p { font-size: 14.5px; color: #3d4759; line-height: 1.75; margin: 0 0 14px; }

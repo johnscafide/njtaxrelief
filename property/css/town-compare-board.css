@@ -9,7 +9,7 @@ html body[data-sidebar-page="town-compare"]{
   --tb-bg:#f3f1ec;--tb-surface:#fbfaf7;--tb-line:#e3dfd6;--tb-ink:#0e2248;--tb-muted:#5d6877;
   --tb-navy:#0e2248;--tb-blue:#1456a0;--tb-blue-bright:#2f6df6;--tb-gold:#b8972a;
   --tb-sky:#e3edfb;--tb-sky-deep:#b9d0f2;--tb-teal:#dff1ec;--tb-teal-deep:#9fd3c5;--tb-sand:#f6efd9;--tb-sand-deep:#e4cf8e;
-  --tb-display:"Plus Jakarta Sans",Inter,system-ui,sans-serif;
+  --tb-display:"Libre Franklin",system-ui,sans-serif;
 }
 html body[data-sidebar-page="town-compare"],
 html body[data-sidebar-page="town-compare"] .db-workspace,

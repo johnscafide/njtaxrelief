@@ -65,7 +65,7 @@
     $('uv-summary').innerHTML = [
       ['Releases', data.releases.length],
       ['Active roadmap', data.roadmap.length],
-      ['Checked markers', registry ? registry.summary.total : '—'],
+      ['Checked markers', registry ? registry.summary.total : '-'],
       ['Current release', 'v' + latest.version]
     ].map(function (item) { return '<div class="uv-stat"><b>' + item[1] + '</b><span>' + item[0] + '</span></div>'; }).join('');
     releasePulse();

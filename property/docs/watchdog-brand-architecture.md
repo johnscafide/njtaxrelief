@@ -29,12 +29,12 @@ Do not casually rename it “ROBUST Score.”
 
 The governed six-dimension methodology beneath the Watchdog Score:
 
-- **R — Recourse**
-- **O — Overassessment Position**
-- **B — Burden**
-- **U — Uniformity**
-- **S — Stability**
-- **T — Trajectory**
+- **R: Recourse**
+- **O: Overassessment Position**
+- **B: Burden**
+- **U: Uniformity**
+- **S: Stability**
+- **T: Trajectory**
 
 ROBUST is methodology and explanatory language, not the master company name.
 

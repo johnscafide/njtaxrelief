@@ -115,7 +115,7 @@
       municipalities.forEach(record => {
         const option = document.createElement('option');
         option.value = record.id;
-        option.textContent = `${record.municipality} — ${record.county} County`;
+        option.textContent = `${record.municipality} ${record.county} County`;
         $('municipality').appendChild(option);
       });
       $('status').textContent = `${municipalities.length} municipalities loaded from the official COD dataset.`;

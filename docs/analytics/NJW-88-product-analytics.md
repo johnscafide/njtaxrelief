@@ -1,4 +1,4 @@
-# NJW-88 — first-party product analytics
+# NJW-88, first-party product analytics
 
 ## What is collected
 Pseudonymous visitor/session UUIDs, pathname, product surface/tool name, event type, first-touch UTM fields, referrer hostname, and a strictly allowlisted small categorical properties object.
@@ -19,12 +19,12 @@ Core SaaS:
 - `checkout_started`
 
 Watchdog Intelligence:
-- `intelligence_exposed` — a governed Intelligence surface/brief became visible
-- `intelligence_reasoning_inspected` — the user opened progressive reasoning/evidence
-- `intelligence_action_started` — the user selected a categorized next action
-- `intent_question_shown` — a high-information-gain intent question was displayed
-- `intent_question_answered` — the user selected an answer; the answer value is not copied into product analytics
-- `trust_evidence_opened` — the user opened the Trust/source evidence path from Intelligence
+- `intelligence_exposed` - a governed Intelligence surface/brief became visible
+- `intelligence_reasoning_inspected` - the user opened progressive reasoning/evidence
+- `intelligence_action_started` - the user selected a categorized next action
+- `intent_question_shown` - a high-information-gain intent question was displayed
+- `intent_question_answered` - the user selected an answer; the answer value is not copied into product analytics
+- `trust_evidence_opened` - the user opened the Trust/source evidence path from Intelligence
 
 The Intelligence browser funnel stores only categorical metadata such as `surface`, `source`, `action`, `status`, and a coarse reason-count bucket. It does not copy the property, prompt, intent payload, or Context Graph evidence into product analytics.
 

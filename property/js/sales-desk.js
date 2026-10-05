@@ -17,7 +17,7 @@
        signed-out state with a plain message instead of a blank page. */
     document.addEventListener('DOMContentLoaded', function () {
       var n = document.querySelector('[data-notice]');
-      // content-architecture: dynamic — shown only when the auth library failed to load at runtime; a recovery message for a failure state, not page copy.
+      // content-architecture: dynamic, shown only when the auth library failed to load at runtime; a recovery message for a failure state, not page copy.
       if (n) { n.textContent = 'The sign-in library did not load. Refresh the page or check your connection.'; n.hidden = false; n.classList.add('is-error'); }
       Array.prototype.forEach.call(document.querySelectorAll('[data-state]'), function (x) { x.hidden = x.getAttribute('data-state') !== 'signin'; });
     }, { once: true });
@@ -116,7 +116,7 @@
         var input = document.getElementById(b.getAttribute('data-copy'));
         if (!input) return;
         input.select();
-        // content-architecture: dynamic — button label flips with the clipboard result and reverts after a moment; interaction state, not static copy.
+        // content-architecture: dynamic, button label flips with the clipboard result and reverts after a moment; interaction state, not static copy.
         try { navigator.clipboard.writeText(input.value); b.textContent = 'Copied'; setTimeout(function () { b.textContent = 'Copy'; }, 1500); } catch (_) { document.execCommand('copy'); }
       });
     });

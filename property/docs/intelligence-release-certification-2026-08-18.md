@@ -1,4 +1,4 @@
-# Watchdog Intelligence release certification — August 18, 2026
+# Watchdog Intelligence release certification: August 18, 2026
 
 This document records staging-only runtime evidence for the Watchdog Intelligence release candidate. It does not authorize production promotion, enable customer visibility, or change Stripe/billing configuration.
 

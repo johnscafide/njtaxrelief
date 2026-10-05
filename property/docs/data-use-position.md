@@ -21,7 +21,7 @@ Not part of the product:
 
 New Jersey has heightened privacy and compliance considerations around protected address and personal information, including Daniel's Law. Watchdog's safer and more defensible role is to interpret property records and let professionals use relationships and contact data they already possess lawfully, rather than becoming a reseller of personal-contact data.
 
-This is also a product-positioning choice. Watchdog competes on assessment interpretation, Chapter 123 context, municipal and revaluation signals, evidence, and professional workflow—not on skip tracing.
+This is also a product-positioning choice. Watchdog competes on assessment interpretation, Chapter 123 context, municipal and revaluation signals, evidence, and professional workflow, not on skip tracing.
 
 ## Future partner path
 

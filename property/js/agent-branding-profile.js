@@ -1,4 +1,4 @@
-// content-architecture: dynamic — authenticated real-estate professional branding editor.
+// content-architecture: dynamic, authenticated real-estate professional branding editor.
 (function(){
 'use strict';
 if(!window.NJPTRSupabaseRuntime)return;

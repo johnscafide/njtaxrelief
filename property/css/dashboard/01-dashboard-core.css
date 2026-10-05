@@ -24,7 +24,7 @@
   --gold:     #b8972a;
   --gold-bg:  #fdf6e0;
   --mono:     ui-monospace, SFMono-Regular, "SF Mono", Menlo, monospace;
-  --sans:     'Plus Jakarta Sans', 'Source Sans 3', system-ui, sans-serif;
+  --sans:     'Libre Franklin', 'Source Sans 3', system-ui, sans-serif;
 }
 
 body { background: var(--paper); }

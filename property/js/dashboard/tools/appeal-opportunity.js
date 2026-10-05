@@ -34,7 +34,7 @@
   }
 
   function card(r) {
-    var v = calc(r), score = v.score == null ? '&mdash;' : v.score;
+    var v = calc(r), score = v.score == null ? '-' : v.score;
     var message = v.score == null
       ? 'The current record does not contain enough independent evidence to rank this property yet.'
       : v.caseSignal

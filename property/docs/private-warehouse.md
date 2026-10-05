@@ -10,11 +10,11 @@ The `watchdog_warehouse` schema is deliberately private and must **not** be adde
 
 Tables:
 
-- `source_releases` — immutable source edition/checksum metadata and lifecycle state.
-- `load_runs` — bulk-copy execution state and row-count evidence.
-- `modiv_observations` — privacy-limited annual property/tax observations, versioned by release.
-- `data_quality_summary` — release-level QA observations and blocking checks.
-- `publication_sets` — the explicit active release pointer, including the previous release for rollback history.
+- `source_releases` - immutable source edition/checksum metadata and lifecycle state.
+- `load_runs` - bulk-copy execution state and row-count evidence.
+- `modiv_observations` - privacy-limited annual property/tax observations, versioned by release.
+- `data_quality_summary` - release-level QA observations and blocking checks.
+- `publication_sets` - the explicit active release pointer, including the previous release for rollback history.
 
 ## Why releases are part of every row
 

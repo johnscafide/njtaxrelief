@@ -1,4 +1,4 @@
-# Watchdog Intelligence Voice vNext — Command Policy Runbook
+# Watchdog Intelligence Voice vNext: Command Policy Runbook
 
 **Status:** Production contract  
 **Date:** 2026-08-23  

@@ -80,10 +80,10 @@
   function sourceLine(src){
     const label=text(src.kind||'Public record source').replace(/_/g,' ');
     const date=src.recorded_at?new Date(src.recorded_at).toLocaleDateString():'';
-    return`• ${label}${date?` (${date})`:''}${src.url?` — ${src.url}`:''}`;
+    return`• ${label}${date?` (${date})`:''}${src.url?` - ${src.url}`:''}`;
   }
   function noteBlock(payload,selected){
-    const f=payload.facts||{},lines=['WATCHDOG VERIFIED PROPERTY — public-record research'];
+    const f=payload.facts||{},lines=['WATCHDOG VERIFIED PROPERTY, public-record research'];
     lines.push(`Property: ${[f.address,f.municipality,'NJ',f.zip].filter(Boolean).join(', ')}`);
     for(const k of selected){
       if(k==='source_note'||!DISPLAY[k])continue;

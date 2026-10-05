@@ -1,4 +1,4 @@
-/* Property Home visual mount guarantee — 2026-08-27.
+/* Property Home visual mount guarantee: 2026-08-27.
    Ensures the ad-inspired Property Home hero is visible even when the legacy
    hero/score enhancer initializes late. No demo values are introduced. */
 (function(){

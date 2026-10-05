@@ -80,8 +80,8 @@
       <span style="color:#f0d87a;">Property Tax Appeal</span>
     </div>
     <div class="hero-badge">Your Legal Right</div>
-    <h1 style="font-size:40px;line-height:1.12;margin:14px 0;max-width:680px;">NJ Property Tax Appeal — <span style="color:#f0d87a;">Step-by-Step Guide</span></h1>
-    <p style="font-size:17px;color:#d0dcec;max-width:600px;margin-bottom:28px;">If your home is over-assessed, you're overpaying — and you have the legal right to appeal every single year. A successful appeal reduces your taxes permanently going forward.</p>
+    <h1 style="font-size:40px;line-height:1.12;margin:14px 0;max-width:680px;">NJ Property Tax Appeal<span style="color:#f0d87a;">Step-by-Step Guide</span></h1>
+    <p style="font-size:17px;color:#d0dcec;max-width:600px;margin-bottom:28px;">If your home is over-assessed, you're overpaying, and you have the legal right to appeal every single year. A successful appeal reduces your taxes permanently going forward.</p>
     <div style="display:flex;gap:12px;flex-wrap:wrap;">
       <a href="#ratio-calculator" class="btn-primary">Check If I'm Over-Assessed</a>
       <a href="#free-comps" class="btn-outline">Get Free Comps</a>
@@ -98,7 +98,7 @@
 <div class="alert-banner">
   <div class="alert-inner">
     <i class="fas fa-triangle-exclamation" style="color:var(--gold);"></i>
-    <span><strong>2026 Appeal Deadline: April 1</strong> in most NJ counties (or 45 days from the mailing of your assessment notice). Check with your County Board of Taxation — some counties differ. Miss this date and you wait another year.</span>
+    <span><strong>2026 Appeal Deadline: April 1</strong> in most NJ counties (or 45 days from the mailing of your assessment notice). Check with your County Board of Taxation, some counties differ. Miss this date and you wait another year.</span>
   </div>
 </div>
 
@@ -110,10 +110,10 @@
     <div class="info-grid">
       <div class="info-content">
         <h3>Assessed Value vs. Market Value</h3>
-        <p>Your property tax bill is based on your home's <strong>assessed value</strong> — not what your home would actually sell for. Towns assess properties as a percentage of market value, and that percentage (the equalization ratio) varies by town and changes every year.</p>
-        <p>The goal of an appeal is to prove that your <strong>implied market value</strong> (assessed value ÷ equalization ratio) is higher than what your home would actually sell for. If you can show that — usually with recent comparable sales — you win a reduction.</p>
+        <p>Your property tax bill is based on your home's <strong>assessed value</strong>not what your home would actually sell for. Towns assess properties as a percentage of market value, and that percentage (the equalization ratio) varies by town and changes every year.</p>
+        <p>The goal of an appeal is to prove that your <strong>implied market value</strong> (assessed value ÷ equalization ratio) is higher than what your home would actually sell for. If you can show that, usually with recent comparable sales, you win a reduction.</p>
         <div class="info-box"><strong>The math:</strong> Assessed Value ÷ Equalization Ratio = Implied Market Value. If your implied market value is significantly higher than what similar homes are selling for nearby, you have a case.</div>
-        <p>A successful appeal reduces your assessed value. Lower assessed value = lower tax bill — not just for the current year, but going forward until the next municipal reassessment.</p>
+        <p>A successful appeal reduces your assessed value. Lower assessed value = lower tax bill, not just for the current year, but going forward until the next municipal reassessment.</p>
       </div>
       <div>
         <div class="info-card" style="margin-bottom:16px;">
@@ -127,7 +127,7 @@
         </div>
         <div class="info-card">
           <h4 style="font-size:15px;color:var(--navy-dark);margin-bottom:10px;">Where to Find Your Equalization Ratio</h4>
-          <p style="font-size:14px;color:var(--text-muted);">Your town's current equalization ratio is published annually by the NJ Division of Taxation. Search "NJ equalization table" + your county, or ask your local real estate agent — they pull this regularly.</p>
+          <p style="font-size:14px;color:var(--text-muted);">Your town's current equalization ratio is published annually by the NJ Division of Taxation. Search "NJ equalization table" + your county, or ask your local real estate agent, they pull this regularly.</p>
           <a href="https://www.nj.gov/treasury/taxation/lpt/equalization.shtml" target="_blank" class="official-link" style="margin-top:10px;">NJ Equalization Table ↗</a>
         </div>
       </div>
@@ -147,14 +147,14 @@
       <p style="color:#c0cfdf;font-size:14px;margin-bottom:20px;">This is a rough indicator only. A licensed real estate agent can provide actual comparable sales to validate your case.</p>
       <div class="ratio-inputs">
         <div class="ratio-field"><label>Your Assessed Value ($)</label><input type="number" id="r-assessed" placeholder="e.g. 320000" oninput="calcRatio()" min="0"></div>
-        <div class="ratio-field"><label>Equalization Ratio (%) — find at nj.gov</label><input type="number" id="r-ratio" placeholder="e.g. 85" oninput="calcRatio()" min="1" max="100" step="0.1"></div>
+        <div class="ratio-field"><label>Equalization Ratio (%), find at nj.gov</label><input type="number" id="r-ratio" placeholder="e.g. 85" oninput="calcRatio()" min="1" max="100" step="0.1"></div>
         <div class="ratio-field"><label>Your Estimated Market Value ($)</label><input type="number" id="r-market" placeholder="e.g. 340000" oninput="calcRatio()" min="0"></div>
       </div>
       <div class="ratio-result" id="ratio-result">
         <div class="ratio-result-grid">
-          <div class="ratio-box"><div class="rnum" id="r-implied">—</div><div class="rlabel">Implied Market Value<br>(from your assessment)</div></div>
-          <div class="ratio-box"><div class="rnum" id="r-your">—</div><div class="rlabel">Your Estimated<br>Market Value</div></div>
-          <div class="ratio-box"><div class="rnum" id="r-diff">—</div><div class="rlabel">Difference<br>(over/under assessed)</div></div>
+          <div class="ratio-box"><div class="rnum" id="r-implied">-</div><div class="rlabel">Implied Market Value<br>(from your assessment)</div></div>
+          <div class="ratio-box"><div class="rnum" id="r-your">-</div><div class="rlabel">Your Estimated<br>Market Value</div></div>
+          <div class="ratio-box"><div class="rnum" id="r-diff">-</div><div class="rlabel">Difference<br>(over/under assessed)</div></div>
         </div>
         <div class="ratio-verdict" id="r-verdict"></div>
       </div>
@@ -172,7 +172,7 @@
       <div class="appeal-step">
         <div class="step-num">1</div>
         <h4>Receive Your Assessment Notice</h4>
-        <p>Mailed by your town in January or early February. It shows your assessed value for the upcoming tax year — NOT what your home is worth. This triggers your appeal window.</p>
+        <p>Mailed by your town in January or early February. It shows your assessed value for the upcoming tax year: NOT what your home is worth. This triggers your appeal window.</p>
       </div>
       <div class="appeal-step">
         <div class="step-num">2</div>
@@ -187,7 +187,7 @@
       <div class="appeal-step">
         <div class="step-num">4</div>
         <h4>File Before April 1</h4>
-        <p>File your appeal with your County Board of Taxation. Most counties accept online filings. There is a small filing fee for properties assessed above a certain value — typically $25–$150.</p>
+        <p>File your appeal with your County Board of Taxation. Most counties accept online filings. There is a small filing fee for properties assessed above a certain value, typically $25–$150.</p>
       </div>
       <div class="appeal-step">
         <div class="step-num">5</div>
@@ -197,7 +197,7 @@
       <div class="appeal-step">
         <div class="step-num">6</div>
         <h4>Receive Your Decision</h4>
-        <p>If successful, your assessed value is reduced — lowering your tax bill for the current year and permanently going forward until the next reassessment. If unsuccessful, you can appeal again next year.</p>
+        <p>If successful, your assessed value is reduced, lowering your tax bill for the current year and permanently going forward until the next reassessment. If unsuccessful, you can appeal again next year.</p>
       </div>
     </div>
   </div>
@@ -211,15 +211,15 @@
     <div class="info-grid">
       <div class="info-content">
         <h3>What the Tax Board Actually Looks At</h3>
-        <p>The County Board of Taxation evaluates your appeal using one primary metric: recent sales of similar properties in your neighborhood. They want to know — what would your home actually sell for in today's market, compared to what your assessed value implies it's worth?</p>
+        <p>The County Board of Taxation evaluates your appeal using one primary metric: recent sales of similar properties in your neighborhood. They want to know, what would your home actually sell for in today's market, compared to what your assessed value implies it's worth?</p>
         <p>Strong comps are homes that sold in the past 12 months, within a reasonable distance of your property, with similar square footage, bedroom/bathroom count, condition, and lot size. The closer the match, the stronger your case.</p>
-        <div class="info-box"><strong>This is where a real estate agent becomes your best asset.</strong> Licensed agents have direct access to the MLS — the same database that gives the most accurate, up-to-date comparable sales data. And they can pull it for free, because it's part of their everyday work.</div>
-        <p>You can also get an appraisal ($400–$600), which carries more weight, but comps from an agent are often sufficient — especially for straightforward cases.</p>
+        <div class="info-box"><strong>This is where a real estate agent becomes your best asset.</strong> Licensed agents have direct access to the MLS, the same database that gives the most accurate, up-to-date comparable sales data. And they can pull it for free, because it's part of their everyday work.</div>
+        <p>You can also get an appraisal ($400–$600), which carries more weight, but comps from an agent are often sufficient, especially for straightforward cases.</p>
       </div>
       <div>
         <div style="background:var(--info-bg);border-radius:10px;padding:28px;border:1px solid var(--border);">
-          <h3 style="font-size:20px;color:var(--navy-dark);margin-bottom:14px;"><i class="fas fa-gift" style="margin-right:8px;color:var(--navy);"></i>Free Comp Report — No Obligation</h3>
-          <p style="font-size:15px;color:var(--text-muted);margin-bottom:16px;line-height:1.7;">John and Heather Scafide are licensed South Jersey real estate agents with access to the full MLS database. They pull comparable sales reports regularly as part of their work — and they'll pull one for you at no charge.</p>
+          <h3 style="font-size:20px;color:var(--navy-dark);margin-bottom:14px;"><i class="fas fa-gift" style="margin-right:8px;color:var(--navy);"></i>Free Comp Report: No Obligation</h3>
+          <p style="font-size:15px;color:var(--text-muted);margin-bottom:16px;line-height:1.7;">John and Heather Scafide are licensed South Jersey real estate agents with access to the full MLS database. They pull comparable sales reports regularly as part of their work, and they'll pull one for you at no charge.</p>
           <ul style="list-style:none;margin-bottom:20px;">
             <li style="padding:8px 0;font-size:14px;color:var(--text);display:flex;align-items:center;gap:10px;border-bottom:1px solid var(--border);"><i class="fas fa-check" style="color:var(--green);"></i>Recent MLS sales in your neighborhood</li>
             <li style="padding:8px 0;font-size:14px;color:var(--text);display:flex;align-items:center;gap:10px;border-bottom:1px solid var(--border);"><i class="fas fa-check" style="color:var(--green);"></i>Filtered to comparable size and style</li>
@@ -238,7 +238,7 @@
   <div class="section-inner">
     <div class="section-label">Key Deadlines</div>
     <h2 class="section-title">South Jersey County Appeal Deadlines &amp; Filing Info</h2>
-    <p class="section-subtitle">Most NJ counties use April 1 as their deadline, but always verify with your specific county. The 45-day rule also applies — if your assessment notice was mailed late, you may have 45 days from that mailing date.</p>
+    <p class="section-subtitle">Most NJ counties use April 1 as their deadline, but always verify with your specific county. The 45-day rule also applies, if your assessment notice was mailed late, you may have 45 days from that mailing date.</p>
     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px;margin-top:8px;">
       <div class="info-card">
         <h4 style="font-size:16px;color:var(--navy-dark);margin-bottom:12px;"><i class="fas fa-location-dot" style="margin-right:8px;color:var(--navy);"></i>Camden County</h4>
@@ -265,7 +265,7 @@
         <div class="detail-row" style="display:flex;justify-content:space-between;padding:8px 0;font-size:14px;"><span style="color:var(--text-muted);">Website</span><span style="font-weight:600;">salemcountynj.gov</span></div>
       </div>
     </div>
-    <div class="warning-box" style="margin-top:20px;"><strong>Always verify directly with your county</strong> — deadlines can shift and the 45-day rule from assessment notice mailing may give you additional time. When in doubt, file early.</div>
+    <div class="warning-box" style="margin-top:20px;"><strong>Always verify directly with your county</strong>deadlines can shift and the 45-day rule from assessment notice mailing may give you additional time. When in doubt, file early.</div>
   </div>
 </section>
 
@@ -275,12 +275,12 @@
     <div class="section-label">Common Questions</div>
     <h2 class="section-title">Property Tax Appeal FAQ</h2>
     <div style="max-width:780px;">
-      <div class="faq-item"><div class="faq-question" onclick="toggleFAQ(this)">Can appealing my assessment cause my taxes to go UP? <i class="fas fa-chevron-down faq-arrow"></i></div><div class="faq-answer">Yes — this is called a "counter-assessment" or "cross-appeal," and it does happen. If the tax board believes your home is actually worth MORE than your current assessment implies, they can raise it. This is why it's important to know your numbers before filing. If your comps strongly support a lower value, the risk is low. If it's borderline, talk to a real estate agent first to assess the strength of your case.</div></div>
-      <div class="faq-item"><div class="faq-question" onclick="toggleFAQ(this)">Do I need a lawyer to appeal? <i class="fas fa-chevron-down faq-arrow"></i></div><div class="faq-answer">No — for residential properties, most homeowners represent themselves successfully. You present your comparable sales, the assessor presents their defense, and the Tax Board decides. For high-value properties or complex cases, some homeowners hire a tax attorney, but it's not required for a standard single-family home appeal.</div></div>
+      <div class="faq-item"><div class="faq-question" onclick="toggleFAQ(this)">Can appealing my assessment cause my taxes to go UP? <i class="fas fa-chevron-down faq-arrow"></i></div><div class="faq-answer">Yes, this is called a "counter-assessment" or "cross-appeal," and it does happen. If the tax board believes your home is actually worth MORE than your current assessment implies, they can raise it. This is why it's important to know your numbers before filing. If your comps strongly support a lower value, the risk is low. If it's borderline, talk to a real estate agent first to assess the strength of your case.</div></div>
+      <div class="faq-item"><div class="faq-question" onclick="toggleFAQ(this)">Do I need a lawyer to appeal? <i class="fas fa-chevron-down faq-arrow"></i></div><div class="faq-answer">No, for residential properties, most homeowners represent themselves successfully. You present your comparable sales, the assessor presents their defense, and the Tax Board decides. For high-value properties or complex cases, some homeowners hire a tax attorney, but it's not required for a standard single-family home appeal.</div></div>
       <div class="faq-item"><div class="faq-question" onclick="toggleFAQ(this)">How long does an appeal take? <i class="fas fa-chevron-down faq-arrow"></i></div><div class="faq-answer">After you file by April 1, hearings are typically scheduled April through July. You'll receive a notice of your hearing date by mail. The hearing itself usually takes 15–30 minutes. The decision comes by mail within a few weeks after the hearing.</div></div>
-      <div class="faq-item"><div class="faq-question" onclick="toggleFAQ(this)">If I win, how much will my taxes actually go down? <i class="fas fa-chevron-down faq-arrow"></i></div><div class="faq-answer">It depends on how much your assessed value is reduced and your town's tax rate. A rough rule: every $10,000 reduction in assessed value saves approximately $200–$350/year in property taxes (depending on your town's rate). A $50,000 assessment reduction could save $1,000–$1,750/year — permanently, until the next reassessment.</div></div>
-      <div class="faq-item"><div class="faq-question" onclick="toggleFAQ(this)">Can I appeal if I recently bought my home? <i class="fas fa-chevron-down faq-arrow"></i></div><div class="faq-answer">Yes — but your purchase price becomes strong evidence against you if you paid close to or above the assessed value. If you paid less than the implied market value (assessed ÷ ratio), you have a solid case. If you paid more, an appeal is difficult because the market just validated a higher value.</div></div>
-      <div class="faq-item"><div class="faq-question" onclick="toggleFAQ(this)">What happens if my town does a full reassessment? <i class="fas fa-chevron-down faq-arrow"></i></div><div class="faq-answer">In a reassessment year, the equalization ratio typically resets to 100% and all assessed values are updated to current market values. Your prior appeal victories don't carry over — you start fresh. However, you still have the right to appeal the new assessment in the same way.</div></div>
+      <div class="faq-item"><div class="faq-question" onclick="toggleFAQ(this)">If I win, how much will my taxes actually go down? <i class="fas fa-chevron-down faq-arrow"></i></div><div class="faq-answer">It depends on how much your assessed value is reduced and your town's tax rate. A rough rule: every $10,000 reduction in assessed value saves approximately $200–$350/year in property taxes (depending on your town's rate). A $50,000 assessment reduction could save $1,000–$1,750/year, permanently, until the next reassessment.</div></div>
+      <div class="faq-item"><div class="faq-question" onclick="toggleFAQ(this)">Can I appeal if I recently bought my home? <i class="fas fa-chevron-down faq-arrow"></i></div><div class="faq-answer">Yes, but your purchase price becomes strong evidence against you if you paid close to or above the assessed value. If you paid less than the implied market value (assessed ÷ ratio), you have a solid case. If you paid more, an appeal is difficult because the market just validated a higher value.</div></div>
+      <div class="faq-item"><div class="faq-question" onclick="toggleFAQ(this)">What happens if my town does a full reassessment? <i class="fas fa-chevron-down faq-arrow"></i></div><div class="faq-answer">In a reassessment year, the equalization ratio typically resets to 100% and all assessed values are updated to current market values. Your prior appeal victories don't carry over, you start fresh. However, you still have the right to appeal the new assessment in the same way.</div></div>
     </div>
   </div>
 </section>
@@ -290,12 +290,12 @@
     <div class="lead-top">
       <div class="lead-content">
         <h2>Request Your Free Comp Report</h2>
-        <p>John and Heather Scafide are licensed South Jersey agents with full MLS access. They'll pull the comparable sales you need to build a strong appeal case — at no charge.</p>
+        <p>John and Heather Scafide are licensed South Jersey agents with full MLS access. They'll pull the comparable sales you need to build a strong appeal case, at no charge.</p>
         <ul class="lead-points">
-          <li><i class="fas fa-check"></i>MLS comp report for your neighborhood — free</li>
+          <li><i class="fas fa-check"></i>MLS comp report for your neighborhood, free</li>
           <li><i class="fas fa-check"></i>Filtered to match your home's size and style</li>
           <li><i class="fas fa-check"></i>Ready to present to the County Tax Board</li>
-          <li><i class="fas fa-check"></i>No obligation — just a useful free resource</li>
+          <li><i class="fas fa-check"></i>No obligation, just a useful free resource</li>
         </ul>
         <div style="background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.13);border-radius:12px;padding:20px;margin-top:20px;">
           <div style="font-family:'Playfair Display',serif;font-size:17px;color:#fff;font-weight:700;">John Scafide</div>
@@ -315,7 +315,7 @@
           <input type="email" id="cf-email" placeholder="Email address">
           <input type="tel" id="cf-phone" placeholder="Phone number">
           <select id="cf-topic">
-            <option value="Property tax appeal — need comps" selected>Property tax appeal — need comps</option>
+            <option value="Property tax appeal, need comps" selected>Property tax appeal, need comps</option>
             <option>ANCHOR eligibility question</option>
             <option>PAS-1 filing help ($20)</option>
             <option>Thinking about selling my home</option>
@@ -328,7 +328,7 @@
         </div>
         <div class="form-success" id="form-success">
           <i class="fas fa-circle-check check-icon"></i>
-          <h4>Got it — we'll pull your comps!</h4>
+          <h4>Got it, we'll pull your comps!</h4>
           <p>John or Heather will follow up within one business day with your comparable sales report.</p>
         </div>
       </div>
@@ -359,11 +359,11 @@ function calcRatio() {
   document.getElementById('r-diff').style.color    = diff > 0 ? '#f0d87a' : '#7ec8a0';
   var verdict = '';
   if (diff > 15000) {
-    verdict = '<strong style="color:#f0d87a;">You may be over-assessed.</strong> Your implied market value is $' + Math.round(diff).toLocaleString() + ' higher than your estimate. This is worth investigating — request a free comp report to validate your numbers before filing.';
+    verdict = '<strong style="color:#f0d87a;">You may be over-assessed.</strong> Your implied market value is $' + Math.round(diff).toLocaleString() + ' higher than your estimate. This is worth investigating, request a free comp report to validate your numbers before filing.';
   } else if (diff > 0) {
     verdict = '<strong style="color:#f0d87a;">Marginal over-assessment.</strong> There may be a case here, but it depends on what the comps actually show. Request a free comp report to see if the numbers support an appeal.';
   } else {
-    verdict = '<strong style="color:#7ec8a0;">You may not be over-assessed</strong> based on your estimate. Your implied market value is lower than or equal to what you think the home is worth. An appeal may not be warranted — but actual comp data could tell a different story.';
+    verdict = '<strong style="color:#7ec8a0;">You may not be over-assessed</strong> based on your estimate. Your implied market value is lower than or equal to what you think the home is worth. An appeal may not be warranted, but actual comp data could tell a different story.';
   }
   document.getElementById('r-verdict').innerHTML = verdict;
   res.style.display = 'block';

@@ -540,7 +540,7 @@
     root.className = 'wd-onboarding-stage';
     root.setAttribute('aria-busy','false');
     progress.style.width = '4%';
-    root.innerHTML = '<div class="wd-auth-intro"><p class="wd-onboarding-step">YOUR WATCHDOG</p><h1>Save the homes you look up.</h1><p class="wd-onboarding-copy">Free account. Keep your properties in one place, watch their tax and property data, and see what changes.</p></div>' +
+    root.innerHTML = '<div class="wd-auth-intro"><p class="wd-onboarding-step">YOUR WATCHDOG</p><h1>Save the homes you look up.</h1><p class="wd-onboarding-copy">Free account. Save your properties, watch their tax and property data, and see what changes.</p></div>' +
       '<div class="wd-auth-panel">' + buttons + '</div>' +
       '<div class="wd-auth-proof"><span><i class="fas fa-bookmark"></i> Save properties</span><span><i class="fas fa-bell"></i> Watch changes</span><span><i class="fas fa-sparkles"></i> Personalized intelligence</span></div>' +
       '<p class="wd-auth-reassurance"><strong>Free. No card required.</strong> Property search stays free without an account.</p>' +

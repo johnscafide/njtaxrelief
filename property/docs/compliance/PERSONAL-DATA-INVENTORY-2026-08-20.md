@@ -1,4 +1,4 @@
-# Watchdog Personal Data Inventory and Minimization Baseline — 2026-08-20
+# Watchdog Personal Data Inventory and Minimization Baseline: 2026-08-20
 
 **Budget:** $0 internal readiness  
 **Scope:** Watchdog `/property/` first-party account/onboarding profile processing evidenced in repository source.  
@@ -51,19 +51,19 @@ Create a field-level inventory for the required onboarding profile so collection
 
 ## Privacy/minimization findings
 
-### PDI-01 — Demographic fields require continuing necessity review
+### PDI-01: Demographic fields require continuing necessity review
 `age_band`, `household_income_band`, and `household_size` are optional and can improve context, but they create more privacy risk than ordinary product-preference fields. Keep `prefer_not` where applicable, prohibit housing-targeting/eligibility use, and periodically verify that each field still delivers a concrete user benefit. If not, stop collecting it.
 
-### PDI-02 — `responses` intentionally duplicates submitted context
+### PDI-02: `responses` intentionally duplicates submitted context
 The JSON snapshot supports versioning/evidence but duplicates structured fields. This increases deletion/retention surface. Any account deletion or profile-erasure path must cover both structured columns and `responses`; future onboarding versions should avoid adding unrelated free-form data.
 
-### PDI-03 — Personalization preference needs downstream verification
+### PDI-03: Personalization preference needs downstream verification
 The schema defines `intelligence_personalization`, but repository-level proof is still needed that every Intelligence consumer honors `false`. Until verified, the control remains Partial.
 
-### PDI-04 — Retention schedule remains incomplete
+### PDI-04: Retention schedule remains incomplete
 The schema provides cascade deletion when the auth user is deleted, but a documented retention schedule for abandoned/pending profiles, completed profiles, and any downstream copies remains to be established and verified.
 
-### PDI-05 — Connector transfer inventory must reference fields, not vague categories
+### PDI-05: Connector transfer inventory must reference fields, not vague categories
 Future CRM, Zapier, AI, email, marketing, voice, or other connectors must explicitly list which of these fields leave Watchdog, why, and under what retention/deletion terms. Default is no transfer unless required for the user-requested integration or documented product purpose.
 
 ## No-cost treatment plan

@@ -1,4 +1,4 @@
-# Watchdog Backoffice — Lead Intelligence
+# Watchdog Backoffice: Lead Intelligence
 
 Private lead-management area for the two Watchdog operators (John and Heather), served at the clean Watchdog URL `https://www.watchdogindex.com/backoffice`. The physical files live in `property/backoffice/`; that path is an implementation detail and is never used in links.
 
@@ -15,8 +15,8 @@ Private lead-management area for the two Watchdog operators (John and Heather), 
 
 One shared shell (`backoffice-board.css` + `backoffice-shell.js`) is used by every Backoffice page:
 
-- **Leads** and **LeadIQ Tools** — both operators.
-- **Application Reviews** (`/backoffice/reviews`), **Professional Reviews** (`/backoffice/professional-verifications`) and **Real Estate OS** (`/backoffice/realestate`) — shown only when the signed-in account passes the server-side `is_watchdog_developer` check. Pending-review badge counts are requested only for developers. Those pages keep their own developer gate (`data-access-require="developer"`).
+- **Leads** and **LeadIQ Tools**, both operators.
+- **Application Reviews** (`/backoffice/reviews`), **Professional Reviews** (`/backoffice/professional-verifications`) and **Real Estate OS** (`/backoffice/realestate`), shown only when the signed-in account passes the server-side `is_watchdog_developer` check. Pending-review badge counts are requested only for developers. Those pages keep their own developer gate (`data-access-require="developer"`).
 - `crm-companion/` is a developer telemetry page that is not linked from the Backoffice nav.
 
 ## Lead workflow
@@ -40,11 +40,11 @@ All actions require a Backoffice session except the four retired ones.
 
 | Action | Request | Response |
 | --- | --- | --- |
-| `session` | — | `{ok, actor, actor_label, expires_at, operators:[{key,label}], integrations}` |
-| `logout` | — | `{ok}` |
-| `status` | — | `{ok, setup_required:false, google_address_validation}` |
-| `integrations` | — | `{ok, google_address_validation, boldtrail:{john,wife}, profiles}` |
-| `list` | — | `{ok, leads, followups_available, integrations}` |
+| `session` | - | `{ok, actor, actor_label, expires_at, operators:[{key,label}], integrations}` |
+| `logout` | - | `{ok}` |
+| `status` | - | `{ok, setup_required:false, google_address_validation}` |
+| `integrations` | - | `{ok, google_address_validation, boldtrail:{john,wife}, profiles}` |
+| `list` | - | `{ok, leads, followups_available, integrations}` |
 | `detail` | `{lead_id}` | `{ok, lead, events}` |
 | `add` | `{lead}` | `{ok, lead}` (201) |
 | `update` | `{lead_id, patch:{lead_status?, processing_status?, notes?, next_action?, next_action_due?}}` | `{ok, lead}` |
@@ -57,7 +57,7 @@ All actions require a Backoffice session except the four retired ones.
 | `sync_boldtrail_bulk` | `{lead_ids (≤50), profile_key, resend?}` | `{ok, requested_count, synced_count, skipped_count, failed_count, synced, skipped, failed}` |
 | `archive_bulk` | `{lead_ids, archive}` | `{ok, updated}` |
 | `export_csv` | `{profile_key, lead_ids?, include_exported?}` | `{ok, filename, csv, count, excluded_count, export_id}` |
-| `setup`, `login`, `rotate_access_key`, `set_google_key` | — | `410 {error:"retired"}` |
+| `setup`, `login`, `rotate_access_key`, `set_google_key` | - | `410 {error:"retired"}` |
 
 ## LeadIQ Tools
 
@@ -83,9 +83,9 @@ The original BTC application remains at `/btc-legacy.html` while Open House, Pro
 
 ## Server components
 
-- `backoffice-api` — session-checked lead reads/writes, pipeline, follow-ups, notes, contact log, assignment, Google validation, BoldTrail send and CSV export.
-- `backoffice-dev-login` — issues Backoffice sessions to listed Watchdog accounts.
-- `backoffice-lead-ingest` — server-to-server intake scaffold (fail-closed until its intake secret is configured).
+- `backoffice-api` - session-checked lead reads/writes, pipeline, follow-ups, notes, contact log, assignment, Google validation, BoldTrail send and CSV export.
+- `backoffice-dev-login` - issues Backoffice sessions to listed Watchdog accounts.
+- `backoffice-lead-ingest` - server-to-server intake scaffold (fail-closed until its intake secret is configured).
 - Tables: `backoffice_leads`, `backoffice_lead_events`, `backoffice_sessions`, `backoffice_auth_events`, `backoffice_exports`, `backoffice_export_items`, `backoffice_export_profiles`, `backoffice_operators`.
 - `supabase/migrations/20260928250000_backoffice_lead_followups.sql` adds `next_action`, `next_action_due` and `last_contacted_at`. Until it is applied, `list` falls back to the older columns and reports `followups_available: false`.
 
@@ -114,8 +114,8 @@ See `property/docs/professional-review-notifications.md` for EmailJS template se
 
 The professional-profile connection cards are intentionally request-first:
 
-- **Bright MLS** — preferred first MLS integration for Watchdog's New Jersey agent workflow.
-- **Other RESO MLS** — foundation for authorized RESO Web API/member integrations.
-- **Realtor.com** — agents may link a public profile, but Watchdog does not scrape ratings or reviews.
+- **Bright MLS**, preferred first MLS integration for Watchdog's New Jersey agent workflow.
+- **Other RESO MLS**, foundation for authorized RESO Web API/member integrations.
+- **Realtor.com**, agents may link a public profile, but Watchdog does not scrape ratings or reviews.
 
 A request does not mean an integration is connected. Only server-owned provider onboarding may move a connection to `connected`. Backoffice can mark a request ready for provider setup or close it; it cannot fabricate a connected state. Live profile/review synchronization remains disabled until the applicable provider grants Watchdog authorized API/partner access.

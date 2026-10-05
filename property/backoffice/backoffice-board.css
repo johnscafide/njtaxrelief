@@ -1,6 +1,6 @@
 /* Watchdog Backoffice board design: shared tokens, shell and building blocks for
    every Backoffice page. Mirrors the Integration Center board (warm paper
-   background, flat 24px cards, navy pills, 44px targets, Plus Jakarta Sans).
+   background, flat 24px cards, navy pills, 44px targets, Libre Franklin).
    Page stylesheets load after this one. */
 :root{
   --bo-bg:#f3f1ec;--bo-surface:#fbfaf7;--bo-card:#ffffff;--bo-line:#e3dfd6;--bo-line-strong:#c9c2b4;
@@ -8,7 +8,7 @@
   --bo-sky:#e3edfb;--bo-sky-line:#b9d0f2;--bo-teal:#dff1ec;--bo-teal-line:#9fd3c5;--bo-sand:#f6efd9;--bo-sand-line:#e4cf8e;
   --bo-review:#fde2e0;--bo-review-line:#f1b5ae;--bo-good:#0b6b50;--bo-bad:#a61f14;--bo-warn:#6b4e00;
   --bo-radius:24px;--bo-radius-md:18px;--bo-radius-sm:14px;
-  --bo-font:"Plus Jakarta Sans",Inter,system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+  --bo-font:"Libre Franklin",system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
   --bo-shell-h:72px;
   color-scheme:light;
 }

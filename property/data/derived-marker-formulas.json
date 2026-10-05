@@ -497,7 +497,7 @@
     "watchdog.agent.offer_question_density": {
       "range": "score / 100",
       "formula": "count(permit, flood, environmental, title questions)",
-      "professional_reason": "Counts pre-offer diligence questions—not defects or deal outcomes."
+      "professional_reason": "Counts pre-offer diligence questions, not defects or deal outcomes."
     },
     "watchdog.agent.seller_tax_story_stability": {
       "range": "score / 100",
@@ -952,7 +952,7 @@
     "watchdog.njplus.zoning_research_readiness": {
       "range": "score / 100",
       "formula": "coverage(zoning_map_url, zoning_ordinance_url, zoning_officer_contact, master_plan_link)",
-      "professional_reason": "Measures the completeness of linked public zoning resources—not permitted use."
+      "professional_reason": "Measures the completeness of linked public zoning resources, not permitted use."
     },
     "watchdog.njplus.planning_document_currency": {
       "range": "score / 100",
@@ -982,7 +982,7 @@
     "watchdog.njplus.pilot_forecast_confidence": {
       "range": "score / 100",
       "formula": "coverage(payment_schedule, term_remaining, forecast_year)",
-      "professional_reason": "Shows the completeness of an available public forecast—not a revenue prediction."
+      "professional_reason": "Shows the completeness of an available public forecast, not a revenue prediction."
     },
     "watchdog.njplus.development_incentive_profile": {
       "range": "score / 100",

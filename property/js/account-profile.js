@@ -133,7 +133,7 @@
       selectField('acp-household','Household size',row.household_size ? String(row.household_size) : '',[['','Prefer not to say'],['1','1'],['2','2'],['3','3'],['4','4'],['5','5'],['6','6+']]) +
       selectField('acp-composition','Household composition',row.household_composition || 'prefer_not',[['single','Living alone'],['couple','Couple / two-adult household'],['family_children','Family with children'],['multigenerational','Multigenerational household'],['roommates','Roommates / shared household'],['other','Other'],['prefer_not','Prefer not to say']]) +
       selectField('acp-tenure','Time at current residence',row.residence_tenure_band || 'prefer_not',[['under_1','Less than 1 year'],['1_3','1–3 years'],['4_7','4–7 years'],['8_15','8–15 years'],['16_plus','16+ years'],['prefer_not','Prefer not to say']]) +
-      selectField('acp-primary-residence','Primary residence',row.primary_residence === true ? 'yes' : row.primary_residence === false ? 'no' : '',[['','Prefer not to say'],['yes','Yes — this is my primary residence'],['no','No — this is not my primary residence']]);
+      selectField('acp-primary-residence','Primary residence',row.primary_residence === true ? 'yes' : row.primary_residence === false ? 'no' : '',[['','Prefer not to say'],['yes','Yes, this is my primary residence'],['no','No, this is not my primary residence']]);
 
     var note = '<div class="acp-private-note"><i class="fas fa-shield-halved"></i><p>These optional household details stay in your private first-party profile. Watchdog does not copy income, age, household composition or residence history into professional Intelligence or housing-targeting assumptions.</p></div>';
 
@@ -276,7 +276,7 @@
     };
     if (!payload.goals.length) { if (note) note.textContent = 'Choose at least one goal.'; return; }
     if (!payload.property_types.length) { if (note) note.textContent = 'Choose at least one property type.'; return; }
-    // content-architecture: dynamic — this validation message is emitted only when the role-specific professional editor is active and its governed priority state is incomplete.
+    // content-architecture: dynamic, this validation message is emitted only when the role-specific professional editor is active and its governed priority state is incomplete.
     if (editProfessional && !payload.professional_priorities.length) { if (note) note.textContent = 'Choose at least one professional Intelligence priority.'; return; }
 
     saving = true;

@@ -1,4 +1,4 @@
-# CRM Property Resolution Gold Set — 2026-08-19
+# CRM Property Resolution Gold Set: 2026-08-19
 
 **Status:** Production gold set established and expanded  
 **Last verified:** 2026-08-20  
@@ -63,7 +63,7 @@ Unique enriched candidates use a lower evidence confidence than native exact-ZIP
 
 An earlier missing-ZIP cohort found **12 unique deterministic shadow candidates out of 22 unresolved records**, with **0 ambiguous matches**. Before those records were reprocessed in production, fresh BoldTrail contact-detail data supplied ZIPs. The controlled production rerun therefore used the stronger existing exact-ZIP route for those records rather than the enrichment route. This proves the enrichment path can recover additional deterministic candidates, but it is not a claim that a live human-reviewed relationship was created by the enrichment route itself.
 
-### Full-current-gold closeout regression — 2026-08-20
+### Full-current-gold closeout regression: 2026-08-20
 
 The enrichment rule was rerun against **all 105 current human-verified gold relationships** by deliberately withholding ZIP evidence and asking NJOGIS to recover it.
 

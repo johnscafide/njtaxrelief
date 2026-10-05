@@ -1,4 +1,4 @@
-/* NJW-96 refinement — Zillow-style public search controls, Watchdog score
+/* NJW-96 refinement: Zillow-style public search controls, Watchdog score
    filtering, property card controls, town SEO clusters and search footer art. */
 (function () {
   'use strict';
@@ -219,7 +219,7 @@
     var address = card.getAttribute('data-address') || ((card.querySelector('.hd-addr') || {}).textContent || 'New Jersey property');
     var url = location.origin + '/property/';
     if (navigator.share) { navigator.share({ title:address, text:address + ' on Watchdog Property Info', url:url }).catch(function(){}); return; }
-    var text = address + ' — ' + url;
+    var text = address + ' - ' + url;
     if (navigator.clipboard) navigator.clipboard.writeText(text).then(function(){toast('Property link copied');});
     else toast('Share: ' + address);
   }
@@ -267,7 +267,7 @@
   }
   function townCard(row,showScore) {
     var stat=statFor(row)||row,score=scoreFor(row);
-    return '<a class="njw-town-card" href="'+townUrl(stat)+'"><b>'+esc(stat.town)+'</b><span>'+esc(stat.county)+' County</span><em>Avg. assessment '+money(stat.avg||0)+'</em>'+(showScore?'<strong>Watchdog Score '+(score==null?'—':score.toFixed(1))+'</strong>':'')+'</a>';
+    return '<a class="njw-town-card" href="'+townUrl(stat)+'"><b>'+esc(stat.town)+'</b><span>'+esc(stat.county)+' County</span><em>Avg. assessment '+money(stat.avg||0)+'</em>'+(showScore?'<strong>Watchdog Score '+(score==null?'-':score.toFixed(1))+'</strong>':'')+'</a>';
   }
   function renderSeo(host) {
     var currentName=currentTownName(),currentNear=null;

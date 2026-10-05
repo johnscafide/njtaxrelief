@@ -19,7 +19,7 @@ Therefore the canonical Class 2 segmented COD is the sixth numeric/dash token af
 ## Authoritative source currently recovered
 
 - Publisher: New Jersey Division of Taxation
-- Publication: **Measures of Property Assessment Uniformity in New Jersey Taxing Districts — Coefficients of Deviation**
+- Publication: **Measures of Property Assessment Uniformity in New Jersey Taxing Districts: Coefficients of Deviation**
 - Publication date printed in source: 2026-01-29
 - Covered years in this edition: 2022, 2023, 2024, 2025
 - Source index: https://www.nj.gov/treasury/taxation/lpt/statdata.shtml

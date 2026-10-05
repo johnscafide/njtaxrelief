@@ -81,7 +81,7 @@ for (const path of ['property/backoffice/backoffice-board.css', 'property/backof
   must(!/font-size:\s*(?:[0-9]|1[01])(?:\.\d+)?px|font:\s*\d{3}\s+(?:[0-9]|1[01])(?:\.\d+)?px/.test(css), `${path}: text must be at least 12px.`);
 }
 const board = read('property/backoffice/backoffice-board.css');
-must(board.includes('--bo-bg:#f3f1ec') && board.includes('--bo-surface:#fbfaf7') && board.includes('--bo-navy:#0e2248') && board.includes('--bo-radius:24px') && board.includes('"Plus Jakarta Sans"'), 'Board tokens must match the Integration Center board.');
+must(board.includes('--bo-bg:#f3f1ec') && board.includes('--bo-surface:#fbfaf7') && board.includes('--bo-navy:#0e2248') && board.includes('--bo-radius:24px') && board.includes('"Libre Franklin"'), 'Board tokens must match the Integration Center board.');
 must(/\.bo-btn\{[^}]*min-height:44px/.test(board) && /\.bo-nav a\{[^}]*min-height:44px/.test(board) && /\.bo-search input\{[^}]*min-height:44px|:is\(input,select,textarea\),\.bo-search input\{[^}]*min-height:44px/.test(board), 'Buttons, nav pills and inputs must keep 44px targets.');
 must(/:focus-visible\{outline:3px solid/.test(board), 'Focus rings must be visible.');
 must(/\.bo-detail\.is-open\{[^}]*position:fixed;inset:0/.test(read('property/backoffice/backoffice.css')), 'Lead detail must open as a full-screen sheet on phones.');

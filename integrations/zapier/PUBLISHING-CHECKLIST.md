@@ -1,4 +1,4 @@
-# Watchdog for Zapier — Publishing Package
+# Watchdog for Zapier: Publishing Package
 
 **Status:** In progress  
 **Connector version:** 1.1.0  
@@ -16,7 +16,7 @@
 - Public Zapier setup/API/support guide: `/property/integrations/zapier/`
 - Internal architecture manual: `/property/whitepapers/zapier-watchdog-intelligence/`
 
-## Current external evidence snapshot — 2026-08-21
+## Current external evidence snapshot: 2026-08-21
 
 Production state was re-checked before this publishing pass:
 
@@ -117,7 +117,7 @@ Never ask a customer to email a Watchdog API key to support.
 | Action | Send CRM Context to Watchdog | ☐ | ☐ | ☐ | Context is non-authoritative |
 | Action | Run Watchdog Intelligence for Property | ☐ | ☐ | ☐ | Requires Intelligence run permission |
 
-## Closure gates — remaining before NJW-233 can be Done
+## Closure gates, remaining before NJW-233 can be Done
 
 ### A. Zapier Developer Platform
 

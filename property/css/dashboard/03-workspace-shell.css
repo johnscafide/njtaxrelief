@@ -18,7 +18,7 @@
   --saas-text: #16253d;
   --saas-muted: #6c788b;
   --saas-border: #e1e7ee;
-  --saas-shadow: 0 10px 32px rgba(16, 41, 75, .07);
+  --saas-shadow: 0 2px 6px rgba(15,23,42,.08);
 }
 
 body {
@@ -106,7 +106,7 @@ body {
 /* Workspace header */
 .top {
   background: rgba(255,255,255,.96); border-bottom: 1px solid var(--saas-border); position: sticky; top: 0;
-  z-index: 100; backdrop-filter: blur(10px);
+  z-index: 100; 
 }
 .top-in { align-items: center; max-width: 1440px; padding: 17px 34px; }
 .who img, .db-noav, .noav { height: 44px; width: 44px; }
@@ -153,7 +153,7 @@ body {
 
 /* Property surfaces */
 .pr {
-  background: #fff; border: 1px solid var(--saas-border); border-radius: 13px; box-shadow: 0 4px 18px rgba(16,41,75,.045);
+  background: #fff; border: 1px solid var(--saas-border); border-radius: 13px; box-shadow: 0 2px 6px rgba(15,23,42,.08);
   margin: 0 0 14px; overflow: visible; padding: 20px; transition: border-color .18s ease, box-shadow .18s ease, transform .18s ease;
 }
 .pr:hover { border-color: #cbd6e2; box-shadow: var(--saas-shadow); transform: translateY(-1px); }
@@ -172,7 +172,7 @@ body {
 
 /* Tool cards */
 .sec {
-  background: #fff; border: 1px solid var(--saas-border); border-radius: 13px; box-shadow: 0 4px 18px rgba(16,41,75,.04);
+  background: #fff; border: 1px solid var(--saas-border); border-radius: 13px; box-shadow: 0 2px 6px rgba(15,23,42,.08);
   margin-top: 18px; padding: 22px 24px;
 }
 .sec h4 { color: var(--saas-text); font-size: 12px; margin-bottom: 20px; }
@@ -224,7 +224,7 @@ body {
 .db-page-head > div > span { color: var(--saas-teal); font-size: 10px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; }
 .db-page-head h2 { color: var(--saas-text); font-family: var(--sans); font-size: 26px; letter-spacing: -.03em; margin: 4px 0 0; }
 .db-page-head p { color: var(--saas-muted); font-size: 13.5px; line-height: 1.55; margin: 0; max-width: 480px; }
-.pf { background: #fff; border: 1px solid var(--saas-border); border-radius: 13px; box-shadow: 0 4px 18px rgba(16,41,75,.04); max-width: 920px; padding: 25px; }
+.pf { background: #fff; border: 1px solid var(--saas-border); border-radius: 13px; box-shadow: 0 2px 6px rgba(15,23,42,.08); max-width: 920px; padding: 25px; }
 .pg { border-color: var(--saas-border); }
 .pg-h { border-radius: 7px; padding-left: 8px; padding-right: 8px; }
 .pg-h:hover { background: #f7f9fb; }
@@ -246,7 +246,7 @@ body {
 @media (max-width: 760px) {
   .db-shell { display: block; }
   .db-sidebar {
-    align-items: center; bottom: 0; box-shadow: 0 -5px 22px rgba(16,41,75,.16); flex-direction: row;
+    align-items: center; bottom: 0; box-shadow: 0 2px 6px rgba(15,23,42,.08); flex-direction: row;
     height: 66px; justify-content: space-around; left: 0; padding: 7px 10px; position: fixed; right: 0; top: auto; width: 100%; z-index: 1000;
   }
   .db-side-brand, .db-side-label, .db-side-section:nth-of-type(2), .db-side-account { display: none; }

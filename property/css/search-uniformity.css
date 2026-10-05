@@ -17,7 +17,7 @@ body.hood-on #njw-filterbar .njw-search-slot .pl-input-wrap.njw-uniform-property
   min-width:0;
   margin:0;
   padding:4px 5px 4px 4px!important;
-  box-shadow:0 6px 18px rgba(14,34,72,.14),0 1px 4px rgba(14,34,72,.08)!important;
+  box-shadow:0 2px 6px rgba(15,23,42,.08),0 1px 4px rgba(14,34,72,.08)!important;
 }
 body.hood-on #njw-filterbar .njw-search-slot .pl-input-wrap.njw-uniform-property-search .pl-input{
   padding:10px 8px!important;
@@ -41,7 +41,7 @@ body.hood-on .wd-nav{
   border-bottom:1px solid #d9e1e8!important;
 }
 body.hood-on .wd-nav{
-  box-shadow:0 4px 18px rgba(14,34,72,.07)!important;
+  box-shadow:0 2px 6px rgba(15,23,42,.08)!important;
 }
 
 /* The public solid nav sits at z-index 6200. Property detail panels must sit

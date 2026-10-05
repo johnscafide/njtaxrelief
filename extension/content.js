@@ -79,7 +79,7 @@
 
   const CSS = `
   :host{all:initial}
-  .wd{position:fixed;right:16px;bottom:16px;z-index:2147483646;width:360px;max-width:calc(100vw - 32px);font:14px/1.45 "Plus Jakarta Sans",-apple-system,"Segoe UI",Roboto,Arial,sans-serif;color:#0e2248;background:#f3f1ec;border:1px solid #e3dfd6;border-radius:22px;box-shadow:0 14px 36px rgba(14,34,72,.22);overflow:hidden}
+  .wd{position:fixed;right:16px;bottom:16px;z-index:2147483646;width:360px;max-width:calc(100vw - 32px);font:14px/1.45 "Libre Franklin",-apple-system,"Segoe UI",Roboto,Arial,sans-serif;color:#0e2248;background:#f3f1ec;border:1px solid #e3dfd6;border-radius:22px;box-shadow:0 2px 6px rgba(15,23,42,.08);overflow:hidden}
   .wd.min .body{display:none}
   .head{display:flex;align-items:center;gap:10px;padding:10px 12px;background:#0e2248;color:#fff}
   .head img{width:26px;height:26px;border-radius:7px}
@@ -96,7 +96,7 @@
   .card h3{margin:0 0 6px;font-size:12px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:#5d6877}
   .score{background:#0e2248;border-color:#0e2248;color:#fff;display:flex;align-items:center;gap:14px}
   .score h3{color:rgba(255,255,255,.7)}
-  .score .big{font:700 40px/1 "Plus Jakarta Sans",system-ui,sans-serif;letter-spacing:-.03em;padding-bottom:4px;border-bottom:2px solid #b8972a}
+  .score .big{font:700 40px/1 "Libre Franklin",system-ui,sans-serif;letter-spacing:-.03em;padding-bottom:4px;border-bottom:2px solid #b8972a}
   .score .big small{font-size:14px;font-weight:600;color:rgba(255,255,255,.7);border:0}
   .score p{margin:0;font-size:13px;color:rgba(255,255,255,.85)}
   .tax{background:#e3edfb;border-color:#e3edfb}
@@ -104,7 +104,7 @@
   .sales{background:#dff1ec;border-color:#dff1ec}
   .row{display:flex;justify-content:space-between;gap:10px;font-size:13px;padding:3px 0}
   .row b{font-size:14px;white-space:nowrap}
-  .lead{font:700 22px/1.1 "Plus Jakarta Sans",system-ui,sans-serif;letter-spacing:-.02em}
+  .lead{font:700 22px/1.1 "Libre Franklin",system-ui,sans-serif;letter-spacing:-.02em}
   .note{margin:6px 0 0;font-size:12.5px;color:#142033}
   .muted{color:#5d6877}
   .verdict{margin-top:8px;padding:8px 10px;border-radius:12px;background:rgba(255,255,255,.7);font-size:12.5px}

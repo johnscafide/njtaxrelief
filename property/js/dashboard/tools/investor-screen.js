@@ -52,8 +52,8 @@
           '<td class="num">' + money(x.r.last_year_tax) + '</td>' +
           '<td class="num"><b>$' + x.burden.toFixed(2) + '</b></td>' +
           '<td class="num' + (x.overBy > 0 ? ' neg' : '') + '">' +
-            (x.overBy > 0 ? money(x.overBy) : '\u2014') + '</td>' +
-          '<td class="num">' + (x.uniformity != null ? x.uniformity : '\u2014') + '</td></tr>';
+            (x.overBy > 0 ? money(x.overBy) : '-') + '</td>' +
+          '<td class="num">' + (x.uniformity != null ? x.uniformity : '-') + '</td></tr>';
       }).join('') + '</tbody></table></div>' +
 
       (worst.burden > best.burden * 1.15

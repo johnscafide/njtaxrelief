@@ -2050,7 +2050,7 @@
     {
       "id": "watchdog.njplus.zoning_research_readiness",
       "label": "Zoning Research Readiness",
-      "description": "Measures the completeness of linked public zoning resources\u2014not permitted use.",
+      "description": "Measures the completeness of linked public zoning resources, not permitted use.",
       "category": "planning",
       "scope": "municipality",
       "tier": "pro_plus",
@@ -2066,7 +2066,7 @@
       "source_id": "watchdog-nj-source-v031",
       "field": "zoning_research_readiness",
       "formula": "coverage(zoning_map_url, zoning_ordinance_url, zoning_officer_contact, master_plan_link)",
-      "professional_reason": "Measures the completeness of linked public zoning resources\u2014not permitted use.",
+      "professional_reason": "Measures the completeness of linked public zoning resources, not permitted use.",
       "unit": "score / 100",
       "dependencies": [
         "nj-dca-zoning-directory"
@@ -2410,7 +2410,7 @@
     {
       "id": "watchdog.njplus.pilot_forecast_confidence",
       "label": "PILOT Forecast Confidence",
-      "description": "Shows the completeness of an available public forecast\u2014not a revenue prediction.",
+      "description": "Shows the completeness of an available public forecast, not a revenue prediction.",
       "category": "municipal finance",
       "scope": "municipality",
       "tier": "pro_plus",
@@ -2426,7 +2426,7 @@
       "source_id": "watchdog-nj-source-v031",
       "field": "pilot_forecast_confidence",
       "formula": "coverage(payment_schedule, term_remaining, forecast_year)",
-      "professional_reason": "Shows the completeness of an available public forecast\u2014not a revenue prediction.",
+      "professional_reason": "Shows the completeness of an available public forecast, not a revenue prediction.",
       "unit": "score / 100",
       "dependencies": [
         "nj-dca-pilot-forecast"

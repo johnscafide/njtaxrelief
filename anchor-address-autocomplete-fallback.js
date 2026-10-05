@@ -37,7 +37,7 @@
       'body.est-page.awd-njgis-address-fallback .awd-search-box{display:none!important}',
       'body.est-page.awd-njgis-address-fallback .pac-container{display:none!important}',
       '.awd-njgis-host{position:relative!important}',
-      '.awd-njgis-box{position:absolute;left:0;right:0;top:calc(100% + 8px);z-index:9100;display:none;max-height:320px;overflow:auto;background:#fff;border:1px solid #dfe5ee;border-radius:14px;box-shadow:0 18px 42px rgba(14,34,72,.18);text-align:left}',
+      '.awd-njgis-box{position:absolute;left:0;right:0;top:calc(100% + 8px);z-index:9100;display:none;max-height:320px;overflow:auto;background:#fff;border:1px solid #dfe5ee;border-radius:14px;box-shadow:0 2px 6px rgba(15,23,42,.08);text-align:left}',
       '.awd-njgis-box.open{display:block}',
       '.awd-njgis-option{appearance:none;width:100%;border:0;border-top:1px solid #edf1f5;background:#fff;padding:12px 14px;text-align:left;cursor:pointer;color:#10294b}',
       '.awd-njgis-option:first-child{border-top:0}',

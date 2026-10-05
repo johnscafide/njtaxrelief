@@ -224,7 +224,7 @@
         return item;
       }));
     }
-    // content-architecture: dynamic — image descriptions follow the selected real or illustrative screenshot.
+    // content-architecture: dynamic, image descriptions follow the selected real or illustrative screenshot.
     const live = key === 'platform';
     if (tourImage) {
       tourImage.src = live ? '/agent/assets/platform-live.png' : '/agent/assets/platform-illustrative.png';
@@ -234,7 +234,7 @@
       tourImage.dataset.screenshotType = live ? 'actual-public-platform' : 'illustrative-agent-dashboard';
     }
     if (tourCaption) {
-      // content-architecture: dynamic — discloses which screenshot type is selected; the public view is not presented as an Agent dashboard.
+      // content-architecture: dynamic, discloses which screenshot type is selected; the public view is not presented as an Agent dashboard.
       tourCaption.textContent = live
         ? 'Actual Watchdog public Uniformity Index page (/fairness). This is public research, not an Agent dashboard.'
         : 'Illustrative Agent dashboard. The property, values and activity shown are sample data.';
@@ -273,7 +273,7 @@
   }
 
   function billingError(error) {
-    // content-architecture: dynamic — checkout feedback is selected from live billing errors, not marketing content.
+    // content-architecture: dynamic, checkout feedback is selected from live billing errors, not marketing content.
     const messages = {
       BILLING_ENROLLMENT_CLOSED: 'Paid enrollment is not open yet. Watchdog is finishing its launch checks.',
       BILLING_CONTROLLED_ONLY: 'Checkout is currently limited to controlled launch accounts.',

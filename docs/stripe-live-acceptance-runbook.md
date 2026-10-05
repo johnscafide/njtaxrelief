@@ -8,12 +8,12 @@ This runbook is the final technical path from the current fail-closed billing st
 - New-subscription provider: Stripe
 - Active products: Watchdog Agent, Watchdog Pro, Watchdog Pro+
 - Active Live recurring catalog:
-  - Agent monthly: `$59` — lookup key `watchdog_agent_monthly`
-  - Agent yearly: `$590` — lookup key `watchdog_agent_yearly`
-  - Pro monthly: `$129` — lookup key `watchdog_pro_monthly`
-  - Pro yearly: `$1,290` — lookup key `watchdog_pro_yearly`
-  - Pro+ monthly: `$399` — lookup key `watchdog_pro_plus_monthly`
-  - Pro+ yearly: `$3,990` — lookup key `watchdog_pro_plus_yearly`
+  - Agent monthly: `$59` - lookup key `watchdog_agent_monthly`
+  - Agent yearly: `$590` - lookup key `watchdog_agent_yearly`
+  - Pro monthly: `$129` - lookup key `watchdog_pro_monthly`
+  - Pro yearly: `$1,290` - lookup key `watchdog_pro_yearly`
+  - Pro+ monthly: `$399` - lookup key `watchdog_pro_plus_monthly`
+  - Pro+ yearly: `$3,990` - lookup key `watchdog_pro_plus_yearly`
 - `create-checkout-session` v38 resolves the active environment's Price through Stripe by lookup key and requires one unique active USD recurring Price with the expected amount and interval.
 - The six historical `STRIPE_PRICE_*` variables remain optional overrides only. They are not required for normal Checkout.
 - `get-platform-health` v20 independently requires a Live Stripe key and verifies all six lookup-key prices before configuration can pass.
@@ -30,8 +30,8 @@ Enter secret values **directly in the Supabase production project**. Do not plac
 
 The only Stripe secret values required for the current implementation are:
 
-- `STRIPE_SECRET_KEY` — production Stripe secret key (`sk_live_…`)
-- `STRIPE_WEBHOOK_SIGNING_SECRET` — signing secret for webhook endpoint `we_1U1xCXAgYeNIcesFdsgxEtPO`
+- `STRIPE_SECRET_KEY` - production Stripe secret key (`sk_live_…`)
+- `STRIPE_WEBHOOK_SIGNING_SECRET` - signing secret for webhook endpoint `we_1U1xCXAgYeNIcesFdsgxEtPO`
 
 Controlled-launch configuration is also required:
 
@@ -225,7 +225,7 @@ Public enrollment is the final billing change:
 The fastest safe billing stop is:
 
 1. set `BILLING_CHECKOUT_MODE=closed`;
-2. disable the Stripe webhook endpoint only if webhook processing itself is unsafe — do not disable it merely to stop new sales because existing subscriber state still needs reconciliation;
+2. disable the Stripe webhook endpoint only if webhook processing itself is unsafe, do not disable it merely to stop new sales because existing subscriber state still needs reconciliation;
 3. restore the public checkout guard if needed;
 4. do not delete Stripe customers/subscriptions or Watchdog billing history as a rollback mechanism;
 5. correct state forward from signed provider evidence.

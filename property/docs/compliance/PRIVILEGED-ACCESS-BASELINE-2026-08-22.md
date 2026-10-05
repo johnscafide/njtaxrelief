@@ -1,4 +1,4 @@
-# Watchdog Privileged Access Governance Baseline — 2026-08-22
+# Watchdog Privileged Access Governance Baseline: 2026-08-22
 
 **Budget:** $0  
 **Scope:** Watchdog `/property/` application, Supabase-backed privileged application roles, internal developer-only surfaces, service-role backed server functions, and backoffice privileged sessions.  

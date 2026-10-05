@@ -64,6 +64,6 @@ struct PropertyOverview: View {
 
     private var blockLot: String {
         if property.block.isEmpty && property.lot.isEmpty { return "Not reported" }
-        return "\(property.block.isEmpty ? "—" : property.block) / \(property.lot.isEmpty ? "—" : property.lot)"
+        return "\(property.block.isEmpty ? "-" : property.block) / \(property.lot.isEmpty ? "-" : property.lot)"
     }
 }

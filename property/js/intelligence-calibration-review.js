@@ -52,21 +52,21 @@ async function call(action,extra={}){
 
 function num(v,d=2){
   const n=Number(v);
-  return Number.isFinite(n)?n.toLocaleString('en-US',{maximumFractionDigits:d}):'—';
+  return Number.isFinite(n)?n.toLocaleString('en-US',{maximumFractionDigits:d}):'-';
 }
 function money(v){
   const n=Number(v);
-  return Number.isFinite(n)?n.toLocaleString('en-US',{style:'currency',currency:'USD',maximumFractionDigits:0}):'—';
+  return Number.isFinite(n)?n.toLocaleString('en-US',{style:'currency',currency:'USD',maximumFractionDigits:0}):'-';
 }
 function scorePct(v){
   const n=Number(v);
-  return Number.isFinite(n)?`${Math.round(n)}%`:'—';
+  return Number.isFinite(n)?`${Math.round(n)}%`:'-';
 }
 function labelName(v){
   return v==='review_priority'?'Priority':v==='not_priority'?'Not priority':v==='uncertain'?'Uncertain':'Unreviewed';
 }
 function predictedName(v){
-  return v==='review_priority'?'Priority':v==='not_priority'?'Not priority':v==='insufficient_evidence'?'Insufficient evidence':'—';
+  return v==='review_priority'?'Priority':v==='not_priority'?'Not priority':v==='insufficient_evidence'?'Insufficient evidence':'-';
 }
 function activeSetObject(){return sets.find(s=>s.id===activeSet)||null;}
 function isDevelopmentSanity(set=activeSetObject()){
@@ -119,7 +119,7 @@ async function semanticFacts(c){
 function markerValue(m){
   if(!m||m.state!=='available')return'Not available';
   if(/tax|price|assess/i.test(String(m.id||''))&&Number.isFinite(Number(m.value)))return money(m.value);
-  return typeof m.value==='number'?num(m.value,4):String(m.value??'—');
+  return typeof m.value==='number'?num(m.value,4):String(m.value??'-');
 }
 
 function factsMarkup(data){
@@ -167,7 +167,7 @@ function renderCase(c,facts){
   const done=(c.expected_class||'unreviewed')!=='unreviewed';
   const sanity=isDevelopmentSanity();
   const set=activeSetObject();
-  const eyebrow=sanity?'DEVELOPMENT SANITY · NOT CALIBRATION':`${esc(set?.model_key||'MODEL')} · VERSION ${esc(set?.model_version||'—')}`;
+  const eyebrow=sanity?'DEVELOPMENT SANITY · NOT CALIBRATION':`${esc(set?.model_key||'MODEL')} · VERSION ${esc(set?.model_version||'-')}`;
   const intro=sanity
     ? 'Would you want Watchdog to surface this as a real transaction follow-up? Judge usefulness and actionability, not whether the property is generally risky. These 10 answers can improve the draft but cannot validate or promote it.'
     : "Would this evidence independently justify putting the property in this model's review queue? Do not infer seller intent, value, profit, legal outcome, urgency, or facts that are not shown.";

@@ -34,16 +34,16 @@ OWASP ASVS 5.0.0 is the pinned version for this baseline. Requirement references
 
 The first requirement-level reviews should focus on the highest-impact Watchdog boundaries:
 
-1. **Authentication documentation** — document all sign-in, recovery and verification paths and the controls applied to each.
-2. **One-time code handling** — verify out-of-band/one-time verification codes cannot be successfully reused.
-3. **Session lifecycle** — document all session-producing systems, expiry/termination behavior, and re-authentication for sensitive account changes.
-4. **Authorization** — demonstrate server/database authorization independently of client-side hiding for developer, paid-tier, account and record boundaries.
-5. **OAuth/OIDC** — verify transaction binding, redirect constraints, PKCE/state/nonce responsibilities and token exposure.
-6. **Backend-to-backend communication** — identify service identities, scopes and least privilege; replace static privileged credentials where practical.
-7. **Security logging** — document required security events and prohibited sensitive fields.
-8. **Data protection** — classify customer profile, lead, verification, billing metadata and public-record data; link retention/deletion requirements.
-9. **Secure communication** — retain repeatable TLS/HSTS evidence for production domains.
-10. **Configuration** — document fail-closed behavior, security headers, secret boundaries and production configuration ownership.
+1. **Authentication documentation**, document all sign-in, recovery and verification paths and the controls applied to each.
+2. **One-time code handling**, verify out-of-band/one-time verification codes cannot be successfully reused.
+3. **Session lifecycle**, document all session-producing systems, expiry/termination behavior, and re-authentication for sensitive account changes.
+4. **Authorization**, demonstrate server/database authorization independently of client-side hiding for developer, paid-tier, account and record boundaries.
+5. **OAuth/OIDC**, verify transaction binding, redirect constraints, PKCE/state/nonce responsibilities and token exposure.
+6. **Backend-to-backend communication**, identify service identities, scopes and least privilege; replace static privileged credentials where practical.
+7. **Security logging**, document required security events and prohibited sensitive fields.
+8. **Data protection**, classify customer profile, lead, verification, billing metadata and public-record data; link retention/deletion requirements.
+9. **Secure communication**, retain repeatable TLS/HSTS evidence for production domains.
+10. **Configuration**, document fail-closed behavior, security headers, secret boundaries and production configuration ownership.
 
 ## Verification record template
 

@@ -12,7 +12,7 @@
 
 .wd-anchor-rating-summary strong {
   color: #102b4e;
-  font: 800 13px/1 "Plus Jakarta Sans", Arial, sans-serif;
+  font: 800 13px/1 "Libre Franklin", Arial, sans-serif;
 }
 
 .wd-anchor-rating-stars {
@@ -40,7 +40,7 @@
 
 .wd-anchor-rating-summary.is-featured strong {
   color: #102b4e;
-  font: 800 21px/1 "Plus Jakarta Sans", Arial, sans-serif;
+  font: 800 21px/1 "Libre Franklin", Arial, sans-serif;
 }
 
 .wd-anchor-rating-summary.is-featured .wd-anchor-rating-stars {
@@ -79,8 +79,7 @@
     linear-gradient(145deg,#ffffff 0%,#f3f8ff 58%,#edf5ff 100%);
   box-shadow:
     0 0 0 5px rgba(47,123,232,.075),
-    0 18px 44px rgba(26,79,156,.16),
-    0 0 38px rgba(47,123,232,.16),
+    0 2px 6px rgba(15,23,42,.08),
     inset 5px 0 0 #1466d8;
   color: #102b4e;
 }
@@ -97,7 +96,7 @@
   border-radius: 999px;
   background: #eaf2ff;
   color: #0e57be;
-  font: 800 11px/1 "Plus Jakarta Sans", Arial, sans-serif;
+  font: 800 11px/1 "Libre Franklin", Arial, sans-serif;
   letter-spacing: .095em;
   text-transform: uppercase;
 }
@@ -138,8 +137,8 @@
   border-radius: 10px;
   background: #eaf2ff;
   color: #1466d8;
-  box-shadow: 0 8px 20px rgba(20,102,216,.14);
-  font: 800 18px/1 "Plus Jakarta Sans", Arial, sans-serif;
+  box-shadow: 0 2px 6px rgba(15,23,42,.08);
+  font: 800 18px/1 "Libre Franklin", Arial, sans-serif;
 }
 
 .wd-anchor-quick-intro .wd-free-help.is-compact .wd-free-help-copy strong {
@@ -147,7 +146,7 @@
   max-width: 500px;
   margin: 0;
   color: #0d2e5d;
-  font: 800 22px/1.22 "Plus Jakarta Sans", Arial, sans-serif;
+  font: 800 22px/1.22 "Libre Franklin", Arial, sans-serif;
   letter-spacing: -.45px;
 }
 
@@ -192,7 +191,7 @@
   border: 1px solid #dfe6ef;
   border-radius: 20px;
   background: #fff;
-  box-shadow: 0 10px 30px rgba(16,43,78,.06);
+  box-shadow: 0 2px 6px rgba(15,23,42,.08);
 }
 
 .wd-anchor-testimonials[hidden] { display: none !important; }
@@ -207,13 +206,13 @@
 
 .wd-anchor-testimonials-head span {
   color: #8a650d;
-  font: 800 10px/1.2 "Plus Jakarta Sans", Arial, sans-serif;
+  font: 800 10px/1.2 "Libre Franklin", Arial, sans-serif;
   letter-spacing: .11em;
 }
 
 .wd-anchor-testimonials-head strong {
   color: #102b4e;
-  font: 800 17px/1.2 "Plus Jakarta Sans", Arial, sans-serif;
+  font: 800 17px/1.2 "Libre Franklin", Arial, sans-serif;
 }
 
 .wd-anchor-testimonials-grid {
@@ -266,8 +265,7 @@
     border-radius: 18px;
     box-shadow:
       0 0 0 4px rgba(47,123,232,.07),
-      0 14px 32px rgba(26,79,156,.14),
-      0 0 28px rgba(47,123,232,.12),
+      0 2px 6px rgba(15,23,42,.08),
       inset 4px 0 0 #1466d8;
   }
   .wd-anchor-quick-intro .wd-free-help.is-compact::before {

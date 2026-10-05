@@ -144,7 +144,7 @@
     fetch('/property/partials/footer.html').then(function (r) { return r.ok ? r.text() : ''; }).then(function (html) {
       var host = $('tn-footer');
       if (!host || !html) return;
-      // content-architecture: dynamic — the shared site footer partial.
+      // content-architecture: dynamic, the shared site footer partial.
       host.innerHTML = html;
       host.querySelectorAll('script').forEach(function (old) {
         var s = document.createElement('script');

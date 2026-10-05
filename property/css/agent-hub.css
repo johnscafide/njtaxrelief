@@ -1,7 +1,7 @@
 /* Watchdog Agent Desk hub (board design).
    One page, five areas (Today, Clients, Farm, Marketing, Research), tools open inside
    the desk. Board language: cream paper background, 24px flat cards, navy pills,
-   Plus Jakarta Sans headings. Layout and section chrome only; worklist, lists,
+   Libre Franklin headings. Layout and section chrome only; worklist, lists,
    territories and results keep their agent-desk.css styles.
    Without agent-hub.js (.adh-ready absent) the rail and tab bar stay hidden and every
    section shows in order. Readability floor: 12px text, 42px desktop / 48px phone controls. */
@@ -21,7 +21,7 @@
   --adh-muted:#5d6678;
   --adh-rail:236px;
   --adh-tabbar:64px;
-  --adh-head-font:"Plus Jakarta Sans",Inter,system-ui,sans-serif;
+  --adh-head-font:"Libre Franklin",system-ui,sans-serif;
 }
 
 body.adh-page{background:var(--adh-bg)!important}
@@ -49,7 +49,7 @@ body.adh-page .ad-gate{margin:24px}
 .adh-nav.on::before{content:"";position:absolute;left:-14px;top:10px;bottom:10px;width:4px;border-radius:0 4px 4px 0;background:var(--adh-gold)}
 .adh-nav:focus-visible,.adh-rail-add:focus-visible,.adh-rail-link:focus-visible{outline:2px solid #fff;outline-offset:2px}
 .adh-rail-foot{margin-top:auto;display:grid;gap:8px}
-.adh-rail-add{display:flex;align-items:center;justify-content:center;gap:9px;min-height:46px;border:0;border-radius:12px;background:var(--adh-bright);color:#fff;font:700 15px/1 var(--aw-font,Inter,sans-serif);cursor:pointer}
+.adh-rail-add{display:flex;align-items:center;justify-content:center;gap:9px;min-height:46px;border:0;border-radius:12px;background:var(--adh-bright);color:#fff;font:700 15px/1 var(--aw-font,Libre Franklin,sans-serif);cursor:pointer}
 .adh-rail-add:hover{background:#255fe0}
 .adh-rail-link{display:flex;align-items:center;gap:10px;min-height:42px;padding:0 12px;border-radius:10px;color:#c8d4e8;font-size:13px;font-weight:600;text-decoration:none}
 .adh-rail-link:hover{background:rgba(255,255,255,.08);color:#fff}
@@ -144,12 +144,12 @@ body.adh-page .ad-gate{margin:24px}
 .adh-tool-stat{display:inline-block;margin-top:6px;padding:2px 9px;border-radius:999px;background:var(--adh-sand);color:var(--adh-sand-ink);font-size:12px;font-style:normal;font-weight:800}
 .adh-tool-stat:empty{display:none}
 .adh-linkbtn{padding:0;border:0;background:none;color:var(--adh-blue);font:inherit;font-weight:700;text-decoration:underline;cursor:pointer}
-button.adh-rail-link{width:100%;border:0;background:none;font:600 13px/1 var(--aw-font,Inter,sans-serif);text-align:left;cursor:pointer}
+button.adh-rail-link{width:100%;border:0;background:none;font:600 13px/1 var(--aw-font,Libre Franklin,sans-serif);text-align:left;cursor:pointer}
 
 /* ---------- First-visit tour ---------- */
 .adh-coach{position:fixed;inset:0;z-index:900}
 .adh-coach-shade{position:absolute;inset:0;background:rgba(14,34,72,.38)}
-.adh-coach-card{position:fixed;left:50%;top:50%;transform:translate(-50%,-50%);width:min(360px,calc(100vw - 24px));padding:20px;border-radius:18px;background:#fff;box-shadow:0 24px 60px rgba(14,34,72,.28);color:var(--adh-ink)}
+.adh-coach-card{position:fixed;left:50%;top:50%;transform:translate(-50%,-50%);width:min(360px,calc(100vw - 24px));padding:20px;border-radius:18px;background:#fff;box-shadow:0 2px 6px rgba(15,23,42,.08);color:var(--adh-ink)}
 .adh-coach-card[style*="top"]{transform:none}
 .adh-coach-count{display:block;color:var(--adh-gold);font-size:12px;font-weight:800;letter-spacing:.06em;text-transform:uppercase}
 .adh-coach-card h2{margin:6px 0 6px;color:var(--adh-navy);font-family:var(--adh-head-font);font-size:20px;font-weight:800}
@@ -157,7 +157,7 @@ button.adh-rail-link{width:100%;border:0;background:none;font:600 13px/1 var(--a
 .adh-coach-actions{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:16px}
 .adh-coach-actions>span{display:flex;gap:8px}
 .adh-coach-actions .ad27-btn{margin-top:0;min-height:44px}
-.adh-coach-skip{min-height:44px;padding:0 4px;border:0;background:none;color:var(--adh-muted);font:600 14px/1 var(--aw-font,Inter,sans-serif);cursor:pointer}
+.adh-coach-skip{min-height:44px;padding:0 4px;border:0;background:none;color:var(--adh-muted);font:600 14px/1 var(--aw-font,Libre Franklin,sans-serif);cursor:pointer}
 .adh-coach-target{position:relative;z-index:901;border-radius:16px;box-shadow:0 0 0 4px var(--adh-gold),0 0 0 9999px rgba(14,34,72,0)!important}
 .adh-rail.adh-coach-target,.adh-nav-list.adh-coach-target{z-index:901}
 .adh-tabbar.adh-coach-target{z-index:901!important;border-radius:0}
@@ -167,7 +167,7 @@ button.adh-rail-link{width:100%;border:0;background:none;font:600 13px/1 var(--a
 .adh-frame[hidden]{display:none}
 .adh-ready.adh-tool-open .adh-stage{padding:14px 16px 18px}
 .adh-frame-bar{display:flex;align-items:center;gap:12px;min-height:52px;margin:0 0 10px}
-.adh-frame-back{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 16px;border:1px solid var(--adh-line);border-radius:12px;background:#fff;color:var(--adh-navy);font:700 14px/1 var(--aw-font,Inter,sans-serif);cursor:pointer}
+.adh-frame-back{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 16px;border:1px solid var(--adh-line);border-radius:12px;background:#fff;color:var(--adh-navy);font:700 14px/1 var(--aw-font,Libre Franklin,sans-serif);cursor:pointer}
 .adh-frame-back:hover{border-color:var(--adh-sky-line);background:var(--adh-sky)}
 .adh-frame-bar h2{flex:1;min-width:0;margin:0;color:var(--adh-navy);font-family:var(--adh-head-font);font-size:18px;font-weight:800;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .adh-frame-out{display:grid;place-items:center;width:44px;height:44px;border:1px solid var(--adh-line);border-radius:12px;background:#fff;color:var(--adh-muted)}
@@ -189,7 +189,7 @@ button.adh-rail-link{width:100%;border:0;background:none;font:600 13px/1 var(--a
 @media(max-width:900px){
   .adh-app.adh-ready{display:block}
   .adh-ready .adh-rail{display:none}
-  .adh-ready .adh-tabbar{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));position:fixed;left:0;right:0;bottom:0;z-index:450;padding:4px 4px calc(4px + env(safe-area-inset-bottom));background:rgba(255,255,255,.97);border-top:1px solid var(--adh-line);box-shadow:0 -6px 20px rgba(14,34,72,.06)}
+  .adh-ready .adh-tabbar{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));position:fixed;left:0;right:0;bottom:0;z-index:450;padding:4px 4px calc(4px + env(safe-area-inset-bottom));background:rgba(255,255,255,.97);border-top:1px solid var(--adh-line);box-shadow:0 2px 6px rgba(15,23,42,.08)}
   .adh-tabbar a{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;min-height:56px;border-radius:12px;color:var(--adh-muted);font-size:12px;font-weight:700;text-decoration:none}
   .adh-tabbar a i{font-size:18px}
   .adh-tabbar a.on{color:var(--adh-navy);background:var(--adh-sky)}

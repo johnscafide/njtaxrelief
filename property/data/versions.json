@@ -649,7 +649,7 @@
       "title": "Agent Opportunity Desk",
       "category": "Agent SaaS / sourced relationship intelligence",
       "status": "Code complete; migration, Edge Function and static upload required",
-      "summary": "Launched a private Pro workspace that turns authoritative property changes across an agent's own sphere into ranked, explainable reasons for a useful conversation. Agents can import 1,000 CSV rows or select saved properties, inspect source/freshness/limitations and all four score components, quick-watch, snooze, dismiss, record funnel outcomes, and opt into a weekly top-ten digest. The workflow explicitly ranks property-information usefulness\u2014not seller intent\u2014and does not depend on owner-name or contact enrichment.",
+      "summary": "Launched a private Pro workspace that turns authoritative property changes across an agent's own sphere into ranked, explainable reasons for a useful conversation. Agents can import 1,000 CSV rows or select saved properties, inspect source/freshness/limitations and all four score components, quick-watch, snooze, dismiss, record funnel outcomes, and opt into a weekly top-ten digest. The workflow explicitly ranks property-information usefulness, not seller intent, and does not depend on owner-name or contact enrichment.",
       "links": [
         "/property/agent-desk.html",
         "/property/pro.html",
@@ -1102,7 +1102,7 @@
       "title": "Cross-professional marker expansion and mobile navigation foundation",
       "category": "Data platform / mobile product quality",
       "status": "Completed",
-      "summary": "Added 100 transparent Watchdog-derived markers\u2014ten for each of ten professional audiences\u2014with formula, professional reason, access tier and dependency-refresh contract. The governed marker catalog now contains 543 fields, including 218 proprietary Watchdog signals. Added a staging-only, browser-level anonymous access smoke test that refuses the production domain. Mobile navigation now uses a clean More sheet with grouped workspace, research and account destinations, large touch targets, safe-area handling, keyboard dismissal, focus visibility and reduced-motion support.",
+      "summary": "Added 100 transparent Watchdog-derived markers, ten for each of ten professional audiences, with formula, professional reason, access tier and dependency-refresh contract. The governed marker catalog now contains 543 fields, including 218 proprietary Watchdog signals. Added a staging-only, browser-level anonymous access smoke test that refuses the production domain. Mobile navigation now uses a clean More sheet with grouped workspace, research and account destinations, large touch targets, safe-area handling, keyboard dismissal, focus visibility and reduced-motion support.",
       "links": [
         "/property/dashboard.html",
         "/property/home.html",

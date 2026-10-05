@@ -1,4 +1,4 @@
-# Connector Credential Revocation Tabletop — 2026-08-21
+# Connector Credential Revocation Tabletop: 2026-08-21
 
 **Budget:** $0 internal exercise  
 **Framework mapping:** SOC 2 Security/Availability; NIST CSF 2.0 Detect/Respond/Recover; OWASP ASVS authentication/secure communications; ISO/IEC 27001 incident and supplier controls; NJDPA security safeguards.
@@ -31,25 +31,25 @@ Operations receives credible evidence that a reusable credential associated with
 
 ## Tabletop findings
 
-### Finding CR-1 — Revocation capability exists, but evidence must be retained per material connector
+### Finding CR-1: Revocation capability exists, but evidence must be retained per material connector
 
 **Result:** Partial pass. The connector register documents implemented revocation/offboarding paths for the generic bridge and BoldTrail Direct, but the program does not yet retain a dated, repeatable credential-revocation verification for every Tier 1 connector.
 
 **Treatment:** Add a sanitized revocation-test record at first production acceptance and after material authentication changes. Evidence should identify the connector, test date, credential category, expected denial after revocation, result, and reviewer, never the credential value.
 
-### Finding CR-2 — Blast-radius evidence is connector-specific
+### Finding CR-2: Blast-radius evidence is connector-specific
 
 **Result:** Partial pass. Audit/delivery/sync history exists for reviewed CRM connectors, but the exact telemetry needed to establish misuse windows varies by provider.
 
 **Treatment:** Add a minimum incident-evidence field to every Tier 1 connector review: authoritative credential location, revocation mechanism, audit source, queued-work cancellation mechanism, and provider-side activity source if available.
 
-### Finding CR-3 — Replacement must not become automatic recovery
+### Finding CR-3: Replacement must not become automatic recovery
 
 **Result:** Pass as policy decision. Immediate replacement without understanding the exposure path can recreate the incident.
 
 **Treatment:** Require containment and exposure-path review before reconnecting a material connector, except where emergency business-continuity procedures explicitly accept and document the residual risk.
 
-### Finding CR-4 — Customer/privacy escalation threshold must remain explicit
+### Finding CR-4: Customer/privacy escalation threshold must remain explicit
 
 **Result:** Pass as response rule. A credential incident is not automatically a personal-data breach, but evidence of unauthorized access to CRM/contact context requires privacy-impact evaluation and the incident-response process.
 

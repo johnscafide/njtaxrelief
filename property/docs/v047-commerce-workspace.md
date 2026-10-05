@@ -1,6 +1,6 @@
-# Watchdog v0.47 — commerce catalog and workspace repair
+# Watchdog v0.47, commerce catalog and workspace repair
 
-> **Historical release record — not current billing authority.** This document records the Paddle-era v0.47 implementation and its then-current prices. It is retained as release chronology. New Watchdog subscriptions are now Stripe-authoritative. For current pricing and launch instructions use `docs/billing-launch-status.md`, `docs/v046-production-readiness.md`, and `docs/stripe-live-acceptance-runbook.md`. Do not configure new Paddle products or use the prices below as current customer-facing pricing.
+> **Historical release record, not current billing authority.** This document records the Paddle-era v0.47 implementation and its then-current prices. It is retained as release chronology. New Watchdog subscriptions are now Stripe-authoritative. For current pricing and launch instructions use `docs/billing-launch-status.md`, `docs/v046-production-readiness.md`, and `docs/stripe-live-acceptance-runbook.md`. Do not configure new Paddle products or use the prices below as current customer-facing pricing.
 
 ## What changed in v0.47
 
@@ -9,10 +9,10 @@
 - Locked Pro content used document flow instead of a fixed overlay height, with a complete mobile CTA and no clipped feature list.
 - Agent Intel received safer header, body and bottom spacing on desktop and phone layouts.
 - Account & Billing at that historical release presented:
-  - Free — $0
-  - Agent — $29/month or $290/year
-  - Professional — $349/month or $3,490/year
-  - Firm / API — $1,000+/month, controlled enrollment only
+  - Free: $0
+  - Agent: $29/month or $290/year
+  - Professional: $349/month or $3,490/year
+  - Firm / API: $1,000+/month, controlled enrollment only
 - Yearly billing was selected by default and represented two free months compared with monthly billing.
 - Paddle checkout and webhook functions distinguished monthly and annual Agent/Professional Price IDs while retaining the stable authorization-tier concepts then in use.
 
@@ -38,7 +38,7 @@ supabase/migrations/20260810031500_watchdog_v047_report_preset_compatibility.sql
 
 It replaced only the `professional_reports_preset_check` constraint and accepted both legacy and then-current preset values. It did not rewrite existing rows.
 
-## Historical Paddle catalog configuration — superseded
+## Historical Paddle catalog configuration, superseded
 
 The following instructions describe the v0.47 Paddle-era launch path and **must not be executed for new Watchdog subscriptions**.
 
@@ -65,7 +65,7 @@ and deployment of the then-current checkout and Paddle webhook functions.
 
 That provider path is now historical. The remaining Paddle runtime exists only for the existing legacy Paddle subscriber and cannot satisfy the current Stripe Live release gate.
 
-## Historical v0.47 acceptance checklist — superseded
+## Historical v0.47 acceptance checklist, superseded
 
 The original release required controlled Paddle purchase, interval change, Professional upgrade, cancellation/reversal, failed/past-due recovery, idempotency checks, role acceptance, Paddle reconciliation, and an isolated restore drill before public enrollment.
 

@@ -175,7 +175,7 @@
 .pm {
   display: none; position: absolute; right: 0; top: calc(100% + 6px); z-index: 60;
   min-width: 214px; background: #fff; border: 1px solid var(--hair); border-radius: 9px;
-  box-shadow: 0 12px 34px rgba(16,24,43,.16); padding: 6px;
+  box-shadow: 0 2px 6px rgba(15,23,42,.08); padding: 6px;
 }
 .pm.open { display: block; }
 .pm a, .pm button {

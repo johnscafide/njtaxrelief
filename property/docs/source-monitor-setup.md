@@ -2,7 +2,7 @@
 
 The watcher checks official New Jersey publisher pages once a day. It does not publish data automatically.
 
-The monitor keeps a timestamped source-health ledger in the private warehouse. A public page changing its rendered HTML is **not** enough to create an alert: the same publisher-provided `ETag` or `Last-Modified` token must appear on two daily checks. Confirmed changes are sent to the deployed Supabase function, which records the run and observations, respects each saved property's Pulse preferences, and creates a private `source_refresh` event. The customer sees that Watchdog is reviewing a changed source—not a claim that their parcel has changed.
+The monitor keeps a timestamped source-health ledger in the private warehouse. A public page changing its rendered HTML is **not** enough to create an alert: the same publisher-provided `ETag` or `Last-Modified` token must appear on two daily checks. Confirmed changes are sent to the deployed Supabase function, which records the run and observations, respects each saved property's Pulse preferences, and creates a private `source_refresh` event. The customer sees that Watchdog is reviewing a changed source, not a claim that their parcel has changed.
 
 Set these GitHub Actions secrets before enabling scheduled delivery:
 
