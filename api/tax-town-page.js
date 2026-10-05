@@ -157,8 +157,8 @@ function checker(t, f) {
       <h2 id="tt-check-h">Is your assessment too high?</h2>
       <p>${intro}</p>
       <form class="wdp-form" id="tt-check-form" ${attrs}${rateAttr} novalidate>
-        <label>Your assessment<input name="assessed" inputmode="numeric" autocomplete="off" placeholder="${esc(money(f.bill.assessed))}"></label>
-        <label>What your home was worth<input name="value" inputmode="numeric" autocomplete="off" placeholder="What it would have sold for"></label>
+        <label>Your assessment<input name="assessed" data-missing="Enter your assessment." inputmode="numeric" autocomplete="off" placeholder="${esc(money(f.bill.assessed))}"></label>
+        <label>What your home was worth<input name="value" data-missing="Enter what your home was worth." inputmode="numeric" autocomplete="off" placeholder="What it would have sold for"></label>
         <p class="wdp-wide wdp-fine">Use the value as of October 1, 2025 (the date 2026 assessments are based on). Your assessment is on your tax bill or at the town tax assessor's office.</p>
         <div class="wdp-wide wdp-form-foot"><button class="wdp-pill is-dark" type="submit">Check it</button></div>
       </form>

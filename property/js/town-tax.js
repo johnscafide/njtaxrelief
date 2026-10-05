@@ -40,7 +40,12 @@
   function num(v) { var n = Number(String(v || '').replace(/[^0-9.]/g, '')); return n > 0 ? n : 0; }
 
   var toast = document.querySelector('.tt-toast');
-  function say(t) { if (!toast) return; toast.textContent = t; clearTimeout(say.t); say.t = setTimeout(function () { toast.textContent = ''; }, 2500); }
+  function say(t) {
+    if (!toast) return;
+    toast.textContent = t;
+    clearTimeout(say.t);
+    say.t = setTimeout(function () { toast.textContent = ''; }, 2500);
+  }
 
   var row = document.querySelector('[data-share-row]');
   if (row) {
@@ -74,8 +79,14 @@
       e.preventDefault();
       var a = num(form.elements.assessed.value), v = num(form.elements.value.value);
       [form.elements.assessed, form.elements.value].forEach(function (el) { el.removeAttribute('aria-invalid'); });
-      if (!a) { form.elements.assessed.setAttribute('aria-invalid', 'true'); form.elements.assessed.focus(); out.className = 'tt-result is-error'; out.textContent = 'Enter your assessment.'; return; }
-      if (!v) { form.elements.value.setAttribute('aria-invalid', 'true'); form.elements.value.focus(); out.className = 'tt-result is-error'; out.textContent = 'Enter what your home was worth.'; return; }
+      var missing = !a ? form.elements.assessed : !v ? form.elements.value : null;
+      if (missing) {
+        missing.setAttribute('aria-invalid', 'true');
+        missing.focus();
+        out.className = 'tt-result is-error';
+        out.textContent = missing.getAttribute('data-missing');
+        return;
+      }
       var ratio = a / v, html, verdict;
       if (mode === 'reval') {
         if (ratio > 1) {
