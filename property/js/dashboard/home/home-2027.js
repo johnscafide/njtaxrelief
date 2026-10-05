@@ -118,7 +118,7 @@ function loadWeather(){
   });
 }
 
-function shareInvite(){var code=user?'WD-'+String(user.id).replace(/-/g,'').slice(0,10).toUpperCase():'WATCHDOG',link=location.origin+'/property/?ref='+encodeURIComponent(code);if(navigator.share){navigator.share({title:'Watchdog Property Intelligence',text:'Take a look at Watchdog Property Intelligence.',url:link}).catch(function(){});}else if(navigator.clipboard){navigator.clipboard.writeText(link).then(function(){alert('Invite link copied.');});}}
+function shareInvite(){var code=user?'WD-'+String(user.id).replace(/-/g,'').slice(0,10).toUpperCase():'WATCHDOG',link=location.origin+'/property/?ref='+encodeURIComponent(code);if(navigator.share){navigator.share({title:'Watchdog Property Info',text:'Take a look at Watchdog Property Info.',url:link}).catch(function(){});}else if(navigator.clipboard){navigator.clipboard.writeText(link).then(function(){alert('Invite link copied.');});}}
 function refreshContext(){return loadCurrentProperty().then(function(){return Promise.all([loadEvents(),loadWeather()]);});}
 
 function bind(){

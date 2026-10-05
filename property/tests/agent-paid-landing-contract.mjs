@@ -13,7 +13,7 @@ const billing=read('property/js/billing-client.js');
 
 function expect(value,message){if(!value)throw new Error(message)}
 
-expect(page.includes('<title>Watchdog for New Jersey Real Estate Agents | Property Intelligence</title>'),'agent landing title missing');
+expect(page.includes('<title>Watchdog for New Jersey Real Estate Agents | Property Info</title>'),'agent landing title missing');
 expect(page.includes('/property/branding/watchdog-logo-horizontal.svg'),'Watchdog logo is not the landing-page brand asset');
 expect(page.includes('property="og:image" content="https://www.watchdogindex.com/property/branding/watchdog-logo-horizontal.svg"'),'social share image must use the Watchdog logo');
 expect(page.includes('/property/for/real-estate-agents/agent-control-capture.svg'),'Agent Control product capture missing');
@@ -27,7 +27,7 @@ expect(!page.includes('Prefer monthly or annual billing?'),'recurring pricing le
 expect(!page.includes('apl-faq'),'formulaic FAQ block returned');
 expect(!page.includes('testimonial'),'unverified testimonial block returned');
 expect(js.includes("billing.invoke('create-lifetime-checkout',{tier:'agent'})"),'lifetime checkout is not server-owned');
-expect(js.includes("billing.checkout('agent',{cadence:'yearly'})"),'annual exit offer is not wired to governed yearly Agent checkout');
+expect(js.includes("billing.checkout('agent',{cadence:'yearly'})"),'annual exit offer is not wired to checked yearly Agent checkout');
 expect(js.includes("sessionStorage.setItem('watchdog:lifetime:pending','agent')"),'signed-out lifetime intent is not preserved');
 expect(js.includes('watchdog:agent-paid-attribution'),'paid acquisition attribution is not preserved');
 expect(js.includes('agent_annual_exit_offer_view'),'exit offer analytics missing');

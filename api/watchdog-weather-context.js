@@ -187,7 +187,7 @@ async function nwsContext(lat, lon) {
       };
     }),
     licensing: 'U.S. National Weather Service open government data; no API fee.',
-    note: 'Forecast and alert context only. It is not property-condition, flood-insurance, appraisal, underwriting, or Watchdog Score evidence.'
+    note: 'Forecast and alert info only. It is not property-condition, flood-insurance, appraisal, underwriting, or Watchdog Score evidence.'
   };
 }
 
@@ -238,7 +238,7 @@ async function openMeteoCommercialContext(lat, lon, apiKey) {
     })),
     alerts: [],
     licensing: 'Commercial Open-Meteo customer API; API key required by provider terms.',
-    note: 'Weather context only. Climate/history endpoints are intentionally not called from this route and are not Watchdog Score evidence.'
+    note: 'Weather info only. Climate/history endpoints are intentionally not called from this route and are not Watchdog Score evidence.'
   };
 }
 
@@ -287,7 +287,7 @@ module.exports = async function handler(req, res) {
   } catch (_) {
     return res.status(502).json({
       ok: false,
-      error: 'Weather context temporarily unavailable',
+      error: 'Weather info temporarily unavailable',
       code: 'WEATHER_CONTEXT_UNAVAILABLE',
       context_only: true,
       score_impact: false

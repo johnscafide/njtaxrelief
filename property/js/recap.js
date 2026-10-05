@@ -113,7 +113,7 @@ function handoffPrompt(section,item,index){
     'HANDOFF: '+title,
     'TASK: '+task
   ];
-  if(detailText)lines.push('CONTEXT: '+detailText);
+  if(detailText)lines.push('INFO: '+detailText);
   if(ids.length)lines.push('LINEAR: '+ids.join(', '));
   if(special)lines.push('SPECIAL HANDOFF NOTE: '+special);
   lines=lines.concat([
@@ -125,7 +125,7 @@ function handoffPrompt(section,item,index){
     'Operating requirements:',
     '- Re-fetch current main and current file SHAs immediately before every GitHub write so concurrent work is never overwritten.',
     '- Reuse and update the mapped Linear issue(s). Do not create a duplicate issue unless the current scope genuinely has no appropriate existing issue.',
-    '- Preserve entitlement, RLS, privacy, billing, security, compliance, evidence-lineage, provenance, accessibility, and data-governance boundaries.',
+    '- Preserve entitlement, RLS, privacy, billing, security, compliance, evidence-lineage, source history, accessibility, and data-governance boundaries.',
     '- Do not fabricate completion, sources, LIVE status, provider behavior, customer outcomes, test evidence, or external certification.',
     '- If an owner/provider/external dependency blocks part of the work, document exactly what is blocked, complete every safe adjacent step that can be done now, and leave the issue status truthful.',
     '- Run the relevant tests, canaries, contracts, visual checks, or production verification for the work you change.',

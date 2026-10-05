@@ -125,7 +125,7 @@ module.exports = async function handler(req, res) {
     });
   } catch (_) {
     return res.status(502).json({
-      error: 'Flood intelligence temporarily unavailable',
+      error: 'Flood info temporarily unavailable',
       code: 'FEMA_NFHL_UNAVAILABLE'
     });
   }

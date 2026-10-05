@@ -50,7 +50,7 @@
     results.setAttribute('aria-label', 'Data Center result sheet');
     results.setAttribute('tabindex', '0');
     var table = results.querySelector('table');
-    if (table) table.setAttribute('aria-label', 'Generated governed Data Center sheet');
+    if (table) table.setAttribute('aria-label', 'Generated checked Data Center sheet');
   }
 
   function handleNote() {

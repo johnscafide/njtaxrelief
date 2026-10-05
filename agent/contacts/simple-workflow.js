@@ -47,7 +47,7 @@
     return !!q('.aci-score-card,.aci-two-col,.aci-property-list,.aci-opportunity-list,.aci-builder',body);
   }
 
-  function simpleSteps(){return '<div class="aci-simple-steps" aria-label="Contact workflow"><span><b>1</b>Upload</span><i class="fa-solid fa-chevron-right" aria-hidden="true"></i><span class="active"><b>2</b>Analyze</span><i class="fa-solid fa-chevron-right" aria-hidden="true"></i><span><b>3</b>Review</span></div>';}
+  function simpleSteps(){return '<div class="aci-simple-steps" aria-label="Contact process"><span><b>1</b>Upload</span><i class="fa-solid fa-chevron-right" aria-hidden="true"></i><span class="active"><b>2</b>Analyze</span><i class="fa-solid fa-chevron-right" aria-hidden="true"></i><span><b>3</b>Review</span></div>';}
 
   function simplifyIntelligence(){
     var shell=q('#aci-shell');if(!shell)return;
@@ -60,7 +60,7 @@
 
     setText(q('.aci-head>div:first-child>span',shell),'WATCHDOG ANALYZE');
     setText(q('.aci-head h2',shell),ready?'Analyze this file.':'Watchdog analysis');
-    setText(q('.aci-head p',shell),ready?'Get health, matches, and next actions.':'Your contact intelligence is ready.');
+    setText(q('.aci-head p',shell),ready?'Get health, matches, and next actions.':'Your contact info is ready.');
 
     var analyze=q('#aci-analyze',shell);
     if(analyze&&!/Analyzing/i.test(analyze.textContent||''))setHtml(analyze,'<i class="fa-solid fa-shield-dog"></i> Analyze file');

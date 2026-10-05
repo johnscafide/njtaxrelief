@@ -1109,7 +1109,7 @@ body.plm-locked { overflow: hidden; }
   <div class="pl-hero-inner">
     <h1>Are you overpaying property tax on<br><span class="pl-type" id="pl-type">any NJ home</span>?</h1>
     <p class="pl-hero-sub">
-      Type an address. See the assessed value, last year&rsquo;s tax bill, block and lot, the real lot lines, and our own read on whether that assessment is defensible. Built from New Jersey&rsquo;s official records.
+      Type an address. See the assessed value, last year&rsquo;s tax bill, block and lot, the real lot lines, and our own read on whether that assessment is solid. Built from New Jersey&rsquo;s official records.
     </p>
     <div class="pl-search-card">
       <div class="pl-search-row">
@@ -2495,7 +2495,7 @@ body.plm-locked { overflow: hidden; }
   ];
 
   function buildSellingOptions() {
-    return '<h3 class="plm-sec-h">Explore your selling options</h3>' +
+    return '<h3 class="plm-sec-h">See your selling options</h3>' +
       '<p class="plm-sec-s">Three ways to sell ' + esc(current.address) + '. Two of them are free either way.</p>' +
       '<div class="sell-opts">' +
         SELL_OPTIONS.map(function (o) {
@@ -2532,7 +2532,7 @@ body.plm-locked { overflow: hidden; }
       box.innerHTML =
         '<div class="plm-est-lbl"><i class="fas fa-dog"></i> Watchdog Tax Value</div>' +
         '<div class="plm-est-val small">Not enough to go on yet</div>' +
-        '<div class="plm-est-sub">Working out a defensible value for this property needs recorded sales nearby, and there are not enough on file for ' +
+        '<div class="plm-est-sub">Working out a solid value for this property needs recorded sales nearby, and there are not enough on file for ' +
         esc(current.town || 'this town') + ' yet. Rather than invent a number, I would rather tell you. ' +
         '<a href="#" onclick="plOpenForm(\'appeal\');return false;">Ask me to look at it by hand</a>.</div>';
       var eqx = el('plm-equity');
@@ -2568,13 +2568,13 @@ body.plm-locked { overflow: hidden; }
         : v.ratioSource === 'official'
         ? 'Based on the official state equalization ratio of <b>' + (v.ratio * 100).toFixed(2) + '%</b> for <b>' +
           esc(current.town) + '</b>, tax year ' + v.ratioYear + '. That is the same figure a county tax board applies.'
-        : 'Derived from recorded sales, since no published state ratio is on file for <b>' + esc(current.town) + '</b> yet.');
+        : 'Calculated from recorded sales, since no published state ratio is on file for <b>' + esc(current.town) + '</b> yet.');
 
     box.innerHTML =
       '<div class="plm-est-lbl"><i class="fas fa-dog"></i> Watchdog Tax Value' +
         '<span class="plm-conf ' + cm.cls + '" title="' + cm.note + '">' + cm.txt + '</span></div>' +
       '<div class="plm-est-hero">' + money(r(argued)) + '</div>' +
-      '<div class="plm-est-range">Defensible range ' + money(r(lowEnd)) + ' to ' + money(r(midEnd)) + '</div>' +
+      '<div class="plm-est-range">Solid range ' + money(r(lowEnd)) + ' to ' + money(r(midEnd)) + '</div>' +
       '<div class="plm-est-purpose"><i class="fas fa-gavel"></i>' +
         '<span>This is a <b>tax appeal value</b>, not a listing price. It is deliberately set at the ' +
         'conservative end, because the number that wins in front of a county board is the one you can defend.</span>' +
@@ -2738,7 +2738,7 @@ body.plm-locked { overflow: hidden; }
       '<p><b>Assessed value</b> is the number your town uses to calculate your tax bill. It is not what your home would sell for. ' +
       'Most New Jersey towns assess at some fraction of real market value, and that fraction drifts every year until the town revalues.</p>' +
 
-      '<p><b>The Watchdog Tax Value</b> is our estimate of what this property is defensibly worth for tax purposes. ' +
+      '<p><b>The Watchdog Tax Value</b> is our estimate of what this property is solidly worth for tax purposes. ' +
       'It is built from what comparable homes in your town actually sold for, measured against their assessments, ' +
       'so it speaks the same language a county tax board does.</p>' +
 
@@ -3099,7 +3099,7 @@ body.plm-locked { overflow: hidden; }
             ? (val.appreciation * 100).toFixed(2) + '%/yr ' + (val.apprMeasured ? '(measured from this town)' : '(DEFAULT, town too sparse to measure)') +
               ', median sale age ' + (val.medSaleAge != null ? val.medSaleAge.toFixed(2) + ' yrs' : '?')
             : 'n/a') + '</div>' +
-        '<div><b>Calibration factor</b>: ' + (val ? val.calibration.toFixed(3) : '-') +
+        '<div><b>Tuning factor</b>: ' + (val ? val.calibration.toFixed(3) : '-') +
           '  <b>Years stale</b>: ' + (val ? (val.yearsStale || 0).toFixed(2) : '-') + '</div>' +
         '<div><b>Drift</b>: ' + (val && val.drift != null ? (val.drift * 100).toFixed(2) + '%/yr' : 'not measured') +
           '  <b>Time factor</b>: ' + (val ? val.timeFactor.toFixed(3) : '-') +
@@ -4483,7 +4483,7 @@ body.plm-locked { overflow: hidden; }
         '<input id="pl-fphone" type="tel" placeholder="Phone (optional)" autocomplete="tel">' +
         (it.rel
           ? '<select id="pl-frel"><option value="">I am the...</option><option>Owner, I live here</option><option>Owner, I rent it out</option><option>Tenant</option><option>Just researching</option></select>'
-          : '<select id="pl-fwhen"><option value="">Timing</option><option>As soon as possible</option><option>1 to 3 months</option><option>3 to 6 months</option><option>6 to 12 months</option><option>Just exploring</option></select>') +
+          : '<select id="pl-fwhen"><option value="">Timing</option><option>As soon as possible</option><option>1 to 3 months</option><option>3 to 6 months</option><option>6 to 12 months</option><option>Just looking into</option></select>') +
         '<button onclick="plSubmitForm(\'' + kind + '\')">Send to ' + esc(AGENTS[activeAgentKey].name.split(' ')[0]) + '</button>' +
       '</div>' +
       '<div class="pl-fine">The address, block and lot, and tax figures go with your message. <a href="#" onclick="plResetCard();return false;">Back</a></div>';

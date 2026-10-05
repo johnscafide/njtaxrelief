@@ -5,7 +5,7 @@ module.exports = {
   noun: 'Intelligence Job',
   display: {
     label: 'Run Watchdog Intelligence for Property',
-    description: 'Queues a governed Watchdog Intelligence analysis for one verified property, subject to plan quotas and deduplication.',
+    description: 'Queues a checked Watchdog Intelligence analysis for one verified property, subject to plan quotas and deduplication.',
   },
   operation: {
     inputFields: [

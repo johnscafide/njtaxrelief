@@ -125,7 +125,7 @@
     $('dc-rows').innerHTML = rows.length ? rows.map(function (marker) {
       var c = coverageFor(marker.id) || {};
       var status = statusFor(marker);
-      var origin = marker.origin === 'watchdog-derived' ? 'Watchdog derived' : 'Public source';
+      var origin = marker.origin === 'watchdog-derived' ? 'Watchdog calculated' : 'Public source';
       // Planned and unavailable fields have no connected source, so they cannot be added to a dataset.
       var selectable = status === 'live' || status === 'partial' || selected.indexOf(marker.id) >= 0;
       return '<tr data-provider-status="' + esc(status) + '">' +
@@ -138,7 +138,7 @@
         '<td>' + esc(label(marker.scope)) + '</td>' +
         '<td><span class="dc-pill ' + esc(marker.origin) + '">' + esc(origin) + '</span></td>' +
       '</tr>';
-    }).join('') : '<tr><td class="dc-empty" colspan="8">No governed fields match these filters.</td></tr>';
+    }).join('') : '<tr><td class="dc-empty" colspan="8">No checked fields match these filters.</td></tr>';
     renderSelected();
   }
 
@@ -207,7 +207,7 @@
     return c.auth.getSession().then(function (response) {
       var session = response.data && response.data.session;
       if (!session) {
-        if (showGate) openModal({ title: 'Pro+ workspace', copy: 'The governed field catalog is public. Sign in with Pro+ to build against your private saved properties, export results, save views or schedule deliveries.', confirm: 'View Pro+', cancel: 'Not now' }).then(function (choice) { if (choice) location.href = '/pro'; });
+        if (showGate) openModal({ title: 'Pro+ dashboard', copy: 'The checked field catalog is public. Sign in with Pro+ to build against your private saved properties, export results, save views or schedule deliveries.', confirm: 'View Pro+', cancel: 'Not now' }).then(function (choice) { if (choice) location.href = '/pro'; });
         return { ok: false, session: null };
       }
       return c.rpc('has_watchdog_plan', { required_plan: 'pro_plus' }).then(function (plan) {
@@ -227,7 +227,7 @@
     box.innerHTML = '<div class="dc-result-controls">' +
       '<label>Scope<select id="dc-scope"><option value="property">Property rows</option><option value="town">Town rollup — my saved properties</option><option value="county">County rollup — my saved properties</option></select></label>' +
       '<button id="dc-build" type="button">Build private sheet</button><button id="dc-export" type="button" disabled>Export CSV</button><button id="dc-schedule" type="button">Schedule</button></div>' +
-      '<p id="dc-result-note">Select fields, then build a governed result sheet from your own saved properties. Missing or unsupported values remain explicit.</p>' +
+      '<p id="dc-result-note">Select fields, then build a checked result sheet from your own saved properties. Missing or unsupported values remain explicit.</p>' +
       '<div id="dc-result-analytics" class="dc-result-analytics" hidden></div><div id="dc-results" class="dc-results" hidden></div>';
     host.insertAdjacentElement('afterend', box);
     $('dc-build').addEventListener('click', buildSheet);
@@ -405,7 +405,7 @@
     checkProPlus(true).then(function (accessState) {
       if (!accessState.ok) return;
       setBuilding(true);
-      $('dc-result-note').textContent = 'Resolving selected fields through governed providers…';
+      $('dc-result-note').textContent = 'Resolving selected fields through checked providers…';
       analytics('data_center_build_started', { scope: $('dc-scope').value, selected_count_bucket: countBucket(selected.length) });
       return client().from('saved_properties').select('pams_pin,address,town,county,block,lot,assessed,last_year_tax,effective_rate,watchdog_value').order('address')
         .then(function (response) { if (response.error) throw response.error; return hydrateRows(response.data || []); })
@@ -416,10 +416,10 @@
           $('dc-results').hidden = false;
           $('dc-results').innerHTML = '<table><thead><tr>' + selected.map(function (id) { return '<th>' + esc(labels[id] || id) + '</th>'; }).join('') + '</tr></thead><tbody>' + resultRows.map(function (row) { return '<tr>' + selected.map(function (id) { var shown = value(row, id), meta = row.__meta && row.__meta[id], rt = window.WatchdogMarkerRuntime, tip = missing(shown) ? (meta && meta.status && rt ? rt.statusHint(meta.status) : '') : (meta && meta.status === 'available' && meta.source ? meta.source : ''); return '<td' + (missing(shown) ? ' class="dc-cell-missing"' : '') + (tip ? ' title="' + esc(tip) + '"' : '') + '>' + esc(shown) + '</td>'; }).join('') + '</tr>'; }).join('') + '</tbody></table>';
           $('dc-export').disabled = !resultRows.length;
-          $('dc-result-note').textContent = resultRows.length + ' governed ' + (scope === 'property' ? 'property row' : scope + ' rollup') + (resultRows.length === 1 ? '' : 's') + ' from your saved-property workspace. Missing source values remain explicit.';
+          $('dc-result-note').textContent = resultRows.length + ' checked ' + (scope === 'property' ? 'property row' : scope + ' rollup') + (resultRows.length === 1 ? '' : 's') + ' from your saved-property dashboard. Missing source values remain explicit.';
           renderAnalysis(resultRows);
           analytics('data_center_dataset_built', { scope: scope, row_count_bucket: countBucket(resultRows.length), selected_count_bucket: countBucket(selected.length), status: 'success' });
-          toast('Governed dataset built.', 'success');
+          toast('Checked dataset built.', 'success');
         }).catch(function (error) {
           var reason = friendlyError(error);
           $('dc-result-note').textContent = 'Sheet could not be built: ' + reason;
@@ -470,7 +470,7 @@
     if (!selected.length) { toast('Select fields before saving a view.', 'error'); return; }
     checkProPlus(true).then(function (state) {
       if (!state.ok) return;
-      return openModal({ title: 'Save Data Center view', copy: 'Give this governed field and filter set a reusable name.', type: 'text', confirm: 'Save view', cancel: 'Cancel' }).then(function (name) {
+      return openModal({ title: 'Save Data Center view', copy: 'Give this checked field and filter set a reusable name.', type: 'text', confirm: 'Save view', cancel: 'Cancel' }).then(function (name) {
         name = String(name || '').trim(); if (!name) return;
         return client().from('saved_data_center_views').insert({ user_id: state.session.user.id, name: name.slice(0, 120), scope: $('dc-scope') ? $('dc-scope').value : 'property', marker_ids: selected, filters: readFilters() }).select('id,name,scope,marker_ids,filters,sort_config,updated_at').single().then(function (response) {
           if (response.error) throw response.error; views.unshift(response.data); activeView = response.data.id; paintViews(); analytics('data_center_view_saved', { selected_count_bucket: countBucket(selected.length), scope: $('dc-scope').value, status: 'success' }); toast('Saved view created.', 'success');

@@ -59,7 +59,7 @@
     var left = remaining(key), lim = usage && usage.limits ? n(usage.limits[key]) : 0;
     if (left === null || left >= needed) return null;
     if (key === 'properties') return 'You have room for ' + left.toLocaleString() + ' additional ' + (left === 1 ? 'property' : 'properties') + '. Reduce the import or upgrade your plan.';
-    return kind + ' limit reached. Your ' + plan(usage.plan) + ' plan currently supports ' + lim.toLocaleString() + ' ' + kind.toLowerCase() + '. Upgrade to increase your workspace capacity.';
+    return kind + ' limit reached. Your ' + plan(usage.plan) + ' plan currently supports ' + lim.toLocaleString() + ' ' + kind.toLowerCase() + '. Upgrade to increase your dashboard capacity.';
   }
   function toast(msg) {
     var t = $('pl-toast');

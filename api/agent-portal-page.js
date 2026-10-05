@@ -62,7 +62,7 @@ function previewTags(p, slug) {
   const url = `${CANONICAL_ORIGIN}/agent/${slug}`;
   const image = photo || DEFAULT_IMAGE;
   const lines = [
-    `<title>${esc(name)} | Watchdog Property Intelligence</title>`,
+    `<title>${esc(name)} | Watchdog Property Info</title>`,
     `<meta name="description" content="${esc(description)}">`,
     `<link rel="canonical" href="${esc(url)}">`,
     '<meta property="og:type" content="profile">',
@@ -71,7 +71,7 @@ function previewTags(p, slug) {
     `<meta property="og:title" content="${esc(title)}">`,
     `<meta property="og:description" content="${esc(description)}">`,
     `<meta property="og:image" content="${esc(image)}">`,
-    `<meta property="og:image:alt" content="${esc(photo ? name : 'Watchdog Property Intelligence across New Jersey')}">`,
+    `<meta property="og:image:alt" content="${esc(photo ? name : 'Watchdog Property Info across New Jersey')}">`,
     `<meta name="twitter:card" content="${photo ? 'summary' : 'summary_large_image'}">`,
     `<meta name="twitter:title" content="${esc(title)}">`,
     `<meta name="twitter:description" content="${esc(description)}">`,

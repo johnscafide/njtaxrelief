@@ -4,7 +4,7 @@ module.exports = makeRestHook({
   key: 'intelligence_finding_created',
   noun: 'Intelligence Finding',
   name: 'Intelligence Finding Created',
-  description: 'Triggers when Watchdog Intelligence creates a new governed finding.',
+  description: 'Triggers when Watchdog Intelligence creates a new checked finding.',
   eventType: 'intelligence.finding.created',
   sample: {
     id: 'sample-finding',
@@ -21,7 +21,7 @@ module.exports = makeRestHook({
       score: 82,
       confidence: 88,
       evidence_coverage: 91,
-      narrative: 'The governed evidence supports a higher-priority assessment review.',
+      narrative: 'The checked evidence supports a higher-priority assessment review.',
       created_at: '2026-08-19T15:45:00Z',
     },
   },

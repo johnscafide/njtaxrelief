@@ -31,9 +31,9 @@ const ENTITY_GRAPH = `<script type="application/ld+json" id="${ENTITY_GRAPH_ID}"
       "@type": "Organization",
       "@id": "https://www.watchdogindex.com/#organization",
       "name": "Watchdog",
-      "alternateName": "Watchdog Property Intelligence",
+      "alternateName": "Watchdog Property Info",
       "url": "https://www.watchdogindex.com/",
-      "description": "New Jersey property intelligence for homeowners and real-estate professionals, combining public-source property evidence with Watchdog-derived decision intelligence.",
+      "description": "New Jersey property info for homeowners and real-estate professionals, combining public-source property evidence with Watchdog-calculated decision intelligence.",
       "areaServed": { "@type": "State", "name": "New Jersey" }
     },
     {
@@ -112,8 +112,8 @@ function installEntityGraph(input) {
 function installRootSocialMetadata(input) {
   let html = String(input || '');
   const image = 'https://www.watchdogindex.com/watchdog-social-share-20260913-v3.jpg';
-  const title = 'Watchdog | New Jersey Property Intelligence';
-  const description = 'Search New Jersey property data and signals in one place. See Watchdog Score, taxes, assessments, and property intelligence.';
+  const title = 'Watchdog | New Jersey Property Info';
+  const description = 'Search New Jersey property data and numbers in one place. See Watchdog Score, taxes, assessments, and property info.';
 
   html = html
     .replace(/<meta\s+property=["']og:title["'][^>]*>/i, `<meta property="og:title" content="${title}">`)
@@ -130,9 +130,9 @@ function installRootSocialMetadata(input) {
     '<meta property="og:image:type" content="image/jpeg">',
     '<meta property="og:image:width" content="1200">',
     '<meta property="og:image:height" content="630">',
-    '<meta property="og:image:alt" content="Watchdog property intelligence for New Jersey">',
+    '<meta property="og:image:alt" content="Watchdog property info for New Jersey">',
     `<meta name="twitter:image" content="${image}">`,
-    '<meta name="twitter:image:alt" content="Watchdog property intelligence for New Jersey">'
+    '<meta name="twitter:image:alt" content="Watchdog property info for New Jersey">'
   ].join('\n  ');
 
   return html.replace(/<\/head>/i, `  ${imageTags}\n</head>`);
@@ -194,7 +194,7 @@ function sanitizeContactHtml(input, publicPath) {
   );
 
   html = html
-    .replace(/is operated by John Scafide, a licensed New Jersey real estate agent \(License #2079591\) with The McKenty Team at Opus Elite Real Estate, and a tax professional\./gi, 'is operated by Watchdog Property Intelligence. Real-estate services are handled by licensed New Jersey real-estate professionals affiliated with Opus Elite Real Estate.')
+    .replace(/is operated by John Scafide, a licensed New Jersey real estate agent \(License #2079591\) with The McKenty Team at Opus Elite Real Estate, and a tax professional\./gi, 'is operated by Watchdog Property Info. Real-estate services are handled by licensed New Jersey real-estate professionals affiliated with Opus Elite Real Estate.')
     .replace(/John Scafide,\s*NJ License #2079591/gi, 'Licensed NJ real-estate professional')
     .replace(/john@johnscafide\.com/gi, 'Contact Watchdog')
     .replace(/heather@heatherscafide\.com/gi, 'Contact Watchdog')

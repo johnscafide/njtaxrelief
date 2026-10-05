@@ -25,7 +25,7 @@ new vm.Script(dashboardRenderer, { filename: files.dashboardRenderer });
 for (const tier of ['standard','agent','pro','pro_plus','teams','developer']) {
   expect(outcomes.includes(`${tier}:{`) || outcomes.includes(`${tier}: {`), `Missing outcome catalog tier: ${tier}.`);
 }
-for (const phrase of ['UNDERSTAND & WATCH','AGENT WORKFLOW','PROFESSIONAL RESEARCH','RESEARCH AT SCALE','TEAM WORKSPACE']) {
+for (const phrase of ['UNDERSTAND & WATCH','AGENT PROCESS','PROFESSIONAL RESEARCH','RESEARCH AT SCALE','TEAM DASHBOARD']) {
   expect(outcomes.includes(phrase), `Missing plan language: ${phrase}.`);
 }
 expect(outcomes.includes("property_decision:{minimum:'pro'"), 'Property-level professional Intelligence must begin at Pro.');
@@ -48,8 +48,8 @@ expect(projs.includes("var src='/property/js/plan-outcomes.js'"), 'Public Pro pa
 expect(outcomes.includes('Choose the plan you need'), 'Account plan comparison must use concise customer wording.');
 expect(outcomes.includes("if(h)h.textContent='Compare plans'"), 'Public plan comparison must use a concise heading.');
 expect(outcomes.includes('Watchdog Intelligence · live'), 'Public Pro page must identify launched Watchdog Intelligence as live.');
-expect(outcomes.includes('Models still being calibrated are labeled Preview.'), 'Live Intelligence copy must preserve Preview honesty.');
-expect(outcomes.includes('Property-change monitoring with evidence-backed findings'), 'Public Pro comparison must describe the live monitoring outcome.');
+expect(outcomes.includes('Models still being tuned are labeled Preview.'), 'Live Intelligence copy must preserve Preview honesty.');
+expect(outcomes.includes('Property-change monitoring with record-based findings'), 'Public Pro comparison must describe the live monitoring outcome.');
 expect(css.includes('.wd-plan-outcome'), 'Plan language needs a scoped visual treatment.');
 
 // This asset contract belongs to the shared outcome layer. Dashboard now uses independently versioned assets.

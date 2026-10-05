@@ -146,7 +146,7 @@
     return '<strong>Why this scored ' + Number(hit.opportunity && hit.opportunity.score || 0) + '</strong>' +
       '<p>The assessment is <b>' + money(hit.over) + '</b> above the certified Chapter 123 screening threshold after this NJ-verified sale is carried to the pretax valuation date.</p>' +
       '<dl><div><dt>Verified sale</dt><dd>' + money(hit.p) + '</dd></div><div><dt>' + valuationLabel + '</dt><dd>' + money(hit.market) + '</dd></div><div><dt>Supported assessment</dt><dd>' + money(hit.fair) + '</dd></div><div><dt>Ch. 123 threshold</dt><dd>' + money(hit.limit) + '</dd></div></dl>' +
-      '<ul>' + parts + '</ul><p class="sc-caution"><b>Screening signal, not certainty.</b> Condition, renovations, record errors, exemptions, later evidence and reassessment activity can change the result. Confirm the current record and comparable evidence before filing.</p>' +
+      '<ul>' + parts + '</ul><p class="sc-caution"><b>Screening red flag, not certainty.</b> Condition, renovations, record errors, exemptions, later evidence and reassessment activity can change the result. Confirm the current record and comparable evidence before filing.</p>' +
       '<p class="sc-sources">Uses the certified Director/common-level range, General Tax Rate and verified-sale inputs.</p>';
   }
 

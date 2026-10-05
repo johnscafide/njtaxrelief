@@ -33,9 +33,9 @@
       else if (ratio >= .90) points = 28;
       else if (ratio >= .80) points = 14;
       score += points;
-      if (ratio >= 1) reasons.push(`The assessed value is ${(ratio * 100).toFixed(1)}% of the entered market value, a strong screening signal that the valuation deserves review.`);
+      if (ratio >= 1) reasons.push(`The assessed value is ${(ratio * 100).toFixed(1)}% of the entered market value, a strong screening red flag that the valuation deserves review.`);
       else if (ratio >= .9) reasons.push(`The assessed value is ${(ratio * 100).toFixed(1)}% of the entered market value, which is close enough to warrant checking the municipality's applicable ratio and comparable sales.`);
-      else reasons.push(`The assessed value is ${(ratio * 100).toFixed(1)}% of the entered market value, which by itself is not a strong over-assessment signal.`);
+      else reasons.push(`The assessed value is ${(ratio * 100).toFixed(1)}% of the entered market value, which by itself is not a strong over-assessment warning sign.`);
     }
 
     // Municipality consistency context: 15 points.
@@ -44,7 +44,7 @@
       availableWeight += 15;
       const points = percentile >= 75 ? 15 : percentile >= 50 ? 10 : percentile >= 25 ? 5 : 1;
       score += points;
-      reasons.push(`The municipality's residential COD is ${record.municipalityMetrics.cod.toFixed(1)}, with roughly ${percentile}% of loaded municipalities showing a lower COD. This adds context but does not prove an individual error.`);
+      reasons.push(`The municipality's residential COD is ${record.municipalityMetrics.cod.toFixed(1)}, with roughly ${percentile}% of loaded municipalities showing a lower COD. This adds info but does not prove an individual error.`);
     }
 
     // Optional comparable ratio: 20 points.
@@ -74,7 +74,7 @@
   function outcome(score) {
     if (score >= 68) return { label: 'High review potential', cls: 'is-high', summary: 'Multiple screening indicators suggest that gathering formal valuation evidence may be worthwhile.', recommendation: 'Confirm the official assessed value and applicable municipal or county ratio, collect recent comparable sales that predate the valuation date, and review the filing deadline before speaking with the assessor or an appeal professional.' };
     if (score >= 38) return { label: 'Moderate review potential', cls: 'is-moderate', summary: 'The available information is mixed. A targeted review could clarify whether stronger evidence exists.', recommendation: 'Verify the market-value estimate and add comparable property evidence. The result may change materially once a comparable median ratio or official equalization ratio is available.' };
-    return { label: 'Low current signal', cls: 'is-low', summary: 'The entered information does not currently show a strong statistical reason for appeal.', recommendation: 'Keep the assessment notice and monitor future assessments. Recalculate if you obtain a lower supported market value or stronger comparable evidence.' };
+    return { label: 'Low current red flag', cls: 'is-low', summary: 'The entered information does not currently show a strong statistical reason for appeal.', recommendation: 'Keep the assessment notice and monitor future assessments. Recalculate if you obtain a lower supported market value or stronger comparable evidence.' };
   }
 
   function render(result, municipality) {

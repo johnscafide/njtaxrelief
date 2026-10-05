@@ -279,7 +279,7 @@ async function addToDesk(p,btn,data,over){
   try{
     const payload={user_id:user.id,pams_pin:p,address:row.address,municipality:row.town||null,county:row.county||null,zip:row.zip||null,relationship:'farm',source:over?'assessment_screen':'manual',match_status:'matched',updated_at:new Date().toISOString()};
     if(!deskPins.has(p)){const x=await client.from('agent_farm_properties').insert(payload);if(x.error)throw x.error;deskPins.add(p)}
-    if(over){const annual=Number(metric(row,'watchdog.chapter123_annual_overpayment')||0),reason=`Current assessment appears above the Chapter 123 screening range using the parcel's recorded sale and published ratio context. Estimated annual tax difference: ${money(annual)}.`,note='WATCHDOG_ASSESSMENT|'+JSON.stringify({address:row.address,town:row.town,pams_pin:p,annual_impact:annual,assessment_reduction:Number(metric(row,'watchdog.chapter123_assessment_reduction')||0),over_upper_pct:Number(metric(row,'watchdog.chapter123_over_upper_pct')||0),reason,source:data.source||'NJ statewide parcels + Watchdog bulk intelligence',source_date:new Date().toISOString().slice(0,10)}),key=p+':assessment_review';const a=await client.from('agent_opportunity_actions').upsert({user_id:user.id,opportunity_key:key,pams_pin:p,action_state:'watched',note,updated_at:new Date().toISOString()},{onConflict:'user_id,opportunity_key'});if(a.error)throw a.error;assessmentPins.add(p)}
+    if(over){const annual=Number(metric(row,'watchdog.chapter123_annual_overpayment')||0),reason=`Current assessment appears above the Chapter 123 screening range using the parcel's recorded sale and published ratio info. Estimated annual tax difference: ${money(annual)}.`,note='WATCHDOG_ASSESSMENT|'+JSON.stringify({address:row.address,town:row.town,pams_pin:p,annual_impact:annual,assessment_reduction:Number(metric(row,'watchdog.chapter123_assessment_reduction')||0),over_upper_pct:Number(metric(row,'watchdog.chapter123_over_upper_pct')||0),reason,source:data.source||'NJ statewide parcels + Watchdog bulk intelligence',source_date:new Date().toISOString().slice(0,10)}),key=p+':assessment_review';const a=await client.from('agent_opportunity_actions').upsert({user_id:user.id,opportunity_key:key,pams_pin:p,action_state:'watched',note,updated_at:new Date().toISOString()},{onConflict:'user_id,opportunity_key'});if(a.error)throw a.error;assessmentPins.add(p)}
     if(btn){btn.classList.add('added');btn.innerHTML='<i class="fas fa-circle-check" aria-hidden="true"></i> Added'}
     return true;
   }catch(err){
@@ -306,7 +306,7 @@ async function start(ctx){
   loadImported();
   const data=await fetchPage(0,false);render(data);loadWorkspace();
 }
-const ready=window.njptrAccessReady||Promise.reject(new Error('Access context did not initialize'));
+const ready=window.njptrAccessReady||Promise.reject(new Error('Access info did not initialize'));
 Promise.resolve(ready).then(start).catch(err=>{
   if(window.WatchdogAgentSafety)window.WatchdogAgentSafety.report('market-list-start',err);
   const h=qs('#ml-app'),t=qs('#ml-fail');if(!h||!t)return;

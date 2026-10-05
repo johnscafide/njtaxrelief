@@ -43,7 +43,7 @@ function repairRenderedDeedDate(){
     if(year>new Date().getFullYear()+1||year>9999||(/^\d{6}$/.test(text)&&Number(text.slice(0,2))>12)){
       value.textContent='Verify source date';
       value.classList.add('tx-deed-date-warning');
-      value.title='The source date could not be safely normalized. Verify against the county recording record.';
+      value.title='The source date could not be safely standardized. Verify against the county recording record.';
     }
   });
 }

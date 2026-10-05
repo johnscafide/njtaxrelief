@@ -37,15 +37,15 @@
     ['watchdog.comparable_evidence_reliability','Comparable Evidence Reliability',comparableReliability(r),'Confidence in the municipal verified-sale evidence supporting property-level analysis.'],
     ['watchdog.municipal_cost_absorption_score','Municipal Cost Absorption Score',costAbsorption(r),'How well ratable growth and tax collections are absorbing levy growth.'],
     ['watchdog.transaction_tax_shock_index','Transaction Tax Shock Index',taxShock(r),'Combined revaluation, fiscal and tax-rate conditions that can change the carrying-cost conversation.'],
-    ['watchdog.fiscal_resilience_score','Municipal Fiscal Resilience Score',fiscalResilience(r),'Capacity signal combining budget pressure, cost absorption, collections and debt-service burden.'],
-    ['watchdog.assessment_defensibility_score','Assessment Defensibility Score',defensibility(r),'How well the current assessment is supported by independent evidence and assessment consistency.']
+    ['watchdog.fiscal_resilience_score','Municipal Fiscal Resilience Score',fiscalResilience(r),'Capacity sign combining budget pressure, cost absorption, collections and debt-service burden.'],
+    ['watchdog.assessment_defensibility_score','Assessment Strength Score',defensibility(r),'How well the current assessment is supported by independent evidence and assessment consistency.']
   ];}
   function card(r){
     var ms=metrics(r);
-    return toolCard('Cross-Professional Decision Signals','fa-compass-drafting',
-      '<p class="tl-p">Five new Watchdog-derived markers built for professionals who need to triage a property quickly before opening the deeper evidence. Every score is calculated from already-attributed public inputs and links to its formula.</p>'+
+    return toolCard('Cross-Professional Decision Numbers','fa-compass-drafting',
+      '<p class="tl-p">Five new Watchdog-calculated markers built for professionals who need to triage a property quickly before opening the deeper evidence. Every score is calculated from already-attributed public inputs and links to its formula.</p>'+
       '<div class="rai-grid">'+ms.map(function(m){return '<a class="dm" data-marker-id="'+m[0]+'" data-marker-value="'+m[2]+' / 100" data-marker-note="'+m[3].replace(/"/g,'&quot;')+'" href="/property/marker?id='+encodeURIComponent(m[0])+'&value='+encodeURIComponent(m[2]+' / 100')+'&note='+encodeURIComponent(m[3])+'"><span><b>'+m[1]+'</b><small>'+m[3]+'</small></span><strong>'+m[2]+'</strong><i class="fas fa-chevron-right"></i></a>';}).join('')+'</div>'+
-      '<div class="tl-fine">These are screening and prioritization signals, not legal, appraisal, lending or investment conclusions. Missing inputs reduce or neutralize component confidence rather than being silently treated as favorable evidence.</div>');
+      '<div class="tl-fine">These are screening and prioritization signs, not legal, appraisal, lending or investment conclusions. Missing inputs reduce or neutralize component confidence rather than being silently treated as favorable evidence.</div>');
   }
   Object.assign(window,{professionalDecisionSignals:metrics,comparableEvidenceReliability:comparableReliability,municipalCostAbsorption:costAbsorption,transactionTaxShock:taxShock,fiscalResilience:fiscalResilience,assessmentDefensibility:defensibility,toolProfessionalDecisionSignals:card});
 })();

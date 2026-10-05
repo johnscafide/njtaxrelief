@@ -27,7 +27,7 @@
     host.innerHTML =
       '<span class="dc-mobile-recovery-kicker">DATA CENTER</span>' +
       '<h2>Data could not finish loading</h2>' +
-      '<p>The governed marker catalog did not become ready. This may be a temporary connection issue.</p>' +
+      '<p>The checked marker catalog did not become ready. This may be a temporary connection issue.</p>' +
       '<button type="button" id="dc-mobile-retry">Retry Data Center</button>';
 
     var hero = main.querySelector('.dc-hero');

@@ -12,7 +12,7 @@
 
   var AREAS = [
     ['Customer experience', /dashboard|home\.html|mobile|navigation|sidebar|profile|account|lookup|town/i],
-    ['Professional workflows', /agent|workbench|scanner|appeal|professional|case|evidence|export/i],
+    ['Professional tasks', /agent|workbench|scanner|appeal|professional|case|evidence|export/i],
     ['Data & intelligence', /marker|data|modiv|sr1a|municip|source|permit|warehouse|town/i],
     ['Security & reliability', /security|rls|auth|incident|reliability|diagnostic|monitor|access|privacy/i],
     ['Revenue & billing', /billing|paddle|stripe|checkout|portal|pricing|revenue|entitlement|plan/i],
@@ -65,7 +65,7 @@
     $('uv-summary').innerHTML = [
       ['Releases', data.releases.length],
       ['Active roadmap', data.roadmap.length],
-      ['Governed markers', registry ? registry.summary.total : '—'],
+      ['Checked markers', registry ? registry.summary.total : '—'],
       ['Current release', 'v' + latest.version]
     ].map(function (item) { return '<div class="uv-stat"><b>' + item[1] + '</b><span>' + item[0] + '</span></div>'; }).join('');
     releasePulse();
@@ -105,7 +105,7 @@
   function renderRoadmap() {
     var summary = registry && registry.summary;
     $('uv-roadmap-summary').innerHTML = (summary ? [
-      ['Governed markers', summary.total], ['1,000-marker goal', summary.percent_of_goal + '%'],
+      ['Checked markers', summary.total], ['1,000-marker goal', summary.percent_of_goal + '%'],
       ['Public-source', summary.public_source], ['Watchdog-derived', summary.proprietary_derived]
     ] : [['Roadmap projects', data.roadmap.length]]).map(function (item) {
       return '<div class="uv-stat"><b>' + item[1] + '</b><span>' + item[0] + '</span></div>';

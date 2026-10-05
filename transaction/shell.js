@@ -87,7 +87,7 @@ function patch(){
   var bar=document.querySelector('.wdx-pagebar');
   if(bar){
     var kicker=bar.querySelector('.wdx-kicker'),h=bar.querySelector('h1'),p=bar.querySelector('p');
-    if(kicker)kicker.textContent='Agent transaction workspace';
+    if(kicker)kicker.textContent='Agent transaction dashboard';
     if(h)h.textContent='Transaction Command Center';
     if(p)p.textContent='Coordinate closing readiness, disclosures, assignments and source-aware Watchdog evidence across every active deal.';
     var primary=bar.querySelector('.wdx-page-actions .primary');

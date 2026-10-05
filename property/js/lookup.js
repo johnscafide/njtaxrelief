@@ -667,7 +667,7 @@ function assessorAddressAlias(display, assessor) {
     el('pl-inline').innerHTML =
       '<div class="pl-state"><div class="pl-spin"></div>' +
       '<div class="pl-state-title">Locating your property</div>' +
-      '<div class="pl-state-sub">Opening the parcel first. Property intelligence will fill in behind it.</div></div>';
+      '<div class="pl-state-sub">Opening the parcel first. Property info will fill in behind it.</div></div>';
 
     warmReferenceData();
     parcelAt(lat, lon)
@@ -1773,7 +1773,7 @@ function assessorAddressAlias(display, assessor) {
   ];
 
   function buildSellingOptions() {
-    return '<h3 class="plm-sec-h">Explore your selling options</h3>' +
+    return '<h3 class="plm-sec-h">See your selling options</h3>' +
       '<p class="plm-sec-s">Three ways to sell ' + esc(current.address) + '. Two of them are free either way.</p>' +
       '<div class="sell-opts">' +
         SELL_OPTIONS.map(function (o) {
@@ -1804,7 +1804,7 @@ function assessorAddressAlias(display, assessor) {
       box.innerHTML =
         '<div class="plm-est-lbl"><i class="fas fa-dog"></i> Watchdog Tax Value</div>' +
         '<div class="plm-est-val small">Not enough to go on yet</div>' +
-        '<div class="plm-est-sub">Working out a defensible value for this property needs recorded sales nearby, and there are not enough on file for ' +
+        '<div class="plm-est-sub">Working out a solid value for this property needs recorded sales nearby, and there are not enough on file for ' +
         esc(current.town || 'this town') + ' yet. Rather than invent a number, I would rather tell you. ' +
         '<a href="#" onclick="plOpenForm(\'appeal\');return false;">Ask me to look at it by hand</a>.</div>';
       var eqx = el('plm-equity');
@@ -1839,13 +1839,13 @@ function assessorAddressAlias(display, assessor) {
         : v.ratioSource === 'official'
         ? 'Based on the official state equalization ratio of <b>' + (v.ratio * 100).toFixed(2) + '%</b> for <b>' +
           esc(current.town) + '</b>, tax year ' + v.ratioYear + '. That is the same figure a county tax board applies.'
-        : 'Derived from recorded sales, since no published state ratio is on file for <b>' + esc(current.town) + '</b> yet.');
+        : 'Calculated from recorded sales, since no published state ratio is on file for <b>' + esc(current.town) + '</b> yet.');
 
     box.innerHTML =
       '<div class="plm-est-lbl"><i class="fas fa-dog"></i> Watchdog Tax Value' +
         '<span class="plm-conf ' + cm.cls + '" title="' + cm.note + '">' + cm.txt + '</span></div>' +
       '<div class="plm-est-hero">' + money(r(argued)) + '</div>' +
-      '<div class="plm-est-range">Defensible range ' + money(r(lowEnd)) + ' to ' + money(r(midEnd)) + '</div>' +
+      '<div class="plm-est-range">Solid range ' + money(r(lowEnd)) + ' to ' + money(r(midEnd)) + '</div>' +
       '<div class="plm-est-purpose"><i class="fas fa-gavel"></i>' +
         '<span>This is a <b>tax appeal value</b>, not a listing price. It is deliberately set at the ' +
         'conservative end, because the number that wins in front of a county board is the one you can defend.</span>' +
@@ -1893,7 +1893,7 @@ function assessorAddressAlias(display, assessor) {
         label: 'State-verified sale of ' + money(verifiedSale) + ' in ' + verifiedSaleYear +
           (Math.abs(appr) > 0.0001
             ? ', carried forward ' + yrs + ' years at the measured ' + (appr * 100).toFixed(1) + '% annual trend'
-            : ', with no appreciation adjustment because no defensible market trend was available') });
+            : ', with no appreciation adjustment because no solid market trend was available') });
       anchors.push(carried);
     }
 
@@ -1982,7 +1982,7 @@ evidence.map(function (e) { return '<div class="score-row"><span>' + esc(e.label
         '<div class="score-row"><span>Certified legal upper ratio</span><b>' + (upperRatio * 100).toFixed(2) + '%</b></div>' +
         '<div class="score-row' + (hasCase ? ' over' : '') + '"><span>Chapter 123 upper limit</span><b>' + money(limit) + '</b></div>' +
         (hasCase ? '<div class="score-row over"><span>Assessed above that limit by</span><b>' + money(overBy) + '</b></div>' : '') +
-        (peerMed !== null ? '<div class="score-row"><span>Peer median, supporting context only (' + peerN + ' homes)</span><b>' + money(peerMed) + '</b></div>' : '') +
+        (peerMed !== null ? '<div class="score-row"><span>Peer median, supporting info only (' + peerN + ' homes)</span><b>' + money(peerMed) + '</b></div>' : '') +
         '</div>';
 
       host.innerHTML =
@@ -2021,7 +2021,7 @@ buildOpinion(hasCase, overBy, saving, target) + rows +
 
     host.innerHTML =
       '<h3 class="plm-sec-h">How this assessment compares to similar homes nearby</h3>' +
-      '<p class="plm-sec-s">This is an assessment-comparison signal only. It is <b>not a Chapter 123 test</b>, because neighboring assessments are not independent evidence of true market value. ' +
+      '<p class="plm-sec-s">This is an assessment-comparison red flag only. It is <b>not a Chapter 123 test</b>, because neighboring assessments are not independent evidence of true market value. ' +
       'It can tell you when a property looks unusual enough to investigate, but it cannot establish a statutory appeal limit or savings amount.</p>' +
       '<div class="pl-card"><div class="score-rows">' +
         '<div class="score-row"><span>Your current assessment</span><b>' + money(assessed) + '</b></div>' +
@@ -2080,7 +2080,7 @@ buildOpinion(hasCase, overBy, saving, target) + rows +
       '<p><b>Assessed value</b> is the number your town uses to calculate your tax bill. It is not what your home would sell for. ' +
       'Most New Jersey towns assess at some fraction of real market value, and that fraction drifts every year until the town revalues.</p>' +
 
-      '<p><b>The Watchdog Tax Value</b> is our estimate of what this property is defensibly worth for tax purposes. ' +
+      '<p><b>The Watchdog Tax Value</b> is our estimate of what this property is solidly worth for tax purposes. ' +
       'It is built from what comparable homes in your town actually sold for, measured against their assessments, ' +
       'so it speaks the same language a county tax board does.</p>' +
 
@@ -2131,7 +2131,7 @@ buildOpinion(hasCase, overBy, saving, target) + rows +
     }
     var top = list.slice(0, 12);
     host.innerHTML = gate('comps',
-      'Unlock nearby recorded sales',
+      'Open nearby recorded sales',
       'Every deed recorded near this address in the last six years, with sale price, assessed value, year built, and lot size.',
       '<h3 class="plm-sec-h">Recorded sales near this home</h3>' +
       '<p class="plm-sec-s">Actual deeds recorded nearby, newest first. These come from the state file, so they are real closed transfers, not listings. Sale prices lag by roughly a year.</p>' +
@@ -2235,7 +2235,7 @@ buildOpinion(hasCase, overBy, saving, target) + rows +
 
     host.innerHTML =
       '<h3 class="plm-sec-h">Watchdog Score</h3>' +
-      '<p class="plm-sec-s">How this assessment compares to genuinely similar homes nearby, matched on vintage and lot size. This is a peer-assessment signal, not a Chapter 123 statutory test.</p>' +
+      '<p class="plm-sec-s">How this assessment compares to genuinely similar homes nearby, matched on vintage and lot size. This is a peer-assessment red flag, not a Chapter 123 statutory test.</p>' +
       '<div class="score-wrap">' +
         '<div class="score-gauge">' +
           '<svg viewBox="0 0 260 150" role="img" aria-label="Watchdog Score ' + sc.score + '">' +
@@ -2388,7 +2388,7 @@ buildOpinion(hasCase, overBy, saving, target) + rows +
               (val.appreciationSource === 'none' ? ' — no trend adjustment because evidence was insufficient' : '') +
               ', median sale age ' + (val.medSaleAge != null ? val.medSaleAge.toFixed(2) + ' yrs' : '?')
             : 'n/a') + '</div>' +
-        '<div><b>Calibration factor</b>: ' + (val ? val.calibration.toFixed(3) : '-') +
+        '<div><b>Tuning factor</b>: ' + (val ? val.calibration.toFixed(3) : '-') +
           '  <b>Years stale</b>: ' + (val ? (val.yearsStale || 0).toFixed(2) : '-') + '</div>' +
         '<div><b>Drift</b>: ' + (val && val.drift != null ? (val.drift * 100).toFixed(2) + '%/yr' : 'not measured') +
           '  <b>Time factor</b>: ' + (val ? val.timeFactor.toFixed(3) : '-') +
@@ -3047,7 +3047,7 @@ buildOpinion(hasCase, overBy, saving, target) + rows +
         '<h3 class="plm-sec-h">What would you walk away with?</h3>' +
         '<p class="plm-sec-s">Net proceeds after commission, the NJ realty transfer fee, and everything else. Adjust anything and it moves live.</p>' +
         gate('proceeds',
-          'Unlock the net proceeds calculator',
+          'Open the net proceeds calculator',
           'What you actually walk away with after commission, the NJ realty transfer fee, your payoff, and the 2025 seller fee change.',
           buildProceeds()) +
       '</div>' +
@@ -3070,7 +3070,7 @@ buildOpinion(hasCase, overBy, saving, target) + rows +
 
       '<div class="plm-sec" id="plm-comps-sec">' + sectionLoading('Loading nearby recorded sales', 'Finding recent transfers around this parcel.') + '</div>' +
 
-      '<div class="plm-sec" id="plm-hood-sec">' + sectionLoading('Comparing nearby assessments', 'Measuring the surrounding residential parcels for context.') + '</div>' +
+      '<div class="plm-sec" id="plm-hood-sec">' + sectionLoading('Comparing nearby assessments', 'Measuring the surrounding residential parcels for info.') + '</div>' +
 
       '<div class="plm-sec">' + buildPreapproval() + '</div>' +
 
@@ -3093,7 +3093,7 @@ buildOpinion(hasCase, overBy, saving, target) + rows +
 
       '<div class="plm-note">' +
         '<strong>About this data.</strong> New Jersey Office of GIS statewide parcel layer joined to Division of Taxation MOD-IV assessment records, the same system municipal assessors use, refreshed about once a year. Owner names are redacted under Daniel\u2019s Law. The tax figure is the prior year billed amount, not a current year estimate. ' +
-        'Listing status is not from the MLS. The only automatic signal is a recently recorded deed, which means the property changed hands. ' +
+        'Listing status is not from the MLS. The only automatic warning sign is a recently recorded deed, which means the property changed hands. ' +
         'Aerial imagery from Esri World Imagery. Parcel boundaries are for reference and are not survey or legal descriptions. All calculators produce estimates only. Confirm closing figures with your attorney and title company.' +
       '</div>';
 
@@ -4322,7 +4322,7 @@ buildOpinion(hasCase, overBy, saving, target) + rows +
         '<input id="pl-fphone" type="tel" placeholder="Phone (optional)" autocomplete="tel">' +
         (it.rel
           ? '<select id="pl-frel"><option value="">I am the...</option><option>Owner, I live here</option><option>Owner, I rent it out</option><option>Tenant</option><option>Just researching</option></select>'
-          : '<select id="pl-fwhen"><option value="">Timing</option><option>As soon as possible</option><option>1 to 3 months</option><option>3 to 6 months</option><option>6 to 12 months</option><option>Just exploring</option></select>') +
+          : '<select id="pl-fwhen"><option value="">Timing</option><option>As soon as possible</option><option>1 to 3 months</option><option>3 to 6 months</option><option>6 to 12 months</option><option>Just looking into</option></select>') +
         '<button onclick="plSubmitForm(\'' + kind + '\')">Send to ' + esc(AGENTS[activeAgentKey].name.split(' ')[0]) + '</button>' +
       '</div>' +
       '<div class="pl-fine">The address, block and lot, and tax figures go with your message. <a href="#" onclick="plResetCard();return false;">Back</a></div>';

@@ -96,7 +96,7 @@
     if (note && !note.querySelector('[data-crm-aware-note]')) {
       var span = document.createElement('span');
       span.setAttribute('data-crm-aware-note', 'true');
-      span.innerHTML = ' <b>CRM-aware:</b> authorized CRM context is treated as relationship/workflow context only and never replaces governed property facts.';
+      span.innerHTML = ' <b>CRM-aware:</b> authorized CRM info is treated as relationship/workflow info only and never replaces checked property facts.';
       note.appendChild(span);
     }
   }

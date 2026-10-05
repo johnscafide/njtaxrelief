@@ -42,7 +42,7 @@ expect(sharedCss.includes("url('/agent/assets/hero-coast.webp')"),'shared Agent 
 expect(sharedCss.includes("url('/agent/assets/founding-coast.webp')"),'shared Agent founding coast graphic missing');
 expect(sharedJs.includes("'/agent/assets/platform-live.png'")&&sharedJs.includes("'/agent/assets/platform-illustrative.png'"),'shared Agent product-tour graphics missing');
 
-expect(page.includes('<h1 id="hero-title">Lend smarter<br><span><em>know</em> the property.</span></h1>'),'lender-specific two-word hero headline missing');
+expect(page.includes('<h1 id="hero-title">Lend better<br><span><em>know</em> the property.</span></h1>'),'lender-specific two-word hero headline missing');
 expect(page.includes('Look up the property behind any New Jersey loan'),'lender-specific hero copy missing');
 expect(page.includes('Made for<br>New Jersey lenders.'),'lender-specific positioning missing');
 expect(page.includes('Lender Founding Lifetime'),'lender Founding Lifetime heading missing');
@@ -50,7 +50,7 @@ expect(page.includes('$3,499')&&page.includes('$9,999'),'Pro and Pro+ lifetime p
 expect(page.includes('250-property capacity')&&page.includes('2,500-property capacity'),'Pro and Pro+ capacities missing');
 // Count checkout controls only; the inline checkout script also names the attribute in its selectors.
 expect((page.match(/<button\b[^>]*\bdata-lender-lifetime-checkout\b/g)||[]).length===2,'lender page must expose exactly two lifetime checkout choices');
-expect(page.includes('data-tier="pro"')&&page.includes('data-tier="pro_plus"'),'both governed lifetime tiers must be present');
+expect(page.includes('data-tier="pro"')&&page.includes('data-tier="pro_plus"'),'both checked lifetime tiers must be present');
 expect(page.includes('lender-proplus-card')&&page.includes('<span class="price-ribbon">Recommended</span>'),'Pro+ must be the primary recommended Lifetime card');
 expect(page.indexOf('data-tier="pro_plus"')<page.indexOf('data-tier="pro"'),'Pro+ must appear before Pro in the lender offer hierarchy');
 expect(page.includes('lender-pro-card'),'secondary Pro Lifetime box missing');
@@ -61,7 +61,7 @@ expect(page.includes('Usage-based services, direct mail, third-party data and ov
 expect(page.includes('$1,290')&&page.includes('data-lender-annual-checkout data-tier="pro"'),'Pro annual alternative missing');
 
 expect(page.includes("billing.invoke('create-lifetime-checkout', { tier })"),'lender lifetime checkout must reuse server-owned checkout');
-expect(page.includes("billing.checkout(tier, { cadence: 'yearly' })"),'lender annual checkout must reuse shared governed checkout');
+expect(page.includes("billing.checkout(tier, { cadence: 'yearly' })"),'lender annual checkout must reuse shared checked checkout');
 expect(page.includes("sessionStorage.setItem('watchdog:lifetime:pending', tier)"),'signed-out lender lifetime selection must survive sign-in');
 expect(billing.includes("sessionStorage.getItem('watchdog:lifetime:pending')"),'billing client cannot resume pending Lifetime checkout');
 expect(middleware.includes("'/agent', '/lender'"),'Watchdog root static route allowlist must include /lender next to /agent');

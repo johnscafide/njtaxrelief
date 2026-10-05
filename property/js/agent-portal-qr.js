@@ -127,7 +127,7 @@
     pdf.text('WATCHDOG', 0.6, 0.7);
     pdf.setFont('helvetica', 'normal');
     pdf.setFontSize(10.5);
-    pdf.text('New Jersey property intelligence', 0.6, 1.02);
+    pdf.text('New Jersey property info', 0.6, 1.02);
 
     pdf.setTextColor(navy[0], navy[1], navy[2]);
     pdf.setFont('helvetica', 'bold');
@@ -136,7 +136,7 @@
     pdf.setFont('helvetica', 'normal');
     pdf.setFontSize(12.5);
     pdf.setTextColor(80, 93, 103);
-    pdf.text('Open the branded Watchdog property portal, search an address, and review governed public-record intelligence.', 4.25, 2.62, { align: 'center', maxWidth: 6.7 });
+    pdf.text('Open the branded Watchdog property portal, search an address, and review checked public-record info.', 4.25, 2.62, { align: 'center', maxWidth: 6.7 });
 
     pdf.setDrawColor(gold[0], gold[1], gold[2]);
     pdf.setLineWidth(0.05);
@@ -150,7 +150,7 @@
     pdf.setFont('helvetica', 'normal');
     pdf.setTextColor(98, 113, 125);
     pdf.setFontSize(9.5);
-    pdf.text('Property intelligence is informational and based on governed public-record data. It is not legal, tax, appraisal, lending, or appeal-outcome advice.', 4.25, 9.65, { align: 'center', maxWidth: 6.9 });
+    pdf.text('Property info is informational and based on checked public-record data. It is not legal, tax, appraisal, lending, or appeal-outcome advice.', 4.25, 9.65, { align: 'center', maxWidth: 6.9 });
     pdf.setTextColor(130, 140, 148);
     pdf.setFontSize(8.5);
     pdf.text('Generated from the signed-in professional\'s active Watchdog Agent+ vanity portal.', 4.25, 10.05, { align: 'center', maxWidth: 6.9 });

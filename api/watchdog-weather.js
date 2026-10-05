@@ -12,7 +12,7 @@ module.exports = async function handler(req, res) {
 
   var headers = {
     'Accept': 'application/geo+json',
-    'User-Agent': 'Watchdog Property Intelligence (https://www.watchdogindex.com)'
+    'User-Agent': 'Watchdog Property Info (https://www.watchdogindex.com)'
   };
 
   try {

@@ -15,7 +15,7 @@
         '<label>Annual rate change <output>' + rateGrowth.toFixed(1) + '%</output><input type="range" min="-3" max="8" value="' + rateGrowth.toFixed(1) + '" step="0.1" data-k="rate"></label>' +
         '<label>Years ahead <output>5</output><input type="range" min="1" max="10" value="5" step="1" data-k="years"></label>' +
       '</div><div class="tp-output" id="' + id + '-out"></div>' +
-      (budget ? '<div class="tl-note"><b>Budget context:</b> ' + budget.score + '/100 ' + budget.band +
+      (budget ? '<div class="tl-note"><b>Budget info:</b> ' + budget.score + '/100 ' + budget.band +
         ' municipal pressure. This does not change the rate slider because the pressure score is not a forecast.</div>' : '') +
       '<div class="tl-fine">This is an adjustable scenario, not a forecast. It starts with the current assessment and effective tax rate. The rate control defaults to the municipality\'s own historical pace when enough years are available.</div>');
   }

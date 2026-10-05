@@ -53,7 +53,7 @@
     if (built >= year - 1) signals.push('The property record shows very recent construction (' + built + '), a common added-assessment trigger.');
     if (movement && movement.delta > 0) signals.push('Watchdog observed the assessment rise by ' + money(movement.delta) + ' between saved snapshots.');
     if (s.improvement === 'yes') signals.push('You marked a completed improvement after the normal Oct. 1 assessment date.');
-    if (!signals.length) return { tone:'low', title:'No added/omitted signal recorded yet', text:'This is a monitor, not a municipal notice feed. Keep the property saved and enter any improvement or notice you receive.' };
+    if (!signals.length) return { tone:'low', title:'No added/omitted red flag recorded yet', text:'This is a monitor, not a municipal notice feed. Keep the property saved and enter any improvement or notice you receive.' };
     return { tone:'mid', title:'Review this property for an added/omitted assessment', text:signals.join(' ') };
   }
   function selected(value, current) { return value === current ? ' selected' : ''; }

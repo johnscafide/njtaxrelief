@@ -1065,7 +1065,7 @@ body.est-verify-bar-open{padding-bottom:88px;}
       <input class="est-code-input bar" id="est-code" type="text" inputmode="numeric"
              autocomplete="one-time-code" maxlength="6" placeholder="000000">
       <button class="est-btn-next gold" id="est-verify-btn" onclick="estVerifyCheck()">
-        <i class="fas fa-lock-open"></i> Unlock
+        <i class="fas fa-lock-open"></i> Open
       </button>
       <button type="button" class="est-linkbtn" id="est-resend" onclick="estVerifySend(false)">Resend</button>
       <button type="button" class="est-verify-bar-close" onclick="estCloseVerifyBar()" aria-label="Close">
@@ -1274,7 +1274,7 @@ body.est-verify-bar-open{padding-bottom:88px;}
       <!-- Step 6: Lead capture -->
       <div class="est-step" id="est-step6">
         <div class="est-q">Almost done. What would be useful after your tax estimate?</div>
-        <div class="est-hint">Your benefit is only one number. If you're a homeowner, we can also help put your home's value or a future move into context. Choose only what is useful to you.</div>
+        <div class="est-hint">Your benefit is only one number. If you're a homeowner, we can also help put your home's value or a future move into perspective. Choose only what is useful to you.</div>
         <div class="est-lead-wrap">
           <div class="est-lead-title">Where should we send your homeowner summary?</div>
           <div class="est-lead-sub">Your estimated benefit, important deadlines and the next step you choose below.</div>
@@ -2001,7 +2001,7 @@ body.est-verify-bar-open{padding-bottom:88px;}
       rcEl.innerHTML = '<div class="est-loading">'
         + '<div class="est-loading-spinner"></div>'
         + '<div class="est-loading-text">Calculating your benefit\u2026</div>'
-        + '<div class="est-loading-tiktok">Then we\'ll match your address to a few useful Property Watchdog signals.</div>'
+        + '<div class="est-loading-tiktok">Then we\'ll match your address to a few useful Property Watchdog red flags.</div>'
         + '</div>';
     }
     setTimeout(function() {
@@ -2093,14 +2093,14 @@ body.est-verify-bar-open{padding-bottom:88px;}
         + '</div>';
     }
     var decisionBlock = answers.tenure === 'rent'
-      ? '<div class="est-decision-intro"><strong>Your benefit is useful. Your housing options are the bigger picture.</strong><span>We won\'t pretend your rental address is a home you own. Instead, Watchdog can show what residential ownership costs look like nearby, then help you decide whether buying is worth exploring.</span></div>'
-      + '<div class="est-decision-panel"><div class="est-decision-kicker">Your next decision</div><h3>' + (buyInt ? 'Let\'s turn this into a realistic buying plan.' : 'Curious what ownership could look like?') + '</h3><p>Start with local property-tax context. If you want to go further, add price, financing, insurance and your timeline before deciding whether renting or buying fits better.</p><div class="est-decision-grid"><a class="est-decision-card" href="index.html#contact"><i class="fas fa-key"></i><b>Build my rent-vs-own plan</b><span>Local taxes + real buying context</span></a><a class="est-decision-card" href="/property/"><i class="fas fa-magnifying-glass-location"></i><b>Explore Property Watchdog</b><span>Research NJ homes and towns</span></a></div></div>'
+      ? '<div class="est-decision-intro"><strong>Your benefit is useful. Your housing options are the bigger picture.</strong><span>We won\'t pretend your rental address is a home you own. Instead, Watchdog can show what residential ownership costs look like nearby, then help you decide whether buying is worth looking into.</span></div>'
+      + '<div class="est-decision-panel"><div class="est-decision-kicker">Your next decision</div><h3>' + (buyInt ? 'Let\'s turn this into a realistic buying plan.' : 'Curious what ownership could look like?') + '</h3><p>Start with local property-tax info. If you want to go further, add price, financing, insurance and your timeline before deciding whether renting or buying fits better.</p><div class="est-decision-grid"><a class="est-decision-card" href="index.html#contact"><i class="fas fa-key"></i><b>Build my rent-vs-own plan</b><span>Local taxes + real buying info</span></a><a class="est-decision-card" href="/property/"><i class="fas fa-magnifying-glass-location"></i><b>See Property Watchdog</b><span>Research NJ homes and towns</span></a></div></div>'
       : '<div class="est-decision-intro"><strong>Your rebate is the small number. Your housing decision is the big one.</strong><span>Tax relief can help your annual budget, but market value, equity, property taxes and the cost of your next home can change the picture by tens of thousands of dollars. Use the estimate as the start of the conversation—not the end of it.</span></div>'
       + '<div class="est-decision-panel"><div class="est-decision-kicker">Your next decision</div>'
       + '<h3>' + (sellInt ? 'Let\'s put a real number on your home.' : buyInt ? 'Let\'s turn the tax answer into a buying plan.' : 'What would make this estimate more useful?') + '</h3>'
       + '<p>' + (sellInt ? 'You asked for a home-value review. We\'ll use actual neighborhood sales and your timeline so the answer is useful for a real decision.' : buyInt ? 'You asked for buying guidance. The useful conversation is total monthly cost, local taxes, timing and what your current housing position lets you do next.' : 'No sales pitch. Pick the question you actually want answered, or simply take your benefit estimate and apply with the state.') + '</p>'
       + '<div class="est-decision-grid">'
-      + '<button class="est-decision-card" onclick="estCuriousClick()"><i class="fas fa-house-circle-check"></i><b>What could my home sell for?</b><span>Human-reviewed comps + equity context</span></button>'
+      + '<button class="est-decision-card" onclick="estCuriousClick()"><i class="fas fa-house-circle-check"></i><b>What could my home sell for?</b><span>Human-reviewed comps + equity info</span></button>'
       + '<a class="est-decision-card" href="index.html#contact"><i class="fas fa-key"></i><b>What could I buy next?</b><span>Taxes, monthly cost + South Jersey options</span></a>'
       + '</div></div>';
     var payeeName = ((document.getElementById('est-name') || {}).value || 'You').trim();

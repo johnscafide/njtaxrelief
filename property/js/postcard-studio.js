@@ -158,7 +158,7 @@ async function start(ctx){
   if(paid==='success')toast('Payment received. Your postcards go to print as soon as the payment is confirmed.');
   if(paid==='cancelled')toast('Checkout was canceled. You were not charged.');
 }
-const ready=window.njptrAccessReady||Promise.reject(new Error('Access context did not initialize'));
+const ready=window.njptrAccessReady||Promise.reject(new Error('Access info did not initialize'));
 Promise.resolve(ready).then(start).catch(err=>{
   if(window.WatchdogAgentSafety)window.WatchdogAgentSafety.report('postcard-studio-start',err);
   const h=qs('#ps-app'),t=qs('#ps-fail');if(!h||!t)return;

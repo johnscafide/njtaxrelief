@@ -28,13 +28,13 @@ must(customizerCss.includes('@keyframes acBrokerRingSpin'),'Brokerage hover rota
 
 must(profile.includes('await Promise.resolve(window.njptrAccessReady)'),'Homeowner profile does not wait for protected-route auth.');
 must(profile.includes('db.auth.onAuthStateChange'),'Homeowner profile does not retry after auth restoration.');
-must(profile.includes('Household &amp; demographic context'),'Expanded homeowner demographic panel missing.');
+must(profile.includes('Household &amp; demographic info'),'Expanded homeowner demographic panel missing.');
 must(profile.includes('household_income_band'),'Household income field missing.');
 must(profile.includes('household_composition'),'Household composition field missing.');
 must(profile.includes('residence_tenure_band'),'Residence tenure field missing.');
 must(profile.includes('primary_residence'),'Primary residence field missing.');
 must(profileCss.includes('.acp-demographics'),'Homeowner demographic styling missing.');
-must(reusable.includes('Household income, age and other demographics belong in the private homeowner context section'),'Reusable/private data boundary copy missing.');
+must(reusable.includes('Household income, age and other demographics belong in the private homeowner info section'),'Reusable/private data boundary copy missing.');
 must(reusableJs.includes('account-reusable-profile.html?v=20260926a'),'Reusable homeowner partial cache-bust missing.');
 
 must(migration.includes('add column if not exists household_composition text'),'Household composition column migration missing.');

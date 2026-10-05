@@ -170,7 +170,7 @@ function townIntelligenceCard(property) {
     '% per year across ' + rate.span + ' years, rising in ' + rate.upYears + ' and falling in ' + rate.downYears + '.';
   if (location.pathname.indexOf('/fairness') !== -1) setTimeout(function () { hydrateRegressivity(row.district); }, 0);
   return '<div class="ti-report">' +
-    '<div class="ti-report-head"><div><span>Town Intelligence</span><h4>' + tiEsc(row.name) + '</h4>' +
+    '<div class="ti-report-head"><div><span>Town Info</span><h4>' + tiEsc(row.name) + '</h4>' +
       '<p>' + tiEsc(row.county) + ' County</p></div><div class="ti-score ' + row.band + '"><b>' + row.score + '</b><span>fairness</span></div></div>' +
     '<div class="ti-stat-grid">' +
       '<div><b>#' + row.stateRank + '</b><span>of ' + row.stateTotal + ' statewide</span></div>' +

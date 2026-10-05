@@ -6,9 +6,9 @@ const CANONICAL_ORIGIN = 'https://www.watchdogindex.com/';
 const LEGACY_PROPERTY_ORIGIN = 'https://njpropertytaxrelief.com/property/';
 const WATCHDOG_PROPERTY_ORIGIN = 'https://www.watchdogindex.com/property/';
 const SOCIAL_IMAGE_URL = 'https://www.watchdogindex.com/watchdog-social-share.jpg';
-const SOCIAL_TITLE = 'Watchdog | New Jersey Property Intelligence';
-const SOCIAL_DESCRIPTION = 'Search New Jersey property data and signals in one place. See Watchdog Score, taxes, assessments, and property intelligence.';
-const SOCIAL_IMAGE_META = `  <meta property="og:image" content="${SOCIAL_IMAGE_URL}">\n  <meta property="og:image:secure_url" content="${SOCIAL_IMAGE_URL}">\n  <meta property="og:image:type" content="image/jpeg">\n  <meta property="og:image:width" content="600">\n  <meta property="og:image:height" content="315">\n  <meta property="og:image:alt" content="Watchdog property intelligence for New Jersey">\n  <meta name="twitter:image" content="${SOCIAL_IMAGE_URL}">\n  <meta name="twitter:image:alt" content="Watchdog property intelligence for New Jersey">\n`;
+const SOCIAL_TITLE = 'Watchdog | New Jersey Property Info';
+const SOCIAL_DESCRIPTION = 'Search New Jersey property data and numbers in one place. See Watchdog Score, taxes, assessments, and property info.';
+const SOCIAL_IMAGE_META = `  <meta property="og:image" content="${SOCIAL_IMAGE_URL}">\n  <meta property="og:image:secure_url" content="${SOCIAL_IMAGE_URL}">\n  <meta property="og:image:type" content="image/jpeg">\n  <meta property="og:image:width" content="600">\n  <meta property="og:image:height" content="315">\n  <meta property="og:image:alt" content="Watchdog property info for New Jersey">\n  <meta name="twitter:image" content="${SOCIAL_IMAGE_URL}">\n  <meta name="twitter:image:alt" content="Watchdog property info for New Jersey">\n`;
 const GA_TAG = '  <script async src="https://www.googletagmanager.com/gtag/js?id=G-ENP9182L0J"></script>\n';
 const GA_CONFIG = '  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag(\'js\',new Date());gtag(\'config\',\'G-ENP9182L0J\');</script>\n';
 const CLARITY_TAG = '  <script>(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window,document,"clarity","script","wjeklv0exl");</script>\n';
@@ -28,9 +28,9 @@ const ENTITY_GRAPH = `<script type="application/ld+json" id="${ENTITY_GRAPH_ID}"
       "@type": "Organization",
       "@id": "https://www.watchdogindex.com/#organization",
       "name": "Watchdog",
-      "alternateName": "Watchdog Property Intelligence",
+      "alternateName": "Watchdog Property Info",
       "url": "https://www.watchdogindex.com/",
-      "description": "New Jersey property intelligence for homeowners and real-estate professionals, combining public-source property evidence with Watchdog-derived decision intelligence.",
+      "description": "New Jersey property info for homeowners and real-estate professionals, combining public-source property evidence with Watchdog-calculated decision intelligence.",
       "areaServed": { "@type": "State", "name": "New Jersey" }
     },
     {

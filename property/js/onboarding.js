@@ -44,7 +44,7 @@
         ? 'We only use your sign-in to secure your account and save your Watchdog properties.'
         : planMode
           ? 'Paid plans use secure Stripe Checkout. Free requires no payment method and can be upgraded anytime.'
-          : 'Your answers are saved to your Watchdog profile and kept separate from governed property-source facts.';
+          : 'Your answers are saved to your Watchdog profile and kept separate from checked property-source facts.';
     }
   }
 
@@ -84,7 +84,7 @@
   }
 
   var steps = [
-    { id:'intro', kind:'intro', eyebrow:'WELCOME TO WATCHDOG', title:'Make Watchdog yours.', copy:'A few quick answers help Watchdog prioritize the property signals, workflows and intelligence that matter most to you.' },
+    { id:'intro', kind:'intro', eyebrow:'WELCOME TO WATCHDOG', title:'Make Watchdog yours.', copy:'A few quick answers help Watchdog prioritize the property numbers, tasks and intelligence that matter most to you.' },
     {
       id:'persona', kind:'single', eyebrow:'START HERE', title:'How will you use Watchdog?', required:true,
       options:[
@@ -113,10 +113,10 @@
         choice('title_closing','Title / closing','Transaction and property review','CL'),
         choice('contractor','Contractor / developer','Permits, projects and opportunity','BU'),
         choice('accountant','Accountant / CPA','Tax and client advisory','CPA'),
-        choice('insurance','Insurance professional','Property and client risk context','IN'),
+        choice('insurance','Insurance professional','Property and client risk info','IN'),
         choice('property_manager','Property manager','Portfolio operations and monitoring','PM'),
         choice('investor','Real estate investor','Acquisition and portfolio decisions','$'),
-        choice('other','Other professional','A different property-related workflow','…')
+        choice('other','Other professional','A different property-related process','…')
       ]
     },
     {
@@ -131,11 +131,11 @@
     { id:'markets_text', kind:'input', eyebrow:'YOUR MARKET', title:'Where do you work most often?', required:true, when:function(){ return answers.persona === 'professional' || answers.persona === 'both'; }, placeholder:'Camden County, Gloucester County', maxLength:240, note:'Use towns, counties or ZIP codes. Separate multiple areas with commas.' },
     {
       id:'goals', kind:'multi', eyebrow:'YOUR PRIORITIES', title:'What do you want Watchdog to help with?', required:true,
-      options:[choice('monitor_property','Monitor property changes'),choice('lower_property_tax','Understand property taxes'),choice('buy','Buy smarter'),choice('sell','Prepare to sell'),choice('invest','Find opportunities'),choice('client_research','Research for clients'),choice('prospecting','Prospecting / farming'),choice('due_diligence','Property due diligence'),choice('appeals','Assessment / appeal work')]
+      options:[choice('monitor_property','Monitor property changes'),choice('lower_property_tax','Understand property taxes'),choice('buy','Buy better'),choice('sell','Prepare to sell'),choice('invest','Find opportunities'),choice('client_research','Research for clients'),choice('prospecting','Prospecting / farming'),choice('due_diligence','Property due diligence'),choice('appeals','Assessment / appeal work')]
     },
     {
       id:'age_band', kind:'single', eyebrow:'ABOUT YOU', title:'What age range are you in?', required:true,
-      note:'We use ranges for product insights. This is never a housing-targeting filter.',
+      note:'We use ranges for product findings. This is never a housing-targeting filter.',
       options:[choice('18_24','18–24'),choice('25_34','25–34'),choice('35_44','35–44'),choice('45_54','45–54'),choice('55_64','55–64'),choice('65_74','65–74'),choice('75_plus','75+'),choice('prefer_not','Prefer not to say')]
     },
     {
@@ -143,17 +143,17 @@
       note:'A range is enough. Prefer not to say is always an option.',
       options:[choice('under_50k','Under $50k'),choice('50_99k','$50k–$99k'),choice('100_149k','$100k–$149k'),choice('150_249k','$150k–$249k'),choice('250k_plus','$250k+'),choice('prefer_not','Prefer not to say')]
     },
-    { id:'household_size_answer', kind:'single', eyebrow:'ABOUT YOU', title:'How many people are in your household?', required:true, note:'This stays first-party profile context and is not used for housing audience targeting.', options:[choice('1','1'),choice('2','2'),choice('3','3'),choice('4','4'),choice('5','5'),choice('6','6+'),choice('prefer_not','Prefer not to say')] },
+    { id:'household_size_answer', kind:'single', eyebrow:'ABOUT YOU', title:'How many people are in your household?', required:true, note:'This stays first-party profile info and is not used for housing audience targeting.', options:[choice('1','1'),choice('2','2'),choice('3','3'),choice('4','4'),choice('5','5'),choice('6','6+'),choice('prefer_not','Prefer not to say')] },
     { id:'property_types', kind:'multi', eyebrow:'PROPERTY FOCUS', title:'Which properties matter most to you?', required:true, options:[choice('single_family','Single-family'),choice('condo_townhome','Condo / townhome'),choice('multifamily','Multi-family'),choice('commercial','Commercial'),choice('land','Land'),choice('mixed','A mix of property types')] },
     { id:'professional_years_band', kind:'single', eyebrow:'YOUR WORK', title:'How long have you worked in your field?', required:true, when:function(){ return answers.persona === 'professional' || answers.persona === 'both'; }, options:[choice('new','Less than 1 year'),choice('1_3','1–3 years'),choice('4_7','4–7 years'),choice('8_15','8–15 years'),choice('16_plus','16+ years')] },
-    { id:'professional_volume_band', kind:'single', eyebrow:'YOUR WORK', title:'About how many clients or transactions touch your workflow each month?', required:true, when:function(){ return answers.persona === 'professional' || answers.persona === 'both'; }, options:[choice('under_5','Under 5'),choice('5_14','5–14'),choice('15_29','15–29'),choice('30_59','30–59'),choice('60_plus','60+'),choice('not_applicable','Not measured this way')] },
+    { id:'professional_volume_band', kind:'single', eyebrow:'YOUR WORK', title:'About how many clients or transactions touch your process each month?', required:true, when:function(){ return answers.persona === 'professional' || answers.persona === 'both'; }, options:[choice('under_5','Under 5'),choice('5_14','5–14'),choice('15_29','15–29'),choice('30_59','30–59'),choice('60_plus','60+'),choice('not_applicable','Not measured this way')] },
     {
       id:'professional_priorities', kind:'multi', eyebrow:'WATCHDOG INTELLIGENCE', title:'Where should Intelligence help you first?', required:true,
       when:function(){ return answers.persona === 'professional' || answers.persona === 'both'; },
       options:[choice('lead_prioritization','Prioritize opportunities'),choice('client_briefs','Build client briefs'),choice('property_change','Catch meaningful property changes'),choice('tax_assessment','Assessment / tax analysis'),choice('listing_prep','Listing preparation'),choice('buyer_diligence','Buyer due diligence'),choice('portfolio_monitoring','Portfolio monitoring'),choice('workflow_automation','Reduce repetitive research')]
     },
-    { id:'time_horizon', kind:'single', eyebrow:'TIMING', title:'When do you expect Watchdog to be most useful?', required:true, options:[choice('now','Right now'),choice('0_3_months','Next 3 months'),choice('3_6_months','3–6 months'),choice('6_12_months','6–12 months'),choice('12_plus_months','More than a year'),choice('researching','I’m exploring')] },
-    { id:'finish', kind:'finish', eyebrow:'READY', title:'Your Watchdog is ready.', copy:'We’ll use the context you confirmed to organize your experience. Property facts and Watchdog scores still come only from governed data and evidence.' }
+    { id:'time_horizon', kind:'single', eyebrow:'TIMING', title:'When do you expect Watchdog to be most useful?', required:true, options:[choice('now','Right now'),choice('0_3_months','Next 3 months'),choice('3_6_months','3–6 months'),choice('6_12_months','6–12 months'),choice('12_plus_months','More than a year'),choice('researching','I’m looking into')] },
+    { id:'finish', kind:'finish', eyebrow:'READY', title:'Your Watchdog is ready.', copy:'We’ll use the info you confirmed to organize your experience. Property facts and Watchdog scores still come only from checked data and evidence.' }
   ];
 
   function activeSteps() {
@@ -312,17 +312,17 @@
     var definitions = {
       agent: {
         label:'Agent', kicker:'FOR AGENTS & SOLO PROFESSIONALS',
-        description:'A focused professional workspace for opportunity discovery, monitoring and client-ready property research.',
+        description:'A focused professional dashboard for opportunity discovery, monitoring and client-ready property research.',
         features:['Monitor up to 25 properties','Agent Opportunity Desk','Professional reports and exports']
       },
       pro: {
-        label:'Pro', kicker:'PROFESSIONAL WORKSPACE', featured:true, badge:'Most popular',
-        description:'Deeper property intelligence and repeatable research workflows for professionals handling active client work.',
-        features:['Monitor up to 250 properties','Expanded professional workbenches','Advanced research workflows']
+        label:'Pro', kicker:'PROFESSIONAL DASHBOARD', featured:true, badge:'Most popular',
+        description:'Deeper property info and repeatable research tasks for professionals handling active client work.',
+        features:['Monitor up to 250 properties','Expanded professional workbenches','Advanced research tasks']
       },
       pro_plus: {
         label:'Pro+', kicker:'MAXIMUM DATA ACCESS',
-        description:'Watchdog’s deepest data, bulk intelligence and high-volume workflows for power users.',
+        description:'Watchdog’s deepest data, bulk intelligence and high-volume tasks for power users.',
         features:['Monitor up to 2,500 properties','1,000+ data points and proprietary markers','Bulk and scheduled intelligence']
       }
     };
@@ -399,7 +399,7 @@
       : '';
 
     root.innerHTML =
-      '<div class="wd-plan-header"><div><p class="wd-onboarding-step">CHOOSE YOUR MEMBERSHIP</p><h2>Your account is ready. Choose your plan.</h2><p class="wd-onboarding-copy">Paid workspaces unlock more Watchdog from day one. Free stays available below with no card required, and you can upgrade anytime.</p></div>' +
+      '<div class="wd-plan-header"><div><p class="wd-onboarding-step">CHOOSE YOUR MEMBERSHIP</p><h2>Your account is ready. Choose your plan.</h2><p class="wd-onboarding-copy">Paid dashboards open more Watchdog from day one. Free stays available below with no card required, and you can upgrade anytime.</p></div>' +
       (planCatalog ? '<div class="wd-plan-controls"><span>Billing</span><div class="wd-plan-cadence" role="group" aria-label="Billing cadence"><button type="button" data-plan-cadence="yearly" aria-pressed="' + (planCadence === 'yearly') + '">Yearly <em>Save 17%</em></button><button type="button" data-plan-cadence="monthly" aria-pressed="' + (planCadence === 'monthly') + '">Monthly</button></div></div>' : '') +
       '</div>' +
       catalogNotice + checkoutNotice +

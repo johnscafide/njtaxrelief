@@ -51,9 +51,9 @@
   <meta property="og:image:type" content="image/jpeg">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
-  <meta property="og:image:alt" content="Watchdog Property Intelligence across New Jersey">
+  <meta property="og:image:alt" content="Watchdog Property Info across New Jersey">
   <meta name="twitter:image" content="https://www.watchdogindex.com/watchdog-social-share-20260913-v3.jpg">
-  <meta name="twitter:image:alt" content="Watchdog Property Intelligence across New Jersey">
+  <meta name="twitter:image:alt" content="Watchdog Property Info across New Jersey">
 </head>
 <body data-sidebar-page="fairness">
 <div class="pl-toast" id="pl-toast"></div>
@@ -85,7 +85,7 @@
           <div>
             <span>2026 edition &middot; U — Uniformity</span>
             <h2>How consistently do New Jersey municipalities assess property?</h2>
-            <p>Built from the Coefficient of Deviation published by the Division of Taxation and cross-checked against the state's verified arm's-length sales. This is municipal system context, not a finding about any one parcel.</p>
+            <p>Built from the Coefficient of Deviation published by the Division of Taxation and cross-checked against the state's verified arm's-length sales. This is municipal system info, not a finding about any one parcel.</p>
           </div>
         </div>
 
@@ -131,9 +131,9 @@
           <h4><i class="fas fa-circle-info"></i> How U — Uniformity is built</h4>
           <p class="tl-p">Seventy percent of each town's current index is its Coefficient of Deviation, the Division of Taxation's measure of how consistently assessment ratios cluster around the municipality's median ratio. Thirty percent is an assessment-currency component built from the drift between the town's officially published assessment ratio and the ratio implied by recent state-verified sales.</p>
           <p class="tl-note">A higher result means the measured assessment system is more consistent and its ratio evidence is more current. It does not mean the town has lower taxes, is a better place to live, or that every individual parcel is correctly assessed.</p>
-          <p class="tl-note"><b>O and U answer different questions.</b> O — Overassessment Position examines an individual property against supported value and Chapter 123 context. U — Uniformity measures municipality-wide assessment consistency. A property can be strong on one and pressured on the other.</p>
-          <p class="tl-note"><b>Parcel mix is context, not a score input.</b> Residential and commercial counts are shown because property mix can help explain assessment workload and fiscal structure. A correlation does not establish causation.</p>
-          <p class="tl-fine">Sources: NJ Division of Taxation Table of Equalized Valuations and Abstract of Ratables, including Coefficient of Deviation, plus SR-1A verified arm's-length sales. Methodology is living and versioned.</p>
+          <p class="tl-note"><b>O and U answer different questions.</b> O — Overassessment Position examines an individual property against supported value and Chapter 123 info. U — Uniformity measures municipality-wide assessment consistency. A property can be strong on one and pressured on the other.</p>
+          <p class="tl-note"><b>Parcel mix is background info, not a score input.</b> Residential and commercial counts are shown because property mix can help explain assessment workload and fiscal structure. A correlation does not establish causation.</p>
+          <p class="tl-fine">Sources: NJ Division of Taxation Table of Equalized Valuations and Abstract of Ratables, including Coefficient of Deviation, plus SR-1A verified arm's-length sales. We update this as we improve it.</p>
           <p><a class="db-btn" href="/property/robust/uniformity/"><i class="fas fa-gauge-high"></i> Learn about U — Uniformity in ROBUST</a></p>
         </div>
 
@@ -202,7 +202,7 @@ import '/property/js/dashboard/tools/municipal-budget-pressure.js?v=20260805a';
   }
 
   fetch('/property/data/statewide-intelligence.json')
-    .then(function (response) { if (!response.ok) throw new Error('MOD-IV context unavailable'); return response.json(); })
+    .then(function (response) { if (!response.ok) throw new Error('MOD-IV info unavailable'); return response.json(); })
     .then(start)
     .catch(function (error) { console.warn(error); start({ municipalities: {} }); });
 
@@ -319,7 +319,7 @@ import '/property/js/dashboard/tools/municipal-budget-pressure.js?v=20260805a';
   "name": "New Jersey Assessment Uniformity Index 2026",
   "description": "A Watchdog ranking of New Jersey tax districts with available assessment-uniformity data, built from state Coefficient of Deviation and verified sales data and identified as U — Uniformity in the ROBUST Framework.",
   "url": "https://njpropertytaxrelief.com/property/fairness",
-  "creator": { "@type": "Organization", "name": "Watchdog Property Intelligence" },
+  "creator": { "@type": "Organization", "name": "Watchdog Property Info" },
   "license": { "@type": "CreativeWork", "name": "Watchdog data-use terms (effective August 24, 2026)", "url": "https://www.watchdogindex.com/property/terms/#api" }
 }
 </script>

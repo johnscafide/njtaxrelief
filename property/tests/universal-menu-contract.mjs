@@ -58,13 +58,13 @@ for (const [key, label] of canonical) {
 
 assert(universal.includes("can('pro_plus')"), 'Pro+ menu gating is missing');
 assert(universal.includes("can('agent')"), 'Agent+ menu gating is missing');
-assert(universal.includes("can('agent')) out.push({key:'transaction',href:'/transaction/'"), 'Transactions must be an Agent-or-higher root workspace');
+assert(universal.includes("can('agent')) out.push({key:'transaction',href:'/transaction/'"), 'Transactions must be an Agent-or-higher root dashboard');
 assert(universal.includes('isAgent()'), 'Agent Control role gating is missing');
 assert(universal.includes("hostname === 'watchdogindex.com'") || universal.includes("hostname === 'www.watchdogindex.com'"), 'Clean watchdogindex.com route support is missing');
 assert(universal.includes('Edit profile &amp; role'), 'Shared profile menu is missing Edit profile & role');
 assert(universal.includes('Invite others'), 'Shared profile menu is missing Invite others');
 assert(universal.includes('Account &amp; billing'), 'Shared profile menu is missing Account & billing');
-assert(universal.includes('Your saved-home workspace'), 'Shared profile menu is missing Property Home context');
+assert(universal.includes('Your saved-home dashboard'), 'Shared profile menu is missing Property Home info');
 
 // Developer shortcuts belong to the universal profile menu only and must be
 // unlocked by the internal account_role, never by a paid customer plan tier.
@@ -127,7 +127,7 @@ assert(css.includes('min-height:90px!important'), 'Mobile graphical promo is no 
 assert(css.includes('@media(max-width:390px)'), 'Small-phone graphical promo fallback is missing');
 
 // Teams is an honest preview page, not a false self-service sales surface.
-assert(teams.includes('<title>Watchdog Teams | Shared Property Intelligence</title>'), 'Teams preview page title is missing');
+assert(teams.includes('<title>Watchdog Teams | Shared Property Info</title>'), 'Teams preview page title is missing');
 assert(teams.includes('Watchdog Teams · Preview'), 'Teams page does not visibly identify itself as a preview');
 assert(teams.includes('not a self-service plan for purchase today'), 'Teams page does not disclose current purchase status');
 assert(teams.includes('Seats &amp; invitations'), 'Teams roadmap is missing seat/invite planning');

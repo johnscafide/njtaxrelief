@@ -106,7 +106,7 @@ function renderCheckup(row, agent, now) {
       </section>
     </div>
   </div>
-  <p class="wdp-source">A screening check, not legal or appraisal advice. Tax from the New Jersey MOD-IV tax list; ratios and limits from the ${f.ratio ? '2026 ' : ''}Chapter 123 certification; tax rates from the NJ Division of Taxation. <a href="https://www.nj.gov/treasury/taxation/lpt/lpt-appeal.shtml" rel="noopener">State appeal guide</a> · <a href="/data-methodology">Data methodology</a></p>
+  <p class="wdp-source">A screening check, not legal or appraisal advice. Tax from the New Jersey MOD-IV tax list; ratios and limits from the ${f.ratio ? '2026 ' : ''}Chapter 123 certification; tax rates from the NJ Division of Taxation. <a href="https://www.nj.gov/treasury/taxation/lpt/lpt-appeal.shtml" rel="noopener">State appeal guide</a> · <a href="/data-methodology">How we get our numbers</a></p>
 </main>
 <style>${CK_STYLE}</style>`;
   return tc.shell(`Property tax checkup: ${v.address}, ${v.town} | Watchdog`, `Does the assessment on ${v.address}, ${v.town}, NJ hold up? The value it needs, the appeal deadline and what to do.`, body, 'noindex')

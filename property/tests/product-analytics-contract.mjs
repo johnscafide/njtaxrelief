@@ -14,7 +14,7 @@ must(page.includes('data-developer-only="true"'),'Analytics review page must rem
 must(page.includes('/property/js/supabase-runtime.js'),'Analytics page must use the canonical Supabase runtime.');
 must(page.includes("functions.invoke('product-analytics-report'"),'Analytics page must read through the guarded report endpoint.');
 must(page.includes('Decision funnel · recent days'),'Developer analytics must expose the Intelligence decision funnel.');
-must(page.includes('Governed decision activity · 30 days'),'Developer analytics must summarize persisted Today/Intent outcomes.');
+must(page.includes('Checked decision activity · 30 days'),'Developer analytics must summarize persisted Today/Intent outcomes.');
 must(page.includes('does not expose names, emails, addresses, PAMS PINs, search text, prompts'),'Developer page must state the Intelligence analytics privacy boundary.');
 must(!page.match(/\.js\?v=|\.css\?v=/),'Analytics page must not use version-query asset URLs.');
 

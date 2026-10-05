@@ -110,7 +110,7 @@
     return 'Reading Disk 2 of 3...';
   };
   api.disk3 = function () {
-    console.log('%cSetup complete. Watchdog Property Intelligence has been installed.\nIf it helped you, the least you can do is share it. Press any key to continue.', 'font:600 13px/1.6 Menlo,Consolas,monospace;color:#0b6e6e');
+    console.log('%cSetup complete. Watchdog Property Info has been installed.\nIf it helped you, the least you can do is share it. Press any key to continue.', 'font:600 13px/1.6 Menlo,Consolas,monospace;color:#0b6e6e');
     return 'Disk 3 of 3 OK';
   };
   api.konami = function () { chase(); return 'Fetch!'; };

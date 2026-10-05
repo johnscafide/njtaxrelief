@@ -63,7 +63,7 @@
 
   function confirmCopy(policy){
     const value=policy||{};
-    if(value.class===CLASSES.reversible)return Object.freeze({title:'Confirm reversible action',body:'This can change your internal Watchdog state, but it is intended to be reversible. Confirm before Watchdog passes the request into governed tools.',confirmLabel:'Confirm action',mode:'confirmed'});
+    if(value.class===CLASSES.reversible)return Object.freeze({title:'Confirm reversible action',body:'This can change your internal Watchdog state, but it is intended to be reversible. Confirm before Watchdog passes the request into checked tools.',confirmLabel:'Confirm action',mode:'confirmed'});
     if(value.class===CLASSES.approval_required)return Object.freeze({title:'Approval required',body:'This could create an external, paid, destructive, legal, marketing, communication, billing, or provider-side effect. Voice will not execute it. You can prepare it for the existing approval flow.',confirmLabel:'Prepare for review',mode:'prepare_only'});
     if(value.class===CLASSES.prohibited)return Object.freeze({title:'Command blocked',body:'Watchdog will not use spoken or typed commands to bypass permissions, reveal credentials, expand access, enable always-listening behavior, or clone/impersonate a voice.',confirmLabel:'',mode:'blocked'});
     return null;

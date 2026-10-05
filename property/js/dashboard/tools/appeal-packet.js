@@ -268,7 +268,7 @@
           'The compact evidence file preserves deed month, not day, so October ' + valuationYear +
           ' sales are conservatively excluded rather than risk using a post-valuation transfer. Human review of ' +
           'condition, location and other material differences remains required.</div>'
-        : '<p class="na">No verified pre-valuation comparable sales are on file for this municipality in the governed period.</p>') +
+        : '<p class="na">No verified pre-valuation comparable sales are on file for this municipality in the checked period.</p>') +
 
       '<h2>4. Chapter 123 calculation</h2>' +
       (c && c.testable

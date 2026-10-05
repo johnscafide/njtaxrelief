@@ -39,13 +39,13 @@
       <div class="panel"><h2>Top tools</h2><p>External tool opens, marker views, lookups and exports.</p><div id="tools" class="empty">Loading…</div></div>
       <div class="panel wide"><h2>Acquisition detail</h2><p>Session source, campaign, specific referrer path when the browser supplies it, landing page and paid-click source. Raw third-party query strings are not stored.</p><div id="acquisition" class="empty">Loading…</div></div>
 
-      <div class="panel wide"><div class="panel-head"><div><h2>Signup acquisition</h2><p>External account creation by provider, Watchdog signup context and consented first-touch attribution.</p></div><span class="tag"><i class="fas fa-user-plus"></i> NEW ACCOUNT ATTRIBUTION</span></div><div id="signup-acquisition" class="empty">Loading…</div></div>
+      <div class="panel wide"><div class="panel-head"><div><h2>Signup acquisition</h2><p>External account creation by provider, Watchdog signup info and consented first-touch attribution.</p></div><span class="tag"><i class="fas fa-user-plus"></i> NEW ACCOUNT ATTRIBUTION</span></div><div id="signup-acquisition" class="empty">Loading…</div></div>
       <div class="panel wide"><div class="panel-head"><div><h2>Authentication funnel</h2><p>Signup surface views, provider selections, email code requests, successful account links and authentication failures. No email addresses or error text are stored.</p></div><span class="tag"><i class="fas fa-right-to-bracket"></i> PRIVACY-SAFE</span></div><div id="auth-funnel" class="empty">Loading…</div></div>
 
       <div class="panel"><h2>Event mix</h2><p>Which external product behaviors generate the most activity.</p><div id="events" class="empty">Loading…</div></div>
       <div class="panel wide"><div class="panel-head"><div><h2>Accounts & subscription health</h2><p>External registered users, onboarding, plans and current billing states.</p></div><span class="tag"><i class="fas fa-users"></i> INTERNAL EXCLUDED</span></div><div id="account-health" class="empty">Loading…</div><div id="plans" style="margin-top:14px"></div></div>
       <div class="panel"><span class="tag"><i class="fas fa-wand-magic-sparkles"></i> INTELLIGENCE</span><h2 style="margin-top:9px">Decision funnel · recent days</h2><p>Did external users reach Intelligence, inspect reasoning, act, answer intent questions and open trust evidence?</p><div id="intelligence" class="empty">Loading…</div></div>
-      <div class="panel"><span class="tag"><i class="fas fa-route"></i> GOVERNED</span><h2 style="margin-top:9px">Governed decision activity · 30 days</h2><p>External-account Today and Intent decision events from governed production trails.</p><div id="governed" class="empty">Loading…</div></div>
+      <div class="panel"><span class="tag"><i class="fas fa-route"></i> CHECKED</span><h2 style="margin-top:9px">Checked decision activity · 30 days</h2><p>External-account Today and Intent decision events from checked production trails.</p><div id="governed" class="empty">Loading…</div></div>
       <div class="panel wide"><h2>Retention cohorts</h2><p>Weekly external activated-visitor retention.</p><div id="retention" class="empty">Loading…</div></div>
       <div class="panel"><h2>Billing lifecycle</h2><p>Provider lifecycle events captured in the selected range. MRR is deliberately not guessed when interval/amount data is incomplete.</p><div id="billing" class="empty">Loading…</div></div>
       <div class="panel"><h2>Data quality & freshness</h2><p>Know whether you are looking at current, trustworthy instrumentation.</p><div id="quality" class="empty">Loading…</div></div>
@@ -82,7 +82,7 @@
       var coverage=a.coverage||{},providers=aggregate(a.auth_provider_totals||[],'auth_provider','signups'),signups=a.signups||[],funnel=a.auth_funnel||[];
       var failures=funnel.filter(function(r){return r.event_name==='auth_failure';}).reduce(function(sum,r){return sum+Number(r.sessions||0);},0);
       var providerTable=table(['Provider','External signups'],providers.map(function(r){return '<tr>'+td(pretty(r[0]))+td(n(r[1]),1)+'</tr>';}));
-      var sourceTable=table(['Day','Signup context','Provider','Source','Medium','Campaign','Landing page','Signups','ANCHOR','Onboarded'],signups.map(function(r){return '<tr>'+td(r.day)+td(pretty(r.signup_context))+td(pretty(r.auth_provider))+td(r.source)+td(r.medium)+td(r.campaign)+td(r.landing_path)+td(n(r.signups),1)+td(n(r.anchor_accounts),1)+td(n(r.onboarding_completed),1)+'</tr>';}));
+      var sourceTable=table(['Day','Signup info','Provider','Source','Medium','Campaign','Landing page','Signups','ANCHOR','Onboarded'],signups.map(function(r){return '<tr>'+td(r.day)+td(pretty(r.signup_context))+td(pretty(r.auth_provider))+td(r.source)+td(r.medium)+td(r.campaign)+td(r.landing_path)+td(n(r.signups),1)+td(n(r.anchor_accounts),1)+td(n(r.onboarding_completed),1)+'</tr>';}));
       target.innerHTML='<div class="health">'+[
         ['External signups',coverage.total_external_signups,'all auth providers'],
         ['Attributed',coverage.attributed_signups,'consented signup sessions'],
@@ -93,7 +93,7 @@
       '<div class="subsection"><h3>Attributed signup sources</h3>'+sourceTable+'</div>'+
       '<div class="status"><b>Coverage note:</b> '+esc(coverage.note||'Source attribution appears only when optional analytics was allowed.')+'</div>';
 
-      funnelTarget.innerHTML=table(['Day','Signup context','Event','Provider','Events','Sessions'],funnel.map(function(r){return '<tr>'+td(r.day)+td(pretty(r.signup_context))+td(pretty(r.event_name))+td(pretty(r.auth_provider))+td(n(r.events),1)+td(n(r.sessions),1)+'</tr>';}));
+      funnelTarget.innerHTML=table(['Day','Signup info','Event','Provider','Events','Sessions'],funnel.map(function(r){return '<tr>'+td(r.day)+td(pretty(r.signup_context))+td(pretty(r.event_name))+td(pretty(r.auth_provider))+td(n(r.events),1)+td(n(r.sessions),1)+'</tr>';}));
     }
 
     function render(d,signupAcquisition){
@@ -125,7 +125,7 @@
       document.getElementById('audience').innerHTML=table(['Audience class','Counted in KPIs','Visitors','Sessions','Events'],aud.map(function(r){var external=r.audience_class==='external_visitor'||r.audience_class==='external_account';return '<tr>'+td(pretty(r.audience_class))+td(external?'Yes':'No')+td(n(r.visitors),1)+td(n(r.sessions),1)+td(n(r.events),1)+'</tr>';}));
       document.getElementById('pages').innerHTML=table(['Page','Views','Visitors','Sessions'],(s.top_pages||[]).map(function(r){return '<tr>'+td(r.path)+td(n(r.events),1)+td(n(r.visitors),1)+td(n(r.sessions),1)+'</tr>';}));
       document.getElementById('tools').innerHTML=table(['Tool','Events','Visitors'],(s.top_tools||[]).map(function(r){return '<tr>'+td(pretty(r.tool))+td(n(r.events),1)+td(n(r.visitors),1)+'</tr>';}));
-      document.getElementById('acquisition').innerHTML=table(['Source','Medium','Campaign','Specific referrer','Landing page','Paid signal','Visitors','Activated','Checkout'],(s.acquisition||[]).map(function(r){return '<tr>'+td(r.source)+td(r.medium)+td(r.campaign)+td(r.source_url)+td(r.landing_path)+td(pretty(r.click_source))+td(n(r.visitors),1)+td(n(r.activated),1)+td(n(r.checkout_starts),1)+'</tr>';}));
+      document.getElementById('acquisition').innerHTML=table(['Source','Medium','Campaign','Specific referrer','Landing page','Paid red flag','Visitors','Activated','Checkout'],(s.acquisition||[]).map(function(r){return '<tr>'+td(r.source)+td(r.medium)+td(r.campaign)+td(r.source_url)+td(r.landing_path)+td(pretty(r.click_source))+td(n(r.visitors),1)+td(n(r.activated),1)+td(n(r.checkout_starts),1)+'</tr>';}));
       renderSignupAcquisition(signupAcquisition);
       document.getElementById('events').innerHTML=table(['Event','Events','Visitors'],(s.top_events||[]).map(function(r){return '<tr>'+td(pretty(r.event_name))+td(n(r.events),1)+td(n(r.visitors),1)+'</tr>';}));
       document.getElementById('account-health').innerHTML='<div class="health">'+[
@@ -137,7 +137,7 @@
         ['Reached',intel.intelligence_reached],['Reasoning inspectors',intel.reasoning_inspectors],['Action starters',intel.action_starters],['Action completers',intel.action_completers],['Intent question viewers',intel.intent_question_viewers],['Intent answerers',intel.intent_question_answerers],['Trust evidence openers',intel.trust_evidence_openers]
       ].map(function(r){return '<tr>'+td(r[0])+td(n(r[1]),1)+'</tr>';}));
       var sum=d.summary||{},gov=countRows(sum.today_actions_by_type_30d).map(function(r){return ['Today · '+pretty(r[0]),r[1]];}).concat(countRows(sum.intent_events_by_type_30d).map(function(r){return ['Intent · '+pretty(r[0]),r[1]];}));
-      document.getElementById('governed').innerHTML=table(['Governed event','30-day count'],gov.map(function(r){return '<tr>'+td(r[0])+td(n(r[1]),1)+'</tr>';}));
+      document.getElementById('governed').innerHTML=table(['Checked event','30-day count'],gov.map(function(r){return '<tr>'+td(r[0])+td(n(r[1]),1)+'</tr>';}));
       document.getElementById('retention').innerHTML=table(['Cohort','Week','Retained visitors'],(d.retention||[]).slice(0,60).map(function(r){return '<tr>'+td(r.cohort_week)+td('Week '+r.week_number)+td(n(r.retained_visitors),1)+'</tr>';}));
       document.getElementById('billing').innerHTML='<div class="health"><div class="health-item"><span>Lifecycle events</span><b>'+n(billing.lifecycle_events)+'</b><span>provider ledger</span></div><div class="health-item"><span>Trials</span><b>'+n(sub.trials)+'</b><span>external current</span></div><div class="health-item"><span>Past due</span><b>'+n(sub.past_due)+'</b><span>external current</span></div><div class="health-item"><span>Interval unknown</span><b>'+n(sub.interval_unknown)+'</b><span>MRR not guessed</span></div></div>'+table(['Provider','Event','Count'],(s.billing_events||[]).map(function(r){return '<tr>'+td(pretty(r.provider))+td(pretty(r.event_type))+td(n(r.events),1)+'</tr>';}));
       var last=t.last_event?Date.now()-new Date(t.last_event).getTime():Infinity,healthy=last<6*3600000,internalVisitors=aud.filter(function(r){return String(r.audience_class).indexOf('internal_')===0;}).reduce(function(a,r){return a+Number(r.visitors||0);},0);

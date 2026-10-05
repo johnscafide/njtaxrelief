@@ -315,7 +315,7 @@ function renderCard(row, inp, agent) {
       ${townSection(row)}
     </div>
   </div>
-  <p class="wdp-source">Estimates only, not a loan offer. Tax from the New Jersey MOD-IV tax list; tax rates from the NJ Division of Taxation; town ratios from the 2026 Chapter 123 certification. "Usually carry" compares the price with the town's average assessment ratio and latest published tax rate. <a href="/data-methodology">Data methodology</a></p>
+  <p class="wdp-source">Estimates only, not a loan offer. Tax from the New Jersey MOD-IV tax list; tax rates from the NJ Division of Taxation; town ratios from the 2026 Chapter 123 certification. "Usually carry" compares the price with the town's average assessment ratio and latest published tax rate. <a href="/data-methodology">How we get our numbers</a></p>
 </main>
 <script id="tc-data" type="application/json">${data}</script>
 <script>${clientScript(share)}</script>`;

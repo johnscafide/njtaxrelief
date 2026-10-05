@@ -85,7 +85,7 @@
     if (Number(context.change_of_assessment_notice_days) > 0) {
       parts.push('A qualifying change-of-assessment notice can create a ' + Number(context.change_of_assessment_notice_days) + '-day window from issuance.');
     }
-    return '<div class="notice"><b>Filing-window context, not a deadline.</b> ' + esc(parts.join(' ')) + ' Verify the current notice, forum, revaluation/reassessment status, and any weekend/legal-holiday adjustment. No countdown is generated.</div>';
+    return '<div class="notice"><b>Filing-window info, not a deadline.</b> ' + esc(parts.join(' ')) + ' Verify the current notice, forum, revaluation/reassessment status, and any weekend/legal-holiday adjustment. No countdown is generated.</div>';
   }
 
   function caseValueBlock(hit) {
@@ -106,7 +106,7 @@
   function factors(hit) {
     var parts = hit && hit.opportunity && Array.isArray(hit.opportunity.parts) ? hit.opportunity.parts : [];
     if (!parts.length) return '<p class="muted">No opportunity-factor detail was returned.</p>';
-    return '<table class="factors"><thead><tr><th>Server-returned factor</th><th>Signal</th><th>Weight</th></tr></thead><tbody>' + parts.map(function (part) {
+    return '<table class="factors"><thead><tr><th>Server-returned factor</th><th>Red flag</th><th>Weight</th></tr></thead><tbody>' + parts.map(function (part) {
       return '<tr><td>' + esc(part.label || '') + '</td><td>' + esc(Math.round(Number(part.value) || 0) + '/100') + '</td><td>' + esc(String(part.weight == null ? '' : part.weight) + '%') + '</td></tr>';
     }).join('') + '</tbody></table>';
   }
@@ -130,7 +130,7 @@
       '</style></head><body>' +
       '<h1>Attorney screening evidence brief</h1><div class="sub">' + esc(hit.a) + ', ' + esc(run.name || '') + ', ' + esc(run.county || '') + ' County, New Jersey</div>' +
       '<div class="sub">Generated from an entitled Watchdog server result · ' + esc(generated) + '</div><div class="rule"></div>' +
-      '<h2>Subject and governed sale evidence</h2><table>' +
+      '<h2>Subject and checked sale evidence</h2><table>' +
       row('Property class', hit.c || '2', 'Current automated scanner is limited to Class 2 residential') +
       row('Block / lot', String(hit.b || '') + ' / ' + String(hit.l || '')) +
       row('Assessment', money(hit.av)) +
@@ -144,13 +144,13 @@
       row('Supported assessment', money(hit.fair)) +
       row('Assessment above threshold', money(hit.over)) +
       row('Estimated annual tax at stake', money(hit.saving), 'Screening estimate, not an appeal outcome or award') +
-      row('Evidence grade', grade) +
+      row('Record-based', grade) +
       row('Opportunity index', score, band) +
       '</table>' +
       '<h2>Opportunity factors</h2>' + factors(hit) +
       caseValueBlock(hit) +
-      '<h2>Filing-window context</h2>' + deadlineBlock(run) +
-      '<h2>Provenance</h2><p class="sources">' + esc(sourceNote()) + (sourceUrl ? '<br>Certified Chapter 123 source: ' + esc(sourceUrl) : '') + '</p>' +
+      '<h2>Filing-window info</h2>' + deadlineBlock(run) +
+      '<h2>Source history</h2><p class="sources">' + esc(sourceNote()) + (sourceUrl ? '<br>Certified Chapter 123 source: ' + esc(sourceUrl) : '') + '</p>' +
       '<div class="warn"><b>Screening evidence only.</b> This brief is not a filed pleading, legal opinion, appraisal, appeal-outcome prediction, fee recommendation, or final filing-deadline determination. Any case-value section appears only when the attorney entered working assumptions in the current browser tab. It contains no owner-contact or represented-status conclusion. Public records cannot establish current condition, renovations, interior finish, exemptions, or other facts that require professional review. Confirm the property record and supporting evidence before action.</div>' +
       '</body></html>';
   }

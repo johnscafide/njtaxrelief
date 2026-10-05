@@ -25,7 +25,7 @@
           <div class="wds-cmp-title">
             <div>
               <h2>Watchdog vs.<br><em>the other guys.</em></h2>
-              <p>Watchdog is built to be the most accurate, complete and actionable property data tool for New Jersey. Compare us with the national data brokers.</p>
+              <p>Watchdog is built to be the most accurate, complete and useful property data tool for New Jersey. Compare us with the national data brokers.</p>
             </div>
             <a href="/property/compare">Full vendor comparison <i class="fas fa-arrow-right"></i></a>
           </div>
@@ -41,7 +41,7 @@
             <div class="wds-cmp-row" role="row"><span>Chapter 123 appeal math</span><b class="y"><i class="fas fa-check"></i></b><em class="n"><i class="fas fa-xmark"></i></em></div>
             <div class="wds-cmp-row" role="row"><span>State-verified SR-1A sales</span><b class="y"><i class="fas fa-check"></i></b><em class="n"><i class="fas fa-xmark"></i></em></div>
             <div class="wds-cmp-row" role="row"><span>Assessment uniformity &amp; revaluation risk</span><b class="y"><i class="fas fa-check"></i></b><em class="n"><i class="fas fa-xmark"></i></em></div>
-            <div class="wds-cmp-row" role="row"><span>ANCHOR, Stay NJ &amp; Senior Freeze context</span><b class="y"><i class="fas fa-check"></i></b><em class="n"><i class="fas fa-xmark"></i></em></div>
+            <div class="wds-cmp-row" role="row"><span>ANCHOR, Stay NJ &amp; Senior Freeze info</span><b class="y"><i class="fas fa-check"></i></b><em class="n"><i class="fas fa-xmark"></i></em></div>
             <div class="wds-cmp-row" role="row"><span>Every figure carries its source and date</span><b class="y"><i class="fas fa-check"></i></b><em>Varies</em></div>
             <div class="wds-cmp-row" role="row"><span>Sells homeowner contact data</span><b>Never</b><em>Core product</em></div>
             <div class="wds-cmp-row" role="row"><span>Skip tracing &amp; phone append</span><b>Not offered</b><em>Usually included</em></div>
@@ -53,7 +53,7 @@
           <div class="wds-cmp-foot">
             <div>
               <b>Different tools win different jobs.</b>
-              <p>Watchdog is a New Jersey property intelligence tool, not a generic national lead list. We go deep on public assessment, tax and sales records, then connect the evidence to a decision or workflow.</p>
+              <p>Watchdog is a New Jersey property info tool, not a generic national lead list. We go deep on public assessment, tax and sales records, then connect the evidence to a decision or process.</p>
             </div>
             <div class="wds-cmp-vendors" aria-label="Detailed vendor comparisons">
               <a href="/property/compare/attom">ATTOM</a>

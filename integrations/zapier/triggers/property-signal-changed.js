@@ -2,9 +2,9 @@ const makeRestHook = require('./rest-hook');
 
 module.exports = makeRestHook({
   key: 'property_signal_changed',
-  noun: 'Property Signal',
-  name: 'Property Signal Changed',
-  description: 'Triggers when a governed Watchdog property signal changes.',
+  noun: 'Property Warning Sign',
+  name: 'Property Red Flag Changed',
+  description: 'Triggers when a checked Watchdog property red flag changes.',
   eventType: 'property.signal.changed',
   sample: {
     id: 'sample-signal',
@@ -15,8 +15,8 @@ module.exports = makeRestHook({
       pams_pin: 'sample-pin',
       source_event_type: 'property.marker.changed',
       severity: 'medium',
-      title: 'Property signal changed',
-      summary: 'A governed property signal changed.',
+      title: 'Property red flag changed',
+      summary: 'A checked property warning sign changed.',
       marker_id: 'property.assessed_value',
       old_value: '300000',
       new_value: '325000',
@@ -36,6 +36,6 @@ module.exports = makeRestHook({
     { key: 'data__new_value', label: 'New Value' },
     { key: 'data__delta_numeric', label: 'Numeric Delta', type: 'number' },
     { key: 'data__source_url', label: 'Source URL' },
-    { key: 'data__occurred_at', label: 'Signal Occurred At', type: 'datetime' },
+    { key: 'data__occurred_at', label: 'Red flag Occurred At', type: 'datetime' },
   ],
 });

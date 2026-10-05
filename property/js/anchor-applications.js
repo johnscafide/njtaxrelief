@@ -110,7 +110,7 @@
   }
 
   async function unlock() {
-    var button = q('#wd-library-unlock'); button.disabled = true; status('Unlocking your Private Vault...');
+    var button = q('#wd-library-unlock'); button.disabled = true; status('Opening your Private Vault...');
     try {
       var key = vault.parseRecoveryKey(q('#wd-library-recovery').value);
       if (!await keyMatches(key)) throw new Error('mismatch');
@@ -167,7 +167,7 @@
       var loaded = await loadLatestPdf(id);
       var blob = new Blob([loaded.bytes], {type:'application/pdf'}), url=URL.createObjectURL(blob), a=document.createElement('a');
       a.href=url; a.download=formLabel(decoded.get(id)).replace(/\s+/g,'-') + '-Watchdog.pdf'; document.body.appendChild(a); a.click(); a.remove(); setTimeout(function(){URL.revokeObjectURL(url);},1500); status('');
-    } catch (_) { status('Watchdog could not decrypt the saved PDF. Confirm that you unlocked the correct Private Vault.', true); }
+    } catch (_) { status('Watchdog could not decrypt the saved PDF. Confirm that you opened the correct Private Vault.', true); }
   }
 
   async function printLatest(id) {
@@ -184,7 +184,7 @@
       status('Your print-ready PDF opened in a new tab. Use the browser print control if the print dialog does not open automatically.');
     } catch (_) {
       try { preview.close(); } catch (_) {}
-      status('Watchdog could not decrypt the saved PDF. Confirm that you unlocked the correct Private Vault.', true);
+      status('Watchdog could not decrypt the saved PDF. Confirm that you opened the correct Private Vault.', true);
     }
   }
 

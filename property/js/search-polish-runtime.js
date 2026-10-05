@@ -218,7 +218,7 @@
   function shareCard(card) {
     var address = card.getAttribute('data-address') || ((card.querySelector('.hd-addr') || {}).textContent || 'New Jersey property');
     var url = location.origin + '/property/';
-    if (navigator.share) { navigator.share({ title:address, text:address + ' on Watchdog Property Intelligence', url:url }).catch(function(){}); return; }
+    if (navigator.share) { navigator.share({ title:address, text:address + ' on Watchdog Property Info', url:url }).catch(function(){}); return; }
     var text = address + ' — ' + url;
     if (navigator.clipboard) navigator.clipboard.writeText(text).then(function(){toast('Property link copied');});
     else toast('Share: ' + address);
@@ -235,7 +235,7 @@
     var host=document.getElementById('hd-seo'), map=window.__njw96HoodMap;
     if(!host || !map || seoBusy || host.dataset.njwRich==='1') return;
     seoBusy=true; host.dataset.njwRich='1'; host.classList.add('njw-rich-seo');
-    host.innerHTML='<div class="njw-seo-loading">Building nearby and similar town intelligence…</div>';
+    host.innerHTML='<div class="njw-seo-loading">Building nearby and similar town info…</div>';
     var stats=JSON.stringify([{statisticType:'avg',onStatisticField:'NET_VALUE',outStatisticFieldName:'avg_assessment'},{statisticType:'count',onStatisticField:'PAMS_PIN',outStatisticFieldName:'property_count'}]);
     var allParams=new URLSearchParams({where:"PROP_CLASS = '2' AND NET_VALUE > 10000",outStatistics:stats,groupByFieldsForStatistics:'COUNTY,MUN_NAME',orderByFields:'COUNTY,MUN_NAME',returnGeometry:'false',resultRecordCount:'2000',f:'json'});
     var center=map.getCenter();
@@ -253,7 +253,7 @@
     Promise.all([fetch(PARCEL+'?'+allParams.toString()).then(function(r){return r.json();}),nearbyFetch(0.22).then(function(rows){return rows.length>=11?rows:nearbyFetch(0.42);}),scorePromise]).then(function(all){
       townRows=(all[0].features||[]).map(function(f){var a=f.attributes||{};return {town:a.MUN_NAME,county:a.COUNTY,avg:+a.avg_assessment||0,count:+a.property_count||0};}).filter(function(x){return x.town&&x.county;});
       nearbyRows=all[1]||[]; townScores=all[2]||[]; seoCacheKey=key; renderSeo(host);
-    }).catch(function(){host.innerHTML='<h3>Explore New Jersey property tax assessments</h3><p><a href="/towns/">Browse every municipality</a>.</p>';}).finally(function(){seoBusy=false;});
+    }).catch(function(){host.innerHTML='<h3>See New Jersey property tax assessments</h3><p><a href="/towns/">Browse every municipality</a>.</p>';}).finally(function(){seoBusy=false;});
   }
   function scoreFor(row) {
     var nTown=norm(row.town),nCounty=norm(row.county);
@@ -279,7 +279,7 @@
     var similarScore=currentScore==null?[]:townRows.filter(function(x){var s=scoreFor(x);return s!=null&&norm(x.town)!==norm(currentName);}).sort(function(a,b){return Math.abs(scoreFor(a)-currentScore)-Math.abs(scoreFor(b)-currentScore);}).slice(0,5);
     var counties=Object.create(null); townRows.forEach(function(x){(counties[x.county]=counties[x.county]||[]).push(x);});
     var countyHtml=Object.keys(counties).sort().map(function(c){return '<div class="njw-county-group"><h4>'+esc(c)+' County</h4><div class="njw-all-town-links">'+counties[c].sort(function(a,b){return a.town.localeCompare(b.town);}).map(function(x){return '<a href="'+townUrl(x)+'"><span>'+esc(x.town)+'</span><b>'+money(x.avg)+'</b></a>';}).join('')+'</div></div>';}).join('');
-    host.innerHTML='<div class="njw-seo-intro"><span>Explore more New Jersey property intelligence</span><h3>Compare nearby and similar municipalities</h3><p>Assessment averages come from New Jersey’s statewide residential assessment file. Town Watchdog Scores are the average of the latest property-level Watchdog scores currently observed in that municipality.</p></div>'+
+    host.innerHTML='<div class="njw-seo-intro"><span>See more New Jersey property info</span><h3>Compare nearby and similar municipalities</h3><p>Assessment averages come from New Jersey’s statewide residential assessment file. Town Watchdog Scores are the average of the latest property-level Watchdog scores currently observed in that municipality.</p></div>'+
       '<section class="njw-seo-block"><div class="njw-seo-title"><h4>10 nearest towns</h4><p>Closest municipalities to the current map area.</p></div><div class="njw-town-grid">'+nearest.map(function(x){return townCard(x,false);}).join('')+'</div></section>'+
       '<section class="njw-seo-block"><div class="njw-seo-title"><h4>Similar assessment value towns</h4><p>Municipalities with average residential assessments closest to '+(currentStat?money(currentStat.avg):'this area')+'.</p></div><div class="njw-town-grid compact">'+similarAssess.map(function(x){return townCard(x,false);}).join('')+'</div></section>'+
       '<section class="njw-seo-block"><div class="njw-seo-title"><h4>Similar Watchdog towns</h4><p>'+(currentScore==null?'A town-average Watchdog score will appear as property score coverage grows.':'Towns with average Watchdog scores closest to '+currentScore.toFixed(1)+'.')+'</p></div><div class="njw-town-grid compact">'+(similarScore.length?similarScore.map(function(x){return townCard(x,true);}).join(''):'<div class="njw-score-pending">Not enough scored municipalities yet for a reliable similarity set.</div>')+'</div></section>'+
@@ -290,7 +290,7 @@
   function installSearchArtAndFooter() {
     var right=document.querySelector('#pl-hood .hd-right'); if(!right)return;
     var art=document.getElementById('njw-search-art');
-    if(!art){art=document.createElement('div');art.id='njw-search-art';art.className='njw-search-art';art.innerHTML='<img src="/property/assets/watchdog-layout.svg" alt="Watchdog property intelligence illustration">';}
+    if(!art){art=document.createElement('div');art.id='njw-search-art';art.className='njw-search-art';art.innerHTML='<img src="/property/assets/watchdog-layout.svg" alt="Watchdog property info illustration">';}
     var footer=document.getElementById('wd-property-footer');
     if(footer&&!footerPlaceholder){footerPlaceholder=document.createComment('watchdog-footer-home');footer.parentNode.insertBefore(footerPlaceholder,footer);}
     if(document.body.classList.contains('hood-on')){

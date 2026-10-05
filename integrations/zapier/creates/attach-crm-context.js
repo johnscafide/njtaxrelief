@@ -1,8 +1,8 @@
 const { api } = require('../common');
 module.exports = {
   key: 'attach_crm_context',
-  noun: 'CRM Context',
-  display: { label: 'Send CRM Context to Watchdog', description: 'Adds user-authorized CRM relationship context to Watchdog without replacing governed property facts.' },
+  noun: 'CRM Info',
+  display: { label: 'Send CRM Info to Watchdog', description: 'Adds user-authorized CRM relationship info to Watchdog without replacing checked property facts.' },
   operation: {
     inputFields: [
       { key: 'external_contact_id', label: 'CRM Contact ID', type: 'string', required: true },

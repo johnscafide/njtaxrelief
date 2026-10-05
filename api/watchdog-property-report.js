@@ -174,7 +174,7 @@ async function buildPdf(row, requester) {
   }
 
   // Tax in context
-  heading('Property tax in context');
+  heading('Property tax in perspective');
   const compare = H.townCompareText(row, v);
   if (compare) para(compare, 10);
   const trend = H.rateTrend(row);

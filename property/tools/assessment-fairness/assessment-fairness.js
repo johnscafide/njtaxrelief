@@ -33,7 +33,7 @@
   function appealCopy(score) {
     if (score < 45) return ['Stronger reason to investigate', 'The municipal data shows relatively wide assessment variation. That does not establish an individual overassessment, but it increases the value of comparing your assessment with recent, similar sales and neighboring properties.'];
     if (score < 75) return ['Worth a closer look', 'The municipality falls in the middle of the loaded dataset. Homeowners should focus on property-specific evidence rather than relying on the municipal statistic alone.'];
-    return ['Municipal consistency looks stronger', 'The municipality compares favorably on assessment uniformity. An appeal may still be justified when the individual assessment exceeds supported market value, but the town-wide statistic alone is not a strong warning signal.'];
+    return ['Municipal consistency looks stronger', 'The municipality compares favorably on assessment uniformity. An appeal may still be justified when the individual assessment exceeds supported market value, but the town-wide statistic alone is not a strong warning red flag.'];
   }
 
   function renderChart(history) {

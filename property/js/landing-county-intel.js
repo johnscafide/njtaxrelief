@@ -140,8 +140,8 @@
     var hook=entry&&entry.hook?entry.hook:'';
     var copy=entry&&entry.note
       ? entry.note
-      : 'Explore '+item.county+' County assessment context, property tax records and Watchdog research with real evidence.';
-    var cta=entry&&entry.cta?entry.cta:'Explore '+item.county+' County';
+      : 'Take a look '+item.county+' County assessment info, property tax records and Watchdog research with real evidence.';
+    var cta=entry&&entry.cta?entry.cta:'Take a look '+item.county+' County';
     var hookHtml=hook?'<span class="wd-county-intel-hook">'+esc(hook)+'</span>':'';
     return '<a class="wd-county-intel-card" href="/towns/'+esc(item.slug)+'/" data-county-intel="'+esc(item.slug)+'">'+
       '<span class="wd-county-intel-image"><img src="'+esc(commonsImage(item.image))+'" alt="'+esc(item.county)+' County, New Jersey" loading="lazy" width="1200" height="700" data-county-photo="'+esc(item.slug)+'"></span>'+

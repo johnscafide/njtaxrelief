@@ -27,13 +27,13 @@ function ensure(){
     +'<form id="tx-collab-form" class="tx-collab-form">'
     +'<label><span>Email address</span><input name="email" type="email" autocomplete="email" required placeholder="pro@company.com"></label>'
     +'<label><span>Role</span><select name="role"><option value="title">Title / settlement</option><option value="lender">Lender</option><option value="tc">Transaction coordinator</option><option value="attorney">Attorney</option><option value="other">Other professional</option></select></label>'
-    +'<div class="tx-collab-scope"><i class="fas fa-shield-halved"></i><div><b>Only this transaction</b><span>View shared closing context and upload closing documents. Access can be revoked anytime.</span></div></div>'
+    +'<div class="tx-collab-scope"><i class="fas fa-shield-halved"></i><div><b>Only this transaction</b><span>View shared closing info and upload closing documents. Access can be revoked anytime.</span></div></div>'
     +'<button class="tx-collab-send" id="tx-collab-send" type="submit"><i class="fas fa-paper-plane"></i> Create invite</button>'
     +'</form>'
     +'<div class="tx-collab-created" id="tx-collab-created" hidden></div>'
     +'<div class="tx-collab-list-head"><h3>Shared access</h3><button type="button" data-collab-action="reload"><i class="fas fa-rotate"></i> Refresh</button></div>'
     +'<div id="tx-collab-list" class="tx-collab-list"><div class="tx-collab-loading"><i class="fas fa-circle-notch fa-spin"></i> Loading access…</div></div>'
-    +'<p class="tx-collab-conversion"><b>Watchdog guest access is transaction-specific.</b> Invitees can later choose Pro or Pro+ if they want their own Watchdog professional workspace.</p>'
+    +'<p class="tx-collab-conversion"><b>Watchdog guest access is transaction-specific.</b> Invitees can later choose Pro or Pro+ if they want their own Watchdog professional dashboard.</p>'
     +'</section><div class="tx-collab-toast" id="tx-collab-toast" hidden></div>';
   document.body.appendChild(layer);
   $('#tx-collab-form',layer).addEventListener('submit',createInvite);

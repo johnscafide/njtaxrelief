@@ -18,7 +18,7 @@ function openQueue(){
     pams_pins:pins,
     context:{context_key:'daily-intelligence:today',scope_type:'today_queue'},
     title:'Ask Watchdog about Today',
-    contextLabel:pins.length+' properties in the visible governed Today queue',
+    contextLabel:pins.length+' properties in the visible checked Today queue',
     seed:'What changed on my important properties today?',
     chips:[
       'What changed on my important properties today?',

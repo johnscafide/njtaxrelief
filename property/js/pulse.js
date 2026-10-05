@@ -129,7 +129,7 @@
   }
   function actionCard() {
     var acts = inRange().filter(function (e) { return tone(e) === 'review'; }), latest = acts[0];
-    return '<article class="wdd-card wdd-card--value">' + DECO.pin + '<div class="wdd-card-head"><h2>Action signals:</h2></div><div class="wdd-stats">' +
+    return '<article class="wdd-card wdd-card--value">' + DECO.pin + '<div class="wdd-card-head"><h2>Action signs:</h2></div><div class="wdd-stats">' +
       stat(String(acts.length), '', 'Higher priority', true) + stat(String(acts.filter(function (e) { return !e.read_at; }).length), '', 'Unread') + '</div>' +
       '<p class="wdd-card-note">' + (latest ? 'Latest: <b>' + esc(latest.title) + '</b>, ' + esc(propName(propFor(latest.pams_pin))) + ' · ' + esc(short(latest.occurred_at)) : 'No higher-priority changes in ' + rangeLabel() + '.') + '</p></article>';
   }

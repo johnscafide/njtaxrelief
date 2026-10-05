@@ -275,7 +275,7 @@ async function start(ctx){
   if(connected()){await loadCatalog();countAudience();if(statsStale())refreshStats(null,true)}
   onEdit();
 }
-const ready=window.njptrAccessReady||Promise.reject(new Error('Access context did not initialize'));
+const ready=window.njptrAccessReady||Promise.reject(new Error('Access info did not initialize'));
 Promise.resolve(ready).then(start).catch(err=>{
   if(window.WatchdogAgentSafety)window.WatchdogAgentSafety.report('email-updates-start',err);
   const h=qs('#eu-app'),t=qs('#eu-fail');if(!h||!t)return;

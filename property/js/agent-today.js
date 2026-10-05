@@ -32,7 +32,7 @@ function render(tx,lp,buyers,oh){
   tasks.sort(function(a,b){return a.p-b.p;});
   if(!tasks.length){empty('Nothing dated or flagged today.');return;}
   // content-architecture: dynamic — this queue markup is selected from the signed-in agent's computed cross-workspace task state.
-  queue.innerHTML=tasks.slice(0,6).map(task).join('')+(tasks.length>6?'<div class="ad-today-more">+'+(tasks.length-6)+' more in your workflows</div>':'');
+  queue.innerHTML=tasks.slice(0,6).map(task).join('')+(tasks.length>6?'<div class="ad-today-more">+'+(tasks.length-6)+' more in your tasks</div>':'');
 }
 
 function load(ctx){

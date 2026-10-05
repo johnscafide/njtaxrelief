@@ -205,9 +205,9 @@
   }
 
   function renderPropertyContext(host,result,subject,score){
-    if(!subject){host.innerHTML='<div class="wd-anchor-property-empty"><span>WATCHDOG PROPERTY CONTEXT</span><strong>Property match unavailable</strong><p>We will not guess when a New Jersey parcel cannot be matched confidently.</p><a href="/?address='+encodeURIComponent(result.address||'')+'">Open property search →</a></div>';return;}
+    if(!subject){host.innerHTML='<div class="wd-anchor-property-empty"><span>WATCHDOG PROPERTY INFO</span><strong>Property match unavailable</strong><p>We will not guess when a New Jersey parcel cannot be matched confidently.</p><a href="/?address='+encodeURIComponent(result.address||'')+'">Open property search →</a></div>';return;}
     var scoreValue=score&&Number(score.watchdog_score),hasScore=Number.isFinite(scoreValue);
-    host.innerHTML='<div class="wd-anchor-property-head"><span>WATCHDOG PROPERTY CONTEXT</span><b>'+esc(subject.propertyLocation||result.address)+'</b><small>'+esc(subject.municipality||'New Jersey')+(subject.county?' · '+esc(subject.county)+' County':'')+'</small></div>'+
+    host.innerHTML='<div class="wd-anchor-property-head"><span>WATCHDOG PROPERTY INFO</span><b>'+esc(subject.propertyLocation||result.address)+'</b><small>'+esc(subject.municipality||'New Jersey')+(subject.county?' · '+esc(subject.county)+' County':'')+'</small></div>'+
       '<div class="wd-anchor-property-score"><div><strong>'+(hasScore?Math.round(scoreValue):'—')+'</strong><span>Watchdog Score</span></div><p>'+(hasScore?'Canonical score shown when ROBUST evidence supports it.':'Canonical score not yet available for this property.')+'</p></div>'+
       '<div class="wd-anchor-property-stats"><div><b>'+moneyOrDash(subject.assessedValue)+'</b><span>Assessment</span></div><div><b>'+moneyOrDash(subject.lastYearTax)+'</b><span>Prior-year tax</span></div><div><b>'+pct(subject.effectiveTaxRatePct)+'</b><span>Effective rate</span></div></div>'+
       '<a class="wd-anchor-property-open" href="/?address='+encodeURIComponent(result.address||'')+'">Open full property record →</a>';
