@@ -131,4 +131,12 @@ function sitemapRows() {
   return rows;
 }
 
-module.exports = { facts, towns, findTown, findCounty, publishedCounties, nearby, sitemapRows, townPath, PUBLISHED };
+// CO and tax page links for one town by Treasury code, for the property and True Cost pages.
+function townLinks(code) {
+  const co = CO.towns().byCode.get(String(code || '').slice(0, 4));
+  if (!co) return { name: '', co: '/co', tax: '' };
+  const tax = towns().byPath.get(townPath(co));
+  return { name: co.name, co: co.published ? co.path : '/co', tax: tax && tax.published ? tax.path : '' };
+}
+
+module.exports = { townLinks, facts, towns, findTown, findCounty, publishedCounties, nearby, sitemapRows, townPath, PUBLISHED };

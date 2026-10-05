@@ -13,6 +13,8 @@
    - Rollout is per county: pages outside INDEXABLE_COUNTIES are served with
      noindex until that county is released to search engines. */
 
+const { townLinks } = require('./_tax-town');
+
 const CANONICAL_ORIGIN = 'https://www.watchdogindex.com';
 const PAGE_CACHE = 'public, max-age=0, s-maxage=86400, stale-while-revalidate=604800';
 
@@ -354,6 +356,7 @@ function neighborsSection(row) {
 function toolkitSection(row, v) {
   const trend = rateTrend(row);
   const ratio = latestRatio(row);
+  const links = townLinks(row.pams_pin);
   const appeal = new URLSearchParams();
   if (row.assessed_value) appeal.set('assessed', String(row.assessed_value));
   if (trend) appeal.set('rate', trend.latest.rate.toFixed(3));
@@ -364,6 +367,8 @@ function toolkitSection(row, v) {
     ['fa-calendar-check', 'Appeal deadlines', 'Usually April 1 (May 1 after a town-wide revaluation), or 45 days after assessment notices go out if later.', '/nj-property-tax-calendar'],
     ['fa-hand-holding-dollar', 'ANCHOR, Senior Freeze and Stay NJ', 'Check which state property tax relief programs apply.', '/senior-benefit-estimator'],
     ['fa-calculator', 'Buying here?', 'Monthly cost with the real tax bill included.', '/home-buying-cost-calculator'],
+    ['fa-clipboard-check', 'Selling? CO requirements', `Resale certificate of occupancy and smoke detector certificate rules${links.name ? ` for ${links.name}` : ''}.`, links.co],
+    ...(links.tax ? [['fa-landmark', `${links.name} property taxes`, 'Typical bill, tax rate and appeal deadline for the town.', links.tax]] : []),
     ['fa-map-location-dot', 'Map', 'Open this address in Google Maps.', maps]
   ];
   const list = items.map(([icon, title, text, href]) => {
