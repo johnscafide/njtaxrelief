@@ -143,7 +143,7 @@
       "slug": "senior-freeze-base-year",
       "term": "Senior Freeze base year",
       "definition": "The tax year used as the comparison point for an eligible Senior Freeze applicant's future property-tax reimbursement calculation.",
-      "example": "The actionable number is the eligible base-year tax amount, not simply the homeowner's current age or current bill.",
+      "example": "The useful number is the eligible base-year tax amount, not simply the homeowner's current age or current bill.",
       "source": "https://www.nj.gov/treasury/taxation/ptr/",
       "category": "relief-programs",
       "aliases": [
@@ -191,7 +191,7 @@
       "slug": "mod-iv",
       "term": "MOD-IV",
       "definition": "New Jersey's standardized local property-tax assessment data format used to transmit municipal assessment-roll information.",
-      "example": "Parcel assessment, class, tax and many physical fields in Watchdog originate from MOD-IV-derived public records.",
+      "example": "Parcel assessment, class, tax and many physical fields in Watchdog originate from MOD-IV-based public records.",
       "source": "https://www.nj.gov/treasury/taxation/lpt/localtax.shtml",
       "category": "assessments-appeals",
       "aliases": [
