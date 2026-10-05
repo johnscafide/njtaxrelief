@@ -27,3 +27,35 @@ Property Intelligence.</template>
     <button type="button" class="wd-1999-exit">Back to 2026</button>
   </div>
 </div></template>
+<template id="wd-egg-oos"><div class="wd-oos" id="wd-oos">
+  <div class="wd-oos-card" role="dialog" aria-modal="true" aria-labelledby="wd-oos-title" aria-describedby="wd-oos-body">
+    <div class="wd-oos-sign"><div class="wd-oos-sign-frame"><small>Welcome to</small><strong>New Jersey</strong><em>Watchdog's whole territory</em></div></div>
+    <div class="wd-oos-scene" aria-hidden="true"><div class="wd-oos-dog"></div><div class="wd-oos-stamp"></div></div>
+    <p class="wd-oos-kicker">You're not from around here</p>
+    <h2 class="wd-oos-title" id="wd-oos-title"></h2>
+    <p class="wd-oos-body" id="wd-oos-body"></p>
+    <div class="wd-oos-quiz" hidden>
+      <p class="wd-oos-quiz-q">Quick Jersey check: pork roll or Taylor ham?</p>
+      <div class="wd-oos-actions wd-oos-quiz-actions">
+        <button type="button" class="wd-oos-btn wd-oos-btn-secondary" data-oos-answer="pork">Pork roll</button>
+        <button type="button" class="wd-oos-btn wd-oos-btn-secondary" data-oos-answer="taylor">Taylor ham</button>
+      </div>
+      <p class="wd-oos-answer" aria-live="polite"></p>
+    </div>
+    <div class="wd-oos-actions">
+      <button type="button" class="wd-oos-btn wd-oos-btn-primary" data-oos="retry">Try a Jersey address</button>
+      <button type="button" class="wd-oos-btn wd-oos-btn-secondary" data-oos="close">Got it</button>
+    </div>
+  </div>
+</div></template>
+<template id="wd-egg-oos-lines">
+  <p data-state="NY" data-head="Bridge and tunnel? We'll allow it.">The skyline does look better from our side. Watchdog only sniffs out New Jersey homes, though, from High Point to Cape May.</p>
+  <p data-state="PA" data-head="Wawa's on both sides of the river.">Our data stops at the Delaware, though. Watchdog only covers New Jersey homes.</p>
+  <p data-state="DE" data-head="Tax-free shopping is nice and all.">Our data still stops at the Delaware Memorial Bridge. Watchdog only covers New Jersey homes.</p>
+  <p data-state="CT" data-head="That's a long way up the Turnpike.">Watchdog only sniffs out New Jersey homes, from High Point to Cape May.</p>
+  <p data-state="FL" data-head="Half of Jersey retires there, so we get it.">Watchdog only covers New Jersey homes, though. Come visit.</p>
+  <p data-state="*" data-head="{state}? Nice try.">Watchdog only sniffs out New Jersey homes, from High Point to Cape May.</p>
+  <p data-state="ZIP" data-head="That ZIP isn't from around here.">New Jersey ZIP codes start with 07 or 08. Watchdog only sniffs out New Jersey homes, from High Point to Cape May.</p>
+  <p data-answer="pork">Pork roll, huh? South Jersey energy. Real Jersey people argue about this. You'll fit right in.</p>
+  <p data-answer="taylor">Taylor ham, huh? North Jersey energy. Real Jersey people argue about this. You'll fit right in.</p>
+</template>

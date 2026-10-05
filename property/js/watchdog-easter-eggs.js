@@ -27,8 +27,8 @@
   w.__watchdogEasterEggs = true;
   try { if (w.top !== w.self) return; } catch (_) { return; }
 
-  var CSS_HREF = '/property/css/watchdog-easter-eggs.css?v=20261004a';
-  var PARTIAL_URL = '/property/partials/watchdog-easter-eggs.html?v=20261004a';
+  var CSS_HREF = '/property/css/watchdog-easter-eggs.css?v=20261005a';
+  var PARTIAL_URL = '/property/partials/watchdog-easter-eggs.html?v=20261005a';
   var BEAGLE = [
     '                               ___',
     '                            .-\'   \'-.',
@@ -324,11 +324,169 @@
     }, function () {});
   }
 
+  var STATES = {
+    AL: 'Alabama', AK: 'Alaska', AZ: 'Arizona', AR: 'Arkansas', CA: 'California', CO: 'Colorado', CT: 'Connecticut',
+    DE: 'Delaware', DC: 'Washington DC', FL: 'Florida', GA: 'Georgia', HI: 'Hawaii', ID: 'Idaho', IL: 'Illinois',
+    IN: 'Indiana', IA: 'Iowa', KS: 'Kansas', KY: 'Kentucky', LA: 'Louisiana', ME: 'Maine', MD: 'Maryland',
+    MA: 'Massachusetts', MI: 'Michigan', MN: 'Minnesota', MS: 'Mississippi', MO: 'Missouri', MT: 'Montana',
+    NE: 'Nebraska', NV: 'Nevada', NH: 'New Hampshire', NJ: 'New Jersey', NM: 'New Mexico', NY: 'New York',
+    NC: 'North Carolina', ND: 'North Dakota', OH: 'Ohio', OK: 'Oklahoma', OR: 'Oregon', PA: 'Pennsylvania',
+    RI: 'Rhode Island', SC: 'South Carolina', SD: 'South Dakota', TN: 'Tennessee', TX: 'Texas', UT: 'Utah',
+    VT: 'Vermont', VA: 'Virginia', WA: 'Washington', WV: 'West Virginia', WI: 'Wisconsin', WY: 'Wyoming', PR: 'Puerto Rico'
+  };
+  var STATE_NAMES = {};
+  Object.keys(STATES).forEach(function (code) { STATE_NAMES[STATES[code].toUpperCase()] = code; });
+  STATE_NAMES['DISTRICT OF COLUMBIA'] = 'DC';
+
+  function stateIn(text) {
+    var t = text.trim();
+    if (!t) return null;
+    if (t.length === 2 && STATES[t]) return t;
+    if (STATE_NAMES[t]) return STATE_NAMES[t];
+    return null;
+  }
+  function stateAtEnd(text) {
+    var words = text.trim().split(' ');
+    for (var n = Math.min(3, words.length); n >= 1; n -= 1) {
+      var code = stateIn(words.slice(-n).join(' '));
+      if (code) return code;
+    }
+    return null;
+  }
+
+  function outOfState(value) {
+    var s = String(value || '').toUpperCase().replace(/[^A-Z0-9,\- ]/g, ' ').replace(/\s+/g, ' ').trim();
+    if (s.length < 6 || !/[A-Z]/.test(s)) return null;
+    s = s.replace(/[ ,]*\b(USA|US|UNITED STATES)$/, '');
+    var zipMatch = s.match(/[ ,](\d{5})(?:-\d{4})?$/);
+    var zip = zipMatch ? zipMatch[1] : '';
+    if (/^0[78]/.test(zip)) return null;
+    if (zip) s = s.slice(0, zipMatch.index).replace(/[ ,]+$/, '');
+    var segments = s.split(',').map(function (part) { return part.trim(); }).filter(Boolean);
+    var code = null;
+    if (zip) code = stateAtEnd(segments[segments.length - 1] || '');
+    else if (segments.length >= 3) code = stateIn(segments[segments.length - 1]);
+    if (code === 'NJ') return null;
+    if (code) return { code: code, name: STATES[code] };
+    if (zip && segments.length >= 2) return { code: 'ZIP', name: '' };
+    return null;
+  }
+
+  function addressField(input) {
+    if (!input || (input.tagName || '').toLowerCase() !== 'input') return false;
+    var type = (input.getAttribute('type') || 'text').toLowerCase();
+    if (type !== 'text' && type !== 'search') return false;
+    var auto = (input.getAttribute('autocomplete') || '').toLowerCase();
+    if (/street|address-line|shipping|billing|postal/.test(auto)) return false;
+    var hint = [input.id, input.name, input.getAttribute('placeholder'), input.getAttribute('aria-label')].join(' ');
+    if (type !== 'search' && !/addr|search|lookup|property|command|query/i.test(hint)) return false;
+    var form = input.form;
+    if (form && form.querySelectorAll('input[type="text"],input:not([type]),input[type="email"],input[type="tel"],textarea').length > 2) return false;
+    return true;
+  }
+
+  var oosOpen = false, oosLast = '', oosLastAt = 0;
+  function checkAddress(input) {
+    if (!addressField(input) || oosOpen) return;
+    var value = input.value;
+    var hit = outOfState(value);
+    if (!hit) return;
+    var now = Date.now();
+    if (value === oosLast && now - oosLastAt < 4000) return;
+    oosLast = value;
+    oosLastAt = now;
+    showOutOfState(hit, input);
+  }
+
+  function showOutOfState(hit, input) {
+    if (!d.body) return;
+    oosOpen = true;
+    loadCss();
+    parts().then(function (doc) {
+      var frag = part(doc, 'wd-egg-oos');
+      var lines = part(doc, 'wd-egg-oos-lines');
+      var box = frag && frag.querySelector('#wd-oos');
+      if (!box || !lines || !d.body) { oosOpen = false; return; }
+      var line = lines.querySelector('[data-state="' + hit.code + '"]') || lines.querySelector('[data-state="*"]');
+      var label = hit.code === 'ZIP' ? 'Not NJ?' : (hit.code === 'DC' ? 'DC?' : hit.name + '?');
+      box.querySelector('.wd-oos-stamp').textContent = label;
+      box.querySelector('.wd-oos-title').textContent = line.getAttribute('data-head').replace('{state}', hit.name);
+      box.querySelector('.wd-oos-body').textContent = line.textContent.trim();
+      openOutOfState(box, lines, input);
+    }, function () { oosOpen = false; });
+  }
+
+  function openOutOfState(box, lines, input) {
+    var back = d.activeElement;
+    var quiz = box.querySelector('.wd-oos-quiz');
+    var quizTimer = 0;
+    function buttons() { return Array.prototype.slice.call(box.querySelectorAll('button')).filter(function (b) { return b.offsetParent !== null; }); }
+    function close(retry) {
+      w.clearTimeout(quizTimer);
+      d.removeEventListener('keydown', onBoxKey, true);
+      box.classList.remove('is-on');
+      w.setTimeout(function () { if (box.parentNode) box.parentNode.removeChild(box); oosOpen = false; }, reducedMotion() ? 0 : 200);
+      if (retry && input) { input.value = ''; try { input.dispatchEvent(new Event('input', { bubbles: true })); } catch (_) {} input.focus(); }
+      else if (back && typeof back.focus === 'function') { try { back.focus(); } catch (_) {} }
+    }
+    function onBoxKey(event) {
+      if (event.key === 'Escape') { event.preventDefault(); event.stopPropagation(); close(false); return; }
+      if (event.key === 'Tab') {
+        var list = buttons();
+        if (!list.length) return;
+        var first = list[0], last = list[list.length - 1];
+        if (event.shiftKey && d.activeElement === first) { event.preventDefault(); last.focus(); }
+        else if (!event.shiftKey && d.activeElement === last) { event.preventDefault(); first.focus(); }
+        else if (list.indexOf(d.activeElement) < 0) { event.preventDefault(); first.focus(); }
+      }
+      if (event.key === 'Enter' || event.key === ' ') event.stopPropagation();
+    }
+    box.addEventListener('click', function (event) {
+      if (event.target === box) { close(false); return; }
+      var action = event.target.closest('[data-oos]');
+      if (action) { close(action.getAttribute('data-oos') === 'retry'); return; }
+      var answer = event.target.closest('[data-oos-answer]');
+      if (answer) {
+        var key = answer.getAttribute('data-oos-answer');
+        var reply = lines.querySelector('[data-answer="' + key + '"]');
+        box.querySelectorAll('[data-oos-answer]').forEach(function (b) { b.setAttribute('aria-pressed', b === answer ? 'true' : 'false'); });
+        box.querySelector('.wd-oos-answer').textContent = reply ? reply.textContent.trim() : '';
+      }
+    });
+    d.body.appendChild(box);
+    d.addEventListener('keydown', onBoxKey, true);
+    w.requestAnimationFrame(function () { box.classList.add('is-on'); });
+    var primary = box.querySelector('[data-oos="close"]');
+    if (primary) primary.focus();
+    quizTimer = w.setTimeout(function () { quiz.hidden = false; }, 2500);
+  }
+
+  function onAddressKey(event) {
+    if (event.key === 'Enter' && !event.isComposing) checkAddress(event.target);
+  }
+  function onAddressSubmit(event) {
+    var form = event.target;
+    if (!form || !form.querySelectorAll) return;
+    Array.prototype.forEach.call(form.querySelectorAll('input'), checkAddress);
+  }
+  function onAddressClick(event) {
+    var button = event.target && event.target.closest ? event.target.closest('button,[type="submit"],[role="button"]') : null;
+    if (!button || button.closest('#wd-oos')) return;
+    var scope = button.closest('form,[role="search"],.ssearch,.wdh-search,[class*="search"]');
+    if (!scope) return;
+    var inputs = scope.querySelectorAll('input');
+    if (inputs.length > 3) return;
+    Array.prototype.forEach.call(inputs, checkAddress);
+  }
+
   function start() {
     greet();
     d.addEventListener('keydown', onKey, true);
     d.addEventListener('touchstart', onTouchStart, { passive: true, capture: true });
     d.addEventListener('touchend', onTouchEnd, { passive: true, capture: true });
+    d.addEventListener('keydown', onAddressKey, true);
+    d.addEventListener('submit', onAddressSubmit, true);
+    d.addEventListener('click', onAddressClick, true);
     if (read('sessionStorage', RETRO_KEY) === '1') setRetro(true);
     var idle = w.requestIdleCallback || function (fn) { return w.setTimeout(fn, 1500); };
     idle(loadCss);
