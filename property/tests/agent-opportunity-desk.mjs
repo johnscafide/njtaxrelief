@@ -12,7 +12,7 @@ for (const id of ['ad-list','ad-stats','ad-focus','ad-import-modal','ad-drawer',
   if (!html.includes(`id="${id}"`)) throw new Error(`Missing Agent Desk UI contract: ${id}`);
 }
 if (!html.includes('data-queue="top"')) throw new Error('Top 10 focused worklist is missing');
-if (!js.includes('Anonymous property red flag')) throw new Error('Agent Desk does not disclose the contact-safe property-signal boundary');
+if (!html.includes('Anonymous property red flag')) throw new Error('Agent Desk does not disclose the contact-safe property-signal boundary');
 if (!js.includes('function focusCard()')) throw new Error('Best-next-conversation focus card is missing');
 if (!js.includes("'Evidence ready'")) throw new Error('Evidence-readiness KPI is missing');
 // Host-aware clean route: /home?pin= on WatchdogIndex, /property/home?pin= on preview hosts.

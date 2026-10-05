@@ -58,7 +58,21 @@ function mutationKind(line) {
   return '';
 }
 
+function structure(line) {
+  return String(line || '').replace(/[A-Za-z0-9'\u2019&;-]+/g, '').replace(/\s+/g, '');
+}
+
+function withoutEyebrows(line) {
+  return String(line || '').replace(/<(\w+)\b[^<>]*class=\\?["'][^"']*(?:eyebrow|kicker)[^"']*\\?["'][^<>]*>[\s\S]*?<\/\1>/gi, '');
+}
+
+function isWordingOnlyEdit(line) {
+  const shape = structure(line);
+  return removedInHunk.some((oldLine) => structure(oldLine) === shape || structure(withoutEyebrows(oldLine)) === shape);
+}
+
 function isExistingCopyReplacement(line) {
+  if (isWordingOnlyEdit(line)) return true;
   if (!TRANSITIONAL_COPY_EDIT_FILES.has(file)) return false;
   const kind = mutationKind(line);
   if (!kind) return false;
