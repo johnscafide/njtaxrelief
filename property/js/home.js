@@ -854,7 +854,7 @@ window.addEventListener('load',function(){if('serviceWorker' in navigator)naviga
   }
   function syncBrand(){
     setText('.wd4-brand-copy strong','Watchdog');
-    setText('.wd4-brand-copy small,.hm27-brand-copy small,.wdx-brand-copy small','PROPERTY INFO');
+    setText('.wd4-brand-copy small,.hm27-brand-copy small,.wdx-brand-copy small','Property info');
   }
   function run(){
     ensureStylesheet(STYLE);
@@ -3530,7 +3530,7 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
       '<header class="wdai-head"><div class="wdai-mark"><i class="fas fa-dog"></i></div><div class="wdai-title"><span>Watchdog Intelligence</span><h2>' + esc(address) + '</h2><p>' + (exact ? 'Built for a ' + esc(def.label) + ' using this property’s checked records.' : 'Generalized property info until you tell Watchdog how you work.') + '</p></div><div class="wdai-persona"><i class="fas ' + esc(def.icon) + '"></i><span><small>Perspective</small><b>' + esc(exact ? def.label : 'Generalized') + '</b></span></div></header>' +
       (exact ? '<div class="wdai-role-set"><i class="fas fa-circle-check"></i><span>Profession-aware Intel is active for <b>' + esc(def.label) + '</b>.</span><a href="/property/account">Change profession</a></div>' : rolePrompt()) +
       '<div class="wdai-grid">' +
-        card('fa-coins', 'FINANCIAL LENS', 'What the numbers mean for you', financialCopy(role, m), 'money') +
+        card('fa-coins', 'Financial lens', 'What the numbers mean for you', financialCopy(role, m), 'money') +
         card('fa-bolt', 'MOTIVATION', 'Why this property deserves attention', urgencyCopy(m, suggestion), 'motivation') +
         card('fa-lightbulb', 'INNOVATION', 'A better way to use this property', innovationCopy(role), 'innovation') +
         card('fa-shield-halved', 'EVIDENCE', suggestion ? 'What Watchdog is seeing' : 'What Watchdog can prove now', evidenceCopy(suggestion), 'evidence') +
@@ -3708,14 +3708,14 @@ if(window.__WATCHDOG_HOME_INTELLIGENCE_BRAND_V2__)return;
 window.__WATCHDOG_HOME_INTELLIGENCE_BRAND_V2__=true;
 
 var replacements=[
-  [/WATCHDOG ANALYST INTEL/g,'WATCHDOG INTELLIGENCE'],
+  [/WATCHDOG ANALYST INTEL/g,'Watchdog Intelligence'],
   [/Watchdog Analyst Intel/g,'Watchdog Intelligence'],
   [/Profession-aware Intel/g,'Watchdog Intelligence'],
   [/profession-aware Intel/g,'Watchdog Intelligence'],
   [/generalized Intel/g,'generalized Watchdog Intelligence'],
   [/Generalized Intel/g,'Generalized Watchdog Intelligence'],
-  [/PERSONALIZATION REQUIRED FOR EXACT INTEL/g,'PERSONALIZE WATCHDOG INTELLIGENCE'],
-  [/EXACT INTEL/g,'WATCHDOG INTELLIGENCE'],
+  [/PERSONALIZATION REQUIRED FOR EXACT INTEL/g,'Personalize Watchdog Intelligence'],
+  [/EXACT INTEL/g,'Watchdog Intelligence'],
   [/exact Intel/g,'Watchdog Intelligence'],
   [/Personalize my Intel/g,'Personalize Watchdog Intelligence'],
   [/Use generalized Intelligence for now/g,'Use generalized Watchdog Intelligence for now']
@@ -4032,7 +4032,7 @@ async function openVoice(){
     window.WatchdogContextualAnalyst.open({
       surface:'property_home',
       title:'Ask Watchdog Intelligence',
-      kicker:'WATCHDOG INTELLIGENCE',
+      kicker:'Watchdog Intelligence',
       subtitle:'Ask a focused question about this saved property. Watchdog keeps the checked property info attached.',
       pams_pins:property.pams_pin ? [property.pams_pin] : [],
       contextLabel:property.address || 'This saved property',
@@ -4059,7 +4059,7 @@ function rebrandIntelligence(panel){
   var main=panel.querySelector(':scope > .wdai-main');
   if(main)main.classList.add('wd-intelligence-frame');
   var brand=panel.querySelector('.wdai-title > span');
-  if(brand && String(brand.textContent || '').trim()!=='WATCHDOG INTELLIGENCE')brand.textContent='WATCHDOG INTELLIGENCE';
+  if(brand && String(brand.textContent || '').trim()!=='Watchdog Intelligence')brand.textContent='Watchdog Intelligence';
   var roleLine=panel.querySelector('.wdai-role-set span');
   if(roleLine){
     Array.prototype.slice.call(roleLine.childNodes).forEach(function(node){
@@ -4236,8 +4236,8 @@ function refreshLegacyIntelBrand(){
 function refreshAgentAd(){
   Array.prototype.forEach.call(document.querySelectorAll('#hm-body section,#hm-body article,#hm-body div'),function(el){
     var text=(el.textContent||'').replace(/\s+/g,' ').trim();
-    if(text.indexOf('SELLER STRATEGY')===-1&&text.indexOf('Seller strategy')===-1)return;
-    if(el.parentElement&&((el.parentElement.textContent||'').indexOf('SELLER STRATEGY')!==-1))return;
+    if(text.indexOf('Seller strategy')===-1&&text.indexOf('Seller strategy')===-1)return;
+    if(el.parentElement&&((el.parentElement.textContent||'').indexOf('Seller strategy')!==-1))return;
     el.classList.add('wd-home-agent-ad');
     var walker=document.createTreeWalker(el,NodeFilter.SHOW_TEXT),node;
     while((node=walker.nextNode()))if((node.nodeValue||'').indexOf('John and Heather')!==-1)node.nodeValue=node.nodeValue.replace(/John and Heather/g,'John Scafide and Heather');

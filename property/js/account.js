@@ -17,12 +17,12 @@
       features: ['Opportunity Desk and sphere monitoring', 'Professional reports and exports', 'Agent-focused property red flags']
     },
     pro: {
-      internal: 'pro', name: 'Pro', monthly: 129, yearly: 1290, featured: true, badge: 'PROFESSIONAL DASHBOARD',
+      internal: 'pro', name: 'Pro', monthly: 129, yearly: 1290, featured: true, badge: 'Professional dashboard',
       audience: 'For professionals who need deeper property research and repeatable tools.',
       features: ['Expanded professional workbenches', 'Advanced research tasks', 'Professional research and exports']
     },
     pro_plus: {
-      internal: 'pro_plus', name: 'Pro+', monthly: 399, yearly: 3990, badge: 'MAXIMUM DATA ACCESS',
+      internal: 'pro_plus', name: 'Pro+', monthly: 399, yearly: 3990, badge: 'Maximum data access',
       audience: 'For power users who need deeper data, bulk research and high-volume tasks.',
       features: ['1,000+ data points and proprietary markers', 'Population and scheduled intelligence', 'Bulk research and advanced exports']
     }

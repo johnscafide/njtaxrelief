@@ -116,9 +116,9 @@ assert(css.includes('.wd-universal-profile>nav>a.wd-universal-plan-promo{'), 'Ex
 assert(css.includes('no decorative circles, orbs, bubbles or corner blobs'), 'Plan promo no-circle design guardrail is missing');
 assert(!css.includes('.wd-universal-profile>nav>a.wd-universal-plan-promo:before{'), 'Decorative corner circle returned to plan promo');
 assert(!/wd-universal-plan-promo-(?:pro|plus|teams)\{background:radial-gradient/.test(css), 'Decorative radial circle returned to plan promo backgrounds');
-assert(css.includes('.wd-universal-plan-promo-pro{background:linear-gradient'), 'Pro linear promo background is missing');
-assert(css.includes('.wd-universal-plan-promo-plus{background:linear-gradient'), 'Pro+ linear promo background is missing');
-assert(css.includes('.wd-universal-plan-promo-teams{background:linear-gradient'), 'Teams linear promo background is missing');
+assert(/\.wd-universal-plan-promo-pro\{background:#[0-9a-f]{6}/.test(css), 'Pro flat promo background is missing');
+assert(/\.wd-universal-plan-promo-plus\{background:#[0-9a-f]{6}/.test(css), 'Pro+ flat promo background is missing');
+assert(/\.wd-universal-plan-promo-teams\{background:#[0-9a-f]{6}/.test(css), 'Teams flat promo background is missing');
 assert(css.includes('.wd-universal-plan-promo-icon'), 'Graphical promo icon styling is missing');
 assert(css.includes('.wd-universal-plan-promo-copy>em'), 'Graphical promo supporting-copy styling is missing');
 assert(css.includes('.wd-universal-plan-promo-cta'), 'Graphical promo CTA styling is missing');

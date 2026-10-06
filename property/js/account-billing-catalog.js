@@ -47,7 +47,7 @@
     if (eligible) {
       offer.classList.remove('included');
       offer.setAttribute('aria-label', 'Watchdog Intelligence add-on');
-      setText(label, 'WATCHDOG INTELLIGENCE');
+      setText(label, 'Watchdog Intelligence');
       setText(price, '+' + money(Number(intelligence.regular_add_on_monthly || 12), false) + '/month');
       setText(note, 'Optional add-on.');
       return;
@@ -56,7 +56,7 @@
     if (included) {
       offer.classList.add('included');
       offer.setAttribute('aria-label', 'Watchdog Intelligence included');
-      setText(label, 'WATCHDOG INTELLIGENCE');
+      setText(label, 'Watchdog Intelligence');
       setText(price, 'Included');
       setText(note, 'Included with this plan.');
     }

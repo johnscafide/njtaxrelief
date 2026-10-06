@@ -8,14 +8,14 @@ if(window.__WATCHDOG_HOME_INTELLIGENCE_BRAND_V2__)return;
 window.__WATCHDOG_HOME_INTELLIGENCE_BRAND_V2__=true;
 
 var replacements=[
-  [/WATCHDOG ANALYST INTEL/g,'WATCHDOG INTELLIGENCE'],
+  [/WATCHDOG ANALYST INTEL/g,'Watchdog Intelligence'],
   [/Watchdog Analyst Intel/g,'Watchdog Intelligence'],
   [/Profession-aware Intel/g,'Watchdog Intelligence'],
   [/profession-aware Intel/g,'Watchdog Intelligence'],
   [/generalized Intel/g,'generalized Watchdog Intelligence'],
   [/Generalized Intel/g,'Generalized Watchdog Intelligence'],
-  [/PERSONALIZATION REQUIRED FOR EXACT INTEL/g,'PERSONALIZE WATCHDOG INTELLIGENCE'],
-  [/EXACT INTEL/g,'WATCHDOG INTELLIGENCE'],
+  [/PERSONALIZATION REQUIRED FOR EXACT INTEL/g,'Personalize Watchdog Intelligence'],
+  [/EXACT INTEL/g,'Watchdog Intelligence'],
   [/exact Intel/g,'Watchdog Intelligence'],
   [/Personalize my Intel/g,'Personalize Watchdog Intelligence'],
   [/Use generalized Intelligence for now/g,'Use generalized Watchdog Intelligence for now']

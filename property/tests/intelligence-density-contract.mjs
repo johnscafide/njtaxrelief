@@ -26,7 +26,7 @@ expect(home.includes('/property/js/watchdog-intelligence-density.js'),'Property 
 expect(runtime.includes("(?:intelligence|daily-intelligence|data-center|scan)"),'Immersive Intelligence-first routes must remain exempt from compact mode.');
 expect(runtime.includes("item.classList.toggle('wd-density-extra',i>0)"),'Supporting Context Intelligence must rank one finding above the rest by default.');
 expect(runtime.includes("Review all "+"'"),'Context Intelligence must keep the full queue one action away.');
-expect(runtime.includes('WATCHDOG DECISION BRIEF'),'Property Home must expose a concise decision brief.');
+expect(/WATCHDOG DECISION BRIEF/i.test(runtime),'Property Home must expose a concise decision brief.');
 expect(runtime.includes('slice(0,3)'),'The compact brief must cap supporting reasons at three.');
 expect(runtime.includes('Next:</b>'),'The compact brief must expose one next-action statement.');
 expect(runtime.includes('Inspect reasoning'),'Full reasoning must remain available through progressive disclosure.');

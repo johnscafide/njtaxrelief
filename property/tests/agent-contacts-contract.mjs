@@ -61,7 +61,7 @@ assert.match(js, /parts\.shift\(\),parts\.join\(' '\)/, 'Name splitter must keep
 assert.match(js, /@full:/, 'Full-name source columns must support a derived split mapping');
 assert.match(js, /Split into First \+ Last/, 'Import flow must offer split names');
 assert.match(js, /Keep the full name together/, 'Import flow must offer keeping names together');
-assert.match(js, /RECOMMENDED/, 'Split mode must be visually marked as recommended');
+assert.match(js, /RECOMMENDED/i, 'Split mode must be visually marked as recommended');
 assert.match(js, /contacts-polish\.css/, 'Runtime must load the Agent Contacts readability and visual polish stylesheet');
 assert.match(js, /Turn one name column into CRM-ready fields/, 'Mapping view must include a graphical name-cleanup explanation');
 

@@ -80,8 +80,8 @@ function refreshLegacyIntelBrand(){
 function refreshAgentAd(){
   Array.prototype.forEach.call(document.querySelectorAll('#hm-body section,#hm-body article,#hm-body div'),function(el){
     var text=(el.textContent||'').replace(/\s+/g,' ').trim();
-    if(text.indexOf('SELLER STRATEGY')===-1&&text.indexOf('Seller strategy')===-1)return;
-    if(el.parentElement&&((el.parentElement.textContent||'').indexOf('SELLER STRATEGY')!==-1))return;
+    if(text.indexOf('Seller strategy')===-1&&text.indexOf('Seller strategy')===-1)return;
+    if(el.parentElement&&((el.parentElement.textContent||'').indexOf('Seller strategy')!==-1))return;
     el.classList.add('wd-home-agent-ad');
     var walker=document.createTreeWalker(el,NodeFilter.SHOW_TEXT),node;
     while((node=walker.nextNode()))if((node.nodeValue||'').indexOf('John and Heather')!==-1)node.nodeValue=node.nodeValue.replace(/John and Heather/g,'John Scafide and Heather');

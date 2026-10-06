@@ -171,7 +171,7 @@ function renderCase(c,facts){
   const intro=sanity
     ? 'Would you want Watchdog to surface this as a real transaction follow-up? Judge usefulness and actionability, not whether the property is generally risky. These 10 answers can improve the draft but cannot validate or promote it.'
     : "Would this evidence independently justify putting the property in this model's review queue? Do not infer seller intent, value, profit, legal outcome, urgency, or facts that are not shown.";
-  const step3=sanity?'YOUR PRODUCT JUDGMENT':'HUMAN LABEL';
+  const step3=sanity?'Your product judgment':'HUMAN LABEL';
   const title=sanity?'Should Watchdog surface this?':'Your independent judgment';
   const saveLabel=sanity?'Save product judgment':'Save independent label';
 

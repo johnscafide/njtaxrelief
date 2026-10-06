@@ -43,7 +43,7 @@ for (const profession of ['real_estate','investor','attorney','mortgage_lending'
   expect(onboarding.includes("'" + profession + "'"), `Missing profession onboarding choice: ${profession}`);
 }
 for (const label of ['FINANCIAL LENS','MOTIVATION','INNOVATION','EVIDENCE','NEXT BEST ACTION']) {
-  expect(analyst.includes(label), `Missing Analyst Intel decision layer: ${label}`);
+  expect(analyst.toLowerCase().includes(label.toLowerCase()), `Missing Analyst Intel decision layer: ${label}`);
 }
 expect(analyst.includes('rather than manufacture urgency'), 'Motivation layer must explicitly refuse manufactured urgency.');
 expect(analyst.includes('Renovation ROI still depends'), 'ROI language must preserve uncertainty and required inputs.');

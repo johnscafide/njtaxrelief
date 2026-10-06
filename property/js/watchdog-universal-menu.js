@@ -261,7 +261,7 @@
     if(!state.user || !state.ready || isDeveloper()) return null;
     var p = actualPlan();
     if(p === 'standard' || p === 'agent'){
-      return {key:'pro',tone:'pro',href:route('/pro#pricing'),eyebrow:p === 'agent' ? 'READY FOR MORE?' : 'UPGRADE WATCHDOG',title:'Move up to Pro',detail:'Deeper professional research and intelligence.',icon:'fa-arrow-trend-up',cta:'See Pro'};
+      return {key:'pro',tone:'pro',href:route('/pro#pricing'),eyebrow:p === 'agent' ? 'READY FOR MORE?' : 'Upgrade Watchdog',title:'Move up to Pro',detail:'Deeper professional research and intelligence.',icon:'fa-arrow-trend-up',cta:'See Pro'};
     }
     if(p === 'pro'){
       return {key:'pro_plus',tone:'plus',href:route('/pro#pricing'),eyebrow:'GO FURTHER',title:'Open Pro+',detail:'Higher-scale data, Scanner and advanced tasks.',icon:'fa-bolt',cta:'See Pro+'};

@@ -92,7 +92,7 @@
       };
     }
     return {
-      eyebrow: 'YOUR PROFESSIONAL SPHERE',
+      eyebrow: 'Your professional sphere',
       title: 'Invite your professional sphere',
       lead: 'Know colleagues or partners who would use Watchdog? Copy your invite and send it however you like: email, text or social media.',
       message: 'I use Watchdog for New Jersey property and tax research in my work. Here is my invite if you want to try it: ' + invite.link + ' (invite code ' + invite.code + ')'
