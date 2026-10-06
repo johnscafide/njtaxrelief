@@ -23,7 +23,7 @@
   margin-bottom: 24px;
   padding: 28px;
   border-radius: var(--radius-xl);
-  background: linear-gradient(125deg, var(--wd-navy-950) 0%, #173f6d 66%, var(--wd-teal-600) 150%);
+  background:var;
   color: var(--surface);
   box-shadow: var(--shadow-md);
 }
@@ -113,7 +113,7 @@
 .ac-account-rows i { color: var(--text-muted); text-align: center; }
 .ac-account-rows b, .ac-account-rows small { display: block; }
 .ac-account-rows b { color: var(--ink); overflow-wrap: anywhere; }
-.ac-account-rows small { color: var(--text-muted); text-transform: uppercase; letter-spacing: .08em; }
+.ac-account-rows small { color: var(--text-muted); text-transform:none; letter-spacing:0; }
 
 .ac-pricing { scroll-margin-top: 24px; }
 .ac-cadence { display: inline-flex; padding: 5px; border-radius: var(--radius-lg); background: var(--surface-soft); }

@@ -59,7 +59,6 @@
           <section class="dcv2-hero" aria-labelledby="dc-page-title">
             
             <h1 id="dc-page-title">Build, analyze and monitor property datasets.</h1>
-            <p>Browse available data fields, check coverage and freshness, then use Pro+ to build, export and monitor datasets from your saved properties.</p>
             <div class="dcv2-hero-actions">
               <button class="dcv2-btn primary" type="button" data-dc-tab="build"><i class="fas fa-sliders"></i> See the field catalog</button>
               <a class="dcv2-btn secondary" href="/pro"><i class="fas fa-bolt"></i> Data Center with Pro+</a>
@@ -74,7 +73,7 @@
 
           <section data-dc-panel="overview">
             <div class="dc-load-notice" id="dc-overview-error" role="status" hidden>
-              <div><strong>Live coverage status is unavailable right now.</strong><p>Field availability below comes from the published catalog until the live status check responds.</p></div>
+              <div><strong>Live coverage status is unavailable right now.</strong></div>
               <button type="button" class="dcv2-btn secondary" data-dc-retry>Try again</button>
             </div>
             <div class="dcv2-kpis" aria-label="Data Center coverage summary">
@@ -86,7 +85,7 @@
 
             <div class="dcv2-grid">
               <article class="dcv2-card">
-                <div class="dcv2-card-head"><div><h2>Coverage by intelligence family</h2><p>See which data families are live, bulk ready or unavailable. Select one to open it in the builder.</p></div></div>
+                <div class="dcv2-card-head"><div><h2>Coverage</h2></div></div>
                 <div class="dcv2-fresh-row" id="dc-coverage-health">
                   <div class="dcv2-fresh-top"><b>Coverage</b><span class="dcv2-fresh-badge"><span id="dc-coverage-live-pct">...</span>% live</span></div>
                   <p><span id="dc-coverage-bulk-pct">...</span>% of live fields are bulk ready. <span id="dc-coverage-recent-pct">...</span>% were verified within the last 7 days.</p>
@@ -111,7 +110,7 @@
                 </template>
               </article>
               <article class="dcv2-card">
-                <div class="dcv2-card-head"><div><h2>Source freshness</h2><p>See when live fields were last checked. A live source may still have no value for a specific property.</p></div></div>
+                <div class="dcv2-card-head"><div><h2>Source freshness</h2></div></div>
                 <div id="dc-source-freshness" class="dcv2-freshness">
                   <div class="dcv2-fresh-row" id="dc-verification-recency">
                     <div class="dcv2-fresh-top"><b>Verification recency</b><span class="dcv2-fresh-badge"><span id="dc-recency-recent-pct">...</span>% within 7 days</span></div>
@@ -133,19 +132,13 @@
                 </template>
               </article>
             </div>
-
-            <div class="dcv2-usecases">
-              <article class="dcv2-usecase"><i class="fas fa-magnifying-glass-chart"></i><h3>Find the red flag behind the record</h3><p>Combine tax, assessment, sales, appeal, development, environmental and Watchdog-calculated fields instead of reading one metric in isolation.</p></article>
-              <article class="dcv2-usecase"><i class="fas fa-chart-column"></i><h3>Turn rows into analysis</h3><p>Pro+ result sheets summarize coverage, missing values, ranges and common categories before you export.</p></article>
-              <article class="dcv2-usecase"><i class="fas fa-clock-rotate-left"></i><h3>Save and monitor repeat work</h3><p>Save useful field sets across devices and schedule recurring deliveries.</p></article>
-            </div>
           </section>
 
           <section data-dc-panel="build" hidden>
             <div class="dc-shell">
               <aside class="dc-filter">
                 <div class="dc-brand">
-                  <span>FIELD CATALOG</span>
+                  <span>Field catalog</span>
                   <h2>Choose your data</h2>
                   <p>Browse fields without loading your private property values.</p>
                 </div>

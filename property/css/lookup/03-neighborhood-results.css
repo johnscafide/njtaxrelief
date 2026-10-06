@@ -115,14 +115,14 @@ body.hood-on .ssearch { transform: translateY(0) !important; }
 /* ---------- the ad. Reads as an ad, not a property. ---------- */
 .hd-ad {
   grid-column: span 1; display: flex; gap: 14px; align-items: center;
-  background: linear-gradient(150deg, #14361f, #1e6b3a 70%); border-radius: var(--radius-md);
+  background:#14361f; border-radius:var(--radius-md);
   padding: 18px; text-decoration: none; position: relative; overflow: hidden;
   flex-direction: column; align-items: flex-start; min-height: 300px; justify-content: center;
 }
 .hd-ad:hover { filter: brightness(1.07); }
 .hd-ad-tag {
   position: absolute; top: 8px; right: 10px; font-size: var(--type-xs); font-weight: 700;
-  text-transform: uppercase; letter-spacing: .08em; color: rgba(255,255,255,.5);
+  text-transform:none; letter-spacing:0; color: rgba(255,255,255,.5);
 }
 .hd-ad img { width: 54px; height: 54px; border-radius: var(--radius-pill); object-fit: cover;
   object-position: center top; border: 2px solid var(--gold); flex-shrink: 0; }

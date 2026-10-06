@@ -631,7 +631,7 @@
       '<p><b>Request a six character postcard code for ' + text(address) + '.</b> The request goes to our mailing desk, and the postcard is mailed manually to the property address.</p>' +
       '<div class="pl-form" style="grid-template-columns:1fr;"><button id="njptr-verify-request" type="button">Request postcard code</button></div>' +
       '<div class="auth-or"><span>already have a code</span></div>' +
-      '<div class="pl-form" style="grid-template-columns:1fr;"><input id="njptr-verify-code" type="text" placeholder="Six character code" maxlength="8" autocomplete="one-time-code" style="text-transform:uppercase;letter-spacing:.15em;"><button id="njptr-verify-redeem" type="button">Verify ownership</button></div>' +
+      '<div class="pl-form" style="grid-template-columns:1fr;"><input id="njptr-verify-code" type="text" placeholder="Six character code" maxlength="8" autocomplete="one-time-code" style="text-transform:none;letter-spacing:0;"><button id="njptr-verify-redeem" type="button">Verify ownership</button></div>' +
       '<button id="njptr-verify-later" class="plm-rbtn" type="button" style="margin-top:12px;">Not now</button>' +
       '<div class="auth-fine">Choosing Not now keeps the property saved as your home, but it remains marked unverified until you enter the postcard code.</div>', true);
 
@@ -2011,7 +2011,7 @@ document.addEventListener('mouseover',e=>{var t=e.target.closest('[data-marker-i
     if (t.tax != null) items.push(item(t.taxYear ? t.taxYear + ' annual tax' : 'Saved annual tax', money(t.tax), t.live ? 'Municipal bill evidence' : 'Saved state record'));
     if (t.rate != null) items.push(item(t.taxYear ? t.taxYear + ' tax rate' : 'Tax rate', t.rate.toFixed(3) + '%', 'Municipal evidence'));
     if (t.mismatch) items.push(item('Tax-year alignment', 'Protected', 'Assessment year is not inferred'));
-    return '<section class="hm-tax-timeline" id="hm-current-tax-evidence"><div class="hm-tax-head"><div><h2>Current municipal tax evidence</h2><p>Observed bill, assessment and rate stay aligned by tax year. Watchdog does not mix a revaluation assessment with an older rate.</p></div>' + (t.source ? '<a href="' + esc(t.source) + '" target="_blank" rel="noopener">Official source ↗</a>' : '') + '</div><div class="hm-tax-grid">' + items.join('') + '</div>' + (t.provider ? '<p class="hm-tax-source">Source: ' + esc(t.provider) + '</p>' : '') + '</section>';
+    return '<section class="hm-tax-timeline" id="hm-current-tax-evidence"><div class="hm-tax-head"><div><h2>Current municipal tax evidence</h2></div>' + (t.source ? '<a href="' + esc(t.source) + '" target="_blank" rel="noopener">Official source ↗</a>' : '') + '</div><div class="hm-tax-grid">' + items.join('') + '</div>' + (t.provider ? '<p class="hm-tax-source">Source: ' + esc(t.provider) + '</p>' : '') + '</section>';
   }
 
   window.hmSwitch = function (pin) {
@@ -3109,13 +3109,13 @@ function ensureStyles(){
     '.hm-id>.hm-jurisdiction{margin:5px 0 0!important;color:#8796aa!important;font-size:clamp(11px,.78vw,13px)!important;font-weight:650!important;line-height:1.45!important}',
     '.hm-id>.hm-score-hero{margin-top:clamp(22px,2.2vw,34px)!important;padding-top:clamp(20px,1.8vw,28px)!important;border-top:1px solid #e5ebf3!important}',
     '.hm-score-top{display:grid;grid-template-columns:auto minmax(0,1fr);gap:clamp(15px,1.5vw,22px);align-items:center}',
-    '.hm-score-badge{width:clamp(104px,8.3vw,132px);height:clamp(104px,8.3vw,132px);border-radius:30px;display:grid;grid-template-columns:1fr auto;grid-template-rows:auto 1fr auto;align-items:center;padding:14px 16px;background:linear-gradient(145deg,#10294b 0%,#1f5cc7 100%);box-shadow:0 2px 6px rgba(15,23,42,.08);color:#fff;position:relative;overflow:hidden}',
+    '.hm-score-badge{width:clamp(104px,8.3vw,132px);height:clamp(104px,8.3vw,132px);border-radius:12px;display:grid;grid-template-columns:1fr auto;grid-template-rows:auto 1fr auto;align-items:center;padding:14px 16px;background:#10294b;box-shadow:0 2px 6px rgba(15,23,42,.08);color:#fff;position:relative;overflow:hidden}',
     '.hm-score-badge:after{content:"";position:absolute;width:74px;height:74px;border-radius:50%;right:-28px;top:-26px;background:rgba(255,255,255,.09)}',
     '.hm-score-badge>i{grid-column:1/-1;justify-self:start;width:30px;height:30px;border-radius:10px;display:grid;place-items:center;background:rgba(255,255,255,.14);font-size:14px}',
     '.hm-score-badge>b{font:800 clamp(43px,3.7vw,58px)/.92 "Libre Franklin",sans-serif;letter-spacing:-.065em;align-self:end}',
     '.hm-score-badge>small{font:800 11px/1 "Libre Franklin",sans-serif;opacity:.75;align-self:end;padding-bottom:7px;margin-left:5px}',
     '.hm-score-copy{min-width:0}',
-    '.hm-score-kicker{display:block;color:#2d6df6;font:850 10px/1.2 "Libre Franklin",sans-serif;letter-spacing:.115em;text-transform:uppercase}',
+    '.hm-score-kicker{display:block;color:#2d6df6;font:850 10px/1.2 "Libre Franklin",sans-serif;letter-spacing:0;text-transform:none}',
     '.hm-score-copy>strong{display:block;margin-top:7px;color:#10213f;font:800 clamp(19px,1.55vw,25px)/1.18 "Libre Franklin",sans-serif;letter-spacing:-.035em}',
     '.hm-score-copy>small{display:block;margin-top:8px;color:#73849c;font-size:12px;font-weight:650;line-height:1.5}',
     '.hm-score-copy>small b{color:#425774;font-weight:800}',
@@ -3131,18 +3131,18 @@ function ensureStyles(){
     '.hm-score-empty b{display:block;color:#10213f;font:800 17px/1.2 "Libre Franklin",sans-serif}',
     '.hm-score-empty span{display:block;margin-top:4px;color:#78889d;font-size:12px;line-height:1.45}',
     '.hm-current-tax{margin-top:16px;padding:14px 15px;border:1px solid #d8e5f5;border-radius:16px;background:#f8fbff}',
-    '.hm-current-tax-head{display:flex;align-items:center;justify-content:space-between;gap:12px}.hm-current-tax-head b{color:#10213f;font:850 12px/1.2 "Libre Franklin",sans-serif}.hm-current-tax-head span{padding:5px 8px;border-radius:999px;background:#e6f7f3;color:#008d82;font:850 9px/1 "Libre Franklin",sans-serif;letter-spacing:.06em;text-transform:uppercase}',
-    '.hm-current-tax-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-top:11px}.hm-current-tax-grid div{padding:9px 10px;border-radius:12px;background:#fff;border:1px solid #e7edf5}.hm-current-tax-grid small{display:block;color:#8290a3;font-size:9px;font-weight:800;text-transform:uppercase;letter-spacing:.04em}.hm-current-tax-grid strong{display:block;margin-top:4px;color:#10213f;font:850 16px/1.1 "Libre Franklin",sans-serif}.hm-current-tax-foot{display:flex;justify-content:space-between;gap:10px;margin-top:9px;color:#708198;font-size:10px;font-weight:650}.hm-current-tax-foot a{color:#008d82!important;font-weight:850;text-decoration:none!important}',
+    '.hm-current-tax-head{display:flex;align-items:center;justify-content:space-between;gap:12px}.hm-current-tax-head b{color:#10213f;font:850 12px/1.2 "Libre Franklin",sans-serif}.hm-current-tax-head span{padding:5px 8px;border-radius:8px;background:#e6f7f3;color:#008d82;font:850 9px/1 "Libre Franklin",sans-serif;letter-spacing:0;text-transform:none}',
+    '.hm-current-tax-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-top:11px}.hm-current-tax-grid div{padding:9px 10px;border-radius:12px;background:#fff;border:1px solid #e7edf5}.hm-current-tax-grid small{display:block;color:#8290a3;font-size:9px;font-weight:800;text-transform:none;letter-spacing:0}.hm-current-tax-grid strong{display:block;margin-top:4px;color:#10213f;font:850 16px/1.1 "Libre Franklin",sans-serif}.hm-current-tax-foot{display:flex;justify-content:space-between;gap:10px;margin-top:9px;color:#708198;font-size:10px;font-weight:650}.hm-current-tax-foot a{color:#008d82!important;font-weight:850;text-decoration:none!important}',
     '.hm-shot.wd-streetview-host{position:relative!important;overflow:hidden!important;background-image:none!important;background-color:#e9eef5!important}',
-    '.hm-shot.wd-streetview-host .wd-streetview-state{position:absolute;inset:0;display:grid;place-items:center;padding:26px;text-align:center;background:linear-gradient(145deg,#eef3f8,#dde7f0);color:#53677f}',
+    '.hm-shot.wd-streetview-host .wd-streetview-state{position:absolute;inset:0;display:grid;place-items:center;padding:26px;text-align:center;background:#eef3f8;color:#53677f}',
     '.wd-streetview-state>div{max-width:340px}',
     '.wd-streetview-state i{display:grid;place-items:center;margin:0 auto 12px;width:52px;height:52px;border-radius:16px;background:#fff;color:#2d6df6;box-shadow:0 2px 6px rgba(15,23,42,.08);font-size:20px}',
     '.wd-streetview-state b{display:block;color:#17304f;font:800 15px/1.25 "Libre Franklin",sans-serif}',
     '.wd-streetview-state span{display:block;margin-top:6px;font-size:12px;line-height:1.45}',
     '.wd-streetview-state a{display:inline-flex;margin-top:12px;color:#2d6df6;font-weight:800;text-decoration:none}',
     '.hm-shot.wd-streetview-live .gm-style{border-radius:inherit}',
-    '@media(max-width:760px){.hm-id>.hm-score-hero{margin-top:20px!important;padding-top:18px!important}.hm-score-badge{width:100px;height:100px;border-radius:25px}.hm-robust-mini{grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}.hm-robust-cell{padding:8px 6px}.hm-score-copy>small{font-size:11px}}',
-    '@media(max-width:430px){.hm-score-top{grid-template-columns:88px minmax(0,1fr);gap:13px}.hm-score-badge{width:88px;height:88px;padding:11px 12px;border-radius:22px}.hm-score-badge>i{width:25px;height:25px;border-radius:8px;font-size:12px}.hm-score-badge>b{font-size:39px}.hm-score-copy>strong{font-size:18px}}'
+    '@media(max-width:760px){.hm-id>.hm-score-hero{margin-top:20px!important;padding-top:18px!important}.hm-score-badge{width:100px;height:100px;border-radius:12px}.hm-robust-mini{grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}.hm-robust-cell{padding:8px 6px}.hm-score-copy>small{font-size:11px}}',
+    '@media(max-width:430px){.hm-score-top{grid-template-columns:88px minmax(0,1fr);gap:13px}.hm-score-badge{width:88px;height:88px;padding:11px 12px;border-radius:12px}.hm-score-badge>i{width:25px;height:25px;border-radius:8px;font-size:12px}.hm-score-badge>b{font-size:39px}.hm-score-copy>strong{font-size:18px}}'
   ].join('');
   document.head.appendChild(style);
 }
@@ -3517,7 +3517,7 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
     return '<article class="wdai-card ' + (className || '') + '"><div class="wdai-card-icon"><i class="fas ' + icon + '"></i></div><div><span>' + esc(label) + '</span><h3>' + esc(title) + '</h3><p>' + esc(copy) + '</p></div></article>';
   }
   function rolePrompt() {
-    return '<section class="wdai-role-prompt"><div><span>PERSONALIZATION REQUIRED FOR EXACT INTEL</span><h3>What is your primary profession?</h3><p>Without a stated profession, Watchdog keeps this property brief generalized. Choose one and the same checked facts will be rebuilt around your financial, risk, opportunity, and process priorities.</p></div><div class="wdai-role-controls"><select id="wdai-profession" aria-label="Primary profession"><option value="">Choose profession</option>' + PROFESSION_OPTIONS.map(function (option) { return '<option value="' + esc(option[0]) + '">' + esc(option[1]) + '</option>'; }).join('') + '</select><button type="button" id="wdai-save-profession">Personalize my Intel</button></div><small id="wdai-role-note" aria-live="polite">Your profession personalizes recommendations. It does not change billing or authorization.</small></section>';
+    return '<section class="wdai-role-prompt"><div><span>Personalization required for exact intel</span><h3>What is your primary profession?</h3></div><div class="wdai-role-controls"><select id="wdai-profession" aria-label="Primary profession"><option value="">Choose profession</option>' + PROFESSION_OPTIONS.map(function (option) { return '<option value="' + esc(option[0]) + '">' + esc(option[1]) + '</option>'; }).join('') + '</select><button type="button" id="wdai-save-profession">Personalize my Intel</button></div><small id="wdai-role-note" aria-live="polite">Your profession personalizes recommendations. It does not change billing or authorization.</small></section>';
   }
   function render() {
     var panel = document.querySelector('#hm-body .ai');
@@ -3527,7 +3527,7 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
     panel.classList.add('wdai');
     panel.setAttribute('data-watchdog-analyst-intel', role);
     panel.innerHTML =
-      '<header class="wdai-head"><div class="wdai-mark"><i class="fas fa-dog"></i><i class="fas fa-wand-magic-sparkles"></i></div><div class="wdai-title"><span>WATCHDOG ANALYST INTEL</span><h2>' + esc(address) + '</h2><p>' + (exact ? 'Built for a ' + esc(def.label) + ' using this property’s checked records.' : 'Generalized property info until you tell Watchdog how you work.') + '</p></div><div class="wdai-persona"><i class="fas ' + esc(def.icon) + '"></i><span><small>Perspective</small><b>' + esc(exact ? def.label : 'Generalized') + '</b></span></div></header>' +
+      '<header class="wdai-head"><div class="wdai-mark"><i class="fas fa-dog"></i></div><div class="wdai-title"><span>Watchdog Intelligence</span><h2>' + esc(address) + '</h2><p>' + (exact ? 'Built for a ' + esc(def.label) + ' using this property’s checked records.' : 'Generalized property info until you tell Watchdog how you work.') + '</p></div><div class="wdai-persona"><i class="fas ' + esc(def.icon) + '"></i><span><small>Perspective</small><b>' + esc(exact ? def.label : 'Generalized') + '</b></span></div></header>' +
       (exact ? '<div class="wdai-role-set"><i class="fas fa-circle-check"></i><span>Profession-aware Intel is active for <b>' + esc(def.label) + '</b>.</span><a href="/property/account">Change profession</a></div>' : rolePrompt()) +
       '<div class="wdai-grid">' +
         card('fa-coins', 'FINANCIAL LENS', 'What the numbers mean for you', financialCopy(role, m), 'money') +
@@ -3535,10 +3535,10 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
         card('fa-lightbulb', 'INNOVATION', 'A better way to use this property', innovationCopy(role), 'innovation') +
         card('fa-shield-halved', 'EVIDENCE', suggestion ? 'What Watchdog is seeing' : 'What Watchdog can prove now', evidenceCopy(suggestion), 'evidence') +
       '</div>' +
-      '<section class="wdai-next"><div><span>NEXT BEST ACTION</span><h3>' + esc(nextActionCopy(role, suggestion)) + '</h3><p>Watchdog is decision support. Source facts, missing evidence, and professional judgment stay visible.</p></div><div class="wdai-actions">' +
+      '<section class="wdai-next"><div><span>Next best action</span><h3>' + esc(nextActionCopy(role, suggestion)) + '</h3></div><div class="wdai-actions">' +
         (suggestion ? '<button type="button" id="wdai-open-evidence"><i class="fas fa-magnifying-glass-chart"></i> Why Watchdog?</button>' : '') +
         '<a href="/property/data-workbench"><i class="fas fa-table-list"></i> Open Data Workbench</a>' +
-        (can('pro') ? '<a class="primary" href="/property/intelligence"><i class="fas fa-wand-magic-sparkles"></i> Intelligence Hub</a>' : '<a class="primary" href="/property/pro#plans"><i class="fas fa-lock"></i> Open Pro Intelligence</a>') +
+        (can('pro') ? '<a class="primary" href="/property/intelligence"><i class="fas fa-dog"></i> Intelligence Hub</a>' : '<a class="primary" href="/property/pro#plans"><i class="fas fa-lock"></i> Open Pro Intelligence</a>') +
       '</div></section>';
 
     var save = document.getElementById('wdai-save-profession');
@@ -4202,11 +4202,11 @@ function ensureMobileRefreshStyle(){
     'body.hm-dashboard-page .hm-figs dt,body.hm-dashboard-page .hm-figs dd{text-align:center!important;width:100%!important}',
     'body.hm-dashboard-page .hm-figs dd{font-size:30px!important}',
     'body.hm-dashboard-page .hm-figs dd em{font-size:14px!important}',
-    'body.hm-dashboard-page .hm-secbar{margin-top:24px!important;padding:24px 22px 18px!important;background:#fff!important;border:1px solid #dfe6ef!important;border-bottom:0!important;border-radius:22px 22px 0 0!important;gap:14px!important}',
+    'body.hm-dashboard-page .hm-secbar{margin-top:24px!important;padding:24px 22px 18px!important;background:#fff!important;border:1px solid #dfe6ef!important;border-bottom:0!important;border-radius:12px 12px 0 0!important;gap:14px!important}',
     'body.hm-dashboard-page .hm-secbar h2{font-size:22px!important}',
     'body.hm-dashboard-page .hm-secbar p{font-size:15px!important;line-height:1.5!important}',
     'body.hm-dashboard-page .hm-secbar~.sec2{background:#fff!important;border-left:1px solid #dfe6ef!important;border-right:1px solid #dfe6ef!important;padding-left:20px!important;padding-right:20px!important}',
-    'body.hm-dashboard-page .hm-secbar~.sec2:last-of-type{border-radius:0 0 22px 22px!important;border-bottom:1px solid #dfe6ef!important;padding-bottom:12px!important}',
+    'body.hm-dashboard-page .hm-secbar~.sec2:last-of-type{border-radius:0 0 12px 12px!important;border-bottom:1px solid #dfe6ef!important;padding-bottom:12px!important}',
     'body.hm-dashboard-page .wd-home-agent-ad{margin-left:auto!important;margin-right:auto!important;text-align:center!important}',
     'body.hm-dashboard-page .wd-home-agent-ad>*{margin-left:auto!important;margin-right:auto!important}',
     '}',

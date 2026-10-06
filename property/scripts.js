@@ -342,7 +342,7 @@
       '  font-size: 14px !important;',
       '  font-weight: 700 !important;',
       '  padding: 13px 22px !important;',
-      '  border-radius: 50px !important;',
+      '  border-radius:12px !important;',
       '  text-decoration: none !important;',
       '  white-space: nowrap !important;',
       '  cursor: pointer !important;',
@@ -354,7 +354,7 @@
       '  transform: translateY(-2px) !important;',
       '}',
       '#sticky-rebate-link i { font-size: 16px !important; flex-shrink: 0 !important; }',
-      '#sticky-rebate-link.rebate-visible { animation: rebateGlow 2.4s ease-in-out infinite !important; }',
+      '#sticky-rebate-link.rebate-visible { animation:none !important; }',
       '#sticky-rebate-link.rebate-shake  { animation: rebateShake 0.65s ease-in-out !important; }',
       '@media (max-width: 680px) {',
       '  #sticky-rebate-link { left:0 !important; right:0 !important; bottom:0 !important;',
@@ -842,7 +842,7 @@
         'padding:20px;text-align:left;border:1px solid rgba(184,151,42,0.4);">' +
         '<div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;">' +
         '<div style="background:var(--gold);color:var(--navy-dark);font-size:11px;font-weight:700;' +
-        'padding:3px 10px;border-radius:20px;text-transform:uppercase;letter-spacing:0.5px;">New</div>' +
+        'padding:3px 10px;border-radius:12px;text-transform:none;letter-spacing:0;">New</div>' +
         '<div style="font-size:14px;font-weight:700;color:#fff;">Don\u2019t leave money on the table</div>' +
         '</div>' +
         '<p style="font-size:13px;color:#c0cfdf;line-height:1.6;margin-bottom:14px;">' +

@@ -57,13 +57,13 @@
     <section class="acx-overview" aria-label="Contacts overview">
       <article><span class="acx-stat-icon green"><i class="fa-solid fa-folder-open" aria-hidden="true"></i></span><div><b id="acx-stat-files">-</b><small>files saved</small></div></article>
       <article><span class="acx-stat-icon blue"><i class="fa-solid fa-users" aria-hidden="true"></i></span><div><b id="acx-stat-rows">-</b><small>rows archived</small></div></article>
-      <article><span class="acx-stat-icon amber"><i class="fa-solid fa-wand-magic-sparkles" aria-hidden="true"></i></span><div><b id="acx-stat-exports">-</b><small>clean exports</small></div></article>
+      <article><span class="acx-stat-icon amber"><i class="fa-solid fa-dog" aria-hidden="true"></i></span><div><b id="acx-stat-exports">-</b><small>clean exports</small></div></article>
       <article class="acx-private-stat"><span class="acx-stat-icon slate"><i class="fa-solid fa-shield-halved" aria-hidden="true"></i></span><div><b>Private by default</b><small>Files are account-scoped, not public</small></div></article>
     </section>
 
     <section class="acx-shell">
       <aside class="acx-library" aria-labelledby="acx-library-title">
-        <header><div><span>YOUR LIBRARY</span><h2 id="acx-library-title">Contact files</h2></div><button id="acx-library-refresh" type="button" aria-label="Refresh files"><i class="fa-solid fa-rotate" aria-hidden="true"></i></button></header>
+        <header><div><span>Your library</span><h2 id="acx-library-title">Contact files</h2></div><button id="acx-library-refresh" type="button" aria-label="Refresh files"><i class="fa-solid fa-rotate" aria-hidden="true"></i></button></header>
         <div class="acx-library-tabs" role="group" aria-label="Filter file history">
           <button class="active" type="button" data-history-filter="all">All</button>
           <button type="button" data-history-filter="upload">Uploads</button>
@@ -78,7 +78,7 @@
           <div class="acx-drop" id="acx-drop" tabindex="0" role="button" aria-label="Upload a CSV contact file">
             <input id="acx-file-input" type="file" accept=".csv,text/csv,application/csv,application/vnd.ms-excel,text/plain" hidden>
             <div class="acx-drop-icon"><i class="fa-solid fa-cloud-arrow-up" aria-hidden="true"></i></div>
-            <span>START A CONTACT DASHBOARD</span>
+            <span>Start a contact dashboard</span>
             <h2>Drop in the CSV you already have.</h2>
             <p>Watchdog reads it locally first, identifies common contact fields, flags obvious duplicates, and saves the original privately to your account.</p>
             <button class="acx-btn acx-btn-primary" id="acx-browse" type="button"><i class="fa-solid fa-folder-open" aria-hidden="true"></i>Choose CSV</button>
@@ -93,7 +93,7 @@
 
         <section class="acx-current" id="acx-current" hidden>
           <header class="acx-current-head">
-            <div class="acx-current-file"><span class="acx-file-mark"><i class="fa-solid fa-file-csv" aria-hidden="true"></i></span><div><small id="acx-current-kicker">CURRENT FILE</small><h2 id="acx-current-name">contacts.csv</h2><p><span id="acx-current-meta">0 rows</span><i aria-hidden="true"></i><span id="acx-current-saved"><i class="fa-solid fa-lock" aria-hidden="true"></i> Saved privately</span></p></div></div>
+            <div class="acx-current-file"><span class="acx-file-mark"><i class="fa-solid fa-file-csv" aria-hidden="true"></i></span><div><small id="acx-current-kicker">Current file</small><h2 id="acx-current-name">contacts.csv</h2><p><span id="acx-current-meta">0 rows</span><i aria-hidden="true"></i><span id="acx-current-saved"><i class="fa-solid fa-lock" aria-hidden="true"></i> Saved privately</span></p></div></div>
             <div class="acx-current-actions"><button class="acx-btn acx-btn-quiet" id="acx-replace" type="button"><i class="fa-solid fa-arrow-up-from-bracket" aria-hidden="true"></i>New file</button><button class="acx-btn acx-btn-primary" id="acx-jump-export" type="button"><i class="fa-solid fa-arrow-right" aria-hidden="true"></i>Export</button></div>
           </header>
 
@@ -105,13 +105,13 @@
           </div>
 
           <section class="acx-panel" id="acx-section-map" data-section="map">
-            <div class="acx-panel-head"><div><span>FIELD MAPPING</span><h3>Tell Watchdog what each column means.</h3><p>We made a best guess from your headers. Change anything that does not look right.</p></div><div class="acx-map-score"><b id="acx-map-score">0%</b><small>core fields mapped</small></div></div>
+            <div class="acx-panel-head"><div><span>Field mapping</span><h3>Tell Watchdog what each column means.</h3><p>We made a best guess from your headers. Change anything that does not look right.</p></div><div class="acx-map-score"><b id="acx-map-score">0%</b><small>core fields mapped</small></div></div>
             <div class="acx-map-grid" id="acx-map-grid"></div>
             <div class="acx-panel-foot"><span id="acx-map-note"><i class="fa-solid fa-circle-info" aria-hidden="true"></i> Name plus email or phone is the strongest starting point.</span><button class="acx-btn acx-btn-primary" id="acx-review-next" type="button">Review contacts <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></button></div>
           </section>
 
           <section class="acx-panel" id="acx-section-review" data-section="review">
-            <div class="acx-panel-head review"><div><span>DATA REVIEW</span><h3>Clean the list before it leaves Watchdog.</h3><p>Edit cells in place. Removing a row only changes this working copy; your original upload remains in your library.</p></div><button class="acx-btn acx-btn-quiet" id="acx-back-map" type="button"><i class="fa-solid fa-arrow-left" aria-hidden="true"></i>Mapping</button></div>
+            <div class="acx-panel-head review"><div><span>Data review</span><h3>Clean the list before it leaves Watchdog.</h3><p>Edit cells in place. Removing a row only changes this working copy; your original upload remains in your library.</p></div><button class="acx-btn acx-btn-quiet" id="acx-back-map" type="button"><i class="fa-solid fa-arrow-left" aria-hidden="true"></i>Mapping</button></div>
             <div class="acx-quality" id="acx-quality">
               <article data-quality="ready"><i class="fa-solid fa-circle-check" aria-hidden="true"></i><div><b id="acx-q-ready">0</b><span>ready contacts</span></div></article>
               <article data-quality="duplicates"><i class="fa-solid fa-clone" aria-hidden="true"></i><div><b id="acx-q-dupes">0</b><span>possible duplicates</span></div></article>
@@ -133,10 +133,10 @@
           </section>
 
           <section class="acx-panel" id="acx-section-export" data-section="export">
-            <div class="acx-panel-head review"><div><span>EXPORT</span><h3>Put the cleaned list where you need it.</h3><p>Every CSV created here is also saved privately in your Watchdog file library.</p></div><button class="acx-btn acx-btn-quiet" id="acx-back-review" type="button"><i class="fa-solid fa-arrow-left" aria-hidden="true"></i>Review</button></div>
+            <div class="acx-panel-head review"><div><span>Export</span><h3>Put the cleaned list where you need it.</h3><p>Every CSV created here is also saved privately in your Watchdog file library.</p></div><button class="acx-btn acx-btn-quiet" id="acx-back-review" type="button"><i class="fa-solid fa-arrow-left" aria-hidden="true"></i>Review</button></div>
             <div class="acx-export-grid">
               <article class="acx-export-card featured">
-                <div class="acx-export-brand"><span class="acx-bt-mark">bt</span><em>RECOMMENDED FOR OPUS / BOLDTRAIL</em></div>
+                <div class="acx-export-brand"><span class="acx-bt-mark">bt</span><em>Recommended for Opus / BoldTrail</em></div>
                 <h4>BoldTrail-ready CSV</h4>
                 <p>Formats the working list into clear real-estate CRM fields for BoldTrail’s contact import mapper: names, email, mobile, source, status, address, notes and tags.</p>
                 <div class="acx-export-preview"><span>First Name</span><span>Last Name</span><span>Email</span><span>Cell Phone 1</span><span>Source</span><span>Tags</span></div>
@@ -144,7 +144,7 @@
                 <small><i class="fa-solid fa-circle-info" aria-hidden="true"></i> Watchdog’s existing BoldTrail Direct beta is read-only today; this free Agent process does not claim to push records into BoldTrail.</small>
               </article>
               <article class="acx-export-card">
-                <div class="acx-export-brand generic"><span><i class="fa-solid fa-database" aria-hidden="true"></i></span><em>UNIVERSAL</em></div>
+                <div class="acx-export-brand generic"><span><i class="fa-solid fa-database" aria-hidden="true"></i></span><em>Universal</em></div>
                 <h4>Clean standard CSV</h4>
                 <p>Download a straightforward contact file with common headings that can be mapped into almost any database or CRM.</p>
                 <div class="acx-export-preview"><span>First Name</span><span>Last Name</span><span>Email</span><span>Phone</span><span>City</span><span>Tags</span></div>
@@ -162,7 +162,7 @@
   <div class="acx-guide" id="acx-guide" hidden>
     <button class="acx-guide-backdrop" type="button" data-guide-close aria-label="Close import guide"></button>
     <aside role="dialog" aria-modal="true" aria-labelledby="acx-guide-title">
-      <header><div><span>CRM HANDOFF</span><h2 id="acx-guide-title">Import your cleaned contacts</h2></div><button type="button" data-guide-close aria-label="Close"><i class="fa-solid fa-xmark" aria-hidden="true"></i></button></header>
+      <header><div><span>CRM handoff</span><h2 id="acx-guide-title">Import your cleaned contacts</h2></div><button type="button" data-guide-close aria-label="Close"><i class="fa-solid fa-xmark" aria-hidden="true"></i></button></header>
       <div class="acx-guide-tabs"><button class="active" type="button" data-guide-view="boldtrail">BoldTrail</button><button type="button" data-guide-view="generic">Any CRM</button></div>
       <div class="acx-guide-body" data-guide-panel="boldtrail">
         <div class="acx-guide-callout"><span class="acx-bt-mark">bt</span><p><b>Use BoldTrail’s own contact import screen.</b><span>Watchdog prepares the file; BoldTrail remains the system that accepts and maps it.</span></p></div>

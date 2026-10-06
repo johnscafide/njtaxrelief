@@ -204,7 +204,7 @@ function mountThemePicker(){
   var control=hero.querySelector('.ac-hero-style-control');
   if(!control){
     control=document.createElement('div');control.className='ac-hero-style-control';
-    control.innerHTML='<button class="ac-hero-style-toggle" type="button" aria-expanded="false"><i class="fas fa-wand-magic-sparkles" aria-hidden="true"></i><span>Customize</span></button>';
+    control.innerHTML='<button class="ac-hero-style-toggle" type="button" aria-expanded="false"><i class="fas fa-dog" aria-hidden="true"></i><span>Customize</span></button>';
     hero.appendChild(control);
     control.querySelector('button').addEventListener('click',function(event){event.stopPropagation();openThemePanel(event.currentTarget);});
   }

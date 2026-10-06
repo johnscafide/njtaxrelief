@@ -22,7 +22,7 @@
     if (!host) return;
     var billing = payload && payload.billing;
     if (!billing) {
-      host.innerHTML = '<div class="do-billing-head"><div><span>STRIPE LIVE RELEASE</span><h2>Billing health unavailable</h2><p>The Developer health endpoint did not return a billing payload.</p></div></div>';
+      host.innerHTML = '<div class="do-billing-head"><div><span>Stripe live release</span><h2>Billing health unavailable</h2><p>The Developer health endpoint did not return a billing payload.</p></div></div>';
       return;
     }
 
@@ -37,7 +37,7 @@
     var catalogRequired = catalog.required == null ? secrets.catalog_lookup_required || 6 : catalog.required;
 
     host.innerHTML =
-      '<div class="do-billing-head"><div><span>STRIPE LIVE RELEASE</span><h2>' + (ready ? 'Live billing accepted' : 'Controlled billing gate') + '</h2>' +
+      '<div class="do-billing-head"><div><span>Stripe live release</span><h2>' + (ready ? 'Live billing accepted' : 'Controlled billing gate') + '</h2>' +
       '<p>Server-owned launch evidence only. No Stripe secret value is returned to this page.</p></div>' +
       '<div class="do-billing-gate ' + esc(ready ? 'passed' : gateStatus) + '"><i class="fas ' + (ready ? 'fa-circle-check' : 'fa-shield-halved') + '"></i>' + esc(label(gateStatus)) + '</div></div>' +
       '<div class="do-billing-metrics">' +
@@ -72,7 +72,7 @@
       paint(result.data || {});
     }).catch(function () {
       var host = document.getElementById('do-billing-release');
-      if (host) host.innerHTML = '<div class="do-billing-head"><div><span>STRIPE LIVE RELEASE</span><h2>Billing health unavailable</h2><p>Sign in with Developer access and reload this control center.</p></div></div>';
+      if (host) host.innerHTML = '<div class="do-billing-head"><div><span>Stripe live release</span><h2>Billing health unavailable</h2><p>Sign in with Developer access and reload this control center.</p></div></div>';
     });
   }
 

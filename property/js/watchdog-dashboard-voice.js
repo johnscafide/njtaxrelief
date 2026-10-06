@@ -5,7 +5,7 @@ if(window.__watchdogDashboardVoice)return;window.__watchdogDashboardVoice=true;
 function ensure(){
   var host=document.getElementById('db-panel-main');if(!host||document.getElementById('wd-dashboard-voice-entry'))return;
   var entry=document.createElement('div');entry.id='wd-dashboard-voice-entry';entry.className='wd-contextual-voice-entry';
-  entry.innerHTML='<div><span>WATCHDOG VOICE</span><b>Ask about what needs attention now.</b><small>Uses the saved-property info already driving Dashboard Intelligence.</small></div><button type="button" class="wd-contextual-voice-open"><i class="fas fa-microphone"></i><span>Ask Watchdog</span></button>';
+  entry.innerHTML='<div><span>Watchdog voice</span><b>Ask about what needs attention now.</b><small>Uses the saved-property info already driving Dashboard Intelligence.</small></div><button type="button" class="wd-contextual-voice-open"><i class="fas fa-microphone"></i><span>Ask Watchdog</span></button>';
   host.insertBefore(entry,host.firstChild);
   entry.querySelector('button').addEventListener('click',open);
 }

@@ -77,7 +77,7 @@
     host.innerHTML =
       '<header class="acp-header acp-header-clean"><div><h2>Choose the profile you want to edit</h2></div></header>' +
       '<div class="acp-profile-route-grid">' +
-        '<a class="acp-profile-route-card personal" href="/account/profile"><span class="acp-route-icon compact"><i class="fa-regular fa-user"></i></span><div><small>PERSONAL</small><h3>Homeowner profile</h3><p>Contact details, home area, property goals, preferences and optional household info.</p><b>Edit homeowner profile <i class="fas fa-arrow-right"></i></b></div></a>' +
+        '<a class="acp-profile-route-card personal" href="/account/profile"><span class="acp-route-icon compact"><i class="fa-regular fa-user"></i></span><div><small>Personal</small><h3>Homeowner profile</h3><p>Contact details, home area, property goals, preferences and optional household info.</p><b>Edit homeowner profile <i class="fas fa-arrow-right"></i></b></div></a>' +
         '<a class="acp-profile-route-card professional" href="/account/professional-profile"><span class="acp-route-icon compact"><i class="fa-regular fa-address-card"></i></span><div><small>' + (isAgent ? 'AGENT' : 'PROFESSIONAL') + '</small><h3>' + (isAgent ? 'Agent profile' : 'Professional profile') + '</h3><p>' + (professional ? esc(professionLabel(profession)) + '. Manage professional process info' + (isAgent ? ', brokerage identity, license and Agent portal settings.' : ' and Watchdog Intelligence preferences.') : 'Set up a professional role only if you use Watchdog for your work.') + '</p><b>' + (professional ? 'Edit professional profile' : 'Set up professional profile') + ' <i class="fas fa-arrow-right"></i></b></div></a>' +
       '</div>' +
       (isAgent ? '<div class="acp-agent-confirmed"><i class="fas fa-circle-check"></i><span><b>Real estate agent profile enabled</b><small>Agent-only fields appear only because your user-confirmed profession is Real estate agent / broker.</small></span></div>' : '');
@@ -166,7 +166,7 @@
           inputField('acp-zip','Main NJ ZIP',row.location_zip || '','text','08081','Sets your geographic starting point.','inputmode="numeric" maxlength="5"') +
         '</div></section>' +
         '<section class="acp-panel"><div class="acp-panel-head"><i class="fas fa-compass"></i><div><b>How you use Watchdog</b><small>Your default dashboard and property focus</small></div></div><div class="acp-fields">' +
-          (mode === 'homeowner' ? '<input id="acp-persona" type="hidden" value="' + esc(persona) + '"><div class="acp-profile-context"><span>PROFILE TYPE</span><b>Personal / homeowner</b><small>Professional role settings are edited separately.</small></div>' : selectField('acp-persona','Account use',persona,[['homeowner','Homeowner'],['renter','Renter'],['professional','Professional'],['both','Personal + professional'],['investor','Investor'],['planning_to_buy','Planning to buy']])) +
+          (mode === 'homeowner' ? '<input id="acp-persona" type="hidden" value="' + esc(persona) + '"><div class="acp-profile-context"><span>Profile type</span><b>Personal / homeowner</b><small>Professional role settings are edited separately.</small></div>' : selectField('acp-persona','Account use',persona,[['homeowner','Homeowner'],['renter','Renter'],['professional','Professional'],['both','Personal + professional'],['investor','Investor'],['planning_to_buy','Planning to buy']])) +
           '<div data-acp-housing>' + selectField('acp-home-status','Housing situation',row.home_status || '',[['','Not specified'],['own','Own my home'],['rent','Rent'],['own_and_invest','Own + invest'],['rent_and_invest','Rent + own investments'],['planning_to_buy','Planning to buy'],['other','Other']]) + '</div>' +
           selectField('acp-time','Time horizon',row.time_horizon || 'researching',[['now','Right now'],['0_3_months','Next 3 months'],['3_6_months','3–6 months'],['6_12_months','6–12 months'],['12_plus_months','More than a year'],['researching','Looking into / researching']]) +
           '<label class="acp-field acp-wide"><span>Markets, towns or counties</span><input id="acp-markets" value="' + esc(marketsText) + '" placeholder="Camden County, Gloucester County"><small>Separate multiple markets with commas.</small></label>' +
@@ -221,7 +221,7 @@
       legacy = replacement;
     }
     if (profile && currentUser) renderEditor(legacy);
-    else legacy.innerHTML = '<header><div><span>ABOUT YOU</span><h2>Your Watchdog profile</h2><p>Loading your confirmed onboarding info…</p></div></header>';
+    else legacy.innerHTML = '<header><div><span>About you</span><h2>Your Watchdog profile</h2><p>Loading your confirmed onboarding info…</p></div></header>';
   }
 
   function valuesFor(group) {
@@ -330,7 +330,7 @@
       mount();
     } catch (error) {
       var host = findLegacySection();
-      if (host) host.innerHTML = '<header><div><span>ABOUT YOU</span><h2>Your Watchdog profile</h2><p>We could not load your profile right now.</p></div></header><div class="acp-error">' + esc(error && error.message || 'Profile unavailable') + '</div>';
+      if (host) host.innerHTML = '<header><div><span>About you</span><h2>Your Watchdog profile</h2><p>We could not load your profile right now.</p></div></header><div class="acp-error">' + esc(error && error.message || 'Profile unavailable') + '</div>';
     } finally {
       loading = false;
     }

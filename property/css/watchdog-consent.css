@@ -29,7 +29,7 @@
 .wd-consent-option>div{min-width:0}
 .wd-consent-option b{display:block;margin:0 0 3px;color:var(--wdc-navy);font:800 13px/1.3 var(--wdc-display)}
 .wd-consent-option span{color:#6c7a87;font:500 12px/1.35 var(--wdc-font)}
-.wd-consent-always{flex:0 0 auto!important;padding:6px 9px;border-radius:999px;background:#edf7f5;color:var(--wdc-teal-dark)!important;font-weight:800!important}
+.wd-consent-always{flex:0 0 auto!important;padding:6px 9px;border-radius:8px;background:#edf7f5;color:var(--wdc-teal-dark)!important;font-weight:800!important}
 .wd-consent-toggle-row{cursor:pointer}
 .wd-consent-toggle{position:relative;display:inline-flex!important;flex:0 0 46px;width:46px;height:26px}
 .wd-consent-toggle input{position:absolute;opacity:0;pointer-events:none}

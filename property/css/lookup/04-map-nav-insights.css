@@ -7,7 +7,7 @@
 .hd-pin {
   display: inline-flex; align-items: center; gap: 5px; white-space: nowrap;
   background: #fff; color: #0e2248; border: 1.5px solid #0e2248;
-  border-radius: 20px; padding: 4px 10px 4px 7px;
+  border-radius:12px; padding: 4px 10px 4px 7px;
   font-family: 'Libre Franklin', system-ui, sans-serif;
   font-size: 12px; font-weight: 800; letter-spacing: -.01em;
   box-shadow: 0 2px 8px rgba(14,34,72,.28); cursor: pointer;
@@ -127,14 +127,14 @@ body.nav-solid .wd-nav a, body.nav-solid .wd-nav button, body.nav-solid .wd-logo
 .ins-lead { display: block; text-decoration: none; }
 .ins-photo { height: 300px; border-radius: 12px; background-size: cover; background-position: center;
   margin-bottom: 16px; }
-.ins-kicker { display: inline-block; font-size: 10.5px; font-weight: 800; text-transform: uppercase;
-  letter-spacing: .1em; color: var(--gold-dark, #8a6f14); margin-bottom: 8px; }
+.ins-kicker { display: inline-block; font-size: 10.5px; font-weight: 800; text-transform:none;
+  letter-spacing:0; color: var(--gold-dark, #8a6f14); margin-bottom: 8px; }
 .ins-lead h3 { font-family: 'Libre Franklin', system-ui, sans-serif;
   font-size: 25px; font-weight: 800; letter-spacing: -.028em; line-height: 1.22;
   color: var(--navy-dark); margin: 0 0 10px; }
 .ins-lead p { font-size: 15px; line-height: 1.7; color: #5a6070; margin: 0 0 10px; }
 .ins-lead em, .ins-list em { font-style: normal; font-size: 11.5px; font-weight: 700;
-  text-transform: uppercase; letter-spacing: .07em; color: #a0a8b8; }
+  text-transform:none; letter-spacing:0; color: #a0a8b8; }
 .ins-lead:hover h3 { color: var(--navy); }
 
 .ins-list { display: flex; flex-direction: column; }

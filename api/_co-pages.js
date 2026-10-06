@@ -341,7 +341,7 @@ const PRINT_CSS = `body.checklist{background:#f5f7fa}
 .sheet{position:relative;max-width:760px;margin:0 auto 40px;padding:36px 40px 28px;background:#fff;border:1px solid var(--line);border-radius:12px}
 .phead{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-bottom:14px;border-bottom:3px solid var(--blue)}
 .phead img{display:block;width:170px;height:auto}
-.phead span{color:var(--muted);font-size:14px;font-weight:600;text-transform:uppercase;letter-spacing:.06em}
+.phead span{color:var(--muted);font-size:14px;font-weight:600;text-transform:none;letter-spacing:0}
 .sheet h1{margin:20px 0 0;font-size:28px;line-height:1.2}
 .pmeta{margin:2px 0 18px;color:var(--muted)}
 .sheet section{margin:0 0 18px;padding-top:14px;border-top:1px solid var(--line)}

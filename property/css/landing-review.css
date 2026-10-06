@@ -27,22 +27,22 @@ body.wd-consumer-mode .wd-nav.solid .wd-nav-in{padding-top:11px;padding-bottom:1
 
 .wd-consumer-wrap{width:min(1240px,calc(100% - 48px));margin:0 auto}
 .wd-section-head{display:flex;align-items:end;justify-content:space-between;gap:24px;margin-bottom:24px}
-.wd-section-kicker{display:block;margin-bottom:10px;color:#087f82;font:800 13px/1.2 "Libre Franklin",sans-serif;letter-spacing:.07em;text-transform:uppercase}
+.wd-section-kicker{display:block;margin-bottom:10px;color:#087f82;font:800 13px/1.2 "Libre Franklin",sans-serif;letter-spacing:0;text-transform:none}
 .wd-section-head h2,.wd-directory-head h2,.wd-guide-band h2,.wd-homeowner-links h2{margin:0;color:#10294b;font:800 clamp(30px,4vw,48px)/1.05 "Libre Franklin",sans-serif;letter-spacing:-.05em}
 .wd-section-link,.wd-directory-more a,.wd-guide-all{display:inline-flex;align-items:center;gap:9px;color:#087f82;text-decoration:none;font-size:16px;font-weight:800;white-space:nowrap}
 .wd-section-link:hover,.wd-directory-more a:hover,.wd-guide-all:hover{text-decoration:underline;text-underline-offset:4px}
 
 .wd-consumer-recents{background:#fff;padding:34px 0 54px;border-bottom:1px solid #e8ecec;position:relative;z-index:1}
 .wd-property-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
-.wd-property-card,.wd-free-card,.wd-empty-card{min-width:0;border-radius:24px;overflow:hidden;text-decoration:none;transition:transform .18s ease,box-shadow .18s ease}
+.wd-property-card,.wd-free-card,.wd-empty-card{min-width:0;border-radius:12px;overflow:hidden;text-decoration:none;transition:transform .18s ease,box-shadow .18s ease}
 .wd-property-card{background:#f6f8f8;color:#172234}
 .wd-property-card:hover,.wd-free-card:hover,.wd-empty-card:hover{transform:translateY(-2px)}
 .wd-property-photo{position:relative;height:190px;background:#e8eded;overflow:hidden}
 .wd-property-photo img{position:relative;z-index:1;width:100%;height:100%;object-fit:cover;display:block;color:transparent;font-size:0;transition:transform .35s ease}
 .wd-property-card:hover .wd-property-photo img{transform:scale(1.02)}
-.wd-property-placeholder{position:absolute;inset:0;z-index:0;height:100%;display:grid;place-items:center;align-content:center;gap:8px;color:#6e8087;font-size:34px;background:linear-gradient(145deg,#edf1f1,#dce5e5)}
+.wd-property-placeholder{position:absolute;inset:0;z-index:0;height:100%;display:grid;place-items:center;align-content:center;gap:8px;color:#6e8087;font-size:34px;background:#edf1f1}
 .wd-property-placeholder span{font-size:13px;font-weight:700}
-.wd-property-label{position:absolute;z-index:2;left:16px;top:16px;padding:8px 11px;border-radius:999px;background:rgba(255,255,255,.94);color:#273b4d;font:800 12px/1.1 "Libre Franklin",sans-serif;box-shadow:0 2px 10px rgba(17,38,57,.08)}
+.wd-property-label{position:absolute;z-index:2;left:16px;top:16px;padding:8px 11px;border-radius:8px;background:rgba(255,255,255,.94);color:#273b4d;font:800 12px/1.1 "Libre Franklin",sans-serif;box-shadow:0 2px 10px rgba(17,38,57,.08)}
 .wd-property-copy{padding:20px 20px 22px}
 .wd-property-copy h3{margin:0;color:#10294b;font:800 20px/1.25 "Libre Franklin",sans-serif;letter-spacing:-.025em}
 .wd-property-copy p{margin:6px 0 0;color:#60717b;font-size:16px;line-height:1.4}
@@ -50,13 +50,13 @@ body.wd-consumer-mode .wd-nav.solid .wd-nav-in{padding-top:11px;padding-bottom:1
 .wd-property-facts span+span:before{content:"·";margin-right:12px;color:#9aa6aa}
 .wd-property-open{display:inline-flex;align-items:center;gap:8px;margin-top:18px;color:#087f82;font-size:15px}
 .wd-free-card{display:flex;flex-direction:column;justify-content:space-between;min-height:100%;padding:26px;background:#10294b;color:#fff}
-.wd-free-label{display:inline-block;margin-bottom:32px;color:#a8e1dc;font:800 13px/1.2 "Libre Franklin",sans-serif;letter-spacing:.06em;text-transform:uppercase}
+.wd-free-label{display:inline-block;margin-bottom:32px;color:#a8e1dc;font:800 13px/1.2 "Libre Franklin",sans-serif;letter-spacing:0;text-transform:none}
 .wd-free-card h3{margin:0;font:800 clamp(24px,2.7vw,32px)/1.08 "Libre Franklin",sans-serif;letter-spacing:-.04em;color:#fff}
 .wd-free-card p{margin:15px 0 26px;color:#d8e1e8;font-size:17px;line-height:1.55}
 .wd-free-card b{display:inline-flex;align-items:center;gap:9px;color:#fff;font-size:16px}
 .wd-empty-card{display:grid;place-items:center;align-content:center;min-height:320px;padding:30px;background:#f4f7f7;color:#10294b;text-align:center}
 .wd-empty-card i{font-size:28px;color:#087f82;margin-bottom:15px}.wd-empty-card h3{font-size:22px;margin:0}.wd-empty-card p{font-size:16px;line-height:1.5;color:#64737c}
-.wd-card-loading{height:330px;border-radius:24px;background:linear-gradient(90deg,#f1f4f4 20%,#f8fafa 50%,#f1f4f4 80%);background-size:220% 100%;animation:wdLoad 1.4s linear infinite}
+.wd-card-loading{height:330px;border-radius:12px;background:#f1f4f4;background-size:220% 100%;animation:wdLoad 1.4s linear infinite}
 @keyframes wdLoad{to{background-position:-220% 0}}
 
 body.wd-consumer-mode .section:has(.ins-grid){background:#f4f1eb!important;padding:72px 0 78px!important;margin:0!important}
@@ -67,10 +67,10 @@ body.wd-consumer-mode .section:has(.ins-grid) .ins-grid{display:block!important;
 .wd-insights-intro{max-width:760px;margin:14px 0 34px;color:#58666d;font-size:18px;line-height:1.55}
 .wd-insights-layout{display:grid;grid-template-columns:minmax(0,1.55fr) minmax(390px,.85fr);gap:48px;align-items:start;width:100%}
 .wd-insight-lead{display:block;color:inherit;text-decoration:none;min-width:0}
-.wd-insight-image{height:430px;border-radius:28px;overflow:hidden;background:#dfe5e4}
+.wd-insight-image{height:430px;border-radius:12px;overflow:hidden;background:#dfe5e4}
 .wd-insight-image img,.wd-insight-thumb img{width:100%;height:100%;object-fit:cover;display:block}
 .wd-insight-copy{padding:24px 4px 0}
-.wd-insight-copy span,.wd-insight-list span{color:#087f82;font:800 13px/1.3 "Libre Franklin",sans-serif;letter-spacing:.04em;text-transform:uppercase}
+.wd-insight-copy span,.wd-insight-list span{color:#087f82;font:800 13px/1.3 "Libre Franklin",sans-serif;letter-spacing:0;text-transform:none}
 .wd-insight-copy h3{max-width:850px;margin:10px 0 12px;color:#132a39;font:800 clamp(29px,3.4vw,43px)/1.08 "Libre Franklin",sans-serif;letter-spacing:-.045em}
 .wd-insight-copy p{max-width:790px;margin:0;color:#58666d;font-size:18px;line-height:1.6}
 .wd-insight-copy b{display:inline-flex;align-items:center;gap:8px;margin-top:20px;color:#087f82;font-size:16px}
@@ -91,8 +91,8 @@ body.wd-consumer-mode .ins-glance{display:none!important}
 .wd-town-links{display:flex;flex-direction:column;gap:9px}.wd-town-links a{color:#44545e;text-decoration:none;font-size:16px;line-height:1.4}.wd-town-links a:hover{color:#087f82;text-decoration:underline;text-underline-offset:3px}
 .wd-county-all{display:inline-flex;align-items:center;gap:8px;margin-top:17px;color:#087f82;text-decoration:none;font-size:15px;font-weight:800}
 .wd-directory-more{display:flex;justify-content:center;padding:32px 0 0}
-.wd-directory-more a{padding:13px 18px;border-radius:999px;background:#eef7f5}
-.wd-guide-band{margin-top:72px;padding:42px;border-radius:28px;background:#f0f6f5}
+.wd-directory-more a{padding:13px 18px;border-radius:8px;background:#eef7f5}
+.wd-guide-band{margin-top:72px;padding:42px;border-radius:12px;background:#f0f6f5}
 .wd-guide-band>div:first-child{max-width:760px}
 .wd-guide-links{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0 24px;margin-top:28px;border-top:1px solid #d4dfdd}
 .wd-guide-links a{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:16px 0;border-bottom:1px solid #d4dfdd;color:#173143;text-decoration:none;font-size:16px;font-weight:700;line-height:1.35}.wd-guide-links a i{font-size:12px;color:#087f82}.wd-guide-links a:hover{color:#087f82}
@@ -116,7 +116,7 @@ body.wd-consumer-mode .landing-faq-more a{color:#087f82!important;font-weight:80
 body.wd-consumer-mode .landing-faq-more a:hover{text-decoration:underline;text-underline-offset:4px}
 
 body.wd-consumer-mode .section:has(.gt-banner){padding:12px 0 54px!important}
-body.wd-consumer-mode .gt-banner{border-radius:24px!important}
+body.wd-consumer-mode .gt-banner{border-radius:12px!important}
 body.wd-consumer-mode .gt-headline{font-size:clamp(23px,2.5vw,32px)!important;line-height:1.12!important}
 body.wd-consumer-mode .gt-sub{font-size:16px!important;line-height:1.55!important}
 body.wd-consumer-mode .gt-disc{font-size:14px!important;line-height:1.55!important}
@@ -136,10 +136,10 @@ body.wd-consumer-mode #wd-property-footer .wdf-legal p{font-size:14px!important;
   .wd-consumer-wrap,body.wd-consumer-mode .section:has(.ins-grid)>.section-inner{width:min(100% - 30px,1240px)}
   body.wd-consumer-mode .pl-hero{min-height:360px;padding:86px 15px 64px}.wd-section-head{align-items:flex-start;flex-direction:column;gap:9px}.wd-section-link{white-space:normal}
   .wd-property-grid{grid-template-columns:1fr}.wd-property-card{display:grid;grid-template-columns:138px minmax(0,1fr)}.wd-property-photo{height:100%;min-height:160px}.wd-property-label{left:10px;top:10px;font-size:11px}.wd-property-copy{padding:17px}.wd-property-copy h3{font-size:18px}.wd-property-facts{font-size:14px}.wd-free-card{min-height:270px}.wd-free-label{margin-bottom:22px}
-  body.wd-consumer-mode .section:has(.ins-grid){padding:58px 0 62px!important}.wd-insight-image{height:280px;border-radius:22px}.wd-insight-copy p{font-size:17px}.wd-insight-list{display:flex}.wd-insight-list>a:not(.wd-all-insights){grid-template-columns:104px minmax(0,1fr)}
+  body.wd-consumer-mode .section:has(.ins-grid){padding:58px 0 62px!important}.wd-insight-image{height:280px;border-radius:12px}.wd-insight-copy p{font-size:17px}.wd-insight-list{display:flex}.wd-insight-list>a:not(.wd-all-insights){grid-template-columns:104px minmax(0,1fr)}
   .wd-seo-directory{padding:62px 0 68px}.wd-county-grid{grid-template-columns:1fr}.wd-guide-band{margin-top:54px;padding:28px 22px}.wd-guide-links{grid-template-columns:1fr}.wd-directory-head p,.wd-guide-band p{font-size:17px}
   body.wd-consumer-mode .landing-faq{padding:58px 16px 68px}.landing-faq-grid{grid-template-columns:1fr!important}
 }
 @media(max-width:480px){
-  .wd-property-card{grid-template-columns:1fr}.wd-property-photo{height:190px}.wd-insight-list>a:not(.wd-all-insights){grid-template-columns:92px minmax(0,1fr);gap:14px}.wd-insight-thumb{height:88px}.wd-insight-list p{display:none}.wd-county{padding:24px 0}.wd-guide-band{border-radius:22px}
+  .wd-property-card{grid-template-columns:1fr}.wd-property-photo{height:190px}.wd-insight-list>a:not(.wd-all-insights){grid-template-columns:92px minmax(0,1fr);gap:14px}.wd-insight-thumb{height:88px}.wd-insight-list p{display:none}.wd-county{padding:24px 0}.wd-guide-band{border-radius:12px}
 }

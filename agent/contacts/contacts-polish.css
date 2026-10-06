@@ -84,9 +84,9 @@ body[data-sidebar-page="agent-contacts"] .acx-busy small{font-size:12px}
 body[data-sidebar-page="agent-contacts"] .acx-toast{font-size:13px}
 
 /* Mapping-stage visual: raw contact -> Watchdog cleanup -> CRM */
-.acx-name-intelligence{margin:0 24px 22px;padding:20px;border:1px solid #cad9ff;border-radius:18px;background:linear-gradient(135deg,#f7faff 0%,#ffffff 56%,#f1faf6 100%);display:grid;grid-template-columns:minmax(260px,.82fr) minmax(520px,1.18fr);gap:22px;align-items:center;position:relative;overflow:hidden;box-shadow:0 2px 6px rgba(15,23,42,.08)}
+.acx-name-intelligence{margin:0 24px 22px;padding:20px;border:1px solid #cad9ff;border-radius:18px;background:#f7faff;display:grid;grid-template-columns:minmax(260px,.82fr) minmax(520px,1.18fr);gap:22px;align-items:center;position:relative;overflow:hidden;box-shadow:0 2px 6px rgba(15,23,42,.08)}
 .acx-name-intelligence[hidden]{display:none}
-.acx-name-intelligence:after{content:"";position:absolute;width:260px;height:260px;border-radius:50%;right:-115px;top:-145px;background:radial-gradient(circle,rgba(47,109,246,.10),rgba(47,109,246,0) 68%);pointer-events:none}
+.acx-name-intelligence:after{content:"";position:absolute;width:260px;height:260px;border-radius:50%;right:-115px;top:-145px;background:none;pointer-events:none}
 .acx-name-copy{position:relative;z-index:1}
 .acx-name-copy>span{display:block;color:#2f6df6;font-size:11px;font-weight:900;letter-spacing:.14em}
 .acx-name-copy h4{margin:7px 0 7px;color:#20314d;font-size:20px;line-height:1.2;letter-spacing:-.025em}
@@ -107,7 +107,7 @@ body[data-sidebar-page="agent-contacts"] .acx-toast{font-size:13px}
 .acx-name-modal{position:fixed;inset:0;z-index:12000;display:grid;place-items:center;padding:24px}
 .acx-name-modal[hidden]{display:none}
 .acx-name-backdrop{position:absolute;inset:0;border:0;background:rgba(22,36,58,.36);}
-.acx-name-modal>section{position:relative;width:min(760px,100%);max-height:min(90vh,860px);overflow:auto;border:1px solid #dbe3ed;border-radius:24px;background:#fff;box-shadow:0 2px 6px rgba(15,23,42,.08);padding:32px;color:#18243a}
+.acx-name-modal>section{position:relative;width:min(760px,100%);max-height:min(90vh,860px);overflow:auto;border:1px solid #dbe3ed;border-radius:12px;background:#fff;box-shadow:0 2px 6px rgba(15,23,42,.08);padding:32px;color:#18243a}
 .acx-name-x{position:absolute;right:18px;top:18px;width:42px;height:42px;border-radius:12px;border:1px solid #dfe6ef;background:#f8fafc;color:#607087}
 .acx-name-modal-icon{width:52px;height:52px;border-radius:15px;background:#edf3ff;color:#2f6df6;display:grid;place-items:center;font-size:20px;margin-bottom:16px}
 .acx-name-modal>section>span{display:block;font-size:11px;font-weight:900;letter-spacing:.14em;color:#2f6df6}
@@ -136,7 +136,7 @@ body[data-sidebar-page="agent-contacts"] .acx-toast{font-size:13px}
 .acx-name-preview-row>i{color:#a7b4c4;font-size:11px}
 .acx-name-preview-row .raw{font-size:13px;font-weight:700;color:#40516a;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .acx-name-preview-row .result{min-width:0;border:1px solid #dfe6ef;border-radius:9px;background:#fff;padding:8px 9px;font-size:12px;color:#3f5069;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.acx-name-preview-row .result b{display:block;font-size:9px;letter-spacing:.08em;text-transform:uppercase;color:#8794a6;margin-bottom:2px}
+.acx-name-preview-row .result b{display:block;font-size:9px;letter-spacing:0;text-transform:none;color:#8794a6;margin-bottom:2px}
 .acx-name-preview-row .result.one{grid-column:3/5}
 .acx-name-modal footer{margin-top:20px;display:flex;justify-content:flex-end}
 .acx-name-modal footer .acx-btn{min-height:48px;font-size:14px;padding:0 18px}
@@ -144,8 +144,8 @@ body[data-sidebar-page="agent-contacts"] .acx-toast{font-size:13px}
 /* Make the existing hero more visual without stock photography. */
 body[data-sidebar-page="agent-contacts"] .acx-hero-visual:before,
 body[data-sidebar-page="agent-contacts"] .acx-hero-visual:after{content:"";position:absolute;border-radius:18px;pointer-events:none;z-index:-1}
-body[data-sidebar-page="agent-contacts"] .acx-hero-visual:before{width:180px;height:110px;right:24px;top:28px;border:1px solid rgba(47,109,246,.11);background:linear-gradient(145deg,rgba(47,109,246,.07),rgba(255,255,255,.5));transform:rotate(8deg)}
-body[data-sidebar-page="agent-contacts"] .acx-hero-visual:after{width:150px;height:90px;left:28px;bottom:24px;border:1px solid rgba(24,169,102,.10);background:linear-gradient(145deg,rgba(24,169,102,.06),rgba(255,255,255,.45));transform:rotate(-7deg)}
+body[data-sidebar-page="agent-contacts"] .acx-hero-visual:before{width:180px;height:110px;right:24px;top:28px;border:1px solid rgba(47,109,246,.11);background:rgba;transform:rotate(8deg)}
+body[data-sidebar-page="agent-contacts"] .acx-hero-visual:after{width:150px;height:90px;left:28px;bottom:24px;border:1px solid rgba(24,169,102,.10);background:rgba;transform:rotate(-7deg)}
 
 @media(max-width:1100px){
   .acx-name-intelligence{grid-template-columns:1fr;gap:16px}

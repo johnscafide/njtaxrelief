@@ -192,7 +192,7 @@
       'h1{font-size:17pt;margin:0 0 4px;letter-spacing:-.01em}' +
       '.sub{font-size:10pt;color:#555;margin-bottom:4px}' +
       '.rule{border-bottom:2px solid #10182b;margin:10px 0 18px}' +
-      'h2{font-size:11pt;text-transform:uppercase;letter-spacing:.09em;margin:22px 0 8px;' +
+      'h2{font-size:11pt;text-transform:none;letter-spacing:0;margin:22px 0 8px;' +
         'border-bottom:1px solid #bbb;padding-bottom:4px}' +
       'table{width:100%;border-collapse:collapse;font-size:10pt;margin-bottom:6px}' +
       'th{text-align:left;padding:5px 10px 5px 0;font-weight:normal;color:#555;width:38%;vertical-align:top}' +
@@ -200,7 +200,7 @@
       'td em{display:block;font-style:normal;font-size:8.5pt;color:#777;margin-top:1px}' +
       '.na{color:#999;font-style:italic}' +
       '.ct th{background:#10182b;color:#fff;padding:6px 8px;width:auto;font-size:8.5pt;' +
-        'text-transform:uppercase;letter-spacing:.05em}' +
+        'text-transform:none;letter-spacing:0}' +
       '.ct td{padding:6px 8px;border-bottom:1px solid #ddd;font-size:9.5pt}' +
       '.ct td.n,.ct th.n{text-align:right}' +
       '.calc{background:#f4f6fa;padding:14px 18px;border-left:3px solid #10182b;margin:10px 0}' +

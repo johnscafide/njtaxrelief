@@ -33,7 +33,7 @@
 }
 
 .db-side-section + .db-side-section::before {
-  background: linear-gradient(90deg, rgba(69,197,190,.34), rgba(255,255,255,.05) 52%, transparent);
+  background:rgba;
   content: '';
   height: 1px;
   left: 10px;
@@ -79,7 +79,7 @@
 
 .db-sidebar .pn.on::after,
 .db-side-link.on::after {
-  background: radial-gradient(circle, rgba(69,197,190,.22), transparent 70%);
+  background:none;
   content: '';
   inset: 0;
   pointer-events: none;

@@ -80,7 +80,7 @@
       }
       #wd-showcase .wds-cmp-shell{
         background:#fff;
-        border-radius:34px;
+        border-radius:12px;
         overflow:hidden;
         box-shadow:0 2px 6px rgba(15,23,42,.08);
       }
@@ -90,7 +90,7 @@
         gap:36px;
         align-items:end;
         padding:56px 58px 38px;
-        background:linear-gradient(145deg,#fff,#f5f8fa);
+        background:#fff;
       }
       #wd-showcase .wds-cmp-title h2{
         margin:0;
@@ -139,15 +139,15 @@
       #wd-showcase .wds-cmp-label{
         color:#8fa2b9;
         font:800 var(--type-xs)/1 var(--font-ui);
-        letter-spacing:.1em;
-        text-transform:uppercase;
+        letter-spacing:0;
+        text-transform:none;
       }
       #wd-showcase .wds-cmp-us,
       #wd-showcase .wds-cmp-them{
         text-align:center;
         font:800 var(--type-xs)/1 var(--font-ui);
-        letter-spacing:.07em;
-        text-transform:uppercase;
+        letter-spacing:0;
+        text-transform:none;
       }
       #wd-showcase .wds-cmp-us{color:#9ce2d9}
       #wd-showcase .wds-cmp-us i{margin-right:5px}

@@ -338,13 +338,13 @@
     var brand = 'Watchdog <span class="wd-intelligence-brand-word">Intelligence</span>';
 
     if (promoEligible) {
-      return '<p class="wd-plan-intelligence"><i class="fas fa-sparkles" aria-hidden="true"></i><span>' + brand + ' included for a limited time <small>Normally +' + esc(money(regular, false)) + '/month</small></span></p>';
+      return '<p class="wd-plan-intelligence"><i class="fas fa-dog" aria-hidden="true"></i><span>' + brand + ' included for a limited time <small>Normally +' + esc(money(regular, false)) + '/month</small></span></p>';
     }
     if (included) {
-      return '<p class="wd-plan-intelligence"><i class="fas fa-sparkles" aria-hidden="true"></i><span>' + brand + ' included at no additional charge</span></p>';
+      return '<p class="wd-plan-intelligence"><i class="fas fa-dog" aria-hidden="true"></i><span>' + brand + ' included at no additional charge</span></p>';
     }
     if (Array.isArray(promotion.eligible_plans) && promotion.eligible_plans.indexOf(key) >= 0) {
-      return '<p class="wd-plan-intelligence"><i class="fas fa-sparkles" aria-hidden="true"></i><span>' + brand + ' available for +' + esc(money(regular, false)) + '/month</span></p>';
+      return '<p class="wd-plan-intelligence"><i class="fas fa-dog" aria-hidden="true"></i><span>' + brand + ' available for +' + esc(money(regular, false)) + '/month</span></p>';
     }
     return '';
   }
@@ -399,12 +399,12 @@
       : '';
 
     root.innerHTML =
-      '<div class="wd-plan-header"><div><p class="wd-onboarding-step">CHOOSE YOUR MEMBERSHIP</p><h2>Your account is ready. Choose your plan.</h2><p class="wd-onboarding-copy">Paid dashboards open more Watchdog from day one. Free stays available below with no card required, and you can upgrade anytime.</p></div>' +
+      '<div class="wd-plan-header"><div><p class="wd-onboarding-step">Choose your membership</p><h2>Your account is ready. Choose your plan.</h2><p class="wd-onboarding-copy">Paid dashboards open more Watchdog from day one. Free stays available below with no card required, and you can upgrade anytime.</p></div>' +
       (planCatalog ? '<div class="wd-plan-controls"><span>Billing</span><div class="wd-plan-cadence" role="group" aria-label="Billing cadence"><button type="button" data-plan-cadence="yearly" aria-pressed="' + (planCadence === 'yearly') + '">Yearly <em>Save 17%</em></button><button type="button" data-plan-cadence="monthly" aria-pressed="' + (planCadence === 'monthly') + '">Monthly</button></div></div>' : '') +
       '</div>' +
       catalogNotice + checkoutNotice +
       (paidCards ? '<div class="wd-plan-grid">' + paidCards + '</div>' : '') +
-      '<section class="wd-plan-free" aria-label="Free membership"><div><span>FREE FOREVER</span><h3>Continue with Free</h3><p>Property lookup, watchlist, core assessment and tax markers, standard alerts and history. No payment method required.</p></div><button type="button" data-plan-free' + (planCheckoutBusy ? ' disabled' : '') + '>Continue with Free <i class="fas fa-arrow-right" aria-hidden="true"></i></button></section>' +
+      '<section class="wd-plan-free" aria-label="Free membership"><div><span>Free forever</span><h3>Continue with Free</h3><p>Property lookup, watchlist, core assessment and tax markers, standard alerts and history. No payment method required.</p></div><button type="button" data-plan-free' + (planCheckoutBusy ? ' disabled' : '') + '>Continue with Free <i class="fas fa-arrow-right" aria-hidden="true"></i></button></section>' +
       '<p class="wd-plan-secure"><i class="fas fa-lock" aria-hidden="true"></i> Paid plans use secure Stripe Checkout. Watchdog never stores card details.</p>';
 
     wirePlanSelection();
@@ -540,9 +540,9 @@
     root.className = 'wd-onboarding-stage';
     root.setAttribute('aria-busy','false');
     progress.style.width = '4%';
-    root.innerHTML = '<div class="wd-auth-intro"><p class="wd-onboarding-step">YOUR WATCHDOG</p><h1>Save the homes you look up.</h1><p class="wd-onboarding-copy">Free account. Save your properties, watch their tax and property data, and see what changes.</p></div>' +
+    root.innerHTML = '<div class="wd-auth-intro"><p class="wd-onboarding-step">Your Watchdog</p><h1>Save the homes you look up.</h1><p class="wd-onboarding-copy">Free account. Save your properties, watch their tax and property data, and see what changes.</p></div>' +
       '<div class="wd-auth-panel">' + buttons + '</div>' +
-      '<div class="wd-auth-proof"><span><i class="fas fa-bookmark"></i> Save properties</span><span><i class="fas fa-bell"></i> Watch changes</span><span><i class="fas fa-sparkles"></i> Personalized intelligence</span></div>' +
+      '<div class="wd-auth-proof"><span><i class="fas fa-bookmark"></i> Save properties</span><span><i class="fas fa-bell"></i> Watch changes</span><span><i class="fas fa-dog"></i> Personalized intelligence</span></div>' +
       '<p class="wd-auth-reassurance"><strong>Free. No card required.</strong> Property search stays free without an account.</p>' +
       '<a class="wd-auth-return" href="/property/"><i class="fas fa-arrow-left"></i> Keep searching without an account</a>';
     root.querySelectorAll('[data-provider]').forEach(function (button) {
@@ -569,7 +569,7 @@
     } catch (error) {
       setMode('onboarding');
       root.className = 'wd-onboarding-stage';
-      root.innerHTML = '<p class="wd-onboarding-step">WATCHDOG</p><h2>We couldn’t load setup.</h2><p class="wd-onboarding-copy">Refresh the page to try again.</p><div class="wd-onboarding-error is-visible">' + esc(error && error.message || 'Unknown setup error') + '</div>';
+      root.innerHTML = '<p class="wd-onboarding-step">Watchdog</p><h2>We couldn’t load setup.</h2><p class="wd-onboarding-copy">Refresh the page to try again.</p><div class="wd-onboarding-error is-visible">' + esc(error && error.message || 'Unknown setup error') + '</div>';
     }
   }
 

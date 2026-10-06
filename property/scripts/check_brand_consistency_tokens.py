@@ -32,6 +32,8 @@ FORBIDDEN = {
     "Inter,sans-serif",
     "Plus Jakarta Sans",
     "family=Plus+Jakarta+Sans",
+    "Playfair Display",
+    "family=Playfair+Display",
     "@media (max-width:760px)",
     "Source Sans 3",
 }

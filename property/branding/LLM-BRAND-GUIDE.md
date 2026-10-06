@@ -102,7 +102,7 @@ Semantic colors are not decorative colors. Red, amber, and green need actual mea
 
 ### Existing exceptions
 
-Some public content still uses Source Sans 3 and Playfair Display. Maintain those where required, but do not introduce Playfair into dashboards, forms, data tools, or dense SaaS interfaces.
+Some public content still uses Source Sans 3. Playfair Display was retired in October 2026 for looking AI-made; do not bring it back.
 
 ### Hierarchy
 

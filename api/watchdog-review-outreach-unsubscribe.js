@@ -11,7 +11,7 @@ function digest(value) {
   return crypto.createHash('sha256').update(value).digest('hex');
 }
 function page(title, message) {
-  return `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>${title}</title></head><body style="margin:0;background:#f5f5f7;color:#1d1d1f;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif"><main style="max-width:560px;margin:72px auto;padding:0 20px"><section style="background:#fff;border:1px solid #e8e8ed;border-radius:28px;padding:44px;text-align:center"><div style="font-size:26px;font-weight:800;color:#0b4fb3">Watchdog</div><h1 style="margin:26px 0 12px;font-size:32px;letter-spacing:-1px">${title}</h1><p style="margin:0;color:#6e6e73;font-size:17px;line-height:1.55">${message}</p></section></main></body></html>`;
+  return `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>${title}</title></head><body style="margin:0;background:#f5f5f7;color:#1d1d1f;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif"><main style="max-width:560px;margin:72px auto;padding:0 20px"><section style="background:#fff;border:1px solid #e8e8ed;border-radius:12px;padding:44px;text-align:center"><div style="font-size:26px;font-weight:800;color:#0b4fb3">Watchdog</div><h1 style="margin:26px 0 12px;font-size:32px;letter-spacing:-1px">${title}</h1><p style="margin:0;color:#6e6e73;font-size:17px;line-height:1.55">${message}</p></section></main></body></html>`;
 }
 
 export default async function handler(req, res) {
@@ -35,7 +35,7 @@ export default async function handler(req, res) {
   // follow links automatically, so the unsubscribe itself needs a POST.
   if (req.method === 'GET') {
     const action = `/api/watchdog-review-outreach-unsubscribe?t=${encodeURIComponent(token)}`;
-    const form = `<form method="post" action="${action}" style="margin-top:24px"><button type="submit" style="font:inherit;font-size:17px;font-weight:700;color:#fff;background:#0b4fb3;border:0;border-radius:999px;padding:14px 28px;min-height:44px;cursor:pointer">Unsubscribe</button></form>`;
+    const form = `<form method="post" action="${action}" style="margin-top:24px"><button type="submit" style="font:inherit;font-size:17px;font-weight:700;color:#fff;background:#0b4fb3;border:0;border-radius:8px;padding:14px 28px;min-height:44px;cursor:pointer">Unsubscribe</button></form>`;
     return res.status(200).send(page('Stop review-request emails?', `Press the button to stop Watchdog application review-request emails.${form}`));
   }
 

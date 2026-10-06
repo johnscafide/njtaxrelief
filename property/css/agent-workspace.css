@@ -82,7 +82,7 @@ body.wdx-agent-workspace .wdx-brand-mark{width:38px;height:38px}
 .aw27-head{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;flex-wrap:wrap;margin:0 0 16px}
 .aw27-head h1{margin:0;font-size:clamp(1.35rem,2vw,1.6rem);font-weight:800;line-height:1.15}
 .aw27-head p{margin:4px 0 0;color:var(--aw-muted);font-size:var(--aw-sm);max-width:760px}
-.aw27-eyebrow{display:block;margin:0 0 4px;color:var(--aw-muted);font:700 var(--aw-xs)/1.2 var(--aw-font);letter-spacing:.08em;text-transform:uppercase}
+.aw27-eyebrow{display:block;margin:0 0 4px;color:var(--aw-muted);font:700 var(--aw-xs)/1.2 var(--aw-font);letter-spacing:0;text-transform:none}
 
 /* Numbers line up in every table, meter and KPI. */
 html.aw27-page b,html.aw27-page .aw27-num{font-variant-numeric:tabular-nums}

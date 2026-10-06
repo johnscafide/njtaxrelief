@@ -28,7 +28,7 @@
   position:static;z-index:auto;background:transparent;box-shadow:none;
 }
 .wd-crumbs a{
-  display:inline-flex;align-items:center;gap:7px;min-height:44px;padding:0 6px;border-radius:999px;
+  display:inline-flex;align-items:center;gap:7px;min-height:44px;padding:0 6px;border-radius:8px;
   color:#1456a0;text-decoration:none;white-space:nowrap;
 }
 .wd-crumbs a:hover{text-decoration:underline;text-underline-offset:3px}

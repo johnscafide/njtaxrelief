@@ -10,7 +10,7 @@
 /* header gets a spine of brand color */
 .top { border-bottom: none; box-shadow: inset 0 -1px 0 var(--hair); }
 .top::before { content: ''; display: block; height: 4px;
-  background: linear-gradient(90deg, var(--accent) 0%, var(--accent-2) 45%, var(--gold) 100%); }
+  background:var; }
 
 .who h1 { font-size: 26px; }
 .vwset { border-color: #d6dceb; }
@@ -50,7 +50,7 @@
 .pr-shot.noimg img { display: none; }
 .pr-kind {
   position: absolute; top: 10px; left: 10px; z-index: 2;
-  font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: .07em;
+  font-size: 10px; font-weight: 800; text-transform:none; letter-spacing:0;
   background: rgba(255,255,255,.95); color: var(--ink); padding: 4px 9px; border-radius: 4px;
 }
 .pr-kind.home { background: var(--accent); color: #fff; }
@@ -96,7 +96,7 @@
 .sec h4 i { color: var(--accent-2); }
 
 /* ---------- locked ---------- */
-.lk-over { background: linear-gradient(90deg, rgba(255,255,255,.97) 52%, rgba(255,255,255,.68)); }
+.lk-over { background:rgba; }
 .lk-t i { color: var(--gold); }
 .lk-b { background: var(--accent); }
 .lk-b:hover { background: var(--accent-2); }
@@ -125,7 +125,7 @@
   display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
   padding: 14px 0 18px; font-size: 13px; color: var(--ink-3);
 }
-.sortbar label { font-weight: 700; text-transform: uppercase; letter-spacing: .07em; font-size: 11px; }
+.sortbar label { font-weight: 700; text-transform:none; letter-spacing:0; font-size: 11px; }
 .sortbar select {
   padding: 8px 12px; font-family: inherit; font-size: 13.5px; color: var(--ink);
   border: 1px solid #d6dceb; border-radius: 6px; background: #fff;
@@ -144,7 +144,7 @@
 
 /* group bands. Your home reads warmer than the watchlist. */
 .band { padding: 4px 26px 10px; border-radius: 12px; margin-bottom: 26px; }
-.band.own { background: linear-gradient(180deg, #f4f8fd 0%, #fbfcfe 100%); }
+.band.own { background:#f4f8fd; }
 .band .grp { margin-top: 20px; }
 .band.own .grp { color: var(--accent-2); }
 .band .pr:last-child { border-bottom: none; padding-bottom: 14px; }
@@ -152,7 +152,7 @@
 /* title row holds the compare tick and the menu */
 .pr-titlerow { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 6px; }
 .pick { display: inline-flex; align-items: center; gap: 7px; cursor: pointer;
-  font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .07em; color: var(--ink-3); }
+  font-size: 11px; font-weight: 700; text-transform:none; letter-spacing:0; color: var(--ink-3); }
 .pick input { width: 15px; height: 15px; accent-color: var(--accent-2); cursor: pointer; }
 .pr.picked { outline: 2px solid var(--accent-2); outline-offset: 10px; border-radius: 6px; }
 
@@ -231,9 +231,9 @@
 .pf-noimg { background: var(--accent); color: #fff; display: flex; align-items: center;
   justify-content: center; font-size: 30px; font-weight: 800; }
 .pf-topb { flex: 1; min-width: 0; }
-.pf-meter { height: 7px; background: var(--hair); border-radius: 99px; overflow: hidden; }
-.pf-meter i { display: block; height: 100%; border-radius: 99px;
-  background: linear-gradient(90deg, var(--accent), var(--accent-2)); transition: width .4s ease; }
+.pf-meter { height: 7px; background: var(--hair); border-radius:12px; overflow: hidden; }
+.pf-meter i { display: block; height: 100%; border-radius:12px;
+  background:var; transition: width .4s ease; }
 .pf-pct { font-size: 13px; color: var(--ink-3); margin-top: 9px; }
 .pf-pct b { color: var(--accent); }
 
@@ -255,8 +255,8 @@
 .pf-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(215px, 1fr)); gap: 18px 22px; }
 .pf-f { display: flex; flex-direction: column; }
 .pf-f.wide { grid-column: 1 / -1; margin-top: 18px; }
-.pf-f label { font-size: 11.5px; font-weight: 700; text-transform: uppercase;
-  letter-spacing: .06em; color: var(--ink-3); margin-bottom: 6px; }
+.pf-f label { font-size: 11.5px; font-weight: 700; text-transform:none;
+  letter-spacing:0; color: var(--ink-3); margin-bottom: 6px; }
 .pf-f input, .pf-f select, .pf-f textarea {
   width: 100%; padding: 10px 0; font-size: 15.5px; font-family: inherit; color: var(--ink);
   border: none; border-bottom: 1.5px solid var(--hair); background: none;
@@ -274,7 +274,7 @@
 
 .pf-chips { display: flex; flex-wrap: wrap; gap: 8px; }
 .chip { display: inline-flex; align-items: center; font-size: 13.5px; padding: 8px 15px;
-  border: 1px solid var(--hair); border-radius: 99px; cursor: pointer; color: var(--ink-2);
+  border: 1px solid var(--hair); border-radius:12px; cursor: pointer; color: var(--ink-2);
   transition: all .15s ease; }
 .chip input { display: none; }
 .chip:hover { border-color: var(--accent-2); }
@@ -312,8 +312,8 @@
 .un-score { flex-shrink: 0; text-align: center; padding: 14px 20px; border-radius: 10px; min-width: 110px; }
 .un-score b { display: block; font-family: var(--sans); font-size: 38px; font-weight: 800;
   letter-spacing: -.04em; line-height: 1; }
-.un-score span { font-size: 10px; font-weight: 700; text-transform: uppercase;
-  letter-spacing: .07em; opacity: .75; }
+.un-score span { font-size: 10px; font-weight: 700; text-transform:none;
+  letter-spacing:0; opacity: .75; }
 .un-score.good { background: var(--pos-bg); color: var(--pos); }
 .un-score.mid  { background: var(--gold-bg); color: #8a6f14; }
 .un-score.bad  { background: var(--neg-bg); color: var(--neg); }

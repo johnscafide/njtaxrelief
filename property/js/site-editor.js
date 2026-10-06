@@ -532,7 +532,7 @@
     '.menu button,.menu a{display:flex;align-items:center;width:100%;text-align:left;background:none;border:0;color:#10294b;border-radius:9px;font-size:14px;font-weight:600;min-height:44px;padding:0 12px;text-decoration:none}',
     '.menu button:hover,.menu a:hover{background:#eef3fb}',
     '.menu .danger{color:#b91c1c}',
-    '.mini{position:fixed;left:12px;bottom:12px;z-index:2147483000;border-radius:999px;background:#0f1f38;box-shadow:0 2px 6px rgba(15,23,42,.08)}',
+    '.mini{position:fixed;left:12px;bottom:12px;z-index:2147483000;border-radius:8px;background:#0f1f38;box-shadow:0 2px 6px rgba(15,23,42,.08)}',
     '.tools{position:fixed;z-index:2147483001;display:flex;gap:4px;padding:4px;border-radius:12px;background:#0f1f38;box-shadow:0 2px 6px rgba(15,23,42,.08)}',
     '.tools button{min-width:44px;padding:0 10px}',
     '.backdrop{position:fixed;inset:0;z-index:2147483002;background:rgba(2,12,27,.45);display:flex;align-items:center;justify-content:center;padding:16px}',

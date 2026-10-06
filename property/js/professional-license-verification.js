@@ -62,7 +62,7 @@
     section.id = 'ac-professional-verification';
     section.className = 'ac-section acp-editor';
     section.innerHTML =
-      '<header class="acp-header"><div><span>PROFESSIONAL VERIFICATION</span><h2>New Jersey Real Estate License</h2><p>Confirm your professional identity against the official New Jersey Real Estate Commission record.</p></div><div class="acp-source"><i class="fas ' + copy.icon + '"></i><span>' + esc(copy.label) + '</span></div></header>' +
+      '<header class="acp-header"><div><span>Professional verification</span><h2>New Jersey Real Estate License</h2><p>Confirm your professional identity against the official New Jersey Real Estate Commission record.</p></div><div class="acp-source"><i class="fas ' + copy.icon + '"></i><span>' + esc(copy.label) + '</span></div></header>' +
       '<div class="acp-grid"><section class="acp-panel"><div class="acp-panel-head"><i class="fas fa-address-card"></i><div><b>License verification</b><small>Automatic exact match against the official NJDOBI public search</small></div></div><div class="acp-fields">' +
         '<label class="acp-field"><span>NJ license number</span><input id="ac-license-number" type="text" value="' + esc(license) + '" placeholder="0123456" maxlength="14" autocomplete="off" inputmode="numeric"><small>Don\'t know the number? Use the license finder in Agent branding above and search by <b>last name</b>, then select your record.</small></label>' +
         '<div class="acp-field"><span>Verification status</span><b>' + esc(copy.label) + '</b><small>' + esc(copy.note) + '</small></div>' +

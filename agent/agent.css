@@ -8,7 +8,7 @@
   .product-preview{isolation:isolate}
   .product-preview figcaption button[data-tour-open]{position:absolute;z-index:4;inset:0;height:100%;min-height:0;padding:0;border-radius:9px;background:transparent;color:transparent;font-size:0;cursor:pointer}
   .product-preview figcaption button[data-tour-open] .icon{display:none}
-  .product-preview figcaption button[data-tour-open]::after{content:'Tap to explore';position:absolute;right:10px;bottom:10px;padding:8px 11px;border-radius:999px;background:#fffffff0;color:#174f9d;font:600 12px/1 var(--sans);box-shadow:0 2px 10px #17375f22}
+  .product-preview figcaption button[data-tour-open]::after{content:'Tap to explore';position:absolute;right:10px;bottom:10px;padding:8px 11px;border-radius:8px;background:#fffffff0;color:#174f9d;font:600 12px/1 var(--sans);box-shadow:0 2px 10px #17375f22}
   .product-preview figcaption>span{position:relative;z-index:5}
 }
 

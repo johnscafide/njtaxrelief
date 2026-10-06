@@ -12,7 +12,7 @@
   --hm-green:#13a66b;
   --hm-amber:#f4ad00;
   --hm-red:#ec5361;
-  --hm-radius:20px;
+  --hm-radius:12px;
   --hm-shadow:0 2px 6px rgba(15,23,42,.08);
   --hm-shadow-hover:0 2px 6px rgba(15,23,42,.08);
 }
@@ -30,7 +30,7 @@ body.hm-dashboard-page .db-workspace{margin:0!important;width:100%!important;max
 .hm27-menu{width:58px;height:58px;border:1px solid var(--hm-line);border-radius:17px;background:#fff;color:var(--hm-ink);font-size:23px;cursor:pointer;box-shadow:0 2px 6px rgba(15,23,42,.08);transition:.18s ease}
 .hm27-menu:hover{transform:translateY(-1px);box-shadow:0 2px 6px rgba(15,23,42,.08)}
 .hm27-brand{display:flex;align-items:center;gap:12px;text-decoration:none;color:var(--hm-ink)}
-.hm27-brand-mark{width:54px;height:54px;border-radius:15px;display:grid;place-items:center;background:linear-gradient(145deg,#173f91,#2d6df6);color:#fff;font-size:23px;box-shadow:0 2px 6px rgba(15,23,42,.08)}
+.hm27-brand-mark{width:54px;height:54px;border-radius:15px;display:grid;place-items:center;background:#173f91;color:#fff;font-size:23px;box-shadow:0 2px 6px rgba(15,23,42,.08)}
 .hm27-brand-copy b{display:block;font:800 25px/1 "Libre Franklin",sans-serif;letter-spacing:-.04em}
 .hm27-brand-copy small{display:block;margin-top:5px;font:800 10px/1 "Libre Franklin",sans-serif;letter-spacing:.13em;color:#8997ad}
 .hm27-top-right{margin-left:auto;height:100%;gap:0}
@@ -52,7 +52,7 @@ body.hm-dashboard-page .db-workspace{margin:0!important;width:100%!important;max
 .hm27-nav.open{pointer-events:auto;visibility:visible}
 .hm27-nav-backdrop{position:absolute;inset:0;border:0;background:rgba(18,32,54,.30);opacity:0;transition:opacity .2s ease}
 .hm27-nav.open .hm27-nav-backdrop{opacity:1}
-.hm27-nav-panel{position:absolute;left:16px;top:16px;bottom:16px;width:min(330px,calc(100vw - 32px));background:#fff;border:1px solid var(--hm-line);border-radius:24px;box-shadow:0 2px 6px rgba(15,23,42,.08);display:flex;flex-direction:column;overflow:hidden;transform:translateX(calc(-100% - 42px));transition:transform .24s cubic-bezier(.22,.75,.24,1)}
+.hm27-nav-panel{position:absolute;left:16px;top:16px;bottom:16px;width:min(330px,calc(100vw - 32px));background:#fff;border:1px solid var(--hm-line);border-radius:12px;box-shadow:0 2px 6px rgba(15,23,42,.08);display:flex;flex-direction:column;overflow:hidden;transform:translateX(calc(-100% - 42px));transition:transform .24s cubic-bezier(.22,.75,.24,1)}
 .hm27-nav.open .hm27-nav-panel{transform:translateX(0)}
 .hm27-nav-head{display:flex;align-items:center;justify-content:space-between;padding:20px 18px;border-bottom:1px solid var(--hm-line)}
 .hm27-nav-head .hm27-brand-mark{width:45px;height:45px;border-radius:13px;font-size:19px}.hm27-nav-head .hm27-brand-copy b{font-size:21px}
@@ -71,7 +71,7 @@ body.hm-nav-open{overflow:hidden}
 .hm-top{position:relative!important;top:auto!important;border:0!important;background:transparent!important;z-index:20!important}
 .hm-top-in{max-width:none!important;margin:0!important;padding:22px 28px 16px!important;display:grid!important;grid-template-columns:auto auto minmax(260px,520px) 1fr auto!important;align-items:center!important;gap:12px!important}
 .hm-back{height:44px;padding:0 15px;border:1px solid var(--hm-line);border-radius:13px;background:#fff;color:var(--hm-ink)!important;display:inline-flex!important;align-items:center!important;gap:8px!important;text-decoration:none!important;box-shadow:0 2px 6px rgba(15,23,42,.08)}
-.hm-switch-label{font:800 11px/1 "Libre Franklin",sans-serif;text-transform:uppercase;letter-spacing:.08em;color:#8795a9}
+.hm-switch-label{font:800 11px/1 "Libre Franklin",sans-serif;text-transform:none;letter-spacing:0;color:#8795a9}
 #hm-switch{max-width:none!important;height:46px!important;border:1px solid var(--hm-line)!important;border-radius:13px!important;background:#fff!important;padding:0 42px 0 14px!important;font:700 14px "Source Sans 3",sans-serif!important;color:var(--hm-ink)!important;box-shadow:0 2px 6px rgba(15,23,42,.08)}
 .hm-saved{justify-self:end;color:var(--hm-green)!important;font-weight:700;font-size:13px}.hm-saved i{margin-right:6px}
 .hm27-page-actions{display:flex;gap:9px;justify-self:end}
@@ -106,7 +106,7 @@ body.hm-nav-open{overflow:hidden}
 
 /* Agent Intel becomes a real full-width briefing rather than a narrow floating box. */
 .hm-wrap>.ai{grid-column:1/-1!important;width:100%!important;max-width:none!important;margin:0!important;padding:0!important;display:grid!important;grid-template-columns:270px minmax(0,1fr)!important;background:#fff!important;border:1px solid var(--hm-line)!important;border-radius:var(--hm-radius)!important;overflow:hidden!important;box-shadow:var(--hm-shadow)!important}
-.hm-wrap>.ai .ai-h{position:static!important;grid-column:1!important;grid-row:1 / span 2!important;min-height:100%!important;background:linear-gradient(150deg,#14315c,#1d4b82)!important;padding:26px!important;display:flex!important;align-items:flex-start!important;gap:14px!important;color:#fff!important}
+.hm-wrap>.ai .ai-h{position:static!important;grid-column:1!important;grid-row:1 / span 2!important;min-height:100%!important;background:#14315c!important;padding:26px!important;display:flex!important;align-items:flex-start!important;gap:14px!important;color:#fff!important}
 .hm-wrap>.ai .ai-h img{width:52px!important;height:52px!important;border:2px solid rgba(255,255,255,.9)!important;box-shadow:0 2px 6px rgba(15,23,42,.08)}
 .hm-wrap>.ai .ai-h b{font:800 18px/1.2 "Libre Franklin",sans-serif!important;color:#fff!important}.hm-wrap>.ai .ai-h span{font-size:12px!important;color:#bdd0e9!important}
 .hm-wrap>.ai>.hm-lede{grid-column:2!important;margin:0!important;padding:28px 28px 16px!important;max-width:none!important;font-size:18px!important;line-height:1.65!important;color:#30435e!important}
@@ -136,13 +136,13 @@ body.hm-nav-open{overflow:hidden}
 .sec2.open>.sec2-h{min-height:0!important;padding:20px 22px!important;border-bottom:1px solid var(--hm-line)!important;background:#fbfcfe!important}
 .sec2-icon-tile{width:54px!important;height:54px!important;border-radius:16px!important;background:#eef4ff!important;color:var(--hm-blue)!important;display:grid!important;place-items:center!important;font-size:20px!important;align-self:start!important}
 .sec2-copy{display:block!important;min-width:0!important}
-.sec2-kicker{display:block!important;font:800 10px/1.2 "Libre Franklin",sans-serif!important;text-transform:uppercase!important;letter-spacing:.11em!important;color:#91a0b4!important;margin-bottom:8px!important}
+.sec2-kicker{display:block!important;font:800 10px/1.2 "Libre Franklin",sans-serif!important;text-transform:none;letter-spacing:0 !important;color:#91a0b4!important;margin-bottom:8px!important}
 .sec2-t{display:block!important;font:800 20px/1.18 "Libre Franklin",sans-serif!important;letter-spacing:-.03em!important;color:var(--hm-ink)!important;margin:0 0 8px!important}
 .sec2-s{display:block!important;font-size:14px!important;line-height:1.45!important;color:#73849c!important;max-width:42ch!important}
 .sec2-c{font-size:12px!important;color:#a0aec0!important;transition:transform .18s ease!important}.sec2.open .sec2-c{transform:rotate(180deg)}
 .sec2-b{display:none!important;padding:24px!important;background:#fff!important}.sec2.open>.sec2-b{display:block!important}
 .sec2-pro{display:grid!important;grid-template-columns:190px minmax(0,1fr)!important;gap:18px!important;align-items:start!important;margin:0 0 22px!important;padding:16px 18px!important;border-radius:14px!important;background:#f4f7fb!important;color:#5f7088!important;font-size:13.5px!important;line-height:1.5!important}
-.sec2-pro b{font:800 12px/1.4 "Libre Franklin",sans-serif!important;text-transform:uppercase!important;letter-spacing:.06em!important;color:#34465f!important}
+.sec2-pro b{font:800 12px/1.4 "Libre Franklin",sans-serif!important;text-transform:none;letter-spacing:0 !important;color:#34465f!important}
 
 /* compact signal cards generated by the legacy tool modules */
 .hs-signal{min-height:88px!important;display:grid!important;grid-template-columns:minmax(0,1fr) auto!important;gap:12px!important;align-items:center!important}
@@ -156,13 +156,13 @@ body.hm-nav-open{overflow:hidden}
 .hm-dashboard-page table{width:100%;max-width:100%}.hm-dashboard-page .comps-wrap,.hm-dashboard-page .table-wrap,.hm-dashboard-page .rl-wrap{overflow-x:auto;overscroll-behavior:contain}
 
 /* ---------- profile and notification popovers ---------- */
-.hm27-pop{position:fixed;z-index:14500;right:26px;top:82px;width:min(390px,calc(100vw - 28px));background:#fff;border:1px solid var(--hm-line);border-radius:20px;box-shadow:0 2px 6px rgba(15,23,42,.08);padding:10px;opacity:0;transform:translateY(-8px) scale(.98);pointer-events:none;transition:.18s ease}
+.hm27-pop{position:fixed;z-index:14500;right:26px;top:82px;width:min(390px,calc(100vw - 28px));background:#fff;border:1px solid var(--hm-line);border-radius:12px;box-shadow:0 2px 6px rgba(15,23,42,.08);padding:10px;opacity:0;transform:translateY(-8px) scale(.98);pointer-events:none;transition:.18s ease}
 .hm27-pop.open{opacity:1;transform:none;pointer-events:auto}
 .hm27-pop header{display:flex;align-items:center;justify-content:space-between;padding:14px 13px;border-bottom:1px solid var(--hm-line)}
 .hm27-pop header b{font:800 16px "Libre Franklin",sans-serif}.hm27-pop header small{display:block;margin-top:3px;color:var(--hm-muted)}
 .hm27-pop nav{display:grid;padding:7px 0}.hm27-pop a,.hm27-pop button.hm27-menu-row{border:0;background:none;text-decoration:none;color:var(--hm-ink);display:flex;gap:12px;align-items:center;text-align:left;padding:12px;border-radius:13px;cursor:pointer;width:100%}.hm27-pop a:hover,.hm27-pop button.hm27-menu-row:hover{background:#f4f7fb}.hm27-pop a>i,.hm27-pop button.hm27-menu-row>i{width:36px;height:36px;border-radius:11px;background:#eef4ff;color:var(--hm-blue);display:grid;place-items:center}.hm27-pop span b{display:block;font-size:14px}.hm27-pop span small{display:block;color:var(--hm-muted);font-size:12px;margin-top:2px}
 .hm27-notice-list{max-height:440px;overflow:auto;padding:5px}.hm27-notice{display:grid!important;grid-template-columns:36px minmax(0,1fr) auto!important;align-items:start!important}.hm27-notice em{font-size:11px;color:var(--hm-muted);font-style:normal;padding-top:5px}.hm27-read{border:0;background:none;color:var(--hm-blue);font-weight:800;cursor:pointer}
-.hm-loading-screen{background:var(--hm-bg)!important}.gate{border-radius:24px!important;border:1px solid var(--hm-line)!important;box-shadow:var(--hm-shadow)!important}
+.hm-loading-screen{background:var(--hm-bg)!important}.gate{border-radius:12px!important;border:1px solid var(--hm-line)!important;box-shadow:var(--hm-shadow)!important}
 
 @media(max-width:1180px){
   .hm27-date{display:none}.hm27-weather{padding:0 14px}.hm27-brand-copy small{display:none}

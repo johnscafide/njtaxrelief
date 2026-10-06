@@ -2,7 +2,7 @@
 /* ---------- WATCHDOG ESTIMATE ---------- */
 .plm-est {
   position: relative; overflow: hidden;
-  background: linear-gradient(135deg, #0e2248 0%, #1a3a6b 100%);
+  background:#0e2248;
   border-radius: 14px; padding: 24px 26px; color: #fff; margin-bottom: 16px;
 }
 /* Faint roofline pattern, drawn as an inline SVG rather than a photo. A
@@ -17,7 +17,7 @@
 }
 .plm-est > * { position: relative; z-index: 1; }
 .plm-est-lbl {
-  font-size: 11.5px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase;
+  font-size: 11.5px; font-weight: 800; letter-spacing:0; text-transform:none;
   color: var(--gold); display: flex; align-items: center; gap: 8px; margin-bottom: 10px;
 }
 .plm-est-val { font-size: 34px; font-weight: 800; letter-spacing: -.025em; line-height: 1.1; }
@@ -60,7 +60,7 @@
 .score-gauge { position: relative; text-align: center; }
 .score-gauge svg { width: 100%; height: auto; display: block; }
 .score-num { font-size: 40px; font-weight: 800; letter-spacing: -.03em; margin-top: -34px; }
-.score-lbl { font-size: 13px; font-weight: 800; text-transform: uppercase; letter-spacing: .07em; margin-top: 4px; }
+.score-lbl { font-size: 13px; font-weight: 800; text-transform:none; letter-spacing:0; margin-top: 4px; }
 .score-body p { font-size: 14.5px; color: #3d4759; line-height: 1.7; margin: 0 0 16px; }
 .score-rows { border-top: 1px solid #eef0f5; }
 .score-row { display: flex; justify-content: space-between; gap: 16px; padding: 9px 0;
@@ -75,7 +75,7 @@
 /* ---------- TIMELINE ---------- */
 .tl-kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 14px; margin-bottom: 18px; }
 .tl-n { font-size: 20px; font-weight: 800; color: #0e2248; letter-spacing: -.02em; font-variant-numeric: tabular-nums; }
-.tl-l { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; color: #5a6070; margin-top: 4px; }
+.tl-l { font-size: 11px; font-weight: 700; text-transform:none; letter-spacing:0; color: #5a6070; margin-top: 4px; }
 .tl-cta { display: flex; align-items: center; justify-content: space-between; gap: 18px; flex-wrap: wrap;
   margin-top: 16px; padding: 16px 18px; background: #f4f6fa; border-radius: 11px; font-size: 14px; color: #3d4759; line-height: 1.6; }
 @media (max-width: 700px) {
@@ -117,7 +117,7 @@
   transition: opacity .2s ease, transform .2s ease;
   display: flex; gap: 3px; padding: 5px;
   background: rgba(255,255,255,.96); 
-  border: 1px solid var(--border); border-radius: 99px;
+  border: 1px solid var(--border); border-radius:12px;
   box-shadow: 0 2px 6px rgba(15,23,42,.08);
   max-width: calc(100% - 32px); overflow-x: auto; scrollbar-width: none;
 }
@@ -127,7 +127,7 @@
   display: inline-flex; align-items: center; gap: 7px; white-space: nowrap;
   border: none; background: none; cursor: pointer; font-family: inherit;
   font-size: 13px; font-weight: 700; color: #5a6070;
-  padding: 9px 15px; border-radius: 99px; transition: background .15s, color .15s;
+  padding: 9px 15px; border-radius:12px; transition: background .15s, color .15s;
 }
 .secnav button:hover { background: #f2f5fa; color: var(--navy-dark); }
 .secnav button.here { background: var(--navy); color: #fff; }
@@ -167,7 +167,7 @@
 .auth-magic-note { font-size: 12px; color: #8a93a6; margin-top: 8px; line-height: 1.55; }
 .auth-or { display: flex; align-items: center; gap: 12px; margin: 18px 0 4px; }
 .auth-or::before, .auth-or::after { content: ''; flex: 1; height: 1px; background: #eef0f5; }
-.auth-or span { font-size: 11.5px; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; color: #a0a8b8; }
+.auth-or span { font-size: 11.5px; font-weight: 700; text-transform:none; letter-spacing:0; color: #a0a8b8; }
 /* ---------- ACCOUNT CARD ---------- */
 .acct-cta { background: #fff; border: 1px dashed var(--border); border-radius: 13px; padding: 18px; margin-bottom: 16px; }
 .acct-cta.signed { border-style: solid; border-color: #c8d6ea; }

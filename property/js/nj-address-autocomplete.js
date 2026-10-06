@@ -201,9 +201,9 @@
     style.id='wd-nj-address-autocomplete-style';
     style.textContent=[
       '.pl-input-wrap,.ssearch-pill{position:relative}',
-      '.wd-nj-predictions{background:#fff;border:1px solid #e4eaee;border-radius:20px;box-shadow:0 2px 6px rgba(15,23,42,.08);display:none;left:0;max-height:min(590px,68vh);overflow:auto;position:absolute;right:0;top:calc(100% + 10px);z-index:7300;text-align:left;font-family:"Libre Franklin",system-ui,sans-serif}',
+      '.wd-nj-predictions{background:#fff;border:1px solid #e4eaee;border-radius:12px;box-shadow:0 2px 6px rgba(15,23,42,.08);display:none;left:0;max-height:min(590px,68vh);overflow:auto;position:absolute;right:0;top:calc(100% + 10px);z-index:7300;text-align:left;font-family:"Libre Franklin",system-ui,sans-serif}',
       '.wd-nj-predictions.open{display:block}',
-      '.wd-nj-county{align-items:center;background:#f7faf9;border-top:1px solid #e8eeee;color:#078486;display:flex;font-size:11px;font-weight:900;justify-content:space-between;letter-spacing:.09em;padding:12px 15px 8px;text-transform:uppercase}',
+      '.wd-nj-county{align-items:center;background:#f7faf9;border-top:1px solid #e8eeee;color:#078486;display:flex;font-size:11px;font-weight:900;justify-content:space-between;letter-spacing:0;padding:12px 15px 8px;text-transform:none}',
       '.wd-nj-county:first-child{border-top:0}',
       '.wd-nj-county small{color:#829196;font-size:10px;font-weight:800;letter-spacing:0;text-transform:none}',
       '.wd-nj-option{appearance:none;background:#fff;border:0;border-top:1px solid #edf1f3;color:#122845;cursor:pointer;display:grid;gap:11px;grid-template-columns:34px minmax(0,1fr) auto;padding:13px 15px;text-align:left;width:100%}',
@@ -222,9 +222,9 @@
       '.wd-nj-score{align-items:center;background:#10294b;border-radius:14px;color:#fff;display:flex;flex-direction:column;justify-content:center;min-width:64px;padding:7px 8px;text-align:center}',
       '.wd-nj-score[hidden]{display:none}',
       '.wd-nj-score b{font-size:19px;line-height:1}',
-      '.wd-nj-score span{font-size:7px;font-weight:900;letter-spacing:.055em;line-height:1.15;margin-top:3px;text-transform:uppercase}',
+      '.wd-nj-score span{font-size:7px;font-weight:900;letter-spacing:0;line-height:1.15;margin-top:3px;text-transform:none}',
       '.wd-nj-empty{color:#718094;font-size:13px;font-weight:650;padding:15px}',
-      '.wd-nj-quick-head{align-items:center;color:#73838c;display:flex;font-size:10px;font-weight:900;justify-content:space-between;letter-spacing:.09em;padding:12px 15px 7px;text-transform:uppercase}',
+      '.wd-nj-quick-head{align-items:center;color:#73838c;display:flex;font-size:10px;font-weight:900;justify-content:space-between;letter-spacing:0;padding:12px 15px 7px;text-transform:none}',
       '.wd-nj-quick{appearance:none;background:#fff;border:0;border-top:1px solid #edf1f3;color:#122845;cursor:pointer;display:grid;gap:11px;grid-template-columns:34px minmax(0,1fr) auto;padding:12px 15px;text-align:left;width:100%}',
       '.wd-nj-quick:hover,.wd-nj-quick:focus-visible{background:#f1f7f6;outline:none}',
       '.wd-nj-quick>i{align-items:center;background:#f1f4f5;border-radius:50%;color:#64788b;display:flex;height:32px;justify-content:center;width:32px}',

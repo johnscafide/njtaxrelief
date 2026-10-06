@@ -336,7 +336,7 @@
     return '<div class="wd-universal-lens" data-lens="' + lens + '" role="tablist" aria-label="Show tools for">' + tab('home','fa-house-chimney','My home',false) + tab('work',unlocked ? 'fa-briefcase' : 'fa-lock','My work',!unlocked) + '<span class="wd-universal-lens-thumb" aria-hidden="true"></span></div>';
   }
   function brandHtml(){
-    return '<a class="wd-universal-brand" href="' + route('/dashboard') + '"><span class="wd-universal-brand-mark"><i class="fas fa-dog"></i></span><span class="wd-universal-brand-copy"><strong>Watchdog</strong><small>PROPERTY INFO</small></span></a>';
+    return '<a class="wd-universal-brand" href="' + route('/dashboard') + '"><span class="wd-universal-brand-mark"><i class="fas fa-dog"></i></span><span class="wd-universal-brand-copy"><strong>Watchdog</strong><small>Property info</small></span></a>';
   }
 
   function publicDrawerHtml(){
@@ -500,12 +500,12 @@
   function renderInvite(d){
     var nodes = ensureInvite();
     if(!d){
-      nodes.modal.innerHTML = '<button class="wd-universal-invite-x" type="button" data-wd-universal="invite-close" aria-label="Close invite"><i class="fas fa-xmark"></i></button><small>INVITE TO WATCHDOG</small><h2>Your invite link is not available right now.</h2><p>Please try again in a moment.</p>';
+      nodes.modal.innerHTML = '<button class="wd-universal-invite-x" type="button" data-wd-universal="invite-close" aria-label="Close invite"><i class="fas fa-xmark"></i></button><small>Invite to Watchdog</small><h2>Your invite link is not available right now.</h2><p>Please try again in a moment.</p>';
       nodes.shade.classList.add('open');
       nodes.modal.classList.add('open');
       return;
     }
-    nodes.modal.innerHTML = '<button class="wd-universal-invite-x" type="button" data-wd-universal="invite-close" aria-label="Close invite"><i class="fas fa-xmark"></i></button><small>INVITE TO WATCHDOG</small><h2>Share better property info.</h2><p>Send your personal Watchdog invite link to a friend, client or colleague.</p><label>Your invite link</label><div><input id="wd-universal-ref" readonly value="' + esc(d.link) + '"><button type="button" data-wd-universal="copy"><i class="far fa-copy"></i> Copy</button></div><footer><a href="mailto:?subject=' + encodeURIComponent('Try Watchdog Property Info') + '&body=' + encodeURIComponent('I thought you might find Watchdog useful: ' + d.link) + '"><i class="fas fa-envelope"></i>Email invite</a><button type="button" data-wd-universal="share"><i class="fas fa-share-nodes"></i> Share</button></footer><em>Invite code: ' + esc(d.code) + '</em>';
+    nodes.modal.innerHTML = '<button class="wd-universal-invite-x" type="button" data-wd-universal="invite-close" aria-label="Close invite"><i class="fas fa-xmark"></i></button><small>Invite to Watchdog</small><h2>Share better property info.</h2><p>Send your personal Watchdog invite link to a friend, client or colleague.</p><label>Your invite link</label><div><input id="wd-universal-ref" readonly value="' + esc(d.link) + '"><button type="button" data-wd-universal="copy"><i class="far fa-copy"></i> Copy</button></div><footer><a href="mailto:?subject=' + encodeURIComponent('Try Watchdog Property Info') + '&body=' + encodeURIComponent('I thought you might find Watchdog useful: ' + d.link) + '"><i class="fas fa-envelope"></i>Email invite</a><button type="button" data-wd-universal="share"><i class="fas fa-share-nodes"></i> Share</button></footer><em>Invite code: ' + esc(d.code) + '</em>';
     nodes.shade.classList.add('open');
     nodes.modal.classList.add('open');
   }

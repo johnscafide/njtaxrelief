@@ -53,7 +53,7 @@
   function tool(r){
     var k=key(r);records[k]=r;setTimeout(function(){load(k,false);},0);
     // content-architecture: dynamic, the body is filled from the parcel's town rows after the server plan check.
-    return '<section class="tcx-tool" id="tcx-'+k+'"><div class="tcx-intro"><span class="tcx-badge">PRO+ · CLOSING</span><h3>Town CO &amp; fire certificate</h3><p>What this town requires before closing, what it costs and who to call.</p></div><div id="tcx-body-'+k+'"><div class="tcx-loading"><span class="pl-spin"></span> Loading town certificate details</div></div></section>';
+    return '<section class="tcx-tool" id="tcx-'+k+'"><div class="tcx-intro"><span class="tcx-badge">Pro+ · Closing</span><h3>Town CO &amp; fire certificate</h3><p>What this town requires before closing, what it costs and who to call.</p></div><div id="tcx-body-'+k+'"><div class="tcx-loading"><span class="pl-spin"></span> Loading town certificate details</div></div></section>';
   }
   Object.assign(window,{toolTownCertificates:tool,tcxRetry:retry});
 })();

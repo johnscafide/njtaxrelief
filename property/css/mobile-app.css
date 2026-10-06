@@ -9,7 +9,7 @@
   .db-workspace{padding-bottom:94px}
 
   /* Floating app navigation: safe-area aware, large touch targets. */
-  .db-sidebar{background:rgba(8,29,55,.96);border:1px solid rgba(255,255,255,.09);border-radius:22px;
+  .db-sidebar{background:rgba(8,29,55,.96);border:1px solid rgba(255,255,255,.09);border-radius:12px;
     bottom:max(9px,env(safe-area-inset-bottom));box-shadow:0 2px 6px rgba(15,23,42,.08);height:72px;
     left:10px;padding:6px 7px;right:10px;width:auto;}
   .db-sidebar .pn,.db-side-link{border-radius:var(--radius-lg);color:#9fb0c5;font-size:var(--type-xs);font-weight:750;gap:5px;min-height:58px;max-width:none;padding:7px 3px}
@@ -36,7 +36,7 @@
 
   .property-card-grid{gap:18px}
   .pr-item{margin:0}
-  .pr-card{border:0;border-radius:20px;box-shadow:0 3px 14px rgba(12,35,64,.10);grid-template-rows:225px auto;max-width:none;overflow:hidden;width:100%}
+  .pr-card{border:0;border-radius:12px;box-shadow:0 3px 14px rgba(12,35,64,.10);grid-template-rows:225px auto;max-width:none;overflow:hidden;width:100%}
   .pr-card:hover{box-shadow:0 3px 14px rgba(12,35,64,.10);transform:none}
   .pr-card-media{height:225px}
   .pr-card .pr-kind{font-size:var(--type-xs);left:14px;padding:8px 12px;top:14px}
@@ -51,7 +51,7 @@
   .pr-card-metrics{gap:0;margin:0 0 13px;padding:0}
   .pr-card-metrics span{padding:0 8px}.pr-card-metrics span:first-child{padding-left:0}.pr-card-metrics span:last-child{padding-right:0}
   .pr-card-metrics b{font-size:var(--type-lg);line-height:1.15}.pr-card-metrics small{font-size:var(--type-xs);line-height:1.3;margin-top:4px}
-  .pr-card-context{margin-top:8px}.pr-card-signals-toggle{align-items:center;background:#f5f8fa;border:0;border-radius:var(--radius-md);color:#28435e;cursor:pointer;display:flex;font:800 var(--type-sm)/1 var(--font-ui);gap:8px;justify-content:flex-start;min-height:47px;padding:0 12px;width:100%}.pr-card-signals-toggle>i:first-child{color:#078486}.pr-card-signals-toggle b{color:#75869a;font-size:var(--type-xs);margin-left:auto;text-transform:uppercase}.pr-card-signals-toggle>i:last-child{color:#7b8b9c;font-size:var(--type-xs);transition:transform .18s ease}.pr-card-context.open .pr-card-signals-toggle>i:last-child{transform:rotate(180deg)}.pr-card-context-body{display:none}.pr-card-context.open .pr-card-context-body{display:block}
+  .pr-card-context{margin-top:8px}.pr-card-signals-toggle{align-items:center;background:#f5f8fa;border:0;border-radius:var(--radius-md);color:#28435e;cursor:pointer;display:flex;font:800 var(--type-sm)/1 var(--font-ui);gap:8px;justify-content:flex-start;min-height:47px;padding:0 12px;width:100%}.pr-card-signals-toggle>i:first-child{color:#078486}.pr-card-signals-toggle b{color:#75869a;font-size:var(--type-xs);margin-left:auto;text-transform:none}.pr-card-signals-toggle>i:last-child{color:#7b8b9c;font-size:var(--type-xs);transition:transform .18s ease}.pr-card-context.open .pr-card-signals-toggle>i:last-child{transform:rotate(180deg)}.pr-card-context-body{display:none}.pr-card-context.open .pr-card-context-body{display:block}
   .ti-mini,.bp-mini{border-radius:var(--radius-md)!important;margin-top:9px!important;min-height:66px}
   .ti-mini>div,.bp-mini>div{padding:10px 9px!important}.ti-mini b,.bp-mini b{font-size:var(--type-sm)!important}.ti-mini small,.bp-mini small{font-size:var(--type-xs)!important;line-height:1.25!important}
   .pr-card-actions{gap:8px;margin-top:13px}.pr-card-actions a,.pr-card-actions button{border-radius:var(--radius-md);font-size:var(--type-sm);min-height:46px;padding:9px 6px}
@@ -59,7 +59,7 @@
   /* Agent Intel becomes a true app sheet instead of a compressed report card. */
   .mobile-intel-overlay,.hm-mobile-intel{align-items:flex-end;background:rgba(5,17,32,.5);display:flex;inset:0;justify-content:center;opacity:0;padding:0;pointer-events:none;position:fixed;z-index:5000}
   .mobile-intel-overlay.open,.hm-mobile-intel.open{opacity:1;pointer-events:auto}
-  .mobile-intel-sheet{background:#fff;border:0;border-radius:28px 28px 0 0;box-shadow:0 2px 6px rgba(15,23,42,.08);box-sizing:border-box;max-height:calc(100dvh - 34px);max-width:none;overflow:auto;overscroll-behavior:contain;padding:50px 22px calc(124px + env(safe-area-inset-bottom));scroll-padding-bottom:142px;transform:translateY(24px);width:100%}
+  .mobile-intel-sheet{background:#fff;border:0;border-radius:12px 12px 0 0;box-shadow:0 2px 6px rgba(15,23,42,.08);box-sizing:border-box;max-height:calc(100dvh - 34px);max-width:none;overflow:auto;overscroll-behavior:contain;padding:50px 22px calc(124px + env(safe-area-inset-bottom));scroll-padding-bottom:142px;transform:translateY(24px);width:100%}
   .mobile-intel-overlay.open .mobile-intel-sheet{transform:none}
   .mobile-intel-bar{height:5px;top:10px;width:46px}
   .mobile-intel-close{background:#edf1f4;height:44px;right:18px;top:20px;width:44px}
@@ -81,7 +81,7 @@
 
   .hm-dashboard-page .hm-hero{background:#fff;box-shadow:none;margin:0;padding:0 12px 18px}
   .hm-dashboard-page .hm-hero-in{display:block;padding:12px 0 0}
-  .hm-dashboard-page .hm-shot{border:0;border-radius:20px;box-shadow:none;height:235px;width:100%}
+  .hm-dashboard-page .hm-shot{border:0;border-radius:12px;box-shadow:none;height:235px;width:100%}
   .hm-dashboard-page .hm-id{background:#fff;min-width:0;padding:16px 3px 0}
   .hm-dashboard-page .hm-kind{background:#e7f5f3;border:0;color:#087f81;font-size:var(--type-xs);margin:0 0 10px;padding:7px 10px}
   .hm-dashboard-page .hm-id h1{color:#112743;font-size:var(--type-2xl);line-height:1.05;margin-bottom:7px}

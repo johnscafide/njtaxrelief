@@ -15,16 +15,16 @@ html body[data-sidebar-page="town-compare"],
 html body[data-sidebar-page="town-compare"] .db-workspace,
 html body[data-sidebar-page="town-compare"] #tc-main{background:var(--tb-bg)!important}
 html body[data-sidebar-page="town-compare"] .wdx-topbar{background:rgba(251,250,247,.94)!important}
-html body[data-sidebar-page="town-compare"] .wdx-btn{border-radius:999px!important}
+html body[data-sidebar-page="town-compare"] .wdx-btn{border-radius:8px!important}
 html body[data-sidebar-page="town-compare"] .wdx-btn.primary{background:var(--tb-navy)!important;border-color:var(--tb-navy)!important}
 html body[data-sidebar-page="town-compare"] #tc-main .tc-wrap{word-spacing:.05em}
 
 /* Picker */
-html body[data-sidebar-page="town-compare"] #tc-main .tc-picker{border:0!important;border-radius:24px!important;background:#fff!important;box-shadow:none!important}
-html body[data-sidebar-page="town-compare"] #tc-main .tc-picker :is(input,select){border-radius:999px!important;border-color:var(--tb-line)!important;background:var(--tb-surface)!important;color:var(--tb-ink)!important;padding-left:16px!important}
-html body[data-sidebar-page="town-compare"] #tc-add{border-radius:999px!important;background:var(--tb-navy)!important;border-color:var(--tb-navy)!important;box-shadow:none!important;color:#fff!important;padding:0 20px!important}
+html body[data-sidebar-page="town-compare"] #tc-main .tc-picker{border:0!important;border-radius:12px!important;background:#fff!important;box-shadow:none!important}
+html body[data-sidebar-page="town-compare"] #tc-main .tc-picker :is(input,select){border-radius:8px!important;border-color:var(--tb-line)!important;background:var(--tb-surface)!important;color:var(--tb-ink)!important;padding-left:16px!important}
+html body[data-sidebar-page="town-compare"] #tc-add{border-radius:8px!important;background:var(--tb-navy)!important;border-color:var(--tb-navy)!important;box-shadow:none!important;color:#fff!important;padding:0 20px!important}
 html body[data-sidebar-page="town-compare"] #tc-add:hover{background:var(--tb-blue)!important}
-html body[data-sidebar-page="town-compare"] #tc-selected span{border:0!important;border-radius:999px!important;font-weight:700!important;color:var(--tb-ink)!important}
+html body[data-sidebar-page="town-compare"] #tc-selected span{border:0!important;border-radius:8px!important;font-weight:700!important;color:var(--tb-ink)!important}
 html body[data-sidebar-page="town-compare"] #tc-selected span button{border-radius:50%!important;background:rgba(255,255,255,.7)!important;color:inherit!important}
 html body[data-sidebar-page="town-compare"] #tc-selected span:nth-child(1){background:var(--tb-navy)!important;color:#fff!important}
 html body[data-sidebar-page="town-compare"] #tc-selected span:nth-child(1) button{background:rgba(255,255,255,.18)!important}
@@ -33,13 +33,13 @@ html body[data-sidebar-page="town-compare"] #tc-selected span:nth-child(3){backg
 html body[data-sidebar-page="town-compare"] #tc-selected span:nth-child(4){background:var(--tb-sand)!important}
 
 /* Empty state and note */
-html body[data-sidebar-page="town-compare"] #tc-output .blank{border:0!important;border-radius:24px!important;background:#fff!important}
-html body[data-sidebar-page="town-compare"] #tc-main .tc-limit{border:0!important;border-radius:24px!important;background:#fff!important;box-shadow:none!important}
+html body[data-sidebar-page="town-compare"] #tc-output .blank{border:0!important;border-radius:12px!important;background:#fff!important}
+html body[data-sidebar-page="town-compare"] #tc-main .tc-limit{border:0!important;border-radius:12px!important;background:#fff!important;box-shadow:none!important}
 
 /* Town cards: one color per town */
 html body[data-sidebar-page="town-compare"] #tc-output .tc-cards{gap:16px!important}
 html body[data-sidebar-page="town-compare"] #tc-output .tc-cards>div{display:grid;gap:10px;align-content:start}
-html body[data-sidebar-page="town-compare"] #tc-output .ti-report{border:0!important;border-radius:24px!important;box-shadow:none!important;overflow:hidden!important;background:#fff!important}
+html body[data-sidebar-page="town-compare"] #tc-output .ti-report{border:0!important;border-radius:12px!important;box-shadow:none!important;overflow:hidden!important;background:#fff!important}
 html body[data-sidebar-page="town-compare"] #tc-output .ti-report-head{position:relative;overflow:hidden;border:0!important}
 html body[data-sidebar-page="town-compare"] #tc-output .ti-report-head::after{content:"";position:absolute;right:92px;bottom:-26px;width:96px;height:96px;opacity:.55;pointer-events:none;background:no-repeat center/contain}
 html body[data-sidebar-page="town-compare"] #tc-output .tc-cards>div:nth-child(1) .ti-report-head{background:var(--tb-navy)!important;color:#fff!important}
@@ -60,7 +60,7 @@ html body[data-sidebar-page="town-compare"] #tc-output .ti-links a{font-weight:7
 html body[data-sidebar-page="town-compare"] #tc-output .bp-mini{border:0!important;border-radius:18px!important;background:#fff!important;margin-top:0!important;overflow:hidden}
 
 /* Comparison table with matching column colors */
-html body[data-sidebar-page="town-compare"] #tc-output .tc-table{border:0!important;border-radius:24px!important;background:#fff!important;box-shadow:none!important;overflow:auto}
+html body[data-sidebar-page="town-compare"] #tc-output .tc-table{border:0!important;border-radius:12px!important;background:#fff!important;box-shadow:none!important;overflow:auto}
 html body[data-sidebar-page="town-compare"] #tc-output .tc-table thead th{background:var(--tb-surface)!important;color:var(--tb-muted)!important;border-color:var(--tb-line)!important}
 html body[data-sidebar-page="town-compare"] #tc-output .tc-table thead th:nth-child(n+2)::before{content:"";display:inline-block;width:10px;height:10px;margin-right:8px;border-radius:50%;vertical-align:0}
 html body[data-sidebar-page="town-compare"] #tc-output .tc-table thead th:nth-child(2)::before{background:var(--tb-navy)}

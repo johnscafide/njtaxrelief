@@ -36,15 +36,15 @@
   font-size: 9px;
   font-weight: 800;
   justify-content: space-between;
-  letter-spacing: .13em;
+  letter-spacing:0;
   padding: 11px 14px;
-  text-transform: uppercase;
+  text-transform:none;
 }
 
 .gt-ad-label i { color: #247947; font-size: 12px; }
 
 .gt-ad-portrait {
-  background: linear-gradient(145deg, #e8eeeb, #d3ddd8);
+  background:#e8eeeb;
   height: 168px;
   overflow: hidden;
   position: relative;
@@ -99,9 +99,9 @@
   display: block;
   font-size: 9px;
   font-weight: 850;
-  letter-spacing: .11em;
+  letter-spacing:0;
   margin-bottom: 8px;
-  text-transform: uppercase;
+  text-transform:none;
 }
 
 .gt-ad h3 {
@@ -202,18 +202,18 @@
   align-items: center; color: var(--saas-text); display: flex; font-size: 11px; gap: 9px;
   letter-spacing: .1em; margin: 31px 0 12px;
 }
-.band > .grp::before { background: var(--saas-teal); border-radius: 99px; content: ''; height: 7px; width: 7px; }
+.band > .grp::before { background: var(--saas-teal); border-radius:12px; content: ''; height: 7px; width: 7px; }
 
 .pr {
-  background: linear-gradient(180deg, #fff 0%, #fdfefe 100%); border: 1px solid #dce4ec;
+  background:#fff; border: 1px solid #dce4ec;
   border-radius: 16px; box-shadow: 0 2px 6px rgba(15,23,42,.08); margin-bottom: 18px;
   overflow: hidden; padding: 0; position: relative; transform: translateZ(0);
 }
 .pr::before {
   background: #90a1b4; content: ''; height: 3px; left: 0; position: absolute; right: 0; top: 0; z-index: 3;
 }
-.pr.ok::before { background: linear-gradient(90deg, #20a174, #71c7a7); }
-.pr.hot::before { background: linear-gradient(90deg, #d94a3f, #e99965); }
+.pr.ok::before { background:#20a174; }
+.pr.hot::before { background:#d94a3f; }
 .pr:hover { border-color: #c7d4e0; box-shadow: 0 2px 6px rgba(15,23,42,.08); transform: translateY(-2px); }
 .pr.picked { border-color: var(--saas-teal); box-shadow: 0 0 0 3px rgba(7,132,134,.12), 0 2px 6px rgba(15,23,42,.08); outline: 0; }
 
@@ -228,7 +228,7 @@
 .pr:hover .pr-shot img { transform: scale(1.035); }
 .pr-kind {
    background: rgba(255,255,255,.97); border: 1px solid rgba(255,255,255,.65);
-  border-radius: 99px; box-shadow: 0 3px 12px rgba(10,32,58,.13); left: 13px; padding: 6px 10px; top: 14px;
+  border-radius:12px; box-shadow: 0 3px 12px rgba(10,32,58,.13); left: 13px; padding: 6px 10px; top: 14px;
 }
 .pr-kind.home { background: rgba(7,132,134,.92); border-color: rgba(255,255,255,.22); }
 
@@ -260,7 +260,7 @@
 .pr-facts .dot { color: #c3cbd4; margin: 0 2px; }
 .pr-tags { gap: 7px; margin-top: 14px; }
 .tg {
-  border: 1px solid transparent; border-radius: 99px; font-size: 10.5px; letter-spacing: .01em;
+  border: 1px solid transparent; border-radius:12px; font-size: 10.5px; letter-spacing: .01em;
   padding: 5px 9px;
 }
 .tg.yes, .tg.ok { border-color: #cce7d9; }
@@ -321,7 +321,7 @@
 
 /* Tool entries feel like modules rather than long document sections. */
 .sec { overflow: hidden; position: relative; }
-.sec::before { background: linear-gradient(180deg, var(--saas-teal), #4fb9af); content: ''; inset: 0 auto 0 0; position: absolute; width: 3px; }
+.sec::before { background:var; content: ''; inset: 0 auto 0 0; position: absolute; width: 3px; }
 .sec h4 { border-bottom: 1px solid #ebeff3; margin: -4px 0 20px; padding-bottom: 15px; }
 
 @media (max-width: 1180px) {
@@ -388,11 +388,11 @@
   color: #8793a4;
   font-size: 9.5px;
   font-weight: 800;
-  letter-spacing: .085em;
+  letter-spacing:0;
   line-height: 1.25;
   margin: 0 0 9px;
   min-height: 12px;
-  text-transform: uppercase;
+  text-transform:none;
 }
 .pr > .fig dd {
   color: #172f52;
@@ -441,11 +441,11 @@
   display: flex;
   font-size: 9.5px;
   font-weight: 800;
-  letter-spacing: .075em;
+  letter-spacing:0;
   line-height: 1.2;
   margin-bottom: 7px;
   min-width: 0;
-  text-transform: uppercase;
+  text-transform:none;
 }
 .pr .ms-v {
   color: #1b3456;

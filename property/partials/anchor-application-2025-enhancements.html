@@ -23,7 +23,7 @@
   <button type="button" class="wd-pdf-preview-shade" aria-label="Close PDF preview"></button>
   <aside class="wd-pdf-preview-drawer" aria-hidden="true">
     <div class="wd-pdf-preview-head">
-      <div><span>LIVE OFFICIAL PDF</span><h2 id="wd-pdf-preview-title">2025 application preview</h2><p id="wd-pdf-preview-meta">Filled locally in your browser.</p></div>
+      <div><span>Live official PDF</span><h2 id="wd-pdf-preview-title">2025 application preview</h2><p id="wd-pdf-preview-meta">Filled locally in your browser.</p></div>
       <button type="button" id="wd-close-pdf-preview" aria-label="Close PDF preview">×</button>
     </div>
     <div class="wd-pdf-preview-notice"><strong>Preview only</strong><span>Download and print are available after you finish the application and complete the final review.</span></div>
@@ -46,7 +46,7 @@
     <a href="https://www.nj.gov/treasury/taxation/pdf/lpt/cntycode.pdf" target="_blank" rel="noopener">View official NJ code list</a>
     <p data-municipality-status role="status" aria-live="polite"></p>
     <div class="wd-municipality-result" data-municipality-result hidden>
-      <span>NJ COUNTY / MUNICIPALITY CODE</span>
+      <span>NJ county / municipality code</span>
       <strong data-municipality-code></strong>
       <small data-municipality-name></small>
       <button type="button" class="wd-btn secondary small" data-use-municipality-code>Use this code</button>
@@ -71,12 +71,12 @@
   <div class="wd-guidance-card wd-parcel-help">
     <div class="wd-guidance-head"><div><strong>Find the property identifiers on your tax record.</strong></div><span class="wd-courtesy-badge">Watchdog courtesy</span></div>
     <div class="wd-record-card-example" aria-label="Example property record card showing where Block and Lot appear">
-      <div class="wd-record-card-top"><span>MUNICIPAL PROPERTY RECORD</span><small>Layout and card color vary by municipality</small></div>
-      <div class="wd-record-card-grid"><span>OWNER</span><b>Sample Owner</b><span>PROPERTY LOCATION</span><b>123 Sample Street</b><span class="is-highlight">BLOCK</span><b class="is-highlight">3105.62</b><span class="is-highlight">LOT</span><b class="is-highlight">14.3</b><span>QUALIFIER</span><b>C0012</b></div>
+      <div class="wd-record-card-top"><span>Municipal property record</span><small>Layout and card color vary by municipality</small></div>
+      <div class="wd-record-card-grid"><span>OWNER</span><b>Sample Owner</b><span>Property location</span><b>123 Sample Street</b><span class="is-highlight">BLOCK</span><b class="is-highlight">3105.62</b><span class="is-highlight">LOT</span><b class="is-highlight">14.3</b><span>Qualifier</span><b>C0012</b></div>
     </div>
     <p>The official NJ instructions say Block, Lot, and condominium Qualifier can be taken from your property tax bill or obtained from your local tax collector. Many municipalities also display them on a property record card, which may be green, white, or another format.</p>
     <div class="wd-parcel-actions"><button type="button" id="wd-watchdog-parcel-lookup" class="wd-btn secondary small">Look up with Watchdog</button><small id="wd-watchdog-parcel-lookup-status"></small></div>
-    <div id="wd-watchdog-parcel-prefill" class="wd-watchdog-prefill" hidden><span>WATCHDOG PROPERTY MATCH</span><strong id="wd-watchdog-parcel-values"></strong><small>We filled these fields from the matched Watchdog parcel record. Review them against your municipal record before continuing.</small></div>
+    <div id="wd-watchdog-parcel-prefill" class="wd-watchdog-prefill" hidden><span>Watchdog property match</span><strong id="wd-watchdog-parcel-values"></strong><small>We filled these fields from the matched Watchdog parcel record. Review them against your municipal record before continuing.</small></div>
   </div>
 </template>
 <span id="wd-parcel-missing-address" hidden>Enter your main home street address and city first.</span>
@@ -93,7 +93,7 @@
   <div class="wd-guidance-card wd-tax-verification">
     <div class="wd-guidance-head"><div><strong>Verify the full-year amount before you enter it.</strong></div><span class="wd-courtesy-badge">Watchdog reference</span></div>
     <p>Use the total property tax <strong>billed for the calendar year</strong>. You can find it on your municipal property-tax bills or in your municipal tax collector account/payment history. Do not use the property-tax amount shown on a mortgage escrow statement unless it matches the municipality's full-year billed total.</p>
-    <div class="wd-tax-match" data-tax-match hidden><span>LATEST WATCHDOG TAX RECORD</span><strong data-tax-value></strong><small data-tax-caption></small></div>
+    <div class="wd-tax-match" data-tax-match hidden><span>Latest Watchdog tax record</span><strong data-tax-value></strong><small data-tax-caption></small></div>
     <p class="wd-tax-note">Watchdog can show a public-record reference for comparison, but it will not put that number into your 2024 or 2025 application field. Confirm each year yourself before continuing.</p>
     <button type="button" class="wd-btn secondary small" data-tax-lookup>Check Watchdog tax record</button>
     <small data-tax-status></small>

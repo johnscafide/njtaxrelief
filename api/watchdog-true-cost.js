@@ -189,7 +189,7 @@ const TC_STYLE = `
 .tc-agent{display:grid;grid-template-columns:56px minmax(0,1fr);gap:4px 12px;align-items:center;background:var(--b-white);border:1px solid var(--b-line);border-radius:var(--b-radius);padding:14px 16px;max-width:420px}
 .tc-agent img,.tc-agent-ph{width:56px;height:56px;border-radius:50%;object-fit:cover;background:var(--b-sky);display:grid;place-content:center;color:var(--b-blue)}
 .tc-agent-copy{display:grid;gap:2px;min-width:0}
-.tc-agent-copy small{font-size:12px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:var(--b-muted)}
+.tc-agent-copy small{font-size:12px;font-weight:600;letter-spacing:0;text-transform:none;color:var(--b-muted)}
 .tc-agent-copy b{font-size:16px}
 .tc-agent-copy span{font-size:13px;color:var(--b-muted)}
 .tc-agent-links{grid-column:1/-1;display:flex;flex-wrap:wrap;gap:8px;margin-top:6px}

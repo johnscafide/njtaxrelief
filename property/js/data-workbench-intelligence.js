@@ -141,7 +141,7 @@ function shell(){
   drawer.id='dwi-drawer';
   drawer.className='dwi-drawer';
   drawer.setAttribute('aria-label','Watchdog Intelligence');
-  drawer.innerHTML=`<header class="dwi-head"><div><span class="dwi-eyebrow">WATCHDOG INTELLIGENCE</span><h2>Turn this Workbench into a review queue</h2><p>Find the properties that deserve a closer look.</p></div><button class="dwi-close" aria-label="Close">×</button></header><div class="dwi-body">${rank(plan)<2?upsell():`<div class="dwi-models">${renderModels()}</div>${scopeSwitch()}${savedViewPicker()}<div class="dwi-scope"><div><b id="dwi-scope-count">${ps.length.toLocaleString()} properties</b><small id="dwi-scope-note">${$$('[data-row]:checked').length?'Selected rows':'Visible Workbench rows'} · max 100 per run</small></div><button class="dwi-run" id="dwi-run"><i class="fas fa-wand-magic-sparkles"></i> Analyze</button></div><div class="dwi-trust">Watchdog keeps source evidence attached to each finding.</div><div id="dwi-results" class="dwi-status">Choose a model and analyze the current properties.</div>`}</div>`;
+  drawer.innerHTML=`<header class="dwi-head"><div><span class="dwi-eyebrow">Watchdog Intelligence</span><h2>Turn this Workbench into a review queue</h2><p>Find the properties that deserve a closer look.</p></div><button class="dwi-close" aria-label="Close">×</button></header><div class="dwi-body">${rank(plan)<2?upsell():`<div class="dwi-models">${renderModels()}</div>${scopeSwitch()}${savedViewPicker()}<div class="dwi-scope"><div><b id="dwi-scope-count">${ps.length.toLocaleString()} properties</b><small id="dwi-scope-note">${$$('[data-row]:checked').length?'Selected rows':'Visible Workbench rows'} · max 100 per run</small></div><button class="dwi-run" id="dwi-run"><i class="fas fa-dog"></i> Analyze</button></div><div class="dwi-trust">Watchdog keeps source evidence attached to each finding.</div><div id="dwi-results" class="dwi-status">Choose a model and analyze the current properties.</div>`}</div>`;
   document.body.append(back,drawer);
   back.onclick=close;
   $('.dwi-close',drawer).onclick=close;
@@ -159,7 +159,7 @@ function shell(){
 }
 
 function upsell(){
-  return `<div class="dwi-upsell"><span class="dwi-eyebrow">PRO INTELLIGENCE</span><h3>Intelligence starts with Pro</h3><p>Pro turns property facts into ranked, evidence-backed findings. Pro+ adds Closing Review, population scans and Change Intelligence.</p><a href="/pro#plans">See Pro plans</a></div>`;
+  return `<div class="dwi-upsell"><span class="dwi-eyebrow">Pro intelligence</span><h3>Intelligence starts with Pro</h3><p>Pro turns property facts into ranked, evidence-backed findings. Pro+ adds Closing Review, population scans and Change Intelligence.</p><a href="/pro#plans">See Pro plans</a></div>`;
 }
 
 async function loadPropertyContexts(data){
@@ -205,7 +205,7 @@ async function run(){
     host.innerHTML=`Watchdog Intelligence is not available for this scope yet.<br><small>${esc(e?.message||'The analysis could not complete.')}</small>`;
   }finally{
     button.disabled=false;
-    button.innerHTML='<i class="fas fa-wand-magic-sparkles"></i> Analyze';
+    button.innerHTML='<i class="fas fa-dog"></i> Analyze';
   }
 }
 
@@ -427,7 +427,7 @@ function detail(f){
   const evidence=Array.isArray(f.evidence)?f.evidence:[],missing=Array.isArray(f.missing_evidence)?f.missing_evidence:[],facts=evidence.filter(e=>!isDerivedEvidence(e)),derived=evidence.filter(isDerivedEvidence),why=Array.isArray(f.why_now)?f.why_now:[],lineage=findingLineage(f),ctx=contextFor(f),modelLabel=last?.model?.label||MODELS.find(x=>x.key===model)?.label||model;
   const modelStatus=String(last?.model?.status||'').toLowerCase()==='preview'?' · Preview':'';
   host.innerHTML=`<section class="dwi-detail">
-    <div class="dwi-detail-title"><div><span class="dwi-eyebrow">WHY WATCHDOG FLAGGED THIS</span><h3>${esc(f.property_address||f.pams_pin||'Property')}</h3><p>${[ctx.municipality,ctx.county?`${ctx.county} County`:null,ctx.property_class?`Class ${ctx.property_class}`:null].filter(Boolean).map(esc).join(' · ')}</p></div><div class="dwi-model-state"><b>${esc(modelLabel)}${last?.model?.version?` v${esc(last.model.version)}`:''}${modelStatus}</b></div></div>
+    <div class="dwi-detail-title"><div><span class="dwi-eyebrow">Why Watchdog flagged this</span><h3>${esc(f.property_address||f.pams_pin||'Property')}</h3><p>${[ctx.municipality,ctx.county?`${ctx.county} County`:null,ctx.property_class?`Class ${ctx.property_class}`:null].filter(Boolean).map(esc).join(' · ')}</p></div><div class="dwi-model-state"><b>${esc(modelLabel)}${last?.model?.version?` v${esc(last.model.version)}`:''}${modelStatus}</b></div></div>
     <div class="dwi-conclusion"><b>Review finding</b><p>Score ${Number(f.score||0).toFixed(1)} · confidence ${Number(f.confidence||0).toFixed(1)}% · evidence ${Number(f.evidence_coverage||0).toFixed(1)}%. This is a review queue item, not a determination.</p>${why.length?`<ul>${why.map(w=>`<li><b>${esc(w.signal_id)}</b>${w.explanation?` · ${esc(w.explanation)}`:''}</li>`).join('')}</ul>`:''}</div>
     ${facts.length?`<section class="dwi-detail-section"><h4>Source evidence</h4><div class="dwi-detail-grid">${facts.map(e=>evidenceCard(e,'fact')).join('')}</div></section>`:''}
     ${derived.length?`<section class="dwi-detail-section"><h4>Watchdog calculations</h4><p>Calculated from the source facts above.</p><div class="dwi-detail-grid">${derived.map(e=>evidenceCard(e,'derived')).join('')}</div></section>`:''}
@@ -464,7 +464,7 @@ async function install(){
       const b=document.createElement('button');
       b.id='dw-intelligence';
       b.className='dwi-trigger '+(rank(plan)<2?'locked':'');
-      b.innerHTML=`<i class="fas fa-wand-magic-sparkles"></i> Intelligence${rank(plan)<2?' · Pro':''}`;
+      b.innerHTML=`<i class="fas fa-dog"></i> Intelligence${rank(plan)<2?' · Pro':''}`;
       b.onclick=shell;
       const refresh=$('#dw-refresh');
       refresh?bar.insertBefore(b,refresh):bar.appendChild(b);

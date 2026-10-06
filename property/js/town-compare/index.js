@@ -52,7 +52,7 @@ function render() {
   history.replaceState(null,'',selected.length ? `?towns=${selected.join(',')}` : location.pathname);
   const output = document.getElementById('tc-output');
   if (!rows.length) {
-    output.innerHTML = '<div class="blank"><h3>Choose your first town</h3><p>Add two or more municipalities to compare their assessment systems and tax-rate direction.</p></div>';
+    output.innerHTML = '<div class="blank"><h3>Add a town to start</h3></div>';
     return;
   }
   output.innerHTML = `<section class="tc-cards">${rows.map(row => '<div>' + townIntelligenceCard(row.district) + budgetPressureSummary(row.district) + '</div>').join('')}</section>` +

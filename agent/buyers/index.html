@@ -13,22 +13,22 @@
 <header class="ag-header"><div class="ag-header-copy"><h1>Buyer Shortlists</h1><p>Keep candidate homes together, compare public tax and assessment info, add your own notes, and move the chosen property into Watchdog Transactions without re-entering the address.</p></div><div class="ag-header-actions"><button class="ag-btn primary" id="bs-new" type="button"><i class="fa-solid fa-plus"></i> New shortlist</button></div></header>
 <nav class="ag-tabs" aria-label="Clients tools"><a href="/agent/listing-prep"><i class="fa-solid fa-house-chimney"></i>Listing Prep</a><a href="/agent/buyers" aria-current="page"><i class="fa-solid fa-scale-balanced"></i>Buyer Shortlists</a><a href="/agent/open-house"><i class="fa-solid fa-qrcode"></i>Open Houses</a><a href="/agent/contacts"><i class="fa-solid fa-address-book"></i>Contacts</a><a href="/transaction/"><i class="fa-solid fa-file-signature"></i>Transactions</a></nav>
 <section class="ag-main"><div class="ag-grid">
-<aside class="ag-rail"><div class="ag-rail-head"><div><span>YOUR BUYERS</span><h2>Shortlists</h2></div></div><div id="bs-list" class="ag-list"><div class="ag-empty">Loading shortlists…</div></div></aside>
+<aside class="ag-rail"><div class="ag-rail-head"><div><span>Your buyers</span><h2>Shortlists</h2></div></div><div id="bs-list" class="ag-list"><div class="ag-empty">Loading shortlists…</div></div></aside>
 <div class="ag-work">
 <section class="ag-card" id="bs-create">
-<div class="ag-card-head"><div><span>NEW SHORTLIST</span><h2>Create a buyer dashboard</h2></div></div>
+<div class="ag-card-head"><div><span>New shortlist</span><h2>Create a buyer dashboard</h2></div></div>
 <div class="ag-card-body"><form class="ag-form" id="bs-create-form"><label>Shortlist name<input id="bs-name" required maxlength="100" placeholder="Voorhees buyer shortlist"></label><label>Client label<input id="bs-client" maxlength="120" placeholder="Alleu"></label><label class="wide">Private notes<textarea id="bs-notes" maxlength="4000" placeholder="Budget, must-haves, timeline, financing notes…"></textarea></label><div class="wide ag-form-actions"><button class="ag-btn primary" type="submit"><i class="fa-solid fa-folder-plus"></i> Create shortlist</button><span id="bs-create-note" class="ag-note"></span></div></form></div>
 </section>
 <section class="ag-card" id="bs-detail" hidden>
-<div class="ag-card-head"><div><span>BUYER SHORTLIST</span><h2 id="bs-title">Buyer</h2></div><div class="ag-header-actions"><button class="ag-btn" id="bs-save-meta" type="button"><i class="fa-solid fa-check"></i> Save details</button></div></div>
+<div class="ag-card-head"><div><span>Buyer shortlist</span><h2 id="bs-title">Buyer</h2></div><div class="ag-header-actions"><button class="ag-btn" id="bs-save-meta" type="button"><i class="fa-solid fa-check"></i> Save details</button></div></div>
 <div class="ag-card-body"><div class="ag-form"><label>Shortlist name<input id="bs-edit-name" maxlength="100"></label><label>Client label<input id="bs-edit-client" maxlength="120"></label><label class="wide">Private notes<textarea id="bs-edit-notes" maxlength="4000"></textarea></label></div><div class="ag-form-actions"><span id="bs-save-note" class="ag-note"></span></div></div>
 </section>
 <section class="ag-card" id="bs-add" hidden>
-<div class="ag-card-head"><div><span>ADD A HOME</span><h2>Search Watchdog property records</h2></div></div>
+<div class="ag-card-head"><div><span>Add a home</span><h2>Search Watchdog property records</h2></div></div>
 <div class="ag-card-body"><div class="ag-search"><input id="bs-search" type="search" placeholder="Enter a street address"><button class="ag-btn primary" id="bs-search-btn" type="button"><i class="fa-solid fa-magnifying-glass"></i> Search</button></div><div id="bs-results" class="ag-results" hidden></div><p class="ag-note" style="margin:10px 0 0">Public records help compare carrying-cost and diligence info. They do not replace MLS listing details, inspections, appraisals or lender qualification.</p></div>
 </section>
 <section class="ag-card" id="bs-compare-card" hidden>
-<div class="ag-card-head"><div><span>SIDE-BY-SIDE</span><h2>Buyer comparison</h2></div><span class="ag-pill" id="bs-count">0 homes</span></div>
+<div class="ag-card-head"><div><span>Side-by-side</span><h2>Buyer comparison</h2></div><span class="ag-pill" id="bs-count">0 homes</span></div>
 <div class="ag-card-body"><div id="bs-compare" class="ag-compare"></div></div>
 </section>
 </div></div></section>

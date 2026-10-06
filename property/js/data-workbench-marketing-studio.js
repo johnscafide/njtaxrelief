@@ -11,7 +11,7 @@ function install(){
   const bar=document.querySelector('.dw-actionbar');
   if(bar&&!document.querySelector('#dw-marketing-studio')){
     const b=document.createElement('button');b.id='dw-marketing-studio';b.type='button';
-    b.innerHTML='<i class="fas fa-wand-magic-sparkles"></i> Marketing Studio';
+    b.innerHTML='<i class="fas fa-pen-nib"></i> Marketing Studio';
     b.addEventListener('click',handoff);bar.insertBefore(b,bar.querySelector('[data-action="ads"]')||bar.firstChild);
   }
   const top=document.querySelector('.dw-top-actions');

@@ -72,9 +72,22 @@ function withoutEyebrows(line) {
   return text;
 }
 
+function isSubsequence(shorter, longer) {
+  let i = 0;
+  for (const ch of longer) {
+    if (ch === shorter[i]) i += 1;
+    if (i === shorter.length) return true;
+  }
+  return i === shorter.length;
+}
+
+// Trims and value swaps only take markup away, so they cannot add new static copy.
 function isWordingOnlyEdit(line) {
   const shape = structure(line);
-  return removedInHunk.some((oldLine) => structure(oldLine) === shape || structure(withoutEyebrows(oldLine)) === shape);
+  return removedInHunk.some((oldLine) => {
+    const oldShape = structure(oldLine);
+    return oldShape === shape || structure(withoutEyebrows(oldLine)) === shape || (line.length <= oldLine.length && isSubsequence(shape, oldShape));
+  });
 }
 
 function isExistingCopyReplacement(line) {

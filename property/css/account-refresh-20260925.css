@@ -10,7 +10,7 @@ body[data-sidebar-page="account"] .ac-profile-hero{
   isolation:isolate;
   min-height:224px!important;
   padding:34px 36px!important;
-  border-radius:26px!important;
+  border-radius:12px!important;
   transition:background .28s ease,box-shadow .28s ease;
 }
 body[data-sidebar-page="account"] .ac-profile-hero>.ac-avatar-wrap{align-self:center}
@@ -87,7 +87,7 @@ body[data-sidebar-page="account"] .ac-completion>b{font-size:42px!important;line
 .ac-hero-style-panel header b{font-size:14px}
 .ac-hero-style-panel header button{width:30px;height:30px;border:0;border-radius:9px;background:#eff4f7;color:#40526b;cursor:pointer}
 .ac-theme-group+.ac-theme-group{margin-top:13px}
-.ac-theme-group>span{display:block;margin-bottom:7px;color:#738398;font-size:10px;font-weight:900;letter-spacing:.12em;text-transform:uppercase}
+.ac-theme-group>span{display:block;margin-bottom:7px;color:#738398;font-size:10px;font-weight:900;letter-spacing:0;text-transform:none}
 .ac-theme-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:7px}
 .ac-theme-choice{
   position:relative;aspect-ratio:1.28/1;border:2px solid transparent;border-radius:11px;
@@ -101,7 +101,7 @@ body[data-sidebar-page="account"] .acp-profile-hub .acp-header-clean{margin-bott
 body[data-sidebar-page="account"] .acp-profile-route-grid{gap:14px!important}
 body[data-sidebar-page="account"] .acp-profile-route-card{
   position:relative;overflow:hidden;border:1px solid #dbe5ef!important;
-  background:linear-gradient(135deg,#f7fbff 0%,#eef5ff 100%)!important;
+  background:#f7fbff!important;
   box-shadow:0 2px 6px rgba(15,23,42,.08);transition:transform .16s ease,box-shadow .16s ease;
 }
 body[data-sidebar-page="account"] .acp-profile-route-card::after{
@@ -109,7 +109,7 @@ body[data-sidebar-page="account"] .acp-profile-route-card::after{
   background:rgba(51,111,220,.08);pointer-events:none;
 }
 body[data-sidebar-page="account"] .acp-profile-route-card.professional{
-  border-color:#cfe7e2!important;background:linear-gradient(135deg,#f5fcfa 0%,#edf8f6 55%,#eef7ff 100%)!important;
+  border-color:#cfe7e2!important;background:#f5fcfa!important;
 }
 body[data-sidebar-page="account"] .acp-profile-route-card.professional::after{background:rgba(5,139,132,.10)}
 body[data-sidebar-page="account"] .acp-profile-route-card:hover{transform:translateY(-1px);box-shadow:0 2px 6px rgba(15,23,42,.08)}
@@ -122,8 +122,8 @@ body[data-sidebar-page="account"] .ac-signin-security>header h2{margin:0!importa
 body[data-sidebar-page="account"] .ac-signin-note:empty{display:none}
 body[data-sidebar-page="account"] .ac-signin-note:not(:empty){margin-top:10px!important}
 
-.ac-provider-icon.ac-provider-boldtrail{background:linear-gradient(135deg,#0b8d91,#075f6d)!important;color:#fff!important}
-.ac-provider-icon.ac-provider-kit{background:linear-gradient(135deg,#ffd85e,#ff8f5e)!important;color:#342713!important}
+.ac-provider-icon.ac-provider-boldtrail{background:#0b8d91!important;color:#fff!important}
+.ac-provider-icon.ac-provider-kit{background:#ffd85e!important;color:#342713!important}
 .ac-provider-wordmark{font:900 14px/1 var(--font-ui,"Libre Franklin"),sans-serif;letter-spacing:-.04em}
 .ac-provider-kit .ac-provider-wordmark{text-transform:lowercase;font-size:16px}
 body[data-sidebar-page="account"] .ac-connection-card{box-shadow:0 2px 6px rgba(15,23,42,.08)}
@@ -140,7 +140,7 @@ body[data-sidebar-page="account"] .ac-self-service .ac-self-action small{margin-
 body[data-sidebar-page="account"] .ac-danger-zone{margin-top:22px!important;padding-top:20px!important}
 body[data-sidebar-page="account"] .ac-danger-head h3{margin-bottom:0!important}
 
-.ac-account-summary{background:linear-gradient(145deg,#fbfcfe,#f3f8fb)!important}
+.ac-account-summary{background:#fbfcfe!important}
 .ac-account-summary .ac-account-rows{margin-top:15px!important}
 
 .ac-cadence [data-account-lifetime]{
@@ -185,7 +185,7 @@ body.ac-lifetime-mode #membership-options .ac-price-card[data-plan="teams"]{opac
   body[data-sidebar-page="account"] .ac-page-top{padding-bottom:4px}
   body[data-sidebar-page="account"] .ac-profile-hero{
     grid-template-columns:82px minmax(0,1fr)!important;gap:14px!important;
-    padding:24px 18px 20px!important;min-height:0!important;border-radius:20px!important;
+    padding:24px 18px 20px!important;min-height:0!important;border-radius:12px!important;
   }
   body[data-sidebar-page="account"] .ac-avatar-wrap,
   body[data-sidebar-page="account"] .ac-avatar{width:76px!important;height:76px!important;min-width:76px!important;min-height:76px!important}
@@ -236,11 +236,11 @@ body[data-sidebar-page="account"] .ac-style-chevron{font-size:9px;opacity:.7;mar
 .ac-theme-backdrop[hidden]{display:none!important}
 .ac-theme-popover{
   position:fixed;left:50%;top:50%;z-index:100005;width:min(760px,calc(100vw - 42px));max-height:min(720px,calc(100vh - 56px));
-  transform:translate(-50%,-50%);overflow:auto;padding:0 24px 18px;border:1px solid rgba(16,41,75,.12);border-radius:28px;background:#fff;
+  transform:translate(-50%,-50%);overflow:auto;padding:0 24px 18px;border:1px solid rgba(16,41,75,.12);border-radius:12px;background:#fff;
   color:#10294b;box-shadow:0 2px 6px rgba(15,23,42,.08);animation:acPanelIn .19s ease
 }
 .ac-theme-popover[hidden]{display:none!important}
-.ac-theme-popover .ac-theme-accent{height:7px;margin:0 -24px 20px;background:linear-gradient(90deg,#0d294e,#0c8f89,#48a8e8,#7156c7)}
+.ac-theme-popover .ac-theme-accent{height:7px;margin:0 -24px 20px;background:#0d294e}
 .ac-theme-popover>header{display:flex;align-items:flex-start;justify-content:space-between;gap:20px;margin:0!important;padding:0!important;border:0!important}
 .ac-theme-popover>header>div>span{display:block;color:#0a8b86;font-size:10px;font-weight:900;letter-spacing:.15em}
 .ac-theme-popover>header h3{margin:5px 0 5px;font:850 27px/1.1 var(--font-ui,"Libre Franklin"),sans-serif;letter-spacing:-.035em}
@@ -253,7 +253,7 @@ body[data-sidebar-page="account"] .ac-style-chevron{font-size:9px;opacity:.7;mar
 .ac-theme-section-head{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;margin-bottom:10px}
 .ac-theme-section-head span{display:block;color:#526a84;font-size:11px;font-weight:900;letter-spacing:.12em}
 .ac-theme-section-head small{display:block;margin-top:3px;color:#93a0af;font-size:10px}
-.ac-theme-section-head em{display:grid;place-items:center;min-width:28px;height:24px;padding:0 7px;border-radius:999px;background:#edf4f8;color:#49647e;font-size:10px;font-style:normal;font-weight:900}
+.ac-theme-section-head em{display:grid;place-items:center;min-width:28px;height:24px;padding:0 7px;border-radius:8px;background:#edf4f8;color:#49647e;font-size:10px;font-style:normal;font-weight:900}
 .ac-theme-popover .ac-theme-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px}
 .ac-theme-popover .ac-theme-choice{
   position:relative;display:grid;grid-template-rows:auto auto;gap:6px;aspect-ratio:auto;min-width:0;padding:0;border:2px solid transparent;border-radius:15px;background:none!important;
@@ -293,7 +293,7 @@ body[data-sidebar-page="account"] .acp-profile-route-card p,
 body[data-sidebar-page="account"] .acp-profile-route-card b{color:#fff!important}
 body[data-sidebar-page="account"] .acp-profile-route-card p{max-width:600px;color:rgba(255,255,255,.82)!important;text-shadow:0 1px 2px rgba(0,0,0,.15)}
 body[data-sidebar-page="account"] .acp-profile-route-card .acp-route-icon{background:rgba(255,255,255,.97)!important;color:#fff!important;border:1px solid rgba(255,255,255,.20);}
-body[data-sidebar-page="account"] .acp-profile-route-card b{display:inline-flex;align-items:center;gap:8px;margin-top:12px;padding:9px 12px;border-radius:999px;background:rgba(255,255,255,.97);}
+body[data-sidebar-page="account"] .acp-profile-route-card b{display:inline-flex;align-items:center;gap:8px;margin-top:12px;padding:9px 12px;border-radius:8px;background:rgba(255,255,255,.97);}
 body[data-sidebar-page="account"] .acp-profile-route-card:hover{transform:translateY(-3px)!important;box-shadow:0 2px 6px rgba(15,23,42,.08)!important}
 
 .ac-provider-logo{width:118px;height:48px;flex:0 0 118px;display:grid;place-items:center;padding:7px 9px;border:1px solid #dde5ed;border-radius:12px;background:#fff;box-shadow:0 5px 13px rgba(22,52,83,.06)}
@@ -302,8 +302,8 @@ body[data-sidebar-page="account"] .acp-profile-route-card:hover{transform:transl
 .ac-provider-logo.ac-provider-kit img{max-height:29px}
 body[data-sidebar-page="account"] .ac-connection-head{align-items:center!important}
 
-body[data-sidebar-page="account"] .ac-account-summary{position:relative;overflow:hidden;background:linear-gradient(145deg,#fbfdff 0%,#f1f6fb 100%)!important}
-body[data-sidebar-page="account"] .ac-account-summary::after{content:"";position:absolute;right:-72px;top:-82px;width:190px;height:190px;border-radius:50%;background:radial-gradient(circle,rgba(45,113,240,.10),rgba(45,113,240,0) 70%);pointer-events:none}
+body[data-sidebar-page="account"] .ac-account-summary{position:relative;overflow:hidden;background:#fbfdff!important}
+body[data-sidebar-page="account"] .ac-account-summary::after{content:"";position:absolute;right:-72px;top:-82px;width:190px;height:190px;border-radius:50%;background:none;pointer-events:none}
 body[data-sidebar-page="account"] .ac-account-summary-head{position:relative;z-index:1}
 body[data-sidebar-page="account"] .ac-account-overview{position:relative;z-index:1;margin-top:16px!important}
 body[data-sidebar-page="account"] .ac-account-primary{display:flex;align-items:center;gap:12px;padding:15px;border:1px solid #dce6ef;border-radius:14px;background:#fff}
@@ -321,8 +321,8 @@ body[data-sidebar-page="account"] .ac-account-id code{font:800 11px/1 var(--font
 body[data-sidebar-page="account"] .ac-account-id button{width:27px;height:27px;border:0;border-radius:8px;background:#eaf0f6;color:#375672;cursor:pointer}
 
 @media(max-width:760px){
-  .ac-theme-popover{left:0;top:auto;bottom:0;width:100%;max-height:88vh;transform:none;border-radius:24px 24px 0 0;padding:0 18px 18px}
-  .ac-theme-popover .ac-theme-accent{margin:0 -18px 17px;border-radius:24px 24px 0 0}
+  .ac-theme-popover{left:0;top:auto;bottom:0;width:100%;max-height:88vh;transform:none;border-radius:12px 12px 0 0;padding:0 18px 18px}
+  .ac-theme-popover .ac-theme-accent{margin:0 -18px 17px;border-radius:12px 12px 0 0}
   .ac-theme-popover>header h3{font-size:23px}
   .ac-theme-popover .ac-theme-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
   @keyframes acPanelIn{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
@@ -359,7 +359,7 @@ body[data-sidebar-page="account"] .acp-profile-route-card.professional .acp-rout
 .ac-theme-live-head span{color:#8a98a8;font-size:10px}
 .ac-theme-live-banner{
   display:grid;grid-template-columns:auto minmax(0,1fr) auto;align-items:center;gap:12px;min-height:126px;
-  padding:18px 18px;border-radius:14px;background:linear-gradient(112deg,#0f274b,#123d58 56%,#087f78);
+  padding:18px 18px;border-radius:14px;background:#0f274b;
   background-size:cover!important;background-position:center!important;box-shadow:inset 0 0 0 1px rgba(255,255,255,.12),0 2px 6px rgba(15,23,42,.08);
   overflow:hidden
 }
@@ -372,7 +372,7 @@ body[data-sidebar-page="account"] .acp-profile-route-card.professional .acp-rout
 .ac-theme-live-copy>span{display:block;color:#74ddd5;font-size:9px;font-weight:900;letter-spacing:.12em}
 .ac-theme-live-copy strong{display:block;margin-top:4px;color:#fff;font-size:20px;line-height:1.1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .ac-theme-live-copy small{display:block;margin-top:5px;color:rgba(255,255,255,.80);font-size:10px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.ac-theme-live-badge{display:flex;align-items:center;gap:6px;padding:7px 9px;border:1px solid rgba(255,255,255,.18);border-radius:999px;background:rgba(5,28,48,.97);color:#fff;font-size:9px;font-weight:800;}
+.ac-theme-live-badge{display:flex;align-items:center;gap:6px;padding:7px 9px;border:1px solid rgba(255,255,255,.18);border-radius:8px;background:rgba(5,28,48,.97);color:#fff;font-size:9px;font-weight:800;}
 .ac-theme-live-badge i{color:#79e5dd}
 
 .ac-theme-tabs{display:flex;align-items:center;gap:4px;margin:0 0 12px;border-bottom:1px solid #e9eef2}
@@ -380,7 +380,7 @@ body[data-sidebar-page="account"] .acp-profile-route-card.professional .acp-rout
   position:relative;display:flex;align-items:center;gap:6px;padding:9px 10px 10px;border:0;background:transparent;color:#728196;
   font:800 11px/1 var(--font-ui,"Libre Franklin"),sans-serif;cursor:pointer
 }
-.ac-theme-tabs button em{display:grid;place-items:center;min-width:20px;height:18px;padding:0 5px;border-radius:999px;background:#eef3f6;color:#607184;font-size:9px;font-style:normal}
+.ac-theme-tabs button em{display:grid;place-items:center;min-width:20px;height:18px;padding:0 5px;border-radius:8px;background:#eef3f6;color:#607184;font-size:9px;font-style:normal}
 .ac-theme-tabs button[aria-selected="true"]{color:#0b817c}
 .ac-theme-tabs button[aria-selected="true"]::after{content:"";position:absolute;left:8px;right:8px;bottom:-1px;height:2px;background:#0b8b85}
 .ac-theme-section[hidden]{display:none!important}
@@ -460,7 +460,7 @@ body[data-sidebar-page="account"] .ac-danger-zone{margin-top:18px!important}
   width:min(760px,calc(100vw - 40px))!important;
   max-height:min(720px,calc(100vh - 40px))!important;
   padding:20px 22px 18px!important;
-  border-radius:20px!important;
+  border-radius:12px!important;
   overflow:auto!important;
   background:#fff!important;
 }
@@ -502,7 +502,7 @@ body[data-sidebar-page="account"] .ac-danger-zone{margin-top:18px!important}
 }
 .ac-theme-popover nav.ac-theme-tabs button em{
   display:inline-grid!important;place-items:center!important;min-width:18px!important;height:17px!important;padding:0 4px!important;
-  border-radius:999px!important;background:#eef2f4!important;color:#667587!important;font-size:8px!important;font-style:normal!important
+  border-radius:8px!important;background:#eef2f4!important;color:#667587!important;font-size:8px!important;font-style:normal!important
 }
 .ac-theme-popover nav.ac-theme-tabs button[aria-selected="true"]{color:#0b837c!important}
 .ac-theme-popover nav.ac-theme-tabs button[aria-selected="true"]::after{
@@ -641,7 +641,7 @@ body[data-sidebar-page="account"] .ac-danger-actions{
 }
 .ac-theme-section-title span{
   display:grid;place-items:center;min-width:20px;height:17px;padding:0 5px;
-  border-radius:999px;background:#eef3f5;color:#6b7b8d;font-size:8px;font-weight:900
+  border-radius:8px;background:#eef3f5;color:#6b7b8d;font-size:8px;font-weight:900
 }
 .ac-theme-popover .ac-theme-section[data-theme-kind="color"] .ac-theme-grid{
   grid-template-columns:repeat(5,minmax(0,1fr))!important;gap:7px!important
@@ -696,7 +696,7 @@ body[data-sidebar-page="account"] .ac-hero-name-row{
 }
 body[data-sidebar-page="account"] .ac-hero-name-row h1{margin:7px 0 7px!important}
 body[data-sidebar-page="account"] .ac-pro-badge{
-  display:inline-flex;align-items:center;gap:5px;min-height:24px;padding:0 8px;border-radius:999px;
+  display:inline-flex;align-items:center;gap:5px;min-height:24px;padding:0 8px;border-radius:8px;
   border:1px solid rgba(255,255,255,.28);font:850 9px/1 var(--font-ui,"Libre Franklin"),sans-serif;
   letter-spacing:.025em;white-space:nowrap;}
 body[data-sidebar-page="account"] .ac-pro-badge.agent{
@@ -757,12 +757,12 @@ body[data-sidebar-page="account"] .ac-hero-name-row{
 }
 body[data-sidebar-page="account"] .ac-hero-name-row h1{margin:0!important}
 body[data-sidebar-page="account"] .ac-pro-badge{
-  min-height:23px!important;padding:0 8px!important;border-radius:999px!important;font-size:8px!important
+  min-height:23px!important;padding:0 8px!important;border-radius:8px!important;font-size:8px!important
 }
 body[data-sidebar-page="account"] .ac-hero-broker{
   display:inline-flex!important;align-items:center!important;gap:6px!important;max-width:260px!important;
   min-height:28px!important;margin:0!important;padding:3px 8px 3px 4px!important;
-  border:1px solid rgba(255,255,255,.18)!important;border-radius:999px!important;
+  border:1px solid rgba(255,255,255,.18)!important;border-radius:8px!important;
   background:rgba(5,27,47,.97)!important;
   color:#fff!important;vertical-align:middle!important
 }
@@ -796,7 +796,7 @@ body[data-sidebar-page="account"] .ac-connections .ac-sync-header{
 }
 body[data-sidebar-page="account"] .ac-connections .ac-sync-header::after{
   content:"";position:absolute;inset:0;z-index:-1;
-  background:linear-gradient(180deg,rgba(255,255,255,.02),rgba(3,20,36,.12));pointer-events:none
+  background:rgba;pointer-events:none
 }
 body[data-sidebar-page="account"] .ac-connections .ac-sync-header h2{
   margin:0!important;color:#fff!important;font-size:clamp(28px,3vw,40px)!important;line-height:1!important;letter-spacing:-.035em!important;
@@ -837,9 +837,7 @@ body[data-sidebar-page="account"] .ac-hero-broker{display:none!important}
 body[data-sidebar-page="account"] .ac-avatar-wrap{position:relative!important}
 body[data-sidebar-page="account"] .ac-avatar-wrap.has-broker-brand .ac-avatar{
   border:5px solid transparent!important;
-  background:
-    linear-gradient(#fff,#fff) padding-box,
-    linear-gradient(135deg,var(--broker-primary,#0b8b85),var(--broker-secondary,#f15a24)) border-box!important;
+  background:#fff padding-box!important;
   transition:box-shadow .18s ease,filter .18s ease,transform .18s ease!important
 }
 body[data-sidebar-page="account"] .ac-avatar-wrap.has-broker-brand:hover .ac-avatar{
@@ -852,9 +850,7 @@ body[data-sidebar-page="account"] .ac-avatar-wrap.has-broker-brand:hover .ac-ava
 body[data-sidebar-page="account"] .ac-avatar-wrap.has-broker-brand .ac-avatar-edit{
   overflow:hidden!important;
   border:2px solid transparent!important;
-  background:
-    linear-gradient(#fff,#fff) padding-box,
-    linear-gradient(135deg,var(--broker-primary,#0b8b85),var(--broker-secondary,#f15a24)) border-box!important;
+  background:#fff padding-box!important;
   box-shadow:0 2px 6px rgba(15,23,42,.08)!important;
   transition:transform .16s ease,box-shadow .16s ease!important
 }
@@ -884,7 +880,7 @@ body[data-sidebar-page="account"] .ac-hero-style-toggle{
   min-height:0!important;padding:5px 2px!important;border:0!important;border-radius:0!important;
   background:transparent!important;box-shadow:none!important;
   color:rgba(255,255,255,.94)!important;font:900 10px/1 var(--font-ui,"Libre Franklin"),sans-serif!important;
-  letter-spacing:.08em!important;text-transform:uppercase!important;text-shadow:0 2px 10px rgba(3,21,37,.42)!important;
+  letter-spacing:0 !important;text-transform:none;text-shadow:0 2px 10px rgba(3,21,37,.42)!important;
   transition:color .15s ease,transform .15s ease!important
 }
 body[data-sidebar-page="account"] .ac-hero-style-toggle:hover{
@@ -918,9 +914,7 @@ body[data-sidebar-page="account"] .ac-style-chevron{display:none!important}
 .ac-theme-live-verified[hidden]{display:none!important}
 .ac-theme-live-avatar.has-broker-brand{
   border:4px solid transparent!important;
-  background:
-    linear-gradient(rgba(255,255,255,.10),rgba(255,255,255,.10)) padding-box,
-    linear-gradient(135deg,var(--broker-primary,#0b8b85),var(--broker-secondary,#f15a24)) border-box!important;
+  background:var border-box!important;
   box-shadow:0 0 14px var(--broker-primary,#0b8b85)!important
 }
 
@@ -1021,7 +1015,7 @@ body[data-sidebar-page="account"] .ac-avatar-change-broker-logo{
   overflow-y:auto!important;
   scrollbar-gutter:stable!important;
   padding:24px 28px 22px!important;
-  border-radius:26px!important;
+  border-radius:12px!important;
 }
 .ac-theme-popover>header{
   position:relative!important;
@@ -1150,7 +1144,7 @@ body[data-sidebar-page="account"] .ac-avatar-change-broker-logo{
   grid-template-columns:auto minmax(0,1fr) auto!important;
   margin:20px -2px 0!important;
   padding:14px 2px 2px!important;
-  background:linear-gradient(180deg,rgba(255,255,255,.94),#fff 24%)!important;
+  background:rgba!important;
   box-shadow:0 2px 6px rgba(15,23,42,.08)!important;
 }
 .ac-theme-popover>footer.ac-theme-actions button{
@@ -1191,7 +1185,7 @@ body[data-sidebar-page="account"] .ac-avatar-wrap.has-broker-brand:hover .ac-ava
     width:calc(100vw - 18px)!important;
     max-height:calc(100vh - 18px)!important;
     padding:16px!important;
-    border-radius:20px!important;
+    border-radius:12px!important;
   }
   .ac-theme-popover>header h3{font-size:24px!important}
   .ac-theme-live-head span{display:none!important}
@@ -1286,10 +1280,7 @@ body[data-sidebar-page="account"] .ac-avatar-wrap.has-broker-brand:hover .ac-ava
 
 /* Motion themes own their full background in CSS so background-position can animate after save/reload. */
 [data-motion-theme="aurora-motion"]{
-  background:
-    radial-gradient(circle at 15% 35%,rgba(74,232,215,.72),transparent 34%),
-    radial-gradient(circle at 78% 38%,rgba(91,116,255,.60),transparent 36%),
-    linear-gradient(120deg,#07172c,#103d55 48%,#073c43)!important;
+  background:#07172c!important;
 }
 [data-motion-theme="signal-grid"]{
   background:
@@ -1299,37 +1290,27 @@ body[data-sidebar-page="account"] .ac-avatar-wrap.has-broker-brand:hover .ac-ava
     linear-gradient(120deg,#07192d,#0b3045)!important;
 }
 [data-motion-theme="tidal-motion"]{
-  background:
-    radial-gradient(ellipse at 20% 110%,rgba(44,205,194,.58),transparent 42%),
-    radial-gradient(ellipse at 82% -5%,rgba(57,118,239,.54),transparent 40%),
-    linear-gradient(120deg,#071b31,#0e4251 58%,#0b293d)!important;
+  background:#071b31!important;
 }
 [data-motion-theme="spectrum-motion"]{
-  background:linear-gradient(120deg,#091b35 0%,#0c6d78 20%,#5a48a8 42%,#c84f86 60%,#1ba7a1 80%,#0a2440 100%)!important;
+  background:#091b35!important;
 }
 [data-motion-theme="orbit-motion"]{
-  background:
-    radial-gradient(circle at 50% 50%,transparent 0 18%,rgba(116,231,218,.22) 19% 20%,transparent 21% 31%,rgba(105,141,255,.18) 32% 33%,transparent 34%),
-    radial-gradient(circle at 15% 20%,rgba(79,221,213,.50),transparent 24%),
-    linear-gradient(135deg,#07182c,#132a4c 54%,#0b4f54)!important;
+  background:#07182c!important;
 }
 
 /* No glow: reverse brokerage primary/secondary colors on hover. */
 body[data-sidebar-page="account"] .ac-avatar-wrap.has-broker-brand .ac-avatar{
   border-width:5px!important;
   box-shadow:none!important;
-  background:
-    linear-gradient(#fff,#fff) padding-box,
-    linear-gradient(135deg,var(--broker-primary,#0b8b85),var(--broker-secondary,#f15a24)) border-box!important;
+  background:#fff padding-box!important;
   transition:background .18s ease,transform .18s ease!important;
 }
 body[data-sidebar-page="account"] .ac-avatar-wrap.has-broker-brand:hover .ac-avatar{
   box-shadow:none!important;
   filter:none!important;
   transform:none!important;
-  background:
-    linear-gradient(#fff,#fff) padding-box,
-    linear-gradient(135deg,var(--broker-secondary,#f15a24),var(--broker-primary,#0b8b85)) border-box!important;
+  background:#fff padding-box!important;
 }
 .ac-theme-live-avatar.has-broker-brand{
   box-shadow:none!important;

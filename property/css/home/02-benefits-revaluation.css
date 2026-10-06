@@ -16,9 +16,9 @@
 .sb-l.total { background: var(--accent-bg); border-top: 2px solid var(--accent); font-weight: 700; color: var(--ink); }
 .sb-l.total b { font-size: 20px; color: var(--accent); }
 
-.sb-meter { position: relative; height: 26px; background: var(--hair); border-radius: 99px;
+.sb-meter { position: relative; height: 26px; background: var(--hair); border-radius:12px;
   overflow: hidden; max-width: 620px; margin: 16px 0 20px; }
-.sb-meter i { display: block; height: 100%; background: linear-gradient(90deg, var(--accent-2), var(--pos)); }
+.sb-meter i { display: block; height: 100%; background:var; }
 .sb-meter span { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
   font-size: 12px; font-weight: 700; color: #fff; text-shadow: 0 1px 3px rgba(0,0,0,.35); }
 
@@ -35,8 +35,8 @@
 .sb-cta b { color: var(--ink); }
 
 .bc-in { display: flex; align-items: center; gap: 14px; margin-bottom: 20px; flex-wrap: wrap; }
-.bc-in label { font-size: 11.5px; font-weight: 700; text-transform: uppercase;
-  letter-spacing: .07em; color: var(--ink-3); }
+.bc-in label { font-size: 11.5px; font-weight: 700; text-transform:none;
+  letter-spacing:0; color: var(--ink-3); }
 .bc-money { display: flex; align-items: center; border-bottom: 2px solid var(--hair); }
 .bc-money span { color: var(--ink-3); font-size: 18px; }
 .bc-money input { border: none; background: none; font-family: var(--sans); font-size: 22px;
@@ -60,7 +60,7 @@
 .bc-warn b { color: var(--ink); }
 
 .bc-proj { max-width: 560px; }
-.bc-proj h5 { font-size: 11.5px; font-weight: 800; text-transform: uppercase; letter-spacing: .09em;
+.bc-proj h5 { font-size: 11.5px; font-weight: 800; text-transform:none; letter-spacing:0;
   color: var(--ink-3); margin: 0 0 10px; }
 .bc-proj table { width: 100%; border-collapse: collapse; font-size: 14px; }
 .bc-proj td { padding: 9px 0; border-bottom: 1px solid var(--hair-2); color: var(--ink-2);
@@ -76,8 +76,8 @@
 .ab-n { flex-shrink: 0; text-align: center; padding: 15px 20px; border-radius: 10px; min-width: 118px; }
 .ab-n b { display: block; font-family: var(--sans); font-size: 30px; font-weight: 800;
   letter-spacing: -.04em; line-height: 1; }
-.ab-n span { font-size: 10px; font-weight: 700; text-transform: uppercase;
-  letter-spacing: .07em; opacity: .75; }
+.ab-n span { font-size: 10px; font-weight: 700; text-transform:none;
+  letter-spacing:0; opacity: .75; }
 .ab-n.high       { background: var(--neg-bg); color: var(--neg); }
 .ab-n.notable    { background: var(--gold-bg); color: #8a6f14; }
 .ab-n.small      { background: #eef3fc; color: var(--accent); }
@@ -93,9 +93,9 @@
 .ab-mine p { font-size: 13.5px; line-height: 1.65; color: var(--ink-3); margin: 10px 0 0; }
 
 .ab-cmp { max-width: 560px; margin-bottom: 24px; }
-.ab-bar { height: 8px; background: var(--hair); border-radius: 99px; overflow: hidden; }
-.ab-bar i { display: block; height: 100%; border-radius: 99px;
-  background: linear-gradient(90deg, var(--accent-2), var(--neg)); }
+.ab-bar { height: 8px; background: var(--hair); border-radius:12px; overflow: hidden; }
+.ab-bar i { display: block; height: 100%; border-radius:12px;
+  background:var; }
 .ab-cmp-l { display: flex; justify-content: space-between; margin-top: 7px;
   font-size: 12px; color: var(--ink-3); }
 .ab-cmp-l b { color: var(--ink); }

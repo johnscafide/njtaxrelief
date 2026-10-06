@@ -38,7 +38,7 @@
   margin: 0 !important;
   padding: 0 !important;
   border: 1px solid var(--hm-line) !important;
-  border-radius: 20px !important;
+  border-radius:12px !important;
   background: #fff !important;
   overflow: hidden !important;
   box-shadow: var(--hm-shadow) !important;
@@ -60,7 +60,7 @@
   border: 0 !important;
   border-radius: 0 !important;
   box-shadow: none !important;
-  background: linear-gradient(155deg, #153661 0%, #1d4d82 100%) !important;
+  background:#153661!important;
   display: flex !important;
   align-items: flex-start !important;
   gap: 13px !important;
@@ -205,8 +205,8 @@
   grid-row: 1 !important;
   margin: 0 0 3px !important;
   font: 800 9.5px/1.2 "Libre Franklin", sans-serif !important;
-  letter-spacing: .10em !important;
-  text-transform: uppercase !important;
+  letter-spacing:0 !important;
+  text-transform:none;
   color: #91a0b3 !important;
 }
 .sec2-t {
@@ -251,7 +251,7 @@
   padding: 10px !important;
   background: #fff !important;
   border: 1px solid var(--hm-line) !important;
-  border-radius: 20px !important;
+  border-radius:12px !important;
   color: var(--hm-ink) !important;
 }
 #hm27-profile-pop header {
@@ -321,9 +321,7 @@ body.hm-dashboard-page {
   --hm-premium-shadow: 0 2px 6px rgba(15,23,42,.08);
   --hm-premium-shadow-soft: 0 2px 6px rgba(15,23,42,.08);
   font-size: clamp(15px, calc(14.2px + .18vw), 17px) !important;
-  background:
-    radial-gradient(circle at 92% 2%, rgba(45,109,246,.055), transparent 27rem),
-    #f4f7fb !important;
+  background:#f4f7fb!important;
 }
 
 /* Keep the utility shell useful without letting it dominate the paid content. */
@@ -376,7 +374,7 @@ body.hm-dashboard-page {
 }
 .hm-shot {
   height: clamp(330px, 31vw, 520px) !important;
-  border-radius: clamp(20px, 1.5vw, 26px) !important;
+  border-radius:clamp(12px, 1.5vw, 12px) !important;
   border: 1px solid rgba(209,219,232,.92) !important;
   box-shadow: var(--hm-premium-shadow) !important;
   background-position: center 50% !important;
@@ -384,7 +382,7 @@ body.hm-dashboard-page {
 }
 .hm-id {
   padding: clamp(26px, 3vw, 52px) !important;
-  border-radius: clamp(20px, 1.5vw, 26px) !important;
+  border-radius:clamp(12px, 1.5vw, 12px) !important;
   border: 1px solid rgba(216,224,235,.96) !important;
   box-shadow: var(--hm-premium-shadow-soft) !important;
   justify-content: center !important;
@@ -392,10 +390,10 @@ body.hm-dashboard-page {
 .hm-kind {
   margin-bottom: clamp(14px, 1.2vw, 20px) !important;
   padding: 8px 11px !important;
-  border-radius: 999px !important;
+  border-radius:8px !important;
   font-size: clamp(10px, .7vw, 11px) !important;
-  letter-spacing: .09em !important;
-  text-transform: uppercase !important;
+  letter-spacing:0 !important;
+  text-transform:none;
 }
 .hm-id h1 {
   max-width: 14ch !important;
@@ -466,15 +464,13 @@ body.hm-dashboard-page {
 /* Analyst Intel reads like a paid briefing, not a widget. */
 .hm-wrap > .ai {
   grid-template-columns: minmax(210px, 255px) minmax(0, 1fr) !important;
-  border-radius: clamp(20px, 1.45vw, 24px) !important;
+  border-radius:clamp(12px, 1.45vw, 12px) !important;
   border-color: #dce4ee !important;
   box-shadow: var(--hm-premium-shadow) !important;
 }
 .hm-wrap > .ai .ai-h {
   padding: clamp(24px, 2vw, 34px) !important;
-  background:
-    radial-gradient(circle at 25% 10%, rgba(45,109,246,.28), transparent 15rem),
-    linear-gradient(150deg, #0d294d 0%, #143b68 55%, #164e78 100%) !important;
+  background:#0d294d!important;
 }
 .hm-wrap > .ai .ai-h b {
   font-size: clamp(16px, 1.25vw, 20px) !important;
@@ -502,7 +498,7 @@ body.hm-dashboard-page {
 .hm-wrap > .sc-cards .sc-c,
 .hm-wrap > .sec {
   border: 1px solid #dfe6ef !important;
-  border-radius: 20px !important;
+  border-radius:12px !important;
   box-shadow: var(--hm-premium-shadow-soft) !important;
 }
 .hm-wrap > .sc-cards .sc-c {
