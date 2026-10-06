@@ -34,7 +34,7 @@ assert.match(sweep, /const REFERRED_PAYING = \['active', 'past_due'\];/);
 assert.match(sweep, /voidReward\(reward, blocked\)/);
 // Credit, never a charge; the inviter's own monthly price read from Stripe; idempotent per reward.
 assert.match(sweep, /amount: -amount,/);
-assert.match(sweep, /stripe\.prices\.retrieve\(priceId\)/);
+assert.match(sweep, /const price = await monthlyPrice\(stripe, tier\);/);
 assert.match(sweep, /idempotencyKey: `watchdog-referral-reward-\$\{reward\.id\}`/);
 
 assert.match(hold, /alter column eligible_at set not null/);
