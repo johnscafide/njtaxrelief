@@ -71,7 +71,7 @@ body.hm-nav-open{overflow:hidden}
 .hm-top{position:relative!important;top:auto!important;border:0!important;background:transparent!important;z-index:20!important}
 .hm-top-in{max-width:none!important;margin:0!important;padding:22px 28px 16px!important;display:grid!important;grid-template-columns:auto auto minmax(260px,520px) 1fr auto!important;align-items:center!important;gap:12px!important}
 .hm-back{height:44px;padding:0 15px;border:1px solid var(--hm-line);border-radius:13px;background:#fff;color:var(--hm-ink)!important;display:inline-flex!important;align-items:center!important;gap:8px!important;text-decoration:none!important;box-shadow:0 2px 6px rgba(15,23,42,.08)}
-.hm-switch-label{font:800 11px/1 "Libre Franklin",sans-serif;text-transform:none;letter-spacing:0;color:#8795a9}
+.hm-switch-label{font:800 12px/1 "Libre Franklin",sans-serif;text-transform:none;letter-spacing:0;color:#8795a9}
 #hm-switch{max-width:none!important;height:46px!important;border:1px solid var(--hm-line)!important;border-radius:13px!important;background:#fff!important;padding:0 42px 0 14px!important;font:700 14px "Source Sans 3",sans-serif!important;color:var(--hm-ink)!important;box-shadow:0 2px 6px rgba(15,23,42,.08)}
 .hm-saved{justify-self:end;color:var(--hm-green)!important;font-weight:700;font-size:13px}.hm-saved i{margin-right:6px}
 .hm27-page-actions{display:flex;gap:9px;justify-self:end}
@@ -136,7 +136,7 @@ body.hm-nav-open{overflow:hidden}
 .sec2.open>.sec2-h{min-height:0!important;padding:20px 22px!important;border-bottom:1px solid var(--hm-line)!important;background:#fbfcfe!important}
 .sec2-icon-tile{width:54px!important;height:54px!important;border-radius:16px!important;background:#eef4ff!important;color:var(--hm-blue)!important;display:grid!important;place-items:center!important;font-size:20px!important;align-self:start!important}
 .sec2-copy{display:block!important;min-width:0!important}
-.sec2-kicker{display:block!important;font:800 10px/1.2 "Libre Franklin",sans-serif!important;text-transform:none;letter-spacing:0 !important;color:#91a0b4!important;margin-bottom:8px!important}
+.sec2-kicker{display:block!important;font:800 12px/1.2 "Libre Franklin",sans-serif!important;text-transform:none;letter-spacing:0 !important;color:#91a0b4!important;margin-bottom:8px!important}
 .sec2-t{display:block!important;font:800 20px/1.18 "Libre Franklin",sans-serif!important;letter-spacing:-.03em!important;color:var(--hm-ink)!important;margin:0 0 8px!important}
 .sec2-s{display:block!important;font-size:14px!important;line-height:1.45!important;color:#73849c!important;max-width:42ch!important}
 .sec2-c{font-size:12px!important;color:#a0aec0!important;transition:transform .18s ease!important}.sec2.open .sec2-c{transform:rotate(180deg)}

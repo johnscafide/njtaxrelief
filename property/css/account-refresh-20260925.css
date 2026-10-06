@@ -87,7 +87,7 @@ body[data-sidebar-page="account"] .ac-completion>b{font-size:42px!important;line
 .ac-hero-style-panel header b{font-size:14px}
 .ac-hero-style-panel header button{width:30px;height:30px;border:0;border-radius:9px;background:#eff4f7;color:#40526b;cursor:pointer}
 .ac-theme-group+.ac-theme-group{margin-top:13px}
-.ac-theme-group>span{display:block;margin-bottom:7px;color:#738398;font-size:10px;font-weight:900;letter-spacing:0;text-transform:none}
+.ac-theme-group>span{display:block;margin-bottom:7px;color:#738398;font-size:12px;font-weight:900;letter-spacing:0;text-transform:none}
 .ac-theme-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:7px}
 .ac-theme-choice{
   position:relative;aspect-ratio:1.28/1;border:2px solid transparent;border-radius:11px;
@@ -253,7 +253,7 @@ body[data-sidebar-page="account"] .ac-style-chevron{font-size:9px;opacity:.7;mar
 .ac-theme-section-head{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;margin-bottom:10px}
 .ac-theme-section-head span{display:block;color:#526a84;font-size:11px;font-weight:900;letter-spacing:.12em}
 .ac-theme-section-head small{display:block;margin-top:3px;color:#93a0af;font-size:10px}
-.ac-theme-section-head em{display:grid;place-items:center;min-width:28px;height:24px;padding:0 7px;border-radius:8px;background:#edf4f8;color:#49647e;font-size:10px;font-style:normal;font-weight:900}
+.ac-theme-section-head em{display:grid;place-items:center;min-width:28px;height:24px;padding:0 7px;border-radius:8px;background:#edf4f8;color:#49647e;font-size:12px;font-style:normal;font-weight:900}
 .ac-theme-popover .ac-theme-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px}
 .ac-theme-popover .ac-theme-choice{
   position:relative;display:grid;grid-template-rows:auto auto;gap:6px;aspect-ratio:auto;min-width:0;padding:0;border:2px solid transparent;border-radius:15px;background:none!important;
@@ -372,7 +372,7 @@ body[data-sidebar-page="account"] .acp-profile-route-card.professional .acp-rout
 .ac-theme-live-copy>span{display:block;color:#74ddd5;font-size:9px;font-weight:900;letter-spacing:.12em}
 .ac-theme-live-copy strong{display:block;margin-top:4px;color:#fff;font-size:20px;line-height:1.1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .ac-theme-live-copy small{display:block;margin-top:5px;color:rgba(255,255,255,.80);font-size:10px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.ac-theme-live-badge{display:flex;align-items:center;gap:6px;padding:7px 9px;border:1px solid rgba(255,255,255,.18);border-radius:8px;background:rgba(5,28,48,.97);color:#fff;font-size:9px;font-weight:800;}
+.ac-theme-live-badge{display:flex;align-items:center;gap:6px;padding:7px 9px;border:1px solid rgba(255,255,255,.18);border-radius:8px;background:rgba(5,28,48,.97);color:#fff;font-size:12px;font-weight:800;}
 .ac-theme-live-badge i{color:#79e5dd}
 
 .ac-theme-tabs{display:flex;align-items:center;gap:4px;margin:0 0 12px;border-bottom:1px solid #e9eef2}
@@ -380,7 +380,7 @@ body[data-sidebar-page="account"] .acp-profile-route-card.professional .acp-rout
   position:relative;display:flex;align-items:center;gap:6px;padding:9px 10px 10px;border:0;background:transparent;color:#728196;
   font:800 11px/1 var(--font-ui,"Libre Franklin"),sans-serif;cursor:pointer
 }
-.ac-theme-tabs button em{display:grid;place-items:center;min-width:20px;height:18px;padding:0 5px;border-radius:8px;background:#eef3f6;color:#607184;font-size:9px;font-style:normal}
+.ac-theme-tabs button em{display:grid;place-items:center;min-width:20px;height:18px;padding:0 5px;border-radius:8px;background:#eef3f6;color:#607184;font-size:12px;font-style:normal}
 .ac-theme-tabs button[aria-selected="true"]{color:#0b817c}
 .ac-theme-tabs button[aria-selected="true"]::after{content:"";position:absolute;left:8px;right:8px;bottom:-1px;height:2px;background:#0b8b85}
 .ac-theme-section[hidden]{display:none!important}
@@ -502,7 +502,7 @@ body[data-sidebar-page="account"] .ac-danger-zone{margin-top:18px!important}
 }
 .ac-theme-popover nav.ac-theme-tabs button em{
   display:inline-grid!important;place-items:center!important;min-width:18px!important;height:17px!important;padding:0 4px!important;
-  border-radius:8px!important;background:#eef2f4!important;color:#667587!important;font-size:8px!important;font-style:normal!important
+  border-radius:8px!important;background:#eef2f4!important;color:#667587!important;font-size:12px!important;font-style:normal!important
 }
 .ac-theme-popover nav.ac-theme-tabs button[aria-selected="true"]{color:#0b837c!important}
 .ac-theme-popover nav.ac-theme-tabs button[aria-selected="true"]::after{
@@ -641,7 +641,7 @@ body[data-sidebar-page="account"] .ac-danger-actions{
 }
 .ac-theme-section-title span{
   display:grid;place-items:center;min-width:20px;height:17px;padding:0 5px;
-  border-radius:8px;background:#eef3f5;color:#6b7b8d;font-size:8px;font-weight:900
+  border-radius:8px;background:#eef3f5;color:#6b7b8d;font-size:12px;font-weight:900
 }
 .ac-theme-popover .ac-theme-section[data-theme-kind="color"] .ac-theme-grid{
   grid-template-columns:repeat(5,minmax(0,1fr))!important;gap:7px!important
@@ -757,7 +757,7 @@ body[data-sidebar-page="account"] .ac-hero-name-row{
 }
 body[data-sidebar-page="account"] .ac-hero-name-row h1{margin:0!important}
 body[data-sidebar-page="account"] .ac-pro-badge{
-  min-height:23px!important;padding:0 8px!important;border-radius:8px!important;font-size:8px!important
+  min-height:23px!important;padding:0 8px!important;border-radius:8px!important;font-size:12px!important
 }
 body[data-sidebar-page="account"] .ac-hero-broker{
   display:inline-flex!important;align-items:center!important;gap:6px!important;max-width:260px!important;

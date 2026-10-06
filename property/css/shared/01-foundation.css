@@ -188,7 +188,7 @@
 .plm-facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(232px, 1fr)); gap: 0 34px; }
 .plm-fgroup { break-inside: avoid; }
 .plm-fgroup h4 {
-  font-size: 11.5px; font-weight: 800; text-transform:none; letter-spacing:0;
+  font-size: 12px; font-weight: 800; text-transform:none; letter-spacing:0;
   color: #0e2248; margin: 18px 0 2px; padding-bottom: 7px; border-bottom: 2px solid #0e2248;
 }
 .plm-fgroup:first-child h4, .plm-fgroup:nth-child(2) h4 { margin-top: 0; }
@@ -200,7 +200,7 @@
 .plm-kpi { background: #fff; padding: 18px 12px; text-align: center; }
 .plm-kpi-n { font-size: 21px; font-weight: 800; color: #0e2248; letter-spacing: -.02em; font-variant-numeric: tabular-nums; }
 .plm-kpi-n.gold { color: var(--gold); }
-.plm-kpi-l { font-size: 10.5px; font-weight: 700; text-transform:none; letter-spacing:0; color: #5a6070; margin-top: 6px; }
+.plm-kpi-l { font-size: 12px; font-weight: 700; text-transform:none; letter-spacing:0; color: #5a6070; margin-top: 6px; }
 .plm-chartgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
 /* rail cards */
 .plm-rcard { background: #fff; border: 1px solid var(--border); border-radius: 14px; padding: 20px; margin-bottom: 16px; }

@@ -2,7 +2,7 @@
 .wd-anchor-home-result,.wd-anchor-quick{font-family:"Source Sans 3",system-ui,sans-serif;color:var(--wd-anchor-ink)}
 .wd-anchor-home-result{position:relative;z-index:5;background:#f8fbff;border-bottom:1px solid #e6ebf2;padding:28px 0 36px}
 .wd-anchor-home-wrap,.wd-anchor-quick-wrap{width:min(1240px,calc(100% - 48px));margin:0 auto}
-.wd-anchor-home-topline{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:12px;color:#2862b9;font:800 10px/1.2 "Libre Franklin",sans-serif;letter-spacing:0;text-transform:none}
+.wd-anchor-home-topline{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:12px;color:#2862b9;font:800 12px/1.2 "Libre Franklin",sans-serif;letter-spacing:0;text-transform:none}
 .wd-anchor-home-secure{display:flex;align-items:center;gap:7px;color:#687995;letter-spacing:.02em;text-transform:none;font-weight:700}
 .wd-anchor-home-grid{display:grid;grid-template-columns:minmax(0,1.12fr) minmax(320px,.88fr);overflow:hidden;border:1px solid #dce5f0;border-radius:12px;background:#fff;box-shadow:0 2px 6px rgba(15,23,42,.08)}
 .wd-anchor-home-benefit{padding:30px 32px 28px;position:relative}
@@ -32,7 +32,7 @@
 @keyframes wd-anchor-spin{to{transform:rotate(360deg)}}
 .wd-anchor-property-head>span,.wd-anchor-property-empty>span{display:block;color:#8ebaff;font:800 9px/1.2 "Libre Franklin",sans-serif;letter-spacing:.1em}.wd-anchor-property-head>b{display:block;margin:6px 0 2px;font:800 16px/1.3 "Libre Franklin",sans-serif}.wd-anchor-property-head small{color:#b6c6df;font-size:11px}
 .wd-anchor-property-score{display:grid;grid-template-columns:105px 1fr;align-items:center;gap:16px;margin:22px 0 17px;padding:15px;border-radius:17px;background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.11)}
-.wd-anchor-property-score>div{width:88px;height:88px;border-radius:50%;display:grid;place-content:center;text-align:center;background:radial-gradient(circle,#fff 56%,transparent 58%),conic-gradient(#5aa0ff 0 73%,rgba(255,255,255,.16) 73% 100%);color:#0d3dbe}.wd-anchor-property-score strong{font:800 27px/1 "Libre Franklin",sans-serif}.wd-anchor-property-score span{display:block;margin-top:3px;color:#7286a5;font-size:7px;font-weight:900;text-transform:none}.wd-anchor-property-score p{margin:0;color:#d2def1;font-size:11px;line-height:1.45}
+.wd-anchor-property-score>div{width:88px;height:88px;border-radius:50%;display:grid;place-content:center;text-align:center;background:radial-gradient(circle,#fff 56%,transparent 58%),conic-gradient(#5aa0ff 0 73%,rgba(255,255,255,.16) 73% 100%);color:#0d3dbe}.wd-anchor-property-score strong{font:800 27px/1 "Libre Franklin",sans-serif}.wd-anchor-property-score span{display:block;margin-top:3px;color:#7286a5;font-size:12px;font-weight:900;text-transform:none}.wd-anchor-property-score p{margin:0;color:#d2def1;font-size:12px;line-height:1.45}
 .wd-anchor-property-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:7px}.wd-anchor-property-stats>div{padding:10px;border-radius:11px;background:rgba(255,255,255,.07)}.wd-anchor-property-stats b{display:block;color:#fff;font:800 13px/1.2 "Libre Franklin",sans-serif}.wd-anchor-property-stats span{display:block;margin-top:3px;color:#a8bddd;font-size:8.5px;font-weight:700}
 .wd-anchor-property-open,.wd-anchor-property-empty a{display:inline-flex;margin-top:16px;color:#c8dcff;text-decoration:none;font-size:11.5px;font-weight:850}.wd-anchor-property-open:hover,.wd-anchor-property-empty a:hover{text-decoration:underline}
 .wd-anchor-property-empty{min-height:250px;display:flex;flex-direction:column;justify-content:center}.wd-anchor-property-empty strong{margin:8px 0 5px;font:800 17px/1.3 "Libre Franklin",sans-serif}.wd-anchor-property-empty p{max-width:340px;margin:0;color:#b7c8e3;font-size:12px;line-height:1.5}
@@ -42,7 +42,7 @@
 
 .wd-anchor-social{margin-top:18px;padding:16px;border:1px solid #dce5f0;border-radius:16px;background:#f8fbff}
 .wd-anchor-social-head{display:flex;align-items:flex-start;justify-content:space-between;gap:14px}
-.wd-anchor-social-kicker{display:block;color:#0d3dbe;font:800 9px/1.2 "Libre Franklin",sans-serif;letter-spacing:0;text-transform:none}
+.wd-anchor-social-kicker{display:block;color:#0d3dbe;font:800 12px/1.2 "Libre Franklin",sans-serif;letter-spacing:0;text-transform:none}
 .wd-anchor-social h3{margin:4px 0;color:#10284c;font:800 15px/1.3 "Libre Franklin",sans-serif}
 .wd-anchor-social p{margin:0;color:#66758c;font-size:11.5px;line-height:1.5}
 .wd-anchor-social-buttons{display:grid;grid-template-columns:minmax(0,1.35fr) repeat(2,minmax(0,1fr));gap:8px;margin-top:12px}
@@ -104,7 +104,7 @@
 @media(prefers-reduced-motion:reduce){.wd-anchor-loader{animation:none}.wd-anchor-btn{transition:none!important}}
 
 /* Shared free application assistance message. */
-.wd-free-help{box-sizing:border-box;display:flex;align-items:center;gap:24px;width:min(1100px,calc(100% - 40px));margin:32px auto;padding:20px;background:#fff;border:1px solid #dce5f0;border-radius:12px;color:#103780;font-family:"Source Sans 3",system-ui,sans-serif;text-align:left}
+.wd-free-help{box-sizing:border-box;display:flex;align-items:center;gap:24px;width:min(1100px,calc(100% - 40px));margin:32px auto;padding:20px;background:#fff;border:1px solid #dce5f0;border-radius:12px;color:#103780;font-family:"Libre Franklin",system-ui,sans-serif;text-align:left}
 .wd-free-help-image{display:block;flex:0 0 220px;overflow:hidden;border-radius:12px;line-height:0}
 .wd-free-help-image img{display:block;width:100%;height:auto}
 .wd-free-help-copy{min-width:0}.wd-free-help-copy strong{display:block;font-size:clamp(20px,2.3vw,28px);line-height:1.25}.wd-free-help-copy p{margin:12px 0;color:#435570;font-size:16px;line-height:1.5}.wd-free-help-copy>a{display:inline-flex;align-items:center;min-height:44px;gap:8px;color:#103780;font-size:16px;font-weight:700;text-decoration:underline;text-underline-offset:3px}

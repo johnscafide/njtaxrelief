@@ -17,7 +17,7 @@
 }
 .plm-est > * { position: relative; z-index: 1; }
 .plm-est-lbl {
-  font-size: 11.5px; font-weight: 800; letter-spacing:0; text-transform:none;
+  font-size: 12px; font-weight: 800; letter-spacing:0; text-transform:none;
   color: var(--gold); display: flex; align-items: center; gap: 8px; margin-bottom: 10px;
 }
 .plm-est-val { font-size: 34px; font-weight: 800; letter-spacing: -.025em; line-height: 1.1; }
@@ -75,7 +75,7 @@
 /* ---------- TIMELINE ---------- */
 .tl-kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 14px; margin-bottom: 18px; }
 .tl-n { font-size: 20px; font-weight: 800; color: #0e2248; letter-spacing: -.02em; font-variant-numeric: tabular-nums; }
-.tl-l { font-size: 11px; font-weight: 700; text-transform:none; letter-spacing:0; color: #5a6070; margin-top: 4px; }
+.tl-l { font-size: 12px; font-weight: 700; text-transform:none; letter-spacing:0; color: #5a6070; margin-top: 4px; }
 .tl-cta { display: flex; align-items: center; justify-content: space-between; gap: 18px; flex-wrap: wrap;
   margin-top: 16px; padding: 16px 18px; background: #f4f6fa; border-radius: 11px; font-size: 14px; color: #3d4759; line-height: 1.6; }
 @media (max-width: 700px) {
@@ -167,7 +167,7 @@
 .auth-magic-note { font-size: 12px; color: #8a93a6; margin-top: 8px; line-height: 1.55; }
 .auth-or { display: flex; align-items: center; gap: 12px; margin: 18px 0 4px; }
 .auth-or::before, .auth-or::after { content: ''; flex: 1; height: 1px; background: #eef0f5; }
-.auth-or span { font-size: 11.5px; font-weight: 700; text-transform:none; letter-spacing:0; color: #a0a8b8; }
+.auth-or span { font-size: 12px; font-weight: 700; text-transform:none; letter-spacing:0; color: #a0a8b8; }
 /* ---------- ACCOUNT CARD ---------- */
 .acct-cta { background: #fff; border: 1px dashed var(--border); border-radius: 13px; padding: 18px; margin-bottom: 16px; }
 .acct-cta.signed { border-style: solid; border-color: #c8d6ea; }

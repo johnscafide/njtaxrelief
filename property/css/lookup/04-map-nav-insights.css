@@ -127,7 +127,7 @@ body.nav-solid .wd-nav a, body.nav-solid .wd-nav button, body.nav-solid .wd-logo
 .ins-lead { display: block; text-decoration: none; }
 .ins-photo { height: 300px; border-radius: 12px; background-size: cover; background-position: center;
   margin-bottom: 16px; }
-.ins-kicker { display: inline-block; font-size: 10.5px; font-weight: 800; text-transform:none;
+.ins-kicker { display: inline-block; font-size: 12px; font-weight: 800; text-transform:none;
   letter-spacing:0; color: var(--gold-dark, #8a6f14); margin-bottom: 8px; }
 .ins-lead h3 { font-family: 'Libre Franklin', system-ui, sans-serif;
   font-size: 25px; font-weight: 800; letter-spacing: -.028em; line-height: 1.22;

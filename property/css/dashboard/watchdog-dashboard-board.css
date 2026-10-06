@@ -267,7 +267,7 @@ body:has(#wdd-boot:not([hidden])) .wd-public-backdrop:not(.open){transition:none
 .wdd-sponsor{display:grid;grid-template-columns:44px minmax(0,1fr);gap:4px 12px;padding:16px;border-radius:12px;background:var(--b-surface);text-decoration:none;color:var(--b-ink)}
 .wdd-sponsor:hover{background:var(--b-white)}
 .wdd-sponsor img{grid-row:span 3;width:44px;height:44px;border-radius:50%;object-fit:cover}
-.wdd-sponsor em{font-style:normal;font-size:11px;font-weight:700;letter-spacing:0;text-transform:none;color:var(--b-muted)}
+.wdd-sponsor em{font-style:normal;font-size:12px;font-weight:700;letter-spacing:0;text-transform:none;color:var(--b-muted)}
 .wdd-sponsor strong{font-size:14px}
 .wdd-sponsor span{font-size:13px;line-height:1.45;color:var(--b-muted)}
 .wdd-sponsor small{grid-column:2;font-size:12px;color:var(--b-muted)}

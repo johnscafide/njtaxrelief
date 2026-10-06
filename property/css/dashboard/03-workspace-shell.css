@@ -87,7 +87,7 @@ body {
 .db-side-brand small { color: #91a5bf; display: block; font-size: 10.5px; margin-top: 2px; }
 .db-side-section { border-top: 1px solid rgba(255,255,255,.09); margin-bottom: 18px; padding-top: 18px; }
 .db-side-label {
-  color: #7890ad; display: block; font-size: 10px; font-weight: 800; letter-spacing:0;
+  color: #7890ad; display: block; font-size: 12px; font-weight: 800; letter-spacing:0;
   margin: 0 12px 8px; text-transform:none;
 }
 .db-sidebar .pn, .db-side-link, .db-side-account button {
@@ -111,7 +111,7 @@ body {
 .top-in { align-items: center; max-width: 1440px; padding: 17px 34px; }
 .who img, .db-noav, .noav { height: 44px; width: 44px; }
 .db-noav { align-items: center; background: var(--saas-teal); border-radius: 50%; color: #fff; display: flex; font-size: 17px; font-weight: 800; justify-content: center; }
-.top-eyebrow { color: var(--saas-teal) !important; display: block; font-size: 9.5px !important; font-weight: 800; letter-spacing:0; margin-bottom: 2px; text-transform:none; }
+.top-eyebrow { color: var(--saas-teal) !important; display: block; font-size: 12px !important; font-weight: 800; letter-spacing:0; margin-bottom: 2px; text-transform:none; }
 .who h1 { color: var(--saas-text); font-size: 21px; }
 .who > div > span:last-child { font-size: 12px; }
 .top-acts { gap: 12px; }
@@ -221,7 +221,7 @@ body {
 
 /* Profile page */
 .db-page-head { align-items: end; border-bottom: 1px solid var(--saas-border); display: flex; gap: 35px; justify-content: space-between; margin-bottom: 24px; padding-bottom: 23px; }
-.db-page-head > div > span { color: var(--saas-teal); font-size: 10px; font-weight: 800; letter-spacing:0; text-transform:none; }
+.db-page-head > div > span { color: var(--saas-teal); font-size: 12px; font-weight: 800; letter-spacing:0; text-transform:none; }
 .db-page-head h2 { color: var(--saas-text); font-family: var(--sans); font-size: 26px; letter-spacing: -.03em; margin: 4px 0 0; }
 .db-page-head p { color: var(--saas-muted); font-size: 13.5px; line-height: 1.55; margin: 0; max-width: 480px; }
 .pf { background: #fff; border: 1px solid var(--saas-border); border-radius: 13px; box-shadow: 0 2px 6px rgba(15,23,42,.08); max-width: 920px; padding: 25px; }

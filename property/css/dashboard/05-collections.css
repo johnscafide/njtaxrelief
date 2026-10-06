@@ -45,7 +45,7 @@
   font-size: 12px; line-height: 1.25; overflow: hidden; }
 .ms-bk span { display: block; }
 
-.ms-l { font-size: 10.5px; font-weight: 700; text-transform:none; letter-spacing:0;
+.ms-l { font-size: 12px; font-weight: 700; text-transform:none; letter-spacing:0;
   color: var(--ink-3, #7d8798); }
 .ms-v { font-family: var(--sans, 'Libre Franklin'), system-ui, sans-serif; font-size: 26px;
   font-weight: 800; letter-spacing: -.03em; line-height: 1.1; margin: 5px 0 3px;
@@ -422,7 +422,7 @@ body.compare-tray-visible .db-to-top { bottom: 96px; }
 /* Sorting and page-size controls */
 .sortbar { align-items: center; display: flex; gap: 10px; }
 .sortbar-control { align-items: center; display: inline-flex; gap: 7px; }
-.sortbar-control label { color: #7b8798; font-size: 10px; font-weight: 800; letter-spacing:0; text-transform:none; }
+.sortbar-control label { color: #7b8798; font-size: 12px; font-weight: 800; letter-spacing:0; text-transform:none; }
 .sortbar-control span { color: #8b96a5; font-size: 10.5px; }
 .sortbar-control select { min-height: 34px; padding: 6px 28px 6px 9px; }
 .property-total { color: #8b96a5; font-size: 11px; }

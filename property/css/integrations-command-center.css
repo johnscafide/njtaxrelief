@@ -9,7 +9,7 @@ body.igcc-enabled[data-igcc-view="automations"] .igcc-surface:not([data-igcc-sur
 .igcc-kicker{display:block;margin-bottom:7px;font-size:10px;font-weight:900;letter-spacing:.13em;color:var(--igcc-blue)}
 .igcc h2{margin:0;color:var(--igcc-ink);font:800 clamp(25px,3vw,38px)/1.08 'Libre Franklin',sans-serif;letter-spacing:-.035em}
 .igcc-sub{max-width:680px;margin:9px 0 0;color:var(--igcc-muted);font-size:13px;line-height:1.65}
-.igcc-health{display:flex;align-items:center;gap:9px;min-width:max-content;padding:9px 12px;border:1px solid var(--igcc-line);border-radius:8px;background:var(--igcc-surface);font-size:11px;font-weight:800;color:var(--igcc-text)}
+.igcc-health{display:flex;align-items:center;gap:9px;min-width:max-content;padding:9px 12px;border:1px solid var(--igcc-line);border-radius:8px;background:var(--igcc-surface);font-size:12px;font-weight:800;color:var(--igcc-text)}
 .igcc-health i{font-size:8px;color:var(--igcc-success)}
 .igcc-health.attention i{color:var(--igcc-danger)}
 .igcc-health.setup i{color:var(--igcc-warning)}
@@ -25,7 +25,7 @@ body.igcc-enabled:not([data-igcc-view="overview"]) .igcc-overview{display:none}
 .igcc-primary,.igcc-metric,.igcc-next{border:1px solid var(--igcc-line);border-radius:18px;background:#fff;box-shadow:0 2px 6px rgba(15,23,42,.08)}
 .igcc-primary{padding:21px 22px;display:flex;align-items:center;gap:16px}
 .igcc-primary-icon{width:42px;height:42px;display:grid;place-items:center;flex:0 0 42px;border-radius:13px;background:var(--igcc-soft);color:var(--igcc-blue);font-size:16px}
-.igcc-primary small,.igcc-metric small,.igcc-next small{display:block;color:var(--igcc-muted);font-size:9px;font-weight:900;letter-spacing:0;text-transform:none}
+.igcc-primary small,.igcc-metric small,.igcc-next small{display:block;color:var(--igcc-muted);font-size:12px;font-weight:900;letter-spacing:0;text-transform:none}
 .igcc-primary b{display:block;margin-top:4px;color:var(--igcc-ink);font:800 17px/1.25 'Libre Franklin',sans-serif}
 .igcc-primary span span{display:block;margin-top:5px;color:var(--igcc-muted);font-size:11px;line-height:1.45}
 .igcc-metric{padding:17px 18px;min-height:108px;display:flex;flex-direction:column;justify-content:center}
@@ -40,7 +40,7 @@ body.igcc-enabled:not([data-igcc-view="overview"]) .igcc-overview{display:none}
 .igcc-btn.primary{border-color:var(--igcc-blue);background:var(--igcc-blue);color:#fff}
 .igcc-learning{padding:18px 20px;display:flex;align-items:center;gap:13px;border:1px solid var(--igcc-line);border-radius:18px;background:#fff}
 .igcc-learning-icon{width:36px;height:36px;display:grid;place-items:center;flex:0 0 36px;border-radius:11px;background:#f1f4fa;color:var(--igcc-ink)}
-.igcc-learning small{display:block;color:var(--igcc-muted);font-size:9px;font-weight:900;letter-spacing:0;text-transform:none}
+.igcc-learning small{display:block;color:var(--igcc-muted);font-size:12px;font-weight:900;letter-spacing:0;text-transform:none}
 .igcc-learning b{display:block;margin:4px 0 2px;color:var(--igcc-ink);font-size:12px}
 .igcc-learning span{display:block;color:var(--igcc-muted);font-size:10px;line-height:1.4}
 .igcc-view-note{display:none;margin:14px 0 18px;padding:11px 14px;border:1px solid var(--igcc-line);border-radius:12px;background:#fff;color:var(--igcc-muted);font-size:11px;line-height:1.45}

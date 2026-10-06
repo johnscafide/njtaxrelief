@@ -260,7 +260,7 @@
 .pr-facts .dot { color: #c3cbd4; margin: 0 2px; }
 .pr-tags { gap: 7px; margin-top: 14px; }
 .tg {
-  border: 1px solid transparent; border-radius:12px; font-size: 10.5px; letter-spacing: .01em;
+  border: 1px solid transparent; border-radius:12px; font-size: 12px; letter-spacing: .01em;
   padding: 5px 9px;
 }
 .tg.yes, .tg.ok { border-color: #cce7d9; }

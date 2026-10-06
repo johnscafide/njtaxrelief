@@ -38,7 +38,7 @@ body.hood-on .wd-nav .wd-logo i{color:var(--gold,#b8972a)!important;}
 
 /* Range controls keep direct entry and add a dual slider. */
 .njw-dual-slider{margin:4px 0 20px;}
-.njw-slider-labels{display:flex;justify-content:space-between;margin:0 1px 8px;color:#6f7989;font-size:11px;font-weight:800;text-transform:none;letter-spacing:0;}
+.njw-slider-labels{display:flex;justify-content:space-between;margin:0 1px 8px;color:#6f7989;font-size:12px;font-weight:800;text-transform:none;letter-spacing:0;}
 .njw-slider-track{position:relative;height:30px;}
 .njw-slider-track:before{
   content:"";position:absolute;left:0;right:0;top:13px;height:4px;border-radius:999px;background:#dce2eb;
