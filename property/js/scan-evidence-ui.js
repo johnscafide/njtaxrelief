@@ -122,7 +122,7 @@
 
     return '<!doctype html><html><head><meta charset="utf-8"><title>Attorney screening evidence brief, ' + esc(hit.a) + '</title><style>' +
       '@page{margin:18mm}body{font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:#111827;margin:0;font-size:11pt;line-height:1.45}' +
-      'h1{font-size:20pt;margin:0 0 4px}h2{font-size:12pt;text-transform:uppercase;letter-spacing:.06em;margin:22px 0 8px;border-bottom:1px solid #cbd5e1;padding-bottom:5px}' +
+      'h1{font-size:20pt;margin:0 0 4px}h2{font-size:12pt;text-transform:none;letter-spacing:0;margin:22px 0 8px;border-bottom:1px solid #cbd5e1;padding-bottom:5px}' +
       '.sub{color:#475569;margin-bottom:3px}.rule{border-bottom:3px solid #0f2747;margin:14px 0 18px}' +
       'table{width:100%;border-collapse:collapse}th,td{text-align:left;vertical-align:top;padding:6px 8px;border-bottom:1px solid #e2e8f0}th{width:38%;color:#475569;font-weight:600}td small{display:block;color:#64748b;margin-top:2px}' +
       '.factors th{width:auto;background:#f8fafc}.notice{margin:14px 0;padding:11px 13px;background:#fff7ed;border-left:4px solid #c2410c}' +

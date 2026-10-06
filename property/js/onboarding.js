@@ -84,9 +84,9 @@
   }
 
   var steps = [
-    { id:'intro', kind:'intro', eyebrow:'WELCOME TO WATCHDOG', title:'Make Watchdog yours.', copy:'A few quick answers help Watchdog prioritize the property numbers, tasks and intelligence that matter most to you.' },
+    { id:'intro', kind:'intro', eyebrow:'Welcome to Watchdog', title:'Make Watchdog yours.', copy:'A few quick answers help Watchdog prioritize the property numbers, tasks and intelligence that matter most to you.' },
     {
-      id:'persona', kind:'single', eyebrow:'START HERE', title:'How will you use Watchdog?', required:true,
+      id:'persona', kind:'single', eyebrow:'Start here', title:'How will you use Watchdog?', required:true,
       options:[
         choice('homeowner','Homeowner','Understand and monitor my home','⌂'),
         choice('renter','Renter','I rent now and may buy later','↗'),
@@ -97,12 +97,12 @@
       ]
     },
     {
-      id:'contact_email', kind:'input', eyebrow:'YOUR ACCOUNT', title:'What email should Watchdog use for you?', required:true,
+      id:'contact_email', kind:'input', eyebrow:'Your account', title:'What email should Watchdog use for you?', required:true,
       placeholder:'you@example.com', inputType:'email', inputMode:'email', autocomplete:'email', maxLength:254,
       note:'We save this as your Watchdog contact email. It can be different from the account you used to sign in. Marketing permission is always separate.'
     },
     {
-      id:'primary_profession', kind:'single', eyebrow:'YOUR WORK', title:'What best describes your role?', required:true,
+      id:'primary_profession', kind:'single', eyebrow:'Your work', title:'What best describes your role?', required:true,
       when:function(){ return answers.persona === 'professional' || answers.persona === 'both'; },
       options:[
         choice('real_estate','Real estate agent / broker','Sales, listings, buyers and farms','RE'),
@@ -120,35 +120,35 @@
       ]
     },
     {
-      id:'home_status', kind:'single', eyebrow:'YOUR HOUSEHOLD', title:'What is your current housing situation?', required:true,
+      id:'home_status', kind:'single', eyebrow:'Your household', title:'What is your current housing situation?', required:true,
       when:function(){ return answers.persona !== 'professional'; },
       options:[
         choice('own','I own my home','','⌂'), choice('rent','I rent','','□'), choice('own_and_invest','I own + invest','','◫'),
         choice('rent_and_invest','I rent + own investments','','◇'), choice('planning_to_buy','Planning to buy','','↗'), choice('other','Something else','','…')
       ]
     },
-    { id:'location_zip', kind:'input', eyebrow:'YOUR MARKET', title:'What is your main New Jersey ZIP code?', required:true, placeholder:'08081', inputMode:'numeric', maxLength:5, note:'This sets the geographic starting point for your Watchdog experience.' },
-    { id:'markets_text', kind:'input', eyebrow:'YOUR MARKET', title:'Where do you work most often?', required:true, when:function(){ return answers.persona === 'professional' || answers.persona === 'both'; }, placeholder:'Camden County, Gloucester County', maxLength:240, note:'Use towns, counties or ZIP codes. Separate multiple areas with commas.' },
+    { id:'location_zip', kind:'input', eyebrow:'Your market', title:'What is your main New Jersey ZIP code?', required:true, placeholder:'08081', inputMode:'numeric', maxLength:5, note:'This sets the geographic starting point for your Watchdog experience.' },
+    { id:'markets_text', kind:'input', eyebrow:'Your market', title:'Where do you work most often?', required:true, when:function(){ return answers.persona === 'professional' || answers.persona === 'both'; }, placeholder:'Camden County, Gloucester County', maxLength:240, note:'Use towns, counties or ZIP codes. Separate multiple areas with commas.' },
     {
-      id:'goals', kind:'multi', eyebrow:'YOUR PRIORITIES', title:'What do you want Watchdog to help with?', required:true,
+      id:'goals', kind:'multi', eyebrow:'Your priorities', title:'What do you want Watchdog to help with?', required:true,
       options:[choice('monitor_property','Monitor property changes'),choice('lower_property_tax','Understand property taxes'),choice('buy','Buy better'),choice('sell','Prepare to sell'),choice('invest','Find opportunities'),choice('client_research','Research for clients'),choice('prospecting','Prospecting / farming'),choice('due_diligence','Property due diligence'),choice('appeals','Assessment / appeal work')]
     },
     {
-      id:'age_band', kind:'single', eyebrow:'ABOUT YOU', title:'What age range are you in?', required:true,
+      id:'age_band', kind:'single', eyebrow:'About you', title:'What age range are you in?', required:true,
       note:'We use ranges for product findings. This is never a housing-targeting filter.',
       options:[choice('18_24','18–24'),choice('25_34','25–34'),choice('35_44','35–44'),choice('45_54','45–54'),choice('55_64','55–64'),choice('65_74','65–74'),choice('75_plus','75+'),choice('prefer_not','Prefer not to say')]
     },
     {
-      id:'household_income_band', kind:'single', eyebrow:'ABOUT YOU', title:'What is your household income range?', required:true,
+      id:'household_income_band', kind:'single', eyebrow:'About you', title:'What is your household income range?', required:true,
       note:'A range is enough. Prefer not to say is always an option.',
       options:[choice('under_50k','Under $50k'),choice('50_99k','$50k–$99k'),choice('100_149k','$100k–$149k'),choice('150_249k','$150k–$249k'),choice('250k_plus','$250k+'),choice('prefer_not','Prefer not to say')]
     },
-    { id:'household_size_answer', kind:'single', eyebrow:'ABOUT YOU', title:'How many people are in your household?', required:true, note:'This stays first-party profile info and is not used for housing audience targeting.', options:[choice('1','1'),choice('2','2'),choice('3','3'),choice('4','4'),choice('5','5'),choice('6','6+'),choice('prefer_not','Prefer not to say')] },
-    { id:'property_types', kind:'multi', eyebrow:'PROPERTY FOCUS', title:'Which properties matter most to you?', required:true, options:[choice('single_family','Single-family'),choice('condo_townhome','Condo / townhome'),choice('multifamily','Multi-family'),choice('commercial','Commercial'),choice('land','Land'),choice('mixed','A mix of property types')] },
-    { id:'professional_years_band', kind:'single', eyebrow:'YOUR WORK', title:'How long have you worked in your field?', required:true, when:function(){ return answers.persona === 'professional' || answers.persona === 'both'; }, options:[choice('new','Less than 1 year'),choice('1_3','1–3 years'),choice('4_7','4–7 years'),choice('8_15','8–15 years'),choice('16_plus','16+ years')] },
-    { id:'professional_volume_band', kind:'single', eyebrow:'YOUR WORK', title:'About how many clients or transactions touch your process each month?', required:true, when:function(){ return answers.persona === 'professional' || answers.persona === 'both'; }, options:[choice('under_5','Under 5'),choice('5_14','5–14'),choice('15_29','15–29'),choice('30_59','30–59'),choice('60_plus','60+'),choice('not_applicable','Not measured this way')] },
+    { id:'household_size_answer', kind:'single', eyebrow:'About you', title:'How many people are in your household?', required:true, note:'This stays first-party profile info and is not used for housing audience targeting.', options:[choice('1','1'),choice('2','2'),choice('3','3'),choice('4','4'),choice('5','5'),choice('6','6+'),choice('prefer_not','Prefer not to say')] },
+    { id:'property_types', kind:'multi', eyebrow:'Property focus', title:'Which properties matter most to you?', required:true, options:[choice('single_family','Single-family'),choice('condo_townhome','Condo / townhome'),choice('multifamily','Multi-family'),choice('commercial','Commercial'),choice('land','Land'),choice('mixed','A mix of property types')] },
+    { id:'professional_years_band', kind:'single', eyebrow:'Your work', title:'How long have you worked in your field?', required:true, when:function(){ return answers.persona === 'professional' || answers.persona === 'both'; }, options:[choice('new','Less than 1 year'),choice('1_3','1–3 years'),choice('4_7','4–7 years'),choice('8_15','8–15 years'),choice('16_plus','16+ years')] },
+    { id:'professional_volume_band', kind:'single', eyebrow:'Your work', title:'About how many clients or transactions touch your process each month?', required:true, when:function(){ return answers.persona === 'professional' || answers.persona === 'both'; }, options:[choice('under_5','Under 5'),choice('5_14','5–14'),choice('15_29','15–29'),choice('30_59','30–59'),choice('60_plus','60+'),choice('not_applicable','Not measured this way')] },
     {
-      id:'professional_priorities', kind:'multi', eyebrow:'WATCHDOG INTELLIGENCE', title:'Where should Intelligence help you first?', required:true,
+      id:'professional_priorities', kind:'multi', eyebrow:'Watchdog Intelligence', title:'Where should Intelligence help you first?', required:true,
       when:function(){ return answers.persona === 'professional' || answers.persona === 'both'; },
       options:[choice('lead_prioritization','Prioritize opportunities'),choice('client_briefs','Build client briefs'),choice('property_change','Catch meaningful property changes'),choice('tax_assessment','Assessment / tax analysis'),choice('listing_prep','Listing preparation'),choice('buyer_diligence','Buyer due diligence'),choice('portfolio_monitoring','Portfolio monitoring'),choice('workflow_automation','Reduce repetitive research')]
     },
@@ -316,12 +316,12 @@
         features:['Monitor up to 25 properties','Agent Opportunity Desk','Professional reports and exports']
       },
       pro: {
-        label:'Pro', kicker:'PROFESSIONAL DASHBOARD', featured:true, badge:'Most popular',
+        label:'Pro', kicker:'Professional dashboard', featured:true, badge:'Most popular',
         description:'Deeper property info and repeatable research tasks for professionals handling active client work.',
         features:['Monitor up to 250 properties','Expanded professional workbenches','Advanced research tasks']
       },
       pro_plus: {
-        label:'Pro+', kicker:'MAXIMUM DATA ACCESS',
+        label:'Pro+', kicker:'Maximum data access',
         description:'Watchdog’s deepest data, bulk intelligence and high-volume tasks for power users.',
         features:['Monitor up to 2,500 properties','1,000+ data points and proprietary markers','Bulk and scheduled intelligence']
       }
@@ -338,13 +338,13 @@
     var brand = 'Watchdog <span class="wd-intelligence-brand-word">Intelligence</span>';
 
     if (promoEligible) {
-      return '<p class="wd-plan-intelligence"><i class="fas fa-sparkles" aria-hidden="true"></i><span>' + brand + ' included for a limited time <small>Normally +' + esc(money(regular, false)) + '/month</small></span></p>';
+      return '<p class="wd-plan-intelligence"><i class="fas fa-dog" aria-hidden="true"></i><span>' + brand + ' included for a limited time <small>Normally +' + esc(money(regular, false)) + '/month</small></span></p>';
     }
     if (included) {
-      return '<p class="wd-plan-intelligence"><i class="fas fa-sparkles" aria-hidden="true"></i><span>' + brand + ' included at no additional charge</span></p>';
+      return '<p class="wd-plan-intelligence"><i class="fas fa-dog" aria-hidden="true"></i><span>' + brand + ' included at no additional charge</span></p>';
     }
     if (Array.isArray(promotion.eligible_plans) && promotion.eligible_plans.indexOf(key) >= 0) {
-      return '<p class="wd-plan-intelligence"><i class="fas fa-sparkles" aria-hidden="true"></i><span>' + brand + ' available for +' + esc(money(regular, false)) + '/month</span></p>';
+      return '<p class="wd-plan-intelligence"><i class="fas fa-dog" aria-hidden="true"></i><span>' + brand + ' available for +' + esc(money(regular, false)) + '/month</span></p>';
     }
     return '';
   }
@@ -399,12 +399,12 @@
       : '';
 
     root.innerHTML =
-      '<div class="wd-plan-header"><div><p class="wd-onboarding-step">CHOOSE YOUR MEMBERSHIP</p><h2>Your account is ready. Choose your plan.</h2><p class="wd-onboarding-copy">Paid dashboards open more Watchdog from day one. Free stays available below with no card required, and you can upgrade anytime.</p></div>' +
+      '<div class="wd-plan-header"><div><p class="wd-onboarding-step">Choose your membership</p><h2>Your account is ready. Choose your plan.</h2><p class="wd-onboarding-copy">Paid dashboards open more Watchdog from day one. Free stays available below with no card required, and you can upgrade anytime.</p></div>' +
       (planCatalog ? '<div class="wd-plan-controls"><span>Billing</span><div class="wd-plan-cadence" role="group" aria-label="Billing cadence"><button type="button" data-plan-cadence="yearly" aria-pressed="' + (planCadence === 'yearly') + '">Yearly <em>Save 17%</em></button><button type="button" data-plan-cadence="monthly" aria-pressed="' + (planCadence === 'monthly') + '">Monthly</button></div></div>' : '') +
       '</div>' +
       catalogNotice + checkoutNotice +
       (paidCards ? '<div class="wd-plan-grid">' + paidCards + '</div>' : '') +
-      '<section class="wd-plan-free" aria-label="Free membership"><div><span>FREE FOREVER</span><h3>Continue with Free</h3><p>Property lookup, watchlist, core assessment and tax markers, standard alerts and history. No payment method required.</p></div><button type="button" data-plan-free' + (planCheckoutBusy ? ' disabled' : '') + '>Continue with Free <i class="fas fa-arrow-right" aria-hidden="true"></i></button></section>' +
+      '<section class="wd-plan-free" aria-label="Free membership"><div><span>Free forever</span><h3>Continue with Free</h3><p>Property lookup, watchlist, core assessment and tax markers, standard alerts and history. No payment method required.</p></div><button type="button" data-plan-free' + (planCheckoutBusy ? ' disabled' : '') + '>Continue with Free <i class="fas fa-arrow-right" aria-hidden="true"></i></button></section>' +
       '<p class="wd-plan-secure"><i class="fas fa-lock" aria-hidden="true"></i> Paid plans use secure Stripe Checkout. Watchdog never stores card details.</p>';
 
     wirePlanSelection();
@@ -540,9 +540,9 @@
     root.className = 'wd-onboarding-stage';
     root.setAttribute('aria-busy','false');
     progress.style.width = '4%';
-    root.innerHTML = '<div class="wd-auth-intro"><p class="wd-onboarding-step">YOUR WATCHDOG</p><h1>Save the homes you look up.</h1><p class="wd-onboarding-copy">Free account. Save your properties, watch their tax and property data, and see what changes.</p></div>' +
+    root.innerHTML = '<div class="wd-auth-intro"><p class="wd-onboarding-step">Your Watchdog</p><h1>Save the homes you look up.</h1><p class="wd-onboarding-copy">Free account. Save your properties, watch their tax and property data, and see what changes.</p></div>' +
       '<div class="wd-auth-panel">' + buttons + '</div>' +
-      '<div class="wd-auth-proof"><span><i class="fas fa-bookmark"></i> Save properties</span><span><i class="fas fa-bell"></i> Watch changes</span><span><i class="fas fa-sparkles"></i> Personalized intelligence</span></div>' +
+      '<div class="wd-auth-proof"><span><i class="fas fa-bookmark"></i> Save properties</span><span><i class="fas fa-bell"></i> Watch changes</span><span><i class="fas fa-dog"></i> Personalized intelligence</span></div>' +
       '<p class="wd-auth-reassurance"><strong>Free. No card required.</strong> Property search stays free without an account.</p>' +
       '<a class="wd-auth-return" href="/property/"><i class="fas fa-arrow-left"></i> Keep searching without an account</a>';
     root.querySelectorAll('[data-provider]').forEach(function (button) {
@@ -569,7 +569,7 @@
     } catch (error) {
       setMode('onboarding');
       root.className = 'wd-onboarding-stage';
-      root.innerHTML = '<p class="wd-onboarding-step">WATCHDOG</p><h2>We couldn’t load setup.</h2><p class="wd-onboarding-copy">Refresh the page to try again.</p><div class="wd-onboarding-error is-visible">' + esc(error && error.message || 'Unknown setup error') + '</div>';
+      root.innerHTML = '<p class="wd-onboarding-step">Watchdog</p><h2>We couldn’t load setup.</h2><p class="wd-onboarding-copy">Refresh the page to try again.</p><div class="wd-onboarding-error is-visible">' + esc(error && error.message || 'Unknown setup error') + '</div>';
     }
   }
 

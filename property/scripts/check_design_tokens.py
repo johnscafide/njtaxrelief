@@ -232,7 +232,7 @@ MIGRATED_CANONICAL_JS = {
 REQUIRED_TOKEN_LINES = {
     '--wd-gold-500: #b8972a;',
     '--font-ui: "Libre Franklin", Arial, sans-serif;',
-    '--font-display: "Playfair Display", Georgia, serif;',
+    '--font-display: "Libre Franklin", Arial, sans-serif;',
     '--container-narrow: 720px;',
     '--container-reading: 1080px;',
     '--container-app: 1280px;',

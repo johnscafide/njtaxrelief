@@ -45,7 +45,7 @@ function render(x) {
 <meta name="description" content="${e(x.definition)}">
 <link rel="canonical" href="${url}">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Libre+Franklin:wght@500;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@500;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/property/css/watchdog-games.css?v=20261001c">
 <link rel="stylesheet" href="/property/css/watchdog-glossary.css?v=20261001a">
 ${schema.map((s) => `<script type="application/ld+json">${j(s)}</script>`).join('')}

@@ -68,8 +68,7 @@
       "body_ui": {"family": "Libre Franklin", "fallback": "Arial, sans-serif", "weights": [400, 500, 600, 700, 800]}
     },
     "editorial_exceptions": {
-      "Source Sans 3": "Allowed on existing public long-form or lookup experiences while those surfaces are maintained.",
-      "Playfair Display": "Editorial accent only. Do not introduce into dashboards, data tools, controls, forms, or dense SaaS UI."
+      "Source Sans 3": "Allowed on existing public long-form or lookup experiences while those surfaces are maintained."
     },
     "scale": {
       "display_xl": {"size": "clamp(32px, 4vw, 52px)", "line_height": 1.02, "weight": 800, "tracking_em": -0.05},
@@ -286,7 +285,7 @@
     "statement": "The repository includes multiple generations of Watchdog and NJPropertyTaxRelief styling. Existing code is evidence of history, not automatic brand authority.",
     "known_transitional_patterns": [
       "Older public pages use navy/gold visual language.",
-      "Some public property surfaces use Source Sans 3 and Playfair Display.",
+      "Some public property surfaces use Source Sans 3. Playfair Display was retired in October 2026.",
       "Older dashboards contain stronger glassmorphism, larger shadows, and one-off component rules.",
       "Some shared CSS imports still contain query-string versioning. Do not copy that pattern into new files."
     ],

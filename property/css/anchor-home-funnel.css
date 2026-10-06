@@ -1,16 +1,16 @@
 :root{--wd-anchor-navy:#0b203d;--wd-anchor-blue:#0d3dbe;--wd-anchor-teal:#0b8f90;--wd-anchor-ink:#11233f;--wd-anchor-muted:#637188;--wd-anchor-line:#e1e8f1;--wd-anchor-soft:#f5f8fc}
 .wd-anchor-home-result,.wd-anchor-quick{font-family:"Source Sans 3",system-ui,sans-serif;color:var(--wd-anchor-ink)}
-.wd-anchor-home-result{position:relative;z-index:5;background:linear-gradient(180deg,#f8fbff 0%,#fff 100%);border-bottom:1px solid #e6ebf2;padding:28px 0 36px}
+.wd-anchor-home-result{position:relative;z-index:5;background:#f8fbff;border-bottom:1px solid #e6ebf2;padding:28px 0 36px}
 .wd-anchor-home-wrap,.wd-anchor-quick-wrap{width:min(1240px,calc(100% - 48px));margin:0 auto}
-.wd-anchor-home-topline{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:12px;color:#2862b9;font:800 10px/1.2 "Libre Franklin",sans-serif;letter-spacing:.1em;text-transform:uppercase}
+.wd-anchor-home-topline{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:12px;color:#2862b9;font:800 12px/1.2 "Libre Franklin",sans-serif;letter-spacing:0;text-transform:none}
 .wd-anchor-home-secure{display:flex;align-items:center;gap:7px;color:#687995;letter-spacing:.02em;text-transform:none;font-weight:700}
-.wd-anchor-home-grid{display:grid;grid-template-columns:minmax(0,1.12fr) minmax(320px,.88fr);overflow:hidden;border:1px solid #dce5f0;border-radius:26px;background:#fff;box-shadow:0 2px 6px rgba(15,23,42,.08)}
+.wd-anchor-home-grid{display:grid;grid-template-columns:minmax(0,1.12fr) minmax(320px,.88fr);overflow:hidden;border:1px solid #dce5f0;border-radius:12px;background:#fff;box-shadow:0 2px 6px rgba(15,23,42,.08)}
 .wd-anchor-home-benefit{padding:30px 32px 28px;position:relative}
 .wd-anchor-home-benefit:before{content:"";position:absolute;left:0;top:0;bottom:0;width:5px}
 .wd-anchor-home-hello{margin:0 0 5px;color:#637188;font-size:14px;font-weight:650}
 .wd-anchor-home-benefit h2{margin:0;color:#10284c;font:800 20px/1.25 "Libre Franklin",sans-serif;letter-spacing:-.025em}
 .wd-anchor-home-amount{display:block;margin:9px 0 6px;color:#0d3dbe;font:800 clamp(48px,7vw,72px)/.98 "Libre Franklin",sans-serif;letter-spacing:-.06em}
-.wd-anchor-home-status{display:inline-flex;align-items:center;min-height:30px;padding:6px 10px;border-radius:999px;background:#eaf8f3;color:#177354;font-size:12px;font-weight:800}
+.wd-anchor-home-status{display:inline-flex;align-items:center;min-height:30px;padding:6px 10px;border-radius:8px;background:#eaf8f3;color:#177354;font-size:12px;font-weight:800}
 .wd-anchor-home-status.is-review{background:#fff5e7;color:#8a5a16}
 .wd-anchor-home-address{display:flex;align-items:flex-start;gap:8px;margin-top:18px;color:#172a48;font:750 14px/1.4 "Libre Franklin",sans-serif}
 .wd-anchor-home-address i{margin-top:3px;color:#0b8f90}
@@ -18,21 +18,21 @@
 .wd-anchor-home-actions{display:flex;align-items:center;flex-wrap:wrap;gap:9px;margin-top:21px}
 .wd-anchor-btn{appearance:none;border:0;border-radius:12px;min-height:44px;padding:10px 15px;display:inline-flex;align-items:center;justify-content:center;gap:8px;font:800 12.5px/1.2 "Libre Franklin",sans-serif;cursor:pointer;text-decoration:none;transition:transform .15s ease,box-shadow .15s ease,background .15s ease}
 .wd-anchor-btn:hover{transform:translateY(-1px)}
-.wd-anchor-btn.primary{background:linear-gradient(135deg,#0d3dbe,#176ef5);color:#fff;box-shadow:0 2px 6px rgba(15,23,42,.08)}
+.wd-anchor-btn.primary{background:#0d3dbe;color:#fff;box-shadow:0 2px 6px rgba(15,23,42,.08)}
 .wd-anchor-btn.secondary{background:#f2f6fb;color:#183a70;border:1px solid #d9e3ef}
 .wd-anchor-btn:disabled{cursor:default;opacity:.7;transform:none}
 .wd-anchor-link{display:inline-flex;align-items:center;gap:7px;padding:8px 3px;color:#48617f;text-decoration:none;font-weight:800;font-size:12.5px}
 .wd-anchor-link:hover{text-decoration:underline;text-underline-offset:3px}
 .wd-anchor-save-status,.wd-anchor-quick-status{min-height:18px;margin-top:11px;color:#65758c;font-size:12px;font-weight:700}
 .wd-anchor-save-status.is-error,.wd-anchor-quick-status.is-error{color:#a14343}.wd-anchor-save-status.is-saved{color:#157458}
-.wd-anchor-property-context{padding:25px;background:radial-gradient(circle at 90% 0%,rgba(81,151,255,.23),transparent 32%),linear-gradient(145deg,#071c43,#0a347c);color:#fff;min-width:0}
+.wd-anchor-property-context{padding:25px;background:#071c43;color:#fff;min-width:0}
 .wd-anchor-property-loading{height:100%;min-height:250px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:25px}
 .wd-anchor-property-loading strong{font:800 16px/1.3 "Libre Franklin",sans-serif}.wd-anchor-property-loading p{max-width:310px;margin:7px 0 0;color:#b8c9e8;font-size:12px;line-height:1.5}
 .wd-anchor-loader{width:31px;height:31px;margin-bottom:13px;border:3px solid rgba(255,255,255,.18);border-top-color:#73aeff;border-radius:50%;animation:wd-anchor-spin .8s linear infinite}
 @keyframes wd-anchor-spin{to{transform:rotate(360deg)}}
 .wd-anchor-property-head>span,.wd-anchor-property-empty>span{display:block;color:#8ebaff;font:800 9px/1.2 "Libre Franklin",sans-serif;letter-spacing:.1em}.wd-anchor-property-head>b{display:block;margin:6px 0 2px;font:800 16px/1.3 "Libre Franklin",sans-serif}.wd-anchor-property-head small{color:#b6c6df;font-size:11px}
 .wd-anchor-property-score{display:grid;grid-template-columns:105px 1fr;align-items:center;gap:16px;margin:22px 0 17px;padding:15px;border-radius:17px;background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.11)}
-.wd-anchor-property-score>div{width:88px;height:88px;border-radius:50%;display:grid;place-content:center;text-align:center;background:radial-gradient(circle,#fff 56%,transparent 58%),conic-gradient(#5aa0ff 0 73%,rgba(255,255,255,.16) 73% 100%);color:#0d3dbe}.wd-anchor-property-score strong{font:800 27px/1 "Libre Franklin",sans-serif}.wd-anchor-property-score span{display:block;margin-top:3px;color:#7286a5;font-size:7px;font-weight:900;text-transform:uppercase}.wd-anchor-property-score p{margin:0;color:#d2def1;font-size:11px;line-height:1.45}
+.wd-anchor-property-score>div{width:88px;height:88px;border-radius:50%;display:grid;place-content:center;text-align:center;background:radial-gradient(circle,#fff 56%,transparent 58%),conic-gradient(#5aa0ff 0 73%,rgba(255,255,255,.16) 73% 100%);color:#0d3dbe}.wd-anchor-property-score strong{font:800 27px/1 "Libre Franklin",sans-serif}.wd-anchor-property-score span{display:block;margin-top:3px;color:#7286a5;font-size:12px;font-weight:900;text-transform:none}.wd-anchor-property-score p{margin:0;color:#d2def1;font-size:12px;line-height:1.45}
 .wd-anchor-property-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:7px}.wd-anchor-property-stats>div{padding:10px;border-radius:11px;background:rgba(255,255,255,.07)}.wd-anchor-property-stats b{display:block;color:#fff;font:800 13px/1.2 "Libre Franklin",sans-serif}.wd-anchor-property-stats span{display:block;margin-top:3px;color:#a8bddd;font-size:8.5px;font-weight:700}
 .wd-anchor-property-open,.wd-anchor-property-empty a{display:inline-flex;margin-top:16px;color:#c8dcff;text-decoration:none;font-size:11.5px;font-weight:850}.wd-anchor-property-open:hover,.wd-anchor-property-empty a:hover{text-decoration:underline}
 .wd-anchor-property-empty{min-height:250px;display:flex;flex-direction:column;justify-content:center}.wd-anchor-property-empty strong{margin:8px 0 5px;font:800 17px/1.3 "Libre Franklin",sans-serif}.wd-anchor-property-empty p{max-width:340px;margin:0;color:#b7c8e3;font-size:12px;line-height:1.5}
@@ -42,7 +42,7 @@
 
 .wd-anchor-social{margin-top:18px;padding:16px;border:1px solid #dce5f0;border-radius:16px;background:#f8fbff}
 .wd-anchor-social-head{display:flex;align-items:flex-start;justify-content:space-between;gap:14px}
-.wd-anchor-social-kicker{display:block;color:#0d3dbe;font:800 9px/1.2 "Libre Franklin",sans-serif;letter-spacing:.09em;text-transform:uppercase}
+.wd-anchor-social-kicker{display:block;color:#0d3dbe;font:800 12px/1.2 "Libre Franklin",sans-serif;letter-spacing:0;text-transform:none}
 .wd-anchor-social h3{margin:4px 0;color:#10284c;font:800 15px/1.3 "Libre Franklin",sans-serif}
 .wd-anchor-social p{margin:0;color:#66758c;font-size:11.5px;line-height:1.5}
 .wd-anchor-social-buttons{display:grid;grid-template-columns:minmax(0,1.35fr) repeat(2,minmax(0,1fr));gap:8px;margin-top:12px}
@@ -64,10 +64,10 @@
 .wd-anchor-quick-shell{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr)}
 .wd-anchor-quick-intro{padding:28px 28px 24px;border-right:1px solid #e6eaf0;background:#fff}
 .wd-anchor-quick-eyebrow{display:block;margin-bottom:10px;color:var(--wd-gold-500,#b8972a);font-size:12px;font-weight:600;line-height:1.2;letter-spacing:.12em}
-.wd-anchor-quick-intro h2{margin:0 0 10px;color:var(--wd-navy-950,#0e2248);font:600 28px/1.2 "Playfair Display",Georgia,serif;letter-spacing:0}
+.wd-anchor-quick-intro h2{margin:0 0 10px;color:var(--wd-navy-950,#0e2248);font:600 28px/1.2 "Libre Franklin",Arial,sans-serif;letter-spacing:0}
 .wd-anchor-quick-intro>p{margin:0;color:#3f4a5c;font-size:16px;line-height:1.5}
 .wd-anchor-quick-chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
-.wd-anchor-quick-chips>span,.wd-anchor-edit-chip{min-height:30px;box-sizing:border-box;padding:6px 12px;border-radius:999px;font:500 13px/1.25 "Libre Franklin",sans-serif}
+.wd-anchor-quick-chips>span,.wd-anchor-edit-chip{min-height:30px;box-sizing:border-box;padding:6px 12px;border-radius:8px;font:500 13px/1.25 "Libre Franklin",sans-serif}
 .wd-anchor-quick-chips>span{background:#eef3fb;color:var(--wd-navy-700,#1456a0)}
 .wd-anchor-edit-chip{appearance:none;border:1px solid #c9d2df;background:#fff;color:#3f4a5c;cursor:pointer}
 .wd-anchor-edit-chip:hover{border-color:#9eacbd;color:var(--wd-navy-700,#1456a0)}
@@ -99,12 +99,12 @@
 
 @media(max-width:900px){.wd-anchor-home-grid{grid-template-columns:1fr}.wd-anchor-property-context{min-height:0}.wd-anchor-quick-fields{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:720px){.wd-anchor-quick-shell{grid-template-columns:1fr}.wd-anchor-quick-intro{border-right:0;border-bottom:1px solid #e6eaf0}.wd-anchor-quick-result{min-height:0}.wd-anchor-quick-result>strong{font-size:40px}.wd-anchor-quick-result-actions{width:100%;flex-direction:column;align-items:stretch;gap:8px}.wd-anchor-quick-result-actions .wd-anchor-btn{width:100%}.wd-anchor-save-link{text-align:center}.wd-anchor-quick-disclaimer{padding:12px 20px}}
-@media(max-width:680px){.wd-anchor-home-result{padding:18px 0 26px}.wd-anchor-home-wrap,.wd-anchor-quick-wrap{width:min(100% - 28px,1240px)}.wd-anchor-home-topline{align-items:flex-start;flex-direction:column;gap:5px}.wd-anchor-home-grid{border-radius:20px}.wd-anchor-home-benefit{padding:24px 20px 22px}.wd-anchor-home-benefit:before{width:4px}.wd-anchor-home-amount{font-size:52px}.wd-anchor-home-actions{align-items:stretch;flex-direction:column}.wd-anchor-btn,.wd-anchor-link{width:100%;box-sizing:border-box;justify-content:center}.wd-anchor-property-context{padding:20px}.wd-anchor-property-score{grid-template-columns:78px 1fr}.wd-anchor-property-score>div{width:70px;height:70px}.wd-anchor-property-score strong{font-size:22px}.wd-anchor-property-stats{grid-template-columns:1fr 1fr}.wd-anchor-social-buttons{grid-template-columns:1fr}.wd-anchor-social-foot{align-items:flex-start;flex-direction:column}.wd-anchor-quick{padding:10px 0 40px}.wd-anchor-quick-intro{padding:22px 20px 20px}.wd-anchor-quick-intro h2{font-size:26px}.wd-anchor-quick-form,.wd-anchor-quick-result{padding:22px 20px}.wd-anchor-auth-box{padding:15px}}
+@media(max-width:680px){.wd-anchor-home-result{padding:18px 0 26px}.wd-anchor-home-wrap,.wd-anchor-quick-wrap{width:min(100% - 28px,1240px)}.wd-anchor-home-topline{align-items:flex-start;flex-direction:column;gap:5px}.wd-anchor-home-grid{border-radius:12px}.wd-anchor-home-benefit{padding:24px 20px 22px}.wd-anchor-home-benefit:before{width:4px}.wd-anchor-home-amount{font-size:52px}.wd-anchor-home-actions{align-items:stretch;flex-direction:column}.wd-anchor-btn,.wd-anchor-link{width:100%;box-sizing:border-box;justify-content:center}.wd-anchor-property-context{padding:20px}.wd-anchor-property-score{grid-template-columns:78px 1fr}.wd-anchor-property-score>div{width:70px;height:70px}.wd-anchor-property-score strong{font-size:22px}.wd-anchor-property-stats{grid-template-columns:1fr 1fr}.wd-anchor-social-buttons{grid-template-columns:1fr}.wd-anchor-social-foot{align-items:flex-start;flex-direction:column}.wd-anchor-quick{padding:10px 0 40px}.wd-anchor-quick-intro{padding:22px 20px 20px}.wd-anchor-quick-intro h2{font-size:26px}.wd-anchor-quick-form,.wd-anchor-quick-result{padding:22px 20px}.wd-anchor-auth-box{padding:15px}}
 @media(max-width:520px){.wd-anchor-quick-fields{grid-template-columns:1fr}.wd-anchor-quick-form-actions{align-items:stretch;flex-direction:column}.wd-anchor-quick-form-actions .wd-anchor-btn{width:100%}}
 @media(prefers-reduced-motion:reduce){.wd-anchor-loader{animation:none}.wd-anchor-btn{transition:none!important}}
 
 /* Shared free application assistance message. */
-.wd-free-help{box-sizing:border-box;display:flex;align-items:center;gap:24px;width:min(1100px,calc(100% - 40px));margin:32px auto;padding:20px;background:#fff;border:1px solid #dce5f0;border-radius:20px;color:#103780;font-family:"Source Sans 3",system-ui,sans-serif;text-align:left}
+.wd-free-help{box-sizing:border-box;display:flex;align-items:center;gap:24px;width:min(1100px,calc(100% - 40px));margin:32px auto;padding:20px;background:#fff;border:1px solid #dce5f0;border-radius:12px;color:#103780;font-family:"Libre Franklin",system-ui,sans-serif;text-align:left}
 .wd-free-help-image{display:block;flex:0 0 220px;overflow:hidden;border-radius:12px;line-height:0}
 .wd-free-help-image img{display:block;width:100%;height:auto}
 .wd-free-help-copy{min-width:0}.wd-free-help-copy strong{display:block;font-size:clamp(20px,2.3vw,28px);line-height:1.25}.wd-free-help-copy p{margin:12px 0;color:#435570;font-size:16px;line-height:1.5}.wd-free-help-copy>a{display:inline-flex;align-items:center;min-height:44px;gap:8px;color:#103780;font-size:16px;font-weight:700;text-decoration:underline;text-underline-offset:3px}

@@ -12,24 +12,24 @@ html body:is([data-sidebar-page="data-center"],[data-sidebar-page="data-workbenc
 html body:is([data-sidebar-page="data-center"],[data-sidebar-page="data-workbench"]),
 html body:is([data-sidebar-page="data-center"],[data-sidebar-page="data-workbench"]) .db-workspace{background:var(--xb-bg)!important}
 html body:is([data-sidebar-page="data-center"],[data-sidebar-page="data-workbench"]) .wdx-topbar{background:rgba(251,250,247,.94)!important}
-html body:is([data-sidebar-page="data-center"],[data-sidebar-page="data-workbench"]) .wdx-btn{border-radius:999px!important}
+html body:is([data-sidebar-page="data-center"],[data-sidebar-page="data-workbench"]) .wdx-btn{border-radius:8px!important}
 html body:is([data-sidebar-page="data-center"],[data-sidebar-page="data-workbench"]) .wdx-btn.primary{background:var(--xb-navy)!important;border-color:var(--xb-navy)!important}
 
 /* ---------------- Data Center ---------------- */
 html body[data-sidebar-page="data-center"] .dcv2-page{word-spacing:.04em}
-html body[data-sidebar-page="data-center"] .dcv2-hero{position:relative;overflow:hidden;border-radius:24px!important;background:var(--xb-navy)!important;box-shadow:none!important}
+html body[data-sidebar-page="data-center"] .dcv2-hero{position:relative;overflow:hidden;border-radius:12px!important;background:var(--xb-navy)!important;box-shadow:none!important}
 html body[data-sidebar-page="data-center"] .dcv2-hero::after{content:"";position:absolute;top:auto!important;left:auto!important;right:48px;bottom:-40px;width:220px;height:256px;opacity:.5;pointer-events:none;background:no-repeat center/contain url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 116'%3E%3Cpath fill='%231456a0' d='M50 2 94 18v34c0 30-19 52-44 62C25 104 6 82 6 52V18Z'/%3E%3C/svg%3E")}
 html body[data-sidebar-page="data-center"] .dcv2-hero>*{position:relative;z-index:1}
 html body[data-sidebar-page="data-center"] .dcv2-hero::before{display:none!important}
-html body[data-sidebar-page="data-center"] .dcv2-hero-actions :is(a,button){border-radius:999px!important}
+html body[data-sidebar-page="data-center"] .dcv2-hero-actions :is(a,button){border-radius:8px!important}
 
-html body[data-sidebar-page="data-center"] .dcv2-tabs{gap:6px!important;padding:6px!important;border:0!important;border-radius:999px!important;background:#fff!important;box-shadow:none!important;width:fit-content;max-width:100%;overflow-x:auto}
-html body[data-sidebar-page="data-center"] .dcv2-tab{min-height:44px!important;padding:0 18px!important;border:0!important;border-radius:999px!important;background:transparent!important;color:var(--xb-ink)!important;font:600 14px var(--xb-display)!important;white-space:nowrap}
+html body[data-sidebar-page="data-center"] .dcv2-tabs{gap:6px!important;padding:6px!important;border:0!important;border-radius:8px!important;background:#fff!important;box-shadow:none!important;width:fit-content;max-width:100%;overflow-x:auto}
+html body[data-sidebar-page="data-center"] .dcv2-tab{min-height:44px!important;padding:0 18px!important;border:0!important;border-radius:8px!important;background:transparent!important;color:var(--xb-ink)!important;font:600 14px var(--xb-display)!important;white-space:nowrap}
 html body[data-sidebar-page="data-center"] .dcv2-tab[aria-selected="true"]{background:var(--xb-navy)!important;color:#fff!important}
 
 /* The four summary numbers become the board's colored cards */
 html body[data-sidebar-page="data-center"] .dcv2-kpis{gap:16px!important}
-html body[data-sidebar-page="data-center"] .dcv2-kpi{position:relative;overflow:hidden;min-height:150px;border:0!important;border-radius:24px!important;box-shadow:none!important;color:var(--xb-ink)!important}
+html body[data-sidebar-page="data-center"] .dcv2-kpi{position:relative;overflow:hidden;min-height:150px;border:0!important;border-radius:12px!important;box-shadow:none!important;color:var(--xb-ink)!important}
 html body[data-sidebar-page="data-center"] .dcv2-kpi>*{position:relative;z-index:1}
 html body[data-sidebar-page="data-center"] .dcv2-kpi::after{content:"";position:absolute;z-index:0;right:14px;top:14px;width:72px;height:72px;pointer-events:none;background:no-repeat center/contain}
 html body[data-sidebar-page="data-center"] .dcv2-kpi:nth-child(1){background:var(--xb-navy)!important;color:#fff!important}
@@ -43,20 +43,20 @@ html body[data-sidebar-page="data-center"] .dcv2-kpi:nth-child(4){background:var
 html body[data-sidebar-page="data-center"] .dcv2-kpi:nth-child(4)::after{width:58px;height:72px;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 80 100'%3E%3Cpath fill='%23e4cf8e' d='M40 2C19 2 4 17 4 37c0 26 36 61 36 61s36-35 36-61C76 17 61 2 40 2Z'/%3E%3Ccircle cx='40' cy='37' r='13' fill='%23f6efd9'/%3E%3C/svg%3E")}
 html body[data-sidebar-page="data-center"] .dcv2-kpi b{display:inline-block;max-width:calc(100% - 70px);padding-bottom:6px;border-bottom:2px solid currentColor;font:700 28px/1.15 var(--xb-display)!important;letter-spacing:-.02em}
 html body[data-sidebar-page="data-center"] .dcv2-kpi:nth-child(1) b{border-color:var(--xb-gold)}
-html body[data-sidebar-page="data-center"] .dcv2-kpi strong{font-size:13px!important;font-weight:700!important;letter-spacing:.04em;text-transform:uppercase;opacity:.8}
+html body[data-sidebar-page="data-center"] .dcv2-kpi strong{font-size:13px!important;font-weight:700!important;letter-spacing:0;text-transform:none;opacity:.8}
 html body[data-sidebar-page="data-center"] .dcv2-kpi:not(:nth-child(1)) :is(b,strong,span){color:var(--xb-ink)!important}
 html body[data-sidebar-page="data-center"] .dcv2-kpi span{font-size:14px!important;opacity:.82}
 
-html body[data-sidebar-page="data-center"] :is(.dcv2-card,.dcv2-usecase){border:0!important;border-radius:24px!important;background:#fff!important;box-shadow:none!important}
+html body[data-sidebar-page="data-center"] :is(.dcv2-card,.dcv2-usecase){border:0!important;border-radius:12px!important;background:#fff!important;box-shadow:none!important}
 html body[data-sidebar-page="data-center"] .dcv2-card-head h2{color:var(--xb-ink)!important;font:700 22px/1.2 var(--xb-display)!important;letter-spacing:-.015em!important}
 html body[data-sidebar-page="data-center"] .dcv2-fresh-row{border:1px solid var(--xb-line)!important;border-radius:18px!important;background:var(--xb-surface)!important}
-html body[data-sidebar-page="data-center"] .dcv2-fresh-badge{border-radius:999px!important}
-html body[data-sidebar-page="data-center"] .dcv2-bar{border-radius:999px!important;background:#eeeae2!important;overflow:hidden}
+html body[data-sidebar-page="data-center"] .dcv2-fresh-badge{border-radius:8px!important}
+html body[data-sidebar-page="data-center"] .dcv2-bar{border-radius:8px!important;background:#eeeae2!important;overflow:hidden}
 html body[data-sidebar-page="data-center"] .dcv2-usecase i{display:grid!important;place-items:center;width:42px;height:42px;border-radius:14px!important;background:var(--xb-sky)!important;color:var(--xb-blue)!important}
 html body[data-sidebar-page="data-center"] :is(button,a):focus-visible{outline:3px solid var(--xb-blue-bright)!important;outline-offset:2px}
 
 /* ---------------- Data Workbench ---------------- */
-html body[data-sidebar-page="data-workbench"] #dw-app{border:0!important;border-radius:24px!important;box-shadow:none!important;overflow:hidden;background:#fff!important}
+html body[data-sidebar-page="data-workbench"] #dw-app{border:0!important;border-radius:12px!important;box-shadow:none!important;overflow:hidden;background:#fff!important}
 html body[data-sidebar-page="data-workbench"] #dw-app .dw-side{background:var(--xb-surface)!important;border-color:var(--xb-line)!important}
 html body[data-sidebar-page="data-workbench"] #dw-app .dw-side h2{color:var(--xb-ink)!important;font:700 22px/1.2 var(--xb-display)!important}
 html body[data-sidebar-page="data-workbench"] #dw-app :is(.dw-source-list,.dw-view-list)>button{border:0!important;border-radius:14px!important;background:transparent!important;color:var(--xb-ink)!important;font-weight:600!important}
@@ -64,7 +64,7 @@ html body[data-sidebar-page="data-workbench"] #dw-app :is(.dw-source-list,.dw-vi
 html body[data-sidebar-page="data-workbench"] #dw-app .dw-source-list>button.on{background:var(--xb-navy)!important;color:#fff!important}
 html body[data-sidebar-page="data-workbench"] #dw-app .dw-source-list>button.on i{color:#fff!important}
 html body[data-sidebar-page="data-workbench"] #dw-app .dw-toolbar{gap:8px!important;border-color:var(--xb-line)!important}
-html body[data-sidebar-page="data-workbench"] #dw-app .dw-toolbar :is(button,select,input){border-radius:999px!important;border-color:var(--xb-line)!important;box-shadow:none!important}
+html body[data-sidebar-page="data-workbench"] #dw-app .dw-toolbar :is(button,select,input){border-radius:8px!important;border-color:var(--xb-line)!important;box-shadow:none!important}
 html body[data-sidebar-page="data-workbench"] #dw-app .dw-toolbar :is(button:not(.dwi-trigger):not(.dwa-trigger):not(.primary),select,input){background:#fff!important;color:var(--xb-ink)!important}
 html body[data-sidebar-page="data-workbench"] #dw-app .dw-toolbar input{padding-left:16px!important}
 html body[data-sidebar-page="data-workbench"] #dw-app #dw-refresh.primary{background:var(--xb-navy)!important;border-color:var(--xb-navy)!important;color:#fff!important}
@@ -74,9 +74,9 @@ html body[data-sidebar-page="data-workbench"] #dw-app .dw-grid thead th{backgrou
 html body[data-sidebar-page="data-workbench"] #dw-app .dw-grid td{border-color:#efebe4!important;color:var(--xb-ink)}
 html body[data-sidebar-page="data-workbench"] #dw-app .dw-grid tbody tr:hover td{background:var(--xb-surface)!important}
 html body[data-sidebar-page="data-workbench"] #dw-app .dw-grid input[type=checkbox]{accent-color:var(--xb-navy)}
-html body[data-sidebar-page="data-workbench"] #dw-app .dw-load-more{border-radius:999px!important;border-color:var(--xb-line)!important;color:var(--xb-ink)!important}
+html body[data-sidebar-page="data-workbench"] #dw-app .dw-load-more{border-radius:8px!important;border-color:var(--xb-line)!important;color:var(--xb-ink)!important}
 html body[data-sidebar-page="data-workbench"] #dw-app .dw-actionbar{background:var(--xb-surface)!important;border-color:var(--xb-line)!important}
-html body[data-sidebar-page="data-workbench"] #dw-app .dw-actionbar button{border-radius:999px!important;border-color:var(--xb-line)!important;background:#fff!important;color:var(--xb-ink)!important}
+html body[data-sidebar-page="data-workbench"] #dw-app .dw-actionbar button{border-radius:8px!important;border-color:var(--xb-line)!important;background:#fff!important;color:var(--xb-ink)!important}
 html body[data-sidebar-page="data-workbench"] #dw-app #dw-export{background:var(--xb-navy)!important;border-color:var(--xb-navy)!important;color:#fff!important}
 html body[data-sidebar-page="data-workbench"] #dw-app :is(button,a,input,select):focus-visible{outline:3px solid var(--xb-blue-bright)!important;outline-offset:2px}
 
@@ -88,11 +88,11 @@ html body[data-sidebar-page="data-workbench"] #dw-app :is(button,a,input,select)
   html body[data-sidebar-page="data-center"] .dcv2-tabs{width:auto}
 }
 /* ---------------- Load, error and missing-value states ---------------- */
-html body[data-sidebar-page="data-center"] .dc-load-notice{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;margin:0 0 16px;padding:18px 20px;border:1px solid var(--xb-sand-deep);border-radius:24px;background:var(--xb-sand);color:var(--xb-ink)}
+html body[data-sidebar-page="data-center"] .dc-load-notice{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;margin:0 0 16px;padding:18px 20px;border:1px solid var(--xb-sand-deep);border-radius:12px;background:var(--xb-sand);color:var(--xb-ink)}
 html body[data-sidebar-page="data-center"] .dc-load-notice[hidden]{display:none!important}
 html body[data-sidebar-page="data-center"] .dc-load-notice strong{display:block;font:700 16px/1.3 var(--xb-display)}
 html body[data-sidebar-page="data-center"] .dc-load-notice p{margin:4px 0 0;font-size:14px;line-height:1.45;color:var(--xb-muted)}
-html body[data-sidebar-page="data-center"] .dc-load-notice button{min-height:44px;padding:0 20px;border-radius:999px!important;border:1px solid var(--xb-navy)!important;background:var(--xb-navy)!important;color:#fff!important;font:700 14px var(--xb-display);cursor:pointer}
+html body[data-sidebar-page="data-center"] .dc-load-notice button{min-height:44px;padding:0 20px;border-radius:8px!important;border:1px solid var(--xb-navy)!important;background:var(--xb-navy)!important;color:#fff!important;font:700 14px var(--xb-display);cursor:pointer}
 html body[data-sidebar-page="data-center"] #dc-rows tr:is([data-provider-status="planned"],[data-provider-status="unavailable"]) strong{color:var(--xb-muted)}
 html body[data-sidebar-page="data-center"] .dc-results td.dc-cell-missing{color:var(--xb-muted);font-style:italic}
 html body[data-sidebar-page="data-center"] .dc-drawer:focus-visible{outline:3px solid var(--xb-blue-bright);outline-offset:-3px}
@@ -113,7 +113,7 @@ html body[data-sidebar-page="data-center"] .dc-check input[type=checkbox]{width:
 html body[data-sidebar-page="data-workbench"] #dw-app .dw-grid td.dw-source-missing{color:var(--xb-muted)!important;font-style:italic}
 html body[data-sidebar-page="data-workbench"] #dw-app .dw-start-error{display:grid!important;justify-items:center;gap:14px;text-align:center}
 html body[data-sidebar-page="data-workbench"] #dw-app .dw-start-error p{margin:0;max-width:520px;font-size:15px;line-height:1.5;color:var(--xb-ink)}
-html body[data-sidebar-page="data-workbench"] #dw-app .dw-start-retry{min-height:44px;padding:0 22px;border:0;border-radius:999px;background:var(--xb-navy);color:#fff;font:700 14px var(--xb-display);cursor:pointer}
+html body[data-sidebar-page="data-workbench"] #dw-app .dw-start-retry{min-height:44px;padding:0 22px;border:0;border-radius:8px;background:var(--xb-navy);color:#fff;font:700 14px var(--xb-display);cursor:pointer}
 html body[data-sidebar-page="data-workbench"] #dw-app .dw-start-retry:focus-visible{outline:3px solid var(--xb-blue-bright);outline-offset:2px}
 /* "Load more from source" only exists for paged farm sources; a display rule must not unhide it. */
 html body[data-sidebar-page="data-workbench"] #dw-app .dw-load-more[hidden]{display:none!important}

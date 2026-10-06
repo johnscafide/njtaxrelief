@@ -69,7 +69,7 @@
       var typeLink = nav.querySelector('a[href="#type"]');
       var link = document.createElement('a');
       link.href = '#intelligence-brand';
-      link.innerHTML = '<i class="fas fa-wand-magic-sparkles"></i> Watchdog Intelligence';
+      link.innerHTML = '<i class="fas fa-pen-nib"></i> Watchdog Intelligence';
       if (typeLink) nav.insertBefore(link, typeLink); else nav.appendChild(link);
     }
 
@@ -168,7 +168,7 @@
         var intelligenceRow = document.createElement('div');
         intelligenceRow.className = 'bc-asset';
         intelligenceRow.setAttribute('data-bc-current-layer','intelligence');
-        intelligenceRow.innerHTML = '<span class="bc-asset-icon"><i class="fas fa-wand-magic-sparkles"></i></span><div><b>Watchdog Intelligence sub-brand</b><span>/property/branding/WATCHDOG-INTELLIGENCE-BRAND.md</span></div><a href="/property/branding/WATCHDOG-INTELLIGENCE-BRAND.md">Open</a>';
+        intelligenceRow.innerHTML = '<span class="bc-asset-icon"><i class="fas fa-pen-nib"></i></span><div><b>Watchdog Intelligence sub-brand</b><span>/property/branding/WATCHDOG-INTELLIGENCE-BRAND.md</span></div><a href="/property/branding/WATCHDOG-INTELLIGENCE-BRAND.md">Open</a>';
         list.insertBefore(intelligenceRow, runtimeRow.nextSibling);
       }
     }

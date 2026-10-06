@@ -118,7 +118,7 @@
     card.dataset.address=ctx.address;
     card.setAttribute('aria-label','Property location for '+ctx.address);
     card.innerHTML='<div class="wd-property-map-head">'+
-      '<div><small>PROPERTY LOCATION</small><strong>Map view</strong>'+(ctx.locality?'<span>'+esc(ctx.locality)+'</span>':'')+'</div>'+ 
+      '<div><small>Property location</small><strong>Map view</strong>'+(ctx.locality?'<span>'+esc(ctx.locality)+'</span>':'')+'</div>'+ 
       '<a href="'+esc(link)+'" target="_blank" rel="noopener" aria-label="Open '+esc(ctx.address)+' in Google Maps"><i class="fas fa-arrow-up-right-from-square"></i> Open</a>'+ 
       '</div>'+ 
       '<div class="wd-property-map-canvas"><div class="wd-property-map-leaflet" id="'+mapId+'" role="img" aria-label="Interactive aerial map around '+esc(ctx.address)+'"></div></div>'+ 

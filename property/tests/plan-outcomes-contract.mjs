@@ -26,7 +26,7 @@ for (const tier of ['standard','agent','pro','pro_plus','teams','developer']) {
   expect(outcomes.includes(`${tier}:{`) || outcomes.includes(`${tier}: {`), `Missing outcome catalog tier: ${tier}.`);
 }
 for (const phrase of ['UNDERSTAND & WATCH','AGENT PROCESS','PROFESSIONAL RESEARCH','RESEARCH AT SCALE','TEAM DASHBOARD']) {
-  expect(outcomes.includes(phrase), `Missing plan language: ${phrase}.`);
+  expect(outcomes.toLowerCase().includes(phrase.toLowerCase()), `Missing plan language: ${phrase}.`);
 }
 expect(outcomes.includes("property_decision:{minimum:'pro'"), 'Property-level professional Intelligence must begin at Pro.');
 expect(outcomes.includes("population_triage:{minimum:'pro_plus'"), 'Population/scheduled Intelligence must begin at Pro+.');

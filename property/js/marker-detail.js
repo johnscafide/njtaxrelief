@@ -127,7 +127,7 @@
     $('mk-why').textContent=rich.why||m.professional_reason||('This '+label(m.scope).toLowerCase()+' marker helps add info to '+label(m.category).toLowerCase()+' analysis.');
     $('mk-read').textContent=howToRead(m);
     $('mk-method').textContent=rich.method||(formula?formula.formula:(m.origin==='watchdog-derived'?'Watchdog transforms one or more checked source fields into this screening red flag.':'Reported or calculated from the public source identified below.'));
-    if(formula&&formula.formula){$('mk-formula').hidden=false;$('mk-formula').innerHTML='<span>FORMULA / RULE</span><code>'+esc(formula.formula)+'</code>'+(formula.range?'<small>Output / range: '+esc(formula.range)+'</small>':'');}
+    if(formula&&formula.formula){$('mk-formula').hidden=false;$('mk-formula').innerHTML='<span>Formula / rule</span><code>'+esc(formula.formula)+'</code>'+(formula.range?'<small>Output / range: '+esc(formula.range)+'</small>':'');}
     $('mk-professions').innerHTML=professionalUse(m,reg)||'<span><b>General property research</b><small>Useful as supporting info when reviewing this property or municipality.</small></span>';
     $('mk-caution').textContent=cautionFor(m,rich);
     $('mk-badges').innerHTML='<span class="tier">'+esc(m.tier==='pro_plus'?'Pro+':label(m.tier))+'</span><span>'+esc(m.origin==='public'?'Public source':'Watchdog proprietary')+'</span><span>'+esc(label(m.scope))+'</span>'+(m.unit?'<span>'+esc(label(m.unit))+'</span>':'');

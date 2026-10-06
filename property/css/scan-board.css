@@ -15,28 +15,28 @@ html body[data-sidebar-page="scan"] .db-workspace,
 html body[data-sidebar-page="scan"] #sc-main{background:var(--sb-bg)!important}
 html body[data-sidebar-page="scan"] .wdx-topbar{background:rgba(251,250,247,.94)!important}
 html body[data-sidebar-page="scan"] .wdx-pagebar h1{color:var(--sb-ink)!important}
-html body[data-sidebar-page="scan"] .wdx-btn{border-radius:999px!important}
+html body[data-sidebar-page="scan"] .wdx-btn{border-radius:8px!important}
 html body[data-sidebar-page="scan"] .wdx-btn.primary{background:var(--sb-navy)!important;border-color:var(--sb-navy)!important}
 html body[data-sidebar-page="scan"] #sc-main .sc-wrap{word-spacing:.06em}
 
 /* Intro: the navy card */
-html body[data-sidebar-page="scan"] #sc-main .sc-intro{position:relative!important;overflow:hidden!important;max-width:none!important;border:0!important;border-radius:24px!important;background:var(--sb-navy)!important;color:#fff!important;padding:28px 30px!important;padding-right:170px!important}
+html body[data-sidebar-page="scan"] #sc-main .sc-intro{position:relative!important;overflow:hidden!important;max-width:none!important;border:0!important;border-radius:12px!important;background:var(--sb-navy)!important;color:#fff!important;padding:28px 30px!important;padding-right:170px!important}
 html body[data-sidebar-page="scan"] #sc-main .sc-intro::after{content:"";position:absolute;right:-18px;top:14px;width:150px;height:170px;opacity:.6;background:no-repeat center/contain url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 116'%3E%3Cpath fill='%231456a0' d='M50 2 94 18v34c0 30-19 52-44 62C25 104 6 82 6 52V18Z'/%3E%3Cpath fill='none' stroke='%232f6df6' stroke-width='7' stroke-linecap='round' stroke-linejoin='round' d='m30 58 14 14 28-30'/%3E%3C/svg%3E")}
 html body[data-sidebar-page="scan"] #sc-main .sc-intro h2{color:#fff!important}
 html body[data-sidebar-page="scan"] #sc-main .sc-intro p{color:rgba(255,255,255,.78)!important}
 html body[data-sidebar-page="scan"] #sc-main .sc-eyebrow{color:#e4cf8e!important}
 
 /* Form */
-html body[data-sidebar-page="scan"] #sc-main .sc-form{border:0!important;border-radius:24px!important;background:#fff!important;box-shadow:none!important;padding:20px!important}
+html body[data-sidebar-page="scan"] #sc-main .sc-form{border:0!important;border-radius:12px!important;background:#fff!important;box-shadow:none!important;padding:20px!important}
 html body[data-sidebar-page="scan"] #sc-main .sc-f label{font-size:12px!important;font-weight:700!important;color:var(--sb-muted)!important}
-html body[data-sidebar-page="scan"] #sc-main .sc-f select{border-radius:999px!important;border-color:var(--sb-line)!important;background:var(--sb-surface)!important;color:var(--sb-ink)!important;padding:0 16px!important}
-html body[data-sidebar-page="scan"] #sc-main .sc-run{border-radius:999px!important;background:var(--sb-navy)!important;box-shadow:none!important;font-weight:700!important}
+html body[data-sidebar-page="scan"] #sc-main .sc-f select{border-radius:8px!important;border-color:var(--sb-line)!important;background:var(--sb-surface)!important;color:var(--sb-ink)!important;padding:0 16px!important}
+html body[data-sidebar-page="scan"] #sc-main .sc-run{border-radius:8px!important;background:var(--sb-navy)!important;box-shadow:none!important;font-weight:700!important}
 html body[data-sidebar-page="scan"] #sc-main .sc-run:hover{background:var(--sb-blue)!important}
 html body[data-sidebar-page="scan"] #sc-main .sc-cov{font-size:12px!important;color:var(--sb-muted)!important}
 
 /* Result summary: the four board cards */
 html body[data-sidebar-page="scan"] #sc-main .sc-sum{display:grid!important;grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:16px!important;border:0!important;background:transparent!important;overflow:visible!important}
-html body[data-sidebar-page="scan"] #sc-main .sc-sum>div{position:relative;overflow:hidden;min-height:132px;border:0!important;border-radius:24px!important;padding:22px!important;color:var(--sb-ink)}
+html body[data-sidebar-page="scan"] #sc-main .sc-sum>div{position:relative;overflow:hidden;min-height:132px;border:0!important;border-radius:12px!important;padding:22px!important;color:var(--sb-ink)}
 html body[data-sidebar-page="scan"] #sc-main .sc-sum>div::after{content:"";position:absolute;right:14px;top:14px;width:64px;height:64px;background:no-repeat center/contain}
 html body[data-sidebar-page="scan"] #sc-main .sc-sum>div:nth-child(1){background:var(--sb-navy)!important;color:#fff}
 html body[data-sidebar-page="scan"] #sc-main .sc-sum>div:nth-child(1)::after{opacity:.55;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 116'%3E%3Cpath fill='%231456a0' d='M50 2 94 18v34c0 30-19 52-44 62C25 104 6 82 6 52V18Z'/%3E%3C/svg%3E")}
@@ -48,13 +48,13 @@ html body[data-sidebar-page="scan"] #sc-main .sc-sum>div:nth-child(4){background
 html body[data-sidebar-page="scan"] #sc-main .sc-sum>div:nth-child(4)::after{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 80 100'%3E%3Cpath fill='%23e4cf8e' d='M40 2C19 2 4 17 4 37c0 26 36 61 36 61s36-35 36-61C76 17 61 2 40 2Z'/%3E%3Ccircle cx='40' cy='37' r='13' fill='%23f6efd9'/%3E%3C/svg%3E")}
 html body[data-sidebar-page="scan"] #sc-main .sc-sum b{position:relative;z-index:1;display:inline-block!important;color:inherit!important;font:700 34px/1.1 var(--sb-display)!important;padding-bottom:6px;border-bottom:2px solid currentColor;margin-bottom:10px}
 html body[data-sidebar-page="scan"] #sc-main .sc-sum>div:nth-child(1) b{border-color:var(--sb-gold)}
-html body[data-sidebar-page="scan"] #sc-main .sc-sum span{position:relative;z-index:1;display:block;font-size:12px!important;font-weight:700!important;letter-spacing:.04em;text-transform:uppercase;color:inherit!important;opacity:.78}
+html body[data-sidebar-page="scan"] #sc-main .sc-sum span{position:relative;z-index:1;display:block;font-size:12px!important;font-weight:700!important;letter-spacing:0;text-transform:none;color:inherit!important;opacity:.78}
 
 /* Actions, table, notes */
 html body[data-sidebar-page="scan"] #sc-main .sc-lede{color:var(--sb-ink)!important;font-size:15px!important;line-height:1.6!important}
-html body[data-sidebar-page="scan"] #sc-main .sc-exp{border-radius:999px!important;background:var(--sb-navy)!important;border-color:var(--sb-navy)!important;color:#fff!important}
+html body[data-sidebar-page="scan"] #sc-main .sc-exp{border-radius:8px!important;background:var(--sb-navy)!important;border-color:var(--sb-navy)!important;color:#fff!important}
 html body[data-sidebar-page="scan"] #sc-main .sc-exp.ghost{background:#fff!important;border-color:var(--sb-line)!important;color:var(--sb-ink)!important}
-html body[data-sidebar-page="scan"] #sc-main .sc-tablewrap{border:0!important;border-radius:24px!important;background:#fff!important;box-shadow:none!important}
+html body[data-sidebar-page="scan"] #sc-main .sc-tablewrap{border:0!important;border-radius:12px!important;background:#fff!important;box-shadow:none!important}
 html body[data-sidebar-page="scan"] #sc-main .sc-t thead th{background:var(--sb-surface)!important;color:var(--sb-muted)!important;border-color:var(--sb-line)!important}
 html body[data-sidebar-page="scan"] #sc-main .sc-t tbody tr:hover td{background:#f7f5f0!important}
 html body[data-sidebar-page="scan"] #sc-main .sc-t td{border-color:#efebe4!important}
@@ -65,9 +65,9 @@ html body[data-sidebar-page="scan"] #sc-main .sc-op.ophi b,html body[data-sideba
 html body[data-sidebar-page="scan"] #sc-main .sc-op.opmd{background:var(--sb-sky)!important}
 html body[data-sidebar-page="scan"] #sc-main .sc-op.oplo{background:var(--sb-sand)!important}
 html body[data-sidebar-page="scan"] #sc-main .sc-op.opmd b,html body[data-sidebar-page="scan"] #sc-main .sc-op.oplo b{color:var(--sb-ink)!important}
-html body[data-sidebar-page="scan"] #sc-main .sc-quick{border-radius:999px!important}
-html body[data-sidebar-page="scan"] #sc-main .sc-method{border:0!important;border-radius:24px!important;background:#fff!important;box-shadow:none!important;max-width:none!important}
-html body[data-sidebar-page="scan"] #sc-main .sc-plan-gate,html body[data-sidebar-page="scan"] #sc-main .sc-err,html body[data-sidebar-page="scan"] #sc-main .sc-none,html body[data-sidebar-page="scan"] #sc-main .sc-load{border-radius:24px!important;border-color:var(--sb-line)!important;background:#fff!important}
+html body[data-sidebar-page="scan"] #sc-main .sc-quick{border-radius:8px!important}
+html body[data-sidebar-page="scan"] #sc-main .sc-method{border:0!important;border-radius:12px!important;background:#fff!important;box-shadow:none!important;max-width:none!important}
+html body[data-sidebar-page="scan"] #sc-main .sc-plan-gate,html body[data-sidebar-page="scan"] #sc-main .sc-err,html body[data-sidebar-page="scan"] #sc-main .sc-none,html body[data-sidebar-page="scan"] #sc-main .sc-load{border-radius:12px!important;border-color:var(--sb-line)!important;background:#fff!important}
 html body[data-sidebar-page="scan"] #sc-main :focus-visible{outline:3px solid var(--sb-blue-bright)!important;outline-offset:2px}
 
 @media (max-width:1100px){html body[data-sidebar-page="scan"] #sc-main .sc-sum{grid-template-columns:repeat(2,minmax(0,1fr))!important}}

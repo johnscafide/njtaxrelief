@@ -23,20 +23,20 @@
     s.textContent=[
       '#plm .wd-pl-proprietary>i{color:#24498b!important}',
       '#plm .wd-pl-proprietary b{color:#142a56}',
-      '#plm .wd-pl-proprietary[data-ready="1"]{background:linear-gradient(145deg,#fff,#f4f7fc)}',
+      '#plm .wd-pl-proprietary[data-ready="1"]{background:#fff}',
       '#plm #plm-kpi-burden .plm-kpi-n{color:#24498b}',
       '#plm .plm-addr>span[data-wd-city="1"]{display:block}',
       'html.wd-index-mapless #plm-map,html.wd-index-mapless #hd-map,html.wd-index-mapless .leaflet-container{display:none!important;visibility:hidden!important;pointer-events:none!important;max-height:0!important;overflow:hidden!important}',
       'html.wd-index-mapless #plm section:has(#plm-map),html.wd-index-mapless #plm .plm-sec:has(#plm-map),html.wd-index-mapless .hd-mapwrap:has(#hd-map){display:none!important}',
-      '#plm-photos .wd-mapless-property-hero{position:relative;min-height:320px;width:100%;overflow:hidden;display:grid;align-items:stretch;background:radial-gradient(circle at 78% 14%,rgba(92,161,255,.48),transparent 34%),linear-gradient(145deg,#071a35 0%,#123e82 52%,#2468d8 100%);color:#fff}',
+      '#plm-photos .wd-mapless-property-hero{position:relative;min-height:320px;width:100%;overflow:hidden;display:grid;align-items:stretch;background:#071a35;color:#fff}',
       '#plm-photos .wd-mapless-property-hero:after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(180deg,rgba(255,255,255,.035),rgba(0,8,24,.28))}',
       '#plm-photos .wd-mapless-property-in{position:relative;z-index:2;display:grid;grid-template-columns:minmax(0,1.25fr) minmax(260px,.75fr);gap:28px;align-items:center;padding:36px clamp(24px,4vw,54px)}',
-      '#plm-photos .wd-mapless-kicker{display:inline-flex;align-items:center;gap:9px;color:#9eece4;font:850 11px/1.2 "Libre Franklin",sans-serif;letter-spacing:.105em;text-transform:uppercase}',
+      '#plm-photos .wd-mapless-kicker{display:inline-flex;align-items:center;gap:9px;color:#9eece4;font:850 11px/1.2 "Libre Franklin",sans-serif;letter-spacing:0;text-transform:none}',
       '#plm-photos .wd-mapless-address{margin:13px 0 7px;color:#fff;font:850 clamp(24px,3.3vw,40px)/1.05 "Libre Franklin",sans-serif;letter-spacing:-.045em}',
       '#plm-photos .wd-mapless-copy{max-width:670px;margin:0;color:rgba(255,255,255,.72);font-size:15px;line-height:1.55}',
-      '#plm-photos .wd-mapless-status{display:inline-flex;margin-top:18px;padding:8px 11px;border:1px solid rgba(255,255,255,.2);border-radius:999px;background:rgba(255,255,255,.08);font-size:12px;font-weight:800}',
-      '#plm-photos .wd-mapless-scorebox{justify-self:end;width:min(100%,330px);padding:22px;border:1px solid rgba(255,255,255,.24);border-radius:24px;background:rgba(4,22,51,.97);box-shadow:0 2px 6px rgba(15,23,42,.08);}',
-      '#plm-photos .wd-mapless-scorelabel{display:flex;align-items:center;gap:9px;color:rgba(255,255,255,.74);font:850 10px/1.1 "Libre Franklin",sans-serif;letter-spacing:.08em;text-transform:uppercase}',
+      '#plm-photos .wd-mapless-status{display:inline-flex;margin-top:18px;padding:8px 11px;border:1px solid rgba(255,255,255,.2);border-radius:8px;background:rgba(255,255,255,.08);font-size:12px;font-weight:800}',
+      '#plm-photos .wd-mapless-scorebox{justify-self:end;width:min(100%,330px);padding:22px;border:1px solid rgba(255,255,255,.24);border-radius:12px;background:rgba(4,22,51,.97);box-shadow:0 2px 6px rgba(15,23,42,.08);}',
+      '#plm-photos .wd-mapless-scorelabel{display:flex;align-items:center;gap:9px;color:rgba(255,255,255,.74);font:850 10px/1.1 "Libre Franklin",sans-serif;letter-spacing:0;text-transform:none}',
       '#plm-photos .wd-mapless-score{display:flex;align-items:flex-end;gap:5px;margin-top:10px;color:#fff;font:900 clamp(46px,7vw,72px)/.86 "Libre Franklin",sans-serif;letter-spacing:-.07em}',
       '#plm-photos .wd-mapless-score em{padding-bottom:7px;color:rgba(255,255,255,.55);font:800 14px/1 "Libre Franklin",sans-serif;font-style:normal;letter-spacing:0}',
       '#plm-photos .wd-mapless-score.building{font-size:28px;line-height:1;letter-spacing:-.025em}',
@@ -252,7 +252,7 @@
     var statusHtml=status?'<span class="wd-mapless-status">'+esc(status)+'</span>':'';
     photos.innerHTML='<div class="wd-mapless-property-hero" data-signature="'+esc(signature)+'"><div class="wd-mapless-property-in">'+
       '<div><h2 class="wd-mapless-address">'+esc(address)+'</h2><p class="wd-mapless-copy">Rendered maps and third-party property imagery are temporarily disabled on this page. The property record, Watchdog Score and checked ROBUST evidence remain available.</p>'+statusHtml+'</div>'+
-      '<div class="wd-mapless-scorebox"><span class="wd-mapless-scorelabel"><i class="fas fa-shield-dog"></i> Watchdog Score</span>'+scoreHtml+'<div class="wd-mapless-robust-title">ROBUST FRAMEWORK</div><div class="wd-mapless-components">'+componentsMarkup(rows)+'</div></div>'+
+      '<div class="wd-mapless-scorebox"><span class="wd-mapless-scorelabel"><i class="fas fa-shield-dog"></i> Watchdog Score</span>'+scoreHtml+'<div class="wd-mapless-robust-title">ROBUST Framework</div><div class="wd-mapless-components">'+componentsMarkup(rows)+'</div></div>'+
       '<div class="wd-mapless-photo-note"><i class="fas fa-camera"></i><span>Owner-submitted property photos are planned as the replacement for third-party rendered imagery.</span></div>'+
       '</div></div>'+(parcel?lotMapMarkup(parcel):'');
     photos.classList.toggle('wd-has-lot-map',!!parcel);

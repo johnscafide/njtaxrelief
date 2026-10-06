@@ -9,7 +9,7 @@ Generated from the repository tree. Authority: `property/branding/brand-system.j
 - JavaScript files scanned: **646**
 - App/current-shell pages identified: **38**
 - Distinct raw px font sizes: **70**
-- Raw `font-size` declarations below 12px: **2014**
+- Raw `font-size` declarations below 12px: **2013**
 - Raw `font-size` declarations below 10px: **744**
 - Files containing Source Sans 3: **91**
 
@@ -34,9 +34,6 @@ Canonical app navigation:
 ## Findings
 
 - **CRITICAL** `property/home/index.html`: Property Home does not load the canonical brand consistency runtime.
-- **WARN** `property/css/anchor-home-funnel.css`: Playfair Display can render in an app/data surface; product UI should use Libre Franklin.
-- **WARN** `property/css/home.css`: Playfair Display can render in an app/data surface; product UI should use Libre Franklin.
-- **WARN** `property/css/shared/03-dashboard-components.css`: Playfair Display can render in an app/data surface; product UI should use Libre Franklin.
 
 ## Highest concentrations of sub-12px CSS
 
@@ -70,7 +67,7 @@ Canonical app navigation:
 
 ## Raw pixel type scale
 
-5px (14), 6px (18), 6.5px (1), 6.8px (4), 7px (58), 7.5px (13), 7.6px (1), 7.8px (2), 8px (177), 8.2px (2), 8.5px (44), 8.7px (1), 8.8px (4), 9px (344), 9.2px (1), 9.3px (1), 9.5px (59), 10px (424), 10.5px (129), 11px (565), 11.5px (152), 12px (785), 12.5px (106), 13px (565), 13.5px (132), 14px (423), 14.5px (77), 15px (300), 15.5px (30), 16px (195), 16.5px (5), 17px (148), 17.5px (4), 18px (124), 19px (70), 20px (108), 21px (63), 22px (75), 23px (27), 24px (50), 25px (37), 26px (31), 27px (19), 28px (26), 29px (9), 30px (32), 31px (8), 32px (10), 33px (1), 34px (29), 36px (15), 38px (11), 39px (2), 40px (8), 42px (8), 43px (1), 44px (5), 45px (3), 46px (2), 48px (1), 50px (4), 52px (6), 53px (1), 54px (1), 57px (1), 58px (1), 62px (1), 64px (1), 78px (1), 210px (1)
+5px (14), 6px (18), 6.5px (1), 6.8px (4), 7px (58), 7.5px (13), 7.6px (1), 7.8px (2), 8px (177), 8.2px (2), 8.5px (44), 8.7px (1), 8.8px (4), 9px (344), 9.2px (1), 9.3px (1), 9.5px (59), 10px (423), 10.5px (129), 11px (565), 11.5px (152), 12px (785), 12.5px (106), 13px (565), 13.5px (132), 14px (423), 14.5px (77), 15px (300), 15.5px (30), 16px (195), 16.5px (5), 17px (148), 17.5px (4), 18px (124), 19px (70), 20px (108), 21px (63), 22px (75), 23px (27), 24px (50), 25px (37), 26px (31), 27px (19), 28px (26), 29px (9), 30px (32), 31px (8), 32px (10), 33px (1), 34px (29), 36px (15), 38px (11), 39px (2), 40px (8), 42px (8), 43px (1), 44px (5), 45px (3), 46px (2), 48px (1), 50px (4), 52px (6), 53px (1), 54px (1), 57px (1), 58px (1), 62px (1), 64px (1), 78px (1), 210px (1)
 
 ## App/current-shell pages detected
 
@@ -117,4 +114,4 @@ Canonical app navigation:
 
 Raw font-size and legacy-font totals are debt metrics, not automatic rendered defects. Existing editorial exceptions, compact brand descriptors, migration shims, and historical CSS remain visible in the debt tables. Structural findings are reserved for current-shell contracts or source paths that can affect the effective user experience.
 
-Critical findings: **1**. Effective structural warnings: **3**.
+Critical findings: **1**. Effective structural warnings: **0**.

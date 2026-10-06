@@ -8,7 +8,7 @@ body[data-sidebar-page="agent-desk"]:has(.ml-shell){background:#f3f1ec}
 .ml-shell{
   --ml-navy:#0e2248;--ml-blue:#1456a0;--ml-gold:#b8972a;--ml-ink:#14213d;--ml-muted:#5d6678;
   --ml-line:#e3dfd6;--ml-surface:#fbfaf7;--ml-sky:#e3edfb;--ml-sky-line:#b9d0f2;--ml-teal:#dff1ec;--ml-teal-ink:#0f6e5c;
-  --ml-sand:#f6efd9;--ml-sand-ink:#7a5d0c;--ml-rose:#fde8e4;--ml-radius:22px;
+  --ml-sand:#f6efd9;--ml-sand-ink:#7a5d0c;--ml-rose:#fde8e4;--ml-radius:12px;
   max-width:1440px;margin:0 auto;padding:20px 24px 80px;color:var(--ml-ink);font-family:Libre Franklin,system-ui,sans-serif
 }
 .ml-shell h1,.ml-shell h2{font-family:"Libre Franklin",sans-serif;letter-spacing:-.015em}
@@ -19,7 +19,7 @@ body[data-sidebar-page="agent-desk"]:has(.ml-shell){background:#f3f1ec}
 .ml-warn{margin:0 0 10px;padding:10px 12px;border-radius:12px;background:#fdecea;color:#9f2a1d;font-size:13px}
 
 /* Buttons */
-.ml-btn{display:inline-flex;align-items:center;justify-content:center;gap:7px;min-height:42px;padding:0 15px;border:1px solid var(--ml-line);border-radius:999px;background:#fff;color:var(--ml-ink);font:600 14px/1 Libre Franklin,system-ui,sans-serif;text-decoration:none;white-space:nowrap;cursor:pointer}
+.ml-btn{display:inline-flex;align-items:center;justify-content:center;gap:7px;min-height:42px;padding:0 15px;border:1px solid var(--ml-line);border-radius:8px;background:#fff;color:var(--ml-ink);font:600 14px/1 Libre Franklin,system-ui,sans-serif;text-decoration:none;white-space:nowrap;cursor:pointer}
 .ml-btn:hover{background:var(--ml-surface);border-color:#cfc9bc}
 .ml-btn:focus-visible,.ml-hbtn:focus-visible,.ml-seg button:focus-visible,.ml-link:focus-visible,.ml-dl-opt:focus-visible{outline:2px solid var(--ml-blue);outline-offset:2px}
 .ml-btn.dark{background:var(--ml-navy);border-color:var(--ml-navy);color:#fff}
@@ -30,14 +30,14 @@ body[data-sidebar-page="agent-desk"]:has(.ml-shell){background:#f3f1ec}
 .ml-link{display:inline;min-height:0;padding:0;border:0;background:none;color:var(--ml-blue);font:700 13px Libre Franklin,sans-serif;text-decoration:underline;text-underline-offset:3px;cursor:pointer}
 
 /* Hero */
-.ml-hero{display:flex;align-items:flex-end;justify-content:space-between;gap:20px;flex-wrap:wrap;padding:26px 28px;border-radius:26px;background:var(--ml-navy);color:#fff;position:relative;overflow:hidden}
-.ml-hero::after{content:"";position:absolute;right:-60px;top:-80px;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(184,151,42,.28),transparent 70%);pointer-events:none}
+.ml-hero{display:flex;align-items:flex-end;justify-content:space-between;gap:20px;flex-wrap:wrap;padding:26px 28px;border-radius:12px;background:var(--ml-navy);color:#fff;position:relative;overflow:hidden}
+.ml-hero::after{content:"";position:absolute;right:-60px;top:-80px;width:260px;height:260px;border-radius:50%;background:none;pointer-events:none}
 .ml-hero-copy{position:relative;z-index:1;min-width:0}
-.ml-eyebrow{display:inline-flex;align-items:center;gap:8px;color:#e8d18a;font:800 12px Libre Franklin,sans-serif;letter-spacing:.12em;text-transform:uppercase}
+.ml-eyebrow{display:inline-flex;align-items:center;gap:8px;color:#e8d18a;font:800 12px Libre Franklin,sans-serif;letter-spacing:0;text-transform:none}
 .ml-hero h1{margin:8px 0 6px;font-size:clamp(28px,3.6vw,42px);line-height:1.06;font-weight:800;overflow-wrap:anywhere}
 .ml-hero p{margin:0;color:#c9d4e6;font-size:15px}
 .ml-hero-actions{position:relative;z-index:1;display:flex;flex-wrap:wrap;gap:8px;justify-content:flex-end}
-.ml-hbtn{display:inline-flex;align-items:center;gap:7px;min-height:42px;padding:0 15px;border:1px solid rgba(255,255,255,.22);border-radius:999px;background:rgba(255,255,255,.08);color:#fff;font:600 14px/1 Libre Franklin,sans-serif;text-decoration:none;white-space:nowrap;cursor:pointer}
+.ml-hbtn{display:inline-flex;align-items:center;gap:7px;min-height:42px;padding:0 15px;border:1px solid rgba(255,255,255,.22);border-radius:8px;background:rgba(255,255,255,.08);color:#fff;font:600 14px/1 Libre Franklin,sans-serif;text-decoration:none;white-space:nowrap;cursor:pointer}
 .ml-hbtn:hover{background:rgba(255,255,255,.16)}
 .ml-hbtn.gold{background:var(--ml-gold);border-color:var(--ml-gold);color:var(--ml-navy);font-weight:700}
 .ml-hbtn.gold:hover{background:#cfae3f}
@@ -76,8 +76,8 @@ body[data-sidebar-page="agent-desk"]:has(.ml-shell){background:#f3f1ec}
 .ml-crm-meter{margin:12px 0}
 .ml-crm-meter b{font:800 26px/1 "Libre Franklin",sans-serif}
 .ml-crm-meter span{margin-left:6px;color:var(--ml-muted);font-size:13px}
-.ml-meter{height:10px;margin-top:8px;border-radius:999px;background:#ece8df;overflow:hidden}
-.ml-meter i{display:block;height:100%;border-radius:inherit;background:linear-gradient(90deg,var(--ml-blue),#2f6df6)}
+.ml-meter{height:10px;margin-top:8px;border-radius:8px;background:#ece8df;overflow:hidden}
+.ml-meter i{display:block;height:100%;border-radius:inherit;background:var(--ml-blue)}
 .ml-file{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:10px;align-items:center;margin:10px 0;padding:10px 12px;border:1px dashed var(--ml-sky-line);border-radius:14px;background:#f6f9fe}
 .ml-file>i{color:var(--ml-blue);font-size:18px}
 .ml-file b{display:block;font-size:13px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
@@ -90,10 +90,10 @@ body[data-sidebar-page="agent-desk"]:has(.ml-shell){background:#f3f1ec}
 .ml-toolbar-left h2{margin:0;font-size:19px;font-weight:700}
 .ml-count{color:var(--ml-muted);font-size:13px}
 .ml-toolbar-right{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
-.ml-seg{display:inline-flex;padding:4px;border-radius:999px;background:#f0ede6}
-.ml-seg button{min-height:36px;padding:0 14px;border:0;border-radius:999px;background:transparent;color:var(--ml-muted);font:600 13px Libre Franklin,sans-serif;cursor:pointer}
+.ml-seg{display:inline-flex;padding:4px;border-radius:8px;background:#f0ede6}
+.ml-seg button{min-height:36px;padding:0 14px;border:0;border-radius:8px;background:transparent;color:var(--ml-muted);font:600 13px Libre Franklin,sans-serif;cursor:pointer}
 .ml-seg button[aria-pressed="true"]{background:var(--ml-navy);color:#fff}
-#ml-search{min-height:42px;width:min(320px,100%);padding:0 16px;border:1px solid var(--ml-line);border-radius:999px;background:var(--ml-surface);font:14px Libre Franklin,sans-serif;color:var(--ml-ink)}
+#ml-search{min-height:42px;width:min(320px,100%);padding:0 16px;border:1px solid var(--ml-line);border-radius:8px;background:var(--ml-surface);font:14px Libre Franklin,sans-serif;color:var(--ml-ink)}
 #ml-search:focus{outline:2px solid var(--ml-blue);outline-offset:1px;background:#fff}
 .ml-tools{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:14px 0 4px}
 .ml-pop{margin:10px 0;padding:16px;border:1px solid var(--ml-sky-line);border-radius:18px;background:#f6f9fe}
@@ -119,32 +119,32 @@ body[data-sidebar-page="agent-desk"]:has(.ml-shell){background:#f3f1ec}
 .ml-table tr.is-picked td{background:var(--ml-sky)}
 .ml-check{width:40px}
 .ml-check input{width:18px;height:18px;accent-color:var(--ml-navy);cursor:pointer}
-.ml-sort-head{display:inline-flex;align-items:center;gap:6px;min-height:32px;padding:0 8px;margin-left:-8px;border:0;border-radius:8px;background:none;color:var(--ml-muted);font:700 12px Libre Franklin,sans-serif;letter-spacing:.04em;text-transform:uppercase;cursor:pointer}
+.ml-sort-head{display:inline-flex;align-items:center;gap:6px;min-height:32px;padding:0 8px;margin-left:-8px;border:0;border-radius:8px;background:none;color:var(--ml-muted);font:700 12px Libre Franklin,sans-serif;letter-spacing:0;text-transform:none;cursor:pointer}
 .ml-sort-head.active{background:var(--ml-sky);color:var(--ml-navy)}
 .ml-sort-head i{font-size:12px}
 .ml-address{color:var(--ml-navy);font-weight:700;text-decoration:none}
 .ml-address:hover{text-decoration:underline}
 .ml-sub{display:block;margin-top:3px;color:var(--ml-muted);font-size:12px}
-.ml-flag{display:inline-block;margin-top:6px;padding:3px 8px;border-radius:999px;background:var(--ml-sand);color:var(--ml-sand-ink);font-size:12px;font-weight:600}
+.ml-flag{display:inline-block;margin-top:6px;padding:3px 8px;border-radius:8px;background:var(--ml-sand);color:var(--ml-sand-ink);font-size:12px;font-weight:600}
 .ml-crm{display:block;max-width:220px}
 .ml-crm.none{color:#8a92a1;font-size:13px}
 .ml-crm.in b{display:flex;align-items:center;gap:6px;color:var(--ml-teal-ink);font-size:13px}
 .ml-crm.in small{display:block;margin-top:2px;color:var(--ml-muted);font-size:12px}
 .ml-impact{color:#9f2a1d}
 .ml-actions{display:flex;flex-direction:column;align-items:flex-start;gap:6px}
-.ml-load{display:flex;align-items:center;justify-content:center;gap:8px;margin:14px auto 0;min-height:44px;padding:0 20px;border:1px solid var(--ml-line);border-radius:999px;background:#fff;font:600 14px Libre Franklin,sans-serif;cursor:pointer}
+.ml-load{display:flex;align-items:center;justify-content:center;gap:8px;margin:14px auto 0;min-height:44px;padding:0 20px;border:1px solid var(--ml-line);border-radius:8px;background:#fff;font:600 14px Libre Franklin,sans-serif;cursor:pointer}
 .ml-load[hidden]{display:none}
 .ml-empty{padding:40px 20px;text-align:center;color:var(--ml-muted)}
 .ml-empty i{font-size:26px}
 .ml-empty h2{margin:10px 0 6px;color:var(--ml-ink);font-size:18px}
 .ml-source{display:flex;gap:8px;margin:14px 0 0;color:var(--ml-muted);font-size:12px;line-height:1.5}
-.ml-error{margin:40px auto;max-width:560px;padding:24px;border-radius:20px;background:#fff;border:1px solid var(--ml-line)}
-.pl-toast{position:fixed;left:50%;bottom:24px;z-index:1000;display:none;transform:translateX(-50%);max-width:calc(100vw - 32px);padding:12px 18px;border-radius:999px;background:var(--ml-navy,#0e2248);color:#fff;font:600 14px Libre Franklin,sans-serif;box-shadow:0 2px 6px rgba(15,23,42,.08)}
+.ml-error{margin:40px auto;max-width:560px;padding:24px;border-radius:12px;background:#fff;border:1px solid var(--ml-line)}
+.pl-toast{position:fixed;left:50%;bottom:24px;z-index:1000;display:none;transform:translateX(-50%);max-width:calc(100vw - 32px);padding:12px 18px;border-radius:8px;background:var(--ml-navy,#0e2248);color:#fff;font:600 14px Libre Franklin,sans-serif;box-shadow:0 2px 6px rgba(15,23,42,.08)}
 
 @media (max-width:1100px){.ml-duo{grid-template-columns:minmax(0,1fr)}}
 @media (max-width:760px){
   .ml-shell{padding:14px 16px 90px}
-  .ml-hero{padding:20px;border-radius:22px}
+  .ml-hero{padding:20px;border-radius:12px}
   .ml-hero-actions{justify-content:flex-start}
   .ml-hbtn,.ml-btn{min-height:44px}
   .ml-stats{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
@@ -165,7 +165,7 @@ body[data-sidebar-page="agent-desk"]:has(.ml-shell){background:#f3f1ec}
   .ml-sheet:last-child{break-after:auto;page-break-after:auto}
   .ml-sheet.f5160{padding:.5in .1875in;grid-template-columns:repeat(3,2.625in);grid-auto-rows:1in;column-gap:.125in}
   .ml-sheet.f5163{padding:.5in .15625in;grid-template-columns:repeat(2,4in);grid-auto-rows:2in;column-gap:.1875in}
-  .ml-label{box-sizing:border-box;display:flex;flex-direction:column;justify-content:center;padding:0 .18in;overflow:hidden;font:10pt/1.25 Arial,Helvetica,sans-serif;color:#000;text-transform:uppercase}
+  .ml-label{box-sizing:border-box;display:flex;flex-direction:column;justify-content:center;padding:0 .18in;overflow:hidden;font:10pt/1.25 Arial,Helvetica,sans-serif;color:#000;text-transform:none}
   .f5163 .ml-label{padding:0 .3in;font-size:12pt}
   .ml-label b,.ml-label span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
   .ml-label b{font-weight:400}
@@ -175,7 +175,7 @@ body[data-sidebar-page="agent-desk"]:has(.ml-shell){background:#f3f1ec}
 /* Page-level overrides that must win over the shared agent workspace sheet. */
 .ml-shell [hidden]{display:none!important}
 html.aw27-page .ml-hero h1{color:#fff}
-.ml-table th.ml-th-plain{color:var(--ml-muted);font:700 12px Libre Franklin,sans-serif;letter-spacing:.04em;text-transform:uppercase}
+.ml-table th.ml-th-plain{color:var(--ml-muted);font:700 12px Libre Franklin,sans-serif;letter-spacing:0;text-transform:none}
 .ml-actions{flex-direction:row;flex-wrap:wrap;align-items:center}
 
 /* Phones: each home becomes a card instead of a squeezed table row. */
@@ -194,7 +194,7 @@ html.aw27-page .ml-hero h1{color:#fff}
   .ml-table td{display:block;padding:0;border:0;background:none!important;min-width:0}
   .ml-table td.ml-check{grid-row:span 2}
   .ml-table td:nth-child(2),.ml-table td:nth-child(3){grid-column:2/-1}
-  .ml-table td:nth-child(n+4)::before{content:attr(data-l);display:block;color:var(--ml-muted);font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.04em}
+  .ml-table td:nth-child(n+4)::before{content:attr(data-l);display:block;color:var(--ml-muted);font-size:12px;font-weight:600;text-transform:none;letter-spacing:0}
   .ml-table td:nth-child(4){grid-column:2}
   .ml-table td:last-child{grid-column:1/-1}
   .ml-table td:last-child::before{display:none}

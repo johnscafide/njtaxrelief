@@ -79,7 +79,7 @@
 
 .db-sidebar .pn.on::after,
 .db-side-link.on::after {
-  background: radial-gradient(circle, rgba(69,197,190,.22), transparent 70%);
+  background:none;
   content: '';
   inset: 0;
   pointer-events: none;

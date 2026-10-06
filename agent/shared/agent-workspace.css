@@ -30,11 +30,11 @@ body[data-agent-workspace] .wdx-pagebar{display:none!important}
 .awx-breadcrumb i{font-style:normal;color:#9a9ea5}.awx-breadcrumb strong{color:var(--awx-text);font-weight:500}
 .awx-header{display:flex;align-items:flex-start;justify-content:space-between;gap:28px;padding:28px 28px 20px;background:#fff}
 .awx-header-copy{min-width:0;max-width:820px}
-.awx-kicker{display:flex;align-items:center;gap:8px;margin-bottom:5px;color:#666c74;font-size:12px;line-height:18px;font-weight:600;letter-spacing:.055em;text-transform:uppercase}
+.awx-kicker{display:flex;align-items:center;gap:8px;margin-bottom:5px;color:#666c74;font-size:12px;line-height:18px;font-weight:600;letter-spacing:0;text-transform:none}
 .awx-kicker i{font-size:11px;color:#727780}
 .awx-title-row{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
 .awx-title-row h1{margin:0;color:var(--awx-text);font-size:32px;line-height:40px;font-weight:600;letter-spacing:-.025em}
-.awx-plan-pill{display:inline-flex;align-items:center;gap:7px;min-height:28px;padding:0 9px;border:1px solid #d9dcdf;border-radius:999px;background:#f7f8f8;color:#535b62;font-size:12px;font-weight:600;white-space:nowrap}
+.awx-plan-pill{display:inline-flex;align-items:center;gap:7px;min-height:28px;padding:0 9px;border:1px solid #d9dcdf;border-radius:8px;background:#f7f8f8;color:#535b62;font-size:12px;font-weight:600;white-space:nowrap}
 .awx-plan-pill i{font-size:10px}
 .awx-header-copy>p{margin:6px 0 0;max-width:760px;color:var(--awx-muted);font-size:15px;line-height:22px}
 .awx-header-actions{display:flex;align-items:center;justify-content:flex-end;gap:10px;flex-wrap:wrap;flex:0 0 auto}

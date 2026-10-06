@@ -26,7 +26,7 @@ assert.match(html, /Saved Views &amp; Monitoring/);
 assert.match(html, /Live fields/);
 assert.match(html, /Bulk-ready fields/);
 assert.match(html, /Latest verification/);
-assert.match(html, /Coverage by intelligence family/);
+assert.match(html, /<h2>Coverage<\/h2>/);
 assert.match(html, /Verification recency across live fields/);
 assert.match(html, /Refresh timing follows the expected update cycle for each source/);
 assert.match(html, /id="dc-category-coverage-template"/);

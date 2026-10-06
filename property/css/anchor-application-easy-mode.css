@@ -140,8 +140,8 @@
 }
 .wd-easy-section {
   font: 800 12px/1.2 var(--font-ui, "Libre Franklin", Arial, sans-serif);
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
+  letter-spacing:0;
+  text-transform:none;
   color: var(--teal);
 }
 .wd-easy-count {

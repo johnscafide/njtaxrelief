@@ -85,7 +85,7 @@
   }
   function syncBrand(){
     setText('.wd4-brand-copy strong','Watchdog');
-    setText('.wd4-brand-copy small,.hm27-brand-copy small,.wdx-brand-copy small','PROPERTY INFO');
+    setText('.wd4-brand-copy small,.hm27-brand-copy small,.wdx-brand-copy small','Property info');
   }
   function run(){
     ensureStylesheet(STYLE);

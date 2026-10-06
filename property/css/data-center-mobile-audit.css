@@ -165,8 +165,8 @@
     font-size: 11px;
     font-weight: 800;
     line-height: 1.3;
-    letter-spacing: .06em;
-    text-transform: uppercase;
+    letter-spacing:0;
+    text-transform:none;
   }
 
   body[data-sidebar-page="data-center"] .dc-table-wrap td:nth-child(2)::before { content: "Marker"; }
@@ -273,7 +273,7 @@
     overscroll-behavior: contain;
     -webkit-overflow-scrolling: touch;
     background: #fff;
-    border-radius: 22px 22px 0 0;
+    border-radius:12px 12px 0 0;
     padding: 18px 18px calc(18px + env(safe-area-inset-bottom));
     box-shadow: 0 2px 6px rgba(15,23,42,.08);
   }

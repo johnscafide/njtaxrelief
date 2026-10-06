@@ -32,7 +32,7 @@
   margin: 16px 0 26px;
   padding: 11px 15px;
   border: 1px solid #ead6a9;
-  border-radius: 999px;
+  border-radius:8px;
   background: #fffaf0;
   color: #4f5f72;
   font: 700 14px/1.35 "Source Sans 3", Arial, sans-serif;
@@ -73,10 +73,8 @@
   padding: 26px 26px 26px;
   overflow: hidden;
   border: 2px solid #2f7be8;
-  border-radius: 22px;
-  background:
-    radial-gradient(circle at 88% 0%, rgba(65,135,255,.18) 0, rgba(65,135,255,0) 34%),
-    linear-gradient(145deg,#ffffff 0%,#f3f8ff 58%,#edf5ff 100%);
+  border-radius:12px;
+  background:#ffffff;
   box-shadow:
     0 0 0 5px rgba(47,123,232,.075),
     0 2px 6px rgba(15,23,42,.08),
@@ -93,12 +91,12 @@
   margin: 0 0 16px 42px;
   padding: 7px 11px 6px;
   border: 1px solid rgba(20,102,216,.18);
-  border-radius: 999px;
+  border-radius:8px;
   background: #eaf2ff;
   color: #0e57be;
   font: 800 11px/1 "Libre Franklin", Arial, sans-serif;
-  letter-spacing: .095em;
-  text-transform: uppercase;
+  letter-spacing:0;
+  text-transform:none;
 }
 
 .wd-anchor-quick-intro .wd-free-help.is-compact::after {
@@ -110,7 +108,7 @@
   width: 150px;
   height: 150px;
   border-radius: 50%;
-  background: radial-gradient(circle,rgba(46,123,232,.14) 0,rgba(46,123,232,0) 70%);
+  background:none;
   pointer-events: none;
 }
 
@@ -189,7 +187,7 @@
   margin: 0 28px 26px;
   padding: 20px 22px 22px;
   border: 1px solid #dfe6ef;
-  border-radius: 20px;
+  border-radius:12px;
   background: #fff;
   box-shadow: 0 2px 6px rgba(15,23,42,.08);
 }
@@ -245,8 +243,8 @@
 .wd-anchor-testimonial > span {
   color: #64748a;
   font: 700 11px/1.25 "Source Sans 3", Arial, sans-serif;
-  text-transform: uppercase;
-  letter-spacing: .04em;
+  text-transform:none;
+  letter-spacing:0;
 }
 
 @media (max-width: 640px) {

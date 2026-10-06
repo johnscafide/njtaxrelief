@@ -60,7 +60,7 @@
       '.ac-vanity-note{display:block;min-height:20px;margin-top:9px;font-size:var(--type-xs,12px);color:var(--text-muted,#65717f)}',
       '.ac-vanity-note.ok{color:#087a68}.ac-vanity-note.error{color:#a93636}',
       '.ac-vanity-preview{padding:16px;border-radius:var(--radius-md,14px);background:var(--surface-muted,#f4f7fa)}',
-      '.ac-vanity-preview span{display:block;font-size:var(--type-xs,12px);font-weight:800;letter-spacing:.06em;color:var(--text-muted,#65717f);text-transform:uppercase}',
+      '.ac-vanity-preview span{display:block;font-size:var(--type-xs,12px);font-weight:800;letter-spacing:0;color:var(--text-muted,#65717f);text-transform:none}',
       '.ac-vanity-preview b{display:block;margin-top:6px;font-size:var(--type-sm,14px);overflow-wrap:anywhere}',
       '.ac-vanity-preview small{display:block;margin-top:8px;font-size:var(--type-xs,12px);line-height:1.55;color:var(--text-muted,#65717f)}',
       '.ac-vanity-status{margin-top:10px;padding-top:10px;border-top:1px solid var(--border,#d9e0e8)}',
@@ -125,7 +125,7 @@
     var section = document.createElement('section');
     section.id = 'ac-vanity';
     section.className = 'ac-section ac-vanity';
-    section.innerHTML = '<header><div><span>AGENT PORTAL</span><h2>Reserve your Watchdog address</h2><p>Your vanity address is protected by your Agent-or-higher entitlement and remains reserved through the paid term plus the existing grace period after cancellation.</p></div></header>' +
+    section.innerHTML = '<header><div><span>Agent portal</span><h2>Reserve your Watchdog address</h2><p>Your vanity address is protected by your Agent-or-higher entitlement and remains reserved through the paid term plus the existing grace period after cancellation.</p></div></header>' +
       '<div class="ac-vanity-grid"><div><label for="ac-vanity-input">Portal address</label><div class="ac-vanity-field"><span>watchdogindex.com/agent/</span><input id="ac-vanity-input" maxlength="40" autocomplete="off" spellcheck="false" aria-describedby="ac-vanity-note"></div>' +
       '<div class="ac-vanity-actions"><button class="ac-vanity-save" id="ac-vanity-save" type="button">Reserve address</button><button class="ac-vanity-clear" id="ac-vanity-clear" type="button">Release address</button></div><small class="ac-vanity-note" id="ac-vanity-note" aria-live="polite"></small></div>' +
       '<aside class="ac-vanity-preview"><span>Public portal URL</span><b id="ac-vanity-url">Not reserved yet</b><small id="ac-vanity-help">Your active Agent+ portal displays approved professional branding above Watchdog’s checked public NJ property lookup, with consent-based lead capture, QR assets and portal analytics.</small><div class="ac-vanity-status" id="ac-vanity-status"></div></aside></div>';

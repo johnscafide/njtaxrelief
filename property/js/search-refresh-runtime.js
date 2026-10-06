@@ -50,7 +50,7 @@
       '.hd-runtime-loading{grid-column:1/-1;padding:28px;text-align:center;color:#5a6070;font-weight:700}' +
       '.hd-countline{margin:4px 0 0!important}' +
       '.hd-seo{grid-column:1/-1}.hd-seo-links a span{display:block;color:#68788f;font-weight:600;font-size:11.5px;margin-top:2px}' +
-      '.hd-more{grid-column:1/-1;display:flex;justify-content:center;padding:10px 0 18px}.hd-more button{border:1px solid #0e2248;background:#fff;color:#0e2248;border-radius:999px;padding:10px 18px;font-weight:800;cursor:pointer}' +
+      '.hd-more{grid-column:1/-1;display:flex;justify-content:center;padding:10px 0 18px}.hd-more button{border:1px solid #0e2248;background:#fff;color:#0e2248;border-radius:8px;padding:10px 18px;font-weight:800;cursor:pointer}' +
       '@media(max-width:900px){.ssearch-in{grid-template-columns:auto 1fr!important}.hd-head-actions{width:100%}.hd-searchbox{flex:1}}';
     document.head.appendChild(s);
   }

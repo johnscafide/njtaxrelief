@@ -45,9 +45,9 @@
 #wd-property-footer .wdf-logo{display:inline-flex;align-items:center;gap:14px;margin:0 0 24px;padding:0;border:0;background:transparent;color:inherit;text-decoration:none;transform:none}
 #wd-property-footer .wdf-logo-icon{display:inline-flex;align-items:center;justify-content:center;flex:0 0 52px;width:52px;height:52px;border-radius:50%;background:var(--wd-teal-600);color:#fff;font-size:1.4375rem}
 #wd-property-footer .wdf-logo-copy{display:flex;flex-direction:column}
-#wd-property-footer .wdf-logo-name{color:var(--wd-teal-600);font:800 1.4375rem/1.05 var(--font-ui);letter-spacing:-.7px;text-transform:uppercase}
+#wd-property-footer .wdf-logo-name{color:var(--wd-teal-600);font:800 1.4375rem/1.05 var(--font-ui);letter-spacing:-.7px;text-transform:none}
 #wd-property-footer .wdf-logo-name span{color:var(--wd-teal-600)}
-#wd-property-footer .wdf-tagline{display:block;margin:6px 0 0;padding:0;color:var(--text-muted);font:800 var(--type-xs)/1.4 var(--font-ui);letter-spacing:1.35px;text-transform:uppercase}
+#wd-property-footer .wdf-tagline{display:block;margin:6px 0 0;padding:0;color:var(--text-muted);font:800 var(--type-xs)/1.4 var(--font-ui);letter-spacing:0;text-transform:none}
 #wd-property-footer .wdf-description{max-width:var(--container-narrow);margin:0 0 23px;padding:0;color:var(--text-muted);font:400 var(--type-sm)/1.65 var(--font-ui)}
 #wd-property-footer .wdf-legal,#wd-property-footer .wdf-legal p{color:var(--text-muted);font:400 var(--type-xs)/1.55 var(--font-ui)}
 #wd-property-footer .wdf-legal{margin:0;padding:0;background:transparent}
@@ -58,7 +58,7 @@
 #wd-property-footer .wdf-legal-link:hover,#wd-property-footer .wdf-legal-link:focus-visible,#wd-property-footer .wdf-bottom-link:hover,#wd-property-footer .wdf-bottom-link:focus-visible{color:var(--wd-navy-700);text-decoration:underline;text-underline-offset:3px}
 #wd-property-footer .wdf-housing{display:flex;align-items:flex-start;gap:13px;margin:21px 0 0;padding:15px 17px;border:0;box-shadow:none;background:var(--surface-soft)}
 #wd-property-footer .wdf-housing i{flex:0 0 25px;width:25px;margin-top:2px;color:var(--wd-teal-600);font-size:1.4375rem;text-align:center}
-#wd-property-footer .wdf-housing p{margin:0;padding:0;color:var(--ink);font:800 var(--type-xs)/1.45 var(--font-ui);text-transform:uppercase}
+#wd-property-footer .wdf-housing p{margin:0;padding:0;color:var(--ink);font:800 var(--type-xs)/1.45 var(--font-ui);text-transform:none}
 #wd-property-footer .wdf-bottom{display:flex;align-items:center;justify-content:space-between;gap:30px;margin:42px 0 0;padding:22px 0 0;border:0;border-top:1px solid var(--border);background:transparent;box-shadow:none}
 #wd-property-footer .wdf-copyright{margin:0;padding:0;color:var(--text-muted);font-size:var(--type-xs);line-height:1.5}
 #wd-property-footer .wdf-bottom-links{display:flex;flex-wrap:wrap;align-items:center;justify-content:flex-end;gap:8px 20px;margin:0;padding:0}

@@ -17,7 +17,7 @@
 .ac-intel-offer b{margin-top:4px;color:#102a4c;font:800 var(--type-md,.9375rem)/1.25 var(--font-ui,"Libre Franklin"),sans-serif}
 .ac-intel-offer small{margin-top:3px!important;color:#68798e!important;font-size:var(--type-xs,.75rem)!important;line-height:1.4}
 .ac-intel-offer.included b{color:#0b7356}
-@media(prefers-reduced-motion:reduce){.wd-intelligence-frame{animation:none;background:linear-gradient(#fff,#fff) padding-box,linear-gradient(110deg,#f2a21a,#22b8cf,#0a9f71) border-box!important}}
+@media(prefers-reduced-motion:reduce){.wd-intelligence-frame{animation:none;background:#fff padding-box!important}}
 
 .ac-connections{scroll-margin-top:22px}
 .ac-connections>header{align-items:flex-start}

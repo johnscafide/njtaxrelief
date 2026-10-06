@@ -14,13 +14,13 @@ html body[data-sidebar-page="account"],
 html body[data-sidebar-page="account"] .db-workspace,
 html body[data-sidebar-page="account"] .ac-shell{background:var(--ab-bg)!important}
 html body[data-sidebar-page="account"] .wdx-topbar{background:rgba(251,250,247,.94)!important}
-html body[data-sidebar-page="account"] .wdx-btn{border-radius:999px!important}
+html body[data-sidebar-page="account"] .wdx-btn{border-radius:8px!important}
 html body[data-sidebar-page="account"] .wdx-btn.primary{background:var(--ab-navy)!important;border-color:var(--ab-navy)!important}
 html body[data-sidebar-page="account"] .ac-shell{word-spacing:.05em}
 
 /* Cards and sections: white, rounded, flat */
 html body[data-sidebar-page="account"] .ac-card,
-html body[data-sidebar-page="account"] .ac-section{border:0!important;border-radius:24px!important;box-shadow:none!important}
+html body[data-sidebar-page="account"] .ac-section{border:0!important;border-radius:12px!important;box-shadow:none!important}
 html body[data-sidebar-page="account"] .ac-account-summary{background:#fff!important}
 html body[data-sidebar-page="account"] .ac-account-primary,
 html body[data-sidebar-page="account"] .ac-account-detail-grid>*{border-radius:18px!important;border-color:var(--ab-line)!important;background:var(--ab-surface)!important;box-shadow:none!important}
@@ -38,7 +38,7 @@ html body[data-sidebar-page="account"] .ac-card.ac-plan .ac-meta b,
 html body[data-sidebar-page="account"] .ac-card.ac-plan .ac-meta strong{color:#fff!important}
 
 /* Profile chooser */
-html body[data-sidebar-page="account"] .acp-profile-route-card{position:relative;overflow:hidden;border:0!important;border-radius:24px!important;box-shadow:none!important;color:var(--ab-ink)!important}
+html body[data-sidebar-page="account"] .acp-profile-route-card{position:relative;overflow:hidden;border:0!important;border-radius:12px!important;box-shadow:none!important;color:var(--ab-ink)!important}
 html body[data-sidebar-page="account"] .acp-profile-route-card.personal{background:var(--ab-sky)!important}
 html body[data-sidebar-page="account"] .acp-profile-route-card.professional{background:var(--ab-teal)!important}
 html body[data-sidebar-page="account"] .acp-profile-route-card::after{content:"";display:block!important;background-color:transparent!important;z-index:0!important;position:absolute!important;inset:auto 18px -10px auto!important;width:110px!important;height:110px!important;border-radius:0!important;opacity:1!important;pointer-events:none;background:no-repeat center/contain}
@@ -47,27 +47,27 @@ html body[data-sidebar-page="account"] .acp-profile-route-card.professional::aft
 html body[data-sidebar-page="account"] .acp-profile-route-card>*{position:relative;z-index:1}
 html body[data-sidebar-page="account"] .acp-profile-route-card :is(h2,h3,h4,b,strong,p,span,small){color:var(--ab-ink)!important;text-shadow:none!important}
 html body[data-sidebar-page="account"] .acp-profile-route-card :is(p,small){color:rgba(14,34,72,.72)!important}
-html body[data-sidebar-page="account"] .acp-profile-route-card b{display:inline-flex!important;align-items:center;gap:8px;min-height:40px;margin-top:14px!important;padding:0 16px;border-radius:999px;background:var(--ab-navy)!important;color:#fff!important}
+html body[data-sidebar-page="account"] .acp-profile-route-card b{display:inline-flex!important;align-items:center;gap:8px;min-height:40px;margin-top:14px!important;padding:0 16px;border-radius:8px;background:var(--ab-navy)!important;color:#fff!important}
 html body[data-sidebar-page="account"] .acp-profile-route-card b i{color:#fff!important}
 html body[data-sidebar-page="account"] .acp-route-icon{background:rgba(255,255,255,.7)!important;color:var(--ab-blue)!important;border:0!important}
 
 /* Sync Accounts */
 /* Sync Accounts keeps its deliberate photo header (account-refresh-20260925.css). */
-html body[data-sidebar-page="account"] .ac-connection-center{border-radius:999px!important}
-html body[data-sidebar-page="account"] .ac-connection-card{border:0!important;border-radius:20px!important;background:var(--ab-surface)!important;box-shadow:none!important}
-html body[data-sidebar-page="account"] .ac-connection-actions :is(button,a){border-radius:999px!important}
+html body[data-sidebar-page="account"] .ac-connection-center{border-radius:8px!important}
+html body[data-sidebar-page="account"] .ac-connection-card{border:0!important;border-radius:12px!important;background:var(--ab-surface)!important;box-shadow:none!important}
+html body[data-sidebar-page="account"] .ac-connection-actions :is(button,a){border-radius:8px!important}
 
 /* Plans (layout only; every price, gate and button comes from the billing scripts) */
-html body[data-sidebar-page="account"] .ac-cadence{border-radius:999px!important;background:#fff!important;border:1px solid var(--ab-line)!important}
-html body[data-sidebar-page="account"] .ac-cadence button{border-radius:999px!important}
-html body[data-sidebar-page="account"] .ac-price-card{border:1px solid #ebe7df!important;border-radius:24px!important;box-shadow:none!important;background:#fff!important}
+html body[data-sidebar-page="account"] .ac-cadence{border-radius:8px!important;background:#fff!important;border:1px solid var(--ab-line)!important}
+html body[data-sidebar-page="account"] .ac-cadence button{border-radius:8px!important}
+html body[data-sidebar-page="account"] .ac-price-card{border:1px solid #ebe7df!important;border-radius:12px!important;box-shadow:none!important;background:#fff!important}
 html body[data-sidebar-page="account"] .ac-price-card.current{border:2px solid var(--ab-teal-deep)!important;background:#fbfefd!important}
-html body[data-sidebar-page="account"] .ac-price-card>button{border-radius:999px!important}
+html body[data-sidebar-page="account"] .ac-price-card>button{border-radius:8px!important}
 html body[data-sidebar-page="account"] .ac-popular{background:var(--ab-navy)!important;color:#fff!important}
 
 /* Buttons, inputs, danger zone */
 html body[data-sidebar-page="account"] .ac-shell :is(input[type="text"],input[type="email"],input[type="password"],input[type="url"],input[type="tel"],select,textarea){border-radius:14px!important;border-color:var(--ab-line)!important;background:#fff!important}
-html body[data-sidebar-page="account"] .ac-danger-zone{border-radius:24px!important}
+html body[data-sidebar-page="account"] .ac-danger-zone{border-radius:12px!important}
 html body[data-sidebar-page="account"] .ac-shell :focus-visible{outline:3px solid var(--ab-blue-bright)!important;outline-offset:2px}
 
 @media print{html body[data-sidebar-page="account"] .ac-card.ac-plan{background:#fff!important;color:#000!important;border:1px solid #bbb!important}html body[data-sidebar-page="account"] .ac-card.ac-plan::after,html body[data-sidebar-page="account"] .acp-profile-route-card::after{display:none}}

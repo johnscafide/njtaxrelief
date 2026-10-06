@@ -19,7 +19,7 @@ body.wt-page{margin:0;background:var(--wt-bg);color:var(--wt-text);font-family:"
 .wt-skip{position:absolute;left:-999px;top:12px;z-index:1000;padding:12px 16px;background:#fff;border:1px solid var(--wt-line);border-radius:10px}
 .wt-skip:focus{left:12px}
 .wt-wrap{width:min(1120px,calc(100% - 32px));margin:0 auto}
-.wt-kicker{display:block;margin:0 0 12px;font-size:12px;line-height:1;font-weight:800;letter-spacing:.11em;text-transform:uppercase;color:var(--wt-blue)}
+.wt-kicker{display:block;margin:0 0 12px;font-size:12px;line-height:1;font-weight:800;letter-spacing:0;text-transform:none;color:var(--wt-blue)}
 
 /* Header: wordmark and Sign in only */
 .wt-header{background:var(--wt-surface);border-bottom:1px solid var(--wt-line)}
@@ -62,12 +62,12 @@ html:not([data-trial-variant="b"]) [data-variant-b]{display:none!important}
 
 /* Sample Opportunity Desk card (real HTML, not an image) */
 .wt-sample{position:relative;background:var(--wt-surface);border:1px solid var(--wt-line);border-radius:18px;padding:20px;box-shadow:0 2px 6px rgba(15,23,42,.08)}
-.wt-sample-tag{position:absolute;top:14px;right:14px;font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--wt-navy);background:#fff;border:1px solid var(--wt-navy);border-radius:999px;padding:3px 10px;line-height:1.4}
-.wt-sample-rank{display:inline-flex;align-items:center;gap:8px;margin-bottom:10px;font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--wt-navy)}
+.wt-sample-tag{position:absolute;top:14px;right:14px;font-size:12px;font-weight:800;letter-spacing:0;text-transform:none;color:var(--wt-navy);background:#fff;border:1px solid var(--wt-navy);border-radius:8px;padding:3px 10px;line-height:1.4}
+.wt-sample-rank{display:inline-flex;align-items:center;gap:8px;margin-bottom:10px;font-size:12px;font-weight:800;letter-spacing:0;text-transform:none;color:var(--wt-navy)}
 .wt-sample-rank span{display:inline-block;padding:4px 10px;border-radius:8px;background:var(--wt-navy);color:#fff}
 .wt-sample-address{font-size:18px;font-weight:800;color:var(--wt-ink);margin:0 0 10px;padding-right:90px}
 .wt-sample dl{margin:0;display:grid;grid-template-columns:1fr;gap:10px}
-.wt-sample dt{font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--wt-muted)}
+.wt-sample dt{font-size:12px;font-weight:800;letter-spacing:0;text-transform:none;color:var(--wt-muted)}
 .wt-sample dd{margin:2px 0 0;font-size:16px;line-height:1.5;color:var(--wt-ink)}
 .wt-sample-quote{display:block;margin:0;padding:12px 14px;border-radius:12px;background:var(--wt-soft);font-size:16px;line-height:1.55;color:var(--wt-ink)}
 .wt-sample-next{margin-top:6px;font-weight:700;color:var(--wt-ink)}
@@ -95,8 +95,8 @@ html:not([data-trial-variant="b"]) [data-variant-b]{display:none!important}
 .wt-shot-title{font-weight:800;font-size:15px;padding-right:80px}
 .wt-shot-row{display:flex;justify-content:space-between;gap:10px;padding:8px 10px;border-radius:8px;background:#fff;border:1px solid var(--wt-line)}
 .wt-shot-row b{font-weight:800}
-.wt-shot-bar{height:8px;border-radius:999px;background:var(--wt-line);overflow:hidden}
-.wt-shot-bar i{display:block;height:100%;background:var(--wt-navy);border-radius:999px}
+.wt-shot-bar{height:8px;border-radius:8px;background:var(--wt-line);overflow:hidden}
+.wt-shot-bar i{display:block;height:100%;background:var(--wt-navy);border-radius:8px}
 .wt-score{display:grid;grid-template-columns:96px 1fr;gap:12px;align-items:center}
 .wt-ring{position:relative;width:96px;height:96px}
 .wt-ring svg{width:96px;height:96px;display:block}

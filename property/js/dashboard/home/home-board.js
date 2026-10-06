@@ -136,7 +136,7 @@
   function navItems(wrap) {
     var items = [];
     var intel = wrap.querySelector('#wd-home-voice-entry') || wrap.querySelector(':scope > .ai');
-    if (intel) items.push({ target: intel, label: 'Watchdog Intelligence', icon: 'fa-wand-magic-sparkles' });
+    if (intel) items.push({ target: intel, label: 'Watchdog Intelligence', icon: 'fa-dog' });
     var tax = d.getElementById('hm-current-tax-evidence');
     if (tax) items.push({ target: tax, label: 'Tax evidence', icon: 'fa-file-invoice-dollar' });
     GROUPS.forEach(function (g) { var box = d.getElementById('hb-group-' + g.id); if (box) items.push({ target: box, label: g.label, icon: g.icon }); });

@@ -56,7 +56,7 @@ const html = `<!doctype html>
 <meta name="description" content="Plain-English definitions for ${terms.length} New Jersey property terms: tax bills, assessments, appeals, ANCHOR and Senior Freeze, buying, mortgages and renting. Each one cites an official source.">
 <link rel="canonical" href="${ORIGIN}/glossary">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Libre+Franklin:wght@500;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@500;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/property/css/watchdog-games.css?v=20261001c">
 <link rel="stylesheet" href="/property/css/watchdog-glossary.css?v=20261001a">
 <script type="application/ld+json">${json(schema)}</script>

@@ -23,7 +23,7 @@
   .dmaa-table tbody tr{display:grid;width:100%;padding:14px;background:#f7f9fc;border:1px solid #e8edf4;border-radius:14px;overflow:hidden}
   .dmaa-table tbody td{display:grid;grid-template-columns:minmax(96px,38%) minmax(0,1fr);gap:10px;align-items:start;width:100%;padding:8px 0;border-bottom:1px solid #e8edf4;font-size:14px;line-height:1.4;overflow-wrap:anywhere}
   .dmaa-table tbody td:last-child{border-bottom:0}
-  .dmaa-table tbody td::before{color:#6d7889;font-size:12px;font-weight:800;line-height:1.4;text-transform:uppercase;letter-spacing:.03em}
+  .dmaa-table tbody td::before{color:#6d7889;font-size:12px;font-weight:800;line-height:1.4;text-transform:none;letter-spacing:0}
   .dmaa-table tbody td b{font-size:14px;line-height:1.35}
   .dmaa-table tbody td small{display:block;margin-top:2px;color:#697688;font-size:13px;line-height:1.4;overflow-wrap:anywhere}
   .dmaa-pill{font-size:12px;line-height:1.25;white-space:normal}

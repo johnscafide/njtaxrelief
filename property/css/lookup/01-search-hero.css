@@ -116,7 +116,7 @@
 .ssearch-brand i { color: var(--gold); font-size: 17px; }
 .ssearch-pill {
   flex: 1; min-width: 0; display: flex; align-items: center; gap: 3px;
-  background: #f4f6fa; border: 1px solid var(--border); border-radius: 999px;
+  background: #f4f6fa; border: 1px solid var(--border); border-radius:8px;
   padding: 4px 5px 4px 3px; max-width: 620px; margin: 0 auto;
 }
 .ssearch-pill:focus-within { background: #fff; border-color: var(--navy-light); }
@@ -155,7 +155,7 @@ body.plm-locked .ssearch { transform: translateY(-100%) !important; }
   display: inline-flex; align-items: center; gap: 9px; text-decoration: none; cursor: pointer;
   background: rgba(255,255,255,.95); border: 1px solid rgba(216,220,232,.9);
   color: var(--navy-dark); font-size: 14px; font-weight: 700; font-family: inherit;
-  padding: 11px 20px; border-radius: 99px; box-shadow: 0 3px 12px rgba(14,34,72,.10);
+  padding: 11px 20px; border-radius:12px; box-shadow: 0 3px 12px rgba(14,34,72,.10);
 }
 .heroauth-btn:hover { background: #fff; border-color: var(--navy-light); }
 .heroauth-btn img { width: 22px; height: 22px; border-radius: 50%; object-fit: cover; }
@@ -180,7 +180,7 @@ body.plm-locked .ssearch { transform: translateY(-100%) !important; }
 }
 .gate-icon {
   width: 52px; height: 52px; margin: 0 auto 14px; border-radius: 50%;
-  background: linear-gradient(135deg, #e0bb52, #b8972a); color: #17203a;
+  background:#e0bb52; color: #17203a;
   display: flex; align-items: center; justify-content: center; font-size: 20px;
 }
 .gate-t { font-size: 19px; font-weight: 800; color: #0e2248; margin-bottom: 8px; letter-spacing: -.01em; }
@@ -217,7 +217,7 @@ body.pl-signedin .gate-cta { display: none; }
 .lp-cred-txt span { display: block; font-size: 13.5px; color: #5a6070; margin-top: 6px; }
 .lp-cred-badges { display: flex; gap: 20px; flex-shrink: 0; }
 .lp-cred-badges b { display: block; font-size: 22px; font-weight: 800; color: var(--navy); line-height: 1; }
-.lp-cred-badges span { font-size: 10.5px; font-weight: 700; text-transform: uppercase; letter-spacing: .05em; color: #8a93a6; }
+.lp-cred-badges span { font-size: 12px; font-weight: 700; text-transform:none; letter-spacing:0; color: #8a93a6; }
 /* ---------- PHOTO CARDS ---------- */
 .lp-photo {
   position: relative; background-size: cover; background-position: center;
@@ -239,12 +239,12 @@ body.pl-signedin .gate-cta { display: none; }
 /* tag sits inside the photo, top corner */
 .lp-tag {
   position: absolute; top: 16px; left: 16px; z-index: 3;
-  font-size: 10.5px; font-weight: 800; text-transform: uppercase; letter-spacing: .08em;
-  padding: 6px 13px; border-radius: 99px;
+  font-size: 12px; font-weight: 800; text-transform:none; letter-spacing:0;
+  padding: 6px 13px; border-radius:12px;
   background: rgba(255,255,255,.94); color: var(--navy-dark);
   box-shadow: 0 2px 8px rgba(0,0,0,.18);
 }
-.lp-tag.gold  { background: linear-gradient(135deg, #e0bb52, #b8972a); color: #17203a; }
+.lp-tag.gold  { background:#e0bb52; color: #17203a; }
 .lp-tag.green { background: #1e6b3a; color: #fff; }
 /* tag sits inside the photo, right corner */
 .lp-tag.right { left: auto; right: 16px; }
@@ -253,7 +253,7 @@ body.pl-signedin .gate-cta { display: none; }
 /* styles.css sets heading colours globally, so these are forced. Without the
    !important the overlay headings render navy on a dark photo and vanish. */
 .lp-photo .lp-over h3 {
-  font-family: 'Playfair Display', Georgia, serif; font-size: clamp(22px, 2.6vw, 30px);
+  font-family: 'Libre Franklin', Arial, sans-serif; font-size: clamp(22px, 2.6vw, 30px);
   font-weight: 700; color: #ffffff !important; margin: 0 0 9px; line-height: 1.2;
   text-shadow: 0 2px 14px rgba(0,0,0,.7), 0 1px 3px rgba(0,0,0,.5);
 }
@@ -333,10 +333,10 @@ body.pl-signedin .gate-cta { display: none; }
 /* ---------- AGENT CARD (tools grid, col 3) ---------- */
 .lp-tool.agent .lp-photo.agentbg {
   min-height: 150px; align-items: center; justify-content: center;
-  background: linear-gradient(135deg, #0e2248 0%, #1a3a6b 55%, #2a4f8f 100%);
+  background:#0e2248;
 }
 .lp-tool.agent .lp-photo.agentbg::after {
-  background: radial-gradient(circle at 50% 120%, rgba(240,216,122,.20), transparent 62%);
+  background:none;
 }
 .lp-faces { position: relative; z-index: 2; display: flex; gap: 12px; align-items: center; }
 .lp-faces img {
@@ -348,7 +348,7 @@ body.pl-signedin .gate-cta { display: none; }
 .lp-tool.agent .lp-body p.lp-agent-role,
 .lp-tool.agent .lp-body p.lp-agent-lic { flex: 0 0 auto; }
 .lp-agent-role {
-  font-size: 11.5px; font-weight: 800; text-transform: uppercase; letter-spacing: .06em;
+  font-size: 12px; font-weight: 800; text-transform:none; letter-spacing:0;
   color: #8a6f14; margin: 0 0 9px;
 }
 .lp-agent-lic {
@@ -359,8 +359,8 @@ body.pl-signedin .gate-cta { display: none; }
 /* ---------- FIELD LIBRARY AVAILABILITY BADGES ---------- */
 .dw-field-status {
   margin-left: auto; flex-shrink: 0;
-  font-size: 9.5px; font-weight: 800; letter-spacing: .06em;
-  padding: 2px 7px; border-radius: 99px; text-transform: uppercase;
+  font-size: 12px; font-weight: 800; letter-spacing:0;
+  padding: 2px 7px; border-radius:12px; text-transform:none;
 }
 .dw-field-status.planned     { background: #fbf3dc; color: #7a6417; }
 .dw-field-status.unavailable { background: #f2eef0; color: #8a6070; }

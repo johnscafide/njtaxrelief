@@ -33,7 +33,7 @@ body.hm-dashboard-page .wd-home-voice-entry {
   min-height: 102px;
   margin: 0;
   padding: 20px 22px;
-  border-radius: 22px;
+  border-radius:12px;
   color: #10294b;
 }
 body.hm-dashboard-page .wd-home-voice-copy {
@@ -43,8 +43,8 @@ body.hm-dashboard-page .wd-home-voice-copy {
 }
 body.hm-dashboard-page .wd-home-voice-kicker {
   font: 800 11px/1.2 "Libre Franklin",sans-serif;
-  letter-spacing: .105em;
-  text-transform: uppercase;
+  letter-spacing:0;
+  text-transform:none;
   color: #087f83;
 }
 body.hm-dashboard-page .wd-home-voice-title {
@@ -97,7 +97,7 @@ body.hm-dashboard-page .wd-home-voice-button i { font-size: 17px; }
 /* Watchdog Intelligence card. Keep the professional content hierarchy but give
    the branded surface the same rotating Intelligence signature as Voice. */
 body.hm-dashboard-page .wdai-main.wd-intelligence-frame {
-  border-radius: clamp(20px,1.45vw,24px) !important;
+  border-radius:clamp(12px,1.45vw,12px) !important;
 }
 body.hm-dashboard-page .wdai-main .wdai-title > span {
   color: #087f83 !important;
@@ -110,7 +110,7 @@ body.hm-dashboard-page .hm-explore-card {
   margin: 8px 0 0;
   overflow: hidden;
   border: 1px solid #dfe6ef;
-  border-radius: 24px;
+  border-radius:12px;
   background: #fff;
   box-shadow: 0 2px 6px rgba(15,23,42,.08);
 }
@@ -193,7 +193,7 @@ body.hm-dashboard-page .wd-intelligence-gate-card {
   overflow: hidden;
   padding: 30px;
   border: 2px solid transparent;
-  border-radius: 24px;
+  border-radius:12px;
   background:
     linear-gradient(#fff,#fff) padding-box,
     conic-gradient(from var(--wd-intelligence-angle),#15b7c9,#2478ff,#7857ff,#e84bc4,#15b7c9) border-box;
@@ -227,8 +227,8 @@ body.hm-dashboard-page .wd-intelligence-gate-kicker {
   display: block;
   margin-bottom: 7px;
   font: 800 10px/1.2 "Libre Franklin",sans-serif;
-  letter-spacing: .11em;
-  text-transform: uppercase;
+  letter-spacing:0;
+  text-transform:none;
   color: #087f83;
 }
 body.hm-dashboard-page .wd-intelligence-gate-card h2 {
@@ -282,10 +282,10 @@ body.hm-dashboard-page .wd-intelligence-gate-secondary {
   }
   body.hm-dashboard-page .wd-home-voice-sub { white-space: normal; }
   body.hm-dashboard-page .wd-home-voice-button { width: 100%; min-height: 50px; }
-  body.hm-dashboard-page .hm-explore-card { border-radius: 20px; }
+  body.hm-dashboard-page .hm-explore-card { border-radius:12px; }
   body.hm-dashboard-page .hm-explore-card .hm-secbar { padding: 20px 18px 16px !important; }
   body.hm-dashboard-page .hm-explore-card .sec2-h { min-height: 82px !important; padding: 13px 15px !important; }
-  body.hm-dashboard-page .wd-intelligence-gate-card { padding: 25px 21px; border-radius: 20px; }
+  body.hm-dashboard-page .wd-intelligence-gate-card { padding: 25px 21px; border-radius:12px; }
 }
 
 @media (prefers-reduced-motion: reduce) {

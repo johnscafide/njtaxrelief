@@ -1,8 +1,8 @@
 /* Watchdog Intelligence briefing layout (watchdog-contextual-analyst.js).
    The written brief leads, "Needs your attention" cards follow, and the
    evidence lists Voice reads stay available under "Evidence and sources". */
-.dwa-msg.assistant:has(.dwa-brief-lead){max-width:100%;width:100%;padding:20px 20px 16px;border:1px solid #dfe7ef;border-radius:20px;background:#fff;box-shadow:0 2px 6px rgba(15,23,42,.08)}
-.dwa-msg.assistant b.dwa-brief-kicker{display:block;margin:0 0 8px;color:#078486;font:800 12px/1.2 "Libre Franklin",system-ui,sans-serif;letter-spacing:.08em;text-transform:uppercase}
+.dwa-msg.assistant:has(.dwa-brief-lead){max-width:100%;width:100%;padding:20px 20px 16px;border:1px solid #dfe7ef;border-radius:12px;background:#fff;box-shadow:0 2px 6px rgba(15,23,42,.08)}
+.dwa-msg.assistant b.dwa-brief-kicker{display:block;margin:0 0 8px;color:#078486;font:800 12px/1.2 "Libre Franklin",system-ui,sans-serif;letter-spacing:0;text-transform:none}
 .dwa-msg.assistant p.dwa-brief-lead{margin:0;color:#10294b;font:500 18px/1.55 "Libre Franklin",system-ui,sans-serif;letter-spacing:-.005em}
 
 .dwa-brief-cards{display:grid;gap:10px;margin-top:18px}
@@ -20,7 +20,7 @@
 .dwa-card p.dwa-card-gap{color:#7a5310;font-size:13px}
 .dwa-card p.dwa-card-meta{color:#5b6b7b;font-size:13px}
 .dwa-card-actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
-.dwa-card-actions button,.dwa-card-actions a{display:inline-flex;align-items:center;justify-content:center;gap:7px;min-height:44px;padding:0 16px;border:1px solid #cbd6e2;border-radius:999px;background:#fff;color:#10294b;font:700 14px/1 "Libre Franklin",system-ui,sans-serif;text-decoration:none;cursor:pointer}
+.dwa-card-actions button,.dwa-card-actions a{display:inline-flex;align-items:center;justify-content:center;gap:7px;min-height:44px;padding:0 16px;border:1px solid #cbd6e2;border-radius:8px;background:#fff;color:#10294b;font:700 14px/1 "Libre Franklin",system-ui,sans-serif;text-decoration:none;cursor:pointer}
 .dwa-card-actions button{background:#10294b;border-color:#10294b;color:#fff}
 .dwa-card-actions button:hover{background:#1b3f6d}
 .dwa-card-actions a:hover{background:#f1f5f9}

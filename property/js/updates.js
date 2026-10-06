@@ -51,9 +51,9 @@
     });
     var shipped = data.releases.filter(function (release) { return /complete|active|passed|shipped|deployed|live/i.test(release.status || ''); }).length;
     var areas = normalizedCounts(AREAS, recent).slice(0, 3);
-    $('uv-pulse').innerHTML = '<article><span>LAST 30 DAYS</span><b>' + recent.length + '</b><small>documented releases</small></article>' +
-      '<article><span>DELIVERY CONFIDENCE</span><b>' + Math.round((shipped / Math.max(data.releases.length, 1)) * 100) + '%</b><small>marked shipped, active or passed</small></article>' +
-      '<article class="uv-pulse-wide"><span>MOST ACTIVE PRODUCT AREAS</span><div>' + areas.map(function (item) {
+    $('uv-pulse').innerHTML = '<article><span>Last 30 days</span><b>' + recent.length + '</b><small>documented releases</small></article>' +
+      '<article><span>Delivery confidence</span><b>' + Math.round((shipped / Math.max(data.releases.length, 1)) * 100) + '%</b><small>marked shipped, active or passed</small></article>' +
+      '<article class="uv-pulse-wide"><span>Most active product areas</span><div>' + areas.map(function (item) {
         return '<em>' + esc(item[0]) + ' <b>' + item[1] + '</b></em>';
       }).join('') + '</div></article>';
   }

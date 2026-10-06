@@ -46,7 +46,7 @@
     flex: 0 0 auto;
     min-height: 44px;
     padding: 0 13px;
-    border-radius: 999px;
+    border-radius:8px;
     background: #fff;
     border: 1px solid var(--pg-line);
     color: #41556c;

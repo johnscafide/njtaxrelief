@@ -44,7 +44,7 @@ html.wd-index-lean-runtime #wd-consumer-recents .wd-property-label{
   left:12px!important;
   padding:5px 10px!important;
   border:0!important;
-  border-radius:999px!important;
+  border-radius:8px!important;
   background:#fff!important;
   color:#3f4a5c!important;
   box-shadow:none!important;
@@ -149,10 +149,7 @@ html.wd-index-lean-runtime #wd-consumer-recents .wd-property-footer>i{flex:0 0 a
 /* Mapless property-photo CTA is stable presentation, not runtime behavior. */
 html.wd-index-lean-runtime #plm-photos .wd-mapless-property-hero{
   isolation:isolate!important;
-  background:
-    radial-gradient(circle at 82% 18%,rgba(110,172,255,.30) 0%,rgba(110,172,255,0) 31%),
-    radial-gradient(circle at 17% 88%,rgba(24,178,167,.13) 0%,rgba(24,178,167,0) 29%),
-    linear-gradient(118deg,#071a35 0%,#0b2d5c 44%,#1452a4 76%,#1e66cb 100%)!important;
+  background:#071a35!important;
   box-shadow:inset 0 0 0 1px rgba(255,255,255,.08)!important;
 }
 html.wd-index-lean-runtime #plm-photos .wd-mapless-property-hero:before{

@@ -29,7 +29,7 @@
 .ti-source.muted{color:var(--bo-muted);font-weight:600}
 .ti-controls{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:12px;align-items:end;margin-top:14px}
 .ti-controls label{display:grid;gap:6px}
-.ti-controls label span{color:var(--bo-muted);font:800 12px/1.2 var(--bo-font);letter-spacing:.06em;text-transform:uppercase}
+.ti-controls label span{color:var(--bo-muted);font:800 12px/1.2 var(--bo-font);letter-spacing:0;text-transform:none}
 .ti-controls textarea{min-height:44px;padding:10px 12px;border:1px solid var(--bo-line);border-radius:12px;font:500 14px/1.4 inherit;resize:vertical}
 .ti-actions{display:flex;gap:8px;flex-wrap:wrap}
 .ti-approve{background:var(--bo-navy);color:#fff}

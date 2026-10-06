@@ -46,11 +46,11 @@ function ensureMobileRefreshStyle(){
     'body.hm-dashboard-page .hm-figs dt,body.hm-dashboard-page .hm-figs dd{text-align:center!important;width:100%!important}',
     'body.hm-dashboard-page .hm-figs dd{font-size:30px!important}',
     'body.hm-dashboard-page .hm-figs dd em{font-size:14px!important}',
-    'body.hm-dashboard-page .hm-secbar{margin-top:24px!important;padding:24px 22px 18px!important;background:#fff!important;border:1px solid #dfe6ef!important;border-bottom:0!important;border-radius:22px 22px 0 0!important;gap:14px!important}',
+    'body.hm-dashboard-page .hm-secbar{margin-top:24px!important;padding:24px 22px 18px!important;background:#fff!important;border:1px solid #dfe6ef!important;border-bottom:0!important;border-radius:12px 12px 0 0!important;gap:14px!important}',
     'body.hm-dashboard-page .hm-secbar h2{font-size:22px!important}',
     'body.hm-dashboard-page .hm-secbar p{font-size:15px!important;line-height:1.5!important}',
     'body.hm-dashboard-page .hm-secbar~.sec2{background:#fff!important;border-left:1px solid #dfe6ef!important;border-right:1px solid #dfe6ef!important;padding-left:20px!important;padding-right:20px!important}',
-    'body.hm-dashboard-page .hm-secbar~.sec2:last-of-type{border-radius:0 0 22px 22px!important;border-bottom:1px solid #dfe6ef!important;padding-bottom:12px!important}',
+    'body.hm-dashboard-page .hm-secbar~.sec2:last-of-type{border-radius:0 0 12px 12px!important;border-bottom:1px solid #dfe6ef!important;padding-bottom:12px!important}',
     'body.hm-dashboard-page .wd-home-agent-ad{margin-left:auto!important;margin-right:auto!important;text-align:center!important}',
     'body.hm-dashboard-page .wd-home-agent-ad>*{margin-left:auto!important;margin-right:auto!important}',
     '}',
@@ -80,8 +80,8 @@ function refreshLegacyIntelBrand(){
 function refreshAgentAd(){
   Array.prototype.forEach.call(document.querySelectorAll('#hm-body section,#hm-body article,#hm-body div'),function(el){
     var text=(el.textContent||'').replace(/\s+/g,' ').trim();
-    if(text.indexOf('SELLER STRATEGY')===-1&&text.indexOf('Seller strategy')===-1)return;
-    if(el.parentElement&&((el.parentElement.textContent||'').indexOf('SELLER STRATEGY')!==-1))return;
+    if(text.indexOf('Seller strategy')===-1&&text.indexOf('Seller strategy')===-1)return;
+    if(el.parentElement&&((el.parentElement.textContent||'').indexOf('Seller strategy')!==-1))return;
     el.classList.add('wd-home-agent-ad');
     var walker=document.createTreeWalker(el,NodeFilter.SHOW_TEXT),node;
     while((node=walker.nextNode()))if((node.nodeValue||'').indexOf('John and Heather')!==-1)node.nodeValue=node.nodeValue.replace(/John and Heather/g,'John Scafide and Heather');

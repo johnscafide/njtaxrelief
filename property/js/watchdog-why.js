@@ -92,7 +92,7 @@ function shell(address){
   panel.setAttribute('role','dialog');
   panel.setAttribute('aria-modal','true');
   panel.setAttribute('aria-labelledby','wdwhy-title');
-  panel.innerHTML=`<header class="wdwhy-head"><div><span>WATCHDOG INTELLIGENCE</span><h2 id="wdwhy-title">Why Watchdog flagged this</h2><p>${esc(address||'Property review')}</p></div><button type="button" class="wdwhy-close" aria-label="Close"><i class="fas fa-xmark"></i></button></header><div class="wdwhy-body" id="wdwhy-body"><div class="wdwhy-loading"><i class="fas fa-circle-notch fa-spin"></i><b>Checking the evidence</b><span>Watchdog is reviewing the current property record.</span></div></div>`;
+  panel.innerHTML=`<header class="wdwhy-head"><div><span>Watchdog Intelligence</span><h2 id="wdwhy-title">Why Watchdog flagged this</h2><p>${esc(address||'Property review')}</p></div><button type="button" class="wdwhy-close" aria-label="Close"><i class="fas fa-xmark"></i></button></header><div class="wdwhy-body" id="wdwhy-body"><div class="wdwhy-loading"><i class="fas fa-circle-notch fa-spin"></i><b>Checking the evidence</b><span>Watchdog is reviewing the current property record.</span></div></div>`;
   document.body.append(backdrop,panel);
   document.body.classList.add('wdwhy-open');
   backdrop.onclick=close;

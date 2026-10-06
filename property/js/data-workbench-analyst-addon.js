@@ -44,7 +44,7 @@
     panel.setAttribute('aria-modal', 'true');
     panel.innerHTML = `
       <header class="dwa-head">
-        <div><span>WATCHDOG INTELLIGENCE</span><h2>Ask Watchdog</h2><p>Natural-language analysis over approved Watchdog tools.</p></div>
+        <div><span>Watchdog Intelligence</span><h2>Ask Watchdog</h2><p>Natural-language analysis over approved Watchdog tools.</p></div>
         <button class="dwa-close" type="button" aria-label="Close"><i class="fas fa-xmark"></i></button>
       </header>
       <div class="dwa-body" id="dwa-body"></div>`;

@@ -3238,7 +3238,7 @@ buildOpinion(hasCase, overBy, saving, target) + rows +
           '<circle r="' + r + '" fill="none" stroke="#b8972a" stroke-width="26" ' +
             'stroke-dasharray="' + off.toFixed(2) + ' ' + (c - off).toFixed(2) + '" transform="rotate(-90)"/>' +
           '<text y="-4" text-anchor="middle" font-size="21" font-weight="700" fill="#0e2248">' + money(total) + '</text>' +
-          '<text y="15" text-anchor="middle" font-size="10.5" fill="#5a6070" letter-spacing=".06em">TOTAL ASSESSED</text>' +
+          '<text y="15" text-anchor="middle" font-size="10.5" fill="#5a6070" letter-spacing=".06em">Total assessed</text>' +
         '</g>' +
         '<g transform="translate(178,52)" font-size="12.5">' +
           '<rect x="0" y="-9" width="11" height="11" rx="3" fill="#b8972a"/>' +
@@ -4274,7 +4274,7 @@ buildOpinion(hasCase, overBy, saving, target) + rows +
 
   function buildAppeal() {
     return '<div class="plm-agent" id="pl-appeal">' +
-      '<h3 style="font-family:\'Playfair Display\',Georgia,serif;font-size:24px;margin:0 0 9px;">Is this assessment fair?</h3>' +
+      '<h3 style="font-family:\'Libre Franklin\',Arial,sans-serif;font-size:24px;margin:0 0 9px;">Is this assessment fair?</h3>' +
       '<p style="font-size:14.5px;color:#cdd9ec;line-height:1.7;margin:0 0 18px;">I will pull recent comparable sales for this address, work out the market value your town is implying, and tell you straight whether an appeal is worth your time. If the numbers do not support it, I will say so.</p>' +
       '<div class="pl-form">' +
         '<input id="pl-name" type="text" placeholder="Your name" autocomplete="name">' +

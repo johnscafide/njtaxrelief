@@ -68,8 +68,8 @@
 .pk-ok b, .pk-warn b { color: var(--ink); }
 
 .pk-inc { max-width: 740px; margin-bottom: 20px; }
-.pk-inc b { display: block; font-size: 11.5px; font-weight: 800; text-transform: uppercase;
-  letter-spacing: .09em; color: var(--ink-3); margin-bottom: 10px; }
+.pk-inc b { display: block; font-size: 12px; font-weight: 800; text-transform:none;
+  letter-spacing:0; color: var(--ink-3); margin-bottom: 10px; }
 .pk-inc ul { list-style: none; padding: 0; margin: 0; }
 .pk-inc li { position: relative; padding: 7px 0 7px 22px; font-size: 14px; line-height: 1.6;
   color: var(--ink-2); border-bottom: 1px solid var(--hair-2); }
@@ -86,8 +86,8 @@
    RELOCATION  +  PORTFOLIO SCREEN
    ============================================================ */
 .rl-in { display: flex; gap: 18px; align-items: flex-end; flex-wrap: wrap; margin-bottom: 22px; }
-.rl-b label, .rl-t label { display: block; font-size: 11px; font-weight: 700; text-transform: uppercase;
-  letter-spacing: .07em; color: var(--ink-3); margin-bottom: 6px; }
+.rl-b label, .rl-t label { display: block; font-size: 12px; font-weight: 700; text-transform:none;
+  letter-spacing:0; color: var(--ink-3); margin-bottom: 6px; }
 .rl-money { display: flex; align-items: center; border-bottom: 2px solid var(--hair); }
 .rl-money span { color: var(--ink-3); font-size: 17px; }
 .rl-money input { border: none; background: none; font-family: var(--sans); font-size: 20px;

@@ -32,7 +32,7 @@ function card(p){
 function render(){
   remove();if(!profile||profile.primary_profession!=='real_estate')return;var a=anchor();if(!a||!a.parentNode)return;
   var section=document.createElement('section');section.id='ac-professional-connections';section.className='ac-section acp-editor apc-editor';
-  section.innerHTML='<header class="acp-header"><div><span>PROFESSIONAL CONNECTIONS</span><h2>MLS & reputation connections</h2><p>Request provider connections that can verify identity and, where authorized, sync professional profile data.</p></div><div class="acp-source"><i class="fas fa-link"></i><span>Provider-controlled</span></div></header>'+
+  section.innerHTML='<header class="acp-header"><div><span>Professional connections</span><h2>MLS & reputation connections</h2><p>Request provider connections that can verify identity and, where authorized, sync professional profile data.</p></div><div class="acp-source"><i class="fas fa-link"></i><span>Provider-controlled</span></div></header>'+
     '<div class="apc-notice"><i class="fas fa-shield-halved"></i><span>Watchdog never treats a profile URL as proof of membership and does not scrape Realtor.com reviews. A connection is shown as <b>Connected</b> only after provider authorization is established.</span></div>'+
     '<div class="apc-grid">'+PROVIDERS.map(card).join('')+'</div>'+
     '<div class="apc-foot"><span id="apc-note" aria-live="polite"></span><a href="/integrations">Open Integration Center <i class="fas fa-arrow-right"></i></a></div>';

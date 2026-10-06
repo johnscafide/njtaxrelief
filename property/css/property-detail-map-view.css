@@ -39,7 +39,7 @@
   gap:6px;
   padding:8px 10px;
   border:1px solid #dfe5ef;
-  border-radius:999px;
+  border-radius:8px;
   background:#f8fafc;
   color:#153d7c;
   text-decoration:none;
@@ -91,7 +91,7 @@ html.wd-index-mapless #plm-rail .wd-property-map-leaflet.leaflet-container{
   inset:-8px;
   border:2px solid rgba(255,255,255,.65);
   border-radius:50%;
-  animation:wdPropertyMapPulse 2.8s ease-out infinite;
+  animation:none;
 }
 @keyframes wdPropertyMapPulse{
   0%{transform:scale(.8);opacity:.8}

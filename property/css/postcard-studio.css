@@ -6,7 +6,7 @@ body[data-sidebar-page="postcard-studio"]{background:#f3f1ec}
 .ps-shell{
   --ps-navy:#0e2248;--ps-blue:#1456a0;--ps-gold:#b8972a;--ps-ink:#14213d;--ps-muted:#5d6678;
   --ps-line:#e3dfd6;--ps-surface:#fbfaf7;--ps-teal:#dff1ec;--ps-teal-ink:#0f6e5c;--ps-sand:#f6efd9;--ps-sand-ink:#7a5d0c;
-  --ps-red:#9f2a1d;--ps-radius:22px;
+  --ps-red:#9f2a1d;--ps-radius:12px;
   max-width:1040px;margin:0 auto;padding:20px 24px 80px;color:var(--ps-ink);font-family:"Libre Franklin",Arial,sans-serif
 }
 .ps-shell h1,.ps-shell h2{letter-spacing:-.015em}
@@ -19,14 +19,14 @@ body[data-sidebar-page="postcard-studio"]{background:#f3f1ec}
 .ps-error p{color:var(--ps-muted)}
 
 /* Hero */
-.ps-hero{display:flex;align-items:flex-end;justify-content:space-between;gap:20px;flex-wrap:wrap;padding:26px 28px;border-radius:26px;background:var(--ps-navy);color:#fff;position:relative;overflow:hidden}
-.ps-hero::after{content:"";position:absolute;right:-60px;top:-80px;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(184,151,42,.28),transparent 70%);pointer-events:none}
+.ps-hero{display:flex;align-items:flex-end;justify-content:space-between;gap:20px;flex-wrap:wrap;padding:26px 28px;border-radius:12px;background:var(--ps-navy);color:#fff;position:relative;overflow:hidden}
+.ps-hero::after{content:"";position:absolute;right:-60px;top:-80px;width:260px;height:260px;border-radius:50%;background:none;pointer-events:none}
 .ps-hero-copy{position:relative;z-index:1;min-width:0;max-width:640px}
-.ps-eyebrow{display:inline-flex;align-items:center;gap:8px;color:#e8d18a;font-weight:800;font-size:12px;letter-spacing:.12em;text-transform:uppercase}
+.ps-eyebrow{display:inline-flex;align-items:center;gap:8px;color:#e8d18a;font-weight:800;font-size:12px;letter-spacing:0;text-transform:none}
 html.aw27-page .ps-hero h1{margin:8px 0 6px;color:#fff;font-size:clamp(28px,3.6vw,40px);line-height:1.06;font-weight:800}
 .ps-hero p{margin:0;color:#c9d4e6;font-size:15px;line-height:1.5}
 .ps-hero-side{position:relative;z-index:1;display:flex;flex-direction:column;align-items:flex-end;gap:8px}
-.ps-env,.ps-credit{display:inline-flex;align-items:center;min-height:32px;padding:0 12px;border-radius:999px;font-size:13px;font-weight:700}
+.ps-env,.ps-credit{display:inline-flex;align-items:center;min-height:32px;padding:0 12px;border-radius:8px;font-size:13px;font-weight:700}
 .ps-env{background:rgba(255,255,255,.12);color:#fff}
 .ps-env.live{background:#e8d18a;color:var(--ps-navy)}
 .ps-credit{background:var(--ps-teal);color:var(--ps-teal-ink)}
@@ -40,7 +40,7 @@ html.aw27-page .ps-hero h1{margin:8px 0 6px;color:#fff;font-size:clamp(28px,3.6v
 .ps-step-head p{margin:0;color:var(--ps-muted);font-size:14px;line-height:1.45}
 .ps-num{flex:0 0 auto;display:grid;place-items:center;width:34px;height:34px;border-radius:50%;background:var(--ps-surface);border:1px solid var(--ps-line);font-weight:800;font-size:15px}
 .ps-step[data-status="done"] .ps-num{background:var(--ps-teal);border-color:#bfe4d1;color:var(--ps-teal-ink)}
-.ps-state{flex:0 0 auto;padding:5px 10px;border-radius:999px;background:var(--ps-surface);border:1px solid var(--ps-line);color:var(--ps-muted);font-size:12px;font-weight:700;white-space:nowrap}
+.ps-state{flex:0 0 auto;padding:5px 10px;border-radius:8px;background:var(--ps-surface);border:1px solid var(--ps-line);color:var(--ps-muted);font-size:12px;font-weight:700;white-space:nowrap}
 .ps-step[data-status="done"] .ps-state{background:var(--ps-teal);border-color:#bfe4d1;color:var(--ps-teal-ink)}
 .ps-step[data-status="todo"] .ps-state{background:var(--ps-sand);border-color:#ecdcae;color:var(--ps-sand-ink)}
 .ps-step-body{margin:14px 0 0 48px}
@@ -48,7 +48,7 @@ html.aw27-page .ps-hero h1{margin:8px 0 6px;color:#fff;font-size:clamp(28px,3.6v
 
 /* Controls */
 .ps-actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
-.ps-btn{display:inline-flex;align-items:center;justify-content:center;gap:7px;min-height:42px;padding:0 16px;border:1px solid var(--ps-line);border-radius:999px;background:#fff;color:var(--ps-ink);font:700 14px/1 "Libre Franklin",Arial,sans-serif;text-decoration:none;cursor:pointer}
+.ps-btn{display:inline-flex;align-items:center;justify-content:center;gap:7px;min-height:42px;padding:0 16px;border:1px solid var(--ps-line);border-radius:8px;background:#fff;color:var(--ps-ink);font:700 14px/1 "Libre Franklin",Arial,sans-serif;text-decoration:none;cursor:pointer}
 .ps-btn:hover{background:var(--ps-surface);border-color:#cfc9bc}
 .ps-btn:focus-visible,.ps-field input:focus-visible,.ps-field select:focus-visible,.ps-check input:focus-visible,.ps-tips summary:focus-visible{outline:2px solid var(--ps-blue);outline-offset:2px}
 .ps-btn.dark{background:var(--ps-navy);border-color:var(--ps-navy);color:#fff}

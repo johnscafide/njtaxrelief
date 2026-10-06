@@ -186,7 +186,7 @@ async function openVoice(){
     window.WatchdogContextualAnalyst.open({
       surface:'property_home',
       title:'Ask Watchdog Intelligence',
-      kicker:'WATCHDOG INTELLIGENCE',
+      kicker:'Watchdog Intelligence',
       subtitle:'Ask a focused question about this saved property. Watchdog keeps the checked property info attached.',
       pams_pins:property.pams_pin ? [property.pams_pin] : [],
       contextLabel:property.address || 'This saved property',
@@ -213,7 +213,7 @@ function rebrandIntelligence(panel){
   var main=panel.querySelector(':scope > .wdai-main');
   if(main)main.classList.add('wd-intelligence-frame');
   var brand=panel.querySelector('.wdai-title > span');
-  if(brand && String(brand.textContent || '').trim()!=='WATCHDOG INTELLIGENCE')brand.textContent='WATCHDOG INTELLIGENCE';
+  if(brand && String(brand.textContent || '').trim()!=='Watchdog Intelligence')brand.textContent='Watchdog Intelligence';
   var roleLine=panel.querySelector('.wdai-role-set span');
   if(roleLine){
     Array.prototype.slice.call(roleLine.childNodes).forEach(function(node){

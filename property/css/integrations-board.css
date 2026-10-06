@@ -6,7 +6,7 @@ html body[data-sidebar-page="integrations"]{
   --ixb-bg:#f3f1ec;--ixb-surface:#fbfaf7;--ixb-line:#e3dfd6;--ixb-navy:#0e2248;--ixb-ink:#142033;--ixb-muted:#5d6877;
   --ixb-blue:#1456a0;--ixb-blue-bright:#2f6df6;--ixb-gold:#b8972a;--ixb-sky:#e3edfb;--ixb-sky-line:#b9d0f2;
   --ixb-teal:#dff1ec;--ixb-teal-line:#9fd3c5;--ixb-sand:#f6efd9;--ixb-sand-line:#e4cf8e;--ixb-review:#fde2e0;--ixb-good:#0b7356;--ixb-bad:#b42318;
-  --ixb-radius:24px;--ixb-font:"Libre Franklin",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --ixb-radius:12px;--ixb-font:"Libre Franklin",system-ui,-apple-system,"Segoe UI",sans-serif;
   /* Re-theme the legacy and module tokens so everything reads as one board. */
   --ig-navy:var(--ixb-navy);--ig-teal:var(--ixb-blue);--ig-ink:var(--ixb-ink);--ig-muted:var(--ixb-muted);--ig-line:var(--ixb-line);--ig-soft:var(--ixb-bg);
   --igd-blue:var(--ixb-blue);--igd-violet:var(--ixb-navy);--igd-soft:var(--ixb-bg);--igd-line:var(--ixb-line);--igd-ink:var(--ixb-ink);--igd-muted:var(--ixb-muted);
@@ -28,17 +28,17 @@ html body[data-sidebar-page="integrations"] :is(h2,h3,h4){color:var(--ixb-navy);
 
 /* Buttons: navy pills, 44px tall. */
 html body[data-sidebar-page="integrations"] :is(.ig-primary,.igcc-btn.primary,.ig-gate a,.ig-gate button){
-  min-height:44px;border-radius:999px;background:var(--ixb-navy);color:#fff;border:0;padding:0 18px;font-weight:800
+  min-height:44px;border-radius:8px;background:var(--ixb-navy);color:#fff;border:0;padding:0 18px;font-weight:800
 }
 html body[data-sidebar-page="integrations"] :is(.ig-primary,.igcc-btn.primary,.ig-gate a,.ig-gate button):hover{background:var(--ixb-blue)}
 html body[data-sidebar-page="integrations"] :is(.igd-actions button:not(.ig-primary),.ig-section-head button,.ig-subhead button,.igcc-btn:not(.primary),.igd-history-head button){
-  min-height:44px;border-radius:999px;background:#fff;color:var(--ixb-navy);border:1px solid var(--ixb-line);padding:0 16px;font-weight:700
+  min-height:44px;border-radius:8px;background:#fff;color:var(--ixb-navy);border:1px solid var(--ixb-line);padding:0 16px;font-weight:700
 }
 html body[data-sidebar-page="integrations"] .igd-actions button.danger{color:var(--ixb-bad)}
 html body[data-sidebar-page="integrations"] :is(.ig-card,.igd-panel,.ig-modal) :is(input:not([type="checkbox"]):not([type="radio"]),select,textarea){
   border-radius:14px;border:1px solid var(--ixb-line);background:#fff;min-height:44px
 }
-html body[data-sidebar-page="integrations"] .igcc-nav button{min-height:44px;border-radius:999px}
+html body[data-sidebar-page="integrations"] .igcc-nav button{min-height:44px;border-radius:8px}
 html body[data-sidebar-page="integrations"] .igcc-nav button[aria-selected="true"]{background:var(--ixb-navy);color:#fff}
 html body[data-sidebar-page="integrations"] :is(button,a,input,select,summary):focus-visible{outline:3px solid var(--ixb-blue-bright);outline-offset:2px}
 
@@ -50,7 +50,7 @@ html body[data-sidebar-page="integrations"] :is(button,a,input,select,summary):f
 .igx-kicker{display:block;font:800 12px/1.2 var(--ixb-font);letter-spacing:.14em;color:var(--ixb-blue)}
 .igx-head h2{margin:8px 0 6px;font:800 clamp(24px,2.6vw,34px)/1.1 var(--ixb-font);letter-spacing:-.03em;color:var(--ixb-navy);max-width:780px}
 .igx-head p{margin:0;color:var(--ixb-muted);font-size:15px;line-height:1.55;max-width:760px}
-.igx-btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;padding:0 18px;border-radius:999px;border:0;background:var(--ixb-navy);color:#fff;font:800 14px/1 var(--ixb-font);text-decoration:none;cursor:pointer;white-space:nowrap}
+.igx-btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;padding:0 18px;border-radius:8px;border:0;background:var(--ixb-navy);color:#fff;font:800 14px/1 var(--ixb-font);text-decoration:none;cursor:pointer;white-space:nowrap}
 .igx-btn:hover{background:var(--ixb-blue)}
 .igx-btn.is-ghost{background:#fff;color:var(--ixb-navy);border:1px solid var(--ixb-line)}
 .igx-btn.is-ghost:hover{background:var(--ixb-sky)}
@@ -61,7 +61,7 @@ html body[data-sidebar-page="integrations"] :is(button,a,input,select,summary):f
 
 .igx-cards{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin:0 0 20px}
 .igx-card{position:relative;overflow:hidden;border-radius:var(--ixb-radius);padding:20px 20px 18px;min-height:132px;display:flex;flex-direction:column;justify-content:space-between;text-align:left;border:1px solid transparent;font:inherit;color:var(--ixb-ink);cursor:pointer}
-.igx-card small{font:800 12px/1.3 var(--ixb-font);letter-spacing:.12em;text-transform:uppercase;opacity:.8}
+.igx-card small{font:800 12px/1.3 var(--ixb-font);letter-spacing:0;text-transform:none;opacity:.8}
 .igx-card b{display:block;font:800 34px/1 var(--ixb-font);letter-spacing:-.03em;margin:12px 0 6px}
 .igx-card span{font-size:13px;line-height:1.45;opacity:.85}
 .igx-card--navy{background:var(--ixb-navy);color:#fff;cursor:default}
@@ -73,9 +73,9 @@ html body[data-sidebar-page="integrations"] :is(button,a,input,select,summary):f
 .igx-card--navy[aria-pressed="true"]{box-shadow:0 0 0 3px var(--ixb-gold) inset}
 
 .igx-tabs{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 14px}
-.igx-tab{min-height:44px;padding:0 16px;border-radius:999px;border:1px solid var(--ixb-line);background:#fff;color:var(--ixb-navy);font:700 14px/1 var(--ixb-font);cursor:pointer;display:inline-flex;align-items:center;gap:8px}
+.igx-tab{min-height:44px;padding:0 16px;border-radius:8px;border:1px solid var(--ixb-line);background:#fff;color:var(--ixb-navy);font:700 14px/1 var(--ixb-font);cursor:pointer;display:inline-flex;align-items:center;gap:8px}
 .igx-tab[aria-selected="true"]{background:var(--ixb-navy);border-color:var(--ixb-navy);color:#fff}
-.igx-tab em{font-style:normal;font-weight:800;min-width:22px;padding:3px 7px;border-radius:999px;background:var(--ixb-bg);color:var(--ixb-navy);font-size:12px;text-align:center}
+.igx-tab em{font-style:normal;font-weight:800;min-width:22px;padding:3px 7px;border-radius:8px;background:var(--ixb-bg);color:var(--ixb-navy);font-size:12px;text-align:center}
 .igx-tab[aria-selected="true"] em{background:rgba(255,255,255,.18);color:#fff}
 
 .igx-panel{background:#fff;border-radius:var(--ixb-radius);padding:18px}
@@ -84,7 +84,7 @@ html body[data-sidebar-page="integrations"] :is(button,a,input,select,summary):f
 .igx-toolbar-left,.igx-toolbar-right{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
 .igx-search{position:relative;display:block;min-width:280px;flex:1;max-width:440px}
 .igx-search i{position:absolute;left:15px;top:50%;transform:translateY(-50%);color:var(--ixb-muted);font-size:14px}
-.igx-search input{width:100%;min-height:44px;border-radius:999px;border:1px solid var(--ixb-line);background:var(--ixb-surface);padding:0 16px 0 40px;font:500 14px/1 var(--ixb-font);color:var(--ixb-ink)}
+.igx-search input{width:100%;min-height:44px;border-radius:8px;border:1px solid var(--ixb-line);background:var(--ixb-surface);padding:0 16px 0 40px;font:500 14px/1 var(--ixb-font);color:var(--ixb-ink)}
 .igx-check{display:inline-flex;align-items:center;gap:10px;min-height:44px;font-size:14px;color:var(--ixb-ink);cursor:pointer}
 .igx-check input{width:20px;height:20px;accent-color:var(--ixb-navy)}
 .igx-note{font-size:13px;color:var(--ixb-muted);line-height:1.5}
@@ -97,9 +97,9 @@ html body[data-sidebar-page="integrations"] :is(button,a,input,select,summary):f
 .igx-row-title{display:block;font:800 15px/1.3 var(--ixb-font);color:var(--ixb-navy);overflow-wrap:anywhere}
 .igx-row-sub{display:block;font-size:13px;color:var(--ixb-muted);margin-top:3px;overflow-wrap:anywhere}
 .igx-people{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
-.igx-person{display:inline-flex;align-items:center;gap:6px;min-height:28px;padding:4px 10px;border-radius:999px;background:#fff;border:1px solid var(--ixb-line);font-size:12px;color:var(--ixb-ink);max-width:100%}
+.igx-person{display:inline-flex;align-items:center;gap:6px;min-height:28px;padding:4px 10px;border-radius:8px;background:#fff;border:1px solid var(--ixb-line);font-size:12px;color:var(--ixb-ink);max-width:100%}
 .igx-person b{font-weight:800;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.igx-tag{display:inline-flex;align-items:center;min-height:22px;padding:2px 8px;border-radius:999px;font-size:12px;font-weight:700;background:var(--ixb-sky);color:var(--ixb-navy)}
+.igx-tag{display:inline-flex;align-items:center;min-height:22px;padding:2px 8px;border-radius:8px;font-size:12px;font-weight:700;background:var(--ixb-sky);color:var(--ixb-navy)}
 .igx-tag.stage-client,.igx-tag.stage-closed{background:var(--ixb-teal)}
 .igx-tag.stage-contract,.igx-tag.stage-active{background:var(--ixb-sand)}
 .igx-row-actions{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}
@@ -145,7 +145,7 @@ html body[data-sidebar-page="integrations"] :is(button,a,input,select,summary):f
 
 .igx-toast{position:fixed;left:50%;bottom:22px;transform:translateX(-50%);z-index:60;max-width:min(560px,calc(100vw - 32px));background:var(--ixb-navy);color:#fff;border-radius:18px;padding:13px 18px;font:700 14px/1.45 var(--ixb-font);box-shadow:0 2px 6px rgba(15,23,42,.08)}
 .igx-toast.is-error{background:var(--ixb-bad)}
-.igx-skeleton{height:84px;border-radius:18px;background:linear-gradient(90deg,var(--ixb-surface),#efece5,var(--ixb-surface));background-size:200% 100%;animation:igx-shimmer 1.4s ease-in-out infinite}
+.igx-skeleton{height:84px;border-radius:18px;background:var(--ixb-surface);background-size:200% 100%;animation:none}
 @keyframes igx-shimmer{to{background-position:-200% 0}}
 
 /* Show the CRM panel on the Overview tab; other tabs keep their focused views. */

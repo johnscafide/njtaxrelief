@@ -37,7 +37,7 @@ body.acx-simple-has-file[data-sidebar-page="agent-contacts"] .acx-shell{margin-t
 
 /* Make Analyze the unmistakable next action. */
 body[data-sidebar-page="agent-contacts"] #aci-shell{margin:0;border-left:0;border-right:0;border-radius:0;box-shadow:none}
-body[data-sidebar-page="agent-contacts"] #aci-shell.aci-simple-ready{margin:0 18px 18px;border:1px solid #b9cffd;border-radius:16px;background:linear-gradient(135deg,#f8fbff,#edf4ff);box-shadow:0 2px 6px rgba(15,23,42,.08)}
+body[data-sidebar-page="agent-contacts"] #aci-shell.aci-simple-ready{margin:0 18px 18px;border:1px solid #b9cffd;border-radius:16px;background:#f8fbff;box-shadow:0 2px 6px rgba(15,23,42,.08)}
 body[data-sidebar-page="agent-contacts"] .aci-simple-ready .aci-head{padding:20px;border-bottom:0;background:transparent;align-items:center}
 body[data-sidebar-page="agent-contacts"] .aci-simple-ready .aci-head>div:first-child>span{font-size:10px}
 body[data-sidebar-page="agent-contacts"] .aci-simple-ready .aci-head h2{font-size:25px;margin:3px 0}
@@ -54,7 +54,7 @@ body[data-sidebar-page="agent-contacts"] .aci-simple-ready .aci-empty>span,
 body[data-sidebar-page="agent-contacts"] .aci-simple-ready .aci-empty>button{display:none!important}
 
 .aci-simple-steps{display:flex;align-items:center;gap:9px;flex-wrap:wrap}
-.aci-simple-steps>span{min-height:34px;padding:0 12px;border:1px solid #d5e1f6;border-radius:999px;background:#fff;color:#5b6d84;font-size:11px;font-weight:800;display:inline-flex;align-items:center;gap:7px}
+.aci-simple-steps>span{min-height:34px;padding:0 12px;border:1px solid #d5e1f6;border-radius:8px;background:#fff;color:#5b6d84;font-size:11px;font-weight:800;display:inline-flex;align-items:center;gap:7px}
 .aci-simple-steps>span b{width:20px;height:20px;border-radius:50%;display:grid;place-items:center;background:#edf2f8;color:#64758a;font-size:10px}
 .aci-simple-steps>span.active{border-color:#2f6df6;background:#2f6df6;color:#fff}
 .aci-simple-steps>span.active b{background:#fff;color:#2f6df6}

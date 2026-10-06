@@ -90,7 +90,7 @@
     if (!data) {
       modal.innerHTML =
         '<button class="wd-invite-close" type="button" data-watchdog-invite-action="close" aria-label="Close invite dialog"><i class="fas fa-xmark" aria-hidden="true"></i></button>' +
-        '<div class="wd-invite-hero"><small>INVITE TO WATCHDOG</small><h2 id="wd-invite-title">Your invite link is not available right now.</h2><p>Please try again in a moment.</p></div>';
+        '<div class="wd-invite-hero"><small>Invite to Watchdog</small><h2 id="wd-invite-title">Your invite link is not available right now.</h2><p>Please try again in a moment.</p></div>';
       modal.dataset.inviteLink = '';
       return;
     }
@@ -100,7 +100,7 @@
     modal.innerHTML =
       '<button class="wd-invite-close" type="button" data-watchdog-invite-action="close" aria-label="Close invite dialog"><i class="fas fa-xmark" aria-hidden="true"></i></button>' +
       '<div class="wd-invite-hero">' +
-        '<small>INVITE TO WATCHDOG</small>' +
+        '<small>Invite to Watchdog</small>' +
         '<h2 id="wd-invite-title">Share better property info.</h2>' +
         '<p>Send your personal Watchdog invite link to a friend, client or colleague.</p>' +
       '</div>' +
