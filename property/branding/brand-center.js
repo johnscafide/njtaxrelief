@@ -89,7 +89,7 @@
         '<p class="bc-intelligence-do"><b>Keep it restrained.</b> This gradient is not a generic dashboard accent and does not replace semantic status colors. Generic Watchdog UI remains blue, navy and neutral. If gradient text is not legible or supported, use Watchdog ink and preserve the colorful border.</p>'+
       '</div></div>'+
       '<div class="bc-grid two" style="margin-top:14px">'+
-        '<article class="bc-card"><span class="bc-eyebrow">VOICE</span><h3>Voice belongs to Watchdog Intelligence</h3><p>Use <b>Watchdog Intelligence Voice</b> when the full name is needed. Inside an established Intelligence context, <b>Voice</b> is enough. Do not sell or brand Voice as a separate audio product.</p><p>Agent and Pro unlock Voice through Watchdog Intelligence entitlement. Pro+ includes it. Written evidence remains authoritative.</p></article>'+
+        '<article class="bc-card"><span class="bc-eyebrow">VOICE</span><h3>Voice belongs to Watchdog Intelligence</h3><p>Use <b>Watchdog Intelligence Voice</b> when the full name is needed. Inside an established Intelligence context, <b>Voice</b> is enough. Do not sell or brand Voice as a separate audio product.</p><p>Agent unlocks Voice through Watchdog Intelligence entitlement. Professional includes it. Written evidence remains authoritative.</p></article>'+
         '<article class="bc-card"><span class="bc-eyebrow">ROBUST</span><h3>Watchdog Score, powered by ROBUST</h3><p><b>The Watchdog Score is powered by the ROBUST Framework.</b> One score. Six dimensions. ROBUST.</p><p>R Recourse · O Overassessment Position · B Burden · U Uniformity · S Stability · T Trajectory. Never rename the product “ROBUST Score.”</p></article>'+
       '</div>'+
       '<div class="bc-grid two" style="margin-top:14px">'+

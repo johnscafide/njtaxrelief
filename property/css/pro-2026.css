@@ -180,7 +180,7 @@ html.p26-js .p26-alerts.is-in .p26-alert{opacity:1;transform:none}
 .p26 .pro-cadence button:hover{background:rgba(255,255,255,.08)}
 .p26 .pro-cadence button.active{background:#fff;color:var(--p26-ink)}
 .p26 .pro-cadence button.active small{color:var(--p26-blue)}
-.p26-plans{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;margin-top:44px}
+.p26-plans{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px;margin-top:44px;max-width:860px;margin-left:auto;margin-right:auto}
 .p26-plan{display:flex;flex-direction:column;padding:34px 30px 30px;border-radius:12px;background:#fff;color:var(--p26-ink)}
 .p26 .p26-plan h3{font-size:2.125rem;font-weight:800;letter-spacing:-.03em}
 .p26-plan-for{margin-top:6px!important;font-size:1.125rem;font-weight:600;color:var(--p26-muted)}

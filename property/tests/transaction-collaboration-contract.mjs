@@ -65,7 +65,7 @@ assert.doesNotMatch(edge,/account_entitlements[^\n]{0,240}(insert|update|upsert)
 assert.match(config,/\[functions\.transaction-collaboration\][\s\S]*?verify_jwt = true/,'transaction collaboration Edge Function must require JWT verification');
 
 assert.match(sharedHtml,/Client disclosures are not shared/,'shared portal must tell the guest that client disclosures are excluded');
-assert.match(sharedHtml,/Compare Pro &amp; Pro\+/,'shared portal must expose the professional conversion path');
+assert.match(sharedHtml,/Compare Professional/,'shared portal must expose the professional conversion path');
 assert.match(sharedHtml,/Manage your own closings and property info/,'shared portal must explain the value of a standalone Watchdog plan');
 assert.doesNotMatch(sharedJs,/transaction_disclosures/,'shared portal runtime must never query owner client disclosures');
 assert.match(sharedJs,/accept_invite/,'shared portal must accept a scoped invite');

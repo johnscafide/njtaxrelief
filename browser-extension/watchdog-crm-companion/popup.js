@@ -8,7 +8,7 @@ const plain=(v)=>v===null||v===undefined||v===''?'-':String(v);
 const rate=(v)=>{const n=Number(v);if(!Number.isFinite(n))return'-';const pct=Math.abs(n)<1?n*100:n;return `${pct.toFixed(3).replace(/\.?0+$/,'')}%`;};
 const acres=(v)=>Number.isFinite(Number(v))?`${Number(v).toLocaleString('en-US',{maximumFractionDigits:3})} ac`:'-';
 const score=(v)=>{const n=Number(v);if(!Number.isFinite(n))return'-';return `${Math.round(n<=1?n*100:n)}/100`;};
-const planLabel=(p)=>({agent:'Agent',pro:'Pro',pro_plus:'Pro+',teams:'Teams',developer:'Developer'})[p]||'Paid';
+const planLabel=(p)=>({agent:'Agent',pro:'Pro',pro_plus:'Professional',teams:'Teams',developer:'Developer'})[p]||'Paid';
 const CATEGORY_ORDER=['Watchdog','Tax & assessment','Property','Sale history','Parcel & location','CRM note'];
 
 const FIELD_DEFS=[

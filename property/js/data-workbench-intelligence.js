@@ -88,7 +88,7 @@ function rememberAction(f,name){
 }
 
 function renderModels(){
-  return MODELS.map(m=>`<button class="dwi-model ${model===m.key?'on':''}" data-dwi-model="${m.key}" ${rank(plan)<rank(m.plan)?'disabled':''}><b>${esc(m.label)}</b><small>${m.plan==='pro_plus'?'Pro+':'Pro'} · ${esc(m.desc)}</small></button>`).join('');
+  return MODELS.map(m=>`<button class="dwi-model ${model===m.key?'on':''}" data-dwi-model="${m.key}" ${rank(plan)<rank(m.plan)?'disabled':''}><b>${esc(m.label)}</b><small>${m.plan==='pro_plus'?'Professional':'Pro'} · ${esc(m.desc)}</small></button>`).join('');
 }
 
 function scopeSwitch(){
@@ -159,7 +159,7 @@ function shell(){
 }
 
 function upsell(){
-  return `<div class="dwi-upsell"><span class="dwi-eyebrow">Pro intelligence</span><h3>Intelligence starts with Pro</h3><p>Pro turns property facts into ranked, evidence-backed findings. Pro+ adds Closing Review, population scans and Change Intelligence.</p><a href="/pro#plans">See Pro plans</a></div>`;
+  return `<div class="dwi-upsell"><span class="dwi-eyebrow">Pro intelligence</span><h3>Intelligence starts with Professional</h3><p>Professional turns property facts into ranked, evidence-backed findings, with Closing Review, population scans and Change Intelligence.</p><a href="/pro#plans">See plans</a></div>`;
 }
 
 async function loadPropertyContexts(data){
@@ -178,7 +178,7 @@ async function loadPropertyContexts(data){
 async function run(){
   const button=$('#dwi-run'),host=$('#dwi-results'),ps=pins(),def=MODELS.find(x=>x.key===model);
   if(!def||rank(plan)<rank(def.plan)){toast(`${planName(def?.plan)} required`);return;}
-  if((scopeMode==='farm'||scopeMode==='view')&&rank(plan)<3){toast('Pro+ required for population Intelligence.');return;}
+  if((scopeMode==='farm'||scopeMode==='view')&&rank(plan)<3){toast('Professional required for population Intelligence.');return;}
   if(scopeMode==='rows'&&!ps.length){host.className='dwi-status';host.textContent='Select or load properties with a PAMS PIN first.';return;}
   if(scopeMode==='view'&&!scopeViewId){host.className='dwi-status';host.textContent='Save a Workbench view before running Saved View Intelligence.';return;}
   button.disabled=true;

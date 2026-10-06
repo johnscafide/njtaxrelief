@@ -12,9 +12,9 @@
 
   var plans = {
     agent: {
-      internal: 'agent', name: 'Agent', monthly: 59, yearly: 590,
+      internal: 'agent', name: 'Agent', monthly: 14.99, yearly: 119,
       audience: 'For agents who want property research, opportunity discovery and client tasks.',
-      features: ['Opportunity Desk and sphere monitoring', 'Professional reports and exports', 'Agent-focused property red flags']
+      features: ['Monitor up to 100 properties', 'Opportunity Desk and sphere monitoring', 'Professional reports and exports', 'Agent-focused property red flags']
     },
     pro: {
       internal: 'pro', name: 'Pro', monthly: 129, yearly: 1290, featured: true, badge: 'Professional dashboard',
@@ -22,9 +22,9 @@
       features: ['Expanded professional workbenches', 'Advanced research tasks', 'Professional research and exports']
     },
     pro_plus: {
-      internal: 'pro_plus', name: 'Pro+', monthly: 399, yearly: 3990, badge: 'Maximum data access',
-      audience: 'For power users who need deeper data, bulk research and high-volume tasks.',
-      features: ['1,000+ data points and proprietary markers', 'Population and scheduled intelligence', 'Bulk research and advanced exports']
+      internal: 'pro_plus', name: 'Professional', monthly: 49.99, yearly: 479, badge: 'Maximum data access',
+      audience: 'For teams and heavy users who need deeper research, bulk tools and high volume.',
+      features: ['Monitor up to 2,500 properties', 'Appeal and diligence tools', '1,000+ data points and proprietary markers', 'Population and scheduled intelligence', 'Bulk research and advanced exports']
     }
   };
 
@@ -37,7 +37,7 @@
     return String(value || 'none').replace(/_/g, ' ').replace(/\b\w/g, function (c) { return c.toUpperCase(); });
   }
   function planLabel(value) {
-    return { standard:'Free', agent:'Agent', pro:'Pro', pro_plus:'Pro+', teams:'Teams', developer:'Developer' }[value] || 'Free';
+    return { standard:'Free', agent:'Agent', pro:'Pro', pro_plus:'Professional', teams:'Teams', developer:'Developer' }[value] || 'Free';
   }
   function date(value) {
     if (!value) return 'Not available';
@@ -183,7 +183,7 @@
     return '<article class="ac-price-card' + (item.featured ? ' featured' : '') + (active ? ' current' : '') + '" data-plan="' + item.internal + '">' +
       (item.badge ? '<span class="ac-popular">' + esc(item.badge) + '</span>' : '') +
       '<div class="ac-price-head"><div><span>' + esc(item.name.toUpperCase()) + '</span><h3>' + esc(item.name) + '</h3></div>' + (active ? '<em>Current</em>' : '') + '</div>' +
-      '<div class="ac-price"><b>' + money(total) + '</b><span>' + (annual ? '/year' : '/month') + '</span></div>' +
+      '<div class="ac-price"><b>' + money(total, total % 1 !== 0) + '</b><span>' + (annual ? '/year' : '/month') + '</span></div>' +
       '<small>' + (annual ? money(item.yearly / 12, true) + '/mo when billed yearly' : 'Billed monthly') + '</small>' +
       intelligenceOffer(item.internal) +
       '<p>' + esc(item.audience) + '</p><ul>' + item.features.map(function (feature) { return '<li><i class="fas fa-check"></i>' + esc(feature) + '</li>'; }).join('') + '</ul>' + button + '</article>';
@@ -191,13 +191,13 @@
   function pricing(currentPlan, developer) {
     var freeCurrent = !developer && currentPlan === 'standard';
     return '<section class="ac-section ac-pricing" id="membership-options">' +
-      '<header class="ac-pricing-header"><div><span>Membership options</span><h2>Choose the dashboard you need</h2><p>Save 17% with yearly billing.</p></div>' +
-      '<div class="ac-cadence" role="group" aria-label="Billing cadence"><button type="button" data-cadence="yearly" aria-pressed="' + (billingCadence === 'yearly') + '">Yearly <em>Save 17%</em></button><button type="button" data-cadence="monthly" aria-pressed="' + (billingCadence === 'monthly') + '">Monthly</button></div></header>' +
+      '<header class="ac-pricing-header"><div><span>Membership options</span><h2>Choose the dashboard you need</h2><p>Save up to 33% with yearly billing.</p></div>' +
+      '<div class="ac-cadence" role="group" aria-label="Billing cadence"><button type="button" data-cadence="yearly" aria-pressed="' + (billingCadence === 'yearly') + '">Yearly <em>Save up to 33%</em></button><button type="button" data-cadence="monthly" aria-pressed="' + (billingCadence === 'monthly') + '">Monthly</button></div></header>' +
       '<div class="ac-price-grid"><article class="ac-price-card' + (freeCurrent ? ' current' : '') + '" data-plan="standard">' +
       '<div class="ac-price-head"><div><span>FREE</span><h3>Free</h3></div>' + (freeCurrent ? '<em>Current</em>' : '') + '</div><div class="ac-price"><b>$0</b><span>/forever</span></div><small>No payment method required</small>' +
       '<p>For homeowners starting with their own property-tax record.</p><ul><li><i class="fas fa-check"></i>Property lookup and watchlist</li><li><i class="fas fa-check"></i>Core assessment and tax markers</li><li><i class="fas fa-check"></i>Standard alerts and history</li></ul>' +
       (freeCurrent ? '<button type="button" disabled>Current plan</button>' : '<button type="button" data-billing-portal>Manage current plan</button>') + '</article>' +
-      pricingCard('agent', currentPlan, developer) + pricingCard('pro', currentPlan, developer) + pricingCard('pro_plus', currentPlan, developer) +
+      pricingCard('agent', currentPlan, developer) + (currentPlan === 'pro' ? pricingCard('pro', currentPlan, developer) : '') + pricingCard('pro_plus', currentPlan, developer) +
       '<article class="ac-price-card firm" data-plan="teams"><div class="ac-price-head"><div><span>TEAMS</span><h3>Teams</h3></div></div><div class="ac-price"><b>Custom</b></div><small>10+ seats</small>' + intelligenceOffer('teams') +
       '<p>For organizations that need shared access, API delivery and higher-volume tasks.</p><ul><li><i class="fas fa-check"></i>Team administration</li><li><i class="fas fa-check"></i>API and high-volume data delivery</li><li><i class="fas fa-check"></i>Implementation and support</li></ul><button type="button" disabled>Contact us for Teams</button></article></div>' +
       '</section>';

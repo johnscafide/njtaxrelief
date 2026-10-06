@@ -231,14 +231,14 @@
       var text = gate.querySelector('[data-dc-gate-copy]');
       var action = gate.querySelector('[data-dc-gate-action]');
       if (access.proPlus) {
-        if (text) text.textContent = 'Pro+ dashboard active. Build against your own saved properties, export checked results and save recurring views.';
+        if (text) text.textContent = 'Professional dashboard active. Build against your own saved properties, export checked results and save recurring views.';
         if (action) { action.textContent = 'Dashboard active'; action.setAttribute('href', '#dc-selected-workspace'); action.classList.add('secondary'); }
       } else if (access.signedIn) {
-        if (text) text.textContent = 'Catalog browsing is public. Building private datasets, exports, saved views and schedules require Pro+.';
-        if (action) { action.textContent = 'See Pro+ access'; action.setAttribute('href', '/pro'); }
+        if (text) text.textContent = 'Catalog browsing is public. Building private datasets, exports, saved views and schedules require the Professional plan.';
+        if (action) { action.textContent = 'See Professional access'; action.setAttribute('href', '/pro'); }
       } else {
-        if (text) text.textContent = 'Browse every checked field publicly. Sign in with Pro+ to run these fields against your saved-property dashboard.';
-        if (action) { action.textContent = 'Sign in / view Pro+'; action.setAttribute('href', '/pro'); }
+        if (text) text.textContent = 'Browse every checked field publicly. Sign in with Professional to run these fields against your saved-property dashboard.';
+        if (action) { action.textContent = 'Sign in / view Professional'; action.setAttribute('href', '/pro'); }
       }
     }
     document.dispatchEvent(new CustomEvent('watchdog:data-center-access', { detail: Object.assign({}, access) }));
@@ -286,7 +286,7 @@
     setText('dc-drawer-bulk', c.value_status === 'live' ? (c.bulk_capable ? 'Bulk ready' : 'Single-record / bounded use') : 'Not bulk available');
     setText('dc-drawer-scope', title(marker.scope || 'property'));
     setText('dc-drawer-origin', marker.origin === 'watchdog-derived' ? 'Watchdog calculated' : 'Public source');
-    setText('dc-drawer-tier', marker.tier === 'pro_plus' ? 'Pro+' : title(marker.tier || 'standard'));
+    setText('dc-drawer-tier', marker.tier === 'pro_plus' ? 'Professional' : title(marker.tier || 'standard'));
     var pageLink = $('dc-drawer-link');
     if (pageLink) pageLink.href = '/marker?id=' + encodeURIComponent(id);
     drawerReturnFocus = document.activeElement && document.activeElement !== document.body ? document.activeElement : null;

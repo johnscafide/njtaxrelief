@@ -87,8 +87,8 @@
   }
 
   var priceData={
-    yearly:{agent:{value:'590',unit:'/ year',eyebrow:'Annual',note:'2 months free. Save $118.'},pro:{value:'1,290',unit:'/ year',eyebrow:'Annual',note:'2 months free. Save $258.'},pro_plus:{value:'3,990',unit:'/ year',eyebrow:'Annual',note:'2 months free. Save $798.'}},
-    monthly:{agent:{value:'59',unit:'/ month',eyebrow:'Monthly',note:'Cancel anytime.'},pro:{value:'129',unit:'/ month',eyebrow:'Monthly',note:'Cancel anytime.'},pro_plus:{value:'399',unit:'/ month',eyebrow:'Monthly',note:'Cancel anytime.'}}
+    yearly:{agent:{value:'119',unit:'/ year',eyebrow:'Annual',note:'Save $60 a year.'},pro_plus:{value:'479',unit:'/ year',eyebrow:'Annual',note:'Save $120 a year.'}},
+    monthly:{agent:{value:'14.99',unit:'/ month',eyebrow:'Monthly',note:'Cancel anytime.'},pro_plus:{value:'49.99',unit:'/ month',eyebrow:'Monthly',note:'Cancel anytime.'}}
   };
 
   function pricing(){
@@ -98,7 +98,7 @@
     function set(cad,shouldTrack){
       if(!priceData[cad])cad='yearly';
       buttons.forEach(function(b){var on=b.dataset.cadence===cad;b.classList.toggle('active',on);b.setAttribute('aria-pressed',on?'true':'false');});
-      ['agent','pro','pro_plus'].forEach(function(plan){var d=priceData[cad][plan];var v=document.querySelector('[data-price-value="'+plan+'"]'),u=document.querySelector('[data-price-unit="'+plan+'"]'),e=document.querySelector('[data-price-eyebrow="'+plan+'"]'),n=document.querySelector('[data-price-note="'+plan+'"]'),cta=document.querySelector('[data-demo-plan="'+plan+'"]');if(v)v.textContent=d.value;if(u)u.textContent=d.unit;if(e)e.textContent=d.eyebrow;if(n)n.textContent=d.note;if(cta)cta.dataset.demoCadence=cad;});
+      ['agent','pro_plus'].forEach(function(plan){var d=priceData[cad][plan];var v=document.querySelector('[data-price-value="'+plan+'"]'),u=document.querySelector('[data-price-unit="'+plan+'"]'),e=document.querySelector('[data-price-eyebrow="'+plan+'"]'),n=document.querySelector('[data-price-note="'+plan+'"]'),cta=document.querySelector('[data-demo-plan="'+plan+'"]');if(v)v.textContent=d.value;if(u)u.textContent=d.unit;if(e)e.textContent=d.eyebrow;if(n)n.textContent=d.note;if(cta)cta.dataset.demoCadence=cad;});
       if(demoCadence)demoCadence.value=cad;
       if(shouldTrack)trackEvent('pro_billing_toggle',{cadence:cad});
     }
@@ -110,11 +110,11 @@
     var promo=intelligence.promotion||{};
     var regular=Number(intelligence.regular_add_on_monthly||12);
     if(!Number.isFinite(regular)||regular<=0)regular=12;
-    var eligible=Array.isArray(promo.eligible_plans)?promo.eligible_plans:['agent','pro'];
+    var eligible=Array.isArray(promo.eligible_plans)?promo.eligible_plans:['agent'];
     var promoActive=promo.active===true;
     var brand='Watchdog <span class="wd-intelligence-brand-word">Intelligence</span>';
     // content-architecture: dynamic. This wording follows the live billing catalog and promotion state.
-    var offer=promoActive?'Free for a limited time on Agent and Pro. Pro+ always includes it.':'Add it to Agent or Pro for $'+regular+'/month. Pro+ includes it.';
+    var offer=promoActive?'Free for a limited time on Agent. Professional always includes it.':'Add it to Agent for $'+regular+'/month. Professional includes it.';
     var promoNode=document.querySelector('[data-intel-promo]');if(promoNode)promoNode.textContent=offer;
     all('[data-intel-line]').forEach(function(li){
       if(eligible.indexOf(li.dataset.intelLine)<0)return;
@@ -122,7 +122,7 @@
     });
     all('[data-intel-cell]').forEach(function(td){td.textContent=promoActive?'Free for now':'$'+regular+'/mo add-on';});
     // content-architecture: dynamic. FAQ answer follows the live billing catalog and promotion state.
-    var faq=document.querySelector('[data-intel-faq]');if(faq)faq.textContent=promoActive?'Agent and Pro normally add it for $'+regular+'/month. It is free for a limited time. Pro+ includes it.':'Agent and Pro can add it for $'+regular+'/month. Pro+ includes it.';
+    var faq=document.querySelector('[data-intel-faq]');if(faq)faq.textContent=promoActive?'Agent normally adds it for $'+regular+'/month. It is free for a limited time. Professional includes it.':'Agent can add it for $'+regular+'/month. Professional includes it.';
   }
 
   function intelligencePricing(){

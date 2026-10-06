@@ -27,8 +27,8 @@ for (const source of [createLifetime, completeLifetime]) {
   assert.match(source, /www\.watchdogindex\.com/, 'Lifetime billing must allow the canonical Watchdog origin.');
 }
 
-assert.match(createLifetime, /149900/, 'Agent lifetime governed amount changed unexpectedly.');
+assert.match(createLifetime, /34900/, 'Agent lifetime governed amount changed unexpectedly.');
 assert.match(createLifetime, /349900/, 'Pro lifetime governed amount changed unexpectedly.');
-assert.match(createLifetime, /999900/, 'Pro+ lifetime governed amount changed unexpectedly.');
+assert.match(createLifetime, /99900/, 'Professional lifetime governed amount changed unexpectedly.');
 
 console.log('pro-lifetime-soft-launch-contract: ok');

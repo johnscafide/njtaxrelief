@@ -282,7 +282,7 @@
     if(!need || !RANK.hasOwnProperty(need)) return '';
     var have = viewerPlan();
     if(have && RANK[have] >= RANK[need]) return '';
-    return {agent:'Agent',pro:'Pro',pro_plus:'Pro+',teams:'Teams',developer:'Developer'}[need] || '';
+    return {agent:'Agent',pro:'Pro',pro_plus:'Professional',teams:'Teams',developer:'Developer'}[need] || '';
   }
 
   /* ---------- Data ---------- */

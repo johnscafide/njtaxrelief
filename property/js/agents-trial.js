@@ -361,7 +361,7 @@
         var status = row && (row.subscription_status || row.status);
         var line = $('[data-trial-status]');
         if (!line) return;
-        if (status === 'trialing') line.textContent = 'Your Agent trial is active. Your card is charged $59 on day 14 unless you cancel first.';
+        if (status === 'trialing') line.textContent = 'Your Agent trial is active. Your card is charged $14.99 on day 14 unless you cancel first.';
         else if (status === 'active') line.textContent = 'Your Agent plan is active.';
         else line.textContent = 'Your trial is being confirmed with Stripe. Refresh this page in a moment if the status does not update.';
       }).catch(function () {});

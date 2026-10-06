@@ -258,7 +258,7 @@ module.exports = async function handler(req, res) {
     }
 
     if (!VOICE_ENABLED) return res.status(503).json({ error: 'Voice Intelligence is temporarily disabled.' });
-    if (!allowed) return res.status(403).json({ error: 'Voice Intelligence requires Pro+ or Teams, or an active Watchdog Intelligence add-on for Agent or Pro.' });
+    if (!allowed) return res.status(403).json({ error: 'Voice Intelligence requires Professional or Teams, or an active Watchdog Intelligence add-on for Agent or Pro.' });
     if (!GATEWAY_TOKEN) return res.status(503).json({ error: 'Voice Intelligence provider authentication is not configured.' });
 
     if (action === 'transcribe') {

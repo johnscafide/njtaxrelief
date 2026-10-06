@@ -75,7 +75,7 @@
       var price = card.querySelector('.ac-price b');
       var unit = card.querySelector('.ac-price span');
       var note = card.querySelector(':scope > small');
-      setText(price, money(amount, false));
+      setText(price, money(amount, amount % 1 !== 0));
       setText(unit, annual ? '/year' : '/month');
       if (note) {
         if (annual) {

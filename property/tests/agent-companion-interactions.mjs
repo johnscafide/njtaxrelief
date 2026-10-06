@@ -73,7 +73,7 @@ try{
     const {page,context,errors}=await fixture('transaction',width);
     await addTransaction(page,'123 Fixture Street, Test Town, NJ','Fixture client');
     assert.equal(await page.locator('[data-v2-action="refresh"]').isVisible(),false,'Agent must not expose a fake paid refresh action');
-    assert.match(await page.locator('#txv2-document-copy').innerText(),/available with Pro\+/i);
+    assert.match(await page.locator('#txv2-document-copy').innerText(),/available with Professional/i);
     assert.match(await page.locator('#txv2-attention').innerText(),/review needed/i);
     await page.waitForTimeout(1700);
     assert.deepEqual(await page.evaluate(()=>companionFixture.invocations),[],'Agent must not invoke paid evidence sweeps');

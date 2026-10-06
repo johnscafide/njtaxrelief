@@ -32,8 +32,8 @@ expect(outcomes.includes("property_decision:{minimum:'pro'"), 'Property-level pr
 expect(outcomes.includes("population_triage:{minimum:'pro_plus'"), 'Population/scheduled Intelligence must begin at Pro+.');
 expect(outcomes.includes("team_operations:{minimum:'teams'"), 'Organization operations must remain a Teams outcome.');
 expect(outcomes.includes('Server entitlements remain authoritative'), 'Public wording must not replace server authorization.');
-expect(outcomes.includes('From $59'), 'Dashboard professional plan card must start at the current Agent monthly price.');
-expect(outcomes.includes('Pro $129 · Pro+ $399'), 'Dashboard plan card must use the current Pro and Pro+ monthly prices.');
+expect(outcomes.includes('From $14.99'), 'Dashboard professional plan card must start at the current Agent monthly price.');
+expect(outcomes.includes('Professional $49.99'), 'Dashboard plan card must use the current Professional monthly price.');
 expect(!outcomes.includes('<b>$49</b>'), 'Outcome layer must not reintroduce the retired $49 price.');
 // The current Dashboard renders its own plan gate; the old pricing override is no longer loaded there.
 const dashboardScripts = [...dashboard.matchAll(/<script\b[^>]*\bsrc=["']([^"']+)["']/g)].map(match => match[1].split('?')[0]);

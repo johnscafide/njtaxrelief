@@ -207,12 +207,12 @@
     return c.auth.getSession().then(function (response) {
       var session = response.data && response.data.session;
       if (!session) {
-        if (showGate) openModal({ title: 'Pro+ dashboard', copy: 'The checked field catalog is public. Sign in with Pro+ to build against your private saved properties, export results, save views or schedule deliveries.', confirm: 'View Pro+', cancel: 'Not now' }).then(function (choice) { if (choice) location.href = '/pro'; });
+        if (showGate) openModal({ title: 'Professional dashboard', copy: 'The checked field catalog is public. Sign in with Professional to build against your private saved properties, export results, save views or schedule deliveries.', confirm: 'View Professional', cancel: 'Not now' }).then(function (choice) { if (choice) location.href = '/pro'; });
         return { ok: false, session: null };
       }
       return c.rpc('has_watchdog_plan', { required_plan: 'pro_plus' }).then(function (plan) {
         var ok = !plan.error && plan.data === true;
-        if (!ok && showGate) openModal({ title: 'Pro+ required', copy: 'Your account can browse and select fields here, but private Data Center execution is a Pro+ capability.', confirm: 'See Pro+', cancel: 'Keep browsing' }).then(function (choice) { if (choice) location.href = '/pro'; });
+        if (!ok && showGate) openModal({ title: 'Professional required', copy: 'Your account can browse and select fields here, but private Data Center execution is a Professional capability.', confirm: 'See Professional', cancel: 'Keep browsing' }).then(function (choice) { if (choice) location.href = '/pro'; });
         return { ok: ok, session: session };
       });
     }).catch(function () { return { ok: false, session: null }; });
@@ -460,7 +460,7 @@
   function loadViews() {
     ensureViewControls();
     return checkProPlus(false).then(function (state) {
-      if (!state.ok) { if ($('dc-saved-controls')) $('dc-saved-controls').innerHTML = '<div class="dc-monitor-empty">Public browsing is active. Sign in with Pro+ to load private saved views.</div>'; return []; }
+      if (!state.ok) { if ($('dc-saved-controls')) $('dc-saved-controls').innerHTML = '<div class="dc-monitor-empty">Public browsing is active. Sign in with Professional to load private saved views.</div>'; return []; }
       return client().from('saved_data_center_views').select('id,name,scope,marker_ids,filters,sort_config,updated_at').order('updated_at', { ascending: false }).then(function (response) {
         if (response.error) throw response.error; views = response.data || []; paintViews(); return views;
       });
@@ -510,7 +510,7 @@
   function loadMonitoring() {
     var host = $('dc-monitor-list'); if (!host) return Promise.resolve();
     return checkProPlus(false).then(function (state) {
-      if (!state.ok) { host.innerHTML = '<div class="dc-monitor-empty">Public browsing is active. Pro+ members can schedule private saved-view deliveries.</div>'; return; }
+      if (!state.ok) { host.innerHTML = '<div class="dc-monitor-empty">Public browsing is active. Professional members can schedule private saved-view deliveries.</div>'; return; }
       return client().from('data_center_delivery_jobs').select('id,name,scope,format,cadence,next_run_at,last_run_at,status,updated_at').order('updated_at', { ascending: false }).limit(12).then(function (response) {
         if (response.error) throw response.error;
         var jobs = response.data || [];

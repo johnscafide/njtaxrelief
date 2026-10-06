@@ -28,9 +28,8 @@ expect(colorCount===10,'expected 10 color/gradient hero themes');
 expect(imageCount===10,'expected 10 image hero themes');
 expect((refresh.match(/images\.unsplash\.com/g)||[]).length===10,'Unsplash image presets missing');
 expect(refresh.includes("watchdog_account_hero_theme"),'hero theme persistence missing');
-expect(refresh.includes("agent:{label:'Agent',value:'$1,499'"),'Agent Lifetime price missing');
-expect(refresh.includes("pro:{label:'Pro',value:'$3,499'"),'Pro Lifetime price missing');
-expect(refresh.includes("pro_plus:{label:'Pro+',value:'$9,999'"),'Pro+ Lifetime price missing');
+expect(refresh.includes("agent:{label:'Agent',value:'$349'"),'Agent Lifetime price missing');
+expect(refresh.includes("pro_plus:{label:'Professional',value:'$999'"),'Professional Lifetime price missing');
 expect(refresh.includes("create-lifetime-checkout"),'governed Lifetime checkout wiring missing');
 expect(refreshCss.includes('border-radius:50%!important'),'circular avatar contract missing');
 

@@ -46,19 +46,16 @@ expect(page.includes('<h1 id="hero-title">Lend better<br><span><em>know</em> the
 expect(page.includes('Look up the property behind any New Jersey loan'),'lender-specific hero copy missing');
 expect(page.includes('Made for<br>New Jersey lenders.'),'lender-specific positioning missing');
 expect(page.includes('Lender Founding Lifetime'),'lender Founding Lifetime heading missing');
-expect(page.includes('$3,499')&&page.includes('$9,999'),'Pro and Pro+ lifetime prices missing');
-expect(page.includes('250-property capacity')&&page.includes('2,500-property capacity'),'Pro and Pro+ capacities missing');
+expect(page.includes('$999')&&!page.includes('$3,499'),'Professional lifetime price missing');
+expect(page.includes('2,500-property capacity'),'Professional capacity missing');
 // Count checkout controls only; the inline checkout script also names the attribute in its selectors.
-expect((page.match(/<button\b[^>]*\bdata-lender-lifetime-checkout\b/g)||[]).length===2,'lender page must expose exactly two lifetime checkout choices');
-expect(page.includes('data-tier="pro"')&&page.includes('data-tier="pro_plus"'),'both checked lifetime tiers must be present');
-expect(page.includes('lender-proplus-card')&&page.includes('<span class="price-ribbon">Recommended</span>'),'Pro+ must be the primary recommended Lifetime card');
-expect(page.indexOf('data-tier="pro_plus"')<page.indexOf('data-tier="pro"'),'Pro+ must appear before Pro in the lender offer hierarchy');
-expect(page.includes('lender-pro-card'),'secondary Pro Lifetime box missing');
-expect(page.includes('10× Pro capacity'),'Pro+ capacity difference callout missing');
+expect((page.match(/<button\b[^>]*\bdata-lender-lifetime-checkout\b/g)||[]).length===1,'lender page must expose exactly one lifetime checkout choice');
+expect(page.includes('data-tier="pro_plus"')&&!page.includes('data-tier="pro"'),'only the Professional tier may be sold');
+expect(page.includes('lender-proplus-card')&&page.includes('<span class="price-ribbon">Recommended</span>'),'Professional must be the primary recommended Lifetime card');
 expect(lenderCss.includes('background: #fff0a6'),'yellow plan-difference highlight missing');
 expect(lenderCss.includes('grid-template-columns: minmax(300px, 1fr) 190px'),'desktop main/secondary pricing hierarchy missing');
 expect(page.includes('Usage-based services, direct mail, third-party data and overages'),'lifetime exclusions missing');
-expect(page.includes('$1,290')&&page.includes('data-lender-annual-checkout data-tier="pro"'),'Pro annual alternative missing');
+expect(page.includes('$479')&&page.includes('data-lender-annual-checkout data-tier="pro_plus"'),'Professional annual alternative missing');
 
 expect(page.includes("billing.invoke('create-lifetime-checkout', { tier })"),'lender lifetime checkout must reuse server-owned checkout');
 expect(page.includes("billing.checkout(tier, { cadence: 'yearly' })"),'lender annual checkout must reuse shared checked checkout');

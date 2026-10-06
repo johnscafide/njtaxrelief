@@ -26,7 +26,7 @@ function allowedOrigin(req: Request) {
 const catalog = {
   provider: 'stripe',
   currency: 'USD',
-  catalog_version: '2026-08-22',
+  catalog_version: '2026-10-06',
   teams_available: false,
   tax_collection_enabled: false,
   intelligence: {
@@ -35,7 +35,7 @@ const catalog = {
     promotion: {
       active: true,
       label: 'Limited time',
-      eligible_plans: ['agent', 'pro'],
+      eligible_plans: ['agent'],
       price_during_promotion: 0,
       ends_on: null
     }
@@ -43,18 +43,19 @@ const catalog = {
   plans: {
     agent: {
       label: 'Agent',
-      monthly: { amount: 59, lookup_key: 'watchdog_agent_monthly' },
-      yearly: { amount: 590, lookup_key: 'watchdog_agent_yearly' }
+      monthly: { amount: 14.99, lookup_key: 'watchdog_agent_monthly' },
+      yearly: { amount: 119, lookup_key: 'watchdog_agent_yearly' }
     },
     pro: {
       label: 'Pro',
+      retired: true,
       monthly: { amount: 129, lookup_key: 'watchdog_pro_monthly' },
       yearly: { amount: 1290, lookup_key: 'watchdog_pro_yearly' }
     },
     pro_plus: {
-      label: 'Pro+',
-      monthly: { amount: 399, lookup_key: 'watchdog_pro_plus_monthly' },
-      yearly: { amount: 3990, lookup_key: 'watchdog_pro_plus_yearly' }
+      label: 'Professional',
+      monthly: { amount: 49.99, lookup_key: 'watchdog_pro_plus_monthly' },
+      yearly: { amount: 479, lookup_key: 'watchdog_pro_plus_yearly' }
     }
   }
 };

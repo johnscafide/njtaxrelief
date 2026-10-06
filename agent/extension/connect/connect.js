@@ -7,7 +7,7 @@
   if(!validUuid(deviceId)||!/^[0-9a-f]{64}$/.test(challenge)){paint('error','This connection request is invalid.','Return to the CRM Companion extension and start a new connection.');approve.disabled=true;return;}
   Promise.resolve(window.njptrAccessReady).then(function(access){
     if(!access||!access.user)throw new Error('sign_in_required');
-    paint('','Ready to connect this browser.',('Signed in with Watchdog '+String(access.plan||'paid').replace('pro_plus','Pro+').replace(/^pro$/,'Pro')+'.'));
+    paint('','Ready to connect this browser.',('Signed in with Watchdog '+String(access.plan||'paid').replace('pro_plus','Professional').replace(/^pro$/,'Pro')+'.'));
     approve.disabled=false;
   }).catch(function(){paint('error','Watchdog sign-in is required.','Sign in with an active paid plan, then reopen this connection from the extension.');approve.disabled=true;});
   approve.addEventListener('click',async function(){

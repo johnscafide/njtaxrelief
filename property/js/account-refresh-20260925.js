@@ -32,9 +32,8 @@ var THEMES=[
   {key:'orbit-motion',label:'Orbit',kind:'motion',bg:'radial-gradient(circle at 50% 50%,transparent 0 18%,rgba(116,231,218,.22) 19% 20%,transparent 21% 31%,rgba(105,141,255,.18) 32% 33%,transparent 34%),radial-gradient(circle at 15% 20%,rgba(79,221,213,.50),transparent 24%),linear-gradient(135deg,#07182c,#132a4c 54%,#0b4f54)'}
 ];
 var LIFETIME={
-  agent:{label:'Agent',value:'$1,499',amount:149900},
-  pro:{label:'Pro',value:'$3,499',amount:349900},
-  pro_plus:{label:'Pro+',value:'$9,999',amount:999900}
+  agent:{label:'Agent',value:'$349',amount:34900},
+  pro_plus:{label:'Professional',value:'$999',amount:99900}
 };
 
 function getClient(){

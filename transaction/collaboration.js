@@ -33,7 +33,7 @@ function ensure(){
     +'<div class="tx-collab-created" id="tx-collab-created" hidden></div>'
     +'<div class="tx-collab-list-head"><h3>Shared access</h3><button type="button" data-collab-action="reload"><i class="fas fa-rotate"></i> Refresh</button></div>'
     +'<div id="tx-collab-list" class="tx-collab-list"><div class="tx-collab-loading"><i class="fas fa-circle-notch fa-spin"></i> Loading access…</div></div>'
-    +'<p class="tx-collab-conversion"><b>Watchdog guest access is transaction-specific.</b> Invitees can later choose Pro or Pro+ if they want their own Watchdog professional dashboard.</p>'
+    +'<p class="tx-collab-conversion"><b>Watchdog guest access is transaction-specific.</b> Invitees can later choose Professional if they want their own Watchdog professional dashboard.</p>'
     +'</section><div class="tx-collab-toast" id="tx-collab-toast" hidden></div>';
   document.body.appendChild(layer);
   $('#tx-collab-form',layer).addEventListener('submit',createInvite);

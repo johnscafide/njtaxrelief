@@ -2361,7 +2361,7 @@ document.addEventListener('mouseover',e=>{var t=e.target.closest('[data-marker-i
   window.hmToggle = function (k) {
     var accessSection = SECTIONS.filter(function (x) { return x.k === k; })[0];
     if (accessSection && window.NJPTRPlan && !window.NJPTRPlan.can(accessSection.tier || 'standard')) {
-      toast((accessSection.tier === 'pro_plus' ? 'Pro+' : 'Pro') + ' access is required in this View As mode');
+      toast((accessSection.tier === 'pro_plus' ? 'Professional' : 'Pro') + ' access is required in this View As mode');
       return;
     }
     OPEN[k] = !OPEN[k];
@@ -3993,9 +3993,9 @@ function showGate(status){
   }else{
     title.textContent='Watchdog Intelligence Voice is a premium capability';
     if(plan==='agent' || plan==='pro'){
-      copy.textContent='Your '+(plan==='agent'?'Agent':'Pro')+' plan can use Voice when the Watchdog Intelligence add-on is active. Voice is included with Pro+ and Teams.';
+      copy.textContent='Your '+(plan==='agent'?'Agent':'Pro')+' plan can use Voice when the Watchdog Intelligence add-on is active. Voice is included with Professional and Teams.';
     }else{
-      copy.textContent='Watchdog Intelligence Voice is included with Pro+ and Teams. Agent and Pro accounts can use it with the Watchdog Intelligence add-on.';
+      copy.textContent='Watchdog Intelligence Voice is included with Professional and Teams. Agent accounts can use it with the Watchdog Intelligence add-on.';
     }
     actions.innerHTML='<a class="wd-intelligence-gate-primary" href="/property/pro#plans">See Intelligence access</a><button class="wd-intelligence-gate-secondary" type="button" data-wd-intelligence-close>Not now</button>';
   }

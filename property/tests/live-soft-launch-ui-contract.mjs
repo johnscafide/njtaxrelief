@@ -18,9 +18,9 @@ assert.match(pro, /Card required\. Renews automatically on day 14 unless you can
 assert.match(pro, /data-cadence="lifetime"/);
 assert.match(pro, /Founding Lifetime/);
 assert.match(pro, /data-billing-plan="agent"/);
-assert.match(pro, /data-billing-plan="pro"/);
+assert.doesNotMatch(pro, /data-billing-plan="pro"/);
 assert.match(pro, /data-billing-plan="pro_plus"/);
-assert.match(pro, /Paid enrollment is open for Agent, Pro and Pro\+/);
+assert.match(pro, /Paid enrollment is open for Agent and Professional/);
 assert.match(pro, /\/property\/css\/pro-2026\.css/);
 
 // The app-shell logo still opens property lookup; it now uses the host-aware clean route ("/" on WatchdogIndex).

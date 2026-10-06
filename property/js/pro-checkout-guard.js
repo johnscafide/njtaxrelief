@@ -1,5 +1,5 @@
 /* Watchdog Pro pricing controller.
-   Public Agent / Pro / Pro+ checkout is open. Teams remains request-only.
+   Public Agent / Professional checkout is open. Teams remains request-only.
    The page ships the Annual / Monthly / Lifetime toggle and plan buttons;
    this script switches the buttons between trial, plain plan and Founding
    Lifetime checkout. */
@@ -9,9 +9,8 @@
   if(path!=='/property/pro'&&path!=='/pro')return;
 
   var LIFETIME={
-    agent:{value:'1,499',amount:149900,label:'Agent'},
-    pro:{value:'3,499',amount:349900,label:'Pro'},
-    pro_plus:{value:'9,999',amount:999900,label:'Pro+'}
+    agent:{value:'349',amount:34900,label:'Agent'},
+    pro_plus:{value:'999',amount:99900,label:'Professional'}
   };
   var normalCadence='yearly';
   var trialOffered=true;
@@ -33,11 +32,11 @@
 
   function setCtas(cadence){
     normalCadence=cadence==='monthly'?'monthly':'yearly';
-    ['agent','pro','pro_plus'].forEach(function(plan){
+    ['agent','pro_plus'].forEach(function(plan){
       var band=document.querySelector('[data-price-band="'+plan+'"]');var cta=band&&band.querySelector('.pro-price-cta');if(!cta)return;
       cta.removeAttribute('data-lifetime-plan');
       cta.dataset.billingPlan=plan;cta.dataset.billingCadence=normalCadence;cta.dataset.billingTrial=trialOffered?'1':'0';cta.href='#';
-      var label=plan==='pro_plus'?'Pro+':plan.charAt(0).toUpperCase()+plan.slice(1);
+      var label=plan==='pro_plus'?'Professional':plan.charAt(0).toUpperCase()+plan.slice(1);
       // content-architecture: dynamic, the button reads as a trial or a plain plan choice depending on this account's trial eligibility from the checkout server.
       cta.innerHTML=(trialOffered?'Try '+label+' free for 14 days':'Choose '+label)+' <i class="fas fa-arrow-right"></i>';
     });
@@ -46,7 +45,7 @@
 
   function setLifetime(shouldTrack){
     var group=document.querySelector('.pro-cadence');if(group){group.querySelectorAll('[data-cadence]').forEach(function(b){var on=b.dataset.cadence==='lifetime';b.classList.toggle('active',on);b.setAttribute('aria-pressed',on?'true':'false');});}
-    ['agent','pro','pro_plus'].forEach(function(plan){
+    ['agent','pro_plus'].forEach(function(plan){
       var d=LIFETIME[plan];var v=document.querySelector('[data-price-value="'+plan+'"]'),u=document.querySelector('[data-price-unit="'+plan+'"]'),e=document.querySelector('[data-price-eyebrow="'+plan+'"]'),n=document.querySelector('[data-price-note="'+plan+'"]'),band=document.querySelector('[data-price-band="'+plan+'"]'),cta=band&&band.querySelector('.pro-price-cta');
       if(v)v.textContent=d.value;if(u)u.textContent=' once';if(e)e.textContent='Founding Lifetime';if(n)n.textContent='One payment. No renewal.';
       if(band)band.classList.add('is-founding-lifetime');
@@ -98,7 +97,7 @@
       if(!ctx.session)throw new Error('Sign in to the Watchdog account used for checkout to activate Lifetime access.');
       var result=await ctx.billing.invoke('complete-lifetime-checkout',{session_id:sessionId});
       if(!result||!result.ok)throw new Error('Lifetime access could not be verified.');
-      var plan=result.tier==='pro_plus'?'Pro+':String(result.tier||'').replace(/^./,function(c){return c.toUpperCase();});
+      var plan=result.tier==='pro_plus'?'Professional':String(result.tier||'').replace(/^./,function(c){return c.toUpperCase();});
       toast(plan+' Founding Lifetime is active. No renewal.');track('pro_lifetime_checkout_complete',{plan:result.tier,property_capacity:result.property_capacity});
       try{sessionStorage.removeItem('watchdog:lifetime:pending');}catch(_){ }
       cleanCheckoutQuery();

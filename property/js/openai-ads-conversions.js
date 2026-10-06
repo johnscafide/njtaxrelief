@@ -110,7 +110,7 @@
   function planData(tier,amount){
     var raw=String(tier||'').toLowerCase();
     var normalized=raw==='pro+'?'pro_plus':raw;
-    var names={agent:'Watchdog Agent Founding Lifetime',pro:'Watchdog Pro Founding Lifetime',pro_plus:'Watchdog Pro+ Founding Lifetime'};
+    var names={agent:'Watchdog Agent Founding Lifetime',pro:'Watchdog Pro Founding Lifetime',pro_plus:'Watchdog Professional Founding Lifetime'};
     var cents=Number(amount||0);
     var data={type:'contents',contents:[{id:'watchdog_founding_lifetime_'+normalized,name:names[normalized]||'Watchdog Founding Lifetime',content_type:'plan',quantity:1}]};
     if(Number.isFinite(cents)&&cents>0){data.amount=Math.round(cents);data.currency='USD';}

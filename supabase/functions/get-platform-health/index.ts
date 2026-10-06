@@ -3,12 +3,10 @@ import Stripe from 'npm:stripe@18.4.0';
 
 const CANONICAL_SITE = 'https://www.watchdogindex.com';
 const PRICE_LOOKUPS = [
-  ['watchdog_agent_monthly', 5900, 'month'],
-  ['watchdog_agent_yearly', 59000, 'year'],
-  ['watchdog_pro_monthly', 12900, 'month'],
-  ['watchdog_pro_yearly', 129000, 'year'],
-  ['watchdog_pro_plus_monthly', 39900, 'month'],
-  ['watchdog_pro_plus_yearly', 399000, 'year']
+  ['watchdog_agent_monthly', 1499, 'month'],
+  ['watchdog_agent_yearly', 11900, 'year'],
+  ['watchdog_pro_plus_monthly', 4999, 'month'],
+  ['watchdog_pro_plus_yearly', 47900, 'year']
 ] as const;
 const PUBLIC_STATUS_ACTIVE_WINDOW_MS = 30 * 60 * 1000;
 const PUBLIC_STATUS_HISTORY_WINDOW_MS = 30 * 24 * 60 * 60 * 1000;

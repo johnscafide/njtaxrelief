@@ -10,7 +10,7 @@
   const score=v=>Number.isFinite(Number(v))?`${Math.round(Number(v)<=1?Number(v)*100:Number(v))}/100`:'-';
   const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   const compact=v=>String(v??'').replace(/\s+/g,' ').trim();
-  const planLabel=p=>({agent:'Agent',pro:'Pro',pro_plus:'Pro+',teams:'Teams',developer:'Developer'})[p]||'Watchdog';
+  const planLabel=p=>({agent:'Agent',pro:'Pro',pro_plus:'Professional',teams:'Teams',developer:'Developer'})[p]||'Watchdog';
   const bg=(type,payload={})=>new Promise((resolve,reject)=>chrome.runtime.sendMessage({type,...payload},response=>{
     if(chrome.runtime.lastError)return reject(new Error(chrome.runtime.lastError.message));
     if(response?.ok===false&&response?.error)return reject(Object.assign(new Error(response.error),{data:response.data||null,status:response.status||0}));

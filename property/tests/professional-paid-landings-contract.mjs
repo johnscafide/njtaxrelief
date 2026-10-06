@@ -33,13 +33,12 @@ for(const page of pages){
   expect(page.html.includes('<link rel="stylesheet" href="/lender/lender.css">'),`${page.name} must use lender pricing hierarchy CSS`);
   expect(page.html.includes('<script src="/agent/agent.js" defer></script>'),`${page.name} must use Agent JS`);
   expect(page.html.includes('<script src="/property/js/professional-lifetime-landing.js" defer></script>'),`${page.name} shared checkout runtime missing`);
-  expect(page.html.includes('$9,999')&&page.html.includes('$3,499'),`${page.name} Lifetime prices missing`);
-  expect(page.html.includes('2,500-property capacity')&&page.html.includes('250-property capacity'),`${page.name} capacities missing`);
-  expect(page.html.includes('10× Pro capacity'),`${page.name} Pro+ difference callout missing`);
-  expect(page.html.includes('<span class="price-ribbon">Recommended</span>'),`${page.name} Pro+ recommendation missing`);
-  expect(page.html.indexOf('data-tier="pro_plus"')<page.html.indexOf('data-tier="pro"'),`${page.name} Pro+ must lead Pro`);
-  expect((page.html.match(/data-professional-lifetime-checkout/g)||[]).length===2,`${page.name} must expose two Lifetime choices`);
-  expect(page.html.includes('data-professional-annual-checkout data-tier="pro"'),`${page.name} Pro annual alternative missing`);
+  expect(page.html.includes('$999')&&!page.html.includes('$3,499'),`${page.name} Professional Lifetime price missing`);
+  expect(page.html.includes('2,500-property capacity'),`${page.name} capacity missing`);
+  expect(page.html.includes('<span class="price-ribbon">Recommended</span>'),`${page.name} Professional recommendation missing`);
+  expect(!page.html.includes('data-tier="pro"'),`${page.name} must not sell the retired Pro plan`);
+  expect((page.html.match(/data-professional-lifetime-checkout/g)||[]).length===1,`${page.name} must expose one Lifetime choice`);
+  expect(page.html.includes('data-professional-annual-checkout data-tier="pro_plus"')&&page.html.includes('$479'),`${page.name} Professional annual alternative missing`);
   expect(!page.html.includes('class="eyebrow"'),`${page.name} must not add eyebrow text`);
 }
 

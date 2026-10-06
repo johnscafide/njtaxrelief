@@ -4,8 +4,8 @@ This directory serves the clean public route `/agent`. `middleware.js` includes 
 
 ## Offers and checkout
 
-- Agent Founding Lifetime: **$1,499 one time**, with 25-property Agent capacity.
-- Agent Annual: **$590 per year**, recurring until canceled, with the same Agent capacity.
+- Agent Founding Lifetime: **$349 one time**, with 100-property Agent capacity.
+- Agent Annual: **$119 per year**, recurring until canceled, with the same Agent capacity.
 - Usage-based services, direct mail, third-party data and overages are separate.
 
 Both buttons use the existing `/property/js/billing-client.js` and authenticated Supabase functions. Lifetime invokes `create-lifetime-checkout`; annual invokes `create-checkout-session` with yearly cadence. Signed-out visitors continue through the clean `/dashboard` route with their selected offer stored in session storage. Server release gates remain authoritative. This page does not enable paid enrollment or change Stripe prices.

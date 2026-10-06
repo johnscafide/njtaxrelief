@@ -56,7 +56,7 @@
     document.body.style.overflow='hidden';
     var close=exit.querySelector('.apl-exit-x');
     if(close)close.focus();
-    track('agent_annual_exit_offer_view',{tier:'agent',annual_amount_cents:59000});
+    track('agent_annual_exit_offer_view',{tier:'agent',annual_amount_cents:11900});
   }
 
   function closeExitOffer(reason){
@@ -74,7 +74,7 @@
     closeExitOffer('lifetime_selected');
     var buttons=Array.prototype.slice.call(document.querySelectorAll('[data-agent-lifetime-checkout]'));
     buttons.forEach(function(b){b.disabled=true;});
-    track('agent_lifetime_checkout_start',{tier:'agent',amount_cents:149900,utm_source:new URLSearchParams(location.search||'').get('utm_source')||''});
+    track('agent_lifetime_checkout_start',{tier:'agent',amount_cents:34900,utm_source:new URLSearchParams(location.search||'').get('utm_source')||''});
     try{
       var billing=window.WatchdogBilling;
       if(!billing||typeof billing.client!=='function'||typeof billing.invoke!=='function')throw new Error('Secure checkout is unavailable. Please refresh and try again.');
@@ -116,7 +116,7 @@
     }
     busy=true;
     closeExitOffer();
-    track('agent_annual_checkout_start',{tier:'agent',amount_cents:59000,cadence:'yearly'});
+    track('agent_annual_checkout_start',{tier:'agent',amount_cents:11900,cadence:'yearly'});
     Promise.resolve(billing.checkout('agent',{cadence:'yearly'})).catch(function(err){
       busy=false;
       console.error('Agent annual checkout failed',err);

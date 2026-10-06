@@ -1730,7 +1730,7 @@
   window.hmToggle = function (k) {
     var accessSection = SECTIONS.filter(function (x) { return x.k === k; })[0];
     if (accessSection && window.NJPTRPlan && !window.NJPTRPlan.can(accessSection.tier || 'standard')) {
-      toast((accessSection.tier === 'pro_plus' ? 'Pro+' : 'Pro') + ' access is required in this View As mode');
+      toast((accessSection.tier === 'pro_plus' ? 'Professional' : 'Pro') + ' access is required in this View As mode');
       return;
     }
     OPEN[k] = !OPEN[k];

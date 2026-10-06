@@ -32,7 +32,7 @@
   function render(k,data){
     var host=document.getElementById('tcx-body-'+k);if(!host)return;
     if(!data||data.status==='error'){host.innerHTML=message('fa-circle-exclamation','Watchdog couldn’t load the town certificate details.',k);return;}
-    if(data.status==='locked'){host.innerHTML=message('fa-lock','Town certificate details come with Pro+.');return;}
+    if(data.status==='locked'){host.innerHTML=message('fa-lock','Town certificate details come with Professional.');return;}
     if(data.status!=='ok'){host.innerHTML=message('fa-hourglass-half','Watchdog hasn’t checked this town’s certificate rules yet. Towns are being added county by county.');return;}
     var rows=data.rows||[],co=rows.filter(function(x){return x.requirement_key==='resale_cco';})[0],fire=rows.filter(function(x){return x.requirement_key==='smoke_fire_cert';})[0];
     var checked=date(rows[0]&&rows[0].last_verified_at),flag=rows.some(function(x){return x.needs_lookup;});
@@ -53,7 +53,7 @@
   function tool(r){
     var k=key(r);records[k]=r;setTimeout(function(){load(k,false);},0);
     // content-architecture: dynamic, the body is filled from the parcel's town rows after the server plan check.
-    return '<section class="tcx-tool" id="tcx-'+k+'"><div class="tcx-intro"><span class="tcx-badge">Pro+ · Closing</span><h3>Town CO &amp; fire certificate</h3><p>What this town requires before closing, what it costs and who to call.</p></div><div id="tcx-body-'+k+'"><div class="tcx-loading"><span class="pl-spin"></span> Loading town certificate details</div></div></section>';
+    return '<section class="tcx-tool" id="tcx-'+k+'"><div class="tcx-intro"><span class="tcx-badge">Professional · Closing</span><h3>Town CO &amp; fire certificate</h3><p>What this town requires before closing, what it costs and who to call.</p></div><div id="tcx-body-'+k+'"><div class="tcx-loading"><span class="pl-spin"></span> Loading town certificate details</div></div></section>';
   }
   Object.assign(window,{toolTownCertificates:tool,tcxRetry:retry});
 })();
