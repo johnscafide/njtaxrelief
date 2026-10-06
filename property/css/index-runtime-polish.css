@@ -166,11 +166,13 @@ html.wd-index-lean-runtime #plm-photos .wd-mapless-property-hero:before{
 }
 html.wd-index-lean-runtime #plm-photos .wd-mapless-property-hero:after{
   z-index:1!important;
-  background:rgba!important;
+  background:
+    linear-gradient(90deg,rgba(3,15,35,.48) 0%,rgba(3,15,35,.10) 52%,rgba(3,15,35,.16) 100%),
+    linear-gradient(180deg,rgba(255,255,255,.035) 0%,rgba(0,7,20,.34) 100%)!important;
 }
 html.wd-index-lean-runtime #plm-photos .wd-mapless-scorebox{
   border-color:rgba(206,226,255,.25)!important;
-  background:rgba!important;
+  background:linear-gradient(180deg,rgba(11,46,95,.97),rgba(6,30,68,.97))!important;
   box-shadow:0 2px 6px rgba(15,23,42,.08),inset 0 1px 0 rgba(255,255,255,.06)!important;
   
 }

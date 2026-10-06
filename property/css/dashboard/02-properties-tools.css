@@ -10,7 +10,7 @@
 /* header gets a spine of brand color */
 .top { border-bottom: none; box-shadow: inset 0 -1px 0 var(--hair); }
 .top::before { content: ''; display: block; height: 4px;
-  background:var; }
+  background:var(--accent); }
 
 .who h1 { font-size: 26px; }
 .vwset { border-color: #d6dceb; }
@@ -96,7 +96,7 @@
 .sec h4 i { color: var(--accent-2); }
 
 /* ---------- locked ---------- */
-.lk-over { background:rgba; }
+.lk-over { background: linear-gradient(90deg, rgba(255,255,255,.97) 52%, rgba(255,255,255,.68)); }
 .lk-t i { color: var(--gold); }
 .lk-b { background: var(--accent); }
 .lk-b:hover { background: var(--accent-2); }
@@ -233,7 +233,7 @@
 .pf-topb { flex: 1; min-width: 0; }
 .pf-meter { height: 7px; background: var(--hair); border-radius:12px; overflow: hidden; }
 .pf-meter i { display: block; height: 100%; border-radius:12px;
-  background:var; transition: width .4s ease; }
+  background:var(--accent); transition: width .4s ease; }
 .pf-pct { font-size: 13px; color: var(--ink-3); margin-top: 9px; }
 .pf-pct b { color: var(--accent); }
 

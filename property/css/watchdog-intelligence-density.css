@@ -25,7 +25,7 @@
 .wdcx-root.wdcx-compact .wdcx-more{margin-top:6px;padding:7px 10px;font-size:var(--type-xs);border-style:solid;border-color:var(--border);background:var(--surface-soft)}
 
 /* Property Home Analyst: the default state is a decision brief, not four large explanation cards. */
-.ai.wdai.wdai-compact,.hm-wrap>.ai.wdai.wdai-compact{padding:var(--space-4)!important;border-radius:var(--radius-xl)!important;margin-bottom:var(--space-5)!important;box-shadow:var(--shadow-sm)!important;background:var!important}
+.ai.wdai.wdai-compact,.hm-wrap>.ai.wdai.wdai-compact{padding:var(--space-4)!important;border-radius:var(--radius-xl)!important;margin-bottom:var(--space-5)!important;box-shadow:var(--shadow-sm)!important;background:var(--surface)!important}
 .ai.wdai.wdai-compact:before,.hm-wrap>.ai.wdai.wdai-compact:before{width:180px!important;height:180px!important;inset:-90px auto auto -70px!important;opacity:.65}
 .wdai-compact .wdai-head{gap:var(--space-3);grid-template-columns:auto minmax(0,1fr) auto}
 .wdai-compact .wdai-mark{width:44px;height:44px;border-radius:var(--radius-lg)}

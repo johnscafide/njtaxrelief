@@ -23,7 +23,7 @@
   margin-bottom: 24px;
   padding: 28px;
   border-radius: var(--radius-xl);
-  background:var;
+  background:var(--wd-navy-950);
   color: var(--surface);
   box-shadow: var(--shadow-md);
 }

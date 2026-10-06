@@ -321,7 +321,7 @@
 
 /* Tool entries feel like modules rather than long document sections. */
 .sec { overflow: hidden; position: relative; }
-.sec::before { background:var; content: ''; inset: 0 auto 0 0; position: absolute; width: 3px; }
+.sec::before { background:var(--saas-teal); content: ''; inset: 0 auto 0 0; position: absolute; width: 3px; }
 .sec h4 { border-bottom: 1px solid #ebeff3; margin: -4px 0 20px; padding-bottom: 15px; }
 
 @media (max-width: 1180px) {

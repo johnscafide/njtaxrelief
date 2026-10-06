@@ -228,7 +228,7 @@ body { background: var(--paper); }
 .lk-over {
   position: absolute; inset: 0; display: flex; flex-direction: column;
   align-items: flex-start; justify-content: center; padding: 0 4px;
-  background:rgba;
+  background: linear-gradient(90deg, rgba(255,255,255,.97) 55%, rgba(255,255,255,.72));
 }
 .lk-t { font-size: 15px; font-weight: 800; color: var(--ink); margin-bottom: 5px; }
 .lk-t i { color: var(--gold); margin-right: 7px; }

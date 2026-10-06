@@ -15,13 +15,13 @@ body.apl-page{margin:0;background:#fff;color:var(--apl-ink);font-family:Libre Fr
 .apl-page a{color:inherit}.apl-page button{font:inherit}.apl-page h1,.apl-page h2,.apl-page h3,.apl-page p,.apl-page blockquote{margin-top:0}
 .apl-skip{position:absolute;left:-999px;top:10px;z-index:1000;padding:11px 15px;background:#fff;border:1px solid var(--apl-line);border-radius:12px}.apl-skip:focus{left:12px}
 
-.apl-header{position:absolute;top:0;left:0;right:0;z-index:50;height:92px;padding:0 max(30px,calc((100vw - 1460px)/2));display:flex;align-items:center;justify-content:space-between;gap:42px;background:rgba;}
+.apl-header{position:absolute;top:0;left:0;right:0;z-index:50;height:92px;padding:0 max(30px,calc((100vw - 1460px)/2));display:flex;align-items:center;justify-content:space-between;gap:42px;background:linear-gradient(180deg,rgba(238,248,255,.78),rgba(238,248,255,0));}
 .apl-brand img{display:block;width:300px;height:auto}.apl-nav{display:flex;align-items:center;gap:28px;font-size:13px;font-weight:600}.apl-nav a{text-decoration:none;white-space:nowrap}.apl-nav a:hover{color:var(--apl-blue)}.apl-signin{color:#60728c}.apl-nav-cta{padding:14px 27px;border-radius:8px;background:var(--apl-blue);color:#fff!important;box-shadow:0 2px 6px rgba(15,23,42,.08)}
 .apl-kicker{margin:0 0 18px;font-size:10px;line-height:1;font-weight:800;letter-spacing:.22em;color:var(--apl-blue)}
 
 .apl-hero{position:relative;min-height:760px;overflow:hidden;padding:135px max(30px,calc((100vw - 1500px)/2)) 92px;background:#eaf7ff}
 .apl-hero-scene{position:absolute;inset:0;background:url('/property/for/real-estate-agents/nj-shore-scene.svg') center bottom/cover no-repeat;transform:scale(1.015);transform-origin:center bottom}
-.apl-hero:after{content:"";position:absolute;left:0;right:0;bottom:-2px;height:160px;background:rgba;pointer-events:none}
+.apl-hero:after{content:"";position:absolute;left:0;right:0;bottom:-2px;height:160px;background:linear-gradient(180deg,rgba(255,255,255,0),rgba(255,255,255,.95) 72%,#fff 100%);pointer-events:none}
 .apl-hero-inner{position:relative;z-index:2;max-width:1500px;margin:0 auto;display:grid;grid-template-columns:minmax(440px,.72fr) minmax(670px,1.28fr);gap:62px;align-items:center}
 .apl-hero-copy{padding:28px 0 84px;max-width:650px}
 .apl-hero h1{font:400 clamp(58px,5.7vw,90px)/.89 "Instrument Serif",Georgia,serif;letter-spacing:-.045em;color:#0d2359;margin:0;max-width:650px;text-wrap:balance}

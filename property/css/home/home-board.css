@@ -84,7 +84,7 @@ html body.hb-board #hm-body .hb-figs .dm{border:0!important;border-radius:18px!i
 html body.hb-board #hm-body .hb-figs .dm dt{color:var(--hb-muted)!important}
 html body.hb-board #hm-body .hb-figs .dm dd{color:var(--hb-ink)!important}
 
-html body.hb-board #hm-body .hb-nav{box-sizing:border-box;width:100%;max-width:100%;min-width:0;grid-column:1/-1;position:sticky;top:86px;z-index:40;display:flex;gap:8px;overflow-x:auto;margin:18px 0 18px;padding:10px 0;background:var!important;border:0!important;box-shadow:none!important;border-radius:0!important;scrollbar-width:none}
+html body.hb-board #hm-body .hb-nav{box-sizing:border-box;width:100%;max-width:100%;min-width:0;grid-column:1/-1;position:sticky;top:86px;z-index:40;display:flex;gap:8px;overflow-x:auto;margin:18px 0 18px;padding:10px 0;background:var(--hb-bg)!important;border:0!important;box-shadow:none!important;border-radius:0!important;scrollbar-width:none}
 html body.hb-board #hm-body .hb-nav::-webkit-scrollbar{display:none}
 html body.hb-board #hm-body .hb-nav button{flex:none;display:inline-flex;align-items:center;gap:8px;min-height:42px;padding:0 16px;border:1px solid var(--hb-line);border-radius:8px;background:#fff;color:var(--hb-ink);font:600 13px var(--hb-display);word-spacing:.06em;cursor:pointer}
 html body.hb-board #hm-body .hb-nav button:hover{border-color:#cfc8ba}

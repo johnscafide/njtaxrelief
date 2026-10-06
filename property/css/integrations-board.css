@@ -145,7 +145,7 @@ html body[data-sidebar-page="integrations"] :is(button,a,input,select,summary):f
 
 .igx-toast{position:fixed;left:50%;bottom:22px;transform:translateX(-50%);z-index:60;max-width:min(560px,calc(100vw - 32px));background:var(--ixb-navy);color:#fff;border-radius:18px;padding:13px 18px;font:700 14px/1.45 var(--ixb-font);box-shadow:0 2px 6px rgba(15,23,42,.08)}
 .igx-toast.is-error{background:var(--ixb-bad)}
-.igx-skeleton{height:84px;border-radius:18px;background:var;background-size:200% 100%;animation:none}
+.igx-skeleton{height:84px;border-radius:18px;background:var(--ixb-surface);background-size:200% 100%;animation:none}
 @keyframes igx-shimmer{to{background-position:-200% 0}}
 
 /* Show the CRM panel on the Overview tab; other tabs keep their focused views. */

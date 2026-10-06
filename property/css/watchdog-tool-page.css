@@ -2,7 +2,7 @@
    /home-improvement-abatement). Uses the shared public header (public-nav.js). */
 .tp-page{--tp-navy:#0e2849;--tp-navy-2:#12375b;--tp-teal:#078486;--tp-ink:#14202b;--tp-muted:#5c6b78;--tp-line:#dde4ea;--tp-bg:#f4f6f9;background:var(--tp-bg);color:var(--tp-ink);font-family:"Libre Franklin",system-ui,-apple-system,"Segoe UI",sans-serif}
 .tp-shell{width:min(1180px,calc(100% - 48px));margin:0 auto}
-.tp-hero{position:relative;overflow:hidden;background:var;color:#fff;padding:64px 0 88px}
+.tp-hero{position:relative;overflow:hidden;background:var(--tp-navy);color:#fff;padding:64px 0 88px}
 .tp-hero:before{content:"";position:absolute;width:520px;height:520px;border:1px solid rgba(255,255,255,.12);border-radius:50%;right:-160px;top:-260px;box-shadow:0 0 0 90px rgba(255,255,255,.025),0 0 0 180px rgba(255,255,255,.02)}
 .tp-kicker{margin:0 0 12px;font-size:12px;font-weight:800;letter-spacing:0;text-transform:none;color:#8fe0d6}
 .tp-hero h1{margin:0 0 14px;max-width:860px;font-size:clamp(34px,5vw,60px);line-height:1.02;letter-spacing:-.04em;font-weight:800}

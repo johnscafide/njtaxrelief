@@ -77,7 +77,7 @@ body[data-sidebar-page="agent-desk"]:has(.ml-shell){background:#f3f1ec}
 .ml-crm-meter b{font:800 26px/1 "Libre Franklin",sans-serif}
 .ml-crm-meter span{margin-left:6px;color:var(--ml-muted);font-size:13px}
 .ml-meter{height:10px;margin-top:8px;border-radius:8px;background:#ece8df;overflow:hidden}
-.ml-meter i{display:block;height:100%;border-radius:inherit;background:var}
+.ml-meter i{display:block;height:100%;border-radius:inherit;background:var(--ml-blue)}
 .ml-file{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:10px;align-items:center;margin:10px 0;padding:10px 12px;border:1px dashed var(--ml-sky-line);border-radius:14px;background:#f6f9fe}
 .ml-file>i{color:var(--ml-blue);font-size:18px}
 .ml-file b{display:block;font-size:13px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}

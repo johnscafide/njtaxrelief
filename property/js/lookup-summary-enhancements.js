@@ -29,7 +29,7 @@
       'html.wd-index-mapless #plm-map,html.wd-index-mapless #hd-map,html.wd-index-mapless .leaflet-container{display:none!important;visibility:hidden!important;pointer-events:none!important;max-height:0!important;overflow:hidden!important}',
       'html.wd-index-mapless #plm section:has(#plm-map),html.wd-index-mapless #plm .plm-sec:has(#plm-map),html.wd-index-mapless .hd-mapwrap:has(#hd-map){display:none!important}',
       '#plm-photos .wd-mapless-property-hero{position:relative;min-height:320px;width:100%;overflow:hidden;display:grid;align-items:stretch;background:#071a35;color:#fff}',
-      '#plm-photos .wd-mapless-property-hero:after{content:"";position:absolute;inset:0;pointer-events:none;background:rgba}',
+      '#plm-photos .wd-mapless-property-hero:after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(180deg,rgba(255,255,255,.035),rgba(0,8,24,.28))}',
       '#plm-photos .wd-mapless-property-in{position:relative;z-index:2;display:grid;grid-template-columns:minmax(0,1.25fr) minmax(260px,.75fr);gap:28px;align-items:center;padding:36px clamp(24px,4vw,54px)}',
       '#plm-photos .wd-mapless-kicker{display:inline-flex;align-items:center;gap:9px;color:#9eece4;font:850 11px/1.2 "Libre Franklin",sans-serif;letter-spacing:0;text-transform:none}',
       '#plm-photos .wd-mapless-address{margin:13px 0 7px;color:#fff;font:850 clamp(24px,3.3vw,40px)/1.05 "Libre Franklin",sans-serif;letter-spacing:-.045em}',

@@ -214,7 +214,7 @@ body.compare-tray-visible .db-to-top { bottom: 96px; }
 }
 
 .pr-card-media::after {
-  background:rgba;
+  background: linear-gradient(180deg, rgba(8,25,48,.08), transparent 36%, rgba(8,25,48,.28));
   border-radius: 15px 15px 0 0;
   content: '';
   inset: 0;

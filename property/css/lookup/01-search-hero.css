@@ -228,9 +228,9 @@ body.pl-signedin .gate-cta { display: none; }
 .lp-photo.tall  { min-height: 340px; }
 .lp-photo::after {
   content: ''; position: absolute; inset: 0;
-  background:rgba;
+  background: linear-gradient(180deg, rgba(8,18,42,.10) 0%, rgba(8,18,42,.46) 46%, rgba(6,14,34,.94) 100%);
 }
-.lp-photo.short::after { background:rgba; }
+.lp-photo.short::after { background: linear-gradient(180deg, rgba(8,18,42,.34), rgba(8,18,42,.12)); }
 .lp-photo.audit { background-blend-mode: multiply; background-color: #16305c; }
 .lp-ghost {
   position: absolute; right: 16px; bottom: 12px; z-index: 2;
@@ -287,13 +287,13 @@ body.pl-signedin .gate-cta { display: none; }
 .lp-tool.span3 { grid-column: span 3; }
 .lp-photo.band { min-height: 210px; align-items: center; }
 .lp-photo.band::after {
-  background:rgba;
+  background: linear-gradient(90deg, rgba(6,14,34,.92) 0%, rgba(6,14,34,.72) 46%, rgba(6,14,34,.18) 100%);
 }
 .lp-over.band-over { max-width: 620px; padding: 26px 30px; }
 @media (max-width: 900px) {
   .lp-tool.span3 { grid-column: span 2; }
   .lp-photo.band { min-height: 240px; align-items: flex-end; }
-  .lp-photo.band::after { background:rgba; }
+  .lp-photo.band::after { background: linear-gradient(180deg, rgba(8,18,42,.10), rgba(6,14,34,.94)); }
   .lp-over.band-over { max-width: none; }
 }
 @media (max-width: 620px) { .lp-tool.span3 { grid-column: span 1; } }

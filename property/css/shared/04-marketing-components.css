@@ -206,7 +206,7 @@ body.note-modal-open .leaflet-container { visibility: hidden; }
 .zillow-slider { -webkit-appearance: none; appearance: none; width: 100%; height: 4px; background: #e2e8f0; border-radius: 2px; outline: none; margin: 14px 0 22px; }
 .zillow-slider::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 22px; height: 22px; border-radius: 50%; background: #fff; border: 2px solid var(--navy); box-shadow: 0 2px 5px rgba(0,0,0,.22); cursor: pointer; margin-top: -9px; }
 .zillow-slider::-moz-range-thumb { width: 20px; height: 20px; border-radius: 50%; background: #fff; border: 2px solid var(--navy); cursor: pointer; }
-.zillow-slider::-webkit-slider-runnable-track { width: 100%; height: 4px; cursor: pointer; background:var; border-radius:2px; }
+.zillow-slider::-webkit-slider-runnable-track { width: 100%; height: 4px; cursor: pointer; background:var(--navy); border-radius:2px; }
 #pl-appeal .pl-form input { border-color: rgba(255,255,255,.2); background: rgba(255,255,255,.09); color: #fff; }
 #pl-appeal .pl-form input::placeholder { color: #90a4c4; }
 #pl-appeal .pl-form input:focus { border-color: var(--gold); background: rgba(255,255,255,.15); }

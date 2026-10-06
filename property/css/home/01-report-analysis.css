@@ -127,7 +127,7 @@
   color: var(--ink-3); margin: 22px 0 12px; }
 .rr-bar { height: 8px; background: var(--hair); border-radius:12px; overflow: hidden; max-width: 460px; }
 .rr-bar i { display: block; height: 100%; border-radius:12px;
-  background:var; }
+  background:var(--gold); }
 .rr-say { font-size: 14.5px; line-height: 1.7; color: var(--ink-2); margin: 12px 0 0; max-width: 700px; }
 .rr-say b { color: var(--ink); }
 .comps td.neg { color: var(--neg); font-weight: 700; }

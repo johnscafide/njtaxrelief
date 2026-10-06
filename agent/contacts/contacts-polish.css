@@ -144,8 +144,8 @@ body[data-sidebar-page="agent-contacts"] .acx-toast{font-size:13px}
 /* Make the existing hero more visual without stock photography. */
 body[data-sidebar-page="agent-contacts"] .acx-hero-visual:before,
 body[data-sidebar-page="agent-contacts"] .acx-hero-visual:after{content:"";position:absolute;border-radius:18px;pointer-events:none;z-index:-1}
-body[data-sidebar-page="agent-contacts"] .acx-hero-visual:before{width:180px;height:110px;right:24px;top:28px;border:1px solid rgba(47,109,246,.11);background:rgba;transform:rotate(8deg)}
-body[data-sidebar-page="agent-contacts"] .acx-hero-visual:after{width:150px;height:90px;left:28px;bottom:24px;border:1px solid rgba(24,169,102,.10);background:rgba;transform:rotate(-7deg)}
+body[data-sidebar-page="agent-contacts"] .acx-hero-visual:before{width:180px;height:110px;right:24px;top:28px;border:1px solid rgba(47,109,246,.11);background:linear-gradient(145deg,rgba(47,109,246,.07),rgba(255,255,255,.5));transform:rotate(8deg)}
+body[data-sidebar-page="agent-contacts"] .acx-hero-visual:after{width:150px;height:90px;left:28px;bottom:24px;border:1px solid rgba(24,169,102,.10);background:linear-gradient(145deg,rgba(24,169,102,.06),rgba(255,255,255,.45));transform:rotate(-7deg)}
 
 @media(max-width:1100px){
   .acx-name-intelligence{grid-template-columns:1fr;gap:16px}

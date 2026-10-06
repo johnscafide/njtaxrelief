@@ -118,7 +118,7 @@
       '.wd-county-intel-image{position:relative;display:block;height:190px;margin-bottom:10px;overflow:hidden;background:#dfe6e6}',
       '.wd-county-intel-image img{width:100%;height:100%;display:block;object-fit:cover;transition:transform .35s ease}',
       '.wd-county-intel-card:hover .wd-county-intel-image img,.wd-county-intel-card:focus-visible .wd-county-intel-image img{transform:scale(1.025)}',
-      '.wd-county-intel-image:after{content:"";position:absolute;inset:0;background:rgba}',
+      '.wd-county-intel-image:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(8,28,51,.02),rgba(8,28,51,.36))}',
       '.wd-county-intel-copy{display:block;padding:20px 20px 22px}',
       '.wd-county-intel-county{display:block;color:#087f82;font:800 11px/1.2 "Libre Franklin",sans-serif;letter-spacing:0;text-transform:none}',
       '.wd-county-intel-card h3{margin:0;color:#10294b;padding:20px 20px 22px;font:800 21px/1.22 "Libre Franklin",sans-serif;letter-spacing:-.025em}',

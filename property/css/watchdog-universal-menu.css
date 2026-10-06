@@ -291,7 +291,7 @@ html body .wd-universal-nav-head .wd-universal-brand>span{
   right:0;
   bottom:0;
   height:2px;
-  background:rgba;
+  background:linear-gradient(90deg,rgba(255,255,255,.08),rgba(255,255,255,.58),rgba(255,255,255,.08));
   z-index:-1;
   pointer-events:none;
 }
