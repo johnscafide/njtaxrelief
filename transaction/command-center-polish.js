@@ -200,15 +200,15 @@ function renderSelected(){
   if(!selected){renderEmpty(false);return}renderHeader();
   var r=readiness(items),score=$('#txv2-score'),fill=$('#txv2-meter-fill'),meter=$('.txv2-meter');score.textContent=r.score==null?'-':r.score;fill.style.width=(r.score==null?0:r.score)+'%';if(r.score==null)meter.removeAttribute('aria-valuenow');else meter.setAttribute('aria-valuenow',String(r.score));meter.setAttribute('aria-label',r.score==null?'Readiness score unavailable':'Readiness score: '+r.score+' out of 100');
   var open=items.filter(function(i){return !isResolved(i)}),roles=['tc','title','municipality','lender'];$('#txv2-assignments').innerHTML=roles.map(function(role){var n=open.filter(function(i){return i.assigned_role===role}).length;return '<div class="txv2-context-row"><span>'+esc(roleLabel(role))+'</span><b>'+n+'</b></div>'}).join('');
-  $('#txv2-document-count').textContent=premiumAvailable()?documents.length:'-';$('#txv2-document-copy').textContent=premiumAvailable()?(documents.length?(documents.length+' '+(documents.length===1?'document':'documents')+' uploaded'):'No documents uploaded'):'Private document vault is available with Pro+';
+  $('#txv2-document-count').textContent=premiumAvailable()?documents.length:'-';$('#txv2-document-copy').textContent=premiumAvailable()?(documents.length?(documents.length+' '+(documents.length===1?'document':'documents')+' uploaded'):'No documents uploaded'):'Private document vault is available with Professional';
   renderEvidence();syncFeatureAvailability();
 }
 function syncFeatureAvailability(){
   var premium=premiumAvailable(),refresh=$('[data-v2-action="refresh"]'),invite=$('[data-collab-action="open"]'),doc=$('[data-v2-action="documents"]');
   if(refresh)refresh.hidden=!premium;
   if(invite)invite.hidden=!premium;
-  if(doc){var span=doc.querySelector('span');if(span)span.textContent=premium?'Upload document':'View Pro+ documents'}
-  var privateCopy=$('#txv2-private-copy');if(privateCopy)privateCopy.textContent=premium?'Private to your account':'Pro+ feature';
+  if(doc){var span=doc.querySelector('span');if(span)span.textContent=premium?'Upload document':'View Professional documents'}
+  var privateCopy=$('#txv2-private-copy');if(privateCopy)privateCopy.textContent=premium?'Private to your account':'Professional feature';
 }
 function showLoading(){var detail=$('#txv2-detail'),load=$('#txv2-loading'),error=$('#txv2-load-error'),overview=$('#txv2-overview'),secondary=$('#txv2-secondary');if(detail)detail.hidden=false;if(load)load.hidden=false;if(error)error.hidden=true;if(overview)overview.hidden=true;if(secondary)secondary.hidden=true}
 function showLoadError(){var load=$('#txv2-loading'),error=$('#txv2-load-error'),overview=$('#txv2-overview'),secondary=$('#txv2-secondary');if(load)load.hidden=true;if(error)error.hidden=false;if(overview)overview.hidden=true;if(secondary)secondary.hidden=true}
@@ -274,7 +274,7 @@ function findViewNode(view){
   if(view==='disclosures')return $('[data-tx-panel="disclosures"]');
   return null;
 }
-function renderPremiumUpgrade(view){var host=$('#txv2-secondary');if(!host)return;host.hidden=false;host.innerHTML='<section class="txv2-upgrade"><span>PRO+ EVIDENCE</span><h2>'+esc(view==='documents'?'Private closing documents':'Watchdog source evidence')+'</h2><p>This dashboard is available with Pro+ while your Agent transaction checklist remains unchanged.</p><a href="/pro#plans">Compare Pro+ evidence <i class="fas fa-arrow-right" aria-hidden="true"></i></a></section>'}
+function renderPremiumUpgrade(view){var host=$('#txv2-secondary');if(!host)return;host.hidden=false;host.innerHTML='<section class="txv2-upgrade"><span>PRO+ EVIDENCE</span><h2>'+esc(view==='documents'?'Private closing documents':'Watchdog source evidence')+'</h2><p>This dashboard is available with Professional while your Agent transaction checklist remains unchanged.</p><a href="/pro#plans">Compare Professional evidence <i class="fas fa-arrow-right" aria-hidden="true"></i></a></section>'}
 function activateView(view,quiet){
   activeView=view||'overview';if(loading)return;var overview=$('#txv2-overview'),secondary=$('#txv2-secondary');
   $$('.txv2-tabs [data-v2-view]').forEach(function(b){b.toggleAttribute('aria-current',b.dataset.v2View===activeView)});var more=$('.txv2-more-wrap>[data-v2-action="toggle-more"]');if(more)more.classList.toggle('active',['readiness','disclosures'].includes(activeView));

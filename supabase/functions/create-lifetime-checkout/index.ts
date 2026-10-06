@@ -8,11 +8,11 @@ const PRODUCTION_HOSTS = new Set([
   'njpropertytaxrelief.com',
   'www.njpropertytaxrelief.com'
 ]);
-const CAPACITY = { agent: 25, pro: 250, pro_plus: 2500 } as const;
+const CAPACITY = { agent: 100, pro: 250, pro_plus: 2500 } as const;
 const FOUNDING = {
-  agent: { amount: 149900, label: 'Agent' },
+  agent: { amount: 34900, label: 'Agent' },
   pro: { amount: 349900, label: 'Pro' },
-  pro_plus: { amount: 999900, label: 'Pro+' }
+  pro_plus: { amount: 99900, label: 'Professional' }
 } as const;
 const TAX_CODE = 'txcd_10701400';
 type Tier = keyof typeof FOUNDING;
@@ -45,8 +45,8 @@ function json(req: Request, body: unknown, status = 200) {
 
 function tierOf(value: unknown): Tier | null {
   const raw = String(value || '').trim().toLowerCase();
-  if (raw === 'pro+') return 'pro_plus';
-  return raw === 'agent' || raw === 'pro' || raw === 'pro_plus' ? raw : null;
+  if (raw === 'pro+' || raw === 'professional') return 'pro_plus';
+  return raw === 'agent' || raw === 'pro_plus' ? raw : null;
 }
 
 Deno.serve(async (req) => {
@@ -66,7 +66,7 @@ Deno.serve(async (req) => {
 
   const body = await req.json().catch(() => ({}));
   const tier = tierOf(body?.tier || body?.plan);
-  if (!tier) return json(req, { error: 'Choose Agent, Pro, or Pro+.', code: 'INVALID_PLAN' }, 400);
+  if (!tier) return json(req, { error: 'Choose Agent or Professional.', code: 'INVALID_PLAN' }, 400);
 
   const gate = await admin.from('platform_release_gates').select('status,evidence').eq('gate_key', 'live_billing_lifecycle').maybeSingle();
   if (gate.error) return json(req, { error: 'Paid enrollment is unavailable right now.', code: 'BILLING_RELEASE_CONTROL_ERROR' }, 503);

@@ -32,7 +32,7 @@
   function esc(v) { return String(v == null ? '' : v).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
   function money(cents) { var n = Number(cents || 0) / 100; return '$' + n.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }); }
   function day(v) { if (!v) return ''; var d = new Date(v); return isNaN(d) ? '' : d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }); }
-  function plan(v) { return { agent: 'Agent', pro: 'Pro', pro_plus: 'Pro+', teams: 'Teams', standard: 'Free' }[v] || (v || ''); }
+  function plan(v) { return { agent: 'Agent', pro: 'Pro', pro_plus: 'Professional', teams: 'Teams', standard: 'Free' }[v] || (v || ''); }
   function kind(v) { return { lifetime: 'Lifetime', yearly_first: 'Annual, first year', monthly: 'Monthly', renewal: 'Renewal', adjustment: 'Adjustment' }[v] || v; }
   function show(name) { $$('[data-state]').forEach(function (n) { n.hidden = n.getAttribute('data-state') !== name; }); }
   function notice(text, isError) { var n = $('[data-notice]'); if (!n) return; n.textContent = text || ''; n.hidden = !text; n.classList.toggle('is-error', Boolean(isError)); }
@@ -258,7 +258,7 @@
     });
     var end = $('[data-end-consultant]');
     if (end) end.addEventListener('click', function () {
-      if (!window.confirm('End this consultant? Role returns to user and Pro+ access is removed. Commissions stay on the ledger.')) return;
+      if (!window.confirm('End this consultant? Role returns to user and Professional access is removed. Commissions stay on the ledger.')) return;
       db.rpc('end_sales_consultant', { p_consultant: state.viewing }).then(function (r) { if (r.error) throw r.error; return openList(); }).catch(function (e) { notice(err(e), true); });
     });
     var back = $('[data-back-to-list]');

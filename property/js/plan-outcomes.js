@@ -11,7 +11,7 @@ var CATALOG={
   standard:{name:'Free',eyebrow:'Understand & watch',promise:'Understand the property and keep an eye on important changes.',bestFor:'Homeowners and anyone starting property research.',outcomes:['See the current tax, assessment and property record','Save properties and return when important facts change','Know when a property deserves deeper research']},
   agent:{name:'Agent',eyebrow:'AGENT PROCESS',promise:'Find property changes worth a client conversation.',bestFor:'Real estate professionals working buyers, sellers, a sphere or a farm.',outcomes:['Prioritize properties instead of working a flat list','Use property numbers as reasons to follow up','Move research into reports, outreach and next actions']},
   pro:{name:'Pro',eyebrow:'Professional research',promise:'Turn property evidence into a stronger professional review.',bestFor:'Professionals who need deeper property-level research.',outcomes:['Use Watchdog Analyst for property questions','Review evidence, confidence and missing data together','Move findings into diligence, cases, reports or research']},
-  pro_plus:{name:'Pro+',eyebrow:'Research at scale',promise:'Find and rank important patterns across many properties.',bestFor:'Power users working portfolios, farms, populations or recurring research.',outcomes:['Analyze many properties without opening them one by one','Use Daily Intelligence as findings change','Use deeper data and bulk research tools']},
+  pro_plus:{name:'Professional',eyebrow:'Research at scale',promise:'Find and rank important patterns across many properties.',bestFor:'Power users working portfolios, farms, populations or recurring research.',outcomes:['Analyze many properties without opening them one by one','Use Daily Intelligence as findings change','Use deeper data and bulk research tools']},
   teams:{name:'Teams',eyebrow:'Team dashboard',promise:'Make Watchdog research repeatable across a team.',bestFor:'Organizations that need shared access, administration and higher-volume tasks.',outcomes:['Coordinate Intelligence across a team','Manage shared work and member access','Standardize high-volume research across professionals']},
   developer:{name:'Developer',eyebrow:'Operate & verify',promise:'Inspect, test and govern every Watchdog boundary without changing customer billing.',bestFor:'Internal product, engineering, security and release operations.',outcomes:['Verify customer-plan behavior','Inspect checked evidence and release controls','Operate developer-only diagnostics and audits']}
 };
@@ -61,8 +61,8 @@ function dashboardUpgrade(){
   card.dataset.outcomeEnhanced='1';
   var link=card.querySelector('a')||card;link.setAttribute('href','/property/pro#pricing');
   var copy=card.querySelector('.wdv2-up-copy');
-  if(copy)copy.innerHTML='<h3>More research tools when you need them.</h3><p><b>Agent</b> helps with client opportunities. <b>Pro</b> adds deeper property research. <b>Pro+</b> adds population and bulk tasks.</p><span class="wdv2-up-cta">Compare plans <i class="fas fa-arrow-right" aria-hidden="true"></i></span>';
-  var price=card.querySelector('.wdv2-up-price');if(price)price.innerHTML='<b>From $59</b><span>Agent · monthly</span><em>Pro $129 · Pro+ $399</em>';
+  if(copy)copy.innerHTML='<h3>More research tools when you need them.</h3><p><b>Agent</b> helps with client opportunities. <b>Professional</b> adds deeper research, population and bulk tasks.</p><span class="wdv2-up-cta">Compare plans <i class="fas fa-arrow-right" aria-hidden="true"></i></span>';
+  var price=card.querySelector('.wdv2-up-price');if(price)price.innerHTML='<b>From $14.99</b><span>Agent · monthly</span><em>Professional $49.99</em>';
 }
 
 function proPricing(){
@@ -89,7 +89,7 @@ function proPricing(){
     if(String(h.textContent||'').trim()==='Is Watchdog AI live now?'||String(h.textContent||'').trim()==='Is Watchdog Intelligence live now?'){
       var p=card.querySelector('p');
       h.textContent='Is Watchdog Intelligence live now?';
-      if(p)p.textContent='Yes. Pro includes property-level Watchdog Intelligence. Pro+ adds population and scheduled Intelligence. Models still being tuned are labeled Preview.';
+      if(p)p.textContent='Yes. Professional includes Watchdog Intelligence, with population and scheduled Intelligence. Models still being tuned are labeled Preview.';
       card.dataset.outcomeLive='1';
     }
   });

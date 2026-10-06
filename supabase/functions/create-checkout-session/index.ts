@@ -11,23 +11,23 @@ const PRODUCTION_HOSTS = new Set([
   'watchdogindex.com',
   'www.watchdogindex.com'
 ]);
-const CAPACITY = { agent: 25, pro: 250, pro_plus: 2500 } as const;
+const CAPACITY = { agent: 100, pro: 250, pro_plus: 2500 } as const;
 const PRICE_CATALOG = {
   agent: {
-    monthly: { lookup_key: 'watchdog_agent_monthly', amount: 5900 },
-    yearly: { lookup_key: 'watchdog_agent_yearly', amount: 59000 }
+    monthly: { lookup_key: 'watchdog_agent_monthly', amount: 1499 },
+    yearly: { lookup_key: 'watchdog_agent_yearly', amount: 11900 }
   },
   pro: {
     monthly: { lookup_key: 'watchdog_pro_monthly', amount: 12900 },
     yearly: { lookup_key: 'watchdog_pro_yearly', amount: 129000 }
   },
   pro_plus: {
-    monthly: { lookup_key: 'watchdog_pro_plus_monthly', amount: 39900 },
-    yearly: { lookup_key: 'watchdog_pro_plus_yearly', amount: 399000 }
+    monthly: { lookup_key: 'watchdog_pro_plus_monthly', amount: 4999 },
+    yearly: { lookup_key: 'watchdog_pro_plus_yearly', amount: 47900 }
   }
 } as const;
 const MOVE_PRICE = { lookup_key: 'watchdog_move_90_day', amount: 2900 } as const;
-/* First-use free trial on every paid plan (Agent, Pro, Pro+), owner decision
+/* First-use free trial on every paid plan (Agent, Professional), owner decision
    2026-10-01. A card is collected up front and the subscription renews
    automatically on day 14 unless the customer cancels first. One trial per
    account: any earlier Watchdog subscription (including a past trial or beta)
@@ -132,7 +132,7 @@ function formatUsd(cents: number) {
 }
 
 function trialTerms(tier: Tier, cadence: Cadence, trialEnd: Date) {
-  const label = tier === 'pro_plus' ? 'Pro+' : tier === 'pro' ? 'Pro' : 'Agent';
+  const label = tier === 'pro_plus' ? 'Professional' : tier === 'pro' ? 'Pro' : 'Agent';
   const period = cadence === 'monthly' ? 'month' : 'year';
   const price = `${formatUsd(PRICE_CATALOG[tier][cadence].amount)} per ${period}`;
   const endDate = new Intl.DateTimeFormat('en-US', { timeZone: TRIAL_TIME_ZONE, month: 'long', day: 'numeric', year: 'numeric' }).format(trialEnd);
@@ -149,7 +149,7 @@ function agentsTrialPaths(site: string) {
 
 function normalizeTier(value: unknown): Tier | null {
   const raw = String(value || '').trim().toLowerCase();
-  if (raw === 'pro+') return 'pro_plus';
+  if (raw === 'pro+' || raw === 'professional') return 'pro_plus';
   return ['agent', 'pro', 'pro_plus'].includes(raw) ? raw as Tier : null;
 }
 
@@ -212,7 +212,7 @@ async function createBetaInvite(req: Request, body: any, user: any, userClient: 
   const recipientEmail = normalizeEmail(body?.recipient_email);
   const expiresInDays = Number(body?.expires_in_days ?? 14);
 
-  if (!tier) return json(req, { error: 'Choose Agent, Pro, or Pro+.', code: 'BETA_INVALID_TIER' }, 400);
+  if (!tier || tier === 'pro') return json(req, { error: 'Choose Agent or Professional.', code: 'BETA_INVALID_TIER' }, 400);
   if (!BETA_TRIAL_DAYS.has(durationDays)) return json(req, { error: 'Beta trials may be 30 or 60 days.', code: 'BETA_INVALID_DURATION' }, 400);
   if (!Number.isInteger(maxRedemptions) || maxRedemptions < 1 || maxRedemptions > BETA_MAX_REDEMPTIONS) {
     return json(req, { error: `Beta invite redemptions must be between 1 and ${BETA_MAX_REDEMPTIONS}.`, code: 'BETA_INVALID_REDEMPTION_LIMIT' }, 400);
@@ -723,8 +723,8 @@ Deno.serve(async (req) => {
   }
 
   if (rawTier === 'teams') return json(req, { error: 'Teams enrollment is not open yet.', code: 'TEAMS_ENROLLMENT_CLOSED' }, 409);
-  if (!['agent', 'pro', 'pro_plus', 'pro+'].includes(rawTier)) return json(req, { error: 'Choose Agent, Pro, or Pro+.', code: 'INVALID_PLAN' }, 400);
-  const tier = (rawTier === 'pro+' ? 'pro_plus' : rawTier) as Tier;
+  if (!['agent', 'pro_plus', 'pro+', 'professional'].includes(rawTier)) return json(req, { error: 'Choose Agent or Professional.', code: 'INVALID_PLAN' }, 400);
+  const tier = (rawTier === 'agent' ? 'agent' : 'pro_plus') as Tier;
   const cadence: Cadence = String(body?.cadence || 'yearly').toLowerCase() === 'monthly' ? 'monthly' : 'yearly';
 
   const { data: entitlement, error: entitlementError } = await readEntitlement(admin, user.id);

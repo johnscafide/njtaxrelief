@@ -4,7 +4,7 @@ function hex(b:ArrayBuffer){return Array.from(new Uint8Array(b)).map(x=>x.toStri
 function eq(a:string,b:string){if(a.length!==b.length)return false;let d=0;for(let i=0;i<a.length;i++)d|=a.charCodeAt(i)^b.charCodeAt(i);return d===0}
 async function verify(raw:string,h:string,s:string){const p=h.split(';').map(x=>x.trim().split('=')),ts=p.find(x=>x[0]==='ts')?.[1],sigs=p.filter(x=>x[0]==='h1').map(x=>x[1]);if(!ts||!sigs.length)return false;const n=Number(ts),tol=Number(Deno.env.get('PADDLE_WEBHOOK_TOLERANCE_SECONDS')||'5');if(!Number.isFinite(n)||Math.abs(Math.floor(Date.now()/1000)-n)>tol)return false;const k=await crypto.subtle.importKey('raw',enc.encode(s),{name:'HMAC',hash:'SHA-256'},false,['sign']);const dig=hex(await crypto.subtle.sign('HMAC',k,enc.encode(`${ts}:${raw}`)));return sigs.some(x=>eq(x.toLowerCase(),dig))}
 const catalog:Record<string,{tier:string,plan:string,interval:string,capacity:number}>={
-'pri_01kzp7mcvs46mmcdwyxd0sjvne':{tier:'agent',plan:'pro',interval:'monthly',capacity:25},'pri_01kzp7kwcfzs9znjwwj24zgdb6':{tier:'agent',plan:'pro',interval:'yearly',capacity:25},
+'pri_01kzp7mcvs46mmcdwyxd0sjvne':{tier:'agent',plan:'pro',interval:'monthly',capacity:100},'pri_01kzp7kwcfzs9znjwwj24zgdb6':{tier:'agent',plan:'pro',interval:'yearly',capacity:100},
 'pri_01kzp7jhcsk07k47dtvrmaxvjh':{tier:'pro',plan:'pro_plus',interval:'monthly',capacity:250},'pri_01kzp7hwtx1qp946ftnmj4xpqc':{tier:'pro',plan:'pro_plus',interval:'yearly',capacity:250},
 'pri_01kzp7h2mw9waf3exfsee8jxsb':{tier:'pro_plus',plan:'pro_plus',interval:'monthly',capacity:2500},'pri_01kzp7fmg7ksff6sjg054mqbe4':{tier:'pro_plus',plan:'pro_plus',interval:'yearly',capacity:2500},
 'pri_01kzp7e6vsmsbjyw36mxgvww1b':{tier:'teams',plan:'pro_plus',interval:'monthly',capacity:10000}};

@@ -5,7 +5,7 @@
   var nav=document.getElementById('tr-nav'),bar=document.getElementById('tr-progress-bar'),progressTitle=document.getElementById('tr-progress-title'),progressCopy=document.getElementById('tr-progress-copy'),resume=document.getElementById('tr-resume'),account=document.getElementById('tr-account'),requirement=document.getElementById('tr-requirement'),status=document.getElementById('tr-status'),ack=document.getElementById('tr-ack'),completeBtn=document.getElementById('tr-complete'),shotDialog=document.getElementById('tr-shot-dialog'),shotImg=document.getElementById('tr-shot-dialog-img'),shotTitle=document.getElementById('tr-shot-dialog-title'),shotCaption=document.getElementById('tr-shot-dialog-caption');
 
   function sb(){ if(client)return client; if(!window.NJPTRSupabaseRuntime) return null; try{client=window.NJPTRSupabaseRuntime.createClient();return client}catch(_e){return null} }
-  function escPlan(v){v=String(v||'standard');return v==='pro_plus'?'Pro+':v.charAt(0).toUpperCase()+v.slice(1)}
+  function escPlan(v){v=String(v||'standard');return v==='pro_plus'?'Professional':v.charAt(0).toUpperCase()+v.slice(1)}
   function setStatus(msg,type){if(!status)return;status.textContent=msg||'';status.className='tr-status'+(type?' '+type:'')}
   function returnTarget(){
     var value=new URLSearchParams(location.search).get('return')||'/agent-desk';

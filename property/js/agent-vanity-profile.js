@@ -152,7 +152,7 @@
         save.disabled = true;
         clear.disabled = true;
         note.className = 'ac-vanity-note';
-        note.textContent = 'Agent portal addresses require an active Agent, Pro, Pro+ or Teams entitlement.';
+        note.textContent = 'Agent portal addresses require an active Agent, Professional or Teams entitlement.';
       }
       var bits = [];
       if (row && row.vanity_slug_reserved_at) bits.push('Reserved ' + fmtDate(row.vanity_slug_reserved_at));

@@ -36,7 +36,7 @@ var configs={
   'town-compare':{kicker:'Town info',title:'Town Compare',action:'/',actionLabel:'Property Lookup'},
   fairness:{kicker:'ROBUST Framework · U: Uniformity',title:'Uniformity Index',action:'/town-compare',actionLabel:'Compare towns'},
   pulse:{kicker:'Property tracking',title:'Property Pulse',action:'/',actionLabel:'Add property'},
-  scan:{kicker:'Pro+ process',title:'Appeal Scanner',action:'/pro',actionLabel:'Plans & Pricing'},
+  scan:{kicker:'Professional process',title:'Appeal Scanner',action:'/pro',actionLabel:'Plans & Pricing'},
   account:{kicker:'Account',title:'Account & Billing',action:'/dashboard',actionLabel:'Dashboard'},
   'account-homeowner':{kicker:'Account',title:'Homeowner Profile',action:'/account',actionLabel:'Account overview'},
   'account-professional':{kicker:'Account',title:'Professional Profile',action:'/account',actionLabel:'Account overview'},

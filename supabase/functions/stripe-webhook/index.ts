@@ -10,28 +10,44 @@ type BillingTier = 'agent' | 'pro' | 'pro_plus';
 type BillingInterval = 'monthly' | 'yearly';
 type PriceConfig = { id: string; tier: BillingTier; interval: BillingInterval; capacity: number };
 
-const LIVE_PRICE_DEFAULTS = {
-  agent_monthly: 'price_1U5qPZAgYeNIcesFuC2gKGTz',
-  agent_yearly: 'price_1U5qPjAgYeNIcesFCXaHoU0c',
-  pro_monthly: 'price_1U5qPyAgYeNIcesFy57ssZsV',
-  pro_yearly: 'price_1U5qQAAgYeNIcesF6UOsmwAX',
-  pro_plus_monthly: 'price_1U5qQKAgYeNIcesFmQqrWROC',
-  pro_plus_yearly: 'price_1U5qQUAgYeNIcesFOSN8JZjR'
-} as const;
+const CAPACITY: Record<BillingTier, number> = { agent: 100, pro: 250, pro_plus: 2500 };
+
+const LEGACY_PRICES: Array<[string, BillingTier, BillingInterval]> = [
+  ['price_1U5qPZAgYeNIcesFuC2gKGTz', 'agent', 'monthly'],
+  ['price_1U5qPjAgYeNIcesFCXaHoU0c', 'agent', 'yearly'],
+  ['price_1U5qPyAgYeNIcesFy57ssZsV', 'pro', 'monthly'],
+  ['price_1U5qQAAgYeNIcesF6UOsmwAX', 'pro', 'yearly'],
+  ['price_1U5qQKAgYeNIcesFmQqrWROC', 'pro_plus', 'monthly'],
+  ['price_1U5qQUAgYeNIcesFOSN8JZjR', 'pro_plus', 'yearly']
+];
+
+const PRICE_ENV: Array<[string, BillingTier, BillingInterval]> = [
+  ['STRIPE_PRICE_AGENT_MONTHLY', 'agent', 'monthly'],
+  ['STRIPE_PRICE_AGENT_YEARLY', 'agent', 'yearly'],
+  ['STRIPE_PRICE_PRO_MONTHLY', 'pro', 'monthly'],
+  ['STRIPE_PRICE_PRO_YEARLY', 'pro', 'yearly'],
+  ['STRIPE_PRICE_PRO_PLUS_MONTHLY', 'pro_plus', 'monthly'],
+  ['STRIPE_PRICE_PRO_PLUS_YEARLY', 'pro_plus', 'yearly']
+];
 
 function priceCatalog(): PriceConfig[] {
-  return [
-    { id: Deno.env.get('STRIPE_PRICE_AGENT_MONTHLY') || LIVE_PRICE_DEFAULTS.agent_monthly, tier: 'agent', interval: 'monthly', capacity: 25 },
-    { id: Deno.env.get('STRIPE_PRICE_AGENT_YEARLY') || LIVE_PRICE_DEFAULTS.agent_yearly, tier: 'agent', interval: 'yearly', capacity: 25 },
-    { id: Deno.env.get('STRIPE_PRICE_PRO_MONTHLY') || LIVE_PRICE_DEFAULTS.pro_monthly, tier: 'pro', interval: 'monthly', capacity: 250 },
-    { id: Deno.env.get('STRIPE_PRICE_PRO_YEARLY') || LIVE_PRICE_DEFAULTS.pro_yearly, tier: 'pro', interval: 'yearly', capacity: 250 },
-    { id: Deno.env.get('STRIPE_PRICE_PRO_PLUS_MONTHLY') || LIVE_PRICE_DEFAULTS.pro_plus_monthly, tier: 'pro_plus', interval: 'monthly', capacity: 2500 },
-    { id: Deno.env.get('STRIPE_PRICE_PRO_PLUS_YEARLY') || LIVE_PRICE_DEFAULTS.pro_plus_yearly, tier: 'pro_plus', interval: 'yearly', capacity: 2500 }
-  ];
+  const rows: PriceConfig[] = [];
+  for (const [name, tier, interval] of PRICE_ENV) {
+    const id = String(Deno.env.get(name) || '').trim();
+    if (id) rows.push({ id, tier, interval, capacity: CAPACITY[tier] });
+  }
+  for (const [id, tier, interval] of LEGACY_PRICES) rows.push({ id, tier, interval, capacity: CAPACITY[tier] });
+  return rows;
 }
 
-function configForPrice(priceId?: string | null) {
-  return priceId ? priceCatalog().find(row => row.id === priceId) || null : null;
+function configForPrice(price?: Stripe.Price | null) {
+  if (!price?.id) return null;
+  const known = priceCatalog().find(row => row.id === price.id);
+  if (known) return known;
+  const match = /^watchdog_(agent|pro|pro_plus)_(monthly|yearly)$/.exec(String(price.lookup_key || ''));
+  if (!match) return null;
+  const tier = match[1] as BillingTier;
+  return { id: price.id, tier, interval: match[2] as BillingInterval, capacity: CAPACITY[tier] };
 }
 
 function entitlementStatus(status: Stripe.Subscription.Status) {
@@ -53,7 +69,7 @@ async function syncSubscription(sub: Stripe.Subscription, eventCreated?: number)
   const customerId = typeof sub.customer === 'string' ? sub.customer : sub.customer.id;
   const price = sub.items.data[0]?.price;
   const priceId = price?.id || null;
-  const config = configForPrice(priceId);
+  const config = configForPrice(price);
   const userId = await resolveSubscriptionUser(sub, customerId);
   if (!userId) return { skipped: 'missing supabase_user_id' };
   const eventAt = new Date((eventCreated || Math.floor(Date.now() / 1000)) * 1000).toISOString();

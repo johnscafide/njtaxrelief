@@ -17,11 +17,18 @@ const SERVICE_ROLE = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!;
 const service = createClient(SUPABASE_URL, SERVICE_ROLE);
 
 type BillingTier = 'agent' | 'pro' | 'pro_plus';
-const MONTHLY_PRICE: Record<BillingTier, string> = {
-  agent: Deno.env.get('STRIPE_PRICE_AGENT_MONTHLY') || 'price_1U5qPZAgYeNIcesFuC2gKGTz',
-  pro: Deno.env.get('STRIPE_PRICE_PRO_MONTHLY') || 'price_1U5qPyAgYeNIcesFy57ssZsV',
-  pro_plus: Deno.env.get('STRIPE_PRICE_PRO_PLUS_MONTHLY') || 'price_1U5qQKAgYeNIcesFmQqrWROC'
+const MONTHLY_PRICE_ENV: Record<BillingTier, string> = {
+  agent: 'STRIPE_PRICE_AGENT_MONTHLY',
+  pro: 'STRIPE_PRICE_PRO_MONTHLY',
+  pro_plus: 'STRIPE_PRICE_PRO_PLUS_MONTHLY'
 };
+
+async function monthlyPrice(stripe: Stripe, tier: BillingTier) {
+  const override = String(Deno.env.get(MONTHLY_PRICE_ENV[tier]) || '').trim();
+  if (override) return stripe.prices.retrieve(override);
+  const result = await stripe.prices.list({ lookup_keys: [`watchdog_${tier}_monthly`], active: true, limit: 1 });
+  return result.data[0] || null;
+}
 const INVITER_LIVE = ['active', 'trialing', 'past_due'];
 const REFERRED_PAYING = ['active', 'past_due'];
 
@@ -53,8 +60,7 @@ async function payOut(stripe: Stripe, reward: any) {
   const { data: ent, error } = await service.from('account_entitlements').select('provider,provider_customer_id,billing_tier,subscription_status').eq('user_id', reward.inviter_user_id).maybeSingle();
   if (error) throw error;
   const tier = ent?.billing_tier as BillingTier | undefined;
-  const priceId = tier ? MONTHLY_PRICE[tier] : null;
-  if (ent?.provider !== 'stripe' || !ent.provider_customer_id || !priceId || !INVITER_LIVE.includes(ent.subscription_status)) {
+  if (ent?.provider !== 'stripe' || !ent.provider_customer_id || !tier || !INVITER_LIVE.includes(ent.subscription_status)) {
     if (reward.status !== 'waiting_for_subscription') {
       const { error: waitError } = await service.from('watchdog_referral_rewards').update({ status: 'waiting_for_subscription', updated_at: now }).eq('id', reward.id).eq('status', 'pending');
       if (waitError) throw waitError;
@@ -62,7 +68,8 @@ async function payOut(stripe: Stripe, reward: any) {
     return { reward_id: reward.id, status: 'waiting_for_subscription' };
   }
 
-  const price = await stripe.prices.retrieve(priceId);
+  const price = await monthlyPrice(stripe, tier);
+  if (!price) throw new Error(`no active monthly ${tier} price`);
   const amount = Number(price.unit_amount || 0);
   if (!(amount > 0)) throw new Error(`monthly ${tier} price has no amount`);
   const txn = await stripe.customers.createBalanceTransaction(ent.provider_customer_id, {

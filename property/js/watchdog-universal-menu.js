@@ -87,7 +87,7 @@
     var p = actualPlan();
     if(!state.user) return 'Signed out';
     if(p === 'developer') return 'Developer';
-    if(p === 'pro_plus') return 'Pro+';
+    if(p === 'pro_plus') return 'Professional';
     return p.replace(/\b\w/g,function(c){ return c.toUpperCase(); });
   }
   function displayName(){
@@ -198,7 +198,7 @@
     items().forEach(function(item){ have[item.key] = true; });
     var out = [];
     if(!have['agent-desk']) out.push({key:'agent-desk',icon:'fa-briefcase',label:'Agent Desk',need:'Agent'});
-    if(!have.scan) out.push({key:'scan',icon:'fa-magnifying-glass-chart',label:'Appeal Scanner',need:'Pro+'});
+    if(!have.scan) out.push({key:'scan',icon:'fa-magnifying-glass-chart',label:'Appeal Scanner',need:'Professional'});
     if(!have.transaction) out.push({key:'transaction',icon:'fa-file-signature',label:'Transactions',need:'Agent'});
     if(!have['data-workbench']) out.push({key:'data-workbench',icon:'fa-table-list',label:'Data Workbench',need:'Agent'});
     return out;
@@ -264,7 +264,7 @@
       return {key:'pro',tone:'pro',href:route('/pro#pricing'),eyebrow:p === 'agent' ? 'READY FOR MORE?' : 'Upgrade Watchdog',title:'Move up to Pro',detail:'Deeper professional research and intelligence.',icon:'fa-arrow-trend-up',cta:'See Pro'};
     }
     if(p === 'pro'){
-      return {key:'pro_plus',tone:'plus',href:route('/pro#pricing'),eyebrow:'GO FURTHER',title:'Open Pro+',detail:'Higher-scale data, Scanner and advanced tasks.',icon:'fa-bolt',cta:'See Pro+'};
+      return {key:'pro_plus',tone:'plus',href:route('/pro#pricing'),eyebrow:'GO FURTHER',title:'Open Professional',detail:'Higher-scale data, Scanner and advanced tasks.',icon:'fa-bolt',cta:'See Professional'};
     }
     if(p === 'pro_plus'){
       return {key:'teams',tone:'teams',href:route('/teams'),eyebrow:'WORK WITH OTHERS?',title:'Part of a team?',detail:'Preview shared intelligence, seats and team controls.',icon:'fa-users',cta:'Preview Teams'};
@@ -408,7 +408,7 @@
         '<a href="' + route('/account') + '"><i class="fas fa-user-pen"></i><span><b>Edit profile &amp; role</b><small>Profile, profession and preferences</small></span></a>' +
         '<button type="button" data-wd-universal="invite"><i class="fas fa-user-plus"></i><span><b>Invite others</b><small>Share your Watchdog referral link</small></span></button>' +
         '<a href="' + route('/account') + '"><i class="fas fa-credit-card"></i><span><b>Account &amp; billing</b><small>Plan, subscription and billing</small></span></a>' +
-        ((isAgent() || can('agent')) ? '<a href="/agent/training"><i class="fas fa-graduation-cap"></i><span><b>Training Center</b><small>Review Agent and Pro+ tasks anytime</small></span></a>' : '') +
+        ((isAgent() || can('agent')) ? '<a href="/agent/training"><i class="fas fa-graduation-cap"></i><span><b>Training Center</b><small>Review Agent and Professional tasks anytime</small></span></a>' : '') +
         '<a href="' + route('/home') + '"><i class="fas fa-house"></i><span><b>Property Home</b><small>Your saved-home dashboard</small></span></a>' +
         developerToolsHtml() + salesDeskHtml() +
       '</nav><button class="wd-universal-signout" type="button" data-wd-universal="signout"><i class="fas fa-arrow-right-from-bracket"></i> Sign out</button>';

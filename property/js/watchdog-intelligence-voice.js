@@ -421,7 +421,7 @@
       if (!current.enabled) {
         button.disabled = true;
         if (!current.eligible && current.packaging === 'watchdog_intelligence_add_on_required') {
-          setVoiceStatus('Voice Intelligence is available with the Watchdog Intelligence add-on, or included with Pro+ and Teams.', 'error');
+          setVoiceStatus('Voice Intelligence is available with the Watchdog Intelligence add-on, or included with Professional and Teams.', 'error');
         } else {
           setVoiceStatus(current.eligible ? 'Watchdog Voice is temporarily unavailable.' : 'Voice Intelligence is not included with this plan.', 'error');
         }

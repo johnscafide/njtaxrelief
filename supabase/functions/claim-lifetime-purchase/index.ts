@@ -2,8 +2,8 @@ import { createClient } from 'npm:@supabase/supabase-js@2.95.0';
 import Stripe from 'npm:stripe@^22';
 
 type Tier='agent'|'pro'|'pro_plus';
-const OFFERS:Record<Tier,{amount:number;capacity:number}>={agent:{amount:149900,capacity:25},pro:{amount:349900,capacity:250},pro_plus:{amount:999900,capacity:2500}};
-function tierOf(v:unknown):Tier|null{const x=String(v||'').trim().toLowerCase();if(x==='pro+')return'pro_plus';return x==='agent'||x==='pro'||x==='pro_plus'?x as Tier:null;}
+const OFFERS:Record<Tier,{amount:number;capacity:number}>={agent:{amount:34900,capacity:100},pro:{amount:349900,capacity:250},pro_plus:{amount:99900,capacity:2500}};
+function tierOf(v:unknown):Tier|null{const x=String(v||'').trim().toLowerCase();if(x==='pro+'||x==='professional')return'pro_plus';return x==='agent'||x==='pro'||x==='pro_plus'?x as Tier:null;}
 function cors(req:Request){const origin=req.headers.get('origin')||'https://www.watchdogindex.com';return{'Access-Control-Allow-Origin':origin,'Access-Control-Allow-Headers':'authorization, apikey, content-type','Access-Control-Allow-Methods':'POST, OPTIONS','Vary':'Origin'};}
 function json(req:Request,body:unknown,status=200){return new Response(JSON.stringify(body),{status,headers:{...cors(req),'Content-Type':'application/json','Cache-Control':'no-store'}});}
 Deno.serve(async(req)=>{

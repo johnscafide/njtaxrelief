@@ -87,10 +87,10 @@
     }
 
     document.querySelectorAll('[data-professional-lifetime-checkout]').forEach(button => {
-      button.addEventListener('click', () => checkout('lifetime', button.dataset.tier || 'pro'));
+      button.addEventListener('click', () => checkout('lifetime', button.dataset.tier || 'pro_plus'));
     });
     document.querySelectorAll('[data-professional-annual-checkout]').forEach(button => {
-      button.addEventListener('click', () => checkout('annual', button.dataset.tier || 'pro'));
+      button.addEventListener('click', () => checkout('annual', button.dataset.tier || 'pro_plus'));
     });
     window.addEventListener('pageshow', () => setBusy(false));
   }

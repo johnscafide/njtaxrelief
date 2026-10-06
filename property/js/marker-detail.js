@@ -130,7 +130,7 @@
     if(formula&&formula.formula){$('mk-formula').hidden=false;$('mk-formula').innerHTML='<span>Formula / rule</span><code>'+esc(formula.formula)+'</code>'+(formula.range?'<small>Output / range: '+esc(formula.range)+'</small>':'');}
     $('mk-professions').innerHTML=professionalUse(m,reg)||'<span><b>General property research</b><small>Useful as supporting info when reviewing this property or municipality.</small></span>';
     $('mk-caution').textContent=cautionFor(m,rich);
-    $('mk-badges').innerHTML='<span class="tier">'+esc(m.tier==='pro_plus'?'Pro+':label(m.tier))+'</span><span>'+esc(m.origin==='public'?'Public source':'Watchdog proprietary')+'</span><span>'+esc(label(m.scope))+'</span>'+(m.unit?'<span>'+esc(label(m.unit))+'</span>':'');
+    $('mk-badges').innerHTML='<span class="tier">'+esc(m.tier==='pro_plus'?'Professional':label(m.tier))+'</span><span>'+esc(m.origin==='public'?'Public source':'Watchdog proprietary')+'</span><span>'+esc(label(m.scope))+'</span>'+(m.unit?'<span>'+esc(label(m.unit))+'</span>':'');
     var value=q.get('value'),note=q.get('note');if(value){$('mk-reading').hidden=false;$('mk-reading').innerHTML='<div><span>Current reading</span><b>'+esc(value)+'</b></div>'+(note?'<div><span>Context</span><small>'+esc(note)+'</small></div>':'');}
     $('mk-sources').innerHTML=sourceHTML(sourceList(m,rich,{all:sources,byId:byId},reg));
     $('mk-refresh').innerHTML=refresh?'<i class="fas fa-clock-rotate-left"></i><div><b>'+esc(label(refresh.cadence))+' refresh contract</b><span>'+esc(refresh.rule)+' Trigger: '+esc(String(refresh.trigger||'').replace(/_/g,' '))+'.</span></div>':'';

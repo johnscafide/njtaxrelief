@@ -313,7 +313,7 @@
       agent: {
         label:'Agent', kicker:'FOR AGENTS & SOLO PROFESSIONALS',
         description:'A focused professional dashboard for opportunity discovery, monitoring and client-ready property research.',
-        features:['Monitor up to 25 properties','Agent Opportunity Desk','Professional reports and exports']
+        features:['Monitor up to 100 properties','Agent Opportunity Desk','Professional reports and exports']
       },
       pro: {
         label:'Pro', kicker:'Professional dashboard', featured:true, badge:'Most popular',
@@ -321,9 +321,9 @@
         features:['Monitor up to 250 properties','Expanded professional workbenches','Advanced research tasks']
       },
       pro_plus: {
-        label:'Pro+', kicker:'Maximum data access',
-        description:'Watchdog’s deepest data, bulk intelligence and high-volume tasks for power users.',
-        features:['Monitor up to 2,500 properties','1,000+ data points and proprietary markers','Bulk and scheduled intelligence']
+        label:'Professional', kicker:'Maximum data access', featured:true,
+        description:'Watchdog’s deepest data, appeal tools, bulk intelligence and high-volume tasks.',
+        features:['Monitor up to 2,500 properties','Appeal and diligence tools','1,000+ data points and proprietary markers','Bulk and scheduled intelligence']
       }
     };
     return definitions[key] || null;
@@ -358,9 +358,9 @@
     var amount = Number(pricing.amount);
     var yearly = planCadence === 'yearly';
     var primary = yearly ? amount / 12 : amount;
-    var priceText = money(primary, yearly && primary % 1 !== 0);
+    var priceText = money(primary, primary % 1 !== 0);
     var note = yearly
-      ? money(amount, false) + ' billed yearly · two months included'
+      ? money(amount, false) + ' billed yearly'
       : 'Billed monthly';
 
     return '<article class="wd-plan-card wd-plan-' + esc(key) + (definition.featured ? ' is-featured' : '') + '" data-plan-card="' + esc(key) + '">' +
@@ -389,7 +389,7 @@
     }
 
     var paidCards = planCatalog
-      ? ['agent','pro','pro_plus'].map(planCard).filter(Boolean).join('')
+      ? ['agent','pro_plus'].map(planCard).filter(Boolean).join('')
       : '';
     var catalogNotice = planCatalogError
       ? '<div class="wd-plan-notice"><i class="fas fa-circle-info" aria-hidden="true"></i><span>Paid plan details are temporarily unavailable. Your account is ready, and you can continue with Free now and upgrade from Account later.</span></div>'
@@ -400,7 +400,7 @@
 
     root.innerHTML =
       '<div class="wd-plan-header"><div><p class="wd-onboarding-step">Choose your membership</p><h2>Your account is ready. Choose your plan.</h2><p class="wd-onboarding-copy">Paid dashboards open more Watchdog from day one. Free stays available below with no card required, and you can upgrade anytime.</p></div>' +
-      (planCatalog ? '<div class="wd-plan-controls"><span>Billing</span><div class="wd-plan-cadence" role="group" aria-label="Billing cadence"><button type="button" data-plan-cadence="yearly" aria-pressed="' + (planCadence === 'yearly') + '">Yearly <em>Save 17%</em></button><button type="button" data-plan-cadence="monthly" aria-pressed="' + (planCadence === 'monthly') + '">Monthly</button></div></div>' : '') +
+      (planCatalog ? '<div class="wd-plan-controls"><span>Billing</span><div class="wd-plan-cadence" role="group" aria-label="Billing cadence"><button type="button" data-plan-cadence="yearly" aria-pressed="' + (planCadence === 'yearly') + '">Yearly <em>Save up to 33%</em></button><button type="button" data-plan-cadence="monthly" aria-pressed="' + (planCadence === 'monthly') + '">Monthly</button></div></div>' : '') +
       '</div>' +
       catalogNotice + checkoutNotice +
       (paidCards ? '<div class="wd-plan-grid">' + paidCards + '</div>' : '') +
@@ -478,7 +478,7 @@
       });
       if (!response.ok) throw new Error('Billing catalog unavailable');
       var catalog = await response.json();
-      if (!catalog || catalog.provider !== 'stripe' || !catalog.plans || !catalog.plans.agent || !catalog.plans.pro || !catalog.plans.pro_plus) {
+      if (!catalog || catalog.provider !== 'stripe' || !catalog.plans || !catalog.plans.agent || !catalog.plans.pro_plus) {
         throw new Error('Billing catalog invalid');
       }
       planCatalog = catalog;

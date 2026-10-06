@@ -16,7 +16,7 @@ must(/<section class="igx" id="igx-crm"[^>]*hidden>/.test(page), 'CRM property p
 ['loading', 'upsell', 'connect', 'error'].forEach((state) => must(page.includes(`data-igx-state="${state}"`), `CRM panel ${state} state must be static HTML.`));
 ['ready', 'dashboard', 'missing', 'review', 'search'].forEach((name) => must(page.includes(`data-igx-empty="${name}"`), `CRM panel ${name} empty state must be static HTML.`));
 must(page.includes('Nothing is linked until you say so') && page.includes('Watchdog never writes to your CRM on its own'), 'CRM panel intros must live in the page HTML.');
-must(/Agent and Pro/.test(page) && /Automations need Pro\+ or Teams/.test(page), 'Plan gate must say the CRM panel works on Agent and Pro.');
+must(/works on Agent too/.test(page) && /Automations need Professional or Teams/.test(page), 'Plan gate must say the CRM panel works on Agent.');
 
 const js = read('property/js/integrations-crm-properties.js');
 ['get_my_crm_property_overview', 'add_my_crm_properties_to_dashboard', 'review_my_crm_property_matches'].forEach((rpc) => {

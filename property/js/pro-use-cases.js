@@ -17,7 +17,7 @@
     link.className='pro-price-float';
     link.id='pro-price-float';
     link.href='#pricing';
-    link.innerHTML='Plans from <b>$59/mo</b> <span>View pricing</span> <i class="fas fa-arrow-down"></i>';
+    link.innerHTML='Plans from <b>$14.99/mo</b> <span>View pricing</span> <i class="fas fa-arrow-down"></i>';
     document.body.appendChild(link);
 
     var hero=qs('.pro-hero');

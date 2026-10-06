@@ -120,7 +120,7 @@
     function inviteDetails(code){
       var m=normalize(code).match(/^WDG-(AG|PR|PP)-(30|60)-/);
       if(!m)return null;
-      return {plan:m[1]==='AG'?'Agent':m[1]==='PR'?'Pro':'Pro+',days:m[2]};
+      return {plan:m[1]==='AG'?'Agent':m[1]==='PR'?'Pro':'Professional',days:m[2]};
     }
     function previewCode(){
       var details=inviteDetails(input.value);

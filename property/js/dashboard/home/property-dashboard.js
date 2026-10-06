@@ -99,7 +99,7 @@
 
   function planLabel(plan) {
     plan = normalizePlan(plan);
-    return ({ standard: 'Standard', agent: 'Agent', pro: 'Pro', pro_plus: 'Pro+', teams: 'Teams', developer: 'Developer' })[plan] || 'Standard';
+    return ({ standard: 'Standard', agent: 'Agent', pro: 'Pro', pro_plus: 'Professional', teams: 'Teams', developer: 'Developer' })[plan] || 'Standard';
   }
 
   function markerAllowed(marker, plan) {
@@ -114,7 +114,7 @@
 
   function requiredPlan(marker) {
     var tier = normalizePlan(marker && marker.tier || 'standard');
-    return tier === 'pro_plus' ? 'Pro+' : 'Pro';
+    return tier === 'pro_plus' ? 'Professional' : 'Pro';
   }
 
   function getPin() {
@@ -524,14 +524,14 @@
     }
     if (rank >= 3) {
       var x = currentRecord || {};
-      html += '<article class="wdpd-paid-module"><header><span><small>Pro+ intelligence</small><b>Deed & closing details</b></span><i class="fas fa-file-signature"></i></header><div class="wdpd-mini-grid">' +
+      html += '<article class="wdpd-paid-module"><header><span><small>Professional intelligence</small><b>Deed & closing details</b></span><i class="fas fa-file-signature"></i></header><div class="wdpd-mini-grid">' +
         safeFact('Mailing address', x.mailing_address || 'No mailing address returned', 'fa-envelope') +
         safeFact('Mailing city/state', x.mailing_city_state || '-', 'fa-location-dot') +
         safeFact('Deed book / page', [x.deed_book, x.deed_page].filter(Boolean).join(' / ') || '-', 'fa-book') +
         safeFact('Parcel updated', x.parcel_last_update ? String(x.parcel_last_update) : '-', 'fa-rotate') +
         '</div></article>';
     } else {
-      html += factLock('Deed & closing details', 'Pro+', 'Deep closing, mailing and deed fields are never sent to lower-tier clients by this dashboard.');
+      html += factLock('Deed & closing details', 'Professional', 'Deep closing, mailing and deed fields are never sent to lower-tier clients by this dashboard.');
     }
     return '<div class="wdpd-paid-grid">' + html + '</div>';
   }
@@ -546,7 +546,7 @@
 
   function tierCounts() {
     var by = registry && registry.summary && registry.summary.by_tier || {};
-    return '<div class="wdpd-tier-counts"><span><i></i><b>' + esc(String(by.standard || 0)) + '</b><small>Standard</small></span><span><i></i><b>' + esc(String(by.pro || 0)) + '</b><small>Pro</small></span><span><i></i><b>' + esc(String(by.pro_plus || 0)) + '</b><small>Pro+</small></span></div>';
+    return '<div class="wdpd-tier-counts"><span><i></i><b>' + esc(String(by.standard || 0)) + '</b><small>Standard</small></span><span><i></i><b>' + esc(String(by.pro || 0)) + '</b><small>Pro</small></span><span><i></i><b>' + esc(String(by.pro_plus || 0)) + '</b><small>Professional</small></span></div>';
   }
 
   function explorerState() {
@@ -640,7 +640,7 @@
     var plan = activePlan();
     return '<section class="wdpd-explorer" id="wdpd-explorer"><header class="wdpd-section-head"><div><h3>Property Data Explorer</h3></div><div class="wdpd-explorer-actions">' + (paidPlan() ? '<button type="button" data-wdpd-load-visible><i class="fas fa-bolt"></i> Load visible data</button>' : '<a href="/property/account"><i class="fas fa-lock-open"></i> Open checked data</a>') + '</div></header>' +
       tierCounts() +
-      '<div class="wdpd-filters"><label class="wdpd-search"><i class="fas fa-magnifying-glass"></i><input type="search" data-wdpd-search placeholder="Search markers, fields, sources…" autocomplete="off"></label><label><span>Category</span><select data-wdpd-category><option value="all">All categories</option>' + categories.map(function (c) { return '<option value="' + esc(c) + '">' + esc(pretty(c)) + '</option>'; }).join('') + '</select></label><label><span>Tier</span><select data-wdpd-tier><option value="all">All tiers</option><option value="standard">Standard</option><option value="pro">Pro</option><option value="pro_plus">Pro+</option></select></label><label><span>Provider</span><select data-wdpd-provider><option value="all">All provider states</option><option value="live">Live</option><option value="partial">Partial</option><option value="planned">Planned</option><option value="unavailable">Unavailable</option></select></label></div>' +
+      '<div class="wdpd-filters"><label class="wdpd-search"><i class="fas fa-magnifying-glass"></i><input type="search" data-wdpd-search placeholder="Search markers, fields, sources…" autocomplete="off"></label><label><span>Category</span><select data-wdpd-category><option value="all">All categories</option>' + categories.map(function (c) { return '<option value="' + esc(c) + '">' + esc(pretty(c)) + '</option>'; }).join('') + '</select></label><label><span>Tier</span><select data-wdpd-tier><option value="all">All tiers</option><option value="standard">Standard</option><option value="pro">Pro</option><option value="pro_plus">Professional</option></select></label><label><span>Provider</span><select data-wdpd-provider><option value="all">All provider states</option><option value="live">Live</option><option value="partial">Partial</option><option value="planned">Planned</option><option value="unavailable">Unavailable</option></select></label></div>' +
       '<div class="wdpd-access-note"><i class="fas fa-shield-halved"></i><span><b>' + esc(planLabel(plan)) + ' access is active.</b><small>Locked rows show catalog metadata only. Real paid values are never embedded in those rows.</small></span></div>' +
       '<div data-wdpd-results>' + explorerRowsHtml({ q: '', category: 'all', tier: 'all', provider: 'all' }) + '</div></section>';
   }

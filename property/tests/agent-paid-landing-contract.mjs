@@ -18,11 +18,11 @@ expect(page.includes('/property/branding/watchdog-logo-horizontal.svg'),'Watchdo
 expect(page.includes('property="og:image" content="https://www.watchdogindex.com/property/branding/watchdog-logo-horizontal.svg"'),'social share image must use the Watchdog logo');
 expect(page.includes('/property/for/real-estate-agents/agent-control-capture.svg'),'Agent Control product capture missing');
 expect(page.includes('Representative Agent Control view'),'product capture disclosure missing');
-expect(page.includes('Agent Founding Lifetime')&&page.includes('$1,499'),'Founding Lifetime offer missing');
+expect(page.includes('Agent Founding Lifetime')&&page.includes('$349'),'Founding Lifetime offer missing');
 expect((page.match(/data-agent-lifetime-checkout/g)||[]).length===1,'Founding Lifetime should have one primary checkout CTA');
-expect(page.includes('25-property Agent capacity'),'Agent capacity disclosure missing');
+expect(page.includes('100-property Agent capacity'),'Agent capacity disclosure missing');
 expect(page.includes('Usage-based services, direct mail, third-party data and overages'),'lifetime exclusions missing');
-expect(page.includes('id="apl-exit"')&&page.includes('$590')&&page.includes('data-agent-annual-checkout'),'annual exit offer missing');
+expect(page.includes('id="apl-exit"')&&page.includes('$119')&&page.includes('data-agent-annual-checkout'),'annual exit offer missing');
 expect(!page.includes('Prefer monthly or annual billing?'),'recurring pricing leaked into main page');
 expect(!page.includes('apl-faq'),'formulaic FAQ block returned');
 expect(!page.includes('testimonial'),'unverified testimonial block returned');

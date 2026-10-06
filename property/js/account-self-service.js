@@ -142,8 +142,8 @@
     if (!paidProfessional()) {
       section.classList.add('plan-gated');
       section.querySelectorAll('input,button').forEach(function (node) { node.disabled = true; });
-      section.querySelector('#ac-crm-status').textContent = 'Available on Agent, Pro, Pro+ and Teams.';
-      section.querySelector('#ac-kit-status').textContent = 'Available on Agent, Pro, Pro+ and Teams.';
+      section.querySelector('#ac-crm-status').textContent = 'Available on Agent, Professional and Teams.';
+      section.querySelector('#ac-kit-status').textContent = 'Available on Agent, Professional and Teams.';
       return;
     }
     document.getElementById('ac-crm-save').addEventListener('click', saveCrm);
