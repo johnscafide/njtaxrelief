@@ -45,7 +45,7 @@
       "maxDuration": 10
     },
     "api/co-town-page.js": {
-      "includeFiles": "{property/data/municipal-requirements/approvals.json,property/data/municipal-requirements/checked/*.json,co/towns.json,property/data/town-tax/bills.json}",
+      "includeFiles": "{property/data/municipal-requirements/approvals.json,property/data/municipal-requirements/checked/*.json,co/towns.json,property/data/town-tax/bills.json,co/index.html}",
       "maxDuration": 10
     },
     "api/tax-town-page.js": {
