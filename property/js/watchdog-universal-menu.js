@@ -747,3 +747,4 @@
 
 (function(){try{if(window.__wdGlassHeader||document.querySelector('script[src^="/property/js/watchdog-glass-header.js"]'))return;var s=document.createElement('script');s.src='/property/js/watchdog-glass-header.js';s.defer=true;(document.head||document.documentElement).appendChild(s);}catch(_){}})();
 (function(){try{if(window.__wdSiteSearch||document.querySelector('script[src^="/property/js/watchdog-site-search.js"]'))return;var s=document.createElement('script');s.src='/property/js/watchdog-site-search.js';s.defer=true;(document.head||document.documentElement).appendChild(s);}catch(_){}})();
+(function(){try{if(window.__wdAppsMenu||document.querySelector('script[src^="/property/js/watchdog-apps-menu.js"]'))return;var s=document.createElement('script');s.src='/property/js/watchdog-apps-menu.js?v=20261007a';s.defer=true;(document.head||document.documentElement).appendChild(s);}catch(_){}})();
