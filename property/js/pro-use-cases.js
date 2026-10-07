@@ -6,18 +6,13 @@
 
   function qs(sel,root){return (root||document).querySelector(sel);}
 
-  window.WatchdogProCadence=window.WatchdogProCadence||function(){
-    var active=qs('[data-cadence].active');
-    return active&&active.dataset.cadence==='monthly'?'monthly':'yearly';
-  };
-
   function stickyPriceShortcut(){
     if(qs('#pro-price-float'))return;
     var link=document.createElement('a');
     link.className='pro-price-float';
     link.id='pro-price-float';
     link.href='#pricing';
-    link.innerHTML='Plans from <b>$14.99/mo</b> <span>View pricing</span> <i class="fas fa-arrow-down"></i>';
+    link.innerHTML='Plans from <b>$99 one time</b> <span>View pricing</span> <i class="fas fa-arrow-down"></i>';
     document.body.appendChild(link);
 
     var hero=qs('.pro-hero');

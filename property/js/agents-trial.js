@@ -1,13 +1,6 @@
 /* Watchdog Agent trial landing page (/agents/trial) and thank-you page
    (/agents/trial/thanks). One page, one action.
 
-   Variant A (public checkout open): "Start your 14-day Agent trial" opens the
-   card-required Stripe Checkout through create-checkout-session with the
-   first-use trial offer. Variant B (checkout controlled or closed): the
-   Founding Agent invite request form is the primary action. The variant comes
-   from the public get_public_checkout_mode read; the checkout function stays
-   the authority and any rejection flips the page to variant B.
-
    Runs only on the clean and implementation paths of the two pages. */
 (function () {
   'use strict';
@@ -19,7 +12,6 @@
   var isTrial = Boolean(TRIAL_PATHS[path]);
   if (!isThanks && !isTrial) return;
 
-  var TRIAL_OFFER = 'watchdog_14d_card_v1';
   var PRODUCTION_FUNCTIONS = 'https://uvkvaxljhhngydvlrzom.supabase.co/functions/v1/';
   var PRODUCTION_KEY = 'sb_publishable_MYX59qCbK3d-21zDfJqkNw_fvmfnexa';
   /* 15-minute onboarding call. Leave empty until the scheduler link is
@@ -111,13 +103,12 @@
 
   function checkoutErrorMessage(e) {
     var code = e && e.code ? String(e.code) : '';
-    if (code === 'SIGN_IN_REQUIRED') return { text: 'Sign in first, then the trial starts.', flip: false, signIn: true };
+    if (code === 'SIGN_IN_REQUIRED') return { text: 'Sign in first, then checkout opens.', flip: false, signIn: true };
     if (code === 'BILLING_ENROLLMENT_CLOSED' || code === 'BILLING_CONTROLLED_ONLY' || code === 'BILLING_GATE_NOT_PASSED' || code === 'CONTROLLED_TRIAL_UNAVAILABLE') {
-      return { text: 'Public enrollment is not open yet. Request a Founding Agent invite below and we will email you the day it opens.', flip: true };
+      return { text: 'Paid enrollment is not open yet. Leave your email below and we will tell you the day it opens.', flip: true };
     }
-    if (code === 'TRIAL_ALREADY_USED' || code === 'CONTROLLED_TRIAL_ALREADY_USED' || code === 'CONTROLLED_TRIAL_NOT_ELIGIBLE') {
-      return { text: 'This account has already used its Agent trial. Open Account to choose a plan.', flip: false, account: true };
-    }
+    if (code === 'LIFETIME_ALREADY_ACTIVE') return { text: 'Lifetime access is already active on this account.', flip: false, account: true };
+    if (code === 'LIFETIME_ACTIVE_SUBSCRIPTION') return { text: 'This account already has a plan. Open Account to manage it.', flip: false, account: true };
     if (code === 'LEGACY_SUBSCRIPTION_MIGRATION_REQUIRED') return { text: 'This account has legacy billing that must be migrated before starting Stripe. Contact Watchdog support so you are not charged twice.', flip: false };
     if (code === 'WATCHDOG_TEST_NO_REAL_SPEND') return { text: 'This test account cannot create a real charge.', flip: false };
     if (code === 'PRICE_NOT_CONFIGURED' || code === 'STRIPE_NOT_CONFIGURED' || code === 'STRIPE_API_KEY_INVALID') return { text: 'Checkout is not configured yet. Your card was not charged.', flip: false };
@@ -129,9 +120,9 @@
     if (!window.WatchdogBilling || typeof window.WatchdogBilling.invoke !== 'function') { notice('Checkout is not available right now. Nothing was charged.', true); return; }
     setBusy(true);
     notice('');
-    ga('checkout_started', { plan: 'agent', cadence: 'monthly', variant: currentVariant() });
-    wd('checkout_started', { plan: 'agent', billing_period: 'monthly', source: 'agents_trial' });
-    window.WatchdogBilling.invoke('create-checkout-session', { plan: 'agent', tier: 'agent', cadence: 'monthly', trial: true, offer: TRIAL_OFFER, return_to: 'agents_trial' })
+    ga('checkout_started', { plan: 'agent', cadence: 'lifetime', variant: currentVariant() });
+    wd('checkout_started', { plan: 'agent', billing_period: 'lifetime', source: 'agents_trial' });
+    window.WatchdogBilling.invoke('create-lifetime-checkout', { tier: 'agent' })
       .then(function (p) {
         if (!p || !p.url) throw new Error('Stripe did not return a secure checkout URL.');
         location.href = p.url;
@@ -139,7 +130,7 @@
       .catch(function (e) {
         setBusy(false);
         var m = checkoutErrorMessage(e);
-        if (m.signIn) { signInReturnTo(trialPath + '?start=trial'); return; }
+        if (m.signIn) { signInReturnTo(trialPath + '?start=checkout'); return; }
         if (m.flip) { setVariant('b'); ga('view_landing', { variant: 'b', reason: 'checkout_rejected' }); }
         notice(m.text + (m.account ? ' ' : ''), true);
         if (m.account) {
@@ -152,10 +143,10 @@
 
   function startTrial(position) {
     if (busy) return;
-    ga('cta_click', { cta: 'trial', position: position || 'hero', variant: currentVariant() });
+    ga('cta_click', { cta: 'lifetime', position: position || 'hero', variant: currentVariant() });
     wd('upgrade_cta_clicked', { plan: 'agent', source: 'agents_trial' });
     session().then(function (s) {
-      if (!s) { signInReturnTo(trialPath + '?start=trial'); return; }
+      if (!s) { signInReturnTo(trialPath + '?start=checkout'); return; }
       launchCheckout();
     });
   }
@@ -307,10 +298,9 @@
       ga('view_landing', { variant: v });
       wd('page_view', { tool: 'agents_trial', plan: 'agent' });
 
-      /* Returning from sign-in with ?start=trial: open checkout once. */
-      if (query.get('start') === 'trial') {
+      if (query.get('start') === 'checkout' || query.get('start') === 'trial') {
         try { history.replaceState(null, '', location.pathname); } catch (_) {}
-        if (v !== 'a') { notice('Public enrollment is not open yet. Request a Founding Agent invite below.'); return; }
+        if (v !== 'a') { notice('Paid enrollment is not open yet. Leave your email below.'); return; }
         session().then(function (s) { if (s) launchCheckout(); });
       }
     });
@@ -347,8 +337,7 @@
       try { already = sessionStorage.getItem(key) === '1'; } catch (_) {}
       if (!already) {
         try { sessionStorage.setItem(key, '1'); } catch (_) {}
-        ga('trial_started', { plan: 'agent', cadence: 'monthly', variant: 'a', event_id: sessionId });
-        wd('subscription_confirmed', { plan: 'agent', billing_period: 'monthly', status: 'trialing', source: 'agents_trial' });
+        ga('purchase_confirmed', { plan: 'agent', cadence: 'lifetime', variant: 'a', event_id: sessionId });
       }
       /* Best-effort status line from the server-owned billing state. The
          webhook can lag the redirect by a few seconds, so a missing row is
@@ -361,9 +350,8 @@
         var status = row && (row.subscription_status || row.status);
         var line = $('[data-trial-status]');
         if (!line) return;
-        if (status === 'trialing') line.textContent = 'Your Agent trial is active. Your card is charged $14.99 on day 14 unless you cancel first.';
-        else if (status === 'active') line.textContent = 'Your Agent plan is active.';
-        else line.textContent = 'Your trial is being confirmed with Stripe. Refresh this page in a moment if the status does not update.';
+        if (status === 'active') line.textContent = 'Your Agent plan is active.';
+        else line.textContent = 'Your purchase is being confirmed with Stripe. Refresh this page in a moment if the status does not update.';
       }).catch(function () {});
     });
   }

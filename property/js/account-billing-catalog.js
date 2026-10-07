@@ -20,38 +20,14 @@
     var key = String(card && card.dataset && card.dataset.plan || '').trim().toLowerCase().replace(/\+/g,'_plus');
     return ['agent','pro','pro_plus','teams'].indexOf(key) >= 0 ? key : null;
   }
-  function isYearly() {
-    var yearly = document.querySelector('[data-cadence="yearly"]');
-    return !yearly || yearly.getAttribute('aria-pressed') === 'true';
-  }
   function applyIntelligenceOffer(card, key) {
     var offer = card && card.querySelector('.ac-intel-offer');
     var intelligence = catalog && catalog.intelligence;
     if (!offer || !intelligence || !key) return;
-    var promo = intelligence.promotion || {};
-    var eligible = Array.isArray(promo.eligible_plans) && promo.eligible_plans.indexOf(key) >= 0;
     var included = Array.isArray(intelligence.included_plans) && intelligence.included_plans.indexOf(key) >= 0;
     var label = offer.querySelector('span');
     var price = offer.querySelector('b');
     var note = offer.querySelector('small');
-
-    if (promo.active === true && eligible) {
-      offer.classList.add('included');
-      offer.setAttribute('aria-label', 'Watchdog Intelligence limited-time promotion');
-      setText(label, 'WATCHDOG INTELLIGENCE · ' + String(promo.label || 'LIMITED TIME').toUpperCase());
-      setText(price, 'Included');
-      setText(note, 'Normally +' + money(Number(intelligence.regular_add_on_monthly || 12), false) + '/month. Included for a limited time.');
-      return;
-    }
-
-    if (eligible) {
-      offer.classList.remove('included');
-      offer.setAttribute('aria-label', 'Watchdog Intelligence add-on');
-      setText(label, 'Watchdog Intelligence');
-      setText(price, '+' + money(Number(intelligence.regular_add_on_monthly || 12), false) + '/month');
-      setText(note, 'Optional add-on.');
-      return;
-    }
 
     if (included) {
       offer.classList.add('included');
@@ -63,28 +39,19 @@
   }
   function applyCatalog() {
     if (!catalog || !catalog.plans) return;
-    var annual = isYearly();
-    var cadence = annual ? 'yearly' : 'monthly';
     document.querySelectorAll('#membership-options .ac-price-card[data-plan]').forEach(function (card) {
       var key = planForCard(card);
       if (!key) return;
       applyIntelligenceOffer(card, key);
-      if (!catalog.plans[key] || !catalog.plans[key][cadence]) return;
-      var amount = Number(catalog.plans[key][cadence].amount);
+      if (!catalog.plans[key] || !catalog.plans[key].lifetime) return;
+      var amount = Number(catalog.plans[key].lifetime.amount);
       if (!Number.isFinite(amount)) return;
       var price = card.querySelector('.ac-price b');
       var unit = card.querySelector('.ac-price span');
       var note = card.querySelector(':scope > small');
       setText(price, money(amount, amount % 1 !== 0));
-      setText(unit, annual ? '/year' : '/month');
-      if (note) {
-        if (annual) {
-          var monthly = Number(catalog.plans[key].monthly && catalog.plans[key].monthly.amount);
-          var effective = amount / 12;
-          var savings = Number.isFinite(monthly) ? (monthly * 12) - amount : 0;
-          setText(note, money(effective, true) + '/mo billed yearly' + (savings > 0 ? ' · save ' + money(savings, false) + '/yr' : ''));
-        } else setText(note, 'Billed monthly');
-      }
+      setText(unit, ' once');
+      setText(note, 'One payment · no renewal');
     });
   }
   function loadCatalog() {
@@ -112,7 +79,6 @@
     observer = new MutationObserver(refreshCatalogDisplay);
     observer.observe(app, { childList:true, subtree:false });
   }
-  document.addEventListener('click', function (event) { if (event.target.closest('[data-cadence]')) setTimeout(refreshCatalogDisplay, 0); });
   document.addEventListener('watchdog:account-rendered', refreshCatalogDisplay);
   function start() { observeAccountRenders(); loadCatalog(); refreshCatalogDisplay(); }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start, { once:true }); else start();

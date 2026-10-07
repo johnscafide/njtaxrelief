@@ -9,7 +9,7 @@ const PRODUCTION_HOSTS = new Set([
   'www.njpropertytaxrelief.com'
 ]);
 const CAPACITY = { agent: 100, pro: 250, pro_plus: 2500 } as const;
-const FOUNDING = { agent: 34900, pro: 349900, pro_plus: 99900 } as const;
+const FOUNDING = { agent: 9900, pro: 349900, pro_plus: 29900 } as const;
 const PLAN_LABEL = { agent: 'Agent', pro: 'Pro', pro_plus: 'Professional' } as const;
 const OPENAI_ADS_ENDPOINT = 'https://bzr.openai.com/v1/events';
 type Tier = keyof typeof FOUNDING;
@@ -116,7 +116,7 @@ async function sendOpenAIAdsOrderCreated(args: {
         currency: 'USD',
         contents: [{
           id: `watchdog_founding_lifetime_${args.tier}`,
-          name: `Watchdog ${PLAN_LABEL[args.tier]} Founding Lifetime`,
+          name: `Watchdog ${PLAN_LABEL[args.tier]} Lifetime`,
           content_type: 'plan',
           quantity: 1,
           amount: args.amountCents,
@@ -196,7 +196,7 @@ Deno.serve(async (req) => {
     return json(req, { error: 'Payment has not completed yet.', code: 'PAYMENT_NOT_COMPLETE' }, 409);
   }
   if (String(session.currency || '').toLowerCase() !== 'usd' || Number(session.amount_subtotal || 0) !== FOUNDING[tier]) {
-    return json(req, { error: 'The checkout amount does not match the governed Founding Lifetime offer.', code: 'LIFETIME_AMOUNT_MISMATCH' }, 409);
+    return json(req, { error: 'The checkout amount does not match the Lifetime offer.', code: 'LIFETIME_AMOUNT_MISMATCH' }, 409);
   }
 
   const paymentIntent = session.payment_intent;

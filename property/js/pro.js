@@ -7,7 +7,6 @@
   document.documentElement.classList.add('p26-js');
 
   var DEMO_ENDPOINT='https://uvkvaxljhhngydvlrzom.supabase.co/functions/v1/pro-demo-request';
-  var INTELLIGENCE_CATALOG_ENDPOINT='https://uvkvaxljhhngydvlrzom.supabase.co/functions/v1/billing-price-catalog';
   var SUPABASE_PUBLISHABLE_KEY='sb_publishable_MYX59qCbK3d-21zDfJqkNw_fvmfnexa';
   var reduceMotion=!!(window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches);
 
@@ -86,56 +85,10 @@
     window.addEventListener('scroll',onScroll,{passive:true});window.addEventListener('resize',onScroll);update();
   }
 
-  var priceData={
-    yearly:{agent:{value:'119',unit:'/ year',eyebrow:'Annual',note:'Save $60 a year.'},pro_plus:{value:'479',unit:'/ year',eyebrow:'Annual',note:'Save $120 a year.'}},
-    monthly:{agent:{value:'14.99',unit:'/ month',eyebrow:'Monthly',note:'Cancel anytime.'},pro_plus:{value:'49.99',unit:'/ month',eyebrow:'Monthly',note:'Cancel anytime.'}}
-  };
-
-  function pricing(){
-    var buttons=all('.pro-cadence [data-cadence]');
-    var demoCadence=document.getElementById('demo-cadence');
-    if(!buttons.length)return;
-    function set(cad,shouldTrack){
-      if(!priceData[cad])cad='yearly';
-      buttons.forEach(function(b){var on=b.dataset.cadence===cad;b.classList.toggle('active',on);b.setAttribute('aria-pressed',on?'true':'false');});
-      ['agent','pro_plus'].forEach(function(plan){var d=priceData[cad][plan];var v=document.querySelector('[data-price-value="'+plan+'"]'),u=document.querySelector('[data-price-unit="'+plan+'"]'),e=document.querySelector('[data-price-eyebrow="'+plan+'"]'),n=document.querySelector('[data-price-note="'+plan+'"]'),cta=document.querySelector('[data-demo-plan="'+plan+'"]');if(v)v.textContent=d.value;if(u)u.textContent=d.unit;if(e)e.textContent=d.eyebrow;if(n)n.textContent=d.note;if(cta)cta.dataset.demoCadence=cad;});
-      if(demoCadence)demoCadence.value=cad;
-      if(shouldTrack)trackEvent('pro_billing_toggle',{cadence:cad});
-    }
-    buttons.forEach(function(b){b.addEventListener('click',function(){if(b.dataset.cadence==='lifetime')return;set(b.dataset.cadence,true);});});set('yearly',false);
-  }
-
-  function renderIntelligenceOffer(catalog){
-    var intelligence=catalog&&catalog.intelligence||{};
-    var promo=intelligence.promotion||{};
-    var regular=Number(intelligence.regular_add_on_monthly||12);
-    if(!Number.isFinite(regular)||regular<=0)regular=12;
-    var eligible=Array.isArray(promo.eligible_plans)?promo.eligible_plans:['agent'];
-    var promoActive=promo.active===true;
-    var brand='Watchdog <span class="wd-intelligence-brand-word">Intelligence</span>';
-    // content-architecture: dynamic. This wording follows the live billing catalog and promotion state.
-    var offer=promoActive?'Free for a limited time on Agent. Professional always includes it.':'Add it to Agent for $'+regular+'/month. Professional includes it.';
-    var promoNode=document.querySelector('[data-intel-promo]');if(promoNode)promoNode.textContent=offer;
-    all('[data-intel-line]').forEach(function(li){
-      if(eligible.indexOf(li.dataset.intelLine)<0)return;
-      li.innerHTML=brand+(promoActive?', free for now':', +$'+regular+'/month');
-    });
-    all('[data-intel-cell]').forEach(function(td){td.textContent=promoActive?'Free for now':'$'+regular+'/mo add-on';});
-    // content-architecture: dynamic. FAQ answer follows the live billing catalog and promotion state.
-    var faq=document.querySelector('[data-intel-faq]');if(faq)faq.textContent=promoActive?'Agent normally adds it for $'+regular+'/month. It is free for a limited time. Professional includes it.':'Agent can add it for $'+regular+'/month. Professional includes it.';
-  }
-
-  function intelligencePricing(){
-    fetch(INTELLIGENCE_CATALOG_ENDPOINT,{method:'GET',headers:{Accept:'application/json'},cache:'no-store'})
-      .then(function(r){if(!r.ok)throw new Error('Billing catalog '+r.status);return r.json();})
-      .then(function(catalog){if(catalog&&catalog.provider==='stripe')renderIntelligenceOffer(catalog);})
-      .catch(function(err){console.warn('Watchdog Intelligence pricing catalog unavailable; keeping the published wording.',err);});
-  }
-
   function demoPrefill(){
     var planInput=document.getElementById('demo-plan');
     var cadence=document.getElementById('demo-cadence');
-    all('[data-demo-plan]').forEach(function(link){link.addEventListener('click',function(){if(planInput)planInput.value=link.dataset.demoPlan||'unsure';if(cadence)cadence.value=link.dataset.demoCadence||'yearly';trackEvent('pro_plan_explore',{plan:link.dataset.demoPlan||'unsure',cadence:link.dataset.demoCadence||'yearly'});});});
+    all('[data-demo-plan]').forEach(function(link){link.addEventListener('click',function(){if(planInput)planInput.value=link.dataset.demoPlan||'unsure';if(cadence)cadence.value=link.dataset.demoCadence||'lifetime';trackEvent('pro_plan_explore',{plan:link.dataset.demoPlan||'unsure',cadence:link.dataset.demoCadence||'lifetime'});});});
     all('[data-price-jump]').forEach(function(link){link.addEventListener('click',function(){trackEvent('pro_price_jump',{location:link.dataset.priceJump||'page'});});});
   }
 
@@ -148,7 +101,7 @@
     form.addEventListener('submit',function(e){
       e.preventDefault();setStatus('','');if(!form.reportValidity())return;
       var data=new FormData(form);
-      var payload={full_name:String(data.get('full_name')||'').trim(),email:String(data.get('email')||'').trim(),company:String(data.get('company')||'').trim(),role:String(data.get('role')||'').trim(),volume:String(data.get('volume')||'').trim(),plan:String(data.get('plan')||'unsure').trim()||'unsure',cadence:String(data.get('cadence')||'yearly').trim()||'yearly',message:String(data.get('message')||'').trim(),source:String(data.get('source')||'pro-page').trim(),website:String(data.get('website')||'').trim(),page_url:window.location.href};
+      var payload={full_name:String(data.get('full_name')||'').trim(),email:String(data.get('email')||'').trim(),company:String(data.get('company')||'').trim(),role:String(data.get('role')||'').trim(),volume:String(data.get('volume')||'').trim(),plan:String(data.get('plan')||'unsure').trim()||'unsure',cadence:String(data.get('cadence')||'lifetime').trim()||'lifetime',message:String(data.get('message')||'').trim(),source:String(data.get('source')||'pro-page').trim(),website:String(data.get('website')||'').trim(),page_url:window.location.href};
       if(submit)submit.disabled=true;
       setStatus('Sending...','');
       trackEvent('pro_demo_submit',{plan:payload.plan,cadence:payload.cadence,role:payload.role});
@@ -169,6 +122,6 @@
     var script=document.createElement('script');script.src=src;script.defer=true;document.body.appendChild(script);
   }
 
-  function init(){loadFragment('main-footer','/property/partials/footer.html');reveal();countUp();heroScroll();chat();dock();pricing();intelligencePricing();demoPrefill();demoForm();sampleTracking();loadOutcomeGuidance();}
+  function init(){loadFragment('main-footer','/property/partials/footer.html');reveal();countUp();heroScroll();chat();dock();demoPrefill();demoForm();sampleTracking();loadOutcomeGuidance();}
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});else init();
 })();

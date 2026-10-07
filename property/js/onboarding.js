@@ -12,7 +12,6 @@
   var visibleSteps = [];
   var stepIndex = 0;
   var saving = false;
-  var planCadence = 'yearly';
   var planCatalog = null;
   var planCatalogError = '';
   var planCheckoutBusy = false;
@@ -331,20 +330,11 @@
 
   function intelligenceCopy(key) {
     var intelligence = planCatalog && planCatalog.intelligence || {};
-    var promotion = intelligence.promotion || {};
-    var promoEligible = promotion.active === true && Array.isArray(promotion.eligible_plans) && promotion.eligible_plans.indexOf(key) >= 0;
     var included = Array.isArray(intelligence.included_plans) && intelligence.included_plans.indexOf(key) >= 0;
-    var regular = Number(intelligence.regular_add_on_monthly || 12);
     var brand = 'Watchdog <span class="wd-intelligence-brand-word">Intelligence</span>';
 
-    if (promoEligible) {
-      return '<p class="wd-plan-intelligence"><i class="fas fa-dog" aria-hidden="true"></i><span>' + brand + ' included for a limited time <small>Normally +' + esc(money(regular, false)) + '/month</small></span></p>';
-    }
     if (included) {
       return '<p class="wd-plan-intelligence"><i class="fas fa-dog" aria-hidden="true"></i><span>' + brand + ' included at no additional charge</span></p>';
-    }
-    if (Array.isArray(promotion.eligible_plans) && promotion.eligible_plans.indexOf(key) >= 0) {
-      return '<p class="wd-plan-intelligence"><i class="fas fa-dog" aria-hidden="true"></i><span>' + brand + ' available for +' + esc(money(regular, false)) + '/month</span></p>';
     }
     return '';
   }
@@ -353,21 +343,17 @@
     var definition = planDefinition(key);
     var plan = planCatalog && planCatalog.plans && planCatalog.plans[key];
     if (!definition || !plan) return '';
-    var pricing = plan[planCadence];
+    var pricing = plan.lifetime;
     if (!pricing || !Number.isFinite(Number(pricing.amount))) return '';
     var amount = Number(pricing.amount);
-    var yearly = planCadence === 'yearly';
-    var primary = yearly ? amount / 12 : amount;
-    var priceText = money(primary, primary % 1 !== 0);
-    var note = yearly
-      ? money(amount, false) + ' billed yearly'
-      : 'Billed monthly';
+    var priceText = money(amount, amount % 1 !== 0);
+    var note = 'Lifetime access. No subscription.';
 
     return '<article class="wd-plan-card wd-plan-' + esc(key) + (definition.featured ? ' is-featured' : '') + '" data-plan-card="' + esc(key) + '">' +
       (definition.badge ? '<span class="wd-plan-badge">' + esc(definition.badge) + '</span>' : '') +
       '<div class="wd-plan-card-head"><span>' + esc(definition.kicker) + '</span><h3>' + esc(definition.label) + '</h3></div>' +
       '<p class="wd-plan-description">' + esc(definition.description) + '</p>' +
-      '<div class="wd-plan-price"><b>' + esc(priceText) + '</b><span>/month</span></div>' +
+      '<div class="wd-plan-price"><b>' + esc(priceText) + '</b><span> one time</span></div>' +
       '<p class="wd-plan-billing-note">' + esc(note) + '</p>' +
       '<ul class="wd-plan-features">' + definition.features.map(function (feature) {
         return '<li><i class="fas fa-check" aria-hidden="true"></i><span>' + esc(feature) + '</span></li>';
@@ -399,8 +385,7 @@
       : '';
 
     root.innerHTML =
-      '<div class="wd-plan-header"><div><p class="wd-onboarding-step">Choose your membership</p><h2>Your account is ready. Choose your plan.</h2><p class="wd-onboarding-copy">Paid dashboards open more Watchdog from day one. Free stays available below with no card required, and you can upgrade anytime.</p></div>' +
-      (planCatalog ? '<div class="wd-plan-controls"><span>Billing</span><div class="wd-plan-cadence" role="group" aria-label="Billing cadence"><button type="button" data-plan-cadence="yearly" aria-pressed="' + (planCadence === 'yearly') + '">Yearly <em>Save up to 33%</em></button><button type="button" data-plan-cadence="monthly" aria-pressed="' + (planCadence === 'monthly') + '">Monthly</button></div></div>' : '') +
+      '<div class="wd-plan-header"><div><p class="wd-onboarding-step">Choose your membership</p><h2>Your account is ready. Choose your plan.</h2><p class="wd-onboarding-copy">Pay once and keep it for life. Free stays available below with no card required.</p></div>' +
       '</div>' +
       catalogNotice + checkoutNotice +
       (paidCards ? '<div class="wd-plan-grid">' + paidCards + '</div>' : '') +
@@ -415,6 +400,8 @@
     if (code === 'BILLING_CONTROLLED_ONLY') return 'Paid enrollment is currently limited to controlled launch accounts. Continue with Free now and upgrade when enrollment opens for your account.';
     if (code === 'BILLING_GATE_NOT_PASSED') return 'Paid enrollment is awaiting final Live billing acceptance. Continue with Free now and upgrade from Account once that acceptance is complete.';
     if (code === 'PRICE_NOT_CONFIGURED') return 'That paid plan is temporarily unavailable for checkout. Continue with Free or try again later.';
+    if (code === 'LIFETIME_ALREADY_ACTIVE') return 'Lifetime access is already active on this account.';
+    if (code === 'LIFETIME_ACTIVE_SUBSCRIPTION') return 'This account already has a plan. Manage it from Account.';
     if (code === 'LEGACY_SUBSCRIPTION_MIGRATION_REQUIRED') return fallback || 'This account needs billing support before starting a new subscription.';
     return fallback || 'Paid checkout could not be started. You can continue with Free and upgrade later.';
   }
@@ -432,8 +419,8 @@
     planCheckoutError = '';
     renderPlanSelection();
     try {
-      var result = await db.functions.invoke('create-checkout-session', {
-        body: { tier:tier, cadence:planCadence }
+      var result = await db.functions.invoke('create-lifetime-checkout', {
+        body: { tier:tier }
       });
       if (result.error) {
         var payloadError = await checkoutErrorPayload(result.error);
@@ -453,14 +440,6 @@
   }
 
   function wirePlanSelection() {
-    root.querySelectorAll('[data-plan-cadence]').forEach(function (button) {
-      button.addEventListener('click', function () {
-        if (planCheckoutBusy) return;
-        planCadence = button.getAttribute('data-plan-cadence') === 'monthly' ? 'monthly' : 'yearly';
-        planCheckoutError = '';
-        renderPlanSelection();
-      });
-    });
     root.querySelectorAll('[data-plan-tier]').forEach(function (button) {
       button.addEventListener('click', function () {
         startPaidCheckout(button.getAttribute('data-plan-tier'));

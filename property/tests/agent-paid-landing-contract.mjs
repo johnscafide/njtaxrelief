@@ -18,20 +18,20 @@ expect(page.includes('/property/branding/watchdog-logo-horizontal.svg'),'Watchdo
 expect(page.includes('property="og:image" content="https://www.watchdogindex.com/property/branding/watchdog-logo-horizontal.svg"'),'social share image must use the Watchdog logo');
 expect(page.includes('/property/for/real-estate-agents/agent-control-capture.svg'),'Agent Control product capture missing');
 expect(page.includes('Representative Agent Control view'),'product capture disclosure missing');
-expect(page.includes('Agent Founding Lifetime')&&page.includes('$349'),'Founding Lifetime offer missing');
-expect((page.match(/data-agent-lifetime-checkout/g)||[]).length===1,'Founding Lifetime should have one primary checkout CTA');
+expect(page.includes('Agent Lifetime')&&page.includes('$99')&&!page.includes('$349'),'Agent Lifetime offer missing');
+expect((page.match(/data-agent-lifetime-checkout/g)||[]).length===1,'Agent Lifetime should have one primary checkout CTA');
 expect(page.includes('100-property Agent capacity'),'Agent capacity disclosure missing');
 expect(page.includes('Usage-based services, direct mail, third-party data and overages'),'lifetime exclusions missing');
-expect(page.includes('id="apl-exit"')&&page.includes('$119')&&page.includes('data-agent-annual-checkout'),'annual exit offer missing');
+expect(!page.includes('id="apl-exit"')&&!page.includes('$119')&&!page.includes('data-agent-annual-checkout'),'annual exit offer must be removed');
 expect(!page.includes('Prefer monthly or annual billing?'),'recurring pricing leaked into main page');
 expect(!page.includes('apl-faq'),'formulaic FAQ block returned');
 expect(!page.includes('testimonial'),'unverified testimonial block returned');
 expect(js.includes("billing.invoke('create-lifetime-checkout',{tier:'agent'})"),'lifetime checkout is not server-owned');
-expect(js.includes("billing.checkout('agent',{cadence:'yearly'})"),'annual exit offer is not wired to checked yearly Agent checkout');
+expect(!js.includes("cadence:'yearly'"),'Agent landing must not start a yearly checkout');
 expect(js.includes("sessionStorage.setItem('watchdog:lifetime:pending','agent')"),'signed-out lifetime intent is not preserved');
 expect(js.includes('watchdog:agent-paid-attribution'),'paid acquisition attribution is not preserved');
-expect(js.includes('agent_annual_exit_offer_view'),'exit offer analytics missing');
-expect(js.includes("document.addEventListener('mouseout',onExitIntent)"),'desktop exit intent trigger missing');
+expect(!js.includes('agent_annual_exit_offer_view')&&!js.includes('onExitIntent'),'annual exit offer logic must be removed');
+expect(js.includes('amount_cents:9900'),'Agent Lifetime checkout value must be $99');
 // The approved graphical landing (f9ec6a34) moved the mobile breakpoint from 720px to 760px.
 expect(css.includes('@media(max-width:760px)'),'mobile landing breakpoint missing');
 expect(billing.includes("sessionStorage.getItem('watchdog:lifetime:pending')"),'billing client cannot resume pending Lifetime checkout');

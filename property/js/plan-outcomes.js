@@ -62,7 +62,7 @@ function dashboardUpgrade(){
   var link=card.querySelector('a')||card;link.setAttribute('href','/property/pro#pricing');
   var copy=card.querySelector('.wdv2-up-copy');
   if(copy)copy.innerHTML='<h3>More research tools when you need them.</h3><p><b>Agent</b> helps with client opportunities. <b>Professional</b> adds deeper research, population and bulk tasks.</p><span class="wdv2-up-cta">Compare plans <i class="fas fa-arrow-right" aria-hidden="true"></i></span>';
-  var price=card.querySelector('.wdv2-up-price');if(price)price.innerHTML='<b>From $14.99</b><span>Agent · monthly</span><em>Professional $49.99</em>';
+  var price=card.querySelector('.wdv2-up-price');if(price)price.innerHTML='<b>From $99</b><span>Agent · one time</span><em>Professional $299</em>';
 }
 
 function proPricing(){

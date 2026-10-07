@@ -26,23 +26,19 @@ function allowedOrigin(req: Request) {
 const catalog = {
   provider: 'stripe',
   currency: 'USD',
-  catalog_version: '2026-10-06',
+  catalog_version: '2026-10-07',
+  billing_model: 'lifetime',
+  recurring_available: false,
   teams_available: false,
   tax_collection_enabled: false,
   intelligence: {
-    regular_add_on_monthly: 12,
-    included_plans: ['pro_plus', 'teams'],
-    promotion: {
-      active: true,
-      label: 'Limited time',
-      eligible_plans: ['agent'],
-      price_during_promotion: 0,
-      ends_on: null
-    }
+    add_on_available: false,
+    included_plans: ['pro_plus', 'teams']
   },
   plans: {
     agent: {
       label: 'Agent',
+      lifetime: { amount: 99 },
       monthly: { amount: 14.99, lookup_key: 'watchdog_agent_monthly' },
       yearly: { amount: 119, lookup_key: 'watchdog_agent_yearly' }
     },
@@ -54,6 +50,7 @@ const catalog = {
     },
     pro_plus: {
       label: 'Professional',
+      lifetime: { amount: 299 },
       monthly: { amount: 49.99, lookup_key: 'watchdog_pro_plus_monthly' },
       yearly: { amount: 479, lookup_key: 'watchdog_pro_plus_yearly' }
     }

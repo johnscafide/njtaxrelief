@@ -50,8 +50,7 @@ for (const [tier, price] of Object.entries(expected)) {
   expect(catalog.includes(`yearly: { amount: ${price.yearly}, lookup_key: '${price.yearlyLookup}' }`), `Public billing catalog ${tier} yearly contract drifted.`);
 
   expect(account.includes(`internal: '${tier}'`), `Account card is not mapped to the ${tier} server tier.`);
-  expect(account.includes(`monthly: ${price.monthly}`), `Account fallback ${tier} monthly amount drifted.`);
-  expect(account.includes(`yearly: ${price.yearly}`), `Account fallback ${tier} yearly amount drifted.`);
+  expect(account.includes(`lifetime: ${tier === 'agent' ? 99 : 299}`), `Account fallback ${tier} Lifetime amount drifted.`);
 
   expect(checkout.includes(`lookup_key: '${price.monthlyLookup}', amount: ${price.monthlyCents}`), `Checkout ${tier} monthly lookup/amount contract drifted.`);
   expect(checkout.includes(`lookup_key: '${price.yearlyLookup}', amount: ${price.yearlyCents}`), `Checkout ${tier} yearly lookup/amount contract drifted.`);
@@ -67,9 +66,13 @@ for (const [tier, price] of Object.entries(expected)) {
 expect(accountSync.includes('/functions/v1/billing-price-catalog'), 'Account does not load the server billing catalog.');
 expect(accountSync.includes("payload.provider !== 'stripe'"), 'Account billing catalog sync does not validate the Stripe provider boundary.');
 
-expect(pro.includes('Agent from $14.99 a month. Professional from $49.99 a month.'), 'Pro page monthly summary no longer matches the accepted catalog.');
-expect(pro.includes('Agent is $119/year and Professional is $479/year'), 'Pro page yearly FAQ no longer matches the accepted catalog.');
-expect(pro.includes('Agent is $14.99 a month and Professional is $49.99 a month.'), 'Pro page monthly FAQ no longer matches the accepted catalog.');
+// Owner decision 2026-10-07: new buyers pay once ($99 Agent, $299 Professional).
+// The recurring prices above stay so existing subscribers keep working.
+expect(catalog.includes("billing_model: 'lifetime'"), 'Public billing catalog must say plans are sold as Lifetime.');
+expect(catalog.includes('lifetime: { amount: 99 }') && catalog.includes('lifetime: { amount: 299 }'), 'Public billing catalog Lifetime amounts drifted.');
+expect(pro.includes('data-price-value="agent">99<') && pro.includes('data-price-value="pro_plus">299<'), 'Pro page Lifetime prices no longer match the catalog.');
+expect(!/\$(14\.99|49\.99|119|479)\b|data-cadence="(monthly|yearly)"/.test(pro), 'Pro page still sells a monthly or yearly plan.');
+expect(checkout.includes("code: 'RECURRING_PLANS_RETIRED'"), 'Checkout must refuse new monthly or yearly subscriptions.');
 
 expect(billingClient.includes("if(x==='agent')return{tier:'agent',plan:'agent'}"), 'Billing client Agent mapping drifted.');
 expect(billingClient.includes("if(x==='pro')return{tier:'pro',plan:'pro'}"), 'Billing client Pro mapping drifted.');
@@ -103,7 +106,7 @@ expect(onboarding.includes("await showPlanSelection();"), 'Onboarding no longer 
 expect(onboarding.includes("/functions/v1/billing-price-catalog"), 'Onboarding does not load prices from the server-owned Stripe billing catalog.');
 expect(onboarding.includes("['agent','pro_plus'].map(planCard)"), 'Onboarding paid-first plan set or ordering drifted.');
 expect(onboarding.indexOf("wd-plan-grid") < onboarding.indexOf("wd-plan-free"), 'Onboarding no longer renders paid plans before the Free option.');
-expect(onboarding.includes("db.functions.invoke('create-checkout-session'"), 'Onboarding paid CTA no longer uses the authenticated server checkout function.');
+expect(onboarding.includes("db.functions.invoke('create-lifetime-checkout'"), 'Onboarding paid CTA no longer uses the authenticated Lifetime checkout function.');
 expect(onboarding.includes("BILLING_ENROLLMENT_CLOSED"), 'Onboarding no longer handles the fail-closed billing release state cleanly.');
 expect(onboarding.includes("Continue with Free"), 'Onboarding no longer preserves a no-card Free continuation path.');
 expect(onboarding.includes("runtime.cleanRoutes"), 'Onboarding next-route handling is not aware of clean WatchdogIndex routes.');

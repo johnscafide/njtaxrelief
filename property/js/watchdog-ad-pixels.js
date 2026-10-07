@@ -8,8 +8,7 @@
    - the GA4 event names the site already sends through window.gtag, including any
      sent before this file loaded (read back from window.dataLayer);
    - clicks on plan buttons ([data-billing-plan]) for checkout starts;
-   - return URLs from Stripe Checkout (/account?checkout=success, with &trial=1 for a
-     14-day trial start, and the agent trial thank-you page);
+   - return URLs from Stripe Checkout (/account?checkout=success);
    - a first sign-in within two hours of account creation, for sign-ups.
    No email, name, phone or property data is sent to any ad platform from here. */
 (function(){
@@ -31,8 +30,8 @@
 
   var enabled=true;
   var CURRENCY='USD';
-  var LIFETIME_VALUE={agent:1499,pro:3499,pro_plus:9999};
-  var PLAN_VALUE={agent:{monthly:59,yearly:590},pro:{monthly:129,yearly:1290},pro_plus:{monthly:399,yearly:3990}};
+  var LIFETIME_VALUE={agent:99,pro_plus:299};
+  var PLAN_VALUE={agent:{monthly:99,yearly:99},pro_plus:{monthly:299,yearly:299}};
   var LANDING_PATHS=['/pro','/agents/trial','/real-estate-agents','/for/real-estate-agents','/agents','/agent','/pricing'];
 
   /* Site GA4 event name -> Watchdog conversion name. */
@@ -278,7 +277,7 @@
     var session=q.get('session_id')||'';
     if(LANDING_PATHS.indexOf(p)>=0&&onceKey('landing_'+p)) conversion('view_landing',{});
     if(p==='/account'&&q.get('checkout')==='success'&&session) conversion(q.get('trial')==='1'?'trial_started':'subscribe',{event_id:session,plan:q.get('plan'),cadence:q.get('cadence')});
-    if(p==='/agents/trial/thanks'&&session) conversion('trial_started',{event_id:session,plan:'agent',cadence:'monthly'});
+    if(p==='/agents/trial/thanks'&&session) conversion('purchase',{event_id:session,plan:'agent'});
   }
   function planClicks(){
     document.addEventListener('click',function(e){

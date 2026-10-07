@@ -10,9 +10,9 @@ const PRODUCTION_HOSTS = new Set([
 ]);
 const CAPACITY = { agent: 100, pro: 250, pro_plus: 2500 } as const;
 const FOUNDING = {
-  agent: { amount: 34900, label: 'Agent' },
+  agent: { amount: 9900, label: 'Agent' },
   pro: { amount: 349900, label: 'Pro' },
-  pro_plus: { amount: 99900, label: 'Professional' }
+  pro_plus: { amount: 29900, label: 'Professional' }
 } as const;
 const TAX_CODE = 'txcd_10701400';
 type Tier = keyof typeof FOUNDING;
@@ -72,7 +72,7 @@ Deno.serve(async (req) => {
   if (gate.error) return json(req, { error: 'Paid enrollment is unavailable right now.', code: 'BILLING_RELEASE_CONTROL_ERROR' }, 503);
   const evidence = gate.data?.evidence && typeof gate.data.evidence === 'object' ? gate.data.evidence : {};
   const mode = String((evidence as any).checkout_mode || (evidence as any).public_checkout || '').toLowerCase();
-  if (gate.data?.status !== 'passed' || mode !== 'open') return json(req, { error: 'Founding Lifetime enrollment is not open right now.', code: 'LIFETIME_ENROLLMENT_CLOSED' }, 503);
+  if (gate.data?.status !== 'passed' || mode !== 'open') return json(req, { error: 'Lifetime enrollment is not open right now.', code: 'LIFETIME_ENROLLMENT_CLOSED' }, 503);
 
   const { data: isTest } = await admin.rpc('is_watchdog_test_account', { p_user_id: user.id });
   if (isTest) return json(req, { error: 'Watchdog test accounts cannot create real charges.', code: 'WATCHDOG_TEST_NO_REAL_SPEND' }, 403);
@@ -85,11 +85,11 @@ Deno.serve(async (req) => {
   const entitlement = entitlementResult.data;
 
   if (entitlement?.billing_interval === 'lifetime' && entitlement?.subscription_status === 'active') {
-    return json(req, { error: 'This account already has Founding Lifetime access.', code: 'LIFETIME_ALREADY_ACTIVE' }, 409);
+    return json(req, { error: 'This account already has Lifetime access.', code: 'LIFETIME_ALREADY_ACTIVE' }, 409);
   }
   const hasRecurring = Boolean(entitlement?.provider_subscription_id) && ['active', 'trialing', 'past_due', 'paused'].includes(entitlement?.subscription_status || '');
   if (hasRecurring) {
-    return json(req, { error: 'This account already has active recurring billing. End that subscription before switching to Founding Lifetime so you are not charged twice.', code: 'LIFETIME_ACTIVE_SUBSCRIPTION' }, 409);
+    return json(req, { error: 'This account already has active recurring billing. End that subscription before switching to Lifetime so you are not charged twice.', code: 'LIFETIME_ACTIVE_SUBSCRIPTION' }, 409);
   }
 
   const stripeKey = String(Deno.env.get('STRIPE_SECRET_KEY') || '').trim();
@@ -117,7 +117,7 @@ Deno.serve(async (req) => {
           currency: 'usd',
           unit_amount: offer.amount,
           product_data: {
-            name: `Watchdog ${offer.label} · Founding Lifetime`,
+            name: `Watchdog ${offer.label} · Lifetime`,
             description: 'One-time Watchdog professional plan access. Usage-based services and third-party costs are separate.',
             tax_code: TAX_CODE,
             metadata: { product: 'watchdog_founding_lifetime', tier }
@@ -156,6 +156,6 @@ Deno.serve(async (req) => {
     });
   } catch (error) {
     console.error('STRIPE_LIFETIME_CHECKOUT_ERROR', error);
-    return json(req, { error: 'Could not open secure Founding Lifetime checkout.', code: 'STRIPE_LIFETIME_CHECKOUT_ERROR' }, 502);
+    return json(req, { error: 'Could not open secure Lifetime checkout.', code: 'STRIPE_LIFETIME_CHECKOUT_ERROR' }, 502);
   }
 });
