@@ -15,7 +15,7 @@ const games = require('../../api/watchdog-games.js');
 const engine = require('../../api/_watchdog-games-engine.js');
 const board = require('../../api/watchdog-games-board.js');
 const I = engine._internals;
-const { soldPuzzle, townShapesPuzzle, pinDropPuzzle, lineupPuzzle, fairPuzzle, blocksPuzzle, streetName, encodeAnswer, decodeAnswer, decodeData, LAUNCH_DATE } = I;
+const { parcelPin, soldPuzzle, townShapesPuzzle, pinDropPuzzle, lineupPuzzle, fairPuzzle, blocksPuzzle, streetName, encodeAnswer, decodeAnswer, decodeData, LAUNCH_DATE } = I;
 const day = (n) => new Date(Date.parse(LAUNCH_DATE + 'T00:00:00Z') + n * 86400000).toISOString().slice(0, 10);
 const GAME_IDS = ['sold', 'town-shapes', 'pin-drop', 'lineup', 'fair-or-unfair', 'blocks'];
 assert.deepEqual(engine.GAME_IDS, GAME_IDS, 'six games, in a fixed list');
@@ -28,6 +28,10 @@ const townByCode = new Map(towns.map((t) => [t.c, t]));
 assert.equal(towns.length, 564, 'all 564 New Jersey municipalities are playable');
 assert.equal(new Set(towns.map((t) => t.c)).size, 564, 'municipality codes are unique');
 assert.ok(towns.every((t) => t.lat > 38.8 && t.lat < 41.4 && t.lon > -75.6 && t.lon < -73.8), 'centroids fall inside New Jersey');
+
+assert.equal(parcelPin({ d: '0505', b: '0049916', l: '00009', q: null }), '0505_499.16_9', 'block and lot suffixes become decimals');
+assert.equal(parcelPin({ d: '0507', b: '00101', l: '0000210', q: null }), '0507_101_2.10', 'lot suffixes keep both digits');
+assert.equal(parcelPin({ d: '0502', b: '01160', l: '00036', q: 'C-1' }), '0502_1160_36_C-1', 'qualifiers go last');
 
 // ---------- street names never carry a house number or unit ----------
 assert.deepEqual(streetName('23 LEGION DR., UNIT 202'), { street: 'Legion Dr', unit: true });
@@ -81,6 +85,9 @@ for (let i = 0; i < DAYS; i++) {
     const price = Number(decodeAnswer(sold.k));
     assert.ok(price >= 125000 && price <= 3000000, `${date}: sale price in range`);
     assert.ok(!Object.values(sold.home).concat(Object.values(sold)).includes(price), `${date}: price never travels as a plain field`);
+    const place = decodeData(sold.place);
+    assert.match(place.pin, /^\d{4}_[^_\s]+_[^_\s]+(?:_\S+)?$/, `${date}: Sold! links a parcel PIN`);
+    assert.ok(/^\S.*, .+, NJ$/.test(place.address) && !JSON.stringify(sold).includes(place.address), `${date}: full address travels encoded only`);
 
     const shape = townShapesPuzzle(date);
     const code = decodeAnswer(shape.k);
