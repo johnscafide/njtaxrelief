@@ -1,10 +1,7 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "git": {
-    "deploymentEnabled": {
-      "**": false,
-      "claude/project-thread-i78ufs": true
-    }
+    "deploymentEnabled": false
   },
   "functions": {
     "api/sales-by-district.js": {
