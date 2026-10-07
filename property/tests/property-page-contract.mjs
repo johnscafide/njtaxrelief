@@ -200,6 +200,25 @@ assert.equal(res.statusCode, 400);
 res = await call('', {}, { query: { top: '0904_9_21' } });
 assert.equal(res.statusCode, 404);
 
+// Send to my AI agent: Markdown file
+res = await call('', { get_public_property_page: row, get_public_property_page_by_pin: published }, { query: { md: '0904_9_20' } });
+assert.equal(res.statusCode, 200);
+assert.match(res.headers['content-type'], /text\/markdown/);
+assert.match(res.body, /^# 102 Grant Ave/);
+assert.match(res.body, /PAMS PIN\): 0904_9_20/);
+assert.match(res.body, /https:\/\/www\.watchdogindex\.com\/nj\/harrison-town\/102-grant-avenue-07029/);
+assert.doesNotMatch(res.body, /\u2014/, 'no em dashes');
+res = await call('', {}, { query: { md: 'bad pin' } });
+assert.equal(res.statusCode, 400);
+res = await call('/nj/harrison-town/102-grant-avenue-07029.md', { get_public_property_page_slug: published, get_public_property_page: row });
+assert.equal(res.statusCode, 200);
+assert.match(res.headers['content-type'], /text\/markdown/);
+const heartSql = read('supabase/migrations/20261007190000_hearted_properties.sql');
+assert.match(heartSql, /enable row level security/);
+assert.match(heartSql, /revoke all on public\.hearted_properties from anon, authenticated/);
+assert.match(heartSql, /using \(user_id = auth\.uid\(\)\)/);
+assert.doesNotMatch(heartSql, /grant[^;]*update[^;]*hearted_properties/i, 'hearts are insert/delete only');
+
 // Property sitemap
 const sitemap = require(new URL('api/watchdog-property-sitemap.js', root).pathname);
 const xml = sitemap.renderXml([{ path: '/nj/harrison-town/102-grant-avenue-07029', lastmod: '2026-10-07T13:00:00Z' }, { path: '/nj/bad path/<x>' }]);

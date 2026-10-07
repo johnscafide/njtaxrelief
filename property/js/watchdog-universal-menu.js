@@ -410,6 +410,7 @@
         '<a href="' + route('/account') + '"><i class="fas fa-credit-card"></i><span><b>Account &amp; billing</b><small>Plan, subscription and billing</small></span></a>' +
         ((isAgent() || can('agent')) ? '<a href="/agent/training"><i class="fas fa-graduation-cap"></i><span><b>Training Center</b><small>Review Agent and Professional tasks anytime</small></span></a>' : '') +
         '<a href="' + route('/home') + '"><i class="fas fa-house"></i><span><b>Property Home</b><small>Your saved-home dashboard</small></span></a>' +
+        '<a href="' + route('/saved') + '"><i class="fas fa-heart"></i><span><b>Saved homes</b><small>Homes you tapped the heart on</small></span></a>' +
         developerToolsHtml() + salesDeskHtml() +
       '</nav><button class="wd-universal-signout" type="button" data-wd-universal="signout"><i class="fas fa-arrow-right-from-bracket"></i> Sign out</button>';
   }

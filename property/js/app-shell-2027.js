@@ -38,6 +38,7 @@ var configs={
   pulse:{kicker:'Property tracking',title:'Property Pulse',action:'/',actionLabel:'Add property'},
   scan:{kicker:'Professional process',title:'Appeal Scanner',action:'/pro',actionLabel:'Plans & Pricing'},
   account:{kicker:'Account',title:'Account & Billing',action:'/dashboard',actionLabel:'Dashboard'},
+saved:{kicker:'Account',title:'Saved homes',action:'/',actionLabel:'Search an address'},
   'account-homeowner':{kicker:'Account',title:'Homeowner Profile',action:'/account',actionLabel:'Account overview'},
   'account-professional':{kicker:'Account',title:'Professional Profile',action:'/account',actionLabel:'Account overview'},
   'postcard-studio':{kicker:'Agent Desk · Marketing',title:'Postcard Studio',action:'/agent-desk',actionLabel:'Agent Desk'},
