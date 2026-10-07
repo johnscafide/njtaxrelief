@@ -28,15 +28,6 @@
  },
  "towns": [
   {
-   "code": "0103",
-   "town": "Brigantine",
-   "county": "Atlantic",
-   "live": false,
-   "needs": [
-    "co_required"
-   ]
-  },
-  {
    "code": "0104",
    "town": "Buena Borough",
    "county": "Atlantic",
@@ -86,15 +77,6 @@
   {
    "code": "0114",
    "town": "Linwood",
-   "county": "Atlantic",
-   "live": false,
-   "needs": [
-    "co_required"
-   ]
-  },
-  {
-   "code": "0120",
-   "town": "Port Republic",
    "county": "Atlantic",
    "live": false,
    "needs": [

@@ -2,19 +2,19 @@
  "municipality_code": "0118",
  "municipality": "Northfield",
  "county": "ATLANTIC",
- "checked_at": "2026-09-30",
+ "checked_at": "2026-10-06",
  "resale_co": {
   "status": "required",
   "name": "Certificate of Compliance for the Resale of One and Two Family Dwellings (CCO)",
-  "issued_by": "Housing Officer (City Housing and Zoning office)",
+  "issued_by": "City of Northfield Housing Officer (Housing and Zoning)",
   "lead_time": "Inspections are made within 10 business days of the application. If settlement is 5 days or less from the application, the City does not guarantee an inspection before closing and an extra $10 fee may apply.",
   "valid_for": "",
   "requirements": [
    "Smoke alarms and carbon monoxide alarms in good working order, placed by the year the home was built (see fire certificate)",
-   "Portable ABC fire extinguisher near the kitchen (see fire certificate)",
+   "Portable ABC fire extinguisher near the kitchen (packet still lists it; see fire certificate)",
    "Heating certification for every oil or gas fired heating unit, from a NJ licensed plumber or HVAC contractor",
    "Sidewalks, walkways, stairs, driveways and parking areas in good repair",
-   "Yard free of weeds and overgrowth; garages, fences and other accessory structures sound",
+   "Yard free of weeds; garages, fences and other accessory structures sound",
    "Pools clean; pools, hot tubs and spas over 24 inches deep fenced at least 48 inches high with self-closing, self-latching gates",
    "Exterior wood painted or protected; house number plainly visible from the street",
    "Roof, flashing, gutters and downspouts sound and draining properly",
@@ -42,124 +42,131 @@
    {
     "label": "Settlement 5 days or less after application (may apply)",
     "amount": "$10",
-    "quote": "If settlement date is five (5) days or less from the date of Application, there is no guarantee that we will be able to perform the inspection prior to the desired date. An additional $10 fee may apply.",
+    "quote": "An additional $10 fee may apply.",
     "source_url": "https://www.cityofnorthfield.org/pdf/RESALE-property-inspection-registration-packet-2026.pdf",
     "verified": true
    }
   ],
-  "how_to_apply": "Download the 'Application for Certificate of Compliance for Residential Resale (CCO)' packet from the City Forms page, fill in block, lot, settlement date, year built, seller, agent and buyer, and give it to the Housing Officer, City Hall, 1600 Shore Road, with the $85.00 non-refundable fee (checks payable to the City of Northfield) and the heating certification for oil or gas heat. Inspections are scheduled for Mondays only by calling 609-641-2832 ext 140. If repairs are still open at closing, the buyer can sign the notarized 'Resale Certification of As-Is Conditions' form; the home cannot be occupied until a re-inspection passes and the Certificate of Compliance is issued.",
+  "how_to_apply": "Download the 'Application for Certificate of Compliance for Residential Resale (CCO)' packet from the City Forms page, fill in block, lot, settlement date, year built, seller, agent and buyer, and give it to the Housing Officer, City Hall, 1600 Shore Road, Northfield, with the $85.00 non-refundable fee (checks payable to the City of Northfield) and the heating certification for oil or gas heat. Inspections are scheduled for Mondays only by calling 609-641-2832 ext 140 (housing@cityofnorthfield.org). If repairs are still open at closing, the buyer can sign the notarized 'Resale Certification of As-Is Conditions' form; the home cannot be occupied until a re-inspection passes and the Certificate of Compliance is issued.",
   "application_url": "https://www.cityofnorthfield.org/pdf/RESALE-property-inspection-registration-packet-2026.pdf",
   "department_url": "https://www.cityofnorthfield.org/government/zoning.asp",
-  "contact_name": "",
-  "contact_title": "Housing Officer",
   "phone": "609-641-2832 ext 140",
   "email": "housing@cityofnorthfield.org",
+  "contact_name": "",
+  "contact_title": "Housing Officer",
   "evidence": [
    {
     "url": "https://www.cityofnorthfield.org/pdf/RESALE-property-inspection-registration-packet-2026.pdf",
     "quote": "APPLICATION FOR CERTIFICATE OF COMPLIANCE FOR THE RESALE OF ONE AND TWO FAMILY DWELLINGS (CCO)",
-    "doc_date": "2026-07 (file modified July 17, 2026)",
+    "doc_date": "2026-07-17 (PDF modified)",
     "via": "pdf",
     "verified": true
    },
    {
     "url": "https://www.cityofnorthfield.org/pdf/RESALE-property-inspection-registration-packet-2026.pdf",
     "quote": "Inspections are made within ten (10) business days of Application.",
-    "doc_date": "2026-07 (file modified July 17, 2026)",
+    "doc_date": "2026-07-17 (PDF modified)",
     "via": "pdf",
     "verified": true
    },
    {
     "url": "https://www.cityofnorthfield.org/pdf/RESALE-property-inspection-registration-packet-2026.pdf",
-    "quote": "Heating Certificates will only be accepted from NJ Licensed Plumbers or HVAC",
-    "doc_date": "2026-07 (file modified July 17, 2026)",
+    "quote": "Heating Certificates will only be accepted from NJ Licensed Plumbers or HVAC Contractors.",
+    "doc_date": "2026-07-17 (PDF modified)",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.cityofnorthfield.org/pdf/RESALE-property-inspection-registration-packet-2026.pdf",
+    "quote": "(609)641-2832 Ext. 140",
+    "doc_date": "2026-07-17 (PDF modified)",
     "via": "pdf",
     "verified": true
    },
    {
     "url": "https://www.cityofnorthfield.org/government/zoning.asp",
-    "quote": "Inspects residential dwellings for rental occupancy, and / or resale, in accordance with the state of New Jersey's fire code and City of Northfield Zoning regulations",
-    "doc_date": "2026-09-30 (page fetched)",
+    "quote": "Inspects residential dwellings for rental occupancy, and / or resale, in accordance with the state of New Jersey’s fire code and City of Northfield Zoning regulations",
+    "doc_date": "2026-10-06 (page fetched)",
     "via": "page",
     "verified": true
    },
    {
     "url": "https://www.cityofnorthfield.org/government/zoning.asp",
-    "quote": "Inspections may be scheduled for Mondays ONLY by calling 609-641-2832 ext 140 Email housing@cityofnorthfield.org",
-    "doc_date": "2026-09-30 (page fetched)",
+    "quote": "Inspections may be scheduled for Mondays ONLY by calling 609-641-2832 ext 140",
+    "doc_date": "2026-10-06 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.cityofnorthfield.org/government/zoning.asp",
+    "quote": "Email housing@cityofnorthfield.org",
+    "doc_date": "2026-10-06 (page fetched)",
     "via": "page",
     "verified": true
    },
    {
     "url": "https://www.cityofnorthfield.org/pdf/Residential%20resale%20-%20certification%20of%20'as%20is'%20conditions.pdf",
     "quote": "the premises cannot be occupied in whole or in part until a re -inspection is performed, all corrections / repairs have been made, and a Certificate of Compliance is issued.",
-    "doc_date": "2024-04 (file created April 16, 2024)",
+    "doc_date": "2024-04-16 (PDF created)",
     "via": "pdf",
     "verified": true
    },
    {
     "url": "https://www.cityofnorthfield.org/main/forms.asp",
     "quote": "HOUSING - APPLICATION FOR CERTIFICATE OF COMPLIANCE FOR RESIDENTIAL RESALE (CCO)",
-    "doc_date": "2026-09-30 (page fetched)",
+    "doc_date": "2026-10-06 (page fetched)",
     "via": "page",
     "verified": true
    }
   ],
   "confidence": "high",
-  "notes": "Northfield's Housing Officer runs a resale Certificate of Compliance (CCO) inspection for one and two family homes, based on City Code Chapters 128 and 215 and the 2018 International Property Maintenance Code. The City's Uniform Construction Code fee ordinance (Ord. 10-2025, section 128-3) separately lists a $168 fee for a 'certificate of continued occupancy, where applicable'; that is a construction code certificate, not the Housing Officer's $85 resale inspection, so it is not listed as a resale fee. A 2021 version of the resale packet also appears in web search results; the July 2026 version on the Forms page is used here. No Housing Officer name is published on the City site. Rental registration and inspection (Chapter 275) is a separate program, and short-term rentals of 30 days or less are prohibited in the City."
+  "notes": "Northfield's Housing Officer runs a resale Certificate of Compliance (CCO) inspection for one and two family homes, based on City Code Chapters 128 and 215 and the 2018 International Property Maintenance Code. The packet linked from the Forms page was last modified July 17, 2026. The City's Uniform Construction Code fee ordinance separately lists a construction code certificate of continued occupancy fee; that is not the Housing Officer's $85 resale inspection, so it is not listed as a resale fee. No Housing Officer name is published on the City site. Rental registration and inspection is a separate program, and short-term rentals of 30 days or less are prohibited in the City. The state smoke certificate fees that were listed under the resale certificate in the earlier check now appear only under the fire certificate."
  },
  "fire_cert": {
   "requirements": [
-   "Smoke alarms by year built (City packet): before 1977 battery alarm on each level and within 10 feet of bedrooms; 1977 onward A/C powered (hardwired) alarms; interconnected alarms from August 1984; from March 1991 A/C powered with battery backup on each level and inside each bedroom",
+   "Smoke alarms by year built (City packet): before January 1977 battery alarms on each level including the basement and within 10 feet of bedrooms; later homes A/C powered (hardwired), interconnected from August 1984, and from March 1991 A/C powered with battery backup on each level and inside each bedroom",
    "Ten-year sealed battery single station smoke alarms where no alarms exist or when replacing battery alarms; hardwired alarms from original construction or a rehab project may not be replaced with battery alarms",
    "Replace smoke alarms 10 years from manufacture or when they fail tests; replace combination smoke/CO alarms at the end-of-life signal or 10 years",
    "Carbon monoxide alarm within 10 feet of bedroom doors; bedrooms with fuel burning appliances also need a CO alarm",
-   "Portable fire extinguisher (City packet dated July 2026 still lists it): minimum 2A-10B:C, no more than 10 pounds, within 10 feet of the kitchen in the path of egress, mounted with the manufacturer's bracket with the top no more than 5 feet above the floor, serviced and tagged by a DFS-certified contractor within 12 months or a recent purchase receipt, with the owner's manual left for the new occupant"
+   "Portable fire extinguisher (form still lists it): minimum 2A-10B:C, no more than 10 pounds, within 10 feet of the kitchen in the path of egress, mounted on the manufacturer's bracket with the top no more than 5 feet above the floor, serviced and tagged by a certified contractor within 12 months or a receipt for a recent purchase, with the owner's manual left for the new occupant"
   ],
   "authorities": [
    {
     "name": "NJ DCA Division of Fire Safety, Bureau of Fire Code Enforcement",
     "type": "state_dca",
     "area_served": "Entire city",
-    "lead_time": "More than 10 business days before closing for the lowest fee",
+    "lead_time": "More than 10 business days before the change of occupant for the lowest fee",
     "fees": [
      {
-      "label": "More than 10 business days before closing",
-      "amount": "$45",
-      "quote": "If you are applying for a certificate more than ten business days from the closing date the fee is $45 dollars",
-      "source_url": "https://firesolutions.dca.nj.gov/ultra-fire-home/smoke-application-create/",
-      "verified": null
-     },
-     {
-      "label": "4 to 10 business days before closing",
-      "amount": "$90",
-      "quote": "if applying 4 to 10 business days from the closing date the fee is $90",
-      "source_url": "https://firesolutions.dca.nj.gov/ultra-fire-home/smoke-application-create/",
-      "verified": null
-     },
-     {
-      "label": "Less than 4 business days before closing",
-      "amount": "$161",
-      "quote": "if the closing date is less than four business days the fee is $161.",
-      "source_url": "https://firesolutions.dca.nj.gov/ultra-fire-home/smoke-application-create/",
-      "verified": null
-     }
-    ],
-    "how_to_apply": "Apply online through the NJ DCA Fire Safety portal ('Start Your Smoke Certification Application'). Pay by e-check or credit card before submitting; a valid email address is required. The certificate is emailed once the application is submitted, the fee is paid and any required inspections are done. Homes heated by electricity with no CO alarm requirement should also email BFCE_CSDCMAC@dca.nj.gov.",
-    "application_url": "https://firesolutions.dca.nj.gov/ultra-fire-home/smoke-application-create/",
-    "department_url": "https://www.nj.gov/dca/dfs/offices/bfce.shtml",
-    "contact_name": "Louis Kilmer",
-    "contact_title": "Bureau Chief, Bureau of Fire Code Enforcement (listed as the Fire Official in the state fire directory)",
-    "phone": "609-633-6106",
-    "email": "BFCE_CSDCMAC@dca.nj.gov",
-    "evidence": [
-     {
-      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
-      "quote": "Northfield City Fire Prev Northfield City Bldg Dept",
-      "doc_date": "2025 directory page (survey date 5/29/2025)",
-      "via": "state_directory",
+      "label": "Request received more than 10 business days before the change of occupant",
+      "amount": "$45.00",
+      "quote": "Requests for a CSACMAPFEC received more than 10 business days prior to the change of occupant: $45.00",
+      "source_url": "https://www.nj.gov/dca/divisions/dfs/codes/regulations/r.2018%20d.074%20(50%20n.j.r.%20729(a)).pdf",
       "verified": true
      },
+     {
+      "label": "Request received 4 to 10 business days before the change of occupant",
+      "amount": "$90.00",
+      "quote": "Requests for a CSACMAPFEC received four to 10 business days prior to the change of occupant: $90.00",
+      "source_url": "https://www.nj.gov/dca/divisions/dfs/codes/regulations/r.2018%20d.074%20(50%20n.j.r.%20729(a)).pdf",
+      "verified": true
+     },
+     {
+      "label": "Request received fewer than 4 business days before the change of occupant",
+      "amount": "$161.00",
+      "quote": "Requests for a CSACMAPFEC received fewer than four business days prior to the change of occupant: $161.00",
+      "source_url": "https://www.nj.gov/dca/divisions/dfs/codes/regulations/r.2018%20d.074%20(50%20n.j.r.%20729(a)).pdf",
+      "verified": true
+     }
+    ],
+    "how_to_apply": "Apply online through the NJ DCA Fire Safety service portal ('Start Your Smoke Certification Application'), choosing change of ownership, the closing date and the property location, and pay online. For questions call the Bureau of Fire Code Enforcement at (609) 633-6106. Also ask the City Housing Officer (609-641-2832 ext 140) whether the City's resale CCO inspection is accepted in place of, or in addition to, the state certificate.",
+    "application_url": "https://firesolutions.dca.nj.gov/ultra-fire-home/smoke-application-create/",
+    "department_url": "https://www.nj.gov/dca/dfs/offices/bfce.shtml",
+    "phone": "609-633-6106",
+    "email": "",
+    "contact_name": "Louis Kilmer",
+    "contact_title": "Bureau Chief, Bureau of Fire Code Enforcement (listed as the Fire Official in the state fire directory)",
+    "evidence": [
      {
       "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
       "quote": "S Northfield City",
@@ -176,29 +183,36 @@
      },
      {
       "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
-      "quote": "LEAID: 0118-999 Enf Auth. State Fire Official Louis Kilmer Phone (609) 633-6132 Addr: 1600 Shore Rd Northfield NJ 08225 Phone (609) 641-0601",
-      "doc_date": "2025 directory page (survey date 5/29/2025)",
+      "quote": "LEAID: 0118-999 Northfield City Fire Prev SMOKE DETECTOR COMPLIANCE Name: Northfield City Bldg Dept",
+      "doc_date": "2025-05-29 (survey date)",
       "via": "state_directory",
-      "verified": true
-     },
-     {
-      "url": "https://firesolutions.dca.nj.gov/ultra-fire-home/smoke-application-create/",
-      "quote": "Please complete the following information to apply for a Certificate of Smoke Alarm, Carbon Monoxide Alarm, and Secondary Power Source Identification Label Compliance (CSACMASPSIL). You will be required to pay, via e-check or credit card, before you can submit this application. This application requires a valid email address.",
-      "doc_date": "2026-09-30 (page fetched)",
-      "via": "page",
       "verified": null
      },
      {
-      "url": "https://firesolutions.dca.nj.gov/ultra-fire-home/smoke-application-create/",
-      "quote": "if your property is heated with electricity and does not require a carbon monoxide alarm, check the fourth box and send an email to BFCE_CSDCMAC@dca.nj.gov stating that you are not subject to that requirement.",
-      "doc_date": "2026-09-30 (page fetched)",
-      "via": "page",
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "Fire Official Louis Kilmer Phone (609) 641-0601",
+      "doc_date": "2025-05-29 (survey date)",
+      "via": "state_directory",
       "verified": null
      },
      {
       "url": "https://www.nj.gov/dca/dfs/offices/bfce.shtml",
-      "quote": "Louis Kilmer, Bureau Chief CPM Address: P.O. Box 809, Trenton, NJ 08625-0809 Phone: (609) 633-6106",
-      "doc_date": "2026-09-30 (page fetched)",
+      "quote": "Louis Kilmer, Bureau Chief CPM",
+      "doc_date": "2026-10-06 (page fetched)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/offices/bfce.shtml",
+      "quote": "Phone: (609) 633-6106",
+      "doc_date": "2026-10-06 (page fetched)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://firesolutions.dca.nj.gov/ultra-fire-home/smoke-application-create/",
+      "quote": "Start Your Smoke Certification Application",
+      "doc_date": "2026-10-06 (page fetched)",
       "via": "page",
       "verified": true
      }
@@ -206,7 +220,7 @@
     "confidence": "medium"
    }
   ],
-  "notes": "NJ DCA lists Northfield as State enforced (S) and its July 17, 2026 list marks Northfield 'SC' (the State issues smoke certificates), so the DCA online certificate is listed here. However, the state fire directory's Northfield page (survey 5/29/2025) names 'Northfield City Bldg Dept' at 1600 Shore Rd, (609) 641-0601, for smoke detector compliance, and the City's July 2026 resale CCO packet has the Housing Officer check smoke alarms, CO alarms and the fire extinguisher during the resale inspection. The City does not say whether its CCO inspection also produces the state smoke certificate or whether the seller must also get the DCA certificate. The directory gives (609) 633-6132 for Louis Kilmer; the Bureau's own page gives (609) 633-6106, which is used here."
+  "notes": "NJ DCA lists Northfield as State enforced (S) and its July 17, 2026 list marks Northfield 'SC' (the State issues smoke certificates), so the DCA online certificate is listed here, with the state fees in N.J.A.C. 5:70-2.9(d) cited from the NJ Register adoption (R.2018 d.074): $45.00, $90.00 and $161.00. However, the state fire directory's Northfield page (survey 5/29/2025) names 'Northfield City Bldg Dept' at 1600 Shore Rd, (609) 641-0601, for smoke detector compliance, and the City's July 2026 resale CCO packet has the Housing Officer check smoke alarms, CO alarms and a fire extinguisher. The City does not say whether its CCO inspection also produces the state smoke certificate. The packet still lists a fire extinguisher, which state law (P.L.2025, c.19) dropped from the sale certificate in February 2025. The directory gives (609) 633-6132 for Louis Kilmer; the Bureau's own page gives (609) 633-6106, which is used here."
  },
  "other_items": [
   {
@@ -228,15 +242,16 @@
  "open_questions": [
   "Does the Housing Officer's resale CCO inspection also issue the smoke/CO certificate, or must the seller also get the NJ DCA online certificate? (DCA marks Northfield 'SC'; the state directory lists the City Building Dept for smoke detector compliance.)",
   "The Housing Officer's name is not published on the City site.",
-  "How long the Certificate of Compliance stays valid is not stated."
+  "How long the Certificate of Compliance stays valid is not stated.",
+  "Does the City still require the fire extinguisher at resale after P.L.2025, c.19?"
  ],
  "verification": {
   "fees": 6,
-  "fee_ok": 3,
+  "fee_ok": 6,
   "fee_bad": 0,
-  "fee_unchecked": 3,
-  "quotes": 14,
-  "q_ok": 12,
+  "fee_unchecked": 0,
+  "quotes": 16,
+  "q_ok": 14,
   "q_bad": 0,
   "q_unchecked": 2
  }

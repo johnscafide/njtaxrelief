@@ -2,7 +2,6 @@
  "municipality_code": "0334",
  "municipality": "Springfield Township",
  "county": "BURLINGTON",
- "checked_at": "2026-09-30",
  "resale_co": {
   "status": "required",
   "name": "Certificate for Change in Occupancy or Ownership (Resale/Rental Certificate)",
@@ -25,14 +24,14 @@
     "label": "Resale inspection (includes two inspections)",
     "amount": "$150.00",
     "quote": "RESALE & RENTAL FEE: $150.00",
-    "source_url": "https://www.springfieldtownshipnj.org/api/blob/viewBlob?i=8EdLWBbrPaZMTUQGXRxGse9maokNtDsfLztEPHsUFaD%2fkDxkTbO4b1PLWTCA07hN",
+    "source_url": "https://www.springfieldtownshipnj.org/api/blob/viewBlob?rf=t&i=8EdLWBbrPaZMTUQGXRxGse9maokNtDsfLztEPHsUFaD%2FkDxkTbO4b1PLWTCA07hN",
     "verified": true
    },
    {
     "label": "Each additional inspection after the first two",
     "amount": "$65.00",
-    "quote": "Two inspections are included.  All additional inspections will be charged a $65.00 fee per inspection.",
-    "source_url": "https://www.springfieldtownshipnj.org/api/blob/viewBlob?i=8EdLWBbrPaZMTUQGXRxGse9maokNtDsfLztEPHsUFaD%2fkDxkTbO4b1PLWTCA07hN",
+    "quote": "Two inspections are included. All additional inspections will be charged a $65.00 fee per inspection.",
+    "source_url": "https://www.springfieldtownshipnj.org/api/blob/viewBlob?rf=t&i=8EdLWBbrPaZMTUQGXRxGse9maokNtDsfLztEPHsUFaD%2FkDxkTbO4b1PLWTCA07hN",
     "verified": true
    }
   ],
@@ -52,30 +51,30 @@
     "verified": true
    },
    {
-    "url": "https://www.springfieldtownshipnj.org/api/blob/viewBlob?i=8EdLWBbrPaZMTUQGXRxGse9maokNtDsfLztEPHsUFaD%2fkDxkTbO4b1PLWTCA07hN",
+    "url": "https://www.springfieldtownshipnj.org/api/blob/viewBlob?rf=t&i=8EdLWBbrPaZMTUQGXRxGse9maokNtDsfLztEPHsUFaD%2FkDxkTbO4b1PLWTCA07hN",
     "quote": "All resales shall comply with Springfield Township code 150.2 ‐ Certificate for Change in Occupancy or Ownership.",
-    "doc_date": "2025-03 (PDF created March 25, 2025; posted January 24, 2026)",
+    "doc_date": "2025-03 (PDF created March 25, 2025; listed as \"Resale+Rental+Fee+instructions+Springfield\" in the Construction Office resources, posted January 24, 2026; re-opened 2026-10-06)",
     "via": "pdf",
     "verified": true
    },
    {
-    "url": "https://www.springfieldtownshipnj.org/api/blob/viewBlob?i=8EdLWBbrPaZMTUQGXRxGse9maokNtDsfLztEPHsUFaD%2fkDxkTbO4b1PLWTCA07hN",
+    "url": "https://www.springfieldtownshipnj.org/api/blob/viewBlob?rf=t&i=8EdLWBbrPaZMTUQGXRxGse9maokNtDsfLztEPHsUFaD%2FkDxkTbO4b1PLWTCA07hN",
     "quote": "Check or Money Order for $150.00 payable to Springfield Township submitted with signed Resale/Rental Application.",
-    "doc_date": "2025-03 (PDF created March 25, 2025; posted January 24, 2026)",
+    "doc_date": "2025-03 (PDF created March 25, 2025; listed as \"Resale+Rental+Fee+instructions+Springfield\" in the Construction Office resources, posted January 24, 2026; re-opened 2026-10-06)",
     "via": "pdf",
     "verified": true
    },
    {
-    "url": "https://www.springfieldtownshipnj.org/api/blob/viewBlob?i=8EdLWBbrPaZMTUQGXRxGse9maokNtDsfLztEPHsUFaDvE4IuruYbYfb5tm5ilT4t",
+    "url": "https://www.springfieldtownshipnj.org/api/blob/viewBlob?rf=t&i=8EdLWBbrPaZMTUQGXRxGse9maokNtDsfLztEPHsUFaDvE4IuruYbYfb5tm5ilT4t",
     "quote": "Inspection results and certificate will be sent via email.",
-    "doc_date": "2025-03 (form marked Rev: Mar 2025; posted January 24, 2026)",
+    "doc_date": "2025-03 (form marked Rev: Mar 2025; listed as \"Resale_Rental+Springfield.pdf\", posted January 24, 2026; re-opened 2026-10-06)",
     "via": "pdf",
     "verified": true
    },
    {
-    "url": "https://www.springfieldtownshipnj.org/api/blob/viewBlob?i=8EdLWBbrPaZMTUQGXRxGse9maokNtDsfLztEPHsUFaDvE4IuruYbYfb5tm5ilT4t",
+    "url": "https://www.springfieldtownshipnj.org/api/blob/viewBlob?rf=t&i=8EdLWBbrPaZMTUQGXRxGse9maokNtDsfLztEPHsUFaDvE4IuruYbYfb5tm5ilT4t",
     "quote": "Two inspections are included in this fee. Additional inspections will be charged a $65.00 fee per inspection.",
-    "doc_date": "2025-03 (form marked Rev: Mar 2025; posted January 24, 2026)",
+    "doc_date": "2025-03 (form marked Rev: Mar 2025; listed as \"Resale_Rental+Springfield.pdf\", posted January 24, 2026; re-opened 2026-10-06)",
     "via": "pdf",
     "verified": true
    },
@@ -102,7 +101,7 @@
    }
   ],
   "confidence": "high",
-  "notes": "The leads file pointed to springfield-nj.us, which is Springfield Township in Union County; the Burlington County township site is www.springfieldtownshipnj.org (Jobstown). Its forms are served through a document viewer: the application link opens the viewer page, and the direct PDF address (/api/blob/viewBlob?i=...) returns the PDF only when opened from the site (automated fetches without a referring page get the viewer instead). Staff names and titles come from the township's staff widget data (app.membershipware.com), shown on the Construction Office page; the site spells the title \"Construction Offical\". Other contact: Kathy Warnebold, Technical Assistant to the Construction Official, construction@springfieldtownshipnj.org, 609-723-2464 (Tuesday to Thursday 8:00AM to 1:00PM). The same application covers rentals; for rentals built before 1978 a lead-safe certificate is also required."
+  "notes": "The leads file pointed to springfield-nj.us, which is Springfield Township in Union County; the Burlington County township site is www.springfieldtownshipnj.org (Jobstown). Its forms are served through a document viewer: the application link opens the viewer page, and the direct PDF address (/api/blob/viewBlob?i=...) returns the PDF only when opened from the site (automated fetches without a referring page get the viewer instead). Staff names and titles come from the township's staff widget data (app.membershipware.com), shown on the Construction Office page; the site spells the title \"Construction Offical\". Other contact: Kathy Warnebold, Technical Assistant to the Construction Official, construction@springfieldtownshipnj.org, 609-723-2464 (Tuesday to Thursday 8:00AM to 1:00PM). The same application covers rentals; for rentals built before 1978 a lead-safe certificate is also required. Re-check 2026-10-06: the fee instructions PDF and the application PDF are unchanged (same March 2025 files, same wording and fees) and are still listed in the Construction Office resources. The township site now serves its documents through a viewer: the resource list links each file as /api/blob/viewBlob?rf=t&i=..., and the same address returns the actual PDF only when the request comes from a township page (a same-site referring page). A direct automated fetch, with or without rf=t, gets the viewer HTML instead of the PDF, which is why the weekly script could no longer find the quotes. The links above are the current resource-list links; the quotes were re-read from the PDFs fetched through the site. No other official fee source was found: the Construction Office page, Forms & Permits page and Fire Department page do not list the resale fee, and the township code on ecode360 (SP0427) could not be opened (bot check). Staff data re-checked: Joseph LaRocca (Construction Offical, Building and Fire Sub-code Official) and Kathy Warnebold still listed."
  },
  "fire_cert": {
   "requirements": [
@@ -152,26 +151,26 @@
       "quote": "LEAID: 0334-999 Enf Auth. State Fire Official Louis Kilmer Phone (609)633-6132",
       "doc_date": "2025-07-21 (survey date)",
       "via": "state_directory",
-      "verified": true
+      "verified": null
      },
      {
       "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
       "quote": "SMOKE DETECTOR COMPLIANCE Name:Springfield Twp Constr Off Addr: PO Box 119 Jobstown NJ 08041 Phone (609) 723-2464",
       "doc_date": "2025-07-21 (survey date)",
       "via": "state_directory",
-      "verified": true
+      "verified": null
      },
      {
-      "url": "https://www.springfieldtownshipnj.org/api/blob/viewBlob?i=8EdLWBbrPaZMTUQGXRxGse9maokNtDsfLztEPHsUFaD%2fkDxkTbO4b1PLWTCA07hN",
+      "url": "https://www.springfieldtownshipnj.org/api/blob/viewBlob?rf=t&i=8EdLWBbrPaZMTUQGXRxGse9maokNtDsfLztEPHsUFaD%2FkDxkTbO4b1PLWTCA07hN",
       "quote": "NJ Admin Code Section 5:70‐4.19 Smoke Alarms for one and two family dwellings; carbon monoxide alarms; and portable fire extinguishers",
-      "doc_date": "2025-03 (PDF created March 25, 2025; posted January 24, 2026)",
+      "doc_date": "2025-03 (PDF created March 25, 2025; posted January 24, 2026; re-opened 2026-10-06)",
       "via": "pdf",
       "verified": true
      },
      {
-      "url": "https://www.springfieldtownshipnj.org/api/blob/viewBlob?i=8EdLWBbrPaZMTUQGXRxGse9maokNtDsfLztEPHsUFaD%2fkDxkTbO4b1PLWTCA07hN",
+      "url": "https://www.springfieldtownshipnj.org/api/blob/viewBlob?rf=t&i=8EdLWBbrPaZMTUQGXRxGse9maokNtDsfLztEPHsUFaD%2FkDxkTbO4b1PLWTCA07hN",
       "quote": "Must be rated 2A‐10B:C and no more than 10 pounds",
-      "doc_date": "2025-03 (PDF created March 25, 2025; posted January 24, 2026)",
+      "doc_date": "2025-03 (PDF created March 25, 2025; posted January 24, 2026; re-opened 2026-10-06)",
       "via": "pdf",
       "verified": true
      }
@@ -185,26 +184,28 @@
   {
    "label": "Open construction permits closed",
    "detail": "No outstanding Springfield Township construction permits; all permitted work must be finalized and passed before the resale inspection passes.",
-   "source_url": "https://www.springfieldtownshipnj.org/api/blob/viewBlob?i=8EdLWBbrPaZMTUQGXRxGse9maokNtDsfLztEPHsUFaD%2fkDxkTbO4b1PLWTCA07hN"
+   "source_url": "https://www.springfieldtownshipnj.org/api/blob/viewBlob?rf=t&i=8EdLWBbrPaZMTUQGXRxGse9maokNtDsfLztEPHsUFaD%2FkDxkTbO4b1PLWTCA07hN"
   },
   {
    "label": "Rental registration deactivated",
    "detail": "If the property was a rental, the landlord registration is deactivated on the resale application.",
-   "source_url": "https://www.springfieldtownshipnj.org/api/blob/viewBlob?i=8EdLWBbrPaZMTUQGXRxGse9maokNtDsfLztEPHsUFaDvE4IuruYbYfb5tm5ilT4t"
+   "source_url": "https://www.springfieldtownshipnj.org/api/blob/viewBlob?rf=t&i=8EdLWBbrPaZMTUQGXRxGse9maokNtDsfLztEPHsUFaDvE4IuruYbYfb5tm5ilT4t"
   }
  ],
  "open_questions": [
   "Lead time before closing and certificate validity are not published.",
-  "Confirm the extinguisher is still required given P.L.2025, c.19; the March 2025 checklist lists it."
+  "Confirm the extinguisher is still required given P.L.2025, c.19; the March 2025 checklist lists it.",
+  "The township fee PDFs cannot be checked by an automated fetch (the site only returns the PDF to visitors coming from its own pages); a person may need to confirm the $150 / $65 fees by opening the Construction Office resources in a browser or calling 609-723-2464."
  ],
+ "checked_at": "2026-10-06",
  "verification": {
   "fees": 2,
-  "fee_ok": 2,
-  "fee_bad": 0,
+  "fee_ok": 0,
+  "fee_bad": 2,
   "fee_unchecked": 0,
   "quotes": 15,
-  "q_ok": 15,
-  "q_bad": 0,
-  "q_unchecked": 0
+  "q_ok": 7,
+  "q_bad": 6,
+  "q_unchecked": 2
  }
 }

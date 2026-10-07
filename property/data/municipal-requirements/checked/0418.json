@@ -2,7 +2,7 @@
  "municipality_code": "0418",
  "municipality": "Haddon Heights Borough",
  "county": "CAMDEN",
- "checked_at": "2026-09-30",
+ "checked_at": "2026-10-06",
  "resale_co": {
   "status": "required",
   "name": "Certificate of Continued Occupancy (CCO) / Certificate of Compliance",
@@ -144,8 +144,8 @@
      },
      {
       "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
-      "quote": "SMOKE DETECTOR COMPLIANCE Name: Haddon Hgts Boro Fire Prev Addr: Rear 608 Station Av Haddon Heights NJ 08035 Phone (856) 546-7135",
-      "doc_date": "2026-09 (directory PDF; fire department survey 5/2026)",
+      "quote": "LEAID: 0418-001 Haddon Heights Boro SMOKE DETECTOR COMPLIANCE Enf Auth. Fire Dept ... Name: Haddon Hgts Boro Fire Prev ... Addr: Rear 608 Station Av ... Haddon Heights NJ 08035 ... Fire Official Benjamin Zwaska Rear 608 Station Av ... Phone (856) 546-7135 Phone JUVENILE FIRESETTERS PROGRAM",
+      "doc_date": "2026-09-03 (directory PDF dated; fire department survey 7/22/2026)",
       "via": "pdf",
       "verified": true
      }
@@ -164,12 +164,12 @@
  ],
  "verification": {
   "fees": 8,
-  "fee_ok": 8,
+  "fee_ok": 4,
   "fee_bad": 0,
-  "fee_unchecked": 0,
+  "fee_unchecked": 4,
   "quotes": 7,
-  "q_ok": 7,
+  "q_ok": 6,
   "q_bad": 0,
-  "q_unchecked": 0
+  "q_unchecked": 1
  }
 }

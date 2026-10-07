@@ -2,7 +2,7 @@
  "municipality_code": "0421",
  "municipality": "Lawnside Borough",
  "county": "CAMDEN",
- "checked_at": "2026-09-30",
+ "checked_at": "2026-10-06",
  "resale_co": {
   "status": "required",
   "name": "Certificate of Occupancy (Resale / Rental)",
@@ -190,8 +190,8 @@
      },
      {
       "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
-      "quote": "SMOKE DETECTOR COMPLIANCE Name: Regional Fire Prev Alliance Addr: 205 Haines Ave Barrington NJ 08007 Phone (856) 547-0991",
-      "doc_date": "2026-09 (directory PDF; fire department survey 5/2026)",
+      "quote": "LEAID: 0421-001 Lawnside Boro SMOKE DETECTOR COMPLIANCE Enf Auth. Municipal ... Name: Regional Fire Prev Alliance ... Addr: 205 Haines Ave ... Barrington NJ 08007 ... Fire Official Nicholas D'Alonzo 205 Haines Ave ... Phone (856) 547-0991 Phone JUVENILE FIRESETTERS PROGRAM",
+      "doc_date": "2026-09-03 (directory PDF dated; fire department survey 5/19/2026)",
       "via": "pdf",
       "verified": true
      }
@@ -219,12 +219,12 @@
  ],
  "verification": {
   "fees": 8,
-  "fee_ok": 8,
+  "fee_ok": 5,
   "fee_bad": 0,
-  "fee_unchecked": 0,
+  "fee_unchecked": 3,
   "quotes": 11,
-  "q_ok": 10,
+  "q_ok": 6,
   "q_bad": 0,
-  "q_unchecked": 1
+  "q_unchecked": 5
  }
 }

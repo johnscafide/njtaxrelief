@@ -2,7 +2,6 @@
  "municipality_code": "0401",
  "municipality": "Audubon Borough",
  "county": "CAMDEN",
- "checked_at": "2026-09-30",
  "resale_co": {
   "status": "required",
   "name": "Certificate of Occupancy for Sale or Resale of Property",
@@ -74,8 +73,15 @@
    },
    {
     "url": "https://www.audubonnj.com/fs/resource-manager/view/05c9a18f-ba4c-4afa-972c-de7cac87ec93",
-    "quote": "A Certificate of Occupancy is required for the sale or resale of all residential and non-residential properties in the Borough of Audubon, whether occupied or unoccupied. This includes both an interior fire and housing code inspection and an exterior property inspection. A 15-business-day notice is required to schedule Fire and Exterior CO inspections.",
-    "doc_date": "Cites Ordinance #2015-4 (adopted June 23, 2015); sheet undated",
+    "quote": "Certificate of Occupancy is required for the sale or resale of all residential and non-residential",
+    "doc_date": "2026-07-07 (PDF created July 7, 2026; cites Ordinance #2015-4)",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.audubonnj.com/fs/resource-manager/view/05c9a18f-ba4c-4afa-972c-de7cac87ec93",
+    "quote": "This includes both an interior fire and housing code inspection and an exterior property inspection. A 15-business-day notice is required to schedule Fire and Exterior CO inspections.",
+    "doc_date": "2026-07-07 (PDF created July 7, 2026; cites Ordinance #2015-4)",
     "via": "pdf",
     "verified": true
    },
@@ -88,7 +94,7 @@
    }
   ],
   "confidence": "high",
-  "notes": "Authority is Ordinance 2015-4, Borough Code Section 105-296. The Borough pages say commercial properties do not need a CO before settlement, but the 2026 application form says a CO is required on residential and commercial properties; this does not affect 1-2 family homes. One Borough page says there is no application to complete (email request), while the resale CO page links a 2026 application form; either route goes to the same contact. The form also asks whether the property is being flipped. A 30-day temporary CO is issued only in exceptional cases such as severe weather or contractor shortages. Exterior inspection does not require anyone present; the fire inspection happens on Thursday mornings only and someone must meet the Fire Marshal or provide a lockbox code. Phone listed as 856-547-1240 option 3 or ext. 110, and 856-547-0710 ext. 110."
+  "notes": "Authority is Ordinance 2015-4, Borough Code Section 105-296. The Borough pages say commercial properties do not need a CO before settlement, but the 2026 application form says a CO is required on residential and commercial properties; this does not affect 1-2 family homes. One Borough page says there is no application to complete (email request), while the resale CO page links a 2026 application form; either route goes to the same contact. The form also asks whether the property is being flipped. A 30-day temporary CO is issued only in exceptional cases such as severe weather or contractor shortages. Exterior inspection does not require anyone present; the fire inspection happens on Thursday mornings only and someone must meet the Fire Marshal or provide a lockbox code. Phone listed as 856-547-1240 option 3 or ext. 110, and 856-547-0710 ext. 110. Re-check 2026-10-06: the Borough CO information sheet and fire requirements sheet (both PDFs generated July 7, 2026) say the same thing as before; fees ($50 exterior, $25 fire), contact and 90-day validity are unchanged. The sheets use large first letters, and the PDF text layer moves each paragraph's first letter out of place (for example \"A Certificate\" reads as \"Certificate ... A properties\", and \"Fire inspections\" loses its \"F\"). The old quotes therefore could not be found by text search; they were replaced with verbatim pieces that avoid the displaced letters."
  },
  "fire_cert": {
   "requirements": [
@@ -131,14 +137,21 @@
      {
       "url": "https://www.audubonnj.com/fs/resource-manager/view/05c9a18f-ba4c-4afa-972c-de7cac87ec93",
       "quote": "State law requires a fire inspection before any sale, and failure to comply may result in state fines.",
-      "doc_date": "",
+      "doc_date": "2026-07-07 (PDF created July 7, 2026)",
       "via": "pdf",
       "verified": true
      },
      {
       "url": "https://www.audubonnj.com/fs/resource-manager/view/683dc676-1b13-445c-9e63-e74ff15a5309",
-      "quote": "Fire inspections occur on Thursday mornings only. A responsible person must be available to meet the Fire Marshal or provide a lockbox code for access.",
-      "doc_date": "",
+      "quote": "inspections occur on Thursday mornings only. A responsible person must be available to",
+      "doc_date": "2026-07-07 (PDF created July 7, 2026)",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.audubonnj.com/fs/resource-manager/view/683dc676-1b13-445c-9e63-e74ff15a5309",
+      "quote": "meet the Fire Marshal or provide a lockbox code for access.",
+      "doc_date": "2026-07-07 (PDF created July 7, 2026)",
       "via": "pdf",
       "verified": true
      },
@@ -184,13 +197,14 @@
   "Whether the Borough accepts the state DCA smoke certificate form or issues its own certificate is not stated.",
   "Could not open the ordinance text (Section 105-296) on ecode360 to confirm fees in code."
  ],
+ "checked_at": "2026-10-06",
  "verification": {
   "fees": 6,
   "fee_ok": 6,
   "fee_bad": 0,
   "fee_unchecked": 0,
-  "quotes": 8,
-  "q_ok": 8,
+  "quotes": 10,
+  "q_ok": 10,
   "q_bad": 0,
   "q_unchecked": 0
  }

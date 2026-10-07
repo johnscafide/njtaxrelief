@@ -2,7 +2,6 @@
  "municipality_code": "1108",
  "municipality": "Pennington Borough",
  "county": "MERCER",
- "checked_at": "2026-09-30",
  "resale_co": {
   "status": "not_required",
   "name": "",
@@ -42,14 +41,21 @@
    },
    {
     "url": "https://www.penningtonboro.org/1239/Borough-Home-Sale-Checklist",
-    "quote": "Once you have a closing date email Gabrielle Smith, DPW ( publicworks@penningtonboro.org ), to schedule a final meter read.",
-    "doc_date": "",
+    "quote": "Once you have a closing date email Gabrielle Smith, DPW ( ... ), to schedule a final meter read. Please include the name of your title company in your email.",
+    "doc_date": "2026-10-06 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.penningtonboro.org/1239/Borough-Home-Sale-Checklist",
+    "quote": "The fee for the House Inspection and non-quarterly meter read will be charged to the final water/sewer bill.",
+    "doc_date": "2026-10-06 (page fetched)",
     "via": "page",
     "verified": true
    }
   ],
   "confidence": "high",
-  "notes": "The Borough Home Sale Checklist lists three steps: a DPW House Inspection (609-737-9440), the fire inspection through the NJ DCA portal, and a final meter read. The checklist PDF (July 2024) misspells the DPW email as 'penningotnboro.org'; the web page shows publicworks@penningtonboro.org. The DPW House Inspection is a water and sewer inspection, not a Certificate of Occupancy; its fee is in other_items."
+  "notes": "The Borough Home Sale Checklist lists three steps: a DPW House Inspection (609-737-9440), the fire inspection through the NJ DCA portal, and a final meter read. The checklist PDF (July 2024) misspells the DPW email as 'penningotnboro.org'; the web page shows publicworks@penningtonboro.org. The DPW House Inspection is a water and sewer inspection, not a Certificate of Occupancy; its fee is in other_items. Re-checked 2026-10-06: the checklist wording is unchanged, but the site now hides the DPW email address behind Cloudflare email protection (it shows as '[email protected]' in the page text; the link still decodes to publicworks@penningtonboro.org), so the evidence quote now stops short of the address."
  },
  "fire_cert": {
   "requirements": [],
@@ -61,46 +67,25 @@
     "lead_time": "More than 10 business days before closing for the lowest fee",
     "fees": [
      {
-      "label": "Application more than 10 business days before closing",
-      "amount": "$45",
-      "quote": "If you are applying for a certificate more than ten business days from the closing date the fee is $45 dollars",
-      "source_url": "https://firesolutions.dca.nj.gov/ultra-fire-home/smoke-application-create/",
-      "verified": null
-     },
-     {
-      "label": "Application 4 to 10 business days before closing",
-      "amount": "$90",
-      "quote": "if applying 4 to 10 business days from the closing date the fee is $90",
-      "source_url": "https://firesolutions.dca.nj.gov/ultra-fire-home/smoke-application-create/",
-      "verified": null
-     },
-     {
-      "label": "Application less than 4 business days before closing",
-      "amount": "$161",
-      "quote": "if the closing date is less than four business days the fee is $161.",
-      "source_url": "https://firesolutions.dca.nj.gov/ultra-fire-home/smoke-application-create/",
-      "verified": null
-     },
-     {
-      "label": "State rule: request received more than 10 business days before change of occupant (N.J.A.C. 5:70-2.9(d), NJ Register October 2, 2017)",
+      "label": "State fee: Request received more than 10 business days before the change of occupant (N.J.A.C. 5:70-2.9(d))",
       "amount": "$45.00",
-      "quote": "1. Requests for a CSDCMAC received more than 10 business days prior to the change of occupant: $45.00;",
-      "source_url": "https://www.nj.gov/dca/divisions/dfs/codes/regulations/adopted_amendment_5_10_2.9.pdf",
-      "verified": null
+      "quote": "Requests for a CSACMAPFEC received more than 10 business days prior to the change of occupant: $45.00",
+      "source_url": "https://www.nj.gov/dca/divisions/dfs/codes/regulations/r.2018%20d.074%20(50%20n.j.r.%20729(a)).pdf",
+      "verified": true
      },
      {
-      "label": "State rule: request received 4 to 10 business days before change of occupant (2017)",
+      "label": "State fee: Request received 4 to 10 business days before the change of occupant",
       "amount": "$90.00",
-      "quote": "2. Requests for a CSDCMAC received four to 10 business days prior to the change of occupant: $90.00; and",
-      "source_url": "https://www.nj.gov/dca/divisions/dfs/codes/regulations/adopted_amendment_5_10_2.9.pdf",
-      "verified": null
+      "quote": "Requests for a CSACMAPFEC received four to 10 business days prior to the change of occupant: $90.00",
+      "source_url": "https://www.nj.gov/dca/divisions/dfs/codes/regulations/r.2018%20d.074%20(50%20n.j.r.%20729(a)).pdf",
+      "verified": true
      },
      {
-      "label": "State rule: request received fewer than 4 business days before change of occupant (2017)",
+      "label": "State fee: Request received fewer than 4 business days before the change of occupant",
       "amount": "$161.00",
-      "quote": "3. Requests for a CSDCMAC received fewer than four business days prior to the change of occupant: $161.00.",
-      "source_url": "https://www.nj.gov/dca/divisions/dfs/codes/regulations/adopted_amendment_5_10_2.9.pdf",
-      "verified": null
+      "quote": "Requests for a CSACMAPFEC received fewer than four business days prior to the change of occupant: $161.00",
+      "source_url": "https://www.nj.gov/dca/divisions/dfs/codes/regulations/r.2018%20d.074%20(50%20n.j.r.%20729(a)).pdf",
+      "verified": true
      }
     ],
     "how_to_apply": "Apply and pay online through the NJ DCA Fire Safety Service Portal ('Start Your Smoke Certification Application'), as the Borough checklist directs. Pay by e-check or credit card before submitting; a valid email is required and the certificate is emailed once the fee is paid and any required inspection is done. Homes heated only by electricity with no attached garage (no CO alarm needed) should email BFCE_CSDCMAC@dca.nj.gov.",
@@ -126,6 +111,13 @@
       "verified": true
      },
      {
+      "url": "https://www.penningtonboro.org/DocumentCenter/View/1827",
+      "quote": "The foregoing ordinance was finally adopted at a meeting of the Pennington Borough Council on February 2, 2026.",
+      "doc_date": "2026-02-03",
+      "via": "pdf",
+      "verified": true
+     },
+     {
       "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
       "quote": "S Pennington Borough",
       "doc_date": "2026-07",
@@ -144,7 +136,7 @@
       "quote": "LEAID: 1108-001 Enf Auth. State Fire Official Louis Kilmer Phone (609) 633-6132",
       "doc_date": "2026 (survey date 6/4/2026)",
       "via": "state_directory",
-      "verified": true
+      "verified": null
      },
      {
       "url": "https://www.nj.gov/dca/dfs/offices/bfce.shtml",
@@ -154,53 +146,47 @@
       "verified": true
      },
      {
-      "url": "https://firesolutions.dca.nj.gov/ultra-fire-home/smoke-application-create/",
-      "quote": "Please complete the following information to apply for a Certificate of Smoke Alarm, Carbon Monoxide Alarm, and Secondary Power Source Identification Label Compliance (CSACMASPSIL). You will be required to pay, via e-check or credit card, before you can submit this application.",
-      "doc_date": "",
-      "via": "page",
-      "verified": null
-     },
-     {
-      "url": "https://firesolutions.dca.nj.gov/ultra-fire-home/smoke-application-create/",
-      "quote": "send an email to BFCE_CSDCMAC@dca.nj.gov stating that you are not subject to that requirement",
-      "doc_date": "",
-      "via": "page",
-      "verified": null
+      "url": "https://www.nj.gov/dca/divisions/dfs/codes/regulations/r.2018%20d.074%20(50%20n.j.r.%20729(a)).pdf",
+      "quote": "(d) The application fee for a certificate of smoke alarm, carbon monoxide alarm, and portable fire extinguisher compliance (CSACMAPFEC), as required by N.J.A.C. 5:70-2.3, shall be based upon the amount of time remaining before the change of occupant is expected, as follows:",
+      "doc_date": "2018-02-05 (NJ Register, 50 N.J.R. 729(a))",
+      "via": "pdf",
+      "verified": true
      }
     ],
     "confidence": "high"
    }
   ],
-  "notes": "Pennington Ordinance 2026-3 moved fire code enforcement from the Hopewell Township Fire Commissioners (Fire District No. 1) to the NJ DCA Division of Fire Safety, pending a Borough fire official for non-life-hazard uses. The July 2026 LEA registry lists the State (S), and the state list of State-enforced towns marks Pennington 'SC' (State issues smoke certificates). The state directory still carries a note 'SSA with Hopewell Twp FD#1'. The DCA fee sentences and the BFCE_CSDCMAC@dca.nj.gov address are in the DCA application page's own instructions (page source). The DCA application title now covers smoke alarms, CO alarms and the secondary power source label (no extinguisher). The DCA BFCE page lists Louis Kilmer at (609) 633-6106; the state directory lists (609) 633-6132 for Pennington."
+  "notes": "Pennington Ordinance 2026-3 moved fire code enforcement from the Hopewell Township Fire Commissioners (Fire District No. 1) to the NJ DCA Division of Fire Safety, pending a Borough fire official for non-life-hazard uses. The July 2026 LEA registry lists the State (S), and the state list of State-enforced towns marks Pennington 'SC' (State issues smoke certificates). The state directory still carries a note 'SSA with Hopewell Twp FD#1'. The DCA fee sentences and the BFCE_CSDCMAC@dca.nj.gov address are in the DCA application page's own instructions (page source). The DCA application title now covers smoke alarms, CO alarms and the secondary power source label (no extinguisher). The DCA BFCE page lists Louis Kilmer at (609) 633-6106; the state directory lists (609) 633-6132 for Pennington. Re-checked 2026-10-06: the state fees are now cited from the NJ Register adoption notice (50 N.J.R. 729(a), N.J.A.C. 5:70-2.9(d)) instead of the DCA portal page and the scanned 2017 PDF, because the portal's fee sentence and its BFCE_CSDCMAC@dca.nj.gov instructions sit in page script and cannot be checked automatically (they still read $45 / $90 / $161 in the page source). The Borough's adoption notice confirms Ordinance 2026-3 was finally adopted February 2, 2026. The ordinance itself is a Word file that the checker cannot read."
  },
  "other_items": [
   {
    "label": "Water and sewer House Inspection by the Department of Public Works (required before closing)",
-   "detail": "Schedule at least ten business days before closing with Superintendent of Public Works Rick Smith, 609-737-9440. The Water/Sewer page says: 'There is a fee of $100 that must be either mailed or dropped off at Borough Hall before the inspection.' The Home Sale Checklist instead says the House Inspection fee is charged to the final water/sewer bill. Ordinance 2026-19 (introduced May 4, 2026; adoption not confirmed) sets 'House inspections on sale of property: regular fee' at $200 (was $150) and $300 (was $250) with less than 10 days' notice.",
+   "detail": "Schedule at least ten business days before closing with Superintendent of Public Works Rick Smith, 609-737-9440. Ordinance 2026-19, adopted June 1, 2026 (adoption vote recorded in the June 1, 2026 Council minutes), sets the fee: \"House inspections on sale of property: regular fee, $150 $200; fee if less than 10 days' notice, $250 $300.\" ($150 and $250 struck, $200 and $300 new.) The Home Sale Checklist says the House Inspection fee is charged to the final water/sewer bill, while the older Water/Sewer page still says \"There is a fee of $100 that must be either mailed or dropped off at Borough Hall before the inspection.\"",
+   "source_url": "https://www.penningtonboro.org/AgendaCenter/ViewFile/Minutes/_06012026-159"
+  },
+  {
+   "label": "Water/Sewer page (older House Inspection fee wording)",
+   "detail": "Quote: \"A water and sewer inspection is required before the closing date of the sale of your house.\" The same page still lists a $100 fee paid before the inspection, which does not match Ordinance 2026-19.",
    "source_url": "https://www.penningtonboro.org/1242/WaterSewer"
   },
   {
-   "label": "House inspection fee in Ordinance 2026-19 (introduced May 4, 2026)",
-   "detail": "Quote: \"House inspections on sale of property: regular fee, $150 $200; fee if less than 10 days' notice, $250 $300 .\" In the ordinance, $150 and $250 are struck out and $200 and $300 are underlined (new).",
-   "source_url": "https://www.penningtonboro.org/DocumentCenter/View/2309/Ordinance-2026---19-Amending-Chapter-98-Borough-Fees-docx"
-  },
-  {
    "label": "Final water meter read",
-   "detail": "Once there is a closing date, email Gabrielle Smith, DPW (publicworks@penningtonboro.org), with the title company name. A non-quarterly meter read fee is charged to the final water/sewer bill (Ordinance 2026-19 proposes $100 scheduled, up from $75).",
+   "detail": "Once there is a closing date, email Gabrielle Smith, DPW (publicworks@penningtonboro.org), with the title company name. The non-quarterly meter read fee is charged to the final water/sewer bill; Ordinance 2026-19 (adopted June 1, 2026) sets \"Scheduled: $75 $100; urgent/disputed: $100 $150\" ($100 scheduled, $150 urgent).",
    "source_url": "https://www.penningtonboro.org/1239/Borough-Home-Sale-Checklist"
   }
  ],
  "open_questions": [
-  "Which House Inspection fee applies now: $100 (Water/Sewer page), $150/$250 (current code per Ordinance 2026-19's struck text), or $200/$300 (Ordinance 2026-19, adoption not confirmed)? And is it paid up front or added to the final water/sewer bill?"
+  "The Water/Sewer page still says the House Inspection fee is $100 paid up front, while Ordinance 2026-19 (adopted June 1, 2026) sets $200 ($300 with less than 10 days' notice) and the checklist says it is added to the final water/sewer bill. Confirm the current amount and how it is paid with DPW (609-737-9440)."
  ],
+ "checked_at": "2026-10-06",
  "verification": {
-  "fees": 6,
-  "fee_ok": 0,
+  "fees": 3,
+  "fee_ok": 3,
   "fee_bad": 0,
-  "fee_unchecked": 6,
-  "quotes": 12,
-  "q_ok": 10,
-  "q_bad": 0,
-  "q_unchecked": 2
+  "fee_unchecked": 0,
+  "quotes": 13,
+  "q_ok": 11,
+  "q_bad": 1,
+  "q_unchecked": 1
  }
 }

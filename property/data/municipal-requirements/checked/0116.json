@@ -2,7 +2,7 @@
  "municipality_code": "0116",
  "municipality": "Margate City",
  "county": "ATLANTIC",
- "checked_at": "2026-09-30",
+ "checked_at": "2026-10-06",
  "resale_co": {
   "status": "required",
   "name": "Resale / Land Use Certificate (Transfer of Title Certificate)",
@@ -14,8 +14,9 @@
    "10-year sealed lithium battery smoke alarms (since January 1, 2019); existing AC-powered alarms accepted, do not remove",
    "Carbon monoxide alarms on each level and outside sleeping areas",
    "GFCI outlets at kitchen and bathroom counters, within 6 feet of a utility sink or wet bar, and in garages and outdoors",
-   "Portable fire extinguisher (2A-10B:C, 10 lb max) within 10 feet of the kitchen, on its bracket, top no higher than 5 feet, with the manual left for the new occupant",
-   "No open permits (checked by the office)"
+   "Portable fire extinguisher (2A-10B:C, 10 lb max) within 10 feet of the kitchen, on its bracket, top no higher than 5 feet, with the manual left for the new occupant (checklist still lists it)",
+   "No open permits (checked by the office)",
+   "No dwelling can be occupied until the certificate is issued"
   ],
   "fees": [
    {
@@ -23,10 +24,10 @@
     "amount": "$60.00",
     "quote": "1) Submit this application along with the $60.00 fee payable to the City of Margate.",
     "source_url": "https://www.margate-nj.com/DocumentCenter/View/4584/2024-Application-for-Resale-Land-Use-Approval-Fillable",
-    "verified": null
+    "verified": true
    }
   ],
-  "how_to_apply": "Complete the Resale/Land Use Certificate Application (Title Transfers) with seller, agent and buyer details, the person to meet the inspector and the settlement date, and submit it with the $60.00 fee payable to the City of Margate (check, cash or card) to the Department of Building Inspection, 9001 Winchester Avenue, Margate City, NJ 08402. Then coordinate the inspection with the Building Department. Attach the Boca form for demolition or rehab if the buyer plans either.",
+  "how_to_apply": "Complete the Resale/Land Use Certificate Application (Title Transfers) with seller, agent and buyer details, the person to meet the inspector and the settlement date, and submit it with the $60.00 fee payable to the City of Margate (check, cash or card) to the Department of Building Inspection, 9001 Winchester Avenue, Margate City, NJ 08402 (margate_inspection@margate-nj.com). Then coordinate the inspection with the Building Department. Attach the Boca form for demolition or rehab if the buyer plans either.",
   "application_url": "https://www.margate-nj.com/DocumentCenter/View/4584/2024-Application-for-Resale-Land-Use-Approval-Fillable",
   "department_url": "https://www.margate-nj.com/1253/Rentals-and-Resales-Housing-Forms-and-In",
   "phone": "609-822-1974",
@@ -37,62 +38,76 @@
    {
     "url": "https://www.margate-nj.com/1253/Rentals-and-Resales-Housing-Forms-and-In",
     "quote": "Transfers of Title Certificates: To purchase or sell a property, a Land Use Certificate application must be completed before closing.",
-    "doc_date": "2026-09-30 (page fetched)",
+    "doc_date": "2026-10-06 (page fetched)",
     "via": "page",
     "verified": true
    },
    {
     "url": "https://www.margate-nj.com/DocumentCenter/View/4584/2024-Application-for-Resale-Land-Use-Approval-Fillable",
-    "quote": "Certificate Required: Per City of Margate Code Chapter 161, no dwelling can be sold, rented, or transferred without a certificate issued by the Construction Code Official. This certificate confirms the dwelling is fit for habitation and complies with all relevant ordinances and laws.",
-    "doc_date": "2024-08 (PDF dated 2024-08-08)",
+    "quote": "Certificate Required: Per City of Margate Code Chapter 161, no dwelling can be sold, rented, or transferred without a certificate issued by the Construction Code Official.",
+    "doc_date": "2024-08-08 (PDF date)",
     "via": "pdf",
-    "verified": null
+    "verified": true
+   },
+   {
+    "url": "https://www.margate-nj.com/DocumentCenter/View/4584/2024-Application-for-Resale-Land-Use-Approval-Fillable",
+    "quote": "No dwelling can be occupied until the certificate is issued.",
+    "doc_date": "2024-08-08 (PDF date)",
+    "via": "pdf",
+    "verified": true
    },
    {
     "url": "https://www.margate-nj.com/DocumentCenter/View/4584/2024-Application-for-Resale-Land-Use-Approval-Fillable",
     "quote": "Official Use Only: App Fee= $60.00",
-    "doc_date": "2024-08",
+    "doc_date": "2024-08-08 (PDF date)",
     "via": "pdf",
-    "verified": null
+    "verified": true
    },
    {
     "url": "https://www.margate-nj.com/DocumentCenter/View/4584/2024-Application-for-Resale-Land-Use-Approval-Fillable",
-    "quote": "City of Margate City Department of Building Inspection 9001 Winchester Avenue Margate City, New Jersey 08402 Phone: (609) 822-1974 Fax: (609) 822-2248 Email: margate_inspection@margate-nj.com",
-    "doc_date": "2024-08",
+    "quote": "Email: margate_inspection@margate-nj.com",
+    "doc_date": "2024-08-08 (PDF date)",
     "via": "pdf",
-    "verified": null
+    "verified": true
    },
    {
     "url": "https://www.margate-nj.com/1202/ConstructionBuilding-Department",
     "quote": "Dino Cavalieri Construction Official 609-822-1974",
-    "doc_date": "2026-09-30 (page fetched)",
+    "doc_date": "2026-10-06 (page fetched)",
     "via": "page",
     "verified": true
    },
    {
     "url": "https://www.margate-nj.com/1202/ConstructionBuilding-Department",
     "quote": "John Votta Housing/Zoning Inspector, Code Enforcement Officer 609-822-2605, ext. 126",
-    "doc_date": "2026-09-30 (page fetched)",
+    "doc_date": "2026-10-06 (page fetched)",
     "via": "page",
     "verified": true
    },
    {
     "url": "https://www.margate-nj.com/DocumentCenter/View/4755/Housing-Rental-and-Resale-Inspection-Requirements",
     "quote": "RENTAL AND RESALE HOUSING INSPECTION REQUIREMENTS",
-    "doc_date": "2024-08 (PDF dated 2024-08-08)",
+    "doc_date": "2024-08-08 (PDF date)",
     "via": "pdf",
-    "verified": true
+    "verified": null
+   },
+   {
+    "url": "https://www.margate-nj.com/DocumentCenter/View/4755/Housing-Rental-and-Resale-Inspection-Requirements",
+    "quote": "All kitchen and bathroom counters.",
+    "doc_date": "2024-08-08 (PDF date)",
+    "via": "pdf",
+    "verified": null
    }
   ],
   "confidence": "high",
-  "notes": "Margate requires a Resale/Land Use Certificate from the Department of Building Inspection before a dwelling is sold or transferred (City Code Chapter 161). The same application is posted twice (DocumentCenter 4584 and 4766 'Land Use Certificate'). The inspection checklist is shared by rentals and resales and dates from August 2024. The 2025 construction permit fee schedule lists 'Certificate of Continued Occupancy: $168.00'; that line sits in the Uniform Construction Code fee list and is not tied to the resale certificate, so it is not recorded as a resale fee. John Votta (Housing/Zoning Inspector, jvotta@margate-nj.com, 609-822-2605 ext. 126) is another likely contact. Margate also requires a Rental License each time a tenant changes (rental program, not resale). The City code (ecode360 MA0562) could not be opened."
+  "notes": "Margate requires a Resale/Land Use Certificate from the Department of Building Inspection before a dwelling is sold or transferred (City Code Chapter 161, per the application). The application (August 2024) is still the one linked from the Rentals and Resales page. The page now links the inspection checklist as DocumentCenter 4587 ('Rental and Resale Inspection Requirements'), which could not be downloaded (connection reset); the same August 2024 checklist is still served at DocumentCenter 4755, which is cited. The 2025 fee schedule (revised May 2025) lists 'Certificate of Continued Occupancy: $168.00' among Uniform Construction Code fees; that line is not tied to the resale certificate, so it is not recorded as a resale fee. John Votta (Housing/Zoning Inspector, 609-822-2605 ext. 126) is another likely contact; Palma Shiles (Office Supervisor, ext. 117) is the page's main contact. Margate also requires a Rental License each time a tenant changes (rental program, not resale). The City code (ecode360 MA0562) could not be opened."
  },
  "fire_cert": {
   "requirements": [
    "Smoke alarms on each level, in every bedroom and outside each sleeping area within 10 feet of doorways",
    "10-year sealed lithium battery single-station smoke alarms since January 1, 2019; existing AC-powered alarms stay",
    "Carbon monoxide alarms on each level and outside sleeping areas",
-   "Portable fire extinguisher 2A-10B:C, no more than 10 lb, within 10 feet of the kitchen in a path of egress, mounted on its bracket with the top no more than 5 feet above the floor; owner's manual left for the new occupant (August 2024 checklist)"
+   "Portable fire extinguisher 2A-10B:C, no more than 10 lb, within 10 feet of the kitchen in a path of egress, mounted on its bracket with the top no more than 5 feet above the floor; owner's manual left for the new occupant (form still lists it)"
   ],
   "authorities": [
    {
@@ -112,30 +127,30 @@
      {
       "url": "https://www.margate-nj.com/1202/ConstructionBuilding-Department",
       "quote": "Pat Baker Fire Inspector 609-822-2605, ext. 127",
-      "doc_date": "2026-09-30 (page fetched)",
+      "doc_date": "2026-10-06 (page fetched)",
       "via": "page",
       "verified": true
      },
      {
       "url": "https://www.margate-nj.com/DocumentCenter/View/4755/Housing-Rental-and-Resale-Inspection-Requirements",
-      "quote": "SMOKE DETECTORS All smoke alarms shall be installed as follows: 1. On each level of the premises. 2. In every bedroom.",
-      "doc_date": "2024-08",
+      "quote": "All smoke alarms shall be installed as follows:",
+      "doc_date": "2024-08-08 (PDF date)",
       "via": "pdf",
-      "verified": true
+      "verified": null
      },
      {
       "url": "https://www.margate-nj.com/DocumentCenter/View/4755/Housing-Rental-and-Resale-Inspection-Requirements",
-      "quote": "Approved listed and labeled type with a minimum rating of 2A-10B:C and no more than 10 pounds;",
-      "doc_date": "2024-08",
+      "quote": "Approved listed and labeled type with a minimum rating of 2A-10B:C and no more than 10",
+      "doc_date": "2024-08-08 (PDF date)",
       "via": "pdf",
-      "verified": true
+      "verified": null
      },
      {
       "url": "https://www.margate-nj.com/1333/Fire",
-      "quote": "Daniel Adams Chief 609-822-5562",
-      "doc_date": "2026-09-30 (page fetched)",
+      "quote": "Daniel Adams",
+      "doc_date": "2026-10-06 (page fetched)",
       "via": "page",
-      "verified": null
+      "verified": true
      },
      {
       "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
@@ -146,23 +161,23 @@
      },
      {
       "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
-      "quote": "LEAID: 0116-001 Enf Auth. Fire Dept Fire Official Daniel Adams Phone (609) 822-1974 Addr: 101 N Washington Av Margate City NJ 08402",
+      "quote": "LEAID: 0116-001 Margate City SMOKE DETECTOR COMPLIANCE Name: Margate City Code Enf",
       "doc_date": "2026-05-26 (survey date)",
       "via": "state_directory",
-      "verified": true
+      "verified": null
      },
      {
       "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
-      "quote": "Margate City Code Enf",
-      "doc_date": "2026-05-26 (survey date; name shown in the smoke detector compliance block)",
+      "quote": "Fire Official Daniel Adams Phone (609) 822-1974",
+      "doc_date": "2026-05-26 (survey date)",
       "via": "state_directory",
-      "verified": true
+      "verified": null
      }
     ],
     "confidence": "medium"
    }
   ],
-  "notes": "DCA registry code F (Margate City Fire Department). The state fire directory (survey 5/26/2026) names Fire Chief Daniel Adams as Fire Official, with phone (609) 822-1974 (the Department of Building Inspection line) and email adams_dan@margate-nj.com, and shows 'Margate City Code Enf' in the smoke detector compliance block. The City's Rental and Resale Housing Inspection Requirements (August 2024) cover smoke alarms, CO alarms, GFCI outlets and a portable fire extinguisher, and the Building Department staff list includes a Fire Inspector, so the resale smoke/CO check appears to be done by the Building Department. The Fire Department page (Chief Daniel Adams, 609-822-5562, adams_dan@margate-nj.com) has no smoke certificate information. No separate smoke/CO certificate fee was found."
+  "notes": "DCA registry code F (Margate City Fire Department). The state fire directory (survey 5/26/2026) names Fire Chief Daniel Adams as Fire Official, with phone (609) 822-1974 (the Department of Building Inspection line) and email adams_dan@margate-nj.com, and shows 'Margate City Code Enf' in the smoke detector compliance block. The City's Rental and Resale Housing Inspection Requirements (August 2024) cover smoke alarms, CO alarms, GFCI outlets and a portable fire extinguisher, and the Building Department staff list includes a Fire Inspector, so the resale smoke/CO check appears to be done by the Building Department. The Fire Department page (Chief Daniel Adams, 609-822-5562, adams_dan@margate-nj.com) has no smoke certificate information. No separate smoke/CO certificate fee was found. The checklist still lists the fire extinguisher, which state law (P.L.2025, c.19) dropped from the sale certificate in February 2025."
  },
  "other_items": [
   {
@@ -177,17 +192,18 @@
   }
  ],
  "open_questions": [
-  "Is the smoke/CO/extinguisher certificate included in the $60.00 Resale/Land Use Certificate, or is there a separate fire certificate fee?",
-  "Lead time before closing, reinspection fee and how long the certificate is valid are not stated."
+  "Is the smoke/CO certificate included in the $60.00 Resale/Land Use Certificate, or is there a separate fire certificate fee?",
+  "Lead time before closing, reinspection fee and how long the certificate is valid are not stated.",
+  "Does Margate still require the fire extinguisher at resale after P.L.2025, c.19?"
  ],
  "verification": {
   "fees": 1,
-  "fee_ok": 0,
+  "fee_ok": 1,
   "fee_bad": 0,
-  "fee_unchecked": 1,
-  "quotes": 14,
+  "fee_unchecked": 0,
+  "quotes": 16,
   "q_ok": 10,
   "q_bad": 0,
-  "q_unchecked": 4
+  "q_unchecked": 6
  }
 }

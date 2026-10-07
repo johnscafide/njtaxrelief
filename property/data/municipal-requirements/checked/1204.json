@@ -2,7 +2,6 @@
  "municipality_code": "1204",
  "municipality": "East Brunswick Township",
  "county": "MIDDLESEX",
- "checked_at": "2026-09-30",
  "resale_co": {
   "status": "not_required",
   "name": "",
@@ -24,28 +23,28 @@
     "quote": "Note: By Ordinance, East Brunswick Township does not require or issue a Certificate of Occupancy for residential resale or rentals.",
     "doc_date": "2026-09 (page checked 2026-09-30)",
     "via": "page",
-    "verified": true
+    "verified": null
    },
    {
     "url": "https://www.eastbrunswick.org/162/Continued-Certificate-of-Occupancy-Requi",
     "quote": "The Township has elected not to implement the permissive portion of the State Code which would require re-inspection before resale or refinancing of single, townhouse or condominium residential dwelling units.",
     "doc_date": "2026-09",
     "via": "page",
-    "verified": true
+    "verified": null
    },
    {
     "url": "https://www.eastbrunswick.org/162/Continued-Certificate-of-Occupancy-Requi",
     "quote": "If you have any questions, please call 732-390-6875.",
     "doc_date": "2026-09",
     "via": "page",
-    "verified": true
+    "verified": null
    },
    {
     "url": "https://www.eastbrunswick.org/158/Construction-Inspection",
     "quote": "Steven R. Curtis Construction Official scurtis@eastbrunswick.org",
     "doc_date": "2026-09",
     "via": "page",
-    "verified": true
+    "verified": null
    }
   ],
   "confidence": "high",
@@ -159,7 +158,7 @@
       "quote": "LEAID: 1204-003 Enf Auth. District Fire Official Jaysen A Whalen Phone (732) 651-8806 Addr: 680 Old Bridge Turnpike Email fireofficial@ebfmo.com",
       "doc_date": "2026-02-06 (survey date)",
       "via": "state_directory",
-      "verified": true
+      "verified": null
      },
      {
       "url": "https://www.brookviewfire.com/",
@@ -272,8 +271,8 @@
      },
      {
       "url": "https://www.ebfd2.org/district",
-      "quote": "Main Office 732-257-2846",
-      "doc_date": "2026-09",
+      "quote": "District Office 732-257-2846 Monday – Friday, 9:00 AM – 4:00 PM 216 Joseph Street, East Brunswick",
+      "doc_date": "2026-10-06 (page fetched)",
       "via": "page",
       "verified": true
      },
@@ -288,21 +287,22 @@
     "confidence": "high"
    }
   ],
-  "notes": "East Brunswick has three fire districts (DCA registry code D). District #1 runs the Bureau of Fire Safety for Districts #1 and #3 (registry note: FD#1 is the enforcing agency for FD#3). District #2 has its own Bureau of Fire Prevention at 216 Joseph Street. The state fire directory (surveys January to February 2026) lists Jaysen A Whalen and the District #1 office for all three district pages, including District #2; the District #2 website shows its own bureau, forms and fees, so the district's own site is used for District #2. The District #2 site does not name its Fire Marshal. Which district an address is in must be checked; the District #2 site links a Fire District Map (https://maphub.net/EBFD1/east-brunswick-fire-dist-1), which was not opened. The state directory prints the District #1 email as fireofficial@ebfmo.com; the District #1/#3 site (ebfmo.com now redirects to ebfmo.org) lists JWhalen@ebfmo.org, which is used. District #2 also posts a notice that all residences in District #2 need an inspection before any change of occupancy (rentals included)."
+  "notes": "East Brunswick has three fire districts (DCA registry code D). District #1 runs the Bureau of Fire Safety for Districts #1 and #3 (registry note: FD#1 is the enforcing agency for FD#3). District #2 has its own Bureau of Fire Prevention at 216 Joseph Street. The state fire directory (surveys January to February 2026) lists Jaysen A Whalen and the District #1 office for all three district pages, including District #2; the District #2 website shows its own bureau, forms and fees, so the district's own site is used for District #2. The District #2 site does not name its Fire Marshal. Which district an address is in must be checked; the District #2 site links a Fire District Map (https://maphub.net/EBFD1/east-brunswick-fire-dist-1), which was not opened. The state directory prints the District #1 email as fireofficial@ebfmo.com; the District #1/#3 site (ebfmo.com now redirects to ebfmo.org) lists JWhalen@ebfmo.org, which is used. District #2 also posts a notice that all residences in District #2 need an inspection before any change of occupancy (rentals included). Re-checked 2026-10-06: the District #2 site was redesigned; its district page now labels 732-257-2846 'District Office' (was 'Main Office') and adds an after-hours inspector line (732-354-6484). The Fire Prevention Bureau phone (732-210-4582), email and the September 2026 smoke application fees are unchanged."
  },
  "other_items": [],
  "open_questions": [
   "Exact boundaries of Fire Districts #1, #2 and #3 (which addresses go to which bureau) were not confirmed from an official map.",
   "Name of the District #2 Fire Marshal / Fire Official is not posted on the District #2 website."
  ],
+ "checked_at": "2026-10-06",
  "verification": {
   "fees": 8,
   "fee_ok": 8,
   "fee_bad": 0,
   "fee_unchecked": 0,
   "quotes": 23,
-  "q_ok": 22,
+  "q_ok": 17,
   "q_bad": 0,
-  "q_unchecked": 1
+  "q_unchecked": 6
  }
 }

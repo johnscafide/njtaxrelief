@@ -10,7 +10,7 @@
   "valid_for": "",
   "requirements": [],
   "fees": [],
-  "how_to_apply": "",
+  "how_to_apply": "No Township resale CO or CCO for residential sales. The only Township item for a home sale is the smoke detector / carbon monoxide certificate from the Bureau of Fire Inspections (see fire certificate).",
   "application_url": "",
   "department_url": "https://www.ehtnj.gov/departments/planning___development/building_inspections.php",
   "phone": "609-926-4122",
@@ -21,7 +21,7 @@
    {
     "url": "https://www.ehtnj.gov/community/forms.php",
     "quote": "EHT does NOT require CCO Inspections for residential resales or rentals.",
-    "doc_date": "2026-03 (Document Center, Building Inspections)",
+    "doc_date": "2026-03 (Document Center, Building Inspections; page fetched 2026-10-06)",
     "via": "page",
     "verified": true
    },
@@ -42,13 +42,13 @@
    {
     "url": "https://www.ehtnj.gov/departments/planning___development/building_inspections.php",
     "quote": "Pat J. Naticchione Construction Official ... Phone: 609-926-4122 Fax: 609-926-4003",
-    "doc_date": "2026-09-30 (page fetched)",
+    "doc_date": "2026-10-06 (page fetched)",
     "via": "page",
     "verified": true
    }
   ],
   "confidence": "high",
-  "notes": "The Township says in writing (notice signed by Construction Official Pat Naticchione, March 2026) that it does not require a resale CO or CCO for residential transfers or rentals. A $200 Continued Certificate of Occupancy application exists only for limited cases: voluntary requests, commercial mercantile licenses, and residential work done without permits. The same notice reminds sellers that the smoke/CO certificate from the Bureau of Fire Inspections is still required. The Construction Official's email is hidden behind an email-protection link and decodes to BuildingInspections@ehtnj.gov."
+  "notes": "The Township says in writing (notice signed by Construction Official Pat Naticchione, March 2026, re-read 2026-10-06) that it does not require a resale CO or CCO for residential transfers or rentals. A $200 Continued Certificate of Occupancy application exists only for limited cases: voluntary requests, commercial mercantile licenses, and residential work done without permits. The same notice reminds sellers that the smoke/CO certificate from the Bureau of Fire Inspections is still required. The Construction Official's email is hidden behind an email-protection link and decodes to BuildingInspections@ehtnj.gov."
  },
  "fire_cert": {
   "requirements": [
@@ -74,22 +74,22 @@
       "verified": true
      },
      {
-      "label": "Second fee amount printed on the 2025 affidavit form (timing tier not labeled on the form)",
+      "label": "Second fee amount printed on the affidavit form (timing tier not labeled on the form)",
       "amount": "$90",
       "quote": "$54 $90 $161 Fee (Updated and Changed by state statute 5:70-2.9)",
-      "source_url": "https://www.ehtnj.gov/Fire%20Inspection/2025affidavit9.9.25.pdf",
+      "source_url": "https://www.ehtnj.gov/2025affidavit9.9.25.pdf",
       "verified": true
      },
      {
-      "label": "Third fee amount printed on the 2025 affidavit form (timing tier not labeled on the form)",
+      "label": "Third fee amount printed on the affidavit form (timing tier not labeled on the form)",
       "amount": "$161",
       "quote": "$54 $90 $161 Fee (Updated and Changed by state statute 5:70-2.9)",
-      "source_url": "https://www.ehtnj.gov/Fire%20Inspection/2025affidavit9.9.25.pdf",
+      "source_url": "https://www.ehtnj.gov/2025affidavit9.9.25.pdf",
       "verified": true
      }
     ],
-    "how_to_apply": "Download the 2025 smoke/CO affidavit from the Document Center (Fire Inspections). Either fill out the whole form as a notarized owner affidavit, or fill out only the top portion to request an on-site inspection. Submit it with the fee to the Bureau of Fire Inspections, 3515 Bargaintown Road, Egg Harbor Township, NJ 08234 (fax 609-926-4181).",
-    "application_url": "https://www.ehtnj.gov/Fire%20Inspection/2025affidavit9.9.25.pdf",
+    "how_to_apply": "Download the 'Smoke Cert. - Property Resale / Residential Tenant' affidavit from the Document Center. Either fill out the whole form as a notarized owner affidavit, or fill out only the top portion to request an on-site inspection. Submit it with the fee to the Bureau of Fire Inspections, 3515 Bargaintown Road, Egg Harbor Township, NJ 08234 (fax 609-926-4181). Office hours Monday to Friday 8:30 am to 4:30 pm; no payments after 4:15 pm.",
+    "application_url": "https://www.ehtnj.gov/2025affidavit9.9.25.pdf",
     "department_url": "https://www.ehtnj.gov/departments/planning___development/fire_inspections.php",
     "phone": "609-926-4070",
     "email": "fireinspections@ehtnj.gov",
@@ -99,28 +99,42 @@
      {
       "url": "https://www.ehtnj.gov/departments/planning___development/fire_inspections.php",
       "quote": "Fire Official: Brian Cummings Fire Inspectors: Craig Thompson & Ray Conover Office Staff: Tammy Naylor, Clerk 1",
-      "doc_date": "2026-09-30 (page fetched)",
+      "doc_date": "2026-10-06 (page fetched)",
       "via": "page",
       "verified": true
      },
      {
       "url": "https://www.ehtnj.gov/departments/planning___development/fire_inspections.php",
       "quote": "Brian Cummings Fire Official ... 3515 Bargaintown Road Egg Harbor Township, NJ 08234 Phone: 609-926-4070 Fax: 609-926-4181",
-      "doc_date": "2026-09-30 (page fetched)",
+      "doc_date": "2026-10-06 (page fetched)",
       "via": "page",
       "verified": true
      },
      {
       "url": "https://www.ehtnj.gov/departments/planning___development/fire_inspections.php",
       "quote": "As of 10/01/2022 The Township is no longer taking any payments after 4:15pm.",
-      "doc_date": "2026-09-30 (page fetched)",
+      "doc_date": "2026-10-06 (page fetched)",
       "via": "page",
       "verified": true
      },
      {
-      "url": "https://www.ehtnj.gov/Fire%20Inspection/2025affidavit9.9.25.pdf",
+      "url": "https://www.ehtnj.gov/departments/planning___development/fire_inspections.php",
+      "quote": "Fire Detector Application for One and Two-Family Dwelling Certification of Smoke Detector, Carbon Monoxide Alarm, and Portable Fire Extinguisher Compliance.",
+      "doc_date": "2026-10-06 (page fetched)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://www.ehtnj.gov/2025affidavit9.9.25.pdf",
       "quote": "Affidavit (fill out the whole form) Request for on sight inspection (fill out top portion only)",
-      "doc_date": "2025-10 (PDF created October 9, 2025)",
+      "doc_date": "2026-04 (PDF uploaded April 24, 2026)",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.ehtnj.gov/2025affidavit9.9.25.pdf",
+      "quote": "Application for One and Two Family Dwelling Certification of Smoke Alarm, Carbon Monoxide Alarm",
+      "doc_date": "2026-04",
       "via": "pdf",
       "verified": true
      },
@@ -134,7 +148,7 @@
      {
       "url": "https://www.ehtnj.gov/departments/planning___development/index.php",
       "quote": "The mission of the Division of Fire Inspections is to educate and ensure Smoke Detector, Carbon Monoxide, and Portable Fire Extinguisher are available upon the sale or rental of all residential units",
-      "doc_date": "2026-09-30 (page fetched)",
+      "doc_date": "2026-10-06 (page fetched)",
       "via": "page",
       "verified": true
      },
@@ -150,27 +164,28 @@
       "quote": "LEAID: 0108-001 Enf Auth. Municipal Fire Official Brian D Cummings Phone (609) 926-4070 Addr: 3515 Bargaintown Rd ... Email Bcummings@ehtgov.org ... Egg Harbor Twp Inspections",
       "doc_date": "2025-09 (survey date 9/2/2025)",
       "via": "state_directory",
-      "verified": true
+      "verified": null
      }
     ],
     "confidence": "high"
    }
   ],
-  "notes": "The Township is the fire code enforcing agency for the whole township (registry code M); the volunteer fire companies (Bargaintown, Cardiff, Farmington, Scullville, West Atlantic City) are fire-tax funded but do not issue resale certificates. The Fire Inspections page gives one fee, $54.00; the October 2025 affidavit prints $54, $90 and $161 without saying which timing tier each belongs to (these match the state's more than 10, 4 to 10 and under 4 business-day tiers, but the form does not say so). The page email is hidden behind an email-protection link and decodes to fireinspections@ehtnj.gov; the affidavit lists tnaylor@ehtnj.gov (Tammy Naylor, Clerk 1) and the state directory lists Bcummings@ehtgov.org. The 2025 affidavit no longer lists a fire extinguisher (consistent with P.L.2025, c.19), although the Construction Office notice of March 2026 still calls it a 'Fire Extinguisher Certification'."
+  "notes": "The Township is the fire code enforcing agency for the whole township (registry code M); the volunteer fire companies do not issue resale certificates. The Fire Inspections page gives one fee, $54.00; the affidavit prints $54, $90 and $161 without saying which timing tier each belongs to (they line up with the state's more than 10, 4 to 10 and under 4 business-day tiers, but the form does not say so). The Document Center now links a re-uploaded copy of the affidavit (April 24, 2026, 'Smoke Cert. - Property Resale / Residential Tenant', same wording as the October 2025 copy, which is still posted at the Fire Inspection folder link). The page email decodes to fireinspections@ehtnj.gov; the affidavit lists tnaylor@ehtnj.gov (Tammy Naylor, Clerk 1) and the state directory lists Bcummings@ehtgov.org. The affidavit no longer lists a fire extinguisher (in line with P.L.2025, c.19), but the Fire Inspections page title and the March 2026 Construction Office notice still mention it."
  },
  "other_items": [],
  "open_questions": [
-  "Which timing tiers apply to the $90 and $161 amounts on the Township's 2025 affidavit form?"
+  "Which timing tiers apply to the $90 and $161 amounts on the Township's affidavit form?",
+  "Does the Bureau still check for a portable fire extinguisher at resale (web page still names it; the affidavit does not)?"
  ],
- "checked_at": "2026-09-30",
+ "checked_at": "2026-10-06",
  "verification": {
   "fees": 3,
   "fee_ok": 3,
   "fee_bad": 0,
   "fee_unchecked": 0,
-  "quotes": 12,
-  "q_ok": 12,
+  "quotes": 14,
+  "q_ok": 13,
   "q_bad": 0,
-  "q_unchecked": 0
+  "q_unchecked": 1
  }
 }

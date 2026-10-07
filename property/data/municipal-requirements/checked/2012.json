@@ -2,7 +2,7 @@
  "municipality_code": "2012",
  "municipality": "Plainfield City",
  "county": "UNION",
- "checked_at": "2026-10-02",
+ "checked_at": "2026-10-06",
  "resale_co": {
   "status": "required",
   "name": "Certificate of Compliance (sale)",
@@ -170,8 +170,8 @@
    },
    {
     "url": "https://www.plainfieldnj.gov/residents/household/code_enforcement_and_inspections_division/index.php",
-    "quote": "A Certificate of Compliance will not be issued until the applicable requirements are satisfied.",
-    "doc_date": "2026-10-02",
+    "quote": "A clear Certificate of Compliance will not be issued until the applicable requirements are satisfied.",
+    "doc_date": "2026-10-06 (page fetched)",
     "via": "page",
     "verified": true
    },
@@ -421,13 +421,13 @@
   "Is Leticia Velez still Director of the Division of Inspections?"
  ],
  "verification": {
-  "fees": 14,
-  "fee_ok": 14,
+  "fees": 23,
+  "fee_ok": 23,
   "fee_bad": 0,
   "fee_unchecked": 0,
   "quotes": 24,
-  "q_ok": 24,
-  "q_bad": 0,
-  "q_unchecked": 0
+  "q_ok": 19,
+  "q_bad": 4,
+  "q_unchecked": 1
  }
 }

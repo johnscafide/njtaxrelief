@@ -2,7 +2,7 @@
  "municipality_code": "2008",
  "municipality": "Kenilworth Borough",
  "county": "UNION",
- "checked_at": "2026-10-02",
+ "checked_at": "2026-10-06",
  "resale_co": {
   "status": "required",
   "name": "Certificate of Compliance / Certificate of Continued Occupancy (CCO), sale of property",
@@ -71,7 +71,7 @@
    },
    {
     "url": "https://www.kenilworthborough.com/DocumentCenter/View/120/Certificate-of-Compliance-Application-Form-SALE-OF-PROPERTY-CCO",
-    "quote": "Borough of Kenilworth Application for Certificate of Compliance September 15,2026",
+    "quote": "Borough of Kenilworth Application for Certificate of Compliance ... September 15,2026",
     "doc_date": "2026-09-15 (form update date)",
     "via": "pdf",
     "verified": true
@@ -348,13 +348,13 @@
   "Are the fire bureau's rush fees ($150.00 / $210.00 for less than 1 week) still charged after Ordinance 2026-08, which only sets the two-weeks-ahead sale fee?"
  ],
  "verification": {
-  "fees": 6,
-  "fee_ok": 6,
+  "fees": 10,
+  "fee_ok": 2,
   "fee_bad": 0,
-  "fee_unchecked": 0,
+  "fee_unchecked": 8,
   "quotes": 30,
-  "q_ok": 30,
+  "q_ok": 18,
   "q_bad": 0,
-  "q_unchecked": 0
+  "q_unchecked": 12
  }
 }

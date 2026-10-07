@@ -2,7 +2,6 @@
  "municipality_code": "0338",
  "municipality": "Willingboro Township",
  "county": "BURLINGTON",
- "checked_at": "2026-09-30",
  "resale_co": {
   "status": "required",
   "name": "Certificate of Occupancy (resale housing inspection)",
@@ -93,14 +92,21 @@
    },
    {
     "url": "https://www.willingboronj.gov/m/directory/department?did=20",
-    "quote": "Shaleen Bolling-Gonzalez Housing / Rental / Resales 609-877-2200 Ext 1033",
-    "doc_date": "",
+    "quote": "Shaleen Bolling-Gonzalez Housing / Rental / Resales",
+    "doc_date": "2026-10-06 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.willingboronj.gov/m/directory/department?did=20",
+    "quote": "Housing / Rental / Resales 609-877-2200 Ext 1033",
+    "doc_date": "2026-10-06 (page fetched)",
     "via": "page",
     "verified": true
    }
   ],
   "confidence": "high",
-  "notes": "The 17-page 'Resale Application 2026' PDF is a scan with no text layer; it was read visually page by page. It contains the 'Moving????????' instructions, the Resale Inspection Housing Application ($150.00 fee; Inspections Department phone 609-877-2200 ext. 1214), the private sewer lateral instructions and report form, the MUA plumber list, an added assessment information sheet, a certified tax search request, the pre-inspection checklist (Department of Code Enforcement and Inspections, (609) 877-2200 ext. 1019), smoke detector placement sheets, and the registered heating contractor list (October 18, 2024). The checklist says rental properties must also be inspected annually (since January 2010). Other resale contacts in the directory: Stephanie Holmes (Housing Rental / Resales, ext 1021); Dennis Tunstall, Director, Inspections (ext 1019)."
+  "notes": "The 17-page 'Resale Application 2026' PDF is a scan with no text layer; it was read visually page by page. It contains the 'Moving????????' instructions, the Resale Inspection Housing Application ($150.00 fee; Inspections Department phone 609-877-2200 ext. 1214), the private sewer lateral instructions and report form, the MUA plumber list, an added assessment information sheet, a certified tax search request, the pre-inspection checklist (Department of Code Enforcement and Inspections, (609) 877-2200 ext. 1019), smoke detector placement sheets, and the registered heating contractor list (October 18, 2024). The checklist says rental properties must also be inspected annually (since January 2010). Other resale contacts in the directory: Stephanie Holmes (Housing Rental / Resales, ext 1021); Dennis Tunstall, Director, Inspections (ext 1019). Re-check 2026-10-06: the staff directory still lists Shaleen Bolling-Gonzalez, Housing / Rental / Resales, 609-877-2200 Ext 1033 (and Stephanie Holmes, ext 1021; Dennis Tunstall, Director, Inspections, ext 1019). The page markup now repeats each title (the name, then the title twice, then the phone), so the old one-line quote no longer matched; it was split into two verbatim pieces. The Resale Application 2026 and Certificate of Compliance 2026 PDFs are the same files (created April 8, 2026) and are still on the Inspection Forms page."
  },
  "fire_cert": {
   "requirements": [
@@ -179,14 +185,14 @@
       "quote": "\"ultra_name\":\"WILLINGBORO TWP-001\" ... \"ultra_firejurisdiction\":{ \"Name\":\"State\",\"Value\":240000000 },\"ultra_smokecertexempt\":true",
       "doc_date": "2026-09-30 (live portal data)",
       "via": "page",
-      "verified": null
+      "verified": true
      },
      {
       "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
       "quote": "LEAID: 0338-999 Willingboro Twp Enf Auth. State Fire Official Louis Kilmer Name: NJ Division of Fire Safety Addr: PO Box 809 Phone (609) 633-6132",
       "doc_date": "2026 (Willingboro page survey date 6/16/2026)",
       "via": "state_directory",
-      "verified": true
+      "verified": null
      }
     ],
     "confidence": "high"
@@ -230,13 +236,14 @@
   "Whether the $150 Certificate of Compliance is charged in addition to the $150 resale housing inspection, or only used when no resale CO is issued.",
   "Direct link to the online resale/rental application portal (the Inspections page mentions it but shows no link)."
  ],
+ "checked_at": "2026-10-06",
  "verification": {
   "fees": 2,
   "fee_ok": 0,
   "fee_bad": 0,
   "fee_unchecked": 2,
-  "quotes": 16,
-  "q_ok": 7,
+  "quotes": 17,
+  "q_ok": 8,
   "q_bad": 0,
   "q_unchecked": 9
  }

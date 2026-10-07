@@ -2,7 +2,7 @@
  "municipality_code": "1709",
  "municipality": "Pennsville Township",
  "county": "SALEM",
- "checked_at": "2026-09-30",
+ "checked_at": "2026-10-06",
  "resale_co": {
   "status": "required",
   "name": "Continued Certificate of Occupancy (Residential Resale housing inspection)",
@@ -168,8 +168,8 @@
      },
      {
       "url": "https://www.pennsville.org/221/Pennsville-Township-Fire-Department",
-      "quote": "Fire Administrator Eric Guglielmo Email: pvfirecode@pvtwp.com Phone: 856-678-3089 ext. 1144",
-      "doc_date": "2026-09-30 (page fetched)",
+      "quote": "Fire Administrator Eric Guglielmo Email: ... Phone: 856-678-3089 ext. 1144",
+      "doc_date": "2026-10-06 (page fetched; email pvfirecode@pvtwp.com decoded from the page's Cloudflare email protection)",
       "via": "page",
       "verified": true
      },
@@ -221,8 +221,8 @@
   "fee_bad": 0,
   "fee_unchecked": 3,
   "quotes": 13,
-  "q_ok": 8,
+  "q_ok": 7,
   "q_bad": 0,
-  "q_unchecked": 5
+  "q_unchecked": 6
  }
 }

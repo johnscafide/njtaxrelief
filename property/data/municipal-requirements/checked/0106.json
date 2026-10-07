@@ -10,7 +10,7 @@
   "valid_for": "",
   "requirements": [],
   "fees": [],
-  "how_to_apply": "",
+  "how_to_apply": "No City resale certificate. The City's fact sheet says no documentation or inspections are required by the City to sell property; only the State smoke/CO certificate (and any county septic or well testing) applies.",
   "application_url": "",
   "department_url": "https://sites.google.com/view/corbincitynj/municipal-services/zoningconstruction",
   "phone": "609-701-0203",
@@ -28,14 +28,21 @@
    {
     "url": "https://sites.google.com/view/corbincitynj/municipal-services/city-clerk/forms",
     "quote": "Selling or Renting Property in Corbin City",
-    "doc_date": "2026-09-30 (Forms page fetched; links the 2026 fact sheet)",
+    "doc_date": "2026-10-06 (page fetched)",
     "via": "page",
     "verified": true
    },
    {
     "url": "https://sites.google.com/view/corbincitynj/municipal-services/zoningconstruction",
     "quote": "Zoning Officer, Alexander Bauer (609) 701-0203 Email: Zoning@corbincitynj.com",
-    "doc_date": "2026-09-30 (page fetched)",
+    "doc_date": "2026-10-06 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://sites.google.com/view/corbincitynj/municipal-services/zoningconstruction",
+    "quote": "All other applications for which no fee is prescribed in Article XXII , included, but not limited to, applications for zoning permits, certificates of occupancy and continuing certificates of occupancy, shall be accompanied by a fee of $35.",
+    "doc_date": "2026-10-06 (page fetched; quotes Code § 102-21.6)",
     "via": "page",
     "verified": true
    }
@@ -50,31 +57,31 @@
     "name": "NJ DCA Division of Fire Safety, Bureau of Fire Code Enforcement",
     "type": "state_dca",
     "area_served": "Entire city",
-    "lead_time": "Fee depends on how many business days before closing you apply (more than 10, 4 to 10, under 4).",
+    "lead_time": "Fee depends on how many business days before the change of occupant the request is received (more than 10, 4 to 10, fewer than 4).",
     "fees": [
      {
-      "label": "State smoke/CO certificate, applied more than 10 business days before closing",
-      "amount": "$45",
-      "quote": "If you are applying for a certificate more than ten business days from the closing date the fee is $45 dollars",
-      "source_url": "https://firesolutions.dca.nj.gov/ultra-fire-home/smoke-application-create/",
-      "verified": null
+      "label": "State smoke/CO certificate, request received more than 10 business days before the change of occupant",
+      "amount": "$45.00",
+      "quote": "Requests for a CSACMAPFEC received more than 10 business days prior to the change of occupant: $45.00",
+      "source_url": "https://www.nj.gov/dca/divisions/dfs/codes/regulations/r.2018%20d.074%20(50%20n.j.r.%20729(a)).pdf",
+      "verified": true
      },
      {
-      "label": "State smoke/CO certificate, applied 4 to 10 business days before closing",
-      "amount": "$90",
-      "quote": "if applying 4 to 10 business days from the closing date the fee is $90",
-      "source_url": "https://firesolutions.dca.nj.gov/ultra-fire-home/smoke-application-create/",
-      "verified": null
+      "label": "State smoke/CO certificate, request received 4 to 10 business days before the change of occupant",
+      "amount": "$90.00",
+      "quote": "Requests for a CSACMAPFEC received four to 10 business days prior to the change of occupant: $90.00",
+      "source_url": "https://www.nj.gov/dca/divisions/dfs/codes/regulations/r.2018%20d.074%20(50%20n.j.r.%20729(a)).pdf",
+      "verified": true
      },
      {
-      "label": "State smoke/CO certificate, closing less than 4 business days away",
-      "amount": "$161",
-      "quote": "if the closing date is less than four business days the fee is $161.",
-      "source_url": "https://firesolutions.dca.nj.gov/ultra-fire-home/smoke-application-create/",
-      "verified": null
+      "label": "State smoke/CO certificate, request received fewer than 4 business days before the change of occupant",
+      "amount": "$161.00",
+      "quote": "Requests for a CSACMAPFEC received fewer than four business days prior to the change of occupant: $161.00",
+      "source_url": "https://www.nj.gov/dca/divisions/dfs/codes/regulations/r.2018%20d.074%20(50%20n.j.r.%20729(a)).pdf",
+      "verified": true
      }
     ],
-    "how_to_apply": "Apply online through the NJ DCA Fire Safety portal ('Start Your Smoke Certification Application'). Pay by e-check or credit card before submitting; a valid email address is required. The certificate is emailed once the application is submitted, the fee is paid and any required inspections are done. Homes heated by electricity with no CO alarm requirement should also email BFCE_CSDCMAC@dca.nj.gov.",
+    "how_to_apply": "Apply online through the NJ DCA Fire Safety portal ('Start Your Smoke Certification Application'): give the application date, reason (change of ownership or change of occupancy), closing date, property block, lot and address, and pay the application fee online. Homes heated by electricity with no CO alarm requirement should also email BFCE_CSDCMAC@dca.nj.gov.",
     "application_url": "https://firesolutions.dca.nj.gov/ultra-fire-home/smoke-application-create/",
     "department_url": "https://www.nj.gov/dca/dfs/offices/bfce.shtml",
     "phone": "609-633-6106",
@@ -108,26 +115,33 @@
       "quote": "LEAID: 0106-999 Enf Auth. State Fire Official Louis Kilmer Phone (609)633-6132 Addr: PO Box 809 Trenton NJ 08625-0809",
       "doc_date": "2026-07 (survey date 7/22/2026)",
       "via": "state_directory",
+      "verified": null
+     },
+     {
+      "url": "https://www.nj.gov/dca/divisions/dfs/codes/regulations/r.2018%20d.074%20(50%20n.j.r.%20729(a)).pdf",
+      "quote": "The application fee for a certificate of smoke alarm, carbon monoxide alarm, and portable fire extinguisher compliance (CSACMAPFEC), as required by N.J.A.C. 5:70-2.3, shall be based upon the amount of time remaining before the change of occupant is expected",
+      "doc_date": "2018 (50 N.J.R. 729(a), N.J.A.C. 5:70-2.9(d))",
+      "via": "pdf",
       "verified": true
      },
      {
       "url": "https://firesolutions.dca.nj.gov/ultra-fire-home/smoke-application-create/",
-      "quote": "Please complete the following information to apply for a Certificate of Smoke Alarm, Carbon Monoxide Alarm, and Secondary Power Source Identification Label Compliance (CSACMASPSIL). You will be required to pay, via e-check or credit card, before you can submit this application. This application requires a valid email address.",
-      "doc_date": "2026-09-30 (page fetched)",
+      "quote": "Start Your Smoke Certification Application PROPERTY INFORMATION Application Date",
+      "doc_date": "2026-10-06 (page fetched)",
       "via": "page",
-      "verified": null
+      "verified": true
      },
      {
       "url": "https://firesolutions.dca.nj.gov/ultra-fire-home/smoke-application-create/",
-      "quote": "The Certificate will be sent automatically to the email address provided once the application has been submitted, the fee has been paid, and any required inspections have been completed.",
-      "doc_date": "2026-09-30 (page fetched)",
+      "quote": "Reason for Certification * Change of Ownership Change of Occupancy Date of Closing/Change in Occupancy",
+      "doc_date": "2026-10-06 (page fetched)",
       "via": "page",
-      "verified": null
+      "verified": true
      },
      {
       "url": "https://www.nj.gov/dca/dfs/offices/bfce.shtml",
       "quote": "Louis Kilmer, Bureau Chief CPM Address: P.O. Box 809, Trenton, NJ 08625-0809 Phone: (609) 633-6106",
-      "doc_date": "2026-09-30 (page fetched)",
+      "doc_date": "2026-10-06 (page fetched)",
       "via": "page",
       "verified": true
      }
@@ -135,7 +149,7 @@
     "confidence": "high"
    }
   ],
-  "notes": "The State DCA is Corbin City's fire code enforcing agency (registry code S) and issues smoke certificates there ('SC' on the July 2026 state towns list). The City's own 2026 fact sheet sends sellers to the DCA Fire Safety portal. The DCA online form (CSACMASPSIL) no longer includes a fire extinguisher, in line with P.L.2025, c.19."
+  "notes": "The State DCA is Corbin City's fire code enforcing agency (registry code S) and issues smoke certificates there ('SC' on the July 2026 state towns list). The City's own 2026 fact sheet sends sellers to the DCA Fire Safety portal. Fees are now cited from the NJ Register rule text for N.J.A.C. 5:70-2.9(d) ($45 / $90 / $161) instead of the DCA portal page. The DCA portal page was reworded since 2026-09-30: its earlier intro text (CSACMASPSIL name, e-check or credit card payment, certificate sent by email) no longer shows, so those quotes were replaced. The state fee rule text still names the certificate CSACMAPFEC (including the extinguisher); P.L.2025, c.19 removed the extinguisher from the sale requirement."
  },
  "other_items": [
   {
@@ -150,15 +164,15 @@
   }
  ],
  "open_questions": [],
- "checked_at": "2026-09-30",
+ "checked_at": "2026-10-06",
  "verification": {
   "fees": 3,
-  "fee_ok": 0,
+  "fee_ok": 3,
   "fee_bad": 0,
-  "fee_unchecked": 3,
-  "quotes": 10,
-  "q_ok": 8,
+  "fee_unchecked": 0,
+  "quotes": 12,
+  "q_ok": 11,
   "q_bad": 0,
-  "q_unchecked": 2
+  "q_unchecked": 1
  }
 }

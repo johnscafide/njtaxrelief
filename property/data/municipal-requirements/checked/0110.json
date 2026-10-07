@@ -2,7 +2,6 @@
  "municipality_code": "0110",
  "municipality": "Folsom Borough",
  "county": "ATLANTIC",
- "checked_at": "2026-10-04",
  "resale_co": {
   "status": "required",
   "name": "Certificate of Continued Occupancy (CCO)",
@@ -10,7 +9,7 @@
   "lead_time": "",
   "valid_for": "",
   "requirements": [
-   "Property must meet the Borough Property Maintenance Code (2018 International Property Maintenance Code, Chapter 151)",
+   "Property must meet the Borough Property Maintenance Code (Chapter 151)",
    "Rental units: a current CCO must be attached to the Borough landlord registration (Chapter 152)"
   ],
   "fees": [
@@ -19,10 +18,10 @@
     "amount": "$25",
     "quote": "The fee for a certificate of continued occupancy, as per Chapter 151, Property Maintenance, shall be $25.",
     "source_url": "https://ecode360.com/10063291",
-    "verified": true
+    "verified": null
    }
   ],
-  "how_to_apply": "Contact the Borough Zoning Official, Frank Sacco, at Borough Hall (1700 Rt 54) to request the certificate of continued occupancy and pay the $25 fee. He holds office hours Mondays 5:00 to 7:00 PM. The Borough code does not publish a form, a lead time or the exact sale trigger, so call ahead to confirm.",
+  "how_to_apply": "Contact the Borough Zoning Official, Frank Sacco, at Borough Hall (1700 Rt 54, Folsom, NJ 08037) to request the certificate of continued occupancy and pay the $25 fee. He holds office hours Mondays 5:00 to 7:00 PM. The Borough code does not publish a form, a lead time or the exact sale trigger, so call ahead to confirm.",
   "application_url": "",
   "department_url": "https://folsomborough.com/services/construction.asp",
   "phone": "609-561-3178",
@@ -33,80 +32,80 @@
    {
     "url": "https://ecode360.com/10063291",
     "quote": "The following fees in this article are under the jurisdiction of the Zoning Official but are not applicable to the uniform construction codes.",
-    "doc_date": "Borough code, Chapter 103 Fees (code current through 12-09-2025)",
+    "doc_date": "Borough code, Chapter 103 Fees (read 2026-10-06)",
     "via": "page",
-    "verified": true
+    "verified": null
    },
    {
     "url": "https://ecode360.com/10063291",
     "quote": "The fee for a certificate of continued occupancy, as per Chapter 151, Property Maintenance, shall be $25.",
-    "doc_date": "Borough code, Chapter 103 Fees (code current through 12-09-2025)",
+    "doc_date": "Borough code, Chapter 103 Fees, Section 103-3 (read 2026-10-06)",
     "via": "page",
-    "verified": true
+    "verified": null
    },
    {
     "url": "https://ecode360.com/38657679",
     "quote": "The term on the lease and a copy of the current continued certificate of occupancy (CCO).",
     "doc_date": "Borough code, Chapter 152 Rental Property Registration (Ord. 14-2021)",
     "via": "page",
-    "verified": true
+    "verified": null
    },
    {
     "url": "https://folsomborough.com/services/construction.asp",
-    "quote": "Frank Sacco - Zoning Officer Email the Zoning Officer Office hours, Mondays 5:00, 7:00 PM",
-    "doc_date": "2025-12 (page last modified December 4, 2025)",
+    "quote": "Frank Sacco - Zoning Officer Email the Zoning Officer Office hours – Mondays 5:00 – 7:00 PM",
+    "doc_date": "2025-12 (page last modified December 4, 2025; fetched 2026-10-06)",
     "via": "page",
     "verified": true
    },
    {
     "url": "https://folsomborough.com/government/directory.asp",
     "quote": "Frank Sacco, Zoning/Code Enforcement Official (fsacco@folsomborough.com)",
-    "doc_date": "2022-07",
+    "doc_date": "2022-07 (page last modified July 8, 2022)",
     "via": "page",
     "verified": true
    }
   ],
   "confidence": "medium",
-  "notes": "Folsom's code (ecode360, read 2026-10-04) sets a $25 fee for a certificate of continued occupancy, handled by the Zoning Official, and requires a current CCO for every registered rental. Chapter 151 adopts the 2018 International Property Maintenance Code but the code text does not spell out when a CCO is triggered on a sale, so we list it as required and tell buyers and sellers to confirm with the Zoning Official. Construction code work is done by the State DCA Construction Office (609-567-3653, marie.reese@dca.nj.gov), which is not the CCO issuer. Smoke/CO certificates come from the State (see fire section)."
+  "notes": "Folsom's code (Section 103-3, re-read 2026-10-06) sets a $25 fee for a certificate of continued occupancy, handled by the Zoning Official, and Chapter 152 requires a current CCO for every registered rental. Chapter 151 (Property Maintenance, re-read 2026-10-06) does not spell out when a CCO is triggered on a sale, so we list it as required and tell buyers and sellers to confirm with the Zoning Official. Construction code work is done by the State DCA Construction Office, which is not the CCO issuer. Smoke/CO certificates come from the State (see fire section)."
  },
  "fire_cert": {
   "requirements": [
-   "Secondary power source identification label for homes with solar, generators or batteries (the State application is now the CSACMASPSIL)"
+   "Smoke alarms, carbon monoxide alarms and, for homes with solar, generators or batteries, a secondary power source identification label (the State application is now the CSACMASPSIL)"
   ],
   "authorities": [
    {
     "name": "NJ DCA Division of Fire Safety, Bureau of Fire Code Enforcement",
     "type": "state_dca",
     "area_served": "Entire borough",
-    "lead_time": "More than 10 business days before closing for the lowest fee",
+    "lead_time": "More than 10 business days before the change of occupant for the lowest fee",
     "fees": [
      {
-      "label": "More than 10 business days before closing",
-      "amount": "$45",
-      "quote": "If you are applying for a certificate more than ten business days from the closing date the fee is $45 dollars",
-      "source_url": "https://firesolutions.dca.nj.gov/ultra-fire-home/smoke-application-create/",
-      "verified": null
+      "label": "Requested more than 10 business days before the change of occupant",
+      "amount": "$45.00",
+      "quote": "Requests for a CSACMAPFEC received more than 10 business days prior to the change of occupant: $45.00",
+      "source_url": "https://www.nj.gov/dca/divisions/dfs/codes/regulations/r.2018%20d.074%20(50%20n.j.r.%20729(a)).pdf",
+      "verified": true
      },
      {
-      "label": "4 to 10 business days before closing",
-      "amount": "$90",
-      "quote": "if applying 4 to 10 business days from the closing date the fee is $90",
-      "source_url": "https://firesolutions.dca.nj.gov/ultra-fire-home/smoke-application-create/",
-      "verified": null
+      "label": "Requested 4 to 10 business days before the change of occupant",
+      "amount": "$90.00",
+      "quote": "Requests for a CSACMAPFEC received four to 10 business days prior to the change of occupant: $90.00",
+      "source_url": "https://www.nj.gov/dca/divisions/dfs/codes/regulations/r.2018%20d.074%20(50%20n.j.r.%20729(a)).pdf",
+      "verified": true
      },
      {
-      "label": "Less than 4 business days before closing",
-      "amount": "$161",
-      "quote": "if the closing date is less than four business days the fee is $161.",
-      "source_url": "https://firesolutions.dca.nj.gov/ultra-fire-home/smoke-application-create/",
-      "verified": null
+      "label": "Requested fewer than 4 business days before the change of occupant",
+      "amount": "$161.00",
+      "quote": "Requests for a CSACMAPFEC received fewer than four business days prior to the change of occupant: $161.00",
+      "source_url": "https://www.nj.gov/dca/divisions/dfs/codes/regulations/r.2018%20d.074%20(50%20n.j.r.%20729(a)).pdf",
+      "verified": true
      }
     ],
-    "how_to_apply": "Apply online through the NJ DCA Fire Safety portal (Apply Smoke Certification). Pay by e-check or credit card before submitting; a valid email address is required. The certificate is emailed once the application is submitted, the fee is paid and any required inspections are done.",
+    "how_to_apply": "Apply online through the NJ DCA Fire Safety portal (Apply Smoke Certification), as the Borough's Construction Office page directs. Pay online before submitting; a valid email address is required. For help email BFCECodeAdmin@dca.nj.gov or call 609-633-6132.",
     "application_url": "https://firesolutions.dca.nj.gov/ultra-fire-home/smoke-application-create/",
     "department_url": "https://www.nj.gov/dca/dfs/offices/bfce.shtml",
-    "phone": "609-633-6106",
-    "email": "BFCE_CSDCMAC@dca.nj.gov",
+    "phone": "609-633-6132",
+    "email": "BFCECodeAdmin@dca.nj.gov",
     "contact_name": "Louis Kilmer",
     "contact_title": "Bureau Chief, Bureau of Fire Code Enforcement (listed as the Fire Official for Folsom in the state fire directory)",
     "evidence": [
@@ -129,7 +128,7 @@
       "quote": "LEAID: 0110-999 Enf Auth. State Fire Official Louis Kilmer Phone (609)633-6132 Addr: PO Box 809 Trenton NJ 08625-0809",
       "doc_date": "2025-07-26 (survey date)",
       "via": "state_directory",
-      "verified": true
+      "verified": null
      },
      {
       "url": "https://folsomborough.com/services/construction.asp",
@@ -139,44 +138,38 @@
       "verified": true
      },
      {
-      "url": "https://firesolutions.dca.nj.gov/ultra-fire-home/smoke-application-create/",
-      "quote": "Please complete the following information to apply for a Certificate of Smoke Alarm, Carbon Monoxide Alarm, and Secondary Power Source Identification Label Compliance (CSACMASPSIL). You will be required to pay, via e-check or credit card, before you can submit this application. This application requires a valid email address.",
-      "doc_date": "2026-09-30 (page fetched)",
-      "via": "page",
-      "verified": null
-     },
-     {
-      "url": "https://firesolutions.dca.nj.gov/ultra-fire-home/smoke-application-create/",
-      "quote": "if your property is heated with electricity and does not require a carbon monoxide alarm, check the fourth box and send an email to BFCE_CSDCMAC@dca.nj.gov stating that you are not subject to that requirement.",
-      "doc_date": "2026-09-30 (page fetched)",
-      "via": "page",
-      "verified": null
-     },
-     {
       "url": "https://www.nj.gov/dca/dfs/offices/bfce.shtml",
       "quote": "Louis Kilmer, Bureau Chief CPM Address: P.O. Box 809, Trenton, NJ 08625-0809 Phone: (609) 633-6106",
-      "doc_date": "2026-09-30 (page fetched)",
+      "doc_date": "2026-10-06 (page fetched)",
       "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/divisions/dfs/codes/regulations/r.2018%20d.074%20(50%20n.j.r.%20729(a)).pdf",
+      "quote": "Requests for a CSACMAPFEC received more than 10 business days prior to the change of occupant: $45.00",
+      "doc_date": "50 N.J.R. 729(a) as adopted (fee schedule N.J.A.C. 5:70-2.9(d))",
+      "via": "pdf",
       "verified": true
      }
     ],
     "confidence": "high"
    }
   ],
-  "notes": "NJ DCA lists Folsom as State enforced (S) and its July 17, 2026 list marks it 'SC' (the State issues smoke certificates). The Borough's Construction Office page links sellers to the State Fire Safety portal. Fire suppression is by the Collings Lakes Fire Department (not the certificate issuer). The directory lists (609) 633-6132; the Bureau's page lists (609) 633-6106 for Louis Kilmer. BFCE_CSDCMAC@dca.nj.gov is the address the State application gives for smoke/CO certificate questions about electric-heat homes."
+  "notes": "NJ DCA lists Folsom as State enforced (S) and its July 17, 2026 list marks it 'SC' (the State issues smoke certificates). The Borough's Construction Office page links sellers to the State Fire Safety portal. Fees are the State fees under N.J.A.C. 5:70-2.9(d) ($45 / $90 / $161), now cited from the NJ Register adoption text instead of the State portal page. The directory lists (609) 633-6132; the Bureau's page lists (609) 633-6106 for Louis Kilmer. BFCECodeAdmin@dca.nj.gov is the State help address for residential smoke certificate questions."
  },
  "other_items": [],
  "open_questions": [
-  "Does the Borough require any resale certificate of occupancy, zoning sign-off or housing inspection when a 1-2 family home is sold? None found online; confirm with the Borough Clerk (609) 561-3178 or the Zoning/Code Enforcement Official."
+  "Is the $25 certificate of continued occupancy required on every 1-2 family sale, or only for rentals? The code sets the fee but does not state the sale trigger; confirm with the Zoning/Code Enforcement Official or the Borough Clerk at (609) 561-3178."
  ],
+ "checked_at": "2026-10-06",
  "verification": {
-  "fees": 3,
-  "fee_ok": 0,
+  "fees": 4,
+  "fee_ok": 3,
   "fee_bad": 0,
-  "fee_unchecked": 3,
-  "quotes": 10,
-  "q_ok": 8,
+  "fee_unchecked": 1,
+  "quotes": 11,
+  "q_ok": 7,
   "q_bad": 0,
-  "q_unchecked": 2
+  "q_unchecked": 4
  }
 }

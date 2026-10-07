@@ -5,24 +5,32 @@
  "resale_co": {
   "status": "required",
   "name": "Occupancy Transfer Certificate (Occupancy Transfer Inspection)",
-  "issued_by": "Egg Harbor City Building Department / Construction Office (Code Enforcement)",
+  "issued_by": "Egg Harbor City Code Enforcement Officer (applications go to the City Construction Office / Building Department)",
   "lead_time": "",
   "valid_for": "",
   "requirements": [
-   "Occupancy Transfer Inspection of the home before the sale (the form covers a rental or a sale)",
-   "Submit the Smoke and Carbon Monoxide Alarm Certificate Application together with it",
-   "Give owner, purchaser, tenant and lock box details and the building type, bedrooms, heat, sewer/septic and water/well on the form"
+   "Occupancy transfer certificate needed before a dwelling is sold, transferred or rented (City Code Section 213-6H, PM-107.6)",
+   "Inspection covers cleanliness, walls and ceilings, doors and hardware, windows, storm windows and screens, exterior paint and maintenance, a visual roof check, basement, kitchen, bathrooms, smoke detectors, carbon monoxide detector, electrical outlets, switches, covers and fuse box cover, sidewalks, lawn, shrubs and trees, maximum bedroom occupancy and all City code, zoning and planning ordinances",
+   "Submit the Smoke and Carbon Monoxide Alarm Certificate Application together with the Occupancy Transfer Inspection form",
+   "Form asks for owner, purchaser, tenant and lock box details and the building type, bedrooms, heat, sewer/septic and water/well"
   ],
   "fees": [
    {
-    "label": "Occupancy Transfer Inspection, per unit",
-    "amount": "$75.00",
-    "quote": "FEE: $75.00 per unit x # of Units",
-    "source_url": "https://app.membershipware.com/api/blob/viewBlob?rf=t&i=rw1asl38m%252BrXS5Vw72pTaPeCCtbucN6tPpPtqA%2FZ3wOk67lJc0pLvULrgKxm9TvE",
-    "verified": true
+    "label": "Occupancy transfer certificate inspection, per dwelling unit (covers the first inspection and one follow-up)",
+    "amount": "$75",
+    "quote": "A nonrefundable inspection fee of $75 for each dwelling unit shall be paid to the City of Egg Harbor at the time of application for such occupancy transfer certificate.",
+    "source_url": "https://ecode360.com/8035021",
+    "verified": null
+   },
+   {
+    "label": "Each additional inspection after one follow-up",
+    "amount": "$25",
+    "quote": "In the event more than on follow-up inspection is needed, there shall be an additional charge of $25 for each additional inspection.",
+    "source_url": "https://ecode360.com/8035021",
+    "verified": null
    }
   ],
-  "how_to_apply": "Download the Occupancy Transfer Inspection Form from Forms & Documents, mark it SALE, and submit it with the Smoke and Carbon Monoxide Alarm Certificate Application to the Egg Harbor City Construction Office, 500 London Ave., Egg Harbor City, NJ 08215. Pay with exact cash, money order or check made out to City of Egg Harbor City. Online payment is also possible through the City's WIPP portal (2.95% fee).",
+  "how_to_apply": "Download the Occupancy Transfer Inspection Form from Forms & Documents, mark it SALE, and submit it with the Smoke and Carbon Monoxide Alarm Certificate Application to the Egg Harbor City Construction Office, 500 London Ave., Egg Harbor City, NJ 08215 ($75.00 per unit). Pay with exact cash, money order or check made out to City of Egg Harbor City, or online through the City's WIPP portal (2.95% fee).",
   "application_url": "https://app.membershipware.com/api/blob/viewBlob?rf=t&i=rw1asl38m%252BrXS5Vw72pTaPeCCtbucN6tPpPtqA%2FZ3wOk67lJc0pLvULrgKxm9TvE",
   "department_url": "https://www.eggharborcity.org/building",
   "phone": "609-965-1616",
@@ -30,6 +38,34 @@
   "contact_name": "Donna Heffley",
   "contact_title": "Land Use and Building Department Office Manager",
   "evidence": [
+   {
+    "url": "https://ecode360.com/8035021",
+    "quote": "No owner or leaseholder or his agent shall rent, sell, transfer, grant, lease, let, mortgage with right of occupancy or otherwise dispose of the ownership or occupancy",
+    "doc_date": "City Code Section 213-6H (PM-107.6), read 2026-10-06",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://ecode360.com/8035021",
+    "quote": "unless an occupancy transfer certificate, certifying that the building and premises are in compliance with the Code and all other ordinances of the City of Egg Harbor City, shall first be obtained from the Code Enforcement Officer of the City.",
+    "doc_date": "City Code Section 213-6H (PM-107.6), read 2026-10-06",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://ecode360.com/8035021",
+    "quote": "Any property owner that fails to obtain an occupancy transfer certificate required as outlined above shall be subject to a fine of $150.",
+    "doc_date": "City Code Section 213-6H (PM-107.6), read 2026-10-06",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://ecode360.com/8032087",
+    "quote": "$75 for sale or rental including fire certification and one follow-up. 3rd inspection is $25",
+    "doc_date": "City Code Section 120-2A fee table (last amended 9-11-2025 by Ord. No. 13-2025), read 2026-10-06",
+    "via": "page",
+    "verified": null
+   },
    {
     "url": "https://app.membershipware.com/api/blob/viewBlob?rf=t&i=rw1asl38m%252BrXS5Vw72pTaPeCCtbucN6tPpPtqA%2FZ3wOk67lJc0pLvULrgKxm9TvE",
     "quote": "OCCUPANCY TRANSFER INSPECTION: RENTAL: _____ SALE: ______",
@@ -39,7 +75,7 @@
    },
    {
     "url": "https://app.membershipware.com/api/blob/viewBlob?rf=t&i=rw1asl38m%252BrXS5Vw72pTaPeCCtbucN6tPpPtqA%2FZ3wOk67lJc0pLvULrgKxm9TvE",
-    "quote": "Exact Cash, Money Order or Check made out to City of Egg Harbor City.",
+    "quote": "FEE: $75.00 per unit",
     "doc_date": "2022-12",
     "via": "pdf",
     "verified": true
@@ -52,29 +88,22 @@
     "verified": true
    },
    {
-    "url": "https://www.eggharborcity.org/formsanddocuments",
+    "url": "https://app.membershipware.com/api/public/mwjsResources?tn=eggharborcityorg&et=DsEBpLP32xQDf9SDjaU%252BKg%3d%3d&pi=TToDIgI7usSeZfigcPBGFg%3d%3d&eb=KpjeAhPgzh3BNBSf%252BZdFBg%3d%3d&tg=YihSMzUNwfZ0WRShR9VMgw%3d%3d&xtg=",
     "quote": "Must be submitted with Occupancy Transfer Inspection form for resale or new tentant.",
-    "doc_date": "2026-04 (description of the Smoke and Carbon Monoxide Alarm Certificate Application in the Forms & Documents list)",
+    "doc_date": "2026-04 (description of the Smoke and Carbon Monoxide Alarm Certificate Application in the City's Forms & Documents data feed, which feeds https://www.eggharborcity.org/formsanddocuments)",
     "via": "page",
     "verified": true
    },
    {
-    "url": "https://ecode360.com/8035021",
-    "quote": "PM-107.6 Occupancy Transfer Certificate: Responsibilities of property owners or leaseholders or their agents",
-    "doc_date": "",
-    "via": "search_snippet",
-    "verified": null
-   },
-   {
     "url": "https://app.membershipware.com/api/public/mwjsPeople?et=DsEBpLP32xQDf9SDjaU%252BKg%3d%3d&eb=u32SQFY7Pxg4KbW4ofECYQ%3d%3d",
-    "quote": "Donna Heffley ... Land Use and Building Department Office Manager ... 6099651616 ... donnah@eggharborcity.org",
-    "doc_date": "2026-09-30 (staff list shown on the Planning, Zoning & Building page)",
+    "quote": "Donna Heffley ... Land Use and Building Department Office Manager ... donnah@eggharborcity.org",
+    "doc_date": "2026-10-06 (staff list shown on the Planning, Zoning & Building page)",
     "via": "page",
     "verified": true
    }
   ],
   "confidence": "high",
-  "notes": "The City's Occupancy Transfer Inspection form (rental or sale) and the Forms page note that the smoke/CO application 'must be submitted with Occupancy Transfer Inspection form for resale or new tentant' show the certificate is needed for a sale. The City code section is titled 'PM-107.6 Occupancy Transfer Certificate' (ecode360, not openable). Search engine summaries of that section describe a $25 charge for each inspection after one follow-up, but the exact words could not be confirmed, so only the form's $75.00 per unit is recorded. The Code Enforcement Officer is Robert McClain (codeenforcement2@eggharborcity.org). The City also schedules annual rental unit inspections online (rental program)."
+  "notes": "The City code (Section 213-6H, PM-107.6 Occupancy Transfer Certificate, now readable in full on ecode360) bars selling or transferring any dwelling without an occupancy transfer certificate from the Code Enforcement Officer, charges $75 per dwelling unit for the first inspection and one follow-up, $25 for each inspection after that, and a $150 fine for skipping it. The City fee table (Section 120-2A, last amended by Ord. No. 13-2025 on 9-11-2025) and the August 2025 Schedule A list the same $75 'for sale or rental including fire certification and one follow-up', yet the City's April 2026 smoke/CO application charges its own $55/$90/$160 fees, so ask whether both are paid. The $25 extra-inspection fee, listed as an open question last time, is now confirmed from the code text. The City's document links (app.membershipware.com viewBlob) changed behaviour since the last check: they now answer with a redirect to a viewer page on eggharborcity.org, so a normal browser may land on the City home page instead of the PDF; the PDF bytes are still sent along with the redirect and were read in full on 2026-10-06, so the form quotes (Occupancy Transfer Inspection form and smoke/CO application) are confirmed by hand but an automatic check that follows the redirect will not find them. The redirect target is https://www.eggharborcity.org/index?i=<document id>&rf=i. The Forms & Documents page is built by script, so its document descriptions are cited from the City's forms data feed (app.membershipware.com mwjsResources). Code Enforcement Officer: Robert McClain (codeenforcement2@eggharborcity.org). The City also schedules annual rental unit inspections (rental program)."
  },
  "fire_cert": {
   "requirements": [
@@ -84,7 +113,7 @@
    "Electric smoke alarms required by the building code cannot be replaced with battery alarms",
    "Smoke detectors at least 3 feet from ceiling fan blade tips and air ducts; none in kitchens, bathrooms, dead air space, crawl spaces or attics",
    "CO alarm in the hallway within 10 feet of all bedrooms; not plugged into a switched outlet",
-   "Fire extinguisher: residential 2A:10B:C, no larger than 10 lb, mounted within 10 feet of the kitchen (April 2026 form still lists it)"
+   "Fire extinguisher: residential 2A:10B:C, no larger than 10 lb, mounted within 10 feet of the kitchen (form still lists it)"
   ],
   "authorities": [
    {
@@ -122,7 +151,7 @@
       "verified": true
      }
     ],
-    "how_to_apply": "Fill out the Certificate of Smoke Detector and Carbon Monoxide Alarm Inspection Request (Smoke and Carbon Monoxide Alarm Certificate Application on Forms & Documents) and submit it with the Occupancy Transfer Inspection form to the City, 500 London Ave. Questions: EHCFirePrevention@eggharborcity.org. After a failed reinspection the process starts over with a new fee.",
+    "how_to_apply": "Fill out the Smoke and Carbon Monoxide Alarm Certificate Application (Forms & Documents) and submit it with the Occupancy Transfer Inspection form to the City, 500 London Ave., Egg Harbor City, NJ 08215. Questions: EHCFirePrevention@eggharborcity.org. After a failed reinspection the process starts over with a new fee.",
     "application_url": "https://app.membershipware.com/api/blob/viewBlob?rf=t&i=mTuJlzExhzyqK3vbZ8XeAem7FEXaIzBDyP97NWQK82S%2FQ20zdH6b2vNSD%252BZxqSv7",
     "department_url": "https://www.eggharborcity.org/building",
     "phone": "609-965-0081",
@@ -132,36 +161,29 @@
     "evidence": [
      {
       "url": "https://app.membershipware.com/api/blob/viewBlob?rf=t&i=mTuJlzExhzyqK3vbZ8XeAem7FEXaIzBDyP97NWQK82S%2FQ20zdH6b2vNSD%252BZxqSv7",
-      "quote": "City of Egg Harbor Fire Official EHCFireprevention@eggharborcity.org 500 London Ave Egg Harbor City, NJ 08215",
-      "doc_date": "2026-04 (PDF created April 15, 2026)",
-      "via": "pdf",
-      "verified": "eye"
-     },
-     {
-      "url": "https://app.membershipware.com/api/blob/viewBlob?rf=t&i=mTuJlzExhzyqK3vbZ8XeAem7FEXaIzBDyP97NWQK82S%2FQ20zdH6b2vNSD%252BZxqSv7",
-      "quote": "Certificate of Smoke Detector and Carbon Monoxide Alarm Inspection Request",
-      "doc_date": "2026-04",
-      "via": "pdf",
-      "verified": "eye"
-     },
-     {
-      "url": "https://app.membershipware.com/api/blob/viewBlob?rf=t&i=mTuJlzExhzyqK3vbZ8XeAem7FEXaIzBDyP97NWQK82S%2FQ20zdH6b2vNSD%252BZxqSv7",
-      "quote": "Residential Resale Requirements for 1 & 2 Family Dwelling",
-      "doc_date": "2026-04",
-      "via": "pdf",
-      "verified": "eye"
-     },
-     {
-      "url": "https://app.membershipware.com/api/blob/viewBlob?rf=t&i=mTuJlzExhzyqK3vbZ8XeAem7FEXaIzBDyP97NWQK82S%2FQ20zdH6b2vNSD%252BZxqSv7",
       "quote": "Thereafter, the inspection process shall be considered to have recommenced with the fees of $55, $90, or $160 due depending upon the timing of the application as outlined above.",
-      "doc_date": "2026-04",
+      "doc_date": "2026-04 (PDF created April 15, 2026; read 2026-10-06)",
       "via": "pdf",
       "verified": true
      },
      {
       "url": "https://app.membershipware.com/api/public/mwjsPeople?et=DsEBpLP32xQDf9SDjaU%252BKg%3d%3d&eb=u32SQFY7Pxg4KbW4ofECYQ%3d%3d",
-      "quote": "Stephen Buchhofer ... Fire Marshall ... Construction Official & Electric, Plumbing, Fire & Mechanical Subcode Official ... EHCFirePrevention@eggharborcity.org ... Inspections available Tuesdays & Thursdays from 2-6pm.",
-      "doc_date": "2026-09-30 (staff list shown on the Planning, Zoning & Building page)",
+      "quote": "Stephen Buchhofer ... Inspections available Tuesdays ... EHCFirePrevention@eggharborcity.org",
+      "doc_date": "2026-10-06 (staff list shown on the Planning, Zoning & Building page)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://app.membershipware.com/api/public/mwjsPeople?et=DsEBpLP32xQDf9SDjaU%252BKg%3d%3d&eb=u32SQFY7Pxg4KbW4ofECYQ%3d%3d",
+      "quote": "Fire Marshal",
+      "doc_date": "2026-10-06 (staff list: Stephen Buchhofer's listed role)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://www.eggharborcity.org/building",
+      "quote": "CONSTRUCTION OFFICIAL STEPHEN BUCHHOFER TUESDAY 2:00 p.m. – 6:00 p.m. THURSDAY 2:00 p.m. – 6:00 p.m.",
+      "doc_date": "2026-10-06 (page fetched)",
       "via": "page",
       "verified": true
      },
@@ -174,30 +196,32 @@
      },
      {
       "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
-      "quote": "LEAID: 0107-001 Enf Auth. Fire Dept Fire Official Stephen Buchhofer ... Addr: 500 London Ave Egg Harbor City NJ 08215 ... Phone (609) 965-0081 ... Egg Harbor City Bldg Dept",
+      "quote": "LEAID: 0107-001 Enf Auth. Fire Dept Fire Official Stephen Buchhofer ... Egg Harbor City Bldg Dept ... Phone (609) 965-0081",
       "doc_date": "2026-01 (survey date 1/27/2026)",
       "via": "state_directory",
-      "verified": true
+      "verified": null
      }
     ],
     "confidence": "high"
    }
   ],
-  "notes": "Egg Harbor City's fire code enforcing agency is its fire department (registry code F); the Fire Official, Stephen Buchhofer, is also the City's Construction Official. The office number recorded is City Hall's main line, (609) 965-0081, which the state directory lists under smoke detector compliance; the directory's separate 856 number and non-City email for the fire official are not recorded. Fees come from the City's April 2026 smoke/CO application. That form still lists a fire extinguisher even though the state law of February 3, 2025 (P.L.2025, c.19) removed it from the state requirement."
+  "notes": "Egg Harbor City's fire code enforcing agency is its fire department (registry code F); the Fire Official, Stephen Buchhofer, is also the City's Construction Official. The office number recorded is City Hall's line, (609) 965-0081, which the state directory lists under smoke detector compliance; the directory's 856 number and non-City email for the fire official are not recorded. Fees come from the City's April 2026 smoke/CO application (re-read 2026-10-06). Its link now redirects to a City viewer page (see resale notes), so the fee quotes may not show up for an automatic check even though the PDF text is unchanged. The form still lists a fire extinguisher even though P.L.2025, c.19 (February 3, 2025) removed it from the state requirement. The City fee table says the $75 occupancy transfer fee includes fire certification, which does not match the separate smoke/CO fees on this form."
  },
  "other_items": [],
  "open_questions": [
-  "Occupancy Transfer Inspection reinspection fee (search summaries of the code mention $25 per extra inspection; not confirmed) and how far ahead to apply."
+  "Does the $75 occupancy transfer fee cover the smoke/CO certificate (the City fee table says 'including fire certification'), or are the $55/$90/$160 smoke/CO fees on the April 2026 form charged on top?",
+  "How far ahead to apply for the occupancy transfer inspection and how long the certificate stays valid (not published).",
+  "Does the City still require a portable fire extinguisher at resale after P.L.2025, c.19?"
  ],
- "checked_at": "2026-09-30",
+ "checked_at": "2026-10-06",
  "verification": {
-  "fees": 5,
-  "fee_ok": 5,
-  "fee_bad": 0,
-  "fee_unchecked": 0,
-  "quotes": 13,
-  "q_ok": 12,
-  "q_bad": 0,
-  "q_unchecked": 1
+  "fees": 6,
+  "fee_ok": 0,
+  "fee_bad": 4,
+  "fee_unchecked": 2,
+  "quotes": 15,
+  "q_ok": 6,
+  "q_bad": 4,
+  "q_unchecked": 5
  }
 }

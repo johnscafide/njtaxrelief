@@ -2,7 +2,7 @@
  "municipality_code": "0417",
  "municipality": "Haddonfield Borough",
  "county": "CAMDEN",
- "checked_at": "2026-09-30",
+ "checked_at": "2026-10-06",
  "resale_co": {
   "status": "required",
   "name": "Resale CO (made up of the Fire Marshal smoke detector certificate of compliance plus the sidewalk inspection certificate of compliance)",
@@ -182,8 +182,8 @@
      },
      {
       "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
-      "quote": "SMOKE DETECTOR COMPLIANCE Name: Haddonfield Fire Co Addr: 15 N Haddon Av Haddonfield NJ 08033 Phone (856) 429-4308",
-      "doc_date": "2026-09 (directory PDF; fire department survey 5/2026)",
+      "quote": "LEAID: 0417-001 Haddonfield Boro SMOKE DETECTOR COMPLIANCE Enf Auth. Municipal ... Name: Haddonfield Fire Co ... Addr: 15 N Haddon Av ... Haddonfield NJ 08033 ... Fire Official Ernest F Busch 15 N Haddon Ave ... Phone (856) 429-4308 Phone JUVENILE FIRESETTERS PROGRAM",
+      "doc_date": "2026-09-03 (directory PDF dated; fire department survey 5/18/2026)",
       "via": "pdf",
       "verified": true
      }
@@ -221,8 +221,8 @@
  ],
  "verification": {
   "fees": 10,
-  "fee_ok": 10,
-  "fee_bad": 0,
+  "fee_ok": 9,
+  "fee_bad": 1,
   "fee_unchecked": 0,
   "quotes": 9,
   "q_ok": 9,

@@ -1,0 +1,187 @@
+{
+ "municipality_code": "0120",
+ "municipality": "Port Republic",
+ "county": "ATLANTIC",
+ "checked_at": "2026-10-06",
+ "resale_co": {
+  "status": "required",
+  "name": "Certificate of Continued Occupancy (CCO) on change of ownership",
+  "issued_by": "Construction Office (Construction Official, with the subcode officials)",
+  "lead_time": "Not stated. The Construction Office keeps office hours Tuesday and Thursday, 4:00 to 6:00 pm.",
+  "valid_for": "Not stated. A temporary certificate of continued occupancy, if granted, is valid for 180 days.",
+  "requirements": [
+   "General inspection of the visible parts of the building; no pending violations or orders of the Construction Official",
+   "The current use of the building must have lawfully existed (checked against municipal records)",
+   "No violations of N.J.A.C. 5:23-2.14 and no unsafe conditions under N.J.A.C. 5:23-2.32(a)"
+  ],
+  "fees": [
+   {
+    "label": "Certificate of continued occupancy, per unit (City Code §102-4 fee schedule, amended 12-8-2015)",
+    "amount": "$100",
+    "quote": "Certificate of continued occupancy: $100 per unit.",
+    "source_url": "https://ecode360.com/15407016",
+    "verified": null
+   },
+   {
+    "label": "Certificate of continued occupancy (older figure in City Code §102-9, added 1989; conflicts with the $100 fee schedule)",
+    "amount": "$25",
+    "quote": "The fee for a certificate of continued occupancy shall be established at $25.",
+    "source_url": "https://ecode360.com/15407016",
+    "verified": null
+   }
+  ],
+  "how_to_apply": "The City Code requires the owner to request the certificate of continued occupancy from the Construction Official before the new owner occupies. No City CCO application form is posted online; contact the Construction Office (143 Main Street; 609-652-8759; construction@portrepublicnj.org), open Tuesday and Thursday 4:00 to 6:00 pm, to request the inspection.",
+  "application_url": "",
+  "department_url": "https://www.portrepublicnj.org/construction-office/",
+  "phone": "609-652-8759",
+  "email": "construction@portrepublicnj.org",
+  "contact_name": "Pat Naticchione",
+  "contact_title": "Construction Official, Zoning Officer and Fire Inspector / Fire Subcode",
+  "evidence": [
+   {
+    "url": "https://ecode360.com/15407016",
+    "quote": "A certificate of continued occupancy shall be required for the occupancy of any existing building or structure upon a change of ownership or upon a change to a new tenant.",
+    "doc_date": "1989-05-09 (§102-9 added by Ord. No. 103-1989)",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://ecode360.com/15407016",
+    "quote": "Certificate of continued occupancy: $100 per unit.",
+    "doc_date": "2015-12-08 (§102-4 amended by Ord. No. 10-2015)",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://ecode360.com/15407016",
+    "quote": "The fee for a certificate of continued occupancy shall be established at $25.",
+    "doc_date": "1989-05-09 (§102-9 added by Ord. No. 103-1989)",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://ecode360.com/15407016",
+    "quote": "The temporary certificate of continued occupancy shall be valid for a period of 180 days from the date of issuance.",
+    "doc_date": "2015-10-13 (§102-10 added by Ord. No. 08-2015)",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://www.portrepublicnj.org/construction-office/",
+    "quote": "Tuesday & Thursday 4:00pm to 6:00pm Phone: 609-652-8759 Fax 609-652-8270 Email: construction@portrepublicnj.org Construction Official - Pat Naticchione",
+    "doc_date": "2026-10-06 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.portrepublicnj.org/construction-office/",
+    "quote": "Zoning Officer - Pat Naticchione Fire Inspector & Fire Subcode - Pat Naticchione",
+    "doc_date": "2026-10-06 (page fetched)",
+    "via": "page",
+    "verified": true
+   }
+  ],
+  "confidence": "medium",
+  "notes": "City Code Chapter 102 (Construction Codes, Uniform), read in full on ecode360, says a certificate of continued occupancy is required for the occupancy of any existing building upon a change of ownership or a new tenant (§102-9). The fee is unclear: the fee schedule in §102-4 (amended 12-8-2015) lists 'Certificate of continued occupancy: $100 per unit', while the older §102-9 text (1989) still says $25. The newer $100 figure is probably current, but confirm. The Construction Office web page does not mention a resale CCO or post an application, so confidence is medium until the office confirms it still performs these inspections on sales. If improvements are needed, the Construction Official may grant a temporary CCO valid 180 days, with a $50 per day penalty after that period (§102-10). The Rental Registration Application (Inspection Fee $100.00, Re-Inspection Fee $35.00) is for rentals only and is not a resale requirement."
+ },
+ "fire_cert": {
+  "requirements": [
+   "Smoke alarms on each level and outside each separate sleeping area, per N.J.A.C. 5:70-4.19 (battery-only alarms must be 10-year sealed units)",
+   "Carbon monoxide alarm in the immediate vicinity of the sleeping areas (homes with a fuel-burning appliance or attached garage)",
+   "The 2025 state law (P.L.2025, c.19) removed the portable fire extinguisher from the state sale certificate"
+  ],
+  "authorities": [
+   {
+    "name": "NJ DCA Division of Fire Safety, Bureau of Fire Code Enforcement",
+    "type": "state_dca",
+    "area_served": "Entire city",
+    "lead_time": "Apply more than 10 business days before the closing (change of occupant) for the lowest fee.",
+    "fees": [
+     {
+      "label": "NJ DCA smoke/CO certificate, requested more than 10 business days before the change of occupant",
+      "amount": "$45.00",
+      "quote": "Requests for a CSACMAPFEC received more than 10 business days prior to the change of occupant: $45.00",
+      "source_url": "https://www.nj.gov/dca/divisions/dfs/codes/regulations/r.2018%20d.074%20(50%20n.j.r.%20729(a)).pdf",
+      "verified": true
+     },
+     {
+      "label": "NJ DCA smoke/CO certificate, requested 4 to 10 business days before the change of occupant",
+      "amount": "$90.00",
+      "quote": "Requests for a CSACMAPFEC received four to 10 business days prior to the change of occupant: $90.00",
+      "source_url": "https://www.nj.gov/dca/divisions/dfs/codes/regulations/r.2018%20d.074%20(50%20n.j.r.%20729(a)).pdf",
+      "verified": true
+     },
+     {
+      "label": "NJ DCA smoke/CO certificate, requested fewer than 4 business days before the change of occupant",
+      "amount": "$161.00",
+      "quote": "Requests for a CSACMAPFEC received fewer than four business days prior to the change of occupant: $161.00",
+      "source_url": "https://www.nj.gov/dca/divisions/dfs/codes/regulations/r.2018%20d.074%20(50%20n.j.r.%20729(a)).pdf",
+      "verified": true
+     }
+    ],
+    "how_to_apply": "Apply online through the NJ DCA Division of Fire Safety portal (firesolutions.dca.nj.gov, smoke certification application) and pay online. The fee depends on how many business days before the closing the request is received. Questions: Bureau of Fire Code Enforcement, P.O. Box 809, Trenton, NJ 08625-0809.",
+    "application_url": "https://firesolutions.dca.nj.gov/ultra-fire-home/smoke-application-create/",
+    "department_url": "https://www.nj.gov/dca/dfs/offices/bfce.shtml",
+    "phone": "609-633-6106",
+    "email": "BFCE_CSDCMAC@dca.nj.gov",
+    "contact_name": "Louis Kilmer",
+    "contact_title": "Bureau Chief, Bureau of Fire Code Enforcement (listed as the Fire Official in the state fire directory)",
+    "evidence": [
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "S Port Republic City",
+      "doc_date": "2026-07",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/state_towns%207_17_26.pdf",
+      "quote": "PORT REPUBLIC 0120 SC",
+      "doc_date": "2026-07-17",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "LEAID: 0120-999 Enf Auth. State Fire Official Louis Kilmer Phone (609)633-6132 Addr: PO Box 809",
+      "doc_date": "directory page (survey date 5/11/2022)",
+      "via": "state_directory",
+      "verified": null
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/offices/bfce.shtml",
+      "quote": "Louis Kilmer, Bureau Chief CPM Address: P.O. Box 809, Trenton, NJ 08625-0809 Phone: (609) 633-6106",
+      "doc_date": "2026-10-06 (page fetched)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/divisions/dfs/codes/regulations/r.2018%20d.074%20(50%20n.j.r.%20729(a)).pdf",
+      "quote": "Requests for a CSACMAPFEC received more than 10 business days prior to the change of occupant: $45.00",
+      "doc_date": "2018-02-05 (N.J.A.C. 5:70-2.9(d) amendments effective)",
+      "via": "pdf",
+      "verified": true
+     }
+    ],
+    "confidence": "high"
+   }
+  ],
+  "notes": "NJ DCA lists Port Republic as State enforced (S) in its July 2026 LEA registry, and its July 17, 2026 list marks Port Republic 'SC' (the State issues smoke certificates). The state fire directory lists 'NJ Division Fire Safety' for smoke detector compliance in Port Republic. State fees ($45 / $90 / $161 by business days before the change of occupant) are cited from the N.J.A.C. 5:70-2.9(d) adoption in the NJ Register. The City's Construction Office page lists Pat Naticchione as Fire Inspector & Fire Subcode, but that is a construction code role; no City page mentions issuing resale smoke certificates. The directory gives (609) 633-6132 for Louis Kilmer; the Bureau's own page gives (609) 633-6106, which is used here."
+ },
+ "other_items": [],
+ "open_questions": [
+  "Does the Construction Office still require and perform the certificate of continued occupancy inspection on every 1-2 family sale, as City Code §102-9 says?",
+  "Is the CCO fee $100 per unit (§102-4 fee schedule, 2015) or $25 (§102-9, 1989)?",
+  "Lead time, reinspection fee and application form for the CCO are not published."
+ ],
+ "verification": {
+  "fees": 8,
+  "fee_ok": 6,
+  "fee_bad": 0,
+  "fee_unchecked": 2,
+  "quotes": 11,
+  "q_ok": 6,
+  "q_bad": 0,
+  "q_unchecked": 5
+ }
+}
