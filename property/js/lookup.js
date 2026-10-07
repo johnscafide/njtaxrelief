@@ -3983,7 +3983,6 @@ buildOpinion(hasCase, overBy, saving, target) + rows +
     });
     sb.auth.onAuthStateChange(function (_event, session) {
       plUser = session ? session.user : null;
-      if (plUser) moveLocalHearts();
       paintAuthBtn();
       applyGates();
       if (current) refreshSaveState();
@@ -4102,7 +4101,6 @@ buildOpinion(hasCase, overBy, saving, target) + rows +
   };
 
   function refreshSaveState() {
-    paintHeart();
     var wrap = el('plm-account');
     if (!wrap) return;
     if (!plUser) {
@@ -4513,59 +4511,17 @@ buildOpinion(hasCase, overBy, saving, target) + rows +
     if (m && m.classList.contains('open') && !m.contains(e.target)) m.classList.remove('open');
   });
 
-  var PIN_RE = /^\d{4}_[0-9A-Za-z.&_-]{1,70}$/;
-  function setHeart(on) {
-    var btn = el('plm-save');
-    btn.classList.toggle('saved', !!on);
-    btn.innerHTML = on ? '<i class="fas fa-heart"></i><span>Saved</span>' : '<i class="far fa-heart"></i><span>Save</span>';
-    btn.setAttribute('aria-pressed', on ? 'true' : 'false');
-  }
-  function heartRow() {
-    var path = onPropertyPath() && /^\/nj\/[a-z0-9-]{1,80}\/[a-z0-9-]{1,120}$/.test(location.pathname) ? location.pathname : null;
-    return {
-      pams_pin: current.pin,
-      address: String(current.address || '').slice(0, 120) || null,
-      town: String(current.town || '').slice(0, 80) || null,
-      zip: /^0[78]\d{3}$/.test(current.zip || '') ? current.zip : null,
-      page_path: path
-    };
-  }
-  function moveLocalHearts() {
-    var saved;
-    try { saved = JSON.parse(localStorage.getItem('pl_saved') || '{}'); } catch (e) { return; }
-    var rows = Object.keys(saved || {}).filter(function (k) { return PIN_RE.test(k); }).map(function (k) {
-      var it = saved[k] || {};
-      return { pams_pin: k, address: String(it.a || '').slice(0, 120) || null, town: String(it.t || '').slice(0, 80) || null };
-    });
-    try { localStorage.removeItem('pl_saved'); } catch (e) {}
-    if (rows.length) sb.from('hearted_properties').upsert(rows, { onConflict: 'user_id,pams_pin', ignoreDuplicates: true }).then(function () {});
-  }
-  function paintHeart() {
-    if (!current || !current.pin) return;
-    var pin = current.pin;
-    if (!plUser || !sb) { setHeart(false); return; }
-    sb.from('hearted_properties').select('pams_pin').eq('pams_pin', pin).maybeSingle().then(function (res) {
-      if (current && current.pin === pin) setHeart(!!(res && res.data));
-    });
-  }
   window.plSaveHome = function () {
-    if (!current || !current.pin) return;
-    if (!plUser || !sb) { toast('Sign in to save homes'); plSignInPrompt(); return; }
-    var btn = el('plm-save'), pin = current.pin;
-    if (btn.classList.contains('saved')) {
-      setHeart(false);
-      sb.from('hearted_properties').delete().eq('pams_pin', pin).then(function (res) {
-        if (res && res.error) { setHeart(true); toast('Could not update, try again'); return; }
-        toast('Removed from saved homes');
-      });
-    } else {
-      setHeart(true);
-      sb.from('hearted_properties').upsert(heartRow(), { onConflict: 'user_id,pams_pin', ignoreDuplicates: true }).then(function (res) {
-        if (res && res.error) { setHeart(false); toast('Could not save, try again'); return; }
-        toast('Saved. See it under Saved homes');
-        if (typeof gtag === 'function') gtag('event', 'heart_property', {});
-      });
+    if (!current) return;
+    var btn = el('plm-save');
+    var saved = JSON.parse(localStorage.getItem('pl_saved') || '{}');
+    var k = current.pin || current.address;
+    if (saved[k]) { delete saved[k]; btn.classList.remove('saved'); btn.innerHTML = '<i class="far fa-heart"></i><span>Save</span>'; toast('Removed'); }
+    else {
+      saved[k] = { a: current.address, t: current.town, v: current.assessed, d: Date.now() };
+      btn.classList.add('saved'); btn.innerHTML = '<i class="fas fa-heart"></i><span>Saved</span>'; toast('Saved to this browser');
     }
+    localStorage.setItem('pl_saved', JSON.stringify(saved));
   };
 
   function propertyPageUrl() {

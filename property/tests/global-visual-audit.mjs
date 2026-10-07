@@ -25,7 +25,7 @@ const PRIVATE_PREFIXES = [
   '/account', '/agent-control', '/agent-desk', '/analytics', '/backoffice', '/compare', '/dashboard',
   '/data-center', '/data-workbench', '/developer', '/developer-data', '/diagnostics', '/farm-builder',
   '/growth', '/home', '/insights/admin', '/integrations', '/intelligence', '/logs', '/marketing-studio',
-  '/newsletter-studio', '/onboarding', '/report-builder', '/saved', '/watchlist', '/whitepapers', '/workbench'
+  '/newsletter-studio', '/onboarding', '/report-builder', '/watchlist', '/whitepapers', '/workbench'
 ];
 
 const CRITICAL_ROUTES = [

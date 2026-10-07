@@ -213,11 +213,6 @@ assert.equal(res.statusCode, 400);
 res = await call('/nj/harrison-town/102-grant-avenue-07029.md', { get_public_property_page_slug: published, get_public_property_page: row });
 assert.equal(res.statusCode, 200);
 assert.match(res.headers['content-type'], /text\/markdown/);
-const heartSql = read('supabase/migrations/20261007190000_hearted_properties.sql');
-assert.match(heartSql, /enable row level security/);
-assert.match(heartSql, /revoke all on public\.hearted_properties from anon, authenticated/);
-assert.match(heartSql, /using \(user_id = auth\.uid\(\)\)/);
-assert.doesNotMatch(heartSql, /grant[^;]*update[^;]*hearted_properties/i, 'hearts are insert/delete only');
 
 // Property sitemap
 const sitemap = require(new URL('api/watchdog-property-sitemap.js', root).pathname);
