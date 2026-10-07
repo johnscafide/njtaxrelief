@@ -40,9 +40,7 @@
     {key:'pro',label:'Pricing',href:'/pro'}
   ];
   var HAS_ICON={dashboard:1,lookup:1,home:1,pulse:1,anchor:1,'town-compare':1,co:1,robust:1,games:1,'data-center':1,pro:1,account:1,'agent-desk':1,clients:1,farm:1,marketing:1,research:1,scan:1,transaction:1,'data-workbench':1};
-  var TOOLS={developer:'Developer','developer-recaps':'Recaps','developer-marketing':'Campaign','developer-analytics':'Analytics','developer-logs':'Build Logs','developer-data':'Data Ops','sales-desk':'Sales Desk'};
   EXTRA.forEach(function(x){HAS_ICON[x.key]=1;});
-  Object.keys(TOOLS).forEach(function(k){HAS_ICON[k]=1;});
   var editing=false,known={},knownOrder=[],recent=[],trigger=null;
   if(window.__wdAppsMenu)return;
   window.__wdAppsMenu=true;
@@ -68,6 +66,7 @@
     },600);
   }
   function adopt(u){
+    if(!u||!user||u.id!==user.id){known={};knownOrder=[];recent=[];}
     user=u||null;
     if(!user)return;
     var meta=user.user_metadata||{},remote=meta[META];
@@ -100,13 +99,6 @@
       seen[key]=1;
       out.push({key:key,label:SHORT[key]||text.trim(),href:a.getAttribute('href'),fa:icon?icon.className:''});
     });
-    Array.prototype.forEach.call(sheet.querySelectorAll('a.wd-universal-developer-tool[data-wd-developer-tool]'),function(a){
-      var key=a.getAttribute('data-wd-developer-tool');
-      if(seen[key])return;
-      seen[key]=1;
-      var b=a.querySelector('b');
-      out.push({key:key,label:TOOLS[key]||(b?b.textContent:key),href:a.getAttribute('href')});
-    });
     if(!out.length){
       Object.keys(SHORT).forEach(function(key){seen[key]=1;out.push({key:key,label:SHORT[key],href:route(key==='lookup'?'/':'/'+(key==='robust'?'robust/':key==='anchor'?'anchor/applications/':key))});});
     }
@@ -128,7 +120,7 @@
     var all=catalog(sheet);
     var byKey={};all.forEach(function(x){byKey[x.key]=x;});
     var stored=load();
-    var favKeys=(stored||Object.keys(SHORT).concat(all.filter(function(x){return !SHORT[x.key]&&!TOOLS[x.key]&&!EXTRA.some(function(e){return e.key===x.key;});}).map(function(x){return x.key;}))).filter(function(k){return byKey[k];});
+    var favKeys=(stored||Object.keys(SHORT).concat(all.filter(function(x){return !SHORT[x.key]&&!EXTRA.some(function(e){return e.key===x.key;});}).map(function(x){return x.key;}))).filter(function(k){return byKey[k];});
     var favSet={};favKeys.forEach(function(k){favSet[k]=1;});
     var more=all.filter(function(x){return !favSet[x.key];});
     recent=recent.filter(function(k){return !favSet[k]&&byKey[k];});
