@@ -129,6 +129,16 @@ function streetName(address) {
   return { street: street.toLowerCase().replace(/(^|[\s-])([a-z])/g, (m, a, b) => a + b.toUpperCase()), unit };
 }
 
+function parcelPart(value) {
+  const raw = String(value || '').trim();
+  const main = (raw.length > 5 ? raw.slice(0, -2) : raw).replace(/^0+(?=\d)/, '');
+  const suffix = raw.length > 5 ? raw.slice(-2) : '00';
+  return suffix === '00' ? main : main + '.' + suffix;
+}
+function parcelPin(row) {
+  return [row.d, parcelPart(row.b), parcelPart(row.l)].concat(row.q ? [String(row.q).trim()] : []).join('_');
+}
+
 function eligibleSale(row) {
   return row && row.c === '2'
     && row.p >= 125000 && row.p <= 3000000
@@ -179,7 +189,8 @@ function soldPuzzle(date) {
       town_ratio: ratioDoc.districts[row.d][0],
       ratio_year: ratioDoc.tax_year
     },
-    k: encodeAnswer(row.p, date)
+    k: encodeAnswer(row.p, date),
+    place: encodeData({ pin: parcelPin(row), address: String(row.a || '').replace(/\s+/g, ' ').trim() + ', ' + town.n + ', NJ' })
   };
 }
 
@@ -568,7 +579,7 @@ module.exports = {
   puzzleFor,
   scorePlay,
   _internals: {
-    streetName, eligibleSale, encodeAnswer, decodeAnswer, encodeData, decodeData, seededOrder, miles,
+    streetName, parcelPin, eligibleSale, encodeAnswer, decodeAnswer, encodeData, decodeData, seededOrder, miles,
     soldPuzzle, townShapesPuzzle, pinDropPuzzle, pinDropPoints, lineupPuzzle, lineupFeedback, fairPuzzle, fairCall,
     blocksPuzzle, blocksGroups, blocksSolutions, bareTownName, LAUNCH_DATE, LINEUP_METRICS
   }
