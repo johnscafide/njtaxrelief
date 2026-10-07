@@ -1,0 +1,3964 @@
+{
+ "schema_version": 1,
+ "district_key": "modiv_pams",
+ "vintage": "2024 ACS 5-year",
+ "source": {
+  "agency": "U.S. Census Bureau",
+  "label": "American Community Survey 2020-2024 5-year summary file",
+  "tables": {
+   "B25003": "https://www2.census.gov/programs-surveys/acs/summary_file/2024/table-based-SF/data/5YRData/acsdt5y2024-b25003.dat",
+   "B25004": "https://www2.census.gov/programs-surveys/acs/summary_file/2024/table-based-SF/data/5YRData/acsdt5y2024-b25004.dat",
+   "B25070": "https://www2.census.gov/programs-surveys/acs/summary_file/2024/table-based-SF/data/5YRData/acsdt5y2024-b25070.dat"
+  }
+ },
+ "municipalities": {
+  "0101": {
+   "name": "Absecon City",
+   "geoid": "0600000US3400100100",
+   "renter_households": 730,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 64.95
+  },
+  "0102": {
+   "name": "Atlantic City City",
+   "geoid": "0600000US3400102080",
+   "renter_households": 11545,
+   "rental_vacancy_rate": 4.65,
+   "rent_burden_share": 58.8
+  },
+  "0103": {
+   "name": "Brigantine City",
+   "geoid": "0600000US3400107810",
+   "renter_households": 939,
+   "rental_vacancy_rate": 16.31,
+   "rent_burden_share": 60.2
+  },
+  "0104": {
+   "name": "Buena Borough",
+   "geoid": "0600000US3400108680",
+   "renter_households": 505,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 58.42
+  },
+  "0105": {
+   "name": "Buena Vista Township",
+   "geoid": "0600000US3400108710",
+   "renter_households": 312,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 71.76
+  },
+  "0106": {
+   "name": "Corbin City",
+   "geoid": "0600000US3400115160",
+   "renter_households": 33,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 60.61
+  },
+  "0107": {
+   "name": "Egg Harbor City",
+   "geoid": "0600000US3400120350",
+   "renter_households": 892,
+   "rental_vacancy_rate": 4.29,
+   "rent_burden_share": 48.27
+  },
+  "0108": {
+   "name": "Egg Harbor Township",
+   "geoid": "0600000US3400120290",
+   "renter_households": 2696,
+   "rental_vacancy_rate": 7.03,
+   "rent_burden_share": 58.63
+  },
+  "0109": {
+   "name": "Estell Manor City",
+   "geoid": "0600000US3400121870",
+   "renter_households": 22,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 70.0
+  },
+  "0110": {
+   "name": "Folsom Borough",
+   "geoid": "0600000US3400123940",
+   "renter_households": 46,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 44.44
+  },
+  "0111": {
+   "name": "Galloway Township",
+   "geoid": "0600000US3400125560",
+   "renter_households": 2893,
+   "rental_vacancy_rate": 1.03,
+   "rent_burden_share": 49.96
+  },
+  "0112": {
+   "name": "Hamilton Township",
+   "geoid": "0600000US3400129280",
+   "renter_households": 3197,
+   "rental_vacancy_rate": 2.2,
+   "rent_burden_share": 52.62
+  },
+  "0113": {
+   "name": "Hammonton Town",
+   "geoid": "0600000US3400129430",
+   "renter_households": 1670,
+   "rental_vacancy_rate": 8.29,
+   "rent_burden_share": 61.21
+  },
+  "0114": {
+   "name": "Linwood City",
+   "geoid": "0600000US3400140530",
+   "renter_households": 160,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 53.24
+  },
+  "0115": {
+   "name": "Longport Borough",
+   "geoid": "0600000US3400141370",
+   "renter_households": 44,
+   "rental_vacancy_rate": 21.43,
+   "rent_burden_share": 53.57
+  },
+  "0116": {
+   "name": "Margate City",
+   "geoid": "0600000US3400143890",
+   "renter_households": 257,
+   "rental_vacancy_rate": 10.31,
+   "rent_burden_share": 33.18
+  },
+  "0117": {
+   "name": "Mullica Township",
+   "geoid": "0600000US3400149410",
+   "renter_households": 170,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 34.62
+  },
+  "0118": {
+   "name": "Northfield City",
+   "geoid": "0600000US3400152950",
+   "renter_households": 381,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 42.24
+  },
+  "0119": {
+   "name": "Pleasantville City",
+   "geoid": "0600000US3400159640",
+   "renter_households": 3538,
+   "rental_vacancy_rate": 1.8,
+   "rent_burden_share": 61.26
+  },
+  "0120": {
+   "name": "Port Republic City",
+   "geoid": "0600000US3400160600",
+   "renter_households": 19,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 73.33
+  },
+  "0121": {
+   "name": "Somers Point City",
+   "geoid": "0600000US3400168430",
+   "renter_households": 2211,
+   "rental_vacancy_rate": 5.31,
+   "rent_burden_share": 51.28
+  },
+  "0122": {
+   "name": "Ventnor City",
+   "geoid": "0600000US3400175620",
+   "renter_households": 1827,
+   "rental_vacancy_rate": 3.64,
+   "rent_burden_share": 56.7
+  },
+  "0123": {
+   "name": "Weymouth Township",
+   "geoid": "0600000US3400180330",
+   "renter_households": 189,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 77.59
+  },
+  "0201": {
+   "name": "Allendale Borough",
+   "geoid": "0600000US3400300700",
+   "renter_households": 465,
+   "rental_vacancy_rate": 20.38,
+   "rent_burden_share": 46.95
+  },
+  "0202": {
+   "name": "Alpine Borough",
+   "geoid": "0600000US3400301090",
+   "renter_households": 38,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 15.79
+  },
+  "0203": {
+   "name": "Bergenfield Borough",
+   "geoid": "0600000US3400305170",
+   "renter_households": 2744,
+   "rental_vacancy_rate": 1.4,
+   "rent_burden_share": 54.06
+  },
+  "0204": {
+   "name": "Bogota Borough",
+   "geoid": "0600000US3400306490",
+   "renter_households": 1108,
+   "rental_vacancy_rate": 2.81,
+   "rent_burden_share": 59.53
+  },
+  "0205": {
+   "name": "Carlstadt Borough",
+   "geoid": "0600000US3400310480",
+   "renter_households": 964,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 61.71
+  },
+  "0206": {
+   "name": "Cliffside Park Borough",
+   "geoid": "0600000US3400313570",
+   "renter_households": 5161,
+   "rental_vacancy_rate": 2.92,
+   "rent_burden_share": 51.37
+  },
+  "0207": {
+   "name": "Closter Borough",
+   "geoid": "0600000US3400313810",
+   "renter_households": 492,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 50.0
+  },
+  "0208": {
+   "name": "Cresskill Borough",
+   "geoid": "0600000US3400315820",
+   "renter_households": 680,
+   "rental_vacancy_rate": 4.09,
+   "rent_burden_share": 57.32
+  },
+  "0209": {
+   "name": "Demarest Borough",
+   "geoid": "0600000US3400317530",
+   "renter_households": 95,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 77.89
+  },
+  "0210": {
+   "name": "Dumont Borough",
+   "geoid": "0600000US3400318400",
+   "renter_households": 1787,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 60.25
+  },
+  "0211": {
+   "name": "Elmwood Park Borough",
+   "geoid": "0600000US3400321300",
+   "renter_households": 3173,
+   "rental_vacancy_rate": 1.86,
+   "rent_burden_share": 49.85
+  },
+  "0212": {
+   "name": "East Rutherford Borough",
+   "geoid": "0600000US3400319510",
+   "renter_households": 2724,
+   "rental_vacancy_rate": 5.56,
+   "rent_burden_share": 45.24
+  },
+  "0213": {
+   "name": "Edgewater Borough",
+   "geoid": "0600000US3400320020",
+   "renter_households": 4348,
+   "rental_vacancy_rate": 9.77,
+   "rent_burden_share": 55.01
+  },
+  "0214": {
+   "name": "Emerson Borough",
+   "geoid": "0600000US3400321450",
+   "renter_households": 217,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 59.14
+  },
+  "0215": {
+   "name": "Englewood City",
+   "geoid": "0600000US3400321480",
+   "renter_households": 5133,
+   "rental_vacancy_rate": 2.86,
+   "rent_burden_share": 59.0
+  },
+  "0216": {
+   "name": "Englewood Cliffs Borough",
+   "geoid": "0600000US3400321510",
+   "renter_households": 332,
+   "rental_vacancy_rate": 1.78,
+   "rent_burden_share": 51.89
+  },
+  "0217": {
+   "name": "Fair Lawn Borough",
+   "geoid": "0600000US3400322470",
+   "renter_households": 2680,
+   "rental_vacancy_rate": 0.22,
+   "rent_burden_share": 59.15
+  },
+  "0218": {
+   "name": "Fairview Borough",
+   "geoid": "0600000US3400322560",
+   "renter_households": 3650,
+   "rental_vacancy_rate": 2.54,
+   "rent_burden_share": 55.3
+  },
+  "0219": {
+   "name": "Fort Lee Borough",
+   "geoid": "0600000US3400324420",
+   "renter_households": 8156,
+   "rental_vacancy_rate": 5.4,
+   "rent_burden_share": 48.44
+  },
+  "0220": {
+   "name": "Franklin Lakes Borough",
+   "geoid": "0600000US3400324990",
+   "renter_households": 422,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 63.42
+  },
+  "0221": {
+   "name": "Garfield City",
+   "geoid": "0600000US3400325770",
+   "renter_households": 6185,
+   "rental_vacancy_rate": 4.29,
+   "rent_burden_share": 52.87
+  },
+  "0222": {
+   "name": "Glen Rock Borough",
+   "geoid": "0600000US3400326640",
+   "renter_households": 357,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 56.3
+  },
+  "0223": {
+   "name": "Hackensack City",
+   "geoid": "0600000US3400328680",
+   "renter_households": 12808,
+   "rental_vacancy_rate": 3.92,
+   "rent_burden_share": 51.38
+  },
+  "0224": {
+   "name": "Harrington Park Borough",
+   "geoid": "0600000US3400330150",
+   "renter_households": 137,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 54.76
+  },
+  "0225": {
+   "name": "Hasbrouck Heights Borough",
+   "geoid": "0600000US3400330420",
+   "renter_households": 1444,
+   "rental_vacancy_rate": 7.85,
+   "rent_burden_share": 60.78
+  },
+  "0226": {
+   "name": "Haworth Borough",
+   "geoid": "0600000US3400330540",
+   "renter_households": 56,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 52.78
+  },
+  "0227": {
+   "name": "Hillsdale Borough",
+   "geoid": "0600000US3400331920",
+   "renter_households": 249,
+   "rental_vacancy_rate": 8.79,
+   "rent_burden_share": 45.78
+  },
+  "0228": {
+   "name": "Ho-Ho-Kus Borough",
+   "geoid": "0600000US3400332310",
+   "renter_households": 102,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 69.44
+  },
+  "0229": {
+   "name": "Leonia Borough",
+   "geoid": "0600000US3400340020",
+   "renter_households": 1007,
+   "rental_vacancy_rate": 6.59,
+   "rent_burden_share": 50.05
+  },
+  "0230": {
+   "name": "Little Ferry Borough",
+   "geoid": "0600000US3400340680",
+   "renter_households": 2456,
+   "rental_vacancy_rate": 5.79,
+   "rent_burden_share": 46.67
+  },
+  "0231": {
+   "name": "Lodi Borough",
+   "geoid": "0600000US3400341100",
+   "renter_households": 5582,
+   "rental_vacancy_rate": 0.87,
+   "rent_burden_share": 50.77
+  },
+  "0232": {
+   "name": "Lyndhurst Township",
+   "geoid": "0600000US3400342090",
+   "renter_households": 3718,
+   "rental_vacancy_rate": 4.06,
+   "rent_burden_share": 47.88
+  },
+  "0233": {
+   "name": "Mahwah Township",
+   "geoid": "0600000US3400342750",
+   "renter_households": 1893,
+   "rental_vacancy_rate": 2.17,
+   "rent_burden_share": 45.11
+  },
+  "0234": {
+   "name": "Maywood Borough",
+   "geoid": "0600000US3400344880",
+   "renter_households": 1200,
+   "rental_vacancy_rate": 2.44,
+   "rent_burden_share": 54.14
+  },
+  "0235": {
+   "name": "Midland Park Borough",
+   "geoid": "0600000US3400346110",
+   "renter_households": 800,
+   "rental_vacancy_rate": 6.67,
+   "rent_burden_share": 32.61
+  },
+  "0236": {
+   "name": "Montvale Borough",
+   "geoid": "0600000US3400347610",
+   "renter_households": 624,
+   "rental_vacancy_rate": 6.41,
+   "rent_burden_share": 62.14
+  },
+  "0237": {
+   "name": "Moonachie Borough",
+   "geoid": "0600000US3400347700",
+   "renter_households": 242,
+   "rental_vacancy_rate": 2.81,
+   "rent_burden_share": 37.5
+  },
+  "0238": {
+   "name": "New Milford Borough",
+   "geoid": "0600000US3400351660",
+   "renter_households": 2402,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 50.67
+  },
+  "0239": {
+   "name": "North Arlington Borough",
+   "geoid": "0600000US3400352320",
+   "renter_households": 3699,
+   "rental_vacancy_rate": 1.39,
+   "rent_burden_share": 43.76
+  },
+  "0240": {
+   "name": "Northvale Borough",
+   "geoid": "0600000US3400353430",
+   "renter_households": 406,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 58.23
+  },
+  "0241": {
+   "name": "Norwood Borough",
+   "geoid": "0600000US3400353610",
+   "renter_households": 409,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 74.08
+  },
+  "0242": {
+   "name": "Oakland Borough",
+   "geoid": "0600000US3400353850",
+   "renter_households": 320,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 57.21
+  },
+  "0243": {
+   "name": "Old Tappan Borough",
+   "geoid": "0600000US3400354870",
+   "renter_households": 114,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 9.71
+  },
+  "0244": {
+   "name": "Oradell Borough",
+   "geoid": "0600000US3400354990",
+   "renter_households": 249,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 33.33
+  },
+  "0245": {
+   "name": "Palisades Park Borough",
+   "geoid": "0600000US3400355770",
+   "renter_households": 4820,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 53.56
+  },
+  "0246": {
+   "name": "Paramus Borough",
+   "geoid": "0600000US3400355950",
+   "renter_households": 1472,
+   "rental_vacancy_rate": 0.54,
+   "rent_burden_share": 57.75
+  },
+  "0247": {
+   "name": "Park Ridge Borough",
+   "geoid": "0600000US3400356130",
+   "renter_households": 621,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 57.0
+  },
+  "0248": {
+   "name": "Ramsey Borough",
+   "geoid": "0600000US3400361680",
+   "renter_households": 1134,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 57.58
+  },
+  "0249": {
+   "name": "Ridgefield Borough",
+   "geoid": "0600000US3400362910",
+   "renter_households": 1961,
+   "rental_vacancy_rate": 0.46,
+   "rent_burden_share": 47.73
+  },
+  "0250": {
+   "name": "Ridgefield Park Village",
+   "geoid": "0600000US3400362940",
+   "renter_households": 2036,
+   "rental_vacancy_rate": 2.06,
+   "rent_burden_share": 47.79
+  },
+  "0251": {
+   "name": "Ridgewood Village",
+   "geoid": "0600000US3400363000",
+   "renter_households": 1556,
+   "rental_vacancy_rate": 5.93,
+   "rent_burden_share": 41.38
+  },
+  "0252": {
+   "name": "River Edge Borough",
+   "geoid": "0600000US3400363360",
+   "renter_households": 1071,
+   "rental_vacancy_rate": 2.64,
+   "rent_burden_share": 54.62
+  },
+  "0253": {
+   "name": "River Vale Township",
+   "geoid": "0600000US3400363690",
+   "renter_households": 352,
+   "rental_vacancy_rate": 6.88,
+   "rent_burden_share": 34.94
+  },
+  "0254": {
+   "name": "Rochelle Park Township",
+   "geoid": "0600000US3400363990",
+   "renter_households": 535,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 78.5
+  },
+  "0255": {
+   "name": "Rockleigh Borough",
+   "geoid": "0600000US3400364170",
+   "renter_households": 17,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 0.0
+  },
+  "0256": {
+   "name": "Rutherford Borough",
+   "geoid": "0600000US3400365280",
+   "renter_households": 2451,
+   "rental_vacancy_rate": 1.88,
+   "rent_burden_share": 31.38
+  },
+  "0257": {
+   "name": "Saddle Brook Township",
+   "geoid": "0600000US3400365340",
+   "renter_households": 1743,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 46.23
+  },
+  "0258": {
+   "name": "Saddle River Borough",
+   "geoid": "0600000US3400365400",
+   "renter_households": 215,
+   "rental_vacancy_rate": 9.66,
+   "rent_burden_share": 75.78
+  },
+  "0259": {
+   "name": "South Hackensack Township",
+   "geoid": "0600000US3400368970",
+   "renter_households": 460,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 74.0
+  },
+  "0260": {
+   "name": "Teaneck Township",
+   "geoid": "0600000US3400372360",
+   "renter_households": 3086,
+   "rental_vacancy_rate": 2.47,
+   "rent_burden_share": 40.68
+  },
+  "0261": {
+   "name": "Tenafly Borough",
+   "geoid": "0600000US3400372420",
+   "renter_households": 1478,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 35.6
+  },
+  "0262": {
+   "name": "Teterboro Borough",
+   "geoid": "0600000US3400372480",
+   "renter_households": 39,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 79.49
+  },
+  "0263": {
+   "name": "Upper Saddle River Borough",
+   "geoid": "0600000US3400375140",
+   "renter_households": 239,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 44.35
+  },
+  "0264": {
+   "name": "Waldwick Borough",
+   "geoid": "0600000US3400376400",
+   "renter_households": 416,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 39.11
+  },
+  "0265": {
+   "name": "Wallington Borough",
+   "geoid": "0600000US3400376490",
+   "renter_households": 2952,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 46.9
+  },
+  "0266": {
+   "name": "Washington Township",
+   "geoid": "0600000US3400377135",
+   "renter_households": 100,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 16.3
+  },
+  "0267": {
+   "name": "Westwood Borough",
+   "geoid": "0600000US3400380270",
+   "renter_households": 1502,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 46.77
+  },
+  "0268": {
+   "name": "Woodcliff Lake Borough",
+   "geoid": "0600000US3400382300",
+   "renter_households": 297,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 86.88
+  },
+  "0269": {
+   "name": "Wood-Ridge Borough",
+   "geoid": "0600000US3400382570",
+   "renter_households": 1292,
+   "rental_vacancy_rate": 3.15,
+   "rent_burden_share": 38.02
+  },
+  "0270": {
+   "name": "Wyckoff Township",
+   "geoid": "0600000US3400383050",
+   "renter_households": 429,
+   "rental_vacancy_rate": 8.51,
+   "rent_burden_share": 66.76
+  },
+  "0301": {
+   "name": "Bass River Township",
+   "geoid": "0600000US3400503370",
+   "renter_households": 50,
+   "rental_vacancy_rate": 18.03,
+   "rent_burden_share": 38.1
+  },
+  "0302": {
+   "name": "Beverly City",
+   "geoid": "0600000US3400505740",
+   "renter_households": 221,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 52.63
+  },
+  "0303": {
+   "name": "Bordentown City",
+   "geoid": "0600000US3400506670",
+   "renter_households": 771,
+   "rental_vacancy_rate": 10.04,
+   "rent_burden_share": 50.97
+  },
+  "0304": {
+   "name": "Bordentown Township",
+   "geoid": "0600000US3400506700",
+   "renter_households": 1475,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 48.27
+  },
+  "0305": {
+   "name": "Burlington City",
+   "geoid": "0600000US3400508920",
+   "renter_households": 1432,
+   "rental_vacancy_rate": 3.83,
+   "rent_burden_share": 53.37
+  },
+  "0306": {
+   "name": "Burlington Township",
+   "geoid": "0600000US3400508950",
+   "renter_households": 2071,
+   "rental_vacancy_rate": 3.36,
+   "rent_burden_share": 48.53
+  },
+  "0307": {
+   "name": "Chesterfield Township",
+   "geoid": "0600000US3400512670",
+   "renter_households": 97,
+   "rental_vacancy_rate": 32.17,
+   "rent_burden_share": 33.78
+  },
+  "0308": {
+   "name": "Cinnaminson Township",
+   "geoid": "0600000US3400512940",
+   "renter_households": 957,
+   "rental_vacancy_rate": 4.82,
+   "rent_burden_share": 44.92
+  },
+  "0309": {
+   "name": "Delanco Township",
+   "geoid": "0600000US3400517080",
+   "renter_households": 374,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 42.99
+  },
+  "0310": {
+   "name": "Delran Township",
+   "geoid": "0600000US3400517440",
+   "renter_households": 1799,
+   "rental_vacancy_rate": 3.18,
+   "rent_burden_share": 56.98
+  },
+  "0311": {
+   "name": "Eastampton Township",
+   "geoid": "0600000US3400518790",
+   "renter_households": 814,
+   "rental_vacancy_rate": 15.13,
+   "rent_burden_share": 72.73
+  },
+  "0312": {
+   "name": "Edgewater Park Township",
+   "geoid": "0600000US3400520050",
+   "renter_households": 931,
+   "rental_vacancy_rate": 9.96,
+   "rent_burden_share": 56.18
+  },
+  "0313": {
+   "name": "Evesham Township",
+   "geoid": "0600000US3400522110",
+   "renter_households": 5476,
+   "rental_vacancy_rate": 1.81,
+   "rent_burden_share": 51.57
+  },
+  "0314": {
+   "name": "Fieldsboro Borough",
+   "geoid": "0600000US3400523250",
+   "renter_households": 35,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 77.14
+  },
+  "0315": {
+   "name": "Florence Township",
+   "geoid": "0600000US3400523850",
+   "renter_households": 869,
+   "rental_vacancy_rate": 2.69,
+   "rent_burden_share": 51.33
+  },
+  "0316": {
+   "name": "Hainesport Township",
+   "geoid": "0600000US3400529010",
+   "renter_households": 259,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 46.89
+  },
+  "0317": {
+   "name": "Lumberton Township",
+   "geoid": "0600000US3400542060",
+   "renter_households": 1283,
+   "rental_vacancy_rate": 0.39,
+   "rent_burden_share": 65.64
+  },
+  "0318": {
+   "name": "Mansfield Township",
+   "geoid": "0600000US3400543290",
+   "renter_households": 142,
+   "rental_vacancy_rate": 18.86,
+   "rent_burden_share": 44.54
+  },
+  "0319": {
+   "name": "Maple Shade Township",
+   "geoid": "0600000US3400543740",
+   "renter_households": 4715,
+   "rental_vacancy_rate": 2.44,
+   "rent_burden_share": 54.66
+  },
+  "0320": {
+   "name": "Medford Township",
+   "geoid": "0600000US3400545120",
+   "renter_households": 1113,
+   "rental_vacancy_rate": 6.71,
+   "rent_burden_share": 58.02
+  },
+  "0321": {
+   "name": "Medford Lakes Borough",
+   "geoid": "0600000US3400545210",
+   "renter_households": 149,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 55.83
+  },
+  "0322": {
+   "name": "Moorestown Township",
+   "geoid": "0600000US3400547880",
+   "renter_households": 1486,
+   "rental_vacancy_rate": 3.74,
+   "rent_burden_share": 48.01
+  },
+  "0323": {
+   "name": "Mount Holly Township",
+   "geoid": "0600000US3400548900",
+   "renter_households": 1347,
+   "rental_vacancy_rate": 10.85,
+   "rent_burden_share": 52.2
+  },
+  "0324": {
+   "name": "Mount Laurel Township",
+   "geoid": "0600000US3400549020",
+   "renter_households": 4512,
+   "rental_vacancy_rate": 3.13,
+   "rent_burden_share": 48.67
+  },
+  "0325": {
+   "name": "New Hanover Township",
+   "geoid": "0600000US3400551510",
+   "renter_households": 366,
+   "rental_vacancy_rate": 1.61,
+   "rent_burden_share": 50.72
+  },
+  "0326": {
+   "name": "North Hanover Township",
+   "geoid": "0600000US3400553070",
+   "renter_households": 1564,
+   "rental_vacancy_rate": 1.32,
+   "rent_burden_share": 67.09
+  },
+  "0327": {
+   "name": "Palmyra Borough",
+   "geoid": "0600000US3400555800",
+   "renter_households": 939,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 54.17
+  },
+  "0328": {
+   "name": "Pemberton Borough",
+   "geoid": "0600000US3400557480",
+   "renter_households": 184,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 65.29
+  },
+  "0329": {
+   "name": "Pemberton Township",
+   "geoid": "0600000US3400557510",
+   "renter_households": 2611,
+   "rental_vacancy_rate": 4.18,
+   "rent_burden_share": 44.97
+  },
+  "0330": {
+   "name": "Riverside Township",
+   "geoid": "0600000US3400563510",
+   "renter_households": 1300,
+   "rental_vacancy_rate": 4.49,
+   "rent_burden_share": 71.46
+  },
+  "0331": {
+   "name": "Riverton Borough",
+   "geoid": "0600000US3400563660",
+   "renter_households": 239,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 42.92
+  },
+  "0332": {
+   "name": "Shamong Township",
+   "geoid": "0600000US3400566810",
+   "renter_households": 171,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 21.1
+  },
+  "0333": {
+   "name": "Southampton Township",
+   "geoid": "0600000US3400568610",
+   "renter_households": 150,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 56.19
+  },
+  "0334": {
+   "name": "Springfield Township",
+   "geoid": "0600000US3400569990",
+   "renter_households": 82,
+   "rental_vacancy_rate": 19.61,
+   "rent_burden_share": 71.93
+  },
+  "0335": {
+   "name": "Tabernacle Township",
+   "geoid": "0600000US3400572060",
+   "renter_households": 94,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 37.23
+  },
+  "0336": {
+   "name": "Washington Township",
+   "geoid": "0600000US3400577150",
+   "renter_households": 41,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 27.78
+  },
+  "0337": {
+   "name": "Westampton Township",
+   "geoid": "0600000US3400578200",
+   "renter_households": 336,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 10.97
+  },
+  "0338": {
+   "name": "Willingboro Township",
+   "geoid": "0600000US3400581440",
+   "renter_households": 1669,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 43.67
+  },
+  "0339": {
+   "name": "Woodland Township",
+   "geoid": "0600000US3400582420",
+   "renter_households": 60,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 61.36
+  },
+  "0340": {
+   "name": "Wrightstown Borough",
+   "geoid": "0600000US3400582960",
+   "renter_households": 114,
+   "rental_vacancy_rate": 8.06,
+   "rent_burden_share": 55.34
+  },
+  "0401": {
+   "name": "Audubon Borough",
+   "geoid": "0600000US3400702200",
+   "renter_households": 803,
+   "rental_vacancy_rate": 1.11,
+   "rent_burden_share": 35.53
+  },
+  "0402": {
+   "name": "Audubon Park Borough",
+   "geoid": "0600000US3400702230",
+   "renter_households": 483,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 32.98
+  },
+  "0403": {
+   "name": "Barrington Borough",
+   "geoid": "0600000US3400703250",
+   "renter_households": 1684,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 44.12
+  },
+  "0404": {
+   "name": "Bellmawr Borough",
+   "geoid": "0600000US3400704750",
+   "renter_households": 1745,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 36.91
+  },
+  "0405": {
+   "name": "Berlin Borough",
+   "geoid": "0600000US3400705440",
+   "renter_households": 822,
+   "rental_vacancy_rate": 10.75,
+   "rent_burden_share": 41.73
+  },
+  "0406": {
+   "name": "Berlin Township",
+   "geoid": "0600000US3400705470",
+   "renter_households": 821,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 68.39
+  },
+  "0407": {
+   "name": "Brooklawn Borough",
+   "geoid": "0600000US3400708170",
+   "renter_households": 163,
+   "rental_vacancy_rate": 4.68,
+   "rent_burden_share": 61.35
+  },
+  "0408": {
+   "name": "Camden City",
+   "geoid": "0600000US3400710000",
+   "renter_households": 16025,
+   "rental_vacancy_rate": 3.43,
+   "rent_burden_share": 60.09
+  },
+  "0409": {
+   "name": "Cherry Hill Township",
+   "geoid": "0600000US3400712280",
+   "renter_households": 6934,
+   "rental_vacancy_rate": 5.07,
+   "rent_burden_share": 42.75
+  },
+  "0410": {
+   "name": "Chesilhurst Borough",
+   "geoid": "0600000US3400712550",
+   "renter_households": 58,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 41.86
+  },
+  "0411": {
+   "name": "Clementon Borough",
+   "geoid": "0600000US3400713420",
+   "renter_households": 888,
+   "rental_vacancy_rate": 3.37,
+   "rent_burden_share": 60.93
+  },
+  "0412": {
+   "name": "Collingswood Borough",
+   "geoid": "0600000US3400714260",
+   "renter_households": 2804,
+   "rental_vacancy_rate": 2.74,
+   "rent_burden_share": 52.01
+  },
+  "0413": {
+   "name": "Gibbsboro Borough",
+   "geoid": "0600000US3400726070",
+   "renter_households": 118,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 66.1
+  },
+  "0414": {
+   "name": "Gloucester City City",
+   "geoid": "0600000US3400726820",
+   "renter_households": 1739,
+   "rental_vacancy_rate": 1.92,
+   "rent_burden_share": 51.16
+  },
+  "0415": {
+   "name": "Gloucester Township",
+   "geoid": "0600000US3400726760",
+   "renter_households": 6801,
+   "rental_vacancy_rate": 5.39,
+   "rent_burden_share": 58.35
+  },
+  "0416": {
+   "name": "Haddon Township",
+   "geoid": "0600000US3400728740",
+   "renter_households": 2349,
+   "rental_vacancy_rate": 8.6,
+   "rent_burden_share": 49.13
+  },
+  "0417": {
+   "name": "Haddonfield Borough",
+   "geoid": "0600000US3400728770",
+   "renter_households": 710,
+   "rental_vacancy_rate": 9.05,
+   "rent_burden_share": 41.69
+  },
+  "0418": {
+   "name": "Haddon Heights Borough",
+   "geoid": "0600000US3400728800",
+   "renter_households": 713,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 43.0
+  },
+  "0419": {
+   "name": "Hi-nella Borough",
+   "geoid": "0600000US3400732220",
+   "renter_households": 237,
+   "rental_vacancy_rate": 5.2,
+   "rent_burden_share": 74.68
+  },
+  "0420": {
+   "name": "Laurel Springs Borough",
+   "geoid": "0600000US3400739210",
+   "renter_households": 141,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 50.75
+  },
+  "0421": {
+   "name": "Lawnside Borough",
+   "geoid": "0600000US3400739420",
+   "renter_households": 423,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 48.66
+  },
+  "0422": {
+   "name": "Lindenwold Borough",
+   "geoid": "0600000US3400740440",
+   "renter_households": 6526,
+   "rental_vacancy_rate": 3.1,
+   "rent_burden_share": 63.27
+  },
+  "0423": {
+   "name": "Magnolia Borough",
+   "geoid": "0600000US3400742630",
+   "renter_households": 553,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 35.62
+  },
+  "0424": {
+   "name": "Merchantville Borough",
+   "geoid": "0600000US3400745510",
+   "renter_households": 655,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 46.41
+  },
+  "0425": {
+   "name": "Mount Ephraim Borough",
+   "geoid": "0600000US3400748750",
+   "renter_households": 645,
+   "rental_vacancy_rate": 8.38,
+   "rent_burden_share": 33.5
+  },
+  "0426": {
+   "name": "Oaklyn Borough",
+   "geoid": "0600000US3400753880",
+   "renter_households": 602,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 44.93
+  },
+  "0427": {
+   "name": "Pennsauken Township",
+   "geoid": "0600000US3400757660",
+   "renter_households": 3371,
+   "rental_vacancy_rate": 4.91,
+   "rent_burden_share": 56.88
+  },
+  "0428": {
+   "name": "Pine Hill Borough",
+   "geoid": "0600000US3400758770",
+   "renter_households": 1830,
+   "rental_vacancy_rate": 3.01,
+   "rent_burden_share": 57.1
+  },
+  "0430": {
+   "name": "Runnemede Borough",
+   "geoid": "0600000US3400765160",
+   "renter_households": 916,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 47.41
+  },
+  "0431": {
+   "name": "Somerdale Borough",
+   "geoid": "0600000US3400768340",
+   "renter_households": 695,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 47.99
+  },
+  "0432": {
+   "name": "Stratford Borough",
+   "geoid": "0600000US3400771220",
+   "renter_households": 806,
+   "rental_vacancy_rate": 2.77,
+   "rent_burden_share": 48.73
+  },
+  "0433": {
+   "name": "Tavistock Borough",
+   "geoid": "0600000US3400772240",
+   "renter_households": 0,
+   "rental_vacancy_rate": null,
+   "rent_burden_share": null
+  },
+  "0434": {
+   "name": "Voorhees Township",
+   "geoid": "0600000US3400776220",
+   "renter_households": 4757,
+   "rental_vacancy_rate": 2.68,
+   "rent_burden_share": 56.7
+  },
+  "0435": {
+   "name": "Waterford Township",
+   "geoid": "0600000US3400777630",
+   "renter_households": 594,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 69.67
+  },
+  "0436": {
+   "name": "Winslow Township",
+   "geoid": "0600000US3400781740",
+   "renter_households": 2757,
+   "rental_vacancy_rate": 6.93,
+   "rent_burden_share": 66.79
+  },
+  "0437": {
+   "name": "Woodlynne Borough",
+   "geoid": "0600000US3400782450",
+   "renter_households": 340,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 61.11
+  },
+  "0501": {
+   "name": "Avalon Borough",
+   "geoid": "0600000US3400902320",
+   "renter_households": 55,
+   "rental_vacancy_rate": 77.46,
+   "rent_burden_share": 44.83
+  },
+  "0502": {
+   "name": "Cape May City",
+   "geoid": "0600000US3400910270",
+   "renter_households": 510,
+   "rental_vacancy_rate": 44.35,
+   "rent_burden_share": 23.4
+  },
+  "0503": {
+   "name": "Cape May Point Borough",
+   "geoid": "0600000US3400910330",
+   "renter_households": 2,
+   "rental_vacancy_rate": 98.0,
+   "rent_burden_share": null
+  },
+  "0504": {
+   "name": "Dennis Township",
+   "geoid": "0600000US3400917560",
+   "renter_households": 273,
+   "rental_vacancy_rate": 3.87,
+   "rent_burden_share": 23.26
+  },
+  "0505": {
+   "name": "Lower Township",
+   "geoid": "0600000US3400941610",
+   "renter_households": 1735,
+   "rental_vacancy_rate": 7.76,
+   "rent_burden_share": 52.63
+  },
+  "0506": {
+   "name": "Middle Township",
+   "geoid": "0600000US3400945810",
+   "renter_households": 1697,
+   "rental_vacancy_rate": 1.45,
+   "rent_burden_share": 61.22
+  },
+  "0507": {
+   "name": "North Wildwood City",
+   "geoid": "0600000US3400953490",
+   "renter_households": 322,
+   "rental_vacancy_rate": 22.03,
+   "rent_burden_share": 34.02
+  },
+  "0508": {
+   "name": "Ocean City City",
+   "geoid": "0600000US3400954360",
+   "renter_households": 1554,
+   "rental_vacancy_rate": 36.61,
+   "rent_burden_share": 61.03
+  },
+  "0509": {
+   "name": "Sea Isle City",
+   "geoid": "0600000US3400966390",
+   "renter_households": 81,
+   "rental_vacancy_rate": 85.0,
+   "rent_burden_share": 75.51
+  },
+  "0510": {
+   "name": "Stone Harbor Borough",
+   "geoid": "0600000US3400971010",
+   "renter_households": 51,
+   "rental_vacancy_rate": 70.17,
+   "rent_burden_share": 25.0
+  },
+  "0511": {
+   "name": "Upper Township",
+   "geoid": "0600000US3400974810",
+   "renter_households": 260,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 53.85
+  },
+  "0512": {
+   "name": "West Cape May Borough",
+   "geoid": "0600000US3400978530",
+   "renter_households": 72,
+   "rental_vacancy_rate": 56.1,
+   "rent_burden_share": 47.22
+  },
+  "0513": {
+   "name": "West Wildwood Borough",
+   "geoid": "0600000US3400980210",
+   "renter_households": 24,
+   "rental_vacancy_rate": 22.58,
+   "rent_burden_share": 28.57
+  },
+  "0514": {
+   "name": "Wildwood City",
+   "geoid": "0600000US3400981170",
+   "renter_households": 1495,
+   "rental_vacancy_rate": 18.12,
+   "rent_burden_share": 60.96
+  },
+  "0515": {
+   "name": "Wildwood Crest Borough",
+   "geoid": "0600000US3400981200",
+   "renter_households": 359,
+   "rental_vacancy_rate": 35.66,
+   "rent_burden_share": 60.11
+  },
+  "0516": {
+   "name": "Woodbine Borough",
+   "geoid": "0600000US3400981890",
+   "renter_households": 341,
+   "rental_vacancy_rate": 3.12,
+   "rent_burden_share": 64.42
+  },
+  "0601": {
+   "name": "Bridgeton City",
+   "geoid": "0600000US3401107600",
+   "renter_households": 4759,
+   "rental_vacancy_rate": 4.74,
+   "rent_burden_share": 52.35
+  },
+  "0602": {
+   "name": "Commercial Township",
+   "geoid": "0600000US3401114710",
+   "renter_households": 586,
+   "rental_vacancy_rate": 1.51,
+   "rent_burden_share": 58.65
+  },
+  "0603": {
+   "name": "Deerfield Township",
+   "geoid": "0600000US3401116900",
+   "renter_households": 150,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 44.54
+  },
+  "0604": {
+   "name": "Downe Township",
+   "geoid": "0600000US3401118220",
+   "renter_households": 112,
+   "rental_vacancy_rate": 10.14,
+   "rent_burden_share": 5.26
+  },
+  "0605": {
+   "name": "Fairfield Township",
+   "geoid": "0600000US3401122350",
+   "renter_households": 333,
+   "rental_vacancy_rate": 8.53,
+   "rent_burden_share": 52.8
+  },
+  "0606": {
+   "name": "Greenwich Township",
+   "geoid": "0600000US3401128170",
+   "renter_households": 30,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 39.13
+  },
+  "0607": {
+   "name": "Hopewell Township",
+   "geoid": "0600000US3401133120",
+   "renter_households": 261,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 59.55
+  },
+  "0608": {
+   "name": "Lawrence Township",
+   "geoid": "0600000US3401139450",
+   "renter_households": 123,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 24.75
+  },
+  "0609": {
+   "name": "Maurice River Township",
+   "geoid": "0600000US3401144580",
+   "renter_households": 218,
+   "rental_vacancy_rate": 12.45,
+   "rent_burden_share": 73.12
+  },
+  "0610": {
+   "name": "Millville City",
+   "geoid": "0600000US3401146680",
+   "renter_households": 4248,
+   "rental_vacancy_rate": 2.11,
+   "rent_burden_share": 58.34
+  },
+  "0611": {
+   "name": "Shiloh Borough",
+   "geoid": "0600000US3401167020",
+   "renter_households": 7,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 0.0
+  },
+  "0612": {
+   "name": "Stow Creek Township",
+   "geoid": "0600000US3401171160",
+   "renter_households": 29,
+   "rental_vacancy_rate": 29.27,
+   "rent_burden_share": 62.96
+  },
+  "0613": {
+   "name": "Upper Deerfield Township",
+   "geoid": "0600000US3401174870",
+   "renter_households": 634,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 70.28
+  },
+  "0614": {
+   "name": "Vineland City",
+   "geoid": "0600000US3401176070",
+   "renter_households": 6509,
+   "rental_vacancy_rate": 5.47,
+   "rent_burden_share": 57.06
+  },
+  "0701": {
+   "name": "Belleville Township",
+   "geoid": "0600000US3401304695",
+   "renter_households": 6326,
+   "rental_vacancy_rate": 2.02,
+   "rent_burden_share": 53.63
+  },
+  "0702": {
+   "name": "Bloomfield Township",
+   "geoid": "0600000US3401306260",
+   "renter_households": 10466,
+   "rental_vacancy_rate": 1.19,
+   "rent_burden_share": 45.71
+  },
+  "0703": {
+   "name": "Caldwell Borough",
+   "geoid": "0600000US3401309250",
+   "renter_households": 2208,
+   "rental_vacancy_rate": 3.2,
+   "rent_burden_share": 52.11
+  },
+  "0704": {
+   "name": "Cedar Grove Township",
+   "geoid": "0600000US3401311200",
+   "renter_households": 786,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 38.16
+  },
+  "0705": {
+   "name": "East Orange City",
+   "geoid": "0600000US3401319390",
+   "renter_households": 19537,
+   "rental_vacancy_rate": 2.82,
+   "rent_burden_share": 57.97
+  },
+  "0706": {
+   "name": "Essex Fells Borough",
+   "geoid": "0600000US3401321840",
+   "renter_households": 27,
+   "rental_vacancy_rate": 15.91,
+   "rent_burden_share": 50.0
+  },
+  "0707": {
+   "name": "Fairfield Township",
+   "geoid": "0600000US3401322385",
+   "renter_households": 648,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 90.46
+  },
+  "0708": {
+   "name": "Glen Ridge Borough",
+   "geoid": "0600000US3401326610",
+   "renter_households": 222,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 37.02
+  },
+  "0709": {
+   "name": "Irvington Township",
+   "geoid": "0600000US3401334450",
+   "renter_households": 16570,
+   "rental_vacancy_rate": 1.53,
+   "rent_burden_share": 52.38
+  },
+  "0710": {
+   "name": "Livingston Township",
+   "geoid": "0600000US3401340890",
+   "renter_households": 1157,
+   "rental_vacancy_rate": 2.94,
+   "rent_burden_share": 50.0
+  },
+  "0711": {
+   "name": "Maplewood Township",
+   "geoid": "0600000US3401343800",
+   "renter_households": 2178,
+   "rental_vacancy_rate": 1.84,
+   "rent_burden_share": 53.48
+  },
+  "0712": {
+   "name": "Millburn Township",
+   "geoid": "0600000US3401346380",
+   "renter_households": 1340,
+   "rental_vacancy_rate": 4.45,
+   "rent_burden_share": 52.07
+  },
+  "0713": {
+   "name": "Montclair Township",
+   "geoid": "0600000US3401347500",
+   "renter_households": 6773,
+   "rental_vacancy_rate": 2.45,
+   "rent_burden_share": 49.24
+  },
+  "0714": {
+   "name": "Newark City",
+   "geoid": "0600000US3401351000",
+   "renter_households": 85720,
+   "rental_vacancy_rate": 3.14,
+   "rent_burden_share": 57.15
+  },
+  "0715": {
+   "name": "North Caldwell Borough",
+   "geoid": "0600000US3401352620",
+   "renter_households": 46,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 76.09
+  },
+  "0716": {
+   "name": "Nutley Township",
+   "geoid": "0600000US3401353680",
+   "renter_households": 3537,
+   "rental_vacancy_rate": 1.65,
+   "rent_burden_share": 48.0
+  },
+  "0717": {
+   "name": "City of Orange Township",
+   "geoid": "0600000US3401313045",
+   "renter_households": 9042,
+   "rental_vacancy_rate": 2.65,
+   "rent_burden_share": 59.78
+  },
+  "0718": {
+   "name": "Roseland Borough",
+   "geoid": "0600000US3401364590",
+   "renter_households": 445,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 45.07
+  },
+  "0719": {
+   "name": "South Orange Village Township",
+   "geoid": "0600000US3401369274",
+   "renter_households": 2107,
+   "rental_vacancy_rate": 0.66,
+   "rent_burden_share": 49.53
+  },
+  "0720": {
+   "name": "Verona Township",
+   "geoid": "0600000US3401375815",
+   "renter_households": 1208,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 51.99
+  },
+  "0721": {
+   "name": "West Caldwell Township",
+   "geoid": "0600000US3401378510",
+   "renter_households": 581,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 45.76
+  },
+  "0722": {
+   "name": "West Orange Township",
+   "geoid": "0600000US3401379800",
+   "renter_households": 5285,
+   "rental_vacancy_rate": 5.54,
+   "rent_burden_share": 53.52
+  },
+  "0801": {
+   "name": "Clayton Borough",
+   "geoid": "0600000US3401513360",
+   "renter_households": 649,
+   "rental_vacancy_rate": 4.7,
+   "rent_burden_share": 49.15
+  },
+  "0802": {
+   "name": "Deptford Township",
+   "geoid": "0600000US3401517710",
+   "renter_households": 2894,
+   "rental_vacancy_rate": 4.2,
+   "rent_burden_share": 59.4
+  },
+  "0803": {
+   "name": "East Greenwich Township",
+   "geoid": "0600000US3401519180",
+   "renter_households": 60,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 0.0
+  },
+  "0804": {
+   "name": "Elk Township",
+   "geoid": "0600000US3401521060",
+   "renter_households": 160,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 31.88
+  },
+  "0805": {
+   "name": "Franklin Township",
+   "geoid": "0600000US3401524840",
+   "renter_households": 799,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 43.42
+  },
+  "0806": {
+   "name": "Glassboro Borough",
+   "geoid": "0600000US3401526340",
+   "renter_households": 3075,
+   "rental_vacancy_rate": 8.39,
+   "rent_burden_share": 52.15
+  },
+  "0807": {
+   "name": "Greenwich Township",
+   "geoid": "0600000US3401528185",
+   "renter_households": 193,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 37.85
+  },
+  "0808": {
+   "name": "Harrison Township",
+   "geoid": "0600000US3401530180",
+   "renter_households": 391,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 37.61
+  },
+  "0809": {
+   "name": "Logan Township",
+   "geoid": "0600000US3401541160",
+   "renter_households": 51,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 0.0
+  },
+  "0810": {
+   "name": "Mantua Township",
+   "geoid": "0600000US3401543440",
+   "renter_households": 578,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 47.51
+  },
+  "0811": {
+   "name": "Monroe Township",
+   "geoid": "0600000US3401547250",
+   "renter_households": 2094,
+   "rental_vacancy_rate": 9.18,
+   "rent_burden_share": 38.14
+  },
+  "0812": {
+   "name": "National Park Borough",
+   "geoid": "0600000US3401549680",
+   "renter_households": 142,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 82.58
+  },
+  "0813": {
+   "name": "Newfield Borough",
+   "geoid": "0600000US3401551390",
+   "renter_households": 57,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 82.46
+  },
+  "0814": {
+   "name": "Paulsboro Borough",
+   "geoid": "0600000US3401557150",
+   "renter_households": 925,
+   "rental_vacancy_rate": 4.34,
+   "rent_burden_share": 69.95
+  },
+  "0815": {
+   "name": "Pitman Borough",
+   "geoid": "0600000US3401559070",
+   "renter_households": 956,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 58.5
+  },
+  "0816": {
+   "name": "South Harrison Township",
+   "geoid": "0600000US3401569030",
+   "renter_households": 31,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 70.0
+  },
+  "0817": {
+   "name": "Swedesboro Borough",
+   "geoid": "0600000US3401571850",
+   "renter_households": 362,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 44.48
+  },
+  "0818": {
+   "name": "Washington Township",
+   "geoid": "0600000US3401577180",
+   "renter_households": 3117,
+   "rental_vacancy_rate": 1.42,
+   "rent_burden_share": 67.29
+  },
+  "0819": {
+   "name": "Wenonah Borough",
+   "geoid": "0600000US3401578110",
+   "renter_households": 63,
+   "rental_vacancy_rate": 12.5,
+   "rent_burden_share": 22.45
+  },
+  "0820": {
+   "name": "West Deptford Township",
+   "geoid": "0600000US3401578800",
+   "renter_households": 2671,
+   "rental_vacancy_rate": 0.93,
+   "rent_burden_share": 50.02
+  },
+  "0821": {
+   "name": "Westville Borough",
+   "geoid": "0600000US3401580120",
+   "renter_households": 794,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 76.02
+  },
+  "0822": {
+   "name": "Woodbury City",
+   "geoid": "0600000US3401582120",
+   "renter_households": 1457,
+   "rental_vacancy_rate": 8.36,
+   "rent_burden_share": 56.41
+  },
+  "0823": {
+   "name": "Woodbury Heights Borough",
+   "geoid": "0600000US3401582180",
+   "renter_households": 42,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 81.25
+  },
+  "0824": {
+   "name": "Woolwich Township",
+   "geoid": "0600000US3401582840",
+   "renter_households": 809,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 59.97
+  },
+  "0901": {
+   "name": "Bayonne City",
+   "geoid": "0600000US3401703580",
+   "renter_households": 18468,
+   "rental_vacancy_rate": 3.63,
+   "rent_burden_share": 46.71
+  },
+  "0902": {
+   "name": "East Newark Borough",
+   "geoid": "0600000US3401719360",
+   "renter_households": 570,
+   "rental_vacancy_rate": 2.73,
+   "rent_burden_share": 62.71
+  },
+  "0903": {
+   "name": "Guttenberg Town",
+   "geoid": "0600000US3401728650",
+   "renter_households": 3123,
+   "rental_vacancy_rate": 1.27,
+   "rent_burden_share": 63.76
+  },
+  "0904": {
+   "name": "Harrison Town",
+   "geoid": "0600000US3401730210",
+   "renter_households": 7404,
+   "rental_vacancy_rate": 5.09,
+   "rent_burden_share": 46.28
+  },
+  "0905": {
+   "name": "Hoboken City",
+   "geoid": "0600000US3401732250",
+   "renter_households": 18607,
+   "rental_vacancy_rate": 5.12,
+   "rent_burden_share": 32.94
+  },
+  "0906": {
+   "name": "Jersey City City",
+   "geoid": "0600000US3401736000",
+   "renter_households": 90256,
+   "rental_vacancy_rate": 5.08,
+   "rent_burden_share": 44.41
+  },
+  "0907": {
+   "name": "Kearny Town",
+   "geoid": "0600000US3401736510",
+   "renter_households": 8418,
+   "rental_vacancy_rate": 2.42,
+   "rent_burden_share": 51.79
+  },
+  "0908": {
+   "name": "North Bergen Township",
+   "geoid": "0600000US3401752470",
+   "renter_households": 13910,
+   "rental_vacancy_rate": 2.29,
+   "rent_burden_share": 54.69
+  },
+  "0909": {
+   "name": "Secaucus Town",
+   "geoid": "0600000US3401766570",
+   "renter_households": 4297,
+   "rental_vacancy_rate": 6.77,
+   "rent_burden_share": 35.72
+  },
+  "0910": {
+   "name": "Union City City",
+   "geoid": "0600000US3401774630",
+   "renter_households": 20818,
+   "rental_vacancy_rate": 3.2,
+   "rent_burden_share": 53.38
+  },
+  "0911": {
+   "name": "Weehawken Township",
+   "geoid": "0600000US3401777930",
+   "renter_households": 5978,
+   "rental_vacancy_rate": 6.61,
+   "rent_burden_share": 41.67
+  },
+  "0912": {
+   "name": "West New York Town",
+   "geoid": "0600000US3401779610",
+   "renter_households": 15759,
+   "rental_vacancy_rate": 3.33,
+   "rent_burden_share": 54.7
+  },
+  "1001": {
+   "name": "Alexandria Township",
+   "geoid": "0600000US3401900550",
+   "renter_households": 163,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 11.66
+  },
+  "1002": {
+   "name": "Bethlehem Township",
+   "geoid": "0600000US3401905650",
+   "renter_households": 67,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 55.22
+  },
+  "1003": {
+   "name": "Bloomsbury Borough",
+   "geoid": "0600000US3401906370",
+   "renter_households": 144,
+   "rental_vacancy_rate": 4.64,
+   "rent_burden_share": 74.65
+  },
+  "1004": {
+   "name": "Califon Borough",
+   "geoid": "0600000US3401909280",
+   "renter_households": 62,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 60.42
+  },
+  "1005": {
+   "name": "Clinton Town",
+   "geoid": "0600000US3401913720",
+   "renter_households": 317,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 49.68
+  },
+  "1006": {
+   "name": "Clinton Township",
+   "geoid": "0600000US3401913750",
+   "renter_households": 564,
+   "rental_vacancy_rate": 7.84,
+   "rent_burden_share": 31.37
+  },
+  "1007": {
+   "name": "Delaware Township",
+   "geoid": "0600000US3401917170",
+   "renter_households": 45,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 0.0
+  },
+  "1008": {
+   "name": "East Amwell Township",
+   "geoid": "0600000US3401918820",
+   "renter_households": 297,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 43.43
+  },
+  "1009": {
+   "name": "Flemington Borough",
+   "geoid": "0600000US3401923700",
+   "renter_households": 1396,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 54.59
+  },
+  "1010": {
+   "name": "Franklin Township",
+   "geoid": "0600000US3401924870",
+   "renter_households": 95,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 83.87
+  },
+  "1011": {
+   "name": "Frenchtown Borough",
+   "geoid": "0600000US3401925350",
+   "renter_households": 362,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 47.73
+  },
+  "1012": {
+   "name": "Glen Gardner Borough",
+   "geoid": "0600000US3401926550",
+   "renter_households": 189,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 56.82
+  },
+  "1013": {
+   "name": "Hampton Borough",
+   "geoid": "0600000US3401929460",
+   "renter_households": 141,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 51.77
+  },
+  "1014": {
+   "name": "High Bridge Borough",
+   "geoid": "0600000US3401931320",
+   "renter_households": 224,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 59.38
+  },
+  "1015": {
+   "name": "Holland Township",
+   "geoid": "0600000US3401932460",
+   "renter_households": 58,
+   "rental_vacancy_rate": 19.44,
+   "rent_burden_share": 74.14
+  },
+  "1016": {
+   "name": "Kingwood Township",
+   "geoid": "0600000US3401937065",
+   "renter_households": 170,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 62.03
+  },
+  "1017": {
+   "name": "Lambertville City",
+   "geoid": "0600000US3401938610",
+   "renter_households": 488,
+   "rental_vacancy_rate": 11.59,
+   "rent_burden_share": 55.79
+  },
+  "1018": {
+   "name": "Lebanon Borough",
+   "geoid": "0600000US3401939630",
+   "renter_households": 326,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 45.96
+  },
+  "1019": {
+   "name": "Lebanon Township",
+   "geoid": "0600000US3401939660",
+   "renter_households": 180,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 65.27
+  },
+  "1020": {
+   "name": "Milford Borough",
+   "geoid": "0600000US3401946260",
+   "renter_households": 142,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 42.25
+  },
+  "1021": {
+   "name": "Raritan Township",
+   "geoid": "0600000US3401961920",
+   "renter_households": 920,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 31.75
+  },
+  "1022": {
+   "name": "Readington Township",
+   "geoid": "0600000US3401962250",
+   "renter_households": 732,
+   "rental_vacancy_rate": 1.61,
+   "rent_burden_share": 39.77
+  },
+  "1023": {
+   "name": "Stockton Borough",
+   "geoid": "0600000US3401970980",
+   "renter_households": 61,
+   "rental_vacancy_rate": 7.58,
+   "rent_burden_share": 4.92
+  },
+  "1024": {
+   "name": "Tewksbury Township",
+   "geoid": "0600000US3401972510",
+   "renter_households": 96,
+   "rental_vacancy_rate": 32.39,
+   "rent_burden_share": 78.21
+  },
+  "1025": {
+   "name": "Union Township",
+   "geoid": "0600000US3401974420",
+   "renter_households": 187,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 70.05
+  },
+  "1026": {
+   "name": "West Amwell Township",
+   "geoid": "0600000US3401978230",
+   "renter_households": 132,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 36.36
+  },
+  "1101": {
+   "name": "East Windsor Township",
+   "geoid": "0600000US3402119780",
+   "renter_households": 4645,
+   "rental_vacancy_rate": 0.92,
+   "rent_burden_share": 49.08
+  },
+  "1102": {
+   "name": "Ewing Township",
+   "geoid": "0600000US3402122185",
+   "renter_households": 4629,
+   "rental_vacancy_rate": 4.09,
+   "rent_burden_share": 47.31
+  },
+  "1103": {
+   "name": "Hamilton Township",
+   "geoid": "0600000US3402129310",
+   "renter_households": 10442,
+   "rental_vacancy_rate": 2.13,
+   "rent_burden_share": 51.77
+  },
+  "1104": {
+   "name": "Hightstown Borough",
+   "geoid": "0600000US3402131620",
+   "renter_households": 574,
+   "rental_vacancy_rate": 3.2,
+   "rent_burden_share": 30.27
+  },
+  "1105": {
+   "name": "Hopewell Borough",
+   "geoid": "0600000US3402133150",
+   "renter_households": 175,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 68.24
+  },
+  "1106": {
+   "name": "Hopewell Township",
+   "geoid": "0600000US3402133180",
+   "renter_households": 553,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 44.95
+  },
+  "1107": {
+   "name": "Lawrence Township",
+   "geoid": "0600000US3402139510",
+   "renter_households": 4046,
+   "rental_vacancy_rate": 1.41,
+   "rent_burden_share": 44.23
+  },
+  "1108": {
+   "name": "Pennington Borough",
+   "geoid": "0600000US3402157600",
+   "renter_households": 211,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 46.24
+  },
+  "1111": {
+   "name": "Trenton City",
+   "geoid": "0600000US3402174000",
+   "renter_households": 19900,
+   "rental_vacancy_rate": 4.32,
+   "rent_burden_share": 58.4
+  },
+  "1112": {
+   "name": "Robbinsville Township",
+   "geoid": "0600000US3402163850",
+   "renter_households": 1196,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 55.24
+  },
+  "1113": {
+   "name": "West Windsor Township",
+   "geoid": "0600000US3402180240",
+   "renter_households": 4023,
+   "rental_vacancy_rate": 3.53,
+   "rent_burden_share": 29.77
+  },
+  "1114": {
+   "name": "Princeton",
+   "geoid": "0600000US3402160900",
+   "renter_households": 4151,
+   "rental_vacancy_rate": 1.14,
+   "rent_burden_share": 36.06
+  },
+  "1201": {
+   "name": "Carteret Borough",
+   "geoid": "0600000US3402310750",
+   "renter_households": 3727,
+   "rental_vacancy_rate": 1.46,
+   "rent_burden_share": 46.33
+  },
+  "1202": {
+   "name": "Cranbury Township",
+   "geoid": "0600000US3402315550",
+   "renter_households": 190,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 57.37
+  },
+  "1203": {
+   "name": "Dunellen Borough",
+   "geoid": "0600000US3402318490",
+   "renter_households": 1008,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 62.64
+  },
+  "1204": {
+   "name": "East Brunswick Township",
+   "geoid": "0600000US3402319000",
+   "renter_households": 3408,
+   "rental_vacancy_rate": 1.02,
+   "rent_burden_share": 50.05
+  },
+  "1205": {
+   "name": "Edison Township",
+   "geoid": "0600000US3402320230",
+   "renter_households": 15020,
+   "rental_vacancy_rate": 3.11,
+   "rent_burden_share": 38.66
+  },
+  "1206": {
+   "name": "Helmetta Borough",
+   "geoid": "0600000US3402330840",
+   "renter_households": 392,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 28.35
+  },
+  "1207": {
+   "name": "Highland Park Borough",
+   "geoid": "0600000US3402331470",
+   "renter_households": 3843,
+   "rental_vacancy_rate": 3.9,
+   "rent_burden_share": 40.25
+  },
+  "1208": {
+   "name": "Jamesburg Borough",
+   "geoid": "0600000US3402334890",
+   "renter_households": 570,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 57.02
+  },
+  "1209": {
+   "name": "Metuchen Borough",
+   "geoid": "0600000US3402345690",
+   "renter_households": 1386,
+   "rental_vacancy_rate": 2.94,
+   "rent_burden_share": 38.24
+  },
+  "1210": {
+   "name": "Middlesex Borough",
+   "geoid": "0600000US3402345900",
+   "renter_households": 1491,
+   "rental_vacancy_rate": 4.61,
+   "rent_burden_share": 44.26
+  },
+  "1211": {
+   "name": "Milltown Borough",
+   "geoid": "0600000US3402346620",
+   "renter_households": 466,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 52.51
+  },
+  "1212": {
+   "name": "Monroe Township",
+   "geoid": "0600000US3402347280",
+   "renter_households": 1944,
+   "rental_vacancy_rate": 0.66,
+   "rent_burden_share": 67.36
+  },
+  "1213": {
+   "name": "New Brunswick City",
+   "geoid": "0600000US3402351210",
+   "renter_households": 12322,
+   "rental_vacancy_rate": 3.7,
+   "rent_burden_share": 58.8
+  },
+  "1214": {
+   "name": "North Brunswick Township",
+   "geoid": "0600000US3402352560",
+   "renter_households": 6526,
+   "rental_vacancy_rate": 0.09,
+   "rent_burden_share": 39.6
+  },
+  "1215": {
+   "name": "Old Bridge Township",
+   "geoid": "0600000US3402354705",
+   "renter_households": 7633,
+   "rental_vacancy_rate": 4.8,
+   "rent_burden_share": 46.53
+  },
+  "1216": {
+   "name": "Perth Amboy City",
+   "geoid": "0600000US3402358200",
+   "renter_households": 12296,
+   "rental_vacancy_rate": 2.05,
+   "rent_burden_share": 64.4
+  },
+  "1217": {
+   "name": "Piscataway Township",
+   "geoid": "0600000US3402359010",
+   "renter_households": 6392,
+   "rental_vacancy_rate": 2.4,
+   "rent_burden_share": 41.38
+  },
+  "1218": {
+   "name": "Plainsboro Township",
+   "geoid": "0600000US3402359280",
+   "renter_households": 5158,
+   "rental_vacancy_rate": 0.19,
+   "rent_burden_share": 33.71
+  },
+  "1219": {
+   "name": "Sayreville Borough",
+   "geoid": "0600000US3402365790",
+   "renter_households": 6361,
+   "rental_vacancy_rate": 2.59,
+   "rent_burden_share": 52.92
+  },
+  "1220": {
+   "name": "South Amboy City",
+   "geoid": "0600000US3402368550",
+   "renter_households": 1832,
+   "rental_vacancy_rate": 3.48,
+   "rent_burden_share": 41.65
+  },
+  "1221": {
+   "name": "South Brunswick Township",
+   "geoid": "0600000US3402368790",
+   "renter_households": 3866,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 38.53
+  },
+  "1222": {
+   "name": "South Plainfield Borough",
+   "geoid": "0600000US3402369390",
+   "renter_households": 1177,
+   "rental_vacancy_rate": 5.84,
+   "rent_burden_share": 49.95
+  },
+  "1223": {
+   "name": "South River Borough",
+   "geoid": "0600000US3402369420",
+   "renter_households": 1915,
+   "rental_vacancy_rate": 4.2,
+   "rent_burden_share": 54.96
+  },
+  "1224": {
+   "name": "Spotswood Borough",
+   "geoid": "0600000US3402369810",
+   "renter_households": 458,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 60.53
+  },
+  "1225": {
+   "name": "Woodbridge Township",
+   "geoid": "0600000US3402382000",
+   "renter_households": 12513,
+   "rental_vacancy_rate": 1.6,
+   "rent_burden_share": 48.08
+  },
+  "1301": {
+   "name": "Aberdeen Township",
+   "geoid": "0600000US3402500070",
+   "renter_households": 2228,
+   "rental_vacancy_rate": 1.63,
+   "rent_burden_share": 46.2
+  },
+  "1302": {
+   "name": "Allenhurst Borough",
+   "geoid": "0600000US3402500730",
+   "renter_households": 86,
+   "rental_vacancy_rate": 3.37,
+   "rent_burden_share": 37.97
+  },
+  "1303": {
+   "name": "Allentown Borough",
+   "geoid": "0600000US3402500760",
+   "renter_households": 188,
+   "rental_vacancy_rate": 2.59,
+   "rent_burden_share": 35.33
+  },
+  "1304": {
+   "name": "Asbury Park City",
+   "geoid": "0600000US3402501960",
+   "renter_households": 5425,
+   "rental_vacancy_rate": 2.95,
+   "rent_burden_share": 52.24
+  },
+  "1305": {
+   "name": "Atlantic Highlands Borough",
+   "geoid": "0600000US3402502110",
+   "renter_households": 603,
+   "rental_vacancy_rate": 10.93,
+   "rent_burden_share": 41.29
+  },
+  "1306": {
+   "name": "Avon-by-the-Sea Borough",
+   "geoid": "0600000US3402502440",
+   "renter_households": 292,
+   "rental_vacancy_rate": 1.61,
+   "rent_burden_share": 24.36
+  },
+  "1307": {
+   "name": "Belmar Borough",
+   "geoid": "0600000US3402504930",
+   "renter_households": 1277,
+   "rental_vacancy_rate": 8.52,
+   "rent_burden_share": 59.83
+  },
+  "1308": {
+   "name": "Bradley Beach Borough",
+   "geoid": "0600000US3402506970",
+   "renter_households": 1150,
+   "rental_vacancy_rate": 6.58,
+   "rent_burden_share": 40.67
+  },
+  "1309": {
+   "name": "Brielle Borough",
+   "geoid": "0600000US3402507750",
+   "renter_households": 180,
+   "rental_vacancy_rate": 12.2,
+   "rent_burden_share": 78.12
+  },
+  "1310": {
+   "name": "Colts Neck Township",
+   "geoid": "0600000US3402514560",
+   "renter_households": 206,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 18.18
+  },
+  "1311": {
+   "name": "Deal Borough",
+   "geoid": "0600000US3402516660",
+   "renter_households": 86,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 33.75
+  },
+  "1312": {
+   "name": "Eatontown Borough",
+   "geoid": "0600000US3402519840",
+   "renter_households": 2395,
+   "rental_vacancy_rate": 3.85,
+   "rent_burden_share": 46.98
+  },
+  "1313": {
+   "name": "Englishtown Borough",
+   "geoid": "0600000US3402521570",
+   "renter_households": 244,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 44.58
+  },
+  "1314": {
+   "name": "Fair Haven Borough",
+   "geoid": "0600000US3402522440",
+   "renter_households": 208,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 28.37
+  },
+  "1315": {
+   "name": "Farmingdale Borough",
+   "geoid": "0600000US3402522950",
+   "renter_households": 262,
+   "rental_vacancy_rate": 2.6,
+   "rent_burden_share": 71.73
+  },
+  "1316": {
+   "name": "Freehold Borough",
+   "geoid": "0600000US3402525200",
+   "renter_households": 1939,
+   "rental_vacancy_rate": 4.29,
+   "rent_burden_share": 54.14
+  },
+  "1317": {
+   "name": "Freehold Township",
+   "geoid": "0600000US3402525230",
+   "renter_households": 2130,
+   "rental_vacancy_rate": 5.38,
+   "rent_burden_share": 59.88
+  },
+  "1318": {
+   "name": "Hazlet Township",
+   "geoid": "0600000US3402530690",
+   "renter_households": 858,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 52.33
+  },
+  "1319": {
+   "name": "Highlands Borough",
+   "geoid": "0600000US3402531500",
+   "renter_households": 955,
+   "rental_vacancy_rate": 6.65,
+   "rent_burden_share": 44.49
+  },
+  "1320": {
+   "name": "Holmdel Township",
+   "geoid": "0600000US3402532640",
+   "renter_households": 539,
+   "rental_vacancy_rate": 1.64,
+   "rent_burden_share": 71.88
+  },
+  "1321": {
+   "name": "Howell Township",
+   "geoid": "0600000US3402533300",
+   "renter_households": 2137,
+   "rental_vacancy_rate": 3.39,
+   "rent_burden_share": 67.45
+  },
+  "1322": {
+   "name": "Interlaken Borough",
+   "geoid": "0600000US3402534200",
+   "renter_households": 23,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 22.22
+  },
+  "1323": {
+   "name": "Keansburg Borough",
+   "geoid": "0600000US3402536480",
+   "renter_households": 1905,
+   "rental_vacancy_rate": 4.46,
+   "rent_burden_share": 49.6
+  },
+  "1324": {
+   "name": "Keyport Borough",
+   "geoid": "0600000US3402536810",
+   "renter_households": 1629,
+   "rental_vacancy_rate": 4.4,
+   "rent_burden_share": 40.48
+  },
+  "1325": {
+   "name": "Little Silver Borough",
+   "geoid": "0600000US3402540770",
+   "renter_households": 83,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 0.0
+  },
+  "1326": {
+   "name": "Loch Arbour Village",
+   "geoid": "0600000US3402541010",
+   "renter_households": 9,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 25.0
+  },
+  "1327": {
+   "name": "Long Branch City",
+   "geoid": "0600000US3402541310",
+   "renter_households": 7560,
+   "rental_vacancy_rate": 4.87,
+   "rent_burden_share": 52.76
+  },
+  "1328": {
+   "name": "Manalapan Township",
+   "geoid": "0600000US3402542990",
+   "renter_households": 1532,
+   "rental_vacancy_rate": 9.94,
+   "rent_burden_share": 61.85
+  },
+  "1329": {
+   "name": "Manasquan Borough",
+   "geoid": "0600000US3402543050",
+   "renter_households": 409,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 56.43
+  },
+  "1330": {
+   "name": "Marlboro Township",
+   "geoid": "0600000US3402544070",
+   "renter_households": 998,
+   "rental_vacancy_rate": 8.86,
+   "rent_burden_share": 42.81
+  },
+  "1331": {
+   "name": "Matawan Borough",
+   "geoid": "0600000US3402544520",
+   "renter_households": 1873,
+   "rental_vacancy_rate": 1.7,
+   "rent_burden_share": 29.36
+  },
+  "1332": {
+   "name": "Middletown Township",
+   "geoid": "0600000US3402545990",
+   "renter_households": 3601,
+   "rental_vacancy_rate": 2.86,
+   "rent_burden_share": 56.21
+  },
+  "1333": {
+   "name": "Millstone Township",
+   "geoid": "0600000US3402546560",
+   "renter_households": 65,
+   "rental_vacancy_rate": 45.59,
+   "rent_burden_share": 40.0
+  },
+  "1334": {
+   "name": "Monmouth Beach Borough",
+   "geoid": "0600000US3402547130",
+   "renter_households": 243,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 64.29
+  },
+  "1335": {
+   "name": "Neptune Township",
+   "geoid": "0600000US3402549890",
+   "renter_households": 3386,
+   "rental_vacancy_rate": 4.38,
+   "rent_burden_share": 54.51
+  },
+  "1336": {
+   "name": "Neptune City Borough",
+   "geoid": "0600000US3402549920",
+   "renter_households": 580,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 52.76
+  },
+  "1337": {
+   "name": "Ocean Township",
+   "geoid": "0600000US3402554270",
+   "renter_households": 4096,
+   "rental_vacancy_rate": 1.23,
+   "rent_burden_share": 56.29
+  },
+  "1338": {
+   "name": "Oceanport Borough",
+   "geoid": "0600000US3402554570",
+   "renter_households": 453,
+   "rental_vacancy_rate": 17.18,
+   "rent_burden_share": 74.83
+  },
+  "1339": {
+   "name": "Red Bank Borough",
+   "geoid": "0600000US3402562430",
+   "renter_households": 2988,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 47.98
+  },
+  "1340": {
+   "name": "Roosevelt Borough",
+   "geoid": "0600000US3402564410",
+   "renter_households": 72,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 62.32
+  },
+  "1341": {
+   "name": "Rumson Borough",
+   "geoid": "0600000US3402565130",
+   "renter_households": 174,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 42.86
+  },
+  "1342": {
+   "name": "Sea Bright Borough",
+   "geoid": "0600000US3402566240",
+   "renter_households": 284,
+   "rental_vacancy_rate": 7.49,
+   "rent_burden_share": 32.5
+  },
+  "1343": {
+   "name": "Sea Girt Borough",
+   "geoid": "0600000US3402566330",
+   "renter_households": 105,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 46.24
+  },
+  "1344": {
+   "name": "Shrewsbury Borough",
+   "geoid": "0600000US3402567350",
+   "renter_households": 214,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 86.39
+  },
+  "1345": {
+   "name": "Shrewsbury Township",
+   "geoid": "0600000US3402567365",
+   "renter_households": 141,
+   "rental_vacancy_rate": 2.08,
+   "rent_burden_share": 39.84
+  },
+  "1346": {
+   "name": "Lake Como Borough",
+   "geoid": "0600000US3402537560",
+   "renter_households": 307,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 59.26
+  },
+  "1347": {
+   "name": "Spring Lake Borough",
+   "geoid": "0600000US3402570110",
+   "renter_households": 103,
+   "rental_vacancy_rate": 28.47,
+   "rent_burden_share": 52.31
+  },
+  "1348": {
+   "name": "Spring Lake Heights Borough",
+   "geoid": "0600000US3402570140",
+   "renter_households": 938,
+   "rental_vacancy_rate": 2.49,
+   "rent_burden_share": 50.5
+  },
+  "1349": {
+   "name": "Tinton Falls Borough",
+   "geoid": "0600000US3402573020",
+   "renter_households": 1384,
+   "rental_vacancy_rate": 15.17,
+   "rent_burden_share": 65.47
+  },
+  "1350": {
+   "name": "Union Beach Borough",
+   "geoid": "0600000US3402574540",
+   "renter_households": 402,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 80.34
+  },
+  "1351": {
+   "name": "Upper Freehold Township",
+   "geoid": "0600000US3402574900",
+   "renter_households": 75,
+   "rental_vacancy_rate": 19.35,
+   "rent_burden_share": 12.73
+  },
+  "1352": {
+   "name": "Wall Township",
+   "geoid": "0600000US3402576460",
+   "renter_households": 1677,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 58.66
+  },
+  "1353": {
+   "name": "West Long Branch Borough",
+   "geoid": "0600000US3402579310",
+   "renter_households": 842,
+   "rental_vacancy_rate": 3.44,
+   "rent_burden_share": 69.51
+  },
+  "1401": {
+   "name": "Boonton Town",
+   "geoid": "0600000US3402706610",
+   "renter_households": 1333,
+   "rental_vacancy_rate": 3.55,
+   "rent_burden_share": 53.41
+  },
+  "1402": {
+   "name": "Boonton Township",
+   "geoid": "0600000US3402706640",
+   "renter_households": 71,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 38.6
+  },
+  "1403": {
+   "name": "Butler Borough",
+   "geoid": "0600000US3402709040",
+   "renter_households": 1088,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 46.65
+  },
+  "1404": {
+   "name": "Chatham Borough",
+   "geoid": "0600000US3402712100",
+   "renter_households": 519,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 41.24
+  },
+  "1405": {
+   "name": "Chatham Township",
+   "geoid": "0600000US3402712130",
+   "renter_households": 632,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 62.09
+  },
+  "1406": {
+   "name": "Chester Borough",
+   "geoid": "0600000US3402712580",
+   "renter_households": 122,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 75.42
+  },
+  "1407": {
+   "name": "Chester Township",
+   "geoid": "0600000US3402712610",
+   "renter_households": 91,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 72.31
+  },
+  "1408": {
+   "name": "Denville Township",
+   "geoid": "0600000US3402717650",
+   "renter_households": 757,
+   "rental_vacancy_rate": 22.91,
+   "rent_burden_share": 56.76
+  },
+  "1409": {
+   "name": "Dover Town",
+   "geoid": "0600000US3402718070",
+   "renter_households": 3594,
+   "rental_vacancy_rate": 1.67,
+   "rent_burden_share": 60.74
+  },
+  "1410": {
+   "name": "East Hanover Township",
+   "geoid": "0600000US3402719210",
+   "renter_households": 308,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 29.73
+  },
+  "1411": {
+   "name": "Florham Park Borough",
+   "geoid": "0600000US3402723910",
+   "renter_households": 1411,
+   "rental_vacancy_rate": 7.84,
+   "rent_burden_share": 43.85
+  },
+  "1412": {
+   "name": "Hanover Township",
+   "geoid": "0600000US3402729550",
+   "renter_households": 1226,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 48.13
+  },
+  "1413": {
+   "name": "Harding Township",
+   "geoid": "0600000US3402729700",
+   "renter_households": 138,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 63.04
+  },
+  "1414": {
+   "name": "Jefferson Township",
+   "geoid": "0600000US3402734980",
+   "renter_households": 906,
+   "rental_vacancy_rate": 2.37,
+   "rent_burden_share": 47.15
+  },
+  "1415": {
+   "name": "Kinnelon Borough",
+   "geoid": "0600000US3402737110",
+   "renter_households": 231,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 27.31
+  },
+  "1416": {
+   "name": "Lincoln Park Borough",
+   "geoid": "0600000US3402740290",
+   "renter_households": 825,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 32.09
+  },
+  "1417": {
+   "name": "Madison Borough",
+   "geoid": "0600000US3402742510",
+   "renter_households": 2032,
+   "rental_vacancy_rate": 1.88,
+   "rent_burden_share": 53.16
+  },
+  "1418": {
+   "name": "Mendham Borough",
+   "geoid": "0600000US3402745330",
+   "renter_households": 254,
+   "rental_vacancy_rate": 12.11,
+   "rent_burden_share": 36.61
+  },
+  "1419": {
+   "name": "Mendham Township",
+   "geoid": "0600000US3402745360",
+   "renter_households": 89,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 13.41
+  },
+  "1420": {
+   "name": "Mine Hill Township",
+   "geoid": "0600000US3402746860",
+   "renter_households": 152,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 56.72
+  },
+  "1421": {
+   "name": "Montville Township",
+   "geoid": "0600000US3402747670",
+   "renter_households": 1038,
+   "rental_vacancy_rate": 2.81,
+   "rent_burden_share": 33.77
+  },
+  "1422": {
+   "name": "Morris Township",
+   "geoid": "0600000US3402748090",
+   "renter_households": 1196,
+   "rental_vacancy_rate": 0.99,
+   "rent_burden_share": 41.99
+  },
+  "1423": {
+   "name": "Morris Plains Borough",
+   "geoid": "0600000US3402748210",
+   "renter_households": 730,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 45.71
+  },
+  "1424": {
+   "name": "Morristown Town",
+   "geoid": "0600000US3402748300",
+   "renter_households": 5744,
+   "rental_vacancy_rate": 2.41,
+   "rent_burden_share": 37.38
+  },
+  "1425": {
+   "name": "Mountain Lakes Borough",
+   "geoid": "0600000US3402748480",
+   "renter_households": 56,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 47.83
+  },
+  "1426": {
+   "name": "Mount Arlington Borough",
+   "geoid": "0600000US3402748690",
+   "renter_households": 694,
+   "rental_vacancy_rate": 13.79,
+   "rent_burden_share": 48.16
+  },
+  "1427": {
+   "name": "Mount Olive Township",
+   "geoid": "0600000US3402749080",
+   "renter_households": 4376,
+   "rental_vacancy_rate": 1.91,
+   "rent_burden_share": 43.21
+  },
+  "1428": {
+   "name": "Netcong Borough",
+   "geoid": "0600000US3402750130",
+   "renter_households": 765,
+   "rental_vacancy_rate": 1.98,
+   "rent_burden_share": 58.3
+  },
+  "1429": {
+   "name": "Parsippany-Troy Hills Township",
+   "geoid": "0600000US3402756460",
+   "renter_households": 9329,
+   "rental_vacancy_rate": 2.82,
+   "rent_burden_share": 34.52
+  },
+  "1430": {
+   "name": "Long Hill Township",
+   "geoid": "0600000US3402741362",
+   "renter_households": 298,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 50.58
+  },
+  "1431": {
+   "name": "Pequannock Township",
+   "geoid": "0600000US3402758110",
+   "renter_households": 1064,
+   "rental_vacancy_rate": 14.74,
+   "rent_burden_share": 61.74
+  },
+  "1432": {
+   "name": "Randolph Township",
+   "geoid": "0600000US3402761890",
+   "renter_households": 2018,
+   "rental_vacancy_rate": 5.61,
+   "rent_burden_share": 52.79
+  },
+  "1433": {
+   "name": "Riverdale Borough",
+   "geoid": "0600000US3402763300",
+   "renter_households": 551,
+   "rental_vacancy_rate": 1.25,
+   "rent_burden_share": 50.0
+  },
+  "1434": {
+   "name": "Rockaway Borough",
+   "geoid": "0600000US3402764050",
+   "renter_households": 1073,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 38.79
+  },
+  "1435": {
+   "name": "Rockaway Township",
+   "geoid": "0600000US3402764080",
+   "renter_households": 1711,
+   "rental_vacancy_rate": 3.71,
+   "rent_burden_share": 37.53
+  },
+  "1436": {
+   "name": "Roxbury Township",
+   "geoid": "0600000US3402764980",
+   "renter_households": 965,
+   "rental_vacancy_rate": 6.85,
+   "rent_burden_share": 63.47
+  },
+  "1437": {
+   "name": "Victory Gardens Borough",
+   "geoid": "0600000US3402775890",
+   "renter_households": 454,
+   "rental_vacancy_rate": 7.16,
+   "rent_burden_share": 63.53
+  },
+  "1438": {
+   "name": "Washington Township",
+   "geoid": "0600000US3402777240",
+   "renter_households": 588,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 66.01
+  },
+  "1439": {
+   "name": "Wharton Borough",
+   "geoid": "0600000US3402780390",
+   "renter_households": 1254,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 55.39
+  },
+  "1501": {
+   "name": "Barnegat Township",
+   "geoid": "0600000US3402903050",
+   "renter_households": 1228,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 49.65
+  },
+  "1502": {
+   "name": "Barnegat Light Borough",
+   "geoid": "0600000US3402903130",
+   "renter_households": 11,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 0.0
+  },
+  "1503": {
+   "name": "Bay Head Borough",
+   "geoid": "0600000US3402903520",
+   "renter_households": 81,
+   "rental_vacancy_rate": 8.91,
+   "rent_burden_share": 65.45
+  },
+  "1504": {
+   "name": "Beach Haven Borough",
+   "geoid": "0600000US3402903940",
+   "renter_households": 56,
+   "rental_vacancy_rate": 5.08,
+   "rent_burden_share": 38.1
+  },
+  "1505": {
+   "name": "Beachwood Borough",
+   "geoid": "0600000US3402904180",
+   "renter_households": 300,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 75.86
+  },
+  "1506": {
+   "name": "Berkeley Township",
+   "geoid": "0600000US3402905305",
+   "renter_households": 2430,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 58.71
+  },
+  "1507": {
+   "name": "Brick Township",
+   "geoid": "0600000US3402907420",
+   "renter_households": 5379,
+   "rental_vacancy_rate": 7.94,
+   "rent_burden_share": 52.45
+  },
+  "1508": {
+   "name": "Toms River Township",
+   "geoid": "0600000US3402973125",
+   "renter_households": 6796,
+   "rental_vacancy_rate": 1.21,
+   "rent_burden_share": 47.7
+  },
+  "1509": {
+   "name": "Eagleswood Township",
+   "geoid": "0600000US3402918670",
+   "renter_households": 64,
+   "rental_vacancy_rate": 20.0,
+   "rent_burden_share": 63.64
+  },
+  "1510": {
+   "name": "Harvey Cedars Borough",
+   "geoid": "0600000US3402930390",
+   "renter_households": 12,
+   "rental_vacancy_rate": 29.41,
+   "rent_burden_share": 37.5
+  },
+  "1511": {
+   "name": "Island Heights Borough",
+   "geoid": "0600000US3402934530",
+   "renter_households": 47,
+   "rental_vacancy_rate": 6.0,
+   "rent_burden_share": 26.19
+  },
+  "1512": {
+   "name": "Jackson Township",
+   "geoid": "0600000US3402934680",
+   "renter_households": 2675,
+   "rental_vacancy_rate": 3.92,
+   "rent_burden_share": 62.93
+  },
+  "1513": {
+   "name": "Lacey Township",
+   "geoid": "0600000US3402937380",
+   "renter_households": 1352,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 61.39
+  },
+  "1514": {
+   "name": "Lakehurst Borough",
+   "geoid": "0600000US3402937770",
+   "renter_households": 381,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 61.8
+  },
+  "1515": {
+   "name": "Lakewood Township",
+   "geoid": "0600000US3402938550",
+   "renter_households": 15248,
+   "rental_vacancy_rate": 3.86,
+   "rent_burden_share": 66.64
+  },
+  "1516": {
+   "name": "Lavallette Borough",
+   "geoid": "0600000US3402939390",
+   "renter_households": 196,
+   "rental_vacancy_rate": 10.5,
+   "rent_burden_share": 78.16
+  },
+  "1517": {
+   "name": "Little Egg Harbor Township",
+   "geoid": "0600000US3402940560",
+   "renter_households": 1209,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 55.37
+  },
+  "1518": {
+   "name": "Long Beach Township",
+   "geoid": "0600000US3402941250",
+   "renter_households": 123,
+   "rental_vacancy_rate": 14.58,
+   "rent_burden_share": 76.19
+  },
+  "1519": {
+   "name": "Manchester Township",
+   "geoid": "0600000US3402943140",
+   "renter_households": 3132,
+   "rental_vacancy_rate": 0.51,
+   "rent_burden_share": 47.53
+  },
+  "1520": {
+   "name": "Mantoloking Borough",
+   "geoid": "0600000US3402943380",
+   "renter_households": 1,
+   "rental_vacancy_rate": 83.33,
+   "rent_burden_share": null
+  },
+  "1521": {
+   "name": "Ocean Township",
+   "geoid": "0600000US3402954300",
+   "renter_households": 456,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 55.11
+  },
+  "1522": {
+   "name": "Ocean Gate Borough",
+   "geoid": "0600000US3402954450",
+   "renter_households": 124,
+   "rental_vacancy_rate": 6.77,
+   "rent_burden_share": 37.08
+  },
+  "1523": {
+   "name": "Pine Beach Borough",
+   "geoid": "0600000US3402958590",
+   "renter_households": 51,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 56.86
+  },
+  "1524": {
+   "name": "Plumsted Township",
+   "geoid": "0600000US3402959790",
+   "renter_households": 622,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 54.03
+  },
+  "1525": {
+   "name": "Point Pleasant Borough",
+   "geoid": "0600000US3402959880",
+   "renter_households": 1480,
+   "rental_vacancy_rate": 3.46,
+   "rent_burden_share": 54.93
+  },
+  "1526": {
+   "name": "Point Pleasant Beach Borough",
+   "geoid": "0600000US3402959910",
+   "renter_households": 474,
+   "rental_vacancy_rate": 6.88,
+   "rent_burden_share": 58.18
+  },
+  "1527": {
+   "name": "Seaside Heights Borough",
+   "geoid": "0600000US3402966450",
+   "renter_households": 796,
+   "rental_vacancy_rate": 0.75,
+   "rent_burden_share": 69.74
+  },
+  "1528": {
+   "name": "Seaside Park Borough",
+   "geoid": "0600000US3402966480",
+   "renter_households": 210,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 56.59
+  },
+  "1529": {
+   "name": "Ship Bottom Borough",
+   "geoid": "0600000US3402967110",
+   "renter_households": 40,
+   "rental_vacancy_rate": 13.04,
+   "rent_burden_share": 40.0
+  },
+  "1530": {
+   "name": "South Toms River Borough",
+   "geoid": "0600000US3402969510",
+   "renter_households": 241,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 60.42
+  },
+  "1531": {
+   "name": "Stafford Township",
+   "geoid": "0600000US3402970320",
+   "renter_households": 1167,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 44.95
+  },
+  "1532": {
+   "name": "Surf City Borough",
+   "geoid": "0600000US3402971640",
+   "renter_households": 51,
+   "rental_vacancy_rate": 22.73,
+   "rent_burden_share": 39.47
+  },
+  "1533": {
+   "name": "Tuckerton Borough",
+   "geoid": "0600000US3402974210",
+   "renter_households": 536,
+   "rental_vacancy_rate": 4.46,
+   "rent_burden_share": 83.96
+  },
+  "1601": {
+   "name": "Bloomingdale Borough",
+   "geoid": "0600000US3403106340",
+   "renter_households": 836,
+   "rental_vacancy_rate": 1.42,
+   "rent_burden_share": 56.94
+  },
+  "1602": {
+   "name": "Clifton City",
+   "geoid": "0600000US3403113690",
+   "renter_households": 13593,
+   "rental_vacancy_rate": 1.47,
+   "rent_burden_share": 57.66
+  },
+  "1603": {
+   "name": "Haledon Borough",
+   "geoid": "0600000US3403129070",
+   "renter_households": 1648,
+   "rental_vacancy_rate": 1.9,
+   "rent_burden_share": 59.08
+  },
+  "1604": {
+   "name": "Hawthorne Borough",
+   "geoid": "0600000US3403130570",
+   "renter_households": 2354,
+   "rental_vacancy_rate": 1.9,
+   "rent_burden_share": 47.78
+  },
+  "1605": {
+   "name": "Little Falls Township",
+   "geoid": "0600000US3403140620",
+   "renter_households": 1597,
+   "rental_vacancy_rate": 9.11,
+   "rent_burden_share": 42.26
+  },
+  "1606": {
+   "name": "North Haledon Borough",
+   "geoid": "0600000US3403153040",
+   "renter_households": 193,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 73.58
+  },
+  "1607": {
+   "name": "Passaic City",
+   "geoid": "0600000US3403156550",
+   "renter_households": 16123,
+   "rental_vacancy_rate": 1.07,
+   "rent_burden_share": 57.78
+  },
+  "1608": {
+   "name": "Paterson City",
+   "geoid": "0600000US3403157000",
+   "renter_households": 36441,
+   "rental_vacancy_rate": 2.45,
+   "rent_burden_share": 59.36
+  },
+  "1609": {
+   "name": "Pompton Lakes Borough",
+   "geoid": "0600000US3403160090",
+   "renter_households": 834,
+   "rental_vacancy_rate": 0.71,
+   "rent_burden_share": 32.03
+  },
+  "1610": {
+   "name": "Prospect Park Borough",
+   "geoid": "0600000US3403161170",
+   "renter_households": 1198,
+   "rental_vacancy_rate": 4.01,
+   "rent_burden_share": 72.22
+  },
+  "1611": {
+   "name": "Ringwood Borough",
+   "geoid": "0600000US3403163150",
+   "renter_households": 158,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 55.7
+  },
+  "1612": {
+   "name": "Totowa Borough",
+   "geoid": "0600000US3403173140",
+   "renter_households": 1035,
+   "rental_vacancy_rate": 2.36,
+   "rent_burden_share": 60.25
+  },
+  "1613": {
+   "name": "Wanaque Borough",
+   "geoid": "0600000US3403176730",
+   "renter_households": 963,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 44.22
+  },
+  "1614": {
+   "name": "Wayne Township",
+   "geoid": "0600000US3403177840",
+   "renter_households": 3922,
+   "rental_vacancy_rate": 2.78,
+   "rent_burden_share": 47.87
+  },
+  "1615": {
+   "name": "West Milford Township",
+   "geoid": "0600000US3403179460",
+   "renter_households": 1074,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 58.5
+  },
+  "1616": {
+   "name": "Woodland Park Borough",
+   "geoid": "0600000US3403182423",
+   "renter_households": 1997,
+   "rental_vacancy_rate": 3.43,
+   "rent_burden_share": 47.62
+  },
+  "1701": {
+   "name": "Alloway Township",
+   "geoid": "0600000US3403300880",
+   "renter_households": 170,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 21.83
+  },
+  "1702": {
+   "name": "Carneys Point Township",
+   "geoid": "0600000US3403310610",
+   "renter_households": 1373,
+   "rental_vacancy_rate": 5.89,
+   "rent_burden_share": 47.97
+  },
+  "1703": {
+   "name": "Elmer Borough",
+   "geoid": "0600000US3403321240",
+   "renter_households": 136,
+   "rental_vacancy_rate": 9.93,
+   "rent_burden_share": 17.5
+  },
+  "1704": {
+   "name": "Elsinboro Township",
+   "geoid": "0600000US3403321330",
+   "renter_households": 41,
+   "rental_vacancy_rate": 6.82,
+   "rent_burden_share": 58.33
+  },
+  "1705": {
+   "name": "Lower Alloways Creek Township",
+   "geoid": "0600000US3403341640",
+   "renter_households": 159,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 54.92
+  },
+  "1706": {
+   "name": "Mannington Township",
+   "geoid": "0600000US3403343200",
+   "renter_households": 46,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 27.91
+  },
+  "1707": {
+   "name": "Oldmans Township",
+   "geoid": "0600000US3403354810",
+   "renter_households": 77,
+   "rental_vacancy_rate": 27.12,
+   "rent_burden_share": 27.03
+  },
+  "1708": {
+   "name": "Penns Grove Borough",
+   "geoid": "0600000US3403357750",
+   "renter_households": 1015,
+   "rental_vacancy_rate": 4.04,
+   "rent_burden_share": 57.26
+  },
+  "1709": {
+   "name": "Pennsville Township",
+   "geoid": "0600000US3403357870",
+   "renter_households": 1061,
+   "rental_vacancy_rate": 6.76,
+   "rent_burden_share": 59.64
+  },
+  "1710": {
+   "name": "Pilesgrove Township",
+   "geoid": "0600000US3403358530",
+   "renter_households": 200,
+   "rental_vacancy_rate": 11.11,
+   "rent_burden_share": 34.0
+  },
+  "1711": {
+   "name": "Pittsgrove Township",
+   "geoid": "0600000US3403359130",
+   "renter_households": 476,
+   "rental_vacancy_rate": 12.5,
+   "rent_burden_share": 80.46
+  },
+  "1712": {
+   "name": "Quinton Township",
+   "geoid": "0600000US3403361470",
+   "renter_households": 248,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 60.0
+  },
+  "1713": {
+   "name": "Salem City",
+   "geoid": "0600000US3403365490",
+   "renter_households": 1557,
+   "rental_vacancy_rate": 5.44,
+   "rent_burden_share": 64.23
+  },
+  "1714": {
+   "name": "Upper Pittsgrove Township",
+   "geoid": "0600000US3403375110",
+   "renter_households": 106,
+   "rental_vacancy_rate": 20.3,
+   "rent_burden_share": 60.44
+  },
+  "1715": {
+   "name": "Woodstown Borough",
+   "geoid": "0600000US3403382720",
+   "renter_households": 546,
+   "rental_vacancy_rate": 4.21,
+   "rent_burden_share": 34.21
+  },
+  "1801": {
+   "name": "Bedminster Township",
+   "geoid": "0600000US3403504450",
+   "renter_households": 878,
+   "rental_vacancy_rate": 0.68,
+   "rent_burden_share": 50.5
+  },
+  "1802": {
+   "name": "Bernards Township",
+   "geoid": "0600000US3403505560",
+   "renter_households": 1763,
+   "rental_vacancy_rate": 1.4,
+   "rent_burden_share": 43.55
+  },
+  "1803": {
+   "name": "Bernardsville Borough",
+   "geoid": "0600000US3403505590",
+   "renter_households": 146,
+   "rental_vacancy_rate": 25.51,
+   "rent_burden_share": 40.41
+  },
+  "1804": {
+   "name": "Bound Brook Borough",
+   "geoid": "0600000US3403506790",
+   "renter_households": 2542,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 65.41
+  },
+  "1805": {
+   "name": "Branchburg Township",
+   "geoid": "0600000US3403507180",
+   "renter_households": 952,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 46.65
+  },
+  "1806": {
+   "name": "Bridgewater Township",
+   "geoid": "0600000US3403507720",
+   "renter_households": 2500,
+   "rental_vacancy_rate": 6.73,
+   "rent_burden_share": 49.25
+  },
+  "1807": {
+   "name": "Far Hills Borough",
+   "geoid": "0600000US3403522890",
+   "renter_households": 55,
+   "rental_vacancy_rate": 5.17,
+   "rent_burden_share": 51.02
+  },
+  "1808": {
+   "name": "Franklin Township",
+   "geoid": "0600000US3403524900",
+   "renter_households": 8148,
+   "rental_vacancy_rate": 0.52,
+   "rent_burden_share": 43.71
+  },
+  "1809": {
+   "name": "Green Brook Township",
+   "geoid": "0600000US3403527510",
+   "renter_households": 161,
+   "rental_vacancy_rate": 23.7,
+   "rent_burden_share": 38.28
+  },
+  "1810": {
+   "name": "Hillsborough Township",
+   "geoid": "0600000US3403531890",
+   "renter_households": 3363,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 48.06
+  },
+  "1811": {
+   "name": "Manville Borough",
+   "geoid": "0600000US3403543620",
+   "renter_households": 1019,
+   "rental_vacancy_rate": 10.06,
+   "rent_burden_share": 50.17
+  },
+  "1812": {
+   "name": "Millstone Borough",
+   "geoid": "0600000US3403546590",
+   "renter_households": 22,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 17.65
+  },
+  "1813": {
+   "name": "Montgomery Township",
+   "geoid": "0600000US3403547580",
+   "renter_households": 1303,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 54.41
+  },
+  "1814": {
+   "name": "North Plainfield Borough",
+   "geoid": "0600000US3403553280",
+   "renter_households": 3659,
+   "rental_vacancy_rate": 1.77,
+   "rent_burden_share": 56.01
+  },
+  "1815": {
+   "name": "Peapack and Gladstone Borough",
+   "geoid": "0600000US3403557300",
+   "renter_households": 194,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 85.71
+  },
+  "1816": {
+   "name": "Raritan Borough",
+   "geoid": "0600000US3403561980",
+   "renter_households": 1667,
+   "rental_vacancy_rate": 1.36,
+   "rent_burden_share": 44.61
+  },
+  "1817": {
+   "name": "Rocky Hill Borough",
+   "geoid": "0600000US3403564320",
+   "renter_households": 75,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 29.33
+  },
+  "1818": {
+   "name": "Somerville Borough",
+   "geoid": "0600000US3403568460",
+   "renter_households": 3411,
+   "rental_vacancy_rate": 1.33,
+   "rent_burden_share": 41.92
+  },
+  "1819": {
+   "name": "South Bound Brook Borough",
+   "geoid": "0600000US3403568730",
+   "renter_households": 750,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 69.27
+  },
+  "1820": {
+   "name": "Warren Township",
+   "geoid": "0600000US3403576940",
+   "renter_households": 632,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 41.11
+  },
+  "1821": {
+   "name": "Watchung Borough",
+   "geoid": "0600000US3403577600",
+   "renter_households": 375,
+   "rental_vacancy_rate": 19.35,
+   "rent_burden_share": 62.16
+  },
+  "1901": {
+   "name": "Andover Borough",
+   "geoid": "0600000US3403701330",
+   "renter_households": 119,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 55.46
+  },
+  "1902": {
+   "name": "Andover Township",
+   "geoid": "0600000US3403701360",
+   "renter_households": 176,
+   "rental_vacancy_rate": 14.15,
+   "rent_burden_share": 70.55
+  },
+  "1903": {
+   "name": "Branchville Borough",
+   "geoid": "0600000US3403707300",
+   "renter_households": 140,
+   "rental_vacancy_rate": 7.89,
+   "rent_burden_share": 22.48
+  },
+  "1904": {
+   "name": "Byram Township",
+   "geoid": "0600000US3403709160",
+   "renter_households": 156,
+   "rental_vacancy_rate": 7.69,
+   "rent_burden_share": 44.03
+  },
+  "1905": {
+   "name": "Frankford Township",
+   "geoid": "0600000US3403724810",
+   "renter_households": 184,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 54.43
+  },
+  "1906": {
+   "name": "Franklin Borough",
+   "geoid": "0600000US3403724930",
+   "renter_households": 975,
+   "rental_vacancy_rate": 3.75,
+   "rent_burden_share": 42.19
+  },
+  "1907": {
+   "name": "Fredon Township",
+   "geoid": "0600000US3403725140",
+   "renter_households": 56,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 39.02
+  },
+  "1908": {
+   "name": "Green Township",
+   "geoid": "0600000US3403727420",
+   "renter_households": 31,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 41.94
+  },
+  "1909": {
+   "name": "Hamburg Borough",
+   "geoid": "0600000US3403729220",
+   "renter_households": 454,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 63.44
+  },
+  "1910": {
+   "name": "Hampton Township",
+   "geoid": "0600000US3403729490",
+   "renter_households": 278,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 52.54
+  },
+  "1911": {
+   "name": "Hardyston Township",
+   "geoid": "0600000US3403729850",
+   "renter_households": 742,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 57.73
+  },
+  "1912": {
+   "name": "Hopatcong Borough",
+   "geoid": "0600000US3403732910",
+   "renter_households": 772,
+   "rental_vacancy_rate": 2.77,
+   "rent_burden_share": 48.81
+  },
+  "1913": {
+   "name": "Lafayette Township",
+   "geoid": "0600000US3403737440",
+   "renter_households": 102,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 44.44
+  },
+  "1914": {
+   "name": "Montague Township",
+   "geoid": "0600000US3403747430",
+   "renter_households": 285,
+   "rental_vacancy_rate": 15.93,
+   "rent_burden_share": 61.05
+  },
+  "1915": {
+   "name": "Newton Town",
+   "geoid": "0600000US3403751930",
+   "renter_households": 1403,
+   "rental_vacancy_rate": 8.01,
+   "rent_burden_share": 61.26
+  },
+  "1916": {
+   "name": "Ogdensburg Borough",
+   "geoid": "0600000US3403754660",
+   "renter_households": 89,
+   "rental_vacancy_rate": 24.58,
+   "rent_burden_share": 79.78
+  },
+  "1917": {
+   "name": "Sandyston Township",
+   "geoid": "0600000US3403765700",
+   "renter_households": 27,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 12.5
+  },
+  "1918": {
+   "name": "Sparta Township",
+   "geoid": "0600000US3403769690",
+   "renter_households": 942,
+   "rental_vacancy_rate": 1.98,
+   "rent_burden_share": 61.09
+  },
+  "1919": {
+   "name": "Stanhope Borough",
+   "geoid": "0600000US3403770380",
+   "renter_households": 186,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 65.05
+  },
+  "1920": {
+   "name": "Stillwater Township",
+   "geoid": "0600000US3403770890",
+   "renter_households": 159,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 40.25
+  },
+  "1921": {
+   "name": "Sussex Borough",
+   "geoid": "0600000US3403771670",
+   "renter_households": 658,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 47.96
+  },
+  "1922": {
+   "name": "Vernon Township",
+   "geoid": "0600000US3403775740",
+   "renter_households": 736,
+   "rental_vacancy_rate": 2.8,
+   "rent_burden_share": 53.75
+  },
+  "1923": {
+   "name": "Walpack Township",
+   "geoid": "0600000US3403776640",
+   "renter_households": 0,
+   "rental_vacancy_rate": null,
+   "rent_burden_share": null
+  },
+  "1924": {
+   "name": "Wantage Township",
+   "geoid": "0600000US3403776790",
+   "renter_households": 731,
+   "rental_vacancy_rate": 9.64,
+   "rent_burden_share": 61.02
+  },
+  "2001": {
+   "name": "Berkeley Heights Township",
+   "geoid": "0600000US3403905320",
+   "renter_households": 323,
+   "rental_vacancy_rate": 5.0,
+   "rent_burden_share": 63.16
+  },
+  "2002": {
+   "name": "Clark Township",
+   "geoid": "0600000US3403913150",
+   "renter_households": 1386,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 34.27
+  },
+  "2003": {
+   "name": "Cranford Township",
+   "geoid": "0600000US3403915640",
+   "renter_households": 2120,
+   "rental_vacancy_rate": 7.71,
+   "rent_burden_share": 48.8
+  },
+  "2004": {
+   "name": "Elizabeth City",
+   "geoid": "0600000US3403921000",
+   "renter_households": 34327,
+   "rental_vacancy_rate": 2.76,
+   "rent_burden_share": 53.51
+  },
+  "2005": {
+   "name": "Fanwood Borough",
+   "geoid": "0600000US3403922860",
+   "renter_households": 427,
+   "rental_vacancy_rate": 5.95,
+   "rent_burden_share": 54.79
+  },
+  "2006": {
+   "name": "Garwood Borough",
+   "geoid": "0600000US3403925800",
+   "renter_households": 970,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 33.85
+  },
+  "2007": {
+   "name": "Hillside Township",
+   "geoid": "0600000US3403931980",
+   "renter_households": 2301,
+   "rental_vacancy_rate": 4.53,
+   "rent_burden_share": 51.11
+  },
+  "2008": {
+   "name": "Kenilworth Borough",
+   "geoid": "0600000US3403936690",
+   "renter_households": 725,
+   "rental_vacancy_rate": 7.41,
+   "rent_burden_share": 51.97
+  },
+  "2009": {
+   "name": "Linden City",
+   "geoid": "0600000US3403940350",
+   "renter_households": 6267,
+   "rental_vacancy_rate": 0.59,
+   "rent_burden_share": 52.5
+  },
+  "2010": {
+   "name": "Mountainside Borough",
+   "geoid": "0600000US3403948510",
+   "renter_households": 304,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 81.58
+  },
+  "2011": {
+   "name": "New Providence Borough",
+   "geoid": "0600000US3403951810",
+   "renter_households": 1297,
+   "rental_vacancy_rate": 7.09,
+   "rent_burden_share": 37.74
+  },
+  "2012": {
+   "name": "Plainfield City",
+   "geoid": "0600000US3403959190",
+   "renter_households": 8782,
+   "rental_vacancy_rate": 3.64,
+   "rent_burden_share": 55.93
+  },
+  "2013": {
+   "name": "Rahway City",
+   "geoid": "0600000US3403961530",
+   "renter_households": 5943,
+   "rental_vacancy_rate": 5.89,
+   "rent_burden_share": 56.66
+  },
+  "2014": {
+   "name": "Roselle Borough",
+   "geoid": "0600000US3403964620",
+   "renter_households": 3808,
+   "rental_vacancy_rate": 0.57,
+   "rent_burden_share": 49.71
+  },
+  "2015": {
+   "name": "Roselle Park Borough",
+   "geoid": "0600000US3403964650",
+   "renter_households": 2214,
+   "rental_vacancy_rate": 1.47,
+   "rent_burden_share": 39.66
+  },
+  "2016": {
+   "name": "Scotch Plains Township",
+   "geoid": "0600000US3403966060",
+   "renter_households": 1797,
+   "rental_vacancy_rate": 3.39,
+   "rent_burden_share": 50.5
+  },
+  "2017": {
+   "name": "Springfield Township",
+   "geoid": "0600000US3403970020",
+   "renter_households": 2288,
+   "rental_vacancy_rate": 5.14,
+   "rent_burden_share": 40.15
+  },
+  "2018": {
+   "name": "Summit City",
+   "geoid": "0600000US3403971430",
+   "renter_households": 2644,
+   "rental_vacancy_rate": 3.43,
+   "rent_burden_share": 45.01
+  },
+  "2019": {
+   "name": "Union Township",
+   "geoid": "0600000US3403974480",
+   "renter_households": 6084,
+   "rental_vacancy_rate": 2.92,
+   "rent_burden_share": 54.07
+  },
+  "2020": {
+   "name": "Westfield Town",
+   "geoid": "0600000US3403979040",
+   "renter_households": 2059,
+   "rental_vacancy_rate": 1.58,
+   "rent_burden_share": 35.81
+  },
+  "2021": {
+   "name": "Winfield Township",
+   "geoid": "0600000US3403981650",
+   "renter_households": 606,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 30.02
+  },
+  "2101": {
+   "name": "Allamuchy Township",
+   "geoid": "0600000US3404100670",
+   "renter_households": 422,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 60.97
+  },
+  "2102": {
+   "name": "Alpha Borough",
+   "geoid": "0600000US3404101030",
+   "renter_households": 256,
+   "rental_vacancy_rate": 5.54,
+   "rent_burden_share": 70.46
+  },
+  "2103": {
+   "name": "Belvidere Town",
+   "geoid": "0600000US3404104990",
+   "renter_households": 542,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 36.9
+  },
+  "2104": {
+   "name": "Blairstown Township",
+   "geoid": "0600000US3404106160",
+   "renter_households": 103,
+   "rental_vacancy_rate": 37.95,
+   "rent_burden_share": 62.22
+  },
+  "2105": {
+   "name": "Franklin Township",
+   "geoid": "0600000US3404124960",
+   "renter_households": 110,
+   "rental_vacancy_rate": 12.0,
+   "rent_burden_share": 30.3
+  },
+  "2106": {
+   "name": "Frelinghuysen Township",
+   "geoid": "0600000US3404125320",
+   "renter_households": 55,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 44.0
+  },
+  "2107": {
+   "name": "Greenwich Township",
+   "geoid": "0600000US3404128260",
+   "renter_households": 56,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 25.64
+  },
+  "2108": {
+   "name": "Hackettstown Town",
+   "geoid": "0600000US3404128710",
+   "renter_households": 1621,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 45.67
+  },
+  "2109": {
+   "name": "Hardwick Township",
+   "geoid": "0600000US3404129820",
+   "renter_households": 66,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 44.0
+  },
+  "2110": {
+   "name": "Harmony Township",
+   "geoid": "0600000US3404130090",
+   "renter_households": 108,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 45.98
+  },
+  "2111": {
+   "name": "Hope Township",
+   "geoid": "0600000US3404133060",
+   "renter_households": 94,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 22.22
+  },
+  "2112": {
+   "name": "Independence Township",
+   "geoid": "0600000US3404133930",
+   "renter_households": 448,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 62.28
+  },
+  "2113": {
+   "name": "Knowlton Township",
+   "geoid": "0600000US3404137320",
+   "renter_households": 140,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 32.14
+  },
+  "2114": {
+   "name": "Liberty Township",
+   "geoid": "0600000US3404140110",
+   "renter_households": 104,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 39.44
+  },
+  "2115": {
+   "name": "Lopatcong Township",
+   "geoid": "0600000US3404141490",
+   "renter_households": 990,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 37.59
+  },
+  "2116": {
+   "name": "Mansfield Township",
+   "geoid": "0600000US3404143320",
+   "renter_households": 1117,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 45.39
+  },
+  "2117": {
+   "name": "Oxford Township",
+   "geoid": "0600000US3404155530",
+   "renter_households": 94,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 51.06
+  },
+  "2119": {
+   "name": "Phillipsburg Town",
+   "geoid": "0600000US3404158350",
+   "renter_households": 2779,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 51.92
+  },
+  "2120": {
+   "name": "Pohatcong Township",
+   "geoid": "0600000US3404159820",
+   "renter_households": 175,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 59.2
+  },
+  "2121": {
+   "name": "Washington Borough",
+   "geoid": "0600000US3404177270",
+   "renter_households": 1286,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 44.19
+  },
+  "2122": {
+   "name": "Washington Township",
+   "geoid": "0600000US3404177300",
+   "renter_households": 216,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 37.89
+  },
+  "2123": {
+   "name": "White Township",
+   "geoid": "0600000US3404180570",
+   "renter_households": 537,
+   "rental_vacancy_rate": 0.0,
+   "rent_burden_share": 51.41
+  }
+ }
+}

@@ -1,9 +1,10 @@
-// Watchdog provider release canaries: data_center_batch_oct7_v1 and pilot_schedule_v1.
+// Watchdog provider release canaries: data_center_batch_oct7_v1 and municipal_context_oct7_v1.
 //
 // data_center_batch_oct7_v1 checks the 27 formulas staged by 20261007181000_prepare_data_center_batch_oct7.sql
 // and the six formulas repaired by 20261007180000_fix_live_formula_transforms.sql against production.
-// pilot_schedule_v1 checks the five values the workbench-hydrate PILOT schedule provider serves against the
-// published pilot-schedule.json, then the two PILOT formulas from 20261007182000_prepare_pilot_schedule.sql.
+// municipal_context_oct7_v1 checks every value the three new workbench-hydrate providers serve (PILOT schedule,
+// federal housing context, ACS rental) against the published data files, then the PILOT and rental formulas
+// from 20261007182000_prepare_pilot_schedule.sql and 20261007183000_prepare_rental_scores.sql.
 // It reads each formula's config from derived_formula_registry, gets raw inputs from workbench-hydrate
 // and already-live derived inputs from workbench-derived, recomputes every value with its own copy of the
 // arithmetic, and compares it with what workbench-derived returns. A marker passes only when every pin
@@ -13,8 +14,8 @@ import { createClient } from 'npm:@supabase/supabase-js@2.95.0';
 const URL = Deno.env.get('SUPABASE_URL')!, ANON = Deno.env.get('SUPABASE_ANON_KEY')!, SERVICE = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!;
 const admin = createClient(URL, SERVICE, { auth: { persistSession: false, autoRefreshToken: false } });
 export const DATA_CENTER_BATCH_OCT7_SCENARIO = 'data_center_batch_oct7_v1';
-export const PILOT_SCHEDULE_SCENARIO = 'pilot_schedule_v1';
-const SCENARIOS = new Set([DATA_CENTER_BATCH_OCT7_SCENARIO, PILOT_SCHEDULE_SCENARIO]);
+export const MUNICIPAL_CONTEXT_SCENARIO = 'municipal_context_oct7_v1';
+const SCENARIOS = new Set([DATA_CENTER_BATCH_OCT7_SCENARIO, MUNICIPAL_CONTEXT_SCENARIO]);
 
 const BATCH = [
   'watchdog.environmental_site_proximity', 'watchdog.water_protection_overlap', 'watchdog.historic_property_constraint',
@@ -31,15 +32,28 @@ const REPAIRED = [
   'watchdog.appraiser.market_anchor_refresh', 'watchdog.consumer.sale_context_strength', 'watchdog.comparable_depth_score',
   'watchdog.market_anchor_confidence', 'watchdog.title.closing_clearance_signal', 'watchdog.fiscal_intervention_priority',
 ];
-const PILOT_DERIVED = ['watchdog.njplus.pilot_rolloff_watch', 'watchdog.njplus.development_incentive_profile'];
-const PILOT_SCHEDULE_URL = 'https://www.watchdogindex.com/property/data/pilot-schedule.json';
-const PILOT_HYDRATE: Record<string, string> = {
-  'njplus.nj-dca-pilot-forecast.pilot_payment_schedule': 'payment_schedule',
-  'njplus.nj-dca-pilot-forecast.pilot_revenue_projection': 'revenue_projection',
-  'njplus.nj-dca-pilot-forecast.pilot_forecast_year': 'forecast_year',
-  'njplus.nj-dca-pilot-forecast.pilot_municipal_share': 'municipal_share_pct',
-  'watchdog.njplus.pilot_forecast_confidence': 'dated_billing_share_pct',
+const CONTEXT_DERIVED = [
+  'watchdog.njplus.pilot_rolloff_watch', 'watchdog.njplus.development_incentive_profile',
+  'watchdog.njplus.rental_market_pressure', 'watchdog.njplus.housing_affordability_gap', 'watchdog.njplus.rent_support_context',
+  'watchdog.internal.pilot_term_remaining_scaled_v1', 'watchdog.internal.acs_rental_vacancy_scaled_v1', 'watchdog.internal.rent_to_income_v1',
+  'watchdog.internal.hud_units_per_renter_v1', 'watchdog.internal.affordable_rental_per_renter_v1',
+];
+const DATA = 'https://www.watchdogindex.com/property/data/';
+// Hydrate marker id -> [published data file, field in that file's municipalities record].
+const CONTEXT_HYDRATE: Record<string, [string, string]> = {
+  'njplus.nj-dca-pilot-forecast.pilot_payment_schedule': ['pilot-schedule.json', 'payment_schedule'],
+  'njplus.nj-dca-pilot-forecast.pilot_revenue_projection': ['pilot-schedule.json', 'revenue_projection'],
+  'njplus.nj-dca-pilot-forecast.pilot_forecast_year': ['pilot-schedule.json', 'forecast_year'],
+  'njplus.nj-dca-pilot-forecast.pilot_municipal_share': ['pilot-schedule.json', 'municipal_share_pct'],
+  'watchdog.njplus.pilot_forecast_confidence': ['pilot-schedule.json', 'dated_billing_share_pct'],
+  'njplus.nj-dca-affordable-housing.hud_subsidized_units': ['federal-housing-context-v041.json', 'hud_subsidized_units'],
+  'njplus.nj-dca-affordable-housing.low_income_cost_burden': ['federal-housing-context-v041.json', 'low_income_cost_burden'],
+  'njplus.nj-dca-neighborhood-trends.commute_mode_mix': ['federal-housing-context-v041.json', 'commute_mode_mix'],
+  'watchdog.internal.acs_renter_households_v1': ['acs-rental-2024.json', 'renter_households'],
+  'watchdog.internal.acs_rental_vacancy_rate_v1': ['acs-rental-2024.json', 'rental_vacancy_rate'],
+  'watchdog.internal.acs_rent_burden_share_v1': ['acs-rental-2024.json', 'rent_burden_share'],
 };
+const sorted = (v: unknown): unknown => v && typeof v === 'object' && !Array.isArray(v) ? Object.fromEntries(Object.keys(v as object).sort().map((k) => [k, sorted((v as any)[k])])) : Array.isArray(v) ? v.map(sorted) : v;
 // Pins already used by earlier production canaries, spread across 8 counties.
 const PINS = ['0202_1_1', '0336_1.01_1', '0502_1056_2', '1420_1003_1', '0113_2802_10', '1906_1301_19', '0101_25.01_10', '0102_139_15'];
 
@@ -102,6 +116,14 @@ function expected(def: any, value: (dep: string) => unknown, ready: (dep: string
     return { v: Math.round(scores.reduce((a, b) => a * b, 1) / (100 ** (scores.length - 1))) };
   }
   if (op === 'inverse') { const x = n(value(cfg.dep)); return { v: x == null ? null : clamp(100 - x) }; }
+  if (op === 'ratio') {
+    const num = n(value(cfg.num)), den = n(value(cfg.den));
+    if (num == null || den == null) return { v: null };
+    const floor = n(cfg.den_min), d = floor == null ? den : Math.max(den, floor);
+    if (d === 0) return { v: cfg.zero_as_100 && num === 0 ? 100 : null };
+    const p = 10 ** Number(cfg.precision ?? 3);
+    return { v: Math.round(num / d * Number(cfg.scale ?? 1) * p) / p };
+  }
   if (op === 'source_alias') { const x = value(cfg.dep); return { v: present(x) ? (n(x) ?? (x as any)) : null }; }
   return { v: null, unsupported: op };
 }
@@ -131,8 +153,8 @@ export async function handleDataCenterBatchOct7Canary(req: Request) {
     if (ta.error) throw new Error('sandbox_account_failed');
 
     const started = Date.now();
-    const pilotRun = SCENARIO === PILOT_SCHEDULE_SCENARIO;
-    const TARGETS = pilotRun ? PILOT_DERIVED : [...BATCH, ...REPAIRED];
+    const contextRun = SCENARIO === MUNICIPAL_CONTEXT_SCENARIO;
+    const TARGETS = contextRun ? CONTEXT_DERIVED : [...BATCH, ...REPAIRED];
     const { data: defRows, error: defError } = await admin.from('derived_formula_registry').select('marker_id,operation,config,dependencies,status').eq('status', 'live');
     if (defError) throw new Error('formula_registry_unavailable');
     const defs = new Map((defRows || []).map((d: any) => [String(d.marker_id), d]));
@@ -151,23 +173,24 @@ export async function handleDataCenterBatchOct7Canary(req: Request) {
     ]);
 
     const mismatches: string[] = [], observations: Record<string, any> = {};
-    let pilotHydrateStatus: number | null = null;
-    if (pilotRun) {
-      const ids = Object.keys(PILOT_HYDRATE);
-      const [file, served] = await Promise.all([
-        fetch(PILOT_SCHEDULE_URL, { headers: { accept: 'application/json' } }).then((r) => r.ok ? r.json() : null).catch(() => null),
+    let contextHydrateStatus: number | null = null;
+    if (contextRun) {
+      const ids = Object.keys(CONTEXT_HYDRATE), names = [...new Set(ids.map((id) => CONTEXT_HYDRATE[id][0]))];
+      const [served, ...loaded] = await Promise.all([
         post('workbench-hydrate', { pams_pins: PINS, marker_ids: ids }, access),
+        ...names.map((name) => fetch(DATA + name, { headers: { accept: 'application/json' } }).then((r) => r.ok ? r.json() : null).catch(() => null)),
       ]);
-      pilotHydrateStatus = served.status;
-      if (!file?.municipalities) mismatches.push('pilot-schedule.json (not loaded)');
+      const files = new Map(names.map((name, i) => [name, loaded[i]]));
+      contextHydrateStatus = served.status;
+      for (const name of names) if (!files.get(name)?.municipalities) mismatches.push(name + ' (not loaded)');
       for (const id of ids) {
-        const field = PILOT_HYDRATE[id], perPin: Record<string, any> = {};
+        const [name, field] = CONTEXT_HYDRATE[id], perPin: Record<string, any> = {};
         let withValue = 0, bad = false;
         for (const pin of PINS) {
-          const town = file?.municipalities?.[pin.slice(0, 4)];
+          const town = files.get(name)?.municipalities?.[pin.slice(0, 4)];
           const want = town && present(town[field]) ? town[field] : null;
           const got = served.p?.markers?.[pin]?.[id], status = served.p?.meta?.[pin]?.[id]?.status || null;
-          const match = want == null ? !present(got) && status === 'source_checked_no_value' : JSON.stringify(got) === JSON.stringify(want) && status === 'available';
+          const match = want == null ? !present(got) && status === 'source_checked_no_value' : JSON.stringify(sorted(got)) === JSON.stringify(sorted(want)) && status === 'available';
           if (present(got)) withValue++;
           if (!match) bad = true;
           perPin[pin] = { expected: want, actual: present(got) ? got : null, status };
@@ -194,8 +217,8 @@ export async function handleDataCenterBatchOct7Canary(req: Request) {
       observations[id] = { operation: def?.operation || null, pins_with_value: withValue, pins: perPin };
       if (!def || unsupported || bad || withValue === 0) mismatches.push(id + (unsupported ? ' (unsupported: ' + unsupported + ')' : withValue === 0 ? ' (no pin returned a value)' : bad ? ' (value mismatch)' : ''));
     }
-    const ok = hydrate.ok && derivedIn.ok && derived.ok && !missingDefs.length && mismatches.length === 0 && (!pilotRun || pilotHydrateStatus === 200);
-    const summary = { pins: PINS.length, targets: TARGETS.length, ...(pilotRun ? { pilot_hydrate_status: pilotHydrateStatus, pilot_hydrate_targets: Object.keys(PILOT_HYDRATE) } : {}), hydrate_status: hydrate.status, derived_input_status: derivedIn.status, derived_status: derived.status, engine_version: derived.p?.engine_version || null, missing_formulas: missingDefs, passed: [...(pilotRun ? Object.keys(PILOT_HYDRATE) : []), ...TARGETS].filter((id) => !mismatches.some((m) => m.startsWith(id + ' ') || m === id)) };
+    const ok = hydrate.ok && derivedIn.ok && derived.ok && !missingDefs.length && mismatches.length === 0 && (!contextRun || contextHydrateStatus === 200);
+    const summary = { pins: PINS.length, targets: TARGETS.length, ...(contextRun ? { context_hydrate_status: contextHydrateStatus, context_hydrate_targets: Object.keys(CONTEXT_HYDRATE) } : {}), hydrate_status: hydrate.status, derived_input_status: derivedIn.status, derived_status: derived.status, engine_version: derived.p?.engine_version || null, missing_formulas: missingDefs, passed: [...(contextRun ? Object.keys(CONTEXT_HYDRATE) : []), ...TARGETS].filter((id) => !mismatches.some((m) => m.startsWith(id + ' ') || m === id)) };
     await admin.from('watchdog_test_auth_events').insert({ token_id: gate.id, user_id: userId, event_type: 'provider_release_canary', metadata: { scenario: SCENARIO, status_code: ok ? 200 : 502, duration_ms: Date.now() - started, assertion_ok: ok, mismatches, summary, observations } });
     return json(ok ? 200 : 502, { ok, scenario: SCENARIO, assertion_ok: ok, mismatches, summary, duration_ms: Date.now() - started });
   } catch (e) {

@@ -2,7 +2,7 @@
 -- workbench-hydrate's PILOT schedule provider (pilot-schedule-provider.ts, data in
 -- property/data/pilot-schedule.json) serves the four njplus.nj-dca-pilot-forecast forecast values and
 -- watchdog.njplus.pilot_forecast_confidence. This migration stages the two derived PILOT scores.
--- Coverage rows stay as they are until the pilot_schedule_v1 canary passes in production.
+-- Coverage rows stay as they are until the municipal_context_oct7_v1 canary passes in production.
 
 insert into public.derived_formula_registry(marker_id,engine_version,formula,dependencies,confidence,status,explanation,operation,config,updated_at) values
 ('watchdog.internal.pilot_term_remaining_scaled_v1','watchdog-derived-pilot-schedule-2026-10-07','min(pilot_term_remaining / 60, 1) * 100',array['njplus.nj-dca-pilot-forecast.pilot_term_remaining']::text[],'high','live','Internal helper: months until the next reported PILOT end date, scaled to 0-100 with 60 months or more at 100.','weighted_signals',
