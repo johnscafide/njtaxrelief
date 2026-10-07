@@ -1,0 +1,10208 @@
+{
+ "schema_version": 1,
+ "district_key": "modiv_pams",
+ "source_year": 2025,
+ "release_year": 2026,
+ "schedule_years": [
+  2026,
+  2027,
+  2028,
+  2029,
+  2030,
+  2031,
+  2032,
+  2033,
+  2034,
+  2035
+ ],
+ "projection_years": [
+  2026,
+  2027,
+  2028,
+  2029,
+  2030
+ ],
+ "source": {
+  "agency": "NJ Department of Community Affairs, DLGS",
+  "label": "PILOT Database and Viewer 2026, Raw Data from UFBs",
+  "url": "https://www.nj.gov/dca/dlgs/misc_docs/2026/PILOT%20Database%20and%20Viewer%202026.xlsx"
+ },
+ "notes": [
+  "Schedule values hold each agreement's latest reported PILOT billing flat through its reported end year.",
+  "Rows without a usable end date are left out of the schedule and counted as end date not reported.",
+  "municipal_share_pct uses pilot_billing and municipal_budget from exempt-pilot.json."
+ ],
+ "totals": {
+  "reported_rows": 2876,
+  "municipalities": 290,
+  "dated_rows": 1088
+ },
+ "municipalities": {
+  "0101": {
+   "name": "Absecon City",
+   "county": "Atlantic",
+   "reported_rows": 4,
+   "dated_rows": 4,
+   "reported_billing": 135530.2,
+   "dated_billing": 135530.2,
+   "dated_billing_share_pct": 100.0,
+   "payment_schedule": [
+    {
+     "year": 2026,
+     "value": 135530.2
+    },
+    {
+     "year": 2027,
+     "value": 97408.09
+    },
+    {
+     "year": 2028,
+     "value": 97408.09
+    },
+    {
+     "year": 2029,
+     "value": 97408.09
+    },
+    {
+     "year": 2030,
+     "value": 97408.09
+    },
+    {
+     "year": 2031,
+     "value": 97408.09
+    },
+    {
+     "year": 2032,
+     "value": 97408.09
+    },
+    {
+     "year": 2033,
+     "value": 97408.09
+    },
+    {
+     "year": 2034,
+     "value": 97408.09
+    },
+    {
+     "year": 2035,
+     "value": 97408.09
+    }
+   ],
+   "revenue_projection": 525162.56,
+   "forecast_year": 2054,
+   "municipal_share_pct": 1.12
+  },
+  "0102": {
+   "name": "Atlantic City City",
+   "county": "Atlantic",
+   "reported_rows": 26,
+   "dated_rows": 19,
+   "reported_billing": 4494000.0,
+   "dated_billing": 2977000.0,
+   "dated_billing_share_pct": 66.2,
+   "payment_schedule": [
+    {
+     "year": 2026,
+     "value": 2907000.0
+    },
+    {
+     "year": 2027,
+     "value": 2907000.0
+    },
+    {
+     "year": 2028,
+     "value": 2907000.0
+    },
+    {
+     "year": 2029,
+     "value": 2883000.0
+    },
+    {
+     "year": 2030,
+     "value": 2883000.0
+    },
+    {
+     "year": 2031,
+     "value": 2883000.0
+    },
+    {
+     "year": 2032,
+     "value": 2783000.0
+    },
+    {
+     "year": 2033,
+     "value": 2783000.0
+    },
+    {
+     "year": 2034,
+     "value": 2783000.0
+    },
+    {
+     "year": 2035,
+     "value": 2783000.0
+    }
+   ],
+   "revenue_projection": 14487000.0,
+   "forecast_year": 2065,
+   "municipal_share_pct": 1.61
+  },
+  "0107": {
+   "name": "Egg Harbor City",
+   "county": "Atlantic",
+   "reported_rows": 1,
+   "dated_rows": 1,
+   "reported_billing": 69540.35,
+   "dated_billing": 69540.35,
+   "dated_billing_share_pct": 100.0,
+   "payment_schedule": [
+    {
+     "year": 2026,
+     "value": 69540.35
+    },
+    {
+     "year": 2027,
+     "value": 69540.35
+    },
+    {
+     "year": 2028,
+     "value": 69540.35
+    },
+    {
+     "year": 2029,
+     "value": 69540.35
+    },
+    {
+     "year": 2030,
+     "value": 69540.35
+    },
+    {
+     "year": 2031,
+     "value": 69540.35
+    },
+    {
+     "year": 2032,
+     "value": 69540.35
+    },
+    {
+     "year": 2033,
+     "value": 69540.35
+    },
+    {
+     "year": 2034,
+     "value": 69540.35
+    },
+    {
+     "year": 2035,
+     "value": 69540.35
+    }
+   ],
+   "revenue_projection": 347701.75,
+   "forecast_year": 2045,
+   "municipal_share_pct": 0.85
+  },
+  "0108": {
+   "name": "Egg Harbor Township",
+   "county": "Atlantic",
+   "reported_rows": 4,
+   "dated_rows": 4,
+   "reported_billing": 249613.45,
+   "dated_billing": 249613.45,
+   "dated_billing_share_pct": 100.0,
+   "payment_schedule": [
+    {
+     "year": 2026,
+     "value": 249613.45
+    },
+    {
+     "year": 2027,
+     "value": 249613.45
+    },
+    {
+     "year": 2028,
+     "value": 249613.45
+    },
+    {
+     "year": 2029,
+     "value": 249613.45
+    },
+    {
+     "year": 2030,
+     "value": 249613.45
+    },
+    {
+     "year": 2031,
+     "value": 249613.45
+    },
+    {
+     "year": 2032,
+     "value": 249613.45
+    },
+    {
+     "year": 2033,
+     "value": 249613.45
+    },
+    {
+     "year": 2034,
+     "value": 249613.45
+    },
+    {
+     "year": 2035,
+     "value": 249613.45
+    }
+   ],
+   "revenue_projection": 1248067.25,
+   "forecast_year": 2053,
+   "municipal_share_pct": 0.47
+  },
+  "0111": {
+   "name": "Galloway Township",
+   "county": "Atlantic",
+   "reported_rows": 3,
+   "dated_rows": 0,
+   "reported_billing": 309362.0,
+   "dated_billing": 0.0,
+   "dated_billing_share_pct": 0.0,
+   "payment_schedule": null,
+   "revenue_projection": null,
+   "forecast_year": null,
+   "municipal_share_pct": 0.94
+  },
+  "0112": {
+   "name": "Hamilton Township",
+   "county": "Atlantic",
+   "reported_rows": 1,
+   "dated_rows": 1,
+   "reported_billing": 45895.89,
+   "dated_billing": 45895.89,
+   "dated_billing_share_pct": 100.0,
+   "payment_schedule": [
+    {
+     "year": 2026,
+     "value": 45895.89
+    },
+    {
+     "year": 2027,
+     "value": 45895.89
+    },
+    {
+     "year": 2028,
+     "value": 45895.89
+    },
+    {
+     "year": 2029,
+     "value": 45895.89
+    },
+    {
+     "year": 2030,
+     "value": 45895.89
+    },
+    {
+     "year": 2031,
+     "value": 45895.89
+    },
+    {
+     "year": 2032,
+     "value": 45895.89
+    },
+    {
+     "year": 2033,
+     "value": 45895.89
+    },
+    {
+     "year": 2034,
+     "value": 45895.89
+    },
+    {
+     "year": 2035,
+     "value": 45895.89
+    }
+   ],
+   "revenue_projection": 229479.45,
+   "forecast_year": 2050,
+   "municipal_share_pct": 0.15
+  },
+  "0113": {
+   "name": "Hammonton Town",
+   "county": "Atlantic",
+   "reported_rows": 3,
+   "dated_rows": 3,
+   "reported_billing": 0.0,
+   "dated_billing": 0.0,
+   "dated_billing_share_pct": null,
+   "payment_schedule": [
+    {
+     "year": 2026,
+     "value": 0.0
+    },
+    {
+     "year": 2027,
+     "value": 0.0
+    },
+    {
+     "year": 2028,
+     "value": 0.0
+    },
+    {
+     "year": 2029,
+     "value": 0.0
+    },
+    {
+     "year": 2030,
+     "value": 0.0
+    },
+    {
+     "year": 2031,
+     "value": 0.0
+    },
+    {
+     "year": 2032,
+     "value": 0.0
+    },
+    {
+     "year": 2033,
+     "value": 0.0
+    },
+    {
+     "year": 2034,
+     "value": 0.0
+    },
+    {
+     "year": 2035,
+     "value": 0.0
+    }
+   ],
+   "revenue_projection": 0.0,
+   "forecast_year": null,
+   "municipal_share_pct": 0.0
+  },
+  "0116": {
+   "name": "Margate City",
+   "county": "Atlantic",
+   "reported_rows": 1,
+   "dated_rows": 0,
+   "reported_billing": 39600.0,
+   "dated_billing": 0.0,
+   "dated_billing_share_pct": 0.0,
+   "payment_schedule": null,
+   "revenue_projection": null,
+   "forecast_year": null,
+   "municipal_share_pct": 0.11
+  },
+  "0119": {
+   "name": "Pleasantville City",
+   "county": "Atlantic",
+   "reported_rows": 8,
+   "dated_rows": 0,
+   "reported_billing": 3881905.0,
+   "dated_billing": 0.0,
+   "dated_billing_share_pct": 0.0,
+   "payment_schedule": null,
+   "revenue_projection": null,
+   "forecast_year": null,
+   "municipal_share_pct": 9.9
+  },
+  "0121": {
+   "name": "Somers Point City",
+   "county": "Atlantic",
+   "reported_rows": 2,
+   "dated_rows": 2,
+   "reported_billing": 0.0,
+   "dated_billing": 0.0,
+   "dated_billing_share_pct": null,
+   "payment_schedule": [
+    {
+     "year": 2026,
+     "value": 0.0
+    },
+    {
+     "year": 2027,
+     "value": 0.0
+    },
+    {
+     "year": 2028,
+     "value": 0.0
+    },
+    {
+     "year": 2029,
+     "value": 0.0
+    },
+    {
+     "year": 2030,
+     "value": 0.0
+    },
+    {
+     "year": 2031,
+     "value": 0.0
+    },
+    {
+     "year": 2032,
+     "value": 0.0
+    },
+    {
+     "year": 2033,
+     "value": 0.0
+    },
+    {
+     "year": 2034,
+     "value": 0.0
+    },
+    {
+     "year": 2035,
+     "value": 0.0
+    }
+   ],
+   "revenue_projection": 0.0,
+   "forecast_year": 2054,
+   "municipal_share_pct": 0.0
+  },
+  "0201": {
+   "name": "Allendale Borough",
+   "county": "Bergen",
+   "reported_rows": 6,
+   "dated_rows": 0,
+   "reported_billing": 197297.6,
+   "dated_billing": 0.0,
+   "dated_billing_share_pct": 0.0,
+   "payment_schedule": null,
+   "revenue_projection": null,
+   "forecast_year": null,
+   "municipal_share_pct": 1.18
+  },
+  "0203": {
+   "name": "Bergenfield Borough",
+   "county": "Bergen",
+   "reported_rows": 1,
+   "dated_rows": 0,
+   "reported_billing": 105839.0,
+   "dated_billing": 0.0,
+   "dated_billing_share_pct": 0.0,
+   "payment_schedule": null,
+   "revenue_projection": null,
+   "forecast_year": null,
+   "municipal_share_pct": 0.23
+  },
+  "0204": {
+   "name": "Bogota Borough",
+   "county": "Bergen",
+   "reported_rows": 2,
+   "dated_rows": 2,
+   "reported_billing": 871954.71,
+   "dated_billing": 871954.71,
+   "dated_billing_share_pct": 100.0,
+   "payment_schedule": [
+    {
+     "year": 2026,
+     "value": 871954.71
+    },
+    {
+     "year": 2027,
+     "value": 871954.71
+    },
+    {
+     "year": 2028,
+     "value": 871954.71
+    },
+    {
+     "year": 2029,
+     "value": 871954.71
+    },
+    {
+     "year": 2030,
+     "value": 871954.71
+    },
+    {
+     "year": 2031,
+     "value": 871954.71
+    },
+    {
+     "year": 2032,
+     "value": 871954.71
+    },
+    {
+     "year": 2033,
+     "value": 871954.71
+    },
+    {
+     "year": 2034,
+     "value": 871954.71
+    },
+    {
+     "year": 2035,
+     "value": 871954.71
+    }
+   ],
+   "revenue_projection": 4359773.55,
+   "forecast_year": 2051,
+   "municipal_share_pct": 6.14
+  },
+  "0206": {
+   "name": "Cliffside Park Borough",
+   "county": "Bergen",
+   "reported_rows": 1,
+   "dated_rows": 1,
+   "reported_billing": 1190602.0,
+   "dated_billing": 1190602.0,
+   "dated_billing_share_pct": 100.0,
+   "payment_schedule": [
+    {
+     "year": 2026,
+     "value": 1190602.0
+    },
+    {
+     "year": 2027,
+     "value": 1190602.0
+    },
+    {
+     "year": 2028,
+     "value": 1190602.0
+    },
+    {
+     "year": 2029,
+     "value": 1190602.0
+    },
+    {
+     "year": 2030,
+     "value": 1190602.0
+    },
+    {
+     "year": 2031,
+     "value": 1190602.0
+    },
+    {
+     "year": 2032,
+     "value": 1190602.0
+    },
+    {
+     "year": 2033,
+     "value": 1190602.0
+    },
+    {
+     "year": 2034,
+     "value": 1190602.0
+    },
+    {
+     "year": 2035,
+     "value": 1190602.0
+    }
+   ],
+   "revenue_projection": 5953010.0,
+   "forecast_year": 2044,
+   "municipal_share_pct": 2.32
+  },
+  "0207": {
+   "name": "Closter Borough",
+   "county": "Bergen",
+   "reported_rows": 3,
+   "dated_rows": 0,
+   "reported_billing": 100022.54,
+   "dated_billing": 0.0,
+   "dated_billing_share_pct": 0.0,
+   "payment_schedule": null,
+   "revenue_projection": null,
+   "forecast_year": null,
+   "municipal_share_pct": 0.49
+  },
+  "0208": {
+   "name": "Cresskill Borough",
+   "county": "Bergen",
+   "reported_rows": 2,
+   "dated_rows": 0,
+   "reported_billing": 179476.0,
+   "dated_billing": 0.0,
+   "dated_billing_share_pct": 0.0,
+   "payment_schedule": null,
+   "revenue_projection": null,
+   "forecast_year": null,
+   "municipal_share_pct": 0.71
+  },
+  "0212": {
+   "name": "East Rutherford Borough",
+   "county": "Bergen",
+   "reported_rows": 5,
+   "dated_rows": 0,
+   "reported_billing": 10383048.21,
+   "dated_billing": 0.0,
+   "dated_billing_share_pct": 0.0,
+   "payment_schedule": null,
+   "revenue_projection": null,
+   "forecast_year": null,
+   "municipal_share_pct": 32.55
+  },
+  "0213": {
+   "name": "Edgewater Borough",
+   "county": "Bergen",
+   "reported_rows": 5,
+   "dated_rows": 5,
+   "reported_billing": 565524.7,
+   "dated_billing": 565524.7,
+   "dated_billing_share_pct": 100.0,
+   "payment_schedule": [
+    {
+     "year": 2026,
+     "value": 565524.7
+    },
+    {
+     "year": 2027,
+     "value": 565524.7
+    },
+    {
+     "year": 2028,
+     "value": 557530.7
+    },
+    {
+     "year": 2029,
+     "value": 557530.7
+    },
+    {
+     "year": 2030,
+     "value": 557530.7
+    },
+    {
+     "year": 2031,
+     "value": 557530.7
+    },
+    {
+     "year": 2032,
+     "value": 557530.7
+    },
+    {
+     "year": 2033,
+     "value": 557530.7
+    },
+    {
+     "year": 2034,
+     "value": 557530.7
+    },
+    {
+     "year": 2035,
+     "value": 557530.7
+    }
+   ],
+   "revenue_projection": 2803641.5,
+   "forecast_year": 2052,
+   "municipal_share_pct": 1.52
+  },
+  "0214": {
+   "name": "Emerson Borough",
+   "county": "Bergen",
+   "reported_rows": 2,
+   "dated_rows": 2,
+   "reported_billing": 9441.0,
+   "dated_billing": 9441.0,
+   "dated_billing_share_pct": 100.0,
+   "payment_schedule": [
+    {
+     "year": 2026,
+     "value": 9441.0
+    },
+    {
+     "year": 2027,
+     "value": 9441.0
+    },
+    {
+     "year": 2028,
+     "value": 9441.0
+    },
+    {
+     "year": 2029,
+     "value": 9441.0
+    },
+    {
+     "year": 2030,
+     "value": 9441.0
+    },
+    {
+     "year": 2031,
+     "value": 9441.0
+    },
+    {
+     "year": 2032,
+     "value": 9441.0
+    },
+    {
+     "year": 2033,
+     "value": 9441.0
+    },
+    {
+     "year": 2034,
+     "value": 9441.0
+    },
+    {
+     "year": 2035,
+     "value": 9441.0
+    }
+   ],
+   "revenue_projection": 47205.0,
+   "forecast_year": 2065,
+   "municipal_share_pct": 0.06
+  },
+  "0215": {
+   "name": "Englewood City",
+   "county": "Bergen",
+   "reported_rows": 4,
+   "dated_rows": 2,
+   "reported_billing": 1551801.46,
+   "dated_billing": 1138931.95,
+   "dated_billing_share_pct": 73.4,
+   "payment_schedule": [
+    {
+     "year": 2026,
+     "value": 663090.15
+    },
+    {
+     "year": 2027,
+     "value": 663090.15
+    },
+    {
+     "year": 2028,
+     "value": 663090.15
+    },
+    {
+     "year": 2029,
+     "value": 663090.15
+    },
+    {
+     "year": 2030,
+     "value": 663090.15
+    },
+    {
+     "year": 2031,
+     "value": 0.0
+    },
+    {
+     "year": 2032,
+     "value": 0.0
+    },
+    {
+     "year": 2033,
+     "value": 0.0
+    },
+    {
+     "year": 2034,
+     "value": 0.0
+    },
+    {
+     "year": 2035,
+     "value": 0.0
+    }
+   ],
+   "revenue_projection": 3315450.75,
+   "forecast_year": 2030,
+   "municipal_share_pct": 1.96
+  },
+  "0217": {
+   "name": "Fair Lawn Borough",
+   "county": "Bergen",
+   "reported_rows": 1,
+   "dated_rows": 0,
+   "reported_billing": 0.0,
+   "dated_billing": 0.0,
+   "dated_billing_share_pct": null,
+   "payment_schedule": null,
+   "revenue_projection": null,
+   "forecast_year": null,
+   "municipal_share_pct": 0.0
+  },
+  "0219": {
+   "name": "Fort Lee Borough",
+   "county": "Bergen",
+   "reported_rows": 5,
+   "dated_rows": 4,
+   "reported_billing": 2526725.26,
+   "dated_billing": 2515028.26,
+   "dated_billing_share_pct": 99.5,
+   "payment_schedule": [
+    {
+     "year": 2026,
+     "value": 2515028.26
+    },
+    {
+     "year": 2027,
+     "value": 2515028.26
+    },
+    {
+     "year": 2028,
+     "value": 2515028.26
+    },
+    {
+     "year": 2029,
+     "value": 2515028.26
+    },
+    {
+     "year": 2030,
+     "value": 2515028.26
+    },
+    {
+     "year": 2031,
+     "value": 2515028.26
+    },
+    {
+     "year": 2032,
+     "value": 918777.87
+    },
+    {
+     "year": 2033,
+     "value": 918777.87
+    },
+    {
+     "year": 2034,
+     "value": 918777.87
+    },
+    {
+     "year": 2035,
+     "value": 918777.87
+    }
+   ],
+   "revenue_projection": 12575141.3,
+   "forecast_year": 2052,
+   "municipal_share_pct": 2.65
+  },
+  "0221": {
+   "name": "Garfield City",
+   "county": "Bergen",
+   "reported_rows": 2,
+   "dated_rows": 0,
+   "reported_billing": 340000.0,
+   "dated_billing": 0.0,
+   "dated_billing_share_pct": 0.0,
+   "payment_schedule": null,
+   "revenue_projection": null,
+   "forecast_year": null,
+   "municipal_share_pct": 0.75
+  },
+  "0222": {
+   "name": "Glen Rock Borough",
+   "county": "Bergen",
+   "reported_rows": 2,
+   "dated_rows": 2,
+   "reported_billing": 22668.71,
+   "dated_billing": 22668.71,
+   "dated_billing_share_pct": 100.0,
+   "payment_schedule": [
+    {
+     "year": 2026,
+     "value": 22668.71
+    },
+    {
+     "year": 2027,
+     "value": 22668.71
+    },
+    {
+     "year": 2028,
+     "value": 22668.71
+    },
+    {
+     "year": 2029,
+     "value": 22668.71
+    },
+    {
+     "year": 2030,
+     "value": 22668.71
+    },
+    {
+     "year": 2031,
+     "value": 22668.71
+    },
+    {
+     "year": 2032,
+     "value": 22668.71
+    },
+    {
+     "year": 2033,
+     "value": 22668.71
+    },
+    {
+     "year": 2034,
+     "value": 22668.71
+    },
+    {
+     "year": 2035,
+     "value": 22668.71
+    }
+   ],
+   "revenue_projection": 113343.55,
+   "forecast_year": 2054,
+   "municipal_share_pct": 0.09
+  },
+  "0223": {
+   "name": "Hackensack City",
+   "county": "Bergen",
+   "reported_rows": 21,
+   "dated_rows": 0,
+   "reported_billing": 6497443.0,
+   "dated_billing": 0.0,
+   "dated_billing_share_pct": 0.0,
+   "payment_schedule": null,
+   "revenue_projection": null,
+   "forecast_year": null,
+   "municipal_share_pct": 5.01
+  },
+  "0225": {
+   "name": "Hasbrouck Heights Borough",
+   "county": "Bergen",
+   "reported_rows": 2,
+   "dated_rows": 0,
+   "reported_billing": 3036.63,
+   "dated_billing": 0.0,
+   "dated_billing_share_pct": 0.0,
+   "payment_schedule": null,
+   "revenue_projection": null,
+   "forecast_year": null,
+   "municipal_share_pct": 0.01
+  },
+  "0226": {
+   "name": "Haworth Borough",
+   "county": "Bergen",
+   "reported_rows": 1,
+   "dated_rows": 0,
+   "reported_billing": 0.0,
+   "dated_billing": 0.0,
+   "dated_billing_share_pct": null,
+   "payment_schedule": null,
+   "revenue_projection": null,
+   "forecast_year": null,
+   "municipal_share_pct": 0.0
+  },
+  "0227": {
+   "name": "Hillsdale Borough",
+   "county": "Bergen",
+   "reported_rows": 1,
+   "dated_rows": 0,
+   "reported_billing": 61711.87,
+   "dated_billing": 0.0,
+   "dated_billing_share_pct": 0.0,
+   "payment_schedule": null,
+   "revenue_projection": null,
+   "forecast_year": null,
+   "municipal_share_pct": 0.34
+  },
+  "0230": {
+   "name": "Little Ferry Borough",
+   "county": "Bergen",
+   "reported_rows": 2,
+   "dated_rows": 0,
+   "reported_billing": 161984.44,
+   "dated_billing": 0.0,
+   "dated_billing_share_pct": 0.0,
+   "payment_schedule": null,
+   "revenue_projection": null,
+   "forecast_year": null,
+   "municipal_share_pct": 0.83
+  },
+  "0231": {
+   "name": "Lodi Borough",
+   "county": "Bergen",
+   "reported_rows": 1,
+   "dated_rows": 0,
+   "reported_billing": 147125.0,
+   "dated_billing": 0.0,
+   "dated_billing_share_pct": 0.0,
+   "payment_schedule": null,
+   "revenue_projection": null,
+   "forecast_year": null,
+   "municipal_share_pct": 0.46
+  },
+  "0234": {
+   "name": "Maywood Borough",
+   "county": "Bergen",
+   "reported_rows": 1,
+   "dated_rows": 0,
+   "reported_billing": 147125.0,
+   "dated_billing": 0.0,
+   "dated_billing_share_pct": 0.0,
+   "payment_schedule": null,
+   "revenue_projection": null,
+   "forecast_year": null,
+   "municipal_share_pct": 0.76
+  },
+  "0235": {
+   "name": "Midland Park Borough",
+   "county": "Bergen",
+   "reported_rows": 2,
+   "dated_rows": 1,
+   "reported_billing": 121178.6,
+   "dated_billing": 117690.12,
+   "dated_billing_share_pct": 97.1,
+   "payment_schedule": [
+    {
+     "year": 2026,
+     "value": 117690.12
+    },
+    {
+     "year": 2027,
+     "value": 117690.12
+    },
+    {
+     "year": 2028,
+     "value": 117690.12
+    },
+    {
+     "year": 2029,
+     "value": 117690.12
+    },
+    {
+     "year": 2030,
+     "value": 117690.12
+    },
+    {
+     "year": 2031,
+     "value": 0.0
+    },
+    {
+     "year": 2032,
+     "value": 0.0
+    },
+    {
+     "year": 2033,
+     "value": 0.0
+    },
+    {
+     "year": 2034,
+     "value": 0.0
+    },
+    {
+     "year": 2035,
+     "value": 0.0
+    }
+   ],
+   "revenue_projection": 588450.6,
+   "forecast_year": 2030,
+   "municipal_share_pct": 0.9
+  },
+  "0237": {
+   "name": "Moonachie Borough",
+   "county": "Bergen",
+   "reported_rows": 1,
+   "dated_rows": 0,
+   "reported_billing": 16335.0,
+   "dated_billing": 0.0,
+   "dated_billing_share_pct": 0.0,
+   "payment_schedule": null,
+   "revenue_projection": null,
+   "forecast_year": null,
+   "municipal_share_pct": 0.11
+  },
+  "0246": {
+   "name": "Paramus Borough",
+   "county": "Bergen",
+   "reported_rows": 1,
+   "dated_rows": 0,
+   "reported_billing": 64168.0,
+   "dated_billing": 0.0,
+   "dated_billing_share_pct": 0.0,
+   "payment_schedule": null,
+   "revenue_projection": null,
+   "forecast_year": null,
+   "municipal_share_pct": 0.07
+  },
+  "0247": {
+   "name": "Park Ridge Borough",
+   "county": "Bergen",
+   "reported_rows": 2,
+   "dated_rows": 0,
+   "reported_billing": 820561.0,
+   "dated_billing": 0.0,
+   "dated_billing_share_pct": 0.0,
+   "payment_schedule": null,
+   "revenue_projection": null,
+   "forecast_year": null,
+   "municipal_share_pct": 4.76
+  },
+  "0248": {
+   "name": "Ramsey Borough",
+   "county": "Bergen",
+   "reported_rows": 3,
+   "dated_rows": 0,
+   "reported_billing": 73465.61,
+   "dated_billing": 0.0,
+   "dated_billing_share_pct": 0.0,
+   "payment_schedule": null,
+   "revenue_projection": null,
+   "forecast_year": null,
+   "municipal_share_pct": 0.26
+  },
+  "0249": {
+   "name": "Ridgefield Borough",
+   "county": "Bergen",
+   "reported_rows": 1,
+   "dated_rows": 1,
+   "reported_billing": 513679.64,
+   "dated_billing": 513679.64,
+   "dated_billing_share_pct": 100.0,
+   "payment_schedule": [
+    {
+     "year": 2026,
+     "value": 513679.64
+    },
+    {
+     "year": 2027,
+     "value": 513679.64
+    },
+    {
+     "year": 2028,
+     "value": 513679.64
+    },
+    {
+     "year": 2029,
+     "value": 513679.64
+    },
+    {
+     "year": 2030,
+     "value": 513679.64
+    },
+    {
+     "year": 2031,
+     "value": 513679.64
+    },
+    {
+     "year": 2032,
+     "value": 513679.64
+    },
+    {
+     "year": 2033,
+     "value": 513679.64
+    },
+    {
+     "year": 2034,
+     "value": 513679.64
+    },
+    {
+     "year": 2035,
+     "value": 513679.64
+    }
+   ],
+   "revenue_projection": 2568398.2,
+   "forecast_year": 2053,
+   "municipal_share_pct": 1.95
+  },
+  "0253": {
+   "name": "River Vale Township",
+   "county": "Bergen",
+   "reported_rows": 2,
+   "dated_rows": 0,
+   "reported_billing": 111535.5,
+   "dated_billing": 0.0,
+   "dated_billing_share_pct": 0.0,
+   "payment_schedule": null,
+   "revenue_projection": null,
+   "forecast_year": null,
+   "municipal_share_pct": 0.49
+  },
+  "0254": {
+   "name": "Rochelle Park Township",
+   "county": "Bergen",
+   "reported_rows": 2,
+   "dated_rows": 2,
+   "reported_billing": 295000.0,
+   "dated_billing": 295000.0,
+   "dated_billing_share_pct": 100.0,
+   "payment_schedule": [
+    {
+     "year": 2026,
+     "value": 295000.0
+    },
+    {
+     "year": 2027,
+     "value": 295000.0
+    },
+    {
+     "year": 2028,
+     "value": 295000.0
+    },
+    {
+     "year": 2029,
+     "value": 295000.0
+    },
+    {
+     "year": 2030,
+     "value": 295000.0
+    },
+    {
+     "year": 2031,
+     "value": 295000.0
+    },
+    {
+     "year": 2032,
+     "value": 295000.0
+    },
+    {
+     "year": 2033,
+     "value": 295000.0
+    },
+    {
+     "year": 2034,
+     "value": 295000.0
+    },
+    {
+     "year": 2035,
+     "value": 295000.0
+    }
+   ],
+   "revenue_projection": 1475000.0,
+   "forecast_year": 2043,
+   "municipal_share_pct": 1.92
+  },
+  "0255": {
+   "name": "Rockleigh Borough",
+   "county": "Bergen",
+   "reported_rows": 1,
+   "dated_rows": 1,
+   "reported_billing": 35000.0,
+   "dated_billing": 35000.0,
+   "dated_billing_share_pct": 100.0,
+   "payment_schedule": [
+    {
+     "year": 2026,
+     "value": 35000.0
+    },
+    {
+     "year": 2027,
+     "value": 0.0
+    },
+    {
+     "year": 2028,
+     "value": 0.0
+    },
+    {
+     "year": 2029,
+     "value": 0.0
+    },
+    {
+     "year": 2030,
+     "value": 0.0
+    },
+    {
+     "year": 2031,
+     "value": 0.0
+    },
+    {
+     "year": 2032,
+     "value": 0.0
+    },
+    {
+     "year": 2033,
+     "value": 0.0
+    },
+    {
+     "year": 2034,
+     "value": 0.0
+    },
+    {
+     "year": 2035,
+     "value": 0.0
+    }
+   ],
+   "revenue_projection": 35000.0,
+   "forecast_year": 2026,
+   "municipal_share_pct": 2.43
+  },
+  "0256": {
+   "name": "Rutherford Borough",
+   "county": "Bergen",
+   "reported_rows": 4,
+   "dated_rows": 4,
+   "reported_billing": 965157.05,
+   "dated_billing": 965157.05,
+   "dated_billing_share_pct": 100.0,
+   "payment_schedule": [
+    {
+     "year": 2026,
+     "value": 0.0
+    },
+    {
+     "year": 2027,
+     "value": 0.0
+    },
+    {
+     "year": 2028,
+     "value": 0.0
+    },
+    {
+     "year": 2029,
+     "value": 0.0
+    },
+    {
+     "year": 2030,
+     "value": 0.0
+    },
+    {
+     "year": 2031,
+     "value": 0.0
+    },
+    {
+     "year": 2032,
+     "value": 0.0
+    },
+    {
+     "year": 2033,
+     "value": 0.0
+    },
+    {
+     "year": 2034,
+     "value": 0.0
+    },
+    {
+     "year": 2035,
+     "value": 0.0
+    }
+   ],
+   "revenue_projection": 0.0,
+   "forecast_year": null,
+   "municipal_share_pct": 2.44
+  },
+  "0260": {
+   "name": "Teaneck Township",
+   "county": "Bergen",
+   "reported_rows": 2,
+   "dated_rows": 0,
+   "reported_billing": 138819.0,
+   "dated_billing": 0.0,
+   "dated_billing_share_pct": 0.0,
+   "payment_schedule": null,
+   "revenue_projection": null,
+   "forecast_year": null,
+   "municipal_share_pct": 0.17
+  },
+  "0261": {
+   "name": "Tenafly Borough",
+   "county": "Bergen",
+   "reported_rows": 2,
+   "dated_rows": 0,
+   "reported_billing": 26800.0,
+   "dated_billing": 0.0,
+   "dated_billing_share_pct": 0.0,
+   "payment_schedule": null,
+   "revenue_projection": null,
+   "forecast_year": null,
+   "municipal_share_pct": 0.07
+  },
+  "0267": {
+   "name": "Westwood Borough",
+   "county": "Bergen",
+   "reported_rows": 1,
+   "dated_rows": 0,
+   "reported_billing": 123915.4,
+   "dated_billing": 0.0,
+   "dated_billing_share_pct": 0.0,
+   "payment_schedule": null,
+   "revenue_projection": null,
+   "forecast_year": null,
+   "municipal_share_pct": 0.57
+  },
+  "0269": {
+   "name": "Wood-Ridge Borough",
+   "county": "Bergen",
+   "reported_rows": 2,
+   "dated_rows": 1,
+   "reported_billing": 915757.5,
+   "dated_billing": 845335.5,
+   "dated_billing_share_pct": 92.3,
+   "payment_schedule": [
+    {
+     "year": 2026,
+     "value": 845335.5
+    },
+    {
+     "year": 2027,
+     "value": 845335.5
+    },
+    {
+     "year": 2028,
+     "value": 845335.5
+    },
+    {
+     "year": 2029,
+     "value": 845335.5
+    },
+    {
+     "year": 2030,
+     "value": 845335.5
+    },
+    {
+     "year": 2031,
+     "value": 845335.5
+    },
+    {
+     "year": 2032,
+     "value": 845335.5
+    },
+    {
+     "year": 2033,
+     "value": 845335.5
+    },
+    {
+     "year": 2034,
+     "value": 845335.5
+    },
+    {
+     "year": 2035,
+     "value": 845335.5
+    }
+   ],
+   "revenue_projection": 4226677.5,
+   "forecast_year": 2043,
+   "municipal_share_pct": 2.89
+  },
+  "0302": {
+   "name": "Beverly City",
+   "county": "Burlington",
+   "reported_rows": 1,
+   "dated_rows": 0,
+   "reported_billing": 0.0,
+   "dated_billing": 0.0,
+   "dated_billing_share_pct": null,
+   "payment_schedule": null,
+   "revenue_projection": null,
+   "forecast_year": null,
+   "municipal_share_pct": 0.0
+  },
+  "0303": {
+   "name": "Bordentown City",
+   "county": "Burlington",
+   "reported_rows": 3,
+   "dated_rows": 2,
+   "reported_billing": 123985.0,
+   "dated_billing": 123985.0,
+   "dated_billing_share_pct": 100.0,
+   "payment_schedule": [
+    {
+     "year": 2026,
+     "value": 123985.0
+    },
+    {
+     "year": 2027,
+     "value": 123985.0
+    },
+    {
+     "year": 2028,
+     "value": 123985.0
+    },
+    {
+     "year": 2029,
+     "value": 101000.0
+    },
+    {
+     "year": 2030,
+     "value": 101000.0
+    },
+    {
+     "year": 2031,
+     "value": 101000.0
+    },
+    {
+     "year": 2032,
+     "value": 101000.0
+    },
+    {
+     "year": 2033,
+     "value": 101000.0
+    },
+    {
+     "year": 2034,
+     "value": 101000.0
+    },
+    {
+     "year": 2035,
+     "value": 101000.0
+    }
+   ],
+   "revenue_projection": 573955.0,
+   "forecast_year": 2047,
+   "municipal_share_pct": 1.6
+  },
+  "0304": {
+   "name": "Bordentown Township",
+   "county": "Burlington",
+   "reported_rows": 6,
+   "dated_rows": 0,
+   "reported_billing": 1087777.73,
+   "dated_billing": 0.0,
+   "dated_billing_share_pct": 0.0,
+   "payment_schedule": null,
+   "revenue_projection": null,
+   "forecast_year": null,
+   "municipal_share_pct": 6.2
+  },
+  "0305": {
+   "name": "Burlington City",
+   "county": "Burlington",
+   "reported_rows": 6,
+   "dated_rows": 5,
+   "reported_billing": 988065.86,
+   "dated_billing": 944440.86,
+   "dated_billing_share_pct": 95.6,
+   "payment_schedule": [
+    {
+     "year": 2026,
+     "value": 944440.86
+    },
+    {
+     "year": 2027,
+     "value": 944440.86
+    },
+    {
+     "year": 2028,
+     "value": 559598.95
+    },
+    {
+     "year": 2029,
+     "value": 559598.95
+    },
+    {
+     "year": 2030,
+     "value": 559598.95
+    },
+    {
+     "year": 2031,
+     "value": 559598.95
+    },
+    {
+     "year": 2032,
+     "value": 540319.75
+    },
+    {
+     "year": 2033,
+     "value": 540319.75
+    },
+    {
+     "year": 2034,
+     "value": 540319.75
+    },
+    {
+     "year": 2035,
+     "value": 540319.75
+    }
+   ],
+   "revenue_projection": 3567678.57,
+   "forecast_year": 2041,
+   "municipal_share_pct": 4.45
+  },
+  "0306": {
+   "name": "Burlington Township",
+   "county": "Burlington",
+   "reported_rows": 6,
+   "dated_rows": 5,
+   "reported_billing": 1494624.23,
+   "dated_billing": 1401168.23,
+   "dated_billing_share_pct": 93.7,
+   "payment_schedule": [
+    {
+     "year": 2026,
+     "value": 1149714.76
+    },
+    {
+     "year": 2027,
+     "value": 1149714.76
+    },
+    {
+     "year": 2028,
+     "value": 1149714.76
+    },
+    {
+     "year": 2029,
+     "value": 1149714.76
+    },
+    {
+     "year": 2030,
+     "value": 1141780.15
+    },
+    {
+     "year": 2031,
+     "value": 1141780.15
+    },
+    {
+     "year": 2032,
+     "value": 1141780.15
+    },
+    {
+     "year": 2033,
+     "value": 1141780.15
+    },
+    {
+     "year": 2034,
+     "value": 685319.02
+    },
+    {
+     "year": 2035,
+     "value": 685319.02
+    }
+   ],
+   "revenue_projection": 5740639.19,
+   "forecast_year": 2047,
+   "municipal_share_pct": 5.38
+  },
+  "0308": {
+   "name": "Cinnaminson Township",
+   "county": "Burlington",
+   "reported_rows": 5,
+   "dated_rows": 5,
+   "reported_billing": 0.0,
+   "dated_billing": 0.0,
+   "dated_billing_share_pct": null,
+   "payment_schedule": [
+    {
+     "year": 2026,
+     "value": 0.0
+    },
+    {
+     "year": 2027,
+     "value": 0.0
+    },
+    {
+     "year": 2028,
+     "value": 0.0
+    },
+    {
+     "year": 2029,
+     "value": 0.0
+    },
+    {
+     "year": 2030,
+     "value": 0.0
+    },
+    {
+     "year": 2031,
+     "value": 0.0
+    },
+    {
+     "year": 2032,
+     "value": 0.0
+    },
+    {
+     "year": 2033,
+     "value": 0.0
+    },
+    {
+     "year": 2034,
+     "value": 0.0
+    },
+    {
+     "year": 2035,
+     "value": 0.0
+    }
+   ],
+   "revenue_projection": 0.0,
+   "forecast_year": 2054,
+   "municipal_share_pct": 0.0
+  },
+  "0309": {
+   "name": "Delanco Township",
+   "county": "Burlington",
+   "reported_rows": 7,
+   "dated_rows": 7,
+   "reported_billing": 2133721.06,
+   "dated_billing": 2133721.06,
+   "dated_billing_share_pct": 100.0,
+   "payment_schedule": [
+    {
+     "year": 2026,
+     "value": 2133721.06
+    },
+    {
+     "year": 2027,
+     "value": 2133721.06
+    },
+    {
+     "year": 2028,
+     "value": 2133721.06
+    },
+    {
+     "year": 2029,
+     "value": 2133721.06
+    },
+    {
+     "year": 2030,
+     "value": 2133721.06
+    },
+    {
+     "year": 2031,
+     "value": 2133721.06
+    },
+    {
+     "year": 2032,
+     "value": 2133721.06
+    },
+    {
+     "year": 2033,
+     "value": 2133721.06
+    },
+    {
+     "year": 2034,
+     "value": 2133721.06
+    },
+    {
+     "year": 2035,
+     "value": 2133721.06
+    }
+   ],
+   "revenue_projection": 10668605.3,
+   "forecast_year": 2049,
+   "municipal_share_pct": 25.38
+  },
+  "0312": {
+   "name": "Edgewater Park Township",
+   "county": "Burlington",
+   "reported_rows": 2,
+   "dated_rows": 0,
+   "reported_billing": 142710.64,
+   "dated_billing": 0.0,
+   "dated_billing_share_pct": 0.0,
+   "payment_schedule": null,
+   "revenue_projection": null,
+   "forecast_year": null,
+   "municipal_share_pct": 1.27
+  },
+  "0313": {
+   "name": "Evesham Township",
+   "county": "Burlington",
+   "reported_rows": 9,
+   "dated_rows": 9,
+   "reported_billing": 2014253.63,
+   "dated_billing": 2014253.63,
+   "dated_billing_share_pct": 100.0,
+   "payment_schedule": [
+    {
+     "year": 2026,
+     "value": 2014253.63
+    },
+    {
+     "year": 2027,
+     "value": 2014253.63
+    },
+    {
+     "year": 2028,
+     "value": 2014253.63
+    },
+    {
+     "year": 2029,
+     "value": 2014253.63
+    },
+    {
+     "year": 2030,
+     "value": 1908163.63
+    },
+    {
+     "year": 2031,
+     "value": 1908163.63
+    },
+    {
+     "year": 2032,
+     "value": 1908163.63
+    },
+    {
+     "year": 2033,
+     "value": 1908163.63
+    },
+    {
+     "year": 2034,
+     "value": 1908163.63
+    },
+    {
+     "year": 2035,
+     "value": 1908163.63
+    }
+   ],
+   "revenue_projection": 9965178.15,
+   "forecast_year": 2056,
+   "municipal_share_pct": 4.19
+  },
+  "0315": {
+   "name": "Florence Township",
+   "county": "Burlington",
+   "reported_rows": 9,
+   "dated_rows": 9,
+   "reported_billing": 2985820.88,
+   "dated_billing": 2985820.88,
+   "dated_billing_share_pct": 100.0,
+   "payment_schedule": [
+    {
+     "year": 2026,
+     "value": 2985820.88
+    },
+    {
+     "year": 2027,
+     "value": 2985820.88
+    },
+    {
+     "year": 2028,
+     "value": 2985820.88
+    },
+    {
+     "year": 2029,
+     "value": 2985820.88
+    },
+    {
+     "year": 2030,
+     "value": 2985820.88
+    },
+    {
+     "year": 2031,
+     "value": 2985820.88
+    },
+    {
+     "year": 2032,
+     "value": 2985820.88
+    },
+    {
+     "year": 2033,
+     "value": 2985820.88
+    },
+    {
+     "year": 2034,
+     "value": 2554401.37
+    },
+    {
+     "year": 2035,
+     "value": 2159665.85
+    }
+   ],
+   "revenue_projection": 14929104.4,
+   "forecast_year": 2047,
+   "municipal_share_pct": 19.32
+  },
+  "0316": {
+   "name": "Hainesport Township",
+   "county": "Burlington",
+   "reported_rows": 2,
+   "dated_rows": 0,
+   "reported_billing": 337000.0,
+   "dated_billing": 0.0,
+   "dated_billing_share_pct": 0.0,
+   "payment_schedule": null,
+   "revenue_projection": null,
+   "forecast_year": null,
+   "municipal_share_pct": 6.36
+  },
+  "0317": {
+   "name": "Lumberton Township",
+   "county": "Burlington",
+   "reported_rows": 2,
+   "dated_rows": 2,
+   "reported_billing": 122861.58,
+   "dated_billing": 122861.58,
+   "dated_billing_share_pct": 100.0,
+   "payment_schedule": [
+    {
+     "year": 2026,
+     "value": 122861.58
+    },
+    {
+     "year": 2027,
+     "value": 122861.58
+    },
+    {
+     "year": 2028,
+     "value": 122861.58
+    },
+    {
+     "year": 2029,
+     "value": 122861.58
+    },
+    {
+     "year": 2030,
+     "value": 122861.58
+    },
+    {
+     "year": 2031,
+     "value": 122861.58
+    },
+    {
+     "year": 2032,
+     "value": 122861.58
+    },
+    {
+     "year": 2033,
+     "value": 122861.58
+    },
+    {
+     "year": 2034,
+     "value": 17861.58
+    },
+    {
+     "year": 2035,
+     "value": 17861.58
+    }
+   ],
+   "revenue_projection": 614307.9,
+   "forecast_year": 2052,
+   "municipal_share_pct": 1.09
+  },
+  "0318": {
+   "name": "Mansfield Township",
+   "county": "Burlington",
+   "reported_rows": 7,
+   "dated_rows": 0,
+   "reported_billing": 2655597.53,
+   "dated_billing": 0.0,
+   "dated_billing_share_pct": 0.0,
+   "payment_schedule": null,
+   "revenue_projection": null,
+   "forecast_year": null,
+   "municipal_share_pct": 20.59
+  },
+  "0319": {
+   "name": "Maple Shade Township",
+   "county": "Burlington",
+   "reported_rows": 1,
+   "dated_rows": 1,
+   "reported_billing": 69255.6,
+   "dated_billing": 69255.6,
+   "dated_billing_share_pct": 100.0,
+   "payment_schedule": [
+    {
+     "year": 2026,
+     "value": 69255.6
+    },
+    {
+     "year": 2027,
+     "value": 69255.6
+    },
+    {
+     "year": 2028,
+     "value": 69255.6
+    },
+    {
+     "year": 2029,
+     "value": 69255.6
+    },
+    {
+     "year": 2030,
+     "value": 69255.6
+    },
+    {
+     "year": 2031,
+     "value": 69255.6
+    },
+    {
+     "year": 2032,
+     "value": 69255.6
+    },
+    {
+     "year": 2033,
+     "value": 69255.6
+    },
+    {
+     "year": 2034,
+     "value": 69255.6
+    },
+    {
+     "year": 2035,
+     "value": 0.0
+    }
+   ],
+   "revenue_projection": 346278.0,
+   "forecast_year": 2034,
+   "municipal_share_pct": 0.33
+  },
+  "0320": {
+   "name": "Medford Township",
+   "county": "Burlington",
+   "reported_rows": 8,
+   "dated_rows": 7,
+   "reported_billing": 640206.7,
+   "dated_billing": 637506.7,
+   "dated_billing_share_pct": 99.6,
+   "payment_schedule": [
+    {
+     "year": 2026,
+     "value": 490223.2
+    },
+    {
+     "year": 2027,
+     "value": 490223.2
+    },
+    {
+     "year": 2028,
+     "value": 490223.2
+    },
+    {
+     "year": 2029,
+     "value": 490223.2
+    },
+    {
+     "year": 2030,
+     "value": 490223.2
+    },
+    {
+     "year": 2031,
+     "value": 490223.2
+    },
+    {
+     "year": 2032,
+     "value": 490223.2
+    },
+    {
+     "year": 2033,
+     "value": 490223.2
+    },
+    {
+     "year": 2034,
+     "value": 490223.2
+    },
+    {
+     "year": 2035,
+     "value": 490223.2
+    }
+   ],
+   "revenue_projection": 2451116.0,
+   "forecast_year": 2058,
+   "municipal_share_pct": 2.42
+  },
+  "0322": {
+   "name": "Moorestown Township",
+   "county": "Burlington",
+   "reported_rows": 1,
+   "dated_rows": 1,
+   "reported_billing": 18247.25,
+   "dated_billing": 18247.25,
+   "dated_billing_share_pct": 100.0,
+   "payment_schedule": [
+    {
+     "year": 2026,
+     "value": 18247.25
+    },
+    {
+     "year": 2027,
+     "value": 18247.25
+    },
+    {
+     "year": 2028,
+     "value": 0.0
+    },
+    {
+     "year": 2029,
+     "value": 0.0
+    },
+    {
+     "year": 2030,
+     "value": 0.0
+    },
+    {
+     "year": 2031,
+     "value": 0.0
+    },
+    {
+     "year": 2032,
+     "value": 0.0
+    },
+    {
+     "year": 2033,
+     "value": 0.0
+    },
+    {
+     "year": 2034,
+     "value": 0.0
+    },
+    {
+     "year": 2035,
+     "value": 0.0
+    }
+   ],
+   "revenue_projection": 36494.5,
+   "forecast_year": 2027,
+   "municipal_share_pct": 0.06
+  },
+  "0323": {
+   "name": "Mount Holly Township",
+   "county": "Burlington",
+   "reported_rows": 7,
+   "dated_rows": 0,
+   "reported_billing": 1329174.0,
+   "dated_billing": 0.0,
+   "dated_billing_share_pct": 0.0,
+   "payment_schedule": null,
+   "revenue_projection": null,
+   "forecast_year": null,
+   "municipal_share_pct": 10.29
+  },
+  "0324": {
+   "name": "Mount Laurel Township",
+   "county": "Burlington",
+   "reported_rows": 6,
+   "dated_rows": 3,
+   "reported_billing": 212996.95,
+   "dated_billing": 86511.91,
+   "dated_billing_share_pct": 40.6,
+   "payment_schedule": [
+    {
+     "year": 2026,
+     "value": 86511.91
+    },
+    {
+     "year": 2027,
+     "value": 86511.91
+    },
+    {
+     "year": 2028,
+     "value": 86511.91
+    },
+    {
+     "year": 2029,
+     "value": 86511.91
+    },
+    {
+     "year": 2030,
+     "value": 86511.91
+    },
+    {
+     "year": 2031,
+     "value": 86511.91
+    },
+    {
+     "year": 2032,
+     "value": 86511.91
+    },
+    {
+     "year": 2033,
+     "value": 86511.91
+    },
+    {
+     "year": 2034,
+     "value": 36511.91
+    },
+    {
+     "year": 2035,
+     "value": 36511.91
+    }
+   ],
+   "revenue_projection": 432559.55,
+   "forecast_year": 2054,
+   "municipal_share_pct": 0.43
+  },
+  "0327": {
+   "name": "Palmyra Borough",
+   "county": "Burlington",
+   "reported_rows": 1,
+   "dated_rows": 0,
+   "reported_billing": 937885.8,
+   "dated_billing": 0.0,
+   "dated_billing_share_pct": 0.0,
+   "payment_schedule": null,
+   "revenue_projection": null,
+   "forecast_year": null,
+   "municipal_share_pct": 3.33
+  },
+  "0329": {
+   "name": "Pemberton Township",
+   "county": "Burlington",
+   "reported_rows": 3,
+   "dated_rows": 0,
+   "reported_billing": 835756.24,
+   "dated_billing": 0.0,
+   "dated_billing_share_pct": 0.0,
+   "payment_schedule": null,
+   "revenue_projection": null,
+   "forecast_year": null,
+   "municipal_share_pct": 2.94
+  },
+  "0330": {
+   "name": "Riverside Township",
+   "county": "Burlington",
+   "reported_rows": 1,
+   "dated_rows": 1,
+   "reported_billing": 314075.1,
+   "dated_billing": 314075.1,
+   "dated_billing_share_pct": 100.0,
+   "payment_schedule": [
+    {
+     "year": 2026,
+     "value": 314075.1
+    },
+    {
+     "year": 2027,
+     "value": 314075.1
+    },
+    {
+     "year": 2028,
+     "value": 314075.1
+    },
+    {
+     "year": 2029,
+     "value": 314075.1
+    },
+    {
+     "year": 2030,
+     "value": 314075.1
+    },
+    {
+     "year": 2031,
+     "value": 314075.1
+    },
+    {
+     "year": 2032,
+     "value": 314075.1
+    },
+    {
+     "year": 2033,
+     "value": 314075.1
+    },
+    {
+     "year": 2034,
+     "value": 314075.1
+    },
+    {
+     "year": 2035,
+     "value": 314075.1
+    }
+   ],
+   "revenue_projection": 1570375.5,
+   "forecast_year": 2052,
+   "municipal_share_pct": 3.02
+  },
+  "0334": {
+   "name": "Springfield Township",
+   "county": "Burlington",
+   "reported_rows": 1,
+   "dated_rows": 0,
+   "reported_billing": 53736.0,
+   "dated_billing": 0.0,
+   "dated_billing_share_pct": 0.0,
+   "payment_schedule": null,
+   "revenue_projection": null,
+   "forecast_year": null,
+   "municipal_share_pct": 1.04
+  },
+  "0337": {
+   "name": "Westampton Township",
+   "county": "Burlington",
+   "reported_rows": 6,
+   "dated_rows": 0,
+   "reported_billing": 732483.78,
+   "dated_billing": 0.0,
+   "dated_billing_share_pct": 0.0,
+   "payment_schedule": null,
+   "revenue_projection": null,
+   "forecast_year": null,
+   "municipal_share_pct": 4.83
+  },
+  "0338": {
+   "name": "Willingboro Township",
+   "county": "Burlington",
+   "reported_rows": 5,
+   "dated_rows": 5,
+   "reported_billing": 402570.17,
+   "dated_billing": 402570.17,
+   "dated_billing_share_pct": 100.0,
+   "payment_schedule": [
+    {
+     "year": 2026,
+     "value": 402570.17
+    },
+    {
+     "year": 2027,
+     "value": 402570.17
+    },
+    {
+     "year": 2028,
+     "value": 402570.17
+    },
+    {
+     "year": 2029,
+     "value": 402570.17
+    },
+    {
+     "year": 2030,
+     "value": 402570.17
+    },
+    {
+     "year": 2031,
+     "value": 402570.17
+    },
+    {
+     "year": 2032,
+     "value": 402570.17
+    },
+    {
+     "year": 2033,
+     "value": 402570.17
+    },
+    {
+     "year": 2034,
+     "value": 283842.75
+    },
+    {
+     "year": 2035,
+     "value": 283842.75
+    }
+   ],
+   "revenue_projection": 2012850.85,
+   "forecast_year": 2039,
+   "municipal_share_pct": 0.78
+  },
+  "0340": {
+   "name": "Wrightstown Borough",
+   "county": "Burlington",
+   "reported_rows": 1,
+   "dated_rows": 1,
+   "reported_billing": 74838.48,
+   "dated_billing": 74838.48,
+   "dated_billing_share_pct": 100.0,
+   "payment_schedule": [
+    {
+     "year": 2026,
+     "value": 74838.48
+    },
+    {
+     "year": 2027,
+     "value": 74838.48
+    },
+    {
+     "year": 2028,
+     "value": 74838.48
+    },
+    {
+     "year": 2029,
+     "value": 74838.48
+    },
+    {
+     "year": 2030,
+     "value": 74838.48
+    },
+    {
+     "year": 2031,
+     "value": 74838.48
+    },
+    {
+     "year": 2032,
+     "value": 74838.48
+    },
+    {
+     "year": 2033,
+     "value": 74838.48
+    },
+    {
+     "year": 2034,
+     "value": 74838.48
+    },
+    {
+     "year": 2035,
+     "value": 0.0
+    }
+   ],
+   "revenue_projection": 374192.4,
+   "forecast_year": 2034,
+   "municipal_share_pct": 6.01
+  },
+  "0403": {
+   "name": "Barrington Borough",
+   "county": "Camden",
+   "reported_rows": 4,
+   "dated_rows": 4,
+   "reported_billing": 278428.13,
+   "dated_billing": 278428.13,
+   "dated_billing_share_pct": 100.0,
+   "payment_schedule": [
+    {
+     "year": 2026,
+     "value": 183894.02
+    },
+    {
+     "year": 2027,
+     "value": 183894.02
+    },
+    {
+     "year": 2028,
+     "value": 183894.02
+    },
+    {
+     "year": 2029,
+     "value": 183894.02
+    },
+    {
+     "year": 2030,
+     "value": 183894.02
+    },
+    {
+     "year": 2031,
+     "value": 183894.02
+    },
+    {
+     "year": 2032,
+     "value": 183894.02
+    },
+    {
+     "year": 2033,
+     "value": 183894.02
+    },
+    {
+     "year": 2034,
+     "value": 183894.02
+    },
+    {
+     "year": 2035,
+     "value": 183894.02
+    }
+   ],
+   "revenue_projection": 919470.1,
+   "forecast_year": 2051,
+   "municipal_share_pct": 2.6
+  },
+  "0404": {
+   "name": "Bellmawr Borough",
+   "county": "Camden",
+   "reported_rows": 1,
+   "dated_rows": 1,
+   "reported_billing": 25000.0,
+   "dated_billing": 25000.0,
+   "dated_billing_share_pct": 100.0,
+   "payment_schedule": [
+    {
+     "year": 2026,
+     "value": 25000.0
+    },
+    {
+     "year": 2027,
+     "value": 25000.0
+    },
+    {
+     "year": 2028,
+     "value": 25000.0
+    },
+    {
+     "year": 2029,
+     "value": 25000.0
+    },
+    {
+     "year": 2030,
+     "value": 25000.0
+    },
+    {
+     "year": 2031,
+     "value": 25000.0
+    },
+    {
+     "year": 2032,
+     "value": 25000.0
+    },
+    {
+     "year": 2033,
+     "value": 25000.0
+    },
+    {
+     "year": 2034,
+     "value": 0.0
+    },
+    {
+     "year": 2035,
+     "value": 0.0
+    }
+   ],
+   "revenue_projection": 125000.0,
+   "forecast_year": 2033,
+   "municipal_share_pct": 0.13
+  },
+  "0405": {
+   "name": "Berlin Borough",
+   "county": "Camden",
+   "reported_rows": 2,
+   "dated_rows": 0,
+   "reported_billing": 52740.41,
+   "dated_billing": 0.0,
+   "dated_billing_share_pct": 0.0,
+   "payment_schedule": null,
+   "revenue_projection": null,
+   "forecast_year": null,
+   "municipal_share_pct": 0.51
+  },
+  "0406": {
+   "name": "Berlin Township",
+   "county": "Camden",
+   "reported_rows": 1,
+   "dated_rows": 1,
+   "reported_billing": 19581.06,
+   "dated_billing": 19581.06,
+   "dated_billing_share_pct": 100.0,
+   "payment_schedule": [
+    {
+     "year": 2026,
+     "value": 19581.06
+    },
+    {
+     "year": 2027,
+     "value": 19581.06
+    },
+    {
+     "year": 2028,
+     "value": 19581.06
+    },
+    {
+     "year": 2029,
+     "value": 0.0
+    },
+    {
+     "year": 2030,
+     "value": 0.0
+    },
+    {
+     "year": 2031,
+     "value": 0.0
+    },
+    {
+     "year": 2032,
+     "value": 0.0
+    },
+    {
+     "year": 2033,
+     "value": 0.0
+    },
+    {
+     "year": 2034,
+     "value": 0.0
+    },
+    {
+     "year": 2035,
+     "value": 0.0
+    }
+   ],
+   "revenue_projection": 58743.18,
+   "forecast_year": 2028,
+   "municipal_share_pct": 0.15
+  },
+  "0408": {
+   "name": "Camden City",
+   "county": "Camden",
+   "reported_rows": 45,
+   "dated_rows": 0,
+   "reported_billing": 4027345.29,
+   "dated_billing": 0.0,
+   "dated_billing_share_pct": 0.0,
+   "payment_schedule": null,
+   "revenue_projection": null,
+   "forecast_year": null,
+   "municipal_share_pct": 1.71
+  },
+  "0409": {
+   "name": "Cherry Hill Township",
+   "county": "Camden",
+   "reported_rows": 11,
+   "dated_rows": 0,
+   "reported_billing": 564264.36,
+   "dated_billing": 0.0,
+   "dated_billing_share_pct": 0.0,
+   "payment_schedule": null,
+   "revenue_projection": null,
+   "forecast_year": null,
+   "municipal_share_pct": 0.71
+  },
+  "0410": {
+   "name": "Chesilhurst Borough",
+   "county": "Camden",
+   "reported_rows": 2,
+   "dated_rows": 0,
+   "reported_billing": 31209.0,
+   "dated_billing": 0.0,
+   "dated_billing_share_pct": 0.0,
+   "payment_schedule": null,
+   "revenue_projection": null,
+   "forecast_year": null,
+   "municipal_share_pct": 0.8
+  },
+  "0412": {
+   "name": "Collingswood Borough",
+   "county": "Camden",
+   "reported_rows": 4,
+   "dated_rows": 4,
+   "reported_billing": 2814795.4,
+   "dated_billing": 2814795.4,
+   "dated_billing_share_pct": 100.0,
+   "payment_schedule": [
+    {
+     "year": 2026,
+     "value": 2814795.4
+    },
+    {
+     "year": 2027,
+     "value": 2814795.4
+    },
+    {
+     "year": 2028,
+     "value": 2659795.4
+    },
+    {
+     "year": 2029,
+     "value": 2659795.4
+    },
+    {
+     "year": 2030,
+     "value": 2659795.4
+    },
+    {
+     "year": 2031,
+     "value": 329795.4
+    },
+    {
+     "year": 2032,
+     "value": 329795.4
+    },
+    {
+     "year": 2033,
+     "value": 329795.4
+    },
+    {
+     "year": 2034,
+     "value": 329795.4
+    },
+    {
+     "year": 2035,
+     "value": 329795.4
+    }
+   ],
+   "revenue_projection": 13608977.0,
+   "forecast_year": 2055,
+   "municipal_share_pct": 12.58
+  },
+  "0415": {
+   "name": "Gloucester Township",
+   "county": "Camden",
+   "reported_rows": 3,
+   "dated_rows": 0,
+   "reported_billing": 279827.56,
+   "dated_billing": 0.0,
+   "dated_billing_share_pct": 0.0,
+   "payment_schedule": null,
+   "revenue_projection": null,
+   "forecast_year": null,
+   "municipal_share_pct": 0.34
+  },
+  "0416": {
+   "name": "Haddon Township",
+   "county": "Camden",
+   "reported_rows": 5,
+   "dated_rows": 0,
+   "reported_billing": 3141164.21,
+   "dated_billing": 0.0,
+   "dated_billing_share_pct": 0.0,
+   "payment_schedule": null,
+   "revenue_projection": null,
+   "forecast_year": null,
+   "municipal_share_pct": 16.6
+  },
+  "0417": {
+   "name": "Haddonfield Borough",
+   "county": "Camden",
+   "reported_rows": 1,
+   "dated_rows": 0,
+   "reported_billing": 8822.0,
+   "dated_billing": 0.0,
+   "dated_billing_share_pct": 0.0,
+   "payment_schedule": null,
+   "revenue_projection": null,
+   "forecast_year": null,
+   "municipal_share_pct": 0.04
+  },
+  "0418": {
+   "name": "Haddon Heights Borough",
+   "county": "Camden",
+   "reported_rows": 2,
+   "dated_rows": 0,
+   "reported_billing": 106439.4,
+   "dated_billing": 0.0,
+   "dated_billing_share_pct": 0.0,
+   "payment_schedule": null,
+   "revenue_projection": null,
+   "forecast_year": null,
+   "municipal_share_pct": 0.95
+  },
+  "0420": {
+   "name": "Laurel Springs Borough",
+   "county": "Camden",
+   "reported_rows": 1,
+   "dated_rows": 0,
+   "reported_billing": 7000.94,
+   "dated_billing": 0.0,
+   "dated_billing_share_pct": 0.0,
+   "payment_schedule": null,
+   "revenue_projection": null,
+   "forecast_year": null,
+   "municipal_share_pct": 0.2
+  },
+  "0421": {
+   "name": "Lawnside Borough",
+   "county": "Camden",
+   "reported_rows": 1,
+   "dated_rows": 0,
+   "reported_billing": 728000.0,
+   "dated_billing": 0.0,
+   "dated_billing_share_pct": 0.0,
+   "payment_schedule": null,
+   "revenue_projection": null,
+   "forecast_year": null,
+   "municipal_share_pct": 10.24
+  },
+  "0422": {
+   "name": "Lindenwold Borough",
+   "county": "Camden",
+   "reported_rows": 4,
+   "dated_rows": 3,
+   "reported_billing": 433574.59,
+   "dated_billing": 413574.59,
+   "dated_billing_share_pct": 95.4,
+   "payment_schedule": [
+    {
+     "year": 2026,
+     "value": 413574.59
+    },
+    {
+     "year": 2027,
+     "value": 413574.59
+    },
+    {
+     "year": 2028,
+     "value": 413574.59
+    },
+    {
+     "year": 2029,
+     "value": 413574.59
+    },
+    {
+     "year": 2030,
+     "value": 413574.59
+    },
+    {
+     "year": 2031,
+     "value": 413574.59
+    },
+    {
+     "year": 2032,
+     "value": 413574.59
+    },
+    {
+     "year": 2033,
+     "value": 413574.59
+    },
+    {
+     "year": 2034,
+     "value": 413574.59
+    },
+    {
+     "year": 2035,
+     "value": 413574.59
+    }
+   ],
+   "revenue_projection": 2067872.95,
+   "forecast_year": 2050,
+   "municipal_share_pct": 2.14
+  },
+  "0423": {
+   "name": "Magnolia Borough",
+   "county": "Camden",
+   "reported_rows": 1,
+   "dated_rows": 1,
+   "reported_billing": 447986.74,
+   "dated_billing": 447986.74,
+   "dated_billing_share_pct": 100.0,
+   "payment_schedule": [
+    {
+     "year": 2026,
+     "value": 447986.74
+    },
+    {
+     "year": 2027,
+     "value": 447986.74
+    },
+    {
+     "year": 2028,
+     "value": 447986.74
+    },
+    {
+     "year": 2029,
+     "value": 447986.74
+    },
+    {
+     "year": 2030,
+     "value": 447986.74
+    },
+    {
+     "year": 2031,
+     "value": 447986.74
+    },
+    {
+     "year": 2032,
+     "value": 447986.74
+    },
+    {
+     "year": 2033,
+     "value": 447986.74
+    },
+    {
+     "year": 2034,
+     "value": 447986.74
+    },
+    {
+     "year": 2035,
+     "value": 447986.74
+    }
+   ],
+   "revenue_projection": 2239933.7,
+   "forecast_year": 2035,
+   "municipal_share_pct": 7.27
+  },
+  "0424": {
+   "name": "Merchantville Borough",
+   "county": "Camden",
+   "reported_rows": 2,
+   "dated_rows": 1,
+   "reported_billing": 69845.57,
+   "dated_billing": 42845.57,
+   "dated_billing_share_pct": 61.3,
+   "payment_schedule": [
+    {
+     "year": 2026,
+     "value": 42845.57
+    },
+    {
+     "year": 2027,
+     "value": 42845.57
+    },
+    {
+     "year": 2028,
+     "value": 42845.57
+    },
+    {
+     "year": 2029,
+     "value": 42845.57
+    },
+    {
+     "year": 2030,
+     "value": 42845.57
+    },
+    {
+     "year": 2031,
+     "value": 42845.57
+    },
+    {
+     "year": 2032,
+     "value": 42845.57
+    },
+    {
+     "year": 2033,
+     "value": 42845.57
+    },
+    {
+     "year": 2034,
+     "value": 42845.57
+    },
+    {
+     "year": 2035,
+     "value": 42845.57
+    }
+   ],
+   "revenue_projection": 214227.85,
+   "forecast_year": 2043,
+   "municipal_share_pct": 1.1
+  },
+  "0425": {
+   "name": "Mount Ephraim Borough",
+   "county": "Camden",
+   "reported_rows": 1,
+   "dated_rows": 1,
+   "reported_billing": 34138.24,
+   "dated_billing": 34138.24,
+   "dated_billing_share_pct": 100.0,
+   "payment_schedule": [
+    {
+     "year": 2026,
+     "value": 34138.24
+    },
+    {
+     "year": 2027,
+     "value": 34138.24
+    },
+    {
+     "year": 2028,
+     "value": 34138.24
+    },
+    {
+     "year": 2029,
+     "value": 34138.24
+    },
+    {
+     "year": 2030,
+     "value": 34138.24
+    },
+    {
+     "year": 2031,
+     "value": 34138.24
+    },
+    {
+     "year": 2032,
+     "value": 34138.24
+    },
+    {
+     "year": 2033,
+     "value": 34138.24
+    },
+    {
+     "year": 2034,
+     "value": 34138.24
+    },
+    {
+     "year": 2035,
+     "value": 34138.24
+    }
+   ],
+   "revenue_projection": 170691.2,
+   "forecast_year": 2042,
+   "municipal_share_pct": 0.44
+  },
+  "0427": {
+   "name": "Pennsauken Township",
+   "county": "Camden",
+   "reported_rows": 7,
+   "dated_rows": 6,
+   "reported_billing": 1658233.48,
+   "dated_billing": 927470.1,
+   "dated_billing_share_pct": 55.9,
+   "payment_schedule": [
+    {
+     "year": 2026,
+     "value": 899479.6
+    },
+    {
+     "year": 2027,
+     "value": 899479.6
+    },
+    {
+     "year": 2028,
+     "value": 899479.6
+    },
+    {
+     "year": 2029,
+     "value": 702479.6
+    },
+    {
+     "year": 2030,
+     "value": 702479.6
+    },
+    {
+     "year": 2031,
+     "value": 702479.6
+    },
+    {
+     "year": 2032,
+     "value": 615623.49
+    },
+    {
+     "year": 2033,
+     "value": 615623.49
+    },
+    {
+     "year": 2034,
+     "value": 615623.49
+    },
+    {
+     "year": 2035,
+     "value": 615623.49
+    }
+   ],
+   "revenue_projection": 4103398.0,
+   "forecast_year": 2052,
+   "municipal_share_pct": 3.11
+  },
+  "0428": {
+   "name": "Pine Hill Borough",
+   "county": "Camden",
+   "reported_rows": 2,
+   "dated_rows": 2,
+   "reported_billing": 1284345.0,
+   "dated_billing": 1284345.0,
+   "dated_billing_share_pct": 100.0,
+   "payment_schedule": [
+    {
+     "year": 2026,
+     "value": 1284345.0
+    },
+    {
+     "year": 2027,
+     "value": 1284345.0
+    },
+    {
+     "year": 2028,
+     "value": 1284345.0
+    },
+    {
+     "year": 2029,
+     "value": 1284345.0
+    },
+    {
+     "year": 2030,
+     "value": 1284345.0
+    },
+    {
+     "year": 2031,
+     "value": 1284345.0
+    },
+    {
+     "year": 2032,
+     "value": 1284345.0
+    },
+    {
+     "year": 2033,
+     "value": 1284345.0
+    },
+    {
+     "year": 2034,
+     "value": 1284345.0
+    },
+    {
+     "year": 2035,
+     "value": 1284345.0
+    }
+   ],
+   "revenue_projection": 6421725.0,
+   "forecast_year": 2069,
+   "municipal_share_pct": 10.73
+  },
+  "0431": {
+   "name": "Somerdale Borough",
+   "county": "Camden",
+   "reported_rows": 2,
+   "dated_rows": 1,
+   "reported_billing": 493560.77,
+   "dated_billing": 68477.57,
+   "dated_billing_share_pct": 13.9,
+   "payment_schedule": [
+    {
+     "year": 2026,
+     "value": 68477.57
+    },
+    {
+     "year": 2027,
+     "value": 68477.57
+    },
+    {
+     "year": 2028,
+     "value": 68477.57
+    },
+    {
+     "year": 2029,
+     "value": 68477.57
+    },
+    {
+     "year": 2030,
+     "value": 68477.57
+    },
+    {
+     "year": 2031,
+     "value": 68477.57
+    },
+    {
+     "year": 2032,
+     "value": 68477.57
+    },
+    {
+     "year": 2033,
+     "value": 68477.57
+    },
+    {
+     "year": 2034,
+     "value": 68477.57
+    },
+    {
+     "year": 2035,
+     "value": 68477.57
+    }
+   ],
+   "revenue_projection": 342387.85,
+   "forecast_year": 2047,
+   "municipal_share_pct": 5.92
+  },
+  "0432": {
+   "name": "Stratford Borough",
+   "county": "Camden",
+   "reported_rows": 1,
+   "dated_rows": 1,
+   "reported_billing": 142960.94,
+   "dated_billing": 142960.94,
+   "dated_billing_share_pct": 100.0,
+   "payment_schedule": [
+    {
+     "year": 2026,
+     "value": 142960.94
+    },
+    {
+     "year": 2027,
+     "value": 142960.94
+    },
+    {
+     "year": 2028,
+     "value": 142960.94
+    },
+    {
+     "year": 2029,
+     "value": 142960.94
+    },
+    {
+     "year": 2030,
+     "value": 142960.94
+    },
+    {
+     "year": 2031,
+     "value": 142960.94
+    },
+    {
+     "year": 2032,
+     "value": 142960.94
+    },
+    {
+     "year": 2033,
+     "value": 142960.94
+    },
+    {
+     "year": 2034,
+     "value": 142960.94
+    },
+    {
+     "year": 2035,
+     "value": 142960.94
+    }
+   ],
+   "revenue_projection": 714804.7,
+   "forecast_year": 2047,
+   "municipal_share_pct": 1.76
+  },
+  "0434": {
+   "name": "Voorhees Township",
+   "county": "Camden",
+   "reported_rows": 4,
+   "dated_rows": 3,
+   "reported_billing": 616346.26,
+   "dated_billing": 470846.26,
+   "dated_billing_share_pct": 76.4,
+   "payment_schedule": [
+    {
+     "year": 2026,
+     "value": 470846.26
+    },
+    {
+     "year": 2027,
+     "value": 470846.26
+    },
+    {
+     "year": 2028,
+     "value": 470846.26
+    },
+    {
+     "year": 2029,
+     "value": 470846.26
+    },
+    {
+     "year": 2030,
+     "value": 335159.4
+    },
+    {
+     "year": 2031,
+     "value": 335159.4
+    },
+    {
+     "year": 2032,
+     "value": 335159.4
+    },
+    {
+     "year": 2033,
+     "value": 307315.64
+    },
+    {
+     "year": 2034,
+     "value": 307315.64
+    },
+    {
+     "year": 2035,
+     "value": 307315.64
+    }
+   ],
+   "revenue_projection": 2218544.44,
+   "forecast_year": 2056,
+   "municipal_share_pct": 1.11
+  },
+  "0436": {
+   "name": "Winslow Township",
+   "county": "Camden",
+   "reported_rows": 4,
+   "dated_rows": 0,
+   "reported_billing": 642884.93,
+   "dated_billing": 0.0,
+   "dated_billing_share_pct": 0.0,
+   "payment_schedule": null,
+   "revenue_projection": null,
+   "forecast_year": null,
+   "municipal_share_pct": 1.65
+  },
+  "0502": {
+   "name": "Cape May City",
+   "county": "Cape May",
+   "reported_rows": 1,
+   "dated_rows": 0,
+   "reported_billing": 222280.16,
+   "dated_billing": 0.0,
+   "dated_billing_share_pct": 0.0,
+   "payment_schedule": null,
+   "revenue_projection": null,
+   "forecast_year": null,
+   "municipal_share_pct": 0.79
+  },
+  "0505": {
+   "name": "Lower Township",
+   "county": "Cape May",
+   "reported_rows": 14,
+   "dated_rows": 0,
+   "reported_billing": 143567.01,
+   "dated_billing": 0.0,
+   "dated_billing_share_pct": 0.0,
+   "payment_schedule": null,
+   "revenue_projection": null,
+   "forecast_year": null,
+   "municipal_share_pct": 0.41
+  },
+  "0506": {
+   "name": "Middle Township",
+   "county": "Cape May",
+   "reported_rows": 2,
+   "dated_rows": 0,
+   "reported_billing": 102550.79,
+   "dated_billing": 0.0,
+   "dated_billing_share_pct": 0.0,
+   "payment_schedule": null,
+   "revenue_projection": null,
+   "forecast_year": null,
+   "municipal_share_pct": 0.36
+  },
+  "0514": {
+   "name": "Wildwood City",
+   "county": "Cape May",
+   "reported_rows": 3,
+   "dated_rows": 3,
+   "reported_billing": 0.0,
+   "dated_billing": 0.0,
+   "dated_billing_share_pct": null,
+   "payment_schedule": [
+    {
+     "year": 2026,
+     "value": 0.0
+    },
+    {
+     "year": 2027,
+     "value": 0.0
+    },
+    {
+     "year": 2028,
+     "value": 0.0
+    },
+    {
+     "year": 2029,
+     "value": 0.0
+    },
+    {
+     "year": 2030,
+     "value": 0.0
+    },
+    {
+     "year": 2031,
+     "value": 0.0
+    },
+    {
+     "year": 2032,
+     "value": 0.0
+    },
+    {
+     "year": 2033,
+     "value": 0.0
+    },
+    {
+     "year": 2034,
+     "value": 0.0
+    },
+    {
+     "year": 2035,
+     "value": 0.0
+    }
+   ],
+   "revenue_projection": 0.0,
+   "forecast_year": 2065,
+   "municipal_share_pct": 0.0
+  },
+  "0601": {
+   "name": "Bridgeton City",
+   "county": "Cumberland",
+   "reported_rows": 7,
+   "dated_rows": 6,
+   "reported_billing": 608688.36,
+   "dated_billing": 484278.17,
+   "dated_billing_share_pct": 79.6,
+   "payment_schedule": [
+    {
+     "year": 2026,
+     "value": 484278.17
+    },
+    {
+     "year": 2027,
+     "value": 484278.17
+    },
+    {
+     "year": 2028,
+     "value": 484278.17
+    },
+    {
+     "year": 2029,
+     "value": 484278.17
+    },
+    {
+     "year": 2030,
+     "value": 484278.17
+    },
+    {
+     "year": 2031,
+     "value": 484278.17
+    },
+    {
+     "year": 2032,
+     "value": 484278.17
+    },
+    {
+     "year": 2033,
+     "value": 484278.17
+    },
+    {
+     "year": 2034,
+     "value": 484278.17
+    },
+    {
+     "year": 2035,
+     "value": 459358.06
+    }
+   ],
+   "revenue_projection": 2421390.85,
+   "forecast_year": 2052,
+   "municipal_share_pct": 1.99
+  },
+  "0602": {
+   "name": "Commercial Township",
+   "county": "Cumberland",
+   "reported_rows": 1,
+   "dated_rows": 0,
+   "reported_billing": 18548.0,
+   "dated_billing": 0.0,
+   "dated_billing_share_pct": 0.0,
+   "payment_schedule": null,
+   "revenue_projection": null,
+   "forecast_year": null,
+   "municipal_share_pct": 0.43
+  },
+  "0607": {
+   "name": "Hopewell Township",
+   "county": "Cumberland",
+   "reported_rows": 1,
+   "dated_rows": 1,
+   "reported_billing": 112700.0,
+   "dated_billing": 112700.0,
+   "dated_billing_share_pct": 100.0,
+   "payment_schedule": [
+    {
+     "year": 2026,
+     "value": 112700.0
+    },
+    {
+     "year": 2027,
+     "value": 112700.0
+    },
+    {
+     "year": 2028,
+     "value": 0.0
+    },
+    {
+     "year": 2029,
+     "value": 0.0
+    },
+    {
+     "year": 2030,
+     "value": 0.0
+    },
+    {
+     "year": 2031,
+     "value": 0.0
+    },
+    {
+     "year": 2032,
+     "value": 0.0
+    },
+    {
+     "year": 2033,
+     "value": 0.0
+    },
+    {
+     "year": 2034,
+     "value": 0.0
+    },
+    {
+     "year": 2035,
+     "value": 0.0
+    }
+   ],
+   "revenue_projection": 225400.0,
+   "forecast_year": 2027,
+   "municipal_share_pct": 4.26
+  },
+  "0610": {
+   "name": "Millville City",
+   "county": "Cumberland",
+   "reported_rows": 1,
+   "dated_rows": 1,
+   "reported_billing": 25000.0,
+   "dated_billing": 25000.0,
+   "dated_billing_share_pct": 100.0,
+   "payment_schedule": [
+    {
+     "year": 2026,
+     "value": 25000.0
+    },
+    {
+     "year": 2027,
+     "value": 25000.0
+    },
+    {
+     "year": 2028,
+     "value": 25000.0
+    },
+    {
+     "year": 2029,
+     "value": 25000.0
+    },
+    {
+     "year": 2030,
+     "value": 25000.0
+    },
+    {
+     "year": 2031,
+     "value": 25000.0
+    },
+    {
+     "year": 2032,
+     "value": 25000.0
+    },
+    {
+     "year": 2033,
+     "value": 25000.0
+    },
+    {
+     "year": 2034,
+     "value": 25000.0
+    },
+    {
+     "year": 2035,
+     "value": 25000.0
+    }
+   ],
+   "revenue_projection": 125000.0,
+   "forecast_year": 2038,
+   "municipal_share_pct": 0.06
+  },
+  "0613": {
+   "name": "Upper Deerfield Township",
+   "county": "Cumberland",
+   "reported_rows": 3,
+   "dated_rows": 0,
+   "reported_billing": 287082.25,
+   "dated_billing": 0.0,
+   "dated_billing_share_pct": 0.0,
+   "payment_schedule": null,
+   "revenue_projection": null,
+   "forecast_year": null,
+   "municipal_share_pct": 4.44
+  },
+  "0614": {
+   "name": "Vineland City",
+   "county": "Cumberland",
+   "reported_rows": 48,
+   "dated_rows": 48,
+   "reported_billing": 1947623.51,
+   "dated_billing": 1947623.51,
+   "dated_billing_share_pct": 100.0,
+   "payment_schedule": [
+    {
+     "year": 2026,
+     "value": 603201.8
+    },
+    {
+     "year": 2027,
+     "value": 173439.48
+    },
+    {
+     "year": 2028,
+     "value": 0.0
+    },
+    {
+     "year": 2029,
+     "value": 0.0
+    },
+    {
+     "year": 2030,
+     "value": 0.0
+    },
+    {
+     "year": 2031,
+     "value": 0.0
+    },
+    {
+     "year": 2032,
+     "value": 0.0
+    },
+    {
+     "year": 2033,
+     "value": 0.0
+    },
+    {
+     "year": 2034,
+     "value": 0.0
+    },
+    {
+     "year": 2035,
+     "value": 0.0
+    }
+   ],
+   "revenue_projection": 776641.28,
+   "forecast_year": 2028,
+   "municipal_share_pct": 2.16
+  },
+  "0701": {
+   "name": "Belleville Township",
+   "county": "Essex",
+   "reported_rows": 4,
+   "dated_rows": 0,
+   "reported_billing": 812879.61,
+   "dated_billing": 0.0,
+   "dated_billing_share_pct": 0.0,
+   "payment_schedule": null,
+   "revenue_projection": null,
+   "forecast_year": null,
+   "municipal_share_pct": 0.93
+  },
+  "0702": {
+   "name": "Bloomfield Township",
+   "county": "Essex",
+   "reported_rows": 7,
+   "dated_rows": 0,
+   "reported_billing": 3135754.0,
+   "dated_billing": 0.0,
+   "dated_billing_share_pct": 0.0,
+   "payment_schedule": null,
+   "revenue_projection": null,
+   "forecast_year": null,
+   "municipal_share_pct": 3.08
+  },
+  "0703": {
+   "name": "Caldwell Borough",
+   "county": "Essex",
+   "reported_rows": 1,
+   "dated_rows": 1,
+   "reported_billing": 327222.49,
+   "dated_billing": 327222.49,
+   "dated_billing_share_pct": 100.0,
+   "payment_schedule": [
+    {
+     "year": 2026,
+     "value": 327222.49
+    },
+    {
+     "year": 2027,
+     "value": 327222.49
+    },
+    {
+     "year": 2028,
+     "value": 327222.49
+    },
+    {
+     "year": 2029,
+     "value": 327222.49
+    },
+    {
+     "year": 2030,
+     "value": 327222.49
+    },
+    {
+     "year": 2031,
+     "value": 327222.49
+    },
+    {
+     "year": 2032,
+     "value": 327222.49
+    },
+    {
+     "year": 2033,
+     "value": 327222.49
+    },
+    {
+     "year": 2034,
+     "value": 327222.49
+    },
+    {
+     "year": 2035,
+     "value": 327222.49
+    }
+   ],
+   "revenue_projection": 1636112.45,
+   "forecast_year": 2051,
+   "municipal_share_pct": 2.13
+  },
+  "0704": {
+   "name": "Cedar Grove Township",
+   "county": "Essex",
+   "reported_rows": 2,
+   "dated_rows": 0,
+   "reported_billing": 6146818.52,
+   "dated_billing": 0.0,
+   "dated_billing_share_pct": 0.0,
+   "payment_schedule": null,
+   "revenue_projection": null,
+   "forecast_year": null,
+   "municipal_share_pct": 26.12
+  },
+  "0705": {
+   "name": "East Orange City",
+   "county": "Essex",
+   "reported_rows": 45,
+   "dated_rows": 0,
+   "reported_billing": 5112139.85,
+   "dated_billing": 0.0,
+   "dated_billing_share_pct": 0.0,
+   "payment_schedule": null,
+   "revenue_projection": null,
+   "forecast_year": null,
+   "municipal_share_pct": 2.98
+  },
+  "0708": {
+   "name": "Glen Ridge Borough",
+   "county": "Essex",
+   "reported_rows": 1,
+   "dated_rows": 1,
+   "reported_billing": 612083.04,
+   "dated_billing": 612083.04,
+   "dated_billing_share_pct": 100.0,
+   "payment_schedule": [
+    {
+     "year": 2026,
+     "value": 612083.04
+    },
+    {
+     "year": 2027,
+     "value": 612083.04
+    },
+    {
+     "year": 2028,
+     "value": 612083.04
+    },
+    {
+     "year": 2029,
+     "value": 612083.04
+    },
+    {
+     "year": 2030,
+     "value": 612083.04
+    },
+    {
+     "year": 2031,
+     "value": 612083.04
+    },
+    {
+     "year": 2032,
+     "value": 612083.04
+    },
+    {
+     "year": 2033,
+     "value": 612083.04
+    },
+    {
+     "year": 2034,
+     "value": 612083.04
+    },
+    {
+     "year": 2035,
+     "value": 612083.04
+    }
+   ],
+   "revenue_projection": 3060415.2,
+   "forecast_year": 2048,
+   "municipal_share_pct": 3.48
+  },
+  "0709": {
+   "name": "Irvington Township",
+   "county": "Essex",
+   "reported_rows": 13,
+   "dated_rows": 12,
+   "reported_billing": 903954.01,
+   "dated_billing": 887652.01,
+   "dated_billing_share_pct": 98.2,
+   "payment_schedule": [
+    {
+     "year": 2026,
+     "value": 887652.01
+    },
+    {
+     "year": 2027,
+     "value": 887652.01
+    },
+    {
+     "year": 2028,
+     "value": 887652.01
+    },
+    {
+     "year": 2029,
+     "value": 887652.01
+    },
+    {
+     "year": 2030,
+     "value": 887652.01
+    },
+    {
+     "year": 2031,
+     "value": 823680.69
+    },
+    {
+     "year": 2032,
+     "value": 823680.69
+    },
+    {
+     "year": 2033,
+     "value": 823680.69
+    },
+    {
+     "year": 2034,
+     "value": 823680.69
+    },
+    {
+     "year": 2035,
+     "value": 823680.69
+    }
+   ],
+   "revenue_projection": 4438260.05,
+   "forecast_year": 2052,
+   "municipal_share_pct": 0.69
+  },
+  "0710": {
+   "name": "Livingston Township",
+   "county": "Essex",
+   "reported_rows": 4,
+   "dated_rows": 4,
+   "reported_billing": 1306603.67,
+   "dated_billing": 1306603.67,
+   "dated_billing_share_pct": 100.0,
+   "payment_schedule": [
+    {
+     "year": 2026,
+     "value": 1306603.67
+    },
+    {
+     "year": 2027,
+     "value": 1215843.88
+    },
+    {
+     "year": 2028,
+     "value": 1215843.88
+    },
+    {
+     "year": 2029,
+     "value": 1215843.88
+    },
+    {
+     "year": 2030,
+     "value": 1215843.88
+    },
+    {
+     "year": 2031,
+     "value": 1215843.88
+    },
+    {
+     "year": 2032,
+     "value": 1215843.88
+    },
+    {
+     "year": 2033,
+     "value": 1215843.88
+    },
+    {
+     "year": 2034,
+     "value": 1215843.88
+    },
+    {
+     "year": 2035,
+     "value": 1215843.88
+    }
+   ],
+   "revenue_projection": 6169979.19,
+   "forecast_year": 2053,
+   "municipal_share_pct": 2.0
+  },
+  "0711": {
+   "name": "Maplewood Township",
+   "county": "Essex",
+   "reported_rows": 3,
+   "dated_rows": 3,
+   "reported_billing": 908200.0,
+   "dated_billing": 908200.0,
+   "dated_billing_share_pct": 100.0,
+   "payment_schedule": [
+    {
+     "year": 2026,
+     "value": 908200.0
+    },
+    {
+     "year": 2027,
+     "value": 908200.0
+    },
+    {
+     "year": 2028,
+     "value": 908200.0
+    },
+    {
+     "year": 2029,
+     "value": 908200.0
+    },
+    {
+     "year": 2030,
+     "value": 908200.0
+    },
+    {
+     "year": 2031,
+     "value": 908200.0
+    },
+    {
+     "year": 2032,
+     "value": 908200.0
+    },
+    {
+     "year": 2033,
+     "value": 908200.0
+    },
+    {
+     "year": 2034,
+     "value": 908200.0
+    },
+    {
+     "year": 2035,
+     "value": 908200.0
+    }
+   ],
+   "revenue_projection": 4541000.0,
+   "forecast_year": 2048,
+   "municipal_share_pct": 1.58
+  },
+  "0713": {
+   "name": "Montclair Township",
+   "county": "Essex",
+   "reported_rows": 13,
+   "dated_rows": 13,
+   "reported_billing": 5916818.65,
+   "dated_billing": 5916818.65,
+   "dated_billing_share_pct": 100.0,
+   "payment_schedule": [
+    {
+     "year": 2026,
+     "value": 5786493.09
+    },
+    {
+     "year": 2027,
+     "value": 5594456.09
+    },
+    {
+     "year": 2028,
+     "value": 5594456.09
+    },
+    {
+     "year": 2029,
+     "value": 5594456.09
+    },
+    {
+     "year": 2030,
+     "value": 5594456.09
+    },
+    {
+     "year": 2031,
+     "value": 5594456.09
+    },
+    {
+     "year": 2032,
+     "value": 5594456.09
+    },
+    {
+     "year": 2033,
+     "value": 5594456.09
+    },
+    {
+     "year": 2034,
+     "value": 5594456.09
+    },
+    {
+     "year": 2035,
+     "value": 5594456.09
+    }
+   ],
+   "revenue_projection": 28164317.45,
+   "forecast_year": 2060,
+   "municipal_share_pct": 6.14
+  },
+  "0714": {
+   "name": "Newark City",
+   "county": "Essex",
+   "reported_rows": 858,
+   "dated_rows": 0,
+   "reported_billing": 31568897.85,
+   "dated_billing": 0.0,
+   "dated_billing_share_pct": 0.0,
+   "payment_schedule": null,
+   "revenue_projection": null,
+   "forecast_year": null,
+   "municipal_share_pct": 3.24
+  },
+  "0715": {
+   "name": "North Caldwell Borough",
+   "county": "Essex",
+   "reported_rows": 1,
+   "dated_rows": 0,
+   "reported_billing": 36502.72,
+   "dated_billing": 0.0,
+   "dated_billing_share_pct": 0.0,
+   "payment_schedule": null,
+   "revenue_projection": null,
+   "forecast_year": null,
+   "municipal_share_pct": 0.26
+  },
+  "0716": {
+   "name": "Nutley Township",
+   "county": "Essex",
+   "reported_rows": 3,
+   "dated_rows": 3,
+   "reported_billing": 2914749.8,
+   "dated_billing": 2914749.8,
+   "dated_billing_share_pct": 100.0,
+   "payment_schedule": [
+    {
+     "year": 2026,
+     "value": 2914749.8
+    },
+    {
+     "year": 2027,
+     "value": 2914749.8
+    },
+    {
+     "year": 2028,
+     "value": 2914749.8
+    },
+    {
+     "year": 2029,
+     "value": 2914749.8
+    },
+    {
+     "year": 2030,
+     "value": 2914749.8
+    },
+    {
+     "year": 2031,
+     "value": 2914749.8
+    },
+    {
+     "year": 2032,
+     "value": 2914749.8
+    },
+    {
+     "year": 2033,
+     "value": 2914749.8
+    },
+    {
+     "year": 2034,
+     "value": 2914749.8
+    },
+    {
+     "year": 2035,
+     "value": 2914749.8
+    }
+   ],
+   "revenue_projection": 14573749.0,
+   "forecast_year": 2054,
+   "municipal_share_pct": 4.63
+  },
+  "0717": {
+   "name": "City of Orange Township",
+   "county": "Essex",
+   "reported_rows": 27,
+   "dated_rows": 0,
+   "reported_billing": 2560817.0,
+   "dated_billing": 0.0,
+   "dated_billing_share_pct": 0.0,
+   "payment_schedule": null,
+   "revenue_projection": null,
+   "forecast_year": null,
+   "municipal_share_pct": 2.68
+  },
+  "0718": {
+   "name": "Roseland Borough",
+   "county": "Essex",
+   "reported_rows": 1,
+   "dated_rows": 1,
+   "reported_billing": 144909.26,
+   "dated_billing": 144909.26,
+   "dated_billing_share_pct": 100.0,
+   "payment_schedule": [
+    {
+     "year": 2026,
+     "value": 144909.26
+    },
+    {
+     "year": 2027,
+     "value": 144909.26
+    },
+    {
+     "year": 2028,
+     "value": 144909.26
+    },
+    {
+     "year": 2029,
+     "value": 144909.26
+    },
+    {
+     "year": 2030,
+     "value": 0.0
+    },
+    {
+     "year": 2031,
+     "value": 0.0
+    },
+    {
+     "year": 2032,
+     "value": 0.0
+    },
+    {
+     "year": 2033,
+     "value": 0.0
+    },
+    {
+     "year": 2034,
+     "value": 0.0
+    },
+    {
+     "year": 2035,
+     "value": 0.0
+    }
+   ],
+   "revenue_projection": 579637.04,
+   "forecast_year": 2029,
+   "municipal_share_pct": 0.85
+  },
+  "0719": {
+   "name": "South Orange Village Township",
+   "county": "Essex",
+   "reported_rows": 18,
+   "dated_rows": 17,
+   "reported_billing": 4229850.6,
+   "dated_billing": 4217187.87,
+   "dated_billing_share_pct": 99.7,
+   "payment_schedule": [
+    {
+     "year": 2026,
+     "value": 3511078.66
+    },
+    {
+     "year": 2027,
+     "value": 3511078.66
+    },
+    {
+     "year": 2028,
+     "value": 3511078.66
+    },
+    {
+     "year": 2029,
+     "value": 3511078.66
+    },
+    {
+     "year": 2030,
+     "value": 3511078.66
+    },
+    {
+     "year": 2031,
+     "value": 3511078.66
+    },
+    {
+     "year": 2032,
+     "value": 3511078.66
+    },
+    {
+     "year": 2033,
+     "value": 2382923.03
+    },
+    {
+     "year": 2034,
+     "value": 2382923.03
+    },
+    {
+     "year": 2035,
+     "value": 2382923.03
+    }
+   ],
+   "revenue_projection": 17555393.3,
+   "forecast_year": 2053,
+   "municipal_share_pct": 9.08
+  },
+  "0720": {
+   "name": "Verona Township",
+   "county": "Essex",
+   "reported_rows": 6,
+   "dated_rows": 0,
+   "reported_billing": 1725126.16,
+   "dated_billing": 0.0,
+   "dated_billing_share_pct": 0.0,
+   "payment_schedule": null,
+   "revenue_projection": null,
+   "forecast_year": null,
+   "municipal_share_pct": 6.23
+  },
+  "0722": {
+   "name": "West Orange Township",
+   "county": "Essex",
+   "reported_rows": 7,
+   "dated_rows": 0,
+   "reported_billing": 2210763.12,
+   "dated_billing": 0.0,
+   "dated_billing_share_pct": 0.0,
+   "payment_schedule": null,
+   "revenue_projection": null,
+   "forecast_year": null,
+   "municipal_share_pct": 2.16
+  },
+  "0801": {
+   "name": "Clayton Borough",
+   "county": "Gloucester",
+   "reported_rows": 4,
+   "dated_rows": 4,
+   "reported_billing": 1102422.06,
+   "dated_billing": 1102422.06,
+   "dated_billing_share_pct": 100.0,
+   "payment_schedule": [
+    {
+     "year": 2026,
+     "value": 1102422.06
+    },
+    {
+     "year": 2027,
+     "value": 1102422.06
+    },
+    {
+     "year": 2028,
+     "value": 1102422.06
+    },
+    {
+     "year": 2029,
+     "value": 1102422.06
+    },
+    {
+     "year": 2030,
+     "value": 789540.85
+    },
+    {
+     "year": 2031,
+     "value": 789540.85
+    },
+    {
+     "year": 2032,
+     "value": 789540.85
+    },
+    {
+     "year": 2033,
+     "value": 789540.85
+    },
+    {
+     "year": 2034,
+     "value": 789540.85
+    },
+    {
+     "year": 2035,
+     "value": 789540.85
+    }
+   ],
+   "revenue_projection": 5199229.09,
+   "forecast_year": 2048,
+   "municipal_share_pct": 11.21
+  },
+  "0802": {
+   "name": "Deptford Township",
+   "county": "Gloucester",
+   "reported_rows": 5,
+   "dated_rows": 4,
+   "reported_billing": 136481.49,
+   "dated_billing": 98719.22,
+   "dated_billing_share_pct": 72.3,
+   "payment_schedule": [
+    {
+     "year": 2026,
+     "value": 98719.22
+    },
+    {
+     "year": 2027,
+     "value": 88582.96
+    },
+    {
+     "year": 2028,
+     "value": 88582.96
+    },
+    {
+     "year": 2029,
+     "value": 88582.96
+    },
+    {
+     "year": 2030,
+     "value": 88582.96
+    },
+    {
+     "year": 2031,
+     "value": 88582.96
+    },
+    {
+     "year": 2032,
+     "value": 88582.96
+    },
+    {
+     "year": 2033,
+     "value": 88582.96
+    },
+    {
+     "year": 2034,
+     "value": 88582.96
+    },
+    {
+     "year": 2035,
+     "value": 88582.96
+    }
+   ],
+   "revenue_projection": 453051.06,
+   "forecast_year": 2058,
+   "municipal_share_pct": 0.34
+  },
+  "0803": {
+   "name": "East Greenwich Township",
+   "county": "Gloucester",
+   "reported_rows": 4,
+   "dated_rows": 0,
+   "reported_billing": 1048010.09,
+   "dated_billing": 0.0,
+   "dated_billing_share_pct": 0.0,
+   "payment_schedule": null,
+   "revenue_projection": null,
+   "forecast_year": null,
+   "municipal_share_pct": 9.84
+  },
+  "0806": {
+   "name": "Glassboro Borough",
+   "county": "Gloucester",
+   "reported_rows": 18,
+   "dated_rows": 18,
+   "reported_billing": 615969.72,
+   "dated_billing": 615969.72,
+   "dated_billing_share_pct": 100.0,
+   "payment_schedule": [
+    {
+     "year": 2026,
+     "value": 615969.72
+    },
+    {
+     "year": 2027,
+     "value": 615969.72
+    },
+    {
+     "year": 2028,
+     "value": 615969.72
+    },
+    {
+     "year": 2029,
+     "value": 615969.72
+    },
+    {
+     "year": 2030,
+     "value": 615969.72
+    },
+    {
+     "year": 2031,
+     "value": 615969.72
+    },
+    {
+     "year": 2032,
+     "value": 615969.72
+    },
+    {
+     "year": 2033,
+     "value": 615969.72
+    },
+    {
+     "year": 2034,
+     "value": 615969.72
+    },
+    {
+     "year": 2035,
+     "value": 615969.72
+    }
+   ],
+   "revenue_projection": 3079848.6,
+   "forecast_year": 2050,
+   "municipal_share_pct": 1.88
+  },
+  "0807": {
+   "name": "Greenwich Township",
+   "county": "Gloucester",
+   "reported_rows": 4,
+   "dated_rows": 4,
+   "reported_billing": 2074476.46,
+   "dated_billing": 2074476.46,
+   "dated_billing_share_pct": 100.0,
+   "payment_schedule": [
+    {
+     "year": 2026,
+     "value": 2074476.46
+    },
+    {
+     "year": 2027,
+     "value": 2074476.46
+    },
+    {
+     "year": 2028,
+     "value": 2074476.46
+    },
+    {
+     "year": 2029,
+     "value": 2074476.46
+    },
+    {
+     "year": 2030,
+     "value": 2074476.46
+    },
+    {
+     "year": 2031,
+     "value": 2074476.46
+    },
+    {
+     "year": 2032,
+     "value": 2074476.46
+    },
+    {
+     "year": 2033,
+     "value": 2074476.46
+    },
+    {
+     "year": 2034,
+     "value": 2074476.46
+    },
+    {
+     "year": 2035,
+     "value": 2074476.46
+    }
+   ],
+   "revenue_projection": 10372382.3,
+   "forecast_year": 2050,
+   "municipal_share_pct": 15.34
+  },
+  "0808": {
+   "name": "Harrison Township",
+   "county": "Gloucester",
+   "reported_rows": 7,
+   "dated_rows": 4,
+   "reported_billing": 432440.68,
+   "dated_billing": 158381.68,
+   "dated_billing_share_pct": 36.6,
+   "payment_schedule": [
+    {
+     "year": 2026,
+     "value": 158381.68
+    },
+    {
+     "year": 2027,
+     "value": 158381.68
+    },
+    {
+     "year": 2028,
+     "value": 158381.68
+    },
+    {
+     "year": 2029,
+     "value": 158381.68
+    },
+    {
+     "year": 2030,
+     "value": 158381.68
+    },
+    {
+     "year": 2031,
+     "value": 158381.68
+    },
+    {
+     "year": 2032,
+     "value": 158381.68
+    },
+    {
+     "year": 2033,
+     "value": 158381.68
+    },
+    {
+     "year": 2034,
+     "value": 158381.68
+    },
+    {
+     "year": 2035,
+     "value": 158381.68
+    }
+   ],
+   "revenue_projection": 791908.4,
+   "forecast_year": 2054,
+   "municipal_share_pct": 2.96
+  },
+  "0811": {
+   "name": "Monroe Township",
+   "county": "Gloucester",
+   "reported_rows": 9,
+   "dated_rows": 0,
+   "reported_billing": 0.0,
+   "dated_billing": 0.0,
+   "dated_billing_share_pct": null,
+   "payment_schedule": null,
+   "revenue_projection": null,
+   "forecast_year": null,
+   "municipal_share_pct": 0.0
+  },
+  "0818": {
+   "name": "Washington Township",
+   "county": "Gloucester",
+   "reported_rows": 5,
+   "dated_rows": 0,
+   "reported_billing": 607487.6,
+   "dated_billing": 0.0,
+   "dated_billing_share_pct": 0.0,
+   "payment_schedule": null,
+   "revenue_projection": null,
+   "forecast_year": null,
+   "municipal_share_pct": 1.26
+  },
+  "0820": {
+   "name": "West Deptford Township",
+   "county": "Gloucester",
+   "reported_rows": 4,
+   "dated_rows": 4,
+   "reported_billing": 2852758.44,
+   "dated_billing": 2852758.44,
+   "dated_billing_share_pct": 100.0,
+   "payment_schedule": [
+    {
+     "year": 2026,
+     "value": 2791077.44
+    },
+    {
+     "year": 2027,
+     "value": 2791077.44
+    },
+    {
+     "year": 2028,
+     "value": 2791077.44
+    },
+    {
+     "year": 2029,
+     "value": 2791077.44
+    },
+    {
+     "year": 2030,
+     "value": 2791077.44
+    },
+    {
+     "year": 2031,
+     "value": 2791077.44
+    },
+    {
+     "year": 2032,
+     "value": 2791077.44
+    },
+    {
+     "year": 2033,
+     "value": 2791077.44
+    },
+    {
+     "year": 2034,
+     "value": 2791077.44
+    },
+    {
+     "year": 2035,
+     "value": 2791077.44
+    }
+   ],
+   "revenue_projection": 13955387.2,
+   "forecast_year": 2055,
+   "municipal_share_pct": 7.15
+  },
+  "0822": {
+   "name": "Woodbury City",
+   "county": "Gloucester",
+   "reported_rows": 12,
+   "dated_rows": 12,
+   "reported_billing": 778468.89,
+   "dated_billing": 778468.89,
+   "dated_billing_share_pct": 100.0,
+   "payment_schedule": [
+    {
+     "year": 2026,
+     "value": 763468.89
+    },
+    {
+     "year": 2027,
+     "value": 763468.89
+    },
+    {
+     "year": 2028,
+     "value": 751245.69
+    },
+    {
+     "year": 2029,
+     "value": 751245.69
+    },
+    {
+     "year": 2030,
+     "value": 751245.69
+    },
+    {
+     "year": 2031,
+     "value": 751245.69
+    },
+    {
+     "year": 2032,
+     "value": 751245.69
+    },
+    {
+     "year": 2033,
+     "value": 751245.69
+    },
+    {
+     "year": 2034,
+     "value": 751245.69
+    },
+    {
+     "year": 2035,
+     "value": 751245.69
+    }
+   ],
+   "revenue_projection": 3780674.85,
+   "forecast_year": 2046,
+   "municipal_share_pct": 4.12
+  },
+  "0824": {
+   "name": "Woolwich Township",
+   "county": "Gloucester",
+   "reported_rows": 9,
+   "dated_rows": 6,
+   "reported_billing": 1726465.22,
+   "dated_billing": 1516929.37,
+   "dated_billing_share_pct": 87.9,
+   "payment_schedule": [
+    {
+     "year": 2026,
+     "value": 1516929.37
+    },
+    {
+     "year": 2027,
+     "value": 1516929.37
+    },
+    {
+     "year": 2028,
+     "value": 1516929.37
+    },
+    {
+     "year": 2029,
+     "value": 1516929.37
+    },
+    {
+     "year": 2030,
+     "value": 1516929.37
+    },
+    {
+     "year": 2031,
+     "value": 1516929.37
+    },
+    {
+     "year": 2032,
+     "value": 1516929.37
+    },
+    {
+     "year": 2033,
+     "value": 1516929.37
+    },
+    {
+     "year": 2034,
+     "value": 1516929.37
+    },
+    {
+     "year": 2035,
+     "value": 1516929.37
+    }
+   ],
+   "revenue_projection": 7584646.85,
+   "forecast_year": 2054,
+   "municipal_share_pct": 7.88
+  },
+  "0901": {
+   "name": "Bayonne City",
+   "county": "Hudson",
+   "reported_rows": 47,
+   "dated_rows": 42,
+   "reported_billing": 14619654.14,
+   "dated_billing": 12484764.65,
+   "dated_billing_share_pct": 85.4,
+   "payment_schedule": [
+    {
+     "year": 2026,
+     "value": 12484764.65
+    },
+    {
+     "year": 2027,
+     "value": 12484764.65
+    },
+    {
+     "year": 2028,
+     "value": 12484764.65
+    },
+    {
+     "year": 2029,
+     "value": 12484764.65
+    },
+    {
+     "year": 2030,
+     "value": 12484764.65
+    },
+    {
+     "year": 2031,
+     "value": 12484764.65
+    },
+    {
+     "year": 2032,
+     "value": 12484764.65
+    },
+    {
+     "year": 2033,
+     "value": 12368565.59
+    },
+    {
+     "year": 2034,
+     "value": 12368565.59
+    },
+    {
+     "year": 2035,
+     "value": 12368565.59
+    }
+   ],
+   "revenue_projection": 62423823.25,
+   "forecast_year": 2052,
+   "municipal_share_pct": 9.23
+  },
+  "0904": {
+   "name": "Harrison Town",
+   "county": "Hudson",
+   "reported_rows": 22,
+   "dated_rows": 18,
+   "reported_billing": 17766249.16,
+   "dated_billing": 17157347.28,
+   "dated_billing_share_pct": 96.6,
+   "payment_schedule": [
+    {
+     "year": 2026,
+     "value": 17157347.28
+    },
+    {
+     "year": 2027,
+     "value": 17157347.28
+    },
+    {
+     "year": 2028,
+     "value": 15985095.21
+    },
+    {
+     "year": 2029,
+     "value": 15985095.21
+    },
+    {
+     "year": 2030,
+     "value": 15985095.21
+    },
+    {
+     "year": 2031,
+     "value": 15985095.21
+    },
+    {
+     "year": 2032,
+     "value": 15985095.21
+    },
+    {
+     "year": 2033,
+     "value": 15985095.21
+    },
+    {
+     "year": 2034,
+     "value": 15985095.21
+    },
+    {
+     "year": 2035,
+     "value": 15549455.37
+    }
+   ],
+   "revenue_projection": 82269980.19,
+   "forecast_year": 2051,
+   "municipal_share_pct": 31.96
+  },
+  "0905": {
+   "name": "Hoboken City",
+   "county": "Hudson",
+   "reported_rows": 30,
+   "dated_rows": 22,
+   "reported_billing": 20278633.03,
+   "dated_billing": 13805622.92,
+   "dated_billing_share_pct": 68.1,
+   "payment_schedule": [
+    {
+     "year": 2026,
+     "value": 9953558.18
+    },
+    {
+     "year": 2027,
+     "value": 9398168.41
+    },
+    {
+     "year": 2028,
+     "value": 8194354.41
+    },
+    {
+     "year": 2029,
+     "value": 6364634.67
+    },
+    {
+     "year": 2030,
+     "value": 4966769.7
+    },
+    {
+     "year": 2031,
+     "value": 4720982.08
+    },
+    {
+     "year": 2032,
+     "value": 4720982.08
+    },
+    {
+     "year": 2033,
+     "value": 3327782.08
+    },
+    {
+     "year": 2034,
+     "value": 3327782.08
+    },
+    {
+     "year": 2035,
+     "value": 3327782.08
+    }
+   ],
+   "revenue_projection": 38877485.37,
+   "forecast_year": 2058,
+   "municipal_share_pct": 14.13
+  },
+  "0906": {
+   "name": "Jersey City City",
+   "county": "Hudson",
+   "reported_rows": 158,
+   "dated_rows": 156,
+   "reported_billing": 95447966.5,
+   "dated_billing": 94624932.44,
+   "dated_billing_share_pct": 99.1,
+   "payment_schedule": [
+    {
+     "year": 2026,
+     "value": 77293503.95
+    },
+    {
+     "year": 2027,
+     "value": 71243448.21
+    },
+    {
+     "year": 2028,
+     "value": 52239224.0
+    },
+    {
+     "year": 2029,
+     "value": 33054745.11
+    },
+    {
+     "year": 2030,
+     "value": 22583303.94
+    },
+    {
+     "year": 2031,
+     "value": 21294325.67
+    },
+    {
+     "year": 2032,
+     "value": 20908918.34
+    },
+    {
+     "year": 2033,
+     "value": 20651183.78
+    },
+    {
+     "year": 2034,
+     "value": 20309922.19
+    },
+    {
+     "year": 2035,
+     "value": 17997761.89
+    }
+   ],
+   "revenue_projection": 256414225.21,
+   "forecast_year": 2099,
+   "municipal_share_pct": 13.07
+  },
+  "0908": {
+   "name": "North Bergen Township",
+   "county": "Hudson",
+   "reported_rows": 9,
+   "dated_rows": 0,
+   "reported_billing": 4868228.66,
+   "dated_billing": 0.0,
+   "dated_billing_share_pct": 0.0,
+   "payment_schedule": null,
+   "revenue_projection": null,
+   "forecast_year": null,
+   "municipal_share_pct": 4.2
+  },
+  "0909": {
+   "name": "Secaucus Town",
+   "county": "Hudson",
+   "reported_rows": 6,
+   "dated_rows": 0,
+   "reported_billing": 2066385.26,
+   "dated_billing": 0.0,
+   "dated_billing_share_pct": 0.0,
+   "payment_schedule": null,
+   "revenue_projection": null,
+   "forecast_year": null,
+   "municipal_share_pct": 2.56
+  },
+  "0910": {
+   "name": "Union City City",
+   "county": "Hudson",
+   "reported_rows": 5,
+   "dated_rows": 0,
+   "reported_billing": 484482.01,
+   "dated_billing": 0.0,
+   "dated_billing_share_pct": 0.0,
+   "payment_schedule": null,
+   "revenue_projection": null,
+   "forecast_year": null,
+   "municipal_share_pct": 0.25
+  },
+  "0911": {
+   "name": "Weehawken Township",
+   "county": "Hudson",
+   "reported_rows": 11,
+   "dated_rows": 0,
+   "reported_billing": 10291876.34,
+   "dated_billing": 0.0,
+   "dated_billing_share_pct": 0.0,
+   "payment_schedule": null,
+   "revenue_projection": null,
+   "forecast_year": null,
+   "municipal_share_pct": 15.92
+  },
+  "0912": {
+   "name": "West New York Town",
+   "county": "Hudson",
+   "reported_rows": 11,
+   "dated_rows": 6,
+   "reported_billing": 25813538.14,
+   "dated_billing": 10487424.79,
+   "dated_billing_share_pct": 40.6,
+   "payment_schedule": [
+    {
+     "year": 2026,
+     "value": 10487424.79
+    },
+    {
+     "year": 2027,
+     "value": 10487424.79
+    },
+    {
+     "year": 2028,
+     "value": 10487424.79
+    },
+    {
+     "year": 2029,
+     "value": 10487424.79
+    },
+    {
+     "year": 2030,
+     "value": 8099913.79
+    },
+    {
+     "year": 2031,
+     "value": 8099913.79
+    },
+    {
+     "year": 2032,
+     "value": 6548651.53
+    },
+    {
+     "year": 2033,
+     "value": 6548651.53
+    },
+    {
+     "year": 2034,
+     "value": 6548651.53
+    },
+    {
+     "year": 2035,
+     "value": 6548651.53
+    }
+   ],
+   "revenue_projection": 50049612.95,
+   "forecast_year": 2048,
+   "municipal_share_pct": 24.7
+  },
+  "1005": {
+   "name": "Clinton Town",
+   "county": "Hunterdon",
+   "reported_rows": 1,
+   "dated_rows": 1,
+   "reported_billing": 186393.0,
+   "dated_billing": 186393.0,
+   "dated_billing_share_pct": 100.0,
+   "payment_schedule": [
+    {
+     "year": 2026,
+     "value": 186393.0
+    },
+    {
+     "year": 2027,
+     "value": 186393.0
+    },
+    {
+     "year": 2028,
+     "value": 186393.0
+    },
+    {
+     "year": 2029,
+     "value": 186393.0
+    },
+    {
+     "year": 2030,
+     "value": 186393.0
+    },
+    {
+     "year": 2031,
+     "value": 186393.0
+    },
+    {
+     "year": 2032,
+     "value": 186393.0
+    },
+    {
+     "year": 2033,
+     "value": 186393.0
+    },
+    {
+     "year": 2034,
+     "value": 186393.0
+    },
+    {
+     "year": 2035,
+     "value": 186393.0
+    }
+   ],
+   "revenue_projection": 931965.0,
+   "forecast_year": 2053,
+   "municipal_share_pct": 3.0
+  },
+  "1006": {
+   "name": "Clinton Township",
+   "county": "Hunterdon",
+   "reported_rows": 1,
+   "dated_rows": 1,
+   "reported_billing": 42474.4,
+   "dated_billing": 42474.4,
+   "dated_billing_share_pct": 100.0,
+   "payment_schedule": [
+    {
+     "year": 2026,
+     "value": 42474.4
+    },
+    {
+     "year": 2027,
+     "value": 42474.4
+    },
+    {
+     "year": 2028,
+     "value": 42474.4
+    },
+    {
+     "year": 2029,
+     "value": 42474.4
+    },
+    {
+     "year": 2030,
+     "value": 42474.4
+    },
+    {
+     "year": 2031,
+     "value": 42474.4
+    },
+    {
+     "year": 2032,
+     "value": 42474.4
+    },
+    {
+     "year": 2033,
+     "value": 42474.4
+    },
+    {
+     "year": 2034,
+     "value": 42474.4
+    },
+    {
+     "year": 2035,
+     "value": 42474.4
+    }
+   ],
+   "revenue_projection": 212372.0,
+   "forecast_year": 2051,
+   "municipal_share_pct": 0.25
+  },
+  "1017": {
+   "name": "Lambertville City",
+   "county": "Hunterdon",
+   "reported_rows": 3,
+   "dated_rows": 0,
+   "reported_billing": 127900.0,
+   "dated_billing": 0.0,
+   "dated_billing_share_pct": 0.0,
+   "payment_schedule": null,
+   "revenue_projection": null,
+   "forecast_year": null,
+   "municipal_share_pct": 1.65
+  },
+  "1021": {
+   "name": "Raritan Township",
+   "county": "Hunterdon",
+   "reported_rows": 2,
+   "dated_rows": 0,
+   "reported_billing": 128148.0,
+   "dated_billing": 0.0,
+   "dated_billing_share_pct": 0.0,
+   "payment_schedule": null,
+   "revenue_projection": null,
+   "forecast_year": null,
+   "municipal_share_pct": 0.5
+  },
+  "1022": {
+   "name": "Readington Township",
+   "county": "Hunterdon",
+   "reported_rows": 4,
+   "dated_rows": 0,
+   "reported_billing": 0.0,
+   "dated_billing": 0.0,
+   "dated_billing_share_pct": null,
+   "payment_schedule": null,
+   "revenue_projection": null,
+   "forecast_year": null,
+   "municipal_share_pct": 0.0
+  },
+  "1101": {
+   "name": "East Windsor Township",
+   "county": "Mercer",
+   "reported_rows": 4,
+   "dated_rows": 1,
+   "reported_billing": 1455279.86,
+   "dated_billing": 167156.0,
+   "dated_billing_share_pct": 11.5,
+   "payment_schedule": [
+    {
+     "year": 2026,
+     "value": 167156.0
+    },
+    {
+     "year": 2027,
+     "value": 167156.0
+    },
+    {
+     "year": 2028,
+     "value": 167156.0
+    },
+    {
+     "year": 2029,
+     "value": 167156.0
+    },
+    {
+     "year": 2030,
+     "value": 167156.0
+    },
+    {
+     "year": 2031,
+     "value": 167156.0
+    },
+    {
+     "year": 2032,
+     "value": 167156.0
+    },
+    {
+     "year": 2033,
+     "value": 167156.0
+    },
+    {
+     "year": 2034,
+     "value": 0.0
+    },
+    {
+     "year": 2035,
+     "value": 0.0
+    }
+   ],
+   "revenue_projection": 835780.0,
+   "forecast_year": 2033,
+   "municipal_share_pct": 5.74
+  },
+  "1102": {
+   "name": "Ewing Township",
+   "county": "Mercer",
+   "reported_rows": 7,
+   "dated_rows": 7,
+   "reported_billing": 1089797.18,
+   "dated_billing": 1089797.18,
+   "dated_billing_share_pct": 100.0,
+   "payment_schedule": [
+    {
+     "year": 2026,
+     "value": 1089797.18
+    },
+    {
+     "year": 2027,
+     "value": 1089797.18
+    },
+    {
+     "year": 2028,
+     "value": 1089797.18
+    },
+    {
+     "year": 2029,
+     "value": 1089797.18
+    },
+    {
+     "year": 2030,
+     "value": 1089797.18
+    },
+    {
+     "year": 2031,
+     "value": 1089797.18
+    },
+    {
+     "year": 2032,
+     "value": 1089797.18
+    },
+    {
+     "year": 2033,
+     "value": 1089797.18
+    },
+    {
+     "year": 2034,
+     "value": 1089797.18
+    },
+    {
+     "year": 2035,
+     "value": 1089797.18
+    }
+   ],
+   "revenue_projection": 5448985.9,
+   "forecast_year": 2051,
+   "municipal_share_pct": 1.83
+  },
+  "1103": {
+   "name": "Hamilton Township",
+   "county": "Mercer",
+   "reported_rows": 8,
+   "dated_rows": 6,
+   "reported_billing": 2798671.07,
+   "dated_billing": 1424976.07,
+   "dated_billing_share_pct": 50.9,
+   "payment_schedule": [
+    {
+     "year": 2026,
+     "value": 1424976.07
+    },
+    {
+     "year": 2027,
+     "value": 1424976.07
+    },
+    {
+     "year": 2028,
+     "value": 1424976.07
+    },
+    {
+     "year": 2029,
+     "value": 1307782.0
+    },
+    {
+     "year": 2030,
+     "value": 1294932.0
+    },
+    {
+     "year": 2031,
+     "value": 1294932.0
+    },
+    {
+     "year": 2032,
+     "value": 1294932.0
+    },
+    {
+     "year": 2033,
+     "value": 1294932.0
+    },
+    {
+     "year": 2034,
+     "value": 1294932.0
+    },
+    {
+     "year": 2035,
+     "value": 1149782.0
+    }
+   ],
+   "revenue_projection": 6877642.21,
+   "forecast_year": 2054,
+   "municipal_share_pct": 1.64
+  },
+  "1106": {
+   "name": "Hopewell Township",
+   "county": "Mercer",
+   "reported_rows": 6,
+   "dated_rows": 0,
+   "reported_billing": 3495017.0,
+   "dated_billing": 0.0,
+   "dated_billing_share_pct": 0.0,
+   "payment_schedule": null,
+   "revenue_projection": null,
+   "forecast_year": null,
+   "municipal_share_pct": 11.53
+  },
+  "1107": {
+   "name": "Lawrence Township",
+   "county": "Mercer",
+   "reported_rows": 5,
+   "dated_rows": 5,
+   "reported_billing": 793963.44,
+   "dated_billing": 793963.44,
+   "dated_billing_share_pct": 100.0,
+   "payment_schedule": [
+    {
+     "year": 2026,
+     "value": 793963.44
+    },
+    {
+     "year": 2027,
+     "value": 793963.44
+    },
+    {
+     "year": 2028,
+     "value": 793963.44
+    },
+    {
+     "year": 2029,
+     "value": 793963.44
+    },
+    {
+     "year": 2030,
+     "value": 793963.44
+    },
+    {
+     "year": 2031,
+     "value": 780158.76
+    },
+    {
+     "year": 2032,
+     "value": 780158.76
+    },
+    {
+     "year": 2033,
+     "value": 780158.76
+    },
+    {
+     "year": 2034,
+     "value": 780158.76
+    },
+    {
+     "year": 2035,
+     "value": 780158.76
+    }
+   ],
+   "revenue_projection": 3969817.2,
+   "forecast_year": 2058,
+   "municipal_share_pct": 1.31
+  },
+  "1111": {
+   "name": "Trenton City",
+   "county": "Mercer",
+   "reported_rows": 122,
+   "dated_rows": 118,
+   "reported_billing": 5153657.06,
+   "dated_billing": 2333400.0,
+   "dated_billing_share_pct": 45.3,
+   "payment_schedule": [
+    {
+     "year": 2026,
+     "value": 2218000.0
+    },
+    {
+     "year": 2027,
+     "value": 2198000.0
+    },
+    {
+     "year": 2028,
+     "value": 1933000.0
+    },
+    {
+     "year": 2029,
+     "value": 1706000.0
+    },
+    {
+     "year": 2030,
+     "value": 1607000.0
+    },
+    {
+     "year": 2031,
+     "value": 1562000.0
+    },
+    {
+     "year": 2032,
+     "value": 1532000.0
+    },
+    {
+     "year": 2033,
+     "value": 1432000.0
+    },
+    {
+     "year": 2034,
+     "value": 1112000.0
+    },
+    {
+     "year": 2035,
+     "value": 1112000.0
+    }
+   ],
+   "revenue_projection": 9662000.0,
+   "forecast_year": 2065,
+   "municipal_share_pct": 1.85
+  },
+  "1112": {
+   "name": "Robbinsville Township",
+   "county": "Mercer",
+   "reported_rows": 21,
+   "dated_rows": 21,
+   "reported_billing": 1017038.16,
+   "dated_billing": 1017038.16,
+   "dated_billing_share_pct": 100.0,
+   "payment_schedule": [
+    {
+     "year": 2026,
+     "value": 1017038.16
+    },
+    {
+     "year": 2027,
+     "value": 1017038.16
+    },
+    {
+     "year": 2028,
+     "value": 1017038.16
+    },
+    {
+     "year": 2029,
+     "value": 1017038.16
+    },
+    {
+     "year": 2030,
+     "value": 1004698.89
+    },
+    {
+     "year": 2031,
+     "value": 761910.19
+    },
+    {
+     "year": 2032,
+     "value": 761910.19
+    },
+    {
+     "year": 2033,
+     "value": 757406.11
+    },
+    {
+     "year": 2034,
+     "value": 752898.46
+    },
+    {
+     "year": 2035,
+     "value": 126209.67
+    }
+   ],
+   "revenue_projection": 5072851.53,
+   "forecast_year": 2051,
+   "municipal_share_pct": 3.15
+  },
+  "1113": {
+   "name": "West Windsor Township",
+   "county": "Mercer",
+   "reported_rows": 2,
+   "dated_rows": 0,
+   "reported_billing": 14442600.0,
+   "dated_billing": 0.0,
+   "dated_billing_share_pct": 0.0,
+   "payment_schedule": null,
+   "revenue_projection": null,
+   "forecast_year": null,
+   "municipal_share_pct": 27.01
+  },
+  "1114": {
+   "name": "Princeton",
+   "county": "Mercer",
+   "reported_rows": 1,
+   "dated_rows": 0,
+   "reported_billing": 727229.0,
+   "dated_billing": 0.0,
+   "dated_billing_share_pct": 0.0,
+   "payment_schedule": null,
+   "revenue_projection": null,
+   "forecast_year": null,
+   "municipal_share_pct": 0.98
+  },
+  "1201": {
+   "name": "Carteret Borough",
+   "county": "Middlesex",
+   "reported_rows": 17,
+   "dated_rows": 0,
+   "reported_billing": 4550363.06,
+   "dated_billing": 0.0,
+   "dated_billing_share_pct": 0.0,
+   "payment_schedule": null,
+   "revenue_projection": null,
+   "forecast_year": null,
+   "municipal_share_pct": 7.71
+  },
+  "1203": {
+   "name": "Dunellen Borough",
+   "county": "Middlesex",
+   "reported_rows": 4,
+   "dated_rows": 3,
+   "reported_billing": 1405154.8,
+   "dated_billing": 1374120.28,
+   "dated_billing_share_pct": 97.8,
+   "payment_schedule": [
+    {
+     "year": 2026,
+     "value": 1374120.28
+    },
+    {
+     "year": 2027,
+     "value": 1374120.28
+    },
+    {
+     "year": 2028,
+     "value": 1374120.28
+    },
+    {
+     "year": 2029,
+     "value": 1374120.28
+    },
+    {
+     "year": 2030,
+     "value": 1374120.28
+    },
+    {
+     "year": 2031,
+     "value": 1374120.28
+    },
+    {
+     "year": 2032,
+     "value": 1374120.28
+    },
+    {
+     "year": 2033,
+     "value": 1374120.28
+    },
+    {
+     "year": 2034,
+     "value": 1374120.28
+    },
+    {
+     "year": 2035,
+     "value": 1374120.28
+    }
+   ],
+   "revenue_projection": 6870601.4,
+   "forecast_year": 2054,
+   "municipal_share_pct": 13.12
+  },
+  "1204": {
+   "name": "East Brunswick Township",
+   "county": "Middlesex",
+   "reported_rows": 8,
+   "dated_rows": 8,
+   "reported_billing": 3974340.72,
+   "dated_billing": 3974340.72,
+   "dated_billing_share_pct": 100.0,
+   "payment_schedule": [
+    {
+     "year": 2026,
+     "value": 3974340.72
+    },
+    {
+     "year": 2027,
+     "value": 3974340.72
+    },
+    {
+     "year": 2028,
+     "value": 3974340.72
+    },
+    {
+     "year": 2029,
+     "value": 3798640.72
+    },
+    {
+     "year": 2030,
+     "value": 3798640.72
+    },
+    {
+     "year": 2031,
+     "value": 3798640.72
+    },
+    {
+     "year": 2032,
+     "value": 3783242.72
+    },
+    {
+     "year": 2033,
+     "value": 3783242.72
+    },
+    {
+     "year": 2034,
+     "value": 3783242.72
+    },
+    {
+     "year": 2035,
+     "value": 3783242.72
+    }
+   ],
+   "revenue_projection": 19520303.6,
+   "forecast_year": 2071,
+   "municipal_share_pct": 5.09
+  },
+  "1205": {
+   "name": "Edison Township",
+   "county": "Middlesex",
+   "reported_rows": 13,
+   "dated_rows": 0,
+   "reported_billing": 3346667.21,
+   "dated_billing": 0.0,
+   "dated_billing_share_pct": 0.0,
+   "payment_schedule": null,
+   "revenue_projection": null,
+   "forecast_year": null,
+   "municipal_share_pct": 1.99
+  },
+  "1206": {
+   "name": "Helmetta Borough",
+   "county": "Middlesex",
+   "reported_rows": 1,
+   "dated_rows": 0,
+   "reported_billing": 0.0,
+   "dated_billing": 0.0,
+   "dated_billing_share_pct": null,
+   "payment_schedule": null,
+   "revenue_projection": null,
+   "forecast_year": null,
+   "municipal_share_pct": 0.0
+  },
+  "1207": {
+   "name": "Highland Park Borough",
+   "county": "Middlesex",
+   "reported_rows": 4,
+   "dated_rows": 1,
+   "reported_billing": 137426.24,
+   "dated_billing": 101414.32,
+   "dated_billing_share_pct": 73.8,
+   "payment_schedule": [
+    {
+     "year": 2026,
+     "value": 101414.32
+    },
+    {
+     "year": 2027,
+     "value": 101414.32
+    },
+    {
+     "year": 2028,
+     "value": 101414.32
+    },
+    {
+     "year": 2029,
+     "value": 101414.32
+    },
+    {
+     "year": 2030,
+     "value": 101414.32
+    },
+    {
+     "year": 2031,
+     "value": 101414.32
+    },
+    {
+     "year": 2032,
+     "value": 101414.32
+    },
+    {
+     "year": 2033,
+     "value": 101414.32
+    },
+    {
+     "year": 2034,
+     "value": 101414.32
+    },
+    {
+     "year": 2035,
+     "value": 101414.32
+    }
+   ],
+   "revenue_projection": 507071.6,
+   "forecast_year": 2049,
+   "municipal_share_pct": 0.64
+  },
+  "1208": {
+   "name": "Jamesburg Borough",
+   "county": "Middlesex",
+   "reported_rows": 2,
+   "dated_rows": 0,
+   "reported_billing": 48575.87,
+   "dated_billing": 0.0,
+   "dated_billing_share_pct": 0.0,
+   "payment_schedule": null,
+   "revenue_projection": null,
+   "forecast_year": null,
+   "municipal_share_pct": 0.51
+  },
+  "1209": {
+   "name": "Metuchen Borough",
+   "county": "Middlesex",
+   "reported_rows": 1,
+   "dated_rows": 1,
+   "reported_billing": 25000.0,
+   "dated_billing": 25000.0,
+   "dated_billing_share_pct": 100.0,
+   "payment_schedule": [
+    {
+     "year": 2026,
+     "value": 25000.0
+    },
+    {
+     "year": 2027,
+     "value": 25000.0
+    },
+    {
+     "year": 2028,
+     "value": 25000.0
+    },
+    {
+     "year": 2029,
+     "value": 25000.0
+    },
+    {
+     "year": 2030,
+     "value": 25000.0
+    },
+    {
+     "year": 2031,
+     "value": 25000.0
+    },
+    {
+     "year": 2032,
+     "value": 25000.0
+    },
+    {
+     "year": 2033,
+     "value": 25000.0
+    },
+    {
+     "year": 2034,
+     "value": 25000.0
+    },
+    {
+     "year": 2035,
+     "value": 25000.0
+    }
+   ],
+   "revenue_projection": 125000.0,
+   "forecast_year": 2042,
+   "municipal_share_pct": 0.1
+  },
+  "1210": {
+   "name": "Middlesex Borough",
+   "county": "Middlesex",
+   "reported_rows": 6,
+   "dated_rows": 6,
+   "reported_billing": 1872082.0,
+   "dated_billing": 1872082.0,
+   "dated_billing_share_pct": 100.0,
+   "payment_schedule": [
+    {
+     "year": 2026,
+     "value": 1872082.0
+    },
+    {
+     "year": 2027,
+     "value": 1872082.0
+    },
+    {
+     "year": 2028,
+     "value": 1872082.0
+    },
+    {
+     "year": 2029,
+     "value": 1872082.0
+    },
+    {
+     "year": 2030,
+     "value": 1872082.0
+    },
+    {
+     "year": 2031,
+     "value": 1872082.0
+    },
+    {
+     "year": 2032,
+     "value": 1872082.0
+    },
+    {
+     "year": 2033,
+     "value": 1872082.0
+    },
+    {
+     "year": 2034,
+     "value": 1811882.0
+    },
+    {
+     "year": 2035,
+     "value": 1811882.0
+    }
+   ],
+   "revenue_projection": 9360410.0,
+   "forecast_year": 2053,
+   "municipal_share_pct": 7.78
+  },
+  "1211": {
+   "name": "Milltown Borough",
+   "county": "Middlesex",
+   "reported_rows": 1,
+   "dated_rows": 0,
+   "reported_billing": 407000.0,
+   "dated_billing": 0.0,
+   "dated_billing_share_pct": 0.0,
+   "payment_schedule": null,
+   "revenue_projection": null,
+   "forecast_year": null,
+   "municipal_share_pct": 3.36
+  },
+  "1213": {
+   "name": "New Brunswick City",
+   "county": "Middlesex",
+   "reported_rows": 30,
+   "dated_rows": 23,
+   "reported_billing": 8663839.95,
+   "dated_billing": 6518848.52,
+   "dated_billing_share_pct": 75.2,
+   "payment_schedule": [
+    {
+     "year": 2026,
+     "value": 6518848.52
+    },
+    {
+     "year": 2027,
+     "value": 6462278.12
+    },
+    {
+     "year": 2028,
+     "value": 6462278.12
+    },
+    {
+     "year": 2029,
+     "value": 6340122.72
+    },
+    {
+     "year": 2030,
+     "value": 6196063.51
+    },
+    {
+     "year": 2031,
+     "value": 6196063.51
+    },
+    {
+     "year": 2032,
+     "value": 6073079.11
+    },
+    {
+     "year": 2033,
+     "value": 5963079.11
+    },
+    {
+     "year": 2034,
+     "value": 5934144.44
+    },
+    {
+     "year": 2035,
+     "value": 5627571.77
+    }
+   ],
+   "revenue_projection": 31979590.99,
+   "forecast_year": 2051,
+   "municipal_share_pct": 7.9
+  },
+  "1214": {
+   "name": "North Brunswick Township",
+   "county": "Middlesex",
+   "reported_rows": 2,
+   "dated_rows": 0,
+   "reported_billing": 14129000.0,
+   "dated_billing": 0.0,
+   "dated_billing_share_pct": 0.0,
+   "payment_schedule": null,
+   "revenue_projection": null,
+   "forecast_year": null,
+   "municipal_share_pct": 22.3
+  },
+  "1215": {
+   "name": "Old Bridge Township",
+   "county": "Middlesex",
+   "reported_rows": 1,
+   "dated_rows": 1,
+   "reported_billing": 173209.09,
+   "dated_billing": 173209.09,
+   "dated_billing_share_pct": 100.0,
+   "payment_schedule": [
+    {
+     "year": 2026,
+     "value": 173209.09
+    },
+    {
+     "year": 2027,
+     "value": 173209.09
+    },
+    {
+     "year": 2028,
+     "value": 173209.09
+    },
+    {
+     "year": 2029,
+     "value": 173209.09
+    },
+    {
+     "year": 2030,
+     "value": 173209.09
+    },
+    {
+     "year": 2031,
+     "value": 173209.09
+    },
+    {
+     "year": 2032,
+     "value": 173209.09
+    },
+    {
+     "year": 2033,
+     "value": 173209.09
+    },
+    {
+     "year": 2034,
+     "value": 173209.09
+    },
+    {
+     "year": 2035,
+     "value": 173209.09
+    }
+   ],
+   "revenue_projection": 866045.45,
+   "forecast_year": 2047,
+   "municipal_share_pct": 0.25
+  },
+  "1216": {
+   "name": "Perth Amboy City",
+   "county": "Middlesex",
+   "reported_rows": 7,
+   "dated_rows": 2,
+   "reported_billing": 3602515.18,
+   "dated_billing": 2968650.67,
+   "dated_billing_share_pct": 82.4,
+   "payment_schedule": [
+    {
+     "year": 2026,
+     "value": 2968650.67
+    },
+    {
+     "year": 2027,
+     "value": 2968650.67
+    },
+    {
+     "year": 2028,
+     "value": 2968650.67
+    },
+    {
+     "year": 2029,
+     "value": 2968650.67
+    },
+    {
+     "year": 2030,
+     "value": 2968650.67
+    },
+    {
+     "year": 2031,
+     "value": 2968650.67
+    },
+    {
+     "year": 2032,
+     "value": 2968650.67
+    },
+    {
+     "year": 2033,
+     "value": 2968650.67
+    },
+    {
+     "year": 2034,
+     "value": 2968650.67
+    },
+    {
+     "year": 2035,
+     "value": 2968650.67
+    }
+   ],
+   "revenue_projection": 14843253.35,
+   "forecast_year": 2042,
+   "municipal_share_pct": 3.66
+  },
+  "1217": {
+   "name": "Piscataway Township",
+   "county": "Middlesex",
+   "reported_rows": 15,
+   "dated_rows": 15,
+   "reported_billing": 7173879.29,
+   "dated_billing": 7173879.29,
+   "dated_billing_share_pct": 100.0,
+   "payment_schedule": [
+    {
+     "year": 2026,
+     "value": 7173879.29
+    },
+    {
+     "year": 2027,
+     "value": 7173879.29
+    },
+    {
+     "year": 2028,
+     "value": 7173879.29
+    },
+    {
+     "year": 2029,
+     "value": 7173879.29
+    },
+    {
+     "year": 2030,
+     "value": 7173879.29
+    },
+    {
+     "year": 2031,
+     "value": 7173879.29
+    },
+    {
+     "year": 2032,
+     "value": 7173879.29
+    },
+    {
+     "year": 2033,
+     "value": 7173879.29
+    },
+    {
+     "year": 2034,
+     "value": 7173879.29
+    },
+    {
+     "year": 2035,
+     "value": 7173879.29
+    }
+   ],
+   "revenue_projection": 35869396.45,
+   "forecast_year": 2053,
+   "municipal_share_pct": 8.72
+  },
+  "1218": {
+   "name": "Plainsboro Township",
+   "county": "Middlesex",
+   "reported_rows": 8,
+   "dated_rows": 7,
+   "reported_billing": 4366793.02,
+   "dated_billing": 3959099.7,
+   "dated_billing_share_pct": 90.7,
+   "payment_schedule": [
+    {
+     "year": 2026,
+     "value": 3959099.7
+    },
+    {
+     "year": 2027,
+     "value": 3959099.7
+    },
+    {
+     "year": 2028,
+     "value": 3959099.7
+    },
+    {
+     "year": 2029,
+     "value": 3959099.7
+    },
+    {
+     "year": 2030,
+     "value": 3959099.7
+    },
+    {
+     "year": 2031,
+     "value": 3959099.7
+    },
+    {
+     "year": 2032,
+     "value": 3959099.7
+    },
+    {
+     "year": 2033,
+     "value": 3959099.7
+    },
+    {
+     "year": 2034,
+     "value": 3959099.7
+    },
+    {
+     "year": 2035,
+     "value": 3959099.7
+    }
+   ],
+   "revenue_projection": 19795498.5,
+   "forecast_year": 2051,
+   "municipal_share_pct": 11.56
+  },
+  "1219": {
+   "name": "Sayreville Borough",
+   "county": "Middlesex",
+   "reported_rows": 6,
+   "dated_rows": 6,
+   "reported_billing": 2171384.06,
+   "dated_billing": 2171384.06,
+   "dated_billing_share_pct": 100.0,
+   "payment_schedule": [
+    {
+     "year": 2026,
+     "value": 2137166.06
+    },
+    {
+     "year": 2027,
+     "value": 2137166.06
+    },
+    {
+     "year": 2028,
+     "value": 2137166.06
+    },
+    {
+     "year": 2029,
+     "value": 2137166.06
+    },
+    {
+     "year": 2030,
+     "value": 2137166.06
+    },
+    {
+     "year": 2031,
+     "value": 2137166.06
+    },
+    {
+     "year": 2032,
+     "value": 2137166.06
+    },
+    {
+     "year": 2033,
+     "value": 2137166.06
+    },
+    {
+     "year": 2034,
+     "value": 1392065.94
+    },
+    {
+     "year": 2035,
+     "value": 1392065.94
+    }
+   ],
+   "revenue_projection": 10685830.3,
+   "forecast_year": 2054,
+   "municipal_share_pct": 2.79
+  },
+  "1220": {
+   "name": "South Amboy City",
+   "county": "Middlesex",
+   "reported_rows": 6,
+   "dated_rows": 5,
+   "reported_billing": 2227573.1,
+   "dated_billing": 2176220.37,
+   "dated_billing_share_pct": 97.7,
+   "payment_schedule": [
+    {
+     "year": 2026,
+     "value": 2176220.37
+    },
+    {
+     "year": 2027,
+     "value": 2176220.37
+    },
+    {
+     "year": 2028,
+     "value": 2028934.75
+    },
+    {
+     "year": 2029,
+     "value": 2028934.75
+    },
+    {
+     "year": 2030,
+     "value": 2028934.75
+    },
+    {
+     "year": 2031,
+     "value": 2028934.75
+    },
+    {
+     "year": 2032,
+     "value": 2028934.75
+    },
+    {
+     "year": 2033,
+     "value": 2028934.75
+    },
+    {
+     "year": 2034,
+     "value": 2028934.75
+    },
+    {
+     "year": 2035,
+     "value": 1988131.13
+    }
+   ],
+   "revenue_projection": 10439244.99,
+   "forecast_year": 2048,
+   "municipal_share_pct": 9.81
+  },
+  "1221": {
+   "name": "South Brunswick Township",
+   "county": "Middlesex",
+   "reported_rows": 9,
+   "dated_rows": 0,
+   "reported_billing": 291237.0,
+   "dated_billing": 0.0,
+   "dated_billing_share_pct": 0.0,
+   "payment_schedule": null,
+   "revenue_projection": null,
+   "forecast_year": null,
+   "municipal_share_pct": 0.38
+  },
+  "1222": {
+   "name": "South Plainfield Borough",
+   "county": "Middlesex",
+   "reported_rows": 1,
+   "dated_rows": 0,
+   "reported_billing": 0.0,
+   "dated_billing": 0.0,
+   "dated_billing_share_pct": null,
+   "payment_schedule": null,
+   "revenue_projection": null,
+   "forecast_year": null,
+   "municipal_share_pct": 0.0
+  },
+  "1223": {
+   "name": "South River Borough",
+   "county": "Middlesex",
+   "reported_rows": 2,
+   "dated_rows": 0,
+   "reported_billing": 88266.9,
+   "dated_billing": 0.0,
+   "dated_billing_share_pct": 0.0,
+   "payment_schedule": null,
+   "revenue_projection": null,
+   "forecast_year": null,
+   "municipal_share_pct": 0.4
+  },
+  "1224": {
+   "name": "Spotswood Borough",
+   "county": "Middlesex",
+   "reported_rows": 3,
+   "dated_rows": 0,
+   "reported_billing": 0.0,
+   "dated_billing": 0.0,
+   "dated_billing_share_pct": null,
+   "payment_schedule": null,
+   "revenue_projection": null,
+   "forecast_year": null,
+   "municipal_share_pct": 0.0
+  },
+  "1225": {
+   "name": "Woodbridge Township",
+   "county": "Middlesex",
+   "reported_rows": 47,
+   "dated_rows": 0,
+   "reported_billing": 31341695.38,
+   "dated_billing": 0.0,
+   "dated_billing_share_pct": 0.0,
+   "payment_schedule": null,
+   "revenue_projection": null,
+   "forecast_year": null,
+   "municipal_share_pct": 15.23
+  },
+  "1301": {
+   "name": "Aberdeen Township",
+   "county": "Monmouth",
+   "reported_rows": 7,
+   "dated_rows": 7,
+   "reported_billing": 2321479.76,
+   "dated_billing": 2321479.76,
+   "dated_billing_share_pct": 100.0,
+   "payment_schedule": [
+    {
+     "year": 2026,
+     "value": 2321479.76
+    },
+    {
+     "year": 2027,
+     "value": 2321479.76
+    },
+    {
+     "year": 2028,
+     "value": 2321479.76
+    },
+    {
+     "year": 2029,
+     "value": 2321479.76
+    },
+    {
+     "year": 2030,
+     "value": 2321479.76
+    },
+    {
+     "year": 2031,
+     "value": 1272282.69
+    },
+    {
+     "year": 2032,
+     "value": 1258652.48
+    },
+    {
+     "year": 2033,
+     "value": 1258652.48
+    },
+    {
+     "year": 2034,
+     "value": 1258652.48
+    },
+    {
+     "year": 2035,
+     "value": 1258652.48
+    }
+   ],
+   "revenue_projection": 11607398.8,
+   "forecast_year": 2049,
+   "municipal_share_pct": 9.18
+  },
+  "1304": {
+   "name": "Asbury Park City",
+   "county": "Monmouth",
+   "reported_rows": 24,
+   "dated_rows": 21,
+   "reported_billing": 5422513.0,
+   "dated_billing": 5326381.0,
+   "dated_billing_share_pct": 98.2,
+   "payment_schedule": [
+    {
+     "year": 2026,
+     "value": 5171047.0
+    },
+    {
+     "year": 2027,
+     "value": 4931719.0
+    },
+    {
+     "year": 2028,
+     "value": 4543898.0
+    },
+    {
+     "year": 2029,
+     "value": 4543898.0
+    },
+    {
+     "year": 2030,
+     "value": 3276691.0
+    },
+    {
+     "year": 2031,
+     "value": 3276691.0
+    },
+    {
+     "year": 2032,
+     "value": 3276691.0
+    },
+    {
+     "year": 2033,
+     "value": 3276691.0
+    },
+    {
+     "year": 2034,
+     "value": 3190040.0
+    },
+    {
+     "year": 2035,
+     "value": 3190040.0
+    }
+   ],
+   "revenue_projection": 22467253.0,
+   "forecast_year": 2069,
+   "municipal_share_pct": 8.92
+  },
+  "1305": {
+   "name": "Atlantic Highlands Borough",
+   "county": "Monmouth",
+   "reported_rows": 1,
+   "dated_rows": 0,
+   "reported_billing": 38855.85,
+   "dated_billing": 0.0,
+   "dated_billing_share_pct": 0.0,
+   "payment_schedule": null,
+   "revenue_projection": null,
+   "forecast_year": null,
+   "municipal_share_pct": 0.4
+  },
+  "1307": {
+   "name": "Belmar Borough",
+   "county": "Monmouth",
+   "reported_rows": 25,
+   "dated_rows": 25,
+   "reported_billing": 306679.56,
+   "dated_billing": 306679.56,
+   "dated_billing_share_pct": 100.0,
+   "payment_schedule": [
+    {
+     "year": 2026,
+     "value": 306679.56
+    },
+    {
+     "year": 2027,
+     "value": 306679.56
+    },
+    {
+     "year": 2028,
+     "value": 306679.56
+    },
+    {
+     "year": 2029,
+     "value": 306679.56
+    },
+    {
+     "year": 2030,
+     "value": 306679.56
+    },
+    {
+     "year": 2031,
+     "value": 306679.56
+    },
+    {
+     "year": 2032,
+     "value": 306679.56
+    },
+    {
+     "year": 2033,
+     "value": 306679.56
+    },
+    {
+     "year": 2034,
+     "value": 306679.56
+    },
+    {
+     "year": 2035,
+     "value": 306679.56
+    }
+   ],
+   "revenue_projection": 1533397.8,
+   "forecast_year": 2046,
+   "municipal_share_pct": 1.34
+  },
+  "1312": {
+   "name": "Eatontown Borough",
+   "county": "Monmouth",
+   "reported_rows": 2,
+   "dated_rows": 0,
+   "reported_billing": 0.0,
+   "dated_billing": 0.0,
+   "dated_billing_share_pct": null,
+   "payment_schedule": null,
+   "revenue_projection": null,
+   "forecast_year": null,
+   "municipal_share_pct": 0.0
+  },
+  "1316": {
+   "name": "Freehold Borough",
+   "county": "Monmouth",
+   "reported_rows": 3,
+   "dated_rows": 0,
+   "reported_billing": 462680.0,
+   "dated_billing": 0.0,
+   "dated_billing_share_pct": 0.0,
+   "payment_schedule": null,
+   "revenue_projection": null,
+   "forecast_year": null,
+   "municipal_share_pct": 2.04
+  },
+  "1317": {
+   "name": "Freehold Township",
+   "county": "Monmouth",
+   "reported_rows": 3,
+   "dated_rows": 3,
+   "reported_billing": 177372.96,
+   "dated_billing": 177372.96,
+   "dated_billing_share_pct": 100.0,
+   "payment_schedule": [
+    {
+     "year": 2026,
+     "value": 177372.96
+    },
+    {
+     "year": 2027,
+     "value": 159902.96
+    },
+    {
+     "year": 2028,
+     "value": 159902.96
+    },
+    {
+     "year": 2029,
+     "value": 159902.96
+    },
+    {
+     "year": 2030,
+     "value": 159902.96
+    },
+    {
+     "year": 2031,
+     "value": 159902.96
+    },
+    {
+     "year": 2032,
+     "value": 159902.96
+    },
+    {
+     "year": 2033,
+     "value": 159902.96
+    },
+    {
+     "year": 2034,
+     "value": 159902.96
+    },
+    {
+     "year": 2035,
+     "value": 159902.96
+    }
+   ],
+   "revenue_projection": 816984.8,
+   "forecast_year": 2049,
+   "municipal_share_pct": 0.35
+  },
+  "1318": {
+   "name": "Hazlet Township",
+   "county": "Monmouth",
+   "reported_rows": 2,
+   "dated_rows": 2,
+   "reported_billing": 0.0,
+   "dated_billing": 0.0,
+   "dated_billing_share_pct": null,
+   "payment_schedule": [
+    {
+     "year": 2026,
+     "value": 0.0
+    },
+    {
+     "year": 2027,
+     "value": 0.0
+    },
+    {
+     "year": 2028,
+     "value": 0.0
+    },
+    {
+     "year": 2029,
+     "value": 0.0
+    },
+    {
+     "year": 2030,
+     "value": 0.0
+    },
+    {
+     "year": 2031,
+     "value": 0.0
+    },
+    {
+     "year": 2032,
+     "value": 0.0
+    },
+    {
+     "year": 2033,
+     "value": 0.0
+    },
+    {
+     "year": 2034,
+     "value": 0.0
+    },
+    {
+     "year": 2035,
+     "value": 0.0
+    }
+   ],
+   "revenue_projection": 0.0,
+   "forecast_year": 2054,
+   "municipal_share_pct": 0.0
+  },
+  "1319": {
+   "name": "Highlands Borough",
+   "county": "Monmouth",
+   "reported_rows": 1,
+   "dated_rows": 0,
+   "reported_billing": 47037.0,
+   "dated_billing": 0.0,
+   "dated_billing_share_pct": 0.0,
+   "payment_schedule": null,
+   "revenue_projection": null,
+   "forecast_year": null,
+   "municipal_share_pct": 0.32
+  },
+  "1320": {
+   "name": "Holmdel Township",
+   "county": "Monmouth",
+   "reported_rows": 2,
+   "dated_rows": 2,
+   "reported_billing": 7693500.87,
+   "dated_billing": 7693500.87,
+   "dated_billing_share_pct": 100.0,
+   "payment_schedule": [
+    {
+     "year": 2026,
+     "value": 7693500.87
+    },
+    {
+     "year": 2027,
+     "value": 7693500.87
+    },
+    {
+     "year": 2028,
+     "value": 7693500.87
+    },
+    {
+     "year": 2029,
+     "value": 7693500.87
+    },
+    {
+     "year": 2030,
+     "value": 7693500.87
+    },
+    {
+     "year": 2031,
+     "value": 7693500.87
+    },
+    {
+     "year": 2032,
+     "value": 7693500.87
+    },
+    {
+     "year": 2033,
+     "value": 7693500.87
+    },
+    {
+     "year": 2034,
+     "value": 7693500.87
+    },
+    {
+     "year": 2035,
+     "value": 7693500.87
+    }
+   ],
+   "revenue_projection": 38467504.35,
+   "forecast_year": 2051,
+   "municipal_share_pct": 23.68
+  },
+  "1321": {
+   "name": "Howell Township",
+   "county": "Monmouth",
+   "reported_rows": 4,
+   "dated_rows": 4,
+   "reported_billing": 141269.71,
+   "dated_billing": 141269.71,
+   "dated_billing_share_pct": 100.0,
+   "payment_schedule": [
+    {
+     "year": 2026,
+     "value": 141269.71
+    },
+    {
+     "year": 2027,
+     "value": 141269.71
+    },
+    {
+     "year": 2028,
+     "value": 141269.71
+    },
+    {
+     "year": 2029,
+     "value": 141269.71
+    },
+    {
+     "year": 2030,
+     "value": 141269.71
+    },
+    {
+     "year": 2031,
+     "value": 141269.71
+    },
+    {
+     "year": 2032,
+     "value": 141269.71
+    },
+    {
+     "year": 2033,
+     "value": 141269.71
+    },
+    {
+     "year": 2034,
+     "value": 141269.71
+    },
+    {
+     "year": 2035,
+     "value": 141269.71
+    }
+   ],
+   "revenue_projection": 706348.55,
+   "forecast_year": 2065,
+   "municipal_share_pct": 0.22
+  },
+  "1323": {
+   "name": "Keansburg Borough",
+   "county": "Monmouth",
+   "reported_rows": 5,
+   "dated_rows": 0,
+   "reported_billing": 332607.47,
+   "dated_billing": 0.0,
+   "dated_billing_share_pct": 0.0,
+   "payment_schedule": null,
+   "revenue_projection": null,
+   "forecast_year": null,
+   "municipal_share_pct": 1.56
+  },
+  "1324": {
+   "name": "Keyport Borough",
+   "county": "Monmouth",
+   "reported_rows": 2,
+   "dated_rows": 0,
+   "reported_billing": 253135.0,
+   "dated_billing": 0.0,
+   "dated_billing_share_pct": 0.0,
+   "payment_schedule": null,
+   "revenue_projection": null,
+   "forecast_year": null,
+   "municipal_share_pct": 2.0
+  },
+  "1327": {
+   "name": "Long Branch City",
+   "county": "Monmouth",
+   "reported_rows": 10,
+   "dated_rows": 0,
+   "reported_billing": 176581.52,
+   "dated_billing": 0.0,
+   "dated_billing_share_pct": 0.0,
+   "payment_schedule": null,
+   "revenue_projection": null,
+   "forecast_year": null,
+   "municipal_share_pct": 0.23
+  },
+  "1328": {
+   "name": "Manalapan Township",
+   "county": "Monmouth",
+   "reported_rows": 4,
+   "dated_rows": 2,
+   "reported_billing": 204065.11,
+   "dated_billing": 204065.11,
+   "dated_billing_share_pct": 100.0,
+   "payment_schedule": [
+    {
+     "year": 2026,
+     "value": 204065.11
+    },
+    {
+     "year": 2027,
+     "value": 204065.11
+    },
+    {
+     "year": 2028,
+     "value": 204065.11
+    },
+    {
+     "year": 2029,
+     "value": 204065.11
+    },
+    {
+     "year": 2030,
+     "value": 204065.11
+    },
+    {
+     "year": 2031,
+     "value": 204065.11
+    },
+    {
+     "year": 2032,
+     "value": 204065.11
+    },
+    {
+     "year": 2033,
+     "value": 204065.11
+    },
+    {
+     "year": 2034,
+     "value": 204065.11
+    },
+    {
+     "year": 2035,
+     "value": 204065.11
+    }
+   ],
+   "revenue_projection": 1020325.55,
+   "forecast_year": 2042,
+   "municipal_share_pct": 0.45
+  },
+  "1330": {
+   "name": "Marlboro Township",
+   "county": "Monmouth",
+   "reported_rows": 1,
+   "dated_rows": 0,
+   "reported_billing": 674196.18,
+   "dated_billing": 0.0,
+   "dated_billing_share_pct": 0.0,
+   "payment_schedule": null,
+   "revenue_projection": null,
+   "forecast_year": null,
+   "municipal_share_pct": 1.44
+  },
+  "1331": {
+   "name": "Matawan Borough",
+   "county": "Monmouth",
+   "reported_rows": 1,
+   "dated_rows": 1,
+   "reported_billing": 111746.0,
+   "dated_billing": 111746.0,
+   "dated_billing_share_pct": 100.0,
+   "payment_schedule": [
+    {
+     "year": 2026,
+     "value": 0.0
+    },
+    {
+     "year": 2027,
+     "value": 0.0
+    },
+    {
+     "year": 2028,
+     "value": 0.0
+    },
+    {
+     "year": 2029,
+     "value": 0.0
+    },
+    {
+     "year": 2030,
+     "value": 0.0
+    },
+    {
+     "year": 2031,
+     "value": 0.0
+    },
+    {
+     "year": 2032,
+     "value": 0.0
+    },
+    {
+     "year": 2033,
+     "value": 0.0
+    },
+    {
+     "year": 2034,
+     "value": 0.0
+    },
+    {
+     "year": 2035,
+     "value": 0.0
+    }
+   ],
+   "revenue_projection": 0.0,
+   "forecast_year": null,
+   "municipal_share_pct": 0.73
+  },
+  "1332": {
+   "name": "Middletown Township",
+   "county": "Monmouth",
+   "reported_rows": 10,
+   "dated_rows": 0,
+   "reported_billing": 975087.44,
+   "dated_billing": 0.0,
+   "dated_billing_share_pct": 0.0,
+   "payment_schedule": null,
+   "revenue_projection": null,
+   "forecast_year": null,
+   "municipal_share_pct": 1.01
+  },
+  "1335": {
+   "name": "Neptune Township",
+   "county": "Monmouth",
+   "reported_rows": 6,
+   "dated_rows": 4,
+   "reported_billing": 461712.26,
+   "dated_billing": 382706.26,
+   "dated_billing_share_pct": 82.9,
+   "payment_schedule": [
+    {
+     "year": 2026,
+     "value": 382706.26
+    },
+    {
+     "year": 2027,
+     "value": 382706.26
+    },
+    {
+     "year": 2028,
+     "value": 382706.26
+    },
+    {
+     "year": 2029,
+     "value": 382706.26
+    },
+    {
+     "year": 2030,
+     "value": 382706.26
+    },
+    {
+     "year": 2031,
+     "value": 382706.26
+    },
+    {
+     "year": 2032,
+     "value": 382706.26
+    },
+    {
+     "year": 2033,
+     "value": 382706.26
+    },
+    {
+     "year": 2034,
+     "value": 382706.26
+    },
+    {
+     "year": 2035,
+     "value": 382706.26
+    }
+   ],
+   "revenue_projection": 1913531.3,
+   "forecast_year": 2066,
+   "municipal_share_pct": 0.85
+  },
+  "1337": {
+   "name": "Ocean Township",
+   "county": "Monmouth",
+   "reported_rows": 4,
+   "dated_rows": 0,
+   "reported_billing": 151591.22,
+   "dated_billing": 0.0,
+   "dated_billing_share_pct": 0.0,
+   "payment_schedule": null,
+   "revenue_projection": null,
+   "forecast_year": null,
+   "municipal_share_pct": 0.33
+  },
+  "1338": {
+   "name": "Oceanport Borough",
+   "county": "Monmouth",
+   "reported_rows": 3,
+   "dated_rows": 0,
+   "reported_billing": 342529.41,
+   "dated_billing": 0.0,
+   "dated_billing_share_pct": 0.0,
+   "payment_schedule": null,
+   "revenue_projection": null,
+   "forecast_year": null,
+   "municipal_share_pct": 2.27
+  },
+  "1339": {
+   "name": "Red Bank Borough",
+   "county": "Monmouth",
+   "reported_rows": 8,
+   "dated_rows": 6,
+   "reported_billing": 230606.29,
+   "dated_billing": 183330.34,
+   "dated_billing_share_pct": 79.5,
+   "payment_schedule": [
+    {
+     "year": 2026,
+     "value": 183330.34
+    },
+    {
+     "year": 2027,
+     "value": 183330.34
+    },
+    {
+     "year": 2028,
+     "value": 149222.44
+    },
+    {
+     "year": 2029,
+     "value": 93629.04
+    },
+    {
+     "year": 2030,
+     "value": 93629.04
+    },
+    {
+     "year": 2031,
+     "value": 93629.04
+    },
+    {
+     "year": 2032,
+     "value": 28866.56
+    },
+    {
+     "year": 2033,
+     "value": 17903.92
+    },
+    {
+     "year": 2034,
+     "value": 17903.92
+    },
+    {
+     "year": 2035,
+     "value": 17903.92
+    }
+   ],
+   "revenue_projection": 703141.2,
+   "forecast_year": 2048,
+   "municipal_share_pct": 0.79
+  },
+  "1344": {
+   "name": "Shrewsbury Borough",
+   "county": "Monmouth",
+   "reported_rows": 1,
+   "dated_rows": 0,
+   "reported_billing": 5000.0,
+   "dated_billing": 0.0,
+   "dated_billing_share_pct": 0.0,
+   "payment_schedule": null,
+   "revenue_projection": null,
+   "forecast_year": null,
+   "municipal_share_pct": 0.05
+  },
+  "1349": {
+   "name": "Tinton Falls Borough",
+   "county": "Monmouth",
+   "reported_rows": 8,
+   "dated_rows": 8,
+   "reported_billing": 661893.55,
+   "dated_billing": 661893.55,
+   "dated_billing_share_pct": 100.0,
+   "payment_schedule": [
+    {
+     "year": 2026,
+     "value": 661893.55
+    },
+    {
+     "year": 2027,
+     "value": 661893.55
+    },
+    {
+     "year": 2028,
+     "value": 661893.55
+    },
+    {
+     "year": 2029,
+     "value": 661893.55
+    },
+    {
+     "year": 2030,
+     "value": 623593.55
+    },
+    {
+     "year": 2031,
+     "value": 623593.55
+    },
+    {
+     "year": 2032,
+     "value": 526297.54
+    },
+    {
+     "year": 2033,
+     "value": 193686.54
+    },
+    {
+     "year": 2034,
+     "value": 193686.54
+    },
+    {
+     "year": 2035,
+     "value": 136792.54
+    }
+   ],
+   "revenue_projection": 3271167.75,
+   "forecast_year": 2052,
+   "municipal_share_pct": 2.13
+  },
+  "1352": {
+   "name": "Wall Township",
+   "county": "Monmouth",
+   "reported_rows": 6,
+   "dated_rows": 0,
+   "reported_billing": 436469.0,
+   "dated_billing": 0.0,
+   "dated_billing_share_pct": 0.0,
+   "payment_schedule": null,
+   "revenue_projection": null,
+   "forecast_year": null,
+   "municipal_share_pct": 0.89
+  },
+  "1401": {
+   "name": "Boonton Town",
+   "county": "Morris",
+   "reported_rows": 1,
+   "dated_rows": 1,
+   "reported_billing": 950000.0,
+   "dated_billing": 950000.0,
+   "dated_billing_share_pct": 100.0,
+   "payment_schedule": [
+    {
+     "year": 2026,
+     "value": 950000.0
+    },
+    {
+     "year": 2027,
+     "value": 950000.0
+    },
+    {
+     "year": 2028,
+     "value": 950000.0
+    },
+    {
+     "year": 2029,
+     "value": 950000.0
+    },
+    {
+     "year": 2030,
+     "value": 950000.0
+    },
+    {
+     "year": 2031,
+     "value": 950000.0
+    },
+    {
+     "year": 2032,
+     "value": 950000.0
+    },
+    {
+     "year": 2033,
+     "value": 950000.0
+    },
+    {
+     "year": 2034,
+     "value": 950000.0
+    },
+    {
+     "year": 2035,
+     "value": 950000.0
+    }
+   ],
+   "revenue_projection": 4750000.0,
+   "forecast_year": 2050,
+   "municipal_share_pct": 4.83
+  },
+  "1402": {
+   "name": "Boonton Township",
+   "county": "Morris",
+   "reported_rows": 1,
+   "dated_rows": 1,
+   "reported_billing": 187635.88,
+   "dated_billing": 187635.88,
+   "dated_billing_share_pct": 100.0,
+   "payment_schedule": [
+    {
+     "year": 2026,
+     "value": 187635.88
+    },
+    {
+     "year": 2027,
+     "value": 187635.88
+    },
+    {
+     "year": 2028,
+     "value": 187635.88
+    },
+    {
+     "year": 2029,
+     "value": 187635.88
+    },
+    {
+     "year": 2030,
+     "value": 187635.88
+    },
+    {
+     "year": 2031,
+     "value": 187635.88
+    },
+    {
+     "year": 2032,
+     "value": 187635.88
+    },
+    {
+     "year": 2033,
+     "value": 187635.88
+    },
+    {
+     "year": 2034,
+     "value": 0.0
+    },
+    {
+     "year": 2035,
+     "value": 0.0
+    }
+   ],
+   "revenue_projection": 938179.4,
+   "forecast_year": 2033,
+   "municipal_share_pct": 1.84
+  },
+  "1403": {
+   "name": "Butler Borough",
+   "county": "Morris",
+   "reported_rows": 1,
+   "dated_rows": 0,
+   "reported_billing": 82626.63,
+   "dated_billing": 0.0,
+   "dated_billing_share_pct": 0.0,
+   "payment_schedule": null,
+   "revenue_projection": null,
+   "forecast_year": null,
+   "municipal_share_pct": 0.48
+  },
+  "1404": {
+   "name": "Chatham Borough",
+   "county": "Morris",
+   "reported_rows": 1,
+   "dated_rows": 1,
+   "reported_billing": 956857.92,
+   "dated_billing": 956857.92,
+   "dated_billing_share_pct": 100.0,
+   "payment_schedule": [
+    {
+     "year": 2026,
+     "value": 956857.92
+    },
+    {
+     "year": 2027,
+     "value": 956857.92
+    },
+    {
+     "year": 2028,
+     "value": 956857.92
+    },
+    {
+     "year": 2029,
+     "value": 956857.92
+    },
+    {
+     "year": 2030,
+     "value": 956857.92
+    },
+    {
+     "year": 2031,
+     "value": 956857.92
+    },
+    {
+     "year": 2032,
+     "value": 956857.92
+    },
+    {
+     "year": 2033,
+     "value": 956857.92
+    },
+    {
+     "year": 2034,
+     "value": 956857.92
+    },
+    {
+     "year": 2035,
+     "value": 956857.92
+    }
+   ],
+   "revenue_projection": 4784289.6,
+   "forecast_year": 2054,
+   "municipal_share_pct": 4.3
+  },
+  "1406": {
+   "name": "Chester Borough",
+   "county": "Morris",
+   "reported_rows": 1,
+   "dated_rows": 1,
+   "reported_billing": 69111.71,
+   "dated_billing": 69111.71,
+   "dated_billing_share_pct": 100.0,
+   "payment_schedule": [
+    {
+     "year": 2026,
+     "value": 69111.71
+    },
+    {
+     "year": 2027,
+     "value": 69111.71
+    },
+    {
+     "year": 2028,
+     "value": 69111.71
+    },
+    {
+     "year": 2029,
+     "value": 69111.71
+    },
+    {
+     "year": 2030,
+     "value": 69111.71
+    },
+    {
+     "year": 2031,
+     "value": 69111.71
+    },
+    {
+     "year": 2032,
+     "value": 69111.71
+    },
+    {
+     "year": 2033,
+     "value": 69111.71
+    },
+    {
+     "year": 2034,
+     "value": 69111.71
+    },
+    {
+     "year": 2035,
+     "value": 69111.71
+    }
+   ],
+   "revenue_projection": 345558.53,
+   "forecast_year": 2037,
+   "municipal_share_pct": 0.99
+  },
+  "1409": {
+   "name": "Dover Town",
+   "county": "Morris",
+   "reported_rows": 1,
+   "dated_rows": 0,
+   "reported_billing": 181232.0,
+   "dated_billing": 0.0,
+   "dated_billing_share_pct": 0.0,
+   "payment_schedule": null,
+   "revenue_projection": null,
+   "forecast_year": null,
+   "municipal_share_pct": 0.43
+  },
+  "1412": {
+   "name": "Hanover Township",
+   "county": "Morris",
+   "reported_rows": 2,
+   "dated_rows": 2,
+   "reported_billing": 87718.0,
+   "dated_billing": 87718.0,
+   "dated_billing_share_pct": 100.0,
+   "payment_schedule": [
+    {
+     "year": 2026,
+     "value": 87718.0
+    },
+    {
+     "year": 2027,
+     "value": 87718.0
+    },
+    {
+     "year": 2028,
+     "value": 87718.0
+    },
+    {
+     "year": 2029,
+     "value": 87718.0
+    },
+    {
+     "year": 2030,
+     "value": 87718.0
+    },
+    {
+     "year": 2031,
+     "value": 87718.0
+    },
+    {
+     "year": 2032,
+     "value": 87718.0
+    },
+    {
+     "year": 2033,
+     "value": 87718.0
+    },
+    {
+     "year": 2034,
+     "value": 87718.0
+    },
+    {
+     "year": 2035,
+     "value": 87718.0
+    }
+   ],
+   "revenue_projection": 438590.0,
+   "forecast_year": 2052,
+   "municipal_share_pct": 0.23
+  },
+  "1414": {
+   "name": "Jefferson Township",
+   "county": "Morris",
+   "reported_rows": 3,
+   "dated_rows": 0,
+   "reported_billing": 42986.45,
+   "dated_billing": 0.0,
+   "dated_billing_share_pct": 0.0,
+   "payment_schedule": null,
+   "revenue_projection": null,
+   "forecast_year": null,
+   "municipal_share_pct": 0.11
+  },
+  "1417": {
+   "name": "Madison Borough",
+   "county": "Morris",
+   "reported_rows": 3,
+   "dated_rows": 3,
+   "reported_billing": 930800.14,
+   "dated_billing": 930800.14,
+   "dated_billing_share_pct": 100.0,
+   "payment_schedule": [
+    {
+     "year": 2026,
+     "value": 930800.14
+    },
+    {
+     "year": 2027,
+     "value": 930800.14
+    },
+    {
+     "year": 2028,
+     "value": 930800.14
+    },
+    {
+     "year": 2029,
+     "value": 930800.14
+    },
+    {
+     "year": 2030,
+     "value": 930800.14
+    },
+    {
+     "year": 2031,
+     "value": 930800.14
+    },
+    {
+     "year": 2032,
+     "value": 930800.14
+    },
+    {
+     "year": 2033,
+     "value": 930800.14
+    },
+    {
+     "year": 2034,
+     "value": 883868.85
+    },
+    {
+     "year": 2035,
+     "value": 883868.85
+    }
+   ],
+   "revenue_projection": 4654000.7,
+   "forecast_year": 2048,
+   "municipal_share_pct": 1.87
+  },
+  "1421": {
+   "name": "Montville Township",
+   "county": "Morris",
+   "reported_rows": 2,
+   "dated_rows": 2,
+   "reported_billing": 190000.0,
+   "dated_billing": 190000.0,
+   "dated_billing_share_pct": 100.0,
+   "payment_schedule": [
+    {
+     "year": 2026,
+     "value": 190000.0
+    },
+    {
+     "year": 2027,
+     "value": 190000.0
+    },
+    {
+     "year": 2028,
+     "value": 190000.0
+    },
+    {
+     "year": 2029,
+     "value": 190000.0
+    },
+    {
+     "year": 2030,
+     "value": 190000.0
+    },
+    {
+     "year": 2031,
+     "value": 190000.0
+    },
+    {
+     "year": 2032,
+     "value": 190000.0
+    },
+    {
+     "year": 2033,
+     "value": 190000.0
+    },
+    {
+     "year": 2034,
+     "value": 190000.0
+    },
+    {
+     "year": 2035,
+     "value": 190000.0
+    }
+   ],
+   "revenue_projection": 950000.0,
+   "forecast_year": 2055,
+   "municipal_share_pct": 0.44
+  },
+  "1422": {
+   "name": "Morris Township",
+   "county": "Morris",
+   "reported_rows": 5,
+   "dated_rows": 3,
+   "reported_billing": 0.0,
+   "dated_billing": 0.0,
+   "dated_billing_share_pct": null,
+   "payment_schedule": [
+    {
+     "year": 2026,
+     "value": 0.0
+    },
+    {
+     "year": 2027,
+     "value": 0.0
+    },
+    {
+     "year": 2028,
+     "value": 0.0
+    },
+    {
+     "year": 2029,
+     "value": 0.0
+    },
+    {
+     "year": 2030,
+     "value": 0.0
+    },
+    {
+     "year": 2031,
+     "value": 0.0
+    },
+    {
+     "year": 2032,
+     "value": 0.0
+    },
+    {
+     "year": 2033,
+     "value": 0.0
+    },
+    {
+     "year": 2034,
+     "value": 0.0
+    },
+    {
+     "year": 2035,
+     "value": 0.0
+    }
+   ],
+   "revenue_projection": 0.0,
+   "forecast_year": 2050,
+   "municipal_share_pct": 0.0
+  },
+  "1424": {
+   "name": "Morristown Town",
+   "county": "Morris",
+   "reported_rows": 9,
+   "dated_rows": 9,
+   "reported_billing": 2499998.38,
+   "dated_billing": 2499998.38,
+   "dated_billing_share_pct": 100.0,
+   "payment_schedule": [
+    {
+     "year": 2026,
+     "value": 2499998.38
+    },
+    {
+     "year": 2027,
+     "value": 2499998.38
+    },
+    {
+     "year": 2028,
+     "value": 2499998.38
+    },
+    {
+     "year": 2029,
+     "value": 2499998.38
+    },
+    {
+     "year": 2030,
+     "value": 2499998.38
+    },
+    {
+     "year": 2031,
+     "value": 2499998.38
+    },
+    {
+     "year": 2032,
+     "value": 2499998.38
+    },
+    {
+     "year": 2033,
+     "value": 2499998.38
+    },
+    {
+     "year": 2034,
+     "value": 2499998.38
+    },
+    {
+     "year": 2035,
+     "value": 1771998.38
+    }
+   ],
+   "revenue_projection": 12499991.9,
+   "forecast_year": 2052,
+   "municipal_share_pct": 3.62
+  },
+  "1425": {
+   "name": "Mountain Lakes Borough",
+   "county": "Morris",
+   "reported_rows": 1,
+   "dated_rows": 1,
+   "reported_billing": 3054.34,
+   "dated_billing": 3054.34,
+   "dated_billing_share_pct": 100.0,
+   "payment_schedule": [
+    {
+     "year": 2026,
+     "value": 3054.34
+    },
+    {
+     "year": 2027,
+     "value": 3054.34
+    },
+    {
+     "year": 2028,
+     "value": 3054.34
+    },
+    {
+     "year": 2029,
+     "value": 3054.34
+    },
+    {
+     "year": 2030,
+     "value": 3054.34
+    },
+    {
+     "year": 2031,
+     "value": 3054.34
+    },
+    {
+     "year": 2032,
+     "value": 3054.34
+    },
+    {
+     "year": 2033,
+     "value": 3054.34
+    },
+    {
+     "year": 2034,
+     "value": 3054.34
+    },
+    {
+     "year": 2035,
+     "value": 3054.34
+    }
+   ],
+   "revenue_projection": 15271.7,
+   "forecast_year": 2054,
+   "municipal_share_pct": 0.02
+  },
+  "1427": {
+   "name": "Mount Olive Township",
+   "county": "Morris",
+   "reported_rows": 3,
+   "dated_rows": 3,
+   "reported_billing": 295193.3,
+   "dated_billing": 295193.3,
+   "dated_billing_share_pct": 100.0,
+   "payment_schedule": [
+    {
+     "year": 2026,
+     "value": 137693.3
+    },
+    {
+     "year": 2027,
+     "value": 137693.3
+    },
+    {
+     "year": 2028,
+     "value": 137693.3
+    },
+    {
+     "year": 2029,
+     "value": 137693.3
+    },
+    {
+     "year": 2030,
+     "value": 137693.3
+    },
+    {
+     "year": 2031,
+     "value": 137693.3
+    },
+    {
+     "year": 2032,
+     "value": 137693.3
+    },
+    {
+     "year": 2033,
+     "value": 137693.3
+    },
+    {
+     "year": 2034,
+     "value": 137693.3
+    },
+    {
+     "year": 2035,
+     "value": 137693.3
+    }
+   ],
+   "revenue_projection": 688466.5,
+   "forecast_year": 2064,
+   "municipal_share_pct": 0.65
+  },
+  "1428": {
+   "name": "Netcong Borough",
+   "county": "Morris",
+   "reported_rows": 2,
+   "dated_rows": 1,
+   "reported_billing": 448918.83,
+   "dated_billing": 346800.0,
+   "dated_billing_share_pct": 77.3,
+   "payment_schedule": [
+    {
+     "year": 2026,
+     "value": 346800.0
+    },
+    {
+     "year": 2027,
+     "value": 346800.0
+    },
+    {
+     "year": 2028,
+     "value": 346800.0
+    },
+    {
+     "year": 2029,
+     "value": 346800.0
+    },
+    {
+     "year": 2030,
+     "value": 346800.0
+    },
+    {
+     "year": 2031,
+     "value": 346800.0
+    },
+    {
+     "year": 2032,
+     "value": 346800.0
+    },
+    {
+     "year": 2033,
+     "value": 346800.0
+    },
+    {
+     "year": 2034,
+     "value": 346800.0
+    },
+    {
+     "year": 2035,
+     "value": 346800.0
+    }
+   ],
+   "revenue_projection": 1734000.0,
+   "forecast_year": 2052,
+   "municipal_share_pct": 6.98
+  },
+  "1429": {
+   "name": "Parsippany-Troy Hills Township",
+   "county": "Morris",
+   "reported_rows": 1,
+   "dated_rows": 1,
+   "reported_billing": 800070.0,
+   "dated_billing": 800070.0,
+   "dated_billing_share_pct": 100.0,
+   "payment_schedule": [
+    {
+     "year": 2026,
+     "value": 800070.0
+    },
+    {
+     "year": 2027,
+     "value": 800070.0
+    },
+    {
+     "year": 2028,
+     "value": 800070.0
+    },
+    {
+     "year": 2029,
+     "value": 800070.0
+    },
+    {
+     "year": 2030,
+     "value": 800070.0
+    },
+    {
+     "year": 2031,
+     "value": 800070.0
+    },
+    {
+     "year": 2032,
+     "value": 800070.0
+    },
+    {
+     "year": 2033,
+     "value": 800070.0
+    },
+    {
+     "year": 2034,
+     "value": 800070.0
+    },
+    {
+     "year": 2035,
+     "value": 800070.0
+    }
+   ],
+   "revenue_projection": 4000350.0,
+   "forecast_year": 2046,
+   "municipal_share_pct": 0.72
+  },
+  "1435": {
+   "name": "Rockaway Township",
+   "county": "Morris",
+   "reported_rows": 1,
+   "dated_rows": 0,
+   "reported_billing": 519273.37,
+   "dated_billing": 0.0,
+   "dated_billing_share_pct": 0.0,
+   "payment_schedule": null,
+   "revenue_projection": null,
+   "forecast_year": null,
+   "municipal_share_pct": 1.03
+  },
+  "1439": {
+   "name": "Wharton Borough",
+   "county": "Morris",
+   "reported_rows": 2,
+   "dated_rows": 0,
+   "reported_billing": 748405.11,
+   "dated_billing": 0.0,
+   "dated_billing_share_pct": 0.0,
+   "payment_schedule": null,
+   "revenue_projection": null,
+   "forecast_year": null,
+   "municipal_share_pct": 4.17
+  },
+  "1501": {
+   "name": "Barnegat Township",
+   "county": "Ocean",
+   "reported_rows": 5,
+   "dated_rows": 0,
+   "reported_billing": 193340.0,
+   "dated_billing": 0.0,
+   "dated_billing_share_pct": 0.0,
+   "payment_schedule": null,
+   "revenue_projection": null,
+   "forecast_year": null,
+   "municipal_share_pct": 0.54
+  },
+  "1508": {
+   "name": "Toms River Township",
+   "county": "Ocean",
+   "reported_rows": 9,
+   "dated_rows": 9,
+   "reported_billing": 809929.61,
+   "dated_billing": 809929.61,
+   "dated_billing_share_pct": 100.0,
+   "payment_schedule": [
+    {
+     "year": 2026,
+     "value": 609509.61
+    },
+    {
+     "year": 2027,
+     "value": 609509.61
+    },
+    {
+     "year": 2028,
+     "value": 609509.61
+    },
+    {
+     "year": 2029,
+     "value": 609509.61
+    },
+    {
+     "year": 2030,
+     "value": 609509.61
+    },
+    {
+     "year": 2031,
+     "value": 609509.61
+    },
+    {
+     "year": 2032,
+     "value": 609509.61
+    },
+    {
+     "year": 2033,
+     "value": 609509.61
+    },
+    {
+     "year": 2034,
+     "value": 609509.61
+    },
+    {
+     "year": 2035,
+     "value": 369205.07
+    }
+   ],
+   "revenue_projection": 3047548.05,
+   "forecast_year": 2064,
+   "municipal_share_pct": 0.6
+  },
+  "1510": {
+   "name": "Harvey Cedars Borough",
+   "county": "Ocean",
+   "reported_rows": 4,
+   "dated_rows": 0,
+   "reported_billing": 32532.3,
+   "dated_billing": 0.0,
+   "dated_billing_share_pct": 0.0,
+   "payment_schedule": null,
+   "revenue_projection": null,
+   "forecast_year": null,
+   "municipal_share_pct": 0.49
+  },
+  "1512": {
+   "name": "Jackson Township",
+   "county": "Ocean",
+   "reported_rows": 1,
+   "dated_rows": 0,
+   "reported_billing": 131610.11,
+   "dated_billing": 0.0,
+   "dated_billing_share_pct": 0.0,
+   "payment_schedule": null,
+   "revenue_projection": null,
+   "forecast_year": null,
+   "municipal_share_pct": 0.22
+  },
+  "1513": {
+   "name": "Lacey Township",
+   "county": "Ocean",
+   "reported_rows": 3,
+   "dated_rows": 0,
+   "reported_billing": 176330.68,
+   "dated_billing": 0.0,
+   "dated_billing_share_pct": 0.0,
+   "payment_schedule": null,
+   "revenue_projection": null,
+   "forecast_year": null,
+   "municipal_share_pct": 0.42
+  },
+  "1515": {
+   "name": "Lakewood Township",
+   "county": "Ocean",
+   "reported_rows": 17,
+   "dated_rows": 14,
+   "reported_billing": 2069066.62,
+   "dated_billing": 2069066.62,
+   "dated_billing_share_pct": 100.0,
+   "payment_schedule": [
+    {
+     "year": 2026,
+     "value": 2069066.62
+    },
+    {
+     "year": 2027,
+     "value": 2069066.62
+    },
+    {
+     "year": 2028,
+     "value": 2069066.62
+    },
+    {
+     "year": 2029,
+     "value": 2069066.62
+    },
+    {
+     "year": 2030,
+     "value": 2069066.62
+    },
+    {
+     "year": 2031,
+     "value": 2069066.62
+    },
+    {
+     "year": 2032,
+     "value": 2069066.62
+    },
+    {
+     "year": 2033,
+     "value": 2069066.62
+    },
+    {
+     "year": 2034,
+     "value": 2069066.62
+    },
+    {
+     "year": 2035,
+     "value": 2069066.62
+    }
+   ],
+   "revenue_projection": 10345333.1,
+   "forecast_year": 2057,
+   "municipal_share_pct": 1.3
+  },
+  "1519": {
+   "name": "Manchester Township",
+   "county": "Ocean",
+   "reported_rows": 16,
+   "dated_rows": 0,
+   "reported_billing": 478217.36,
+   "dated_billing": 0.0,
+   "dated_billing_share_pct": 0.0,
+   "payment_schedule": null,
+   "revenue_projection": null,
+   "forecast_year": null,
+   "municipal_share_pct": 0.97
+  },
+  "1521": {
+   "name": "Ocean Township",
+   "county": "Ocean",
+   "reported_rows": 3,
+   "dated_rows": 2,
+   "reported_billing": 341168.0,
+   "dated_billing": 316168.0,
+   "dated_billing_share_pct": 92.7,
+   "payment_schedule": [
+    {
+     "year": 2026,
+     "value": 316168.0
+    },
+    {
+     "year": 2027,
+     "value": 316168.0
+    },
+    {
+     "year": 2028,
+     "value": 316168.0
+    },
+    {
+     "year": 2029,
+     "value": 316168.0
+    },
+    {
+     "year": 2030,
+     "value": 316168.0
+    },
+    {
+     "year": 2031,
+     "value": 316168.0
+    },
+    {
+     "year": 2032,
+     "value": 316168.0
+    },
+    {
+     "year": 2033,
+     "value": 316168.0
+    },
+    {
+     "year": 2034,
+     "value": 316168.0
+    },
+    {
+     "year": 2035,
+     "value": 316168.0
+    }
+   ],
+   "revenue_projection": 1580840.0,
+   "forecast_year": 2067,
+   "municipal_share_pct": 2.09
+  },
+  "1524": {
+   "name": "Plumsted Township",
+   "county": "Ocean",
+   "reported_rows": 2,
+   "dated_rows": 0,
+   "reported_billing": 0.0,
+   "dated_billing": 0.0,
+   "dated_billing_share_pct": null,
+   "payment_schedule": null,
+   "revenue_projection": null,
+   "forecast_year": null,
+   "municipal_share_pct": 0.0
+  },
+  "1527": {
+   "name": "Seaside Heights Borough",
+   "county": "Ocean",
+   "reported_rows": 4,
+   "dated_rows": 1,
+   "reported_billing": 273866.74,
+   "dated_billing": 204795.0,
+   "dated_billing_share_pct": 74.8,
+   "payment_schedule": [
+    {
+     "year": 2026,
+     "value": 204795.0
+    },
+    {
+     "year": 2027,
+     "value": 204795.0
+    },
+    {
+     "year": 2028,
+     "value": 0.0
+    },
+    {
+     "year": 2029,
+     "value": 0.0
+    },
+    {
+     "year": 2030,
+     "value": 0.0
+    },
+    {
+     "year": 2031,
+     "value": 0.0
+    },
+    {
+     "year": 2032,
+     "value": 0.0
+    },
+    {
+     "year": 2033,
+     "value": 0.0
+    },
+    {
+     "year": 2034,
+     "value": 0.0
+    },
+    {
+     "year": 2035,
+     "value": 0.0
+    }
+   ],
+   "revenue_projection": 409590.0,
+   "forecast_year": 2027,
+   "municipal_share_pct": 1.29
+  },
+  "1531": {
+   "name": "Stafford Township",
+   "county": "Ocean",
+   "reported_rows": 15,
+   "dated_rows": 15,
+   "reported_billing": 1660281.73,
+   "dated_billing": 1660281.73,
+   "dated_billing_share_pct": 100.0,
+   "payment_schedule": [
+    {
+     "year": 2026,
+     "value": 1660281.73
+    },
+    {
+     "year": 2027,
+     "value": 1660281.73
+    },
+    {
+     "year": 2028,
+     "value": 1660281.73
+    },
+    {
+     "year": 2029,
+     "value": 1660281.73
+    },
+    {
+     "year": 2030,
+     "value": 1660281.73
+    },
+    {
+     "year": 2031,
+     "value": 1660281.73
+    },
+    {
+     "year": 2032,
+     "value": 1660281.73
+    },
+    {
+     "year": 2033,
+     "value": 1660281.73
+    },
+    {
+     "year": 2034,
+     "value": 841480.09
+    },
+    {
+     "year": 2035,
+     "value": 841480.09
+    }
+   ],
+   "revenue_projection": 8301408.65,
+   "forecast_year": 2068,
+   "municipal_share_pct": 2.77
+  },
+  "1601": {
+   "name": "Bloomingdale Borough",
+   "county": "Passaic",
+   "reported_rows": 1,
+   "dated_rows": 1,
+   "reported_billing": 594850.0,
+   "dated_billing": 594850.0,
+   "dated_billing_share_pct": 100.0,
+   "payment_schedule": [
+    {
+     "year": 2026,
+     "value": 594850.0
+    },
+    {
+     "year": 2027,
+     "value": 594850.0
+    },
+    {
+     "year": 2028,
+     "value": 594850.0
+    },
+    {
+     "year": 2029,
+     "value": 594850.0
+    },
+    {
+     "year": 2030,
+     "value": 594850.0
+    },
+    {
+     "year": 2031,
+     "value": 594850.0
+    },
+    {
+     "year": 2032,
+     "value": 594850.0
+    },
+    {
+     "year": 2033,
+     "value": 594850.0
+    },
+    {
+     "year": 2034,
+     "value": 594850.0
+    },
+    {
+     "year": 2035,
+     "value": 594850.0
+    }
+   ],
+   "revenue_projection": 2974250.0,
+   "forecast_year": 2043,
+   "municipal_share_pct": 3.97
+  },
+  "1602": {
+   "name": "Clifton City",
+   "county": "Passaic",
+   "reported_rows": 13,
+   "dated_rows": 0,
+   "reported_billing": 2057974.65,
+   "dated_billing": 0.0,
+   "dated_billing_share_pct": 0.0,
+   "payment_schedule": null,
+   "revenue_projection": null,
+   "forecast_year": null,
+   "municipal_share_pct": 1.53
+  },
+  "1605": {
+   "name": "Little Falls Township",
+   "county": "Passaic",
+   "reported_rows": 3,
+   "dated_rows": 3,
+   "reported_billing": 3584000.0,
+   "dated_billing": 3584000.0,
+   "dated_billing_share_pct": 100.0,
+   "payment_schedule": [
+    {
+     "year": 2026,
+     "value": 3584000.0
+    },
+    {
+     "year": 2027,
+     "value": 3584000.0
+    },
+    {
+     "year": 2028,
+     "value": 3584000.0
+    },
+    {
+     "year": 2029,
+     "value": 3584000.0
+    },
+    {
+     "year": 2030,
+     "value": 3584000.0
+    },
+    {
+     "year": 2031,
+     "value": 3584000.0
+    },
+    {
+     "year": 2032,
+     "value": 3584000.0
+    },
+    {
+     "year": 2033,
+     "value": 3584000.0
+    },
+    {
+     "year": 2034,
+     "value": 1596000.0
+    },
+    {
+     "year": 2035,
+     "value": 1596000.0
+    }
+   ],
+   "revenue_projection": 17920000.0,
+   "forecast_year": 2043,
+   "municipal_share_pct": 14.27
+  },
+  "1606": {
+   "name": "North Haledon Borough",
+   "county": "Passaic",
+   "reported_rows": 2,
+   "dated_rows": 0,
+   "reported_billing": 596600.0,
+   "dated_billing": 0.0,
+   "dated_billing_share_pct": 0.0,
+   "payment_schedule": null,
+   "revenue_projection": null,
+   "forecast_year": null,
+   "municipal_share_pct": 3.33
+  },
+  "1607": {
+   "name": "Passaic City",
+   "county": "Passaic",
+   "reported_rows": 10,
+   "dated_rows": 8,
+   "reported_billing": 1421024.0,
+   "dated_billing": 1096578.0,
+   "dated_billing_share_pct": 77.2,
+   "payment_schedule": [
+    {
+     "year": 2026,
+     "value": 1096578.0
+    },
+    {
+     "year": 2027,
+     "value": 1096578.0
+    },
+    {
+     "year": 2028,
+     "value": 1096578.0
+    },
+    {
+     "year": 2029,
+     "value": 1096578.0
+    },
+    {
+     "year": 2030,
+     "value": 1096578.0
+    },
+    {
+     "year": 2031,
+     "value": 1096578.0
+    },
+    {
+     "year": 2032,
+     "value": 985075.0
+    },
+    {
+     "year": 2033,
+     "value": 691751.0
+    },
+    {
+     "year": 2034,
+     "value": 691751.0
+    },
+    {
+     "year": 2035,
+     "value": 691751.0
+    }
+   ],
+   "revenue_projection": 5482890.0,
+   "forecast_year": 2047,
+   "municipal_share_pct": 1.22
+  },
+  "1608": {
+   "name": "Paterson City",
+   "county": "Passaic",
+   "reported_rows": 70,
+   "dated_rows": 0,
+   "reported_billing": 2932111.94,
+   "dated_billing": 0.0,
+   "dated_billing_share_pct": 0.0,
+   "payment_schedule": null,
+   "revenue_projection": null,
+   "forecast_year": null,
+   "municipal_share_pct": 0.9
+  },
+  "1609": {
+   "name": "Pompton Lakes Borough",
+   "county": "Passaic",
+   "reported_rows": 5,
+   "dated_rows": 0,
+   "reported_billing": 0.0,
+   "dated_billing": 0.0,
+   "dated_billing_share_pct": null,
+   "payment_schedule": null,
+   "revenue_projection": null,
+   "forecast_year": null,
+   "municipal_share_pct": 0.0
+  },
+  "1610": {
+   "name": "Prospect Park Borough",
+   "county": "Passaic",
+   "reported_rows": 1,
+   "dated_rows": 1,
+   "reported_billing": 40000.0,
+   "dated_billing": 40000.0,
+   "dated_billing_share_pct": 100.0,
+   "payment_schedule": [
+    {
+     "year": 2026,
+     "value": 40000.0
+    },
+    {
+     "year": 2027,
+     "value": 40000.0
+    },
+    {
+     "year": 2028,
+     "value": 40000.0
+    },
+    {
+     "year": 2029,
+     "value": 40000.0
+    },
+    {
+     "year": 2030,
+     "value": 0.0
+    },
+    {
+     "year": 2031,
+     "value": 0.0
+    },
+    {
+     "year": 2032,
+     "value": 0.0
+    },
+    {
+     "year": 2033,
+     "value": 0.0
+    },
+    {
+     "year": 2034,
+     "value": 0.0
+    },
+    {
+     "year": 2035,
+     "value": 0.0
+    }
+   ],
+   "revenue_projection": 160000.0,
+   "forecast_year": 2029,
+   "municipal_share_pct": 0.44
+  },
+  "1612": {
+   "name": "Totowa Borough",
+   "county": "Passaic",
+   "reported_rows": 1,
+   "dated_rows": 1,
+   "reported_billing": 207628.36,
+   "dated_billing": 207628.36,
+   "dated_billing_share_pct": 100.0,
+   "payment_schedule": [
+    {
+     "year": 2026,
+     "value": 207628.36
+    },
+    {
+     "year": 2027,
+     "value": 207628.36
+    },
+    {
+     "year": 2028,
+     "value": 207628.36
+    },
+    {
+     "year": 2029,
+     "value": 207628.36
+    },
+    {
+     "year": 2030,
+     "value": 207628.36
+    },
+    {
+     "year": 2031,
+     "value": 207628.36
+    },
+    {
+     "year": 2032,
+     "value": 207628.36
+    },
+    {
+     "year": 2033,
+     "value": 207628.36
+    },
+    {
+     "year": 2034,
+     "value": 207628.36
+    },
+    {
+     "year": 2035,
+     "value": 207628.36
+    }
+   ],
+   "revenue_projection": 1038141.8,
+   "forecast_year": 2049,
+   "municipal_share_pct": 0.93
+  },
+  "1613": {
+   "name": "Wanaque Borough",
+   "county": "Passaic",
+   "reported_rows": 3,
+   "dated_rows": 0,
+   "reported_billing": 0.0,
+   "dated_billing": 0.0,
+   "dated_billing_share_pct": null,
+   "payment_schedule": null,
+   "revenue_projection": null,
+   "forecast_year": null,
+   "municipal_share_pct": 0.0
+  },
+  "1614": {
+   "name": "Wayne Township",
+   "county": "Passaic",
+   "reported_rows": 4,
+   "dated_rows": 0,
+   "reported_billing": 548209.0,
+   "dated_billing": 0.0,
+   "dated_billing_share_pct": 0.0,
+   "payment_schedule": null,
+   "revenue_projection": null,
+   "forecast_year": null,
+   "municipal_share_pct": 0.57
+  },
+  "1615": {
+   "name": "West Milford Township",
+   "county": "Passaic",
+   "reported_rows": 2,
+   "dated_rows": 2,
+   "reported_billing": 357375.34,
+   "dated_billing": 357375.34,
+   "dated_billing_share_pct": 100.0,
+   "payment_schedule": [
+    {
+     "year": 2026,
+     "value": 357375.34
+    },
+    {
+     "year": 2027,
+     "value": 357375.34
+    },
+    {
+     "year": 2028,
+     "value": 357375.34
+    },
+    {
+     "year": 2029,
+     "value": 357375.34
+    },
+    {
+     "year": 2030,
+     "value": 357375.34
+    },
+    {
+     "year": 2031,
+     "value": 357375.34
+    },
+    {
+     "year": 2032,
+     "value": 357375.34
+    },
+    {
+     "year": 2033,
+     "value": 357375.34
+    },
+    {
+     "year": 2034,
+     "value": 357375.34
+    },
+    {
+     "year": 2035,
+     "value": 0.0
+    }
+   ],
+   "revenue_projection": 1786876.7,
+   "forecast_year": 2034,
+   "municipal_share_pct": 0.94
+  },
+  "1616": {
+   "name": "Woodland Park Borough",
+   "county": "Passaic",
+   "reported_rows": 1,
+   "dated_rows": 0,
+   "reported_billing": 4142.88,
+   "dated_billing": 0.0,
+   "dated_billing_share_pct": 0.0,
+   "payment_schedule": null,
+   "revenue_projection": null,
+   "forecast_year": null,
+   "municipal_share_pct": 0.02
+  },
+  "1702": {
+   "name": "Carneys Point Township",
+   "county": "Salem",
+   "reported_rows": 7,
+   "dated_rows": 6,
+   "reported_billing": 2006318.0,
+   "dated_billing": 1916318.0,
+   "dated_billing_share_pct": 95.5,
+   "payment_schedule": [
+    {
+     "year": 2026,
+     "value": 1916318.0
+    },
+    {
+     "year": 2027,
+     "value": 1748318.0
+    },
+    {
+     "year": 2028,
+     "value": 1748318.0
+    },
+    {
+     "year": 2029,
+     "value": 1010318.0
+    },
+    {
+     "year": 2030,
+     "value": 1010318.0
+    },
+    {
+     "year": 2031,
+     "value": 1010318.0
+    },
+    {
+     "year": 2032,
+     "value": 1010318.0
+    },
+    {
+     "year": 2033,
+     "value": 1010318.0
+    },
+    {
+     "year": 2034,
+     "value": 1010318.0
+    },
+    {
+     "year": 2035,
+     "value": 1010318.0
+    }
+   ],
+   "revenue_projection": 7433590.0,
+   "forecast_year": 2050,
+   "municipal_share_pct": 15.07
+  },
+  "1707": {
+   "name": "Oldmans Township",
+   "county": "Salem",
+   "reported_rows": 5,
+   "dated_rows": 5,
+   "reported_billing": 1227729.0,
+   "dated_billing": 1227729.0,
+   "dated_billing_share_pct": 100.0,
+   "payment_schedule": [
+    {
+     "year": 2026,
+     "value": 1227729.0
+    },
+    {
+     "year": 2027,
+     "value": 1227729.0
+    },
+    {
+     "year": 2028,
+     "value": 1227729.0
+    },
+    {
+     "year": 2029,
+     "value": 1227729.0
+    },
+    {
+     "year": 2030,
+     "value": 1227729.0
+    },
+    {
+     "year": 2031,
+     "value": 1227729.0
+    },
+    {
+     "year": 2032,
+     "value": 1227729.0
+    },
+    {
+     "year": 2033,
+     "value": 1227729.0
+    },
+    {
+     "year": 2034,
+     "value": 1148745.0
+    },
+    {
+     "year": 2035,
+     "value": 1148745.0
+    }
+   ],
+   "revenue_projection": 6138645.0,
+   "forecast_year": 2039,
+   "municipal_share_pct": 43.22
+  },
+  "1708": {
+   "name": "Penns Grove Borough",
+   "county": "Salem",
+   "reported_rows": 3,
+   "dated_rows": 0,
+   "reported_billing": 275570.04,
+   "dated_billing": 0.0,
+   "dated_billing_share_pct": 0.0,
+   "payment_schedule": null,
+   "revenue_projection": null,
+   "forecast_year": null,
+   "municipal_share_pct": 3.2
+  },
+  "1709": {
+   "name": "Pennsville Township",
+   "county": "Salem",
+   "reported_rows": 5,
+   "dated_rows": 2,
+   "reported_billing": 1035000.0,
+   "dated_billing": 1035000.0,
+   "dated_billing_share_pct": 100.0,
+   "payment_schedule": [
+    {
+     "year": 2026,
+     "value": 1035000.0
+    },
+    {
+     "year": 2027,
+     "value": 1035000.0
+    },
+    {
+     "year": 2028,
+     "value": 1035000.0
+    },
+    {
+     "year": 2029,
+     "value": 1035000.0
+    },
+    {
+     "year": 2030,
+     "value": 1035000.0
+    },
+    {
+     "year": 2031,
+     "value": 1035000.0
+    },
+    {
+     "year": 2032,
+     "value": 1035000.0
+    },
+    {
+     "year": 2033,
+     "value": 1035000.0
+    },
+    {
+     "year": 2034,
+     "value": 1035000.0
+    },
+    {
+     "year": 2035,
+     "value": 1035000.0
+    }
+   ],
+   "revenue_projection": 5175000.0,
+   "forecast_year": 2055,
+   "municipal_share_pct": 4.5
+  },
+  "1713": {
+   "name": "Salem City",
+   "county": "Salem",
+   "reported_rows": 3,
+   "dated_rows": 0,
+   "reported_billing": 506543.85,
+   "dated_billing": 0.0,
+   "dated_billing_share_pct": 0.0,
+   "payment_schedule": null,
+   "revenue_projection": null,
+   "forecast_year": null,
+   "municipal_share_pct": 3.61
+  },
+  "1715": {
+   "name": "Woodstown Borough",
+   "county": "Salem",
+   "reported_rows": 2,
+   "dated_rows": 0,
+   "reported_billing": 26167.75,
+   "dated_billing": 0.0,
+   "dated_billing_share_pct": 0.0,
+   "payment_schedule": null,
+   "revenue_projection": null,
+   "forecast_year": null,
+   "municipal_share_pct": 0.57
+  },
+  "1801": {
+   "name": "Bedminster Township",
+   "county": "Somerset",
+   "reported_rows": 1,
+   "dated_rows": 0,
+   "reported_billing": 28717.73,
+   "dated_billing": 0.0,
+   "dated_billing_share_pct": 0.0,
+   "payment_schedule": null,
+   "revenue_projection": null,
+   "forecast_year": null,
+   "municipal_share_pct": 0.23
+  },
+  "1802": {
+   "name": "Bernards Township",
+   "county": "Somerset",
+   "reported_rows": 3,
+   "dated_rows": 0,
+   "reported_billing": 494654.95,
+   "dated_billing": 0.0,
+   "dated_billing_share_pct": 0.0,
+   "payment_schedule": null,
+   "revenue_projection": null,
+   "forecast_year": null,
+   "municipal_share_pct": 1.09
+  },
+  "1804": {
+   "name": "Bound Brook Borough",
+   "county": "Somerset",
+   "reported_rows": 10,
+   "dated_rows": 7,
+   "reported_billing": 1670761.7,
+   "dated_billing": 1259040.76,
+   "dated_billing_share_pct": 75.4,
+   "payment_schedule": [
+    {
+     "year": 2026,
+     "value": 1259040.76
+    },
+    {
+     "year": 2027,
+     "value": 1259040.76
+    },
+    {
+     "year": 2028,
+     "value": 1259040.76
+    },
+    {
+     "year": 2029,
+     "value": 1259040.76
+    },
+    {
+     "year": 2030,
+     "value": 1259040.76
+    },
+    {
+     "year": 2031,
+     "value": 1259040.76
+    },
+    {
+     "year": 2032,
+     "value": 1259040.76
+    },
+    {
+     "year": 2033,
+     "value": 1259040.76
+    },
+    {
+     "year": 2034,
+     "value": 1259040.76
+    },
+    {
+     "year": 2035,
+     "value": 1259040.76
+    }
+   ],
+   "revenue_projection": 6295203.8,
+   "forecast_year": 2045,
+   "municipal_share_pct": 8.07
+  },
+  "1805": {
+   "name": "Branchburg Township",
+   "county": "Somerset",
+   "reported_rows": 2,
+   "dated_rows": 2,
+   "reported_billing": 95090.8,
+   "dated_billing": 95090.8,
+   "dated_billing_share_pct": 100.0,
+   "payment_schedule": [
+    {
+     "year": 2026,
+     "value": 18193.8
+    },
+    {
+     "year": 2027,
+     "value": 18193.8
+    },
+    {
+     "year": 2028,
+     "value": 18193.8
+    },
+    {
+     "year": 2029,
+     "value": 18193.8
+    },
+    {
+     "year": 2030,
+     "value": 18193.8
+    },
+    {
+     "year": 2031,
+     "value": 18193.8
+    },
+    {
+     "year": 2032,
+     "value": 18193.8
+    },
+    {
+     "year": 2033,
+     "value": 18193.8
+    },
+    {
+     "year": 2034,
+     "value": 18193.8
+    },
+    {
+     "year": 2035,
+     "value": 18193.8
+    }
+   ],
+   "revenue_projection": 90969.0,
+   "forecast_year": 2052,
+   "municipal_share_pct": 0.35
+  },
+  "1808": {
+   "name": "Franklin Township",
+   "county": "Somerset",
+   "reported_rows": 7,
+   "dated_rows": 0,
+   "reported_billing": 377704.83,
+   "dated_billing": 0.0,
+   "dated_billing_share_pct": 0.0,
+   "payment_schedule": null,
+   "revenue_projection": null,
+   "forecast_year": null,
+   "municipal_share_pct": 0.55
+  },
+  "1810": {
+   "name": "Hillsborough Township",
+   "county": "Somerset",
+   "reported_rows": 2,
+   "dated_rows": 2,
+   "reported_billing": 230527.0,
+   "dated_billing": 230527.0,
+   "dated_billing_share_pct": 100.0,
+   "payment_schedule": [
+    {
+     "year": 2026,
+     "value": 230527.0
+    },
+    {
+     "year": 2027,
+     "value": 230527.0
+    },
+    {
+     "year": 2028,
+     "value": 230527.0
+    },
+    {
+     "year": 2029,
+     "value": 230527.0
+    },
+    {
+     "year": 2030,
+     "value": 230527.0
+    },
+    {
+     "year": 2031,
+     "value": 230527.0
+    },
+    {
+     "year": 2032,
+     "value": 230527.0
+    },
+    {
+     "year": 2033,
+     "value": 230527.0
+    },
+    {
+     "year": 2034,
+     "value": 230527.0
+    },
+    {
+     "year": 2035,
+     "value": 230527.0
+    }
+   ],
+   "revenue_projection": 1152635.0,
+   "forecast_year": 2055,
+   "municipal_share_pct": 0.57
+  },
+  "1813": {
+   "name": "Montgomery Township",
+   "county": "Somerset",
+   "reported_rows": 1,
+   "dated_rows": 0,
+   "reported_billing": 62400.63,
+   "dated_billing": 0.0,
+   "dated_billing_share_pct": 0.0,
+   "payment_schedule": null,
+   "revenue_projection": null,
+   "forecast_year": null,
+   "municipal_share_pct": 0.19
+  },
+  "1815": {
+   "name": "Peapack and Gladstone Borough",
+   "county": "Somerset",
+   "reported_rows": 1,
+   "dated_rows": 0,
+   "reported_billing": 0.0,
+   "dated_billing": 0.0,
+   "dated_billing_share_pct": null,
+   "payment_schedule": null,
+   "revenue_projection": null,
+   "forecast_year": null,
+   "municipal_share_pct": 0.0
+  },
+  "1816": {
+   "name": "Raritan Borough",
+   "county": "Somerset",
+   "reported_rows": 1,
+   "dated_rows": 0,
+   "reported_billing": 1015289.0,
+   "dated_billing": 0.0,
+   "dated_billing_share_pct": 0.0,
+   "payment_schedule": null,
+   "revenue_projection": null,
+   "forecast_year": null,
+   "municipal_share_pct": 7.17
+  },
+  "1818": {
+   "name": "Somerville Borough",
+   "county": "Somerset",
+   "reported_rows": 11,
+   "dated_rows": 10,
+   "reported_billing": 4282599.48,
+   "dated_billing": 4192751.08,
+   "dated_billing_share_pct": 97.9,
+   "payment_schedule": [
+    {
+     "year": 2026,
+     "value": 4192751.08
+    },
+    {
+     "year": 2027,
+     "value": 4192751.08
+    },
+    {
+     "year": 2028,
+     "value": 4192751.08
+    },
+    {
+     "year": 2029,
+     "value": 4192751.08
+    },
+    {
+     "year": 2030,
+     "value": 4192751.08
+    },
+    {
+     "year": 2031,
+     "value": 4192751.08
+    },
+    {
+     "year": 2032,
+     "value": 4192751.08
+    },
+    {
+     "year": 2033,
+     "value": 3635778.88
+    },
+    {
+     "year": 2034,
+     "value": 3635778.88
+    },
+    {
+     "year": 2035,
+     "value": 3635778.88
+    }
+   ],
+   "revenue_projection": 20963755.4,
+   "forecast_year": 2049,
+   "municipal_share_pct": 15.16
+  },
+  "1819": {
+   "name": "South Bound Brook Borough",
+   "county": "Somerset",
+   "reported_rows": 1,
+   "dated_rows": 0,
+   "reported_billing": 832739.33,
+   "dated_billing": 0.0,
+   "dated_billing_share_pct": 0.0,
+   "payment_schedule": null,
+   "revenue_projection": null,
+   "forecast_year": null,
+   "municipal_share_pct": 10.77
+  },
+  "1820": {
+   "name": "Warren Township",
+   "county": "Somerset",
+   "reported_rows": 6,
+   "dated_rows": 6,
+   "reported_billing": 2000685.15,
+   "dated_billing": 2000685.15,
+   "dated_billing_share_pct": 100.0,
+   "payment_schedule": [
+    {
+     "year": 2026,
+     "value": 2000685.15
+    },
+    {
+     "year": 2027,
+     "value": 2000685.15
+    },
+    {
+     "year": 2028,
+     "value": 2000685.15
+    },
+    {
+     "year": 2029,
+     "value": 2000685.15
+    },
+    {
+     "year": 2030,
+     "value": 2000685.15
+    },
+    {
+     "year": 2031,
+     "value": 2000685.15
+    },
+    {
+     "year": 2032,
+     "value": 2000685.15
+    },
+    {
+     "year": 2033,
+     "value": 2000685.15
+    },
+    {
+     "year": 2034,
+     "value": 2000685.15
+    },
+    {
+     "year": 2035,
+     "value": 2000685.15
+    }
+   ],
+   "revenue_projection": 10003425.75,
+   "forecast_year": 2059,
+   "municipal_share_pct": 7.85
+  },
+  "1905": {
+   "name": "Frankford Township",
+   "county": "Sussex",
+   "reported_rows": 1,
+   "dated_rows": 0,
+   "reported_billing": 10248.88,
+   "dated_billing": 0.0,
+   "dated_billing_share_pct": 0.0,
+   "payment_schedule": null,
+   "revenue_projection": null,
+   "forecast_year": null,
+   "municipal_share_pct": 0.21
+  },
+  "1915": {
+   "name": "Newton Town",
+   "county": "Sussex",
+   "reported_rows": 13,
+   "dated_rows": 6,
+   "reported_billing": 1661086.08,
+   "dated_billing": 1245811.65,
+   "dated_billing_share_pct": 75.0,
+   "payment_schedule": [
+    {
+     "year": 2026,
+     "value": 1245811.65
+    },
+    {
+     "year": 2027,
+     "value": 790249.65
+    },
+    {
+     "year": 2028,
+     "value": 790249.65
+    },
+    {
+     "year": 2029,
+     "value": 790249.65
+    },
+    {
+     "year": 2030,
+     "value": 790249.65
+    },
+    {
+     "year": 2031,
+     "value": 790249.65
+    },
+    {
+     "year": 2032,
+     "value": 790249.65
+    },
+    {
+     "year": 2033,
+     "value": 790249.65
+    },
+    {
+     "year": 2034,
+     "value": 790249.65
+    },
+    {
+     "year": 2035,
+     "value": 790249.65
+    }
+   ],
+   "revenue_projection": 4406810.25,
+   "forecast_year": 2052,
+   "municipal_share_pct": 10.33
+  },
+  "1918": {
+   "name": "Sparta Township",
+   "county": "Sussex",
+   "reported_rows": 3,
+   "dated_rows": 0,
+   "reported_billing": 0.0,
+   "dated_billing": 0.0,
+   "dated_billing_share_pct": null,
+   "payment_schedule": null,
+   "revenue_projection": null,
+   "forecast_year": null,
+   "municipal_share_pct": 0.0
+  },
+  "1921": {
+   "name": "Sussex Borough",
+   "county": "Sussex",
+   "reported_rows": 1,
+   "dated_rows": 0,
+   "reported_billing": 65698.96,
+   "dated_billing": 0.0,
+   "dated_billing_share_pct": 0.0,
+   "payment_schedule": null,
+   "revenue_projection": null,
+   "forecast_year": null,
+   "municipal_share_pct": 3.64
+  },
+  "1924": {
+   "name": "Wantage Township",
+   "county": "Sussex",
+   "reported_rows": 1,
+   "dated_rows": 0,
+   "reported_billing": 0.0,
+   "dated_billing": 0.0,
+   "dated_billing_share_pct": null,
+   "payment_schedule": null,
+   "revenue_projection": null,
+   "forecast_year": null,
+   "municipal_share_pct": 0.0
+  },
+  "2001": {
+   "name": "Berkeley Heights Township",
+   "county": "Union",
+   "reported_rows": 5,
+   "dated_rows": 5,
+   "reported_billing": 1511662.8,
+   "dated_billing": 1511662.8,
+   "dated_billing_share_pct": 100.0,
+   "payment_schedule": [
+    {
+     "year": 2026,
+     "value": 1511662.8
+    },
+    {
+     "year": 2027,
+     "value": 1511662.8
+    },
+    {
+     "year": 2028,
+     "value": 1511662.8
+    },
+    {
+     "year": 2029,
+     "value": 1511662.8
+    },
+    {
+     "year": 2030,
+     "value": 1511662.8
+    },
+    {
+     "year": 2031,
+     "value": 1511662.8
+    },
+    {
+     "year": 2032,
+     "value": 1511662.8
+    },
+    {
+     "year": 2033,
+     "value": 1511662.8
+    },
+    {
+     "year": 2034,
+     "value": 1511662.8
+    },
+    {
+     "year": 2035,
+     "value": 1511662.8
+    }
+   ],
+   "revenue_projection": 7558314.0,
+   "forecast_year": 2053,
+   "municipal_share_pct": 5.2
+  },
+  "2002": {
+   "name": "Clark Township",
+   "county": "Union",
+   "reported_rows": 1,
+   "dated_rows": 1,
+   "reported_billing": 787500.0,
+   "dated_billing": 787500.0,
+   "dated_billing_share_pct": 100.0,
+   "payment_schedule": [
+    {
+     "year": 2026,
+     "value": 787500.0
+    },
+    {
+     "year": 2027,
+     "value": 787500.0
+    },
+    {
+     "year": 2028,
+     "value": 787500.0
+    },
+    {
+     "year": 2029,
+     "value": 787500.0
+    },
+    {
+     "year": 2030,
+     "value": 787500.0
+    },
+    {
+     "year": 2031,
+     "value": 787500.0
+    },
+    {
+     "year": 2032,
+     "value": 787500.0
+    },
+    {
+     "year": 2033,
+     "value": 787500.0
+    },
+    {
+     "year": 2034,
+     "value": 787500.0
+    },
+    {
+     "year": 2035,
+     "value": 787500.0
+    }
+   ],
+   "revenue_projection": 3937500.0,
+   "forecast_year": 2056,
+   "municipal_share_pct": 2.44
+  },
+  "2003": {
+   "name": "Cranford Township",
+   "county": "Union",
+   "reported_rows": 1,
+   "dated_rows": 1,
+   "reported_billing": 829619.04,
+   "dated_billing": 829619.04,
+   "dated_billing_share_pct": 100.0,
+   "payment_schedule": [
+    {
+     "year": 2026,
+     "value": 829619.04
+    },
+    {
+     "year": 2027,
+     "value": 829619.04
+    },
+    {
+     "year": 2028,
+     "value": 829619.04
+    },
+    {
+     "year": 2029,
+     "value": 829619.04
+    },
+    {
+     "year": 2030,
+     "value": 829619.04
+    },
+    {
+     "year": 2031,
+     "value": 829619.04
+    },
+    {
+     "year": 2032,
+     "value": 829619.04
+    },
+    {
+     "year": 2033,
+     "value": 829619.04
+    },
+    {
+     "year": 2034,
+     "value": 829619.04
+    },
+    {
+     "year": 2035,
+     "value": 829619.04
+    }
+   ],
+   "revenue_projection": 4148095.2,
+   "forecast_year": 2051,
+   "municipal_share_pct": 1.79
+  },
+  "2004": {
+   "name": "Elizabeth City",
+   "county": "Union",
+   "reported_rows": 48,
+   "dated_rows": 0,
+   "reported_billing": 14148812.01,
+   "dated_billing": 0.0,
+   "dated_billing_share_pct": 0.0,
+   "payment_schedule": null,
+   "revenue_projection": null,
+   "forecast_year": null,
+   "municipal_share_pct": 4.2
+  },
+  "2005": {
+   "name": "Fanwood Borough",
+   "county": "Union",
+   "reported_rows": 4,
+   "dated_rows": 0,
+   "reported_billing": 403515.29,
+   "dated_billing": 0.0,
+   "dated_billing_share_pct": 0.0,
+   "payment_schedule": null,
+   "revenue_projection": null,
+   "forecast_year": null,
+   "municipal_share_pct": 3.15
+  },
+  "2006": {
+   "name": "Garwood Borough",
+   "county": "Union",
+   "reported_rows": 3,
+   "dated_rows": 3,
+   "reported_billing": 1382190.0,
+   "dated_billing": 1382190.0,
+   "dated_billing_share_pct": 100.0,
+   "payment_schedule": [
+    {
+     "year": 2026,
+     "value": 1382190.0
+    },
+    {
+     "year": 2027,
+     "value": 1382190.0
+    },
+    {
+     "year": 2028,
+     "value": 1382190.0
+    },
+    {
+     "year": 2029,
+     "value": 1382190.0
+    },
+    {
+     "year": 2030,
+     "value": 1382190.0
+    },
+    {
+     "year": 2031,
+     "value": 1382190.0
+    },
+    {
+     "year": 2032,
+     "value": 1382190.0
+    },
+    {
+     "year": 2033,
+     "value": 1382190.0
+    },
+    {
+     "year": 2034,
+     "value": 1382190.0
+    },
+    {
+     "year": 2035,
+     "value": 1382190.0
+    }
+   ],
+   "revenue_projection": 6910950.0,
+   "forecast_year": 2048,
+   "municipal_share_pct": 12.51
+  },
+  "2007": {
+   "name": "Hillside Township",
+   "county": "Union",
+   "reported_rows": 2,
+   "dated_rows": 0,
+   "reported_billing": 204350.0,
+   "dated_billing": 0.0,
+   "dated_billing_share_pct": 0.0,
+   "payment_schedule": null,
+   "revenue_projection": null,
+   "forecast_year": null,
+   "municipal_share_pct": 0.37
+  },
+  "2009": {
+   "name": "Linden City",
+   "county": "Union",
+   "reported_rows": 42,
+   "dated_rows": 18,
+   "reported_billing": 8401339.0,
+   "dated_billing": 8336611.0,
+   "dated_billing_share_pct": 99.2,
+   "payment_schedule": [
+    {
+     "year": 2026,
+     "value": 8336611.0
+    },
+    {
+     "year": 2027,
+     "value": 8336611.0
+    },
+    {
+     "year": 2028,
+     "value": 8336611.0
+    },
+    {
+     "year": 2029,
+     "value": 8336611.0
+    },
+    {
+     "year": 2030,
+     "value": 8336611.0
+    },
+    {
+     "year": 2031,
+     "value": 8336611.0
+    },
+    {
+     "year": 2032,
+     "value": 8336611.0
+    },
+    {
+     "year": 2033,
+     "value": 7342391.0
+    },
+    {
+     "year": 2034,
+     "value": 7098775.0
+    },
+    {
+     "year": 2035,
+     "value": 7098775.0
+    }
+   ],
+   "revenue_projection": 41683055.0,
+   "forecast_year": 2054,
+   "municipal_share_pct": 6.2
+  },
+  "2012": {
+   "name": "Plainfield City",
+   "county": "Union",
+   "reported_rows": 27,
+   "dated_rows": 0,
+   "reported_billing": 3741215.99,
+   "dated_billing": 0.0,
+   "dated_billing_share_pct": 0.0,
+   "payment_schedule": null,
+   "revenue_projection": null,
+   "forecast_year": null,
+   "municipal_share_pct": 3.51
+  },
+  "2013": {
+   "name": "Rahway City",
+   "county": "Union",
+   "reported_rows": 12,
+   "dated_rows": 11,
+   "reported_billing": 2737000.0,
+   "dated_billing": 2447000.0,
+   "dated_billing_share_pct": 89.4,
+   "payment_schedule": [
+    {
+     "year": 2026,
+     "value": 1970000.0
+    },
+    {
+     "year": 2027,
+     "value": 1970000.0
+    },
+    {
+     "year": 2028,
+     "value": 1970000.0
+    },
+    {
+     "year": 2029,
+     "value": 1605000.0
+    },
+    {
+     "year": 2030,
+     "value": 1605000.0
+    },
+    {
+     "year": 2031,
+     "value": 1080000.0
+    },
+    {
+     "year": 2032,
+     "value": 1080000.0
+    },
+    {
+     "year": 2033,
+     "value": 1080000.0
+    },
+    {
+     "year": 2034,
+     "value": 1062000.0
+    },
+    {
+     "year": 2035,
+     "value": 1062000.0
+    }
+   ],
+   "revenue_projection": 9120000.0,
+   "forecast_year": 2053,
+   "municipal_share_pct": 3.88
+  },
+  "2014": {
+   "name": "Roselle Borough",
+   "county": "Union",
+   "reported_rows": 10,
+   "dated_rows": 0,
+   "reported_billing": 2379252.12,
+   "dated_billing": 0.0,
+   "dated_billing_share_pct": 0.0,
+   "payment_schedule": null,
+   "revenue_projection": null,
+   "forecast_year": null,
+   "municipal_share_pct": 4.49
+  },
+  "2015": {
+   "name": "Roselle Park Borough",
+   "county": "Union",
+   "reported_rows": 6,
+   "dated_rows": 3,
+   "reported_billing": 1387911.59,
+   "dated_billing": 1387911.59,
+   "dated_billing_share_pct": 100.0,
+   "payment_schedule": [
+    {
+     "year": 2026,
+     "value": 1387911.59
+    },
+    {
+     "year": 2027,
+     "value": 1387911.59
+    },
+    {
+     "year": 2028,
+     "value": 1387911.59
+    },
+    {
+     "year": 2029,
+     "value": 1387911.59
+    },
+    {
+     "year": 2030,
+     "value": 1387911.59
+    },
+    {
+     "year": 2031,
+     "value": 1387911.59
+    },
+    {
+     "year": 2032,
+     "value": 1387911.59
+    },
+    {
+     "year": 2033,
+     "value": 1387911.59
+    },
+    {
+     "year": 2034,
+     "value": 1387911.59
+    },
+    {
+     "year": 2035,
+     "value": 1387911.59
+    }
+   ],
+   "revenue_projection": 6939557.95,
+   "forecast_year": 2054,
+   "municipal_share_pct": 5.9
+  },
+  "2016": {
+   "name": "Scotch Plains Township",
+   "county": "Union",
+   "reported_rows": 3,
+   "dated_rows": 3,
+   "reported_billing": 1518962.3,
+   "dated_billing": 1518962.3,
+   "dated_billing_share_pct": 100.0,
+   "payment_schedule": [
+    {
+     "year": 2026,
+     "value": 1518962.3
+    },
+    {
+     "year": 2027,
+     "value": 1518962.3
+    },
+    {
+     "year": 2028,
+     "value": 1518962.3
+    },
+    {
+     "year": 2029,
+     "value": 1518962.3
+    },
+    {
+     "year": 2030,
+     "value": 1518962.3
+    },
+    {
+     "year": 2031,
+     "value": 1518962.3
+    },
+    {
+     "year": 2032,
+     "value": 1518962.3
+    },
+    {
+     "year": 2033,
+     "value": 1518962.3
+    },
+    {
+     "year": 2034,
+     "value": 1518962.3
+    },
+    {
+     "year": 2035,
+     "value": 1518962.3
+    }
+   ],
+   "revenue_projection": 7594811.5,
+   "forecast_year": 2054,
+   "municipal_share_pct": 4.65
+  },
+  "2017": {
+   "name": "Springfield Township",
+   "county": "Union",
+   "reported_rows": 2,
+   "dated_rows": 2,
+   "reported_billing": 0.0,
+   "dated_billing": 0.0,
+   "dated_billing_share_pct": null,
+   "payment_schedule": [
+    {
+     "year": 2026,
+     "value": 0.0
+    },
+    {
+     "year": 2027,
+     "value": 0.0
+    },
+    {
+     "year": 2028,
+     "value": 0.0
+    },
+    {
+     "year": 2029,
+     "value": 0.0
+    },
+    {
+     "year": 2030,
+     "value": 0.0
+    },
+    {
+     "year": 2031,
+     "value": 0.0
+    },
+    {
+     "year": 2032,
+     "value": 0.0
+    },
+    {
+     "year": 2033,
+     "value": 0.0
+    },
+    {
+     "year": 2034,
+     "value": 0.0
+    },
+    {
+     "year": 2035,
+     "value": 0.0
+    }
+   ],
+   "revenue_projection": 0.0,
+   "forecast_year": 2050,
+   "municipal_share_pct": 0.0
+  },
+  "2019": {
+   "name": "Union Township",
+   "county": "Union",
+   "reported_rows": 7,
+   "dated_rows": 5,
+   "reported_billing": 0.0,
+   "dated_billing": 0.0,
+   "dated_billing_share_pct": null,
+   "payment_schedule": [
+    {
+     "year": 2026,
+     "value": 0.0
+    },
+    {
+     "year": 2027,
+     "value": 0.0
+    },
+    {
+     "year": 2028,
+     "value": 0.0
+    },
+    {
+     "year": 2029,
+     "value": 0.0
+    },
+    {
+     "year": 2030,
+     "value": 0.0
+    },
+    {
+     "year": 2031,
+     "value": 0.0
+    },
+    {
+     "year": 2032,
+     "value": 0.0
+    },
+    {
+     "year": 2033,
+     "value": 0.0
+    },
+    {
+     "year": 2034,
+     "value": 0.0
+    },
+    {
+     "year": 2035,
+     "value": 0.0
+    }
+   ],
+   "revenue_projection": 0.0,
+   "forecast_year": 2052,
+   "municipal_share_pct": 0.0
+  },
+  "2020": {
+   "name": "Westfield Town",
+   "county": "Union",
+   "reported_rows": 1,
+   "dated_rows": 1,
+   "reported_billing": 89780.09,
+   "dated_billing": 89780.09,
+   "dated_billing_share_pct": 100.0,
+   "payment_schedule": [
+    {
+     "year": 2026,
+     "value": 89780.09
+    },
+    {
+     "year": 2027,
+     "value": 89780.09
+    },
+    {
+     "year": 2028,
+     "value": 89780.09
+    },
+    {
+     "year": 2029,
+     "value": 89780.09
+    },
+    {
+     "year": 2030,
+     "value": 89780.09
+    },
+    {
+     "year": 2031,
+     "value": 89780.09
+    },
+    {
+     "year": 2032,
+     "value": 89780.09
+    },
+    {
+     "year": 2033,
+     "value": 89780.09
+    },
+    {
+     "year": 2034,
+     "value": 89780.09
+    },
+    {
+     "year": 2035,
+     "value": 89780.09
+    }
+   ],
+   "revenue_projection": 448900.45,
+   "forecast_year": 2054,
+   "municipal_share_pct": 0.17
+  },
+  "2108": {
+   "name": "Hackettstown Town",
+   "county": "Warren",
+   "reported_rows": 1,
+   "dated_rows": 1,
+   "reported_billing": 57681.0,
+   "dated_billing": 57681.0,
+   "dated_billing_share_pct": 100.0,
+   "payment_schedule": [
+    {
+     "year": 2026,
+     "value": 57681.0
+    },
+    {
+     "year": 2027,
+     "value": 57681.0
+    },
+    {
+     "year": 2028,
+     "value": 57681.0
+    },
+    {
+     "year": 2029,
+     "value": 57681.0
+    },
+    {
+     "year": 2030,
+     "value": 57681.0
+    },
+    {
+     "year": 2031,
+     "value": 57681.0
+    },
+    {
+     "year": 2032,
+     "value": 57681.0
+    },
+    {
+     "year": 2033,
+     "value": 57681.0
+    },
+    {
+     "year": 2034,
+     "value": 57681.0
+    },
+    {
+     "year": 2035,
+     "value": 57681.0
+    }
+   ],
+   "revenue_projection": 288405.0,
+   "forecast_year": 2056,
+   "municipal_share_pct": 0.45
+  },
+  "2112": {
+   "name": "Independence Township",
+   "county": "Warren",
+   "reported_rows": 2,
+   "dated_rows": 2,
+   "reported_billing": 310436.18,
+   "dated_billing": 310436.18,
+   "dated_billing_share_pct": 100.0,
+   "payment_schedule": [
+    {
+     "year": 2026,
+     "value": 238323.0
+    },
+    {
+     "year": 2027,
+     "value": 238323.0
+    },
+    {
+     "year": 2028,
+     "value": 238323.0
+    },
+    {
+     "year": 2029,
+     "value": 238323.0
+    },
+    {
+     "year": 2030,
+     "value": 238323.0
+    },
+    {
+     "year": 2031,
+     "value": 238323.0
+    },
+    {
+     "year": 2032,
+     "value": 238323.0
+    },
+    {
+     "year": 2033,
+     "value": 238323.0
+    },
+    {
+     "year": 2034,
+     "value": 238323.0
+    },
+    {
+     "year": 2035,
+     "value": 238323.0
+    }
+   ],
+   "revenue_projection": 1191615.0,
+   "forecast_year": 2051,
+   "municipal_share_pct": 5.69
+  },
+  "2115": {
+   "name": "Lopatcong Township",
+   "county": "Warren",
+   "reported_rows": 2,
+   "dated_rows": 2,
+   "reported_billing": 205143.35,
+   "dated_billing": 205143.35,
+   "dated_billing_share_pct": 100.0,
+   "payment_schedule": [
+    {
+     "year": 2026,
+     "value": 0.0
+    },
+    {
+     "year": 2027,
+     "value": 0.0
+    },
+    {
+     "year": 2028,
+     "value": 0.0
+    },
+    {
+     "year": 2029,
+     "value": 0.0
+    },
+    {
+     "year": 2030,
+     "value": 0.0
+    },
+    {
+     "year": 2031,
+     "value": 0.0
+    },
+    {
+     "year": 2032,
+     "value": 0.0
+    },
+    {
+     "year": 2033,
+     "value": 0.0
+    },
+    {
+     "year": 2034,
+     "value": 0.0
+    },
+    {
+     "year": 2035,
+     "value": 0.0
+    }
+   ],
+   "revenue_projection": 0.0,
+   "forecast_year": null,
+   "municipal_share_pct": 1.77
+  },
+  "2119": {
+   "name": "Phillipsburg Town",
+   "county": "Warren",
+   "reported_rows": 5,
+   "dated_rows": 5,
+   "reported_billing": 575013.51,
+   "dated_billing": 575013.51,
+   "dated_billing_share_pct": 100.0,
+   "payment_schedule": [
+    {
+     "year": 2026,
+     "value": 575013.51
+    },
+    {
+     "year": 2027,
+     "value": 575013.51
+    },
+    {
+     "year": 2028,
+     "value": 575013.51
+    },
+    {
+     "year": 2029,
+     "value": 575013.51
+    },
+    {
+     "year": 2030,
+     "value": 575013.51
+    },
+    {
+     "year": 2031,
+     "value": 575013.51
+    },
+    {
+     "year": 2032,
+     "value": 575013.51
+    },
+    {
+     "year": 2033,
+     "value": 575013.51
+    },
+    {
+     "year": 2034,
+     "value": 575013.51
+    },
+    {
+     "year": 2035,
+     "value": 575013.51
+    }
+   ],
+   "revenue_projection": 2875067.55,
+   "forecast_year": 2053,
+   "municipal_share_pct": 2.47
+  },
+  "2122": {
+   "name": "Washington Township",
+   "county": "Warren",
+   "reported_rows": 2,
+   "dated_rows": 2,
+   "reported_billing": 1738281.0,
+   "dated_billing": 1738281.0,
+   "dated_billing_share_pct": 100.0,
+   "payment_schedule": [
+    {
+     "year": 2026,
+     "value": 1738281.0
+    },
+    {
+     "year": 2027,
+     "value": 1738281.0
+    },
+    {
+     "year": 2028,
+     "value": 1738281.0
+    },
+    {
+     "year": 2029,
+     "value": 1738281.0
+    },
+    {
+     "year": 2030,
+     "value": 1738281.0
+    },
+    {
+     "year": 2031,
+     "value": 1738281.0
+    },
+    {
+     "year": 2032,
+     "value": 1738281.0
+    },
+    {
+     "year": 2033,
+     "value": 1738281.0
+    },
+    {
+     "year": 2034,
+     "value": 1738281.0
+    },
+    {
+     "year": 2035,
+     "value": 1738281.0
+    }
+   ],
+   "revenue_projection": 8691405.0,
+   "forecast_year": 2047,
+   "municipal_share_pct": 12.92
+  }
+ }
+}
