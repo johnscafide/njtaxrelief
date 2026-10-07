@@ -1863,7 +1863,7 @@ function assessorAddressAlias(display, assessor) {
         : '') +
       '<div class="plm-est-fine">An estimate for screening a property tax appeal. It is built from public assessment and sale records and has not seen inside the house. ' +
         'It is not an appraisal and not a listing price. ' +
-        '<a href="#" onclick="plOpenForm(\'appeal\');return false;">Have me check it properly</a>.</div>';
+        '<a href="#" onclick="plOpenForm(\'appeal\');return false;">Have Watchdog check the property</a>.</div>';
 
     var eq = el('plm-equity');
     if (eq && implied) {
@@ -2869,6 +2869,45 @@ buildOpinion(hasCase, overBy, saving, target) + rows +
       })
       .catch(function () {});
   }
+  function placePropertyTop(pin, html) {
+    var scroll = elReal('plm-scroll'), photos = elReal('plm-photos');
+    if (!scroll || !photos || !current || current.pin !== pin) return;
+    var old = elReal('plm-top');
+    if (old) old.parentNode.removeChild(old);
+    var top = document.createElement('div');
+    top.className = 'wdp';
+    top.id = 'plm-top';
+    top.setAttribute('data-pin', pin);
+    if (typeof html === 'string') top.innerHTML = html;
+    else html.forEach(function (node) { top.appendChild(node); });
+    scroll.insertBefore(top, photos);
+  }
+  function showPropertyTop(geo) {
+    var pin = current && current.pin, boot = window.WD_PROPERTY_PAGE;
+    var old = elReal('plm-top');
+    if (old && old.getAttribute('data-pin') !== pin) old.parentNode.removeChild(old);
+    var ssr = elReal('plm-ssr');
+    if (ssr) {
+      var parts = boot && boot.pin === pin ? [ssr.querySelector('.wdp-head'), ssr.querySelector('.wdp-cards')].filter(Boolean) : [];
+      ssr.parentNode.removeChild(ssr);
+      if (parts.length === 2) { placePropertyTop(pin, parts); return; }
+    }
+    if (!pin || (old && old.getAttribute('data-pin') === pin)) return;
+    var q = '?top=' + encodeURIComponent(pin) + '&zip=' + encodeURIComponent(current.zip || '') + '&city=' + encodeURIComponent(postalCity(geo && geo.matched));
+    fetch('/api/watchdog-property-page' + q)
+      .then(function (r) { return r.ok ? r.json() : null; })
+      .then(function (d) {
+        if (!d || !d.html || d.pin !== pin) return;
+        if (d.css && !elReal('wdp-top-style')) {
+          var st = document.createElement('style');
+          st.id = 'wdp-top-style';
+          st.textContent = d.css;
+          document.head.appendChild(st);
+        }
+        placePropertyTop(pin, d.html);
+      })
+      .catch(function () {});
+  }
   function parcelByPin(pin) {
     var p = new URLSearchParams({
       where: "PAMS_PIN='" + String(pin).replace(/'/g, "''") + "'",
@@ -2973,8 +3012,7 @@ buildOpinion(hasCase, overBy, saving, target) + rows +
       pin: current.pin, address: current.address, block: current.block, lot: current.lot,
       lat: current.lat, lon: current.lon, rings: current.rings
     };
-    var ssr = document.getElementById('plm-ssr');
-    if (ssr) ssr.parentNode.removeChild(ssr);
+    try { showPropertyTop(geo); } catch (e) {}
     publishPropertyPage(geo);
 
     recordLookup(p, geo, rate, dy, propertyZip);

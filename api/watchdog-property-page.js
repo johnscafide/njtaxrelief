@@ -896,22 +896,35 @@ async function homeHtml() {
 const SHELL_STYLE = `
 #plm-ssr.wdp{background:#fff!important;padding:24px 28px 40px}
 #plm-ssr .wdp-head{margin-top:4px}
-@media (max-width:640px){#plm-ssr.wdp{padding:18px 16px 32px}}
+#plm-top.wdp{background:#fff!important;padding:24px 28px 8px}
+#plm-top .wdp-head{margin-top:4px}
+#plm-top~#plm-photos .wd-mapless-property-hero{display:none!important}
+html body #plm-top~#plm-photos.wd-has-lot-map{grid-template-columns:1fr!important}
+@media (max-width:640px){#plm-ssr.wdp{padding:18px 16px 32px}#plm-top.wdp{padding:18px 16px 4px}}
 `;
 
-function propertySection(row, v, options) {
-  const photo = options.photoUrl ? `<figure class="wdp-photo"><img src="${esc(options.photoUrl)}" alt="${esc(`${v.address}, ${v.town}`)}" loading="eager"><figcaption>Photo shared by the homeowner</figcaption></figure>` : '';
-  const updated = monthYear(row.source_synced_at);
-  const subtitle = [row.postal_city ? `${titleCase(row.postal_city)}, NJ${row.zip ? ' ' + row.zip : ''}` : v.place, row.postal_city ? v.town : '', `${v.county} County`, v.cls ? v.cls[0] : '', row.block ? `Block ${row.block}, Lot ${row.lot || ''}` : ''].filter(Boolean).join(' · ');
-  return `<div class="wdp" id="plm-ssr">
-  <div class="wdp-head"><div><h1>${esc(v.address)}</h1><p>${esc(subtitle)}</p></div></div>
-  ${photo}
+function subtitleLine(row, v) {
+  return [row.postal_city ? `${titleCase(row.postal_city)}, NJ${row.zip ? ' ' + row.zip : ''}` : v.place, row.postal_city ? v.town : '', `${v.county} County`, v.cls ? v.cls[0] : '', row.block ? `Block ${row.block}, Lot ${row.lot || ''}` : ''].filter(Boolean).join(' · ');
+}
+
+// Title and the four summary cards. The popup shows this above its own
+// sections, for searches as well as saved links.
+function topSection(row, v) {
+  return `<div class="wdp-head"><div><h1>${esc(v.address)}</h1><p>${esc(subtitleLine(row, v))}</p></div></div>
   <div class="wdp-cards">
     ${scoreCard(row)}
     ${taxCard(row, v)}
     ${salesCard(row, v)}
     ${homeCard(row)}
-  </div>
+  </div>`;
+}
+
+function propertySection(row, v, options) {
+  const photo = options.photoUrl ? `<figure class="wdp-photo"><img src="${esc(options.photoUrl)}" alt="${esc(`${v.address}, ${v.town}`)}" loading="eager"><figcaption>Photo shared by the homeowner</figcaption></figure>` : '';
+  const updated = monthYear(row.source_synced_at);
+  return `<div class="wdp" id="plm-ssr">
+  ${topSection(row, v)}
+  ${photo}
   <div class="wdp-grid">
     <div class="wdp-col">
       ${salesSection(row)}
@@ -1048,8 +1061,37 @@ function sendNotFound(req, res) {
   return res.end(req.method === 'HEAD' ? undefined : notFoundPage());
 }
 
+// GET ?top=<pin>: the title and summary cards for the popup, as JSON.
+async function sendTop(req, res) {
+  res.setHeader('Content-Type', 'application/json; charset=utf-8');
+  res.setHeader('X-Robots-Tag', 'noindex, nofollow');
+  const q = req.query || {};
+  const pin = String(q.top || '');
+  if (!/^\d{4}_[0-9A-Za-z.&_-]{1,70}$/.test(pin)) {
+    res.setHeader('Cache-Control', 'no-store');
+    return res.status(400).end(JSON.stringify({ error: 'Bad property.' }));
+  }
+  try {
+    const row = await fetchProperty(pin);
+    if (!row) {
+      res.setHeader('Cache-Control', 'public, max-age=0, s-maxage=3600');
+      return res.status(404).end(JSON.stringify({ error: 'Not found.' }));
+    }
+    const zip = /^0[78]\d{3}$/.test(String(q.zip || '')) ? String(q.zip) : null;
+    const city = cleanCity(q.city);
+    const full = { ...row, zip, postal_city: city || null };
+    res.setHeader('Cache-Control', PAGE_CACHE);
+    return res.status(200).end(JSON.stringify({ pin, html: topSection(full, view(full)), css: STYLE + SHELL_STYLE }));
+  } catch (err) {
+    console.error('watchdog-property-page top', err && err.message || err);
+    res.setHeader('Cache-Control', 'no-store');
+    return res.status(503).end(JSON.stringify({ error: 'Try again later.' }));
+  }
+}
+
 async function handler(req, res) {
   if (req.method === 'POST') return publish(req, res);
+  if (req.method === 'GET' && req.query && req.query.top) return sendTop(req, res);
   if (req.method !== 'GET' && req.method !== 'HEAD') {
     res.setHeader('Allow', 'GET, HEAD, POST');
     return res.status(405).end('Method not allowed');
@@ -1106,6 +1148,7 @@ module.exports.pageSlug = pageSlug;
 module.exports.spelledAddress = spelledAddress;
 module.exports.publishAllowed = publishAllowed;
 module.exports.withPublished = withPublished;
+module.exports.topSection = topSection;
 module.exports.townName = townName;
 module.exports.slugify = slugify;
 module.exports.INDEXABLE_COUNTIES = INDEXABLE_COUNTIES;

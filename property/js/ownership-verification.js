@@ -235,7 +235,7 @@
   'use strict';
   var path = (window.location.pathname || '').replace(/\/+$/, '');
   var host = String(window.location.hostname || '').toLowerCase();
-  var cleanWatchdogRoot = (host === 'www.watchdogindex.com' || host === 'watchdogindex.com') && path === '';
+  var cleanWatchdogRoot = (host === 'www.watchdogindex.com' || host === 'watchdogindex.com') && (path === '' || /^\/nj\/[a-z0-9-]+\/[a-z0-9-]+$/.test(path));
   if (path !== '/property' && path !== '/property/index.html' && !cleanWatchdogRoot) return;
 
   function bootIntelligence() {

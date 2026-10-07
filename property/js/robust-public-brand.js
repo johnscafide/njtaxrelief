@@ -26,7 +26,8 @@
   function isPropertyLanding(){
     var path=(location.pathname||'').replace(/\/+$/,'');
     var host=String(location.hostname||'').toLowerCase();
-    var root=(host==='watchdogindex.com'||host==='www.watchdogindex.com')&&path==='';
+    var watchdog=host==='watchdogindex.com'||host==='www.watchdogindex.com';
+    var root=watchdog&&(path===''||/^\/nj\/[a-z0-9-]+\/[a-z0-9-]+$/.test(path));
     return path==='/property'||path==='/property/index.html'||root;
   }
 
