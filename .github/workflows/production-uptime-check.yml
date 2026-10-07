@@ -29,6 +29,8 @@ jobs:
     steps:
       - name: Check public Watchdog routes
         shell: bash
+        env:
+          WATCHDOG_INTERNAL_FETCH_KEY: ${{ secrets.WATCHDOG_INTERNAL_FETCH_KEY }}
         run: |
           set -euo pipefail
           check() {
@@ -41,6 +43,7 @@ jobs:
               --connect-timeout 10 --max-time 25 \
               --retry 2 --retry-delay 2 --retry-all-errors \
               -H 'User-Agent: Watchdog-Uptime-GitHub-Actions/1.0' \
+              ${WATCHDOG_INTERNAL_FETCH_KEY:+-H "x-watchdog-internal-fetch: ${WATCHDOG_INTERNAL_FETCH_KEY}"} \
               "$url" -o "$body"
             if ! grep -qi "$expected" "$body"; then
               echo "Expected marker not found for ${url}: ${expected}"

@@ -55,6 +55,7 @@ jobs:
     timeout-minutes: 60
     env:
       VISUAL_BASE_URL: https://www.watchdogindex.com
+      WATCHDOG_INTERNAL_FETCH_KEY: ${{ secrets.WATCHDOG_INTERNAL_FETCH_KEY }}
       VISUAL_EVIDENCE_DIR: global-visual-audit-evidence
       AUDIT_SCOPE: ${{ github.event_name == 'workflow_dispatch' && inputs.scope || github.event_name == 'schedule' && 'all' || 'critical' }}
       AUDIT_PATHS: ${{ github.event_name == 'workflow_dispatch' && inputs.paths || '' }}
