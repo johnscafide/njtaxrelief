@@ -2838,7 +2838,83 @@ buildOpinion(hasCase, overBy, saving, target) + rows +
     } catch (e) { console.warn('[watchdog] hood map:', e); }
   }
 
-  window.plCloseModal = function () {
+  function onPropertyPath() {
+    return /^\/nj\//.test(location.pathname);
+  }
+  var homeDocTitle = onPropertyPath() ? '' : document.title;
+  function postalCity(matched) {
+    var part = String(matched || '').split(',')[1];
+    part = part ? part.trim() : '';
+    return /^[A-Za-z .'-]{2,40}$/.test(part) && !/^(nj|new jersey)$/i.test(part) ? part : '';
+  }
+  function setPropertyPath(path) {
+    if (!path || location.pathname === path) return;
+    try {
+      if (onPropertyPath()) history.replaceState({ wdProperty: path }, '', path);
+      else history.pushState({ wdProperty: path }, '', path);
+    } catch (e) {}
+    if (current && current.address) document.title = current.address + ', ' + (current.town || 'NJ') + ' | Watchdog';
+  }
+  function publishPropertyPage(geo) {
+    if (!current || !current.pin || location.hostname !== 'www.watchdogindex.com') return;
+    var pin = current.pin, boot = window.WD_PROPERTY_PAGE;
+    if (boot && boot.pin === pin && boot.published) return;
+    fetch('/api/watchdog-property-page', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ pin: pin, zip: current.zip || '', city: postalCity(geo && geo.matched) })
+    }).then(function (r) { return r.ok ? r.json() : null; })
+      .then(function (d) {
+        if (d && d.path && current && current.pin === pin && el('plm').classList.contains('open')) setPropertyPath(d.path);
+      })
+      .catch(function () {});
+  }
+  function parcelByPin(pin) {
+    var p = new URLSearchParams({
+      where: "PAMS_PIN='" + String(pin).replace(/'/g, "''") + "'",
+      outFields: FIELDS, returnGeometry: 'true', outSR: '4326', resultRecordCount: '1', f: 'json'
+    });
+    return xfetch(NJ_PARCEL + '?' + p, 15000).then(function (r) { return r.json(); })
+      .then(function (d) {
+        var f = d && d.features && d.features[0];
+        var ring = f && f.geometry && f.geometry.rings && f.geometry.rings[0];
+        if (!ring || !ring.length) return null;
+        var x = 0, y = 0;
+        ring.forEach(function (pt) { x += pt[0]; y += pt[1]; });
+        return { f: f, lat: y / ring.length, lon: x / ring.length };
+      });
+  }
+  function openPropertyPage(boot) {
+    var query = boot.query || '';
+    var input = el('pl-addr');
+    if (input) input.value = query;
+    var lookupId = ++lookupSeq;
+    parcelByPin(boot.pin).then(function (hit) {
+      if (lookupId !== lookupSeq) return;
+      if (!hit) throw new Error('nopin');
+      render(hit.f, { lat: hit.lat, lon: hit.lon, matched: query, score: 100 }, query, lookupId);
+    }).catch(function (e) {
+      if (lookupId !== lookupSeq) return;
+      console.warn('[watchdog] property page fallback:', e && e.message);
+      if (query) window.plLookup();
+    });
+  }
+  window.addEventListener('popstate', function () {
+    var open = el('plm') && el('plm').classList.contains('open');
+    if (!onPropertyPath() && open) window.plCloseModal(true);
+    else if (onPropertyPath() && !open) location.reload();
+  });
+
+  window.plCloseModal = function (fromHistory) {
+    if (fromHistory !== true && onPropertyPath()) {
+      try { history.pushState(null, '', '/'); } catch (e) {}
+    }
+    if (!onPropertyPath()) {
+      var boot = window.WD_PROPERTY_PAGE;
+      document.title = (boot && boot.homeTitle) || homeDocTitle || document.title;
+      var ssrBox = document.getElementById('plm-ssr');
+      if (ssrBox) ssrBox.parentNode.removeChild(ssrBox);
+    }
     var sn = el('secnav'); if (sn) sn.classList.remove('on');
     setTimeout(function () { if (hoodMap) hoodMap.invalidateSize(); }, 260);
     el('plm-backdrop').classList.remove('open');
@@ -2897,6 +2973,9 @@ buildOpinion(hasCase, overBy, saving, target) + rows +
       pin: current.pin, address: current.address, block: current.block, lot: current.lot,
       lat: current.lat, lon: current.lon, rings: current.rings
     };
+    var ssr = document.getElementById('plm-ssr');
+    if (ssr) ssr.parentNode.removeChild(ssr);
+    publishPropertyPage(geo);
 
     recordLookup(p, geo, rate, dy, propertyZip);
     var seen = timesSeen(p.PAMS_PIN || '');
@@ -4542,7 +4621,9 @@ buildOpinion(hasCase, overBy, saving, target) + rows +
   })();
 
   var qs = new URLSearchParams(window.location.search);
-  if (qs.get('address')) {
+  if (window.WD_PROPERTY_PAGE && window.WD_PROPERTY_PAGE.pin && onPropertyPath()) {
+    openPropertyPage(window.WD_PROPERTY_PAGE);
+  } else if (qs.get('address')) {
     el('pl-addr').value = qs.get('address');
     setTimeout(window.plLookup, 500);
   }

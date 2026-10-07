@@ -72,6 +72,7 @@ if(url.pathname==='/anchor-estimator.html'||url.pathname==='/anchor-estimator'){
 if(url.pathname===INDEXNOW_KEY_PATH)return rewriteWatchdogSystemFile(request,'/api/watchdog-index-indexnow-key');
 if(url.pathname==='/robots.txt')return rewriteWatchdogSystemFile(request,'/api/watchdog-index-robots');
 if(url.pathname==='/sitemap.xml')return rewriteWatchdogSystemFile(request,'/api/watchdog-index-sitemap');
+if(url.pathname==='/sitemap-properties.xml')return rewriteWatchdogSystemFile(request,'/api/watchdog-property-sitemap');
 if(TYPED_SITEMAP_FILE.test(url.pathname))return next();
 if(url.pathname==='/checkup'||url.pathname==='/checkup/'){const destination=new URL('/api/watchdog-checkup',request.url);destination.search=url.search;return rewrite(destination);}
 if(url.pathname==='/true-cost'||url.pathname==='/true-cost/'){const destination=new URL('/api/watchdog-true-cost',request.url);destination.search=url.search;destination.searchParams.delete('q');return rewrite(destination);}

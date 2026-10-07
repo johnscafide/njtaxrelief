@@ -1,24 +1,31 @@
-/* Public property pages: https://www.watchdogindex.com/nj/<town>/<address>/<pams_pin>
+/* Public property pages on https://www.watchdogindex.com
 
-   One server-rendered page per NJ property, so search engines and shared
-   links can reach what the address popup shows. The page is built from
-   Watchdog's own copy of the state parcel list (get_public_property_page)
-   and cached at the edge for a day; nothing is generated ahead of time.
+   /nj/<town>/<address>-<zip>      published page (indexable, in /sitemap-properties.xml)
+   /nj/<town>/<address>/<pams_pin> any NJ parcel by PIN (noindex until published)
+   /nj/property/<pams_pin>         short PIN link
 
-   - The last path segment (the PAMS PIN) decides the property. Town and
-     address segments are for people and search engines; if they don't match
-     the canonical ones the request is redirected there (308).
-   - Public-record fields only. Owner names and mailing addresses are never
-     stored, so they cannot appear.
-   - Rollout is per county: pages outside INDEXABLE_COUNTIES are served with
-     noindex until that county is released to search engines. */
+   A property is published the first time someone searches it on Watchdog:
+   lookup.js POSTs the PIN here, publish_public_property_page() stores the
+   slug, and the address bar moves to the published URL. PIN links to a
+   published property redirect (308) to it.
+
+   Every page is the Watchdog home page with the address popup already open.
+   The popup holds a server-rendered copy of the property's public record so
+   search engines can read it; lookup.js then swaps in the live popup. Data is
+   read live from Watchdog's copy of the state parcel list and cached at the
+   edge for a day, so pages follow the monthly refresh on their own.
+
+   Public-record fields only. Owner names and mailing addresses are never
+   stored, so they cannot appear. Anything tied to a signed-in person (saved,
+   "this is my home", watchlists) loads in the browser only. */
 
 const { townLinks } = require('./_tax-town');
 
 const CANONICAL_ORIGIN = 'https://www.watchdogindex.com';
 const PAGE_CACHE = 'public, max-age=0, s-maxage=86400, stale-while-revalidate=604800';
 
-// Counties released to search engines. Empty while the pilot is reviewed.
+// Counties whose PIN pages are open to search engines without being
+// published. Empty: only published pages are indexed.
 const INDEXABLE_COUNTIES = new Set([]);
 
 const DIMENSIONS = [
@@ -80,13 +87,34 @@ function propertyPath(row) {
   return `/nj/${slugify(townName(row.town))}/${slugify(row.address)}/${encodeURIComponent(String(row.pams_pin))}`;
 }
 
-// "/nj/<town>/<address>/<pin>" or the short "/nj/property/<pin>". The PIN is
-// always the last segment.
+// Street suffixes spelled out in published URLs ("11 DALTON PL" becomes
+// 11-dalton-place), the way people type them.
+const STREET_WORDS = { AVE: 'AVENUE', AV: 'AVENUE', ST: 'STREET', RD: 'ROAD', DR: 'DRIVE', CT: 'COURT', LN: 'LANE', PL: 'PLACE', BLVD: 'BOULEVARD', CIR: 'CIRCLE', TER: 'TERRACE', TERR: 'TERRACE', PKWY: 'PARKWAY', HWY: 'HIGHWAY', TRL: 'TRAIL', SQ: 'SQUARE', TPKE: 'TURNPIKE', HTS: 'HEIGHTS', EXT: 'EXTENSION', XING: 'CROSSING', MNR: 'MANOR', PT: 'POINT' };
+
+function spelledAddress(address) {
+  const words = String(address || '').trim().toUpperCase().split(/\s+/).filter(Boolean);
+  for (let i = words.length - 1; i > 0; i--) {
+    if (STREET_WORDS[words[i]]) { words[i] = STREET_WORDS[words[i]]; break; }
+    if (!/^(N|S|E|W|NE|NW|SE|SW|UNIT|APT|#?\d+[A-Z]?)$/.test(words[i])) break;
+  }
+  return words.join(' ');
+}
+
+function pageSlug(row, zip) {
+  const base = slugify(spelledAddress(row.address)).slice(0, 94).replace(/-+$/, '');
+  return /^0[78]\d{3}$/.test(String(zip || '')) ? `${base}-${zip}` : base;
+}
+
+// Published: "/nj/<town>/<address>-<zip>". PIN forms: "/nj/<town>/<address>/<pin>"
+// or the short "/nj/property/<pin>", PIN always last.
 function parsePath(path) {
   const clean = String(path || '').split('?')[0].replace(/\/+$/, '');
   if (!/^\/nj\/.+/i.test(clean)) return null;
   const parts = clean.split('/').filter(Boolean);
   if (parts.length < 3 || parts.length > 4) return null;
+  if (parts.length === 3 && parts[1].toLowerCase() !== 'property' && /^[a-z0-9-]{1,80}$/.test(parts[1]) && /^[a-z0-9-]{1,120}$/.test(parts[2])) {
+    return { town: parts[1], slug: parts[2], path: clean };
+  }
   let pin;
   try { pin = decodeURIComponent(parts[parts.length - 1]); } catch (_err) { return null; }
   if (!/^\d{4}_[0-9A-Za-z.&_-]{1,70}$/.test(pin)) return null;
@@ -128,7 +156,8 @@ function view(row) {
   const address = titleCase(row.address);
   const cls = PROPERTY_CLASSES[String(row.prop_class || '').toUpperCase()] || null;
   const place = `${town}, NJ${row.zip ? ' ' + row.zip : ''}`;
-  return { town, county, address, cls, place, path: propertyPath(row), url: CANONICAL_ORIGIN + propertyPath(row) };
+  const path = row.page_path || propertyPath(row);
+  return { town, county, address, cls, place, path, url: CANONICAL_ORIGIN + path };
 }
 
 function describe(row, v) {
@@ -823,21 +852,227 @@ async function signPhoto(path) {
   }
 }
 
+function supabaseConfig() {
+  const url = process.env.SUPABASE_URL || process.env.NEXT_PUBLIC_SUPABASE_URL;
+  const key = process.env.SUPABASE_SERVICE_ROLE_KEY;
+  if (!url || !key) throw new Error('property data unavailable');
+  return { url, key };
+}
+
+async function rpc(name, body) {
+  const { url, key } = supabaseConfig();
+  const r = await fetch(`${url}/rest/v1/rpc/${name}`, {
+    method: 'POST',
+    headers: { apikey: key, Authorization: `Bearer ${key}`, 'Content-Type': 'application/json', Accept: 'application/json' },
+    body: JSON.stringify(body),
+    signal: AbortSignal.timeout(6000)
+  });
+  if (!r.ok) throw new Error(`${name} http ${r.status}`);
+  return r.json().catch(() => null);
+}
+
+const asObject = (data) => (data && typeof data === 'object' && !Array.isArray(data) ? data : null);
+
+// Published page details (path, property ZIP, postal city) folded into the
+// row so titles, canonical URLs and structured data use them.
+function withPublished(row, published) {
+  if (!published) return row;
+  const zip = /^0[78]\d{3}$/.test(String(published.property_zip || '')) ? published.property_zip : null;
+  return { ...row, zip, postal_city: published.postal_city || null, page_path: published.path };
+}
+
+// The live home page, built by api/watchdog-index-entry.js. Kept for a few
+// minutes per instance; that page changes only on deploys.
+let homeCache = { at: 0, html: '' };
+async function homeHtml() {
+  if (homeCache.html && Date.now() - homeCache.at < 300000) return homeCache.html;
+  const mod = await import('./watchdog-index-entry.js');
+  const build = mod.buildWatchdogHomeHtml || (mod.default && mod.default.buildWatchdogHomeHtml);
+  if (typeof build !== 'function') throw new Error('home page builder missing');
+  homeCache = { at: Date.now(), html: await build() };
+  return homeCache.html;
+}
+
+const SHELL_STYLE = `
+#plm-ssr.wdp{background:#fff!important;padding:24px 28px 40px}
+#plm-ssr .wdp-head{margin-top:4px}
+@media (max-width:640px){#plm-ssr.wdp{padding:18px 16px 32px}}
+`;
+
+function propertySection(row, v, options) {
+  const photo = options.photoUrl ? `<figure class="wdp-photo"><img src="${esc(options.photoUrl)}" alt="${esc(`${v.address}, ${v.town}`)}" loading="eager"><figcaption>Photo shared by the homeowner</figcaption></figure>` : '';
+  const updated = monthYear(row.source_synced_at);
+  const subtitle = [row.postal_city ? `${titleCase(row.postal_city)}, NJ${row.zip ? ' ' + row.zip : ''}` : v.place, row.postal_city ? v.town : '', `${v.county} County`, v.cls ? v.cls[0] : '', row.block ? `Block ${row.block}, Lot ${row.lot || ''}` : ''].filter(Boolean).join(' · ');
+  return `<div class="wdp" id="plm-ssr">
+  <div class="wdp-head"><div><h1>${esc(v.address)}</h1><p>${esc(subtitle)}</p></div></div>
+  ${photo}
+  <div class="wdp-cards">
+    ${scoreCard(row)}
+    ${taxCard(row, v)}
+    ${salesCard(row, v)}
+    ${homeCard(row)}
+  </div>
+  <div class="wdp-grid">
+    <div class="wdp-col">
+      ${salesSection(row)}
+      ${toolkitSection(row, v)}
+    </div>
+    <div class="wdp-col">
+      ${factsSection(row, v)}
+      ${neighborsSection(row)}
+      ${alertsSection(row, v)}
+    </div>
+  </div>
+  ${reportSection(row, v)}
+  <div class="wdp-share-wrap">${shareSection(row, v)}</div>
+  ${faqSection(row, v)}
+  <p class="wdp-source">Source: New Jersey MOD-IV tax list and NJ Office of GIS parcel data, refreshed monthly${updated ? ` (last refresh ${esc(updated)})` : ''}. Town tax rates from the NJ Division of Taxation. Watchdog does not show owner names. <a href="/data-methodology">How we get our numbers</a></p>
+</div>`;
+}
+
+function shellTitle(row, v) {
+  const place = row.postal_city ? `${titleCase(row.postal_city)}, NJ` : `${v.town}, NJ`;
+  return `${v.address}, ${place}${row.zip ? ' ' + row.zip : ''} | Property Tax & Watchdog Score`;
+}
+
+function setTag(html, pattern, tag) {
+  return pattern.test(html) ? html.replace(pattern, tag) : html.replace('</head>', `${tag}\n</head>`);
+}
+
+// The home page with this property's popup open. Returns '' when the home
+// page markup isn't what we expect, and the caller falls back to renderPage.
+function renderShell(home, row, options = {}) {
+  if (!/<div class="plm-backdrop" id="plm-backdrop"/.test(home) || !/<div class="plm" id="plm"/.test(home) || !/<div class="plm-scroll" id="plm-scroll">/.test(home)) return '';
+  const v = view(row);
+  const indexable = options.indexable === true;
+  const title = shellTitle(row, v);
+  const description = describe(row, v);
+  const social = `${v.address}, ${row.postal_city ? titleCase(row.postal_city) : v.town}, NJ`;
+  const homeTitle = (home.match(/<title>([^<]*)<\/title>/) || [])[1] || 'Watchdog';
+  const score = row.score && row.score.score != null ? Math.round(Number(row.score.score)) : null;
+  const pageData = JSON.stringify({
+    url: v.url, title: social, text: `${social}${row.last_year_tax ? `: ${money(row.last_year_tax)} property tax` : ''}${score != null ? `, Watchdog Score ${score}/100` : ''}`,
+    pin: row.pams_pin, fileName: reportFileName(v),
+    recent: { address: v.address, town: row.town, pin: row.pams_pin, assessed: row.assessed_value || '', tax: row.last_year_tax || '', year_built: row.year_built || '', zip: row.zip || '' }
+  }).replace(/</g, '\\u003c');
+  const boot = JSON.stringify({
+    pin: row.pams_pin, path: v.path, published: options.published === true, zip: row.zip || '', homeTitle,
+    query: `${v.address}, ${v.town}, NJ${row.zip ? ' ' + row.zip : ''}`
+  }).replace(/</g, '\\u003c');
+  let html = home;
+  html = html.replace(/<title>[^<]*<\/title>/, `<title>${esc(title)}</title>`);
+  html = setTag(html, /<meta name="description" content="[^"]*">/, `<meta name="description" content="${esc(description)}">`);
+  html = setTag(html, /<meta name="robots" content="[^"]*">/, `<meta name="robots" content="${indexable ? 'index, follow, max-image-preview:large' : 'noindex, follow'}">`);
+  html = setTag(html, /<link rel="canonical" href="[^"]*">/, `<link rel="canonical" href="${esc(v.url)}">`);
+  html = setTag(html, /<meta property="og:url" content="[^"]*">/, `<meta property="og:url" content="${esc(v.url)}">`);
+  html = setTag(html, /<meta property="og:title" content="[^"]*">/, `<meta property="og:title" content="${esc(social)}">`);
+  html = setTag(html, /<meta property="og:description" content="[^"]*">/, `<meta property="og:description" content="${esc(description)}">`);
+  html = setTag(html, /<meta name="twitter:title" content="[^"]*">/, `<meta name="twitter:title" content="${esc(social)}">`);
+  html = setTag(html, /<meta name="twitter:description" content="[^"]*">/, `<meta name="twitter:description" content="${esc(description)}">`);
+  if (options.photoUrl) html = html.replace(/<meta property="og:image" content="[^"]*">/, `<meta property="og:image" content="${esc(options.photoUrl)}">`);
+  html = html.replace('</head>', `<script type="application/ld+json">${jsonLd(row, v)}</script>\n<style>${STYLE}${SHELL_STYLE}</style>\n</head>`);
+  html = html.replace(/<body([^>]*)>/, (m, attrs) => (/class="/.test(attrs) ? `<body${attrs.replace(/class="/, 'class="plm-locked ')}>` : `<body${attrs} class="plm-locked">`));
+  html = html.replace('<div class="plm-backdrop" id="plm-backdrop"', '<div class="plm-backdrop open" id="plm-backdrop"');
+  html = html.replace('<div class="plm" id="plm"', '<div class="plm open" id="plm"');
+  html = html.replace('<div class="plm-scroll" id="plm-scroll">', `<div class="plm-scroll" id="plm-scroll">\n${propertySection(row, v, options)}`);
+  const scripts = `<script id="wdp-data" type="application/json">${pageData}</script>\n<script>window.WD_PROPERTY_PAGE=${boot};</script>\n<script>${PAGE_SCRIPT}</script>\n`;
+  html = html.replace(/<script src="\/property\/js\/lookup\.js/, (m) => scripts + m);
+  if (!html.includes('window.WD_PROPERTY_PAGE')) html = html.replace('</body>', `${scripts}</body>`);
+  return html;
+}
+
+async function renderProperty(row, options) {
+  const photoUrl = await signPhoto(row.photo_path);
+  try {
+    const shell = renderShell(await homeHtml(), row, { ...options, photoUrl });
+    if (shell) return shell;
+    console.warn('watchdog-property-page shell markers missing');
+  } catch (err) {
+    console.warn('watchdog-property-page shell', err && err.message || err);
+  }
+  return renderPage(row, { ...options, photoUrl });
+}
+
+function requestHost(req) {
+  return String((req.headers && (req.headers['x-forwarded-host'] || req.headers.host)) || '').split(',')[0].trim().toLowerCase().replace(/:\d+$/, '');
+}
+
+// Only Watchdog's own pages may publish: same host, a browser, a real PIN.
+function publishAllowed(req) {
+  const host = requestHost(req);
+  const origin = String((req.headers && (req.headers.origin || req.headers.referer)) || '');
+  let originHost = '';
+  try { originHost = new URL(origin).hostname.toLowerCase(); } catch (_err) { return false; }
+  const ua = String((req.headers && req.headers['user-agent']) || '');
+  if (!ua || /curl|wget|python-requests|scrapy|go-http-client|libwww-perl|httpclient|headless|bot|spider|crawl|slurp|lighthouse/i.test(ua)) return false;
+  return !!host && originHost === host && (host === 'www.watchdogindex.com' || host.endsWith('.vercel.app') || host === 'localhost');
+}
+
+function readBody(req) {
+  if (req.body && typeof req.body === 'object') return Promise.resolve(req.body);
+  if (typeof req.body === 'string') { try { return Promise.resolve(JSON.parse(req.body)); } catch (_err) { return Promise.resolve({}); } }
+  return Promise.resolve({});
+}
+
+function cleanCity(value) {
+  const city = String(value || '').trim().replace(/\s+/g, ' ');
+  return /^[A-Za-z .'-]{2,40}$/.test(city) && !/^nj$|^new jersey$/i.test(city) ? city : '';
+}
+
+async function publish(req, res) {
+  res.setHeader('Content-Type', 'application/json; charset=utf-8');
+  res.setHeader('Cache-Control', 'no-store');
+  res.setHeader('X-Robots-Tag', 'noindex, nofollow');
+  if (!publishAllowed(req)) return res.status(403).end(JSON.stringify({ error: 'Not allowed.' }));
+  const body = await readBody(req);
+  const pin = String(body.pin || '');
+  if (!/^\d{4}_[0-9A-Za-z.&_-]{1,70}$/.test(pin)) return res.status(400).end(JSON.stringify({ error: 'Bad property.' }));
+  const zip = /^0[78]\d{3}$/.test(String(body.zip || '')) ? String(body.zip) : null;
+  try {
+    const row = await fetchProperty(pin);
+    if (!row) return res.status(404).end(JSON.stringify({ error: 'Not found.' }));
+    const path = await rpc('publish_public_property_page', {
+      p_pin: pin, p_town_slug: slugify(townName(row.town)), p_page_slug: pageSlug(row, zip), p_zip: zip, p_city: cleanCity(body.city) || null
+    });
+    if (typeof path !== 'string' || !path.startsWith('/nj/')) return res.status(404).end(JSON.stringify({ error: 'Not found.' }));
+    return res.status(200).end(JSON.stringify({ path }));
+  } catch (err) {
+    console.error('watchdog-property-page publish', err && err.message || err);
+    return res.status(503).end(JSON.stringify({ error: 'Try again later.' }));
+  }
+}
+
+function sendNotFound(req, res) {
+  res.statusCode = 404;
+  res.setHeader('Cache-Control', 'public, max-age=0, s-maxage=3600');
+  return res.end(req.method === 'HEAD' ? undefined : notFoundPage());
+}
+
 async function handler(req, res) {
+  if (req.method === 'POST') return publish(req, res);
   if (req.method !== 'GET' && req.method !== 'HEAD') {
-    res.setHeader('Allow', 'GET, HEAD');
+    res.setHeader('Allow', 'GET, HEAD, POST');
     return res.status(405).end('Method not allowed');
   }
   const parsed = parsePath(req.query && req.query.path);
   res.setHeader('Content-Type', 'text/html; charset=utf-8');
-  if (!parsed) {
-    res.statusCode = 404;
-    res.setHeader('Cache-Control', 'public, max-age=0, s-maxage=3600');
-    return res.end(req.method === 'HEAD' ? undefined : notFoundPage());
-  }
+  if (!parsed) return sendNotFound(req, res);
   let row;
+  let published = null;
   try {
-    row = await fetchProperty(parsed.pin);
+    if (parsed.slug) {
+      published = asObject(await rpc('get_public_property_page_slug', { p_town_slug: parsed.town, p_page_slug: parsed.slug }));
+      if (!published) return sendNotFound(req, res);
+      row = await fetchProperty(published.pams_pin);
+    } else {
+      [row, published] = await Promise.all([
+        fetchProperty(parsed.pin),
+        rpc('get_public_property_page_by_pin', { p_pin: parsed.pin }).then(asObject).catch((err) => {
+          console.warn('watchdog-property-page published lookup', err && err.message || err);
+          return null;
+        })
+      ]);
+    }
   } catch (err) {
     console.error('watchdog-property-page', err && err.message || err);
     res.statusCode = 503;
@@ -845,31 +1080,32 @@ async function handler(req, res) {
     res.setHeader('Retry-After', '60');
     return res.end(req.method === 'HEAD' ? undefined : notFoundPage());
   }
-  if (!row) {
-    res.statusCode = 404;
-    res.setHeader('Cache-Control', 'public, max-age=0, s-maxage=3600');
-    return res.end(req.method === 'HEAD' ? undefined : notFoundPage());
-  }
-  const canonical = propertyPath(row);
+  if (!row) return sendNotFound(req, res);
+  const canonical = published ? published.path : propertyPath(row);
   if (parsed.path !== canonical) {
     res.statusCode = 308;
     res.setHeader('Location', canonical);
     res.setHeader('Cache-Control', PAGE_CACHE);
     return res.end();
   }
-  const indexable = INDEXABLE_COUNTIES.has(String(row.county || '').toUpperCase());
+  const indexable = !!published || INDEXABLE_COUNTIES.has(String(row.county || '').toUpperCase());
   res.statusCode = 200;
   res.setHeader('Cache-Control', PAGE_CACHE);
+  res.setHeader('Link', `<${CANONICAL_ORIGIN}${canonical}>; rel="canonical"`);
   if (!indexable) res.setHeader('X-Robots-Tag', 'noindex, follow');
   if (req.method === 'HEAD') return res.end();
-  const photoUrl = await signPhoto(row.photo_path);
-  return res.end(renderPage(row, { indexable, photoUrl }));
+  return res.end(await renderProperty(withPublished(row, published), { indexable, published: !!published }));
 }
 
 module.exports = handler;
 module.exports.parsePath = parsePath;
 module.exports.propertyPath = propertyPath;
 module.exports.renderPage = renderPage;
+module.exports.renderShell = renderShell;
+module.exports.pageSlug = pageSlug;
+module.exports.spelledAddress = spelledAddress;
+module.exports.publishAllowed = publishAllowed;
+module.exports.withPublished = withPublished;
 module.exports.townName = townName;
 module.exports.slugify = slugify;
 module.exports.INDEXABLE_COUNTIES = INDEXABLE_COUNTIES;

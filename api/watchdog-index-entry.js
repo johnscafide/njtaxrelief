@@ -180,6 +180,22 @@ function canonicalizeWatchdogHtml(source) {
   return installEntityGraph(installSocialMetadata(canonicalized));
 }
 
+// The finished home page HTML. Property pages (api/watchdog-property-page.js)
+// reuse it so a property link opens the same page with the popup open.
+export async function buildWatchdogHomeHtml() {
+  const sourcePath = path.join(process.cwd(), 'property', 'index.html');
+  const footerPath = path.join(process.cwd(), 'property', 'partials', 'footer.html');
+  const [source, sharedFooter] = await Promise.all([
+    fs.readFile(sourcePath, 'utf8'),
+    fs.readFile(footerPath, 'utf8')
+  ]);
+  const consentFirst = installConsentFirstAnalytics(source);
+  const freeImagery = installFreeGridImagery(consentFirst);
+  const singletonAuth = installSupabaseSingletonGuard(freeImagery);
+  const canonical = canonicalizeWatchdogHtml(useSharedFooter(singletonAuth, sharedFooter));
+  return installPaidLaunch(canonical);
+}
+
 export default async function handler(req, res) {
   if (requestHost(req) !== CANONICAL_HOST) {
     res.statusCode = 404;
@@ -195,17 +211,7 @@ export default async function handler(req, res) {
   }
 
   try {
-    const sourcePath = path.join(process.cwd(), 'property', 'index.html');
-    const footerPath = path.join(process.cwd(), 'property', 'partials', 'footer.html');
-    const [source, sharedFooter] = await Promise.all([
-      fs.readFile(sourcePath, 'utf8'),
-      fs.readFile(footerPath, 'utf8')
-    ]);
-    const consentFirst = installConsentFirstAnalytics(source);
-    const freeImagery = installFreeGridImagery(consentFirst);
-    const singletonAuth = installSupabaseSingletonGuard(freeImagery);
-    const canonical = canonicalizeWatchdogHtml(useSharedFooter(singletonAuth, sharedFooter));
-    const html = installPaidLaunch(canonical);
+    const html = await buildWatchdogHomeHtml();
 
     res.statusCode = 200;
     res.setHeader('Content-Type', 'text/html; charset=utf-8');
