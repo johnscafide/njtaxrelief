@@ -16,7 +16,7 @@
   var count = new Intl.NumberFormat('en-US');
   var $ = function (id) { return document.getElementById(id); };
   var rows = $('gm-rows');
-  var puzzle, price, state, typed = '', busy = false, ready = false;
+  var puzzle, price, place, state, typed = '', busy = false, ready = false, homeChecked = false;
 
   function fill(field, value) {
     document.querySelectorAll('[data-f="' + field + '"]').forEach(function (node) { node.textContent = value; });
@@ -132,11 +132,38 @@
     return lines.join('\n');
   }
 
+  function titleCase(text) {
+    return String(text).toLowerCase().replace(/(^|[\s-])([a-z])/g, function (m, a, b) { return a + b.toUpperCase(); });
+  }
+
+  function renderHome() {
+    if (!place || !place.pin || homeChecked) return;
+    homeChecked = true;
+    var street = document.querySelector('.gm-street [data-f="street"]');
+    var address = titleCase(place.address.split(',')[0]);
+    street.textContent = address;
+    function show(href) {
+      var link = G.el('a', 'gm-street-link', address);
+      link.href = href;
+      street.textContent = '';
+      street.appendChild(link);
+      $('gm-r-home').href = href;
+      $('gm-r-home').hidden = false;
+    }
+    var href = '/nj/property/' + encodeURIComponent(place.pin);
+    fetch(href, { method: 'HEAD' }).then(function (r) {
+      if (!r.ok) return;
+      var origin = window.location.origin + '/';
+      show(r.url && r.url.indexOf(origin) === 0 ? r.url.slice(origin.length - 1) : href);
+    }).catch(function () { show(href); });
+  }
+
   function renderDone() {
     var done = state.done;
     $('gm-done').hidden = !done;
     $('gm-dock').hidden = done;
     if (!done) return;
+    renderHome();
     $('gm-done-answer').textContent = money.format(price);
     $('gm-results-title').textContent = state.won ? 'Nailed it.' : 'Not this time.';
     $('gm-r-answer').textContent = money.format(price);
@@ -228,6 +255,7 @@
   G.loadPuzzle(GAME).then(function (p) {
     puzzle = p;
     price = Number(G.decode(p.k));
+    place = p.place ? G.decodeData(p.place) : null;
     if (!(price > 0)) throw new Error('bad answer');
     var h = p.home, hints = p.hints;
     fill('town', h.town);
