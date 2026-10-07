@@ -203,12 +203,14 @@ def main() -> int:
     if dashboard.exists() and "/property/js/brand-consistency-runtime.js" not in read_text(dashboard):
         findings.append(Finding("critical", relative(dashboard), "Dashboard does not load the canonical brand consistency runtime."))
     # Property Home ships as one application bundle (home.js) since the Home
-    # refactor; the canonical runtime is compiled into that bundle.
+    # refactor; the canonical runtime is compiled into that bundle. Bundle
+    # comments were stripped sitewide (#609), so detect the runtime by the
+    # global it defines rather than by a file-banner comment.
     home_bundle = PROPERTY / "js" / "home.js"
     home_has_runtime = home.exists() and (
         "/property/js/brand-consistency-runtime.js" in read_text(home)
         or ("/property/js/home.js" in read_text(home) and home_bundle.exists()
-            and "/* ===== property/js/brand-consistency-runtime.js ===== */" in read_text(home_bundle))
+            and "window.WatchdogBrandConsistency=" in read_text(home_bundle))
     )
     if home.exists() and not home_has_runtime:
         findings.append(Finding("critical", relative(home), "Property Home does not load the canonical brand consistency runtime."))
