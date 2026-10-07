@@ -2,7 +2,6 @@
  "municipality_code": "0808",
  "municipality": "Harrison Township",
  "county": "GLOUCESTER",
- "checked_at": "2026-09-30",
  "resale_co": {
   "status": "required",
   "name": "Certificate of Transfer of Ownership / Occupancy (CTO)",
@@ -76,7 +75,7 @@
      {
       "label": "Request received 11 or more days before closing",
       "amount": "$90.00",
-      "quote": "$90.00-Requests received 11 or more days from closing/change of occupancy.",
+      "quote": "$90.00-Requests ... 11 or more days from closing/change of occupancy.",
       "source_url": "https://harrisontwp.us/wp-content/uploads/2024/01/Fire-inspection-revised-01032024.pdf",
       "verified": true
      },
@@ -110,7 +109,7 @@
     "evidence": [
      {
       "url": "https://harrisontwp.us/wp-content/uploads/2024/01/Fire-inspection-revised-01032024.pdf",
-      "quote": "Before any one- and two-family or attached single family structure is sold, leased, or otherwise made subject to a change of occupancy for residential purposes, the owner shall obtain a certificate or smoke alarm, carbon monoxide alarm, and portable fire extinguisher compliance CSACMAPFEC, evidencing compliance with N.J.A.C. 5:70-4.19, from [Bureau of Fire Prevention, Harrison Township Fire District#1].",
+      "quote": "Before any one- and two-family or attached single family structure is sold, leased, or otherwise made subject to a change of occupancy for residential purposes, the owner shall obtain a certificate or smoke alarm, carbon monoxide alarm, and portable fire extinguisher compliance CSACMAPFEC, evidencing compliance with N.J.A.C. 5:70-4.19",
       "doc_date": "2024-01 (Revised 01/01/24)",
       "via": "pdf",
       "verified": true
@@ -126,7 +125,7 @@
     "confidence": "high"
    }
   ],
-  "notes": "DCA LEA Registry (July 2026) lists Harrison Township as 'D' (a fire district is the local enforcing agency). The township's Fire District page lists District Fire Chief Matthew Cardile, 856-478-0423, matt@htfd23.com, office address 4 South Main Street, Mullica Hill; the application form gives 312 Ewan Rd. The fire district's own website (htfd23.com) is behind a bot check and was not read. The CTO form lists 'Smoke Detector Certification from the Fire Department' as a requirement for the CTO."
+  "notes": "DCA LEA Registry (July 2026) lists Harrison Township as 'D' (a fire district is the local enforcing agency). The township's Fire District page lists District Fire Chief Matthew Cardile, 856-478-0423, matt@htfd23.com, office address 4 South Main Street, Mullica Hill; the application form gives 312 Ewan Rd. The fire district's own website (htfd23.com) is behind a bot check and was not read. The CTO form lists 'Smoke Detector Certification from the Fire Department' as a requirement for the CTO. Re-check 2026-10-06: the fire district application PDF is the same file (created January 2, 2024, \"Revised 01/01/24\"); fees ($90 / $160 / $200, $65 re-inspection) and contacts are unchanged, and the township Fire District page still lists Chief Matthew Cardile, 856-478-0423, matt@htfd23.com. The PDF text layer reads the bracketed agency as \"Fire District#!\" (not \"#1\") and splits \"received\" in the $90 row, so the old quotes were trimmed to verbatim pieces that a text search can find."
  },
  "other_items": [
   {
@@ -150,6 +149,7 @@
   "Fire certificate lead time beyond the fee tiers and certificate validity were not published.",
   "An ecode360 search result (ecode360.com/11821137) mentions a $60 smoke certificate fee from 'the Bureau', but the town it belongs to could not be confirmed, so it was not used."
  ],
+ "checked_at": "2026-10-06",
  "verification": {
   "fees": 7,
   "fee_ok": 7,

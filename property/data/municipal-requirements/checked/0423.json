@@ -2,7 +2,7 @@
  "municipality_code": "0423",
  "municipality": "Magnolia Borough",
  "county": "CAMDEN",
- "checked_at": "2026-09-30",
+ "checked_at": "2026-10-06",
  "resale_co": {
   "status": "required",
   "name": "Certificate of Continued Occupancy (Certificate of Change in Ownership / Change in Occupancy), Borough Code Chapter 112",
@@ -113,15 +113,8 @@
     "evidence": [
      {
       "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
-      "quote": "SMOKE DETECTOR COMPLIANCE Name: Magnolia Boro Constr Office Addr: 438 West Evesham Av Magnolia NJ 08049 Phone (856) 783-1520",
-      "doc_date": "2026-09 (directory PDF; fire department survey 5/2026)",
-      "via": "pdf",
-      "verified": true
-     },
-     {
-      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
-      "quote": "Enf Auth. State Fire Official Louis Kilmer NJ Div Fire Safety",
-      "doc_date": "2026-09 (directory PDF; fire department survey 5/2026)",
+      "quote": "LEAID: 0423-999 Magnolia Boro SMOKE DETECTOR COMPLIANCE Enf Auth. State ... Name: Magnolia Boro Constr Office ... Addr: 438 West Evesham Av ... Magnolia NJ 08049 ... Fire Official Louis Kilmer NJ Div Fire Safety PO Box 809 ... Phone (856) 783-1520 Phone JUVENILE FIRESETTERS PROGRAM",
+      "doc_date": "2026-09-03 (directory PDF dated; fire department survey 5/22/2026)",
       "via": "pdf",
       "verified": true
      },
@@ -160,12 +153,12 @@
  ],
  "verification": {
   "fees": 1,
-  "fee_ok": 1,
+  "fee_ok": 0,
   "fee_bad": 0,
-  "fee_unchecked": 0,
-  "quotes": 13,
-  "q_ok": 7,
+  "fee_unchecked": 1,
+  "quotes": 12,
+  "q_ok": 4,
   "q_bad": 0,
-  "q_unchecked": 6
+  "q_unchecked": 8
  }
 }

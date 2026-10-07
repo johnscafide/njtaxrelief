@@ -2,7 +2,6 @@
  "municipality_code": "1609",
  "municipality": "Pompton Lakes Borough",
  "county": "PASSAIC",
- "checked_at": "2026-10-02",
  "resale_co": {
   "status": "required",
   "name": "Certificate of Continued Occupancy (CCO), residential",
@@ -50,25 +49,25 @@
     "verified": true
    },
    {
-    "label": "Smoke alarm and carbon monoxide alarm certificate, request received more than 10 business days before the change of occupant (state Uniform Fire Code schedule, N.J.A.C. 5:70-2.9(d), which Borough Ordinance 23-23 adopts as the Borough fee)",
+    "label": "Smoke/CO certificate, state schedule adopted as the Borough fee by Ordinance 23-23: Request received more than 10 business days before the change of occupant (N.J.A.C. 5:70-2.9(d))",
     "amount": "$45.00",
-    "quote": "1. Requests for a CSDCMAC received more than 10 business days prior to the change of occupant: $45.00;",
-    "source_url": "https://www.nj.gov/dca/divisions/dfs/codes/regulations/adopted_amendment_5_10_2.9.pdf",
-    "verified": "eye"
+    "quote": "Requests for a CSACMAPFEC received more than 10 business days prior to the change of occupant: $45.00",
+    "source_url": "https://www.nj.gov/dca/divisions/dfs/codes/regulations/r.2018%20d.074%20(50%20n.j.r.%20729(a)).pdf",
+    "verified": true
    },
    {
-    "label": "Request received 4 to 10 business days before the change of occupant (state schedule adopted by Ordinance 23-23)",
+    "label": "Smoke/CO certificate, state schedule adopted as the Borough fee by Ordinance 23-23: Request received 4 to 10 business days before the change of occupant",
     "amount": "$90.00",
-    "quote": "2. Requests for a CSDCMAC received four to 10 business days prior to the change of occupant: $90.00; and",
-    "source_url": "https://www.nj.gov/dca/divisions/dfs/codes/regulations/adopted_amendment_5_10_2.9.pdf",
-    "verified": "eye"
+    "quote": "Requests for a CSACMAPFEC received four to 10 business days prior to the change of occupant: $90.00",
+    "source_url": "https://www.nj.gov/dca/divisions/dfs/codes/regulations/r.2018%20d.074%20(50%20n.j.r.%20729(a)).pdf",
+    "verified": true
    },
    {
-    "label": "Request received fewer than 4 business days before the change of occupant (state schedule adopted by Ordinance 23-23)",
+    "label": "Smoke/CO certificate, state schedule adopted as the Borough fee by Ordinance 23-23: Request received fewer than 4 business days before the change of occupant",
     "amount": "$161.00",
-    "quote": "3. Requests for a CSDCMAC received fewer than four business days prior to the change of occupant: $161.00.",
-    "source_url": "https://www.nj.gov/dca/divisions/dfs/codes/regulations/adopted_amendment_5_10_2.9.pdf",
-    "verified": "eye"
+    "quote": "Requests for a CSACMAPFEC received fewer than four business days prior to the change of occupant: $161.00",
+    "source_url": "https://www.nj.gov/dca/divisions/dfs/codes/regulations/r.2018%20d.074%20(50%20n.j.r.%20729(a)).pdf",
+    "verified": true
    }
   ],
   "how_to_apply": "Complete the Residential CCO application (check Resale), sign it and submit it with a check payable to the Borough of Pompton Lakes to the Building Department, 25 Lenox Avenue. The office must have the completed application and fee before it schedules the inspection. Inspections are Tuesday through Friday, 3:30 to 5:30 pm. Contact the Fire Prevention Bureau separately for the smoke alarm and carbon monoxide alarm inspection.",
@@ -158,25 +157,25 @@
     "lead_time": "Lowest fee when the request is received more than 10 business days before the change of occupant",
     "fees": [
      {
-      "label": "Smoke alarm and carbon monoxide alarm certificate, request received more than 10 business days before the change of occupant (state Uniform Fire Code schedule, N.J.A.C. 5:70-2.9(d), which Borough Ordinance 23-23 adopts as the Borough fee)",
+      "label": "State schedule adopted as the Borough fee by Ordinance 23-23: Request received more than 10 business days before the change of occupant (N.J.A.C. 5:70-2.9(d))",
       "amount": "$45.00",
-      "quote": "1. Requests for a CSDCMAC received more than 10 business days prior to the change of occupant: $45.00;",
-      "source_url": "https://www.nj.gov/dca/divisions/dfs/codes/regulations/adopted_amendment_5_10_2.9.pdf",
-      "verified": "eye"
+      "quote": "Requests for a CSACMAPFEC received more than 10 business days prior to the change of occupant: $45.00",
+      "source_url": "https://www.nj.gov/dca/divisions/dfs/codes/regulations/r.2018%20d.074%20(50%20n.j.r.%20729(a)).pdf",
+      "verified": true
      },
      {
-      "label": "Request received 4 to 10 business days before the change of occupant (state schedule adopted by Ordinance 23-23)",
+      "label": "State schedule adopted as the Borough fee by Ordinance 23-23: Request received 4 to 10 business days before the change of occupant",
       "amount": "$90.00",
-      "quote": "2. Requests for a CSDCMAC received four to 10 business days prior to the change of occupant: $90.00; and",
-      "source_url": "https://www.nj.gov/dca/divisions/dfs/codes/regulations/adopted_amendment_5_10_2.9.pdf",
-      "verified": "eye"
+      "quote": "Requests for a CSACMAPFEC received four to 10 business days prior to the change of occupant: $90.00",
+      "source_url": "https://www.nj.gov/dca/divisions/dfs/codes/regulations/r.2018%20d.074%20(50%20n.j.r.%20729(a)).pdf",
+      "verified": true
      },
      {
-      "label": "Request received fewer than 4 business days before the change of occupant (state schedule adopted by Ordinance 23-23)",
+      "label": "State schedule adopted as the Borough fee by Ordinance 23-23: Request received fewer than 4 business days before the change of occupant",
       "amount": "$161.00",
-      "quote": "3. Requests for a CSDCMAC received fewer than four business days prior to the change of occupant: $161.00.",
-      "source_url": "https://www.nj.gov/dca/divisions/dfs/codes/regulations/adopted_amendment_5_10_2.9.pdf",
-      "verified": "eye"
+      "quote": "Requests for a CSACMAPFEC received fewer than four business days prior to the change of occupant: $161.00",
+      "source_url": "https://www.nj.gov/dca/divisions/dfs/codes/regulations/r.2018%20d.074%20(50%20n.j.r.%20729(a)).pdf",
+      "verified": true
      }
     ],
     "how_to_apply": "No application form or online portal is posted. Call the Fire Prevention Bureau at 973-616-5918 (the Borough says to call this number for inspections, permits, CO inspections and real estate closing issues) or email the Fire Official. Fees are payable to the Borough of Pompton Lakes.",
@@ -192,14 +191,14 @@
       "quote": "Call 973-616-5918 for inspections, permits, CO inspections and Real Estate closing issues",
       "doc_date": "",
       "via": "page",
-      "verified": true
+      "verified": null
      },
      {
       "url": "https://pomptonlakes-nj.gov/m/directory/department?did=9",
       "quote": "John Keating Fire Official Fire Official jkeating@pomptonlakes-nj.gov",
       "doc_date": "",
       "via": "page",
-      "verified": true
+      "verified": null
      },
      {
       "url": "https://pomptonlakes-nj.gov/DocumentCenter/View/1577/CCO-Residential-Application",
@@ -210,7 +209,7 @@
      },
      {
       "url": "https://www.pomptonlakes-nj.gov/AgendaCenter/ViewFile/Item/651?fileID=27158",
-      "quote": "The application fee for certificate of smoke alarm, carbon monoxide alarm, and portable fire extinguisher compliance (CSACMAPFEC), as required by N.J.A.C. 5:70-2.3, shall be based upon the amount of time remaining before the change of occupant is expected. The fee schedule for requests received more than 10 business days, four to 10 business days and fewer than four business days will be established by the Uniform Fire Code and shall be the fees established for collection in the Borough of Pompton Lakes.",
+      "quote": "The application fee for certificate of smoke alarm, carbon monoxide alarm, and portable fire extinguisher compliance (CSACMAPFEC), as required by N.J.A.C. 5:70-2.3, shall be based upon the amount of time remaining before the change of occupant is expected. The fee schedule for requests received more than 10 business days, four to 10 business days and fewer than four business days will be established by ... the Uniform Fire Code and shall be the fees established for collection in the Borough of Pompton Lakes.",
       "doc_date": "2023-06-28 (Ordinance 23-23 final passage)",
       "via": "pdf",
       "verified": true
@@ -223,18 +222,18 @@
       "verified": true
      },
      {
-      "url": "https://www.nj.gov/dca/divisions/dfs/codes/regulations/adopted_amendment_5_10_2.9.pdf",
-      "quote": "(d) The application fee for a certificate of smoke detector and carbon monoxide alarm compliance (CSDCMAC), as required by N.J.A.C. 5:70-2.3, shall be based upon the amount of time remaining before the change of occupant is expected, as follows:",
-      "doc_date": "2017-10-02 (NJ Register, effective October 2, 2017; scanned)",
+      "url": "https://www.nj.gov/dca/divisions/dfs/codes/regulations/r.2018%20d.074%20(50%20n.j.r.%20729(a)).pdf",
+      "quote": "(d) The application fee for a certificate of smoke alarm, carbon monoxide alarm, and portable fire extinguisher compliance (CSACMAPFEC), as required by N.J.A.C. 5:70-2.3, shall be based upon the amount of time remaining before the change of occupant is expected, as follows:",
+      "doc_date": "2018-02-05 (NJ Register, 50 N.J.R. 729(a))",
       "via": "pdf",
-      "verified": "eye"
+      "verified": true
      },
      {
       "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
       "quote": "LEAID: 1609-001 Enf Auth. Fire Dept Fire Official John F Keating Phone (973) 616-5918 ... Email JKeating@pomptonlakes-nj.gov",
       "doc_date": "2026",
       "via": "state_directory",
-      "verified": true
+      "verified": null
      },
      {
       "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
@@ -247,7 +246,7 @@
     "confidence": "medium"
    }
   ],
-  "notes": "Borough Ordinance 23-23 (Chapter 18 Fire Prevention, Section 18-8C, adopted June 28, 2023) sets the smoke/CO certificate fee at the Uniform Fire Code schedule rather than a local amount. The amounts recorded are the state schedule in N.J.A.C. 5:70-2.9(d) as published by DCA in the NJ Register (October 2, 2017); the DCA smoke certificate portal currently shows the same $45 / $90 / $161 tiers for state-enforced towns. No Borough fee sheet or form for the fire certificate is posted, so confirm the amount and the application method with the Fire Official. The Fire Department page says fire inspection fees for real estate transactions go to the municipality and the State, not to the volunteer department. The state directory lists the bureau fax as (866)902-4414. The Pompton Lakes Volunteer Fire Department (973-835-0072) handles emergency response."
+  "notes": "Borough Ordinance 23-23 (Chapter 18 Fire Prevention, Section 18-8C, adopted June 28, 2023) sets the smoke/CO certificate fee at the Uniform Fire Code schedule rather than a local amount. The amounts recorded are the state schedule in N.J.A.C. 5:70-2.9(d) as published by DCA in the NJ Register (50 N.J.R. 729(a), February 5, 2018); the DCA smoke certificate portal currently shows the same $45 / $90 / $161 tiers for state-enforced towns. No Borough fee sheet or form for the fire certificate is posted, so confirm the amount and the application method with the Fire Official. The Fire Department page says fire inspection fees for real estate transactions go to the municipality and the State, not to the volunteer department. The state directory lists the bureau fax as (866)902-4414. The Pompton Lakes Volunteer Fire Department (973-835-0072) handles emergency response. Re-checked 2026-10-06: Ordinance 23-23 is unchanged; a stray stamp mark (':2') sits inside its fee sentence in the PDF text, so the quote is split there. The state fee quotes now come from the text-searchable 2018 NJ Register notice instead of the scanned 2017 PDF; the amounts are the same."
  },
  "other_items": [
   {
@@ -260,14 +259,15 @@
   "How to apply for the smoke alarm and carbon monoxide alarm certificate (no form or portal posted) and whether the Fire Prevention Bureau charges exactly the state schedule ($45 / $90 / $161)",
   "Whether the Fire Prevention Bureau still requires a fire extinguisher at resale, as the 2025 Borough CCO form lists"
  ],
+ "checked_at": "2026-10-06",
  "verification": {
-  "fees": 7,
-  "fee_ok": 7,
+  "fees": 10,
+  "fee_ok": 10,
   "fee_bad": 0,
   "fee_unchecked": 0,
   "quotes": 17,
-  "q_ok": 17,
+  "q_ok": 14,
   "q_bad": 0,
-  "q_unchecked": 0
+  "q_unchecked": 3
  }
 }

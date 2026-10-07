@@ -2,17 +2,18 @@
  "municipality_code": "0117",
  "municipality": "Mullica Township",
  "county": "ATLANTIC",
- "checked_at": "2026-09-30",
+ "checked_at": "2026-10-06",
  "resale_co": {
   "status": "required",
-  "name": "Resale Certificate",
-  "issued_by": "Zoning and Code Enforcement Office (Zoning Officer / Code Enforcement Official)",
+  "name": "Resale Certificate (Maintenance Code certificate)",
+  "issued_by": "Mullica Township Zoning and Code Enforcement Office (Code Officer)",
   "lead_time": "",
   "valid_for": "",
   "requirements": [
+   "Township inspection; the certificate is marked passed or failed (inspection checklist not published)",
    "Copy of approved well and septic testing submitted with the application",
    "Copy of the elevation certificate if the home is in a flood zone",
-   "The Township inspects the home and marks the resale certificate passed or failed (inspection checklist not published)"
+   "A conditional certificate is possible if the buyer acknowledges the violations and agrees to fix them within 90 days of the sale (Township code, seen in search results)"
   ],
   "fees": [
    {
@@ -23,93 +24,122 @@
     "verified": null
    }
   ],
-  "how_to_apply": "Download the Resale Certificate Application from the Township Forms page ('RESALE APPLICATION'). Fill in block, lot, property address, lock box number and location, homeowner, buyer and realtor details, and return it with the $75.00 fee (the office section lists cash or check), a copy of approved well and septic testing and, in a flood zone, the elevation certificate. The form does not say whether to mail, email or drop it off, so ask the office (609-561-7070 x 133, zoning@mullicatownship.org). The Township then schedules the inspection. The Zoning and Code Enforcement Officer works Tuesday, Wednesday and Thursday, 8:30 am to 4 pm; an appointment is recommended.",
+  "how_to_apply": "Download the Resale Certificate Application from the Township Forms page ('RESALE APPLICATION'). Fill in block, lot, zone, property address, lock box number and location, homeowner, buyer and realtor details, and return it with the $75.00 fee (cash or check), a copy of approved well and septic testing and, in a flood zone, the elevation certificate. The form does not say whether to mail, email or drop it off, so ask the office (609-561-7070 x 133, zoning@mullicatownship.org). The Township then schedules the inspection. The Zoning and Code Enforcement Officer works Tuesday, Wednesday and Thursday, 8:30 am to 4 pm; an appointment is recommended.",
   "application_url": "https://mullicatownship.org/wp-content/uploads/2026/03/RESALE-certificate-application-NEW.pdf",
   "department_url": "https://www.mullicatownship.org/departments/development-housing/code-enforcement/",
-  "contact_name": "Steven Hadley",
-  "contact_title": "Zoning Officer / Code Enforcement Official",
   "phone": "609-561-7070 x 133",
   "email": "zoning@mullicatownship.org",
+  "contact_name": "Steven Hadley",
+  "contact_title": "Zoning Officer / Code Enforcement Official",
   "evidence": [
    {
     "url": "https://mullicatownship.org/wp-content/uploads/2026/03/RESALE-certificate-application-NEW.pdf",
-    "quote": "RESALE CERTIFICATE APPLICATION ... THE FOLLOWING INFORMATION WILL BE NEEDED TO PROCESS THE RESALE CERTIFICATE 1. COPY OF APPROVED WELL & SEPTIC TESTING 2. COPY OF ELEVATION CERTIFICATE IN FLOOD ZONE 4. APPLICATION FEE $75.00",
-    "doc_date": "2026-03 (scanned PDF created March 4, 2026; read visually)",
+    "quote": "RESALE CERTIFICATE APPLICATION",
+    "doc_date": "2026-03-04 (scanned PDF; read visually)",
     "via": "pdf",
     "verified": null
    },
    {
     "url": "https://mullicatownship.org/wp-content/uploads/2026/03/RESALE-certificate-application-NEW.pdf",
-    "quote": "PO Box 317 Elwood, New Jersey 08217 Phone (609) 561-7070 Fax (609) 561-3031 www.mullicatownship.org zoning@mullicatownship.org",
-    "doc_date": "2026-03 (scanned PDF; read visually)",
+    "quote": "THE FOLLOWING INFORMATION WILL BE NEEDED TO PROCESS THE RESALE CERTIFICATE",
+    "doc_date": "2026-03-04 (scanned PDF; read visually)",
+    "via": "pdf",
+    "verified": null
+   },
+   {
+    "url": "https://mullicatownship.org/wp-content/uploads/2026/03/RESALE-certificate-application-NEW.pdf",
+    "quote": "1. COPY OF APPROVED WELL & SEPTIC TESTING",
+    "doc_date": "2026-03-04 (scanned PDF; read visually)",
+    "via": "pdf",
+    "verified": null
+   },
+   {
+    "url": "https://mullicatownship.org/wp-content/uploads/2026/03/RESALE-certificate-application-NEW.pdf",
+    "quote": "2. COPY OF ELEVATION CERTIFICATE IN FLOOD ZONE",
+    "doc_date": "2026-03-04 (scanned PDF; read visually)",
     "via": "pdf",
     "verified": null
    },
    {
     "url": "https://www.mullicatownship.org/forms/",
     "quote": "RESALE APPLICATION",
-    "doc_date": "2026-09-22 (page last updated)",
+    "doc_date": "2026-10-06 (page fetched)",
     "via": "page",
     "verified": true
    },
    {
     "url": "https://www.mullicatownship.org/departments/development-housing/code-enforcement/",
-    "quote": "Zoning Officer Code Enforcement Official Steven Hadley Email: Zoning@mullicatownship.org Phone (609) 561-7070 x 133",
-    "doc_date": "2026-05-28 (page last updated)",
+    "quote": "Steven Hadley Email: Zoning@mullicatownship.org Phone (609) 561-7070 x 133",
+    "doc_date": "2026-05-28 (page updated)",
     "via": "page",
     "verified": true
    },
    {
     "url": "https://www.mullicatownship.org/departments/development-housing/code-enforcement/",
     "quote": "Zoning and Code Enforcement Officer hours are Tuesday, Wednesday, and Thursday 8:30am to 4pm.",
-    "doc_date": "2026-05-28 (page last updated)",
+    "doc_date": "2026-05-28 (page updated)",
     "via": "page",
     "verified": true
+   },
+   {
+    "url": "https://ecode360.com/9424366",
+    "quote": "No owner or agent shall sell, rent, transfer, grant, lease, let, mortgage with right of occupancy or otherwise dispose of the ownership or occupancy of any dwelling unit",
+    "doc_date": "2026-10-06 (search result, Chapter 177 Property Maintenance, § 177-12 Maintenance Code certificate)",
+    "via": "search_snippet",
+    "verified": null
+   },
+   {
+    "url": "https://ecode360.com/9424366",
+    "quote": "unless a Maintenance Code certificate, certifying that the building and premises are in compliance with all other ordinances of the Township of Mullica, shall first be obtained from the Code Officer of the Township",
+    "doc_date": "2026-10-06 (search result)",
+    "via": "search_snippet",
+    "verified": null
    }
   ],
-  "confidence": "medium",
-  "notes": "The Township Forms page posts a 'RESALE APPLICATION': a one-page Resale Certificate Application (scanned March 2026) with homeowner, buyer and realtor fields, a lock box line, a $75.00 fee and a passed/failed inspection box. This shows a Township resale certificate and inspection exist, but the form does not quote the ordinance that makes it mandatory and the Township Code on ecode360 could not be opened, so confidence is medium. The Code Enforcement page shows 'Zoning@mullicatownship.org' as the email text while the underlying link points to inspections@mullicatownship.org; the form prints zoning@mullicatownship.org, which is used here. A separate $75.00 rental application (maintenance code certificate) is for rentals only. Since February 9, 2026 the Uniform Construction Code in Mullica is enforced by the NJ DCA Southern Regional Office, not a Township construction office."
+  "confidence": "high",
+  "notes": "The Township Forms page posts a 'RESALE APPLICATION': a one-page Resale Certificate Application (scanned March 2026) with homeowner, buyer and realtor fields, a lock box line, a $75.00 fee and a passed/failed inspection box. New this check: web search results for the Township code (Chapter 177 Property Maintenance, § 177-12 'Maintenance Code certificate', ecode360) say no owner may sell or transfer a dwelling unit without first getting a Maintenance Code certificate from the Code Officer, and allow a conditional certificate if the buyer agrees to fix listed violations within 90 days of the sale. The same search results mention a $25 application fee where preoccupancy inspections are done by other reliable agencies; that wording could not be read on the page, so it is not recorded as a fee. The code pages themselves could not be opened (ecode360 blocks direct reads). The Code Enforcement page shows 'Zoning@mullicatownship.org' as the email text while the underlying link points to inspections@mullicatownship.org; the form prints zoning@mullicatownship.org, which is used here. A separate $75.00 rental application is for rentals only. Since February 9, 2026 the Uniform Construction Code in Mullica is enforced by the NJ DCA Southern Regional Office, not a Township construction office."
  },
  "fire_cert": {
   "requirements": [
-   "State online self-certification, now named the Certificate of Smoke Alarm, Carbon Monoxide Alarm, and Secondary Power Source Identification Label Compliance (CSACMASPSIL): smoke alarms, carbon monoxide alarms, and the secondary power source label for homes with solar, generators or batteries. The certificate name no longer includes the fire extinguisher, although the portal's checklist notice still refers to detectors and fire extinguishers"
+   "State certificate of smoke alarm and carbon monoxide alarm compliance from NJ DCA (state-enforced town)",
+   "Smoke alarms and carbon monoxide alarms as required by N.J.A.C. 5:70-4.19; the portable fire extinguisher was dropped from the sale certificate by P.L.2025, c.19"
   ],
   "authorities": [
    {
     "name": "NJ DCA Division of Fire Safety, Bureau of Fire Code Enforcement",
     "type": "state_dca",
     "area_served": "Entire township (Elwood, Nesco, Sweetwater and Weekstown fire companies)",
-    "lead_time": "More than 10 business days before closing for the lowest fee",
+    "lead_time": "More than 10 business days before the change of occupant for the lowest fee",
     "fees": [
      {
-      "label": "More than 10 business days before closing",
-      "amount": "$45",
-      "quote": "If you are applying for a certificate more than ten business days from the closing date the fee is $45 dollars",
-      "source_url": "https://firesolutions.dca.nj.gov/ultra-fire-home/smoke-application-create/",
-      "verified": null
+      "label": "Request received more than 10 business days before the change of occupant",
+      "amount": "$45.00",
+      "quote": "Requests for a CSACMAPFEC received more than 10 business days prior to the change of occupant: $45.00",
+      "source_url": "https://www.nj.gov/dca/divisions/dfs/codes/regulations/r.2018%20d.074%20(50%20n.j.r.%20729(a)).pdf",
+      "verified": true
      },
      {
-      "label": "4 to 10 business days before closing",
-      "amount": "$90",
-      "quote": "if applying 4 to 10 business days from the closing date the fee is $90",
-      "source_url": "https://firesolutions.dca.nj.gov/ultra-fire-home/smoke-application-create/",
-      "verified": null
+      "label": "Request received 4 to 10 business days before the change of occupant",
+      "amount": "$90.00",
+      "quote": "Requests for a CSACMAPFEC received four to 10 business days prior to the change of occupant: $90.00",
+      "source_url": "https://www.nj.gov/dca/divisions/dfs/codes/regulations/r.2018%20d.074%20(50%20n.j.r.%20729(a)).pdf",
+      "verified": true
      },
      {
-      "label": "Less than 4 business days before closing",
-      "amount": "$161",
-      "quote": "if the closing date is less than four business days the fee is $161.",
-      "source_url": "https://firesolutions.dca.nj.gov/ultra-fire-home/smoke-application-create/",
-      "verified": null
+      "label": "Request received fewer than 4 business days before the change of occupant",
+      "amount": "$161.00",
+      "quote": "Requests for a CSACMAPFEC received fewer than four business days prior to the change of occupant: $161.00",
+      "source_url": "https://www.nj.gov/dca/divisions/dfs/codes/regulations/r.2018%20d.074%20(50%20n.j.r.%20729(a)).pdf",
+      "verified": true
      }
     ],
-    "how_to_apply": "Apply online through the NJ DCA Fire Safety portal ('Start Your Smoke Certification Application'). Pay by e-check or credit card before submitting; a valid email address is required. The certificate is emailed once the application is submitted, the fee is paid and any required inspections are done. Homes heated by electricity with no CO alarm requirement should also email BFCE_CSDCMAC@dca.nj.gov.",
+    "how_to_apply": "Apply online through the NJ DCA Fire Safety service portal ('Start Your Smoke Certification Application'), choosing change of ownership, the closing date and the property location, and pay online. For questions call the Bureau of Fire Code Enforcement at (609) 633-6106.",
     "application_url": "https://firesolutions.dca.nj.gov/ultra-fire-home/smoke-application-create/",
     "department_url": "https://www.nj.gov/dca/dfs/offices/bfce.shtml",
+    "phone": "609-633-6106",
+    "email": "",
     "contact_name": "Louis Kilmer",
     "contact_title": "Bureau Chief, Bureau of Fire Code Enforcement (listed as the Fire Official in the state fire directory)",
-    "phone": "609-633-6106",
-    "email": "BFCE_CSDCMAC@dca.nj.gov",
     "evidence": [
      {
       "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
@@ -127,29 +157,36 @@
      },
      {
       "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
-      "quote": "LEAID: 0117-999 Enf Auth. State Fire Official Louis Kilmer Phone (609)633-6132 Addr: PO Box 809",
-      "doc_date": "2026 directory (Mullica pages, survey date 2/6/2026)",
+      "quote": "LEAID: 0117-999 Mullica Twp SMOKE DETECTOR COMPLIANCE Name: NJ Division Fire Safety",
+      "doc_date": "2026-02-06 (survey date)",
       "via": "state_directory",
-      "verified": true
-     },
-     {
-      "url": "https://firesolutions.dca.nj.gov/ultra-fire-home/smoke-application-create/",
-      "quote": "Please complete the following information to apply for a Certificate of Smoke Alarm, Carbon Monoxide Alarm, and Secondary Power Source Identification Label Compliance (CSACMASPSIL). You will be required to pay, via e-check or credit card, before you can submit this application. This application requires a valid email address.",
-      "doc_date": "2026-09-30 (page fetched)",
-      "via": "page",
       "verified": null
      },
      {
-      "url": "https://firesolutions.dca.nj.gov/ultra-fire-home/smoke-application-create/",
-      "quote": "if your property is heated with electricity and does not require a carbon monoxide alarm, check the fourth box and send an email to BFCE_CSDCMAC@dca.nj.gov stating that you are not subject to that requirement.",
-      "doc_date": "2026-09-30 (page fetched)",
-      "via": "page",
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "Fire Official Louis Kilmer Phone (609) 633-6132",
+      "doc_date": "2026-02-06 (survey date)",
+      "via": "state_directory",
       "verified": null
      },
      {
       "url": "https://www.nj.gov/dca/dfs/offices/bfce.shtml",
-      "quote": "Louis Kilmer, Bureau Chief CPM Address: P.O. Box 809, Trenton, NJ 08625-0809 Phone: (609) 633-6106",
-      "doc_date": "2026-09-30 (page fetched)",
+      "quote": "Louis Kilmer, Bureau Chief CPM",
+      "doc_date": "2026-10-06 (page fetched)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/offices/bfce.shtml",
+      "quote": "Phone: (609) 633-6106",
+      "doc_date": "2026-10-06 (page fetched)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://firesolutions.dca.nj.gov/ultra-fire-home/smoke-application-create/",
+      "quote": "Start Your Smoke Certification Application",
+      "doc_date": "2026-10-06 (page fetched)",
       "via": "page",
       "verified": true
      }
@@ -157,7 +194,7 @@
     "confidence": "high"
    }
   ],
-  "notes": "NJ DCA lists Mullica as State enforced (S) and its July 17, 2026 list marks it 'SC' (the State issues smoke certificates). The state fire directory lists 'NJ Division Fire Safety' for smoke detector compliance in Mullica. No Township page about smoke certificates was found; the Township Fire & Rescue page lists only the volunteer fire companies and the Director of Fire Department Affairs (David Butterhof). The directory gives (609) 633-6132 for Louis Kilmer; the Bureau's own page gives (609) 633-6106, which is used here."
+  "notes": "NJ DCA lists Mullica as State enforced (S) and its July 17, 2026 list marks it 'SC' (the State issues smoke certificates); the state fire directory lists 'NJ Division Fire Safety' for smoke detector compliance in Mullica. Fees are the state fees in N.J.A.C. 5:70-2.9(d), cited from the NJ Register adoption (R.2018 d.074): $45.00, $90.00 and $161.00 by how many business days before the change of occupant the request arrives. No Township page about smoke certificates was found. The directory gives (609) 633-6132 for Louis Kilmer; the Bureau's own page gives (609) 633-6106, which is used here."
  },
  "other_items": [
   {
@@ -179,16 +216,16 @@
  "open_questions": [
   "How far ahead of closing to apply and how long the resale certificate stays valid are not stated.",
   "What the resale inspection checks is not published.",
-  "The ordinance section that requires the resale certificate could not be read (ecode360 is blocked)."
+  "Confirm the exact wording of § 177-12 and any reinspection fee (code seen only in search results)."
  ],
  "verification": {
   "fees": 4,
-  "fee_ok": 0,
+  "fee_ok": 3,
   "fee_bad": 0,
-  "fee_unchecked": 4,
-  "quotes": 11,
-  "q_ok": 7,
+  "fee_unchecked": 1,
+  "quotes": 16,
+  "q_ok": 8,
   "q_bad": 0,
-  "q_unchecked": 4
+  "q_unchecked": 8
  }
 }

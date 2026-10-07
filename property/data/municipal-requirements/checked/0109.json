@@ -2,20 +2,31 @@
  "municipality_code": "0109",
  "municipality": "Estell Manor",
  "county": "ATLANTIC",
- "checked_at": "2026-09-30",
  "resale_co": {
   "status": "required",
-  "name": "Certificate of Occupancy - Sale (Housing Inspector's Certificate of Occupancy inspection)",
-  "issued_by": "City of Estell Manor Housing Inspector",
+  "name": "Certificate of Occupancy - Sale (Housing Officer's certificate of occupancy inspection)",
+  "issued_by": "City of Estell Manor Housing Officer / Housing Inspector",
   "lead_time": "",
   "valid_for": "",
-  "requirements": [],
+  "requirements": [
+   "Certificate of occupancy whenever ownership or tenancy of a dwelling changes (City Code Section 380-72D(4))",
+   "Owner must open the home to inspection by the Housing Officer at reasonable hours",
+   "Give the settlement date and a contact person to set up the appointment on the application",
+   "State smoke/CO certificate is a separate application through the NJ DCA portal"
+  ],
   "fees": [
    {
-    "label": "Certificate of Occupancy inspection (sale or rental)",
-    "amount": "$50.00",
-    "quote": "Inspection Fee: $50.00, Payable to the \"City of Estell Manor\"",
-    "source_url": "http://www.estellmanor.org/images/new_co_chase.pdf",
+    "label": "Certificate of occupancy for resale or rerental (with smoke detector certificate)",
+    "amount": "$50",
+    "quote": "Certificate of occupancy for resale or rerental with smoke detector certificate (§380-72) | $50",
+    "source_url": "https://ecode360.com/29976480",
+    "verified": null
+   },
+   {
+    "label": "Second or more reinspection for certificate of occupancy, per unit",
+    "amount": "$30",
+    "quote": "Second or more reinspection for certificate of occupancy (§380-72) | $30 per unit",
+    "source_url": "https://ecode360.com/29976480",
     "verified": null
    }
   ],
@@ -28,9 +39,30 @@
   "contact_title": "Housing Inspector (also Zoning Officer and Code Enforcement)",
   "evidence": [
    {
+    "url": "https://ecode360.com/29978921",
+    "quote": "Change of tenancy or ownership. From and after the effective date of this chapter, a certificate of occupancy shall be required whenever there is a change in ownership or tenancy of any building or structure used for dwelling purposes.",
+    "doc_date": "City Code Section 380-72D(4), read 2026-10-06",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://ecode360.com/29978921",
+    "quote": "The owner of said building or dwelling shall open it to reasonable inspection during reasonable hours by the Housing Officer.",
+    "doc_date": "City Code Section 380-72D(4), read 2026-10-06",
+    "via": "page",
+    "verified": null
+   },
+   {
     "url": "http://www.estellmanor.org/images/new_co_chase.pdf",
-    "quote": "Request for: ( ) Certificate of Occupancy, Sale ( ) Certificate of Occupancy, Rental",
+    "quote": "Request for: ( ) Certificate of Occupancy - Sale ( ) Certificate of Occupancy - Rental",
     "doc_date": "2025-08 (scan dated 2025-08-26)",
+    "via": "pdf",
+    "verified": null
+   },
+   {
+    "url": "http://www.estellmanor.org/images/new_co_chase.pdf",
+    "quote": "Inspection Fee: $50.00 - Payable to the \"City of Estell Manor\"",
+    "doc_date": "2025-08",
     "via": "pdf",
     "verified": null
    },
@@ -51,31 +83,31 @@
    {
     "url": "http://www.estellmanor.org/formslinks.html",
     "quote": "Certificate of Occupancy Application",
-    "doc_date": "2026-09-30 (page fetched)",
+    "doc_date": "2026-10-06 (page fetched)",
     "via": "page",
     "verified": true
    },
    {
     "url": "http://www.estellmanor.org/contactus.html",
     "quote": "Zoning Officer Chase Farabella (609) 476-2692 x104 zoning@estellmanor.org",
-    "doc_date": "2026-09-30 (page fetched)",
+    "doc_date": "2026-10-06 (page fetched)",
     "via": "page",
     "verified": true
    },
    {
     "url": "http://www.estellmanor.org/departments.html",
     "quote": "Housing Officer Chase Farabella",
-    "doc_date": "2026-09-30 (page fetched)",
+    "doc_date": "2026-10-06 (page fetched)",
     "via": "page",
     "verified": true
    }
   ],
-  "confidence": "medium",
-  "notes": "The City's Certificate of Occupancy Application (scanned 8/26/2025) offers a 'Certificate of Occupancy - Sale' with a $50.00 inspection fee, and its second page says the state smoke/CO certificate for a title transfer is 'in addition to the Housing Inspector's Certificates of Occupancy inspection'. The form does not list what is inspected, a lead time or how long the certificate is valid. The City code (ecode360 ES0890) could not be opened to confirm the ordinance wording. The same form covers rentals (Certificate of Occupancy - Rental), and the City also has a rental registration form."
+  "confidence": "high",
+  "notes": "Now confirmed from the City code (read in full on ecode360 on 2026-10-06): Section 380-72D(4) requires a certificate of occupancy whenever ownership or tenancy of a dwelling changes, issued by the Housing Officer after inspection, and Section 185-15 sets the fee at $50 ('Certificate of occupancy for resale or rerental with smoke detector certificate') with $30 per unit for the second or later reinspection. The City's scanned application (August 2025) also shows the $50.00 fee and a 'Certificate of Occupancy - Sale' box. The fee table wording dates from when the City handled the smoke certificate; the smoke/CO certificate now comes from the State (see fire section). The application is a scanned image, so its quotes can only be checked by eye. No lead time or validity period is published. The same form covers rentals, and the City also has a rental registration form."
  },
  "fire_cert": {
   "requirements": [
-   "Secondary power source identification label for homes with solar, generators or batteries (the State application is now the CSACMASPSIL)",
+   "Smoke alarms, carbon monoxide alarms and, for homes with solar, generators or batteries, a secondary power source identification label (the State application is now the CSACMASPSIL)",
    "The City's CO form (August 2025) still describes the state certificate as covering a fire extinguisher"
   ],
   "authorities": [
@@ -83,31 +115,31 @@
     "name": "NJ DCA Division of Fire Safety, Bureau of Fire Code Enforcement",
     "type": "state_dca",
     "area_served": "Entire city",
-    "lead_time": "More than 10 business days before closing for the lowest fee",
+    "lead_time": "More than 10 business days before the change of occupant for the lowest fee",
     "fees": [
      {
-      "label": "More than 10 business days before closing",
-      "amount": "$45",
-      "quote": "If you are applying for a certificate more than ten business days from the closing date the fee is $45 dollars",
-      "source_url": "https://firesolutions.dca.nj.gov/ultra-fire-home/smoke-application-create/",
-      "verified": null
+      "label": "Requested more than 10 business days before the change of occupant",
+      "amount": "$45.00",
+      "quote": "Requests for a CSACMAPFEC received more than 10 business days prior to the change of occupant: $45.00",
+      "source_url": "https://www.nj.gov/dca/divisions/dfs/codes/regulations/r.2018%20d.074%20(50%20n.j.r.%20729(a)).pdf",
+      "verified": true
      },
      {
-      "label": "4 to 10 business days before closing",
-      "amount": "$90",
-      "quote": "if applying 4 to 10 business days from the closing date the fee is $90",
-      "source_url": "https://firesolutions.dca.nj.gov/ultra-fire-home/smoke-application-create/",
-      "verified": null
+      "label": "Requested 4 to 10 business days before the change of occupant",
+      "amount": "$90.00",
+      "quote": "Requests for a CSACMAPFEC received four to 10 business days prior to the change of occupant: $90.00",
+      "source_url": "https://www.nj.gov/dca/divisions/dfs/codes/regulations/r.2018%20d.074%20(50%20n.j.r.%20729(a)).pdf",
+      "verified": true
      },
      {
-      "label": "Less than 4 business days before closing",
-      "amount": "$161",
-      "quote": "if the closing date is less than four business days the fee is $161.",
-      "source_url": "https://firesolutions.dca.nj.gov/ultra-fire-home/smoke-application-create/",
-      "verified": null
+      "label": "Requested fewer than 4 business days before the change of occupant",
+      "amount": "$161.00",
+      "quote": "Requests for a CSACMAPFEC received fewer than four business days prior to the change of occupant: $161.00",
+      "source_url": "https://www.nj.gov/dca/divisions/dfs/codes/regulations/r.2018%20d.074%20(50%20n.j.r.%20729(a)).pdf",
+      "verified": true
      }
     ],
-    "how_to_apply": "Apply online through the NJ DCA Fire Safety portal (Apply Smoke Certification). Pay by e-check or credit card before submitting; a valid email address is required. The City's instructions: complete the Smoke Cert data, submit, pay, and wait for the status 'Approved-Pending Inspection'. For help email BFCECodeAdmin@dca.nj.gov or call 609-633-6132.",
+    "how_to_apply": "Apply online through the NJ DCA Fire Safety portal (Apply Smoke Certification). The City's instructions: complete the Smoke Cert data, submit, pay, and wait for the status 'Approved-Pending Inspection'. For help email BFCECodeAdmin@dca.nj.gov or call 609-633-6132.",
     "application_url": "https://firesolutions.dca.nj.gov/ultra-fire-home/smoke-application-create/",
     "department_url": "https://www.nj.gov/dca/dfs/offices/bfce.shtml",
     "phone": "609-633-6132",
@@ -134,7 +166,7 @@
       "quote": "LEAID: 0109-999 Enf Auth. State Fire Official Louis Kilmer Phone (609)633-6132 Addr: PO Box 809 Trenton NJ 08625-0809",
       "doc_date": "2026-01-27 (survey date)",
       "via": "state_directory",
-      "verified": true
+      "verified": null
      },
      {
       "url": "http://www.estellmanor.org/images/new_co_chase.pdf",
@@ -145,50 +177,52 @@
      },
      {
       "url": "http://www.estellmanor.org/images/new_co_chase.pdf",
-      "quote": "Bureau of Fire Code Enforcement, for assistance with registrations, inspections, invoices, certificates, and residential smoke certificate inspections, please send a detailed email to BFCECodeAdmin@dca.nj.gov. Phone Number: 609-633-6132",
+      "quote": "Bureau of Fire Code Enforcement - for assistance with registrations, inspections, invoices, certificates, and residential smoke certificate inspections, please send a detailed email to BFCECodeAdmin@dca.nj.gov.",
       "doc_date": "2025-08",
       "via": "pdf",
       "verified": null
      },
      {
-      "url": "https://firesolutions.dca.nj.gov/ultra-fire-home/smoke-application-create/",
-      "quote": "Please complete the following information to apply for a Certificate of Smoke Alarm, Carbon Monoxide Alarm, and Secondary Power Source Identification Label Compliance (CSACMASPSIL). You will be required to pay, via e-check or credit card, before you can submit this application. This application requires a valid email address.",
-      "doc_date": "2026-09-30 (page fetched)",
-      "via": "page",
-      "verified": null
-     },
-     {
-      "url": "https://firesolutions.dca.nj.gov/ultra-fire-home/smoke-application-create/",
-      "quote": "if your property is heated with electricity and does not require a carbon monoxide alarm, check the fourth box and send an email to BFCE_CSDCMAC@dca.nj.gov stating that you are not subject to that requirement.",
-      "doc_date": "2026-09-30 (page fetched)",
-      "via": "page",
+      "url": "http://www.estellmanor.org/images/new_co_chase.pdf",
+      "quote": "Phone Number: 609-633-6132",
+      "doc_date": "2025-08",
+      "via": "pdf",
       "verified": null
      },
      {
       "url": "https://www.nj.gov/dca/dfs/offices/bfce.shtml",
       "quote": "Louis Kilmer, Bureau Chief CPM Address: P.O. Box 809, Trenton, NJ 08625-0809 Phone: (609) 633-6106",
-      "doc_date": "2026-09-30 (page fetched)",
+      "doc_date": "2026-10-06 (page fetched)",
       "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/divisions/dfs/codes/regulations/r.2018%20d.074%20(50%20n.j.r.%20729(a)).pdf",
+      "quote": "Requests for a CSACMAPFEC received more than 10 business days prior to the change of occupant: $45.00",
+      "doc_date": "50 N.J.R. 729(a) as adopted (fee schedule N.J.A.C. 5:70-2.9(d))",
+      "via": "pdf",
       "verified": true
      }
     ],
     "confidence": "high"
    }
   ],
-  "notes": "NJ DCA lists Estell Manor as State enforced (S) and its July 17, 2026 list marks it 'SC' (the State issues smoke certificates). The City's own CO application tells sellers to get the fire safety certificate through the State system. The City's form (2025) names the certificate with a fire extinguisher; the current State application title (CSACMASPSIL) reflects P.L.2025, c.19, which replaced the extinguisher with a secondary power source label. The directory lists (609) 633-6132; the Bureau's page lists (609) 633-6106 for Louis Kilmer."
+  "notes": "NJ DCA lists Estell Manor as State enforced (S) and its July 17, 2026 list marks it 'SC' (the State issues smoke certificates). The City's own CO application tells sellers to get the fire safety certificate through the State system. Fees are the State fees under N.J.A.C. 5:70-2.9(d) ($45 / $90 / $161), now cited from the NJ Register adoption text instead of the State portal page. The City's form (2025) names the certificate with a fire extinguisher; P.L.2025, c.19 replaced the extinguisher with a secondary power source label. The directory lists (609) 633-6132; the Bureau's page lists (609) 633-6106 for Louis Kilmer."
  },
  "other_items": [],
  "open_questions": [
-  "What the City's sale CO inspection covers, how far ahead to apply and how long the certificate is valid are not stated on the form; confirm with the Housing Inspector at (609) 476-2692 ext. 104."
+  "How far ahead to apply for the City's sale CO inspection and how long the certificate stays valid (not published); confirm with the Housing Inspector at (609) 476-2692 ext. 104.",
+  "Does the City still charge its $50 CO fee 'with smoke detector certificate' now that the State issues the smoke/CO certificate (is any part of the State fee credited)?"
  ],
+ "checked_at": "2026-10-06",
  "verification": {
-  "fees": 4,
-  "fee_ok": 0,
+  "fees": 5,
+  "fee_ok": 3,
   "fee_bad": 0,
-  "fee_unchecked": 4,
-  "quotes": 14,
+  "fee_unchecked": 2,
+  "quotes": 17,
   "q_ok": 7,
   "q_bad": 0,
-  "q_unchecked": 7
+  "q_unchecked": 10
  }
 }

@@ -2,7 +2,7 @@
  "municipality_code": "2009",
  "municipality": "Linden City",
  "county": "UNION",
- "checked_at": "2026-10-02",
+ "checked_at": "2026-10-06",
  "resale_co": {
   "status": "required",
   "name": "Continued Certificate of Occupancy (CCO), residential sale",
@@ -165,7 +165,7 @@
      },
      {
       "url": "https://linden-nj.gov/wp-content/uploads/2025/09/Application-CSDCMAC-9-2025.pdf",
-      "quote": "CITY OF LINDEN FIRE DEPARTMENT FIRE PREVENTION BUREAU 302 South Wood Avenue Linden New Jersey 07036 Phone: (908)-474-4560 Fax: (908)-474-0318 Christopher Rooney William M. Hasko, Jr. Deputy Chief/Fire Official Fire Chief",
+      "quote": "FIRE DEPARTMENT FIRE PREVENTION BUREAU 302 South Wood Avenue Linden New Jersey 07036 Phone: (908)-474-4560 Fax: (908)-474-0318 Christopher Rooney William M. Hasko, Jr. Deputy Chief/Fire Official Fire Chief",
       "doc_date": "2025-09 (Rev. September 2025)",
       "via": "pdf",
       "verified": true
@@ -237,8 +237,8 @@
   "fee_bad": 0,
   "fee_unchecked": 0,
   "quotes": 21,
-  "q_ok": 21,
+  "q_ok": 20,
   "q_bad": 0,
-  "q_unchecked": 0
+  "q_unchecked": 1
  }
 }

@@ -2,133 +2,162 @@
  "municipality_code": "0123",
  "municipality": "Weymouth Township",
  "county": "ATLANTIC",
- "checked_at": "2026-09-30",
+ "checked_at": "2026-10-06",
  "resale_co": {
   "status": "required",
-  "name": "Certificate of Occupancy - Sale",
+  "name": "Certificate of Occupancy - Sale (Housing Office)",
   "issued_by": "Housing Office (Housing Officer)",
-  "lead_time": "The Housing Officer inspects within 14 days of receiving the completed application and payment.",
-  "valid_for": "",
+  "lead_time": "The Housing Officer inspects within 14 days of receiving the completed application and payment; the Township Code says the CO is issued, or violations are sent, within three working days after the inspection.",
+  "valid_for": "Until the premises become vacant, are sold to a new owner, or there is a conviction for a code violation (Township Code §106-6F).",
   "requirements": [
-   "The Township will not issue the CO until it receives a valid NJ DCA Division of Fire Safety smoke alarm, carbon monoxide alarm and portable fire extinguisher certificate",
-   "Housing Officer inspection of the home (checklist not published)"
+   "Housing Officer inspection: the home must be fit for human habitation (no fire or accident hazards; adequate ventilation, light and sanitary facilities; no dangerous plumbing or heating defects; no dilapidation, disrepair or structural defects; no uncleanliness or infestation; no construction code violations)",
+   "The Township will not issue the CO until it receives a valid NJ DCA Division of Fire Safety smoke alarm, carbon monoxide alarm and portable fire extinguisher certificate"
   ],
   "fees": [
    {
-    "label": "Certificate of Occupancy - Sale inspection",
+    "label": "Certificate of Occupancy - Sale inspection (application form)",
     "amount": "$50.00",
     "quote": "Return this completed application along with the $50.00 inspection fee to the Weymouth Township Housing Officer at the below address.",
     "source_url": "https://www.weymouthnj.org/Document%20Center/Forms%20and%20Documents/Housing%20Forms/CO-Application-8-2026%20updated.pdf",
     "verified": true
+   },
+   {
+    "label": "Inspection of any house or part of a duplex (Township Code §106-7A, amended 5-15-2024); the first reinspection is free, later reinspections cost another inspection fee",
+    "amount": "$50",
+    "quote": "The fee for the inspection of any house or part of any duplex shall be $50, payable at the time the request for inspection and issuance of certificate of occupancy is submitted.",
+    "source_url": "https://ecode360.com/11406861",
+    "verified": null
    }
   ],
   "how_to_apply": "Complete the Application for Certificate of Occupancy (check 'Certificate of Occupancy - Sale'; give block, lot, settlement date, owner and the contact person for the inspection appointment) and return it with the $50.00 inspection fee to the Housing Officer, 45 South Jersey Avenue, Dorothy, NJ 08317. The Housing Officer inspects within 14 days. Separately get the NJ DCA smoke/CO certificate online; the Township will not issue the CO until it receives it.",
   "application_url": "https://www.weymouthnj.org/Document%20Center/Forms%20and%20Documents/Housing%20Forms/CO-Application-8-2026%20updated.pdf",
   "department_url": "https://www.weymouthnj.org/township_offices/housing_office/index.php",
-  "contact_name": "Chase Farabella",
-  "contact_title": "Housing Officer",
   "phone": "609-476-2633 ext 3",
   "email": "housing@weymouthnj.org",
+  "contact_name": "Chase Farabella",
+  "contact_title": "Housing Officer",
   "evidence": [
    {
     "url": "https://www.weymouthnj.org/Document%20Center/Forms%20and%20Documents/Housing%20Forms/CO-Application-8-2026%20updated.pdf",
     "quote": "Request for ( ) Certificate of Occupancy - Sale ( ) Certificate of Occupancy - Rental",
-    "doc_date": "2026-08-26 (revised 8/26/26)",
+    "doc_date": "2026-08-26 (form revised 8/26/26)",
     "via": "pdf",
     "verified": true
    },
    {
     "url": "https://www.weymouthnj.org/Document%20Center/Forms%20and%20Documents/Housing%20Forms/CO-Application-8-2026%20updated.pdf",
     "quote": "Inspections will be done by the Housing Officer Chase Farabella within in fourteen (14) days of receipt of the completed application and payment.",
-    "doc_date": "2026-08-26 (revised 8/26/26)",
+    "doc_date": "2026-08-26 (form revised 8/26/26)",
     "via": "pdf",
     "verified": true
    },
    {
     "url": "https://www.weymouthnj.org/Document%20Center/Forms%20and%20Documents/Housing%20Forms/CO-Application-8-2026%20updated.pdf",
     "quote": "NOTICE: A Certificate of Occupancy will not be issued until Weymouth Township receives a valid New Jersey Division of Community Affairs (DCA), Division of Fire Safety (DFS) Certificate of Fire Inspection of Smoke Detector, Carbon Monoxide Alarm and Portable Fire Extinguisher Compliance",
-    "doc_date": "2026-08-26 (revised 8/26/26)",
+    "doc_date": "2026-08-26 (form revised 8/26/26)",
     "via": "pdf",
     "verified": true
    },
    {
+    "url": "https://ecode360.com/11406861",
+    "quote": "Once a certificate of occupancy is issued by the Housing Inspector, this certificate shall remain in full force and effect until a new certificate shall be required either by the vacancy of the premises for which the certificate was issued, the sale of premises to a new owner,",
+    "doc_date": "1996-06-19 (§106-6F amended by Ord. No. 344-96)",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://ecode360.com/11406861",
+    "quote": "The fee for the inspection of any house or part of any duplex shall be $50, payable at the time the request for inspection and issuance of certificate of occupancy is submitted.",
+    "doc_date": "2024-05-15 (§106-7A amended by Ord. No. 603-2024)",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://ecode360.com/11406861",
+    "quote": "a notice that the buyer of any dwelling unit in the Township is required to obtain a certificate of occupancy before occupying the premises.",
+    "doc_date": "1980-12-29 (§106-13, Ord. No. 243-80)",
+    "via": "page",
+    "verified": null
+   },
+   {
     "url": "https://www.weymouthnj.org/Document%20Center/Forms%20and%20Documents/Housing%20Forms/DCA-Smoke-Detector-info-08-2026.pdf",
     "quote": "The CSDCMAC is in addition to the Housing Officer's Certificates of Occupancy or Rental Certificate of Habitability inspection.",
-    "doc_date": "2026-08-26 (revised 08/26/26)",
+    "doc_date": "2026-08-26 (sheet revised 08/26/26)",
     "via": "pdf",
     "verified": true
    },
    {
     "url": "https://www.weymouthnj.org/township_offices/housing_office/index.php",
     "quote": "Chase Farabella, Housing Officer Address: 45 South Jersey Avenue Dorothy, NJ 08317 Housing Office: 609-476-2633 Extension # 3",
-    "doc_date": "2026-09-30 (page fetched)",
+    "doc_date": "2026-10-06 (page fetched)",
     "via": "page",
     "verified": true
    },
    {
     "url": "https://www.weymouthnj.org/township_offices/housing_office/index.php",
     "quote": "Certificate of Occupancy Code; Chapter 106",
-    "doc_date": "2026-09-30 (page fetched)",
+    "doc_date": "2026-10-06 (page fetched)",
     "via": "page",
     "verified": true
    }
   ],
   "confidence": "high",
-  "notes": "Weymouth's Housing Office runs a Certificate of Occupancy inspection for sales and rentals under the Township's Certificate of Occupancy Code (Chapter 106, on ecode360, which could not be opened). The August 2026 application and the Housing Officer's information sheet say the state smoke/CO certificate is needed in addition to the Township CO when title transfers. The form does not list the inspection checklist or a reinspection fee. Rental registration and rental insurance are separate programs."
+  "notes": "Weymouth's Housing Office runs a Certificate of Occupancy inspection for sales and rentals under Township Code Chapter 106 (read in full on ecode360). The Code says no one may occupy a dwelling without a CO from the Housing Inspector, that a new CO is needed when the home is sold to a new owner, and that the Assessment Clerk's searches warn buyers they must get a CO before moving in. The fee is $50 per house or duplex unit (§106-7A, amended 5-15-2024), matching the August 2026 form. There is no charge for the first reinspection after written violations; a second and later reinspections each cost another inspection fee (§106-12). The August 2026 application and the Housing Officer's information sheet say the state smoke/CO certificate is needed in addition to the Township CO when title transfers. The form does not list an inspection checklist. Rental registration, rental insurance and lead-based paint rules are separate rental programs."
  },
  "fire_cert": {
   "requirements": [
-   "State online self-certification, now named the Certificate of Smoke Alarm, Carbon Monoxide Alarm, and Secondary Power Source Identification Label Compliance (CSACMASPSIL): smoke alarms, carbon monoxide alarms, and the secondary power source label for homes with solar, generators or batteries. The certificate name no longer includes the fire extinguisher, although the portal's checklist notice still refers to detectors and fire extinguishers",
-   "The Township's information sheet (revised 08/26/26) still describes the extinguisher rule: minimum 2A:10B:C, no more than 10 pounds, within 10 feet of the kitchen stove in the exit path, top no more than 5 feet above the floor on the manufacturer's bracket, serviced and tagged by a DFS-certified contractor within 12 months or a recent purchase receipt"
+   "Smoke alarms on each level and outside each separate sleeping area, per N.J.A.C. 5:70-4.19 (battery-only alarms must be 10-year sealed units)",
+   "Carbon monoxide alarm in the immediate vicinity of the sleeping areas (homes with a fuel-burning appliance or attached garage)",
+   "The Township's information sheet (revised 08/26/26) still describes the extinguisher rule: minimum 2A:10B:C, no more than 10 pounds, within 10 feet of the kitchen stove in the exit path, top no more than 5 feet above the floor on the manufacturer's bracket, serviced and tagged by a DFS-certified contractor within 12 months or a recent purchase receipt (form still lists it)"
   ],
   "authorities": [
    {
     "name": "NJ DCA Division of Fire Safety, Bureau of Fire Code Enforcement",
     "type": "state_dca",
     "area_served": "Entire township",
-    "lead_time": "More than 10 business days before closing for the lowest fee",
+    "lead_time": "Apply more than 10 business days before the closing (change of occupant) for the lowest fee.",
     "fees": [
      {
-      "label": "More than 10 business days before closing",
-      "amount": "$45",
-      "quote": "If you are applying for a certificate more than ten business days from the closing date the fee is $45 dollars",
-      "source_url": "https://firesolutions.dca.nj.gov/ultra-fire-home/smoke-application-create/",
-      "verified": null
+      "label": "NJ DCA smoke/CO certificate, requested more than 10 business days before the change of occupant",
+      "amount": "$45.00",
+      "quote": "Requests for a CSACMAPFEC received more than 10 business days prior to the change of occupant: $45.00",
+      "source_url": "https://www.nj.gov/dca/divisions/dfs/codes/regulations/r.2018%20d.074%20(50%20n.j.r.%20729(a)).pdf",
+      "verified": true
      },
      {
-      "label": "4 to 10 business days before closing",
-      "amount": "$90",
-      "quote": "if applying 4 to 10 business days from the closing date the fee is $90",
-      "source_url": "https://firesolutions.dca.nj.gov/ultra-fire-home/smoke-application-create/",
-      "verified": null
+      "label": "NJ DCA smoke/CO certificate, requested 4 to 10 business days before the change of occupant",
+      "amount": "$90.00",
+      "quote": "Requests for a CSACMAPFEC received four to 10 business days prior to the change of occupant: $90.00",
+      "source_url": "https://www.nj.gov/dca/divisions/dfs/codes/regulations/r.2018%20d.074%20(50%20n.j.r.%20729(a)).pdf",
+      "verified": true
      },
      {
-      "label": "Less than 4 business days before closing",
-      "amount": "$161",
-      "quote": "if the closing date is less than four business days the fee is $161.",
-      "source_url": "https://firesolutions.dca.nj.gov/ultra-fire-home/smoke-application-create/",
-      "verified": null
+      "label": "NJ DCA smoke/CO certificate, requested fewer than 4 business days before the change of occupant",
+      "amount": "$161.00",
+      "quote": "Requests for a CSACMAPFEC received fewer than four business days prior to the change of occupant: $161.00",
+      "source_url": "https://www.nj.gov/dca/divisions/dfs/codes/regulations/r.2018%20d.074%20(50%20n.j.r.%20729(a)).pdf",
+      "verified": true
      }
     ],
-    "how_to_apply": "Apply online through the NJ DCA Fire Safety portal ('Start Your Smoke Certification Application'). Pay by e-check or credit card before submitting; a valid email address is required. The certificate is emailed once the application is submitted, the fee is paid and any required inspections are done. Homes heated by electricity with no CO alarm requirement should also email BFCE_CSDCMAC@dca.nj.gov.",
+    "how_to_apply": "Apply online through the NJ DCA Division of Fire Safety portal (firesolutions.dca.nj.gov, smoke certification application) and pay online. The fee depends on how many business days before the closing the request is received. Questions: Bureau of Fire Code Enforcement, P.O. Box 809, Trenton, NJ 08625-0809.",
     "application_url": "https://firesolutions.dca.nj.gov/ultra-fire-home/smoke-application-create/",
     "department_url": "https://www.nj.gov/dca/dfs/offices/bfce.shtml",
-    "contact_name": "Louis Kilmer",
-    "contact_title": "Bureau Chief, Bureau of Fire Code Enforcement (listed as the Fire Official in the state fire directory)",
     "phone": "609-633-6106",
     "email": "BFCE_CSDCMAC@dca.nj.gov",
+    "contact_name": "Louis Kilmer",
+    "contact_title": "Bureau Chief, Bureau of Fire Code Enforcement (listed as the Fire Official in the state fire directory)",
     "evidence": [
      {
       "url": "https://www.weymouthnj.org/Document%20Center/Forms%20and%20Documents/Housing%20Forms/DCA-Smoke-Detector-info-08-2026.pdf",
       "quote": "The application for the Smoke Detector and Carbon Monoxide Alarm and Fire Extinguisher Compliance Certificate is obtained on line at https://firesolutions.dca.nj.gov/",
-      "doc_date": "2026-08-26 (revised 08/26/26)",
+      "doc_date": "2026-08-26 (sheet revised 08/26/26)",
       "via": "pdf",
       "verified": true
      },
      {
       "url": "https://www.weymouthnj.org/Document%20Center/Forms%20and%20Documents/Housing%20Forms/DCA-Smoke-Detector-info-08-2026.pdf",
       "quote": "NJ DCA DFS requires all rentals must have a SMOKE DETECTOR AND CARBON MONOXIDE ALARM AND FIRE EXTINGUISHER COMPLIANCE CERTIFICATE issued by the NJ DCA DFS every time there is a change in tenants or if the property is sold.",
-      "doc_date": "2026-08-26 (revised 08/26/26)",
+      "doc_date": "2026-08-26 (sheet revised 08/26/26)",
       "via": "pdf",
       "verified": true
      },
@@ -142,43 +171,36 @@
      {
       "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/state_towns%207_17_26.pdf",
       "quote": "WEYMOUTH 0123 SC",
-      "doc_date": "2026-07-17 (SC = Smoke Certs)",
+      "doc_date": "2026-07-17",
       "via": "pdf",
       "verified": true
      },
      {
       "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
       "quote": "LEAID: 0123-999 Enf Auth. State Fire Official Louis Kilmer Phone (609)633-6132 Addr: PO Box 809",
-      "doc_date": "2026 directory (Weymouth pages, survey date 2/6/2026)",
+      "doc_date": "directory page (survey date 2/6/2026)",
       "via": "state_directory",
-      "verified": true
-     },
-     {
-      "url": "https://firesolutions.dca.nj.gov/ultra-fire-home/smoke-application-create/",
-      "quote": "Please complete the following information to apply for a Certificate of Smoke Alarm, Carbon Monoxide Alarm, and Secondary Power Source Identification Label Compliance (CSACMASPSIL). You will be required to pay, via e-check or credit card, before you can submit this application. This application requires a valid email address.",
-      "doc_date": "2026-09-30 (page fetched)",
-      "via": "page",
-      "verified": null
-     },
-     {
-      "url": "https://firesolutions.dca.nj.gov/ultra-fire-home/smoke-application-create/",
-      "quote": "if your property is heated with electricity and does not require a carbon monoxide alarm, check the fourth box and send an email to BFCE_CSDCMAC@dca.nj.gov stating that you are not subject to that requirement.",
-      "doc_date": "2026-09-30 (page fetched)",
-      "via": "page",
       "verified": null
      },
      {
       "url": "https://www.nj.gov/dca/dfs/offices/bfce.shtml",
       "quote": "Louis Kilmer, Bureau Chief CPM Address: P.O. Box 809, Trenton, NJ 08625-0809 Phone: (609) 633-6106",
-      "doc_date": "2026-09-30 (page fetched)",
+      "doc_date": "2026-10-06 (page fetched)",
       "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/divisions/dfs/codes/regulations/r.2018%20d.074%20(50%20n.j.r.%20729(a)).pdf",
+      "quote": "Requests for a CSACMAPFEC received more than 10 business days prior to the change of occupant: $45.00",
+      "doc_date": "2018-02-05 (N.J.A.C. 5:70-2.9(d) amendments effective)",
+      "via": "pdf",
       "verified": true
      }
     ],
     "confidence": "high"
    }
   ],
-  "notes": "NJ DCA lists Weymouth as State enforced (S) and its July 17, 2026 list marks it 'SC' (the State issues smoke certificates). The Township's own CO application and Housing Officer information sheet (both revised 8/26/26) send applicants to the DCA online portal, and the Township will not issue its CO until it receives the DCA certificate. The directory gives (609) 633-6132 for Louis Kilmer (also printed on the Township sheet for DCA); the Bureau's own page gives (609) 633-6106, which is used here."
+  "notes": "NJ DCA lists Weymouth as State enforced (S) and its July 17, 2026 list marks it 'SC' (the State issues smoke certificates). The Township's own CO application and Housing Officer information sheet (both revised 8/26/26) send applicants to the DCA online portal, and the Township will not issue its CO until it receives the DCA certificate. State fees ($45 / $90 / $161) are cited from the N.J.A.C. 5:70-2.9(d) adoption in the NJ Register. The Township sheet still describes a fire extinguisher requirement, which state law (P.L.2025, c.19) dropped from the state sale certificate in February 2025. The directory gives (609) 633-6132 for Louis Kilmer (also printed on the Township sheet for DCA); the Bureau's own page gives (609) 633-6106, which is used here."
  },
  "other_items": [
   {
@@ -188,17 +210,17 @@
   }
  ],
  "open_questions": [
-  "What the Housing Officer's sale inspection checks is not published.",
-  "Reinspection fee and how long the CO stays valid are not stated."
+  "What the Housing Officer's sale inspection checks in detail is not published.",
+  "Does the Township still expect the fire extinguisher at sale after P.L.2025, c.19?"
  ],
  "verification": {
-  "fees": 4,
-  "fee_ok": 1,
+  "fees": 8,
+  "fee_ok": 7,
   "fee_bad": 0,
-  "fee_unchecked": 3,
-  "quotes": 14,
+  "fee_unchecked": 1,
+  "quotes": 16,
   "q_ok": 12,
   "q_bad": 0,
-  "q_unchecked": 2
+  "q_unchecked": 4
  }
 }

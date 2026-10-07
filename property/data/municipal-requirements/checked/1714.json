@@ -2,7 +2,7 @@
  "municipality_code": "1714",
  "municipality": "Upper Pittsgrove Township",
  "county": "SALEM",
- "checked_at": "2026-09-30",
+ "checked_at": "2026-10-06",
  "resale_co": {
   "status": "required",
   "name": "Certificate of Compliance (COC), also called Certificate of Occupancy; Pre-Occupancy Inspection for sales",
@@ -57,7 +57,7 @@
    },
    {
     "url": "https://upperpittsgrovenj.org/wp-content/uploads/2026/03/Pre-Occupancy-SALES-Application.pdf",
-    "quote": "Upper Pittsgrove Township Pre-Occupancy Application SALES Only (Revised 03/30/2026)",
+    "quote": "Pre-Occupancy Application SALES Only (Revised 03/30/2026)",
     "doc_date": "2026-03-30",
     "via": "pdf",
     "verified": true
@@ -212,8 +212,8 @@
   "fee_bad": 0,
   "fee_unchecked": 0,
   "quotes": 13,
-  "q_ok": 13,
+  "q_ok": 12,
   "q_bad": 0,
-  "q_unchecked": 0
+  "q_unchecked": 1
  }
 }

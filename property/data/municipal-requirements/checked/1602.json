@@ -2,7 +2,6 @@
  "municipality_code": "1602",
  "municipality": "Clifton City",
  "county": "PASSAIC",
- "checked_at": "2026-10-02",
  "resale_co": {
   "status": "required",
   "name": "Dwelling Certificate (Certificate of Inspection for 1 & 2 family dwellings, sale)",
@@ -173,8 +172,8 @@
     "evidence": [
      {
       "url": "https://www.cliftonnj.org/DocumentCenter/View/127/Dwelling-Application-Packet-PDF",
-      "quote": "APPLICATION FOR DWELLING SMOKE DETECTOR & CARBON MONOXIDE COMPLIANCE THE CITY OF CLIFTON | 900 CLIFTON AVENUE, CLIFTON, NJ 07013 PHONE: 973-470-5801 | FAX: 973-470-5844",
-      "doc_date": "2025-05",
+      "quote": "APPLICATION FOR DWELLING SMOKE DETECTOR & CARBON MONOXIDE COMPLIANCE ... THE CITY OF CLIFTON | 900 CLIFTON AVENUE, CLIFTON, NJ 07013 PHONE: 973-470-5801 | FAX: 973-470-5844",
+      "doc_date": "2025-05-05 (PDF created May 5, 2025)",
       "via": "pdf",
       "verified": true
      },
@@ -218,13 +217,13 @@
       "quote": "16 Passaic Clifton City1602 ... LEAID: 1602-001 Enf Auth. Fire Dept Fire Official Micahel K Pressler Phone (973) 470-5804 Addr: 900 Clifton Av Clifton NJ 07013 ... Email MPressler@Cliftonnj.org ... Clifton City Fire Prev",
       "doc_date": "2026-01-12 (survey date)",
       "via": "state_directory",
-      "verified": true
+      "verified": null
      }
     ],
     "confidence": "high"
    }
   ],
-  "notes": "The Clifton Fire Department (Fire Prevention Bureau) is the fire code enforcing agency and issues the dwelling smoke and carbon monoxide certificate, which is also the City's resale Dwelling Certificate. The state directory lists Fire Official Michael Pressler (name misspelled 'Micahel' there) at (973) 470-5804; the City packet gives the office line (973) 470-5801, which is used here. The Fire Department FAQ still asks for a fire extinguisher at dwelling inspections although P.L.2025, c.19 removed it from the state sale certificate; confirm with the Bureau."
+  "notes": "The Clifton Fire Department (Fire Prevention Bureau) is the fire code enforcing agency and issues the dwelling smoke and carbon monoxide certificate, which is also the City's resale Dwelling Certificate. The state directory lists Fire Official Michael Pressler (name misspelled 'Micahel' there) at (973) 470-5804; the City packet gives the office line (973) 470-5801, which is used here. The Fire Department FAQ still asks for a fire extinguisher at dwelling inspections although P.L.2025, c.19 removed it from the state sale certificate; confirm with the Bureau. Re-checked 2026-10-06: the Dwelling Application Packet is the same May 5, 2025 PDF with the same fees and phone numbers; the form header quote was split because the 'Sale / Rental' checkbox column sits between its lines in the PDF text."
  },
  "other_items": [
   {
@@ -242,14 +241,15 @@
   "Does the City fee ordinance (code not viewable on ecode360) match the May 2025 packet fees ($125 sale per unit, $200 and $300 expedited)?",
   "Is a fire extinguisher still required at the dwelling inspection after P.L.2025, c.19 (the FAQ says yes, the 2025 packet is silent)?"
  ],
+ "checked_at": "2026-10-06",
  "verification": {
-  "fees": 6,
-  "fee_ok": 6,
+  "fees": 9,
+  "fee_ok": 9,
   "fee_bad": 0,
   "fee_unchecked": 0,
   "quotes": 14,
-  "q_ok": 14,
+  "q_ok": 13,
   "q_bad": 0,
-  "q_unchecked": 0
+  "q_unchecked": 1
  }
 }

@@ -2,7 +2,6 @@
  "municipality_code": "1513",
  "municipality": "Lacey Township",
  "county": "OCEAN",
- "checked_at": "2026-09-30",
  "resale_co": {
   "status": "not_required",
   "name": "No resale Certificate of Occupancy; Letter of No Interest required instead",
@@ -52,8 +51,8 @@
    },
    {
     "url": "https://www.laceytownship.org/m/directory/department?did=11",
-    "quote": "Christopher Reid Director Community Development Director Community Development lacey.commdev@laceytownship.org",
-    "doc_date": "2026-09",
+    "quote": "Christopher Reid Director Community Development Director Community Development",
+    "doc_date": "2026-10-06 (page fetched)",
     "via": "page",
     "verified": true
    },
@@ -73,7 +72,7 @@
    }
   ],
   "confidence": "high",
-  "notes": "Lacey states plainly that it does not require a Certificate of Occupancy for a resale; instead it requires a $50 Letter of No Interest from the Construction Office confirming there are no open permits. The request form (dated 10-7-2016) lists the Construction Office at (609) 693-1100 ext. 2252/2253 and lacey.building@laceytownship.org. The Building Department page names two different Construction Officials (Doug Donohue in the text and Jim Peters in the inspector list), so neither is used as the contact; the directory's Director of Community Development is given instead. Code Enforcement (609-693-1100 ext. 2249, codeenforcement@laceytownship.org) handles rental/leased property maintenance, not sales."
+  "notes": "Lacey states plainly that it does not require a Certificate of Occupancy for a resale; instead it requires a $50 Letter of No Interest from the Construction Office confirming there are no open permits. The request form (dated 10-7-2016) lists the Construction Office at (609) 693-1100 ext. 2252/2253 and lacey.building@laceytownship.org. The Building Department page names two different Construction Officials (Doug Donohue in the text and Jim Peters in the inspector list), so neither is used as the contact; the directory's Director of Community Development is given instead. Code Enforcement (609-693-1100 ext. 2249, codeenforcement@laceytownship.org) handles rental/leased property maintenance, not sales. Re-checked 2026-10-06: the directory page is now titled 'Building, Land Use & Development' and hides email addresses behind Cloudflare email protection; Christopher Reid's link still decodes to lacey.commdev@laceytownship.org, and the Community Development line is still 609-693-1100 Ext: 2253."
  },
  "fire_cert": {
   "requirements": [
@@ -88,25 +87,25 @@
     "lead_time": "More than 10 business days before closing for the lowest fee; a new application is needed if the change of occupant does not happen within 6 months",
     "fees": [
      {
-      "label": "More than 10 business days before closing",
-      "amount": "$45",
-      "quote": "If you are applying for a certificate more than ten business days from the closing date the fee is $45 dollars",
-      "source_url": "https://firesolutions.dca.nj.gov/ultra-fire-home/smoke-application-create/",
-      "verified": null
+      "label": "State fee: Request received more than 10 business days before the change of occupant (N.J.A.C. 5:70-2.9(d))",
+      "amount": "$45.00",
+      "quote": "Requests for a CSACMAPFEC received more than 10 business days prior to the change of occupant: $45.00",
+      "source_url": "https://www.nj.gov/dca/divisions/dfs/codes/regulations/r.2018%20d.074%20(50%20n.j.r.%20729(a)).pdf",
+      "verified": true
      },
      {
-      "label": "4 to 10 business days before closing",
-      "amount": "$90",
-      "quote": "if applying 4 to 10 business days from the closing date the fee is $90",
-      "source_url": "https://firesolutions.dca.nj.gov/ultra-fire-home/smoke-application-create/",
-      "verified": null
+      "label": "State fee: Request received 4 to 10 business days before the change of occupant",
+      "amount": "$90.00",
+      "quote": "Requests for a CSACMAPFEC received four to 10 business days prior to the change of occupant: $90.00",
+      "source_url": "https://www.nj.gov/dca/divisions/dfs/codes/regulations/r.2018%20d.074%20(50%20n.j.r.%20729(a)).pdf",
+      "verified": true
      },
      {
-      "label": "Less than 4 business days before closing",
-      "amount": "$161",
-      "quote": "if the closing date is less than four business days the fee is $161.",
-      "source_url": "https://firesolutions.dca.nj.gov/ultra-fire-home/smoke-application-create/",
-      "verified": null
+      "label": "State fee: Request received fewer than 4 business days before the change of occupant",
+      "amount": "$161.00",
+      "quote": "Requests for a CSACMAPFEC received fewer than four business days prior to the change of occupant: $161.00",
+      "source_url": "https://www.nj.gov/dca/divisions/dfs/codes/regulations/r.2018%20d.074%20(50%20n.j.r.%20729(a)).pdf",
+      "verified": true
      }
     ],
     "how_to_apply": "Apply online on the NJ DCA Fire Safety portal (the Township's Building Department page links to it). The applicant checks off each smoke alarm, CO alarm and power source label requirement and pays by e-check or credit card before submitting. The certificate is emailed once the fee is paid and any required inspection is done. Homes heated by electricity with no CO requirement should email BFCE_CSDCMAC@dca.nj.gov.",
@@ -150,20 +149,20 @@
       "quote": "LEAID: 1512-999 Enf Auth. State Fire Official Louis Kilmer Phone (609)633-6132",
       "doc_date": "2025-05-19 and 2026-07-22 (survey dates)",
       "via": "state_directory",
-      "verified": true
+      "verified": null
      },
      {
-      "url": "https://firesolutions.dca.nj.gov/ultra-fire-home/smoke-application-create/",
-      "quote": "Please complete the following information to apply for a Certificate of Smoke Alarm, Carbon Monoxide Alarm, and Secondary Power Source Identification Label Compliance (CSACMASPSIL). You will be required to pay, via e-check or credit card, before you can submit this application.",
-      "doc_date": "2026-09",
-      "via": "page",
-      "verified": null
+      "url": "https://www.nj.gov/dca/divisions/dfs/codes/regulations/r.2018%20d.074%20(50%20n.j.r.%20729(a)).pdf",
+      "quote": "(d) The application fee for a certificate of smoke alarm, carbon monoxide alarm, and portable fire extinguisher compliance (CSACMAPFEC), as required by N.J.A.C. 5:70-2.3, shall be based upon the amount of time remaining before the change of occupant is expected, as follows:",
+      "doc_date": "2018-02-05 (NJ Register, 50 N.J.R. 729(a))",
+      "via": "pdf",
+      "verified": true
      }
     ],
     "confidence": "high"
    }
   ],
-  "notes": "Lacey has no local fire code enforcing agency; the NJ DCA enforces the code (registry code S) and issues smoke certificates there ('SC' on the DCA state-towns list revised 7/17/2026, where Lacey is listed under directory code 1512; Watchdog code 1513). The Township's Building Department page links sellers to the DCA online application. The DCA fee sentence sits in the portal page's script rather than the visible text. The Forked River and Lanoka Harbor fire companies are volunteer fire companies, not the enforcing agency."
+  "notes": "Lacey has no local fire code enforcing agency; the NJ DCA enforces the code (registry code S) and issues smoke certificates there ('SC' on the DCA state-towns list revised 7/17/2026, where Lacey is listed under directory code 1512; Watchdog code 1513). The Township's Building Department page links sellers to the DCA online application. The DCA fee sentence sits in the portal page's script rather than the visible text. The Forked River and Lanoka Harbor fire companies are volunteer fire companies, not the enforcing agency. Re-checked 2026-10-06: state fees are now cited from the NJ Register adoption notice (N.J.A.C. 5:70-2.9(d)) instead of the DCA portal script text; the amounts ($45 / $90 / $161) are unchanged and the portal page source still shows them."
  },
  "other_items": [
   {
@@ -173,11 +172,12 @@
   }
  ],
  "open_questions": [],
+ "checked_at": "2026-10-06",
  "verification": {
   "fees": 4,
-  "fee_ok": 1,
+  "fee_ok": 4,
   "fee_bad": 0,
-  "fee_unchecked": 3,
+  "fee_unchecked": 0,
   "quotes": 12,
   "q_ok": 11,
   "q_bad": 0,

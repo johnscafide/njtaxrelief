@@ -2,7 +2,6 @@
  "municipality_code": "0818",
  "municipality": "Washington Township",
  "county": "GLOUCESTER",
- "checked_at": "2026-09-30",
  "resale_co": {
   "status": "required",
   "name": "Certificate of Occupancy - Sale (Certificate of Resale)",
@@ -158,8 +157,15 @@
      },
      {
       "url": "https://www.twp.washington.nj.us/Housing/Forms%20and%20Resources/Inspection%20Checklist%20July%202026.pdf",
-      "quote": "Must have one (1) per level; if hardwired, must stay hardwired; if not hardwired, must have 10-year sealed battery smoke detector.",
-      "doc_date": "2026-07",
+      "quote": "Must have one (1) per level; if hardwired, must stay hardwired; if not hardwired, must have 10-year sealed",
+      "doc_date": "2026-07 (PDF created July 23, 2026)",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.twp.washington.nj.us/Housing/Forms%20and%20Resources/Inspection%20Checklist%20July%202026.pdf",
+      "quote": "Must be located in the vicinity of all sleeping rooms, in dwellings.",
+      "doc_date": "2026-07 (PDF created July 23, 2026)",
       "via": "pdf",
       "verified": true
      },
@@ -203,7 +209,7 @@
     "confidence": "low"
    }
   ],
-  "notes": "The DCA LEA Registry (July 2026) lists 'D Washington Township' (D = District), so Washington Township Fire District No. 1 is the registered Uniform Fire Code enforcing agency, and the DCA Division of Local Government Services list of Gloucester County fire districts shows only one district in the Township. In practice the Township's own sale CO fee includes smoke certification and the Township fee ordinance sets a $25 Smoke Certificate fee, so for a 1-2 family sale the Housing Office appears to handle the smoke/CO check. Whether the fire district issues any separate resale certificate could not be confirmed because its website is blocked by a bot check. The secondary power source label item is a statewide DCA rule (Division of Fire Safety memo dated February 13, 2025) that the Township posts on its Housing page."
+  "notes": "The DCA LEA Registry (July 2026) lists 'D Washington Township' (D = District), so Washington Township Fire District No. 1 is the registered Uniform Fire Code enforcing agency, and the DCA Division of Local Government Services list of Gloucester County fire districts shows only one district in the Township. In practice the Township's own sale CO fee includes smoke certification and the Township fee ordinance sets a $25 Smoke Certificate fee, so for a 1-2 family sale the Housing Office appears to handle the smoke/CO check. Whether the fire district issues any separate resale certificate could not be confirmed because its website is blocked by a bot check. The secondary power source label item is a statewide DCA rule (Division of Fire Safety memo dated February 13, 2025) that the Township posts on its Housing page. Re-check 2026-10-06: the July 2026 Inspection Checklist is the same file (created July 23, 2026) with the same smoke detector wording. Its text layer drops \"tt\" and \"ti\" letter pairs (for example \"battery\" reads \"ba ery\"), so the old full-sentence quote could not be found; it was trimmed to the verbatim part before that word, and the CO detector line was added."
  },
  "other_items": [
   {
@@ -227,14 +233,15 @@
   "Does Washington Township Fire District No. 1 issue its own smoke/CO/extinguisher certificate for any 1-2 family sales, and does it require a portable fire extinguisher? Its website could not be read.",
   "Validity period of the sale CO is not stated."
  ],
+ "checked_at": "2026-10-06",
  "verification": {
   "fees": 9,
   "fee_ok": 4,
   "fee_bad": 0,
   "fee_unchecked": 5,
-  "quotes": 9,
+  "quotes": 10,
   "q_ok": 8,
-  "q_bad": 0,
+  "q_bad": 1,
   "q_unchecked": 1
  }
 }
