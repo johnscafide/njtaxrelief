@@ -1,0 +1,59 @@
+/* 
+     
+     Hi There. I see you are checking the code. I'm sure you have reasons for such. Curiosity would be my guess. 
+
+     My name is John. I've been building sites since I was 10. I was gifted ecommerce website software on floppy disks
+     and fell in love with web developement ever since. I learned to code HTML using just notepad. I took computer science
+     classes (BASIC and Visual Basic in high school). Took a few college classes learning C++, Python, Ruby and Javascript.
+     My very first websites was with Angelfire and Geocities. In college I dabbed in game development, small tools, and
+     graphic design. Database management with SQL by my sophmore year. Joomla and other CMS tools learned by the age of 20. 
+     I have an understanding and experience writing code by hand, studing and analyzing bugs, issues, and corrections. 
+     The introduction of AI is interesting. I can understand the worry and fear. I also see the memes of "Hey I can make 
+     your job obsolete" then show a localhost:3000. haha. But I do believe, if you understand how to use the tools, it's
+     no different than templates, hiring a local kid, outsourcing your work to fivrr or an agency. I code, I understand the
+     backend and frontend. I'm not an expert by all means. But I do have insights. Watchdog was built on real research.
+     Watchdog & it's companion, NJPropertyTaxRelief.com, is from years of listening to real people with real needs in NJ.
+     I hope these sites and tools have benefit to you and/or your business. If you found them useful, the least I ask of
+     you is to share. Sure, I have paid plan options for members, but majority of the site is free to use. I'm a real estate
+     agent, licensed tax professional, and a big fan of the state of New Jersey. It's a great state, but not without its
+     flaws. The idea is to educate more New Jerseyians about their benefits and property taxes in the state. It's possible
+     one day this site will exceed some of the bigger natonal sites. Who knows. But for now, I present to you, Watchdog
+     Property Intelligence.
+
+     */
+
+#wd-main-sheet.wd-apps-menu{position:fixed!important;left:auto;right:14px;top:66px;bottom:auto!important;width:min(340px,calc(100vw - 28px));height:auto!important;max-height:min(400px,calc(100dvh - 80px));display:flex!important;flex-direction:column!important;padding:10px!important;margin:0!important;background:#fff!important;border:1px solid #dfe6ef!important;border-radius:12px!important;box-shadow:0 4px 12px rgba(16,24,40,.14)!important;overflow:hidden!important;opacity:0!important;visibility:hidden!important;transform:translateY(-8px)!important;transition:opacity .16s ease,transform .16s ease,visibility .16s!important}
+#wd-main-sheet.wd-apps-menu.open{opacity:1!important;visibility:visible!important;transform:none!important}
+@media (prefers-reduced-motion:reduce){#wd-main-sheet.wd-apps-menu{transition:none!important}}
+#wd-main-sheet.wd-apps-menu>*:not(#wsh-apps){display:none!important}
+#wd-main-sheet #wsh-apps{flex:1 1 auto;min-height:0;overflow-y:auto;overscroll-behavior:contain;color:#1b2333;font-family:'Libre Franklin',system-ui,sans-serif}
+.wd-apps-root .wsh-apps-fav{background:#f4f6f9;border-radius:12px;padding:4px 4px 6px;margin-bottom:6px}
+.wd-apps-root .wsh-apps-hd{display:flex;justify-content:space-between;align-items:center;padding:6px 6px 2px 10px}
+.wd-apps-root h2{margin:0;font-size:15px;font-weight:600;color:#1b2333;letter-spacing:0}
+.wd-apps-root .wsh-apps-sec{padding:10px 10px 2px}
+.wd-apps-root .wsh-apps-pen{width:44px;height:44px;border:0;border-radius:50%;background:#e6eaf0;color:#3a4558;font-size:15px;cursor:pointer}
+.wd-apps-root .wsh-apps-pen:hover{background:#dce2ea}
+.wd-apps-root .wsh-apps-done{min-height:44px;padding:0 18px;border:0;border-radius:8px;background:#1f4fa8;color:#fff;font:600 14px 'Libre Franklin',system-ui,sans-serif;cursor:pointer}
+.wd-apps-root .wsh-apps-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px}
+.wd-apps-root .wsh-app-cell{position:relative}
+.wd-apps-root .wsh-app{display:flex;flex-direction:column;align-items:center;gap:8px;padding:12px 4px 10px;border-radius:10px;color:#1b2333;text-decoration:none;font-size:13px;font-weight:500;line-height:1.25;text-align:center}
+.wd-apps-root .wsh-app:hover{background:#e9edf3;text-decoration:none}
+.wd-apps-root .wsh-app-ic{display:flex;align-items:center;justify-content:center;width:46px;height:46px}
+.wd-apps-root .wsh-app-ic img{width:46px;height:46px;display:block}
+.wd-apps-root .wsh-app-ic i{font-size:24px;color:#1f4fa8}
+.wd-apps-root .wsh-app-badge{position:absolute;top:2px;right:calc(50% - 44px);width:28px!important;height:28px!important;min-width:0!important;min-height:0!important;padding:0!important;border:2px solid #fff;border-radius:50%;color:#fff;font:600 17px/1 'Libre Franklin',system-ui,sans-serif;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.wd-apps-root .wsh-app-badge::after{content:"";position:absolute;inset:-8px}
+.wd-apps-root .wsh-app-rm{background:#5a6475}
+.wd-apps-root .wsh-app-add{background:#1f4fa8}
+.wsh-apps.wd-apps-root.editing [data-wsh-fav] .wsh-app-cell{cursor:grab;touch-action:none;user-select:none}
+.wsh-apps.wd-apps-root.editing .wsh-app{pointer-events:none}
+.wsh-apps.wd-apps-root.editing .wsh-app-cell{animation:wsh-wiggle .32s ease-in-out infinite alternate}
+.wsh-apps.wd-apps-root.editing .wsh-app-cell:nth-child(2n){animation-delay:-.16s;animation-direction:alternate-reverse}
+.wsh-apps.wd-apps-root.editing .wsh-app-cell:nth-child(3n){animation-delay:-.08s}
+@keyframes wsh-wiggle{from{transform:rotate(-1.6deg)}to{transform:rotate(1.6deg)}}
+.wsh-apps.wd-apps-root.editing .wsh-app-cell.dragging{animation:none;border:2px dashed #9aa6b8;border-radius:10px;background:#e9edf3}
+.wsh-apps.wd-apps-root.editing .wsh-app-cell.dragging>*{visibility:hidden}
+.wsh-app-ghost{position:fixed;z-index:2147483000;pointer-events:none;background:#fff;border-radius:10px;box-shadow:0 4px 12px rgba(16,24,40,.18);transform:scale(1.08)}
+.wsh-app-ghost .wsh-app-badge{display:none}
+@media (prefers-reduced-motion:reduce){.wsh-apps.wd-apps-root.editing .wsh-app-cell{animation:none}}
+.wd-apps-root button:focus-visible,.wd-apps-root .wsh-app:focus-visible{outline:2px solid #1f4fa8;outline-offset:2px}

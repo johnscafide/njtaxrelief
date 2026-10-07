@@ -40,79 +40,6 @@ body.wsh .wsh-profile:hover{background:#1a4391}
 body.wsh .wsh-profile i{font-size:14px}
 body.wsh .wsh-profile img{width:100%;height:100%;object-fit:cover;border-radius:50%}
 body.wsh .wsh-profile[aria-label="Open account menu"]{width:44px;padding:0!important;border-radius:50%!important;border:2px solid rgba(255,255,255,.9);overflow:hidden}
-body.wsh #wd-main-sheet.wd-universal-public-nav{left:auto!important;right:14px!important;top:66px!important;bottom:auto!important;width:min(340px,calc(100vw - 28px))!important;max-height:min(400px,calc(100dvh - 80px))!important;border-radius:12px!important;opacity:0;visibility:hidden;transform:translateY(-8px)!important;transition:opacity .16s ease,transform .16s ease,visibility .16s!important}
-body.wsh #wd-main-sheet.wd-universal-public-nav.open{opacity:1;visibility:visible;transform:none!important}
-body.wsh #wd-main-sheet .wd-universal-nav-links{display:grid!important;grid-template-columns:repeat(3,1fr)!important;gap:2px!important;align-content:start!important;padding:0!important;overflow-y:auto!important;min-height:0!important}
-body.wsh #wd-main-sheet .wd-universal-nav-links a.wd-universal-link{display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:flex-start!important;gap:8px!important;min-height:0!important;padding:14px 4px 12px!important;border-radius:10px!important;background:transparent!important;box-shadow:none!important;text-align:center!important}
-body.wsh #wd-main-sheet .wd-universal-nav-links a.wd-universal-link:hover,body.wsh #wd-main-sheet .wd-universal-nav-links a.wd-universal-link.active{background:#f2f4f7!important;box-shadow:none!important}
-body.wsh #wd-main-sheet .wd-universal-nav-links a.wd-universal-link>i{width:46px!important;height:46px!important;margin:0!important;border-radius:0!important;font-size:22px!important;background:transparent no-repeat center/contain!important;color:#1f4fa8!important;display:flex!important;align-items:center!important;justify-content:center!important}
-body.wsh #wd-main-sheet .wd-universal-nav-links a.wd-universal-link>span{display:block!important;font:500 13px/1.25 'Libre Franklin',system-ui,sans-serif!important;color:#1b2333!important;letter-spacing:0!important}
-body.wsh #wd-main-sheet .wd-universal-nav-links a.wd-universal-link>span>small,body.wsh #wd-main-sheet .wd-universal-nav-links a.wd-universal-link>em{display:none!important}
-body.wsh #wd-main-sheet .wd-universal-nav-links a.wd-universal-link.wd-universal-lens-work:not(.wd-universal-locked),body.wsh #wd-main-sheet .wd-universal-nav-links a.wd-universal-link.wd-universal-lens-home{display:flex!important}
-body.wsh #wd-main-sheet .wd-universal-nav-links a.wd-universal-link[data-wd-nav="dashboard"]>i{background-image:url(/property/assets/menu-icons/dashboard.svg)!important}
-body.wsh #wd-main-sheet .wd-universal-nav-links a.wd-universal-link[data-wd-nav="lookup"]>i{background-image:url(/property/assets/menu-icons/lookup.svg)!important}
-body.wsh #wd-main-sheet .wd-universal-nav-links a.wd-universal-link[data-wd-nav="home"]>i{background-image:url(/property/assets/menu-icons/home.svg)!important}
-body.wsh #wd-main-sheet .wd-universal-nav-links a.wd-universal-link[data-wd-nav="pulse"]>i{background-image:url(/property/assets/menu-icons/pulse.svg)!important}
-body.wsh #wd-main-sheet .wd-universal-nav-links a.wd-universal-link[data-wd-nav="anchor"]>i{background-image:url(/property/assets/menu-icons/anchor.svg)!important}
-body.wsh #wd-main-sheet .wd-universal-nav-links a.wd-universal-link[data-wd-nav="town-compare"]>i{background-image:url(/property/assets/menu-icons/town-compare.svg)!important}
-body.wsh #wd-main-sheet .wd-universal-nav-links a.wd-universal-link[data-wd-nav="co"]>i{background-image:url(/property/assets/menu-icons/co.svg)!important}
-body.wsh #wd-main-sheet .wd-universal-nav-links a.wd-universal-link[data-wd-nav="robust"]>i{background-image:url(/property/assets/menu-icons/robust.svg)!important}
-body.wsh #wd-main-sheet .wd-universal-nav-links a.wd-universal-link[data-wd-nav="games"]>i{background-image:url(/property/assets/menu-icons/games.svg)!important}
-body.wsh #wd-main-sheet .wd-universal-nav-links a.wd-universal-link[data-wd-nav="data-center"]>i{background-image:url(/property/assets/menu-icons/data-center.svg)!important}
-body.wsh #wd-main-sheet .wd-universal-nav-links a.wd-universal-link[data-wd-nav="pro"]>i{background-image:url(/property/assets/menu-icons/pro.svg)!important}
-body.wsh #wd-main-sheet .wd-universal-nav-links a.wd-universal-link[data-wd-nav="account"]>i{background-image:url(/property/assets/menu-icons/account.svg)!important}
-body.wsh #wd-main-sheet .wd-universal-nav-links a.wd-universal-link[data-wd-nav="agent-desk"]>i{background-image:url(/property/assets/menu-icons/agent-desk.svg)!important}
-body.wsh #wd-main-sheet .wd-universal-nav-links a.wd-universal-link[data-wd-nav="clients"]>i{background-image:url(/property/assets/menu-icons/clients.svg)!important}
-body.wsh #wd-main-sheet .wd-universal-nav-links a.wd-universal-link[data-wd-nav="farm"]>i{background-image:url(/property/assets/menu-icons/farm.svg)!important}
-body.wsh #wd-main-sheet .wd-universal-nav-links a.wd-universal-link[data-wd-nav="marketing"]>i{background-image:url(/property/assets/menu-icons/marketing.svg)!important}
-body.wsh #wd-main-sheet .wd-universal-nav-links a.wd-universal-link[data-wd-nav="research"]>i{background-image:url(/property/assets/menu-icons/research.svg)!important}
-body.wsh #wd-main-sheet .wd-universal-nav-links a.wd-universal-link[data-wd-nav="scan"]>i{background-image:url(/property/assets/menu-icons/scan.svg)!important}
-body.wsh #wd-main-sheet .wd-universal-nav-links a.wd-universal-link[data-wd-nav="transaction"]>i{background-image:url(/property/assets/menu-icons/transaction.svg)!important}
-body.wsh #wd-main-sheet .wd-universal-nav-links a.wd-universal-link[data-wd-nav="data-workbench"]>i{background-image:url(/property/assets/menu-icons/data-workbench.svg)!important}
-body.wsh #wd-main-sheet .wd-universal-nav-links a.wd-universal-link[data-wd-nav="dashboard"]>i::before,body.wsh #wd-main-sheet .wd-universal-nav-links a.wd-universal-link[data-wd-nav="lookup"]>i::before,body.wsh #wd-main-sheet .wd-universal-nav-links a.wd-universal-link[data-wd-nav="home"]>i::before,body.wsh #wd-main-sheet .wd-universal-nav-links a.wd-universal-link[data-wd-nav="pulse"]>i::before,body.wsh #wd-main-sheet .wd-universal-nav-links a.wd-universal-link[data-wd-nav="anchor"]>i::before,body.wsh #wd-main-sheet .wd-universal-nav-links a.wd-universal-link[data-wd-nav="town-compare"]>i::before,body.wsh #wd-main-sheet .wd-universal-nav-links a.wd-universal-link[data-wd-nav="co"]>i::before,body.wsh #wd-main-sheet .wd-universal-nav-links a.wd-universal-link[data-wd-nav="robust"]>i::before,body.wsh #wd-main-sheet .wd-universal-nav-links a.wd-universal-link[data-wd-nav="games"]>i::before,body.wsh #wd-main-sheet .wd-universal-nav-links a.wd-universal-link[data-wd-nav="data-center"]>i::before,body.wsh #wd-main-sheet .wd-universal-nav-links a.wd-universal-link[data-wd-nav="pro"]>i::before,body.wsh #wd-main-sheet .wd-universal-nav-links a.wd-universal-link[data-wd-nav="account"]>i::before,body.wsh #wd-main-sheet .wd-universal-nav-links a.wd-universal-link[data-wd-nav="agent-desk"]>i::before,body.wsh #wd-main-sheet .wd-universal-nav-links a.wd-universal-link[data-wd-nav="clients"]>i::before,body.wsh #wd-main-sheet .wd-universal-nav-links a.wd-universal-link[data-wd-nav="farm"]>i::before,body.wsh #wd-main-sheet .wd-universal-nav-links a.wd-universal-link[data-wd-nav="marketing"]>i::before,body.wsh #wd-main-sheet .wd-universal-nav-links a.wd-universal-link[data-wd-nav="research"]>i::before,body.wsh #wd-main-sheet .wd-universal-nav-links a.wd-universal-link[data-wd-nav="scan"]>i::before,body.wsh #wd-main-sheet .wd-universal-nav-links a.wd-universal-link[data-wd-nav="transaction"]>i::before,body.wsh #wd-main-sheet .wd-universal-nav-links a.wd-universal-link[data-wd-nav="data-workbench"]>i::before{content:none!important}
-body.wsh #wd-main-sheet .wd-universal-nav-links a.wd-universal-link[data-wd-nav="lookup"]>span{font-size:0!important}body.wsh #wd-main-sheet .wd-universal-nav-links a.wd-universal-link[data-wd-nav="lookup"]>span::before{content:"Lookup";font:500 13px/1.25 'Libre Franklin',system-ui,sans-serif}
-body.wsh #wd-main-sheet .wd-universal-nav-links a.wd-universal-link[data-wd-nav="home"]>span{font-size:0!important}body.wsh #wd-main-sheet .wd-universal-nav-links a.wd-universal-link[data-wd-nav="home"]>span::before{content:"My Home";font:500 13px/1.25 'Libre Franklin',system-ui,sans-serif}
-body.wsh #wd-main-sheet .wd-universal-nav-links a.wd-universal-link[data-wd-nav="pulse"]>span{font-size:0!important}body.wsh #wd-main-sheet .wd-universal-nav-links a.wd-universal-link[data-wd-nav="pulse"]>span::before{content:"Pulse";font:500 13px/1.25 'Libre Franklin',system-ui,sans-serif}
-body.wsh #wd-main-sheet .wd-universal-nav-links a.wd-universal-link[data-wd-nav="anchor"]>span{font-size:0!important}body.wsh #wd-main-sheet .wd-universal-nav-links a.wd-universal-link[data-wd-nav="anchor"]>span::before{content:"ANCHOR";font:500 13px/1.25 'Libre Franklin',system-ui,sans-serif}
-body.wsh #wd-main-sheet .wd-universal-nav-links a.wd-universal-link[data-wd-nav="town-compare"]>span{font-size:0!important}body.wsh #wd-main-sheet .wd-universal-nav-links a.wd-universal-link[data-wd-nav="town-compare"]>span::before{content:"Compare Towns";font:500 13px/1.25 'Libre Franklin',system-ui,sans-serif}
-body.wsh #wd-main-sheet .wd-universal-nav-links a.wd-universal-link[data-wd-nav="co"]>span{font-size:0!important}body.wsh #wd-main-sheet .wd-universal-nav-links a.wd-universal-link[data-wd-nav="co"]>span::before{content:"CO Rules";font:500 13px/1.25 'Libre Franklin',system-ui,sans-serif}
-body.wsh #wd-main-sheet .wd-universal-nav-links a.wd-universal-link[data-wd-nav="robust"]>span{font-size:0!important}body.wsh #wd-main-sheet .wd-universal-nav-links a.wd-universal-link[data-wd-nav="robust"]>span::before{content:"Watchdog Score";font:500 13px/1.25 'Libre Franklin',system-ui,sans-serif}
-body.wsh #wd-main-sheet .wd-universal-nav-links a.wd-universal-link[data-wd-nav="pro"]>span{font-size:0!important}body.wsh #wd-main-sheet .wd-universal-nav-links a.wd-universal-link[data-wd-nav="pro"]>span::before{content:"Pricing";font:500 13px/1.25 'Libre Franklin',system-ui,sans-serif}
-body.wsh #wd-main-sheet .wd-universal-nav-head,body.wsh #wd-main-sheet .wd-universal-search,body.wsh #wd-main-sheet .wd-universal-nav-foot,body.wsh #wd-main-sheet .wd-universal-lens,body.wsh #wd-main-sheet .wd-universal-nav-links>p,body.wsh #wd-main-sheet .wd-universal-lens-hint,body.wsh #wd-main-sheet .wd-universal-nav-rule,body.wsh #wd-main-sheet .wd-universal-work-locked,body.wsh #wd-main-sheet .wd-universal-locked{display:none!important}
-body.wsh #wd-main-sheet.wd-universal-public-nav{padding:10px!important}
-@media (prefers-reduced-motion:reduce){body.wsh #wd-main-sheet.wd-universal-public-nav{transition:none!important}}
-body.wsh #wd-main-sheet.wsh-has-apps>*:not(#wsh-apps){display:none!important}
-body.wsh #wsh-apps{flex:1 1 auto;min-height:0;overflow-y:auto;overscroll-behavior:contain;color:#1b2333;font-family:'Libre Franklin',system-ui,sans-serif}
-body.wsh .wsh-apps-fav{background:#f4f6f9;border-radius:12px;padding:4px 4px 6px;margin-bottom:6px}
-body.wsh .wsh-apps-hd{display:flex;justify-content:space-between;align-items:center;padding:6px 6px 2px 10px}
-body.wsh .wsh-apps h2{margin:0;font-size:15px;font-weight:600;color:#1b2333;letter-spacing:0}
-body.wsh .wsh-apps-sec{padding:10px 10px 2px}
-body.wsh .wsh-apps-pen{width:44px;height:44px;border:0;border-radius:50%;background:#e6eaf0;color:#3a4558;font-size:15px;cursor:pointer}
-body.wsh .wsh-apps-pen:hover{background:#dce2ea}
-body.wsh .wsh-apps-done{min-height:44px;padding:0 18px;border:0;border-radius:8px;background:#1f4fa8;color:#fff;font:600 14px 'Libre Franklin',system-ui,sans-serif;cursor:pointer}
-body.wsh .wsh-apps-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px}
-body.wsh .wsh-app-cell{position:relative}
-body.wsh .wsh-app{display:flex;flex-direction:column;align-items:center;gap:8px;padding:12px 4px 10px;border-radius:10px;color:#1b2333;text-decoration:none;font-size:13px;font-weight:500;line-height:1.25;text-align:center}
-body.wsh .wsh-app:hover{background:#e9edf3;text-decoration:none}
-body.wsh .wsh-app-ic{display:flex;align-items:center;justify-content:center;width:46px;height:46px}
-body.wsh .wsh-app-ic img{width:46px;height:46px;display:block}
-body.wsh .wsh-app-ic i{font-size:24px;color:#1f4fa8}
-body.wsh .wsh-app-badge{position:absolute;top:2px;right:calc(50% - 44px);width:28px!important;height:28px!important;min-width:0!important;min-height:0!important;padding:0!important;border:2px solid #fff;border-radius:50%;color:#fff;font:600 17px/1 'Libre Franklin',system-ui,sans-serif;cursor:pointer;display:flex;align-items:center;justify-content:center}
-body.wsh .wsh-app-badge::after{content:"";position:absolute;inset:-8px}
-body.wsh .wsh-app-rm{background:#5a6475}
-body.wsh .wsh-app-add{background:#1f4fa8}
-body.wsh .wsh-apps.editing [data-wsh-fav] .wsh-app-cell{cursor:grab;touch-action:none;user-select:none}
-body.wsh .wsh-apps.editing .wsh-app{pointer-events:none}
-body.wsh .wsh-apps.editing .wsh-app-cell{animation:wsh-wiggle .32s ease-in-out infinite alternate}
-body.wsh .wsh-apps.editing .wsh-app-cell:nth-child(2n){animation-delay:-.16s;animation-direction:alternate-reverse}
-body.wsh .wsh-apps.editing .wsh-app-cell:nth-child(3n){animation-delay:-.08s}
-@keyframes wsh-wiggle{from{transform:rotate(-1.6deg)}to{transform:rotate(1.6deg)}}
-body.wsh .wsh-apps.editing .wsh-app-cell.dragging{animation:none;border:2px dashed #9aa6b8;border-radius:10px;background:#e9edf3}
-body.wsh .wsh-apps.editing .wsh-app-cell.dragging>*{visibility:hidden}
-body.wsh .wsh-app-ghost{position:fixed;z-index:2147483000;pointer-events:none;background:#fff;border-radius:10px;box-shadow:0 4px 12px rgba(16,24,40,.18);transform:scale(1.08)}
-body.wsh .wsh-app-ghost .wsh-app-badge{display:none}
-@media (prefers-reduced-motion:reduce){body.wsh .wsh-apps.editing .wsh-app-cell{animation:none}}
-body.wsh .wsh-apps button:focus-visible,body.wsh .wsh-app:focus-visible{outline:2px solid #1f4fa8;outline-offset:2px}
 body.wsh .wsh-profile[aria-label="Open account menu"] span{display:none}
 
 body.wsh .pl-hero.wsh-hero{position:static;flex:1 0 auto;min-height:0;display:flex;align-items:center;justify-content:center;padding:16px 16px 12vh;background:none;overflow:visible}
@@ -150,7 +77,6 @@ body.wsh .wsh-anchor .wd-anchor-home-topline,body.wsh .wsh-anchor .wd-anchor-hom
 body.wsh .wsh-credit a{text-decoration:underline}
 
 @media (max-width:600px){
-  body.wsh #wd-main-sheet.wd-universal-public-nav{right:10px!important;top:62px!important;width:calc(100vw - 20px)!important}
   .wsh-top{align-items:flex-start;padding:12px 16px}
   .wsh-links{flex-direction:column;gap:0;font-size:14px}
   .wsh-logo{margin-bottom:22px}
