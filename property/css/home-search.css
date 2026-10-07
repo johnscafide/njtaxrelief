@@ -103,7 +103,15 @@ body.wsh .wsh-app-rm{background:#5a6475}
 body.wsh .wsh-app-add{background:#1f4fa8}
 body.wsh .wsh-apps.editing [data-wsh-fav] .wsh-app-cell{cursor:grab;touch-action:none;user-select:none}
 body.wsh .wsh-apps.editing .wsh-app{pointer-events:none}
-body.wsh .wsh-apps.editing .wsh-app-cell.dragging{opacity:.55;background:#e9edf3}
+body.wsh .wsh-apps.editing .wsh-app-cell{animation:wsh-wiggle .32s ease-in-out infinite alternate}
+body.wsh .wsh-apps.editing .wsh-app-cell:nth-child(2n){animation-delay:-.16s;animation-direction:alternate-reverse}
+body.wsh .wsh-apps.editing .wsh-app-cell:nth-child(3n){animation-delay:-.08s}
+@keyframes wsh-wiggle{from{transform:rotate(-1.6deg)}to{transform:rotate(1.6deg)}}
+body.wsh .wsh-apps.editing .wsh-app-cell.dragging{animation:none;border:2px dashed #9aa6b8;border-radius:10px;background:#e9edf3}
+body.wsh .wsh-apps.editing .wsh-app-cell.dragging>*{visibility:hidden}
+body.wsh .wsh-app-ghost{position:fixed;z-index:2147483000;pointer-events:none;background:#fff;border-radius:10px;box-shadow:0 4px 12px rgba(16,24,40,.18);transform:scale(1.08)}
+body.wsh .wsh-app-ghost .wsh-app-badge{display:none}
+@media (prefers-reduced-motion:reduce){body.wsh .wsh-apps.editing .wsh-app-cell{animation:none}}
 body.wsh .wsh-apps button:focus-visible,body.wsh .wsh-app:focus-visible{outline:2px solid #1f4fa8;outline-offset:2px}
 body.wsh .wsh-profile[aria-label="Open account menu"] span{display:none}
 

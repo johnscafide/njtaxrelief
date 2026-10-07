@@ -41,7 +41,7 @@
   ];
   var HAS_ICON={dashboard:1,lookup:1,home:1,pulse:1,anchor:1,'town-compare':1,co:1,robust:1,games:1,'data-center':1,pro:1,account:1,'agent-desk':1,clients:1,farm:1,marketing:1,research:1,scan:1,transaction:1,'data-workbench':1};
   EXTRA.forEach(function(x){HAS_ICON[x.key]=1;});
-  var editing=false;
+  var editing=false,known={},knownOrder=[],recent=[];
 
   function esc(s){return String(s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
   function load(){try{var v=JSON.parse(localStorage.getItem(KEY)||'null');return Array.isArray(v)?v:null;}catch(_){return null;}}
@@ -94,7 +94,9 @@
     if(!out.length){
       Object.keys(SHORT).forEach(function(key){seen[key]=1;out.push({key:key,label:SHORT[key],href:key==='lookup'?'/':'/'+(key==='robust'?'robust/':key==='anchor'?'anchor/applications/':key)});});
     }
-    EXTRA.forEach(function(x){if(!seen[x.key])out.push(x);});
+    EXTRA.forEach(function(x){if(!seen[x.key]){seen[x.key]=1;out.push(x);}});
+    out.forEach(function(x){if(!known[x.key])knownOrder.push(x.key);known[x.key]=x;});
+    knownOrder.forEach(function(k){if(!seen[k])out.push(known[k]);});
     return out;
   }
 
@@ -113,6 +115,8 @@
     var favKeys=(stored||Object.keys(SHORT).concat(all.filter(function(x){return !SHORT[x.key]&&!EXTRA.some(function(e){return e.key===x.key;});}).map(function(x){return x.key;}))).filter(function(k){return byKey[k];});
     var favSet={};favKeys.forEach(function(k){favSet[k]=1;});
     var more=all.filter(function(x){return !favSet[x.key];});
+    recent=recent.filter(function(k){return !favSet[k]&&byKey[k];});
+    more.sort(function(a,b){var i=recent.indexOf(a.key),j=recent.indexOf(b.key);return (i<0?1e3:i)-(j<0?1e3:j);});
     var box=document.getElementById('wsh-apps');
     if(!box){box=document.createElement('div');box.id='wsh-apps';}
     if(box.parentNode!==sheet)sheet.appendChild(box);
@@ -150,7 +154,7 @@
       if(!t)return;
       if(t.hasAttribute('data-wsh-edit')){editing=true;render(sheet);var d=sheet.querySelector('[data-wsh-done]');if(d)d.focus();return;}
       if(t.hasAttribute('data-wsh-done')){editing=false;render(sheet);var p=sheet.querySelector('[data-wsh-edit]');if(p)p.focus();return;}
-      if(t.hasAttribute('data-wsh-remove')){e.preventDefault();var f=currentFav(box).filter(function(k){return k!==t.getAttribute('data-wsh-remove');});save(f);render(sheet);return;}
+      if(t.hasAttribute('data-wsh-remove')){e.preventDefault();var rk=t.getAttribute('data-wsh-remove');var f=currentFav(box).filter(function(k){return k!==rk;});recent=[rk].concat(recent.filter(function(k){return k!==rk;}));save(f);render(sheet);return;}
       if(t.hasAttribute('data-wsh-add')){e.preventDefault();var g=currentFav(box);g.push(t.getAttribute('data-wsh-add'));save(g);render(sheet);return;}
       if(editing)e.preventDefault();
     });
@@ -159,13 +163,25 @@
       if(!editing||e.target.closest('.wsh-app-badge'))return;
       var a=e.target.closest('[data-wsh-fav] .wsh-app-cell');
       if(!a)return;
-      drag={el:a,moved:false};
+      var r=a.getBoundingClientRect();
+      var ghost=a.cloneNode(true);
+      ghost.className='wsh-app-cell wsh-app-ghost';
+      ghost.removeAttribute('data-wsh-key');
+      ghost.style.width=r.width+'px';
+      ghost.style.left=r.left+'px';
+      ghost.style.top=r.top+'px';
+      document.body.appendChild(ghost);
+      drag={el:a,ghost:ghost,dx:e.clientX-r.left,dy:e.clientY-r.top,moved:false};
       a.classList.add('dragging');
       try{a.setPointerCapture(e.pointerId);}catch(_){}
     });
     sheet.addEventListener('pointermove',function(e){
       if(!drag)return;
+      drag.ghost.style.left=(e.clientX-drag.dx)+'px';
+      drag.ghost.style.top=(e.clientY-drag.dy)+'px';
+      drag.ghost.style.visibility='hidden';
       var over=document.elementFromPoint(e.clientX,e.clientY);
+      drag.ghost.style.visibility='';
       var target=over&&over.closest('[data-wsh-fav] .wsh-app-cell');
       if(!target||target===drag.el)return;
       var r=target.getBoundingClientRect();
@@ -176,6 +192,7 @@
     function end(){
       if(!drag)return;
       drag.el.classList.remove('dragging');
+      if(drag.ghost.parentNode)drag.ghost.parentNode.removeChild(drag.ghost);
       if(drag.moved){var box=document.getElementById('wsh-apps');if(box)save(currentFav(box));}
       drag=null;
     }
