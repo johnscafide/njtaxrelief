@@ -9,6 +9,13 @@ const SCOPE = String(process.env.AUDIT_SCOPE || 'critical').toLowerCase();
 const EVIDENCE_DIR = process.env.VISUAL_EVIDENCE_DIR || 'global-visual-audit-evidence';
 const ENFORCE = /^(1|true|yes)$/i.test(String(process.env.AUDIT_ENFORCE || '0'));
 const CAPTURE_ALL = !/^(0|false|no)$/i.test(String(process.env.AUDIT_CAPTURE_SCREENSHOTS || '1'));
+// Lets the Vercel firewall skip bot checks for this audit. Only sent to our own hosts.
+const INTERNAL_FETCH_KEY = String(process.env.WATCHDOG_INTERNAL_FETCH_KEY || '');
+const OWN_HOSTS = new Set([
+  new URL(BASE_URL).hostname,
+  'www.watchdogindex.com', 'watchdogindex.com',
+  'www.njpropertytaxrelief.com', 'njpropertytaxrelief.com'
+]);
 const TARGET_PATHS = String(process.env.AUDIT_PATHS || '')
   .split(/[\n,]+/)
   .map(value => normalizePath(value.trim()))
@@ -78,7 +85,11 @@ function cleanMessage(value) {
 
 async function discoverSitemapRoutes() {
   const response = await fetch(`${BASE_URL}/sitemap.xml`, {
-    headers: { 'User-Agent': 'WatchdogPlaywrightAudit/1.0', Accept: 'application/xml,text/xml;q=0.9,*/*;q=0.2' },
+    headers: {
+      'User-Agent': 'WatchdogPlaywrightAudit/1.0',
+      Accept: 'application/xml,text/xml;q=0.9,*/*;q=0.2',
+      ...(INTERNAL_FETCH_KEY ? { 'x-watchdog-internal-fetch': INTERNAL_FETCH_KEY } : {})
+    },
     signal: AbortSignal.timeout(15000)
   });
   if (!response.ok) throw new Error(`Sitemap discovery failed: HTTP ${response.status}`);
@@ -253,6 +264,11 @@ try {
         deviceScaleFactor: 1,
         reducedMotion: 'reduce'
       });
+      if (INTERNAL_FETCH_KEY) {
+        await context.route(url => OWN_HOSTS.has(url.hostname), route => route.continue({
+          headers: { ...route.request().headers(), 'x-watchdog-internal-fetch': INTERNAL_FETCH_KEY }
+        }));
+      }
       const traceEnabled = ['critical', 'targeted'].includes(SCOPE);
       if (traceEnabled) await context.tracing.start({ screenshots: true, snapshots: true });
       const page = await context.newPage();
