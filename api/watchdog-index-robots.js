@@ -92,6 +92,7 @@ module.exports = function handler(req, res) {
     `Sitemap: ${CANONICAL_ORIGIN}/sitemap-alternatives.xml`,
     `Sitemap: ${CANONICAL_ORIGIN}/sitemap-calculators.xml`,
     `Sitemap: ${CANONICAL_ORIGIN}/sitemap-statistics.xml`,
+    `Sitemap: ${CANONICAL_ORIGIN}/sitemap-properties.xml`,
     ''
   ].join('\n');
 

@@ -21,7 +21,10 @@
       "maxDuration": 10
     },
     "api/watchdog-property-page.js": {
-      "includeFiles": "{tax-rates.json,equalization-ratios.json,property/data/town-tax/bills.json,property/data/municipal-requirements/approvals.json,co/towns.json}",
+      "includeFiles": "{tax-rates.json,equalization-ratios.json,property/data/town-tax/bills.json,property/data/municipal-requirements/approvals.json,co/towns.json,property/index.html,property/partials/footer.html}",
+      "maxDuration": 10
+    },
+    "api/watchdog-property-sitemap.js": {
       "maxDuration": 10
     },
     "api/watchdog-property-report.js": {
