@@ -237,6 +237,15 @@
     document.head.appendChild(style);
   }
 
+  function fitBox(box){
+    if(!box||!box.classList.contains('open'))return;
+    box.style.maxHeight='';
+    var vv=window.visualViewport,bottom=vv?vv.offsetTop+vv.height:window.innerHeight;
+    var room=Math.floor(bottom-box.getBoundingClientRect().top-12);
+    var cap=parseFloat(getComputedStyle(box).maxHeight)||590;
+    box.style.maxHeight=Math.max(160,Math.min(cap,room))+'px';
+  }
+  window.addEventListener('resize',function(){Array.prototype.forEach.call(document.querySelectorAll('.wd-nj-predictions.open'),fitBox);});
   function getBox(input){
     var id=input.id+'-wd-nj-predictions';
     var box=q(id);
@@ -336,7 +345,7 @@
         section('Saved properties',saved,'saved');
         section('Recently viewed',recent,'recent');
         box.innerHTML=html;
-        box.classList.add('open');
+        box.classList.add('open');fitBox(box);
         input.setAttribute('aria-expanded','true');
         Array.prototype.slice.call(box.querySelectorAll('[data-wd-quick]')).forEach(function(btn){
           btn.addEventListener('mousedown',function(e){e.preventDefault();});
@@ -381,7 +390,7 @@
 
     if(!groups.length){
       box.innerHTML='<div class="wd-nj-empty">No matching New Jersey addresses yet. Keep typing.</div><div class="wd-google-credit" aria-label="Powered by Google"></div>';
-      box.classList.add('open');
+      box.classList.add('open');fitBox(box);
       input.setAttribute('aria-expanded','true');
       input.__wdPredictions=[];
       input.__wdPredictionIndex=-1;
@@ -403,7 +412,7 @@
     });
     html+='<div class="wd-google-credit" aria-label="Powered by Google"></div>';
     box.innerHTML=html;
-    box.classList.add('open');
+    box.classList.add('open');fitBox(box);
     input.setAttribute('aria-expanded','true');
     input.__wdPredictions=rows;
     input.__wdPredictionIndex=-1;
@@ -562,7 +571,7 @@
       });
     });
     box.innerHTML=html;
-    box.classList.add('open');
+    box.classList.add('open');fitBox(box);
     input.setAttribute('aria-expanded','true');
     input.__wdPredictions=ordered;
     input.__wdPredictionKind='watchdog';
