@@ -1,4 +1,4 @@
-// Public property pages: /nj/<town>/<address>/<pams_pin>.
+// Public property pages: /nj/<town>/<address>-<zip> (published) and /nj/<town>/<address>/<pams_pin>.
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { createRequire } from 'node:module';
@@ -73,7 +73,7 @@ assert.match(html, /"@type":"FAQPage"/, 'FAQ structured data');
 assert.match(html, /WatchdogPublicNav\.remember/, 'page is remembered in recent properties');
 assert.equal(page.rateTrend({ town: 'WOODBRIDGE TWP', county: 'MIDDLESEX' }).cutAtReval, false);
 assert.match(page.renderPage({ ...row, score: null }), /Still being calculated/);
-assert.equal(page.INDEXABLE_COUNTIES.size, 0, 'pilot: no county released to search engines yet');
+assert.equal(page.INDEXABLE_COUNTIES.size, 0, 'only published pages are indexed');
 
 // Claim, photo, recent sales, PDF report
 assert.match(html, /href="\/home\?pin=0904_9_20">.*Claim this home/, 'claim this home');
@@ -105,24 +105,101 @@ assert.match(reportSql, /revoke all on public\.property_report_requests from ano
 assert.match(reportSql, /contact_consent boolean not null check \(contact_consent\)/, 'consent is required');
 assert.match(reportSql, /cron\.schedule\('watchdog-recent-sales', '39 6 4 \* \*'/, 'recent sales refresh monthly');
 
-// Handler: redirect, 404, cache
-function call(path, data) {
+// Handler: redirect, 404, cache. rpcs maps an RPC name to its response.
+async function call(path, rpcs, req = {}) {
   const res = { headers: {}, statusCode: 0, body: undefined, setHeader(k, v) { this.headers[k.toLowerCase()] = v; }, status(c) { this.statusCode = c; return this; }, end(b) { this.body = b; return this; } };
   const realFetch = global.fetch;
+  const calls = [];
   process.env.SUPABASE_URL = 'https://example.supabase.co';
   process.env.SUPABASE_SERVICE_ROLE_KEY = 'test-key';
-  global.fetch = async () => ({ ok: true, json: async () => data });
-  return page({ method: 'GET', query: { path } }, res).then(() => { global.fetch = realFetch; return res; });
+  global.fetch = async (url, opts) => {
+    const name = String(url).split('/rpc/')[1];
+    calls.push({ name, body: opts && opts.body ? JSON.parse(opts.body) : null });
+    return { ok: true, json: async () => (name in rpcs ? rpcs[name] : null) };
+  };
+  try { await page({ method: 'GET', query: { path }, headers: {}, ...req }, res); } finally { global.fetch = realFetch; }
+  res.calls = calls;
+  return res;
 }
-let res = await call('/nj/property/0904_9_20', row);
+let res = await call('/nj/property/0904_9_20', { get_public_property_page: row });
 assert.equal(res.statusCode, 308);
 assert.equal(res.headers.location, '/nj/harrison-town/102-grant-ave/0904_9_20');
-res = await call('/nj/harrison-town/102-grant-ave/0904_9_20', row);
+res = await call('/nj/harrison-town/102-grant-ave/0904_9_20', { get_public_property_page: row });
 assert.equal(res.statusCode, 200);
 assert.match(res.headers['cache-control'], /s-maxage=86400/);
-assert.equal(res.headers['x-robots-tag'], 'noindex, follow');
-res = await call('/nj/harrison-town/102-grant-ave/0904_9_21', null);
+assert.equal(res.headers['x-robots-tag'], 'noindex, follow', 'unpublished PIN pages stay noindex');
+res = await call('/nj/harrison-town/102-grant-ave/0904_9_21', {});
 assert.equal(res.statusCode, 404);
+
+// Published pages: /nj/<town>/<address>-<zip>
+const published = { pams_pin: '0904_9_20', path: '/nj/harrison-town/102-grant-avenue-07029', property_zip: '07029', postal_city: 'HARRISON' };
+assert.equal(page.spelledAddress('11 DALTON PL'), '11 DALTON PLACE');
+assert.equal(page.spelledAddress('5 MAIN ST UNIT 4'), '5 MAIN STREET UNIT 4');
+assert.equal(page.spelledAddress('ROUTE 9'), 'ROUTE 9');
+assert.equal(page.pageSlug({ address: '11 DALTON PL' }, '08081'), '11-dalton-place-08081');
+assert.equal(page.pageSlug({ address: '11 DALTON PL' }, '19103'), '11-dalton-place', 'only NJ ZIPs go in the URL');
+assert.deepEqual(page.parsePath('/nj/winslow-township/11-dalton-place-08081'), { town: 'winslow-township', slug: '11-dalton-place-08081', path: '/nj/winslow-township/11-dalton-place-08081' });
+assert.equal(page.parsePath('/nj/property/0904_9_20').pin, '0904_9_20', 'short PIN links still parse');
+res = await call('/nj/harrison-town/102-grant-avenue-07029', { get_public_property_page_slug: published, get_public_property_page: row });
+assert.equal(res.statusCode, 200);
+assert.equal(res.headers['x-robots-tag'], undefined, 'published pages are indexable');
+assert.equal(res.headers.link, '<https://www.watchdogindex.com/nj/harrison-town/102-grant-avenue-07029>; rel="canonical"');
+const shell = res.body;
+assert.match(shell, /<title>102 Grant Ave, Harrison, NJ 07029 \| Property Tax &amp; Watchdog Score<\/title>/, 'title uses the postal town and property ZIP');
+assert.match(shell, /<meta name="robots" content="index, follow/);
+assert.match(shell, /<link rel="canonical" href="https:\/\/www\.watchdogindex\.com\/nj\/harrison-town\/102-grant-avenue-07029">/);
+assert.equal((shell.match(/<link rel="canonical"/g) || []).length, 1, 'one canonical');
+assert.equal((shell.match(/<title>/g) || []).length, 1, 'one title');
+assert.match(shell, /<div class="plm open" id="plm"/, 'popup is open on load');
+assert.match(shell, /<div class="plm-backdrop open" id="plm-backdrop"/);
+assert.match(shell, /<body[^>]*class="plm-locked/);
+assert.match(shell, /id="pl-addr"/, 'it is the home search page underneath');
+assert.match(shell, /<div class="wdp" id="plm-ssr">/, 'server-rendered property record inside the popup');
+assert.match(shell, /The Watchdog Score, powered by the ROBUST Framework\./);
+assert.match(shell, /window\.WD_PROPERTY_PAGE=\{"pin":"0904_9_20","path":"\/nj\/harrison-town\/102-grant-avenue-07029","published":true/);
+assert.ok(shell.indexOf('window.WD_PROPERTY_PAGE') < shell.indexOf('/property/js/lookup.js'), 'boot data comes before lookup.js');
+assert.match(shell, /"@type":"FAQPage"/);
+assert.doesNotMatch(shell.replace(/<!--[\s\S]*?Hi There[\s\S]*?-->/g, '').replace(/<!--[\s\S]*?OH[\s\S]*?-->/g, ''), /<!--/, 'no new HTML comments');
+const shellOutsideForm = shell.slice(shell.indexOf('id="plm-ssr"'), shell.indexOf('<section class="wdp-panel wdp-report"'));
+assert.doesNotMatch(shellOutsideForm.replace(/Watchdog does not show owner names( or mailing addresses)?\./g, ''), /\bowners?\b|\bmailing\b/i, 'no owner or mailing data in the popup record');
+res = await call('/nj/harrison-town/102-grant-avenue-07028', { get_public_property_page_slug: null });
+assert.equal(res.statusCode, 404, 'unknown slugs 404');
+res = await call('/nj/harrison-town/102-grant-ave/0904_9_20', { get_public_property_page: row, get_public_property_page_by_pin: published });
+assert.equal(res.statusCode, 308, 'PIN links to a published property redirect to it');
+assert.equal(res.headers.location, '/nj/harrison-town/102-grant-avenue-07029');
+res = await call('/nj/property/0904_9_20', { get_public_property_page: row, get_public_property_page_by_pin: published });
+assert.equal(res.headers.location, '/nj/harrison-town/102-grant-avenue-07029');
+
+// Publishing on first search
+const browser = { host: 'www.watchdogindex.com', origin: 'https://www.watchdogindex.com', 'user-agent': 'Mozilla/5.0 (Macintosh) Safari/605.1.15' };
+res = await call('', { get_public_property_page: row, publish_public_property_page: '/nj/harrison-town/102-grant-avenue-07029' }, { method: 'POST', headers: browser, body: { pin: '0904_9_20', zip: '07029', city: 'Harrison' } });
+assert.equal(res.statusCode, 200);
+assert.deepEqual(JSON.parse(res.body), { path: '/nj/harrison-town/102-grant-avenue-07029' });
+assert.deepEqual(res.calls.find((c) => c.name === 'publish_public_property_page').body, { p_pin: '0904_9_20', p_town_slug: 'harrison-town', p_page_slug: '102-grant-avenue-07029', p_zip: '07029', p_city: 'Harrison' });
+res = await call('', {}, { method: 'POST', headers: { ...browser, origin: 'https://evil.example' }, body: { pin: '0904_9_20' } });
+assert.equal(res.statusCode, 403, 'other sites cannot publish');
+res = await call('', {}, { method: 'POST', headers: { ...browser, 'user-agent': 'Mozilla/5.0 (compatible; Googlebot/2.1)' }, body: { pin: '0904_9_20' } });
+assert.equal(res.statusCode, 403, 'crawlers do not publish');
+res = await call('', {}, { method: 'POST', headers: browser, body: { pin: 'nope' } });
+assert.equal(res.statusCode, 400);
+res = await call('', { get_public_property_page: row, publish_public_property_page: '/nj/x/y' }, { method: 'POST', headers: browser, body: { pin: '0904_9_20', zip: '<b>' } });
+assert.equal(res.calls.find((c) => c.name === 'publish_public_property_page').body.p_zip, null, 'bad ZIPs are dropped');
+
+// Property sitemap
+const sitemap = require(new URL('api/watchdog-property-sitemap.js', root).pathname);
+const xml = sitemap.renderXml([{ path: '/nj/harrison-town/102-grant-avenue-07029', lastmod: '2026-10-07T13:00:00Z' }, { path: '/nj/bad path/<x>' }]);
+assert.match(xml, /<loc>https:\/\/www\.watchdogindex\.com\/nj\/harrison-town\/102-grant-avenue-07029<\/loc>\n    <lastmod>2026-10-07<\/lastmod>/);
+assert.doesNotMatch(xml, /bad path/);
+assert.match(middleware, /url\.pathname==='\/sitemap-properties\.xml'\)return rewriteWatchdogSystemFile\(request,'\/api\/watchdog-property-sitemap'\)/);
+assert.match(read('api/watchdog-index-robots.js'), /Sitemap: \$\{CANONICAL_ORIGIN\}\/sitemap-properties\.xml/);
+const pubSql = read('supabase/migrations/20261007160000_published_property_pages.sql');
+assert.match(pubSql, /revoke all on public\.public_property_pages from anon, authenticated;/, 'published list is server-only');
+for (const fn of ['publish_public_property_page(text, text, text, text, text)', 'get_public_property_page_slug(text, text)', 'get_public_property_page_by_pin(text)', 'list_public_property_pages(integer, integer)']) {
+  assert.ok(pubSql.includes(`revoke all on function public.${fn} from public, anon, authenticated;`), `${fn} revoked`);
+  assert.ok(pubSql.includes(`grant execute on function public.${fn} to service_role;`), `${fn} service only`);
+}
+const vercel = JSON.parse(read('vercel.json'));
+assert.match(vercel.functions['api/watchdog-property-page.js'].includeFiles, /property\/index\.html/, 'home page ships with the property page function');
 
 // Routing and popup link
 assert.match(middleware, /const PROPERTY_PAGE_PATH = /);
