@@ -4,18 +4,21 @@
 //                                         (property/data/federal-housing-context-v041.json; written in #303, never deployed)
 //   acs-rental-provider.ts                ACS 2024 renter households, rental vacancy, rent burden (internal inputs
 //                                         for the rental scores; property/data/acs-rental-2024.json)
+//   pilot-agreement-db-provider.ts        DCA PILOT agreement count, next end year, months remaining, project type mix
+//                                         (pilot_agreement_intelligence table; dropped from the live chain before v92)
 // Deploy with production-njdep-attribute-map-pinned.deno.json as the import map, the same one live
 // v92 uses, so the rest of the chain resolves exactly as it does today.
 import { enrichPilotSchedule } from './pilot-schedule-provider.ts';
 import { enrichFederalHousingContext } from './federal-housing-context-provider.ts';
 import { enrichAcsRental } from './acs-rental-provider.ts';
+import { enrichPilotAgreementDb } from './pilot-agreement-db-provider.ts';
 
 const nativeServe=Deno.serve.bind(Deno);
 const wrappedServe=((first:unknown,second?:unknown)=>{
   const wrap=(handler:Deno.ServeHandler):Deno.ServeHandler=>async(request,info)=>{
-    const a=request.clone(),b=request.clone(),c=request.clone();
+    const a=request.clone(),b=request.clone(),c=request.clone(),d=request.clone();
     const response=await handler(request,info);
-    return enrichAcsRental(c,await enrichFederalHousingContext(b,await enrichPilotSchedule(a,response)));
+    return enrichPilotAgreementDb(d,await enrichAcsRental(c,await enrichFederalHousingContext(b,await enrichPilotSchedule(a,response))));
   };
   if(typeof first==='function') return nativeServe(wrap(first as Deno.ServeHandler));
   if(typeof second==='function') return nativeServe(first as Deno.ServeOptions,wrap(second as Deno.ServeHandler));

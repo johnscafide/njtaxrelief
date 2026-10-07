@@ -52,7 +52,7 @@ async function indexCounty(client: any, countyCode: string) {
     return { county_code: countyCode, status: 'ready', skipped: true, unchanged: true, source_record_count: prior.source_record_count, indexed_parcel_count: prior.indexed_parcel_count, rows_with_living_space: prior.rows_with_living_space, refreshed_at: prior.refreshed_at };
   }
   const headers: Record<string, string> = { accept: 'application/json' };
-  if (prior?.source_etag) headers['If-None-Match'] = String(prior.source_etag);
+  if (prior?.status === 'ready' && prior?.source_etag) headers['If-None-Match'] = String(prior.source_etag);
   const generationId = crypto.randomUUID();
   await client.from('sr1a_subject_index_runs').upsert({ county_code: countyCode, source_url: sourceUrl, status: 'loading', generation_id: generationId, error_text: null, updated_at: new Date().toISOString() });
   try {
