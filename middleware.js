@@ -66,6 +66,7 @@ if(url.pathname===SALES_API_PATH&&AUTOMATION_UA.test(userAgent)){console.warn('w
 // Files like /co/co.css never match the page patterns, so coPageRewrite leaves them to the static checks below.
 const taxMatch=url.pathname.match(TAX_PAGE_PATH);if(taxMatch){if(LEGACY_NJPTR_HOSTS.has(host)){const destination=new URL(url.pathname,`https://${WATCHDOG_HOST}`);destination.search=url.search;return Response.redirect(destination,308);}const d=new URL('/api/tax-town-page',request.url);if(taxMatch[1])d.searchParams.set('county',taxMatch[1]);if(taxMatch[2])d.searchParams.set('town',taxMatch[2]);return rewrite(d);}
 if(url.pathname.startsWith('/co/')){if(url.pathname==='/co/embed'||url.pathname==='/co/embed/')return next();const co=coPageRewrite(request,url);if(co)return co;}
+if(host.endsWith('.vercel.app')&&PROPERTY_PAGE_PATH.test(url.pathname)){const destination=new URL('/api/watchdog-property-page',request.url);destination.searchParams.set('path',url.pathname);return rewrite(destination);}
 if(host!==WATCHDOG_HOST)return next();
 if(WATCHDOG_TOOL_REDIRECTS.has(url.pathname))return redirectCanonical(request,url,WATCHDOG_TOOL_REDIRECTS.get(url.pathname));
 if(url.pathname==='/anchor-estimator.html'||url.pathname==='/anchor-estimator'){const destination=new URL('/anchor-estimator.html','https://njpropertytaxrelief.com');destination.search=url.search;return Response.redirect(destination,308);}
