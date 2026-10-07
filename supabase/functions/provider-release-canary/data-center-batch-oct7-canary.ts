@@ -157,7 +157,10 @@ export async function handleDataCenterBatchOct7Canary(req: Request) {
     await admin.from('watchdog_test_auth_events').insert({ token_id: gate.id, user_id: userId, event_type: 'provider_release_canary', metadata: { scenario: SCENARIO, status_code: ok ? 200 : 502, duration_ms: Date.now() - started, assertion_ok: ok, mismatches, summary, observations } });
     return json(ok ? 200 : 502, { ok, scenario: SCENARIO, assertion_ok: ok, mismatches, summary, duration_ms: Date.now() - started });
   } catch (e) {
-    return json(500, { ok: false, scenario: SCENARIO, error: String((e as Error)?.message || e) });
+    console.error('data_center_batch_oct7_v1 failed:', e);
+    const known = ['sandbox_link_generation_failed', 'sandbox_session_verification_failed', 'sandbox_profile_failed', 'sandbox_account_failed', 'formula_registry_unavailable'];
+    const message = e instanceof Error && known.includes(e.message) ? e.message : 'canary_failed';
+    return json(500, { ok: false, scenario: SCENARIO, error: message });
   } finally {
     if (userId) await cleanup(userId);
   }
