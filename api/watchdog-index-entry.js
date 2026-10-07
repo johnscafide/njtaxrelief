@@ -54,7 +54,7 @@ function requestHost(req) {
 }
 
 function useSharedFooter(source, footer) {
-  if (!footer) return source;
+  if (!footer || !source.includes('id="wd-property-footer"')) return source;
   const footerStart = source.indexOf('<div\n    id="wd-property-footer"');
   const scriptsStart = source.indexOf('<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet', footerStart);
   if (footerStart < 0 || scriptsStart < 0) {
