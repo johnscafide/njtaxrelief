@@ -1,6 +1,6 @@
 // Watchdog provider release canary: data_center_batch_oct7_v1.
 //
-// Checks the 20 formulas staged by 20261007181000_prepare_data_center_batch_oct7.sql and the six
+// Checks the 27 formulas staged by 20261007181000_prepare_data_center_batch_oct7.sql and the six
 // formulas repaired by 20261007180000_fix_live_formula_transforms.sql against production.
 // It reads each formula's config from derived_formula_registry, gets raw inputs from workbench-hydrate
 // and already-live derived inputs from workbench-derived, recomputes every value with its own copy of the
@@ -21,6 +21,8 @@ const BATCH = [
   'watchdog.njplus.new_build_market_depth', 'watchdog.njplus.local_demand_context', 'watchdog.njplus.household_cost_context',
   'watchdog.njplus.housing_supply_balance', 'watchdog.njplus.assessment_history_reliability', 'watchdog.tax_trajectory',
   'watchdog.collateral_operating_cost_stress', 'watchdog.fiscal_trend_momentum',
+  'watchdog.fairness_score', 'watchdog.reassessment_risk', 'watchdog.appeal_odds', 'watchdog.tax_carry_advantage',
+  'watchdog.permit_lifecycle_score', 'watchdog.abatement_exposure', 'watchdog.exempt_pilot_exposure',
 ];
 const REPAIRED = [
   'watchdog.appraiser.market_anchor_refresh', 'watchdog.consumer.sale_context_strength', 'watchdog.comparable_depth_score',
@@ -47,6 +49,7 @@ function transform(v: unknown, t: string): number | null {
   if (t === 'inverse_identity') return clamp(100 - (x ?? 100));
   if (t === 'bool') return truthy(v) || (x != null && x > 0) ? 100 : 0;
   if (t === 'positive_pct5') return x == null ? 0 : clamp(Math.max(0, x) / 0.05 * 100);
+  if (t === 'share35') return x == null ? 0 : clamp(x / 0.35 * 100);
   const m = /^count(\d+)$/.exec(t);
   if (m) return clamp(((x || 0) / Number(m[1])) * 100);
   return null;
