@@ -7,7 +7,6 @@
   document.documentElement.classList.add('p26-js');
 
   var DEMO_ENDPOINT='https://uvkvaxljhhngydvlrzom.supabase.co/functions/v1/pro-demo-request';
-  var INTELLIGENCE_CATALOG_ENDPOINT='https://uvkvaxljhhngydvlrzom.supabase.co/functions/v1/billing-price-catalog';
   var SUPABASE_PUBLISHABLE_KEY='sb_publishable_MYX59qCbK3d-21zDfJqkNw_fvmfnexa';
   var reduceMotion=!!(window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches);
 
@@ -86,33 +85,6 @@
     window.addEventListener('scroll',onScroll,{passive:true});window.addEventListener('resize',onScroll);update();
   }
 
-  function renderIntelligenceOffer(catalog){
-    var intelligence=catalog&&catalog.intelligence||{};
-    var promo=intelligence.promotion||{};
-    var regular=Number(intelligence.regular_add_on_monthly||12);
-    if(!Number.isFinite(regular)||regular<=0)regular=12;
-    var eligible=Array.isArray(promo.eligible_plans)?promo.eligible_plans:['agent'];
-    var promoActive=promo.active===true;
-    var brand='Watchdog <span class="wd-intelligence-brand-word">Intelligence</span>';
-    // content-architecture: dynamic. This wording follows the live billing catalog and promotion state.
-    var offer=promoActive?'Free for a limited time on Agent. Professional always includes it.':'Add it to Agent for $'+regular+'/month. Professional includes it.';
-    var promoNode=document.querySelector('[data-intel-promo]');if(promoNode)promoNode.textContent=offer;
-    all('[data-intel-line]').forEach(function(li){
-      if(eligible.indexOf(li.dataset.intelLine)<0)return;
-      li.innerHTML=brand+(promoActive?', free for now':', +$'+regular+'/month');
-    });
-    all('[data-intel-cell]').forEach(function(td){td.textContent=promoActive?'Free for now':'$'+regular+'/mo add-on';});
-    // content-architecture: dynamic. FAQ answer follows the live billing catalog and promotion state.
-    var faq=document.querySelector('[data-intel-faq]');if(faq)faq.textContent=promoActive?'Agent normally adds it for $'+regular+'/month. It is free for a limited time. Professional includes it.':'Agent can add it for $'+regular+'/month. Professional includes it.';
-  }
-
-  function intelligencePricing(){
-    fetch(INTELLIGENCE_CATALOG_ENDPOINT,{method:'GET',headers:{Accept:'application/json'},cache:'no-store'})
-      .then(function(r){if(!r.ok)throw new Error('Billing catalog '+r.status);return r.json();})
-      .then(function(catalog){if(catalog&&catalog.provider==='stripe')renderIntelligenceOffer(catalog);})
-      .catch(function(err){console.warn('Watchdog Intelligence pricing catalog unavailable; keeping the published wording.',err);});
-  }
-
   function demoPrefill(){
     var planInput=document.getElementById('demo-plan');
     var cadence=document.getElementById('demo-cadence');
@@ -150,6 +122,6 @@
     var script=document.createElement('script');script.src=src;script.defer=true;document.body.appendChild(script);
   }
 
-  function init(){loadFragment('main-footer','/property/partials/footer.html');reveal();countUp();heroScroll();chat();dock();intelligencePricing();demoPrefill();demoForm();sampleTracking();loadOutcomeGuidance();}
+  function init(){loadFragment('main-footer','/property/partials/footer.html');reveal();countUp();heroScroll();chat();dock();demoPrefill();demoForm();sampleTracking();loadOutcomeGuidance();}
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});else init();
 })();

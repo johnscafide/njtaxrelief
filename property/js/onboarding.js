@@ -330,20 +330,11 @@
 
   function intelligenceCopy(key) {
     var intelligence = planCatalog && planCatalog.intelligence || {};
-    var promotion = intelligence.promotion || {};
-    var promoEligible = promotion.active === true && Array.isArray(promotion.eligible_plans) && promotion.eligible_plans.indexOf(key) >= 0;
     var included = Array.isArray(intelligence.included_plans) && intelligence.included_plans.indexOf(key) >= 0;
-    var regular = Number(intelligence.regular_add_on_monthly || 12);
     var brand = 'Watchdog <span class="wd-intelligence-brand-word">Intelligence</span>';
 
-    if (promoEligible) {
-      return '<p class="wd-plan-intelligence"><i class="fas fa-dog" aria-hidden="true"></i><span>' + brand + ' included for a limited time <small>Normally +' + esc(money(regular, false)) + '/month</small></span></p>';
-    }
     if (included) {
       return '<p class="wd-plan-intelligence"><i class="fas fa-dog" aria-hidden="true"></i><span>' + brand + ' included at no additional charge</span></p>';
-    }
-    if (Array.isArray(promotion.eligible_plans) && promotion.eligible_plans.indexOf(key) >= 0) {
-      return '<p class="wd-plan-intelligence"><i class="fas fa-dog" aria-hidden="true"></i><span>' + brand + ' available for +' + esc(money(regular, false)) + '/month</span></p>';
     }
     return '';
   }

@@ -32,15 +32,8 @@ const catalog = {
   teams_available: false,
   tax_collection_enabled: false,
   intelligence: {
-    regular_add_on_monthly: 12,
-    included_plans: ['pro_plus', 'teams'],
-    promotion: {
-      active: true,
-      label: 'Limited time',
-      eligible_plans: ['agent'],
-      price_during_promotion: 0,
-      ends_on: null
-    }
+    add_on_available: false,
+    included_plans: ['pro_plus', 'teams']
   },
   plans: {
     agent: {

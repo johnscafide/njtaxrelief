@@ -160,9 +160,6 @@
     }).join('') + '</select></label>';
   }
   function intelligenceOffer(planKey) {
-    if (planKey === 'agent' || planKey === 'pro') {
-      return '<div class="ac-intel-offer wd-intelligence-frame" aria-label="Watchdog Intelligence add-on"><span>Watchdog Intelligence</span><b>+$12/month</b><small>Add Watchdog Intelligence and Voice to this plan.</small></div>';
-    }
     if (planKey === 'pro_plus' || planKey === 'teams') {
       return '<div class="ac-intel-offer wd-intelligence-frame included" aria-label="Watchdog Intelligence included"><span>Watchdog Intelligence</span><b>Included</b><small>Watchdog Intelligence and Voice are included with this plan.</small></div>';
     }

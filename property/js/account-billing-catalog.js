@@ -24,30 +24,10 @@
     var offer = card && card.querySelector('.ac-intel-offer');
     var intelligence = catalog && catalog.intelligence;
     if (!offer || !intelligence || !key) return;
-    var promo = intelligence.promotion || {};
-    var eligible = Array.isArray(promo.eligible_plans) && promo.eligible_plans.indexOf(key) >= 0;
     var included = Array.isArray(intelligence.included_plans) && intelligence.included_plans.indexOf(key) >= 0;
     var label = offer.querySelector('span');
     var price = offer.querySelector('b');
     var note = offer.querySelector('small');
-
-    if (promo.active === true && eligible) {
-      offer.classList.add('included');
-      offer.setAttribute('aria-label', 'Watchdog Intelligence limited-time promotion');
-      setText(label, 'WATCHDOG INTELLIGENCE · ' + String(promo.label || 'LIMITED TIME').toUpperCase());
-      setText(price, 'Included');
-      setText(note, 'Normally +' + money(Number(intelligence.regular_add_on_monthly || 12), false) + '/month. Included for a limited time.');
-      return;
-    }
-
-    if (eligible) {
-      offer.classList.remove('included');
-      offer.setAttribute('aria-label', 'Watchdog Intelligence add-on');
-      setText(label, 'Watchdog Intelligence');
-      setText(price, '+' + money(Number(intelligence.regular_add_on_monthly || 12), false) + '/month');
-      setText(note, 'Optional add-on.');
-      return;
-    }
 
     if (included) {
       offer.classList.add('included');

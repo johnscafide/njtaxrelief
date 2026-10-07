@@ -147,9 +147,9 @@ function showGate(status){
   }else{
     title.textContent='Watchdog Intelligence Voice is a premium capability';
     if(plan==='agent' || plan==='pro'){
-      copy.textContent='Your '+(plan==='agent'?'Agent':'Pro')+' plan can use Voice when the Watchdog Intelligence add-on is active. Voice is included with Professional and Teams.';
+      copy.textContent='Watchdog Intelligence Voice comes with Professional.';
     }else{
-      copy.textContent='Watchdog Intelligence Voice is included with Professional and Teams. Agent accounts can use it with the Watchdog Intelligence add-on.';
+      copy.textContent='Watchdog Intelligence Voice comes with Professional.';
     }
     actions.innerHTML='<a class="wd-intelligence-gate-primary" href="/property/pro#plans">See Intelligence access</a><button class="wd-intelligence-gate-secondary" type="button" data-wd-intelligence-close>Not now</button>';
   }
