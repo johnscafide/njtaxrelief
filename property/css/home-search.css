@@ -42,12 +42,12 @@ body.wsh .wsh-profile img{width:100%;height:100%;object-fit:cover;border-radius:
 body.wsh .wsh-profile[aria-label="Open account menu"]{width:44px;padding:0!important;border-radius:50%!important;border:2px solid rgba(255,255,255,.9);overflow:hidden}
 body.wsh .wsh-profile[aria-label="Open account menu"] span{display:none}
 
-body.wsh .pl-hero.wsh-hero{position:static;flex:1 0 auto;min-height:0;display:flex;align-items:center;justify-content:center;padding:16px 16px 12vh;background:none;overflow:visible}
+body.wsh .pl-hero.wsh-hero{position:static;flex:1 0 auto;min-height:0;display:flex;align-items:center;justify-content:center;padding:16px 16px 24vh;background:none;overflow:visible}
 body.wsh .pl-hero-bg{position:fixed;inset:0;z-index:-1;filter:brightness(55%);transform:none;background-position:center 52%}
 @media (min-width:1200px){
   body.wsh .pl-hero-bg{background-image:url('https://images.unsplash.com/photo-1628624747186-a941c476b7ef?w=1920&auto=format&fit=crop&q=75')}
 }
-.wsh-inner{width:100%;max-width:900px;display:flex;flex-direction:column;align-items:center}
+body.wsh .wsh-inner{position:relative;z-index:4;width:100%;max-width:900px;display:flex;flex-direction:column;align-items:center}
 .wsh-logo{margin:0 0 30px;line-height:0}
 .wsh-logo svg{display:block;width:380px;max-width:80vw;height:auto}
 
