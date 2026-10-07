@@ -178,7 +178,7 @@
       loadScript('wd-public-score-on-demand-script','/property/js/public-score-on-demand.js');
       loadScript('wd-robust-brand-script','/property/js/robust-public-brand.js');
       loadScript('wd-nj-address-autocomplete-script','/property/js/nj-address-autocomplete.js?v=20260928a');
-      loadScript('wd-anchor-home-funnel-script','/property/js/anchor-home-funnel.js');
+      loadScript('wd-anchor-home-funnel-script','/property/js/anchor-home-funnel.js?v=20261007a');
       loadScript('wd-anchor-rating-summary-script','/property/js/anchor-rating-summary.js');
       return;
     }

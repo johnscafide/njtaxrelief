@@ -1,0 +1,90 @@
+/* 
+     
+     Hi There. I see you are checking the code. I'm sure you have reasons for such. Curiosity would be my guess. 
+
+     My name is John. I've been building sites since I was 10. I was gifted ecommerce website software on floppy disks
+     and fell in love with web developement ever since. I learned to code HTML using just notepad. I took computer science
+     classes (BASIC and Visual Basic in high school). Took a few college classes learning C++, Python, Ruby and Javascript.
+     My very first websites was with Angelfire and Geocities. In college I dabbed in game development, small tools, and
+     graphic design. Database management with SQL by my sophmore year. Joomla and other CMS tools learned by the age of 20. 
+     I have an understanding and experience writing code by hand, studing and analyzing bugs, issues, and corrections. 
+     The introduction of AI is interesting. I can understand the worry and fear. I also see the memes of "Hey I can make 
+     your job obsolete" then show a localhost:3000. haha. But I do believe, if you understand how to use the tools, it's
+     no different than templates, hiring a local kid, outsourcing your work to fivrr or an agency. I code, I understand the
+     backend and frontend. I'm not an expert by all means. But I do have insights. Watchdog was built on real research.
+     Watchdog & it's companion, NJPropertyTaxRelief.com, is from years of listening to real people with real needs in NJ.
+     I hope these sites and tools have benefit to you and/or your business. If you found them useful, the least I ask of
+     you is to share. Sure, I have paid plan options for members, but majority of the site is free to use. I'm a real estate
+     agent, licensed tax professional, and a big fan of the state of New Jersey. It's a great state, but not without its
+     flaws. The idea is to educate more New Jerseyians about their benefits and property taxes in the state. It's possible
+     one day this site will exceed some of the bigger natonal sites. Who knows. But for now, I present to you, Watchdog
+     Property Intelligence.
+
+     */
+
+html,body.wsh{height:100%}
+body.wsh{margin:0;min-height:100vh;min-height:100dvh;display:flex;flex-direction:column;background:#1d2533;color:#fff;font-family:'Libre Franklin',system-ui,sans-serif;overflow-x:hidden}
+body.wsh a{color:inherit;text-decoration:none}
+body.wsh a:hover{text-decoration:underline}
+
+.wsh-top{position:relative;z-index:3;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 20px}
+.wsh-links{position:static;z-index:auto;background:none;box-shadow:none;display:flex;flex-wrap:wrap;gap:6px 22px;font-size:14px;font-weight:500;line-height:1.3}
+.wsh-links a{display:inline-flex;align-items:center;min-height:32px;text-shadow:0 1px 3px rgba(0,0,0,.35)}
+body.wsh .wsh-right{display:flex;align-items:center;gap:8px}
+body.wsh .wsh-menu{display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;padding:0;border:0;border-radius:50%;background:transparent;color:#fff;font-size:20px;cursor:pointer;box-shadow:none}
+body.wsh .wsh-menu:hover{background:rgba(255,255,255,.14)}
+body.wsh .wsh-profile{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-width:44px;height:44px;padding:0 16px;border:0;border-radius:8px;background:#1f4fa8;color:#fff;font:600 14px/1 'Libre Franklin',system-ui,sans-serif;cursor:pointer;box-shadow:0 2px 6px rgba(15,23,42,.08)}
+body.wsh .wsh-top .wdss-trigger,body.wsh .wsh-top .wd-anchor-apps-top{display:none!important}
+body.wsh .wsh-profile:hover{background:#1a4391}
+body.wsh .wsh-profile i{font-size:14px}
+body.wsh .wsh-profile img{width:100%;height:100%;object-fit:cover;border-radius:50%}
+body.wsh .wsh-profile[aria-label="Open account menu"]{width:44px;padding:0;border-radius:50%;border:2px solid rgba(255,255,255,.9);overflow:hidden}
+body.wsh .wsh-profile[aria-label="Open account menu"] span{display:none}
+
+body.wsh .pl-hero.wsh-hero{position:static;flex:1 0 auto;min-height:0;display:flex;align-items:center;justify-content:center;padding:16px 16px 12vh;background:none;overflow:visible}
+body.wsh .pl-hero-bg{position:fixed;inset:0;z-index:-1;filter:brightness(55%);transform:none;background-position:center 52%}
+@media (min-width:1200px){
+  body.wsh .pl-hero-bg{background-image:url('https://images.unsplash.com/photo-1628624747186-a941c476b7ef?w=1920&auto=format&fit=crop&q=75')}
+}
+.wsh-inner{width:100%;max-width:900px;display:flex;flex-direction:column;align-items:center}
+.wsh-logo{margin:0 0 30px;line-height:0}
+.wsh-logo svg{display:block;width:380px;max-width:80vw;height:auto}
+
+body.wsh .pl-search-card{width:100%;max-width:640px;margin:0 auto}
+body.wsh .pl-input-wrap{display:flex;align-items:center;gap:4px;background:#fff;border-radius:10px;padding:6px 8px;box-shadow:0 2px 6px rgba(15,23,42,.08)}
+body.wsh .pl-input{flex:1;min-width:0;border:0;outline:0;background:transparent;color:#141b2b;font:500 17px/1.2 'Libre Franklin',system-ui,sans-serif;padding:12px 4px}
+body.wsh .pl-input::placeholder{color:#6b7385}
+body.wsh .pl-search-btn,body.wsh .pl-geo{flex:0 0 44px;width:44px;height:44px;display:inline-flex;align-items:center;justify-content:center;border:0;border-radius:8px;background:transparent;font-size:17px;cursor:pointer;box-shadow:none;padding:0}
+body.wsh .pl-search-btn{color:#5a6475}
+body.wsh .pl-geo{color:#1f4fa8}
+body.wsh .pl-search-btn:hover,body.wsh .pl-geo:hover{background:#eef2f8}
+body.wsh .pl-search-btn:focus-visible,body.wsh .pl-geo:focus-visible,body.wsh .wsh-profile:focus-visible,body.wsh .wsh-menu:focus-visible,body.wsh a:focus-visible,body.wsh .wsh-foot-btn:focus-visible{outline:2px solid #fff;outline-offset:2px}
+body.wsh .pl-input-wrap:focus-within{box-shadow:0 0 0 3px rgba(255,255,255,.55),0 2px 6px rgba(15,23,42,.08)}
+
+.wsh-anchor{width:100%}
+.wsh-anchor:empty{display:none}
+body.wsh .wsh-anchor .wd-anchor-home-result{margin-top:20px;padding:0;background:transparent;border:0}
+body.wsh .wsh-anchor .wd-anchor-home-wrap{width:100%}
+body.wsh .wsh-anchor .wd-anchor-home-topline,body.wsh .wsh-anchor .wd-anchor-home-secure{color:#fff;text-shadow:0 1px 3px rgba(0,0,0,.35)}
+
+.wsh-foot{position:relative;z-index:2;display:flex;align-items:center;justify-content:space-between;gap:8px 16px;padding:12px 24px;background:rgba(10,14,22,.55);color:#fff;font-size:14px}
+.wsh-foot-links{position:static;z-index:auto;background:none;box-shadow:none;display:flex;gap:24px}
+.wsh-foot-links a,.wsh-foot-btn{display:inline-flex;align-items:center;min-height:32px}
+.wsh-foot-btn{padding:0;border:0;background:none;color:#fff;font:inherit;cursor:pointer}
+.wsh-foot-btn:hover{text-decoration:underline}
+.wsh-credit{font-size:13px;color:rgba(255,255,255,.88)}
+body.wsh .wsh-credit a{text-decoration:underline}
+
+@media (max-width:600px){
+  .wsh-top{align-items:flex-start;padding:12px 16px}
+  .wsh-links{flex-direction:column;gap:0;font-size:14px}
+  .wsh-logo{margin-bottom:22px}
+  .wsh-logo svg{width:260px}
+  body.wsh .pl-input{font-size:16px}
+  .wsh-foot{flex-direction:column-reverse;padding:10px 16px}
+  .wsh-credit{font-size:12px}
+}
+@media print{
+  body.wsh{color:#000;background:#fff}
+  body.wsh .pl-hero-bg,.wsh-foot{display:none}
+}

@@ -64,6 +64,8 @@
   }
 
   function placeResult(section){
+    var slot=document.getElementById('wd-anchor-home-slot');
+    if(slot){if(section.parentNode!==slot)slot.appendChild(section);return true;}
     var recents=document.getElementById('wd-consumer-recents');
     if(recents&&recents.parentNode){if(recents.previousElementSibling!==section)recents.parentNode.insertBefore(section,recents);return true;}
     var hero=q('.pl-hero');if(hero&&hero.parentNode){if(hero.nextElementSibling!==section)hero.insertAdjacentElement('afterend',section);return true;}
