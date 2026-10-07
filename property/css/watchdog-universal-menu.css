@@ -618,3 +618,32 @@ html body .wd-universal-nav-head .wd-universal-brand>span{
 .wd-universal-close,.wd-public-close,.wd-universal-profile-close,.wd-universal-invite-x{min-width:44px!important;min-height:44px!important}
 .wd-public-trigger{min-width:44px!important;min-height:44px!important}
 .wd-anchor-apps-top{width:44px!important;height:44px!important}
+
+.wd-universal-profile .wdpm{display:block!important;padding:16px 14px 12px!important;font-family:var(--wdum-font)!important;color:var(--wdum-ink)!important;text-align:left!important}
+.wd-universal-profile .wdpm *{box-sizing:border-box!important;letter-spacing:0!important;text-transform:none!important}
+.wd-universal-profile .wdpm-close{position:absolute!important;top:10px!important;right:10px!important;z-index:5!important;min-height:36px!important;padding:0 12px!important;border:0!important;border-radius:8px!important;background:transparent!important;color:#5d6a82!important;font:600 14px/1 var(--wdum-font)!important;cursor:pointer!important}
+.wd-universal-profile .wdpm-close:hover{background:#f3f5f9!important;color:var(--wdum-ink)!important}
+.wd-universal-profile .wdpm-who{display:flex!important;flex-direction:column!important;align-items:center!important;gap:2px!important;padding:4px 0 14px!important;text-align:center!important;background:transparent!important;border:0!important}
+.wd-universal-profile .wdpm-face{width:64px!important;height:64px!important;border-radius:50%!important;object-fit:cover!important;display:grid!important;place-items:center!important;margin:0 0 8px!important;background:var(--wdum-navy)!important;color:#fff!important;font:700 24px/1 var(--wdum-head)!important;font-style:normal!important}
+.wd-universal-profile .wdpm-who b{display:block!important;max-width:100%!important;font:700 18px/1.25 var(--wdum-head)!important;color:var(--wdum-ink)!important;overflow:hidden!important;text-overflow:ellipsis!important;white-space:nowrap!important}
+.wd-universal-profile .wdpm-who span{display:block!important;max-width:100%!important;font:400 14px/1.4 var(--wdum-font)!important;color:#5d6a82!important;overflow:hidden!important;text-overflow:ellipsis!important;white-space:nowrap!important}
+.wd-universal-profile .wdpm-manage{display:inline-flex!important;align-items:center!important;justify-content:center!important;min-height:44px!important;margin:12px 0 0!important;padding:0 18px!important;border:1px solid #c9d2e0!important;border-radius:10px!important;background:#fff!important;color:#1d4fd8!important;font:600 14px/1 var(--wdum-font)!important;text-decoration:none!important;cursor:pointer!important;width:auto!important}
+.wd-universal-profile .wdpm-manage:hover{background:#f3f6fd!important}
+.wd-universal-profile .wdpm-box{display:block!important;margin:8px 0 0!important;padding:0!important;border:0!important;border-radius:10px!important;background:#f3f5f9!important;overflow:hidden!important;box-shadow:none!important}
+.wd-universal-profile .wdpm-box>a,.wd-universal-profile .wdpm-box>button{display:flex!important;align-items:center!important;width:100%!important;min-height:44px!important;margin:0!important;padding:0 16px!important;border:0!important;border-top:1px solid #fff!important;border-radius:0!important;background:transparent!important;color:var(--wdum-ink)!important;font:500 15px/1.2 var(--wdum-font)!important;text-align:left!important;text-decoration:none!important;cursor:pointer!important}
+.wd-universal-profile .wdpm-box>:first-child{border-top:0!important}
+.wd-universal-profile .wdpm-box>a:hover,.wd-universal-profile .wdpm-box>button:hover{background:#e9edf4!important}
+.wd-universal-profile .wdpm-set{display:flex!important;align-items:center!important;justify-content:space-between!important;gap:10px!important;min-height:48px!important;padding:0 8px 0 16px!important;border-top:1px solid #fff!important;font:500 15px/1.2 var(--wdum-font)!important;color:var(--wdum-ink)!important}
+.wd-universal-profile .wdpm-set:first-child{border-top:0!important}
+.wd-universal-profile .wdpm-set>button{min-width:72px!important;min-height:36px!important;padding:0 12px!important;border:1px solid #e2e7ef!important;border-radius:8px!important;background:#fff!important;color:var(--wdum-ink)!important;font:600 13px/1 var(--wdum-font)!important;cursor:pointer!important}
+.wd-universal-profile .wdpm-set>button:disabled{color:#8a95a8!important;cursor:default!important}
+.wd-universal-profile .wdpm-set>.wdpm-switch[aria-checked="true"]{background:var(--wdum-navy)!important;border-color:var(--wdum-navy)!important;color:#fff!important}
+.wd-universal-profile .wdpm-dev>p{margin:0!important;padding:12px 16px 2px!important;font:600 14px/1.2 var(--wdum-font)!important;color:#5d6a82!important}
+.wd-universal-profile .wdpm-grid{display:grid!important;grid-template-columns:1fr 1fr!important;padding:2px 6px 6px!important}
+.wd-universal-profile .wdpm-grid>a{display:flex!important;align-items:center!important;min-height:36px!important;padding:0 10px!important;border-radius:8px!important;color:var(--wdum-ink)!important;font:400 14px/1.2 var(--wdum-font)!important;text-decoration:none!important}
+.wd-universal-profile .wdpm-grid>a:hover{background:#e9edf4!important}
+.wd-universal-profile .wdpm-foot{display:grid!important;grid-template-columns:1fr 1fr!important;gap:2px!important;margin:8px 0 0!important;border-radius:10px!important;overflow:hidden!important}
+.wd-universal-profile .wdpm-foot>a,.wd-universal-profile .wdpm-foot>button{display:flex!important;align-items:center!important;justify-content:center!important;min-height:44px!important;margin:0!important;padding:0 12px!important;border:0!important;border-radius:0!important;background:#f3f5f9!important;color:var(--wdum-ink)!important;font:500 14px/1 var(--wdum-font)!important;text-decoration:none!important;cursor:pointer!important;width:100%!important}
+.wd-universal-profile .wdpm-foot>a:hover,.wd-universal-profile .wdpm-foot>button:hover{background:#e9edf4!important}
+.wd-universal-profile .wdpm a:focus-visible,.wd-universal-profile .wdpm button:focus-visible,.wd-universal-profile .wdpm-close:focus-visible{outline:3px solid var(--wdum-sky-line)!important;outline-offset:-3px!important}
+.wd-public-sheet.right.wd-universal-public-profile{width:min(360px,calc(100vw - 20px))!important}

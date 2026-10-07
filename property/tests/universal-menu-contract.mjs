@@ -61,10 +61,12 @@ assert(universal.includes("can('agent')"), 'Agent+ menu gating is missing');
 assert(universal.includes("can('agent')) out.push({key:'transaction',href:'/transaction/'"), 'Transactions must be an Agent-or-higher root dashboard');
 assert(universal.includes('isAgent()'), 'Agent Control role gating is missing');
 assert(universal.includes("hostname === 'watchdogindex.com'") || universal.includes("hostname === 'www.watchdogindex.com'"), 'Clean watchdogindex.com route support is missing');
-assert(universal.includes('Edit profile &amp; role'), 'Shared profile menu is missing Edit profile & role');
+assert(universal.includes('Manage account'), 'Shared profile menu is missing Manage account');
 assert(universal.includes('Invite others'), 'Shared profile menu is missing Invite others');
-assert(universal.includes('Account &amp; billing'), 'Shared profile menu is missing Account & billing');
-assert(universal.includes('Your saved-home dashboard'), 'Shared profile menu is missing Property Home info');
+assert(universal.includes('>Property Home</a>'), 'Shared profile menu is missing Property Home');
+assert(universal.includes('data-wd-universal="alerts"'), 'Shared profile menu is missing the Home alerts switch');
+assert(universal.includes('data-wd-universal="clear-recent"'), 'Shared profile menu is missing Clear recent searches');
+assert(!/class="wdpm[^"]*"[^>]*><i class="fa/.test(universal), 'Profile menu rows must not carry icons');
 
 // Developer shortcuts belong to the universal profile menu only and must be
 // unlocked by the internal account_role, never by a paid customer plan tier.
@@ -85,11 +87,10 @@ assert(universal.includes('function isDeveloper()'), 'Resolved developer-state h
 assert(universal.includes("if(!isDeveloper()) return '';"), 'Developer profile rows are not fail-closed for non-developers');
 assert(universal.includes('developerToolsHtml() +'), 'Developer tools are not injected by the shared profile renderer');
 assert(universal.includes('developerItems:developerItems'), 'Developer tool registry is not exposed from the universal menu');
-assert(css.includes('.wd-universal-developer-label'), 'Developer profile section styling is missing');
-assert(css.includes('.wd-universal-developer-tool'), 'Developer profile tool styling is missing');
+assert(css.includes('.wd-universal-profile .wdpm-dev'), 'Developer profile section styling is missing');
 assert(css.includes('max-height:calc(100vh - 96px)!important;overflow:auto!important'), 'App profile popovers cannot scroll when developer tools are present');
 
-// Customer account menus get one contextual graphical promotion based on the
+// planPromo() keeps the plan-aware upgrade data based on the
 // resolved plan. Developer and Teams accounts must never be shown an upsell ad.
 assert(universal.includes('function planPromo()'), 'Plan-aware account promo helper is missing');
 assert(universal.includes("p === 'standard' || p === 'agent'"), 'Standard/Agent to Pro promo gate is missing');
@@ -97,13 +98,11 @@ assert(universal.includes("if(p === 'pro')"), 'Pro to Pro+ promo gate is missing
 assert(universal.includes("if(p === 'pro_plus')"), 'Pro+ to Teams promo gate is missing');
 assert(universal.includes("if(!state.user || !state.ready || isDeveloper()) return null;"), 'Developer/signed-out promo suppression is missing');
 assert(universal.includes("route('/teams')"), 'Pro+ Teams preview route is missing');
-assert(universal.includes('data-wd-plan-promo'), 'Graphical plan promo markup is missing');
-assert(universal.includes('planPromoHtml() +'), 'Plan promo is not injected by the shared profile renderer');
 assert(universal.includes('planPromo:planPromo'), 'Plan promo registry is not exposed for verification');
 assert(universal.includes("tone:'pro'"), 'Pro promo tone is missing from plan mapping');
 assert(universal.includes("tone:'plus'"), 'Pro+ promo tone is missing from plan mapping');
 assert(universal.includes("tone:'teams'"), 'Teams promo tone is missing from plan mapping');
-assert(universal.includes("var VERSION = '20261001a'"), 'Universal menu asset version is stale');
+assert(universal.includes("var VERSION = '20261007b'"), 'Universal menu asset version is stale');
 assert(!universal.includes('function ensurePromoCss()'), 'Plan promo styling must not be injected inline from JavaScript');
 assert(!universal.includes('wd-universal-plan-promo-css'), 'Legacy inline plan-promo style element is still present');
 

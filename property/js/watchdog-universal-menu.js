@@ -26,15 +26,16 @@
   if(window.__WATCHDOG_UNIVERSAL_MENU__) return;
   window.__WATCHDOG_UNIVERSAL_MENU__ = true;
 
-  var VERSION = '20261001a';
-  var CSS_VERSION = '20261001a';
+  var VERSION = '20261007b';
+  var CSS_VERSION = '20261007b';
   var URL = 'https://uvkvaxljhhngydvlrzom.supabase.co';
   var KEY = 'sb_publishable_MYX59qCbK3d-21zDfJqkNw_fvmfnexa';
   var hostname = String(location.hostname || '').toLowerCase();
   var cleanHost = hostname === 'watchdogindex.com' || hostname === 'www.watchdogindex.com';
   var prefix = cleanHost ? '' : '/property';
   var db = null;
-  var state = { user:null, profile:{}, entitlement:null, ready:false };
+  var state = { user:null, profile:{}, entitlement:null, ready:false, alerts:null, alertPins:[] };
+  var RECENT_KEY = 'watchdogRecentProperties';
   var queued = false;
   var authAttempts = 0;
   var observed = typeof WeakSet === 'function' ? new WeakSet() : null;
@@ -234,12 +235,12 @@
 
   function developerItems(){
     return [
-      {key:'developer',href:route('/developer'),icon:'fa-code',label:'Developer Command Center',detail:'Platform map and developer shortcuts'},
-      {key:'developer-recaps',href:route('/logs/recap'),icon:'fa-calendar-check',label:'Daily Recaps',detail:'Daily operating memory and handoffs'},
-      {key:'developer-marketing',href:route('/developer-marketing-plan'),icon:'fa-bullhorn',label:'Marketing Campaign',detail:'Organic-first Watchdog launch plan under $100'},
-      {key:'developer-analytics',href:route('/analytics'),icon:'fa-chart-line',label:'Analytics',detail:'External product and account KPIs'},
-      {key:'developer-logs',href:route('/logs'),icon:'fa-clock-rotate-left',label:'Build Logs',detail:'Build, verification and audit history'},
-      {key:'developer-data',href:route('/developer-data'),icon:'fa-database',label:'Data Operations',detail:'Marker freshness and release controls'}
+      {key:'developer',short:'Command center',href:route('/developer'),icon:'fa-code',label:'Developer Command Center',detail:'Platform map and developer shortcuts'},
+      {key:'developer-recaps',short:'Daily recaps',href:route('/logs/recap'),icon:'fa-calendar-check',label:'Daily Recaps',detail:'Daily operating memory and handoffs'},
+      {key:'developer-marketing',short:'Marketing',href:route('/developer-marketing-plan'),icon:'fa-bullhorn',label:'Marketing Campaign',detail:'Organic-first Watchdog launch plan under $100'},
+      {key:'developer-analytics',short:'Analytics',href:route('/analytics'),icon:'fa-chart-line',label:'Analytics',detail:'External product and account KPIs'},
+      {key:'developer-logs',short:'Build logs',href:route('/logs'),icon:'fa-clock-rotate-left',label:'Build Logs',detail:'Build, verification and audit history'},
+      {key:'developer-data',short:'Data',href:route('/developer-data'),icon:'fa-database',label:'Data Operations',detail:'Marker freshness and release controls'}
     ];
   }
   function isSalesConsultant(){
@@ -248,14 +249,14 @@
   }
   function salesDeskHtml(){
     if(!isSalesConsultant() && !isDeveloper()) return '';
-    return '<a class="wd-universal-developer-tool" data-wd-developer-tool="sales-desk" href="' + route('/sales-desk') + '"><i class="fas fa-handshake"></i><span><b>Sales Desk</b><small>' + (isDeveloper() ? 'Consultants, attributions and payouts' : 'Your share links, accounts and commissions') + '</small></span></a>';
+    return '<a data-wd-developer-tool="sales-desk" href="' + route('/sales-desk') + '">Sales Desk</a>';
   }
   function developerToolsHtml(){
     if(!isDeveloper()) return '';
-    return '<div class="wd-universal-developer-label"><i class="fas fa-code"></i><span>Developer tools</span></div>' +
+    return '<div class="wdpm-box wdpm-dev"><p>Developer</p><div class="wdpm-grid">' +
       developerItems().map(function(item){
-        return '<a class="wd-universal-developer-tool" data-wd-developer-tool="' + item.key + '" href="' + item.href + '"><i class="fas ' + item.icon + '"></i><span><b>' + item.label + '</b><small>' + item.detail + '</small></span></a>';
-      }).join('');
+        return '<a data-wd-developer-tool="' + item.key + '" href="' + item.href + '">' + item.short + '</a>';
+      }).join('') + salesDeskHtml() + '</div></div>';
   }
   function planPromo(){
     if(!state.user || !state.ready || isDeveloper()) return null;
@@ -271,15 +272,7 @@
     }
     return null;
   }
-  function planPromoHtml(){
-    var promo = planPromo();
-    if(!promo) return '';
-    return '<a class="wd-universal-plan-promo wd-universal-plan-promo-' + promo.tone + '" data-wd-plan-promo="' + promo.key + '" href="' + promo.href + '">' +
-      '<span class="wd-universal-plan-promo-icon"><i class="fas ' + promo.icon + '"></i></span>' +
-      '<span class="wd-universal-plan-promo-copy"><small>' + promo.eyebrow + '</small><b>' + promo.title + '</b><em>' + promo.detail + '</em></span>' +
-      '<span class="wd-universal-plan-promo-cta">' + promo.cta + ' <i class="fas fa-arrow-right"></i></span>' +
-    '</a>';
-  }
+
   function activeKey(){
     var area = agentAreaFor(location.pathname,location.hash);
     if(area && isAgent() && workUnlocked()) return area;
@@ -388,30 +381,72 @@
   }
 
   function profileMarkup(publicMode){
-    var close = publicMode ? '<button class="wd-universal-profile-close wd-public-close" type="button" data-wd-universal="close" aria-label="Close account menu"><i class="fas fa-xmark"></i></button>' : '';
+    var close = publicMode ? '<button class="wdpm-close" type="button" data-wd-universal="close">Close</button>' : '';
     if(!state.user){
-      return close +
-        '<header><span><b>Watchdog</b><small>Sign in to your account</small></span><i>Signed out</i></header>' +
-        '<nav>' +
-          '<button type="button" data-wd-universal="signin"><i class="fas fa-right-to-bracket"></i><span><b>Sign in to Watchdog</b><small>Open your saved properties and account</small></span></button>' +
-          '<a href="' + route('/pro') + '"><i class="fas fa-briefcase"></i><span><b>Plans &amp; professional tools</b><small>See Watchdog access levels</small></span></a>' +
-          '<a href="' + route('/') + '"><i class="fas fa-magnifying-glass"></i><span><b>Property lookup</b><small>Search any New Jersey property</small></span></a>' +
-        '</nav>';
+      return close + '<div class="wdpm">' +
+        '<div class="wdpm-who"><b>Watchdog</b><button class="wdpm-manage" type="button" data-wd-universal="signin">Sign in</button></div>' +
+        '<div class="wdpm-box"><a href="' + route('/') + '">Property lookup</a><a href="' + route('/pro') + '">Plans</a></div>' +
+      '</div>';
     }
     var pic = avatar();
     var initial = esc(String(displayName()).trim().charAt(0).toUpperCase() || 'W');
-    var face = pic ? '<img class="wd-universal-face" src="' + esc(pic) + '" alt="">' : '<em class="wd-universal-face" aria-hidden="true">' + initial + '</em>';
-    return close +
-      '<header>' + face + '<span><b>' + esc(displayName()) + '</b><small>' + esc(state.user.email || '') + '</small></span><i>' + esc(prettyPlan()) + '</i></header>' +
-      '<nav>' +
-        planPromoHtml() +
-        '<a href="' + route('/account') + '"><i class="fas fa-user-pen"></i><span><b>Edit profile &amp; role</b><small>Profile, profession and preferences</small></span></a>' +
-        '<button type="button" data-wd-universal="invite"><i class="fas fa-user-plus"></i><span><b>Invite others</b><small>Share your Watchdog referral link</small></span></button>' +
-        '<a href="' + route('/account') + '"><i class="fas fa-credit-card"></i><span><b>Account &amp; billing</b><small>Plan, subscription and billing</small></span></a>' +
-        ((isAgent() || can('agent')) ? '<a href="/agent/training"><i class="fas fa-graduation-cap"></i><span><b>Training Center</b><small>Review Agent and Professional tasks anytime</small></span></a>' : '') +
-        '<a href="' + route('/home') + '"><i class="fas fa-house"></i><span><b>Property Home</b><small>Your saved-home dashboard</small></span></a>' +
-        developerToolsHtml() + salesDeskHtml() +
-      '</nav><button class="wd-universal-signout" type="button" data-wd-universal="signout"><i class="fas fa-arrow-right-from-bracket"></i> Sign out</button>';
+    var face = pic ? '<img class="wdpm-face" src="' + esc(pic) + '" alt="">' : '<em class="wdpm-face" aria-hidden="true">' + initial + '</em>';
+    var who = (isSalesConsultant() ? 'Sales consultant &middot; ' : '') + esc(prettyPlan());
+    var sales = !isDeveloper() && isSalesConsultant() ? '<div class="wdpm-box">' + salesDeskHtml() + '</div>' : '';
+    return close + '<div class="wdpm">' +
+      '<div class="wdpm-who">' + face + '<b>' + esc(displayName()) + '</b><span>' + esc(state.user.email || '') + '</span><span>' + who + '</span>' +
+        '<a class="wdpm-manage" href="' + route('/account') + '">Manage account</a></div>' +
+      '<div class="wdpm-box">' +
+        '<a href="' + route('/home') + '">Property Home</a>' +
+        '<a href="' + route('/anchor/applications/') + '" data-wd-anchor-apps-profile="1">ANCHOR applications</a>' +
+        ((isAgent() || can('agent')) ? '<a href="/agent/training">Training</a>' : '') +
+        '<button type="button" data-wd-universal="invite">Invite others</button>' +
+      '</div>' +
+      '<div class="wdpm-box">' + alertsRowHtml() +
+        '<div class="wdpm-set"><span>Recent searches</span><button type="button" data-wd-universal="clear-recent"' + (hasRecent() ? '>Clear' : ' disabled>Cleared') + '</button></div>' +
+      '</div>' +
+      developerToolsHtml() + sales +
+      '<div class="wdpm-foot"><a href="' + route('/pro') + '">Plans</a><button type="button" data-wd-universal="signout">Sign out</button></div>' +
+    '</div>';
+  }
+  function alertsRowHtml(){
+    if(state.alerts === null) return '';
+    return '<div class="wdpm-set"><span id="wdpm-alerts-label">Home alerts</span><button class="wdpm-switch" type="button" role="switch" data-wd-universal="alerts" aria-labelledby="wdpm-alerts-label" aria-checked="' + (state.alerts ? 'true' : 'false') + '">' + (state.alerts ? 'On' : 'Off') + '</button></div>';
+  }
+  function hasRecent(){
+    try{ return JSON.parse(localStorage.getItem(RECENT_KEY) || '[]').length > 0; }catch(_){ return false; }
+  }
+  function clearRecent(){
+    try{ localStorage.removeItem(RECENT_KEY); }catch(_){}
+    document.querySelectorAll('[data-wd-universal="clear-recent"]').forEach(function(b){ b.disabled = true; b.textContent = 'Cleared'; });
+  }
+  function loadAlerts(){
+    if(!db || !state.user) return;
+    var uid = state.user.id;
+    Promise.all([
+      db.from('saved_properties').select('pams_pin').eq('user_id',uid),
+      db.from('property_alert_preferences').select('pams_pin,paused').eq('user_id',uid)
+    ]).then(function(r){
+      if(!state.user || state.user.id !== uid || r[0].error) return;
+      var paused = {};
+      (r[1].data || []).forEach(function(p){ if(p.paused) paused[p.pams_pin] = true; });
+      state.alertPins = (r[0].data || []).map(function(p){ return p.pams_pin; }).filter(Boolean);
+      state.alerts = state.alertPins.length ? state.alertPins.some(function(pin){ return !paused[pin]; }) : null;
+      queue();
+    }).catch(function(){});
+  }
+  function paintAlerts(on){
+    document.querySelectorAll('[data-wd-universal="alerts"]').forEach(function(b){ b.setAttribute('aria-checked',on ? 'true' : 'false'); b.textContent = on ? 'On' : 'Off'; });
+  }
+  function toggleAlerts(){
+    if(!db || !state.user || state.alerts === null) return;
+    var was = state.alerts, on = !was, uid = state.user.id;
+    state.alerts = on;
+    paintAlerts(on);
+    var rows = state.alertPins.map(function(pin){ return {user_id:uid,pams_pin:pin,paused:!on}; });
+    Promise.resolve(db.from('property_alert_preferences').upsert(rows,{onConflict:'user_id,pams_pin'})).then(function(r){
+      if(r && r.error) throw r.error;
+    }).catch(function(){ state.alerts = was; paintAlerts(was); });
   }
   function patchProfiles(){
     var publicSheet = document.getElementById('wd-profile-sheet');
@@ -627,7 +662,12 @@
     queued = true;
     requestAnimationFrame(function(){ queued = false; refresh(); });
   }
-  function setUser(u){ state.user = u || null; queue(); }
+  function setUser(u){
+    if(!u || !state.user || u.id !== state.user.id){ state.alerts = null; state.alertPins = []; }
+    state.user = u || null;
+    queue();
+    loadAlerts();
+  }
   function loadAuth(){
     if(!window.supabase){
       if(authAttempts++ < 30) setTimeout(loadAuth,120);
@@ -649,6 +689,7 @@
         state.entitlement = Array.isArray(ent) ? ent[0] : ent;
         state.ready = true;
         queue();
+        loadAlerts();
       });
     }).catch(function(){ state.ready = true; queue(); });
   }
@@ -675,6 +716,8 @@
     else if(action === 'signin'){ ev.preventDefault(); signIn(); }
     else if(action === 'signout'){ ev.preventDefault(); signOut(); }
     else if(action === 'invite'){ ev.preventDefault(); showInvite(); }
+    else if(action === 'alerts'){ ev.preventDefault(); toggleAlerts(); }
+    else if(action === 'clear-recent'){ ev.preventDefault(); clearRecent(); }
     else if(action === 'invite-close'){ ev.preventDefault(); closeInvite(); }
     else if(action === 'copy'){ ev.preventDefault(); copyInvite(); }
     else if(action === 'share'){ ev.preventDefault(); shareInvite(); }
