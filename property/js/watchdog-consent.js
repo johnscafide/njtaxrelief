@@ -49,9 +49,11 @@
   /* The cookie banner is hidden on the ANCHOR/PAS-1 application pages (so it doesn't cover
      the start of the application) and on the free CO lookup (/co and its town pages).
      A prefix ending in "/" also matches the path without it (/co/ covers /co).
-     Hiding the banner never turns optional cookies on: they stay off until the visitor
-     chooses, and Cookie settings in the footer still works. */
+     Hiding the banner doesn't turn optional cookies on, except on the CO lookup paths in
+     ANALYTICS_ON_PATHS: there analytics runs until the visitor turns it off in Cookie
+     settings, unless the browser sends Global Privacy Control or Do Not Track. */
   var HIDE_BANNER_PATHS = ['/anchor/application', '/co/'];
+  var ANALYTICS_ON_PATHS = ['/co/'];
   var stored = readStored();
   var lastFocus = null;
   var analyticsLoadQueued = false;
@@ -115,7 +117,7 @@
     return ADS_AVAILABLE && stored.adChoiceMade !== true;
   }
   function current(){
-    return {version:VERSION,decided:!!stored,necessary:true,analytics:!!(stored && stored.analytics),advertising:advertisingAllowed(),advertisingAvailable:ADS_AVAILABLE};
+    return {version:VERSION,decided:!!stored,necessary:true,analytics:analyticsOn(),advertising:advertisingAllowed(),advertisingAvailable:ADS_AVAILABLE};
   }
   function ensureCss(){
     if(document.querySelector('link[href="'+CSS_URL+'"]')) return;
@@ -265,10 +267,13 @@
     if(ADS_AVAILABLE) return '<div class="wd-consent-copy"><span class="wd-consent-mark" aria-hidden="true"><i class="fas fa-dog"></i></span><div><strong>Choose your cookie preferences</strong><p>Watchdog uses cookies to keep you signed in and remember preferences. Optional measurement cookies help us understand product use. Optional advertising cookies let ad platforms measure Watchdog ads and show you Watchdog ads on other sites. Both stay off unless you turn them on. <a href="'+privacyHref()+'">Privacy Policy</a></p></div></div><div class="wd-consent-actions"><button type="button" class="wd-consent-settings" data-wd-consent-action="settings">Cookie settings</button><button type="button" class="wd-consent-secondary" data-wd-consent-action="reject">Reject optional cookies</button><button type="button" class="wd-consent-primary" data-wd-consent-action="accept">Accept all cookies</button></div>';
     return '<div class="wd-consent-copy"><span class="wd-consent-mark" aria-hidden="true"><i class="fas fa-dog"></i></span><div><strong>Choose your cookie preferences</strong><p>Watchdog uses cookies to keep you signed in and remember preferences. Optional measurement cookies help us understand product use and whether Watchdog ads lead to sign-ups or purchases. We do not sell personal information or enable ad personalization on Watchdog. <a href="'+privacyHref()+'">Privacy Policy</a></p></div></div><div class="wd-consent-actions"><button type="button" class="wd-consent-settings" data-wd-consent-action="settings">Cookie settings</button><button type="button" class="wd-consent-secondary" data-wd-consent-action="reject">Reject optional cookies</button><button type="button" class="wd-consent-primary" data-wd-consent-action="accept">Accept all cookies</button></div>';
   }
-  function bannerHiddenHere(){
+  function onPaths(list){
     var path=String(location.pathname||'').replace(/^\/property(?=\/)/,'');
-    return HIDE_BANNER_PATHS.some(function(prefix){return path===prefix||path===prefix.replace(/\/$/,'')||path.indexOf(prefix)===0;});
+    return list.some(function(prefix){return path===prefix||path===prefix.replace(/\/$/,'')||path.indexOf(prefix)===0;});
   }
+  function bannerHiddenHere(){ return onPaths(HIDE_BANNER_PATHS); }
+  function analyticsOnByDefaultHere(){ return !stored && !privacySignal() && onPaths(ANALYTICS_ON_PATHS); }
+  function analyticsOn(){ return stored ? !!stored.analytics : analyticsOnByDefaultHere(); }
   function ensureBanner(){
     if(bannerHiddenHere() || !needsChoice() || document.getElementById('wd-cookie-banner')) return;
     var banner=document.createElement('section');banner.id='wd-cookie-banner';banner.className='wd-consent-banner';banner.setAttribute('role','region');banner.setAttribute('aria-label','Cookie preferences');banner.innerHTML=bannerMarkup();document.body.appendChild(banner);
@@ -290,7 +295,7 @@
   }
   function syncControls(){
     var input=document.getElementById('wd-consent-analytics');
-    if(input) input.checked=!!(stored&&stored.analytics);
+    if(input) input.checked=analyticsOn();
     var ads=document.getElementById('wd-consent-advertising');
     if(ads) ads.checked=advertisingAllowed();
   }
@@ -323,8 +328,8 @@
   ensureGoogleQueue();
   signalGoogle(false,'default');
   signalClarity(false);
-  if(CLARITY_ID===CLARITY_IDS.watchdog) loadClarity(!!(stored&&stored.analytics));
-  if(stored) apply(stored.analytics,false);
+  if(CLARITY_ID===CLARITY_IDS.watchdog) loadClarity(analyticsOn());
+  if(stored||analyticsOnByDefaultHere()) apply(analyticsOn(),false);
 
   function ready(){ ensureBanner();ensureModal();appendOnboardingLink();syncControls(); }
   if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',ready,{once:true}); else ready();
@@ -338,7 +343,7 @@
     acceptAnalytics:function(){apply(true,true);},
     rejectOptional:function(){apply(false,true,false);},
     setAnalytics:function(value){apply(!!value,true);},
-    setAdvertising:function(value){apply(!!(stored&&stored.analytics),true,!!value&&ADS_AVAILABLE&&!privacySignal());},
+    setAdvertising:function(value){apply(analyticsOn(),true,!!value&&ADS_AVAILABLE&&!privacySignal());},
     adPixels:function(){return ADS_AVAILABLE?JSON.parse(JSON.stringify(AD_PIXELS)):null;},
     syncAnalytics:syncAnalytics
   });
