@@ -185,6 +185,21 @@ assert.equal(res.statusCode, 400);
 res = await call('', { get_public_property_page: row, publish_public_property_page: '/nj/x/y' }, { method: 'POST', headers: browser, body: { pin: '0904_9_20', zip: '<b>' } });
 assert.equal(res.calls.find((c) => c.name === 'publish_public_property_page').body.p_zip, null, 'bad ZIPs are dropped');
 
+// Popup summary cards: GET ?top=<pin>
+res = await call('', { get_public_property_page: row }, { query: { top: '0904_9_20', zip: '07029', city: 'Harrison' } });
+assert.equal(res.statusCode, 200);
+let top = JSON.parse(res.body);
+assert.equal(top.pin, '0904_9_20');
+assert.match(top.html, /class="wdp-head"/);
+assert.match(top.html, /class="wdp-cards"/);
+assert.match(top.html, /Harrison, NJ 07029/);
+assert.doesNotMatch(top.html, /id="plm-ssr"/);
+assert.match(top.css, /#plm-top~#plm-photos/);
+res = await call('', {}, { query: { top: '<script>' } });
+assert.equal(res.statusCode, 400);
+res = await call('', {}, { query: { top: '0904_9_21' } });
+assert.equal(res.statusCode, 404);
+
 // Property sitemap
 const sitemap = require(new URL('api/watchdog-property-sitemap.js', root).pathname);
 const xml = sitemap.renderXml([{ path: '/nj/harrison-town/102-grant-avenue-07029', lastmod: '2026-10-07T13:00:00Z' }, { path: '/nj/bad path/<x>' }]);

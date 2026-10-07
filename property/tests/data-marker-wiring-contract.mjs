@@ -194,11 +194,18 @@ const counties = Object.keys(ref.appeals.counties);
 const fullRecord = { ...parcelRow, prop_class: '2', bldg_class: '15', land_desc: 'L', sales_code: '0', mailing_address: 'x', shape_area: 1, shape_length: 1, parcel_last_update: 'x', parcel_publication_date: 'x', pcl_mun: 'x', gis_pin: 'x', old_property_id: 'x', parcel_guid: 'x', facility_name: 'x', additional_lots_1: 'x' };
 // Resolved by workbench-derived / the SR-1A subject provider in production, not by the parcel record.
 const derivedResolved = new Set(['property.market_value', 'property.square_feet']);
+// Resolved by a compatibility provider that the production Workbench bootstrap imports, not by index.ts.
+const providerResolved = { 'property.city': ['city-provider.ts', 'enrichCityAddress', /const CITY_MARKER_ID = 'property\.city'/] };
+const hydrateBootstrap = read('supabase/functions/workbench-hydrate/production-bootstrap.ts');
+for (const [id, [file, fn, marker]] of Object.entries(providerResolved)) {
+  assert.match(read(`supabase/functions/workbench-hydrate/${file}`), marker, `${file} produces ${id}`);
+  assert.match(hydrateBootstrap, new RegExp(`import \\{ ${fn} \\} from '\\./${file.replace('.', '\\.')}'`), `production bootstrap imports ${fn} for ${id}`);
+}
 const never = [];
 for (const m of markers.filter((x) => x.provider_status === 'live')) {
   const field = String(m.field || '');
   let produced = null;
-  if (m.source_id === 'nj-parcels-modiv') produced = derivedResolved.has(m.id) || resolvers.propField(fullRecord, field) != null;
+  if (m.source_id === 'nj-parcels-modiv') produced = derivedResolved.has(m.id) || Object.hasOwn(providerResolved, m.id) || resolvers.propField(fullRecord, field) != null;
   else if (m.source_id === 'nj-sr1a') produced = districts.some((d) => resolvers.sr1aValue(ref.sr1a.districts[d], field) != null);
   else if (m.source_id === 'nj-cod') produced = districts.some((d) => resolvers.uniformityValue(ref.uniformity.districts[d], field, ref.codHistory.districts?.[d], ref.codLegacy.districts?.[d]) != null);
   else if (m.source_id === 'nj-dca-budget') produced = districts.some((d) => resolvers.budgetValue(ref.budget.municipalities[d], field) != null);

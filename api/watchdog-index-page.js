@@ -120,7 +120,7 @@ function cleanPropertyPath(value) {
 
 function rewriteAbsolutePropertyUrls(html) {
   return html.replace(
-    /https:\/\/(?:www\.)?njpropertytaxrelief\.com\/property([^"'<>\s]*)/gi,
+    /https:\/\/(?:www\.)?(?:njpropertytaxrelief|watchdogindex)\.com\/property([^"'<>\s]*)/gi,
     (full, rest) => {
       const propertyPath = `/property${rest || '/'}`;
       if (isImplementationPropertyPath(propertyPath)) return full;
@@ -269,6 +269,36 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
 })();</script>`;
 }
 
+const DEFAULT_SOCIAL_IMAGE = `${CANONICAL_ORIGIN}/watchdog-social-share-20260913-v3.jpg`;
+
+function metaContent(html, attr, name) {
+  const tag = html.match(new RegExp(`<meta\\s+[^>]*${attr}=["']${name}["'][^>]*>`, 'i'));
+  if (!tag) return null;
+  const content = tag[0].match(/\bcontent=(["'])([\s\S]*?)\1/i);
+  return content ? content[2] : '';
+}
+
+function ensureSocialMetadata(html) {
+  const head = (html.match(/<head\b[\s\S]*?<\/head>/i) || [''])[0];
+  if (!head) return html;
+  const titleMatch = head.match(/<title[^>]*>([\s\S]*?)<\/title>/i);
+  const title = titleMatch ? titleMatch[1].trim().replace(/"/g, '&quot;') : '';
+  const description = metaContent(head, 'name', 'description');
+  const tags = [];
+  if (title && metaContent(head, 'property', 'og:title') == null) tags.push(`<meta property="og:title" content="${title}">`);
+  if (description && metaContent(head, 'property', 'og:description') == null) tags.push(`<meta property="og:description" content="${description}">`);
+  if (metaContent(head, 'property', 'og:type') == null) tags.push('<meta property="og:type" content="website">');
+  if (metaContent(head, 'property', 'og:site_name') == null) tags.push('<meta property="og:site_name" content="Watchdog">');
+  if (metaContent(head, 'property', 'og:image') == null) {
+    tags.push(`<meta property="og:image" content="${DEFAULT_SOCIAL_IMAGE}">`);
+    tags.push('<meta property="og:image:width" content="1200">');
+    tags.push('<meta property="og:image:height" content="630">');
+  }
+  if (metaContent(head, 'name', 'twitter:card') == null) tags.push('<meta name="twitter:card" content="summary_large_image">');
+  if (!tags.length) return html;
+  return html.replace(/<\/head>/i, `  ${tags.join('\n  ')}\n</head>`);
+}
+
 function setCanonicalMetadata(html, canonicalUrl) {
   let output = rewriteNavigationLinks(rewriteAbsolutePropertyUrls(html));
   output = ensureCookiePreferenceControl(installConsentFirstAnalytics(output));
@@ -294,6 +324,8 @@ function setCanonicalMetadata(html, canonicalUrl) {
     )
     .replace(/"item"\s*:\s*"https:\/\/(?:www\.)?njpropertytaxrelief\.com\/"/g, `"item":"${CANONICAL_ORIGIN}/"`)
     .replace(/"url"\s*:\s*"https:\/\/(?:www\.)?njpropertytaxrelief\.com\/property\/"/g, `"url":"${CANONICAL_ORIGIN}/"`);
+
+  output = ensureSocialMetadata(output);
 
   return output.replace(/<\/body>/i, `${cleanRouteRuntime()}\n</body>`);
 }

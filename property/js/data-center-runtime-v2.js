@@ -298,6 +298,22 @@
   function invokeWorkbench(name, batch, ids) {
     return client().functions.invoke(name, { body: { pams_pins: batch, marker_ids: ids } }).then(function (response) { if (response.error) throw response.error; return response.data || {}; });
   }
+  var SCORE_MARKERS = ['watchdog.watchdog_score', 'watchdog.score', 'watchdog.tax_pressure', 'uniformity.score', 'watchdog.revaluation_risk', 'watchdog.market_value_estimate'];
+  var KIND_ORDER = { base: 0, derived: 1, score: 2 };
+  function scorePayload(data) {
+    var markers = {}, meta = {};
+    Object.keys((data && data.markers) || {}).forEach(function (pin) {
+      var values = data.markers[pin] || {}, info = (data.meta && data.meta[pin]) || {};
+      markers[pin] = {}; meta[pin] = {};
+      SCORE_MARKERS.forEach(function (id) {
+        var from = id === 'watchdog.score' ? 'watchdog.watchdog_score' : id;
+        if (selected.indexOf(id) < 0) return;
+        if (present(values[from])) markers[pin][id] = values[from];
+        if (info[from]) meta[pin][id] = info[from];
+      });
+    });
+    return { markers: markers, meta: meta };
+  }
   function hydrateRows(rows) {
     var pins = rows.map(function (r) { return r.pams_pin; }).filter(Boolean);
     if (!pins.length) return Promise.resolve(rows);
@@ -307,9 +323,12 @@
       var derived = selected.slice();
       chunksOf(derived, 250).forEach(function (ids) { if (ids.length) calls.push(invokeWorkbench('workbench-derived', batch, ids).then(function (data) { return { kind: 'derived', data: data }; })); });
     });
+    if (selected.some(function (id) { return SCORE_MARKERS.indexOf(id) >= 0; })) {
+      chunksOf(pins, 1000).forEach(function (batch) { calls.push(invokeWorkbench('workbench-score', batch, []).then(function (data) { return { kind: 'score', data: scorePayload(data) }; }, function () { return { kind: 'score', data: {} }; })); });
+    }
     return Promise.all(calls).then(function (parts) {
       var records = {}, markers = {}, meta = {};
-      parts.sort(function (a, b) { return a.kind === b.kind ? 0 : (a.kind === 'base' ? -1 : 1); });
+      parts.sort(function (a, b) { return KIND_ORDER[a.kind] - KIND_ORDER[b.kind]; });
       parts.forEach(function (part) {
         (part.data.records || []).forEach(function (record) { var pin = String(record.pams_pin); records[pin] = Object.assign(records[pin] || {}, record); });
         Object.keys(part.data.markers || {}).forEach(function (pin) {
