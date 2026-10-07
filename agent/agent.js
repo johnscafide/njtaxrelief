@@ -3,26 +3,17 @@
 
   const $ = (selector, root = document) => root.querySelector(selector);
   const $$ = (selector, root = document) => [...root.querySelectorAll(selector)];
-  const annualDialog = $('#annual-dialog');
   const tourDialog = $('#tour-dialog');
   const imageDialog = $('#image-dialog');
   const mobileButton = $('.mobile-menu');
   const navigation = $('#main-nav');
   const resourcesButton = $('#resources-button');
   const resourcesMenu = $('#resources-menu');
-  const continueLink = $('#continue-link');
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
-  const desktopPointer = window.matchMedia('(hover: hover) and (pointer: fine)');
-  const startedAt = performance.now();
-  const exitStorageKey = 'watchdog:agent:annual-seen';
   const dialogOpeners = new WeakMap();
   const focusableSelector = 'button:not([disabled]), a[href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])';
   let checkoutBusy = false;
-  let engaged = false;
-  let seenAnnual = false;
   let toastTimer;
-
-  try { seenAnnual = sessionStorage.getItem(exitStorageKey) === '1'; } catch (_) { /* In-memory session fallback. */ }
 
   function animate(element, frames, options = {}) {
     if (!element || reducedMotion.matches || typeof element.animate !== 'function') return;
@@ -61,7 +52,6 @@
     dialog.showModal();
     document.body.classList.add('has-dialog');
     const first = $('[data-dialog-initial-focus]', dialog)
-      || (dialog === annualDialog ? $('#annual-title', dialog) : null)
       || $('[data-dialog-close]', dialog)
       || usableFocusTargets(dialog)[0];
     first?.focus({ preventScroll: true });
@@ -86,10 +76,6 @@
     });
     dialog.addEventListener('close', () => {
       document.body.classList.toggle('has-dialog', Boolean(topDialog()));
-      if (dialog === annualDialog && continueLink) {
-        continueLink.hidden = true;
-        continueLink.removeAttribute('href');
-      }
       const opener = dialogOpeners.get(dialog);
       const remaining = topDialog();
       if (opener?.isConnected && opener.getClientRects().length && (!remaining || remaining.contains(opener))) {
@@ -115,24 +101,6 @@
   $$('[data-dialog-close]').forEach(button => button.addEventListener('click', () => closeDialog(button.closest('dialog'))));
   $$('[data-tour-open]').forEach(button => button.addEventListener('click', () => openDialog(tourDialog, button)));
 
-  function showAnnual(opener, destination) {
-    if (!annualDialog || checkoutBusy || topDialog()) return false;
-    if (continueLink) {
-      continueLink.hidden = !destination;
-      if (destination) continueLink.href = destination;
-      else continueLink.removeAttribute('href');
-    }
-    if (!openDialog(annualDialog, opener)) return false;
-    seenAnnual = true;
-    try { sessionStorage.setItem(exitStorageKey, '1'); } catch (_) { /* Keep the in-memory guard. */ }
-    return true;
-  }
-
-  $$('[data-annual-open]').forEach(button => button.addEventListener('click', () => showAnnual(button)));
-  $('[data-keep-lifetime]')?.addEventListener('click', () => {
-    closeDialog(annualDialog);
-    $('#founding-access')?.scrollIntoView({ behavior: reducedMotion.matches ? 'instant' : 'smooth', block: 'center' });
-  });
   $('[data-tour-pricing]')?.addEventListener('click', () => closeDialog(tourDialog));
 
   resourcesButton?.addEventListener('click', () => setResources(resourcesButton.getAttribute('aria-expanded') !== 'true'));
@@ -158,29 +126,6 @@
     const index = links.indexOf(document.activeElement);
     const next = event.key === 'Home' ? 0 : event.key === 'End' ? links.length - 1 : (index + (event.key === 'ArrowDown' ? 1 : -1) + links.length) % links.length;
     event.preventDefault(); links[next]?.focus();
-  });
-
-  ['pointerdown', 'keydown', 'scroll', 'pointermove'].forEach(type => {
-    document.addEventListener(type, () => { engaged = true; }, { once: true, passive: true });
-  });
-  function mayOfferOnExit() {
-    return engaged && performance.now() - startedAt >= 7000 && !seenAnnual && !checkoutBusy && !topDialog() && document.visibilityState === 'visible';
-  }
-  document.addEventListener('mouseout', event => {
-    if (desktopPointer.matches && event.relatedTarget === null && event.clientY <= 0 && mayOfferOnExit()) {
-      showAnnual(document.activeElement);
-    }
-  });
-  document.addEventListener('click', event => {
-    if (desktopPointer.matches || !mayOfferOnExit() || event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
-    const link = event.target instanceof Element ? event.target.closest('a[data-outbound]') : null;
-    if (!link || link.target === '_blank' || link.hasAttribute('download') || link.closest('dialog')) return;
-    const raw = link.getAttribute('href');
-    if (!raw || raw.startsWith('#')) return;
-    const destination = new URL(raw, location.href);
-    if (!['http:', 'https:'].includes(destination.protocol)) return;
-    if (destination.origin === location.origin && destination.pathname === location.pathname && destination.search === location.search) return;
-    if (showAnnual(link, destination.href)) event.preventDefault();
   });
 
   const year = $('#copyright-year');
@@ -278,7 +223,7 @@
       BILLING_ENROLLMENT_CLOSED: 'Paid enrollment is not open yet. Watchdog is finishing its launch checks.',
       BILLING_CONTROLLED_ONLY: 'Checkout is currently limited to controlled launch accounts.',
       LIFETIME_ACTIVE_SUBSCRIPTION: 'This account already has recurring billing. Manage that subscription before switching to Lifetime.',
-      LIFETIME_ALREADY_ACTIVE: 'Founding Lifetime is already active on this account.',
+      LIFETIME_ALREADY_ACTIVE: 'Lifetime access is already active on this account.',
       WATCHDOG_TEST_NO_REAL_SPEND: 'This test account cannot create a real charge.',
       SIGN_IN_REQUIRED: 'Your session has ended. Please sign in before choosing a membership.',
       PRICE_NOT_CONFIGURED: 'This billing option is not configured yet. Your account was not charged.',
@@ -290,27 +235,22 @@
 
   function setCheckoutBusy(busy) {
     checkoutBusy = busy;
-    $$('[data-agent-lifetime-checkout], [data-agent-annual-checkout]').forEach(button => {
+    $$('[data-agent-lifetime-checkout]').forEach(button => {
       button.disabled = busy;
       button.setAttribute('aria-busy', String(busy));
     });
   }
 
-  function storePendingOffer(kind) {
+  function storePendingOffer() {
     try {
-      if (kind === 'lifetime') {
-        sessionStorage.setItem('watchdog:lifetime:pending', 'agent');
-        sessionStorage.removeItem('watchdog:billing:pending');
-      } else {
-        sessionStorage.setItem('watchdog:billing:pending', JSON.stringify({ tier: 'agent', cadence: 'yearly' }));
-        sessionStorage.removeItem('watchdog:lifetime:pending');
-      }
+      sessionStorage.setItem('watchdog:lifetime:pending', 'agent');
+      sessionStorage.removeItem('watchdog:billing:pending');
     } catch (_) {
       throw new Error('Allow session storage in this browser so your selected membership can continue after sign-in.');
     }
   }
 
-  async function checkout(kind) {
+  async function checkout() {
     if (checkoutBusy) return;
     setCheckoutBusy(true);
     try {
@@ -323,36 +263,28 @@
       const response = await authClient.auth.getSession();
       if (response.error) throw response.error;
       if (!response.data?.session) {
-        storePendingOffer(kind);
-        location.assign(kind === 'lifetime' ? '/dashboard?billing=signin&offer=lifetime' : '/dashboard?billing=signin');
+        storePendingOffer();
+        location.assign('/dashboard?billing=signin&offer=lifetime');
         return;
       }
       try {
         sessionStorage.removeItem('watchdog:lifetime:pending');
         sessionStorage.removeItem('watchdog:billing:pending');
       } catch (_) { /* Signed-in checkout does not depend on storage. */ }
-      if (kind === 'lifetime') {
-        const result = await billing.invoke('create-lifetime-checkout', { tier: 'agent' });
-        if (!result?.url) throw new Error('A secure checkout URL was not returned. Please try again.');
-        const destination = new URL(result.url, location.origin);
-        if (destination.protocol !== 'https:' || destination.username || destination.password) {
-          throw new Error('A secure checkout URL was not returned. Please try again.');
-        }
-        location.assign(destination.href);
-      } else {
-        // The shared client catches its own billing failures; await completion and always release our local busy state.
-        await billing.checkout('agent', { cadence: 'yearly' });
-        const sharedToast = $('#wd-billing-toast');
-        if (sharedToast && !sharedToast.hidden && sharedToast.textContent) notify(sharedToast.textContent);
+      const result = await billing.invoke('create-lifetime-checkout', { tier: 'agent' });
+      if (!result?.url) throw new Error('A secure checkout URL was not returned. Please try again.');
+      const destination = new URL(result.url, location.origin);
+      if (destination.protocol !== 'https:' || destination.username || destination.password) {
+        throw new Error('A secure checkout URL was not returned. Please try again.');
       }
+      location.assign(destination.href);
     } catch (error) {
       notify(billingError(error));
     } finally {
       setCheckoutBusy(false);
     }
   }
-  $$('[data-agent-lifetime-checkout]').forEach(button => button.addEventListener('click', () => checkout('lifetime')));
-  $$('[data-agent-annual-checkout]').forEach(button => button.addEventListener('click', () => checkout('annual')));
+  $$('[data-agent-lifetime-checkout]').forEach(button => button.addEventListener('click', () => checkout()));
   window.addEventListener('pageshow', () => setCheckoutBusy(false));
 
   // Details appear immediately; motion adds emphasis without hiding the initial render.
@@ -392,8 +324,4 @@
   reducedMotion.addEventListener?.('change', event => {
     if (event.matches) document.getAnimations().forEach(animation => animation.cancel());
   });
-
-  if (new URLSearchParams(location.search).get('preview') === 'annual') {
-    showAnnual(document.activeElement);
-  }
 })();

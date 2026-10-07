@@ -5,24 +5,23 @@
   var client = window.NJPTRSupabaseRuntime.createClient();
   var user = null;
   var entitlement = {};
-  var billingCadence = 'yearly';
   var counts = { properties: 0, cases: 0 };
   var professional = { agent:{}, license:null, realtor:null };
   var $ = function (id) { return document.getElementById(id); };
 
   var plans = {
     agent: {
-      internal: 'agent', name: 'Agent', monthly: 14.99, yearly: 119,
+      internal: 'agent', name: 'Agent', lifetime: 99,
       audience: 'For agents who want property research, opportunity discovery and client tasks.',
       features: ['Monitor up to 100 properties', 'Opportunity Desk and sphere monitoring', 'Professional reports and exports', 'Agent-focused property red flags']
     },
     pro: {
-      internal: 'pro', name: 'Pro', monthly: 129, yearly: 1290, featured: true, badge: 'Professional dashboard',
+      internal: 'pro', name: 'Pro', lifetime: null, featured: true, badge: 'Professional dashboard',
       audience: 'For professionals who need deeper property research and repeatable tools.',
       features: ['Expanded professional workbenches', 'Advanced research tasks', 'Professional research and exports']
     },
     pro_plus: {
-      internal: 'pro_plus', name: 'Professional', monthly: 49.99, yearly: 479, badge: 'Maximum data access',
+      internal: 'pro_plus', name: 'Professional', lifetime: 299, badge: 'Maximum data access',
       audience: 'For teams and heavy users who need deeper research, bulk tools and high volume.',
       features: ['Monitor up to 2,500 properties', 'Appeal and diligence tools', '1,000+ data points and proprietary markers', 'Population and scheduled intelligence', 'Bulk research and advanced exports']
     }
@@ -172,27 +171,26 @@
   function pricingCard(key, currentPlan, developer) {
     var item = plans[key];
     var active = !developer && currentPlan === item.internal;
-    var annual = billingCadence === 'yearly';
-    var total = annual ? item.yearly : item.monthly;
+    var total = item.lifetime;
     var movingDown = planRank(currentPlan) > planRank(item.internal);
     var button = developer
       ? '<button type="button" disabled>Developer access includes this</button>'
       : active
         ? '<button type="button" disabled>Current plan</button>'
-        : '<button type="button" data-billing-plan="' + item.internal + '" data-billing-cadence="' + billingCadence + '">' + (movingDown ? 'Move to ' : 'Choose ') + esc(item.name) + '</button>';
+        : total == null
+          ? '<button type="button" data-billing-portal>Manage current plan</button>'
+          : '<button type="button" data-billing-plan="' + item.internal + '">' + (movingDown ? 'Move to ' : 'Get ') + esc(item.name) + ' Lifetime</button>';
     return '<article class="ac-price-card' + (item.featured ? ' featured' : '') + (active ? ' current' : '') + '" data-plan="' + item.internal + '">' +
       (item.badge ? '<span class="ac-popular">' + esc(item.badge) + '</span>' : '') +
       '<div class="ac-price-head"><div><span>' + esc(item.name.toUpperCase()) + '</span><h3>' + esc(item.name) + '</h3></div>' + (active ? '<em>Current</em>' : '') + '</div>' +
-      '<div class="ac-price"><b>' + money(total, total % 1 !== 0) + '</b><span>' + (annual ? '/year' : '/month') + '</span></div>' +
-      '<small>' + (annual ? money(item.yearly / 12, true) + '/mo when billed yearly' : 'Billed monthly') + '</small>' +
+      (total == null ? '<div class="ac-price"><b>Current</b></div><small>Your existing subscription</small>' : '<div class="ac-price"><b>' + money(total, false) + '</b><span> once</span></div><small>One payment · no renewal</small>') +
       intelligenceOffer(item.internal) +
       '<p>' + esc(item.audience) + '</p><ul>' + item.features.map(function (feature) { return '<li><i class="fas fa-check"></i>' + esc(feature) + '</li>'; }).join('') + '</ul>' + button + '</article>';
   }
   function pricing(currentPlan, developer) {
     var freeCurrent = !developer && currentPlan === 'standard';
     return '<section class="ac-section ac-pricing" id="membership-options">' +
-      '<header class="ac-pricing-header"><div><span>Membership options</span><h2>Choose the dashboard you need</h2><p>Save up to 33% with yearly billing.</p></div>' +
-      '<div class="ac-cadence" role="group" aria-label="Billing cadence"><button type="button" data-cadence="yearly" aria-pressed="' + (billingCadence === 'yearly') + '">Yearly <em>Save up to 33%</em></button><button type="button" data-cadence="monthly" aria-pressed="' + (billingCadence === 'monthly') + '">Monthly</button></div></header>' +
+      '<header class="ac-pricing-header"><div><span>Membership options</span><h2>Pay once. Keep it for life.</h2></div></header>' +
       '<div class="ac-price-grid"><article class="ac-price-card' + (freeCurrent ? ' current' : '') + '" data-plan="standard">' +
       '<div class="ac-price-head"><div><span>FREE</span><h3>Free</h3></div>' + (freeCurrent ? '<em>Current</em>' : '') + '</div><div class="ac-price"><b>$0</b><span>/forever</span></div><small>No payment method required</small>' +
       '<p>For homeowners starting with their own property-tax record.</p><ul><li><i class="fas fa-check"></i>Property lookup and watchlist</li><li><i class="fas fa-check"></i>Core assessment and tax markers</li><li><i class="fas fa-check"></i>Standard alerts and history</li></ul>' +
@@ -260,12 +258,6 @@
   }
   function bindRendered() {
     var save = $('ac-save-profile'); if (save) save.addEventListener('click', saveProfile);
-    document.querySelectorAll('[data-cadence]').forEach(function (button) {
-      button.addEventListener('click', function () {
-        billingCadence = button.dataset.cadence === 'monthly' ? 'monthly' : 'yearly';
-        render();
-      });
-    });
   }
   function openSignIn() {
     if (window.NJPTRSupabaseRuntime && window.NJPTRSupabaseRuntime.openOnboarding) {

@@ -194,14 +194,11 @@ html.p26-js .p26-alerts.is-in .p26-alert{opacity:1;transform:none}
 .p26-plan ul{margin:26px 0 0;padding:0;list-style:none}
 .p26-plan li{position:relative;padding:13px 0 13px 32px;border-top:1px solid var(--p26-line);font-size:1.0625rem;font-weight:700;line-height:1.4;color:var(--p26-text)}
 .p26-plan li::before{content:"";position:absolute;left:4px;top:19px;width:12px;height:7px;border:solid var(--p26-blue);border-width:0 0 3px 3px;transform:rotate(-45deg)}
-.p26-pricing.is-lifetime-mode .p26-plan{box-shadow:inset 0 0 0 2px #d9b648}
-.p26-plan.is-founding-lifetime .p26-price strong{color:var(--p26-ink)}
 
 /* Fine print: plain white text, no background */
 .p26-fine{max-width:760px;margin:40px auto 0;text-align:center}
 .p26-fine p,.p26 .pro-checkout-note,.p26 .pro-lifetime-terms{margin:0 0 12px;padding:0;background:none;border:0;box-shadow:none;color:#fff;font-size:1rem;font-weight:500;line-height:1.6}
 .p26 .pro-lifetime-terms b{font-weight:800}
-.p26-pricing:not(.is-lifetime-mode) .pro-lifetime-terms,.p26-pricing.is-lifetime-mode .pro-checkout-note{display:none}
 .p26-fine a,.p26-free-line a{color:#fff;font-weight:800;text-decoration:underline;text-underline-offset:3px}
 .p26-free-line{margin-top:26px!important;text-align:center;font-size:1.0625rem;font-weight:600;color:var(--p26-on-dark)}
 

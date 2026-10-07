@@ -19,7 +19,7 @@ const billing=read('property/js/billing-client.js');
 
 function expect(value,message){if(!value)throw new Error(message)}
 
-expect(page.includes('<title>Watchdog for New Jersey Lenders | Founding Lifetime</title>'),'lender landing title missing');
+expect(page.includes('<title>Watchdog for New Jersey Lenders | Lifetime Access</title>'),'lender landing title missing');
 expect(page.includes('<link rel="canonical" href="https://www.watchdogindex.com/lender">'),'canonical Watchdog lender route missing');
 expect(page.includes('<link rel="stylesheet" href="/agent/agent.css">'),'lender must attach the polished Agent CSS directly');
 expect(page.includes('<link rel="stylesheet" href="/lender/lender.css">'),'lender pricing refinement CSS missing');
@@ -29,12 +29,12 @@ expect(!page.includes('lender-paid-landing.js'),'old lender-specific landing JS 
 expect(!page.includes('apl-'),'old APL landing markup must not remain');
 expect(!page.includes('class="eyebrow"'),'lender page must not add eyebrow text');
 
-for(const className of ['site-header container','hero','hero-background','hero-inner container','hero-copy','product-preview','dashboard','trust-band','why-band','why-inner container','features','founding-band','founding-background','founding-inner container','price-card','bottom-trust container','site-footer container','annual-dialog','tour-dialog','image-dialog']){
+for(const className of ['site-header container','hero','hero-background','hero-inner container','hero-copy','product-preview','dashboard','trust-band','why-band','why-inner container','features','founding-band','founding-background','founding-inner container','price-card','bottom-trust container','site-footer container','tour-dialog','image-dialog']){
   expect(page.includes(`class="${className}"`)||page.includes(`class="${className} `),`Agent layout class missing from lender: ${className}`);
   expect(agent.includes(`class="${className}"`)||agent.includes(`class="${className} `),`reference Agent layout class unexpectedly missing: ${className}`);
 }
 
-for(const asset of ['/agent/assets/watchdog-logo.svg','/agent/assets/property-house.webp','/agent/assets/annual-home.webp','/agent/assets/platform-live.png','/agent/assets/watchdog-beagle.webp']){
+for(const asset of ['/agent/assets/watchdog-logo.svg','/agent/assets/property-house.webp','/agent/assets/platform-live.png','/agent/assets/watchdog-beagle.webp']){
   expect(page.includes(asset),`shared Agent graphic missing from lender: ${asset}`);
   expect(agent.includes(asset),`reference Agent graphic unexpectedly missing: ${asset}`);
 }
@@ -45,8 +45,8 @@ expect(sharedJs.includes("'/agent/assets/platform-live.png'")&&sharedJs.includes
 expect(page.includes('<h1 id="hero-title">Lend better<br><span><em>know</em> the property.</span></h1>'),'lender-specific two-word hero headline missing');
 expect(page.includes('Look up the property behind any New Jersey loan'),'lender-specific hero copy missing');
 expect(page.includes('Made for<br>New Jersey lenders.'),'lender-specific positioning missing');
-expect(page.includes('Lender Founding Lifetime'),'lender Founding Lifetime heading missing');
-expect(page.includes('$999')&&!page.includes('$3,499'),'Professional lifetime price missing');
+expect(page.includes('Lender Lifetime'),'lender Lifetime heading missing');
+expect(page.includes('$299')&&!page.includes('$999')&&!page.includes('$3,499'),'Professional lifetime price missing');
 expect(page.includes('2,500-property capacity'),'Professional capacity missing');
 // Count checkout controls only; the inline checkout script also names the attribute in its selectors.
 expect((page.match(/<button\b[^>]*\bdata-lender-lifetime-checkout\b/g)||[]).length===1,'lender page must expose exactly one lifetime checkout choice');
@@ -55,10 +55,10 @@ expect(page.includes('lender-proplus-card')&&page.includes('<span class="price-r
 expect(lenderCss.includes('background: #fff0a6'),'yellow plan-difference highlight missing');
 expect(lenderCss.includes('grid-template-columns: minmax(300px, 1fr) 190px'),'desktop main/secondary pricing hierarchy missing');
 expect(page.includes('Usage-based services, direct mail, third-party data and overages'),'lifetime exclusions missing');
-expect(page.includes('$479')&&page.includes('data-lender-annual-checkout data-tier="pro_plus"'),'Professional annual alternative missing');
+expect(!page.includes('$479')&&!page.includes('data-lender-annual-checkout')&&!page.includes('annual-dialog'),'lender page must not offer an annual alternative');
 
 expect(page.includes("billing.invoke('create-lifetime-checkout', { tier })"),'lender lifetime checkout must reuse server-owned checkout');
-expect(page.includes("billing.checkout(tier, { cadence: 'yearly' })"),'lender annual checkout must reuse shared checked checkout');
+expect(!page.includes("cadence: 'yearly'"),'lender page must not start a yearly checkout');
 expect(page.includes("sessionStorage.setItem('watchdog:lifetime:pending', tier)"),'signed-out lender lifetime selection must survive sign-in');
 expect(billing.includes("sessionStorage.getItem('watchdog:lifetime:pending')"),'billing client cannot resume pending Lifetime checkout');
 expect(middleware.includes("'/agent', '/lender'"),'Watchdog root static route allowlist must include /lender next to /agent');

@@ -32,8 +32,8 @@ var THEMES=[
   {key:'orbit-motion',label:'Orbit',kind:'motion',bg:'radial-gradient(circle at 50% 50%,transparent 0 18%,rgba(116,231,218,.22) 19% 20%,transparent 21% 31%,rgba(105,141,255,.18) 32% 33%,transparent 34%),radial-gradient(circle at 15% 20%,rgba(79,221,213,.50),transparent 24%),linear-gradient(135deg,#07182c,#132a4c 54%,#0b4f54)'}
 ];
 var LIFETIME={
-  agent:{label:'Agent',value:'$349',amount:34900},
-  pro_plus:{label:'Professional',value:'$999',amount:99900}
+  agent:{label:'Agent',value:'$99',amount:9900},
+  pro_plus:{label:'Professional',value:'$299',amount:29900}
 };
 
 function getClient(){
@@ -235,7 +235,7 @@ function setLifetimeMode(){
     if(price)price.textContent=offer.value;
     if(unit)unit.textContent=' once';
     if(note)note.textContent='One payment · no renewal';
-    var eyebrow=card.querySelector('.ac-price-head>div>span');if(eyebrow)eyebrow.textContent='FOUNDING LIFETIME';
+    var eyebrow=card.querySelector('.ac-price-head>div>span');if(eyebrow)eyebrow.textContent='LIFETIME';
     if(!button)return;
     clearBillingAttrs(button);button.disabled=false;
     if(entitlement.account_role==='developer'){
@@ -245,27 +245,17 @@ function setLifetimeMode(){
       button.disabled=true;button.textContent=currentPlan()===key?'Current Lifetime':'Lifetime already active';return;
     }
     if(hasRecurring()){
-      button.setAttribute('data-billing-portal','');button.textContent='Manage subscription first';return;
+      button.setAttribute('data-billing-portal','');button.textContent=currentPlan()===key?'Manage subscription':'Manage subscription first';return;
     }
     button.dataset.accountLifetimePlan=key;button.innerHTML='Get '+offer.label+' Lifetime';
   });
   var note=section.querySelector('.ac-lifetime-terms');
   if(!note){
     note=document.createElement('div');note.className='ac-lifetime-terms';
-    note.innerHTML='<i class="fas fa-circle-info"></i><div><b>Founding Lifetime</b> is a one-time purchase for the same plan limits. Usage-based services, direct mail, third-party data and overages remain separate.</div>';
+    note.innerHTML='<i class="fas fa-circle-info"></i><div><b>Lifetime</b> is a one-time purchase for the same plan limits. Usage-based services, direct mail, third-party data and overages remain separate.</div>';
     var header=section.querySelector('.ac-pricing-header');
     if(header)header.insertAdjacentElement('afterend',note);
   }
-}
-function addLifetimeTab(){
-  var section=document.getElementById('membership-options');if(!section)return;
-  var group=section.querySelector('.ac-cadence');if(!group)return;
-  if(!group.querySelector('[data-account-lifetime]')){
-    var button=document.createElement('button');button.type='button';button.setAttribute('data-account-lifetime','');button.setAttribute('aria-pressed','false');
-    button.innerHTML='Lifetime <em>One-time</em>';
-    group.appendChild(button);
-  }
-  if(lifetimeMode)setLifetimeMode();
 }
 async function lifetimeCheckout(plan){
   if(busy||!LIFETIME[plan])return;busy=true;
@@ -283,7 +273,7 @@ async function lifetimeCheckout(plan){
   }catch(error){
     var message=String(error&&error.message||'Lifetime checkout could not be opened.');
     if(error&&error.code==='LIFETIME_ACTIVE_SUBSCRIPTION')message='Manage your current recurring subscription before switching to Lifetime.';
-    if(error&&error.code==='LIFETIME_ALREADY_ACTIVE')message='Founding Lifetime is already active on this account.';
+    if(error&&error.code==='LIFETIME_ALREADY_ACTIVE')message='Lifetime access is already active on this account.';
     if(error&&error.code==='WATCHDOG_TEST_NO_REAL_SPEND')message='This test account cannot create a real charge.';
     toast(message);
   }finally{busy=false;}
@@ -317,7 +307,7 @@ function fallbackCleanup(){
   }
 }
 function enhance(){
-  fallbackCleanup();mountThemePicker();addLifetimeTab();
+  fallbackCleanup();mountThemePicker();setLifetimeMode();
 }
 async function loadState(){
   var db=getClient();if(!db)return;
@@ -333,11 +323,8 @@ document.addEventListener('watchdog:account-rendered',function(){lifetimeMode=fa
 document.addEventListener('click',function(event){
   var copyId=event.target.closest('[data-copy-account-id]');
   if(copyId){event.preventDefault();var id=copyId.dataset.copyAccountId||'';var done=function(){var icon=copyId.querySelector('i');if(icon){icon.className='fas fa-check';setTimeout(function(){icon.className='fas fa-copy';},1200);}};if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(id).then(done).catch(function(){toast('Account ID could not be copied.');});else{var ta=document.createElement('textarea');ta.value=id;ta.style.position='fixed';ta.style.opacity='0';document.body.appendChild(ta);ta.select();try{document.execCommand('copy');done();}catch(_){toast('Account ID could not be copied.');}ta.remove();}return;}
-  var lifetime=event.target.closest('[data-account-lifetime]');
-  if(lifetime){event.preventDefault();event.stopPropagation();setLifetimeMode();return;}
   var checkout=event.target.closest('[data-account-lifetime-plan]');
   if(checkout){event.preventDefault();event.stopPropagation();lifetimeCheckout(checkout.dataset.accountLifetimePlan);return;}
-  if(event.target.closest('[data-cadence]')){lifetimeMode=false;document.body.classList.remove('ac-lifetime-mode');}
 },true);
 
 function start(){

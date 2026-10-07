@@ -43,10 +43,9 @@ assert.match(hold, /revoke all on function public\.invoke_referral_rewards_sweep
 assert.match(hold, /cron\.schedule\('watchdog-referral-rewards-sweep'/);
 assert.match(config, /\[functions\.referral-rewards-sweep\]\nverify_jwt = false/);
 
-// Pricing page Lifetime toggle: one handler owns the button whether the page
-// ships it (soft-launch build) or the guard adds it.
+// Pricing page: Lifetime is the only plan, so one capture handler owns the plan buttons.
 const guard = read('property/js/pro-checkout-guard.js');
-assert.match(guard, /if\(cadence\.dataset\.cadence==='lifetime'\)\{ev\.preventDefault\(\);setLifetime\(true\);return;\}/);
-assert.doesNotMatch(guard, /b\.addEventListener\('click',function\(\)\{setLifetime\(true\);\}\);/, 'no second Lifetime handler');
+assert.match(guard, /ev\.target\.closest\('\[data-lifetime-plan\]'\)/);
+assert.equal((guard.match(/addEventListener\('click'/g) || []).length, 1, 'no second Lifetime handler');
 
 console.log('Referral reward and Lifetime toggle contract passed.');

@@ -598,6 +598,8 @@ async function redeemBetaTrial(req: Request, body: any, user: any, admin: any, c
   }
 }
 
+const RECURRING_CHECKOUT_OPEN: boolean = false;
+
 Deno.serve(async (req) => {
   if (req.method === 'OPTIONS') return new Response('ok', { headers: cors(req) });
   if (req.method !== 'POST') return json(req, { error: 'Method not allowed' }, 405);
@@ -756,6 +758,11 @@ Deno.serve(async (req) => {
       return json(req, { error: 'Could not open Stripe billing management.', code: 'STRIPE_PORTAL_ERROR' }, 502);
     }
   }
+
+  // Owner decision 2026-10-07: Agent and Professional are sold only as a one-time
+  // Lifetime purchase (create-lifetime-checkout). Existing subscribers still reach
+  // the billing portal above; no new subscription is started here.
+  if (!RECURRING_CHECKOUT_OPEN) return json(req, { error: 'Watchdog plans are a one-time payment now. Choose Lifetime to continue.', code: 'RECURRING_PLANS_RETIRED' }, 410);
 
   if (entitlement?.billing_interval === 'lifetime' && entitlement?.subscription_status === 'active') {
     return json(req, { error: 'Founding Lifetime is already active on this account.', code: 'LIFETIME_ALREADY_ACTIVE' }, 409);

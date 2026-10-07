@@ -86,25 +86,6 @@
     window.addEventListener('scroll',onScroll,{passive:true});window.addEventListener('resize',onScroll);update();
   }
 
-  var priceData={
-    yearly:{agent:{value:'119',unit:'/ year',eyebrow:'Annual',note:'Save $60 a year.'},pro_plus:{value:'479',unit:'/ year',eyebrow:'Annual',note:'Save $120 a year.'}},
-    monthly:{agent:{value:'14.99',unit:'/ month',eyebrow:'Monthly',note:'Cancel anytime.'},pro_plus:{value:'49.99',unit:'/ month',eyebrow:'Monthly',note:'Cancel anytime.'}}
-  };
-
-  function pricing(){
-    var buttons=all('.pro-cadence [data-cadence]');
-    var demoCadence=document.getElementById('demo-cadence');
-    if(!buttons.length)return;
-    function set(cad,shouldTrack){
-      if(!priceData[cad])cad='yearly';
-      buttons.forEach(function(b){var on=b.dataset.cadence===cad;b.classList.toggle('active',on);b.setAttribute('aria-pressed',on?'true':'false');});
-      ['agent','pro_plus'].forEach(function(plan){var d=priceData[cad][plan];var v=document.querySelector('[data-price-value="'+plan+'"]'),u=document.querySelector('[data-price-unit="'+plan+'"]'),e=document.querySelector('[data-price-eyebrow="'+plan+'"]'),n=document.querySelector('[data-price-note="'+plan+'"]'),cta=document.querySelector('[data-demo-plan="'+plan+'"]');if(v)v.textContent=d.value;if(u)u.textContent=d.unit;if(e)e.textContent=d.eyebrow;if(n)n.textContent=d.note;if(cta)cta.dataset.demoCadence=cad;});
-      if(demoCadence)demoCadence.value=cad;
-      if(shouldTrack)trackEvent('pro_billing_toggle',{cadence:cad});
-    }
-    buttons.forEach(function(b){b.addEventListener('click',function(){if(b.dataset.cadence==='lifetime')return;set(b.dataset.cadence,true);});});set('yearly',false);
-  }
-
   function renderIntelligenceOffer(catalog){
     var intelligence=catalog&&catalog.intelligence||{};
     var promo=intelligence.promotion||{};
@@ -135,7 +116,7 @@
   function demoPrefill(){
     var planInput=document.getElementById('demo-plan');
     var cadence=document.getElementById('demo-cadence');
-    all('[data-demo-plan]').forEach(function(link){link.addEventListener('click',function(){if(planInput)planInput.value=link.dataset.demoPlan||'unsure';if(cadence)cadence.value=link.dataset.demoCadence||'yearly';trackEvent('pro_plan_explore',{plan:link.dataset.demoPlan||'unsure',cadence:link.dataset.demoCadence||'yearly'});});});
+    all('[data-demo-plan]').forEach(function(link){link.addEventListener('click',function(){if(planInput)planInput.value=link.dataset.demoPlan||'unsure';if(cadence)cadence.value=link.dataset.demoCadence||'lifetime';trackEvent('pro_plan_explore',{plan:link.dataset.demoPlan||'unsure',cadence:link.dataset.demoCadence||'lifetime'});});});
     all('[data-price-jump]').forEach(function(link){link.addEventListener('click',function(){trackEvent('pro_price_jump',{location:link.dataset.priceJump||'page'});});});
   }
 
@@ -148,7 +129,7 @@
     form.addEventListener('submit',function(e){
       e.preventDefault();setStatus('','');if(!form.reportValidity())return;
       var data=new FormData(form);
-      var payload={full_name:String(data.get('full_name')||'').trim(),email:String(data.get('email')||'').trim(),company:String(data.get('company')||'').trim(),role:String(data.get('role')||'').trim(),volume:String(data.get('volume')||'').trim(),plan:String(data.get('plan')||'unsure').trim()||'unsure',cadence:String(data.get('cadence')||'yearly').trim()||'yearly',message:String(data.get('message')||'').trim(),source:String(data.get('source')||'pro-page').trim(),website:String(data.get('website')||'').trim(),page_url:window.location.href};
+      var payload={full_name:String(data.get('full_name')||'').trim(),email:String(data.get('email')||'').trim(),company:String(data.get('company')||'').trim(),role:String(data.get('role')||'').trim(),volume:String(data.get('volume')||'').trim(),plan:String(data.get('plan')||'unsure').trim()||'unsure',cadence:String(data.get('cadence')||'lifetime').trim()||'lifetime',message:String(data.get('message')||'').trim(),source:String(data.get('source')||'pro-page').trim(),website:String(data.get('website')||'').trim(),page_url:window.location.href};
       if(submit)submit.disabled=true;
       setStatus('Sending...','');
       trackEvent('pro_demo_submit',{plan:payload.plan,cadence:payload.cadence,role:payload.role});
@@ -169,6 +150,6 @@
     var script=document.createElement('script');script.src=src;script.defer=true;document.body.appendChild(script);
   }
 
-  function init(){loadFragment('main-footer','/property/partials/footer.html');reveal();countUp();heroScroll();chat();dock();pricing();intelligencePricing();demoPrefill();demoForm();sampleTracking();loadOutcomeGuidance();}
+  function init(){loadFragment('main-footer','/property/partials/footer.html');reveal();countUp();heroScroll();chat();dock();intelligencePricing();demoPrefill();demoForm();sampleTracking();loadOutcomeGuidance();}
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});else init();
 })();
