@@ -2,6 +2,8 @@
 // Served by api/co-town-page.js and api/co-embed-page.js (middleware.js routes the clean URLs).
 // The look matches /co: same logo, search box and facts layout (co/co.css); the browser side is
 // co/co-search.js (search box) and co/co-town.js (share, votes, corrections, measurement).
+const fs = require('fs');
+const path = require('path');
 const T = require('./_co-town');
 const TAX = require('./_tax-town');
 
@@ -153,6 +155,19 @@ const SEARCH_TPL = `<template id="search-tpl">
 </template>`;
 
 // ---------- page shell ----------
+// John's two long comments, copied from the /co page so they stay word for word.
+let notes = null;
+function johnsComments() {
+  if (notes !== null) return notes;
+  try {
+    const html = fs.readFileSync(path.join(process.cwd(), 'co', 'index.html'), 'utf8');
+    const story = html.match(/<!--\s*\n\s*\n\s*Hi There[\s\S]*?-->/);
+    const curious = html.match(/<!--\s*\n\s*\n\s*OH \.\.\. If you are really curious[\s\S]*?-->/);
+    notes = [story, curious].filter(Boolean).map((m) => m[0] + '\n').join('');
+  } catch (_) { notes = ''; }
+  return notes;
+}
+
 function shell(o) {
   const embed = o.mode === 'embed';
   const robots = o.noindex ? '<meta name="robots" content="noindex,follow">\n' : '';
@@ -179,7 +194,7 @@ function shell(o) {
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>${esc(o.title)}</title>
+${embed ? '' : johnsComments()}<title>${esc(o.title)}</title>
 <meta name="description" content="${esc(o.description)}">
 ${robots}${canonical}${og}<link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
