@@ -1061,6 +1061,80 @@ function sendNotFound(req, res) {
   return res.end(req.method === 'HEAD' ? undefined : notFoundPage());
 }
 
+const ROBUST_NOTES = {
+  recourse: 'weight 10: county appeal options, deadlines and how strong the evidence is',
+  fairness: 'weight 20: assessed value next to the value the sales evidence supports, using NJ Chapter 123 rules',
+  burden: 'weight 30: yearly tax next to the supported market value',
+  uniformity: 'weight 15: how evenly the town assesses, from the NJ Coefficient of Deviation',
+  stability: 'weight 15: revaluation pressure, ratio drift and town uniformity',
+  trajectory: 'weight 10: this assessment next to verified sales and the town ratio over time'
+};
+
+function mdText(value) {
+  return String(value == null ? '' : value).replace(/[\r\n]+/g, ' ').replace(/[<>`|]/g, '').trim();
+}
+
+// A Markdown file about one property that any AI assistant can read.
+function renderMarkdown(row, v) {
+  const lines = [];
+  const add = (...items) => lines.push(...items);
+  const fact = (k, value) => { if (value !== '' && value != null) add(`- ${k}: ${mdText(value)}`); };
+  const place = row.postal_city ? `${titleCase(row.postal_city)}, NJ${row.zip ? ' ' + row.zip : ''}` : v.place;
+  add(`# ${mdText(v.address)}, ${mdText(place)}`, '');
+  add(`Watchdog property file. Source: ${v.url}`, '');
+  add('Watchdog is a New Jersey property tax site. This file has the public tax record for one property and Watchdog\'s own numbers about it. Use it to answer questions about this property\'s taxes, value and whether an appeal might make sense. Figures come from the NJ MOD-IV tax list, NJ Office of GIS parcels, state sales records and the NJ Division of Taxation. Watchdog does not show owner names. This is not an appraisal or legal advice.', '');
+  add('## Property');
+  fact('Address', `${v.address}, ${place}`);
+  fact('Municipality', v.town);
+  fact('County', `${v.county} County`);
+  fact('Block / lot', [row.block, row.lot].filter(Boolean).join(' / ') + (row.qualifier ? ` (${row.qualifier})` : ''));
+  fact('NJ parcel ID (PAMS PIN)', row.pams_pin);
+  fact('Property class', v.cls ? `${v.cls[0]} (${row.prop_class})` : row.prop_class);
+  fact('Year built', row.year_built && row.year_built > 1700 ? row.year_built : '');
+  fact('Building', row.building_desc);
+  fact('Lot size', row.acres && Number(row.acres) > 0 ? `${Number(row.acres).toFixed(2)} acres` : '');
+  add('', '## Property tax');
+  const ts = taxStats(row, money);
+  fact(ts.label, money(row.last_year_tax));
+  if (ts.by.current) fact(`${ts.by.current.year} ${ts.by.current.generalRateOnly ? 'estimate' : 'at new rate'}`, money(ts.by.current.amount));
+  fact('Assessed value', money(row.assessed_value));
+  fact('Land value', money(row.land_value));
+  fact('Improvement value', money(row.improvement_value));
+  const trend = rateTrend(row);
+  if (trend) fact(`${trend.latest.year} general tax rate`, `$${trend.latest.rate.toFixed(3)} per $100 of assessed value`);
+  const ratio = latestRatio(row);
+  if (ratio) fact(`${ratio.year} state equalization ratio`, `${(ratio.ratio > 1.5 ? ratio.ratio : ratio.ratio * 100).toFixed(2)}% (town assessments run at about this share of market value)`);
+  const compare = townCompareText(row, v);
+  if (compare) add(`- ${mdText(compare)}`);
+  if (trend && trend.points.length >= 2) add(`- Tax rate by year: ${trend.points.map((p) => `${p.year} $${p.rate.toFixed(3)}`).join(', ')}`);
+  const s = row.score;
+  if (s && s.score != null) {
+    add('', '## Watchdog Score');
+    add(`${Math.round(Number(s.score))} out of 100${s.verdict ? `: ${mdText(s.verdict)}` : ''}. The Watchdog Score, powered by the ROBUST Framework, rates this property's tax position. Higher means a stronger position for the owner. Evidence coverage ${Math.round(Number(s.evidence_coverage || 0))}%, ${mdText(s.confidence || 'low')} confidence. Scale: 80 and up strong, 65 to 79 favorable, 50 to 64 typical or mixed, 35 to 49 pressured, under 35 highly pressured. Each ROBUST part is scored 0 to 100 and weighted; parts without data are left out instead of guessed.`, '');
+    const parts = s.components || {};
+    DIMENSIONS.forEach((d) => {
+      const value = componentScore(parts[d.key]);
+      add(`- ${d.letter}, ${d.name}: ${value == null ? 'not enough data' : `${value}/100`} (${ROBUST_NOTES[d.key]})`);
+    });
+  }
+  add('', '## Sales');
+  fact('This property\'s last sale', row.last_sale_price ? `${money(row.last_sale_price)}${saleDate(row) ? ` on ${saleDate(row)}` : ''}` : 'No recorded sale price');
+  const sum = row.sales_summary || {};
+  if (Number(sum.count)) fact('Similar sales nearby', `${count(sum.count)}, median price ${money(sum.median)}`);
+  const sales = Array.isArray(row.recent_sales) ? row.recent_sales.filter((x) => x && x.price).slice(0, 10) : [];
+  if (sales.length) {
+    add('', 'Recent nearby sales:');
+    sales.forEach((x) => add(`- ${mdText(titleCase(x.address || ''))}: ${money(x.price)}${x.date ? ` (${x.date})` : ''}`));
+  }
+  add('', '## Links');
+  add(`- This property on Watchdog: ${v.url}`);
+  add(`- How the Watchdog Score works: ${CANONICAL_ORIGIN}/robust`);
+  add(`- Compare NJ towns: ${CANONICAL_ORIGIN}/town-compare`);
+  const updated = monthYear(row.source_synced_at);
+  if (updated) add('', `Last data refresh: ${updated}.`);
+  return lines.join('\n') + '\n';
+}
+
 // GET ?top=<pin>: the title and summary cards for the popup, as JSON.
 async function sendTop(req, res) {
   res.setHeader('Content-Type', 'application/json; charset=utf-8');
@@ -1089,14 +1163,53 @@ async function sendTop(req, res) {
   }
 }
 
+// GET ?md=<pin>: the property as Markdown, for pasting into an AI assistant.
+async function sendMarkdownFor(req, res, row) {
+  res.statusCode = 200;
+  res.setHeader('Content-Type', 'text/markdown; charset=utf-8');
+  res.setHeader('Cache-Control', PAGE_CACHE);
+  res.setHeader('X-Robots-Tag', 'noindex, follow');
+  if (req.method === 'HEAD') return res.end();
+  return res.end(renderMarkdown(row, view(row)));
+}
+
+async function sendMarkdown(req, res) {
+  const q = req.query || {};
+  const pin = String(q.md || '');
+  if (!/^\d{4}_[0-9A-Za-z.&_-]{1,70}$/.test(pin)) {
+    res.setHeader('Cache-Control', 'no-store');
+    return res.status(400).end('Bad property.');
+  }
+  try {
+    const [row, published] = await Promise.all([
+      fetchProperty(pin),
+      rpc('get_public_property_page_by_pin', { p_pin: pin }).then(asObject).catch(() => null)
+    ]);
+    if (!row) {
+      res.setHeader('Cache-Control', 'public, max-age=0, s-maxage=3600');
+      return res.status(404).end('Not found.');
+    }
+    const zip = /^0[78]\d{3}$/.test(String(q.zip || '')) ? String(q.zip) : null;
+    const full = published ? withPublished(row, published) : { ...row, zip, postal_city: cleanCity(q.city) || null };
+    return sendMarkdownFor(req, res, full);
+  } catch (err) {
+    console.error('watchdog-property-page md', err && err.message || err);
+    res.setHeader('Cache-Control', 'no-store');
+    return res.status(503).end('Try again later.');
+  }
+}
+
 async function handler(req, res) {
   if (req.method === 'POST') return publish(req, res);
   if (req.method === 'GET' && req.query && req.query.top) return sendTop(req, res);
+  if ((req.method === 'GET' || req.method === 'HEAD') && req.query && req.query.md) return sendMarkdown(req, res);
   if (req.method !== 'GET' && req.method !== 'HEAD') {
     res.setHeader('Allow', 'GET, HEAD, POST');
     return res.status(405).end('Method not allowed');
   }
-  const parsed = parsePath(req.query && req.query.path);
+  const rawPath = String((req.query && req.query.path) || '');
+  const wantsMarkdown = /\.md$/i.test(rawPath.split('?')[0]);
+  const parsed = parsePath(wantsMarkdown ? rawPath.split('?')[0].replace(/\.md$/i, '') : rawPath);
   res.setHeader('Content-Type', 'text/html; charset=utf-8');
   if (!parsed) return sendNotFound(req, res);
   let row;
@@ -1124,6 +1237,15 @@ async function handler(req, res) {
   }
   if (!row) return sendNotFound(req, res);
   const canonical = published ? published.path : propertyPath(row);
+  if (wantsMarkdown) {
+    if (parsed.path !== canonical) {
+      res.statusCode = 308;
+      res.setHeader('Location', `${canonical}.md`);
+      res.setHeader('Cache-Control', PAGE_CACHE);
+      return res.end();
+    }
+    return sendMarkdownFor(req, res, withPublished(row, published));
+  }
   if (parsed.path !== canonical) {
     res.statusCode = 308;
     res.setHeader('Location', canonical);
@@ -1149,6 +1271,7 @@ module.exports.spelledAddress = spelledAddress;
 module.exports.publishAllowed = publishAllowed;
 module.exports.withPublished = withPublished;
 module.exports.topSection = topSection;
+module.exports.renderMarkdown = renderMarkdown;
 module.exports.townName = townName;
 module.exports.slugify = slugify;
 module.exports.INDEXABLE_COUNTIES = INDEXABLE_COUNTIES;

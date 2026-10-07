@@ -182,6 +182,7 @@
     <div class="plm-bar-actions">
       <button class="plm-barbtn" id="plm-save" onclick="plSaveHome()"><i class="far fa-heart"></i><span>Save</span></button>
       <button class="plm-barbtn" onclick="plShare()"><i class="fas fa-share-nodes"></i><span>Share</span></button>
+      <button class="plm-barbtn" id="plm-ai-btn" onclick="plSendToAI()" title="Send to my AI agent"><i class="fas fa-paper-plane"></i><span>Send to AI</span></button>
       <button class="plm-barbtn" id="pl-authbtn" onclick="plSignInPrompt()" title="Sign in"><i class="fas fa-right-to-bracket"></i><span>Sign in</span></button>
       <button class="plm-barbtn" onclick="plMenu(event)"><i class="fas fa-ellipsis"></i><span>More</span></button>
       <div class="plm-menu" id="plm-menu">
@@ -193,7 +194,7 @@
         <hr>
         <button onclick="plSaveTo('home')"><i class="fas fa-house-chimney"></i> Claim as my home</button>
         <button onclick="plSaveTo('watch')"><i class="fas fa-eye"></i> Add to watchlist</button>
-        <a href="/property/dashboard"><i class="fas fa-table-columns"></i> My dashboard</a>
+        <a href="/dashboard"><i class="fas fa-table-columns"></i> My dashboard</a>
         <hr>
         <button onclick="plScrollTo('pl-proceeds')"><i class="fas fa-sack-dollar"></i> Estimate net proceeds</button>
         <button onclick="plScrollTo('pl-appeal')"><i class="fas fa-scale-balanced"></i> Appeal this assessment</button>
@@ -202,6 +203,7 @@
         <hr>
         <button onclick="plFullPage()"><i class="fas fa-up-right-from-square"></i> Open full property page</button>
         <button onclick="plCopy()"><i class="fas fa-link"></i> Copy link</button>
+        <button onclick="plSendToAI()"><i class="fas fa-paper-plane"></i> Send to my AI agent</button>
         <button onclick="plDirections()"><i class="fas fa-diamond-turn-right"></i> Driving directions</button>
         <a href="#" onclick="plOpenHood();plCloseModal();return false;"><i class="fas fa-map-location-dot"></i> See homes on this block</a>
         <button onclick="window.print()"><i class="fas fa-print"></i> Print this report</button>
@@ -282,6 +284,6 @@
 <script src="/property/js/watchdog-universal-menu.js"></script>
 <script src="/property/js/public-nav.js"></script>
 <script src="/property/js/ownership-verification.js"></script>
-<script src="/property/js/lookup.js?v=20261004a"></script>
+<script src="/property/js/lookup.js?v=20261007b"></script>
 </body>
 </html>

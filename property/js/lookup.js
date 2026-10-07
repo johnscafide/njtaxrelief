@@ -3008,6 +3008,7 @@ buildOpinion(hasCase, overBy, saving, target) + rows +
     if (window.WatchdogPublicNav && typeof window.WatchdogPublicNav.remember === 'function') {
       window.WatchdogPublicNav.remember(current);
     }
+    current.city = postalCity(geo && geo.matched);
     window.WatchdogLookupParcel = {
       pin: current.pin, address: current.address, block: current.block, lot: current.lot,
       lat: current.lat, lon: current.lon, rings: current.rings
@@ -4528,6 +4529,7 @@ buildOpinion(hasCase, overBy, saving, target) + rows +
     return location.origin + '/nj/property/' + encodeURIComponent(current.pin);
   }
   function shareUrl() {
+    if (onPropertyPath()) return location.origin + location.pathname;
     return propertyPageUrl() || (location.origin + location.pathname + '?address=' +
       encodeURIComponent(current.address + ', ' + current.town + ', NJ ' + current.zip));
   }
@@ -4543,6 +4545,69 @@ buildOpinion(hasCase, overBy, saving, target) + rows +
     if (navigator.clipboard) navigator.clipboard.writeText(url).then(function () { toast('Link copied'); })
       .catch(function () { window.prompt('Copy this link:', url); });
     else window.prompt('Copy this link:', url);
+  };
+  function aiFileText() {
+    var pin = current.pin;
+    var q = '?md=' + encodeURIComponent(pin) + '&zip=' + encodeURIComponent(current.zip || '') + '&city=' + encodeURIComponent(current.city || '');
+    return fetch('/api/watchdog-property-page' + q).then(function (r) {
+      if (!r.ok) throw new Error('md ' + r.status);
+      return r.text();
+    }).then(function (md) {
+      var extra = [];
+      var hero = document.querySelector('#plm .plm-est-hero');
+      if (hero && hero.textContent.trim()) {
+        var range = document.querySelector('#plm .plm-est-range');
+        var conf = document.querySelector('#plm .plm-conf');
+        extra.push('', '## Watchdog Tax Value',
+          '- Value: ' + hero.textContent.trim() + (conf ? ' (' + conf.textContent.trim().toLowerCase() + ')' : ''),
+          range ? '- ' + range.textContent.trim() : '',
+          '- This is a tax appeal value from verified nearby sales, set at the conservative end. It is not a listing price or appraisal.');
+      }
+      var lines = ['Here is a Watchdog property file. Read it and help me understand this property and its taxes.', '', md.trim()].concat(extra.filter(function (x) { return x !== ''; }).length ? extra : []);
+      return lines.join('\n').replace(/\n{3,}/g, '\n\n') + '\n';
+    });
+  }
+  function copyFromPromise(textPromise) {
+    if (window.ClipboardItem && navigator.clipboard && navigator.clipboard.write) {
+      try {
+        return navigator.clipboard.write([new ClipboardItem({ 'text/plain': textPromise.then(function (t) { return new Blob([t], { type: 'text/plain' }); }) })]);
+      } catch (e) {}
+    }
+    return textPromise.then(function (t) {
+      if (!navigator.clipboard) throw new Error('no clipboard');
+      return navigator.clipboard.writeText(t);
+    });
+  }
+  window.plSendToAI = function () {
+    var m = el('plm-menu'); if (m) m.classList.remove('open');
+    if (!current || !current.pin) return;
+    var textPromise = aiFileText();
+    var box = function (copied, text) {
+      return '<p>' + (copied ? 'Copied. Paste it into ChatGPT, Claude, Gemini or any AI assistant and ask it anything about this property.'
+                             : 'Copy this and paste it into ChatGPT, Claude, Gemini or any AI assistant.') + '</p>' +
+        '<textarea id="pl-ai-text" readonly rows="8" style="width:100%;margin-top:12px;font:12px/1.5 ui-monospace,Menlo,Consolas,monospace;border:1px solid var(--border);border-radius:8px;padding:10px;resize:vertical;">' + esc(text || '') + '</textarea>' +
+        '<div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:12px;">' +
+          '<button class="plm-rbtn" style="flex:1 1 140px;margin:0;" onclick="plCopyAIText()"><i class="fas fa-copy"></i>&nbsp; Copy</button>' +
+          '<a class="plm-rbtn ghost" style="flex:1 1 140px;margin:0;text-align:center;" href="https://chatgpt.com/" target="_blank" rel="noopener">Open ChatGPT</a>' +
+          '<a class="plm-rbtn ghost" style="flex:1 1 140px;margin:0;text-align:center;" href="https://claude.ai/new" target="_blank" rel="noopener">Open Claude</a>' +
+        '</div>';
+    };
+    window.plModalNote('Send to my AI agent', '<p>Getting the property file ready...</p>', true);
+    var copied = copyFromPromise(textPromise).then(function () { return true; }, function () { return false; });
+    Promise.all([textPromise, copied]).then(function (res) {
+      window.plModalNote('Send to my AI agent', box(res[1], res[0]), true);
+      if (res[1]) toast('Copied for your AI');
+    }).catch(function () {
+      window.plModalNote('Send to my AI agent', '<p>That did not load. Try again in a minute.</p>', true);
+    });
+    if (typeof gtag === 'function') gtag('event', 'send_to_ai', { pin: current.pin });
+  };
+  window.plCopyAIText = function () {
+    var t = el('pl-ai-text');
+    if (!t) return;
+    var done = function () { toast('Copied for your AI'); };
+    if (navigator.clipboard) navigator.clipboard.writeText(t.value).then(done, function () { t.select(); document.execCommand('copy'); done(); });
+    else { t.select(); document.execCommand('copy'); done(); }
   };
   window.plShare = function () {
     var m = el('plm-menu'); if (m) m.classList.remove('open');

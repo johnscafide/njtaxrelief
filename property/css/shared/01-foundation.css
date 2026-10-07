@@ -118,6 +118,7 @@
 .plm-barbtn:hover { background: #f2f5fa; }
 .plm-barbtn i { font-size: 15px; }
 .plm-barbtn.saved i { color: var(--red); }
+@media (max-width: 380px) { #plm-ai-btn { display: none; } }
 /* The scroll area gets its own stacking context. Leaflet assigns z-index up
    to 1000 to its panes and controls; isolating here keeps all of that
    contained so the top bar and its dropdown always paint above the map. */
@@ -243,12 +244,12 @@
   box-shadow: 0 2px 6px rgba(15,23,42,.08); padding: 7px; display: none;
 }
 .plm-menu.open { display: block; }
-.plm-menu button, .plm-menu a {
+.plm-menu button, .plm .plm-menu a {
   display: flex; align-items: center; gap: 12px; width: 100%; text-align: left;
   font-size: 14px; font-family: inherit; color: var(--text); background: none; border: none;
   padding: 11px 12px; border-radius: 8px; cursor: pointer; text-decoration: none;
 }
-.plm-menu button:hover, .plm-menu a:hover { background: #f2f5fa; color: var(--navy-dark); }
+.plm-menu button:hover, .plm .plm-menu a:hover { background: #f2f5fa; color: var(--navy-dark); }
 .plm-menu i { width: 17px; text-align: center; color: var(--navy-light); }
 .plm-menu hr { border: none; border-top: 1px solid #eef0f5; margin: 6px 4px; }
 body.plm-locked { overflow: hidden; }
