@@ -54,3 +54,9 @@
 .tt-county:hover{border-color:var(--b-ink)}
 @media (max-width:640px){.tt-toast{text-align:left}.tt-share{width:100%}}
 @media print{.tt-share,.tt-toast,.tt-check form{display:none!important}}
+.tt-app .wd-look{margin:0 0 16px;padding:16px 18px;background:var(--b-white);border:1px solid var(--b-line);border-radius:var(--b-radius)}
+.tt-app .wd-look label{display:block;margin-bottom:8px;font-weight:700;color:var(--b-ink)}
+.tt-app .wd-look-row{display:flex;gap:8px}
+.tt-app .wd-look input{flex:1;min-width:0;height:44px;padding:0 12px;border:1px solid var(--b-line);border-radius:8px;background:var(--b-white);color:var(--b-ink);font:inherit;font-size:16px}
+.tt-app .wd-look button{flex:none;min-width:88px;height:44px;padding:0 16px;border:0;border-radius:8px;background:var(--b-navy);color:#fff;font:inherit;font-size:16px;font-weight:700;cursor:pointer}
+.tt-app .wd-look input:focus-visible,.tt-app .wd-look button:focus-visible{outline:2px solid var(--b-blue);outline-offset:2px}
