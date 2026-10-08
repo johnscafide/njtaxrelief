@@ -172,17 +172,17 @@
     // content-architecture: dynamic, image descriptions follow the selected real or illustrative screenshot.
     const live = key === 'platform';
     if (tourImage) {
-      tourImage.src = live ? '/agent/assets/platform-live.png' : '/agent/assets/platform-illustrative.png';
+      tourImage.src = live ? '/agent/assets/platform-live.png' : '/agent/assets/property-page.webp';
       tourImage.alt = live
         ? 'Actual Watchdog public Uniformity Index page, showing New Jersey assessment uniformity research.'
-        : 'Illustrative Watchdog Agent dashboard for a fictional property, with sample ownership, permits and value history.';
-      tourImage.dataset.screenshotType = live ? 'actual-public-platform' : 'illustrative-agent-dashboard';
+        : 'Watchdog property page for 205 Claremont Ave., Jersey City, showing the Watchdog Score, property tax and sales.';
+      tourImage.dataset.screenshotType = live ? 'actual-public-platform' : 'actual-property-page';
     }
     if (tourCaption) {
       // content-architecture: dynamic, discloses which screenshot type is selected; the public view is not presented as an Agent dashboard.
       tourCaption.textContent = live
-        ? 'Actual Watchdog public Uniformity Index page (/fairness). This is public research, not an Agent dashboard.'
-        : 'Illustrative Agent dashboard. The property, values and activity shown are sample data.';
+        ? 'Real Watchdog Uniformity Index page.'
+        : 'Real Watchdog property page.';
     }
     if (focus) selected.focus();
     if (tourDialog?.open) animate($('.tour-detail', tourDialog), [{ opacity: 0.65, transform: 'translateY(3px)' }, { opacity: 1, transform: 'translateY(0)' }], { duration: 180 });
