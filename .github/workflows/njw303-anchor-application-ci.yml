@@ -117,6 +117,7 @@ jobs:
           node --check property/js/anchor-applications.js
           node --check property/js/anchor-applications-filing.js
           node --check property/js/anchor-application-easy-mode.js
+          node --check property/js/anchor-application-state-notice.js
       - name: Run privacy and routing contracts
         run: |
           node property/tests/anchor-application-2025-contract.mjs

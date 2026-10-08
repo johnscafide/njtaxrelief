@@ -16,7 +16,23 @@
 </head>
 <body>
   <!-- Sensitive-flow privacy guard: watchdog-consent.js, ai-referral-analytics.js, and contact-routing-policy.js are intentionally not loaded on this page. -->
-  <div class="wd-app-shell">
+  <div id="wd-state-notice" class="wd-state-notice" role="dialog" aria-modal="true" aria-labelledby="wd-state-notice-title" aria-describedby="wd-state-notice-body">
+    <div class="wd-state-notice-card">
+      <h2 id="wd-state-notice-title">Watchdog is NOT the State of New Jersey.</h2>
+      <div id="wd-state-notice-body" class="wd-state-notice-body">
+        <p>Watchdog is a private company. This is a free tool that helps you fill out the State's official ANCHOR or PAS-1 PDF.</p>
+        <p>We do not send, file, or process your application. The State never gets it from us.</p>
+        <p>When you finish, you print the PDF, sign it, and mail it to the State yourself.</p>
+      </div>
+      <label class="wd-state-notice-check"><input type="checkbox" id="wd-state-notice-agree"><span>I understand Watchdog is not the State of New Jersey, and Watchdog does not send, file, or process my application.</span></label>
+      <div class="wd-state-notice-actions">
+        <a class="wd-btn secondary" href="https://www.nj.gov/treasury/taxation/anchor/">Go to the State's ANCHOR site</a>
+        <button type="button" id="wd-state-notice-continue" class="wd-btn primary" disabled>I understand, continue</button>
+      </div>
+    </div>
+  </div>
+  <script src="/property/js/anchor-application-state-notice.js"></script>
+  <div class="wd-app-shell" inert>
     <header class="wd-app-topbar">
       <a class="wd-app-brand" href="/" aria-label="Watchdog home"><span class="wd-app-mark" aria-hidden="true">W</span><span>Watchdog</span></a>
       <div class="wd-app-top-actions"><span class="wd-app-free">Free to prepare &amp; save</span><a href="/anchor/applications/" class="wd-app-library-link">My applications</a></div>
@@ -26,7 +42,7 @@
       <aside class="wd-app-rail" aria-label="Application progress">
         <div class="wd-app-rail-card">
           
-          <h1>Property Tax Relief Application</h1>
+          <h1>Property Tax Relief Application Helper</h1>
           <p>Watchdog turns the official ANC-1 or PAS-1 into a guided application.</p>
           <div class="wd-app-rail-progress" aria-hidden="true"><span id="wd-app-progress-rail"></span></div>
           <div class="wd-app-rail-stat"><span id="wd-app-progress-label">Getting started</span><strong id="wd-app-progress-percent">0%</strong></div>
@@ -41,6 +57,7 @@
 
       <section class="wd-app-card" aria-live="polite">
         <div class="wd-app-progress"><span id="wd-app-progress"></span></div>
+        <p class="wd-state-reminder"><strong>Watchdog is not the State of NJ.</strong> Nothing you enter here is sent to the State. We only help you fill out the PDF. You mail it to the State yourself.</p>
         <div id="wd-app-status" class="wd-app-status" role="status" aria-live="polite"></div>
         <form id="wd-anchor-form" novalidate autocomplete="off">
 
@@ -194,14 +211,14 @@
           <section class="wd-step" data-step="review" data-title="Review">
             <h2>Review before Watchdog prepares the official PDF.</h2><p class="wd-step-copy">Sensitive values remain masked in this summary. You can go back and change answers before generating the file.</p>
             <div id="wd-review-list" class="wd-review-list"></div><div id="wd-review-warning" class="wd-callout warning" hidden><strong>One or more required answers still need attention.</strong><p id="wd-review-warning-copy"></p></div>
-            <label class="wd-check-row"><input id="wd-review-confirm" type="checkbox"><span>I reviewed my answers and understand I must review, sign, and date the official application before mailing it.</span></label>
+            <label class="wd-check-row"><input id="wd-review-confirm" type="checkbox"><span>I reviewed my answers and understand I must review, sign, and date the official application and mail it to the State myself. Watchdog does not send it for me.</span></label>
             <div class="wd-step-actions"><button type="button" class="wd-btn ghost" data-back>Back</button><button id="wd-generate" type="button" class="wd-btn primary" disabled>Prepare my official PDF</button></div>
           </section>
 
           <section class="wd-step" data-step="complete" data-title="Complete">
             <div class="wd-complete-icon">✓</div><h2>The official 2025 NJ form has been prepared.</h2><p class="wd-step-copy">The completed PDF is saved to your Watchdog account as encrypted data and can be decrypted later with your Private Vault key.</p><div id="wd-complete-form" class="wd-complete-form"></div>
             <div class="wd-complete-actions"><button id="wd-download-pdf" type="button" class="wd-btn primary">Download PDF</button><button id="wd-print-pdf" type="button" class="wd-btn secondary">Print PDF</button><a href="/anchor/applications/" class="wd-btn secondary">My saved applications</a></div>
-            <div class="wd-callout warning"><strong>Review, sign, and date before mailing.</strong><p>Open the PDF and confirm every answer. If filing jointly, both signatures may be required. Mail it to the address printed on the official form.</p></div>
+            <div class="wd-callout warning"><strong>Your application is not filed yet.</strong><p>Watchdog did not send it to the State. Open the PDF and check every answer, then sign, date, and mail it to the address printed on the form. If filing jointly, both signatures may be required.</p></div>
             <div class="wd-support-card"><span>Keep Watchdog tools free</span><h3>Did this save you time?</h3><p>Your application is already complete and saved. Supporting Watchdog is optional and never changes access.</p><button type="button" class="wd-btn support" disabled>Support Watchdog</button><small>Support checkout remains disabled pending compliance review.</small></div>
             <a class="wd-property-cta" href="/"><span><strong>See what Watchdog knows about your property</strong><small>Tax history, assessment, Watchdog Score, and property info.</small></span><span aria-hidden="true">→</span></a>
           </section>

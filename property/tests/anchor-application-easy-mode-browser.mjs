@@ -92,6 +92,13 @@ async function openPage(browser, base, viewport, mode) {
   if (mode) await context.addInitScript((m) => { try { localStorage.setItem('wd_anchor_2025_mode', m); } catch (_) {} }, mode);
   await page.goto(`${base}/property/anchor/application/2025/`, { waitUntil: 'load' });
   await page.waitForSelector('.wd-step[data-step="welcome"] [data-readiness]', { timeout: 15000 });
+  await page.locator('#wd-state-notice').waitFor({ state: 'visible' });
+  assert.equal(await page.locator('.wd-app-shell').getAttribute('inert'), '', 'application stays locked until the not-the-State notice is accepted');
+  assert.ok(await page.locator('#wd-state-notice-continue').isDisabled(), 'notice continue button waits for the checkbox');
+  await page.locator('#wd-state-notice-agree').check();
+  await page.locator('#wd-state-notice-continue').click();
+  await page.locator('#wd-state-notice').waitFor({ state: 'hidden' });
+  assert.equal(await page.locator('.wd-app-shell').getAttribute('inert'), null, 'application unlocks after the notice is accepted');
   return { page, context, errors };
 }
 
