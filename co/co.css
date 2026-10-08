@@ -185,3 +185,9 @@ body.embed .home .logo { margin-bottom: 18px; }
 
 @media print { .top, .home, .links, .tools, .votes, .fix, .nearby, .more, .tip, .crumbs, .toast, .embed-foot { display: none !important; } .out { padding: 0; } }
 .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
+.wd-look { margin: 24px 0 8px; padding: 16px; border: 1px solid var(--line); border-radius: 10px; background: var(--soft); }
+.wd-look label { display: block; margin-bottom: 8px; font-weight: 600; }
+.wd-look-row { display: flex; gap: 8px; }
+.wd-look input { flex: 1; min-width: 0; height: 44px; padding: 0 12px; border: 1px solid #c9d1db; border-radius: 8px; background: #fff; color: var(--ink); font: inherit; font-size: 16px; }
+.wd-look button { flex: none; min-width: 88px; height: 44px; padding: 0 16px; border: 0; border-radius: 8px; background: var(--blue); color: #fff; font: inherit; font-size: 16px; font-weight: 600; cursor: pointer; }
+.wd-look input:focus-visible, .wd-look button:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }

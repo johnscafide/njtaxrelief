@@ -6,11 +6,12 @@ const fs = require('fs');
 const path = require('path');
 const T = require('./_co-town');
 const TAX = require('./_tax-town');
+const { homeLookupBox } = require('./_home-lookup-box');
 
 const { ORIGIN, SHARE_IMAGE, esc, countyLabel, fmtDate, STATUS } = T;
 const LOGO = '/property/branding/watchdog-logo-horizontal.svg';
 const MARK = '/property/branding/watchdog-mark.svg';
-const ASSET_V = '20261004c';
+const ASSET_V = '20261008a';
 // Tip line at the bottom of town pages.
 const TIP_URL = 'https://account.venmo.com/u/John-Scafide';
 
@@ -257,6 +258,7 @@ function townPage(t, opts) {
   let out = (embed ? '' : crumbs(t)) + `<div class="head"><div><h1 class="town">${esc(t.name)}</h1><p class="meta">${meta}</p></div>${d ? votes() : ''}</div>`;
   if (d) {
     out += shareRow(t, embed) + facts(d) + '<button class="fix" type="button" data-fix>Report a correction</button>';
+    if (!embed) out += homeLookupBox(t.name);
   } else {
     out += '<p>Not available yet.</p><button class="add" type="button" data-add>Add CO Requirements</button>';
   }
@@ -269,8 +271,8 @@ function townPage(t, opts) {
     }
     const tax = TAX.findTown(t.countySlug, t.slug);
     if (tax) out += `<p class="more"><a href="${esc(tax.path)}">${esc(t.name)} property taxes: typical bill, tax rate and appeal deadline</a></p>`;
-    out += '<p class="more"><a href="/">Look up any New Jersey property on Watchdog</a></p>' +
-      `<p class="tip"><a href="${TIP_URL}" target="_blank" rel="noopener" data-tip>Found this helpful? Show appreciation with a tip on Venmo</a></p>`;
+    if (!d) out += homeLookupBox(t.name);
+    out += `<p class="tip"><a href="${TIP_URL}" target="_blank" rel="noopener" data-tip>Found this helpful? Show appreciation with a tip on Venmo</a></p>`;
   }
   const body = `<main ${attrs}>
 ${topBar(embed)}
