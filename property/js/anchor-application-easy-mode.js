@@ -719,8 +719,8 @@
     var box = el('fieldset', 'wd-easy-chooser');
     box.appendChild(el('legend', '', 'How would you like to fill it out?'));
     [
-      ['easy', 'Easy mode', 'One question at a time, with a plain-English explanation of what each question means and where to find the answer. Good for a first time, or if forms feel overwhelming.'],
-      ['standard', 'Standard', 'See each section\'s questions together. Faster if you have your paperwork ready.']
+      ['easy', 'Easy mode', 'One question at a time, with help.'],
+      ['standard', 'Standard', 'All questions on each page.']
     ].forEach(function (o) {
       var label = el('label', 'wd-easy-option');
       var input = document.createElement('input');
