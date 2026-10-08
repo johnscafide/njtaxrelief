@@ -1,5 +1,3 @@
-@import url('/agent/agent-base.css');
-
 /* Mobile landing-page interaction hardening. Keep vertical scrolling and pinch zoom, but prevent horizontal page drift/whitespace. */
 @media(max-width:960px){
   html,body{width:100%;max-width:100%;overflow-x:hidden;overflow-x:clip}
