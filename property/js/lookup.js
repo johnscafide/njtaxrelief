@@ -745,6 +745,7 @@ function assessorAddressAlias(display, assessor) {
       '<div class="pl-state-title">Locating property</div>' +
       '<div class="pl-state-sub">Matching ' + esc(addr) + ' to the New Jersey parcel map.</div></div>';
     if (typeof gtag === 'function') gtag('event', 'property_lookup');
+    if (window.WatchdogAnalytics) window.WatchdogAnalytics.track('property_lookup_started', { tool: 'property_lookup' });
 
     warmReferenceData();
 
@@ -3324,6 +3325,7 @@ buildOpinion(hasCase, overBy, saving, target) + rows +
     };
 
     if (typeof gtag === 'function') gtag('event', 'property_lookup_success', { town: current.town });
+    if (window.WatchdogAnalytics) window.WatchdogAnalytics.track('property_lookup_succeeded', { tool: 'property_lookup' });
   }
   function drawMap(geo, rings, p) {
     if (typeof L === 'undefined' || !el('plm-map')) return;
