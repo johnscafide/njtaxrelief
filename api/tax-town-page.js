@@ -5,11 +5,12 @@ const fs = require('fs');
 const path = require('path');
 const T = require('./_tax-town');
 const page = require('./watchdog-property-page');
+const { homeLookupBox } = require('./_home-lookup-box');
 
 const { HEAD_ASSETS, STYLE, FOOT_SCRIPTS, chrome, esc } = page.parts;
 const ORIGIN = 'https://www.watchdogindex.com';
 const SHARE_IMAGE = `${ORIGIN}/watchdog-social-share-20260913-v3.jpg`;
-const ASSET_V = '20261005a';
+const ASSET_V = '20261008a';
 const SLUG = /^[a-z0-9-]{1,80}$/;
 
 // John's story comment, copied from the /co page so it stays word for word.
@@ -200,6 +201,7 @@ function townPage(t) {
     </div>
     ${sharePills(t.path, `${t.name} NJ property taxes: typical bill, tax rate and appeal deadline.`)}
   </div>
+  ${homeLookupBox(t.name)}
   <div class="wdp-cards">
     <div class="wdp-card wdp-card--tax">
       <div class="wdp-card-head"><h2>Typical home tax bill</h2></div>
