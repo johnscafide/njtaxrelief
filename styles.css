@@ -2647,3 +2647,12 @@ footer {
 .wd-anchor-quick-intro .wd-free-help{display:block;width:100%;max-width:400px;margin:24px 0 0;padding:0;border:0}.wd-anchor-quick-intro .wd-free-help-image{max-width:360px}.wd-anchor-quick-intro .wd-free-help-copy{padding-top:16px}.wd-anchor-quick-intro .wd-free-help-copy strong{font-size:20px}
 .est-card-wrap>.wd-free-help{width:100%;margin:0 0 24px}
 @media(max-width:600px){.wd-free-help{flex-direction:column;align-items:stretch;gap:18px;padding:16px}.wd-free-help-image{flex-basis:auto;width:100%;max-width:320px;margin:0 auto}.wd-free-help-copy strong{font-size:21px}}
+.wd-njptr-search{background:#fff;border-bottom:1px solid #d8dce8;padding:20px 16px}
+.wd-njptr-search-inner{max-width:760px;margin:0 auto}
+.wd-njptr-search label{display:block;margin:0 0 8px;font:700 17px/1.3 "Libre Franklin",Arial,sans-serif;color:#0e2248}
+.wd-njptr-row{display:flex;gap:8px}
+.wd-njptr-row input{flex:1;min-width:0;height:48px;padding:0 14px;border:1px solid #c3cad8;border-radius:8px;background:#fff;color:#1a1a2e;font:inherit;font-size:16px}
+.wd-njptr-row button{flex:none;min-width:96px;height:48px;padding:0 18px;border:0;border-radius:8px;background:#0e2248;color:#fff;font:700 16px "Libre Franklin",Arial,sans-serif;cursor:pointer}
+.wd-njptr-row input:focus-visible,.wd-njptr-row button:focus-visible{outline:2px solid #b8972a;outline-offset:2px}
+.wd-njptr-links{margin:8px 0 0;font-size:14px;line-height:1.5;color:#5a6070}
+.wd-njptr-links a{color:#1a3a6b;font-weight:600}
