@@ -44,7 +44,7 @@ for(const page of pages){
 
 expect(sharedCss.includes("url('/agent/assets/hero-coast.webp')"),'shared Agent hero imagery missing');
 expect(sharedCss.includes("url('/agent/assets/founding-coast.webp')"),'shared Agent Founding imagery missing');
-expect(sharedJs.includes("'/agent/assets/platform-live.png'")&&sharedJs.includes("'/agent/assets/platform-illustrative.png'"),'shared Agent tour imagery missing');
+expect(sharedJs.includes("'/agent/assets/platform-live.png'")&&sharedJs.includes("'/agent/assets/property-page.webp'"),'shared Agent tour imagery missing');
 expect(pricingCss.includes('background: #fff0a6'),'yellow Pro/Pro+ difference highlight missing');
 expect(checkout.includes("billing.invoke('create-lifetime-checkout', { tier })"),'professional Lifetime checkout must remain server-owned');
 expect(!checkout.includes("cadence: 'yearly'"),'professional landing must not start a yearly checkout');

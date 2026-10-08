@@ -15,7 +15,7 @@ Serve the repository root using its normal development environment, then open `/
 
 The page has no exit-intent offer. Native dialogs support keyboard dismissal, focus containment and backdrop dismissal.
 
-The product tour contains an actual screenshot of the public Watchdog Uniformity Index and a clearly disclosed illustrative Agent dashboard. Sample property figures are not presented as live customer data. Coastal art, the house illustration and the beagle are generated assets. The brand graphic follows the supplied reference. Local font licenses are in `assets/FONT-LICENSES.txt`.
+The hero and the product tour use real screenshots of the live Watchdog property page and the public Uniformity Index (taken Oct 8, 2026). Coastal art, the house illustration and the beagle are generated assets. The brand graphic follows the supplied reference. Local font licenses are in `assets/FONT-LICENSES.txt`.
 
 Motion uses the Web Animations API and IntersectionObserver. Content renders immediately and reduced-motion preferences are respected.
 
