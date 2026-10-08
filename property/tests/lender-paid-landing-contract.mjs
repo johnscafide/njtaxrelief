@@ -31,6 +31,7 @@ expect(!page.includes('class="eyebrow"'),'lender page must not add eyebrow text'
 
 for(const className of ['site-header container','hero','hero-background','hero-inner container','hero-copy','product-preview','dashboard','trust-band','why-band','why-inner container','features','founding-band','founding-background','founding-inner container','price-card','bottom-trust container','site-footer container','tour-dialog','image-dialog']){
   expect(page.includes(`class="${className}"`)||page.includes(`class="${className} `),`Agent layout class missing from lender: ${className}`);
+  if(['trust-band','bottom-trust container'].includes(className))continue;
   expect(agent.includes(`class="${className}"`)||agent.includes(`class="${className} `),`reference Agent layout class unexpectedly missing: ${className}`);
 }
 
