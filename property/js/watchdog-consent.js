@@ -1,8 +1,8 @@
 /* Watchdog privacy preferences.
    Necessary storage supports authentication, security and saved preferences.
-   Google Analytics and Microsoft Clarity are on by default until the visitor turns
-   them off in Cookie settings, unless the browser sends Global Privacy Control or
-   Do Not Track. Ad tools such as OpenAI Ads measurement remain opt-in.
+   Google Analytics, Microsoft Clarity and OpenAI Ads measurement are on by default
+   until the visitor turns them off in Cookie settings, unless the browser sends
+   Global Privacy Control or Do Not Track.
    Advertising cookies are a separate opt-in that only exists on WatchdogIndex once an
    ad platform ID is filled in below. Until then the banner, the Google consent signals
    and the cookie settings stay exactly as they are (ad storage and personalization denied).
@@ -261,7 +261,7 @@
   }
   // content-architecture: dynamic, the advertising row exists only when an ad platform is configured, and its toggle and note change with the visitor's Global Privacy Control / Do Not Track signal.
   function advertisingRow(){
-    if(!ADS_AVAILABLE) return '<p class="wd-consent-note">Ad personalization stays off. OpenAI ad measurement can use a privacy-preserving click or browser reference only after you save your choice with optional measurement on. Read the <a href="'+privacyHref()+'">Privacy Policy</a> for details.</p>';
+    if(!ADS_AVAILABLE) return '<p class="wd-consent-note">Ad personalization stays off. OpenAI ad measurement is part of optional measurement and can use a privacy-preserving click or browser reference. Read the <a href="'+privacyHref()+'">Privacy Policy</a> for details.</p>';
     var blocked=privacySignal();
     return '<label class="wd-consent-option wd-consent-toggle-row" for="wd-consent-advertising"><div><b>Advertising cookies</b><span>Lets ad platforms such as Meta, Google, LinkedIn and TikTok measure Watchdog ads and show you Watchdog ads on other sites</span></div><span class="wd-consent-toggle"><input id="wd-consent-advertising" type="checkbox"'+(blocked?' disabled':'')+'><span aria-hidden="true"></span></span></label><p class="wd-consent-note">'+(blocked?'Your browser is sending a Global Privacy Control or Do Not Track sign, so advertising cookies stay off. ':'')+'Advertising cookies are off unless you turn them on, and you can turn them off here at any time. Read the <a href="'+privacyHref()+'">Privacy Policy</a> for the full list of ad platforms.</p>';
   }
