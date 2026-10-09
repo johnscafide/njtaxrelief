@@ -4518,11 +4518,12 @@ buildOpinion(hasCase, overBy, saving, target) + rows +
     var btn = el('plm-save');
     var saved = JSON.parse(localStorage.getItem('pl_saved') || '{}');
     var k = current.pin || current.address;
-    if (saved[k]) { delete saved[k]; btn.classList.remove('saved'); btn.innerHTML = '<i class="far fa-heart"></i><span>Save</span>'; btn.setAttribute('aria-label', 'Save'); toast('Removed'); }
+    if (saved[k]) { delete saved[k]; btn.classList.remove('saved'); btn.innerHTML = '<i class="far fa-heart"></i><span>Save</span>'; toast('Removed'); }
     else {
       saved[k] = { a: current.address, t: current.town, v: current.assessed, d: Date.now() };
-      btn.classList.add('saved'); btn.innerHTML = '<i class="fas fa-heart"></i><span>Saved</span>'; btn.setAttribute('aria-label', 'Saved'); toast('Saved to this browser');
+      btn.classList.add('saved'); btn.innerHTML = '<i class="fas fa-heart"></i><span>Saved</span>'; toast('Saved to this browser');
     }
+    btn.setAttribute('aria-label', saved[k] ? 'Saved' : 'Save');
     localStorage.setItem('pl_saved', JSON.stringify(saved));
   };
 
