@@ -33,8 +33,14 @@ async function api(action,payload){
 }
 
 function empty(message,detail){return '<div class="br-empty"><b>'+esc(message)+'</b><span>'+esc(detail||'')+'</span></div>'}
-function pendingCard(review){return '<article class="br-review" data-review-id="'+esc(review.id)+'"><div class="br-review-main"><div class="br-review-top"><span class="br-stars" aria-label="'+esc(review.rating)+' out of 5 stars">'+stars(review.rating)+'</span><span class="br-rating">'+esc(review.rating)+'/5</span><span class="br-date">Submitted '+esc(date(review.submitted_at))+'</span></div><blockquote>“'+esc(review.comment)+'”</blockquote></div><div class="br-review-actions"><button type="button" class="br-btn br-btn-primary" data-review-action="approve" data-review-id="'+esc(review.id)+'">Approve & publish</button></div></article>'}
-function approvedCard(review){return '<article class="br-review" data-review-id="'+esc(review.id)+'"><div class="br-review-main"><div class="br-review-top"><span class="br-stars" aria-label="'+esc(review.rating)+' out of 5 stars">'+stars(review.rating)+'</span><span class="br-rating">'+esc(review.rating)+'/5</span><span class="br-date">Approved '+esc(date(review.approved_at))+'</span></div><blockquote>“'+esc(review.comment)+'”</blockquote></div><div class="br-review-actions"><span class="br-published">Published</span><button type="button" class="br-btn br-btn-quiet" data-review-action="unpublish" data-review-id="'+esc(review.id)+'">Unpublish</button></div></article>'}
+function replyBlock(review){
+  var has=!!(review.reply&&String(review.reply).trim());
+  var shown=has?'<div class="br-reply-shown"><b>Your reply</b><span class="br-date">'+esc(date(review.reply_at))+'</span><p>'+esc(review.reply)+'</p></div>':'';
+  return shown+'<details class="br-reply"'+(has?'':' data-br-reply-new')+'><summary>'+(has?'Edit reply':'Reply')+'</summary><label class="bo-sr" for="br-reply-'+esc(review.id)+'">Reply to this review</label><textarea id="br-reply-'+esc(review.id)+'" maxlength="1500" rows="4" data-br-reply-text>'+esc(review.reply||'')+'</textarea><div class="br-reply-actions"><button type="button" class="br-btn br-btn-primary" data-reply-save data-review-id="'+esc(review.id)+'">Save reply</button>'+(has?'<button type="button" class="br-btn br-btn-quiet" data-reply-remove data-review-id="'+esc(review.id)+'">Remove reply</button>':'')+'</div></details>';
+}
+function reviewTop(review,label,when){return '<div class="br-review-top"><span class="br-stars" aria-label="'+esc(review.rating)+' out of 5 stars">'+stars(review.rating)+'</span><span class="br-rating">'+esc(review.rating)+'/5</span><span class="br-date">'+label+' '+esc(date(when))+'</span></div>'}
+function pendingCard(review){return '<article class="br-review" data-review-id="'+esc(review.id)+'"><div class="br-review-main">'+reviewTop(review,'Submitted',review.submitted_at)+'<blockquote>“'+esc(review.comment)+'”</blockquote>'+replyBlock(review)+'</div><div class="br-review-actions"><button type="button" class="br-btn br-btn-primary" data-review-action="approve" data-review-id="'+esc(review.id)+'">Approve & publish</button></div></article>'}
+function approvedCard(review){return '<article class="br-review" data-review-id="'+esc(review.id)+'"><div class="br-review-main">'+reviewTop(review,'Approved',review.approved_at)+'<blockquote>“'+esc(review.comment)+'”</blockquote>'+replyBlock(review)+'</div><div class="br-review-actions"><span class="br-published">Published</span><button type="button" class="br-btn br-btn-quiet" data-review-action="unpublish" data-review-id="'+esc(review.id)+'">Unpublish</button></div></article>'}
 
 function outreachLabel(status){return({prepared:'Prepared',sent:'Sent',opened:'Opened',clicked:'Clicked',rated:'Rated',written_review:'Written review'})[status]||'Prepared'}
 function outreachCard(row){
@@ -71,7 +77,8 @@ function paint(data){
   paintOutreach(data);
 }
 
-function schedule(){clearTimeout(refreshTimer);refreshTimer=setTimeout(load,REFRESH_MS)}
+function editing(){return !!document.querySelector('.br-reply[open]')}
+function schedule(){clearTimeout(refreshTimer);refreshTimer=setTimeout(function(){if(editing())return schedule();load()},REFRESH_MS)}
 async function load(){
   if(busy)return;busy=true;
   var button=$('#br-refresh');if(button)button.disabled=true;
@@ -86,6 +93,16 @@ async function moderate(action,id,button){
   catch(error){toast(error.message);busy=false;if(button)button.disabled=false;}
 }
 
+async function saveReply(id,button,remove){
+  if(!id||busy||!button)return;
+  var card=button.closest('.br-review'),box=card&&card.querySelector('[data-br-reply-text]');
+  var text=remove?'':String(box&&box.value||'').trim();
+  if(!remove&&!text){toast('Write a reply first.');if(box)box.focus();return}
+  busy=true;button.disabled=true;
+  try{await api('reply',{review_id:id,reply:text});toast(remove?'Reply removed.':'Reply saved.');busy=false;await load();}
+  catch(error){toast(error.message);busy=false;button.disabled=false;}
+}
+
 async function markSent(button){
   if(busy||!button)return;var ids=String(button.dataset.ids||'').split(',').filter(Boolean);if(!ids.length)return;
   busy=true;button.disabled=true;
@@ -97,7 +114,7 @@ async function markSent(button){
 function install(){
   var refresh=$('#br-refresh');if(refresh)refresh.addEventListener('click',load);
   var mark=$('#br-mark-sent');if(mark)mark.addEventListener('click',function(){markSent(mark)});
-  document.addEventListener('click',function(event){var button=event.target&&event.target.closest&&event.target.closest('[data-review-action]');if(!button)return;event.preventDefault();moderate(button.getAttribute('data-review-action'),button.getAttribute('data-review-id'),button)});
+  document.addEventListener('click',function(event){var replyButton=event.target&&event.target.closest&&event.target.closest('[data-reply-save],[data-reply-remove]');if(replyButton){event.preventDefault();saveReply(replyButton.getAttribute('data-review-id'),replyButton,replyButton.hasAttribute('data-reply-remove'));return}var button=event.target&&event.target.closest&&event.target.closest('[data-review-action]');if(!button)return;event.preventDefault();moderate(button.getAttribute('data-review-action'),button.getAttribute('data-review-id'),button)});
   document.addEventListener('visibilitychange',function(){if(!document.hidden&&Date.now()-lastLoadedAt>REFRESH_MS)load()});
   load();
 }

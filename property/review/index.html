@@ -12,7 +12,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@500;600;700;800&family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/property/css/anchor-review.css">
+  <link rel="stylesheet" href="/property/css/anchor-review.css?v=20261009a">
 </head>
 <body>
   <main class="review-shell">
@@ -41,6 +41,7 @@
       </div>
 
       <div id="review-form" hidden>
+        <div id="review-owner-reply" class="review-owner-reply" hidden><strong>Reply from Watchdog</strong><p id="review-owner-reply-text"></p></div>
         <div class="review-rating-block">
           <span class="review-label">Your rating</span>
           <div id="review-stars" class="review-stars" role="radiogroup" aria-label="Choose a rating from 1 to 5 stars">
@@ -83,6 +84,6 @@
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
   <script src="/property/js/supabase-runtime.js"></script>
-  <script src="/property/js/anchor-review.js"></script>
+  <script src="/property/js/anchor-review.js?v=20261009a"></script>
 </body>
 </html>
