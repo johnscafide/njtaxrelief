@@ -93,7 +93,9 @@ if (links.length < 2) {
 const first = links[0].index;
 const last = links[links.length - 1].index + links[links.length - 1].tag.length;
 const between = head.slice(first, last);
-if (/<style\b|<link\b[^>]*\brel=["']stylesheet["'](?![^>]*\/property\/css\/)/i.test(between.replace(/<script\b[^>]*type=["']application\/ld\+json["'][\s\S]*?<\/script>/gi, ''))) {
+const localTags = new Set(links.map((link) => link.tag));
+const otherStyles = /<style\b/i.test(between) || [...between.matchAll(linkPattern)].some((m) => /\brel=["']stylesheet["']/i.test(m[0]) && !localTags.has(m[0]));
+if (otherStyles) {
   console.warn('Home CSS bundle: other styles sit between the home page style links, leaving it as is so the order stays the same.');
   process.exit(0);
 }
