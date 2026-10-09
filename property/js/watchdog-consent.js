@@ -264,8 +264,19 @@
   function privacyHref(){ return '/property/privacy'; }
   function bannerMarkup(){
     // content-architecture: dynamic, consent disclosure reflects the optional measurement providers enabled by this runtime.
-    if(ADS_AVAILABLE) return '<div class="wd-consent-copy"><span class="wd-consent-mark" aria-hidden="true"><i class="fas fa-dog"></i></span><div><strong>Choose your cookie preferences</strong><p>Watchdog uses cookies to keep you signed in and remember preferences. Optional measurement cookies help us understand product use. Optional advertising cookies let ad platforms measure Watchdog ads and show you Watchdog ads on other sites. Both stay off unless you turn them on. <a href="'+privacyHref()+'">Privacy Policy</a></p></div></div><div class="wd-consent-actions"><button type="button" class="wd-consent-settings" data-wd-consent-action="settings">Cookie settings</button><button type="button" class="wd-consent-secondary" data-wd-consent-action="reject">Reject optional cookies</button><button type="button" class="wd-consent-primary" data-wd-consent-action="accept">Accept all cookies</button></div>';
-    return '<div class="wd-consent-copy"><span class="wd-consent-mark" aria-hidden="true"><i class="fas fa-dog"></i></span><div><strong>Choose your cookie preferences</strong><p>Watchdog uses cookies to keep you signed in and remember preferences. Optional measurement cookies help us understand product use and whether Watchdog ads lead to sign-ups or purchases. We do not sell personal information or enable ad personalization on Watchdog. <a href="'+privacyHref()+'">Privacy Policy</a></p></div></div><div class="wd-consent-actions"><button type="button" class="wd-consent-settings" data-wd-consent-action="settings">Cookie settings</button><button type="button" class="wd-consent-secondary" data-wd-consent-action="reject">Reject optional cookies</button><button type="button" class="wd-consent-primary" data-wd-consent-action="accept">Accept all cookies</button></div>';
+    var copy=ADS_AVAILABLE
+      ?'Watchdog uses cookies to keep you signed in. Optional measurement and advertising cookies stay off unless you turn them on.'
+      :'Watchdog uses cookies to keep you signed in. Optional measurement cookies help us understand how the site is used. We do not sell personal information.';
+    return '<button type="button" class="wd-consent-tab" data-wd-consent-action="expand" aria-expanded="false" aria-controls="wd-consent-panel"><i class="fas fa-cookie-bite" aria-hidden="true"></i><span>Cookies</span></button><div class="wd-consent-panel" id="wd-consent-panel" hidden><div class="wd-consent-panel-head"><strong>Cookies</strong><button type="button" class="wd-consent-collapse" data-wd-consent-action="collapse" aria-label="Close"><i class="fas fa-xmark" aria-hidden="true"></i></button></div><p>'+copy+' <a href="'+privacyHref()+'">Privacy Policy</a></p><div class="wd-consent-actions"><button type="button" class="wd-consent-primary" data-wd-consent-action="accept">Accept all cookies</button><button type="button" class="wd-consent-secondary" data-wd-consent-action="reject">Reject optional cookies</button><button type="button" class="wd-consent-settings" data-wd-consent-action="settings">Cookie settings</button></div></div>';
+  }
+  function setExpanded(open){
+    var banner=document.getElementById('wd-cookie-banner');if(!banner) return;
+    var tab=banner.querySelector('.wd-consent-tab'),panel=banner.querySelector('.wd-consent-panel');
+    banner.classList.toggle('is-open',!!open);
+    if(tab){tab.hidden=!!open;tab.setAttribute('aria-expanded',open?'true':'false');}
+    if(panel) panel.hidden=!open;
+    if(open){var first=panel&&panel.querySelector('.wd-consent-primary');if(first) first.focus();}
+    else if(tab) tab.focus();
   }
   function onPaths(list){
     var path=String(location.pathname||'').replace(/^\/property(?=\/)/,'');
@@ -276,7 +287,7 @@
   function analyticsOn(){ return stored ? !!stored.analytics : analyticsOnByDefaultHere(); }
   function ensureBanner(){
     if(bannerHiddenHere() || !needsChoice() || document.getElementById('wd-cookie-banner')) return;
-    var banner=document.createElement('section');banner.id='wd-cookie-banner';banner.className='wd-consent-banner';banner.setAttribute('role','region');banner.setAttribute('aria-label','Cookie preferences');banner.innerHTML=bannerMarkup();document.body.appendChild(banner);
+    var banner=document.createElement('section');banner.id='wd-cookie-banner';banner.className='wd-consent-banner';banner.setAttribute('role','region');banner.setAttribute('aria-label','Cookies');banner.innerHTML=bannerMarkup();document.body.appendChild(banner);
   }
   function hideBanner(){ var banner=document.getElementById('wd-cookie-banner');if(banner) banner.remove(); }
   function ensureModal(){
@@ -317,6 +328,8 @@
     if(settings){event.preventDefault();open();return;}
     var action=event.target.closest&&event.target.closest('[data-wd-consent-action]');if(!action)return;
     var name=action.getAttribute('data-wd-consent-action');
+    if(name==='expand'){setExpanded(true);return;}
+    if(name==='collapse'){setExpanded(false);return;}
     if(name==='settings'){open();return;}
     if(name==='close'){close();return;}
     if(name==='accept'){apply(true,true,ADS_AVAILABLE&&!privacySignal());close();return;}
@@ -334,7 +347,7 @@
   function ready(){ ensureBanner();ensureModal();appendOnboardingLink();syncControls(); }
   if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',ready,{once:true}); else ready();
   document.addEventListener('click',onClick);
-  document.addEventListener('keydown',function(event){if(event.key==='Escape')close();});
+  document.addEventListener('keydown',function(event){if(event.key!=='Escape')return;var shade=document.getElementById('wd-consent-shade');if(shade&&!shade.hidden){close();return;}var banner=document.getElementById('wd-cookie-banner');if(banner&&banner.classList.contains('is-open'))setExpanded(false);});
 
   window.WatchdogConsent=Object.freeze({
     version:VERSION,

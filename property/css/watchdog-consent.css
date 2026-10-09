@@ -1,14 +1,20 @@
 /* Watchdog cookie/privacy preference UI. Fully scoped and shared. */
 :root{--wdc-navy:#10294b;--wdc-teal:#078486;--wdc-teal-dark:#056b6d;--wdc-ink:#172332;--wdc-muted:#667482;--wdc-border:#dce5e8;--wdc-soft:#f3f8f7;--wdc-white:#fff;--wdc-font:"Source Sans 3",Arial,sans-serif;--wdc-display:"Libre Franklin",Arial,sans-serif}
 .wd-consent-banner,.wd-consent-banner *,.wd-consent-shade,.wd-consent-shade *{box-sizing:border-box}
-.wd-consent-banner{position:fixed;z-index:9850;left:18px;right:18px;bottom:18px;display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:24px;max-width:1520px;margin:0 auto;padding:18px 20px;border:1px solid rgba(16,41,75,.13);border-radius:16px;background:rgba(255,255,255,.98);box-shadow:0 2px 6px rgba(15,23,42,.08);color:var(--wdc-ink);font-family:var(--wdc-font);}
-.wd-consent-copy{display:flex;align-items:flex-start;gap:13px;min-width:0}
-.wd-consent-mark{display:inline-flex;align-items:center;justify-content:center;flex:0 0 38px;width:38px;height:38px;border-radius:10px;background:var(--wdc-navy);color:#fff;font-size:16px}
-.wd-consent-copy>div{min-width:0}
-.wd-consent-copy strong{display:block;margin:0 0 3px;color:var(--wdc-navy);font:800 14px/1.25 var(--wdc-display);letter-spacing:-.01em}
-.wd-consent-copy p{max-width:910px;margin:0;color:#536474;font:500 12.5px/1.48 var(--wdc-font)}
-.wd-consent-copy a,.wd-consent-note a{color:var(--wdc-teal-dark);font-weight:700;text-decoration:underline;text-underline-offset:2px}
-.wd-consent-actions{display:flex;align-items:center;justify-content:flex-end;gap:9px;white-space:nowrap}
+.wd-consent-banner{position:fixed;z-index:9850;left:12px;bottom:12px;max-width:calc(100vw - 24px);color:var(--wdc-ink);font-family:var(--wdc-font)}
+.wd-consent-banner button.wd-consent-tab{display:inline-flex;align-items:center;gap:7px;min-height:44px;padding:0 14px;border:1px solid rgba(16,41,75,.16);border-radius:10px;background:#fff;color:var(--wdc-navy);font:700 13px/1 var(--wdc-font);box-shadow:0 2px 6px rgba(15,23,42,.08)}
+.wd-consent-tab i{color:var(--wdc-teal-dark);font-size:14px}
+.wd-consent-tab:hover,.wd-consent-tab:focus-visible{border-color:var(--wdc-teal)!important;outline:none}
+.wd-consent-panel[hidden],.wd-consent-tab[hidden]{display:none!important}
+.wd-consent-panel{width:340px;max-width:100%;padding:14px 16px 16px;border:1px solid rgba(16,41,75,.13);border-radius:12px;background:#fff;box-shadow:0 2px 6px rgba(15,23,42,.08)}
+.wd-consent-panel-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:0 0 4px}
+.wd-consent-panel-head strong{color:var(--wdc-navy);font:800 15px/1.25 var(--wdc-display)}
+.wd-consent-banner button.wd-consent-collapse{display:inline-flex;align-items:center;justify-content:center;width:44px;min-height:44px;margin:-10px -10px -10px 0;padding:0;border:0;background:transparent;color:#607080;font-size:15px}
+.wd-consent-collapse:hover,.wd-consent-collapse:focus-visible{color:var(--wdc-navy)!important;outline:2px solid rgba(7,132,134,.25)}
+.wd-consent-panel p{margin:0 0 12px;color:#536474;font:500 13px/1.5 var(--wdc-font)}
+.wd-consent-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.wd-consent-actions .wd-consent-settings{grid-column:1/-1;justify-self:start;padding-left:0!important}
+.wd-consent-panel a,.wd-consent-note a{color:var(--wdc-teal-dark);font-weight:700;text-decoration:underline;text-underline-offset:2px}
 .wd-consent-banner button,.wd-consent-modal button{appearance:none;-webkit-appearance:none;min-height:44px;margin:0;padding:0 15px;border-radius:10px;font:800 12px/1 var(--wdc-font);cursor:pointer;transition:background-color .16s ease,border-color .16s ease,color .16s ease,box-shadow .16s ease}
 .wd-consent-primary{border:1px solid var(--wdc-teal)!important;background:var(--wdc-teal)!important;color:#fff!important;box-shadow:0 2px 6px rgba(15,23,42,.08)}
 .wd-consent-primary:hover,.wd-consent-primary:focus-visible{background:var(--wdc-teal-dark)!important;border-color:var(--wdc-teal-dark)!important;outline:none}
@@ -45,7 +51,6 @@ html.wd-consent-open{overflow:hidden}
 #wd-property-footer button.wdf-legal-link[data-watchdog-cookie-settings]:focus-visible{outline:2px solid var(--wdf-teal);outline-offset:3px}
 .wd-onboarding-cookie-link{appearance:none;border:0;background:transparent;color:inherit;padding:0;font-family:inherit;font-size:inherit;line-height:inherit;font-weight:700;text-decoration:underline;text-underline-offset:2px;cursor:pointer}
 .wd-onboarding-cookie-link:hover,.wd-onboarding-cookie-link:focus-visible{color:#087f82;outline:none}
-@media(max-width:860px){.wd-consent-banner{grid-template-columns:1fr;gap:14px}.wd-consent-actions{justify-content:flex-start;white-space:normal}}
-@media(max-width:560px){.wd-consent-banner{left:10px;right:10px;bottom:10px;padding:15px;border-radius:14px}.wd-consent-copy{gap:10px}.wd-consent-mark{flex-basis:34px;width:34px;height:34px}.wd-consent-copy p{font-size:12px}.wd-consent-actions{display:grid;grid-template-columns:1fr 1fr;width:100%}.wd-consent-settings{grid-column:1/-1;justify-self:start;padding-left:0!important}.wd-consent-banner button{width:100%;min-height:44px}.wd-consent-shade{padding:12px}.wd-consent-modal{max-height:calc(100vh - 24px);border-radius:15px}.wd-consent-modal>header{padding:20px 18px 16px}.wd-consent-modal h2{font-size:22px}.wd-consent-intro{padding:17px 18px 5px}.wd-consent-option{margin-left:18px;margin-right:18px}.wd-consent-note{margin-left:18px;margin-right:18px}.wd-consent-modal>footer{display:grid;grid-template-columns:1fr 1fr;padding:15px 18px 19px}.wd-consent-modal>footer button{width:100%}}
+@media(max-width:560px){.wd-consent-banner{left:10px;bottom:10px;max-width:calc(100vw - 20px)}.wd-consent-banner.is-open{right:10px}.wd-consent-panel{width:100%}.wd-consent-actions button{width:100%}.wd-consent-shade{padding:12px}.wd-consent-modal{max-height:calc(100vh - 24px);border-radius:15px}.wd-consent-modal>header{padding:20px 18px 16px}.wd-consent-modal h2{font-size:22px}.wd-consent-intro{padding:17px 18px 5px}.wd-consent-option{margin-left:18px;margin-right:18px}.wd-consent-note{margin-left:18px;margin-right:18px}.wd-consent-modal>footer{display:grid;grid-template-columns:1fr 1fr;padding:15px 18px 19px}.wd-consent-modal>footer button{width:100%}}
 @media(prefers-reduced-motion:reduce){.wd-consent-banner button,.wd-consent-modal button,.wd-consent-toggle>span,.wd-consent-toggle>span:after{transition:none!important}}
 @media print{.wd-consent-banner,.wd-consent-shade{display:none!important}}
