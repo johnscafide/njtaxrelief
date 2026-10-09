@@ -25,7 +25,7 @@
     return ['/agent','/investor','/lender','/attorney','/property/pro','/pro'].indexOf(path)>=0;
   }
   function consentGranted(){
-    try{return !!(window.WatchdogConsent&&window.WatchdogConsent.state&&window.WatchdogConsent.state().analytics);}catch(_){return false;}
+    try{var s=window.WatchdogConsent&&window.WatchdogConsent.state&&window.WatchdogConsent.state();return !!(s&&s.decided&&s.analytics);}catch(_){return false;}
   }
   function queue(){
     if(typeof window.oaiq==='function')return window.oaiq;
