@@ -2712,11 +2712,58 @@ document.addEventListener('mouseover',e=>{var t=e.target.closest('[data-marker-i
   function toolUniformityFor(r) { var s = uniFor(r); return s ? uniBody(r, s) : ''; }
   function toolAppealOddsFor(r) { var a = appealFor(r); return a ? appealBody(r, a) : ''; }
 
+  function claimRequest() {
+    var q = new URLSearchParams(location.search), pin = qsPin();
+    if (q.get('claim') !== '1' || !pin) return null;
+    return { kind: 'home', pams_pin: pin, address: q.get('a') || '', town: q.get('t') || '', county: q.get('c') || '', zip: q.get('z') || '' };
+  }
+
+  function showClaimGate(claim) {
+    el('hm-gate-title').textContent = 'Create a free account to claim this home.';
+    if (claim.address) {
+      el('hm-gate-addr').textContent = titleCase(claim.address) + (claim.town ? ', ' + titleCase(claim.town) : '');
+      el('hm-gate-addr').hidden = false;
+    }
+    el('hm-gate-go').innerHTML = '<i class="fas fa-user-plus"></i> Create free account';
+    el('hm-gate-alt').hidden = false;
+    var back = el('hm-gate-back');
+    if (document.referrer && document.referrer.indexOf(location.origin + '/') === 0) {
+      back.href = document.referrer;
+      back.innerHTML = '<i class="fas fa-chevron-left"></i> Back';
+    }
+  }
+
+  function saveClaim(claim) {
+    if (!claim || rows.some(function (x) { return x.pams_pin === claim.pams_pin && x.kind === 'home'; })) return Promise.resolve();
+    return sb.rpc('save_property', { p: claim }).then(function (res) {
+      if (res && res.error) throw res.error;
+      return sb.from('saved_properties').select('*').order('created_at', { ascending: false });
+    }).then(function (saved) {
+      if (saved && saved.error) throw saved.error;
+      rows = (saved && saved.data) || rows;
+      toast('Saved as your home');
+    }).catch(function (error) {
+      console.error('Claim save failed:', error);
+      toast('Could not claim this home, try again');
+    });
+  }
+
+  function finishClaim(claim) {
+    if (!claim) return;
+    history.replaceState({}, '', location.pathname + '?pin=' + encodeURIComponent(claim.pams_pin) + location.hash);
+    var home = rows.filter(function (x) { return x.pams_pin === claim.pams_pin && x.kind === 'home'; })[0];
+    if (!home) return;
+    current = home;
+    if (home.verify_level !== 'mail') window.dbVerify(home.pams_pin, home.address || '', home.town || '', home.zip || '');
+  }
+
   function bootHome() {
     if (!getClient()) { setTimeout(bootHome, 120); return; }
+    var claim = claimRequest();
     sb.auth.getSession().then(function (res) {
       plUser = (res && res.data && res.data.session) ? res.data.session.user : null;
       if (!plUser) {
+        if (claim) showClaimGate(claim);
         el('hm-loading').style.display = 'none';
         el('hm-gate').style.display = '';
         return;
@@ -2727,6 +2774,8 @@ document.addEventListener('mouseover',e=>{var t=e.target.closest('[data-marker-i
       sb.from('saved_properties').select('*').order('created_at', { ascending: false }).then(function (saved) {
         if (saved && saved.error) throw saved.error;
         rows = (saved && saved.data) || [];
+        return saveClaim(claim);
+      }).then(function () {
         return Promise.allSettled([
           sb.from('profiles').select('*').eq('id', plUser.id).maybeSingle(),
           sb.rpc('get_my_entitlement'),
@@ -2741,6 +2790,7 @@ document.addEventListener('mouseover',e=>{var t=e.target.closest('[data-marker-i
         var pin = qsPin();
         current = (pin && rows.filter(function (x) { return x.pams_pin === pin; })[0]) ||
                   rows.filter(function (x) { return x.kind === 'home'; })[0] || rows[0];
+        finishClaim(claim);
         paintHomeChrome();
         paintReport();
         if (current) {

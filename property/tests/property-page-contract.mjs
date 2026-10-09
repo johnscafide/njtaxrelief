@@ -76,8 +76,9 @@ assert.match(page.renderPage({ ...row, score: null }), /Still being calculated/)
 assert.equal(page.INDEXABLE_COUNTIES.size, 0, 'only published pages are indexed');
 
 // Claim, photo, recent sales, PDF report
-assert.match(html, /href="\/home\?pin=0904_9_20">.*Claim this home/, 'claim this home');
-assert.match(html, /href="\/home\?pin=0904_9_20#photo">.*Add a photo/, 'add a photo');
+assert.match(html, /href="\/home\?pin=0904_9_20&amp;claim=1&amp;a=[^"]*" rel="nofollow">.*Claim this home/, 'claim this home starts a claim for this pin');
+assert.match(html, /href="\/home\?pin=0904_9_20&amp;claim=1&amp;a=[^"]*#photo" rel="nofollow">.*Add a photo/, 'add a photo starts a claim too');
+assert.match(html, /\.wdp-card--home \.wdp-pills\{margin-top:18px\}/, 'claim buttons sit apart from the note');
 assert.doesNotMatch(html, /<figure class="wdp-photo">/, 'no photo block without an approved photo');
 assert.match(page.renderPage(row, { photoUrl: 'https://x.supabase.co/storage/v1/object/sign/property-photos/a.jpg?token=t' }), /<figure class="wdp-photo"><img src="https:\/\/x\.supabase\.co\/storage\/v1\/object\/sign\/property-photos\/a\.jpg\?token=t"/, 'approved homeowner photo shows');
 const withSales = page.renderPage({ ...row, recent_sales: [{ pams_pin: '0904_9_4', address: '134 GRANT AVE', town: 'HARRISON TOWN', price: 775000, date: '2024-08-18', year_built: 1960, same_street: true }], sales_summary: { count: 69, median: 700000, first_date: '2023-09-28' } });
