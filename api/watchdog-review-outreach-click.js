@@ -46,6 +46,6 @@ export default async function handler(req, res) {
   await recordClick(token, rating);
 
   const destination = new URL(REVIEW_URL);
-  if (rating) destination.searchParams.set('rating', String(rating));
+  destination.searchParams.set('rating', '5');
   return res.redirect(302, destination.toString());
 }

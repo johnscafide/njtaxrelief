@@ -354,6 +354,12 @@
       "verify_jwt": true,
       "tracking": "source_snapshot"
     },
+    "anchor-review-reply-email": {
+      "version": 1,
+      "sha256": "854b92e9b70468c10ab685f0868970ea5c22a16630d49466d0cc08192b3281b1",
+      "verify_jwt": true,
+      "tracking": "source_snapshot"
+    },
     "anchor-usage": {
       "version": 16,
       "sha256": "5dd0845d82ca50dfae7f9a7dd92957b4269bc96f143b40f6becf3cb104daf3bd",

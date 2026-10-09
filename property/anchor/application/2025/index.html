@@ -13,6 +13,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@500;600;700;800&family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/property/css/anchor-application.css">
   <link rel="stylesheet" href="/property/css/anchor-application-easy-mode.css">
+  <link rel="stylesheet" href="/property/css/anchor-application-reviews.css?v=20261009a">
 </head>
 <body>
   <!-- Sensitive-flow privacy guard: watchdog-consent.js, ai-referral-analytics.js, and contact-routing-policy.js are intentionally not loaded on this page. -->
@@ -226,6 +227,21 @@
         </form>
       </section>
     </main>
+    <section class="wd-app-reviews" id="wd-app-reviews" aria-labelledby="wd-app-reviews-title" hidden>
+      <div class="wd-app-reviews-head">
+        <h2 id="wd-app-reviews-title">Reviews</h2>
+        <p class="wd-app-reviews-score" data-reviews-score hidden><span class="wd-app-reviews-stars" data-reviews-stars aria-hidden="true"></span><strong data-reviews-average></strong> out of 5 from <span data-reviews-count></span> ratings</p>
+      </div>
+      <ul class="wd-app-reviews-list" data-reviews-list></ul>
+      <button type="button" class="wd-app-reviews-more" data-reviews-more hidden>Show all reviews</button>
+      <template id="wd-app-review-template">
+        <li class="wd-app-review">
+          <div class="wd-app-review-stars"><span data-review-stars aria-hidden="true"></span><span class="wd-app-sr"><span data-review-rating></span> out of 5 stars</span></div>
+          <p class="wd-app-review-text" data-review-text></p>
+          <div class="wd-app-review-reply" data-review-reply hidden><strong>Reply from Watchdog</strong><p data-review-reply-text></p></div>
+        </li>
+      </template>
+    </section>
     <footer class="wd-app-footer">Watchdog provides a guided self-service tool using the official New Jersey application. The State of New Jersey determines eligibility and benefit amounts.</footer>
   </div>
 
@@ -239,5 +255,6 @@
   <script src="/property/js/anchor-application-2025-guard.js"></script>
   <script src="/property/js/anchor-application-easy-mode.js"></script>
   <script src="/property/js/anchor-application-explain.js"></script>
+  <script src="/property/js/anchor-public-reviews.js?v=20261009a" defer></script>
 </body>
 </html>
