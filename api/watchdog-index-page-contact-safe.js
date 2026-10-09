@@ -268,15 +268,15 @@ function deferHomeScripts(input) {
   const end = html.search(/<\/body>/i);
   if (start < 0 || end < start) return html;
   const tail = html.slice(start, end);
-  const scripts = tail.match(/<script\b[^>]*>[\s\S]*?<\/script>/gi) || [];
+  const scripts = tail.match(/<script\b[^>]*>[\s\S]*?<\/script\s*>/gi) || [];
   if (scripts.some((tag) => !/\bsrc=/i.test(tag))) return html;
   if (!/\bsrc=["']\/property\/js\/supabase-runtime\.js["']/i.test(tail)) return html;
-  let next = tail.replace(/<script\b([^>]*)>\s*<\/script>/gi, (tag, attrs) => {
+  let next = tail.replace(/<script\b([^>]*)>\s*<\/script\s*>/gi, (tag, attrs) => {
     if (/\b(?:defer|async)\b|\btype=["']module["']/i.test(attrs)) return tag;
     return `<script${attrs} defer></script>`;
   });
   if (!/free-imagery-grid-runtime\.js/i.test(html)) {
-    next = next.replace(/(<script\b[^>]*\bsrc=["']\/property\/js\/supabase-runtime\.js["'][^>]*><\/script>)/i, `$1\n${FREE_GRID_DEFER_TAG}`);
+    next = next.replace(/(<script\b[^>]*\bsrc=["']\/property\/js\/supabase-runtime\.js["'][^>]*><\/script\s*>)/i, `$1\n${FREE_GRID_DEFER_TAG}`);
   }
   return html.slice(0, start) + next + html.slice(end);
 }
