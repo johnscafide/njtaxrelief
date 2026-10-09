@@ -5,6 +5,3 @@ property/data-factory-work/
 property/scripts/__pycache__/
 /node_modules/
 dist/
-
-# Built during the Vercel build from the home page style files.
-property/css/home-bundle.css

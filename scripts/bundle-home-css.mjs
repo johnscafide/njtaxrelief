@@ -72,6 +72,14 @@ function expand(file) {
   });
 }
 
+// Vercel only serves files that are in the repo, so the bundle file has to be
+// committed. If it isn't there, keep the normal links instead of pointing the
+// home page at a file that won't exist.
+if (!existsSync(OUT)) {
+  console.warn(`Home CSS bundle: property/css/${OUT_NAME} is not in the repo, leaving the home page links as they are.`);
+  process.exit(0);
+}
+
 const html = readFileSync(HOME, 'utf8');
 const headEnd = html.indexOf('</head>');
 const head = html.slice(0, headEnd);
