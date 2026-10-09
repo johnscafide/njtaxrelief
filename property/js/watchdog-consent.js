@@ -1,8 +1,8 @@
 /* Watchdog privacy preferences.
    Necessary storage supports authentication, security and saved preferences.
-   Google Analytics and OpenAI Ads measurement remain opt-in. Microsoft Clarity
-   may load in cookieless no-consent mode on Watchdog so installation is verifiable
-   without setting optional cookies; full Clarity analytics is enabled only after consent.
+   Google Analytics, Microsoft Clarity and OpenAI Ads measurement are on by default
+   until the visitor turns them off in Cookie settings, unless the browser sends
+   Global Privacy Control or Do Not Track.
    Advertising cookies are a separate opt-in that only exists on WatchdogIndex once an
    ad platform ID is filled in below. Until then the banner, the Google consent signals
    and the cookie settings stay exactly as they are (ad storage and personalization denied).
@@ -46,14 +46,6 @@
   var AD_RUNTIME_URL = '/property/js/watchdog-ad-pixels.js';
   var CSS_URL = '/property/css/watchdog-consent.css';
   var CONTACT_POLICY_URL = '/property/js/contact-routing-policy.js';
-  /* The cookie banner is hidden on the ANCHOR/PAS-1 application pages (so it doesn't cover
-     the start of the application) and on the free CO lookup (/co and its town pages).
-     A prefix ending in "/" also matches the path without it (/co/ covers /co).
-     Hiding the banner doesn't turn optional cookies on, except on the CO lookup paths in
-     ANALYTICS_ON_PATHS: there analytics runs until the visitor turns it off in Cookie
-     settings, unless the browser sends Global Privacy Control or Do Not Track. */
-  var HIDE_BANNER_PATHS = ['/anchor/application', '/co/'];
-  var ANALYTICS_ON_PATHS = ['/co/'];
   var stored = readStored();
   var lastFocus = null;
   var analyticsLoadQueued = false;
@@ -111,10 +103,6 @@
   }
   function advertisingAllowed(){
     return ADS_AVAILABLE && !privacySignal() && !!(stored && stored.advertising);
-  }
-  function needsChoice(){
-    if(!stored) return true;
-    return ADS_AVAILABLE && stored.adChoiceMade !== true;
   }
   function current(){
     return {version:VERSION,decided:!!stored,necessary:true,analytics:analyticsOn(),advertising:advertisingAllowed(),advertisingAvailable:ADS_AVAILABLE};
@@ -250,7 +238,6 @@
     else clearAnalyticsCookies();
     syncAdvertising();
     syncControls();
-    hideBanner();
     if(save) window.dispatchEvent(new CustomEvent('watchdog:consent-change',{detail:current()}));
   }
   function syncAnalytics(){
@@ -262,34 +249,19 @@
     syncAdvertising();
   }
   function privacyHref(){ return '/property/privacy'; }
-  function bannerMarkup(){
-    // content-architecture: dynamic, consent disclosure reflects the optional measurement providers enabled by this runtime.
-    if(ADS_AVAILABLE) return '<div class="wd-consent-copy"><span class="wd-consent-mark" aria-hidden="true"><i class="fas fa-dog"></i></span><div><strong>Choose your cookie preferences</strong><p>Watchdog uses cookies to keep you signed in and remember preferences. Optional measurement cookies help us understand product use. Optional advertising cookies let ad platforms measure Watchdog ads and show you Watchdog ads on other sites. Both stay off unless you turn them on. <a href="'+privacyHref()+'">Privacy Policy</a></p></div></div><div class="wd-consent-actions"><button type="button" class="wd-consent-settings" data-wd-consent-action="settings">Cookie settings</button><button type="button" class="wd-consent-secondary" data-wd-consent-action="reject">Reject optional cookies</button><button type="button" class="wd-consent-primary" data-wd-consent-action="accept">Accept all cookies</button></div>';
-    return '<div class="wd-consent-copy"><span class="wd-consent-mark" aria-hidden="true"><i class="fas fa-dog"></i></span><div><strong>Choose your cookie preferences</strong><p>Watchdog uses cookies to keep you signed in and remember preferences. Optional measurement cookies help us understand product use and whether Watchdog ads lead to sign-ups or purchases. We do not sell personal information or enable ad personalization on Watchdog. <a href="'+privacyHref()+'">Privacy Policy</a></p></div></div><div class="wd-consent-actions"><button type="button" class="wd-consent-settings" data-wd-consent-action="settings">Cookie settings</button><button type="button" class="wd-consent-secondary" data-wd-consent-action="reject">Reject optional cookies</button><button type="button" class="wd-consent-primary" data-wd-consent-action="accept">Accept all cookies</button></div>';
-  }
-  function onPaths(list){
-    var path=String(location.pathname||'').replace(/^\/property(?=\/)/,'');
-    return list.some(function(prefix){return path===prefix||path===prefix.replace(/\/$/,'')||path.indexOf(prefix)===0;});
-  }
-  function bannerHiddenHere(){ return onPaths(HIDE_BANNER_PATHS); }
-  function analyticsOnByDefaultHere(){ return !stored && !privacySignal() && onPaths(ANALYTICS_ON_PATHS); }
+  function analyticsOnByDefaultHere(){ return !stored && !privacySignal(); }
   function analyticsOn(){ return stored ? !!stored.analytics : analyticsOnByDefaultHere(); }
-  function ensureBanner(){
-    if(bannerHiddenHere() || !needsChoice() || document.getElementById('wd-cookie-banner')) return;
-    var banner=document.createElement('section');banner.id='wd-cookie-banner';banner.className='wd-consent-banner';banner.setAttribute('role','region');banner.setAttribute('aria-label','Cookie preferences');banner.innerHTML=bannerMarkup();document.body.appendChild(banner);
-  }
-  function hideBanner(){ var banner=document.getElementById('wd-cookie-banner');if(banner) banner.remove(); }
   function ensureModal(){
     var shade=document.getElementById('wd-consent-shade');
     if(shade) return shade;
     shade=document.createElement('div');shade.id='wd-consent-shade';shade.className='wd-consent-shade';shade.hidden=true;
-    // content-architecture: dynamic, modal disclosure mirrors the enabled consent-gated measurement providers, the advertising row when an ad platform is configured, and their opt-out boundary.
-    shade.innerHTML='<section class="wd-consent-modal" role="dialog" aria-modal="true" aria-labelledby="wd-consent-title"><header><div><h2 id="wd-consent-title">Cookie preferences</h2></div><button class="wd-consent-close" type="button" data-wd-consent-action="close" aria-label="Close cookie settings"><i class="fas fa-xmark"></i></button></header><p class="wd-consent-intro">Choose whether Watchdog may use optional measurement cookies. Necessary cookies stay on because they support account security, sign-in and saved preferences.</p><div class="wd-consent-option"><div><b>Necessary cookies</b><span>Sign-in, security and saved preferences</span></div><span class="wd-consent-always">Always on</span></div><label class="wd-consent-option wd-consent-toggle-row" for="wd-consent-analytics"><div><b>Optional analytics &amp; ad measurement</b><span>Site analytics and attribution for Watchdog campaigns</span></div><span class="wd-consent-toggle"><input id="wd-consent-analytics" type="checkbox"><span aria-hidden="true"></span></span></label>'+advertisingRow()+'<footer><button type="button" class="wd-consent-secondary" data-wd-consent-action="reject">Reject optional cookies</button><button type="button" class="wd-consent-primary" data-wd-consent-action="save">Save preferences</button></footer></section>';
+    // content-architecture: dynamic, modal disclosure mirrors the enabled default-on measurement providers, the advertising row when an ad platform is configured, and their opt-out boundary.
+    shade.innerHTML='<section class="wd-consent-modal" role="dialog" aria-modal="true" aria-labelledby="wd-consent-title"><header><div><h2 id="wd-consent-title">Cookie preferences</h2></div><button class="wd-consent-close" type="button" data-wd-consent-action="close" aria-label="Close cookie settings"><i class="fas fa-xmark"></i></button></header><p class="wd-consent-intro">Optional measurement cookies help us understand how the site is used. They are on unless you turn them off here. Necessary cookies stay on because they support account security, sign-in and saved preferences.</p><div class="wd-consent-option"><div><b>Necessary cookies</b><span>Sign-in, security and saved preferences</span></div><span class="wd-consent-always">Always on</span></div><label class="wd-consent-option wd-consent-toggle-row" for="wd-consent-analytics"><div><b>Optional analytics &amp; ad measurement</b><span>Site analytics and attribution for Watchdog campaigns</span></div><span class="wd-consent-toggle"><input id="wd-consent-analytics" type="checkbox"><span aria-hidden="true"></span></span></label>'+advertisingRow()+'<footer><button type="button" class="wd-consent-secondary" data-wd-consent-action="reject">Reject optional cookies</button><button type="button" class="wd-consent-primary" data-wd-consent-action="save">Save preferences</button></footer></section>';
     document.body.appendChild(shade);return shade;
   }
   // content-architecture: dynamic, the advertising row exists only when an ad platform is configured, and its toggle and note change with the visitor's Global Privacy Control / Do Not Track signal.
   function advertisingRow(){
-    if(!ADS_AVAILABLE) return '<p class="wd-consent-note">Ad personalization stays off. OpenAI ad measurement can use a privacy-preserving click or browser reference only after you opt in. Read the <a href="'+privacyHref()+'">Privacy Policy</a> for details.</p>';
+    if(!ADS_AVAILABLE) return '<p class="wd-consent-note">Ad personalization stays off. OpenAI ad measurement is part of optional measurement and can use a privacy-preserving click or browser reference. Read the <a href="'+privacyHref()+'">Privacy Policy</a> for details.</p>';
     var blocked=privacySignal();
     return '<label class="wd-consent-option wd-consent-toggle-row" for="wd-consent-advertising"><div><b>Advertising cookies</b><span>Lets ad platforms such as Meta, Google, LinkedIn and TikTok measure Watchdog ads and show you Watchdog ads on other sites</span></div><span class="wd-consent-toggle"><input id="wd-consent-advertising" type="checkbox"'+(blocked?' disabled':'')+'><span aria-hidden="true"></span></span></label><p class="wd-consent-note">'+(blocked?'Your browser is sending a Global Privacy Control or Do Not Track sign, so advertising cookies stay off. ':'')+'Advertising cookies are off unless you turn them on, and you can turn them off here at any time. Read the <a href="'+privacyHref()+'">Privacy Policy</a> for the full list of ad platforms.</p>';
   }
@@ -331,7 +303,7 @@
   if(CLARITY_ID===CLARITY_IDS.watchdog) loadClarity(analyticsOn());
   if(stored||analyticsOnByDefaultHere()) apply(analyticsOn(),false);
 
-  function ready(){ ensureBanner();ensureModal();appendOnboardingLink();syncControls(); }
+  function ready(){ ensureModal();appendOnboardingLink();syncControls(); }
   if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',ready,{once:true}); else ready();
   document.addEventListener('click',onClick);
   document.addEventListener('keydown',function(event){if(event.key==='Escape')close();});
