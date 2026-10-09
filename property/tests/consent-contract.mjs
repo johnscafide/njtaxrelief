@@ -20,11 +20,12 @@ assert(consent.includes("window.clarity('consentv2'"), 'Clarity Consent API V2 i
 assert(consent.includes("analytics_Storage:analytics?'granted':'denied'"), 'Clarity analytics storage consent is missing');
 assert(consent.includes("ad_Storage:'denied'"), 'Clarity ad storage must stay denied');
 assert(consent.includes('Reject optional cookies'), 'Reject optional cookies choice is missing');
-assert(consent.includes('Accept all cookies'), 'Accept all cookies choice is missing');
-assert(consent.includes('Cookie settings'), 'Cookie settings choice is missing');
+assert(consent.includes('Save preferences'), 'Save preferences choice is missing from cookie settings');
+assert(!consent.includes("id='wd-cookie-banner'") && !consent.includes("banner.id='wd-cookie-banner'"), 'Cookie choices live in the footer Cookies link, not a floating box');
+assert(consent.includes('They are on unless you turn them off here'), 'Cookie settings must say optional measurement is on by default');
 assert(consent.includes('Necessary cookies'), 'Necessary cookies disclosure is missing');
 // The optional category was renamed when OpenAI Ads measurement was added (commit 7d120005):
-// the banner now names "optional measurement cookies" and the opt-in toggle names both
+// cookie settings now names "optional measurement cookies" and the opt-in toggle names both
 // analytics and ad measurement. Both disclosures and the toggle itself must stay present.
 assert(consent.includes('Optional measurement cookies help us understand'), 'Optional cookies disclosure is missing');
 assert(consent.includes('<b>Optional analytics &amp; ad measurement</b>'), 'Optional cookies category label is missing from cookie settings');
@@ -42,7 +43,7 @@ assert(consent.includes("if(!GA_ID) return;"), 'Unknown and preview hosts must f
 assert(!consent.includes('supabase.co'), 'Browser cookie choice must not be written to Supabase');
 assert(!consent.includes('user_id'), 'Cookie preference storage must not be linked to a user ID');
 
-assert(css.includes('.wd-consent-banner'), 'Consent banner styles are missing');
+assert(css.includes('.wd-consent-modal'), 'Cookie settings styles are missing');
 assert(css.includes('@media(max-width:560px)'), 'Mobile consent layout is missing');
 assert(css.includes('@media(prefers-reduced-motion:reduce)'), 'Reduced-motion consent styles are missing');
 assert(!css.includes('radial-gradient'), 'Consent UI must not use decorative circle/orb motifs');
