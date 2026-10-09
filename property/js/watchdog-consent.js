@@ -179,18 +179,36 @@
       }
     }
     var tagId=GA_GOOGLE_TAG[GA_ID]||GA_ID;
-    if(document.querySelector('script[data-watchdog-consent-ga],script[src*="googletagmanager.com/gtag/js?id='+tagId+'"]')) return;
+    if(window.__watchdogGaQueued||document.querySelector('script[data-watchdog-consent-ga],script[src*="googletagmanager.com/gtag/js?id='+tagId+'"]')) return;
+    window.__watchdogGaQueued=true;
     var script=document.createElement('script');script.async=true;script.src='https://www.googletagmanager.com/gtag/js?id='+encodeURIComponent(tagId);script.setAttribute('data-watchdog-consent-ga','1');
-    document.head.appendChild(script);
+    afterPageLoad(function(){document.head.appendChild(script);});
   }
   function loadClarity(analytics){
     if(!CLARITY_ID) return;
     ensureClarityQueue();
     signalClarity(!!analytics);
-    if(document.querySelector('script[data-watchdog-consent-clarity],script[src*="clarity.ms/tag/'+CLARITY_ID+'"]')) return;
+    if(window.__watchdogClarityQueued||document.querySelector('script[data-watchdog-consent-clarity],script[src*="clarity.ms/tag/'+CLARITY_ID+'"]')) return;
+    window.__watchdogClarityQueued=true;
     var script=document.createElement('script');script.async=true;script.src='https://www.clarity.ms/tag/'+CLARITY_ID;script.setAttribute('data-watchdog-consent-clarity','1');
-    var first=document.getElementsByTagName('script')[0];
-    if(first&&first.parentNode) first.parentNode.insertBefore(script,first); else document.head.appendChild(script);
+    afterPageLoad(function(){
+      var first=document.getElementsByTagName('script')[0];
+      if(first&&first.parentNode) first.parentNode.insertBefore(script,first); else document.head.appendChild(script);
+    });
+  }
+  function afterPageLoad(fn){
+    var done=false,timer=0,events=['pointerdown','keydown','touchstart','scroll'];
+    function run(){
+      if(done)return;
+      done=true;clearTimeout(timer);
+      events.forEach(function(name){window.removeEventListener(name,run,true);});
+      fn();
+    }
+    events.forEach(function(name){window.addEventListener(name,run,{capture:true,passive:true});});
+    var elapsed=window.performance&&performance.now?performance.now():0;
+    timer=setTimeout(run,Math.max(0,3000-elapsed));
+    if(document.readyState==='complete') setTimeout(run,0);
+    else window.addEventListener('load',function(){setTimeout(run,0);},{once:true});
   }
   function loadAllowedAnalytics(){
     if(document.readyState!=='loading'){loadGoogle();loadClarity(true);return;}
