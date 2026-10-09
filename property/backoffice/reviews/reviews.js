@@ -35,7 +35,9 @@ async function api(action,payload){
 function empty(message,detail){return '<div class="br-empty"><b>'+esc(message)+'</b><span>'+esc(detail||'')+'</span></div>'}
 function replyBlock(review){
   var has=!!(review.reply&&String(review.reply).trim());
-  var shown=has?'<div class="br-reply-shown"><b>Your reply</b><span class="br-date">'+esc(date(review.reply_at))+'</span><p>'+esc(review.reply)+'</p></div>':'';
+  var mailed=review.reply_emailed_at&&review.reply_at&&new Date(review.reply_emailed_at)>=new Date(review.reply_at);
+  var mail=has?'<div class="br-reply-mail"><button type="button" class="br-btn br-btn-quiet" data-reply-email data-review-id="'+esc(review.id)+'">'+(mailed?'Email it again':'Email reply to them')+'</button>'+(review.reply_emailed_at?'<span class="br-date">Emailed '+esc(date(review.reply_emailed_at))+'</span>':'<span class="br-date">Not emailed yet</span>')+'</div>':'';
+  var shown=has?'<div class="br-reply-shown"><b>Your reply</b><span class="br-date">'+esc(date(review.reply_at))+'</span><p>'+esc(review.reply)+'</p>'+mail+'</div>':'';
   return shown+'<details class="br-reply"'+(has?'':' data-br-reply-new')+'><summary>'+(has?'Edit reply':'Reply')+'</summary><label class="bo-sr" for="br-reply-'+esc(review.id)+'">Reply to this review</label><textarea id="br-reply-'+esc(review.id)+'" maxlength="1500" rows="4" data-br-reply-text>'+esc(review.reply||'')+'</textarea><div class="br-reply-actions"><button type="button" class="br-btn br-btn-primary" data-reply-save data-review-id="'+esc(review.id)+'">Save reply</button>'+(has?'<button type="button" class="br-btn br-btn-quiet" data-reply-remove data-review-id="'+esc(review.id)+'">Remove reply</button>':'')+'</div></details>';
 }
 function reviewTop(review,label,when){return '<div class="br-review-top"><span class="br-stars" aria-label="'+esc(review.rating)+' out of 5 stars">'+stars(review.rating)+'</span><span class="br-rating">'+esc(review.rating)+'/5</span><span class="br-date">'+label+' '+esc(date(when))+'</span></div>'}
@@ -103,6 +105,14 @@ async function saveReply(id,button,remove){
   catch(error){toast(error.message);busy=false;button.disabled=false;}
 }
 
+async function emailReply(id,button){
+  if(!id||busy||!button)return;
+  if(!window.confirm('Email your reply to this person?'))return;
+  busy=true;button.disabled=true;
+  try{await api('email_reply',{review_id:id});toast('Reply emailed.');busy=false;await load();}
+  catch(error){toast(error.message);busy=false;button.disabled=false;}
+}
+
 async function markSent(button){
   if(busy||!button)return;var ids=String(button.dataset.ids||'').split(',').filter(Boolean);if(!ids.length)return;
   busy=true;button.disabled=true;
@@ -114,7 +124,7 @@ async function markSent(button){
 function install(){
   var refresh=$('#br-refresh');if(refresh)refresh.addEventListener('click',load);
   var mark=$('#br-mark-sent');if(mark)mark.addEventListener('click',function(){markSent(mark)});
-  document.addEventListener('click',function(event){var replyButton=event.target&&event.target.closest&&event.target.closest('[data-reply-save],[data-reply-remove]');if(replyButton){event.preventDefault();saveReply(replyButton.getAttribute('data-review-id'),replyButton,replyButton.hasAttribute('data-reply-remove'));return}var button=event.target&&event.target.closest&&event.target.closest('[data-review-action]');if(!button)return;event.preventDefault();moderate(button.getAttribute('data-review-action'),button.getAttribute('data-review-id'),button)});
+  document.addEventListener('click',function(event){var mailButton=event.target&&event.target.closest&&event.target.closest('[data-reply-email]');if(mailButton){event.preventDefault();emailReply(mailButton.getAttribute('data-review-id'),mailButton);return}var replyButton=event.target&&event.target.closest&&event.target.closest('[data-reply-save],[data-reply-remove]');if(replyButton){event.preventDefault();saveReply(replyButton.getAttribute('data-review-id'),replyButton,replyButton.hasAttribute('data-reply-remove'));return}var button=event.target&&event.target.closest&&event.target.closest('[data-review-action]');if(!button)return;event.preventDefault();moderate(button.getAttribute('data-review-action'),button.getAttribute('data-review-id'),button)});
   document.addEventListener('visibilitychange',function(){if(!document.hidden&&Date.now()-lastLoadedAt>REFRESH_MS)load()});
   load();
 }

@@ -44,6 +44,8 @@
 .br-reply-shown{margin-top:12px;padding:12px 14px;border-radius:8px;background:var(--bo-bg)}
 .br-reply-shown b{margin-right:8px;color:var(--bo-navy);font:800 13px/1.3 var(--bo-font)}
 .br-reply-shown p{margin:6px 0 0;color:var(--bo-ink);font-size:14px;line-height:1.55;white-space:pre-line}
+.br-reply-mail{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:10px}
+.br-reply-mail .br-btn{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:0 16px;border-radius:8px;border:1px solid var(--bo-line-strong);font:700 14px/1 var(--bo-font);cursor:pointer}
 .br-reply{margin-top:10px}
 .br-reply summary{display:inline-flex;align-items:center;min-height:44px;color:var(--bo-blue);font:700 14px/1 var(--bo-font);cursor:pointer}
 .br-reply textarea{display:block;width:100%;max-width:720px;margin-top:6px;padding:10px 12px;border:1px solid var(--bo-line-strong);border-radius:8px;background:#fff;color:var(--bo-ink);font:500 15px/1.5 var(--bo-font);resize:vertical}
