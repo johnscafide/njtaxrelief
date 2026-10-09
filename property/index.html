@@ -72,10 +72,20 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://images.unsplash.com">
-  <link href="https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@400;500;600;700;800&family=Source+Sans+3:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
-  <link rel="stylesheet" href="/styles.css">
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+  <link rel="preconnect" href="https://cdn.jsdelivr.net">
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@400;500;600;700;800&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Source+Sans+3:ital,wght@0,200..900;1,200..900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" media="print" onload="this.media='all'">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css"></noscript>
+  <style>
+    :root{--navy:#1a3a6b;--navy-dark:#0e2248;--navy-light:#2a4f8f;--gold:#b8972a;--gold-light:#f5e9c4;--red:#c0392b;--green:#1e6b3a;--green-light:#e8f5ed;--bg:#f4f5f7;--bg-white:#ffffff;--text:#1a1a2e;--text-muted:#5a6070;--border:#d8dce8;--success:#2e7d52;--info-bg:#eaf0fb}
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:"Source Sans 3",sans-serif;background:var(--bg);color:var(--text);font-size:16px;line-height:1.6}
+    h1,h2,h3,h4{font-family:"Open Sans",sans-serif;font-weight:700}
+    nav{background:var(--navy);position:sticky;top:0;z-index:100;box-shadow:0 2px 10px rgba(0,0,0,.3)}
+    footer{background:var(--navy-dark);color:#7090b0;padding:40px 24px;font-size:13px}
+  </style>
 
   <!-- 
   
@@ -180,11 +190,11 @@
   <div class="plm-bar">
     <button class="plm-back" onclick="plCloseModal()"><i class="fas fa-chevron-left"></i> Back to search</button>
     <div class="plm-bar-actions">
-      <button class="plm-barbtn" id="plm-save" onclick="plSaveHome()"><i class="far fa-heart"></i><span>Save</span></button>
-      <button class="plm-barbtn" onclick="plShare()"><i class="fas fa-share-nodes"></i><span>Share</span></button>
+      <button class="plm-barbtn" id="plm-save" onclick="plSaveHome()" aria-label="Save"><i class="far fa-heart"></i><span>Save</span></button>
+      <button class="plm-barbtn" onclick="plShare()" aria-label="Share"><i class="fas fa-share-nodes"></i><span>Share</span></button>
       <button class="plm-barbtn" id="plm-ai-btn" onclick="plSendToAI()" title="Send to my AI agent"><i class="fas fa-paper-plane"></i><span>Send to AI</span></button>
       <button class="plm-barbtn" id="pl-authbtn" onclick="plSignInPrompt()" title="Sign in"><i class="fas fa-right-to-bracket"></i><span>Sign in</span></button>
-      <button class="plm-barbtn" onclick="plMenu(event)"><i class="fas fa-ellipsis"></i><span>More</span></button>
+      <button class="plm-barbtn" onclick="plMenu(event)" aria-label="More"><i class="fas fa-ellipsis"></i><span>More</span></button>
       <div class="plm-menu" id="plm-menu">
         <button onclick="plOpenForm('sell')"><i class="fas fa-sign-hanging"></i> Sell this home</button>
         <button onclick="plOpenForm('value')"><i class="fas fa-house-chimney-medical"></i> What is it worth today?</button>
@@ -285,7 +295,7 @@
 <script src="/property/js/public-nav.js"></script>
 <script src="/property/js/ownership-verification.js"></script>
 <script src="/property/js/product-analytics.js" defer></script>
-<script src="/property/js/lookup.js?v=20261008a"></script>
+<script src="/property/js/lookup.js?v=20261009a"></script>
 <script src="/property/js/anchor-public-reviews.js?v=20261009a" defer></script>
 </body>
 </html>

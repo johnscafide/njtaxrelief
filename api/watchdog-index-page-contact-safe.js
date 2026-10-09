@@ -265,6 +265,8 @@ function copySafeHeaders(upstream, res, publicPath) {
   if (isPrivateAppPath(publicPath)) {
     res.setHeader('Cache-Control', 'private, no-store, max-age=0');
     res.setHeader('Pragma', 'no-cache');
+  } else if (publicPath === '/') {
+    res.setHeader('Cache-Control', 'public, max-age=0, s-maxage=300, stale-while-revalidate=3600');
   } else if (cacheControl) {
     res.setHeader('Cache-Control', cacheControl);
   }
