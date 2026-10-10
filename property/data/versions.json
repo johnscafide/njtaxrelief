@@ -1,8 +1,38 @@
 {
   "schema_version": 1,
   "timezone": "America/New_York",
-  "updated_at": "2026-10-09T16:18:08.004876+00:00",
+  "updated_at": "2026-10-10T15:26:36.113939+00:00",
   "releases": [
+    {
+      "version": "data-2026-10-10",
+      "date": "2026-10-10",
+      "timestamp": "2026-10-10T15:26:36.113939+00:00",
+      "title": "Automated state-data refresh",
+      "category": "Data",
+      "status": "Completed",
+      "summary": "State-data sources refreshed; configured local coverage and live-source health evidence was regenerated.",
+      "links": [
+        "/property/updates"
+      ],
+      "files": [
+        "nj-lpt-statistical-index",
+        "construction-permits-live",
+        "nj-dca-fourth-round-affordable",
+        "nj-dca-affordable-housing",
+        "nj-lpt-general-tax-rates-2025",
+        "nj-lpt-county-equalization-2026",
+        "nj-lpt-modiv-2026",
+        "nj-dca-ufb-2026",
+        "nj-dca-fast-2026"
+      ],
+      "impact": {
+        "html": 0,
+        "css": 0,
+        "javascript": 0,
+        "data": 9,
+        "navigation": 0
+      }
+    },
     {
       "version": "data-2026-10-09",
       "date": "2026-10-09",
