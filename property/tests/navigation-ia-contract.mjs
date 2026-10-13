@@ -308,7 +308,7 @@ for (const rule of ['plan-promo-copy>small{font-size:12px', 'plan-promo-copy>em{
   assert.ok(menuFloor.includes(rule), `Menu floor is missing ${rule}`);
 }
 for (const m of consentCss.matchAll(/font(?:-size)?:[^;{}]*?(\d+(?:\.\d+)?)px/g)) assert.ok(Number(m[1]) >= 12, `Cookie banner text must be at least 12px (found ${m[1]}px)`);
-for (const m of consentCss.matchAll(/\.wd-consent-banner button[^{]*\{[^}]*min-height:(\d+)px/g)) assert.ok(Number(m[1]) >= 44, `Cookie banner buttons must be at least 44px tall (found ${m[1]}px)`);
+for (const m of consentCss.matchAll(/\.wd-consent-modal button[^{]*\{[^}]*min-height:(\d+)px/g)) assert.ok(Number(m[1]) >= 44, `Cookie settings buttons must be at least 44px tall (found ${m[1]}px)`);
 
 /* ---------- 5. The IA doc names the structure ---------- */
 for (const word of ['Agent Desk', 'Clients', 'Farm', 'Marketing', 'Research', 'Dashboard', 'Property Lookup', 'Property Home', 'Property Pulse', 'ANCHOR Applications', 'Town Compare', 'ROBUST Framework', 'Games', 'Plans & Pricing']) {

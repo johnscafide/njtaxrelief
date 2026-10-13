@@ -721,17 +721,50 @@
     bindLegacy(q('wdd-command-input'));
   }
 
+  var ADDRESS_INPUTS=['pl-addr','ss-addr','wdd-command-input'];
+  var placesWaiting=false;
+
+  function wakeFocusedInput(tries){
+    var input=document.activeElement;
+    if(!input||ADDRESS_INPUTS.indexOf(input.id)<0)return;
+    if(!input.dataset.wdGoogleAutocomplete){
+      if((tries||0)<40)setTimeout(function(){wakeFocusedInput((tries||0)+1);},50);
+      return;
+    }
+    input.dispatchEvent(new Event('focus'));
+    if(String(input.value||'').trim().length>=3)input.dispatchEvent(new Event('input'));
+  }
+
+  function waitForAddressInput(){
+    if(placesWaiting)return;
+    placesWaiting=true;
+    var events=['focusin','pointerdown','keydown'];
+    function start(e){
+      if(!e.target||ADDRESS_INPUTS.indexOf(e.target.id)<0)return;
+      events.forEach(function(name){document.removeEventListener(name,start,true);});
+      loadPlaces();
+    }
+    events.forEach(function(name){document.addEventListener(name,start,true);});
+    if(document.activeElement&&ADDRESS_INPUTS.indexOf(document.activeElement.id)>=0)start({target:document.activeElement});
+  }
+
   function boot(){
     if(!q('pl-addr')&&!q('ss-addr')&&!q('wdd-command-input'))return;
     ensureStyles();
-    window.WatchdogNJAddressGoogleReady=initPlaces;
+    window.WatchdogNJAddressGoogleReady=function(){initPlaces();wakeFocusedInput(0);};
     if(window.google&&google.maps){initPlaces();return;}
+    if(q('wd-google-places-script'))return;
+    waitForAddressInput();
+  }
+
+  function loadPlaces(){
     if(q('wd-google-places-script'))return;
     var script=document.createElement('script');
     script.id='wd-google-places-script';
     script.async=true;
     script.defer=true;
     script.onerror=function(){['pl-addr','ss-addr','wdd-command-input'].forEach(function(id){bindCustom(q(id),null);});};
+    script.addEventListener('error',function(){wakeFocusedInput(0);});
     script.src='https://maps.googleapis.com/maps/api/js?key='+encodeURIComponent(GMAPS_KEY)+'&loading=async&libraries=places&region=US&v=weekly&callback=WatchdogNJAddressGoogleReady';
     document.head.appendChild(script);
   }

@@ -12,7 +12,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@500;600;700;800&family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/property/css/anchor-review.css">
+  <link rel="stylesheet" href="/property/css/anchor-review.css?v=20261009b">
 </head>
 <body>
   <main class="review-shell">
@@ -41,6 +41,7 @@
       </div>
 
       <div id="review-form" hidden>
+        <div id="review-owner-reply" class="review-owner-reply" hidden><strong>Reply from Watchdog</strong><p id="review-owner-reply-text"></p></div>
         <div class="review-rating-block">
           <span class="review-label">Your rating</span>
           <div id="review-stars" class="review-stars" role="radiogroup" aria-label="Choose a rating from 1 to 5 stars">
@@ -61,6 +62,11 @@
         <template id="review-comment-label-optional">Anything you'd like to add? <span>Optional</span></template>
         <template id="review-comment-label-required">What could we have done better? <span>Required</span></template>
         <textarea id="review-comment" maxlength="1200" rows="5" placeholder="Tell us what worked well or what we could improve." data-placeholder-optional="Tell us what worked well or what we could improve." data-placeholder-required="Please tell us what happened or what we could improve."></textarea>
+        <div id="review-state-notice" class="review-state-notice" role="alert" hidden>
+          <strong>Watchdog is not the State of New Jersey.</strong>
+          <span>We only help you fill out the State's form. We don't submit it or keep it, so the State won't have your application until you print, sign and mail it yourself. To check on one you mailed, use the <a href="https://propertytaxreliefstatus.nj.gov/" target="_blank" rel="noopener noreferrer" referrerpolicy="no-referrer">State's status checker</a>.</span>
+          <span>Please change your rating or your comment so it's about Watchdog before you submit.</span>
+        </div>
         <p class="review-privacy">Your email and application details are never published. Written comments stay private unless Watchdog separately approves them for testimonial use.</p>
         <button id="review-submit" type="button" class="review-button review-submit">Submit review</button>
       </div>
@@ -83,6 +89,6 @@
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
   <script src="/property/js/supabase-runtime.js"></script>
-  <script src="/property/js/anchor-review.js"></script>
+  <script src="/property/js/anchor-review.js?v=20261009b"></script>
 </body>
 </html>

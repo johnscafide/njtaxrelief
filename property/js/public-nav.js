@@ -178,7 +178,7 @@
       loadScript('wd-showcase-script','/property/js/landing-showcase.js');
       loadScript('wd-public-score-on-demand-script','/property/js/public-score-on-demand.js');
       loadScript('wd-robust-brand-script','/property/js/robust-public-brand.js');
-      loadScript('wd-nj-address-autocomplete-script','/property/js/nj-address-autocomplete.js?v=20261007a');
+      loadScript('wd-nj-address-autocomplete-script','/property/js/nj-address-autocomplete.js?v=20261009a');
       loadScript('wd-anchor-home-funnel-script','/property/js/anchor-home-funnel.js?v=20261007a');
       loadScript('wd-anchor-rating-summary-script','/property/js/anchor-rating-summary.js');
       return;
@@ -192,7 +192,7 @@
     loadScript('wd-farm-showcase-placement-script','/property/js/farm-showcase-placement.js');
     loadScript('wd-public-score-on-demand-script','/property/js/public-score-on-demand.js');
     loadScript('wd-robust-brand-script','/property/js/robust-public-brand.js');
-    loadScript('wd-nj-address-autocomplete-script','/property/js/nj-address-autocomplete.js?v=20261007a');
+    loadScript('wd-nj-address-autocomplete-script','/property/js/nj-address-autocomplete.js?v=20261009a');
     loadScript('wd-landing-county-intel-script','/property/js/landing-county-intel.js');
     loadScript('wd-anchor-home-funnel-script','/property/js/anchor-home-funnel.js');
     loadScript('wd-anchor-rating-summary-script','/property/js/anchor-rating-summary.js');

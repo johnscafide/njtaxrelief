@@ -327,13 +327,13 @@ function salesCard(row, v) {
 }
 
 function homeCard(row) {
-  const pin = encodeURIComponent(row.pams_pin);
+  const claim = `/home?${new URLSearchParams({ pin: row.pams_pin, claim: '1', a: row.address || '', t: row.town || '', c: row.county || '', z: row.zip || '' })}`;
   return `<section class="wdp-card wdp-card--home" aria-labelledby="wdp-home-h">
       <div class="wdp-card-head"><h2 id="wdp-home-h">Is this your home?</h2></div>
       <p class="wdp-card-note">Claim it to follow its assessment, tax and score in your Watchdog account. Once ownership is verified, you can add a photo that shows wherever this address appears on Watchdog.</p>
       <div class="wdp-pills">
-        <a class="wdp-pill is-dark" href="/home?pin=${pin}"><i class="fas fa-house-circle-check" aria-hidden="true"></i>Claim this home</a>
-        <a class="wdp-pill" href="/home?pin=${pin}#photo"><i class="fas fa-camera" aria-hidden="true"></i>Add a photo</a>
+        <a class="wdp-pill is-dark" href="${esc(claim)}" rel="nofollow"><i class="fas fa-house-circle-check" aria-hidden="true"></i>Claim this home</a>
+        <a class="wdp-pill" href="${esc(claim)}#photo" rel="nofollow"><i class="fas fa-camera" aria-hidden="true"></i>Add a photo</a>
       </div>
     </section>`;
 }
@@ -532,6 +532,7 @@ const STYLE = `
 .wdp-card-link{display:inline-flex;align-items:center;min-height:44px;padding:0 12px;border-radius:8px;background:rgba(255,255,255,.55);color:inherit!important;font-size:13px;font-weight:600;text-decoration:none!important;white-space:nowrap}
 .wdp-card--score .wdp-card-link{background:rgba(255,255,255,.14)}
 .wdp-card-note{margin:12px 0 0;font-size:13px;line-height:1.5;color:rgba(22,20,15,.72)}
+.wdp-card--home .wdp-pills{margin-top:18px}
 .wdp-card--score .wdp-card-note{color:rgba(255,255,255,.74)}
 .wdp-stats{display:flex;flex-wrap:wrap;gap:12px 28px;margin-top:4px}
 .wdp-stat{display:grid;gap:4px;min-width:0}

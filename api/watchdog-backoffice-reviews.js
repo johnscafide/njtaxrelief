@@ -2,7 +2,8 @@ const SUPABASE_URL = process.env.SUPABASE_URL || process.env.NEXT_PUBLIC_SUPABAS
 const SERVICE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY || '';
 const PUBLISHABLE_KEY = 'sb_publishable_MYX59qCbK3d-21zDfJqkNw_fvmfnexa';
 const ALLOWED_HOSTS = new Set(['www.watchdogindex.com', 'watchdogindex.com']);
-const REVIEW_SELECT = 'id,rating,review_comment,public_comment_approved,public_comment_approved_at,submitted_at,updated_at';
+const REVIEW_SELECT = 'id,rating,review_comment,public_comment_approved,public_comment_approved_at,submitted_at,updated_at,owner_reply,owner_reply_at,owner_reply_emailed_at';
+const REPLY_MAX = 1500;
 const OUTREACH_SELECT = 'id,user_id,campaign_key,prepared_at,sent_at,first_opened_at,last_opened_at,open_count,first_clicked_at,last_clicked_at,click_count,last_click_rating,review_submitted_at,review_id,written_review';
 
 function requestHost(req) {
@@ -35,6 +36,9 @@ function safeReview(row) {
     approved_at: row && row.public_comment_approved_at || null,
     submitted_at: row && row.submitted_at || null,
     updated_at: row && row.updated_at || null,
+    reply: String(row && row.owner_reply || '').trim(),
+    reply_at: row && row.owner_reply_at || null,
+    reply_emailed_at: row && row.owner_reply_emailed_at || null,
   };
 }
 
@@ -121,6 +125,45 @@ async function moderate(reviewId, approved) {
   const rows = await response.json();
   if (!Array.isArray(rows) || !rows[0]) throw new Error('Review not found.');
   return safeReview(rows[0]);
+}
+
+async function saveReply(reviewId, text) {
+  const reply = String(text || '').replace(/\r\n/g, '\n').trim().slice(0, REPLY_MAX);
+  const url = new URL(`${SUPABASE_URL}/rest/v1/anchor_application_reviews`);
+  url.searchParams.set('id', `eq.${reviewId}`);
+  url.searchParams.set('select', REVIEW_SELECT);
+  const response = await fetch(url, {
+    method: 'PATCH',
+    headers: serviceHeaders({
+      'Content-Type': 'application/json',
+      Prefer: 'return=representation',
+    }),
+    body: JSON.stringify({
+      owner_reply: reply || null,
+      owner_reply_at: reply ? new Date().toISOString() : null,
+    }),
+    cache: 'no-store',
+  });
+  if (!response.ok) throw new Error('Could not save your reply.');
+  const rows = await response.json();
+  if (!Array.isArray(rows) || !rows[0]) throw new Error('Review not found.');
+  return safeReview(rows[0]);
+}
+
+async function emailReply(reviewId, token) {
+  const response = await fetch(`${SUPABASE_URL}/functions/v1/anchor-review-reply-email`, {
+    method: 'POST',
+    headers: {
+      apikey: PUBLISHABLE_KEY,
+      Authorization: `Bearer ${token}`,
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ review_id: reviewId }),
+    cache: 'no-store',
+  });
+  const data = await response.json().catch(() => ({}));
+  if (!response.ok) throw new Error(data && data.error || 'The email did not send.');
+  return data;
 }
 
 function outreachStatus(row) {
@@ -251,6 +294,21 @@ export default async function handler(req, res) {
       if (!isUuid(reviewId)) return res.status(422).json({ error: 'A valid review_id is required.' });
       const review = await moderate(reviewId, action === 'approve');
       return res.status(200).json({ ok: true, review, pending_count: await countPending() });
+    }
+
+    if (action === 'reply') {
+      const reviewId = String(body.review_id || '').trim();
+      if (!isUuid(reviewId)) return res.status(422).json({ error: 'A valid review_id is required.' });
+      if (String(body.reply || '').trim().length > REPLY_MAX) return res.status(422).json({ error: `Replies can be up to ${REPLY_MAX} characters.` });
+      const review = await saveReply(reviewId, body.reply);
+      return res.status(200).json({ ok: true, review });
+    }
+
+    if (action === 'email_reply') {
+      const reviewId = String(body.review_id || '').trim();
+      if (!isUuid(reviewId)) return res.status(422).json({ error: 'A valid review_id is required.' });
+      const result = await emailReply(reviewId, bearer(req));
+      return res.status(200).json({ ok: true, emailed_at: result.emailed_at || null });
     }
 
     if (action === 'mark_outreach_sent') {

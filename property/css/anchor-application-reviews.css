@@ -1,0 +1,21 @@
+.wd-app-reviews{width:min(1120px,calc(100% - 36px));margin:0 auto 34px;padding:22px 24px;border:1px solid var(--line);border-radius:12px;background:#fff;box-shadow:var(--shadow)}
+.wd-app-reviews[hidden]{display:none}
+.wd-app-reviews-head{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:6px 18px}
+.wd-app-reviews-head h2{margin:0;font:800 20px/1.2 "Libre Franklin",sans-serif;color:var(--navy);letter-spacing:-.02em}
+.wd-app-reviews-score{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin:0;font:600 14px/1.4 "Libre Franklin",sans-serif;color:var(--muted)}
+.wd-app-reviews-score[hidden]{display:none}
+.wd-app-reviews-score strong{color:var(--navy);font-size:16px}
+.wd-app-reviews-stars,.wd-app-review-stars{color:#a07c12;letter-spacing:1px}
+.wd-app-reviews-list{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));align-items:start;gap:12px;margin:16px 0 0;padding:0;list-style:none}
+.wd-app-review{padding:14px 16px;border:1px solid var(--line);border-radius:10px;background:#fbfcfc}
+.wd-app-review[hidden]{display:none}
+.wd-app-review-stars{font-size:15px}
+.wd-app-review-text{margin:6px 0 0;font:500 15px/1.5 "Source Sans 3",sans-serif;color:var(--ink)}
+.wd-app-review-reply{margin-top:10px;padding:10px 12px;border-radius:8px;background:var(--teal2)}
+.wd-app-review-reply[hidden]{display:none}
+.wd-app-review-reply strong{display:block;font:800 13px/1.3 "Libre Franklin",sans-serif;color:var(--navy)}
+.wd-app-review-reply p{margin:4px 0 0;font:500 14.5px/1.5 "Source Sans 3",sans-serif;color:var(--ink);white-space:pre-line}
+.wd-app-reviews-more{display:inline-flex;align-items:center;min-height:44px;margin-top:10px;padding:0;border:0;background:none;color:var(--teal);font:800 14px/1 "Libre Franklin",sans-serif;cursor:pointer}
+.wd-app-reviews-more[hidden]{display:none}
+.wd-app-sr{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+@media(max-width:680px){.wd-app-reviews{width:100%;margin:0;border-radius:0;border-left:0;border-right:0;box-shadow:none;padding:22px 20px 28px}.wd-app-reviews-list{grid-template-columns:1fr}}

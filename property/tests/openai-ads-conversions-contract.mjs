@@ -33,7 +33,7 @@ must(billing, 'measureCheckoutStarted', 'Billing must measure checkout creation 
 must(billing, 'measureOrderCreated', 'Billing must measure verified purchase completion in the browser.');
 must(billing, '/property/js/openai-ads-conversions.js', 'Paid checkout surfaces must load the OpenAI Ads measurement runtime.');
 
-must(consent, 'OpenAI Ads measurement remain opt-in', 'Consent documentation must explicitly keep OpenAI Ads measurement opt-in.');
+must(consent, 'OpenAI Ads measurement are on by default', 'Consent documentation must say OpenAI Ads measurement is on by default and can be turned off.');
 must(consent, "'__oppref','__obref'", 'Revoking optional consent must clear OpenAI measurement cookies.');
 must(consent, 'Ad personalization stays off.', 'Consent UI must disclose the personalization boundary.');
 
