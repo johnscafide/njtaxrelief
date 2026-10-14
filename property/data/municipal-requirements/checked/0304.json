@@ -2,7 +2,6 @@
  "municipality_code": "0304",
  "municipality": "Bordentown Township",
  "county": "BURLINGTON",
- "checked_at": "2026-09-30",
  "resale_co": {
   "status": "required",
   "name": "Certificate of Conformity for Resale / Change of Occupancy",
@@ -94,7 +93,7 @@
     "quote": "Resale Housing / Change of Occupancy / Change of Commercial Tenancy",
     "doc_date": "2024-06-20 (archive capture)",
     "via": "page",
-    "verified": true
+    "verified": null
    },
    {
     "url": "https://thrillshare-cmsv2.services.thrillshare.com/api/v2/s/339996/directories?page_no=1",
@@ -105,7 +104,7 @@
    }
   ],
   "confidence": "high",
-  "notes": "The township website (bordentowntownship.com) shows a browser challenge page. The form was found through the site's own document listing service (thrillshare-cmsv2.services.thrillshare.com), which lists it in the Construction > Resale Housing / Change of Occupancy / Change of Commercial Tenancy folder, and downloaded from the township's document host. The certificate is a fire safety inspection only (smoke, CO, extinguisher, house numbers); the form says a fuller building inspection is up to the buyer's private inspector. Pay by exact cash or check to Bordentown Township."
+  "notes": "The township website (bordentowntownship.com) shows a browser challenge page. The form was found through the site's own document listing service (thrillshare-cmsv2.services.thrillshare.com), which still lists it as the only document in the Construction > Resale Housing / Change of Occupancy / Change of Commercial Tenancy folder on 2026-10-13 (PDF created March 27, 2024). The certificate is a fire safety inspection only (smoke, CO, extinguisher, house numbers); the form says a fuller building inspection is up to the buyer's private home inspector. Pay by exact cash or check to Bordentown Township. The ecode360 link in the leads (BO1079) is the City of Bordentown's code, not the Township's; the Township's own resale ordinance text was not found online, but the form cites Township Code 274-5 (smoke detectors) and 200-7 (house numbers)."
  },
  "fire_cert": {
   "requirements": [
@@ -184,7 +183,7 @@
       "quote": "Mission Fire Co Phone (609) 298-5375 Email mmezger@missionfire.org LEAID: 0304-002 Enf Auth. District Fire Official Mark Mezger",
       "doc_date": "2026-03-05 (survey date)",
       "via": "state_directory",
-      "verified": true
+      "verified": null
      }
     ],
     "confidence": "high"
@@ -244,7 +243,7 @@
       "quote": "Bordentown Twp Fire Dist #2 Phone (609) 298-8527 Email r.macfarland@btfd2.org",
       "doc_date": "2026-03-05 (survey date)",
       "via": "state_directory",
-      "verified": true
+      "verified": null
      }
     ],
     "confidence": "high"
@@ -263,14 +262,15 @@
   "Confirm the first name of Capt. Scully at Fire District #2.",
   "Confirm whether the township still requires the fire extinguisher after P.L.2025, c.19."
  ],
+ "checked_at": "2026-10-13",
  "verification": {
   "fees": 8,
   "fee_ok": 8,
   "fee_bad": 0,
   "fee_unchecked": 0,
   "quotes": 17,
-  "q_ok": 17,
+  "q_ok": 14,
   "q_bad": 0,
-  "q_unchecked": 0
+  "q_unchecked": 3
  }
 }

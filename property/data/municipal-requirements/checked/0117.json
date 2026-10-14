@@ -2,18 +2,18 @@
  "municipality_code": "0117",
  "municipality": "Mullica Township",
  "county": "ATLANTIC",
- "checked_at": "2026-10-06",
  "resale_co": {
   "status": "required",
   "name": "Resale Certificate (Maintenance Code certificate)",
   "issued_by": "Mullica Township Zoning and Code Enforcement Office (Code Officer)",
-  "lead_time": "",
+  "lead_time": "The Township code says the certificate is granted or denied within 10 days of the application.",
   "valid_for": "",
   "requirements": [
    "Township inspection; the certificate is marked passed or failed (inspection checklist not published)",
+   "Certificate shows the building and premises comply with all Township ordinances (Chapter 177 Property Maintenance, Section 177-12)",
    "Copy of approved well and septic testing submitted with the application",
    "Copy of the elevation certificate if the home is in a flood zone",
-   "A conditional certificate is possible if the buyer acknowledges the violations and agrees to fix them within 90 days of the sale (Township code, seen in search results)"
+   "A conditional certificate is possible if the buyer acknowledges the violations noted by the Code Officer and agrees to fix them within 90 days of the sale (extensions of 90 more days if work is in progress)"
   ],
   "fees": [
    {
@@ -22,9 +22,16 @@
     "quote": "APPLICATION FEE $75.00",
     "source_url": "https://mullicatownship.org/wp-content/uploads/2026/03/RESALE-certificate-application-NEW.pdf",
     "verified": null
+   },
+   {
+    "label": "Certificate issued on another reliable agency's preoccupancy inspection (Township code)",
+    "amount": "$25",
+    "quote": "In such cases, the certificate shall be issued upon presentation of pertinent documents and payment of the application fee of $25.",
+    "source_url": "https://ecode360.com/9424366",
+    "verified": null
    }
   ],
-  "how_to_apply": "Download the Resale Certificate Application from the Township Forms page ('RESALE APPLICATION'). Fill in block, lot, zone, property address, lock box number and location, homeowner, buyer and realtor details, and return it with the $75.00 fee (cash or check), a copy of approved well and septic testing and, in a flood zone, the elevation certificate. The form does not say whether to mail, email or drop it off, so ask the office (609-561-7070 x 133, zoning@mullicatownship.org). The Township then schedules the inspection. The Zoning and Code Enforcement Officer works Tuesday, Wednesday and Thursday, 8:30 am to 4 pm; an appointment is recommended.",
+  "how_to_apply": "Download the Resale Certificate Application from the Township Forms page ('RESALE APPLICATION'). Fill in block, lot, zone, property address, lock box number and location, homeowner, buyer and realtor details, and return it with the $75.00 fee (cash or check), a copy of approved well and septic testing and, in a flood zone, the elevation certificate. The form does not say whether to mail, email or drop it off, so ask the office (609-561-7070 x 133, zoning@mullicatownship.org). The Township then schedules the inspection. Office hours are Tuesday, Wednesday and Thursday, 8:30 am to 4 pm; an appointment is recommended. The certificate is granted or denied within 10 days of the application.",
   "application_url": "https://mullicatownship.org/wp-content/uploads/2026/03/RESALE-certificate-application-NEW.pdf",
   "department_url": "https://www.mullicatownship.org/departments/development-housing/code-enforcement/",
   "phone": "609-561-7070 x 133",
@@ -35,69 +42,90 @@
    {
     "url": "https://mullicatownship.org/wp-content/uploads/2026/03/RESALE-certificate-application-NEW.pdf",
     "quote": "RESALE CERTIFICATE APPLICATION",
-    "doc_date": "2026-03-04 (scanned PDF; read visually)",
+    "doc_date": "2026-03-04 (scanned PDF; read visually 2026-10-13)",
     "via": "pdf",
     "verified": null
    },
    {
     "url": "https://mullicatownship.org/wp-content/uploads/2026/03/RESALE-certificate-application-NEW.pdf",
     "quote": "THE FOLLOWING INFORMATION WILL BE NEEDED TO PROCESS THE RESALE CERTIFICATE",
-    "doc_date": "2026-03-04 (scanned PDF; read visually)",
+    "doc_date": "2026-03-04 (scanned PDF; read visually 2026-10-13)",
     "via": "pdf",
     "verified": null
    },
    {
     "url": "https://mullicatownship.org/wp-content/uploads/2026/03/RESALE-certificate-application-NEW.pdf",
     "quote": "1. COPY OF APPROVED WELL & SEPTIC TESTING",
-    "doc_date": "2026-03-04 (scanned PDF; read visually)",
+    "doc_date": "2026-03-04 (scanned PDF; read visually 2026-10-13)",
     "via": "pdf",
     "verified": null
    },
    {
     "url": "https://mullicatownship.org/wp-content/uploads/2026/03/RESALE-certificate-application-NEW.pdf",
     "quote": "2. COPY OF ELEVATION CERTIFICATE IN FLOOD ZONE",
-    "doc_date": "2026-03-04 (scanned PDF; read visually)",
+    "doc_date": "2026-03-04 (scanned PDF; read visually 2026-10-13)",
     "via": "pdf",
     "verified": null
    },
    {
     "url": "https://www.mullicatownship.org/forms/",
     "quote": "RESALE APPLICATION",
-    "doc_date": "2026-10-06 (page fetched)",
+    "doc_date": "2026-10-13 (page fetched)",
     "via": "page",
     "verified": true
    },
    {
     "url": "https://www.mullicatownship.org/departments/development-housing/code-enforcement/",
-    "quote": "Steven Hadley Email: Zoning@mullicatownship.org Phone (609) 561-7070 x 133",
-    "doc_date": "2026-05-28 (page updated)",
+    "quote": "Zoning Officer · Code Enforcement Official Steven Hadley Email: Zoning@mullicatownship.org Phone: (609) 561-7070 ext. 133",
+    "doc_date": "2026-10-12 (page updated; fetched 2026-10-13)",
     "via": "page",
     "verified": true
    },
    {
     "url": "https://www.mullicatownship.org/departments/development-housing/code-enforcement/",
-    "quote": "Zoning and Code Enforcement Officer hours are Tuesday, Wednesday, and Thursday 8:30am to 4pm.",
-    "doc_date": "2026-05-28 (page updated)",
+    "quote": "Office hours Tuesday, Wednesday & Thursday 8:30 AM – 4:00 PM",
+    "doc_date": "2026-10-12 (page updated; fetched 2026-10-13)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.mullicatownship.org/departments/development-housing/code-enforcement/",
+    "quote": "Appointments are recommended to ensure the Zoning and Code Officer is available.",
+    "doc_date": "2026-10-12 (page updated; fetched 2026-10-13)",
     "via": "page",
     "verified": true
    },
    {
     "url": "https://ecode360.com/9424366",
-    "quote": "No owner or agent shall sell, rent, transfer, grant, lease, let, mortgage with right of occupancy or otherwise dispose of the ownership or occupancy of any dwelling unit",
-    "doc_date": "2026-10-06 (search result, Chapter 177 Property Maintenance, § 177-12 Maintenance Code certificate)",
-    "via": "search_snippet",
+    "quote": "No owner or his agent shall sell, rent, transfer, grant, lease, let, mortgage with right of occupancy or otherwise dispose of the ownership or occupancy",
+    "doc_date": "Chapter 177 Property Maintenance, Section 177-12 Maintenance Code certificate (read in full 2026-10-13)",
+    "via": "page",
     "verified": null
    },
    {
     "url": "https://ecode360.com/9424366",
-    "quote": "unless a Maintenance Code certificate, certifying that the building and premises are in compliance with all other ordinances of the Township of Mullica, shall first be obtained from the Code Officer of the Township",
-    "doc_date": "2026-10-06 (search result)",
-    "via": "search_snippet",
+    "quote": "unless a Maintenance Code certificate, certifying that the building and premises are in compliance with all other ordinances of the Township of Mullica, shall first be obtained from the Code Officer of the Township.",
+    "doc_date": "Section 177-12A (read 2026-10-13)",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://ecode360.com/9424366",
+    "quote": "Such Maintenance Code certificate shall be granted or denied within 10 days from the date of the application for the same.",
+    "doc_date": "Section 177-12A (read 2026-10-13)",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://ecode360.com/9424366",
+    "quote": "A property owner shall be entitled to the issuance of a conditional Maintenance Code certificate, provided that the purchaser of the property acknowledges the violations noted by the Code Officer and agrees that such violations shall be remedied within 90 days of the sale of the property.",
+    "doc_date": "Section 177-12F (read 2026-10-13)",
+    "via": "page",
     "verified": null
    }
   ],
   "confidence": "high",
-  "notes": "The Township Forms page posts a 'RESALE APPLICATION': a one-page Resale Certificate Application (scanned March 2026) with homeowner, buyer and realtor fields, a lock box line, a $75.00 fee and a passed/failed inspection box. New this check: web search results for the Township code (Chapter 177 Property Maintenance, § 177-12 'Maintenance Code certificate', ecode360) say no owner may sell or transfer a dwelling unit without first getting a Maintenance Code certificate from the Code Officer, and allow a conditional certificate if the buyer agrees to fix listed violations within 90 days of the sale. The same search results mention a $25 application fee where preoccupancy inspections are done by other reliable agencies; that wording could not be read on the page, so it is not recorded as a fee. The code pages themselves could not be opened (ecode360 blocks direct reads). The Code Enforcement page shows 'Zoning@mullicatownship.org' as the email text while the underlying link points to inspections@mullicatownship.org; the form prints zoning@mullicatownship.org, which is used here. A separate $75.00 rental application is for rentals only. Since February 9, 2026 the Uniform Construction Code in Mullica is enforced by the NJ DCA Southern Regional Office, not a Township construction office."
+  "notes": "Re-checked 2026-10-13. The Code Enforcement & Zoning page was redesigned on 2026-10-12, which is why last week's quotes no longer matched; the facts are the same: Steven Hadley, Zoning Officer and Code Enforcement Official, Zoning@mullicatownship.org (the mail link now matches the text), (609) 561-7070 ext. 133, office hours Tuesday, Wednesday and Thursday 8:30 AM to 4:00 PM, appointments recommended. The page links to the Township Forms page for zoning, rental and resale forms. The Forms page still posts the same 'Resale Application' (one-page scan dated March 4, 2026) with homeowner, buyer and realtor fields, a lock box line, a $75.00 fee and a passed/failed inspection box. New this check: the full text of Township code Chapter 177, Section 177-12 'Maintenance Code certificate' was read on ecode360 (print view). It bars selling or transferring any dwelling unit without a Maintenance Code certificate from the Code Officer, says the certificate is granted or denied within 10 days, sets a nonrefundable $75 inspection charge (amended 1987, matching the form), a $25 fee when another reliable agency's preoccupancy inspection is accepted, and allows a conditional certificate if the buyer agrees to fix violations within 90 days of the sale. Chapter 177 Article on lead-based paint (Section 177-43) applies to rental units only. A separate $75.00 rental application is for rentals only. Since February 9, 2026 the Uniform Construction Code in Mullica is enforced by the NJ DCA Southern Regional Office, not a Township construction office."
  },
  "fire_cert": {
   "requirements": [
@@ -214,18 +242,19 @@
   }
  ],
  "open_questions": [
-  "How far ahead of closing to apply and how long the resale certificate stays valid are not stated.",
+  "How long the resale certificate stays valid is not stated.",
   "What the resale inspection checks is not published.",
-  "Confirm the exact wording of § 177-12 and any reinspection fee (code seen only in search results)."
+  "Is there a reinspection fee after a failed resale inspection? None is published."
  ],
+ "checked_at": "2026-10-13",
  "verification": {
-  "fees": 4,
+  "fees": 5,
   "fee_ok": 3,
   "fee_bad": 0,
-  "fee_unchecked": 1,
-  "quotes": 16,
-  "q_ok": 8,
+  "fee_unchecked": 2,
+  "quotes": 19,
+  "q_ok": 9,
   "q_bad": 0,
-  "q_unchecked": 8
+  "q_unchecked": 10
  }
 }

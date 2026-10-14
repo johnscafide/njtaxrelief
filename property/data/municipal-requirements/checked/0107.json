@@ -41,28 +41,28 @@
    {
     "url": "https://ecode360.com/8035021",
     "quote": "No owner or leaseholder or his agent shall rent, sell, transfer, grant, lease, let, mortgage with right of occupancy or otherwise dispose of the ownership or occupancy",
-    "doc_date": "City Code Section 213-6H (PM-107.6), read 2026-10-06",
+    "doc_date": "City Code Section 213-6H (PM-107.6), read 2026-10-13",
     "via": "page",
     "verified": null
    },
    {
     "url": "https://ecode360.com/8035021",
     "quote": "unless an occupancy transfer certificate, certifying that the building and premises are in compliance with the Code and all other ordinances of the City of Egg Harbor City, shall first be obtained from the Code Enforcement Officer of the City.",
-    "doc_date": "City Code Section 213-6H (PM-107.6), read 2026-10-06",
+    "doc_date": "City Code Section 213-6H (PM-107.6), read 2026-10-13",
     "via": "page",
     "verified": null
    },
    {
     "url": "https://ecode360.com/8035021",
     "quote": "Any property owner that fails to obtain an occupancy transfer certificate required as outlined above shall be subject to a fine of $150.",
-    "doc_date": "City Code Section 213-6H (PM-107.6), read 2026-10-06",
+    "doc_date": "City Code Section 213-6H (PM-107.6), read 2026-10-13",
     "via": "page",
     "verified": null
    },
    {
     "url": "https://ecode360.com/8032087",
     "quote": "$75 for sale or rental including fire certification and one follow-up. 3rd inspection is $25",
-    "doc_date": "City Code Section 120-2A fee table (last amended 9-11-2025 by Ord. No. 13-2025), read 2026-10-06",
+    "doc_date": "City Code Section 120-2A fee table (last amended 9-11-2025 by Ord. No. 13-2025), read 2026-10-13",
     "via": "page",
     "verified": null
    },
@@ -97,13 +97,13 @@
    {
     "url": "https://app.membershipware.com/api/public/mwjsPeople?et=DsEBpLP32xQDf9SDjaU%252BKg%3d%3d&eb=u32SQFY7Pxg4KbW4ofECYQ%3d%3d",
     "quote": "Donna Heffley ... Land Use and Building Department Office Manager ... donnah@eggharborcity.org",
-    "doc_date": "2026-10-06 (staff list shown on the Planning, Zoning & Building page)",
+    "doc_date": "2026-10-13 (staff list shown on the Planning, Zoning & Building page)",
     "via": "page",
     "verified": true
    }
   ],
   "confidence": "high",
-  "notes": "The City code (Section 213-6H, PM-107.6 Occupancy Transfer Certificate, now readable in full on ecode360) bars selling or transferring any dwelling without an occupancy transfer certificate from the Code Enforcement Officer, charges $75 per dwelling unit for the first inspection and one follow-up, $25 for each inspection after that, and a $150 fine for skipping it. The City fee table (Section 120-2A, last amended by Ord. No. 13-2025 on 9-11-2025) and the August 2025 Schedule A list the same $75 'for sale or rental including fire certification and one follow-up', yet the City's April 2026 smoke/CO application charges its own $55/$90/$160 fees, so ask whether both are paid. The $25 extra-inspection fee, listed as an open question last time, is now confirmed from the code text. The City's document links (app.membershipware.com viewBlob) changed behaviour since the last check: they now answer with a redirect to a viewer page on eggharborcity.org, so a normal browser may land on the City home page instead of the PDF; the PDF bytes are still sent along with the redirect and were read in full on 2026-10-06, so the form quotes (Occupancy Transfer Inspection form and smoke/CO application) are confirmed by hand but an automatic check that follows the redirect will not find them. The redirect target is https://www.eggharborcity.org/index?i=<document id>&rf=i. The Forms & Documents page is built by script, so its document descriptions are cited from the City's forms data feed (app.membershipware.com mwjsResources). Code Enforcement Officer: Robert McClain (codeenforcement2@eggharborcity.org). The City also schedules annual rental unit inspections (rental program)."
+  "notes": "The City code (Section 213-6H, PM-107.6 Occupancy Transfer Certificate, read in full on ecode360 again on 2026-10-13) bars selling or transferring any dwelling without an occupancy transfer certificate from the Code Enforcement Officer, charges $75 per dwelling unit for the first inspection and one follow-up, $25 for each inspection after that, and a $150 fine for skipping it. The City fee table (Section 120-2A, last amended by Ord. No. 13-2025 on 9-11-2025) and the August 2025 Schedule A list the same $75 'for sale or rental including fire certification and one follow-up', yet the City's April 2026 smoke/CO application charges its own $55/$90/$160 fees, so ask whether both are paid. The $25 extra-inspection fee, listed as an open question last time, is now confirmed from the code text. The City's document links (app.membershipware.com viewBlob) answer with a 302 redirect to a viewer page on eggharborcity.org, and the PDF bytes ride along with the redirect. On 2026-10-13 the first request returned an empty body and a retry returned the full PDF, so the weekly check's 'changed' flag was a fetch problem, not a change: the Occupancy Transfer Inspection form (PDF created December 1, 2022, 107,158 bytes) and the smoke/CO application (PDF created April 15, 2026) are the same documents, still listed under the same links in the City's Forms & Documents feed, and every quote was found again by hand. An automatic check that follows the redirect will not find them. The redirect target is https://www.eggharborcity.org/index?i=<document id>&rf=i. The Forms & Documents page is built by script, so its document descriptions are cited from the City's forms data feed (app.membershipware.com mwjsResources). Code Enforcement Officer: Robert McClain (codeenforcement2@eggharborcity.org). The City also schedules annual rental unit inspections (rental program)."
  },
  "fire_cert": {
   "requirements": [
@@ -162,28 +162,28 @@
      {
       "url": "https://app.membershipware.com/api/blob/viewBlob?rf=t&i=mTuJlzExhzyqK3vbZ8XeAem7FEXaIzBDyP97NWQK82S%2FQ20zdH6b2vNSD%252BZxqSv7",
       "quote": "Thereafter, the inspection process shall be considered to have recommenced with the fees of $55, $90, or $160 due depending upon the timing of the application as outlined above.",
-      "doc_date": "2026-04 (PDF created April 15, 2026; read 2026-10-06)",
+      "doc_date": "2026-04 (PDF created April 15, 2026; read 2026-10-13)",
       "via": "pdf",
       "verified": true
      },
      {
       "url": "https://app.membershipware.com/api/public/mwjsPeople?et=DsEBpLP32xQDf9SDjaU%252BKg%3d%3d&eb=u32SQFY7Pxg4KbW4ofECYQ%3d%3d",
       "quote": "Stephen Buchhofer ... Inspections available Tuesdays ... EHCFirePrevention@eggharborcity.org",
-      "doc_date": "2026-10-06 (staff list shown on the Planning, Zoning & Building page)",
+      "doc_date": "2026-10-13 (staff list shown on the Planning, Zoning & Building page)",
       "via": "page",
       "verified": true
      },
      {
       "url": "https://app.membershipware.com/api/public/mwjsPeople?et=DsEBpLP32xQDf9SDjaU%252BKg%3d%3d&eb=u32SQFY7Pxg4KbW4ofECYQ%3d%3d",
       "quote": "Fire Marshal",
-      "doc_date": "2026-10-06 (staff list: Stephen Buchhofer's listed role)",
+      "doc_date": "2026-10-13 (staff list: Stephen Buchhofer's listed role)",
       "via": "page",
       "verified": true
      },
      {
       "url": "https://www.eggharborcity.org/building",
       "quote": "CONSTRUCTION OFFICIAL STEPHEN BUCHHOFER TUESDAY 2:00 p.m. – 6:00 p.m. THURSDAY 2:00 p.m. – 6:00 p.m.",
-      "doc_date": "2026-10-06 (page fetched)",
+      "doc_date": "2026-10-13 (page fetched)",
       "via": "page",
       "verified": true
      },
@@ -205,7 +205,7 @@
     "confidence": "high"
    }
   ],
-  "notes": "Egg Harbor City's fire code enforcing agency is its fire department (registry code F); the Fire Official, Stephen Buchhofer, is also the City's Construction Official. The office number recorded is City Hall's line, (609) 965-0081, which the state directory lists under smoke detector compliance; the directory's 856 number and non-City email for the fire official are not recorded. Fees come from the City's April 2026 smoke/CO application (re-read 2026-10-06). Its link now redirects to a City viewer page (see resale notes), so the fee quotes may not show up for an automatic check even though the PDF text is unchanged. The form still lists a fire extinguisher even though P.L.2025, c.19 (February 3, 2025) removed it from the state requirement. The City fee table says the $75 occupancy transfer fee includes fire certification, which does not match the separate smoke/CO fees on this form."
+  "notes": "Egg Harbor City's fire code enforcing agency is its fire department (registry code F); the Fire Official, Stephen Buchhofer, is also the City's Construction Official. The office number recorded is City Hall's line, (609) 965-0081, which the state directory lists under smoke detector compliance; the directory's 856 number and non-City email for the fire official are not recorded. Fees come from the City's April 2026 smoke/CO application (re-read 2026-10-13; same PDF, created April 15, 2026). Its link now redirects to a City viewer page (see resale notes), so the fee quotes may not show up for an automatic check even though the PDF text is unchanged. The form still lists a fire extinguisher even though P.L.2025, c.19 (February 3, 2025) removed it from the state requirement. The City fee table says the $75 occupancy transfer fee includes fire certification, which does not match the separate smoke/CO fees on this form."
  },
  "other_items": [],
  "open_questions": [
@@ -213,15 +213,15 @@
   "How far ahead to apply for the occupancy transfer inspection and how long the certificate stays valid (not published).",
   "Does the City still require a portable fire extinguisher at resale after P.L.2025, c.19?"
  ],
- "checked_at": "2026-10-06",
+ "checked_at": "2026-10-13",
  "verification": {
   "fees": 6,
-  "fee_ok": 0,
-  "fee_bad": 4,
+  "fee_ok": 4,
+  "fee_bad": 0,
   "fee_unchecked": 2,
   "quotes": 15,
-  "q_ok": 6,
-  "q_bad": 4,
+  "q_ok": 10,
+  "q_bad": 0,
   "q_unchecked": 5
  }
 }

@@ -50,55 +50,55 @@
    {
     "url": "https://abseconnj.gov/code-enforcement/",
     "quote": "Chapter 160 of the Code of Absecon requires all properties having a change in owner, tenant or occupant receive a certificate of continuing occupancy stating the property is in compliance with the Chapter 266, property maintenance code. Residential properties must also comply with N.J.A.C.5:70-2.3 for smoke alarms, co alarms and fire extinguisher.",
-    "doc_date": "2026-06-30 (page updated; fetched 2026-10-06)",
+    "doc_date": "2026-10-13 (page fetched)",
     "via": "page",
-    "verified": true
+    "verified": null
    },
    {
     "url": "https://abseconnj.gov/code-enforcement/",
     "quote": "The Code Enforcement office is also responsible for the inspection of all properties that are being sold or rented within the City in compliance with state regulations and municipal code requirements.",
-    "doc_date": "2026-06-30 (page updated; fetched 2026-10-06)",
+    "doc_date": "2026-10-13 (page fetched)",
     "via": "page",
-    "verified": true
+    "verified": null
    },
    {
     "url": "https://abseconnj.gov/wp-content/uploads/2026/06/Certificate-of-Continued-Occupancy-Application.pdf",
     "quote": "A CCO is required for all buildings prior to change in owner, tenant, or occupant.",
-    "doc_date": "2020-03 (scanned form, PDF created March 23, 2020; posted 2026-06; read 2026-10-06)",
+    "doc_date": "2020-03 (scanned form, PDF created March 23, 2020; posted 2026-06; read 2026-10-13)",
     "via": "pdf",
     "verified": null
    },
    {
     "url": "https://abseconnj.gov/wp-content/uploads/2026/06/Certificate-of-Continued-Occupancy-Application.pdf",
     "quote": "Please note application expires in six months from date received. ** Fees are non-refundable",
-    "doc_date": "2020-03 (scanned form, PDF created March 23, 2020; posted 2026-06; read 2026-10-06)",
+    "doc_date": "2020-03 (scanned form, PDF created March 23, 2020; posted 2026-06; read 2026-10-13)",
     "via": "pdf",
     "verified": null
    },
    {
     "url": "https://abseconnj.gov/code-enforcement/",
-    "quote": "Phone (609) 641-0663 ext. 113 Code Enforcement Officers Mike O’Hagan Leigh Gadd",
-    "doc_date": "2026-06-30 (page updated; fetched 2026-10-06)",
+    "quote": "Phone (609) 641-0663 ext. 113 Code Enforcement Officer Leigh Gadd",
+    "doc_date": "2026-10-13 (page fetched)",
     "via": "page",
-    "verified": true
+    "verified": null
    },
    {
     "url": "https://abseconnj.gov/construction/",
     "quote": "Construction Official Patrick Malia Zoning Officer John Fairweather Code Enforcement Officer Leigh Gadd",
-    "doc_date": "2026-10-06 (page fetched)",
+    "doc_date": "2026-10-13 (page fetched)",
     "via": "page",
     "verified": true
    },
    {
     "url": "https://abseconnj.gov/wp-content/uploads/2026/06/Certificate-of-Continued-Occupancy-Application.pdf",
     "quote": "Inspections are subject to the provisions of the 1990 BOCA Property Maintenance Code and the New Jersey Division of Fire Safety regulations for residential smoke and carbon monoxide alarms and fire extinguisher NJAC 5:70- 4.19",
-    "doc_date": "2020-03",
+    "doc_date": "2020-03 (scanned form, PDF created March 23, 2020; posted 2026-06; read 2026-10-13)",
     "via": "pdf",
     "verified": null
    }
   ],
   "confidence": "high",
-  "notes": "Re-checked 2026-10-06: the Code Enforcement page, the CCO application and the Certification for Resale form are unchanged. Both forms are 2020 scans (no text layer), so a script cannot read their quotes; they were read by eye. The Code Enforcement page lists two Code Enforcement Officers, Mike O'Hagan (mohagan@abseconnj.org) and Leigh Gadd (lgadd@abseconnj.org). The Construction page now lists Patrick Malia as Construction Official, John Fairweather as Zoning Officer and Leigh Gadd as Code Enforcement Officer (Patrick Malia's email link on that page points to mohagan@abseconnj.org). The CCO form only prices a single-family home ($75) and hotels/motels ($75 plus $10 per unit, up to $450); no two-family price is printed. The ordinance (Chapter 160) on ecode360 could not be opened; search engine summaries of the code mention a $35 single-family application fee with $25 for the third and later inspections, which looks like an older amount than the form, so only the form's fees are recorded. Ordinances 09-2015 and 16-2015 on ecode360 ($100 inspection, $25 reinspection) are for the separate rental property registration and certificate of habitability program (Chapter 150/251), not the resale CCO."
+  "notes": "Re-checked 2026-10-13: the Code Enforcement page now lists only one Code Enforcement Officer, Leigh Gadd (mailto lgadd@Abseconnj.org); Mike O'Hagan is no longer listed there. The Chapter 160 resale text on that page, the CCO application and the Certification for Resale form are unchanged. Both forms are 2020 scans (no text layer), so a script cannot read their quotes; they were read by eye on 2026-10-13. The Construction page lists Patrick Malia as Construction Official, John Fairweather as Zoning Officer and Leigh Gadd as Code Enforcement Officer, phone (609) 641-0663 ext. 113 (the page still carries a mohagan@abseconnj.org mail link). The CCO form only prices a single-family home ($75) and hotels/motels ($75 plus $10 per unit, up to $450); no two-family price is printed. The ordinance (Chapter 160) on ecode360 could not be opened; search engine summaries of the code mention a $35 single-family application fee with $25 for the third and later inspections, which looks like an older amount than the form, so only the form's fees are recorded. Ordinances 09-2015 and 16-2015 on ecode360 ($100 inspection, $25 reinspection) are for the separate rental property registration and certificate of habitability program (Chapter 150/251), not the resale CCO."
  },
  "fire_cert": {
   "requirements": [
@@ -136,21 +136,21 @@
      {
       "url": "https://abseconnj.gov/wp-content/uploads/2026/06/Certification-for-Resale.pdf",
       "quote": "Application for One and Two Family Dwelling Certification of Smoke Alarm, Carbon Monoxide Alarm and Portable Fire Extinguisher Compliance",
-      "doc_date": "2020-03 (scanned form, PDF created March 23, 2020; read 2026-10-06)",
+      "doc_date": "2020-03 (scanned form, PDF created March 23, 2020; read 2026-10-13)",
       "via": "pdf",
       "verified": null
      },
      {
       "url": "https://abseconnj.gov/wp-content/uploads/2026/06/Certification-for-Resale.pdf",
       "quote": "This inspection shall be conducted by the owner or an authorized representative of the owner.",
-      "doc_date": "2020-03 (scanned form, PDF created March 23, 2020; read 2026-10-06)",
+      "doc_date": "2020-03 (scanned form, PDF created March 23, 2020; read 2026-10-13)",
       "via": "pdf",
       "verified": null
      },
      {
       "url": "https://abseconnj.gov/wp-content/uploads/2026/06/Certification-for-Resale.pdf",
       "quote": "CITY OF ABSECON Municipal Complex 500 Mill Road Absecon, New Jersey 08201 P:609-641-0663 ex 113",
-      "doc_date": "2020-03 (scanned form, PDF created March 23, 2020; read 2026-10-06)",
+      "doc_date": "2020-03 (scanned form, PDF created March 23, 2020; read 2026-10-13)",
       "via": "pdf",
       "verified": null
      },
@@ -171,7 +171,7 @@
      {
       "url": "https://abseconnj.gov/fire-prevention/",
       "quote": "Phone (609) 517-2591 Fax (609) 645-5098 Fire Official Tom Flynn",
-      "doc_date": "2026-10-06 (page fetched)",
+      "doc_date": "2026-10-13 (page fetched)",
       "via": "page",
       "verified": true
      }
@@ -188,15 +188,15 @@
   "Is the $75 CCO fee on the 2020 form still current? The Chapter 160 fee section could not be read online.",
   "Does the City still require the portable fire extinguisher after P.L.2025, c.19? The 2020 forms still list it."
  ],
- "checked_at": "2026-10-06",
+ "checked_at": "2026-10-13",
  "verification": {
   "fees": 4,
   "fee_ok": 0,
   "fee_bad": 0,
   "fee_unchecked": 4,
   "quotes": 13,
-  "q_ok": 6,
+  "q_ok": 3,
   "q_bad": 0,
-  "q_unchecked": 7
+  "q_unchecked": 10
  }
 }

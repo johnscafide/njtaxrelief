@@ -6,7 +6,7 @@
   "status": "required",
   "name": "Certificate of Occupancy (resale housing inspection)",
   "issued_by": "Willingboro Township Inspections Department (Department of Code Enforcement and Inspections)",
-  "lead_time": "The township advises scheduling the inspection within 30 days of the settlement date, because the CO is good for 30 days. All violations must be reinspected within 30 days of the first inspection.",
+  "lead_time": "Town code: schedule the inspection at least 15 calendar days before settlement; requests 4 calendar days or less before settlement pay an extra $80. The township packet also advises scheduling within 30 days of settlement because the CO is good for 30 days. Violations must be reinspected within 30 days of the first inspection.",
   "valid_for": "30 days",
   "requirements": [
    "Township housing inspection of the whole house, inside and out; all violations corrected before the CO is issued",
@@ -22,7 +22,7 @@
    "Original heating certificate from a Willingboro-registered heating contractor (valid 30 days)",
    "Private sewer lateral video inspection report from a master plumber showing no repairs needed (valid 6 months)",
    "Open construction permits must be passed and closed; work done without permits must be permitted",
-   "Copy of a current property survey for all resales"
+   "Copy of a current property survey (still asked for in the 2026 packet, although the code rule requiring it was repealed in 2020)"
   ],
   "fees": [
    {
@@ -30,6 +30,20 @@
     "amount": "$150.00",
     "quote": "To start this transaction an application needs to be filled out along with a fee of $150.00 to cover the housing inspection which includes the first inspection and a re-inspection (if needed) as long as the re-inspection is done within 30 days from the first inspection date.",
     "source_url": "https://www.willingboronj.gov/DocumentCenter/View/307/Resale-Application-2026-PDF",
+    "verified": null
+   },
+   {
+    "label": "Reinspection (third inspection within 30 days)",
+    "amount": "$150",
+    "quote": "Reinspection (third within 30 days) $150",
+    "source_url": "https://ecode360.com/15566992",
+    "verified": null
+   },
+   {
+    "label": "Expedited resale inspection (request received 4 calendar days or less before settlement), added to the regular fee",
+    "amount": "$80",
+    "quote": "Expedited resale/rerental inspection $80",
+    "source_url": "https://ecode360.com/15566992",
     "verified": null
    }
   ],
@@ -103,10 +117,31 @@
     "doc_date": "2026-10-06 (page fetched)",
     "via": "page",
     "verified": true
+   },
+   {
+    "url": "https://ecode360.com/15565809",
+    "quote": "There is hereby established a requirement for a certificate of occupancy prior to a change in ownership or occupancy for all dwellings or dwelling units.",
+    "doc_date": "2026-10-13 (code page fetched; legislation through 12-02-2025)",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://ecode360.com/15565809",
+    "quote": "Inspections must be scheduled at least 15 calendar days prior to the settlement date. Requests for expedited inspections received four calendar days or less prior to the settlement date will require an additional fee of $80.",
+    "doc_date": "2026-10-13 (code page fetched)",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://ecode360.com/15565809",
+    "quote": "The certification must be made not more than 30 days prior to the certificate of occupancy being issued.",
+    "doc_date": "2026-10-13 (code page fetched)",
+    "via": "page",
+    "verified": null
    }
   ],
   "confidence": "high",
-  "notes": "The 17-page 'Resale Application 2026' PDF is a scan with no text layer; it was read visually page by page. It contains the 'Moving????????' instructions, the Resale Inspection Housing Application ($150.00 fee; Inspections Department phone 609-877-2200 ext. 1214), the private sewer lateral instructions and report form, the MUA plumber list, an added assessment information sheet, a certified tax search request, the pre-inspection checklist (Department of Code Enforcement and Inspections, (609) 877-2200 ext. 1019), smoke detector placement sheets, and the registered heating contractor list (October 18, 2024). The checklist says rental properties must also be inspected annually (since January 2010). Other resale contacts in the directory: Stephanie Holmes (Housing Rental / Resales, ext 1021); Dennis Tunstall, Director, Inspections (ext 1019). Re-check 2026-10-06: the staff directory still lists Shaleen Bolling-Gonzalez, Housing / Rental / Resales, 609-877-2200 Ext 1033 (and Stephanie Holmes, ext 1021; Dennis Tunstall, Director, Inspections, ext 1019). The page markup now repeats each title (the name, then the title twice, then the phone), so the old one-line quote no longer matched; it was split into two verbatim pieces. The Resale Application 2026 and Certificate of Compliance 2026 PDFs are the same files (created April 8, 2026) and are still on the Inspection Forms page."
+  "notes": "The 17-page 'Resale Application 2026' PDF is a scan with no text layer; it was read visually page by page. It contains the 'Moving????????' instructions, the Resale Inspection Housing Application ($150.00 fee; Inspections Department phone 609-877-2200 ext. 1214), the private sewer lateral instructions and report form, the MUA plumber list, an added assessment information sheet, a certified tax search request, the pre-inspection checklist (Department of Code Enforcement and Inspections, (609) 877-2200 ext. 1019), smoke detector placement sheets, and the registered heating contractor list (October 18, 2024). The checklist says rental properties must also be inspected annually (since January 2010). Other resale contacts in the directory: Stephanie Holmes (Housing Rental / Resales, ext 1021); Dennis Tunstall, Director, Inspections (ext 1019). Re-check 2026-10-06: the staff directory still lists Shaleen Bolling-Gonzalez, Housing / Rental / Resales, 609-877-2200 Ext 1033 (and Stephanie Holmes, ext 1021; Dennis Tunstall, Director, Inspections, ext 1019). The page markup now repeats each title (the name, then the title twice, then the phone), so the old one-line quote no longer matched; it was split into two verbatim pieces. The Resale Application 2026 and Certificate of Compliance 2026 PDFs are the same files (created April 8, 2026) and are still on the Inspection Forms page. Re-check 2026-10-13: the Resale Application 2026 and Certificate of Compliance 2026 PDFs are unchanged (created April 8, 2026; 17 and 2 pages, scans) and still on the Inspection Forms page. This round the town code on ecode360 (WI3070, legislation through 12-02-2025) was read through its print view. §199-8 requires a certificate of occupancy before a change in ownership or occupancy of any dwelling, says inspections must be scheduled at least 15 calendar days before settlement (expedited requests 4 calendar days or less before settlement pay $80 more), requires a heating certification made not more than 30 days before the CO, and gives 30 days to repair and ask for reinspection. §150-7 (Department of Inspections fees, last amended 12-2-2025 by Ord. Nos. 2025-20 and 2025-21) lists: Housing resale inspection $150 (includes 1 reinspection); Reinspection (third within 30 days) $150; Expedited resale/rerental inspection $80; Certificate of compliance inspection $150. An editor's note in §199-8 says the former rule requiring a current property survey (added 2017) was repealed 3-3-2020 by Ord. No. 2020-5, but the 2026 packet still lists the survey."
  },
  "fire_cert": {
   "requirements": [
@@ -182,15 +217,15 @@
      },
      {
       "url": "https://firesolutions.dca.nj.gov/_odata/firedistricts",
-      "quote": "\"ultra_name\":\"WILLINGBORO TWP-001\" ... \"ultra_firejurisdiction\":{ \"Name\":\"State\",\"Value\":240000000 },\"ultra_smokecertexempt\":true",
-      "doc_date": "2026-09-30 (live portal data)",
+      "quote": "\"ultra_name\":\"WILLINGBORO TWP-001\" ... \"ultra_firejurisdiction\":{\"Name\":\"State\",\"Value\":240000000},\"ultra_smokecertexempt\":true",
+      "doc_date": "2026-10-13 (live portal data)",
       "via": "page",
       "verified": true
      },
      {
       "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
       "quote": "LEAID: 0338-999 Willingboro Twp Enf Auth. State Fire Official Louis Kilmer Name: NJ Division of Fire Safety Addr: PO Box 809 Phone (609) 633-6132",
-      "doc_date": "2026 (Willingboro page survey date 6/16/2026)",
+      "doc_date": "2026-06-16 (survey date)",
       "via": "state_directory",
       "verified": null
      }
@@ -203,8 +238,8 @@
  "other_items": [
   {
    "label": "Heating certificate",
-   "detail": "Original heating system certificate from a heating contractor on the township registered list, valid 30 days, must be brought in to get the CO.",
-   "source_url": "https://www.willingboronj.gov/DocumentCenter/View/307/Resale-Application-2026-PDF"
+   "detail": "Original heating system certificate from a heating contractor on the township registered list, made not more than 30 days before the CO is issued (town code §199-8B), must be brought in to get the CO.",
+   "source_url": "https://ecode360.com/15565809"
   },
   {
    "label": "Private sewer lateral inspection",
@@ -218,7 +253,7 @@
   },
   {
    "label": "Property survey",
-   "detail": "A copy of a current survey of the property must be submitted before a certificate can be issued for all resales.",
+   "detail": "The 2026 resale packet still asks for a copy of a current survey for all resales, although the code section that required it was repealed in 2020 (Ord. No. 2020-5). Ask the office whether it is still needed.",
    "source_url": "https://www.willingboronj.gov/DocumentCenter/View/307/Resale-Application-2026-PDF"
   },
   {
@@ -233,18 +268,20 @@
   }
  ],
  "open_questions": [
-  "Whether the $150 Certificate of Compliance is charged in addition to the $150 resale housing inspection, or only used when no resale CO is issued.",
-  "Direct link to the online resale/rental application portal (the Inspections page mentions it but shows no link)."
+  "Whether the $150 Certificate of Compliance is charged in addition to the $150 resale housing inspection, or only used when no resale CO is issued (the code lists both as separate $150 fees).",
+  "Is a property survey still required for resales? The 2026 packet asks for one, but the code requirement was repealed in 2020.",
+  "Direct link to the online resale/rental application portal (the Inspections page mentions it but shows no link).",
+  "Does the township still require the portable fire extinguisher at resale after P.L.2025, c.19? The 2026 forms still list it."
  ],
- "checked_at": "2026-10-06",
+ "checked_at": "2026-10-13",
  "verification": {
-  "fees": 2,
+  "fees": 4,
   "fee_ok": 0,
   "fee_bad": 0,
-  "fee_unchecked": 2,
-  "quotes": 17,
+  "fee_unchecked": 4,
+  "quotes": 20,
   "q_ok": 8,
   "q_bad": 0,
-  "q_unchecked": 9
+  "q_unchecked": 12
  }
 }

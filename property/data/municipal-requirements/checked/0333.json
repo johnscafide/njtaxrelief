@@ -2,13 +2,13 @@
  "municipality_code": "0333",
  "municipality": "Southampton Township",
  "county": "BURLINGTON",
- "checked_at": "2026-09-30",
+ "checked_at": "2026-10-13",
  "resale_co": {
   "status": "required",
   "name": "Residential Resale Inspection / Resale Certificate",
   "issued_by": "Southampton Township Office of Construction, Zoning and Land Development",
   "lead_time": "Application and fee must be received at least 14 days before the settlement date",
-  "valid_for": "",
+  "valid_for": "Not stated",
   "requirements": [
    "Smoke alarms on each level of the home and within 10 feet of any sleeping room",
    "Carbon monoxide alarms within 10 feet of any sleeping room",
@@ -42,10 +42,10 @@
   "how_to_apply": "Download the 2026 Residential Resale Inspection Application from the Construction & Zoning page and submit it with the fee to the Construction Office, 5 Retreat Road, at least 14 days before settlement. Questions and inspection requests go to construction@southamptonnj.org. Payment method is not stated on the form.",
   "application_url": "https://www.southamptonnj.org/Construction%20&%20Zoning/Forms/Resale%20Inspection%20Application%202026%20New.pdf?t=202607210900510",
   "department_url": "https://www.southamptonnj.org/government/construction___zoning.php",
-  "contact_name": "Tom Boyd",
-  "contact_title": "Construction Official, Building Subcode Official (handles resale inspections)",
   "phone": "609-859-2786",
   "email": "tboyd@southamptonnj.org",
+  "contact_name": "Tom Boyd",
+  "contact_title": "Construction Official, Building Subcode Official (handles resale inspections)",
   "evidence": [
    {
     "url": "https://www.southamptonnj.org/Construction%20&%20Zoning/Forms/Resale%20Inspection%20Application%202026%20New.pdf?t=202607210900510",
@@ -88,10 +88,24 @@
     "doc_date": "",
     "via": "page",
     "verified": true
+   },
+   {
+    "url": "https://ecode360.com/29792304",
+    "quote": "Whenever there is a change of occupancy of any building subject to the requirements of this section, no owner shall sell, lease or otherwise permit occupancy for residential purposes of that building without first obtaining from the township building inspector a certificate evidencing compliance with the requirements of this section.",
+    "doc_date": "2026-10-13 (page fetched)",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://ecode360.com/29792304",
+    "quote": "An owner who sells, leases, rents or otherwise permits to be occupied for residential purposes any premises subject to the provisions of this section without complying with the inspection and certification requirements hereof shall be subject to a fine not more than $500",
+    "doc_date": "2026-10-13 (page fetched)",
+    "via": "page",
+    "verified": null
    }
   ],
-  "confidence": "medium",
-  "notes": "The July 2026 application is titled Residential Resale Inspection Application and must be filed 14 days before settlement; the resale certificate is issued against the state smoke/CO alarm law (N.J.S.A. 52:27D-198.1, N.J.A.C. 5:70-4.19) and Chapter 8 of the township property maintenance code. No page or ordinance text seen says outright that every sale needs it, and the code (ecode360 SO3594) could not be opened, so confidence is medium. Office hours for Tom Boyd: Monday to Thursday, 9 am to 3 pm. Rental properties have separate rental registration and rental inspection forms."
+  "confidence": "high",
+  "notes": "Township Code §8-8 (Smoke Alarms, read through the ecode360 print view) bars an owner from selling a one- or two-family home without first getting a certificate from the township building inspector, with a $50 fee and $25 per reinspection and a fine of up to $500 for noncompliance. The July 21, 2026 Residential Resale Inspection Application uses the same fees, must be filed 14 days before settlement, and issues a resale certificate against the state smoke/CO alarm law (N.J.S.A. 52:27D-198.1, N.J.A.C. 5:70-4.19) and Chapter 8 of the township property maintenance code, so the check is broader than smoke alarms. Tom Boyd (Construction Official, Building Subcode Official, resale inspections) works Monday to Thursday, 9 am to 3 pm. Rental properties have separate rental registration and rental inspection forms (rental program, not a resale item)."
  },
  "fire_cert": {
   "requirements": [
@@ -101,18 +115,18 @@
   ],
   "authorities": [
    {
-    "name": "Southampton Township Construction Office (designated for smoke detector compliance; NJ DCA is the fire code enforcing agency)",
+    "name": "Southampton Township Construction Office (township building inspector issues the smoke alarm certificate under Township Code §8-8; NJ DCA is the fire code enforcing agency)",
     "type": "municipal_fire_bureau",
     "area_served": "Entire township",
     "lead_time": "At least 14 days before settlement",
     "fees": [],
-    "how_to_apply": "Smoke and CO alarms are checked during the Residential Resale Inspection ($50 per unit, see the resale certificate section); the resale certificate cites the state smoke alarm rules. No separate smoke certificate form or fee was found.",
+    "how_to_apply": "Smoke and CO alarms are checked during the Residential Resale Inspection (one $50 per unit application, see the resale certificate section); file the application with the fee at least 14 days before settlement. No separate smoke certificate form or fee was found.",
     "application_url": "https://www.southamptonnj.org/Construction%20&%20Zoning/Forms/Resale%20Inspection%20Application%202026%20New.pdf?t=202607210900510",
     "department_url": "https://www.southamptonnj.org/government/construction___zoning.php",
-    "contact_name": "Tom Boyd",
-    "contact_title": "Construction Official, Building Subcode Official (handles resale inspections)",
     "phone": "609-859-2786",
     "email": "tboyd@southamptonnj.org",
+    "contact_name": "Tom Boyd",
+    "contact_title": "Construction Official, Building Subcode Official (handles resale inspections)",
     "evidence": [
      {
       "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
@@ -140,14 +154,14 @@
       "quote": "LEAID: 0333-999 Enf Auth. State Fire Official Louis Kilmer Phone (609)633-6132",
       "doc_date": "2026-07-17 (survey date)",
       "via": "state_directory",
-      "verified": true
+      "verified": null
      },
      {
       "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
       "quote": "SMOKE DETECTOR COMPLIANCE Name:Southhampton T wp Constr Office Addr: 5 Retreat Rd Southhampton NJ 08088 Phone (609) 859-2786",
       "doc_date": "2026-07-17 (survey date)",
       "via": "state_directory",
-      "verified": true
+      "verified": null
      },
      {
       "url": "https://www.southamptonnj.org/Construction%20&%20Zoning/Forms/Resale%20Inspection%20Application%202026%20New.pdf?t=202607210900510",
@@ -162,12 +176,19 @@
       "doc_date": "2026-07 (PDF created July 21, 2026)",
       "via": "pdf",
       "verified": true
+     },
+     {
+      "url": "https://ecode360.com/29792304",
+      "quote": "This section implements the provisions of P.L. 1991, c.92 to require installation of at least one smoke detector on each level of one- and two-family homes when a change of occupancy occurs.",
+      "doc_date": "2026-10-13 (page fetched)",
+      "via": "page",
+      "verified": null
      }
     ],
-    "confidence": "medium"
+    "confidence": "high"
    }
   ],
-  "notes": "The NJ DCA is the fire code enforcing agency for Southampton (LEA registry code S). The DCA state-towns list (revised 7/17/2026) lists Southampton without the \"SC\" (smoke certs) flag, and the state directory (two fire company pages, Vincentown and Hampton Lakes) names the Southampton Township Construction Office, 5 Retreat Rd, (609) 859-2786, for smoke detector compliance."
+  "notes": "The NJ DCA is the fire code enforcing agency for Southampton (LEA registry code S), but the DCA state-towns list (revised 7/17/2026) lists Southampton without the SC (smoke certs) flag, the state directory (Vincentown and Hampton Lakes fire company pages) names the Southampton Township Construction Office, 5 Retreat Rd, (609) 859-2786, for smoke detector compliance, and Township Code §8-8 makes the township building inspector issue the sale certificate. The $50 / $25 code fees are the same as the resale inspection fees and appear to be one combined charge. The July 2026 township form does not list a fire extinguisher, in line with P.L.2025, c.19."
  },
  "other_items": [
   {
@@ -182,17 +203,17 @@
   }
  ],
  "open_questions": [
-  "Confirm with the Construction Office that the resale inspection is mandatory for every sale (ordinance text not accessible).",
-  "Payment method, certificate validity period and any rush fee are not stated."
+  "Payment method, certificate validity period and any rush fee are not stated.",
+  "Confirm the $50 resale inspection is a single charge covering both the resale certificate and the smoke/CO certificate."
  ],
  "verification": {
   "fees": 2,
   "fee_ok": 2,
   "fee_bad": 0,
   "fee_unchecked": 0,
-  "quotes": 13,
-  "q_ok": 13,
+  "quotes": 16,
+  "q_ok": 11,
   "q_bad": 0,
-  "q_unchecked": 0
+  "q_unchecked": 5
  }
 }

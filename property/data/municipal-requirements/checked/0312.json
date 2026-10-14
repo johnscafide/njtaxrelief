@@ -2,7 +2,6 @@
  "municipality_code": "0312",
  "municipality": "Edgewater Park Township",
  "county": "BURLINGTON",
- "checked_at": "2026-09-30",
  "resale_co": {
   "status": "required",
   "name": "Certificate of Inspection (C/I), formerly Certificate of Occupancy",
@@ -47,6 +46,20 @@
     "quote": "A $50 fee is applied if the Temporary Certificate of Inspection exceeds the 30 day expiration period -or- surpasses 2 failed consecutive inspections.",
     "source_url": "https://www.edgewaterpark-nj.com/content/163/338/4749.aspx",
     "verified": true
+   },
+   {
+    "label": "Emergency inspection status report within 72 hours (Township Code 240-18C; ask whether it applies to rush resale inspections)",
+    "amount": "$150",
+    "quote": "Emergency inspection status report (within 72 hours): $150.",
+    "source_url": "https://ecode360.com/33437489",
+    "verified": null
+   },
+   {
+    "label": "Emergency inspection status report within 24 hours (Township Code 240-18D; ask whether it applies to rush resale inspections)",
+    "amount": "$200",
+    "quote": "Emergency inspection status report (within 24 hours): $200.",
+    "source_url": "https://ecode360.com/33437489",
+    "verified": null
    }
   ],
   "how_to_apply": "Fill out the Certificate of Inspection Application Report (check Re-Sale Inspection), including seller and buyer contacts and a requested inspection date, and submit it with payment. Pay by check or money order mailed to or left in the drop box at 400 Delanco Road, Edgewater Park, NJ 08010, or in person (cash accepted). The form can also be submitted through the Township's SDL citizen portal (account required). Inspections are not scheduled until payment is received. Call 609-877-2050 ext. 314 or email code-enforcement@edgewaterpark-nj.com to reserve a time.",
@@ -105,10 +118,17 @@
     "doc_date": "",
     "via": "page",
     "verified": true
+   },
+   {
+    "url": "https://ecode360.com/33437489",
+    "quote": "Resale inspection: $120.",
+    "doc_date": "Township Code Chapter 240 (2026-10-13 page fetched)",
+    "via": "page",
+    "verified": null
    }
   ],
   "confidence": "high",
-  "notes": "The Certificate of Inspection Application Report PDF was updated September 8, 2026 (uploaded 9/8/2026). The Code Enforcement page lists two inspectors: Yakup Koksaldi (609-877-2050 x340, ykoksaldi@edgewaterpark-nj.com) and David Boulden (609-877-2050 x341, dboulden@edgewaterpark-nj.com); the shared Code Enforcement line is x314. If a resale cannot meet Temporary C/I items by settlement, the buyer can assume responsibility with an Affidavit in Lieu of C/I (https://www.edgewaterpark-nj.com/filestorage/173/360/430/432/Affidavit_in_Lieu_of_C-I.pdf) but may not occupy until items pass. The SDL portal (https://www.sdlportal.com/towns/nj/burlington/edgewaterparktwp/requests/certificate) needs a login. If buyers plan to rent the home, a separate rental C/I ($100) and landlord registration are needed. The Township code (ecode360 ED3219) could not be opened."
+  "notes": "The Certificate of Inspection Application Report PDF was updated September 8, 2026 (uploaded 9/8/2026). The Code Enforcement page lists two inspectors: Yakup Koksaldi (609-877-2050 x340, ykoksaldi@edgewaterpark-nj.com) and David Boulden (609-877-2050 x341, dboulden@edgewaterpark-nj.com); the shared Code Enforcement line is x314. If a resale cannot meet Temporary C/I items by settlement, the buyer can assume responsibility with an Affidavit in Lieu of C/I (https://www.edgewaterpark-nj.com/filestorage/173/360/430/432/Affidavit_in_Lieu_of_C-I.pdf) but may not occupy until items pass. The SDL portal (https://www.sdlportal.com/towns/nj/burlington/edgewaterparktwp/requests/certificate) needs a login. If buyers plan to rent the home, a separate rental C/I ($100) and landlord registration are needed. Township Code Chapter 240 (Fees), section 240-18 Property Maintenance Code, read through the ecode360 print view, confirms 'Resale inspection: $120.' and also lists emergency inspection status reports ($150 within 72 hours, $200 within 24 hours); the Township page does not say whether those apply to resale rush requests."
  },
  "fire_cert": {
   "requirements": [
@@ -162,14 +182,14 @@
       "quote": "Fire Official Matthew J Augustino Phone (609) 877-8812",
       "doc_date": "2026-02",
       "via": "state_directory",
-      "verified": true
+      "verified": null
      },
      {
       "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
       "quote": "Edgewater Park Twp Fire Prev Addr: 400 Delanco Rd Edgewater Park NJ 08010 Phone (609) 877-2050",
       "doc_date": "2026-02",
       "via": "state_directory",
-      "verified": true
+      "verified": null
      },
      {
       "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
@@ -203,16 +223,18 @@
  ],
  "open_questions": [
   "Resale smoke/CO certificate fee and application process for Edgewater Park Fire District No. 1 are not published on any page found; the district's own website was not located.",
-  "Whether the Township C/I inspection satisfies the state smoke/CO certificate or a separate fire district inspection is needed."
+  "Whether the Township C/I inspection satisfies the state smoke/CO certificate or a separate fire district inspection is needed.",
+  "Do the ordinance's emergency inspection status report fees ($150 within 72 hours, $200 within 24 hours) apply to rush resale inspections?"
  ],
+ "checked_at": "2026-10-13",
  "verification": {
-  "fees": 3,
+  "fees": 5,
   "fee_ok": 3,
   "fee_bad": 0,
-  "fee_unchecked": 0,
-  "quotes": 14,
-  "q_ok": 14,
+  "fee_unchecked": 2,
+  "quotes": 15,
+  "q_ok": 12,
   "q_bad": 0,
-  "q_unchecked": 0
+  "q_unchecked": 3
  }
 }

@@ -2,7 +2,6 @@
  "municipality_code": "0313",
  "municipality": "Evesham Township (Marlton)",
  "county": "BURLINGTON",
- "checked_at": "2026-09-30",
  "resale_co": {
   "status": "not_required",
   "name": "",
@@ -20,22 +19,22 @@
   "contact_title": "Construction Office",
   "evidence": [
    {
-    "url": "https://web.archive.org/web/20260508123727/https://evesham-nj.org/construction-page-list/791-construction-faq",
+    "url": "https://evesham-nj.org/construction-page-list/791-construction-faq",
     "quote": "What if I am selling my house? Is an inspection required? The Township of Evesham does not currently inspect existing residential homes for Certificate of Occupancy or Continuing Certificate of Occupancy. All home resales and rentals are required to obtain an inspection from the Township fire department.",
-    "doc_date": "2026-05",
+    "doc_date": "2026-10-13 (page fetched)",
     "via": "page",
     "verified": true
    },
    {
-    "url": "https://web.archive.org/web/20260508113240/https://evesham-nj.org/departments/construction",
+    "url": "https://evesham-nj.org/departments/construction",
     "quote": "Phone: (856) 983-2914",
-    "doc_date": "2026-05",
+    "doc_date": "2026-10-13 (page fetched)",
     "via": "page",
     "verified": true
    }
   ],
   "confidence": "high",
-  "notes": "The live evesham-nj.org site shows a bot-check page to scripted requests, so the Construction FAQ (original URL https://evesham-nj.org/construction-page-list/791-construction-faq) was read from an Internet Archive capture dated May 8, 2026. Commercial properties need a New Tenant Certificate / New Owner Certificate; that does not apply to 1-2 family homes. Rentals (including short-term rentals) must register with the Township Clerk and get the fire department smoke/CO inspection at each new tenant. The Township code (ecode360 EV0481) could not be opened."
+  "notes": "The Township's Construction FAQ (now readable live) says Evesham does not inspect existing homes for a Certificate of Occupancy or Continuing Certificate of Occupancy and that all home resales and rentals need the fire department inspection. Commercial properties need a New Tenant Certificate / New Owner Certificate; that does not apply to 1-2 family homes. Rentals (including short-term rentals) must register with the Township Clerk and get the fire department smoke/CO inspection at each new tenant. Earlier checks used an Internet Archive copy because of a bot check; the live pages now open directly."
  },
  "fire_cert": {
   "requirements": [
@@ -134,7 +133,7 @@
       "quote": "Fire Official Scott L Freedman Phone (856) 983-2750 Email sfreedman@eveshamfire.org",
       "doc_date": "2026-03",
       "via": "state_directory",
-      "verified": true
+      "verified": null
      },
      {
       "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
@@ -151,14 +150,15 @@
  },
  "other_items": [],
  "open_questions": [],
+ "checked_at": "2026-10-13",
  "verification": {
   "fees": 4,
   "fee_ok": 4,
   "fee_bad": 0,
   "fee_unchecked": 0,
   "quotes": 9,
-  "q_ok": 9,
+  "q_ok": 8,
   "q_bad": 0,
-  "q_unchecked": 0
+  "q_unchecked": 1
  }
 }
