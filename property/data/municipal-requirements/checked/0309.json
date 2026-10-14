@@ -2,7 +2,6 @@
  "municipality_code": "0309",
  "municipality": "Delanco Township",
  "county": "BURLINGTON",
- "checked_at": "2026-09-30",
  "resale_co": {
   "status": "required",
   "name": "Certificate of Habitability (COH)",
@@ -80,10 +79,31 @@
     "doc_date": "2023-03",
     "via": "pdf",
     "verified": true
+   },
+   {
+    "url": "https://ecode360.com/10021757",
+    "quote": "a certificate of habitability shall first have been obtained from the Housing Code Officer",
+    "doc_date": "Township Code Chapter 145 (2026-10-13 page fetched)",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://ecode360.com/10021757",
+    "quote": "The fee for such inspection shall be $100 and shall be tendered and paid to the Township Clerk at the time of making the application.",
+    "doc_date": "Township Code Chapter 145",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://ecode360.com/10021757",
+    "quote": "The requested inspection must be made within 10 business days of receipt of a complete application",
+    "doc_date": "Township Code Chapter 145",
+    "via": "page",
+    "verified": null
    }
   ],
   "confidence": "high",
-  "notes": "The COH application form is marked REVISED 06-02-2025. It is listed on the Online Forms page under Rental/COH Applications as 'Certificate of Habitability (COH) Application -buying or selling a house'. The inspection guidelines are a blank 3-page Uniform Inspection Report (template with 2022 file numbers, posted March 2023); it lists 856-820-5620 to schedule a reinspection, which differs from the main office number. The Township code (ecode360 DE0379) could not be opened. Rentals have a separate rental registration and lead-based paint inspection program."
+  "notes": "The COH application form is marked REVISED 06-02-2025. It is listed on the Online Forms page under Rental/COH Applications as 'Certificate of Habitability (COH) Application -buying or selling a house'. The inspection guidelines are a blank 3-page Uniform Inspection Report (template with 2022 file numbers, posted March 2023); it lists 856-820-5620 to schedule a reinspection, which differs from the main office number. Township Code Chapter 145 (Certificate of Habitability, ecode360 DE0379) was read through the print view: it requires the certificate before any change in ownership or occupancy, sets the $100 fee with one free reinspection and $50 for later reinspections, requires the inspection within 10 business days of a complete application, lets the buyer assume non-serious violations to be fixed within 60 days of purchase, and says the certificate is valid for 90 days or until the next change in ownership or occupancy; public sidewalks are excluded. Rentals have a separate rental registration and lead-based paint inspection program."
  },
  "fire_cert": {
   "requirements": [
@@ -160,7 +180,7 @@
       "quote": "Fire Official Randy Johnson",
       "doc_date": "2026-06",
       "via": "state_directory",
-      "verified": true
+      "verified": null
      },
      {
       "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
@@ -183,17 +203,17 @@
   }
  ],
  "open_questions": [
-  "Fire certificate fee for applications received less than 10 business days before settlement is not published.",
-  "The COH form does not state how far ahead of closing to apply."
+  "Fire certificate fee for applications received less than 10 business days before settlement is not published."
  ],
+ "checked_at": "2026-10-13",
  "verification": {
   "fees": 3,
   "fee_ok": 3,
   "fee_bad": 0,
   "fee_unchecked": 0,
-  "quotes": 12,
-  "q_ok": 12,
+  "quotes": 15,
+  "q_ok": 11,
   "q_bad": 0,
-  "q_unchecked": 0
+  "q_unchecked": 4
  }
 }

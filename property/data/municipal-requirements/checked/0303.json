@@ -2,13 +2,12 @@
  "municipality_code": "0303",
  "municipality": "Bordentown City",
  "county": "BURLINGTON",
- "checked_at": "2026-09-30",
  "resale_co": {
   "status": "required",
   "name": "Certificate of Occupancy / Certificate of Approval (Change of Occupancy housing inspection)",
   "issued_by": "City of Bordentown Department of Housing, Zoning & Code Enforcement (Housing Inspector)",
   "lead_time": "Apply at least 14 days but not more than 30 days before the change in occupancy; the FAQ says allow at least 2 weeks to get the first inspection appointment.",
-  "valid_for": "",
+  "valid_for": "Until the next change in ownership or occupancy (City Code 124-1B(6)); no temporary certificates are issued",
   "requirements": [
    "Smoke alarms on every level and outside each sleeping area; replace alarms older than 10 years; battery units must be 10-year sealed",
    "Carbon monoxide alarm near the bedrooms if there are fuel-burning appliances or an attached garage",
@@ -57,6 +56,20 @@
   "phone": "609-298-0604",
   "email": "planning@cityofbordentown.com",
   "evidence": [
+   {
+    "url": "https://ecode360.com/13169303",
+    "quote": "a certificate of approval shall first have been obtained from the Building Official of the City of Bordentown",
+    "doc_date": "1973-10-08 (Ord. No. 1973-7; code fetched 2026-10-13)",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://ecode360.com/13169311",
+    "quote": "which shall be valid until the next occurring change in ownership or occupancy",
+    "doc_date": "code fetched 2026-10-13",
+    "via": "page",
+    "verified": null
+   },
    {
     "url": "https://files-backend.assets.thrillshare.com/documents/asset/uploaded_file/4658/Bordentown/3f01d2a8-840c-4602-a4b0-7ae1e78ed4c6/Frequently_Asked_Questions.pdf?disposition=inline",
     "quote": "A Certificate of Occupancy is required in Bordentown City when selling or purchasing a property, when there is a change in occupancy, or when a property is to be rented out.",
@@ -115,7 +128,7 @@
    }
   ],
   "confidence": "high",
-  "notes": "The city's live website (cityofbordentown.com) shows a browser challenge page, so the documents were fetched from the city's own document host (files-backend.assets.thrillshare.com), whose links are listed in the city's Application & Forms folder. The current Change of Occupancy Application (file dated May 2026) raised the resale fee to $125 and re-inspection to $50; an older rev 9-2022 form showed Housing Resale $75.00 and Reinspection $20.00 and gave phone (609) 298-0604 ext 4. Buyers purchasing 'As-Is' can request a 'No Occupancy' letter for closing (application and fee still required, plus the signed as-is contract and a signed buyer letter); no temporary COs. Staff directory lists Charles Latini for Housing/Code Enforcement without a phone or email, so the office email from the form is given. Rental units also need annual landlord registration and a lead-safe certificate at tenant turnover ($25 city filing fee)."
+  "notes": "City Code Chapter 124 (Buildings, Change in Ownership or Occupancy, Section 124-1) requires a certificate of approval from the Building Official before any change in ownership or occupancy, whether by transfer of title or a new tenant; it was read through the ecode360 print view (BO1079 is the City of Bordentown code, not the Township's). The ordinance says the certificate stays valid until the next change in ownership or occupancy, and violations can be assumed by the buyer only with correction within 30 days (up to 60 with an extension), except serious hazards, which must be fixed before closing. The city's live website (cityofbordentown.com) shows a browser challenge page, so the documents were fetched from the city's own document host (files-backend.assets.thrillshare.com), whose links are listed in the city's Application & Forms folder. The current Change of Occupancy Application (file dated May 14, 2026) lists Resale $125.00 and Re-inspection $50.00; an older rev 9-2022 form showed Housing Resale $75.00 and Reinspection $20.00 and gave phone (609) 298-0604 ext 4. Buyers purchasing 'As-Is' can request a 'No Occupancy' letter for closing; no temporary COs. The staff directory lists Charles Latini for Housing/Code Enforcement without a phone or email, so the office email from the form is given. Rental units also need annual landlord registration and lead-safe inspections (not resale items)."
  },
  "fire_cert": {
   "requirements": [
@@ -181,7 +194,7 @@
       "quote": "03 Burlington Bordentown City0303 LEAID: 0303-001 Enf Auth. District Fire Official Mark Mezger Phone (609) 298-5375 Addr: 324 Farnswoth Av Bordentown NJ 08505 Phone (609) 298-9046 Email mmezger@missionfire.org Bordentown City Inspection Dept",
       "doc_date": "2025-07-31 (survey date)",
       "via": "state_directory",
-      "verified": true
+      "verified": null
      },
      {
       "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
@@ -230,14 +243,15 @@
   "Confirm whether the city still requires the fire extinguisher after P.L.2025, c.19.",
   "Confirm that Bordentown Township Fire District #1 does not also issue a separate smoke certificate for city sales."
  ],
+ "checked_at": "2026-10-13",
  "verification": {
   "fees": 5,
   "fee_ok": 5,
   "fee_bad": 0,
   "fee_unchecked": 0,
-  "quotes": 14,
-  "q_ok": 13,
+  "quotes": 16,
+  "q_ok": 12,
   "q_bad": 0,
-  "q_unchecked": 1
+  "q_unchecked": 4
  }
 }

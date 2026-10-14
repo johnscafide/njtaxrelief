@@ -2,13 +2,13 @@
  "municipality_code": "0330",
  "municipality": "Riverside Township",
  "county": "BURLINGTON",
- "checked_at": "2026-09-30",
+ "checked_at": "2026-10-13",
  "resale_co": {
   "status": "required",
   "name": "Resale Certificate of Occupancy",
   "issued_by": "Riverside Township Housing Office (inspections arranged through the Construction Office; the Housing Office page lists Cinnaminson Fire Department as the inspectors)",
-  "lead_time": "",
-  "valid_for": "60 days from the date of issuance",
+  "lead_time": "By ordinance the inspection is made within 10 business days of a complete application.",
+  "valid_for": "60 days from the date of issuance (Housing Office page)",
   "requirements": [
    "Exterior: driveway and walks without cracks or sinking sections; yard free of high grass, trash and debris",
    "Windows not broken or cracked, able to open and stay up; screens in place without holes",
@@ -33,15 +33,36 @@
     "quote": "The fee for the inspection is $125.00 per unit.",
     "source_url": "https://riversidetwp.org/housing-office/",
     "verified": true
+   },
+   {
+    "label": "Second reinspection and later (third inspection overall)",
+    "amount": "$50",
+    "quote": "A fee of $50 shall be paid for the second reinspection and all subsequent reinspections which are required",
+    "source_url": "https://ecode360.com/15622849",
+    "verified": null
+   },
+   {
+    "label": "Fifth reinspection and later",
+    "amount": "$100",
+    "quote": "A fee of $100 shall be paid for fifth reinspection and all subsequent reinspections which are required",
+    "source_url": "https://ecode360.com/15622849",
+    "verified": null
+   },
+   {
+    "label": "New inspection fee if more than 60 days pass between the first and second inspection, per unit",
+    "amount": "$125",
+    "quote": "A fee of $125 per unit shall be paid for a second inspection if and when there is an excess of 60 days between the first and second inspection within the calendar year.",
+    "source_url": "https://ecode360.com/15622849",
+    "verified": null
    }
   ],
   "how_to_apply": "Download the Application for Resale (April 2025 version) from the Housing Office page, fill it out, and email it to schedule the inspection. The Housing Office page says to arrange inspections through the Construction Office at housing@riversidetwp.org; the application form itself says inspection requests must be emailed to acosello@riversidetwp.org. The $125 per unit fee is printed on the form. Payment method is not stated.",
   "application_url": "https://riversidetwp.org/wp-content/uploads/2025/04/2APPLICATION-FOR-RESALE.pdf",
   "department_url": "https://riversidetwp.org/housing-office/",
-  "contact_name": "",
-  "contact_title": "",
   "phone": "856-461-1460",
   "email": "housing@riversidetwp.org",
+  "contact_name": "",
+  "contact_title": "",
   "evidence": [
    {
     "url": "https://riversidetwp.org/housing-office/",
@@ -98,10 +119,31 @@
     "doc_date": "2019-06 (PDF created June 21, 2019; posted 2021-11)",
     "via": "pdf",
     "verified": true
+   },
+   {
+    "url": "https://ecode360.com/15633681",
+    "quote": "Prior to any change in ownership of any house, dwelling, apartment unit, boardinghouse unit, rooming house unit or any other type of premises, whether by transfer of title",
+    "doc_date": "2026-10-13 (page fetched)",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://ecode360.com/15633681",
+    "quote": "The requested inspection shall be made within 10 business days of receipt of a complete application",
+    "doc_date": "2026-10-13 (page fetched)",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://ecode360.com/15622849",
+    "quote": "The fee for certificate of habitability and/or certificate of occupancy inspection shall be $125 per unit for all buildings or structures, which shall be tendered and paid to the Township at the time of making the application, and shall also cover one reinspection.",
+    "doc_date": "2026-10-13 (page fetched)",
+    "via": "page",
+    "verified": null
    }
   ],
   "confidence": "high",
-  "notes": "The Housing Office page shows the current $125 per unit fee; an older hidden version of the same page still carries a $100 per unit fee and a 856-461-1460 x3 contact, so $125 (matching the April 2025 form) is used. Two inspections are covered; extra fees apply after the second failed inspection (3rd overall) or after the 60-day period, but the amount is not published. No named housing inspector is listed. The page email is shown on the site through an email-protection script (decoded: housing@riversidetwp.org). Rental properties have a separate annual registration and change-of-tenant Certificate of Habitability (not a resale requirement)."
+  "notes": "Township Code Chapter 166 requires a Certificate of Occupancy from the Resale Inspector before any change in ownership of a home, and Chapter 202 sets the $125 per unit fee covering one reinspection, $50 for later reinspections, $100 from the fifth reinspection, and a new $125 if more than 60 days pass between the first and second inspection (read through the ecode360 print view). The Housing Office page and the April 2025 application also show $125 per unit. A buyer may take on non-life-safety violations by notarized affidavit and must fix them within 60 days (Code §166-4D). The Housing Office page says to arrange inspections through the Construction Office at housing@riversidetwp.org (email decoded from the page's email-protection script); the application says to email acosello@riversidetwp.org. No named housing inspector is listed. Rental properties have separate annual registration and change-of-tenant Certificate of Habitability (not a resale requirement)."
  },
  "fire_cert": {
   "requirements": [
@@ -118,10 +160,10 @@
     "how_to_apply": "No separate smoke/CO certificate form or fee was found on the township website. The state directory lists Riverside Township, 237 S. Pavilion Ave, (856) 461-1460 for smoke detector compliance. The resale housing inspection also checks smoke alarms, CO alarms and the extinguisher. Call 856-461-1460 to confirm how the certificate is issued.",
     "application_url": "",
     "department_url": "https://riversidetwp.org/construction-and-zoning-office/",
-    "contact_name": "Robert Yearly",
-    "contact_title": "Fire Official (state directory); Fire Subcode Official, Fire Inspector (township page)",
     "phone": "856-461-1460",
     "email": "",
+    "contact_name": "Robert Yearly",
+    "contact_title": "Fire Official (state directory); Fire Subcode Official, Fire Inspector (township page)",
     "evidence": [
      {
       "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
@@ -135,14 +177,14 @@
       "quote": "LEAID: 0330-001 Enf Auth. Municipal Fire Official Robert Yearly Phone (856) 461-1460",
       "doc_date": "2026-03-05 (survey date)",
       "via": "state_directory",
-      "verified": true
+      "verified": null
      },
      {
       "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
       "quote": "SMOKE DETECTOR COMPLIANCE Name: Riverside Twp Addr: PO Box 188 - 237 S. Pavilion Ave Riverside NJ 08075 Phone (856) 461-1460",
       "doc_date": "2026-03-05 (survey date)",
       "via": "state_directory",
-      "verified": true
+      "verified": null
      },
      {
       "url": "https://riversidetwp.org/construction-and-zoning-office/",
@@ -164,12 +206,19 @@
       "doc_date": "2019-06 (PDF created June 21, 2019; posted 2021-11)",
       "via": "pdf",
       "verified": true
+     },
+     {
+      "url": "https://ecode360.com/11338343",
+      "quote": "The local enforcing agency within the Township of Riverside shall be the Bureau of Fire Prevention Unit of the Township of Riverside.",
+      "doc_date": "2026-10-13 (page fetched)",
+      "via": "page",
+      "verified": null
      }
     ],
     "confidence": "medium"
    }
   ],
-  "notes": "The DCA LEA registry lists Riverside Township as a municipal (M) fire code enforcing agency. The state directory lists an email for the fire official that is not a township address, so it is not recorded here. No published smoke certificate fee was found; it is unclear whether the $125 resale CO inspection also serves as the state smoke/CO certificate. Riverside Fire Company No. 1 (riversidefire.org) is the fire company and has a Board of Fire Commissioners, but it is not the LEA."
+  "notes": "The DCA LEA registry lists Riverside Township as a municipal (M) fire code enforcing agency, and Township Code §219-18 names the Bureau of Fire Prevention Unit. Neither the Township Code fee chapter (Chapter 202, fire prevention section) nor the website lists a smoke/CO certificate fee, so it is unclear whether the $125 resale CO inspection also serves as the state smoke/CO certificate. The state directory lists an email for the fire official that is not a township address, so it is not recorded here. Riverside Fire Company No. 1 is the fire company, not the LEA. The 2019 housing checklist still lists a mounted 2A10BC extinguisher. The state removed the portable fire extinguisher from the sale certificate requirement in February 2025 (P.L.2025, c.19)."
  },
  "other_items": [
   {
@@ -185,18 +234,17 @@
  ],
  "open_questions": [
   "Who issues the state smoke/CO certificate in Riverside and what does it cost? No form or fee is published; confirm with the Township (856-461-1460).",
-  "What is the fee after the second failed inspection or after the 60-day period? Not published.",
   "Is the inspector a Cinnaminson Fire Department employee under a shared-service agreement? The Housing Office heading suggests so but no agreement text was found.",
   "The housing checklist is from 2019 and still lists a fire extinguisher; confirm current requirements given P.L.2025, c.19."
  ],
  "verification": {
-  "fees": 1,
+  "fees": 4,
   "fee_ok": 1,
   "fee_bad": 0,
-  "fee_unchecked": 0,
-  "quotes": 14,
-  "q_ok": 14,
+  "fee_unchecked": 3,
+  "quotes": 18,
+  "q_ok": 12,
   "q_bad": 0,
-  "q_unchecked": 0
+  "q_unchecked": 6
  }
 }

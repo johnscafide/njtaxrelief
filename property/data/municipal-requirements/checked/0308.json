@@ -2,7 +2,6 @@
  "municipality_code": "0308",
  "municipality": "Cinnaminson Township",
  "county": "BURLINGTON",
- "checked_at": "2026-09-30",
  "resale_co": {
   "status": "not_required",
   "name": "",
@@ -35,7 +34,7 @@
    }
   ],
   "confidence": "high",
-  "notes": "Statement is in the Code Enforcement and Zoning FAQ on the Office of Community and Economic Development page. The Code Enforcement Officer is not named on that page. The Township code (ecode360 CI0302) could not be opened."
+  "notes": "Statement is in the Code Enforcement and Zoning FAQ on the Office of Community and Economic Development page. The Code Enforcement Officer is not named on that page. Township Code 265-7 lists a $80 certificate of continued occupancy fee, but it sits in the construction (UCC) fee section and the Township page says no CO inspection is required for home resales."
  },
  "fire_cert": {
   "requirements": [
@@ -124,14 +123,14 @@
       "quote": "Fire Official Jesse Nickum",
       "doc_date": "2026-01",
       "via": "state_directory",
-      "verified": true
+      "verified": null
      },
      {
       "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
       "quote": "Email jnickum@cinnaminsonfire.org",
       "doc_date": "2026-01",
       "via": "state_directory",
-      "verified": true
+      "verified": null
      },
      {
       "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
@@ -139,12 +138,19 @@
       "doc_date": "2026-07",
       "via": "pdf",
       "verified": true
+     },
+     {
+      "url": "https://ecode360.com/10008685",
+      "quote": "Certificate of smoke detector, carbon monoxide and fire extinguisher compliance.",
+      "doc_date": "Township Code 265-9B (2026-10-13 page fetched)",
+      "via": "page",
+      "verified": null
      }
     ],
     "confidence": "high"
    }
   ],
-  "notes": "The DCA Q3 2026 registry lists Cinnaminson as a fire district (D) enforcing agency and says Cinnaminson Township is the LEA for Beverly City. The information page (last modified November 2024) and the application form (last modified September 2026) both still require a portable fire extinguisher, even though P.L.2025, c.19 removed it from the state baseline. The information page lists the same fees (Initial $80.00, Re-Inspection $55.00, Missed Appointment $45.00, Senior discount $10.00) and warns of a $500 to $2,500 penalty for not getting the certificate. The fire marshal's email comes from the state fire directory (survey dated 1/12/2026); the district site gives only the office phone. Online payment link: https://heartlandpaymentservices.net/webpayments/CinnaminsonFireDistrict1"
+  "notes": "The DCA Q3 2026 registry lists Cinnaminson as a fire district (D) enforcing agency and says Cinnaminson Township is the LEA for Beverly City. The information page (last modified November 2024) and the application form (last modified September 2026) both still require a portable fire extinguisher, even though P.L.2025, c.19 removed it from the state baseline. The information page lists the same fees (Initial $80.00, Re-Inspection $55.00, Missed Appointment $45.00, Senior discount $10.00) and warns of a $500 to $2,500 penalty for not getting the certificate. The fire marshal's email comes from the state fire directory (survey dated 1/12/2026); the district site gives only the office phone. Online payment link: https://heartlandpaymentservices.net/webpayments/CinnaminsonFireDistrict1 Township Code 265-9B (read through the ecode360 print view) sets the same 2014 fees: inspection $80, reinspection $55, missed appointment $45, and a $10 senior discount for Cinnaminson seniors 62 or older selling their home. Code 430-2 still requires a fire extinguisher locally."
  },
  "other_items": [
   {
@@ -157,14 +163,15 @@
   "The Sewerage Authority does not publish the compliance inspection fee.",
   "The Township page does not name the Code Enforcement Officer."
  ],
+ "checked_at": "2026-10-13",
  "verification": {
   "fees": 4,
   "fee_ok": 4,
   "fee_bad": 0,
   "fee_unchecked": 0,
-  "quotes": 9,
-  "q_ok": 9,
+  "quotes": 10,
+  "q_ok": 7,
   "q_bad": 0,
-  "q_unchecked": 0
+  "q_unchecked": 3
  }
 }

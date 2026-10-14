@@ -2,12 +2,11 @@
  "municipality_code": "0306",
  "municipality": "Burlington Township",
  "county": "BURLINGTON",
- "checked_at": "2026-09-30",
  "resale_co": {
   "status": "required",
   "name": "Certificate of Continued Occupancy (resale housing inspection)",
   "issued_by": "Burlington Township Licenses & Inspections (Housing Inspector)",
-  "lead_time": "No minimum lead time published; an expedited inspection within 5 days of the request costs $200.",
+  "lead_time": "No minimum lead time published. The owner must notify Licenses and Inspections within 7 calendar days of a resale (Code 318-6); an expedited inspection within 5 days of the request costs $200.",
   "valid_for": "60 days from issuance",
   "requirements": [
    "Smoke detector on each level",
@@ -69,6 +68,27 @@
   "email": "HousingInspection@twp.burlington.nj.us",
   "evidence": [
    {
+    "url": "https://ecode360.com/7630306",
+    "quote": "The owner or occupant of a rooming, multifamily, rental or residential unit may not rent, resell or occupy such unit without a certificate of continued occupancy.",
+    "doc_date": "code fetched 2026-10-13",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://ecode360.com/7630306",
+    "quote": "shall notify the Department of Licenses and Inspections within seven calendar days of any resale or rerental of any such unit",
+    "doc_date": "code fetched 2026-10-13",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://ecode360.com/7630313",
+    "quote": "Resale inspection fees for a single-family house, townhouse and a condominium unit shall be $100, with a reinspection fee of $50.",
+    "doc_date": "Ord. No. 2023-OR-029 (code fetched 2026-10-13)",
+    "via": "page",
+    "verified": null
+   },
+   {
     "url": "https://www.twp.burlington.nj.us/licenses-and-inspections/",
     "quote": "Housing/Rental/Apartment Inspections are to provide minimum, reasonable standards before the occupancy of a home/apartment",
     "doc_date": "",
@@ -126,7 +146,7 @@
    }
   ],
   "confidence": "high",
-  "notes": "Burlington Township's own site does not quote the ordinance, but its Licenses & Inspections page, fee sheet (Rental & Resale Inspection Fees, updated 10/2023) and Housing Inspection Request cover resale inspections and the resulting certificate of occupancy. If a re-inspection is not done within 60 days of the original inspection, a new inspection and fee are required; this also applies if the CO expires before closing, and heater and chimney certifications expire with the CO. Anthony Trappanese's direct email is atrappanese@twp.burlington.nj.us. The staff directory lists Caitlyn Bryant at (609) 239-5847 while the Licenses & Inspections page lists her at (609)239-5846; the department's main line is (609) 239-5847. Township ordinances are on ecode360 (BU2696), which could not be opened. Note: the ecode360 lead in the Watchdog leads (BU2898) is Burlington City's code, not the township's."
+  "notes": "Required by Township Code Chapter 318 (Housing Standards), Article II: Section 318-6 says a residential unit may not be resold or occupied without a certificate of continued occupancy, and the Department may issue a temporary certificate for up to 30 days for minor repairs that do not affect health and safety. Section 318-8 (amended by Ord. No. 2023-OR-029) sets the same fees as the township fee sheet. The code was read through the ecode360 print view (BU2696 is the Township code; BU2898 in the leads is Burlington City's). If a re-inspection is not done within 60 days of the original inspection, a new inspection and fee are required; this also applies if the CO expires before closing, and heater and chimney certifications expire with the CO. Anthony Trappanese's direct email is atrappanese@twp.burlington.nj.us. The Licenses & Inspections page lists Caitlyn Bryant at (609)239-5846; the department's main line is (609) 239-5847."
  },
  "fire_cert": {
   "requirements": [
@@ -172,11 +192,18 @@
       "verified": true
      },
      {
+      "url": "https://ecode360.com/7630354",
+      "quote": "The above provisions shall also apply at time of resale of a residential structure as defined above.",
+      "doc_date": "code fetched 2026-10-13",
+      "via": "page",
+      "verified": null
+     },
+     {
       "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
       "quote": "03 Burlington Burlington Township0306 LEAID: 0306-001 Enf Auth. District Fire Official Ashley L Johnson Phone (609) 239-5850 Addr: 851 Old York Rd Phone (609) 239-5847 Email ajohnson@btfd.org Burlington Twp Inspections",
       "doc_date": "2026-07-22 (survey date)",
       "via": "state_directory",
-      "verified": true
+      "verified": null
      },
      {
       "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
@@ -203,7 +230,7 @@
     "confidence": "medium"
    }
   ],
-  "notes": "The fire code enforcing agency for Burlington Township is the fire district (Burlington Township Fire Department, Bureau of Fire Prevention, 1601 Burlington Bypass). The district's own page names Fire Official Matthew Tomaszewski (609-239-5850, mtomaszewski@btfd.org), while the DCA directory (survey 7/22/2026) still lists Ashley L Johnson (ajohnson@btfd.org); the district page is used as more current. The DCA directory lists 'Burlington Twp Inspections' at 851 Old York Rd, (609) 239-5847 for smoke detector compliance, and the township page says its housing inspector checks smoke, CO and extinguisher, so the resale smoke/CO check appears to be done in the township housing inspection with no separate fire district fee. This is inferred from those two sources; no page states it in one sentence."
+  "notes": "The fire code enforcing agency for Burlington Township is the fire district (Burlington Township Fire Department, Bureau of Fire Prevention). The district's own page names Fire Official Matthew Tomaszewski (609-239-5850, mtomaszewski@btfd.org) and says its regular inspections exclude owner-occupied dwellings, while the DCA directory (survey 7/22/2026) still lists Ashley L Johnson (ajohnson@btfd.org) and lists 'Burlington Twp Inspections' at 851 Old York Rd, (609) 239-5847 for smoke detector compliance. The township page says its housing inspector checks smoke detectors, CO detectors and the extinguisher, and Township Code 318-23 applies the smoke alarm rule at resale, so the resale smoke/CO check is done in the township housing inspection with no separate fire district fee found. This is inferred from these sources; no page states it in one sentence. The township page and 2018 items sheet still list the extinguisher although P.L.2025, c.19 (February 3, 2025) removed it from the state rule."
  },
  "other_items": [
   {
@@ -222,14 +249,15 @@
   "Confirm the recommended lead time before closing (none published).",
   "Confirm whether the township still requires the fire extinguisher after P.L.2025, c.19."
  ],
+ "checked_at": "2026-10-13",
  "verification": {
   "fees": 7,
   "fee_ok": 7,
   "fee_bad": 0,
   "fee_unchecked": 0,
-  "quotes": 13,
-  "q_ok": 13,
+  "quotes": 17,
+  "q_ok": 12,
   "q_bad": 0,
-  "q_unchecked": 0
+  "q_unchecked": 5
  }
 }

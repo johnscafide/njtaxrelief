@@ -2,7 +2,6 @@
  "municipality_code": "0305",
  "municipality": "Burlington City",
  "county": "BURLINGTON",
- "checked_at": "2026-09-30",
  "resale_co": {
   "status": "required",
   "name": "Resale Certificate of Inspection / Housing Clear Certificate (certificate of continued occupancy)",
@@ -94,7 +93,7 @@
    {
     "url": "https://www.burlingtonnj.us/wp-content/uploads/2026/02/Resale-Application.pdf",
     "quote": "RESALE CERTIFICATE OF INSPECTION APPLICATION $100.00 Fee",
-    "doc_date": "2026-07 (file modified July 24, 2026)",
+    "doc_date": "2026-08 (file modified August 24, 2026)",
     "via": "pdf",
     "verified": true
    },
@@ -104,10 +103,17 @@
     "doc_date": "",
     "via": "page",
     "verified": true
+   },
+   {
+    "url": "https://ecode360.com/14736083",
+    "quote": "Resales: (1) Inspection fee: $100. (2) Reinspection fee: $75.",
+    "doc_date": "2022-04-05 (Ord. No. 07-2022; code fetched 2026-10-13)",
+    "via": "page",
+    "verified": null
    }
   ],
   "confidence": "high",
-  "notes": "Required by City Ordinance Chapter 195 (Housing Standards), section 195-15A; fees under Chapter 146 (146-15). If the home fails, the buyer can take responsibility for the listed items by signing a notarized Affidavit in Lieu to get a temporary housing conditional certificate before settlement; if the report says no occupancy, the temporary certificate is for work only. Certificates are not transferable and fees are not refundable. The certificate is emailed to the agent about 2 to 3 business days after a passed inspection."
+  "notes": "Required by City Ordinance Chapter 195 (Housing Standards), section 195-15A. Fees are set in City Code Section 146-15 (amended by Ord. No. 07-2022), which lists resale inspection $100 and reinspection $75, read through the ecode360 print view; the code's fee table also says a missed appointment means paying another fee for that inspection. If the home fails, the buyer can take responsibility for the listed items by signing a notarized Affidavit in Lieu to get a temporary housing conditional certificate before settlement; if the report says no occupancy, the temporary certificate is for work only. Certificates are not transferable and fees are not refundable. The certificate is emailed to the agent about 2 to 3 business days after a passed inspection. The application PDF was re-posted August 24, 2026 with the same $100.00 fee."
  },
  "fire_cert": {
   "requirements": [
@@ -171,7 +177,7 @@
       "quote": "03 Burlington Burlington City0305 LEAID: 0305-001 Enf Auth. Municipal Fire Official Corey Towner Phone (609) 386-0200 Email ctowner@burlingtonnj.us Burlington City Fire Prev",
       "doc_date": "2026-08-13 (survey date)",
       "via": "state_directory",
-      "verified": true
+      "verified": null
      }
     ],
     "confidence": "high"
@@ -199,14 +205,15 @@
  "open_questions": [
   "Confirm whether the city still requires the fire extinguisher after P.L.2025, c.19."
  ],
+ "checked_at": "2026-10-13",
  "verification": {
   "fees": 5,
   "fee_ok": 5,
   "fee_bad": 0,
   "fee_unchecked": 0,
-  "quotes": 11,
-  "q_ok": 11,
+  "quotes": 12,
+  "q_ok": 10,
   "q_bad": 0,
-  "q_unchecked": 0
+  "q_unchecked": 2
  }
 }

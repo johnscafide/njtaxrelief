@@ -2,7 +2,6 @@
  "municipality_code": "0319",
  "municipality": "Maple Shade Township",
  "county": "BURLINGTON",
- "checked_at": "2026-09-30",
  "resale_co": {
   "status": "required",
   "name": "Residential Certificate of Occupancy (Certificate of Inspection / Certificate of Continued Occupancy), Housing Code Chapter 155",
@@ -67,14 +66,14 @@
    {
     "url": "https://mapleshade.com/certificate-of-occupancy/",
     "quote": "Effective immediately, properties within the Township of Maple Shade are required to obtain a Certificate of Occupancy Inspection & Approvals prior to: The Sale of a Property whether Residential or Commercial.",
-    "doc_date": "",
+    "doc_date": "2026-10-13 (page fetched)",
     "via": "page",
     "verified": true
    },
    {
     "url": "https://mapleshade.com/certificate-of-occupancy/",
     "quote": "Kyle Wagner Township of Maple Shade Director of Community Development Zoning Officer / Planning Administration 856-779-9610 ext. 151",
-    "doc_date": "",
+    "doc_date": "2026-10-13 (page fetched)",
     "via": "page",
     "verified": true
    },
@@ -115,7 +114,7 @@
    }
   ],
   "confidence": "high",
-  "notes": "The public notice on the CO page calls the new Housing Code 'Ordinance No. 2025-14', but the ordinance file posted by the Township is Ordinance 2025-18 (Chapter 155 'Housing Code'), introduced October 16, 2025 and adopted November 20, 2025, effective on adoption and publication. Its $125 and $65 fees match the $125.00 on the Residential CO Form (file posted January 2026). The checklist (posted March 2026) says each property may also be cited for violations not on the list. The Director of Community Development's email shows on the Township site as zoning@mapleshade.com (decoded from the site's email protection); the same address is printed on the form. Code Enforcement Officer Michael Anyzek, ext. 171, part-time. Commercial properties have a separate fee schedule in the ordinance."
+  "notes": "The public notice on the CO page calls the new Housing Code 'Ordinance No. 2025-14', but the ordinance file posted by the Township is Ordinance 2025-18 (Chapter 155 'Housing Code'), introduced October 16, 2025 and adopted November 20, 2025, effective on adoption and publication. Its $125 and $65 fees match the $125.00 on the Residential CO Form (file posted January 2026). The checklist (posted March 2026) says each property may also be cited for violations not on the list. The Director of Community Development's email shows on the Township site as zoning@mapleshade.com (decoded from the site's email protection); the same address is printed on the form. Code Enforcement Officer Michael Anyzek, ext. 171, part-time. Commercial properties have a separate fee schedule in the ordinance. Re-checked 2026-10-13: the CO page, Ordinance 2025-18, the Residential CO Form, the Transfer of Title form and the March 2026 checklist are unchanged; Kyle Wagner (ext. 151) is still the listed contact."
  },
  "fire_cert": {
   "requirements": [
@@ -157,21 +156,21 @@
      {
       "url": "https://mapleshade.com/new-fire-official/",
       "quote": "The “Resale Smoke Alarm Application” has been replaced with the “Residential CO Form”.",
-      "doc_date": "",
+      "doc_date": "2026-10-13 (page fetched)",
       "via": "page",
       "verified": true
      },
      {
       "url": "https://mapleshade.com/new-fire-official/",
       "quote": "Matthew Orsini Interim Fire Official (856) 779-9610 ext. 179",
-      "doc_date": "",
+      "doc_date": "2026-10-13 (page fetched)",
       "via": "page",
       "verified": true
      },
      {
       "url": "https://mapleshade.com/land-use-community-development/",
       "quote": "When a property is being sold as an “As-Is” Transfer of Title, a Fire Inspection is required.",
-      "doc_date": "",
+      "doc_date": "2026-10-13 (page fetched)",
       "via": "page",
       "verified": true
      },
@@ -187,7 +186,7 @@
       "quote": "Enf Auth. Municipal Fire Official Matthew Orsini Phone (856) 779-9610 Email firemarshal@mapleshade.com",
       "doc_date": "2025-09 (Maple Shade page survey date 9/10/2025)",
       "via": "state_directory",
-      "verified": true
+      "verified": null
      },
      {
       "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
@@ -200,7 +199,7 @@
     "confidence": "medium"
    }
   ],
-  "notes": "The DCA registry lists Maple Shade as a municipal fire code enforcing agency (code M). The DCA directory lists 'Maple Shade Fire Prev', 200 Stiles Ave, (856) 779-1335 as the Smoke Detector Compliance contact and Fire Official Matthew Orsini at (856) 779-9610, firemarshal@mapleshade.com. The Township's Fire Official page now says the Resale Smoke Alarm Application was replaced by the Residential CO Form, so the smoke and CO check for a sale runs through the Housing CO inspection. Fire Prevention Specialist Shelby Holzinger, ext. 183 (sholzinger@mapleshade.com), is also listed. The March 2026 checklist still lists a 2A:10B:C fire extinguisher even though P.L.2025, c.19 dropped it from the state rule. The checklist asks for 10-year sealed battery detectors; it does not say how homes with hard-wired alarms are handled."
+  "notes": "The DCA registry lists Maple Shade as a municipal fire code enforcing agency (code M). The DCA directory lists 'Maple Shade Fire Prev', 200 Stiles Ave, (856) 779-1335 as the Smoke Detector Compliance contact and Fire Official Matthew Orsini at (856) 779-9610, firemarshal@mapleshade.com. The Township's Fire Official page now says the Resale Smoke Alarm Application was replaced by the Residential CO Form, so the smoke and CO check for a sale runs through the Housing CO inspection. Fire Prevention Specialist Shelby Holzinger, ext. 183 (sholzinger@mapleshade.com), is also listed. The March 2026 checklist still lists a 2A:10B:C fire extinguisher even though P.L.2025, c.19 dropped it from the state rule. The checklist asks for 10-year sealed battery detectors; it does not say how homes with hard-wired alarms are handled. Re-checked 2026-10-13: Matthew Orsini is still listed as Interim Fire Official (ext. 179) and the page still says the Resale Smoke Alarm Application was replaced by the Residential CO Form."
  },
  "other_items": [
   {
@@ -219,14 +218,15 @@
   "Whether the Housing Inspector or the Fire Official staff perform the smoke/CO part of the Residential CO inspection.",
   "Whether homes with hard-wired smoke alarms must add 10-year sealed battery units, as the checklist wording suggests."
  ],
+ "checked_at": "2026-10-13",
  "verification": {
   "fees": 6,
   "fee_ok": 6,
   "fee_bad": 0,
   "fee_unchecked": 0,
   "quotes": 13,
-  "q_ok": 13,
+  "q_ok": 12,
   "q_bad": 0,
-  "q_unchecked": 0
+  "q_unchecked": 1
  }
 }

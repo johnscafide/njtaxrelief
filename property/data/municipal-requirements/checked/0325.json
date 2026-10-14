@@ -1,0 +1,200 @@
+{
+ "municipality_code": "0325",
+ "municipality": "New Hanover Township",
+ "county": "BURLINGTON",
+ "resale_co": {
+  "status": "required",
+  "name": "Resale inspection (Township Code 137-2, inspection prior to rental and/or resale)",
+  "issued_by": "New Hanover Township (code names the Construction Official; the Township site says the Zoning Officer oversees local rental and resale processes)",
+  "lead_time": "The code says the inspection is made within 48 hours after the written request is received.",
+  "valid_for": "",
+  "requirements": [
+   "Written request before the sale giving the property location, the date the buyer will take occupancy and the buyer's name",
+   "Home must meet the ICC International Property Maintenance Code; a written inspection report goes to the owner, the buyer and the Township Clerk",
+   "If the home is found unfit and is sold without the corrections, both the owner and the new occupant are subject to penalties"
+  ],
+  "fees": [
+   {
+    "label": "Resale inspection (Township Code 137-6)",
+    "amount": "$75",
+    "quote": "There shall be an inspection fee of $75 for each rental and/or resale inspection.",
+    "source_url": "https://ecode360.com/7053849",
+    "verified": null
+   },
+   {
+    "label": "Reinspection when the home is not ready or violations are not corrected",
+    "amount": "$25",
+    "quote": "There shall also be a reinspection fee of $25 for each inspection for rental and/or resale to the permit holder for inspections that fail due to being not done or ready when inspection is called or having failed to complete the list of violations to be corrected.",
+    "source_url": "https://ecode360.com/7053849",
+    "verified": null
+   }
+  ],
+  "how_to_apply": "No application form is posted. Send a written request (property location, buyer's name and the date the buyer takes occupancy) to the Township; the website says the Zoning Officer, Aiden DeMarsey, handles local rental and resale processes (Municipal Complex, 2 Hockamick Road, Cookstown, NJ 08511).",
+  "application_url": "",
+  "department_url": "https://www.newhanovertwp.com/construction",
+  "phone": "609-758-7149 x10",
+  "email": "ademarsey@newhanovertwp.com",
+  "contact_name": "Aiden DeMarsey",
+  "contact_title": "Zoning Officer (Interim); also Deputy Clerk",
+  "evidence": [
+   {
+    "url": "https://ecode360.com/7053849",
+    "quote": "No person shall rent and/or resell to another person for occupancy any dwelling or dwelling unit for the purpose of living therein, nor shall any person rent and/or resell to another person for commercial purposes any commercial property for the purpose of conducting business therein, without first having had the premises to be let inspected by the Construction Official of the Township.",
+    "doc_date": "Ch. 137 (Ord. No. 1990-6; 137-2 amended 5-13-2008 by Ord. No. 2008-01)",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://ecode360.com/7053849",
+    "quote": "The Construction Official shall, within 48 hours after the receipt of said written request, make inspection of the premises as requested.",
+    "doc_date": "Ch. 137",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://ecode360.com/7053849",
+    "quote": "There shall be an inspection fee of $75 for each rental and/or resale inspection.",
+    "doc_date": "Ch. 137",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://www.newhanovertwp.com/construction",
+    "quote": "While construction-related matters are managed through a shared service agreement with North Hanover Township, the local office directly oversees all zoning applications, fee payments, and local rental and resale processes.",
+    "doc_date": "2026-10-13 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.newhanovertwp.com/construction",
+    "quote": "Residents and contractors can coordinate these zoning and land use inquiries directly with Aiden DeMarsey at 609-758-2172 ext. 10.",
+    "doc_date": "2026-10-13 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.newhanovertwp.com/departments",
+    "quote": "Zoning Officer (Interim) Aiden DeMarsey 609-758-7149 x10 ademarsey@newhanovertwp.com",
+    "doc_date": "2026-10-13 (page fetched)",
+    "via": "page",
+    "verified": true
+   }
+  ],
+  "confidence": "medium",
+  "notes": "Changed from not_found: Township Code Chapter 137 (Property Maintenance), read on ecode360 (NE1374, print view; the code is the Burlington County New Hanover, with chapters on the Fort Dix Area Joint Meeting and Wrightstown fire enforcement), requires an inspection before any dwelling is resold, with a $75 fee and a $25 reinspection fee (137-6). The code names the Construction Official, but construction is now a shared service with North Hanover Township and the Township site says the Zoning Officer oversees 'local rental and resale processes', so who actually performs the inspection should be confirmed by phone. No application form, checklist or certificate validity period is posted. The site lists two numbers for the Zoning Officer (609-758-7149 x10 and 609-758-2172 ext. 10). Construction Office (shared with North Hanover): 41 Schoolhouse Road, Jacobstown; Construction Official Jeffrey K. Jones (by appointment); Technical Assistant Caitlin Decker, 609-758-2522 Ext. 218. Parts of the township are within Joint Base McGuire-Dix-Lakehurst."
+ },
+ "fire_cert": {
+  "requirements": [
+   "Smoke alarm, carbon monoxide alarm (and, in the code text, portable fire extinguisher) certificate required under N.J.A.C. 5:70-2.3 before the change of occupant",
+   "Township Code 148 requires smoke detectors within 10 feet of sleeping areas"
+  ],
+  "authorities": [
+   {
+    "name": "Wrightstown Borough Bureau of Fire Prevention (the fire code enforcing agency for New Hanover Township)",
+    "type": "municipal_fire_bureau",
+    "area_served": "Entire township (shared service with Wrightstown Borough)",
+    "lead_time": "Request 10 or more days before the date the certificate is needed for the lowest fee.",
+    "fees": [
+     {
+      "label": "Smoke/CO certificate, request received 10 days or more before needed (Township Code 98-9C)",
+      "amount": "$35",
+      "quote": "$35 for requests received 10 days or more prior to the date on which they are needed.",
+      "source_url": "https://ecode360.com/8144206",
+      "verified": null
+     },
+     {
+      "label": "Request received 4 to 9 days before needed",
+      "amount": "$70",
+      "quote": "$70 for requests received four to nine days prior to the date on which they are needed.",
+      "source_url": "https://ecode360.com/8144206",
+      "verified": null
+     },
+     {
+      "label": "Request received 3 days or less before needed",
+      "amount": "$100",
+      "quote": "$100 for requests received three days or less prior to the date they are needed.",
+      "source_url": "https://ecode360.com/8144206",
+      "verified": null
+     }
+    ],
+    "how_to_apply": "No form is posted online. Call the fire inspector, James Ingling, at 609-723-4450 x14 (by appointment only), or email the Wrightstown fire bureau. Fees under the Township fire code are paid to the Wrightstown Borough Bureau of Fire Prevention.",
+    "application_url": "",
+    "department_url": "https://www.newhanovertwp.com/construction",
+    "phone": "609-723-4450 x14",
+    "email": "wrightstownfirebureau@comcast.net",
+    "contact_name": "James H Ingling",
+    "contact_title": "Fire Official (listed on the Township site as Fire Inspector, by appointment only)",
+    "evidence": [
+     {
+      "url": "https://ecode360.com/8144206",
+      "quote": "The local enforcing agency shall be the Wrightstown Borough Bureau of Fire Prevention and shall hereafter be referred to as the \"Bureau\" or \"local enforcing agency.\"",
+      "doc_date": "Ch. 98 (Ord. No. 2007-07)",
+      "via": "page",
+      "verified": null
+     },
+     {
+      "url": "https://ecode360.com/8144206",
+      "quote": "The fee for the issuance of a certificate smoke alarm, carbon monoxide alarm, and portable fire extinguisher compliance, as required by N.J.A.C. 5:70-2.3, shall be:",
+      "doc_date": "Ch. 98",
+      "via": "page",
+      "verified": null
+     },
+     {
+      "url": "https://www.newhanovertwp.com/construction",
+      "quote": "James Ingling - 609-723-4450 x14. (By Appointment Only)",
+      "doc_date": "2026-10-13 (page fetched)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "Wrightstown Borough is the LEA for New Hanover.",
+      "doc_date": "2026-07",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "M New Hanover",
+      "doc_date": "2026-07",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "Fire Official James H Ingling Phone (609) 723-4450",
+      "doc_date": "2026-07 (survey date 6/16/2026)",
+      "via": "state_directory",
+      "verified": null
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "Email wrightstownfirebureau@comcast.net",
+      "doc_date": "2026-07",
+      "via": "state_directory",
+      "verified": null
+     }
+    ],
+    "confidence": "medium"
+   }
+  ],
+  "notes": "Changed from the last check: New Hanover Township Code Chapter 98 (Fire Prevention, Ord. No. 2007-07, read on ecode360) names the Wrightstown Borough Bureau of Fire Prevention as the enforcing agency and sets the smoke/CO certificate fee at $35 / $70 / $100 (98-9C, 'Amended at time of adoption of Code'). These are below the current state schedule ($45 / $90 / $161), and Wrightstown's own Ordinance 2022-04 uses the state schedule for Wrightstown addresses, so the bureau may now charge the state fees in New Hanover too; confirm by phone. The code text still names the portable fire extinguisher, which the state dropped from the sale certificate in February 2025 (P.L.2025, c.19). The DCA registry lists New Hanover as M with the note 'Wrightstown Borough is the LEA for New Hanover'; the state directory lists the Smoke Detector Compliance office as Wrightstown Boro, 21 Saylors Pond Rd, Wrightstown, in a shared service. The Wrightstown Borough website has no fire bureau page or smoke certificate form. The email is a comcast.net address as printed in the state directory."
+ },
+ "other_items": [],
+ "open_questions": [
+  "Who performs the Township resale inspection now (Zoning Officer or the shared North Hanover Construction Office), and is the fee still $75?",
+  "Does the Wrightstown fire bureau charge New Hanover's code fees ($35 / $70 / $100) or the state schedule ($45 / $90 / $161)? Does it still ask for a fire extinguisher?",
+  "Lead time and how long the resale inspection report / smoke certificate stay valid."
+ ],
+ "checked_at": "2026-10-13",
+ "verification": {
+  "fees": 5,
+  "fee_ok": 0,
+  "fee_bad": 0,
+  "fee_unchecked": 5,
+  "quotes": 13,
+  "q_ok": 6,
+  "q_bad": 0,
+  "q_unchecked": 7
+ }
+}

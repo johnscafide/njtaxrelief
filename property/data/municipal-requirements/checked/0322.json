@@ -2,7 +2,6 @@
  "municipality_code": "0322",
  "municipality": "Moorestown Township",
  "county": "BURLINGTON",
- "checked_at": "2026-09-30",
  "resale_co": {
   "status": "required",
   "name": "Certificate for Change in Occupancy/Ownership (Township page calls it Certificate of Continuing Occupancy)",
@@ -78,7 +77,7 @@
    },
    {
     "url": "https://www.moorestown.nj.us/DocumentCenter/View/6604/Buying_-Selling_Renting-_Change-of-Mailing-Address",
-    "quote": "A \"Certificate of Change of Ownership\" Inspection , contact (856) 235-3520, Opt #2",
+    "quote": "A \"Certificate of Change of Ownership\" Inspection, contact (856) 235-3520, Opt #2",
     "doc_date": "2026-04",
     "via": "pdf",
     "verified": true
@@ -89,10 +88,31 @@
     "doc_date": "2026-09",
     "via": "page",
     "verified": true
+   },
+   {
+    "url": "https://ecode360.com/10345310",
+    "quote": "The Township of Moorestown requires the seller of any property in the Township to obtain a certificate for change in occupancy/ownership prior to the real estate closing to ensure that:",
+    "doc_date": "Ch. 53 amended in its entirety 4-24-2022 by Ord. No. 5-2022",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://ecode360.com/10345310",
+    "quote": "A certificate shall be valid for a period of 60 days once issued.",
+    "doc_date": "2022-04-24",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://ecode360.com/10345310",
+    "quote": "The following schedule of fees, which shall be noted on the tax search and collected at the time of closing, are hereby established for the certificate for change in occupancy/ownership inspection:",
+    "doc_date": "2022-04-24",
+    "via": "page",
+    "verified": null
    }
   ],
   "confidence": "high",
-  "notes": "Chapter 53 of the Township code, as amended by Ordinance No. 5-2022 (introduced April 11, 2022; effective the later of June 1, 2022 or 20 days after adoption). The PDF on the Township site is the introduction copy, so the adopted fee amounts should be confirmed with the Township. This is a Public Works / permit / survey check, not a full housing code inspection. A Temporary Certificate with an escrow (valid 90 days) is allowed when sidewalk work or an encroachment cannot be fixed before closing. List of properties needing a survey: https://www.moorestown.nj.us/DocumentCenter/View/7007/Mtwn-Properties-that-Require-Surveys (questions: Tax Collector Jennifer Dellavalle, jdellavalle@moorestown.nj.us). No application form was found online; Don Lloyd is the Public Works director named on the Township site, not a named CCO inspector."
+  "notes": "Chapter 53 of the Township code, 'Certificate for Change in Occupancy/Ownership', amended in its entirety 4-24-2022 by Ord. No. 5-2022. This check read the adopted code text on ecode360 (MO1116, print view), which confirms the $75 / $50 fees, the 60-day validity and the 90-day temporary certificate with escrow; the PDF on the Township site is the April 2022 introduction copy with the same amounts. This is a Public Works / permit / survey check (sewer connections, water meter, sidewalks, open permits, encroachments), not a full housing code inspection. List of properties needing a survey: https://www.moorestown.nj.us/DocumentCenter/View/7007/Mtwn-Properties-that-Require-Surveys (questions: Tax Collector Jennifer Dellavalle, jdellavalle@moorestown.nj.us). No application form was found online; Don Lloyd is the Public Works director named on the Township site, not a named inspector."
  },
  "fire_cert": {
   "requirements": [
@@ -114,7 +134,7 @@
     "type": "fire_district",
     "area_served": "Fire District 1 part of the township (the Township says to find your district on the NJ Division of Elections 'Find Your Polling Location' page, 'Fire' row)",
     "contact_name": "Matthew Orsini",
-    "contact_title": "Fire Official (Moorestown Fire Prevention, shared by both districts)",
+    "contact_title": "Fire Official (Bureau of Fire Prevention)",
     "lead_time": "Certificates are only good for 30 days, so requests for inspections more than 30 days before settlement/move-in are denied. Apply more than 10 business days before the change of occupant for the lowest fee.",
     "fees": [
      {
@@ -148,9 +168,9 @@
     ],
     "how_to_apply": "Apply online with the Moorestown Fire Prevention Jotform application (linked from the Township's Certificate of Continuing Occupancy page). Upload a copy of the contract of sale or lease. Pick a requested inspection date; inspections are Tuesdays and Thursdays, 9 to 11 AM, excluding holidays. The bureau emails a confirmation with the fee and who to make the check payable to. Pay by check or money order to the inspector at the inspection; not paying on arrival is an automatic failure. If you need an inspection within 24 hours, call the office after submitting.",
     "application_url": "https://form.jotform.com/fireofficial313/smokeinspection",
-    "department_url": "https://www.moorestown.nj.us/641/Certificate-of-Continuing-Occupancy",
-    "phone": "(856) 234-1222",
-    "email": "info@fireprevention31.org",
+    "department_url": "https://www.fireprevention31.org/",
+    "phone": "856-234-1222",
+    "email": "fm@fireprevention31.org",
     "evidence": [
      {
       "url": "https://www.moorestown.nj.us/696/Fire-Department",
@@ -195,25 +215,11 @@
       "verified": true
      },
      {
-      "url": "https://web.archive.org/web/20260610022031/https://bureauoffireprevention.com/contact",
-      "quote": "Matthew Orsini - Fire Official",
-      "doc_date": "2026-06",
-      "via": "page",
-      "verified": true
-     },
-     {
-      "url": "https://web.archive.org/web/20260610022031/https://bureauoffireprevention.com/contact",
-      "quote": "Moorestown Fire Prevention 225 North Lenola Road Moorestown, NJ 08057 P. (856) 234-1222 F. (856) 234-4248",
-      "doc_date": "2026-06",
-      "via": "page",
-      "verified": true
-     },
-     {
       "url": "https://web.archive.org/web/20260411081752/https://www.bureauoffireprevention.com/_files/ugd/42b6a6_44bdd1b5d1164a1a8102b8dd30d9ef6f.pdf?index=true",
       "quote": "A Fire Inspector from Moorestown Fire Prevention will inspect the dwelling during the scheduled time slot that was confirmed to by email.",
       "doc_date": "2025-03",
       "via": "pdf",
-      "verified": true
+      "verified": null
      },
      {
       "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
@@ -227,7 +233,28 @@
       "quote": "Fire Official Matthew M Orsini Phone (856) 234-6660 Addr: 225 N Lenola Rd",
       "doc_date": "2026-05",
       "via": "state_directory",
-      "verified": true
+      "verified": null
+     },
+     {
+      "url": "https://www.fireprevention31.org/contact",
+      "quote": "Matthew Orsini, Fire Official",
+      "doc_date": "2026-10-13 (page fetched)",
+      "via": "page",
+      "verified": null
+     },
+     {
+      "url": "https://www.fireprevention31.org/contact",
+      "quote": "225 N Lenola Rd, Moorestown, NJ 08057",
+      "doc_date": "2026-10-13 (page fetched)",
+      "via": "page",
+      "verified": null
+     },
+     {
+      "url": "https://www.fireprevention31.org/",
+      "quote": "Serving Moorestown and Maple Shade",
+      "doc_date": "2026-10-13 (page fetched)",
+      "via": "page",
+      "verified": null
      }
     ],
     "confidence": "high"
@@ -237,7 +264,7 @@
     "type": "fire_district",
     "area_served": "Fire District 2, the western portion of the township (Lenola area); confirm with the polling-location lookup",
     "contact_name": "Matthew Orsini",
-    "contact_title": "Fire Official (Moorestown Fire Prevention, shared by both districts)",
+    "contact_title": "Fire Official (Bureau of Fire Prevention)",
     "lead_time": "Certificates are only good for 30 days, so requests for inspections more than 30 days before settlement/move-in are denied. Apply more than 10 business days before the change of occupant for the lowest fee.",
     "fees": [
      {
@@ -271,9 +298,9 @@
     ],
     "how_to_apply": "Apply online with the Moorestown Fire Prevention Jotform application (linked from the Township's Certificate of Continuing Occupancy page). Upload a copy of the contract of sale or lease. Pick a requested inspection date; inspections are Tuesdays and Thursdays, 9 to 11 AM, excluding holidays. The bureau emails a confirmation with the fee and who to make the check payable to. Pay by check or money order to the inspector at the inspection; not paying on arrival is an automatic failure. If you need an inspection within 24 hours, call the office after submitting.",
     "application_url": "https://form.jotform.com/fireofficial313/smokeinspection",
-    "department_url": "https://www.moorestown.nj.us/641/Certificate-of-Continuing-Occupancy",
-    "phone": "(856) 234-1222",
-    "email": "info@fireprevention31.org",
+    "department_url": "https://www.fireprevention31.org/",
+    "phone": "856-234-1222",
+    "email": "fm@fireprevention31.org",
     "evidence": [
      {
       "url": "https://www.moorestownfire2.com/",
@@ -318,25 +345,11 @@
       "verified": true
      },
      {
-      "url": "https://web.archive.org/web/20260610022031/https://bureauoffireprevention.com/contact",
-      "quote": "Matthew Orsini - Fire Official",
-      "doc_date": "2026-06",
-      "via": "page",
-      "verified": true
-     },
-     {
-      "url": "https://web.archive.org/web/20260610022031/https://bureauoffireprevention.com/contact",
-      "quote": "Moorestown Fire Prevention 225 North Lenola Road Moorestown, NJ 08057 P. (856) 234-1222 F. (856) 234-4248",
-      "doc_date": "2026-06",
-      "via": "page",
-      "verified": true
-     },
-     {
       "url": "https://web.archive.org/web/20260411081752/https://www.bureauoffireprevention.com/_files/ugd/42b6a6_44bdd1b5d1164a1a8102b8dd30d9ef6f.pdf?index=true",
       "quote": "A Fire Inspector from Moorestown Fire Prevention will inspect the dwelling during the scheduled time slot that was confirmed to by email.",
       "doc_date": "2025-03",
       "via": "pdf",
-      "verified": true
+      "verified": null
      },
      {
       "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
@@ -350,13 +363,34 @@
       "quote": "Fire Official Matthew M Orsini Phone (856) 234-6660 Addr: 225 N Lenola Rd",
       "doc_date": "2026-05",
       "via": "state_directory",
-      "verified": true
+      "verified": null
+     },
+     {
+      "url": "https://www.fireprevention31.org/contact",
+      "quote": "Matthew Orsini, Fire Official",
+      "doc_date": "2026-10-13 (page fetched)",
+      "via": "page",
+      "verified": null
+     },
+     {
+      "url": "https://www.fireprevention31.org/contact",
+      "quote": "225 N Lenola Rd, Moorestown, NJ 08057",
+      "doc_date": "2026-10-13 (page fetched)",
+      "via": "page",
+      "verified": null
+     },
+     {
+      "url": "https://www.fireprevention31.org/",
+      "quote": "Serving Moorestown and Maple Shade",
+      "doc_date": "2026-10-13 (page fetched)",
+      "via": "page",
+      "verified": null
      }
     ],
     "confidence": "high"
    }
   ],
-  "notes": "Both fire districts use the same fire prevention office: the DCA LEA registry (July 2026) says 'Moorestown Township FD#2 is sharing their Fire Official and Clerk with Moorestown Township FD#1', and both district sites link to Moorestown Fire Prevention (225 North Lenola Road). The fees and process are therefore the same whichever district the home is in. The bureau's old website (bureauoffireprevention.com) now shows a Wix domain error; its contact page and March 2025 'Instructions for Smoke Detector and Carbon Monoxide Detector Compliance' PDF were read from Internet Archive copies (captured 2026-06-10 and 2026-04-11; original URLs https://bureauoffireprevention.com/contact and https://www.bureauoffireprevention.com/_files/ugd/42b6a6_44bdd1b5d1164a1a8102b8dd30d9ef6f.pdf). The new site www.fireprevention31.org ('Serving Moorestown and Maple Shade') did not load with curl; WebFetch showed only its menu. The moorestownfire2.com text was read with WebFetch. The Fire Official's email on the archived contact page link is fm@fireprevention31.org; the instruction PDF lists office email info@fireprevention31.org and phone (856) 234-1222. The state directory (survey 5/18/2026) lists Fire Official Matthew M Orsini, phone (856) 234-6660, email fireofficial313@gmail.com; the bureau's own documents give (856) 234-1222, which is used here. The Township's 2026 'Selling Your Home' sheet also lists 'Fire Inspection (856)234-1222' with an older Jotform link (form 92477012539157), which shows the same fees. The fee text still names the certificate 'CSACMAC' (smoke alarm, carbon monoxide alarm and portable fire extinguisher compliance), but neither the current application nor the March 2025 instructions list a fire extinguisher requirement. Penalty per the instructions: not less than $100.00 or more than $2,500.00 per occurrence for a change of occupancy without the certificate."
+  "notes": "Both fire districts use the same fire prevention office: the DCA LEA registry (July 2026) says 'Moorestown Township FD#2 is sharing their Fire Official and Clerk with Moorestown Township FD#1', and both district sites point to Moorestown Fire Prevention (225 North Lenola Road). Fees and process are the same whichever district the home is in. The bureau's current site, www.fireprevention31.org ('Serving Moorestown and Maple Shade'), was readable this time; its contact page lists Matthew Orsini, Fire Official (fm@fireprevention31.org), Jamie Locatell, Head of Administrative Services (info@fireprevention31.org), Deputy Fire Official Thomas DiPaolo and inspectors, phone 856-234-1222, hours 8 am to 4 pm. Its Forms & Applications page showed no readable content. The March 2025 'Instructions for Smoke Detector and Carbon Monoxide Detector Compliance' PDF is still cited from an Internet Archive copy of the old bureauoffireprevention.com site. The state directory (survey 5/18/2026) lists Fire Official Matthew M Orsini, phone (856) 234-6660, email fireofficial313@gmail.com. The Township's 'Selling Your Home' sheet lists 'Fire Inspection (856)234-1222' with an older Jotform link (form 92477012539157). The fee text still names the certificate 'CSACMAC' (smoke alarm, carbon monoxide alarm and portable fire extinguisher compliance), but neither the current application nor the March 2025 instructions list a fire extinguisher. Penalty per the instructions: not less than $100.00 or more than $2,500.00 per occurrence for a change of occupancy without the certificate. The moorestownfire2.com site refused the connection on 2026-10-13; its quotes are kept from the last check."
  },
  "other_items": [
   {
@@ -381,18 +415,18 @@
   }
  ],
  "open_questions": [
-  "Adopted text of Ordinance 5-2022 (Chapter 53) was not confirmed; the online PDF is the April 2022 introduction copy. ecode360 MO1116 was not read.",
-  "Exact boundary between Fire District 1 and Fire District 2 is not published as a list; agents should use the NJ polling-location lookup ('Fire' row).",
-  "The bureau's new website (fireprevention31.org) could not be read directly."
+  "Exact boundary between Fire District 1 and Fire District 2 is not published as a list; agents should use the NJ polling-location lookup ('Fire' row). It does not change the fee or the office.",
+  "Whether the Public Works certificate has a published application form or lead time (none found online)."
  ],
+ "checked_at": "2026-10-13",
  "verification": {
   "fees": 10,
   "fee_ok": 10,
   "fee_bad": 0,
   "fee_unchecked": 0,
-  "quotes": 29,
-  "q_ok": 27,
+  "quotes": 34,
+  "q_ok": 19,
   "q_bad": 0,
-  "q_unchecked": 2
+  "q_unchecked": 15
  }
 }

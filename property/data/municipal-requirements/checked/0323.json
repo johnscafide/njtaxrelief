@@ -2,16 +2,16 @@
  "municipality_code": "0323",
  "municipality": "Mount Holly Township",
  "county": "BURLINGTON",
- "checked_at": "2026-09-30",
  "resale_co": {
   "status": "required",
-  "name": "Resale Inspection (Housing Office resale certification)",
-  "issued_by": "Mount Holly Township Code Enforcement and Housing Department (Housing Office)",
+  "name": "Certificate of Approval (resale inspection by the Housing Office)",
+  "issued_by": "Mount Holly Township Housing Code Enforcement Officer (Code Enforcement and Housing Department / Housing Office)",
   "contact_name": "Carolyn Youngbean",
   "contact_title": "Housing",
-  "lead_time": "",
-  "valid_for": "",
+  "lead_time": "The Township code says the inspection is made within five business days of a complete application. The Fire District page says sellers should call within 60 days of settlement.",
+  "valid_for": "Until the next change in ownership or occupancy (or a later inspection that finds violations), per Township Code 90-2H",
   "requirements": [
+   "Required before any change in ownership or occupancy, including transfer of title; violations must be fixed before closing or (except safety violations) assumed by the buyer and fixed within 30 days (no more than 60 days with an extension)",
    "Heating system certification by an HVAC-R contractor or master plumber (form expires 1 year after the inspection date); the application asks for its date",
    "Fire (smoke/CO) certification date is asked on the application",
    "At least one working 10-year sealed battery smoke detector on each level including the basement; CO detectors within 10 feet of sleeping areas",
@@ -41,7 +41,7 @@
     "amount": "$30.00/unit",
     "quote": "3rd or more inspection ... $30.00/unit",
     "source_url": "https://storage.googleapis.com/juniper-media-library/560/2026/05/Fees_for_Housing_Inspections.pdf",
-    "verified": true
+    "verified": null
    },
    {
     "label": "Trash escrow (2016 fee sheet)",
@@ -105,10 +105,31 @@
     "doc_date": "2026-09",
     "via": "page",
     "verified": true
+   },
+   {
+    "url": "https://ecode360.com/10357279",
+    "quote": "Prior to any change in ownership or occupancy of any house, dwelling, apartment unit, boarding house unit, rooming house unit, commercial, industrial or any other type of premises, whether by transfer of title, change of renting or leasing tenant or otherwise, which is used, partially used or intended to be used for human occupancy, a certificate of approval shall first have been obtained from the Housing Code Enforcement Officer",
+    "doc_date": "Ch. 90 (Ord. No. 1993-6, amended 4-28-2008 by Ord. No. 2008-07)",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://ecode360.com/10357279",
+    "quote": "The requested inspection shall be made within five business days of receipt of a complete application",
+    "doc_date": "Ch. 90",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://ecode360.com/10357279",
+    "quote": "The certification shall be dated not more than 365 days prior to the date of application for a certificate of approval.",
+    "doc_date": "Ch. 90 (amended 5-23-2016 by Ord. No. 2016-16)",
+    "via": "page",
+    "verified": null
    }
   ],
-  "confidence": "medium",
-  "notes": "The Township says resale inspections are mandatory, and the Resale Inspection Application is labeled 2026. The only fee sheet online is dated effective May 5, 2016 ($150.00 resale inspection), so confirm the current fee. The fee sheet also lists 'Rental lnspection/2 Year Inspection $150.00/unit' (rental program). Housing staff listed: Carolyn Youngbean and Lee Eckert (leckert@twp.mountholly.nj.us), Monday to Thursday. The department page also says the Housing Department issues a Certificate of Continued Occupancy (CCO) and handles 'Trash and Escrow Verifications' with real estate agents and escrow officers. How far ahead to apply and how long the certificate lasts are not published. Township code (ecode360 MO1235) was not read. The old www.mountholly.nj.us host did not connect; the new site is twp.mountholly.nj.us (launched June 2026)."
+  "confidence": "high",
+  "notes": "Mount Holly Code Chapter 90 (Certificate of Approval), read in full on ecode360 (MO1235, print view), requires a certificate of approval from the Housing Code Enforcement Officer before any change in ownership or occupancy. Code fees (90-2B as amended 4-11-2016 by Ord. No. 2016-13): $150 inspection and a $250 trash deposit from sellers, with the balance returned within 21 days after closing; the trash deposit may be waived if the Code Enforcement Official finds the home vacant and clean within 48 hours of closing (90-2I). One reinspection within 30 days is free, then $30 each (90-2G). These match the Housing Office fee sheet 'effective May 5, 2016' ($150 resale, $30 3rd or more inspection, $250 trash escrow); the fee sheet also lists a $100 recycling cart escrow, which is not in Chapter 90. A heating certification from an HVAC contractor, utility employee or licensed plumber dated within 365 days is required (90-2C). The Township's 2026 Resale Inspection Application asks for the heater certification date, the fire certification date and the settlement date. Housing staff: Carolyn Youngbean and Lee Eckert (Monday to Thursday); Code Enforcement: Kelly Croge and Rich Spitler. The department page also mentions a Certificate of Continued Occupancy (CCO) and 'Trash and Escrow Verifications' with real estate agents. Rental units also need the certificate at each tenant change or every two years (rental program, not a resale item)."
  },
  "fire_cert": {
   "requirements": [
@@ -211,13 +232,20 @@
       "quote": "Fire Official Thomas Mason, Jr Phone (609) 261-7233",
       "doc_date": "2025-06",
       "via": "state_directory",
-      "verified": true
+      "verified": null
+     },
+     {
+      "url": "https://ecode360.com/10357766",
+      "quote": "The fee for a smoke detector inspection for the change of ownership for one- and two-family structures shall be $25.",
+      "doc_date": "Added 1-27-1997 by Ord. No. 1997-3",
+      "via": "page",
+      "verified": null
      }
     ],
     "confidence": "medium"
    }
   ],
-  "notes": "Mount Holly Fire District No. 1 is the fire code enforcing agency (DCA LEA registry, July 2026). The district's resale page (first posted May 13, 2020, last modified January 13, 2024 per the site's WordPress data) says the Township Bureau of Housing and Code Enforcement schedules the resale inspections and the fire fee is paid to the Fire District. The Smoke Detector Certifications number on the district site ((609) 864-2464) is the same number as the Township Housing Office, so the smoke/CO certificate appears to be scheduled through the Housing Office along with the Township resale inspection. The page still lists a portable fire extinguisher requirement; it was last updated before the February 2025 state law (P.L.2025, c.19) that removed the extinguisher from the state requirement, so ask whether it is still enforced. The district's Bureau of Fire Prevention page showed a bot check to curl and was not read. The state directory lists the Fire Official's phone as (609) 261-7233; the district's own site lists (609) 518-8911 (used here)."
+  "notes": "Mount Holly Fire District No. 1 is the fire code enforcing agency (DCA LEA registry, July 2026). The district's resale page (first posted May 13, 2020, last modified January 13, 2024 per the site's WordPress data) says the Township Bureau of Housing and Code Enforcement schedules the resale inspections and the fire fee is paid to the Fire District. The Smoke Detector Certifications number on the district site ((609) 864-2464) is the same number as the Township Housing Office, so the smoke/CO certificate appears to be scheduled through the Housing Office along with the Township resale inspection. The page still lists a portable fire extinguisher requirement; it was last updated before the February 2025 state law (P.L.2025, c.19) that removed the extinguisher from the state requirement, so ask whether it is still enforced. The district's Bureau of Fire Prevention page showed a bot check to curl and was not read. The state directory lists the Fire Official's phone as (609) 261-7233; the district's own site lists (609) 518-8911 (used here). Township Code 128-8D (added 1997) still lists a $25 smoke detector inspection fee for change of ownership of 1-2 family homes; it predates the Fire District taking over as enforcing agency, and the District's own page charges $85.00 per dwelling unit, so expect the District fee. Re-read 2026-10-13: the District resale page text is unchanged."
  },
  "other_items": [
   {
@@ -237,19 +265,19 @@
   }
  ],
  "open_questions": [
-  "Current resale inspection fee: the only fee sheet online is effective May 5, 2016.",
-  "Whether the Township resale inspection and the Fire District smoke/CO inspection are one visit or two separate visits.",
-  "Whether the Fire District still requires a fire extinguisher after P.L.2025, c.19.",
-  "Lead time and validity period for the Township resale certificate are not published."
+  "Is the Township resale inspection fee still $150 (code and 2016 fee sheet) and is the $100 recycling cart escrow still collected?",
+  "Is the Fire District smoke/CO inspection done in the same visit as the Township resale inspection, and which fee applies ($85 District page vs. $25 in old Township Code 128-8D)?",
+  "Does the Fire District still require a fire extinguisher after P.L.2025, c.19?"
  ],
+ "checked_at": "2026-10-13",
  "verification": {
   "fees": 7,
-  "fee_ok": 7,
+  "fee_ok": 6,
   "fee_bad": 0,
-  "fee_unchecked": 0,
-  "quotes": 14,
-  "q_ok": 14,
+  "fee_unchecked": 1,
+  "quotes": 18,
+  "q_ok": 13,
   "q_bad": 0,
-  "q_unchecked": 0
+  "q_unchecked": 5
  }
 }

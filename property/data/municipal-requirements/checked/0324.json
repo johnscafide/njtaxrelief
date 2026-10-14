@@ -2,15 +2,14 @@
  "municipality_code": "0324",
  "municipality": "Mount Laurel Township",
  "county": "BURLINGTON",
- "checked_at": "2026-09-30",
  "resale_co": {
   "status": "required",
   "name": "Certificate of Continued Occupancy (CCO)",
   "issued_by": "Mount Laurel Township Department of Community Development (Construction / Code)",
   "contact_name": "Jennifer Parks",
   "contact_title": "CCO questions and scheduling contact (named on the CCO application and checklist; no title given)",
-  "lead_time": "Fees are tiered by how early you apply: 11 or more days before closing is the lowest fee. The application must be submitted with payment before the inspection is scheduled; the office calls you to set the time.",
-  "valid_for": "",
+  "lead_time": "Fees are tiered by how early you apply: 11 or more days before closing is the lowest fee, and the Township does not guarantee scheduling within 10 days of closing. The application must be submitted with payment before the inspection is scheduled; the office calls you to set the time. Give 24 hours' notice to cancel or reschedule or the fee is charged.",
+  "valid_for": "Must be obtained within 90 days of the closing date (extension possible from the Construction Code Official if closing is delayed). A home that passed its annual rental inspection can get a certificate valid to the end of the calendar year without a second inspection.",
   "requirements": [
    "All permits closed before approval (decks, pools, sheds, water heaters, furnace/HVAC, finished basements, electrical, plumbing, structural work)",
    "Electric, gas and water on; panels, furnace and water heater accessible; furnace and water heater working and properly vented",
@@ -112,10 +111,31 @@
     "doc_date": "2026-09",
     "via": "page",
     "verified": true
+   },
+   {
+    "url": "https://ecode360.com/10362874",
+    "quote": "Prior to a change in ownership or occupancy of any commercial or residential property within the Township of Mount Laurel, the owner or their authorized agent must apply to the Construction Official for, and obtain, a certificate of continuing occupancy.",
+    "doc_date": "Ch. 89 Art. III (Ord. No. 2021-8, adopted 4-12-2021)",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://ecode360.com/10362874",
+    "quote": "The Township will not guarantee scheduling availability if scheduled within the 10 days prior to closing.",
+    "doc_date": "2021-04-12",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://ecode360.com/10362874",
+    "quote": "It is the responsibility of the owner or their authorized agent to provide 24 hours' notice to cancel or reschedule an inspection, or the initial fee will still be assessed as if the inspection had taken place.",
+    "doc_date": "Ch. 89 Art. III",
+    "via": "page",
+    "verified": null
    }
   ],
   "confidence": "high",
-  "notes": "Mount Laurel Township runs its own resale CCO inspection (separate from the fire department smoke/CO certificate). The CCO application (file dated March 2026) cites Ordinance 2021-8; the 2021 'Housing Inspection List' says it applies 'For Resale of ALL Residential Homes'. The June 2026 checklist replaces the 2021 list (the 2021 list named a different contact, Samantha Higarada). The application also says: 'The certificate of continued occupancy must be obtained within 90 days of the closing date. If the closing date is delayed, the seller may request an extension of the 90-day deadline from the Construction Code Official.' The fee tiers are counted from the day the request is made to the closing date. Township code (ecode360 MO0794) was not read. Construction Official: Robert Gates (856-234-0001 ext 1112); Housing Officer: Trish Hochreiter (856-234-0001 ext 1318), per the department page."
+  "notes": "Mount Laurel Township runs its own resale CCO inspection (separate from the fire department smoke/CO certificate). Township Code Chapter 89, Article III (Certificate of Continuing Occupancy, Ord. No. 2021-8, effective for closings after 7-31-2021) was read in full on ecode360 (MO0794, print view) this time; its fees match the CCO application (file dated March 2026). The code adds that the inspection is a visual check against the 2018 International Property Maintenance Code and the Township Code, violations must be fixed within 90 days, and the 50% fee reduction applies to deed-restricted affordable homes or a primary owner aged 65 or older. The June 2026 checklist replaces the 2021 'Housing Inspection List'. Construction Official: Robert Gates (856-234-0001 ext 1112); Housing Officer: Trish Hochreiter (856-234-0001 ext 1318), per the department page at the last check. A new Article IV (Rental Units, Ord. No. 2026-9, 3-2-2026) covers rentals and is not a resale requirement."
  },
  "fire_cert": {
   "requirements": [
@@ -203,23 +223,23 @@
       "verified": true
      },
      {
-      "url": "https://web.archive.org/web/20250421181621/https://mlfd.org/faqs/",
+      "url": "https://mlfd.org/faqs/",
       "quote": "A certificate of Smoke Alarm Compliance is required at the change of ownership or occupancy for residential properties.",
-      "doc_date": "2025-04",
+      "doc_date": "2026-10-13 (page fetched)",
       "via": "page",
       "verified": true
      },
      {
-      "url": "https://web.archive.org/web/20250421181621/https://mlfd.org/faqs/",
+      "url": "https://mlfd.org/faqs/",
       "quote": "The Bureau of Fire Prevention conducts Certificate of Smoke Alarm Compliance inspections each Wednesday by appointment only.",
-      "doc_date": "2025-04",
+      "doc_date": "2026-10-13 (page fetched)",
       "via": "page",
       "verified": true
      },
      {
-      "url": "https://web.archive.org/web/20250421181621/https://mlfd.org/faqs/",
+      "url": "https://mlfd.org/faqs/",
       "quote": "pay a fee. (exact change, check or charge). Applications are accepted in person or scheduled on our website.",
-      "doc_date": "2025-04",
+      "doc_date": "2026-10-13 (page fetched)",
       "via": "page",
       "verified": true
      },
@@ -249,13 +269,13 @@
       "quote": "Fire Official William J Glassman, Jr Phone (856) 234-6053 ... Email wglassman@mlfd.org",
       "doc_date": "2026-03",
       "via": "state_directory",
-      "verified": true
+      "verified": null
      }
     ],
     "confidence": "high"
    }
   ],
-  "notes": "The resale smoke/CO certificate is issued by the Mount Laurel Fire Department (Mount Laurel Fire District #1, a separate taxing body), not the Township. The Township CCO application and checklist both say 'Smoke Certificate required from the Fire Department' and point to mlfd.org. The mlfd.org smoke page embeds a Muniverse portal (geo.muniverse.us) that holds the current requirements and fees; that portal page loaded with curl on 2026-09-30. The live mlfd.org/faqs/ page shows a bot check to curl; its text was read with WebFetch on 2026-09-30 (same wording as quoted) and from an April 2025 Internet Archive copy (cited, original URL https://mlfd.org/faqs/, captured 2025-04-21). The current FAQ list no longer includes a fire extinguisher (the April 2025 copy still listed 'a 2A:10BC fire extinguisher installed in or within 10 feet of the kitchen'), and the current portal application does not list an extinguisher. The FAQ cites the 10-year alarm rule as Ordinance 1985-12 while the portal cites Ordinance 2021-19; both say Chapter 81, Section 81-24. Other bureau staff on the district site: Randy Johnson and Sam Damra (Fire Inspectors), Sarah Nawn (Clerical Staff, snawn@mlfd.org). General office email: info@mlfd.org. The state fire directory (survey 3/5/2026) lists William J Glassman, Jr as the (interim) fire official."
+  "notes": "The resale smoke/CO certificate is issued by the Mount Laurel Fire Department (Mount Laurel Fire District #1, a separate taxing body), not the Township. The Township CCO application and checklist both say 'Smoke Certificate required from the Fire Department' and point to mlfd.org. The mlfd.org smoke page embeds a Muniverse portal (geo.muniverse.us) that holds the current requirements and fees; it was re-read on 2026-10-13 and is unchanged. The live mlfd.org/faqs/ page loaded with curl this time and is cited directly (it was an Internet Archive copy before); its FAQ no longer lists a fire extinguisher, and the portal application does not list one either. The FAQ cites 'NFPA 74' for alarm installation while the portal cites NFPA 72. The portal cites Ordinance 2021-19 for the 10-year alarm rule (Chapter 81, Section 81-24). Other bureau staff on the district site: two Fire Inspectors and Sarah Nawn (Clerical Staff, snawn@mlfd.org). General office email: info@mlfd.org. The state fire directory (survey 3/5/2026) lists William J Glassman, Jr as the interim fire official."
  },
  "other_items": [
   {
@@ -275,18 +295,18 @@
   }
  ],
  "open_questions": [
-  "The text of Ordinance 2021-8 (CCO) was not read (ecode360 blocked); CCO validity period is not stated beyond the '90 days of the closing date' language.",
   "Contact title for Jennifer Parks is not published on the department staff list.",
-  "Live mlfd.org/faqs/ is behind a bot check for curl; the fees used here come from the fire department's current Muniverse application portal."
+  "Smoke/CO fee tiers count days before the inspection date, not the closing date; confirm how far ahead of closing the Wednesday inspection should be booked."
  ],
+ "checked_at": "2026-10-13",
  "verification": {
   "fees": 9,
   "fee_ok": 9,
   "fee_bad": 0,
   "fee_unchecked": 0,
-  "quotes": 17,
-  "q_ok": 17,
+  "quotes": 20,
+  "q_ok": 16,
   "q_bad": 0,
-  "q_unchecked": 0
+  "q_unchecked": 4
  }
 }

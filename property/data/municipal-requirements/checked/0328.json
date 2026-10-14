@@ -2,42 +2,44 @@
  "municipality_code": "0328",
  "municipality": "Pemberton Borough",
  "county": "BURLINGTON",
- "checked_at": "2026-09-30",
+ "checked_at": "2026-10-13",
  "resale_co": {
   "status": "required",
-  "name": "Certificate of Occupancy Inspection (resale)",
-  "issued_by": "Borough of Pemberton Department of Inspections",
-  "contact_name": "",
-  "contact_title": "",
-  "lead_time": "",
-  "valid_for": "",
-  "requirements": [],
+  "name": "Certificate of Occupancy (resale / change of ownership), Borough Code Chapter 117 Article II",
+  "issued_by": "Borough of Pemberton Code Enforcement Official (Department of Inspections)",
+  "lead_time": "By ordinance the certificate is granted or denied within 10 business days of the application.",
+  "valid_for": "60 days (Borough Code §117-12)",
+  "requirements": [
+   "Home and premises must comply with the current International Property Maintenance Code and the Borough's health, sanitation, maintenance and occupancy ordinances"
+  ],
   "fees": [
    {
-    "label": "Initial resale CO inspection (form created November 2024)",
+    "label": "Initial resale CO inspection (application form, created November 2024)",
     "amount": "$100",
     "quote": "Initial Inspection $100",
     "source_url": "https://www.pembertonborough.us/uploads/3/4/2/1/34215036/resale_inspection_application.docx",
     "verified": true
    },
    {
-    "label": "Re-inspection (form created November 2024)",
+    "label": "Re-inspection (application form, created November 2024)",
     "amount": "$75",
     "quote": "Re-Inspection $75",
     "source_url": "https://www.pembertonborough.us/uploads/3/4/2/1/34215036/resale_inspection_application.docx",
     "verified": true
    }
   ],
-  "how_to_apply": "Download the Re-Sale Inspection Form (Certificate of Occupancy Inspection Application) from the Borough Forms page, fill in block, lot, location, owner and buyer, and submit it with the fee to the Department of Inspections, Borough Hall, 50 Egbert St., Pemberton, NJ 08068. The office-use box lists check, cash or credit card. Call the municipal offices at 609-894-8222 for scheduling.",
+  "how_to_apply": "Download the Re-Sale Inspection Form (Certificate of Occupancy Inspection Application, a Word file) from the Borough Forms page, fill in block, lot, location, owner and buyer, and submit it with the fee to the Department of Inspections, Borough Hall, 50 Egbert St., Pemberton, NJ 08068. The office-use box lists check, cash or credit card. The fee is nonrefundable and is paid when the application is filed. Call the Borough at 609-894-8222.",
   "application_url": "https://www.pembertonborough.us/uploads/3/4/2/1/34215036/resale_inspection_application.docx",
   "department_url": "https://www.pembertonborough.us/forms.html",
   "phone": "609-894-8222",
   "email": "",
+  "contact_name": "",
+  "contact_title": "",
   "evidence": [
    {
     "url": "https://www.pembertonborough.us/forms.html",
     "quote": "Re-Sale Inspection Form",
-    "doc_date": "2026-09",
+    "doc_date": "2026-10-13 (page fetched)",
     "via": "page",
     "verified": true
    },
@@ -49,56 +51,84 @@
     "verified": true
    },
    {
-    "url": "https://www.pembertonborough.us/uploads/3/4/2/1/34215036/resale_inspection_application.docx",
-    "quote": "M14 Resale Insp FEE",
-    "doc_date": "2024-11",
+    "url": "https://ecode360.com/11295499",
+    "quote": "shall sell, transfer, assign, or grant the title or change in ownership of any home, dwelling, apartment, cooperative or condominium unit which is used or intended to be used for human occupancy until and unless a certificate of occupancy",
+    "doc_date": "2003-10-20 (Ord. No. 2003-2)",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://ecode360.com/11295499",
+    "quote": "The certificate of occupancy shall first be obtained from the Code Enforcement Official, which certificate of occupancy shall be granted or denied within 10 business days from the date of application for the same.",
+    "doc_date": "2003-10-20 (Ord. No. 2003-2)",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://ecode360.com/11295499",
+    "quote": "A nonrefundable fee, the amount of which shall be set by resolution, to cover the cost of initial inspection requirements in connection with such application shall be paid to Pemberton Borough at the time the application is filed.",
+    "doc_date": "2024-11-18 (Ord. No. 2024-9)",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://ecode360.com/11295499",
+    "quote": "The certificate of occupancy shall be good for 60 days.",
+    "doc_date": "2003-10-20 (Ord. No. 2003-2)",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://www.pembertonborough.us/contact-us.html",
+    "quote": "ph: 609-894-8222 50 Egbert Street Pemberton, New Jersey 08068",
+    "doc_date": "2026-10-13 (page fetched)",
     "via": "page",
     "verified": true
    }
   ],
-  "confidence": "low",
-  "notes": "The Borough posts a 'Re-Sale Inspection Form' (a Word file titled Certificate of Occupancy Inspection Application, with Owner and Buyer fields and an office box 'M14 Resale Insp FEE'; file created November 19, 2024). No ordinance text, web page or checklist was found that states the resale CO is mandatory or lists what is inspected, so 'required' rests on this resale application only. The Borough code (ecode360 PE0435) was not read. No inspector name, email, lead time or validity period is published. The Forms page also has a Rental Inspection Certificate and Landlord Rental Registration (rental program) and a Vacant and Abandoned Registration Form."
+  "confidence": "high",
+  "notes": "Borough Code Chapter 117, Article II (Ord. No. 2003-2, fees amended by Ord. No. 2024-9 on November 18, 2024; code current through 12-15-2025) bars any sale or change in ownership of a home until a certificate of occupancy is issued by the Code Enforcement Official; it was read in full through the ecode360 print view. The ordinance leaves the fee amounts to a council resolution, which was not found online; the $100 initial and $75 re-inspection amounts come from the Borough's application form (Word file created November 19, 2024, the same month as Ord. No. 2024-9). The form is a .docx file, so an automatic text check may not read it. No inspector name, email or checklist is published. The Forms page also has a Rental Inspection Certificate, Landlord Rental Registration and Vacant and Abandoned Registration Form (not resale requirements)."
  },
  "fire_cert": {
   "requirements": [
-   "State certificate is now called the Certificate of Smoke Alarm, Carbon Monoxide Alarm, and Secondary Power Source Identification Label Compliance (CSACMASPSIL); homes with a generator, solar or battery storage need the power source label"
+   "Smoke alarms and carbon monoxide alarms as required by N.J.A.C. 5:70-4.19 (state certificate, now called the Certificate of Smoke Alarm, Carbon Monoxide Alarm, and Secondary Power Source Identification Label Compliance); homes with a generator, solar or battery storage need the power source label"
   ],
   "authorities": [
    {
     "name": "NJ DCA Division of Fire Safety, Bureau of Fire Code Enforcement (State is the fire code enforcing agency for Pemberton Borough)",
     "type": "state_dca",
     "area_served": "Entire borough",
-    "contact_name": "Louis Kilmer",
-    "contact_title": "Deputy Division Director (listed as the state fire official for Pemberton Borough)",
     "lead_time": "Apply more than 10 business days before the closing date for the lowest fee.",
     "fees": [
      {
-      "label": "More than 10 business days before closing",
-      "amount": "$45",
-      "quote": "If you are applying for a certificate more than ten business days from the closing date the fee is $45 dollars",
-      "source_url": "https://firesolutions.dca.nj.gov/ultra-fire-home/smoke-application-create/",
-      "verified": null
+      "label": "More than 10 business days before the change of occupant (state fee, N.J.A.C. 5:70-2.9(d))",
+      "amount": "$45.00",
+      "quote": "Requests for a CSACMAPFEC received more than 10 business days prior to the change of occupant: $45.00",
+      "source_url": "https://www.nj.gov/dca/divisions/dfs/codes/regulations/r.2018%20d.074%20(50%20n.j.r.%20729(a)).pdf",
+      "verified": true
      },
      {
-      "label": "4 to 10 business days before closing",
-      "amount": "$90",
-      "quote": "if applying 4 to 10 business days from the closing date the fee is $90",
-      "source_url": "https://firesolutions.dca.nj.gov/ultra-fire-home/smoke-application-create/",
-      "verified": null
+      "label": "4 to 10 business days before the change of occupant (state fee)",
+      "amount": "$90.00",
+      "quote": "Requests for a CSACMAPFEC received four to 10 business days prior to the change of occupant: $90.00",
+      "source_url": "https://www.nj.gov/dca/divisions/dfs/codes/regulations/r.2018%20d.074%20(50%20n.j.r.%20729(a)).pdf",
+      "verified": true
      },
      {
-      "label": "Less than 4 business days before closing",
-      "amount": "$161",
-      "quote": "if the closing date is less than four business days the fee is $161.",
-      "source_url": "https://firesolutions.dca.nj.gov/ultra-fire-home/smoke-application-create/",
-      "verified": null
+      "label": "Fewer than 4 business days before the change of occupant (state fee)",
+      "amount": "$161.00",
+      "quote": "Requests for a CSACMAPFEC received fewer than four business days prior to the change of occupant: $161.00",
+      "source_url": "https://www.nj.gov/dca/divisions/dfs/codes/regulations/r.2018%20d.074%20(50%20n.j.r.%20729(a)).pdf",
+      "verified": true
      }
     ],
-    "how_to_apply": "Apply online through the NJ DCA Fire Safety portal (smoke certificate application). Pay by e-check or credit card before submitting. A valid email address is required; the certificate is emailed once the application is submitted, the fee is paid and any required inspections are done. All-electric homes with no CO requirement should email BFCE_CSDCMAC@dca.nj.gov.",
+    "how_to_apply": "Apply online through the NJ DCA Division of Fire Safety smoke certificate application (Fire Solutions portal). Pay by e-check or credit card when applying; the certificate is emailed once the fee is paid and any required inspection is done. Questions: Bureau of Fire Code Enforcement, (609) 633-6106.",
     "application_url": "https://firesolutions.dca.nj.gov/ultra-fire-home/smoke-application-create/",
     "department_url": "https://www.nj.gov/dca/dfs/offices/bfce.shtml",
-    "phone": "(609) 633-6132",
+    "phone": "(609) 633-6106",
     "email": "BFCE_CSDCMAC@dca.nj.gov",
+    "contact_name": "Louis Kilmer",
+    "contact_title": "Deputy Division Director (listed as the state fire official for Pemberton Borough)",
     "evidence": [
      {
       "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
@@ -115,52 +145,52 @@
       "verified": true
      },
      {
-      "url": "https://firesolutions.dca.nj.gov/ultra-fire-home/smoke-application-create/",
-      "quote": "Please complete the following information to apply for a Certificate of Smoke Alarm, Carbon Monoxide Alarm, and Secondary Power Source Identification Label Compliance (CSACMASPSIL). You will be required to pay, via e-check or credit card, before you can submit this application.",
-      "doc_date": "2026-09",
-      "via": "page",
-      "verified": null
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/state_towns%207_17_26.pdf",
+      "quote": "SC = Smoke Certs",
+      "doc_date": "2026-07-17",
+      "via": "pdf",
+      "verified": true
      },
      {
-      "url": "https://firesolutions.dca.nj.gov/ultra-fire-home/smoke-application-create/",
-      "quote": "The Certificate will be sent automatically to the email address provided once the application has been submitted, the fee has been paid, and any required inspections have been completed.",
-      "doc_date": "2026-09",
+      "url": "https://www.nj.gov/dca/dfs/offices/bfce.shtml",
+      "quote": "Smoke Detector Certifications.",
+      "doc_date": "2026-10-13 (page fetched)",
       "via": "page",
-      "verified": null
+      "verified": true
      },
      {
-      "url": "https://firesolutions.dca.nj.gov/ultra-fire-home/smoke-application-create/",
-      "quote": "send an email to BFCE_CSDCMAC@dca.nj.gov stating that you are not subject to that requirement.",
-      "doc_date": "2026-09",
-      "via": "page",
-      "verified": null
+      "url": "https://www.nj.gov/dca/divisions/dfs/codes/regulations/r.2018%20d.074%20(50%20n.j.r.%20729(a)).pdf",
+      "quote": "Requests for a CSACMAPFEC received more than 10 business days prior to the change of occupant: $45.00",
+      "doc_date": "2018 (50 N.J.R. 729(a))",
+      "via": "pdf",
+      "verified": true
      },
      {
       "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
       "quote": "LEAID: 0328-999 Enf Auth. State Fire Official Louis Kilmer Phone (609)633-6132",
-      "doc_date": "2026-08",
+      "doc_date": "2026-08 (survey date 8/17/2026)",
       "via": "state_directory",
-      "verified": true
+      "verified": null
      }
     ],
     "confidence": "high"
    }
   ],
-  "notes": "Pemberton Borough has no local fire enforcing agency: the DCA LEA registry (July 2026) lists it as S (State), and the DCA state towns list (July 17, 2026) marks it SC (state issues smoke certificates). The Good Will Fire Company (200 Hanover Street, 609-894-2168) is the fire company but does not issue resale certificates according to any source found. The state fire directory (survey 8/17/2026) lists Louis Kilmer, (609) 633-6132, PO Box 809, Trenton, as the fire official. The BFCE office page lists (609) 633-6106 as the bureau's main number."
+  "notes": "Pemberton Borough has no local fire enforcing agency: the DCA LEA registry (July 2026) lists it as S (State), the DCA state towns list (July 17, 2026) marks it SC (the state issues smoke certificates), and the Borough's own Fire Prevention chapter (Chapter 102) has its enforcement articles repealed (Ord. No. 2010-10). State fees are $45 / $90 / $161 by business days before the change of occupant (N.J.A.C. 5:70-2.9(d)). The Good Will Fire Company (200 Hanover Street, 609-894-2168) is the fire company and does not issue resale certificates. The state directory (survey 8/17/2026) lists Louis Kilmer, (609) 633-6132, PO Box 809, Trenton, as the fire official; the BFCE office page lists (609) 633-6106."
  },
  "other_items": [],
  "open_questions": [
-  "Whether the Borough resale CO inspection is mandatory by ordinance, what it covers, and who the inspector is (no ordinance or checklist found online).",
-  "Current Borough resale inspection fee beyond the November 2024 form."
+  "What fee amounts the current council resolution sets for the resale CO (the ordinance leaves them to resolution; the form shows $100 / $75).",
+  "Who the Code Enforcement Official / resale inspector is and what the inspection checklist covers."
  ],
  "verification": {
   "fees": 5,
-  "fee_ok": 2,
+  "fee_ok": 5,
   "fee_bad": 0,
-  "fee_unchecked": 3,
-  "quotes": 9,
-  "q_ok": 6,
+  "fee_unchecked": 0,
+  "quotes": 13,
+  "q_ok": 8,
   "q_bad": 0,
-  "q_unchecked": 3
+  "q_unchecked": 5
  }
 }

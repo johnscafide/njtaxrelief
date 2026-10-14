@@ -2,7 +2,6 @@
  "municipality_code": "0337",
  "municipality": "Westampton Township",
  "county": "BURLINGTON",
- "checked_at": "2026-09-30",
  "resale_co": {
   "status": "not_required",
   "name": "",
@@ -24,18 +23,18 @@
     "quote": "There is no Certificate of Occupancy (CO) required in Westampton Township. What is required is a Smoke Detector/Carbon Monoxide/Fire Extinguisher Inspection.",
     "doc_date": "2026-05-30 (Internet Archive capture)",
     "via": "page",
-    "verified": true
+    "verified": null
    },
    {
     "url": "https://web.archive.org/web/20260530112936/https://www.westamptonnj.gov/construction-code-enforcement-inspections/pages/resalerental-home",
     "quote": "Contact Info Phone: (609) 267-1891 ext. 101 Fax: (609) 267-7398",
     "doc_date": "2026-05-30 (Internet Archive capture)",
     "via": "page",
-    "verified": true
+    "verified": null
    }
   ],
   "confidence": "high",
-  "notes": "Source is the township's Construction, Codes & Inspections 'Resale/Rental of Home' page (https://www.westamptonnj.gov/construction-code-enforcement-inspections/pages/resalerental-home), read from an Internet Archive capture dated May 30, 2026 because the live township site shows a Cloudflare bot check. The page lists key contacts Michael Lunemann (609-267-1891 x 116) and Charline Stephens (609-267-1891 x 101) without titles."
+  "notes": "Source is the township's Construction, Codes & Inspections 'Resale/Rental of Home' page (https://www.westamptonnj.gov/construction-code-enforcement-inspections/pages/resalerental-home), read from an Internet Archive capture dated May 30, 2026 because the live township site shows a Cloudflare bot check. The page lists key contacts Michael Lunemann (609-267-1891 x 116) and Charline Stephens (609-267-1891 x 101) without titles. Re-check 2026-10-13: the live township page still answers scripts with an error (403 / 406) and the Internet Archive could not be reached from this session, so the two quotes above were not re-opened this round; they were verified on the May 30, 2026 capture in the prior check. The township code on ecode360 (WE0355, legislation through 04-07-2026) was read through its print view: Chapter 128 (Fire Prevention) requires only the smoke detector / CO / extinguisher inspection, and no resale certificate of occupancy chapter appears in the code's chapter list (Chapters 180 Property Maintenance and 254 Housing Standards are general maintenance codes)."
  },
  "fire_cert": {
   "requirements": [
@@ -117,7 +116,7 @@
       "quote": "You must either call Westampton Township Emergency Services at 609-267-2041, at least 2 weeks prior to your settlement date to set up an inspection over the phone or click here to fill out an inspection request online.",
       "doc_date": "2026-05-30 (Internet Archive capture)",
       "via": "page",
-      "verified": true
+      "verified": null
      },
      {
       "url": "https://www.westamptonfire.org/content/ordinances/",
@@ -150,26 +149,50 @@
      {
       "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
       "quote": "LEAID: 0337-001 Westampton Twp Enf Auth. Municipal Fire Official Vincent M Knott Phone (609) 267-2041 Email Vknott@wtes.us Name: Westampton Twp Fire Prev Addr: 780 Woodlane Rd",
-      "doc_date": "2026 (Westampton page survey date 5/18/2026)",
+      "doc_date": "2026-05-18 (survey date)",
       "via": "state_directory",
-      "verified": true
+      "verified": null
+     },
+     {
+      "url": "https://ecode360.com/8750039",
+      "quote": "Appointments made within four to thirteen calendar days of the settlement or when the certificate is required will pay a penalty of $70 in addition to the original fee of $70, for a total of $140.",
+      "doc_date": "2026-10-13 (code page fetched; legislation through 04-07-2026)",
+      "via": "page",
+      "verified": null
+     },
+     {
+      "url": "https://ecode360.com/8750039",
+      "quote": "If less than four days notice is given, a fee of $165 shall be charged.",
+      "doc_date": "2026-10-13 (code page fetched)",
+      "via": "page",
+      "verified": null
+     },
+     {
+      "url": "https://ecode360.com/8750039",
+      "quote": "Certificates of inspection shall be valid for 90 days from time of inspection. After 90 days a new inspection shall be required.",
+      "doc_date": "2026-10-13 (code page fetched)",
+      "via": "page",
+      "verified": null
      }
     ],
     "confidence": "high"
    }
   ],
-  "notes": "Fees are from the WTES Bureau of Fire Prevention certificate page (westamptonfire.org, 2026). The township's own Resale/Rental page (Internet Archive capture May 30, 2026) gives the same amounts: '$70.00 with a 14 or more day notice, $140.00 for a less than 14 day notice. If 4 or less days notice, $165.00. All reinspections are $70.00.' The 'unofficial summary' of Chapter 128 on the WTES ordinances page still shows older amounts ($60 fee, $60 late penalty for a total of $120, $25 reinspection) and a $500 court fine for failing to get the inspection; the certificate page amounts are newer. The Fire Official's name and direct email (Vknott@wtes.us) come from the state fire directory; the WTES site names no Fire Marshal but gives firemarshal@wtes.us. WTES address: 780 Woodlane Road, Westampton, NJ 08060. The township ordinance makes the buyer responsible for getting the inspection before transfer of title."
+  "notes": "Fees are from the WTES Bureau of Fire Prevention certificate page (westamptonfire.org, 2026). The township's own Resale/Rental page (Internet Archive capture May 30, 2026) gives the same amounts: '$70.00 with a 14 or more day notice, $140.00 for a less than 14 day notice. If 4 or less days notice, $165.00. All reinspections are $70.00.' The 'unofficial summary' of Chapter 128 on the WTES ordinances page still shows older amounts ($60 fee, $60 late penalty for a total of $120, $25 reinspection). The current town code (§128-8A(2), read 2026-10-13 on ecode360) matches the WTES certificate page: $70 when applied 14 or more calendar days before settlement, $70 penalty plus $70 fee ($140) at 4 to 13 days, $165 with less than four days notice, $70 reinspection, and certificates valid 90 days. The Fire Official's name and direct email (Vknott@wtes.us) come from the state fire directory; the WTES site names no Fire Marshal but gives firemarshal@wtes.us. WTES address: 780 Woodlane Road, Westampton, NJ 08060. The township ordinance makes the buyer responsible for getting the inspection before transfer of title. The WTES page and the town code still name a portable fire extinguisher; state law P.L.2025, c.19 dropped it from the state sale certificate in February 2025."
  },
  "other_items": [],
- "open_questions": [],
+ "open_questions": [
+  "Does WTES still require the portable fire extinguisher at resale after P.L.2025, c.19? Its page and the town code still list it."
+ ],
+ "checked_at": "2026-10-13",
  "verification": {
   "fees": 4,
   "fee_ok": 4,
   "fee_bad": 0,
   "fee_unchecked": 0,
-  "quotes": 11,
-  "q_ok": 11,
+  "quotes": 14,
+  "q_ok": 7,
   "q_bad": 0,
-  "q_unchecked": 0
+  "q_unchecked": 7
  }
 }
