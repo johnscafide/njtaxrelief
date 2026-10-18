@@ -59,6 +59,10 @@
       "includeFiles": "{property/data/municipal-requirements/approvals.json,property/data/municipal-requirements/checked/*.json,co/towns.json}",
       "maxDuration": 10
     },
+    "api/co-updates.js": {
+      "includeFiles": "{property/data/municipal-requirements/approvals.json,property/data/municipal-requirements/checked/*.json,co/towns.json,property/data/town-tax/bills.json,co/index.html}",
+      "maxDuration": 30
+    },
     "api/watchdog-index-sitemap.js": {
       "includeFiles": "{property/data/municipal-requirements/approvals.json,property/data/municipal-requirements/checked/*.json,co/towns.json,property/data/town-tax/bills.json}",
       "maxDuration": 10

@@ -191,3 +191,22 @@ body.embed .home .logo { margin-bottom: 18px; }
 .wd-look input { flex: 1; min-width: 0; height: 44px; padding: 0 12px; border: 1px solid #c9d1db; border-radius: 8px; background: #fff; color: var(--ink); font: inherit; font-size: 16px; }
 .wd-look button { flex: none; min-width: 88px; height: 44px; padding: 0 16px; border: 0; border-radius: 8px; background: var(--blue); color: #fff; font: inherit; font-size: 16px; font-weight: 600; cursor: pointer; }
 .wd-look input:focus-visible, .wd-look button:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
+.updates { margin: 24px 0 8px; padding: 16px; border: 1px solid var(--line); border-radius: 10px; background: #fff; }
+.updates h2 { margin: 0 0 8px; font-size: 17px; font-weight: 600; }
+.updates .on { display: flex; align-items: center; gap: 10px; min-height: 44px; cursor: pointer; }
+.updates .on input { flex: none; width: 20px; height: 20px; margin: 0; accent-color: var(--blue); }
+.updates-form { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; margin-top: 8px; }
+.updates-form[hidden] { display: none; }
+.updates-form input[type=email] { flex: 1 1 240px; min-width: 0; height: 44px; padding: 0 12px; border: 1px solid #c9d1db; border-radius: 8px; background: #fff; color: var(--ink); font: inherit; font-size: 16px; }
+.updates .role { display: flex; gap: 16px; margin: 0; padding: 0; border: 0; }
+.updates .role label { display: flex; align-items: center; gap: 6px; min-height: 44px; cursor: pointer; }
+.updates .role input { width: 18px; height: 18px; margin: 0; accent-color: var(--blue); }
+.updates .hp { position: absolute; left: -10000px; width: 1px; height: 1px; overflow: hidden; }
+.go { flex: none; min-width: 88px; height: 44px; padding: 0 16px; border: 0; border-radius: 8px; background: var(--blue); color: #fff; font: inherit; font-size: 16px; font-weight: 600; cursor: pointer; }
+.go:hover { background: #0a2f94; }
+.go:disabled { opacity: .6; cursor: default; }
+.updates .formstatus { min-height: 0; margin: 8px 0 0; font-size: 15px; }
+.updates .formstatus:empty { display: none; }
+.updates .formstatus.error { color: #b42318; }
+.updates input:focus-visible, .go:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
+@media print { .updates { display: none !important; } }
