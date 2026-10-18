@@ -11,7 +11,7 @@ const { homeLookupBox } = require('./_home-lookup-box');
 const { ORIGIN, SHARE_IMAGE, esc, countyLabel, fmtDate, STATUS } = T;
 const LOGO = '/property/branding/watchdog-logo-horizontal.svg';
 const MARK = '/property/branding/watchdog-mark.svg';
-const ASSET_V = '20261008a';
+const ASSET_V = '20261018a';
 // Tip line at the bottom of town pages.
 const TIP_URL = 'https://account.venmo.com/u/John-Scafide';
 
@@ -145,6 +145,25 @@ const DIALOG = `<dialog id="add-dlg" aria-labelledby="add-title">
   </form>
 </dialog>`;
 
+// "Get updates": email me when this town changes (api/co-updates.js).
+function updatesBox(t) {
+  return `<section class="updates" data-updates>
+<h2>Get updates</h2>
+<label class="on"><input type="checkbox" data-updates-on> Email me when ${esc(t.name)} CO requirements change</label>
+<form class="updates-form" data-updates-form novalidate hidden>
+<label for="upd-email" class="sr">Email</label>
+<input id="upd-email" name="email" type="email" autocomplete="email" inputmode="email" maxlength="200" placeholder="Email" required>
+<fieldset class="role"><legend class="sr">I’m a</legend>
+<label><input type="radio" name="role" value="homeowner" required> Homeowner</label>
+<label><input type="radio" name="role" value="professional"> Agent or pro</label>
+</fieldset>
+<label class="hp" aria-hidden="true">Website <input name="website" tabindex="-1" autocomplete="off"></label>
+<button class="go" type="submit">Turn on</button>
+</form>
+<p class="formstatus" data-updates-status role="status" aria-live="polite"></p>
+</section>`;
+}
+
 const SEARCH_TPL = `<template id="search-tpl">
   <div class="box">
     <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M15.5 14h-.79l-.28-.27A6.47 6.47 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
@@ -258,9 +277,10 @@ function townPage(t, opts) {
   let out = (embed ? '' : crumbs(t)) + `<div class="head"><div><h1 class="town">${esc(t.name)}</h1><p class="meta">${meta}</p></div>${d ? votes() : ''}</div>`;
   if (d) {
     out += shareRow(t, embed) + facts(d) + '<button class="fix" type="button" data-fix>Report a correction</button>';
-    if (!embed) out += homeLookupBox(t.name);
+    if (!embed) out += updatesBox(t) + homeLookupBox(t.name);
   } else {
     out += '<p>Not available yet.</p><button class="add" type="button" data-add>Add CO Requirements</button>';
+    if (!embed) out += updatesBox(t);
   }
   if (!embed) {
     const county = T.findCounty(t.countySlug);
@@ -453,4 +473,15 @@ function notFound(embed) {
   });
 }
 
-module.exports = { townPage, printPage, countyPage, websitePage, notFound };
+// Small notice pages, such as the unsubscribe link in CO update emails.
+function messagePage(heading, text, extra) {
+  return shell({
+    mode: 'page',
+    title: `${heading} | Watchdog`,
+    description: text,
+    noindex: true,
+    body: `<main>\n${topBar(false)}\n<div class="out" id="out" aria-live="polite"><h1 class="town">${esc(heading)}</h1><p class="msg">${text}</p>${extra || ''}</div>\n</main>\n${scripts(false, false)}`
+  });
+}
+
+module.exports = { townPage, printPage, countyPage, websitePage, notFound, messagePage };

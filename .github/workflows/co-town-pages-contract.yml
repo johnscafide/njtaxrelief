@@ -10,11 +10,15 @@ on:
       - 'api/co-embed-page.js'
       - 'api/co-feedback.js'
       - 'api/co-lookup.js'
+      - 'api/co-updates.js'
       - 'api/watchdog-index-sitemap.js'
       - 'co/**'
       - 'middleware.js'
       - 'property/data/municipal-requirements/**'
       - 'property/tests/co-town-pages-contract.mjs'
+      - 'property/tests/co-updates-contract.mjs'
+      - 'supabase/functions/co-update-sender/**'
+      - 'supabase/migrations/*_co_town_updates.sql'
       - 'supabase/migrations/*_co_town_votes.sql'
       - 'vercel.json'
   workflow_dispatch:
@@ -33,5 +37,6 @@ jobs:
           node-version: '22'
       - name: Town pages, checklist, embed and votes
         run: |
-          for f in co/co-search.js co/co-town.js co/co-embed-frame.js co/co-website.js co/embed.js api/co-feedback.js api/co-town-page.js api/co-embed-page.js; do node --check "$f"; done
+          for f in co/co-search.js co/co-town.js co/co-embed-frame.js co/co-website.js co/embed.js api/co-feedback.js api/co-updates.js api/co-town-page.js api/co-embed-page.js; do node --check "$f"; done
           node property/tests/co-town-pages-contract.mjs
+          node property/tests/co-updates-contract.mjs

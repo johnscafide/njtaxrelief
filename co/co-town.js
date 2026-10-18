@@ -255,4 +255,45 @@
     });
   });
 
+  var upd = document.querySelector('[data-updates]');
+  if (upd) {
+    var updOn = upd.querySelector('[data-updates-on]'), updForm = upd.querySelector('[data-updates-form]'), updStatus = upd.querySelector('[data-updates-status]');
+    var UPD_KEY = 'wd_co_updates';
+    var updDone = function () {
+      updOn.checked = true; updOn.disabled = true; updForm.hidden = true;
+      updStatus.className = 'formstatus';
+      updStatus.textContent = 'You’re set. We’ll email you when ' + town.name + ' changes.';
+    };
+    var updSaved = function () { try { return JSON.parse(store(UPD_KEY) || '{}') || {}; } catch (_) { return {}; } };
+    if (updSaved()[town.code]) updDone();
+    updOn.addEventListener('change', function () {
+      updForm.hidden = !updOn.checked;
+      updStatus.textContent = '';
+      if (updOn.checked) {
+        updForm.elements.email.focus();
+        measure('co_updates_open', base());
+      }
+    });
+    updForm.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var f = updForm.elements;
+      var email = String(f.email.value || '').trim();
+      var role = (updForm.querySelector('input[name=role]:checked') || {}).value || '';
+      var fail = function (msg) { updStatus.className = 'formstatus error'; updStatus.textContent = msg; };
+      if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) return fail('Please enter a valid email.');
+      if (!role) return fail('Pick homeowner or agent or pro.');
+      var btn = updForm.querySelector('.go');
+      btn.disabled = true;
+      fetch('/api/co-updates', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ code: town.code, email: email, role: role, website: f.website.value, source: town.surface }) })
+        .then(function (r) { return r.json().catch(function () { return {}; }).then(function (j) { if (!r.ok) throw new Error(j.error || 'Something went wrong. Please try again.'); return j; }); })
+        .then(function () {
+          var all = updSaved(); all[town.code] = 1; store(UPD_KEY, JSON.stringify(all));
+          updDone();
+          measure('co_updates_signup', withBase({ role: role }));
+          firstParty('updates_signup', town.surface, role);
+        })
+        .catch(function (err) { btn.disabled = false; fail(err.message || 'Something went wrong. Please try again.'); });
+    });
+  }
+
 })();
