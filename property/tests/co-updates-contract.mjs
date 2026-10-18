@@ -66,7 +66,7 @@ assert.equal(mail.subject, `${live.name} CO requirements changed`);
 assert.ok(mail.html.includes('{{unsubscribe_url}}'), 'every email has an unsubscribe link');
 assert.ok(mail.html.includes('5001 Rt 42, Turnersville, NJ 08012'), 'CAN-SPAM mailing address');
 assert.ok(mail.html.includes(`https://www.watchdogindex.com${live.path}?utm_source=co_updates`), 'links to the clean town URL, tagged');
-assert.ok(!/—/.test(mail.html + mail.subject), 'no em dashes');
+assert.ok(!/\u2014/.test(mail.html + mail.subject), 'no em dashes');
 assert.ok(!/mailto:|tel:/i.test(mail.html), 'no email or phone links (contact rule)');
 assert.ok(!/border-radius:999px/.test(mail.html), 'no pill buttons');
 assert.equal(updates.changeEmail(live, [], true).subject, `${live.name} CO requirements are now on Watchdog`);
