@@ -18,7 +18,7 @@ module.exports = async function handler(req, res) {
   if (!form) return res.status(400).json({ error: 'invalid_town' });
 
   try {
-    const get = () => fetch(form.url, { redirect: 'follow', headers: { 'User-Agent': 'Mozilla/5.0 (compatible; Watchdog CO forms; +https://www.watchdogindex.com/co)' }, signal: AbortSignal.timeout(4000) });
+    const get = () => fetch(form.url, { redirect: 'follow', headers: { 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0 Safari/537.36 WatchdogCO/1.0 (+https://www.watchdogindex.com/co)' }, signal: AbortSignal.timeout(4000) });
     const upstream = await get().catch(get);
     if (!upstream.ok) return res.status(502).json({ error: 'town_form_unavailable' });
     const bytes = Buffer.from(await upstream.arrayBuffer());
