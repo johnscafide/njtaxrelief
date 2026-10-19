@@ -8,6 +8,9 @@ on:
       - 'api/_co-pages.js'
       - 'api/co-town-page.js'
       - 'api/co-embed-page.js'
+      - 'api/_co-forms.js'
+      - 'api/co-form-template.js'
+      - 'property/data/co-application-forms.json'
       - 'api/co-feedback.js'
       - 'api/co-lookup.js'
       - 'api/co-updates.js'
@@ -37,6 +40,6 @@ jobs:
           node-version: '22'
       - name: Town pages, checklist, embed and votes
         run: |
-          for f in co/co-search.js co/co-town.js co/co-embed-frame.js co/co-website.js co/embed.js api/co-feedback.js api/co-updates.js api/co-town-page.js api/co-embed-page.js; do node --check "$f"; done
+          for f in co/co-search.js co/co-town.js co/co-embed-frame.js co/co-website.js co/embed.js api/co-feedback.js api/co-updates.js api/co-town-page.js api/co-embed-page.js co/co-apply.js api/co-form-template.js; do node --check "$f"; done
           node property/tests/co-town-pages-contract.mjs
           node property/tests/co-updates-contract.mjs

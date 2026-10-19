@@ -23,11 +23,12 @@ const WATCHDOG_TOOL_REDIRECTS = new Map([['/resources.html','/glossary'],['/reso
 const SALES_API_PATH = '/api/sales-by-district';
 // Public property pages: /nj/<town>/<address>/<pams_pin> (or /nj/property/<pin>, redirected to the full form).
 const PROPERTY_PAGE_PATH = /^\/nj\/[^/]+\/[^/]+(?:\/[^/]+)?\/?$/i;
-// Free CO lookup pages: /co/<county>/<town> (and /print, the client checklist), /co/<county>,
+// Free CO lookup pages: /co/<county>/<town> (and /print, the client checklist, and /apply, the town's
+// own application filled in), /co/<county>,
 // /co/website (embed setup) and /co/embed/<county>/<town> (one town inside the embed).
 // /co itself, /co/embed and the files under /co/ are static.
 const CO_EMBED_TOWN_PATH = /^\/co\/embed\/([a-z0-9-]{1,80})\/([a-z0-9-]{1,80})\/?$/;
-const CO_PAGE_PATH = /^\/co\/([a-z0-9-]{1,80})(?:\/([a-z0-9-]{1,80})(?:\/(print))?)?\/?$/;
+const CO_PAGE_PATH = /^\/co\/([a-z0-9-]{1,80})(?:\/([a-z0-9-]{1,80})(?:\/(print|apply))?)?\/?$/;
 // Town property tax pages: /property-tax, /property-tax/<county> and /property-tax/<county>/<town>.
 const TAX_PAGE_PATH = /^\/property-tax(?:\/([a-z0-9-]{1,80})(?:\/([a-z0-9-]{1,80}))?)?\/?$/;
 const AUTOMATION_UA = /\b(?:curl|wget|python-requests|scrapy|go-http-client|libwww-perl|httpclient)\b/i;
@@ -45,7 +46,7 @@ function rewriteLegacyAcquisitionPage(request,pathname){const destination=new UR
 function rewriteCleanPage(request,publicPath){const destination=new URL('/api/watchdog-index-page-contact-safe',request.url);destination.searchParams.set('path',publicPath);return rewrite(destination);}
 function coPageRewrite(request,url){const p=url.pathname;if(p==='/co/embed'||p==='/co/embed/')return null;if(p==='/co/updates/unsubscribe'||p==='/co/updates/unsubscribe/'){const d=new URL('/api/co-updates',request.url);d.search=url.search;d.searchParams.set('action','unsubscribe');return rewrite(d);}const city=url.searchParams.get('city');let m=p.match(CO_EMBED_TOWN_PATH);if(m){const d=new URL('/api/co-embed-page',request.url);d.searchParams.set('county',m[1]);d.searchParams.set('town',m[2]);if(city)d.searchParams.set('city',city);return rewrite(d);}
 if(p==='/co/website'||p==='/co/website/'){const d=new URL('/api/co-town-page',request.url);d.searchParams.set('view','website');return rewrite(d);}
-m=p.match(CO_PAGE_PATH);if(!m||m[1]==='embed')return null;const d=new URL('/api/co-town-page',request.url);d.searchParams.set('county',m[1]);if(m[2])d.searchParams.set('town',m[2]);if(m[3])d.searchParams.set('view','print');if(city)d.searchParams.set('city',city);return rewrite(d);}
+m=p.match(CO_PAGE_PATH);if(!m||m[1]==='embed')return null;const d=new URL('/api/co-town-page',request.url);d.searchParams.set('county',m[1]);if(m[2])d.searchParams.set('town',m[2]);if(m[3])d.searchParams.set('view',m[3]);if(city)d.searchParams.set('city',city);return rewrite(d);}
 function rewriteWatchdogSystemFile(request,apiPath){return rewrite(new URL(apiPath,request.url));}
 function redirectCanonical(request,url,pathname){const destination=new URL(pathname,request.url);destination.search=url.search;return Response.redirect(destination,308);}
 function blockedDataResponse(status,message,cacheControl){return new Response(JSON.stringify({error:message}),{status,headers:{'Content-Type':'application/json; charset=utf-8','Cache-Control':cacheControl,'X-Robots-Tag':'noindex, nofollow, noarchive','X-Watchdog-Data-Access':'scoped-only'}});}

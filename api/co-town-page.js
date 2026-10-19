@@ -1,4 +1,4 @@
-// /co/<county>/<town>, /co/<county>/<town>/print, /co/<county> and /co/website on www.watchdogindex.com.
+// /co/<county>/<town>, /co/<county>/<town>/print, /co/<county>/<town>/apply, /co/<county> and /co/website on www.watchdogindex.com.
 // middleware.js rewrites those clean URLs here with ?county=&town=&view=. HTML comes from
 // api/_co-pages.js; town data from api/_co-town.js.
 const T = require('./_co-town');
@@ -32,6 +32,12 @@ module.exports = (req, res) => {
   if (!t) return send(res, 404, P.notFound(false), 'public, max-age=60, s-maxage=300');
   if (view === 'print') {
     const html = P.printPage(t);
+    if (!html) { res.statusCode = 307; res.setHeader('Location', t.path); res.setHeader('Cache-Control', 'public, max-age=60, s-maxage=300'); return res.end(); }
+    res.setHeader('X-Robots-Tag', 'noindex, follow');
+    return send(res, 200, html);
+  }
+  if (view === 'apply') {
+    const html = P.applyPage(t);
     if (!html) { res.statusCode = 307; res.setHeader('Location', t.path); res.setHeader('Cache-Control', 'public, max-age=60, s-maxage=300'); return res.end(); }
     res.setHeader('X-Robots-Tag', 'noindex, follow');
     return send(res, 200, html);
