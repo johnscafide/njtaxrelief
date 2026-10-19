@@ -12,7 +12,7 @@ const F = require('./_co-forms');
 const { ORIGIN, SHARE_IMAGE, esc, countyLabel, fmtDate, STATUS } = T;
 const LOGO = '/property/branding/watchdog-logo-horizontal.svg';
 const MARK = '/property/branding/watchdog-mark.svg';
-const ASSET_V = '20261019b';
+const ASSET_V = '20261019c';
 // Tip line at the bottom of town pages.
 const TIP_URL = 'https://account.venmo.com/u/John-Scafide';
 
