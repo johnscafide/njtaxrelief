@@ -127,6 +127,22 @@
     });
   }
 
+  // Some town PDFs carry leftover fields that sit on no page; flattening can't place them, so they go first.
+  function dropOrphanFields(doc, form) {
+    var onPage = {};
+    doc.getPages().forEach(function (page) {
+      var annots = page.node.Annots();
+      if (annots) for (var i = 0; i < annots.size(); i++) onPage[String(annots.get(i))] = true;
+    });
+    form.getFields().forEach(function (field) {
+      var lost = field.acroField.getWidgets().some(function (w) {
+        var ref = doc.context.getObjectRef(w.dict);
+        return !ref || !onPage[String(ref)];
+      });
+      if (lost) form.acroForm.removeField(field.acroField);
+    });
+  }
+
   // Fills the town's PDF in place: its own form fields (entry.fields, by field name) and text placed
   // on the page for forms without fields (entry.overlay: page index, x, y baseline and width in PDF points).
   async function fillDoc(P, doc, entry, v) {
@@ -140,6 +156,7 @@
       fit(field, pdfSafe(map[name]), font);
     });
     if (form.getFields().length) {
+      dropOrphanFields(doc, form);
       form.updateFieldAppearances(font);
       form.flatten();
       dropDanglingAnnots(P, doc);
