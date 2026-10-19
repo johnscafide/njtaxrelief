@@ -31,9 +31,10 @@ const pending = towns.all.find((t) => !t.published);
 for (const t of [live, pending]) {
   const r = await call(page, { query: { county: t.countySlug, town: t.slug } });
   assert.equal(r.status, 200);
-  assert.match(r.body, /<h2>Get updates<\/h2>/, `${t.path} has Get updates`);
+  assert.match(r.body, /<h2><svg[^]*?<\/svg>Get updates when [^<]+ changes<\/h2>/, `${t.path} has Get updates`);
   assert.ok(r.body.includes('value="homeowner"') && r.body.includes('value="professional"'), `${t.path} asks homeowner or agent/pro`);
-  assert.match(r.body, /data-updates-form novalidate hidden/, 'the email box stays hidden until it is turned on');
+  assert.match(r.body, /<div class="toprow"><div class="toprow-main">[^]*?<\/div><aside class="updates" data-updates>/, 'the box sits at the top right, next to the town name');
+  assert.match(r.body, /data-updates-form novalidate>/, 'the email box shows right away');
 }
 const e = await call(embed, { query: { county: live.countySlug, town: live.slug } });
 assert.equal(e.status, 200);
