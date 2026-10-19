@@ -1,4 +1,5 @@
 import assert from 'node:assert/strict';
+import crypto from 'node:crypto';
 import fs from 'node:fs';
 import { createRequire } from 'node:module';
 import { tallyHtml } from '../../scripts/build-co-apply-tally.mjs';
@@ -186,6 +187,15 @@ assert.deepEqual(fill.upright(fakePage(0), 100, 200), { x: 100, y: 200, r: 0 });
 assert.deepEqual(fill.upright(fakePage(270), 100, 200), { x: 200, y: 692, r: 270 }, 'sideways pages get on-screen spots turned back');
 assert.deepEqual(fill.upright(fakePage(90), 100, 200), { x: 412, y: 100, r: 90 });
 assert.equal(fill.pdfSafe('Sam\u2019s LLC \u2014 \u201cMain\u201d'), 'Sam\'s LLC - "Main"', 'PDF text stays in the standard font');
+
+for (const [code, f] of Object.entries(registryForSaved())) {
+  if (!f.saved_copy) continue;
+  const copy = fs.readFileSync(new URL(`../data/co-forms/${code}.pdf`, import.meta.url));
+  assert.equal(crypto.createHash('sha256').update(copy).digest('hex'), f.sha256, `${code}: saved copy matches the pinned town form`);
+}
+assert.match(vercelConfigForSaved().functions['api/co-form-template.js'].includeFiles, /co-forms\/\*\.pdf/, 'form proxy ships the saved copies');
+function registryForSaved() { return JSON.parse(fs.readFileSync(new URL('../data/co-application-forms.json', import.meta.url), 'utf8')).forms; }
+function vercelConfigForSaved() { return JSON.parse(fs.readFileSync(new URL('../../vercel.json', import.meta.url), 'utf8')); }
 
 const coHome = fs.readFileSync(new URL('../../co/index.html', import.meta.url), 'utf8');
 const registryForTally = JSON.parse(fs.readFileSync(new URL('../data/co-application-forms.json', import.meta.url), 'utf8'));

@@ -1,6 +1,8 @@
 // The town's own CO application PDF for /co/<county>/<town>/apply, fetched from the town's site and
 // checked against the pinned hash in property/data/co-application-forms.json (api/_co-forms.js).
 const crypto = require('crypto');
+const fs = require('fs');
+const path = require('path');
 const F = require('./_co-forms');
 
 const AGENTS = [
@@ -25,8 +27,10 @@ module.exports = async function handler(req, res) {
   try {
     const get = (agent) => fetch(form.url, { redirect: 'follow', headers: { 'User-Agent': agent, Accept: 'application/pdf,*/*' }, signal: AbortSignal.timeout(4500) });
     let upstream = await get(AGENTS[0]).catch(() => null);
-    if (!upstream || !upstream.ok) upstream = await get(AGENTS[1]);
-    if (!upstream.ok) {
+    if (!upstream || !upstream.ok) upstream = await get(AGENTS[1]).catch(() => null);
+    if (!upstream || !upstream.ok) {
+      const copy = savedCopy(code, form);
+      if (copy) return sendPdf(res, code, copy, 'saved-copy');
       res.setHeader('Cache-Control', 'private, no-store');
       return res.status(502).json({ error: 'town_form_unavailable' });
     }
@@ -42,12 +46,28 @@ module.exports = async function handler(req, res) {
       return res.status(409).json({ error: 'town_form_changed', expected: form.sha256, received: digest });
     }
 
-    res.setHeader('Content-Type', 'application/pdf');
-    res.setHeader('Content-Disposition', `inline; filename="co-application-${code}.pdf"`);
-    res.setHeader('X-Watchdog-Template-SHA256', digest);
-    return res.status(200).send(bytes);
+    return sendPdf(res, code, bytes, 'town');
   } catch (_) {
+    const copy = savedCopy(code, form);
+    if (copy) return sendPdf(res, code, copy, 'saved-copy');
     res.setHeader('Cache-Control', 'private, no-store');
     return res.status(502).json({ error: 'town_form_unavailable' });
   }
 };
+
+// A few town sites refuse requests from Watchdog's host, so their form is kept in property/data/co-forms/.
+function savedCopy(code, form) {
+  if (!form.saved_copy) return null;
+  try {
+    const bytes = fs.readFileSync(path.join(process.cwd(), 'property', 'data', 'co-forms', `${code}.pdf`));
+    return crypto.createHash('sha256').update(bytes).digest('hex') === form.sha256 ? bytes : null;
+  } catch (_) { return null; }
+}
+
+function sendPdf(res, code, bytes, source) {
+  res.setHeader('Content-Type', 'application/pdf');
+  res.setHeader('Content-Disposition', `inline; filename="co-application-${code}.pdf"`);
+  res.setHeader('X-Watchdog-Template-SHA256', crypto.createHash('sha256').update(bytes).digest('hex'));
+  res.setHeader('X-Watchdog-Template-Source', source);
+  return res.status(200).send(bytes);
+}

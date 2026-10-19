@@ -56,7 +56,7 @@
       "maxDuration": 10
     },
     "api/co-form-template.js": {
-      "includeFiles": "property/data/co-application-forms.json",
+      "includeFiles": "{property/data/co-application-forms.json,property/data/co-forms/*.pdf}",
       "maxDuration": 10
     },
     "api/co-embed-page.js": {
