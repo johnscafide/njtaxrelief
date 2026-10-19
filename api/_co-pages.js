@@ -7,11 +7,12 @@ const path = require('path');
 const T = require('./_co-town');
 const TAX = require('./_tax-town');
 const { homeLookupBox } = require('./_home-lookup-box');
+const F = require('./_co-forms');
 
 const { ORIGIN, SHARE_IMAGE, esc, countyLabel, fmtDate, STATUS } = T;
 const LOGO = '/property/branding/watchdog-logo-horizontal.svg';
 const MARK = '/property/branding/watchdog-mark.svg';
-const ASSET_V = '20261019a';
+const ASSET_V = '20261019b';
 // Tip line at the bottom of town pages.
 const TIP_URL = 'https://account.venmo.com/u/John-Scafide';
 
@@ -35,8 +36,9 @@ function feeTable(fees) {
   if (!fees.length) return '';
   return '<table class="fees"><tbody>' + fees.map((f) => `<tr><td>${esc(f.label)}</td><td class="amt">${esc(f.amount)}</td></tr>`).join('') + '</tbody></table>';
 }
-function links(applyUrl, pageUrl) {
+function links(applyUrl, pageUrl, fillUrl) {
   let h = '';
+  if (fillUrl) h += `<a class="primary fill" href="${esc(fillUrl)}" data-fill-link>Fill out the application online</a>`;
   if (applyUrl) h += `<a class="primary" href="${esc(applyUrl)}" target="_blank" rel="noopener">Application</a>`;
   if (pageUrl) h += `<a href="${esc(pageUrl)}" target="_blank" rel="noopener">Official page</a>`;
   return h ? `<div class="links">${h}</div>` : '';
@@ -50,7 +52,7 @@ function shareUrl(t, medium, content) {
 }
 
 // The same facts /co shows for a town.
-function facts(d) {
+function facts(d, fillUrl) {
   const co = d.co, fire = d.fire;
   const st = STATUS[co.status];
   let html = `<div class="cols"><section class="part"><h2>Certificate of Occupancy</h2><span class="status ${st[0]}">${st[1]}</span>` +
@@ -63,7 +65,7 @@ function facts(d) {
     fact('Timing', esc(co.lead_time)) +
     fact('Valid for', esc(co.valid_for)) +
     fact('Phone', esc(co.phone)) +
-    '</dl>' + links(co.application_url, co.department_url) + '</section>';
+    '</dl>' + links(co.application_url, co.department_url, co.status === 'required' ? fillUrl : '') + '</section>';
 
   html += '<section class="part"><h2>Smoke and CO alarm certificate</h2><span class="status req">Required</span><dl class="facts">' +
     fact('Requirements', items(fire.requirements)) + '</dl>';
@@ -279,7 +281,8 @@ function townPage(t, opts) {
   if (d) out += shareRow(t, embed);
   if (!embed) out = `<div class="toprow"><div class="toprow-main">${out}</div>${updatesBox(t)}</div>`;
   if (d) {
-    out += facts(d) + '<button class="fix" type="button" data-fix>Report a correction</button>';
+    const fill = F.formFor(t.code) ? (embed ? `${ORIGIN}${t.path}/apply?utm_source=embed&utm_medium=referral&utm_campaign=co_embed` : `${t.path}/apply`) : '';
+    out += facts(d, fill) + '<button class="fix" type="button" data-fix>Report a correction</button>';
     if (!embed) out += homeLookupBox(t.name);
   } else {
     out += '<p>Not available yet.</p><button class="add" type="button" data-add>Add CO Requirements</button>';
@@ -404,6 +407,81 @@ const PRINT_CSS = `body.checklist{background:#f5f7fa}
 @media(max-width:640px){.sheet{padding:22px 18px;border-radius:0;border-left:0;border-right:0}.sheet h1{font-size:24px}}
 @media print{@page{margin:14mm}body.checklist{background:#fff}.pbar,.toast{display:none!important}.sheet{max-width:none;margin:0;padding:0;border:0}.wm img{width:70%;opacity:.08}a{color:inherit;text-decoration:none}}`;
 
+// ---------- the town's own application, filled in online (co/co-apply.js) ----------
+function q(label, key, o) {
+  o = o || {};
+  const id = 'f-' + key;
+  const attrs = `id="${id}" name="${key}" data-key="${key}"${o.type ? ` type="${o.type}"` : ''}${o.ac ? ` autocomplete="${o.ac}"` : ' autocomplete="off"'}${o.mode ? ` inputmode="${o.mode}"` : ''}${o.max ? ` maxlength="${o.max}"` : ' maxlength="120"'}`;
+  const input = o.options
+    ? `<select ${attrs.replace(/ maxlength="\d+"/, '')}><option value=""></option>${o.options.map((x) => `<option value="${x[0]}">${esc(x[1])}</option>`).join('')}</select>`
+    : `<input ${attrs}>`;
+  return `<label class="q${o.wide ? ' wide' : ''}" data-q="${key}" for="${id}">${esc(label)}${input}</label>`;
+}
+function group(title, key, inner) { return `<fieldset class="grp" data-group="${key}"><legend>${esc(title)}</legend><div class="qs">${inner}</div></fieldset>`; }
+function applyPage(t) {
+  const d = T.townData(t.code);
+  const form = F.formFor(t.code);
+  if (!d || !form || d.co.status !== 'required') return null;
+  const co = d.co;
+  const body = `<main data-co-town data-code="${t.code}" data-name="${esc(t.name)}" data-county="${esc(countyLabel(t.county))}" data-status="${co.status}" data-url="${esc(ORIGIN + t.path)}" data-surface="apply">
+${topBar(false)}
+<div class="out apply" id="out">
+${crumbs(t)}
+<h1 class="town apply-h">${esc(t.name)} CO application</h1>
+<p class="notice"><img src="/property/branding/watchdog-mark.svg" alt="" width="28" height="28">Watchdog isn’t ${esc(t.name)}. We don’t send or keep your application. You print it or email it to the town yourself.</p>
+<form class="apply-form" data-apply-form novalidate>
+${group('The home', 'home',
+    q('Street address', 'address', { ac: 'off', wide: true, max: 160 }) + q('Unit', 'unit', { max: 20 }) + q('City', 'city', { max: 60 }) + q('ZIP', 'zip', { mode: 'numeric', max: 10 }) +
+    q('Block', 'block', { max: 20 }) + q('Lot', 'lot', { max: 20 }) + q('Qualifier', 'qual', { max: 20 }) +
+    q('Type of home', 'property_type', { options: [['single', 'Single family'], ['two', 'Two family'], ['condo', 'Townhouse or condo'], ['multi', '3 or more units']] }) +
+    q('Who lives there now', 'occupancy', { options: [['owner', 'The owner'], ['rented', 'A tenant'], ['vacant', 'No one, it’s vacant']] }) +
+    q('Bedrooms', 'bedrooms', { mode: 'numeric', max: 3 }) + q('Bathrooms', 'bathrooms', { mode: 'decimal', max: 4 }) + q('Kitchens', 'kitchens', { mode: 'numeric', max: 2 }) +
+    q('Lock box code', 'lockbox', { max: 40 }) + q('Sale price', 'price', { mode: 'decimal', max: 20 }) + q('Settlement date', 'settlement_date', { type: 'date' }))}
+${group('Seller', 'owner',
+    q('Name', 'owner_name', { wide: true, max: 160 }) + q('Phone', 'owner_phone', { type: 'tel', ac: 'off', max: 30 }) + q('Email', 'owner_email', { type: 'email', ac: 'off', max: 200 }) +
+    q('Mailing address, if not the home', 'owner_address', { wide: true, max: 160 }) + q('City, state, ZIP', 'owner_city_zip', { max: 80 }))}
+${group('Buyer', 'buyer',
+    q('Name', 'buyer_name', { wide: true, max: 160 }) + q('Phone', 'buyer_phone', { type: 'tel', ac: 'off', max: 30 }) + q('Email', 'buyer_email', { type: 'email', ac: 'off', max: 200 }) +
+    q('Current address', 'buyer_address', { wide: true, max: 160 }) + q('City, state, ZIP', 'buyer_city_zip', { max: 80 }) +
+    q('Buyer plans to', 'buyer_plan', { options: [['live', 'Live there'], ['rent', 'Rent it out'], ['flip', 'Fix and resell']] }))}
+${group('Seller’s agent', 'agent',
+    q('Agent name', 'agent_name', { max: 120 }) + q('Brokerage', 'agent_company', { max: 120 }) + q('Phone', 'agent_phone', { type: 'tel', max: 30 }) + q('Email', 'agent_email', { type: 'email', max: 200 }) +
+    q('Office address', 'agent_address', { wide: true, max: 200 }))}
+${group('Buyer’s agent', 'buyer_agent',
+    q('Agent name', 'buyer_agent_name', { max: 120 }) + q('Phone', 'buyer_agent_phone', { type: 'tel', max: 30 }) + q('Email', 'buyer_agent_email', { type: 'email', max: 200 }))}
+${group('Who lets the inspector in', 'access',
+    q('Name', 'access_name', { max: 120 }) + q('Phone', 'access_phone', { type: 'tel', max: 30 }))}
+${group('You', 'applicant',
+    q('I’m the', 'applicant_role', { options: [['seller', 'Seller'], ['agent', 'Seller’s agent'], ['buyer', 'Buyer'], ['buyer_agent', 'Buyer’s agent'], ['other', 'Someone else (attorney, title)']] }) +
+    q('Your name', 'applicant_name', { max: 120 }) + q('Your phone', 'applicant_phone', { type: 'tel', ac: 'tel', max: 30 }) + q('Your email', 'applicant_email', { type: 'email', ac: 'email', max: 200 }))}
+<label class="ack"><input type="checkbox" name="ack" data-ack> I understand Watchdog isn’t ${esc(t.name)} and doesn’t send my application.</label>
+<p class="formstatus" data-apply-status role="status" aria-live="polite"></p>
+<button class="add make" type="submit" data-make>Make my PDF</button>
+</form>
+<section class="done" data-done hidden>
+<h2>Your application is ready</h2>
+<div class="links"><a class="primary" href="#" data-download download>Download PDF</a><a href="#" data-open target="_blank" rel="noopener">Open to print</a><button class="chip" type="button" data-again>Change something</button></div>
+<h3>Sign it, then send it to ${esc(t.name)}</h3>
+${co.how_to_apply ? `<p>${esc(co.how_to_apply)}</p>` : ''}
+${feeTable(co.fees)}
+${co.application_url ? `<p class="fine">Something look off? Use the <a href="${esc(co.application_url)}" target="_blank" rel="noopener">town’s blank form</a> instead.</p>` : ''}
+</section>
+</div>
+</main>
+<script type="application/json" id="co-form">${JSON.stringify({ code: t.code, town: t.name, title: form.title, sha256: form.sha256, field_count: form.field_count, fields: form.fields, blank_url: co.application_url, how_to_apply: co.how_to_apply, fees: co.fees }).replace(/</g, '\\u003c')}</script>
+${scripts(false, true)}
+<script src="https://cdn.jsdelivr.net/npm/pdf-lib@1.17.1/dist/pdf-lib.min.js" defer></script>
+<script src="/co/co-apply.js?v=${ASSET_V}" defer></script>`;
+  return shell({
+    mode: 'page',
+    title: `${t.name} CO Application, Filled In Online | Watchdog`,
+    description: `Fill out ${t.name}’s resale certificate of occupancy application online, then print it or email it to the town.`,
+    canonical: `${ORIGIN}${t.path}/apply`,
+    noindex: true,
+    body
+  });
+}
+
 // ---------- county page ----------
 function countyPage(county) {
   const live = county.towns.filter((x) => x.published);
@@ -486,4 +564,4 @@ function messagePage(heading, text, extra) {
   });
 }
 
-module.exports = { townPage, printPage, countyPage, websitePage, notFound, messagePage };
+module.exports = { townPage, printPage, applyPage, countyPage, websitePage, notFound, messagePage };

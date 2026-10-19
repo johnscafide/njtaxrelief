@@ -1,0 +1,411 @@
+{
+ "version": "2026-10-19",
+ "forms": {
+  "0305": {
+   "title": "Resale Certificate of Inspection Application",
+   "url": "https://www.burlingtonnj.us/wp-content/uploads/2026/02/Resale-Application.pdf",
+   "sha256": "a477b22dddd42c8a327482a0e0cf813a0fcac498b54e9aa3ea234e1a2852ef5a",
+   "field_count": 38,
+   "pages": 1,
+   "checked": "2026-10-19",
+   "fields": {
+    "Date of Application": "today",
+    "Address of Inspection": "address",
+    "Unit": "unit",
+    "CityStateZip": "city_zip",
+    "Block": "block",
+    "Lot": "lot",
+    "Bedrooms": "bedrooms",
+    "Date of Closing": "settlement_date",
+    "Is there a Lock Box If so Lock Box": "lockbox",
+    "Sellers Name": "owner_name",
+    "Sellers Address": "owner_street",
+    "Sellers CityStateZip": "owner_city_zip_full",
+    "Sellers Phone Number": "owner_phone",
+    "Email": "owner_email",
+    "Buyers Name": "buyer_name",
+    "Buyers Home Address": "buyer_address",
+    "Buyers CityStateZip": "buyer_city_zip",
+    "Buyers Phone Number": "buyer_phone",
+    "Email_2": "buyer_email",
+    "AgentRealtor Name": {
+     "join": [
+      "agent_name",
+      "agent_company"
+     ],
+     "sep": ", "
+    },
+    "Phone": "agent_phone",
+    "AdressCityZip": "agent_address",
+    "Email_3": "agent_email"
+   }
+  },
+  "0306": {
+   "title": "Housing Inspection Request",
+   "url": "https://www.twp.burlington.nj.us/filestorage/279/714/753/HousingInspectionRequestForm.pdf",
+   "sha256": "3f809a7d7d8eae559bb79b52244f054fdf6a56791c65533e184a95a4f88d021d",
+   "field_count": 25,
+   "pages": 1,
+   "checked": "2026-10-19",
+   "fields": {
+    "DATE": "today",
+    "SALE PRICERENTAL PRICE": "price",
+    "ADDRESS": "address_full",
+    "BLOCK": "block",
+    "LOT": "lot",
+    "OWNERS NAME": "owner_name",
+    "PHONE": "owner_phone",
+    "OWNERS EMAIL": "owner_email",
+    "BUYERSTENANTS NAME": "buyer_name",
+    "PHONE_2": "buyer_phone",
+    "BUYERSTENANTS EMAIL": "buyer_email",
+    "SETTLEMENT DATEMOVE IN DATE": "settlement_date",
+    "AGENT": {
+     "join": [
+      "agent_name",
+      "agent_company"
+     ],
+     "sep": ", "
+    },
+    "ADDRESS 1": "agent_address",
+    "AGENTS EMAIL": "agent_email",
+    "PHONE_3": "agent_phone"
+   }
+  },
+  "0418": {
+   "title": "Certificate of Compliance application",
+   "url": "https://www.haddonhts.com/DocumentCenter/View/3128/Certification-of-Continued-Occupancy-Application-CCO",
+   "sha256": "c4a6971f9bf93a338977215b33ffd4a32bdbd5d309a46dfa8229d47271b6b02e",
+   "field_count": 14,
+   "pages": 2,
+   "checked": "2026-10-19",
+   "fields": {
+    "TODAYS DATE": "today",
+    "SETTLEMENT DATE": "settlement_date",
+    "PROPERTY ADDRESS": "address_full",
+    "HOMEOWNERS NAME": "owner_name",
+    "HOMEOWNERS CELL NO": "owner_phone",
+    "REALTOR": "agent_company",
+    "CONTACT NAME": "agent_name",
+    "ADDRESS": "agent_address",
+    "PHONE NUMBER": "agent_phone",
+    "EMAIL ADDRESS": "agent_email"
+   }
+  },
+  "0422": {
+   "title": "Resale Inspection Application (CCO)",
+   "url": "https://www.lindenwoldnj.gov/DocumentCenter/View/140/Residential-Property-Sales---Inspection-Application--CCO-Certificate-of-Continued-Occupancy-PDF",
+   "sha256": "8abee2c2e2ac639147ee1cbf5b98b3a1bfbab8e1fc56f804cee71130ab905906",
+   "field_count": 130,
+   "pages": 3,
+   "checked": "2026-10-19",
+   "fields": {
+    "Check one SELLER": {
+     "mark": "applicant_role",
+     "is": "seller"
+    },
+    "or BUYER": {
+     "mark": "applicant_role",
+     "is": "buyer"
+    },
+    "CATION": "today",
+    "DATE OF SETTLEMENT": "settlement_date",
+    "ADDRESS": "address_full",
+    "TY": "city",
+    "P": "zip",
+    "BLOCK": "block",
+    "LOT": "lot",
+    "QUAL": "qual",
+    "LY": {
+     "mark": "property_type",
+     "is": "single"
+    },
+    "LY_2": {
+     "mark": "property_type",
+     "is": "two"
+    },
+    "NAME OF APPLICANT 1": "applicant_name",
+    "PHONE 1": "applicant_phone",
+    "SELLERs Name": "owner_name",
+    "Address": "owner_address_full",
+    "Phone": "owner_phone",
+    "s Name": "buyer_name",
+    "Address_2": "buyer_address_full",
+    "Phone_2": "buyer_phone",
+    "Real EstateTitleMortgage Company handling sale or settlement of property Check one SELLER": {
+     "mark": "agent_name",
+     "is": "*"
+    },
+    "ce Phone": "agent_phone",
+    "Name": {
+     "join": [
+      "agent_company",
+      "agent_name"
+     ],
+     "sep": ", "
+    },
+    "undefined_4": "agent_address",
+    "th Access to Property": "access_name",
+    "Contact Phone": "access_phone",
+    "LOCK BOX": "lockbox"
+   }
+  },
+  "0427": {
+   "title": "Housing Resale & Fire Certificate Inspection Application",
+   "url": "https://www.pennsauken.gov/DocumentCenter/View/1116/Housing-Resale-And-Fire-Cert-Inspection-Application-PDF",
+   "sha256": "05b0afff162fa0a6269bd7523e7141289f82309606048fbd7408617a54914594",
+   "field_count": 23,
+   "pages": 1,
+   "checked": "2026-10-19",
+   "fields": {
+    "Date of Application": "today",
+    "Settlement Date": "settlement_date",
+    "Property Address": "address_full",
+    "Current Status of Property": {
+     "mark": "occupancy",
+     "is": "vacant"
+    },
+    "Vacant": {
+     "mark": "occupancy",
+     "is": "rented"
+    },
+    "Rental": {
+     "mark": "occupancy",
+     "is": "owner"
+    },
+    "Intention of Buyer": {
+     "mark": "buyer_plan",
+     "is": "flip"
+    },
+    "Flip": {
+     "mark": "buyer_plan",
+     "is": "rent"
+    },
+    "Future Rental": {
+     "mark": "buyer_plan",
+     "is": "live"
+    },
+    "Owner Name": "owner_name",
+    "Owner Address": "owner_address_full",
+    "Owner Contact": "owner_phone",
+    "Owner Email": "owner_email",
+    "Buyer Name": "buyer_name",
+    "Buyer Address": "buyer_address_full",
+    "Buyer Contact": "buyer_phone",
+    "Buyer Email": "buyer_email",
+    "Send results to Name": "applicant_name",
+    "Email": "applicant_email",
+    "Phone Number": "applicant_phone"
+   }
+  },
+  "0806": {
+   "title": "Application for Resale of Dwelling Certificate",
+   "url": "https://www.glassboro.org/s/Resale-CO-App-2026-FILLABLE.pdf",
+   "sha256": "e43afe8643d7f4a2d6ce9d074bf2ec0e30a6ed5655d143ee9abcb134f16f9c5a",
+   "field_count": 46,
+   "pages": 3,
+   "checked": "2026-10-19",
+   "fields": {
+    "Address of Property For Sale": "address_full",
+    "Block": "block",
+    "Lot": "lot",
+    "Current Owners names If LLC provide name": "owner_name",
+    "Address of owner if different from above": "owner_mailing",
+    "Email address of owner": "owner_email",
+    "Phone number of owner": "owner_phone",
+    "Selling Price of the home": "price",
+    "Date of Settlement": "settlement_date",
+    "Buyers name If LLC provide name": "buyer_name",
+    "Address of Buyer": "buyer_address_full",
+    "Email address of Buyer": "buyer_email",
+    "Phone number of buyer": "buyer_phone",
+    "Name of RealtorAgent": {
+     "join": [
+      "agent_name",
+      "agent_company"
+     ],
+     "sep": ", "
+    },
+    "Email of RealtorAgent": "agent_email",
+    "Phone number of RealtorAgent": "agent_phone",
+    "Number of Kitchens": "kitchens",
+    "Applicants name print": "applicant_name",
+    "Address of Inspection": "address_full",
+    "Block-0": "block",
+    "Lot-0": "lot",
+    "Current Owners names": "owner_name",
+    "Owners Phone number": "owner_phone",
+    "Settlement date for home": "settlement_date",
+    "Name of RealtorAgent-0": {
+     "join": [
+      "agent_name",
+      "agent_company"
+     ],
+     "sep": ", "
+    },
+    "Owners Email Address": "owner_email",
+    "Textfield-2": "applicant_name",
+    "Address of Property": "address_full",
+    "Block-1": "block",
+    "Lot-1": "lot",
+    "Textfield-6": "buyer_name"
+   }
+  },
+  "0808": {
+   "title": "Certificate of Transfer of Ownership / Occupancy application",
+   "url": "https://harrisontwp.us/wp-content/uploads/2025/11/CTO-applicatiCertification-of-Tranfer-of-OwnershipOccupancy-Application-rev-11242025.pdf",
+   "sha256": "8df47e28a81e5c72d0d6be0f2db04fa7bb510d4757091c94ad3d6edf0deeb005",
+   "field_count": 36,
+   "pages": 2,
+   "checked": "2026-10-19",
+   "fields": {
+    "LOCK BOX": "lockbox",
+    "BLOCK": "block",
+    "LOT": "lot",
+    "ADDRESS NEEDING INSPECTION": "address_full",
+    "PROPERTY TYPE": {
+     "text": "X"
+    },
+    "OWNERS NAME": "owner_name",
+    "PHONE": "owner_phone",
+    "CONTACT NAME AND NUMBER TO SET UP INSPECTION": {
+     "join": [
+      "access_name",
+      "access_phone"
+     ],
+     "sep": " "
+    },
+    "EMAIL": "applicant_email",
+    "NEW BUYERRENTER NAME ALL": "buyer_name",
+    "REALTOR COMPANY": "agent_company",
+    "AGENT": "agent_name",
+    "AGENT EMAIL": "agent_email",
+    "AGENT PRIMARY PHONE": "agent_phone",
+    "How many bedrooms": "bedrooms"
+   }
+  },
+  "0822": {
+   "title": "Certificate of Occupancy Inspection application",
+   "url": "https://woodbury.nj.us/DocumentCenter/View/2520/Application-for-Certificate-of-Occupancy-PDF",
+   "sha256": "85d13f8bb7b18418ba9b98e4ad60e27aa97995680f6dd1ceffb8c05ea25b7754",
+   "field_count": 52,
+   "pages": 2,
+   "checked": "2026-10-19",
+   "fields": {
+    "Property Address to be Inspected": "address",
+    "Block": "block",
+    "Lot": "lot",
+    "Apartment": "unit",
+    "Is the Property Vacant YesNo": "vacant_yn",
+    "Is There a LockboxAccess Key AvailableYesNo": "lockbox_yn",
+    "Code": "lockbox",
+    "Owners Name": "owner_name",
+    "Owners Address IF different than site address": "owner_mailing",
+    "Owners Phone": "owner_phone",
+    "Owners Email": "owner_email",
+    "Address": {
+     "join": [
+      "agent_company",
+      "agent_address"
+     ],
+     "sep": ", "
+    },
+    "Agents Name": "agent_name",
+    "Phone_2": "agent_phone",
+    "Email": "agent_email",
+    "Agent": "buyer_agent_name",
+    "Phone_3": "buyer_agent_phone",
+    "Email_2": "buyer_agent_email",
+    "Buyers Name": "buyer_name",
+    "Phone_6": "buyer_phone",
+    "Address_3": "buyer_address_full",
+    "of Bedrooms": "bedrooms",
+    "of Bathrooms": "bathrooms",
+    "Kitchens": "kitchens",
+    "Print Name": "applicant_name"
+   }
+  },
+  "0820": {
+   "title": "Resale Housing Inspection application",
+   "url": "https://www.westdeptford.com/Construction/Housing/WD%20Resale%20Housing%20Inspection%20Form.pdf",
+   "sha256": "091804d9a9b4c3f016fcf4d63a367915eb6cc97f0ef41ff668e69b36bf12b176",
+   "field_count": 42,
+   "pages": 1,
+   "checked": "2026-10-19",
+   "fields": {
+    "SETTLEMENT DATE": "settlement_date",
+    "Address to Be Inspected": "address_full",
+    "B ock": "block",
+    "Lot": "lot",
+    "Qualifier": "qual",
+    "Lock Box": "lockbox",
+    "Dwel ng Vacant": "vacant_yn",
+    "Bedrooms": "bedrooms",
+    "Bathrooms": "bathrooms",
+    "K": "kitchens",
+    "Current Owner Name": "owner_name",
+    "Phone Number": "owner_phone",
+    "Current Owner Address": "owner_address_full",
+    "Emai Address": "owner_email",
+    "Prospect ve Buyer Name": "buyer_name",
+    "Phone Number_2": "buyer_phone",
+    "Prospect ve Buyer Address": "buyer_address_full",
+    "Emai Address_2": "buyer_email",
+    "Sel ers Agent Name": {
+     "join": [
+      "agent_name",
+      "agent_company"
+     ],
+     "sep": ", "
+    },
+    "Sel ers Agent Emai": "agent_email",
+    "Phone Number_3": "agent_phone",
+    "Buyers Agent Name": "buyer_agent_name",
+    "Buyers Agent Emai": "buyer_agent_email",
+    "Phone Number_4": "buyer_agent_phone",
+    "Pr nt Name  T e": "applicant_name_title"
+   }
+  },
+  "0823": {
+   "title": "Resale Housing Inspection application",
+   "url": "https://www.bwhnj.com/DocumentCenter/View/2020/WOODBURY-HEIGHTS-RESALE-INSPECTION-FORM",
+   "sha256": "c8b09106d2316ba2627a366c361814423f5bce409ed356e517879ccbb913d2cd",
+   "field_count": 42,
+   "pages": 1,
+   "checked": "2026-10-19",
+   "fields": {
+    "SETTLEMENT DATE": "settlement_date",
+    "Address to Be Inspected": "address_full",
+    "B ock": "block",
+    "Lot": "lot",
+    "Qualifier": "qual",
+    "Lock Box": "lockbox",
+    "Dwel ng Vacant": "vacant_yn",
+    "Bedrooms": "bedrooms",
+    "Bathrooms": "bathrooms",
+    "K": "kitchens",
+    "Current Owner Name": "owner_name",
+    "Phone Number": "owner_phone",
+    "Current Owner Address": "owner_address_full",
+    "Emai Address": "owner_email",
+    "Prospect ve Buyer Name": "buyer_name",
+    "Phone Number_2": "buyer_phone",
+    "Prospect ve Buyer Address": "buyer_address_full",
+    "Emai Address_2": "buyer_email",
+    "Sel ers Agent Name": {
+     "join": [
+      "agent_name",
+      "agent_company"
+     ],
+     "sep": ", "
+    },
+    "Sel ers Agent Emai": "agent_email",
+    "Phone Number_3": "agent_phone",
+    "Buyers Agent Name": "buyer_agent_name",
+    "Buyers Agent Emai": "buyer_agent_email",
+    "Phone Number_4": "buyer_agent_phone",
+    "Pr nt Name  T e": "applicant_name_title"
+   }
+  }
+ }
+}

@@ -122,4 +122,63 @@ const migration = read('supabase/migrations/20261004170000_co_town_votes.sql');
 assert.match(migration, /enable row level security/, 'votes table has RLS');
 assert.match(migration, /revoke all on table public\.co_town_votes from public, anon, authenticated/, 'votes table is service-role only');
 
+// ---------- /co/<county>/<town>/apply: the town's own application, filled in ----------
+const formsReg = JSON.parse(read('property/data/co-application-forms.json')).forms;
+const fill = require('../../co/co-apply.js');
+const formTemplate = require('../../api/co-form-template.js');
+const INPUTS = ['address', 'unit', 'city', 'zip', 'block', 'lot', 'qual', 'property_type', 'occupancy', 'bedrooms', 'bathrooms', 'kitchens', 'lockbox', 'price', 'settlement_date',
+  'owner_name', 'owner_phone', 'owner_email', 'owner_address', 'owner_city_zip', 'buyer_name', 'buyer_phone', 'buyer_email', 'buyer_address', 'buyer_city_zip', 'buyer_plan',
+  'agent_name', 'agent_company', 'agent_phone', 'agent_email', 'agent_address', 'buyer_agent_name', 'buyer_agent_phone', 'buyer_agent_email', 'access_name', 'access_phone',
+  'applicant_role', 'applicant_name', 'applicant_phone', 'applicant_email'];
+const fillCodes = Object.keys(formsReg);
+assert.ok(fillCodes.length >= 10, 'at least 10 towns can fill in their own application');
+for (const code of fillCodes) {
+  const f = formsReg[code];
+  const t = towns.byCode.get(code);
+  assert.ok(t && t.published, `${code}: application filler only for published towns`);
+  assert.equal(T.townData(code).co.status, 'required', `${code}: only towns that require a resale CO`);
+  assert.match(f.sha256, /^[0-9a-f]{64}$/, `${code}: the town's PDF is pinned by hash`);
+  assert.match(f.url, /^https:\/\//, `${code}: the town's PDF comes from https`);
+  assert.ok(Number.isInteger(f.field_count) && f.field_count > 0, `${code}: field count is checked`);
+  assert.ok(f.title && Object.keys(f.fields).length >= 8, `${code}: has a title and a real field map`);
+  const asked = fill.askedKeys(f.fields);
+  asked.forEach((k) => assert.ok(INPUTS.includes(k), `${code}: asks for a known answer (${k})`));
+  r = await call(page, { county: t.countySlug, town: t.slug, view: 'apply' });
+  assert.equal(r.status, 200, `${t.path}/apply renders`);
+  assert.match(r.body, /name="robots" content="noindex/, `${t.path}/apply is not indexed`);
+  assert.ok(r.body.includes('data-ack') && r.body.includes(`Watchdog isn’t ${t.name}`), `${t.path}/apply says Watchdog isn't the town`);
+  INPUTS.forEach((k) => assert.ok(r.body.includes(`data-key="${k}"`), `${t.path}/apply has the ${k} question`));
+  assert.ok(!/href="(?:mailto|tel):/i.test(r.body), `${t.path}/apply adds no email or phone link (contact rule)`);
+  const json = JSON.parse(/<script type="application\/json" id="co-form">([\s\S]*?)<\/script>/.exec(r.body)[1]);
+  assert.equal(json.sha256, f.sha256, `${t.path}/apply checks the pinned hash`);
+  r = await call(page, { county: t.countySlug, town: t.slug });
+  assert.ok(r.body.includes(`href="${t.path}/apply" data-fill-link>`), `${t.path} links to the online application`);
+}
+const noForm = towns.all.find((x) => x.published && !formsReg[x.code]);
+r = await call(page, { county: noForm.countySlug, town: noForm.slug, view: 'apply' });
+assert.equal(r.status, 307, 'towns without a mapped form send /apply back to the town page');
+r = await call(page, { county: noForm.countySlug, town: noForm.slug });
+assert.ok(!r.body.includes('data-fill-link'), 'no online application link where the form isn’t mapped');
+assert.match(read('middleware.js'), /\(print\|apply\)/, 'middleware routes /apply');
+assert.match(vercel.functions['api/co-town-page.js'].includeFiles, /co-application-forms\.json/, 'town pages ship with the form map');
+assert.match(vercel.functions['api/co-form-template.js'].includeFiles, /co-application-forms\.json/, 'the form proxy ships with the form map');
+r = await call(formTemplate, { code: '9999' });
+assert.equal(r.status, 400, 'form proxy refuses towns without a mapped form');
+
+const v = fill.values({ address: '12 Elm St', unit: '2B', city: 'Glassboro', zip: '08028', settlement_date: '2026-11-20', occupancy: 'vacant', lockbox: '4471',
+  owner_name: 'Jane Seller', owner_phone: '856-555-0101', agent_name: 'Pat Agent', agent_phone: '856-555-0199', agent_email: 'pat@example.com', applicant_role: 'agent' }, new Date(2026, 9, 19));
+assert.equal(v.today, '10/19/2026');
+assert.equal(v.settlement_date, '11/20/2026');
+assert.equal(v.address_full, '12 Elm St, Unit 2B');
+assert.equal(v.owner_address_full, '12 Elm St, Unit 2B, Glassboro, NJ 08028', 'owner address falls back to the home');
+assert.equal(v.owner_mailing, '', '"if different" fields stay blank when the owner lives there');
+assert.equal(v.applicant_name, 'Pat Agent', '"You" fills from the role');
+assert.equal(v.applicant_email, 'pat@example.com');
+assert.equal(v.access_name, 'Pat Agent', 'inspection contact defaults to the agent');
+assert.equal(v.vacant_yn, 'Yes');
+assert.equal(fill.fieldText({ mark: 'occupancy', is: 'vacant' }, v), 'X');
+assert.equal(fill.fieldText({ mark: 'occupancy', is: 'owner' }, v), '');
+assert.equal(fill.fieldText({ join: ['agent_name', 'agent_company'], sep: ', ' }, v), 'Pat Agent', 'joins skip blanks');
+assert.equal(fill.pdfSafe('Sam\u2019s LLC \u2014 \u201cMain\u201d'), 'Sam\'s LLC - "Main"', 'PDF text stays in the standard font');
+
 console.log(`CO town pages contract passed (${rendered} town pages, ${rows.length} sitemap rows).`);
