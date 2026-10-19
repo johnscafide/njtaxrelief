@@ -3,6 +3,11 @@
 const crypto = require('crypto');
 const F = require('./_co-forms');
 
+const AGENTS = [
+  'Mozilla/5.0 (compatible; Watchdog CO forms; +https://www.watchdogindex.com/co)',
+  'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0 Safari/537.36 WatchdogCO/1.0 (+https://www.watchdogindex.com/co)'
+];
+
 module.exports = async function handler(req, res) {
   res.setHeader('X-Content-Type-Options', 'nosniff');
   res.setHeader('Referrer-Policy', 'no-referrer');
@@ -18,11 +23,18 @@ module.exports = async function handler(req, res) {
   if (!form) return res.status(400).json({ error: 'invalid_town' });
 
   try {
-    const get = () => fetch(form.url, { redirect: 'follow', headers: { 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0 Safari/537.36 WatchdogCO/1.0 (+https://www.watchdogindex.com/co)' }, signal: AbortSignal.timeout(4000) });
-    const upstream = await get().catch(get);
-    if (!upstream.ok) return res.status(502).json({ error: 'town_form_unavailable' });
+    const get = (agent) => fetch(form.url, { redirect: 'follow', headers: { 'User-Agent': agent, Accept: 'application/pdf,*/*' }, signal: AbortSignal.timeout(4500) });
+    let upstream = await get(AGENTS[0]).catch(() => null);
+    if (!upstream || !upstream.ok) upstream = await get(AGENTS[1]);
+    if (!upstream.ok) {
+      res.setHeader('Cache-Control', 'private, no-store');
+      return res.status(502).json({ error: 'town_form_unavailable' });
+    }
     const bytes = Buffer.from(await upstream.arrayBuffer());
-    if (!bytes.length || bytes.length > 10 * 1024 * 1024 || bytes.subarray(0, 5).toString('latin1') !== '%PDF-') return res.status(502).json({ error: 'town_form_not_pdf' });
+    if (!bytes.length || bytes.length > 10 * 1024 * 1024 || bytes.subarray(0, 5).toString('latin1') !== '%PDF-') {
+      res.setHeader('Cache-Control', 'private, no-store');
+      return res.status(502).json({ error: 'town_form_not_pdf' });
+    }
 
     const digest = crypto.createHash('sha256').update(bytes).digest('hex');
     if (digest !== form.sha256) {
