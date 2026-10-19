@@ -87,10 +87,11 @@
     return [];
   }
   // The questions this town's form asks, so the page only shows those.
-  function askedKeys(fields) {
+  function askedKeys(fields, overlay) {
     var out = {};
-    Object.keys(fields || {}).forEach(function (name) {
-      specKeys(fields[name]).forEach(function (k) {
+    var specs = Object.keys(fields || {}).map(function (name) { return fields[name]; }).concat((overlay || []).map(function (o) { return o.value; }));
+    specs.forEach(function (spec) {
+      specKeys(spec).forEach(function (k) {
         (DERIVED[k] || [k]).forEach(function (x) { out[x] = true; });
       });
     });
@@ -105,14 +106,64 @@
     return out;
   }
 
-  // Standard PDF fonts only cover Latin-1; swap the usual curly quotes and dashes and drop the rest.
-  function pdfSafe(s) {
-    return String(s).replace(/[‘’‚′]/g, '\'').replace(/[“”„″]/g, '"')
-      .replace(/[‐-―−]/g, '-').replace(/…/g, '...').replace(/[   ]/g, ' ')
-      .normalize('NFKD').replace(/[̀-ͯ]/g, '').replace(/[^\x20-\x7e\xa0-\xff]/g, '');
+  function fit(field, text, font) {
+    var widgets = field.acroField.getWidgets();
+    var width = widgets.length ? widgets[0].getRectangle().width - 4 : 0;
+    var size = 10;
+    if (width > 0) while (size > 6 && font.widthOfTextAtSize(text, size) > width) size -= 0.5;
+    try { field.setFontSize(size); } catch (_) {}
+    var max = field.getMaxLength();
+    field.setText(max ? text.slice(0, max) : text);
   }
 
-  var api = { values: values, fieldText: fieldText, askedKeys: askedKeys, fillMap: fillMap, pdfSafe: pdfSafe };
+  // Flattening can leave page links to form widgets that no longer exist, which some PDF readers flag as damaged.
+  function dropDanglingAnnots(P, doc) {
+    var key = P.PDFName.of('Annots');
+    doc.getPages().forEach(function (page) {
+      var annots = page.node.lookup(key);
+      if (!(annots instanceof P.PDFArray)) return;
+      var keep = annots.asArray().filter(function (ref) { return !(ref instanceof P.PDFRef) || doc.context.lookup(ref); });
+      if (keep.length !== annots.size()) page.node.set(key, doc.context.obj(keep));
+    });
+  }
+
+  // Fills the town's PDF in place: its own form fields (entry.fields, by field name) and text placed
+  // on the page for forms without fields (entry.overlay: page index, x, y baseline and width in PDF points).
+  async function fillDoc(P, doc, entry, v) {
+    var form = doc.getForm();
+    if (form.getFields().length !== (entry.field_count || 0) || doc.getPageCount() !== (entry.pages || doc.getPageCount())) throw new Error('changed');
+    var font = await doc.embedFont(P.StandardFonts.Helvetica);
+    var map = fillMap(entry.fields, v);
+    Object.keys(map).forEach(function (name) {
+      var field;
+      try { field = form.getTextField(name); } catch (_) { throw new Error('changed'); }
+      fit(field, pdfSafe(map[name]), font);
+    });
+    if (form.getFields().length) {
+      form.updateFieldAppearances(font);
+      form.flatten();
+      dropDanglingAnnots(P, doc);
+    }
+    var pages = doc.getPages();
+    (entry.overlay || []).forEach(function (o) {
+      var text = pdfSafe(fieldText(o.value, v));
+      var page = pages[o.page || 0];
+      if (!text || !page) return;
+      var size = o.size || 10;
+      while (o.w && size > 6 && font.widthOfTextAtSize(text, size) > o.w) size -= 0.5;
+      while (o.w && text.length > 1 && font.widthOfTextAtSize(text, size) > o.w) text = text.slice(0, -1);
+      page.drawText(text, { x: o.x, y: o.y, size: size, font: font, color: P.rgb(0.05, 0.1, 0.35) });
+    });
+  }
+
+  // Standard PDF fonts only cover Latin-1; swap the usual curly quotes and dashes and drop the rest.
+  function pdfSafe(s) {
+    return String(s).replace(/[\u2018\u2019\u201a\u2032]/g, '\'').replace(/[\u201c\u201d\u201e\u2033]/g, '"')
+      .replace(/[\u2010-\u2015\u2212]/g, '-').replace(/\u2026/g, '...').replace(/[\u00a0\u2007\u202f]/g, ' ')
+      .normalize('NFKD').replace(/[\u0300-\u036f]/g, '').replace(/[^\x20-\x7e\xa0-\xff]/g, '');
+  }
+
+  var api = { fillDoc: fillDoc, values: values, fieldText: fieldText, askedKeys: askedKeys, fillMap: fillMap, pdfSafe: pdfSafe };
   if (typeof module === 'object' && module.exports) module.exports = api;
   root.WatchdogCoApply = api;
   if (typeof document === 'undefined') return;
@@ -135,7 +186,7 @@
 
   // Show only what this town's form asks for.
   var asked = {};
-  askedKeys(cfg.fields).forEach(function (k) { asked[k] = true; });
+  askedKeys(cfg.fields, cfg.overlay).forEach(function (k) { asked[k] = true; });
   function syncQuestions() {
     var role = (formEl.elements.applicant_role || {}).value || '';
     Array.prototype.forEach.call(formEl.querySelectorAll('[data-q]'), function (q) {
@@ -169,16 +220,6 @@
     var sha = String(res.headers.get('X-Watchdog-Template-SHA256') || '').toLowerCase();
     if (sha !== cfg.sha256) throw new Error('changed');
     return new Uint8Array(await res.arrayBuffer());
-  }
-
-  function fit(field, text, font) {
-    var widgets = field.acroField.getWidgets();
-    var width = widgets.length ? widgets[0].getRectangle().width - 4 : 0;
-    var size = 10;
-    if (width > 0) while (size > 6 && font.widthOfTextAtSize(text, size) > width) size -= 0.5;
-    try { field.setFontSize(size); } catch (_) {}
-    var max = field.getMaxLength();
-    field.setText(max ? text.slice(0, max) : text);
   }
 
   function wrap(text, font, size, width) {
@@ -216,33 +257,11 @@
     para('Filled in with Watchdog at watchdogindex.com/co. Watchdog is not ' + cfg.town + ' and does not send or keep applications. Rules and fees can change, so confirm with the town.', 9.5, gray);
   }
 
-  // Flattening can leave page links to form widgets that no longer exist, which some PDF readers flag as damaged.
-  function dropDanglingAnnots(doc) {
-    var P = window.PDFLib, key = P.PDFName.of('Annots');
-    doc.getPages().forEach(function (page) {
-      var annots = page.node.lookup(key);
-      if (!(annots instanceof P.PDFArray)) return;
-      var keep = annots.asArray().filter(function (ref) { return !(ref instanceof P.PDFRef) || doc.context.lookup(ref); });
-      if (keep.length !== annots.size()) page.node.set(key, doc.context.obj(keep));
-    });
-  }
-
   async function build(a) {
     var P = window.PDFLib;
     if (!P || !P.PDFDocument) throw new Error('engine');
     var doc = await P.PDFDocument.load(await template(), { updateMetadata: false });
-    var form = doc.getForm();
-    if (form.getFields().length !== cfg.field_count) throw new Error('changed');
-    var font = await doc.embedFont(P.StandardFonts.Helvetica);
-    var map = fillMap(cfg.fields, values(a));
-    Object.keys(map).forEach(function (name) {
-      var field;
-      try { field = form.getTextField(name); } catch (_) { throw new Error('changed'); }
-      fit(field, pdfSafe(map[name]), font);
-    });
-    form.updateFieldAppearances(font);
-    form.flatten();
-    dropDanglingAnnots(doc);
+    await fillDoc(P, doc, cfg, values(a));
     await nextStepsPage(doc);
     return doc.save({ useObjectStreams: false });
   }

@@ -10,6 +10,7 @@ on:
       - 'api/co-embed-page.js'
       - 'api/_co-forms.js'
       - 'api/co-form-template.js'
+      - 'scripts/build-co-apply-tally.mjs'
       - 'property/data/co-application-forms.json'
       - 'api/co-feedback.js'
       - 'api/co-lookup.js'

@@ -468,7 +468,7 @@ ${co.application_url ? `<p class="fine">Something look off? Use the <a href="${e
 </section>
 </div>
 </main>
-<script type="application/json" id="co-form">${JSON.stringify({ code: t.code, town: t.name, title: form.title, sha256: form.sha256, field_count: form.field_count, fields: form.fields, blank_url: co.application_url, how_to_apply: co.how_to_apply, fees: co.fees }).replace(/</g, '\\u003c')}</script>
+<script type="application/json" id="co-form">${JSON.stringify({ code: t.code, town: t.name, title: form.title, sha256: form.sha256, field_count: form.field_count, pages: form.pages, fields: form.fields || {}, overlay: form.overlay || [], blank_url: co.application_url, how_to_apply: co.how_to_apply, fees: co.fees }).replace(/</g, '\\u003c')}</script>
 ${scripts(false, true)}
 <script src="https://cdn.jsdelivr.net/npm/pdf-lib@1.17.1/dist/pdf-lib.min.js" defer></script>
 <script src="/co/co-apply.js?v=${ASSET_V}" defer></script>`;

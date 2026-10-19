@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import { createRequire } from 'node:module';
+import { tallyHtml } from '../../scripts/build-co-apply-tally.mjs';
 
 // Free CO lookup town pages: /co/<county>/<town>, its client checklist, county pages, the embed
 // setup page, the embedded lookup and the "Was this helpful?" votes. Renders the real pages from
@@ -139,9 +140,10 @@ for (const code of fillCodes) {
   assert.equal(T.townData(code).co.status, 'required', `${code}: only towns that require a resale CO`);
   assert.match(f.sha256, /^[0-9a-f]{64}$/, `${code}: the town's PDF is pinned by hash`);
   assert.match(f.url, /^https:\/\//, `${code}: the town's PDF comes from https`);
-  assert.ok(Number.isInteger(f.field_count) && f.field_count > 0, `${code}: field count is checked`);
-  assert.ok(f.title && Object.keys(f.fields).length >= 8, `${code}: has a title and a real field map`);
-  const asked = fill.askedKeys(f.fields);
+  assert.ok(Number.isInteger(f.field_count) && f.field_count >= 0 && Number.isInteger(f.pages) && f.pages > 0, `${code}: field and page counts are checked`);
+  assert.ok(f.title && Object.keys(f.fields || {}).length + (f.overlay || []).length >= 6, `${code}: has a title and a real field map`);
+  (f.overlay || []).forEach((o) => assert.ok(Number.isInteger(o.page) && o.page >= 0 && o.page < f.pages && o.x >= 0 && o.y >= 0 && o.w > 0, `${code}: overlay spots sit on a page`));
+  const asked = fill.askedKeys(f.fields, f.overlay);
   asked.forEach((k) => assert.ok(INPUTS.includes(k), `${code}: asks for a known answer (${k})`));
   r = await call(page, { county: t.countySlug, town: t.slug, view: 'apply' });
   assert.equal(r.status, 200, `${t.path}/apply renders`);
@@ -180,5 +182,9 @@ assert.equal(fill.fieldText({ mark: 'occupancy', is: 'vacant' }, v), 'X');
 assert.equal(fill.fieldText({ mark: 'occupancy', is: 'owner' }, v), '');
 assert.equal(fill.fieldText({ join: ['agent_name', 'agent_company'], sep: ', ' }, v), 'Pat Agent', 'joins skip blanks');
 assert.equal(fill.pdfSafe('Sam\u2019s LLC \u2014 \u201cMain\u201d'), 'Sam\'s LLC - "Main"', 'PDF text stays in the standard font');
+
+const coHome = fs.readFileSync(new URL('../../co/index.html', import.meta.url), 'utf8');
+const registryForTally = JSON.parse(fs.readFileSync(new URL('../data/co-application-forms.json', import.meta.url), 'utf8'));
+assert.ok(coHome.includes(tallyHtml(registryForTally)), '/co "Fill out online" county tally matches the registry (run node scripts/build-co-apply-tally.mjs)');
 
 console.log(`CO town pages contract passed (${rendered} town pages, ${rows.length} sitemap rows).`);
