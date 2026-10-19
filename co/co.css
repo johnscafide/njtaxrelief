@@ -240,3 +240,6 @@ body.embed .home .logo { margin-bottom: 18px; }
 .done .links a.primary { border-color: var(--blue); background: var(--blue); color: #fff; }
 @media (max-width: 640px) { .apply-form .qs { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @media (max-width: 359px) { .apply-form .qs { grid-template-columns: 1fr; } .apply-form .q.wide { grid-column: auto; } }
+.browse.tally { margin-top: 4px; }
+.tally .countylist span { margin-left: 8px; font-weight: 600; }
+.tally .countylist .none a, .tally .countylist .none span { color: var(--muted); font-weight: 400; }
