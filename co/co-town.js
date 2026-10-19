@@ -257,22 +257,20 @@
 
   var upd = document.querySelector('[data-updates]');
   if (upd) {
-    var updOn = upd.querySelector('[data-updates-on]'), updForm = upd.querySelector('[data-updates-form]'), updStatus = upd.querySelector('[data-updates-status]');
+    var updForm = upd.querySelector('[data-updates-form]'), updStatus = upd.querySelector('[data-updates-status]');
     var UPD_KEY = 'wd_co_updates';
     var updDone = function () {
-      updOn.checked = true; updOn.disabled = true; updForm.hidden = true;
+      updForm.hidden = true;
       updStatus.className = 'formstatus';
       updStatus.textContent = 'You’re set. We’ll email you when ' + town.name + ' changes.';
     };
     var updSaved = function () { try { return JSON.parse(store(UPD_KEY) || '{}') || {}; } catch (_) { return {}; } };
     if (updSaved()[town.code]) updDone();
-    updOn.addEventListener('change', function () {
-      updForm.hidden = !updOn.checked;
-      updStatus.textContent = '';
-      if (updOn.checked) {
-        updForm.elements.email.focus();
-        measure('co_updates_open', base());
-      }
+    var updOpened = false;
+    updForm.addEventListener('focusin', function () {
+      if (updOpened) return;
+      updOpened = true;
+      measure('co_updates_open', base());
     });
     updForm.addEventListener('submit', function (e) {
       e.preventDefault();

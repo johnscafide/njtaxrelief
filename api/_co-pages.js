@@ -11,7 +11,7 @@ const { homeLookupBox } = require('./_home-lookup-box');
 const { ORIGIN, SHARE_IMAGE, esc, countyLabel, fmtDate, STATUS } = T;
 const LOGO = '/property/branding/watchdog-logo-horizontal.svg';
 const MARK = '/property/branding/watchdog-mark.svg';
-const ASSET_V = '20261018a';
+const ASSET_V = '20261019a';
 // Tip line at the bottom of town pages.
 const TIP_URL = 'https://account.venmo.com/u/John-Scafide';
 
@@ -147,21 +147,22 @@ const DIALOG = `<dialog id="add-dlg" aria-labelledby="add-title">
 
 // "Get updates": email me when this town changes (api/co-updates.js).
 function updatesBox(t) {
-  return `<section class="updates" data-updates>
-<h2>Get updates</h2>
-<label class="on"><input type="checkbox" data-updates-on> Email me when ${esc(t.name)} CO requirements change</label>
-<form class="updates-form" data-updates-form novalidate hidden>
+  return `<aside class="updates" data-updates>
+<h2><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 22a2.5 2.5 0 0 0 2.45-2h-4.9A2.5 2.5 0 0 0 12 22zm7-6V11a7 7 0 0 0-5.5-6.84V3.5a1.5 1.5 0 0 0-3 0v.66A7 7 0 0 0 5 11v5l-2 2v1h18v-1z"/></svg>Get updates when ${esc(t.name)} changes</h2>
+<form class="updates-form" data-updates-form novalidate>
+<div class="updates-row">
 <label for="upd-email" class="sr">Email</label>
 <input id="upd-email" name="email" type="email" autocomplete="email" inputmode="email" maxlength="200" placeholder="Email" required>
+<button class="go" type="submit">Turn on</button>
+</div>
 <fieldset class="role"><legend class="sr">I’m a</legend>
 <label><input type="radio" name="role" value="homeowner" required> Homeowner</label>
 <label><input type="radio" name="role" value="professional"> Agent or pro</label>
 </fieldset>
 <label class="hp" aria-hidden="true">Website <input name="website" tabindex="-1" autocomplete="off"></label>
-<button class="go" type="submit">Turn on</button>
 </form>
 <p class="formstatus" data-updates-status role="status" aria-live="polite"></p>
-</section>`;
+</aside>`;
 }
 
 const SEARCH_TPL = `<template id="search-tpl">
@@ -275,12 +276,13 @@ function townPage(t, opts) {
   meta += '<span data-helpful-summary></span>';
   const attrs = `data-co-town data-code="${t.code}" data-name="${esc(t.name)}" data-county="${esc(countyLabel(t.county))}" data-status="${d ? d.co.status : 'not_available'}" data-url="${esc(ORIGIN + t.path)}" data-surface="${embed ? 'embed' : 'page'}"`;
   let out = (embed ? '' : crumbs(t)) + `<div class="head"><div><h1 class="town">${esc(t.name)}</h1><p class="meta">${meta}</p></div>${d ? votes() : ''}</div>`;
+  if (d) out += shareRow(t, embed);
+  if (!embed) out = `<div class="toprow"><div class="toprow-main">${out}</div>${updatesBox(t)}</div>`;
   if (d) {
-    out += shareRow(t, embed) + facts(d) + '<button class="fix" type="button" data-fix>Report a correction</button>';
-    if (!embed) out += updatesBox(t) + homeLookupBox(t.name);
+    out += facts(d) + '<button class="fix" type="button" data-fix>Report a correction</button>';
+    if (!embed) out += homeLookupBox(t.name);
   } else {
     out += '<p>Not available yet.</p><button class="add" type="button" data-add>Add CO Requirements</button>';
-    if (!embed) out += updatesBox(t);
   }
   if (!embed) {
     const county = T.findCounty(t.countySlug);
