@@ -152,8 +152,18 @@
       var size = o.size || 10;
       while (o.w && size > 6 && font.widthOfTextAtSize(text, size) > o.w) size -= 0.5;
       while (o.w && text.length > 1 && font.widthOfTextAtSize(text, size) > o.w) text = text.slice(0, -1);
-      page.drawText(text, { x: o.x, y: o.y, size: size, font: font, color: P.rgb(0.05, 0.1, 0.35) });
+      var at = upright(page, o.x, o.y);
+      page.drawText(text, { x: at.x, y: at.y, rotate: P.degrees(at.r), size: size, font: font, color: P.rgb(0.05, 0.1, 0.35) });
     });
+  }
+
+  // Overlay spots are measured on the page as it shows on screen; turn them back for pages saved sideways (/Rotate).
+  function upright(page, x, y) {
+    var box = page.getMediaBox(), r = ((page.getRotation().angle % 360) + 360) % 360;
+    if (r === 90) return { x: box.x + box.width - y, y: box.y + x, r: 90 };
+    if (r === 180) return { x: box.x + box.width - x, y: box.y + box.height - y, r: 180 };
+    if (r === 270) return { x: box.x + y, y: box.y + box.height - x, r: 270 };
+    return { x: x, y: y, r: 0 };
   }
 
   // Standard PDF fonts only cover Latin-1; swap the usual curly quotes and dashes and drop the rest.
@@ -163,7 +173,7 @@
       .normalize('NFKD').replace(/[\u0300-\u036f]/g, '').replace(/[^\x20-\x7e\xa0-\xff]/g, '');
   }
 
-  var api = { fillDoc: fillDoc, values: values, fieldText: fieldText, askedKeys: askedKeys, fillMap: fillMap, pdfSafe: pdfSafe };
+  var api = { fillDoc: fillDoc, values: values, fieldText: fieldText, askedKeys: askedKeys, fillMap: fillMap, pdfSafe: pdfSafe, upright: upright };
   if (typeof module === 'object' && module.exports) module.exports = api;
   root.WatchdogCoApply = api;
   if (typeof document === 'undefined') return;

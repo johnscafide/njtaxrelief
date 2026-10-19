@@ -181,6 +181,10 @@ assert.equal(v.vacant_yn, 'Yes');
 assert.equal(fill.fieldText({ mark: 'occupancy', is: 'vacant' }, v), 'X');
 assert.equal(fill.fieldText({ mark: 'occupancy', is: 'owner' }, v), '');
 assert.equal(fill.fieldText({ join: ['agent_name', 'agent_company'], sep: ', ' }, v), 'Pat Agent', 'joins skip blanks');
+const fakePage = (angle) => ({ getMediaBox: () => ({ x: 0, y: 0, width: 612, height: 792 }), getRotation: () => ({ angle }) });
+assert.deepEqual(fill.upright(fakePage(0), 100, 200), { x: 100, y: 200, r: 0 });
+assert.deepEqual(fill.upright(fakePage(270), 100, 200), { x: 200, y: 692, r: 270 }, 'sideways pages get on-screen spots turned back');
+assert.deepEqual(fill.upright(fakePage(90), 100, 200), { x: 412, y: 100, r: 90 });
 assert.equal(fill.pdfSafe('Sam\u2019s LLC \u2014 \u201cMain\u201d'), 'Sam\'s LLC - "Main"', 'PDF text stays in the standard font');
 
 const coHome = fs.readFileSync(new URL('../../co/index.html', import.meta.url), 'utf8');
