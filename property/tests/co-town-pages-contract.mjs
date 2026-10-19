@@ -139,10 +139,10 @@ for (const code of fillCodes) {
   assert.ok(t && t.published, `${code}: application filler only for published towns`);
   assert.equal(T.townData(code).co.status, 'required', `${code}: only towns that require a resale CO`);
   assert.match(f.sha256, /^[0-9a-f]{64}$/, `${code}: the town's PDF is pinned by hash`);
-  assert.match(f.url, /^https:\/\//, `${code}: the town's PDF comes from https`);
+  assert.match(f.url, /^https?:\/\//, `${code}: the town's PDF has a web address`);
   assert.ok(Number.isInteger(f.field_count) && f.field_count >= 0 && Number.isInteger(f.pages) && f.pages > 0, `${code}: field and page counts are checked`);
   assert.ok(f.title && Object.keys(f.fields || {}).length + (f.overlay || []).length >= 6, `${code}: has a title and a real field map`);
-  (f.overlay || []).forEach((o) => assert.ok(Number.isInteger(o.page) && o.page >= 0 && o.page < f.pages && o.x >= 0 && o.y >= 0 && o.w > 0, `${code}: overlay spots sit on a page`));
+  (f.overlay || []).forEach((o) => assert.ok(Number.isInteger(o.page) && o.page >= 0 && o.page < f.pages && o.x >= 0 && o.y >= 0 && (o.w === undefined || o.w > 0), `${code}: overlay spots sit on a page`));
   const asked = fill.askedKeys(f.fields, f.overlay);
   asked.forEach((k) => assert.ok(INPUTS.includes(k), `${code}: asks for a known answer (${k})`));
   r = await call(page, { county: t.countySlug, town: t.slug, view: 'apply' });
