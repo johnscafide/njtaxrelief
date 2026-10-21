@@ -29,7 +29,7 @@ function render(x) {
   const cat = CATEGORY.get(x.category);
   const faq = [
     { q: `What does ${x.term} mean in New Jersey?`, a: x.definition },
-    { q: 'Should I rely on this definition for a filing or transaction?', a: 'Use it as a plain-English starting point. Check the official source, statute or a professional before you file or sign anything.' }
+    { q: 'Should I rely on this definition for a filing or transaction?', a: 'Use it as a simple starting point. Check the official source, statute or a professional before you file or sign anything.' }
   ];
   const schema = [
     { '@context': 'https://schema.org', '@type': 'DefinedTerm', name: x.term, description: x.definition, url, inDefinedTermSet: `${ORIGIN}/glossary` },
@@ -57,7 +57,7 @@ ${schema.map((s) => `<script type="application/ld+json">${j(s)}</script>`).join(
 <h1>${e(x.term)}</h1>
 <p class="gl-def">${e(x.definition)}</p>
 <section class="wg-card"><h2>New Jersey example</h2><p class="gl-example">${e(x.example)}</p></section>
-<section class="wg-card gl-source"><h2>Official source</h2><p><a href="${e(x.source)}" rel="noopener">${e(x.source_title || x.source)}</a></p><p class="gl-disclaimer">This is a plain-English summary. Rules and dollar amounts change, so check the official source or a professional before you file or sign anything.</p></section>
+<section class="wg-card gl-source"><h2>Official source</h2><p><a href="${e(x.source)}" rel="noopener">${e(x.source_title || x.source)}</a></p><p class="gl-disclaimer">This is a simple summary. Rules and dollar amounts change, so check the official source or a professional before you file or sign anything.</p></section>
 ${links ? `<section class="wg-card"><h2>Related terms</h2><ul class="gl-related">${links}</ul></section>` : ''}
 <section class="wg-card"><h2>Put it to work</h2><div class="wg-actions"><a class="wg-btn" href="/">Look up your home</a><a class="wg-btn wg-btn-quiet" href="/games">Play today's games</a></div></section>
 </div></main>
