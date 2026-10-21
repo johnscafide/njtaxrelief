@@ -42,7 +42,7 @@ const schema = {
   '@id': `${ORIGIN}/glossary`,
   name: 'Watchdog New Jersey property glossary',
   url: `${ORIGIN}/glossary`,
-  description: 'Plain-English definitions for New Jersey property tax, relief program, home buying, mortgage and renting terms, each tied to an official New Jersey source.',
+  description: 'Simple definitions for New Jersey property tax, relief program, home buying, mortgage and renting terms, each tied to an official New Jersey source.',
   hasDefinedTerm: terms.map((t) => ({ '@type': 'DefinedTerm', name: t.term, url: `${ORIGIN}/glossary/${t.slug}` }))
 };
 
@@ -53,7 +53,7 @@ const html = `<!doctype html>
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="index,follow">
 <title>New Jersey Property Glossary: Taxes, Relief, Buying and Renting | Watchdog</title>
-<meta name="description" content="Plain-English definitions for ${terms.length} New Jersey property terms: tax bills, assessments, appeals, ANCHOR and Senior Freeze, buying, mortgages and renting. Each one cites an official source.">
+<meta name="description" content="Simple definitions for ${terms.length} New Jersey property terms: tax bills, assessments, appeals, ANCHOR and Senior Freeze, buying, mortgages and renting. Each one cites an official source.">
 <link rel="canonical" href="${ORIGIN}/glossary">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@500;700;800&display=swap" rel="stylesheet">
@@ -71,7 +71,7 @@ const html = `<!doctype html>
 
 <main class="wg-main" id="wg-main">
   <h1>New Jersey property glossary</h1>
-  <p class="wg-lede">Plain-English definitions for the words on your tax bill, your relief application, your closing papers and your lease. Every term links to the official New Jersey source it comes from.</p>
+  <p class="wg-lede">Simple definitions for the words on your tax bill, your relief application, your closing papers and your lease. Every term links to the official New Jersey source it comes from.</p>
   <div class="gl-search">
     <label for="gl-q">Search the glossary</label>
     <input id="gl-q" type="search" placeholder="Try ANCHOR or escrow" autocomplete="off">
