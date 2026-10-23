@@ -74,6 +74,29 @@
   body[data-ms-wizard="review"] .msfr-art img{
     max-height:52dvh;
   }
+  body[data-ms-wizard="review"] .mw-top{
+    min-height:68px;
+    height:auto;
+    padding-left:max(14px,env(safe-area-inset-left));
+    padding-right:max(14px,env(safe-area-inset-right));
+  }
+  body[data-ms-wizard="review"] .mw-stage{
+    padding-left:max(12px,env(safe-area-inset-left));
+    padding-right:max(12px,env(safe-area-inset-right));
+  }
+  body[data-ms-wizard="review"] .mw-nav a,
+  body[data-ms-wizard="review"] .mw-nav button{
+    min-height:48px;
+    font-size:15px;
+    line-height:1.2;
+    touch-action:manipulation;
+  }
+  body[data-ms-wizard="review"] #pl-toast{
+    max-width:calc(100vw - max(24px,env(safe-area-inset-left)) - max(24px,env(safe-area-inset-right)));
+    font-size:14px;
+    line-height:1.4;
+    overflow-wrap:anywhere;
+  }
   body[data-ms-wizard="review"] [data-commerce-quote][aria-busy="true"],
   body[data-ms-wizard="review"] [data-commerce-checkout][aria-busy="true"]{
     cursor:progress;
@@ -81,9 +104,24 @@
   body[data-ms-wizard="review"] [data-commerce-quote]:focus-visible,
   body[data-ms-wizard="review"] [data-commerce-checkout]:focus-visible,
   body[data-ms-wizard="review"] .msfr-actions a:focus-visible,
-  body[data-ms-wizard="review"] .msfr-actions button:focus-visible{
+  body[data-ms-wizard="review"] .msfr-actions button:focus-visible,
+  body[data-ms-wizard="review"] .mw-nav a:focus-visible,
+  body[data-ms-wizard="review"] .mw-nav button:focus-visible{
     outline:3px solid #2f6fed;
     outline-offset:3px;
+  }
+}
+@media (max-width:620px){
+  body[data-ms-wizard="review"] .mw-stage{
+    padding-bottom:calc(96px + env(safe-area-inset-bottom));
+  }
+  body[data-ms-wizard="review"] .mw-nav{
+    position:sticky;
+    bottom:0;
+    z-index:60;
+    padding:10px max(2px,env(safe-area-inset-right)) calc(10px + env(safe-area-inset-bottom)) max(2px,env(safe-area-inset-left))!important;
+    margin-left:calc(-1 * max(2px,env(safe-area-inset-left)));
+    margin-right:calc(-1 * max(2px,env(safe-area-inset-right)));
   }
 }
 @media (max-width:420px){
