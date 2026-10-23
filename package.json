@@ -7,6 +7,8 @@
     "pagefind:index": "node scripts/build-pagefind.mjs",
     "search-growth:cohort": "node scripts/apply-search-growth-cohort.mjs",
     "public-performance:prepare": "node scripts/apply-public-performance.mjs",
+    "performance:check": "node scripts/check-public-performance.mjs",
+    "performance:report": "node scripts/check-public-performance.mjs --report-only",
     "web-signals-growth:prepare": "node scripts/apply-web-signals-growth-ui.mjs",
     "live-soft-launch-ui:prepare": "node scripts/apply-live-soft-launch-ui.mjs",
     "property-detail-map:prepare": "node scripts/apply-property-detail-map-ui.mjs",
