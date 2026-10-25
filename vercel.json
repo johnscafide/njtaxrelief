@@ -649,6 +649,14 @@
       "destination": "/property/backoffice/town-info/index.html"
     },
     {
+      "source": "/backoffice/image-cleaner/",
+      "destination": "/property/backoffice/image-cleaner/index.html"
+    },
+    {
+      "source": "/backoffice/image-cleaner",
+      "destination": "/property/backoffice/image-cleaner/index.html"
+    },
+    {
       "source": "/town-needs",
       "destination": "/property/town-needs/index.html"
     },

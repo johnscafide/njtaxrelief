@@ -1,6 +1,6 @@
 /* Watchdog Backoffice shell, shared by every Backoffice page.
    - Developer-only navigation (Application Reviews, Professional Reviews, Town Info,
-     Real Estate OS) stays hidden unless the signed-in Watchdog account passes
+     Real Estate OS, Image Cleaner) stays hidden unless the signed-in Watchdog account passes
      the server-side is_watchdog_developer check.
    - Pending-review badge counts are requested only for developers.
    - "Lock Backoffice" on pages other than Lead Intelligence revokes this tab's

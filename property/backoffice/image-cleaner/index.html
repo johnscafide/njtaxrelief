@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en" data-access-require="developer">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="robots" content="noindex,nofollow,noarchive">
+  <meta name="referrer" content="same-origin">
+  <title>Image Cleaner | Watchdog Backoffice</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@400;500;600;700;800&display=swap">
+  <link rel="stylesheet" href="/property/backoffice/backoffice-board.css?v=20260928a">
+  <link rel="stylesheet" href="/property/backoffice/image-cleaner/image-cleaner.css?v=20261025a">
+</head>
+<body class="bo-body" data-bo-page="image-cleaner">
+  <a class="bo-skip" href="#bo-main">Skip to content</a>
+
+  <header class="bo-shell">
+    <div class="bo-shell-bar">
+      <a class="bo-brand" href="/backoffice"><span class="bo-mark" aria-hidden="true">W</span><span class="bo-brand-text"><b>Watchdog</b><small>Backoffice</small></span></a>
+      <nav class="bo-nav" aria-label="Backoffice">
+        <a href="/backoffice#leads">Leads</a>
+        <a href="/backoffice#leadiq">LeadIQ Tools</a>
+        <a href="/backoffice/reviews" data-bo-dev-only hidden>Application Reviews <span class="bo-review-badge" data-bo-badge="reviews" hidden><span data-bo-badge-count>0</span><span class="bo-sr"> waiting</span></span></a>
+        <a href="/backoffice/professional-verifications" data-bo-dev-only hidden>Professional Reviews <span class="bo-review-badge" data-bo-badge="professional" hidden><span data-bo-badge-count>0</span><span class="bo-sr"> waiting</span></span></a>
+        <a href="/backoffice/town-info" data-bo-dev-only hidden>Town Info <span class="bo-review-badge" data-bo-badge="town" hidden><span data-bo-badge-count>0</span><span class="bo-sr"> waiting</span></span></a>
+        <a href="/backoffice/realestate" data-bo-dev-only hidden>Real Estate OS</a>
+        <a href="/backoffice/image-cleaner" aria-current="page" data-bo-dev-only hidden>Image Cleaner</a>
+      </nav>
+      <div class="bo-shell-session">
+        <button type="button" class="bo-btn bo-btn-ghost bo-lock" data-bo-lock>Lock Backoffice</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="bo-page ic-main" id="bo-main" tabindex="-1">
+    <header class="ic-topbar">
+      <h1>Image Cleaner</h1>
+      <p>Removes location, camera and other hidden info from photos. It all happens in this browser, so nothing gets uploaded.</p>
+    </header>
+
+    <section class="ic-panel" id="ic-pick">
+      <div class="ic-drop" id="ic-drop">
+        <b>Drop photos or a .zip here</b>
+        <div class="ic-drop-actions">
+          <label class="bo-btn bo-btn-primary" for="ic-files">Choose files</label>
+          <label class="bo-btn bo-btn-ghost" for="ic-folder">Choose a folder</label>
+        </div>
+        <input class="bo-sr" id="ic-files" type="file" multiple accept="image/*,.zip,.heic,.heif,.avif,.tif,.tiff,application/zip">
+        <input class="bo-sr" id="ic-folder" type="file" webkitdirectory multiple>
+      </div>
+    </section>
+
+    <section class="ic-panel" id="ic-work" hidden aria-live="polite">
+      <header class="ic-work-head">
+        <div>
+          <h2 id="ic-status">Cleaning...</h2>
+          <p class="ic-summary" id="ic-summary"></p>
+        </div>
+        <div class="ic-work-actions">
+          <a class="bo-btn bo-btn-primary" id="ic-download" hidden>Download .zip</a>
+          <button class="bo-btn bo-btn-ghost" id="ic-reset" type="button" hidden>Start over</button>
+        </div>
+      </header>
+      <progress class="ic-progress" id="ic-progress" max="1" value="0"></progress>
+      <ul class="ic-list" id="ic-list"></ul>
+    </section>
+  </main>
+
+  <template id="ic-row">
+    <li class="ic-row"><span class="ic-name"></span><span class="ic-tags"></span></li>
+  </template>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+  <script src="/property/js/access-guard.js"></script>
+  <script src="/property/backoffice/backoffice-shell.js?v=20260930a" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/fflate@0.8.2/umd/index.js" integrity="sha384-DT0Ls0mO7JmjTnT+oBuMhEJzYJO1zUqzuuMXNdnOmOQRIpN2BgSjvBV/j50NngIT" crossorigin="anonymous" defer></script>
+  <script src="/property/backoffice/image-cleaner/strip-metadata.js?v=20261025a" defer></script>
+  <script src="/property/backoffice/image-cleaner/image-cleaner.js?v=20261025a" defer></script>
+</body>
+</html>
