@@ -657,6 +657,14 @@
       "destination": "/property/backoffice/image-cleaner/index.html"
     },
     {
+      "source": "/backoffice/quote-image/",
+      "destination": "/property/backoffice/quote-image/index.html"
+    },
+    {
+      "source": "/backoffice/quote-image",
+      "destination": "/property/backoffice/quote-image/index.html"
+    },
+    {
       "source": "/town-needs",
       "destination": "/property/town-needs/index.html"
     },

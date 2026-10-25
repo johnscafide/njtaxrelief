@@ -18,6 +18,7 @@ One shared shell (`backoffice-board.css` + `backoffice-shell.js`) is used by eve
 - **Leads** and **LeadIQ Tools**, both operators.
 - **Application Reviews** (`/backoffice/reviews`), **Professional Reviews** (`/backoffice/professional-verifications`) and **Real Estate OS** (`/backoffice/realestate`), shown only when the signed-in account passes the server-side `is_watchdog_developer` check. Pending-review badge counts are requested only for developers. Those pages keep their own developer gate (`data-access-require="developer"`).
 - **Image Cleaner** (`/backoffice/image-cleaner`), developer-only, removes EXIF, GPS, XMP, IPTC, comments and text chunks from JPEG, PNG, WebP and GIF files without re-saving the pixels (HEIC, AVIF and TIFF are redrawn as JPG when the browser can open them). It takes photos, a folder or .zip files and returns a .zip with the same names and folders. Everything runs in the browser (`strip-metadata.js` + fflate); nothing is uploaded. The ICC color profile and JPEG rotation flag are kept.
+- **Quote Image** (`/backoffice/quote-image`), developer-only, turns typed text into a 1122x1402 PNG post mockup from John in X, Threads or Instagram style (his photo, blue check, `@johnvscafide`). The photo and handle are fixed. Text over about six lines shrinks to fit. It draws on a canvas in the browser; nothing is uploaded. Apple devices use the system font (SF Pro), other devices use Inter sized to match.
 - `crm-companion/` is a developer telemetry page that is not linked from the Backoffice nav.
 
 ## Lead workflow

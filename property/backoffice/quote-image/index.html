@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en" data-access-require="developer">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="robots" content="noindex,nofollow,noarchive">
+  <meta name="referrer" content="same-origin">
+  <title>Quote Image | Watchdog Backoffice</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@400;500;600;700;800&family=Inter:wght@400;500;700&display=swap">
+  <link rel="stylesheet" href="/property/backoffice/backoffice-board.css?v=20260928a">
+  <link rel="stylesheet" href="/property/backoffice/quote-image/quote-image.css?v=20261025a">
+</head>
+<body class="bo-body" data-bo-page="quote-image">
+  <a class="bo-skip" href="#bo-main">Skip to content</a>
+
+  <header class="bo-shell">
+    <div class="bo-shell-bar">
+      <a class="bo-brand" href="/backoffice"><span class="bo-mark" aria-hidden="true">W</span><span class="bo-brand-text"><b>Watchdog</b><small>Backoffice</small></span></a>
+      <nav class="bo-nav" aria-label="Backoffice">
+        <a href="/backoffice#leads">Leads</a>
+        <a href="/backoffice#leadiq">LeadIQ Tools</a>
+        <a href="/backoffice/reviews" data-bo-dev-only hidden>Application Reviews <span class="bo-review-badge" data-bo-badge="reviews" hidden><span data-bo-badge-count>0</span><span class="bo-sr"> waiting</span></span></a>
+        <a href="/backoffice/professional-verifications" data-bo-dev-only hidden>Professional Reviews <span class="bo-review-badge" data-bo-badge="professional" hidden><span data-bo-badge-count>0</span><span class="bo-sr"> waiting</span></span></a>
+        <a href="/backoffice/town-info" data-bo-dev-only hidden>Town Info <span class="bo-review-badge" data-bo-badge="town" hidden><span data-bo-badge-count>0</span><span class="bo-sr"> waiting</span></span></a>
+        <a href="/backoffice/realestate" data-bo-dev-only hidden>Real Estate OS</a>
+        <a href="/backoffice/image-cleaner" data-bo-dev-only hidden>Image Cleaner</a>
+        <a href="/backoffice/quote-image" aria-current="page" data-bo-dev-only hidden>Quote Image</a>
+      </nav>
+      <div class="bo-shell-session">
+        <button type="button" class="bo-btn bo-btn-ghost bo-lock" data-bo-lock>Lock Backoffice</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="bo-page qi-main" id="bo-main" tabindex="-1">
+    <header class="qi-topbar">
+      <h1>Quote Image</h1>
+    </header>
+
+    <div class="qi-grid">
+      <section class="qi-panel qi-form">
+        <fieldset class="qi-styles">
+          <legend class="qi-label">Style</legend>
+          <label><input type="radio" name="qi-style" value="x" checked> X</label>
+          <label><input type="radio" name="qi-style" value="threads"> Threads</label>
+          <label><input type="radio" name="qi-style" value="instagram"> Instagram</label>
+        </fieldset>
+        <label class="qi-label" for="qi-text">Your text</label>
+        <textarea id="qi-text" rows="7" maxlength="600">A lot of confidence
+is just deciding
+not to over-explain
+yourself.</textarea>
+        <div class="qi-actions">
+          <button class="bo-btn bo-btn-primary" id="qi-download" type="button">Download PNG</button>
+        </div>
+      </section>
+
+      <section class="qi-panel qi-preview">
+        <canvas id="qi-canvas" width="1122" height="1402" role="img" aria-label="Preview of the post image"></canvas>
+      </section>
+    </div>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+  <script src="/property/js/access-guard.js"></script>
+  <script src="/property/backoffice/backoffice-shell.js?v=20260930a" defer></script>
+  <script src="/property/backoffice/quote-image/quote-image.js?v=20261025a" defer></script>
+</body>
+</html>
