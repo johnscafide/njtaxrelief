@@ -9,8 +9,9 @@ const API='/api/watchdog-team-listings';
 const ORIGIN='https://www.watchdogindex.com';
 const MAX_PHOTOS=40;
 const MAX_SIDE=2048;
-const LIVE=new Set(['coming_soon','active','under_contract']);
-const STATUS_LABEL={coming_soon:'Coming soon',active:'For sale',under_contract:'Under contract',sold:'Sold',off_market:'Off market'};
+const LIVE=new Set(['coming_soon','active','under_contract','pending']);
+const STALE_DAYS=14;
+const STATUS_LABEL={coming_soon:'Coming soon',active:'For sale',under_contract:'Under contract',pending:'Pending',sold:'Sold',off_market:'Off market'};
 const FIELDS=['mls_number','status','price','address','unit','city','zip','county','beds','baths_full','baths_half','sqft','lot','year_built','property_type','style','annual_tax','school_district','subdivision','list_date','agent_name','brokerage','remarks'];
 
 const $=(id)=>document.getElementById(id);
@@ -43,7 +44,7 @@ function where(l){return [l.address+(l.unit?' #'+l.unit:''),l.city].filter(Boole
 
 // ---------- social post text ----------
 function postText(l){
-  const lead={coming_soon:'Coming soon',active:'Just listed',under_contract:'Under contract',sold:'Sold'}[l.status]||'Listed';
+  const lead={coming_soon:'Coming soon',active:'Just listed',under_contract:'Under contract',pending:'Pending',sold:'Just sold'}[l.status]||'Listed';
   return [
     lead+': '+where(l)+', NJ',
     [money(l.price),factsLine(l)].filter(Boolean).join(' · '),
@@ -56,6 +57,28 @@ function postText(l){
 function visible(){
   return state.listings.filter((l)=>state.filter==='all'||(state.filter==='mine'?l.agent_user_id===state.userId:LIVE.has(l.status)&&l.published));
 }
+function stale(l){
+  if(!LIVE.has(l.status)||!l.can_edit)return false;
+  const t=Date.parse(l.updated_at||l.created_at||'');
+  return t&&Date.now()-t>STALE_DAYS*864e5;
+}
+function statusPicker(l){
+  const s=el('select',{class:'tl-status-pick','aria-label':'Status for '+where(l),'data-status':l.id});
+  s.append(...Object.keys(STATUS_LABEL).map((k)=>el('option',{value:k,text:STATUS_LABEL[k]})));
+  s.value=l.status;
+  return s;
+}
+async function changeStatus(sel){
+  const l=state.listings.find((x)=>x.id===sel.dataset.status);
+  if(!l)return;
+  sel.disabled=true;
+  try{
+    const out=await call('set_status',{id:l.id,status:sel.value});
+    Object.assign(l,out.listing);
+    toast(where(l)+' is now '+(STATUS_LABEL[l.status]||l.status).toLowerCase()+'.');
+  }catch(e){sel.value=l.status;toast(e.message||'That didn’t save.')}
+  renderList();
+}
 function renderList(){
   const list=$('tl-list');
   const rows=visible();
@@ -66,11 +89,12 @@ function renderList(){
       photo?el('img',{src:photo,alt:'',loading:'lazy'}):el('span',{class:'tl-noimg','aria-hidden':'true'}),
       el('div',null,
         el('h3',{text:where(l)}),
-        el('p',null,el('span',{class:'tl-badge',text:STATUS_LABEL[l.status]||l.status}),l.published?null:el('span',{class:'tl-badge is-hidden',text:'Hidden'}),el('span',{class:'tl-price',text:money(l.price)})),
+        el('p',null,el('span',{class:'tl-badge',text:STATUS_LABEL[l.status]||l.status}),l.published?null:el('span',{class:'tl-badge is-hidden',text:'Hidden'}),stale(l)?el('span',{class:'tl-badge is-stale',text:'Still '+(STATUS_LABEL[l.status]||'').toLowerCase()+'?'}):null,el('span',{class:'tl-price',text:money(l.price)})),
         el('p',{text:[factsLine(l),l.mls_number?'MLS# '+l.mls_number:'',l.agent_name].filter(Boolean).join(' · ')})),
       el('div',{class:'tl-item-actions'},
         el('button',{class:'bo-btn bo-btn-ghost',type:'button','data-copy':l.id,text:'Copy post text'}),
         l.published?el('a',{class:'bo-btn bo-btn-ghost',href:'/listings/'+l.slug,target:'_blank',rel:'noopener',text:'Open page'}):null,
+        l.can_edit?statusPicker(l):null,
         l.can_edit?el('button',{class:'bo-btn bo-btn-primary',type:'button','data-edit':l.id,text:'Edit'}):null));
   }));
 }
@@ -104,7 +128,7 @@ function renderPhotos(){
     return el('li',{class:p.uploading?'is-uploading':''},el('img',{alt:'Photo '+(i+1),src:p.preview||p.url}),i===0?el('span',{class:'tl-cover',text:'Cover'}):null,el('div',{class:'tl-photo-tools'},cover,drop));
   }));
   const waiting=state.photos.filter((p)=>p.uploading).length;
-  $('tl-photo-note').textContent=waiting?'Uploading '+waiting+' photo'+(waiting>1?'s':'')+'...':(state.photos.length?'':'No photos yet. The PDF’s photos are small, so add the full-size ones if you have them.');
+  $('tl-photo-note').textContent=waiting?'Uploading '+waiting+' photo'+(waiting>1?'s':'')+'...':(state.photos.length?'':'No photos yet. In Bright, download all the photos, then drop the .zip or the photos here.');
 }
 
 async function shrink(blob){
@@ -118,18 +142,16 @@ async function shrink(blob){
   if(!out)throw new Error('That photo couldn’t be read.');
   return out;
 }
-async function uploadPhoto(blob){
-  const item={uploading:true,preview:URL.createObjectURL(blob)};
-  state.photos.push(item);renderPhotos();
+async function uploadPhoto(item){
   try{
-    const jpg=await shrink(blob);
+    const jpg=await shrink(item.blob);
     const slot=await call('photo_upload',{type:'image/jpeg'});
     const fd=new FormData();
     fd.append('cacheControl','31536000');
     fd.append('',jpg,'photo.jpg');
     const r=await fetch(slot.upload_url,{method:'PUT',headers:{'x-upsert':'false'},body:fd});
     if(!r.ok)throw new Error('A photo didn’t finish uploading. Please try again.');
-    item.url=slot.public_url;item.uploading=false;
+    item.url=slot.public_url;item.uploading=false;delete item.blob;
   }catch(e){
     const i=state.photos.indexOf(item);if(i>=0)state.photos.splice(i,1);
     toast(e.message||'A photo didn’t upload.');
@@ -139,7 +161,40 @@ async function uploadPhoto(blob){
 async function addPhotos(blobs){
   const room=MAX_PHOTOS-state.photos.length;
   if(room<=0){toast('That’s the most photos one listing can have ('+MAX_PHOTOS+').');return}
-  for(const b of [...blobs].slice(0,room))await uploadPhoto(b);
+  const list=[...blobs];
+  if(list.length>room)toast('Only the first '+room+' photos were added. One listing can have '+MAX_PHOTOS+'.');
+  const items=list.slice(0,room).map((blob)=>({uploading:true,blob,preview:URL.createObjectURL(blob)}));
+  state.photos.push(...items);renderPhotos();
+  const queue=items.slice();
+  await Promise.all([0,1,2].map(async()=>{while(queue.length)await uploadPhoto(queue.shift())}));
+}
+
+const PHOTO_EXT=/\.(jpe?g|png|webp|heic|heif)$/i;
+const ZIP_JUNK=/(^|\/)(__MACOSX\/|\.DS_Store$|Thumbs\.db$|\._)/i;
+const byName=(a,b)=>a.name.localeCompare(b.name,undefined,{numeric:true,sensitivity:'base'});
+function unzip(bytes){
+  return new Promise((resolve,reject)=>{
+    window.fflate.unzip(bytes,{filter:(f)=>PHOTO_EXT.test(f.name)&&!ZIP_JUNK.test(f.name)},(err,files)=>err?reject(err):resolve(files));
+  });
+}
+// Bright's "download all photos" gives a .zip; numbered files keep the MLS order.
+async function collectPhotos(fileList){
+  const out=[];
+  for(const f of [...fileList].sort(byName)){
+    if(/\.zip$/i.test(f.name)||f.type==='application/zip'||f.type==='application/x-zip-compressed'){
+      if(!window.fflate)throw new Error('Still loading. Try again in a second.');
+      const files=await unzip(new Uint8Array(await f.arrayBuffer()));
+      Object.keys(files).map((name)=>({name,data:files[name]})).sort(byName).forEach((x)=>out.push(new Blob([x.data],{type:/\.png$/i.test(x.name)?'image/png':/\.webp$/i.test(x.name)?'image/webp':'image/jpeg'})));
+    }else if(/^image\//.test(f.type)||PHOTO_EXT.test(f.name))out.push(f);
+  }
+  return out;
+}
+async function takePhotos(fileList){
+  try{
+    const blobs=await collectPhotos(fileList);
+    if(!blobs.length){toast('No photos found in that.');return}
+    await addPhotos(blobs);
+  }catch(e){toast(e.message||'Those photos couldn’t be read.')}
 }
 
 function openEditor(listing,parsed){
@@ -183,7 +238,10 @@ async function readPdf(file){
     if(!f.mls_number&&/^[A-Z]{2,6}\d{4,12}$/i.test(lookup.replace(/\s+/g,'')))f.mls_number=lookup.replace(/\s+/g,'').toUpperCase();
     const dupe=f.mls_number&&state.listings.find((l)=>l.mls_number===f.mls_number);
     if(dupe&&!dupe.can_edit){say('tl-start-status','MLS# '+f.mls_number+' is already on the list'+(dupe.agent_name?', added by '+dupe.agent_name:'')+'.','bad');return}
-    if(dupe){openEditor(dupe,f);say('tl-form-status','This MLS# is already on the list, so the PDF’s details were filled into it. Save to update it.');if(out.photos.length&&!dupe.photos.length)await addPhotos(out.photos);return}
+    if(dupe){
+      const moved=f.status&&f.status!==dupe.status;
+      openEditor(dupe,f);
+      say('tl-form-status',moved?'The PDF says this listing is now '+STATUS_LABEL[f.status].toLowerCase()+' (it was '+(STATUS_LABEL[dupe.status]||dupe.status).toLowerCase()+'). Save to update it.':'This MLS# is already on the list, so the PDF’s details were filled into it. Save to update it.');if(out.photos.length&&!dupe.photos.length)await addPhotos(out.photos);return}
     openEditor(null,f);
     if(!lookupMatches(lookup,f))say('tl-form-status','Heads up: the PDF doesn’t look like it matches "'+lookup+'". Check it’s the right printout.','bad');
     const found=[f.price,f.beds,f.address,f.mls_number].filter(Boolean).length;
@@ -252,7 +310,11 @@ function bind(){
     openEditor(null,f);say('tl-form-status','');
   });
   $('tl-cancel').addEventListener('click',closeEditor);
-  $('tl-photo-input').addEventListener('change',(e)=>{addPhotos(e.target.files);e.target.value=''});
+  $('tl-photo-input').addEventListener('change',(e)=>{takePhotos(e.target.files);e.target.value=''});
+  const photoDrop=$('tl-photo-drop');
+  ['dragenter','dragover'].forEach((t)=>photoDrop.addEventListener(t,(e)=>{e.preventDefault();photoDrop.classList.add('is-over')}));
+  ['dragleave','drop'].forEach((t)=>photoDrop.addEventListener(t,(e)=>{e.preventDefault();photoDrop.classList.remove('is-over')}));
+  photoDrop.addEventListener('drop',(e)=>takePhotos(e.dataTransfer.files));
   $('tl-add-feature').addEventListener('click',()=>{const li=featureRow();$('tl-features').appendChild(li);li.children[0].focus()});
   form().addEventListener('submit',save);
   $('tl-remove').addEventListener('click',removeListing);
@@ -266,6 +328,7 @@ function bind(){
     if(edit){const l=state.listings.find((x)=>x.id===edit.dataset.edit);if(l)openEditor(l)}
     if(copy)copyPost(copy.dataset.copy);
   });
+  $('tl-list').addEventListener('change',(e)=>{const s=e.target.closest('[data-status]');if(s)changeStatus(s)});
   $('tl-team-form').addEventListener('submit',async(e)=>{
     e.preventDefault();
     const els=e.target.elements;

@@ -8,9 +8,9 @@ const TAX = require('./_tax-town');
 
 const { ORIGIN, esc } = T;
 const LOGO = '/property/branding/watchdog-logo-horizontal.svg';
-const LIVE = ['coming_soon', 'active', 'under_contract'];
-const STATUS = { coming_soon: 'Coming soon', active: 'For sale', under_contract: 'Under contract', sold: 'Sold', off_market: 'Off market' };
-const FILTERS = [['', 'All'], ['active', 'For sale'], ['coming_soon', 'Coming soon'], ['under_contract', 'Under contract']];
+const LIVE = ['coming_soon', 'active', 'under_contract', 'pending'];
+const STATUS = { coming_soon: 'Coming soon', active: 'For sale', under_contract: 'Under contract', pending: 'Pending', sold: 'Sold', off_market: 'Off market' };
+const FILTERS = [['', 'All'], ['active', 'For sale'], ['coming_soon', 'Coming soon'], ['under_contract', 'Under contract'], ['pending', 'Pending']];
 // NJ ad rules (N.J.A.C. 11:5-6.1) want the brokerage name plus words saying it's a real estate broker.
 const BROKER_WORDS = 'Real Estate Broker';
 
@@ -84,10 +84,12 @@ function listingPage(l) {
   const q = (medium) => `${shareUrl}?utm_source=share&utm_medium=${medium}&utm_campaign=team_listing`;
   const facts = factsLine(l);
   const towns = townPages(l);
-  const gallery = photos.length ? `<div class="lgallery">
-<img class="lmain" id="lmain" src="${esc(photos[0])}" alt="${esc(street(l))}, photo 1 of ${photos.length}" width="1200" height="800">
-${photos.length > 1 ? `<ul class="lthumbs">${photos.map((u, i) => `<li><a href="${esc(u)}" data-photo="${i}"${i ? '' : ' aria-current="true"'}><img src="${esc(u)}" alt="Photo ${i + 1}" loading="lazy" width="160" height="107"></a></li>`).join('')}</ul>` : ''}
-</div>` : '';
+  const many = photos.length > 1;
+  const gallery = photos.length ? `<div class="lgallery" data-gallery>
+<div class="ltrack" data-track${many ? ' tabindex="0" role="region" aria-label="Photos, swipe or use the arrow keys"' : ''}>${photos.map((u, i) => `<div class="lslide"><img src="${esc(u)}" alt="${esc(street(l))}, photo ${i + 1} of ${photos.length}"${i ? ' loading="lazy"' : ''} width="1200" height="800"></div>`).join('')}</div>
+${many ? `<button class="lnav prev" type="button" data-step="-1" aria-label="Previous photo">‹</button><button class="lnav next" type="button" data-step="1" aria-label="Next photo">›</button><span class="lcount" data-count aria-live="polite">1 / ${photos.length}</span>` : ''}
+</div>
+${many ? `<ul class="lthumbs">${photos.map((u, i) => `<li><a href="${esc(u)}" data-photo="${i}"${i ? '' : ' aria-current="true"'}><img src="${esc(u)}" alt="Photo ${i + 1}" loading="lazy" width="160" height="107"></a></li>`).join('')}</ul>` : ''}` : '';
   const details = fact('Home type', l.property_type) + fact('Style', l.style) + fact('Year built', l.year_built) + fact('Lot', l.lot) +
     fact('Yearly taxes', l.annual_tax ? money(l.annual_tax) : '') + fact('School district', l.school_district) + fact('Neighborhood', l.subdivision) +
     fact('County', l.county ? `${String(l.county).replace(/\s+county$/i, '')} County` : '') + fact('MLS#', l.mls_number);
@@ -145,7 +147,7 @@ const LISTINGS_CSS = `.lfilters{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 2
 .lbadge{display:inline-block;padding:2px 10px;border-radius:8px;background:#fff;color:var(--blue);font-size:13px;font-weight:600;line-height:1.6}
 .lphoto .lbadge{position:absolute;left:10px;top:10px;box-shadow:0 2px 6px rgba(15,23,42,.08)}
 .lbadge.coming_soon{color:#9a6700}
-.lbadge.under_contract{color:#5f6b7a}
+.lbadge.under_contract,.lbadge.pending{color:#5f6b7a}
 .lbadge.sold,.lbadge.off_market{color:#5f6b7a}
 .lbody{display:grid;gap:1px;padding:10px 2px 0}
 .lprice{font-size:22px;font-weight:600}
@@ -156,13 +158,25 @@ const LISTINGS_CSS = `.lfilters{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 2
 .lcard a:focus-visible{outline:2px solid var(--blue);outline-offset:4px;border-radius:12px}
 .lbroker{margin-top:28px;color:var(--muted);font-size:14px}
 .lfine{margin-top:4px;color:var(--muted);font-size:13px}
-.lgallery{margin:6px 0 20px}
-.lmain{display:block;width:100%;max-height:72vh;aspect-ratio:3/2;object-fit:cover;border-radius:12px;background:var(--soft)}
+.lgallery{position:relative;margin:6px 0 0}
+.ltrack{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;border-radius:12px;background:#eef1f4;scrollbar-width:none;overscroll-behavior-x:contain}
+.ltrack::-webkit-scrollbar{display:none}
+.ltrack:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+.lslide{flex:0 0 100%;scroll-snap-align:center;height:min(72vh,680px)}
+.lslide img{display:block;width:100%;height:100%;object-fit:contain}
+.lnav{position:absolute;top:50%;transform:translateY(-50%);width:44px;height:44px;border:0;border-radius:50%;background:rgba(255,255,255,.92);color:var(--ink);font-size:28px;line-height:1;cursor:pointer;box-shadow:0 2px 6px rgba(15,23,42,.08)}
+.lnav:hover{background:#fff}
+.lnav:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+.lnav.prev{left:12px}
+.lnav.next{right:12px}
+.lnav[disabled]{opacity:0;pointer-events:none}
+.lcount{position:absolute;right:12px;bottom:12px;padding:2px 10px;border-radius:8px;background:rgba(27,36,48,.75);color:#fff;font-size:14px}
 .lthumbs{display:flex;gap:8px;margin:8px 0 0;padding:0 0 4px;list-style:none;overflow-x:auto;scroll-snap-type:x proximity}
 .lthumbs li{flex:none;scroll-snap-align:start}
 .lthumbs a{display:block;border-radius:8px;overflow:hidden;border:2px solid transparent}
 .lthumbs a[aria-current="true"]{border-color:var(--blue)}
 .lthumbs img{display:block;width:120px;height:80px;object-fit:cover}
+.lthumbs + .lhead,.lgallery + .lhead{margin-top:20px}
 .lhead{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-start;gap:12px 32px}
 .lhead .meta{margin-bottom:10px}
 .lpricebox{display:grid;justify-items:end;gap:2px}
@@ -176,10 +190,10 @@ const LISTINGS_CSS = `.lfilters{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 2
 .ldl{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 24px}
 dl.facts.ldl dt{text-transform:none;letter-spacing:0;font-size:14px;font-weight:400}
 .ldl dd{font-weight:600}
-@media (max-width:640px){.ldl{grid-template-columns:1fr 1fr}.lpricebox{justify-items:start}.lgrid{grid-template-columns:1fr}.lmain{border-radius:8px}}
-@media (prefers-reduced-motion:reduce){.lthumbs{scroll-behavior:auto}}
-@media print{.lthumbs,.tools,.lfilters{display:none!important}}`;
+@media (max-width:640px){.ldl{grid-template-columns:1fr 1fr}.lpricebox{justify-items:start}.lgrid{grid-template-columns:1fr}.ltrack{border-radius:8px}.lslide{height:auto;aspect-ratio:4/3}.lnav{display:none}}
+@media (prefers-reduced-motion:reduce){.ltrack,.lthumbs{scroll-behavior:auto}}
+@media print{.lthumbs,.lnav,.lcount,.tools,.lfilters{display:none!important}.lslide:not(:first-child){display:none}}`;
 
-const LISTING_JS = `(function(){var m=document.getElementById('lmain');document.querySelectorAll('[data-photo]').forEach(function(a){a.addEventListener('click',function(e){e.preventDefault();m.src=a.getAttribute('href');m.alt=m.alt.replace(/photo \\d+/,'photo '+(Number(a.dataset.photo)+1));document.querySelectorAll('[data-photo]').forEach(function(x){x.removeAttribute('aria-current')});a.setAttribute('aria-current','true')})});var t=document.querySelector('[data-toast]');document.querySelectorAll('[data-copy]').forEach(function(b){b.addEventListener('click',function(){var u=b.getAttribute('data-copy');var say=function(s){t.textContent=s;t.hidden=false;setTimeout(function(){t.hidden=true},2200)};if(navigator.clipboard)navigator.clipboard.writeText(u).then(function(){say('Link copied')},function(){say('Couldn’t copy the link')});else say('Couldn’t copy the link')})})})();`;
+const LISTING_JS = `(function(){var tr=document.querySelector('[data-track]');if(tr){var slides=tr.children,n=slides.length,count=document.querySelector('[data-count]'),thumbs=document.querySelectorAll('[data-photo]'),prev=document.querySelector('.lnav.prev'),next=document.querySelector('.lnav.next'),cur=0;var at=function(){return Math.round(tr.scrollLeft/Math.max(1,tr.clientWidth))};var go=function(i){i=Math.max(0,Math.min(n-1,i));tr.scrollTo({left:i*tr.clientWidth})};var show=function(){var i=at();if(i===cur&&count&&count.textContent)return;cur=i;if(count)count.textContent=(i+1)+' / '+n;if(prev)prev.disabled=i===0;if(next)next.disabled=i===n-1;thumbs.forEach(function(a,j){if(j===i){a.setAttribute('aria-current','true');a.scrollIntoView({block:'nearest',inline:'nearest'})}else a.removeAttribute('aria-current')})};var tick=null;tr.addEventListener('scroll',function(){clearTimeout(tick);tick=setTimeout(show,60)},{passive:true});document.querySelectorAll('[data-step]').forEach(function(b){b.addEventListener('click',function(){go(at()+Number(b.getAttribute('data-step')))})});tr.addEventListener('keydown',function(e){if(e.key==='ArrowRight'){e.preventDefault();go(at()+1)}if(e.key==='ArrowLeft'){e.preventDefault();go(at()-1)}});thumbs.forEach(function(a){a.addEventListener('click',function(e){e.preventDefault();go(Number(a.getAttribute('data-photo')))})});if(prev)prev.disabled=true}var t=document.querySelector('[data-toast]');document.querySelectorAll('[data-copy]').forEach(function(b){b.addEventListener('click',function(){var u=b.getAttribute('data-copy');var say=function(s){t.textContent=s;t.hidden=false;setTimeout(function(){t.hidden=true},2200)};if(navigator.clipboard)navigator.clipboard.writeText(u).then(function(){say('Link copied')},function(){say('Couldn’t copy the link')});else say('Couldn’t copy the link')})})})();`;
 
 module.exports = { indexPage, listingPage, missingPage, LIVE, _test: { townPages, factsLine, baths } };

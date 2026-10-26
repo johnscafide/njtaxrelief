@@ -10,7 +10,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@400;500;600;700;800&display=swap">
   <link rel="stylesheet" href="/property/backoffice/backoffice-board.css?v=20260928a">
-  <link rel="stylesheet" href="/property/backoffice/team-listings/team-listings.css?v=20261026a">
+  <link rel="stylesheet" href="/property/backoffice/team-listings/team-listings.css?v=20261026b">
 </head>
 <body class="bo-body" data-bo-page="team-listings">
   <a class="bo-skip" href="#bo-main">Skip to content</a>
@@ -66,13 +66,15 @@
           <button class="bo-btn bo-btn-ghost" id="tl-cancel" type="button">Cancel</button>
         </header>
         <form id="tl-form" novalidate>
-          <div class="tl-photos-head">
-            <h3>Photos</h3>
-            <label class="bo-btn bo-btn-ghost" for="tl-photo-input">Add photos</label>
-            <input class="bo-sr" id="tl-photo-input" type="file" multiple accept="image/jpeg,image/png,image/webp,image/heic,image/heif">
+          <div class="tl-photo-drop" id="tl-photo-drop">
+            <div class="tl-photos-head">
+              <h3>Photos</h3>
+              <label class="bo-btn bo-btn-ghost" for="tl-photo-input">Add photos or a .zip</label>
+              <input class="bo-sr" id="tl-photo-input" type="file" multiple accept="image/jpeg,image/png,image/webp,image/heic,image/heif,.zip,application/zip">
+            </div>
+            <p class="tl-hint" id="tl-photo-note"></p>
+            <ul class="tl-photos" id="tl-photos"></ul>
           </div>
-          <p class="tl-hint" id="tl-photo-note"></p>
-          <ul class="tl-photos" id="tl-photos"></ul>
 
           <div class="tl-grid">
             <label class="tl-field">MLS#<input name="mls_number" maxlength="20" autocomplete="off"></label>
@@ -81,6 +83,7 @@
                 <option value="coming_soon">Coming soon</option>
                 <option value="active" selected>For sale</option>
                 <option value="under_contract">Under contract</option>
+                <option value="pending">Pending</option>
                 <option value="sold">Sold</option>
                 <option value="off_market">Off market</option>
               </select>
@@ -157,7 +160,8 @@
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
   <script src="/property/js/access-guard.js"></script>
   <script src="/property/backoffice/backoffice-shell.js?v=20260930a" defer></script>
-  <script src="/property/backoffice/team-listings/bright-pdf.js?v=20261026a" defer></script>
-  <script src="/property/backoffice/team-listings/team-listings.js?v=20261026a" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/fflate@0.8.2/umd/index.js" integrity="sha384-DT0Ls0mO7JmjTnT+oBuMhEJzYJO1zUqzuuMXNdnOmOQRIpN2BgSjvBV/j50NngIT" crossorigin="anonymous" defer></script>
+  <script src="/property/backoffice/team-listings/bright-pdf.js?v=20261026b" defer></script>
+  <script src="/property/backoffice/team-listings/team-listings.js?v=20261026b" defer></script>
 </body>
 </html>
