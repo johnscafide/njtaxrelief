@@ -1,5 +1,5 @@
 {
-  "version": "2026-10-26.1",
+  "version": "2026-10-26.2",
   "canonical_brand": "Watchdog",
   "canonical_origin": "https://www.watchdogindex.com",
   "purpose": "Measure whether answer engines recognize, cite, and correctly describe Watchdog for high-value New Jersey property questions without treating unobservable proprietary UI behavior as fact.",
@@ -83,6 +83,21 @@
         "manual_citation_benchmark"
       ],
       "discovery_control": "verify official current crawler guidance before robots changes"
+    },
+    {
+      "id": "meta_muse",
+      "name": "Meta Muse personal/business agent",
+      "measurement": [
+        "platform_watch",
+        "ai_referral_analytics",
+        "manual_citation_benchmark",
+        "agent_accessibility"
+      ],
+      "discovery_control": "Meta announced Muse agent workflows and Muse Wonder in September–October 2026; track as a distinct user-triggered answer/agent surface, not as proof of public web citations. No verified official publisher/search crawler contract or referral-domain attribution has been established for Muse; do not add user agents or change training permissions on this basis.",
+      "official_sources": [
+        "https://about.fb.com/news/2026/09/introducing-muse-small-business/",
+        "https://about.fb.com/news/2026/10/introducing-muse-wonder-models/"
+      ]
     },
     {
       "id": "future_answer_engine",
@@ -239,7 +254,8 @@
     "Do not infer the Watchdog Search Console Generative AI in Search inclusion-control state; verify it from first-party Search Console evidence when available.",
     "Keep search/retrieval crawler permissions separate from model-training crawler permissions whenever a platform documents distinct controls.",
     "llms.txt is optional metadata for consumers that support it; never describe it as required by Google or as a ranking boost.",
-    "User-triggered agents/fetchers, AI referral click-throughs, generic web-search results and estimated topic opportunity scores must not be recorded as confirmed AI answer citations."
+    "User-triggered agents/fetchers, AI referral click-throughs, generic web-search results and estimated topic opportunity scores must not be recorded as confirmed AI answer citations.",
+    "Treat Meta Muse agent navigation, platform launches and model API availability as platform-watch evidence only; do not infer Watchdog citations or invent a Muse crawler user-agent."
   ],
   "opportunity_watch": [
     {
@@ -253,6 +269,12 @@
       "status": "public_discovery_opportunity",
       "target_url": "https://www.watchdogindex.com/co",
       "note": "Original municipality-specific CO rules and official application links can provide high-value source-backed answers; verify per-town currency and canonical/indexability before publishing new pages."
+    },
+    {
+      "id": "meta-muse-agent-discovery",
+      "status": "official_platform_expansion; no_watchdog_citation_evidence",
+      "source": "https://about.fb.com/news/2026/10/introducing-muse-wonder-models/",
+      "note": "Meta announced Muse Wonder models on 2026-10-12 and Muse for Small Business on 2026-09-29. Monitor user-initiated browsing/accessibility and first-party referrals if attributable, but no robots changes absent official crawler policy."
     }
   ]
 }
