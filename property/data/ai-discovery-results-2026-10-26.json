@@ -212,7 +212,14 @@
     "latest_observed_production_commit": "769cf4ee3b0a6c4486f06a84cf889590a14c88c6",
     "deployment_state": "READY",
     "new_commits_production_verified": false,
-    "note": "Project has git.deploymentEnabled=false; main commits do not prove production release."
+    "note": "Project has git.deploymentEnabled=false; main commits do not prove production release.",
+    "live_legacy_redirect_check": {
+      "checked_at": "2026-10-26T14:02:00Z",
+      "path": "/property/insights/2026-revaluation-reassessment-list.html",
+      "status": 200,
+      "canonical": "https://www.watchdogindex.com/insights/2026-revaluation-reassessment-list",
+      "note": "Old URL still HTTP 200, not yet the committed 308; governed production release pending."
+    }
   },
   "official_sources": {
     "openai": "https://developers.openai.com/api/docs/bots",
@@ -222,9 +229,19 @@
     "google_gen_ai": "https://developers.google.com/search/blog/2026/06/gen-ai-performance-reports",
     "google_multimodal": "https://developers.google.com/search/blog/2026/09/web-multimodal-in-sc",
     "meta_muse": "https://about.fb.com/news/2026/10/introducing-muse-wonder-models/",
-    "nj_senior_relief": "https://www.nj.gov/treasury/taxation/staynj/"
+    "nj_senior_relief": "https://www.nj.gov/treasury/taxation/staynj/",
+    "bing_topics_portfolio": "https://blogs.bing.com/webmaster/2026/10/introducing-topics-portfolio-beta-in-ai-performance/"
   },
   "crawler_policy_changes": "none",
   "model_training_permissions_changes": "none",
-  "private_route_exclusions_changes": "none"
+  "private_route_exclusions_changes": "none",
+  "verified_factual_correction": {
+    "page": "https://www.watchdogindex.com/insights/equalization-ratios",
+    "finding": "Article said '565 municipalities' while official New Jersey Department of Health says 564.",
+    "source": "https://www.nj.gov/health/lh/directory/lhdselectcounty.shtml",
+    "action": "Replaced exact phrase '565 municipalities' with '564 municipalities' in published insights_articles.body_html.",
+    "database_updated_at": "2026-10-26T14:01:27.899901Z",
+    "verification": "Live Watchdog URL fetched via connected Vercel and returned HTTP 200 with corrected '564 municipalities' text.",
+    "training_policy_unchanged": true
+  }
 }
