@@ -45,4 +45,6 @@ must(html.includes('Opus Elite Real Estate, Real Estate Broker'), 'Every listing
 must(html.includes('/contact?subject='), 'Questions go to the contact form.');
 must(!/tel:|mailto:/i.test(html), 'No phone or email links on public listing pages.');
 must(/Hi There/.test(html), 'Public listing pages carry John’s story comment.');
+const vercel = JSON.parse(require('fs').readFileSync(new URL('../../vercel.json', import.meta.url), 'utf8'));
+for (const [fn, cfg] of Object.entries(vercel.functions || {})) must(String(cfg.includeFiles || '').length <= 256, `${fn}: Vercel rejects includeFiles longer than 256 characters.`);
 console.log('Team listings contract passed.');
