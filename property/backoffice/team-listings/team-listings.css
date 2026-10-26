@@ -1,0 +1,71 @@
+/* Team Listings (Backoffice owner and team members). Shell, tokens and buttons come from
+   /property/backoffice/backoffice-board.css. */
+.access-pending body{visibility:hidden}
+.tl-main{max-width:1120px}
+.tl-topbar{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px;margin-bottom:20px}
+.tl-topbar h1{margin:0;font:800 clamp(28px,3vw,40px)/1.08 var(--bo-font);letter-spacing:-.035em}
+.tl-blocked{padding:20px;border-radius:var(--bo-radius);background:var(--bo-surface);font:600 16px/1.5 var(--bo-font)}
+.tl-panel{margin-bottom:16px;border-radius:var(--bo-radius);background:var(--bo-surface);padding:20px}
+.tl-panel h2{margin:0 0 14px;font:800 22px/1.2 var(--bo-font);color:var(--bo-navy)}
+.tl-panel h3{margin:22px 0 10px;font:700 16px/1.3 var(--bo-font);color:var(--bo-navy)}
+.tl-panel-head{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px;margin-bottom:14px}
+.tl-panel-head h2{margin:0}
+.tl-start-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px;align-items:start}
+.tl-field{display:grid;gap:6px;min-width:0;color:var(--bo-navy);font:700 13px/1.3 var(--bo-font)}
+.tl-field :is(input,select,textarea){width:100%;min-height:44px;box-sizing:border-box;border:1px solid var(--bo-line-strong);border-radius:var(--bo-radius-sm);background:#fff;color:var(--bo-ink);padding:10px 12px;font:500 15px/1.4 var(--bo-font)}
+.tl-field textarea{resize:vertical;min-height:120px}
+.tl-field :is(input,select,textarea):focus-visible{outline:3px solid var(--bo-focus);outline-offset:1px}
+.tl-drop{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;min-height:120px;padding:16px;border:2px dashed var(--bo-line-strong);border-radius:var(--bo-radius);background:#fff;text-align:center;color:var(--bo-navy);font:600 15px/1.4 var(--bo-font)}
+.tl-drop.is-over{border-color:var(--bo-navy);background:var(--bo-sky)}
+.tl-status{min-height:1.4em;margin:12px 0 0;font:600 14px/1.4 var(--bo-font);color:var(--bo-muted)}
+.tl-status.is-bad{color:var(--bo-bad)}
+.tl-status.is-good{color:var(--bo-good)}
+.tl-hint{margin:0 0 12px;color:var(--bo-muted);font:500 14px/1.5 var(--bo-font)}
+.tl-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.tl-wide{grid-column:span 2}
+.tl-full{grid-column:1/-1}
+.tl-photos-head{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.tl-photos-head h3{margin:0}
+.tl-photos{display:grid;grid-template-columns:repeat(auto-fill,minmax(132px,1fr));gap:10px;margin:0 0 18px;padding:0;list-style:none}
+.tl-photos li{position:relative;border-radius:8px;overflow:hidden;background:#fff;border:1px solid var(--bo-line)}
+.tl-photos img{display:block;width:100%;aspect-ratio:4/3;object-fit:cover}
+.tl-photos .tl-cover{position:absolute;left:6px;top:6px;padding:2px 8px;border-radius:6px;background:var(--bo-navy);color:#fff;font:700 12px/1.4 var(--bo-font)}
+.tl-photo-tools{display:flex;justify-content:space-between;gap:4px;padding:4px}
+.tl-photo-tools button{min-height:36px;padding:0 8px;border:0;border-radius:6px;background:var(--bo-surface);color:var(--bo-navy);font:700 12px/1 var(--bo-font);cursor:pointer}
+.tl-photo-tools button:hover{background:var(--bo-sky)}
+.tl-photos li.is-uploading img{opacity:.45}
+.tl-features{display:grid;gap:8px;margin:0 0 6px;padding:0;list-style:none}
+.tl-features li{display:grid;grid-template-columns:minmax(0,180px) minmax(0,1fr) auto;gap:8px;align-items:center}
+.tl-features input{min-height:40px;box-sizing:border-box;border:1px solid var(--bo-line-strong);border-radius:var(--bo-radius-sm);background:#fff;padding:8px 10px;font:500 14px/1.3 var(--bo-font);color:var(--bo-ink)}
+.tl-features button{min-height:40px;min-width:40px;border:0;border-radius:8px;background:transparent;color:var(--bo-muted);font:700 18px/1 var(--bo-font);cursor:pointer}
+.tl-check{display:flex;align-items:flex-start;gap:10px;margin-top:14px;font:600 14px/1.4 var(--bo-font);color:var(--bo-ink);cursor:pointer}
+.tl-check input{width:20px;height:20px;margin:0;accent-color:var(--bo-navy);flex:0 0 auto}
+.tl-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px}
+.tl-filters{display:flex;flex-wrap:wrap;gap:6px}
+.tl-filter{min-height:40px;padding:0 14px;border:1px solid var(--bo-line-strong);border-radius:10px;background:#fff;color:var(--bo-navy);font:700 13px/1 var(--bo-font);cursor:pointer}
+.tl-filter[aria-pressed="true"]{border-color:var(--bo-navy);background:var(--bo-sky)}
+.tl-list{display:grid;gap:10px;margin:0;padding:0;list-style:none}
+.tl-item{display:grid;grid-template-columns:112px minmax(0,1fr) auto;gap:14px;align-items:center;padding:10px;border-radius:10px;background:#fff;border:1px solid var(--bo-line)}
+.tl-item img,.tl-item .tl-noimg{display:block;width:112px;aspect-ratio:4/3;border-radius:6px;object-fit:cover;background:var(--bo-surface)}
+.tl-item h3{margin:0;font:700 16px/1.3 var(--bo-font);color:var(--bo-ink)}
+.tl-item p{margin:2px 0 0;color:var(--bo-muted);font:500 13px/1.4 var(--bo-font)}
+.tl-item .tl-price{color:var(--bo-navy);font:800 15px/1.3 var(--bo-font)}
+.tl-badge{display:inline-block;margin-right:6px;padding:1px 8px;border-radius:6px;background:var(--bo-sky);color:var(--bo-navy);font:700 12px/1.5 var(--bo-font)}
+.tl-badge.is-hidden{background:var(--bo-review);color:var(--bo-bad)}
+.tl-item-actions{display:flex;flex-wrap:wrap;justify-content:flex-end;gap:6px}
+.tl-item-actions .bo-btn{min-height:40px;padding:0 14px}
+.tl-team-form{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr) auto;gap:10px;align-items:end}
+.tl-members{display:grid;gap:6px;margin:14px 0 0;padding:0;list-style:none}
+.tl-members li{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:8px 12px;border-radius:8px;background:#fff;font:600 14px/1.4 var(--bo-font)}
+.tl-members small{display:block;color:var(--bo-muted);font-weight:500}
+@media (max-width:860px){
+  .tl-start-grid,.tl-team-form{grid-template-columns:1fr}
+  .tl-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .tl-item{grid-template-columns:84px minmax(0,1fr)}
+  .tl-item img,.tl-item .tl-noimg{width:84px}
+  .tl-item-actions{grid-column:1/-1;justify-content:flex-start}
+  .tl-features li{grid-template-columns:minmax(0,1fr) auto}
+  .tl-features li input:first-child{grid-column:1/-1}
+}
+@media (prefers-reduced-motion:reduce){.tl-drop,.tl-filter{transition:none}}
+@media print{.bo-shell,#tl-start,#tl-editor,#tl-team,.tl-item-actions{display:none!important}.tl-panel{background:#fff}}

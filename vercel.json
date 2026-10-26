@@ -55,6 +55,10 @@
       "includeFiles": "{property/data/town-tax/bills.json,tax-rates.json,chapter123-ratios-2026.json,property/revaluation-reassessment-2026.json,property/data/home-feed-towns.json,property/data/municipal-requirements/approvals.json,co/towns.json,co/index.html}",
       "maxDuration": 10
     },
+    "api/team-listings-page.js": {
+      "includeFiles": "{property/data/municipal-requirements/approvals.json,property/data/municipal-requirements/checked/*.json,co/towns.json,property/data/town-tax/bills.json,tax-rates.json,chapter123-ratios-2026.json,property/revaluation-reassessment-2026.json,property/data/home-feed-towns.json,co/index.html,property/data/co-application-forms.json}",
+      "maxDuration": 10
+    },
     "api/co-form-template.js": {
       "includeFiles": "{property/data/co-application-forms.json,property/data/co-forms/*.pdf}",
       "maxDuration": 10
@@ -668,6 +672,14 @@
     {
       "source": "/backoffice/quote-image",
       "destination": "/property/backoffice/quote-image/index.html"
+    },
+    {
+      "source": "/backoffice/team-listings/",
+      "destination": "/property/backoffice/team-listings/index.html"
+    },
+    {
+      "source": "/backoffice/team-listings",
+      "destination": "/property/backoffice/team-listings/index.html"
     },
     {
       "source": "/town-needs",
