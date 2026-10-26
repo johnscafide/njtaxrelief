@@ -45,6 +45,9 @@ assert.match(reportFn, /host==="www\.watchdogindex\.com"/);
 assert.match(reportFn, /ai_referrals:aiReferrals/);
 assert.match(reportFn, /microsoft_copilot/);
 assert.match(reportFn, /google_gemini/);
+assert.match(reportFn, /session_utm_source/);
+assert.match(reportFn, /session_referrer_host/);
+assert.match(reportFn, /session_landing_path/);
 
 const registry = JSON.parse(benchmark);
 assert.equal(registry.canonical_brand, 'Watchdog');
