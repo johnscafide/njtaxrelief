@@ -14,7 +14,7 @@ function aiSource(row:Row){
  const explicit=String(row?.properties?.source||"").toLowerCase();
  const approved=new Set(["chatgpt","perplexity","microsoft_copilot","google_gemini","claude","grok","you_com","phind","meta_ai","other_ai"]);
  if(approved.has(explicit))return explicit;
- const source=String(row?.utm_source||"").toLowerCase(),medium=String(row?.utm_medium||"").toLowerCase(),host=String(row?.referrer_host||"").toLowerCase();
+ const source=String(row?.utm_source||row?.session_utm_source||"").toLowerCase(),medium=String(row?.utm_medium||row?.session_utm_medium||"").toLowerCase(),host=String(row?.referrer_host||row?.session_referrer_host||"").toLowerCase();
  if(source==="chatgpt.com"||source==="chatgpt"||source==="openai"||host==="chatgpt.com"||host==="chat.openai.com"||host.endsWith(".chatgpt.com"))return"chatgpt";
  if(source.includes("perplexity")||host==="perplexity.ai"||host.endsWith(".perplexity.ai"))return"perplexity";
  if(source.includes("copilot")||source==="microsoft_ai"||host==="copilot.microsoft.com"||host.endsWith(".copilot.microsoft.com"))return"microsoft_copilot";
@@ -29,7 +29,7 @@ function aiSource(row:Row){
 }
 function aggregateAi(rows:Row[]){
  const groups=new Map<string,{source:string,referrals:number,landing_pages:Set<string>,latest_seen:string}>();
- for(const row of rows){const source=aiSource(row);if(!source)continue;const seen=String(row?.occurred_at||"");const path=String(row?.path||row?.landing_path||"/");let group=groups.get(source);if(!group){group={source,referrals:0,landing_pages:new Set<string>(),latest_seen:""};groups.set(source,group)}group.referrals+=1;if(path)group.landing_pages.add(path);if(seen>group.latest_seen)group.latest_seen=seen}
+ for(const row of rows){const source=aiSource(row);if(!source)continue;const seen=String(row?.occurred_at||"");const path=String(row?.landing_path||row?.session_landing_path||row?.path||"/");let group=groups.get(source);if(!group){group={source,referrals:0,landing_pages:new Set<string>(),latest_seen:""};groups.set(source,group)}group.referrals+=1;if(path)group.landing_pages.add(path);if(seen>group.latest_seen)group.latest_seen=seen}
  return [...groups.values()].map(g=>({source:g.source,referrals:g.referrals,landing_pages:g.landing_pages.size,latest_seen:g.latest_seen})).sort((a,b)=>b.referrals-a.referrals||a.source.localeCompare(b.source));
 }
 
@@ -121,7 +121,7 @@ Deno.serve(async(req:Request)=>{
   todayQuery,intentQuery,subscriptionQuery,
   admin.from("access_audit_log").select("event_type,required_plan,created_at").like("event_type","billing.%").gte("created_at",start30).order("created_at",{ascending:false}).limit(1000),
   admin.from("watchdog_product_events").select("id",{count:"exact",head:true}).in("audience_class",["external_visitor","external_account"]),
-  admin.from("watchdog_product_events").select("occurred_at,path,landing_path,referrer_host,utm_source,utm_medium,properties").eq("event_name","page_view").in("audience_class",["external_visitor","external_account"]).gte("occurred_at",startIso).order("occurred_at",{ascending:false}).limit(5000)
+  admin.from("watchdog_product_events").select("occurred_at,path,landing_path,session_landing_path,referrer_host,session_referrer_host,utm_source,session_utm_source,utm_medium,session_utm_medium,properties").eq("event_name","page_view").in("audience_class",["external_visitor","external_account"]).gte("occurred_at",startIso).order("occurred_at",{ascending:false}).limit(5000)
  ]);
  const results=[snapshot,series,userGrowth,funnel,tools,acquisition,retention,intelligenceFunnel,intelligenceInteractions,todayActions,intentEvents,subscriptions,billingEvents,totalEvents,aiReferralEvents];for(const result of results)if(result.error){console.error("analytics_report_query_failed",result.error);return json(req,500,{error:"Could not load one or more analytics aggregates"})}
  const active=subscriptions.data||[],billing=billingEvents.data||[],today=todayActions.data||[],intent=intentEvents.data||[],latestDay=(funnel.data||[])[0]||null,snap=snapshot.data||{},aiReferrals=aggregateAi(aiReferralEvents.data||[]);
