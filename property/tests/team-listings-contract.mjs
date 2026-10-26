@@ -51,6 +51,13 @@ must(api.cleanListing({ address: '1 A St', city: 'Glassboro', status: 'pending' 
 const pendingHtml = pages.listingPage({ slug: '1-a-st-glassboro-08028', status: 'pending', address: '1 A St', city: 'Glassboro', photos: ['/a.jpg', '/b.jpg'], features: [], brokerage: 'Opus Elite Real Estate' });
 must(pendingHtml.includes('Pending') && pages.LIVE.includes('pending'), 'Pending listings stay on the public page with a Pending badge.');
 must(/data-track/.test(pendingHtml) && /object-fit:contain/.test(pendingHtml), 'Listing photos swipe and show the whole photo.');
+must(api.pinFromTaxId('18-00048 01-00073', 'Gloucester, NJ') === '0818_48.01_73' && api.pinFromTaxId('08-00045 02-00003', 'Gloucester') === '0808_45.02_3', 'Bright tax IDs turn into Watchdog parcel IDs.');
+must(api.streetKey('6 Killington Ct') === api.streetKey('6 KILLINGTON COURT'), 'Street suffixes match either way.');
+must(pdf.parseText(['Tax ID #: | 18-00048 01-00073 | Baths: | 2 / 1']).tax_id === '18-00048 01-00073', 'The tax ID is read from the PDF.');
+const wdHtml = pages.listingPage({ slug: '108-briarwood-rd-mullica-hill-08062', status: 'active', address: '108 Briarwood Rd', city: 'Mullica Hill', zip: '08062', county: 'Gloucester', annual_tax: 11362, agent_name: 'Pat Agent', photos: ['/a.jpg'], features: [], brokerage: 'Opus Elite Real Estate' }, { pams_pin: '0808_45.02_3', score: { score: 68 }, assessed_value: 333700, town_compare: { median_tax: 11298 } });
+must(/From Watchdog/.test(wdHtml) && /68 out of 100/.test(wdHtml) && /Harrison Township/.test(wdHtml) && /\/nj\/property\/0808_45.02_3/.test(wdHtml), 'Listings linked to a parcel show the Watchdog box.');
+must(/class="lagent">Listed by Pat Agent</.test(wdHtml), 'The listing agent’s name sits on the photos.');
+must(!/\u2014/.test(wdHtml), 'No em dashes on listing pages.');
 const vercel = JSON.parse(require('fs').readFileSync(new URL('../../vercel.json', import.meta.url), 'utf8'));
 for (const [fn, cfg] of Object.entries(vercel.functions || {})) must(String(cfg.includeFiles || '').length <= 256, `${fn}: Vercel rejects includeFiles longer than 256 characters.`);
 console.log('Team listings contract passed.');

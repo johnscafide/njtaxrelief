@@ -37,7 +37,47 @@ function townPages(l) {
   if (hits.length !== 1) return null;
   const t = hits[0];
   const tax = TAX.findTown(c.slug, t.slug);
-  return { name: t.name, co: t.published ? t.path : '', tax: tax ? tax.path : '' };
+  return { code: t.code, name: t.name, co: t.published ? t.path : '', tax: tax ? tax.path : '' };
+}
+
+// "From Watchdog": a few things Watchdog knows about the home and its town. The parcel record (wd)
+// comes from get_public_property_page; the town is the parcel's town, else the listing's town.
+function townByCode(code) {
+  const tax = TAX.towns().all.find((t) => t.code === code);
+  const co = T.towns().all.find((t) => t.code === code);
+  return tax || co ? { code, name: (tax || co).name, tax: tax && tax.published ? tax.path : '', co: co && co.published ? co.path : '' } : null;
+}
+function firstSentence(s) { const m = String(s || '').match(/^.*?[.!?](?=\s|$)/); return (m ? m[0] : String(s || '')).trim(); }
+function watchdogBox(l, wd) {
+  const pin = wd && wd.pams_pin ? String(wd.pams_pin) : '';
+  let town = pin ? townByCode(pin.slice(0, 4)) : null;
+  if (!town) { const t = townPages(l); town = t ? Object.assign({ code: t.code }, t) : null; }
+  const rows = [];
+  const score = wd && wd.score && Number(wd.score.score);
+  if (score) rows.push(['Watchdog Score', `${score} out of 100`]);
+  const tax = Number(l.annual_tax) || Math.round(Number(wd && wd.last_year_tax) || 0);
+  const tc = wd && wd.town_compare;
+  const f = town ? TAX.facts(town.code) : null;
+  const typical = Number(tc && tc.median_tax) || (f && f.bill && Number(f.bill.median)) || 0;
+  if (tax && typical && town) {
+    const diff = Math.round((tax - typical) / typical * 100);
+    rows.push(['Taxes vs. town', Math.abs(diff) < 3 ? `About the same as the typical ${town.name} home (${money(typical)})` : `${Math.abs(diff)}% ${diff > 0 ? 'more' : 'less'} than the typical ${town.name} home (${money(typical)})`]);
+  }
+  if (wd && Number(wd.assessed_value)) rows.push(['Assessed value', money(Math.round(Number(wd.assessed_value)))]);
+  const co = town ? T.townData(town.code) : null;
+  if (co && co.co && co.co.status === 'required') {
+    const fee = (co.co.fees || []).find((x) => /\$/.test(x.amount));
+    rows.push(['CO to sell', [`Required${co.co.name ? `: ${co.co.name}` : ''}`, fee ? `${fee.amount.replace(/\.00$/, '')} ${/inspect/i.test(fee.label) ? 'inspection' : 'fee'}` : '', firstSentence(co.co.lead_time).replace(/[.!?]$/, '')].filter(Boolean).join('. ') + '.']);
+  } else if (co && co.co && co.co.status === 'not_required') {
+    rows.push(['CO to sell', 'Not required by the town']);
+  }
+  const links = [
+    pin ? `<a href="/nj/property/${esc(encodeURIComponent(pin))}">See this home on Watchdog</a>` : '',
+    town && town.tax ? `<a href="${esc(town.tax)}">${esc(town.name)} taxes</a>` : '',
+    town && town.co ? `<a href="${esc(town.co)}">${esc(town.name)} CO rules</a>` : ''
+  ].filter(Boolean);
+  if (!rows.length && !links.length) return '';
+  return `<section class="part lwd"><h2>From Watchdog</h2>${rows.length ? `<dl class="facts ldl lwdl">${rows.map(([k, v]) => fact(k, v)).join('')}</dl>` : ''}${links.length ? `<p class="lwdlinks">${links.join(' · ')}</p>` : ''}</section>`;
 }
 
 function top() { return `<header class="top">\n  <a class="logo" href="/"><img src="${LOGO}" alt="Watchdog" width="150" height="35"></a>\n</header>`; }
@@ -78,15 +118,16 @@ ${shown.length ? `<ul class="lgrid">${shown.map(card).join('')}</ul>` : '<p clas
 
 function fact(label, value) { return value ? `<div><dt>${label}</dt><dd>${esc(value)}</dd></div>` : ''; }
 
-function listingPage(l) {
+function listingPage(l, wd) {
   const photos = l.photos || [];
   const shareUrl = `${ORIGIN}/listings/${l.slug}`;
   const q = (medium) => `${shareUrl}?utm_source=share&utm_medium=${medium}&utm_campaign=team_listing`;
   const facts = factsLine(l);
-  const towns = townPages(l);
+  const fromWatchdog = watchdogBox(l, wd);
   const many = photos.length > 1;
   const gallery = photos.length ? `<div class="lgallery" data-gallery>
 <div class="ltrack" data-track${many ? ' tabindex="0" role="region" aria-label="Photos, swipe or use the arrow keys"' : ''}>${photos.map((u, i) => `<div class="lslide"><img src="${esc(u)}" alt="${esc(street(l))}, photo ${i + 1} of ${photos.length}"${i ? ' loading="lazy"' : ''} width="1200" height="800"></div>`).join('')}</div>
+${l.agent_name ? `<span class="lagent">Listed by ${esc(l.agent_name)}</span>` : ''}
 ${many ? `<button class="lnav prev" type="button" data-step="-1" aria-label="Previous photo">‹</button><button class="lnav next" type="button" data-step="1" aria-label="Next photo">›</button><span class="lcount" data-count aria-live="polite">1 / ${photos.length}</span>` : ''}
 </div>
 ${many ? `<ul class="lthumbs">${photos.map((u, i) => `<li><a href="${esc(u)}" data-photo="${i}"${i ? '' : ' aria-current="true"'}><img src="${esc(u)}" alt="Photo ${i + 1}" loading="lazy" width="160" height="107"></a></li>`).join('')}</ul>` : ''}` : '';
@@ -111,9 +152,9 @@ ${gallery}
 ${l.remarks ? `<section class="part"><h2>About this home</h2>${String(l.remarks).split(/\n{2,}/).map((p) => `<p>${esc(p)}</p>`).join('')}</section>` : ''}
 <section class="part"><h2>Details</h2><dl class="facts ldl">${details}</dl>${features ? `<h2 class="lsub">Features</h2><dl class="facts ldl">${features}</dl>` : ''}</section>
 </div>
-${towns && (towns.co || towns.tax) ? `<p class="more">${towns.tax ? `<a href="${esc(towns.tax)}">${esc(towns.name)} property taxes</a>` : ''}${towns.tax && towns.co ? ' · ' : ''}${towns.co ? `<a href="${esc(towns.co)}">${esc(towns.name)} CO requirements</a>` : ''}</p>` : ''}
+${fromWatchdog}
 <p class="lbroker">${l.agent_name ? `Listed by ${esc(l.agent_name)}, ` : 'Listed by '}${brokerLine(l)}${l.list_date ? ` · Listed ${esc(new Date(l.list_date + 'T12:00:00Z').toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric', timeZone: 'UTC' }))}` : ''}</p>
-<p class="lfine">Info comes from Bright MLS and is believed accurate but not guaranteed.</p>`;
+<p class="lfine">Info comes from Bright MLS and is believed accurate but not guaranteed.${fromWatchdog ? ' Watchdog numbers come from public NJ tax records.' : ''}</p>`;
   const live = LIVE.includes(l.status);
   return P.shell({
     mode: 'page',
@@ -170,6 +211,7 @@ const LISTINGS_CSS = `.lfilters{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 2
 .lnav.prev{left:12px}
 .lnav.next{right:12px}
 .lnav[disabled]{opacity:0;pointer-events:none}
+.lagent{position:absolute;left:12px;bottom:12px;padding:3px 10px;border-radius:8px;background:rgba(255,255,255,.92);color:var(--ink);font-size:14px;font-weight:600;pointer-events:none}
 .lcount{position:absolute;right:12px;bottom:12px;padding:2px 10px;border-radius:8px;background:rgba(27,36,48,.75);color:#fff;font-size:14px}
 .lthumbs{display:flex;gap:8px;margin:8px 0 0;padding:0 0 4px;list-style:none;overflow-x:auto;scroll-snap-type:x proximity}
 .lthumbs li{flex:none;scroll-snap-align:start}
@@ -187,6 +229,9 @@ const LISTINGS_CSS = `.lfilters{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 2
 .lask:hover{background:#0a2f94}
 .part p{margin:0 0 12px}
 .lsub{margin-top:28px}
+.lwd{margin-top:8px;padding-top:20px;border-top:1px solid var(--line)}
+.lwdl dd{font-weight:500}
+.lwdlinks{margin:12px 0 0;font-size:15px}
 .ldl{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 24px}
 dl.facts.ldl dt{text-transform:none;letter-spacing:0;font-size:14px;font-weight:400}
 .ldl dd{font-weight:600}
