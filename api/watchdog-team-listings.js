@@ -158,9 +158,12 @@ async function findPin(row) {
     if (fromId && (await rest(`property_lookups?select=pams_pin&pams_pin=eq.${encodeURIComponent(fromId)}`)).length) return fromId;
     const cc = countyCode(row.county);
     const key = streetKey(row.address);
-    const m = key.match(/^(\d+[A-Z]?) (\S+)/);
+    const m = key.match(/^(\d+[A-Z]?) (?:([NSEW]) )?(\S+)/);
     if (!cc || !m) return '';
-    const rows = await rest(`property_lookups?select=pams_pin,address&address=like.${encodeURIComponent(`${m[1]} ${m[2]}`)}*&county=not.is.null&pams_pin=like.${cc}*&limit=40`);
+    const long = { N: 'NORTH', S: 'SOUTH', E: 'EAST', W: 'WEST' };
+    const starts = m[2] ? [`${m[1]} ${m[2]} ${m[3]}`, `${m[1]} ${long[m[2]]} ${m[3]}`] : [`${m[1]} ${m[3]}`];
+    const rows = [];
+    for (const s of starts) rows.push(...await rest(`property_lookups?select=pams_pin,address&address=like.${encodeURIComponent(s)}*&county=not.is.null&pams_pin=like.${cc}*&limit=40`));
     let hits = rows.filter((r) => streetKey(r.address) === key);
     const towns = zipTowns(row.zip, row.city);
     if (hits.length > 1 && towns.size) hits = hits.filter((r) => towns.has(String(r.pams_pin).slice(0, 4)));
