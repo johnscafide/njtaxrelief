@@ -200,12 +200,10 @@ function shell(o) {
 <meta property="og:url" content="${esc(o.canonical)}">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Watchdog">
-<meta property="og:image" content="${SHARE_IMAGE}">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="Free resale CO requirements for New Jersey towns, from Watchdog">
+<meta property="og:image" content="${esc(o.image || SHARE_IMAGE)}">
+${o.image ? '' : '<meta property="og:image:width" content="1200">\n<meta property="og:image:height" content="630">\n'}<meta property="og:image:alt" content="${esc(o.imageAlt || 'Free resale CO requirements for New Jersey towns, from Watchdog')}">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="${SHARE_IMAGE}">
+<meta name="twitter:image" content="${esc(o.image || SHARE_IMAGE)}">
 ` : '';
   // Embeds and client checklists get first-party counts only: no cookie banner over a client's printout.
   const analytics = embed || o.mode === 'print'
@@ -564,4 +562,4 @@ function messagePage(heading, text, extra) {
   });
 }
 
-module.exports = { townPage, printPage, applyPage, countyPage, websitePage, notFound, messagePage };
+module.exports = { townPage, printPage, applyPage, countyPage, websitePage, notFound, messagePage, shell };

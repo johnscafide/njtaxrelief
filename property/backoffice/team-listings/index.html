@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="en" data-access-require="standard">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="robots" content="noindex,nofollow,noarchive">
+  <meta name="referrer" content="same-origin">
+  <title>Team Listings | Watchdog Backoffice</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@400;500;600;700;800&display=swap">
+  <link rel="stylesheet" href="/property/backoffice/backoffice-board.css?v=20260928a">
+  <link rel="stylesheet" href="/property/backoffice/team-listings/team-listings.css?v=20261026a">
+</head>
+<body class="bo-body" data-bo-page="team-listings">
+  <a class="bo-skip" href="#bo-main">Skip to content</a>
+
+  <header class="bo-shell">
+    <div class="bo-shell-bar">
+      <a class="bo-brand" href="/backoffice"><span class="bo-mark" aria-hidden="true">W</span><span class="bo-brand-text"><b>Watchdog</b><small>Backoffice</small></span></a>
+      <nav class="bo-nav" aria-label="Backoffice">
+        <a href="/backoffice#leads" data-bo-dev-only hidden>Leads</a>
+        <a href="/backoffice#leadiq" data-bo-dev-only hidden>LeadIQ Tools</a>
+        <a href="/backoffice/reviews" data-bo-dev-only hidden>Application Reviews <span class="bo-review-badge" data-bo-badge="reviews" hidden><span data-bo-badge-count>0</span><span class="bo-sr"> waiting</span></span></a>
+        <a href="/backoffice/professional-verifications" data-bo-dev-only hidden>Professional Reviews <span class="bo-review-badge" data-bo-badge="professional" hidden><span data-bo-badge-count>0</span><span class="bo-sr"> waiting</span></span></a>
+        <a href="/backoffice/town-info" data-bo-dev-only hidden>Town Info <span class="bo-review-badge" data-bo-badge="town" hidden><span data-bo-badge-count>0</span><span class="bo-sr"> waiting</span></span></a>
+        <a href="/backoffice/realestate" data-bo-dev-only hidden>Real Estate OS</a>
+        <a href="/backoffice/image-cleaner" data-bo-dev-only hidden>Image Cleaner</a>
+        <a href="/backoffice/quote-image" data-bo-dev-only hidden>Quote Image</a>
+        <a href="/backoffice/team-listings" aria-current="page">Team Listings</a>
+      </nav>
+      <div class="bo-shell-session">
+        <button type="button" class="bo-btn bo-btn-ghost bo-lock" data-bo-lock>Lock Backoffice</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="bo-page tl-main" id="bo-main" tabindex="-1">
+    <header class="tl-topbar">
+      <h1>Team Listings</h1>
+      <a class="bo-btn bo-btn-ghost" href="/listings" target="_blank" rel="noopener">See the public page</a>
+    </header>
+
+    <p class="tl-blocked" id="tl-blocked" hidden></p>
+
+    <div id="tl-app" hidden>
+      <section class="tl-panel" id="tl-start">
+        <h2>Add a listing</h2>
+        <div class="tl-start-grid">
+          <label class="tl-field">MLS# or address
+            <input id="tl-lookup" type="text" maxlength="200" autocomplete="off" placeholder="NJCD2054321 or 123 Main St, Cherry Hill">
+          </label>
+          <div class="tl-drop" id="tl-drop">
+            <b>Drop the Bright MLS PDF here</b>
+            <label class="bo-btn bo-btn-primary" for="tl-pdf">Choose PDF</label>
+            <input class="bo-sr" id="tl-pdf" type="file" accept="application/pdf,.pdf">
+          </div>
+        </div>
+        <p class="tl-status" id="tl-start-status" role="status" aria-live="polite"></p>
+        <button class="bo-link-btn" id="tl-manual" type="button">No PDF? Type it in</button>
+      </section>
+
+      <section class="tl-panel" id="tl-editor" hidden>
+        <header class="tl-panel-head">
+          <h2 id="tl-editor-title">New listing</h2>
+          <button class="bo-btn bo-btn-ghost" id="tl-cancel" type="button">Cancel</button>
+        </header>
+        <form id="tl-form" novalidate>
+          <div class="tl-photos-head">
+            <h3>Photos</h3>
+            <label class="bo-btn bo-btn-ghost" for="tl-photo-input">Add photos</label>
+            <input class="bo-sr" id="tl-photo-input" type="file" multiple accept="image/jpeg,image/png,image/webp,image/heic,image/heif">
+          </div>
+          <p class="tl-hint" id="tl-photo-note"></p>
+          <ul class="tl-photos" id="tl-photos"></ul>
+
+          <div class="tl-grid">
+            <label class="tl-field">MLS#<input name="mls_number" maxlength="20" autocomplete="off"></label>
+            <label class="tl-field">Status
+              <select name="status">
+                <option value="coming_soon">Coming soon</option>
+                <option value="active" selected>For sale</option>
+                <option value="under_contract">Under contract</option>
+                <option value="sold">Sold</option>
+                <option value="off_market">Off market</option>
+              </select>
+            </label>
+            <label class="tl-field">Price<input name="price" inputmode="numeric" maxlength="14"></label>
+            <label class="tl-field tl-wide">Street address<input name="address" maxlength="200" required></label>
+            <label class="tl-field">Unit<input name="unit" maxlength="40"></label>
+            <label class="tl-field">Town<input name="city" maxlength="80" required></label>
+            <label class="tl-field">ZIP<input name="zip" inputmode="numeric" maxlength="5"></label>
+            <label class="tl-field">County<input name="county" maxlength="60"></label>
+            <label class="tl-field">Beds<input name="beds" inputmode="numeric" maxlength="2"></label>
+            <label class="tl-field">Full baths<input name="baths_full" inputmode="numeric" maxlength="2"></label>
+            <label class="tl-field">Half baths<input name="baths_half" inputmode="numeric" maxlength="2"></label>
+            <label class="tl-field">Square feet<input name="sqft" inputmode="numeric" maxlength="8"></label>
+            <label class="tl-field">Lot<input name="lot" maxlength="80"></label>
+            <label class="tl-field">Year built<input name="year_built" inputmode="numeric" maxlength="4"></label>
+            <label class="tl-field">Home type<input name="property_type" maxlength="80"></label>
+            <label class="tl-field">Style<input name="style" maxlength="80"></label>
+            <label class="tl-field">Yearly taxes<input name="annual_tax" inputmode="numeric" maxlength="10"></label>
+            <label class="tl-field">School district<input name="school_district" maxlength="120"></label>
+            <label class="tl-field">Neighborhood<input name="subdivision" maxlength="120"></label>
+            <label class="tl-field">List date<input name="list_date" type="date"></label>
+            <label class="tl-field">Agent<input name="agent_name" maxlength="120"></label>
+            <label class="tl-field">Brokerage<input name="brokerage" maxlength="120"></label>
+            <label class="tl-field tl-full">Description
+              <textarea name="remarks" rows="6" maxlength="6000"></textarea>
+            </label>
+          </div>
+
+          <h3>Features</h3>
+          <ul class="tl-features" id="tl-features"></ul>
+          <button class="bo-link-btn" id="tl-add-feature" type="button">Add a feature</button>
+
+          <label class="tl-check"><input type="checkbox" name="published" checked> Show on the public page</label>
+          <label class="tl-check"><input type="checkbox" name="seller_ok" required> The seller is OK with this listing, its price and photos being shown online</label>
+
+          <p class="tl-status" id="tl-form-status" role="status" aria-live="polite"></p>
+          <div class="tl-actions">
+            <button class="bo-btn bo-btn-primary" id="tl-save" type="submit">Save listing</button>
+            <button class="bo-btn bo-btn-ghost" id="tl-remove" type="button" hidden>Remove listing</button>
+          </div>
+        </form>
+      </section>
+
+      <section class="tl-panel">
+        <header class="tl-panel-head">
+          <h2>On the market</h2>
+          <div class="tl-filters" role="group" aria-label="Show">
+            <button class="tl-filter" type="button" data-filter="live" aria-pressed="true">For sale</button>
+            <button class="tl-filter" type="button" data-filter="mine" aria-pressed="false">Mine</button>
+            <button class="tl-filter" type="button" data-filter="all" aria-pressed="false">All</button>
+          </div>
+        </header>
+        <p class="tl-status" id="tl-list-status" role="status" aria-live="polite"></p>
+        <ul class="tl-list" id="tl-list"></ul>
+      </section>
+
+      <section class="tl-panel" id="tl-team" hidden>
+        <h2>Team</h2>
+        <p class="tl-hint">Teammates sign in with a free Watchdog account. Add them here and they can add their own listings. They don’t see anything else in Backoffice.</p>
+        <form class="tl-team-form" id="tl-team-form" novalidate>
+          <label class="tl-field">Their Watchdog email<input name="email" type="email" maxlength="254" autocomplete="off" required></label>
+          <label class="tl-field">Name on listings<input name="name" maxlength="120"></label>
+          <button class="bo-btn bo-btn-primary" type="submit">Add</button>
+        </form>
+        <p class="tl-status" id="tl-team-status" role="status" aria-live="polite"></p>
+        <ul class="tl-members" id="tl-members"></ul>
+      </section>
+    </div>
+  </main>
+
+  <div class="bo-toast" id="tl-toast" role="status" aria-live="polite" hidden></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+  <script src="/property/js/access-guard.js"></script>
+  <script src="/property/backoffice/backoffice-shell.js?v=20260930a" defer></script>
+  <script src="/property/backoffice/team-listings/bright-pdf.js?v=20261026a" defer></script>
+  <script src="/property/backoffice/team-listings/team-listings.js?v=20261026a" defer></script>
+</body>
+</html>

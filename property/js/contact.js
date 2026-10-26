@@ -250,7 +250,12 @@
     if (q('voice-reset')) q('voice-reset').addEventListener('click', function () { resetVoice(true); });
     if (q('voice-send')) q('voice-send').addEventListener('click', sendVoice);
     var initialMode = '';
-    try { initialMode = new URLSearchParams(location.search).get('mode') || ''; } catch (_error) {}
+    try {
+      var params = new URLSearchParams(location.search);
+      initialMode = params.get('mode') || '';
+      var subject = String(params.get('subject') || '').replace(/[\u0000-\u001f]/g, '').slice(0, 160);
+      if (subject && q('contact-subject') && !q('contact-subject').value) q('contact-subject').value = subject;
+    } catch (_error) {}
     switchMode(initialMode === 'voice' ? 'voice' : 'message');
   });
 

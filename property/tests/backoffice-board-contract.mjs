@@ -13,12 +13,13 @@ const shell = read('property/backoffice/backoffice-shell.js');
 const leadiq = read('property/backoffice/leadiq-tools.js');
 const api = read('supabase/functions/backoffice-api/index.ts');
 const gateway = read('api/watchdog-backoffice-gateway.js');
-const subpages = ['property/backoffice/reviews/index.html', 'property/backoffice/professional-verifications/index.html', 'property/backoffice/town-info/index.html', 'property/backoffice/realestate/index.html', 'property/backoffice/image-cleaner/index.html', 'property/backoffice/quote-image/index.html'];
+const subpages = ['property/backoffice/reviews/index.html', 'property/backoffice/professional-verifications/index.html', 'property/backoffice/town-info/index.html', 'property/backoffice/realestate/index.html', 'property/backoffice/image-cleaner/index.html', 'property/backoffice/quote-image/index.html', 'property/backoffice/team-listings/index.html'];
 const backofficeHtml = [page, ...subpages.map(read)];
 const townInfo = read('property/backoffice/town-info/town-info.js');
 const imageCleaner = read('property/backoffice/image-cleaner/image-cleaner.js');
 const quoteImage = read('property/backoffice/quote-image/quote-image.js');
-const backofficeJs = [js, shell, leadiq, townInfo, imageCleaner, quoteImage];
+const teamListings = read('property/backoffice/team-listings/team-listings.js');
+const backofficeJs = [js, shell, leadiq, townInfo, imageCleaner, quoteImage, teamListings];
 
 // ---------- one auth flow ----------
 for (const retired of ['property/backoffice/backoffice-dev-auth.js', 'property/backoffice/backoffice-recovery.js', 'property/backoffice/backoffice-secure.css']) {
@@ -75,7 +76,7 @@ must(/function computeDupes/.test(js), 'Leads sharing an email or phone must be 
 must(js.includes("'intent-high'") && js.includes("'benefit-1k-plus'"), 'Client hashtag preview must match the bucketed server tags.');
 
 // ---------- stylesheets: board design ----------
-for (const path of ['property/backoffice/backoffice-board.css', 'property/backoffice/backoffice.css', 'property/backoffice/leadiq-tools.css', 'property/backoffice/reviews/reviews.css', 'property/backoffice/professional-verifications/professional-verifications.css', 'property/backoffice/town-info/town-info.css', 'property/backoffice/realestate/realestate.css', 'property/backoffice/image-cleaner/image-cleaner.css', 'property/backoffice/quote-image/quote-image.css']) {
+for (const path of ['property/backoffice/backoffice-board.css', 'property/backoffice/backoffice.css', 'property/backoffice/leadiq-tools.css', 'property/backoffice/reviews/reviews.css', 'property/backoffice/professional-verifications/professional-verifications.css', 'property/backoffice/town-info/town-info.css', 'property/backoffice/realestate/realestate.css', 'property/backoffice/image-cleaner/image-cleaner.css', 'property/backoffice/quote-image/quote-image.css', 'property/backoffice/team-listings/team-listings.css']) {
   const css = read(path);
   must(/@media print/.test(css) && /prefers-reduced-motion:\s*reduce/.test(css), `${path} needs print and reduced-motion rules.`);
   must(!/border-left\s*:/.test(css), `${path}: the board design does not use border-left accents.`);
