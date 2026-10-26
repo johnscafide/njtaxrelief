@@ -65,4 +65,17 @@ assert.match(commandCenter, /product-analytics-report/);
 assert.match(commandCenter, /ai-discovery-benchmark\.json/);
 assert.match(commandCenter, /Ordinary Google and Bing search traffic is deliberately not relabeled as AI/);
 
+const routing = JSON.parse(await readFile(new URL('../../vercel.json', import.meta.url), 'utf8'));
+for (const [source, destination] of [
+  ['/property/insights/:slug.html', '/insights/:slug'],
+  ['/insights/:slug.html', '/insights/:slug'],
+  ['/property/insights.html', '/insights'],
+  ['/insights.html', '/insights']
+]) {
+  const redirect = (routing.redirects || []).find(item => item.source === source);
+  assert.ok(redirect, `Missing canonical Insight redirect for ${source}`);
+  assert.equal(redirect.destination, destination);
+  assert.equal(redirect.permanent, true);
+}
+
 console.log(`Watchdog AI discovery contract PASS (${registry.platforms.length} platforms, ${registry.prompts.length} benchmark prompts)`);
