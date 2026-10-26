@@ -16,7 +16,7 @@ const BUCKET = 'team-listing-photos';
 const PHOTO_PREFIX = `${SUPABASE_URL}/storage/v1/object/public/${BUCKET}/`;
 const PHOTO_TYPES = { 'image/jpeg': 'jpg', 'image/png': 'png', 'image/webp': 'webp' };
 const MAX_PHOTOS = 40;
-const STATUSES = new Set(['coming_soon', 'active', 'under_contract', 'sold', 'off_market']);
+const STATUSES = new Set(['coming_soon', 'active', 'under_contract', 'pending', 'sold', 'off_market']);
 const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
 const EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const FIELDS = 'id,slug,mls_number,status,address,unit,city,state,zip,county,price,beds,baths_full,baths_half,sqft,lot,year_built,property_type,style,annual_tax,school_district,subdivision,remarks,features,photos,list_date,agent_user_id,agent_name,brokerage,published,created_at,updated_at';
@@ -181,6 +181,18 @@ async function remove(access, body) {
   return [200, { ok: true }];
 }
 
+async function setStatus(access, body) {
+  const id = text(body.id, 40);
+  const status = text(body.status, 20);
+  if (!UUID.test(id)) return [422, { error: 'Unknown listing.' }];
+  if (!STATUSES.has(status)) return [422, { error: 'Pick a status.' }];
+  const row = (await rest(`team_listings?select=id,agent_user_id&id=eq.${id}`))[0];
+  if (!row) return [404, { error: 'That listing was removed.' }];
+  if (!canEdit(access, row)) return [403, { error: 'Only the agent who added this listing can change it.' }];
+  const saved = (await rest(`team_listings?id=eq.${id}&select=${FIELDS}`, { method: 'PATCH', headers: { Prefer: 'return=representation' }, body: JSON.stringify({ status, updated_at: new Date().toISOString() }) }))[0];
+  return [200, { ok: true, listing: withFlags(access, [saved])[0] }];
+}
+
 async function photoUpload(access, body) {
   const ext = PHOTO_TYPES[text(body.type, 40)];
   if (!ext) return [422, { error: 'Photos need to be JPG, PNG or WebP.' }];
@@ -219,6 +231,7 @@ module.exports = async function handler(req, res) {
     else if (action === 'list') out = [200, { ok: true, owner: access.owner, name: access.name, user_id: access.user.id, listings: withFlags(access, await rest(`team_listings?select=${FIELDS}&order=created_at.desc&limit=500`)) }];
     else if (action === 'save') out = await save(access, body);
     else if (action === 'remove') out = await remove(access, body);
+    else if (action === 'set_status') out = await setStatus(access, body);
     else if (action === 'photo_upload') out = await photoUpload(access, body);
     else if (['members', 'add_member', 'remove_member'].includes(action)) {
       if (!access.owner) out = [403, { error: 'Only John can change the team list.' }];

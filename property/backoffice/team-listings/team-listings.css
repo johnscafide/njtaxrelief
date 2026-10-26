@@ -24,6 +24,8 @@
 .tl-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
 .tl-wide{grid-column:span 2}
 .tl-full{grid-column:1/-1}
+.tl-photo-drop{margin:0 -10px;padding:6px 10px;border:2px dashed transparent;border-radius:10px}
+.tl-photo-drop.is-over{border-color:var(--bo-navy);background:#f3f6fa}
 .tl-photos-head{display:flex;align-items:center;justify-content:space-between;gap:10px}
 .tl-photos-head h3{margin:0}
 .tl-photos{display:grid;grid-template-columns:repeat(auto-fill,minmax(132px,1fr));gap:10px;margin:0 0 18px;padding:0;list-style:none}
@@ -51,6 +53,8 @@
 .tl-item p{margin:2px 0 0;color:var(--bo-muted);font:500 13px/1.4 var(--bo-font)}
 .tl-item .tl-price{color:var(--bo-navy);font:800 15px/1.3 var(--bo-font)}
 .tl-badge{display:inline-block;margin-right:6px;padding:1px 8px;border-radius:6px;background:var(--bo-sky);color:var(--bo-navy);font:700 12px/1.5 var(--bo-font)}
+.tl-badge.is-stale{background:#fff4d6;color:#7a5200}
+.tl-status-pick{min-height:40px;padding:0 10px;border:1px solid var(--bo-line);border-radius:8px;background:#fff;color:var(--bo-ink);font:600 14px var(--bo-font)}
 .tl-badge.is-hidden{background:var(--bo-review);color:var(--bo-bad)}
 .tl-item-actions{display:flex;flex-wrap:wrap;justify-content:flex-end;gap:6px}
 .tl-item-actions .bo-btn{min-height:40px;padding:0 14px}

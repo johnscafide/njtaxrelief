@@ -100,7 +100,8 @@ function statusKey(s){
   const v=String(s||'').toLowerCase();
   if(!v)return '';
   if(/coming/.test(v))return 'coming_soon';
-  if(/under contract|pending|contingent|kick ?out/.test(v))return 'under_contract';
+  if(/under contract|contingent|kick ?out/.test(v))return 'under_contract';
+  if(/pending/.test(v))return 'pending';
   if(/closed|sold/.test(v))return 'sold';
   if(/withdrawn|expired|cancel|off market|temp/.test(v))return 'off_market';
   if(/active/.test(v))return 'active';

@@ -45,6 +45,12 @@ must(html.includes('Opus Elite Real Estate, Real Estate Broker'), 'Every listing
 must(html.includes('/contact?subject='), 'Questions go to the contact form.');
 must(!/tel:|mailto:/i.test(html), 'No phone or email links on public listing pages.');
 must(/Hi There/.test(html), 'Public listing pages carry John’s story comment.');
+const statusOf = (word) => pdf.parseText(['10 Oak Ave, Glassboro, NJ 08028 | ' + word + ' | $250,000', 'MLS #: | NJGL2000001']).status;
+must(statusOf('Pending') === 'pending' && statusOf('Active Under Contract') === 'under_contract' && statusOf('Closed') === 'sold', 'Pending, under contract and sold must be read from the PDF.');
+must(api.cleanListing({ address: '1 A St', city: 'Glassboro', status: 'pending' }).row.status === 'pending', 'Pending is a saved status.');
+const pendingHtml = pages.listingPage({ slug: '1-a-st-glassboro-08028', status: 'pending', address: '1 A St', city: 'Glassboro', photos: ['/a.jpg', '/b.jpg'], features: [], brokerage: 'Opus Elite Real Estate' });
+must(pendingHtml.includes('Pending') && pages.LIVE.includes('pending'), 'Pending listings stay on the public page with a Pending badge.');
+must(/data-track/.test(pendingHtml) && /object-fit:contain/.test(pendingHtml), 'Listing photos swipe and show the whole photo.');
 const vercel = JSON.parse(require('fs').readFileSync(new URL('../../vercel.json', import.meta.url), 'utf8'));
 for (const [fn, cfg] of Object.entries(vercel.functions || {})) must(String(cfg.includeFiles || '').length <= 256, `${fn}: Vercel rejects includeFiles longer than 256 characters.`);
 console.log('Team listings contract passed.');
