@@ -146,7 +146,7 @@ function openEditor(listing,parsed){
   state.editing=listing||null;
   form().reset();
   const fresh={};Object.keys(parsed||{}).forEach((k)=>{const v=parsed[k];if(v!=null&&v!==''&&!(Array.isArray(v)&&!v.length))fresh[k]=v});
-  const src=Object.assign({status:'active',brokerage:'Opus Elite Real Estate',agent_name:state.name},listing||{},fresh);
+  const src=Object.assign({status:'active',brokerage:'Opus Elite Real Estate of NJ, LLC',agent_name:state.name},listing||{},fresh);
   FIELDS.forEach((f)=>setField(f,src[f]));
   form().elements.published.checked=listing?listing.published!==false:true;
   form().elements.seller_ok.checked=!!listing;

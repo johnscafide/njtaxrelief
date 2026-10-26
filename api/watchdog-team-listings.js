@@ -111,7 +111,7 @@ function cleanListing(input) {
     photos: cleanPhotos(l.photos),
     list_date: cleanDate(l.list_date),
     agent_name: text(l.agent_name, 120) || null,
-    brokerage: text(l.brokerage, 120) || 'Opus Elite Real Estate',
+    brokerage: text(l.brokerage, 120) || 'Opus Elite Real Estate of NJ, LLC',
     published: l.published !== false
   };
   if (mls && !/^[A-Z0-9-]{4,20}$/.test(mls)) return { error: 'That MLS number doesn’t look right.' };

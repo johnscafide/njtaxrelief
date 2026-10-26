@@ -27,7 +27,7 @@ const LABELS={
   school_district:['School District'],
   subdivision:['Subdivision','Subdiv / Neigh','Neighborhood'],
   county:['County'],
-  list_date:['Listing Agreement Date','List Date','Listing Date','Listed On'],
+  list_date:['Listing Entry Date','Listing Agreement Date','List Date','Listing Date','Listed On'],
   agent_name:['List Agent','Listing Agent'],
   brokerage:['List Office','Listing Office']
 };
@@ -35,7 +35,9 @@ const FEATURES=[
   ['Levels','Levels/Stories','Levels / Stories','Stories'],
   ['Heating','Heating','Heat','Heating Fuel'],
   ['Cooling','Cooling','Cooling Type'],
+  ['Central air','Central Air'],
   ['Basement','Basement Type','Basement'],
+  ['Heating fuel','Heating Fuel'],
   ['Garage','Garage Spaces','Garage'],
   ['Parking','Parking Type','Parking'],
   ['Water','Water Source','Water'],
@@ -50,7 +52,6 @@ const FEATURES=[
   ['Construction','Construction Materials'],
   ['Waterfront','Waterfront'],
   ['HOA fee','HOA Fee','Association Fee'],
-  ['Utilities','Utilities']
 ];
 // Sections and fields that end a block of remarks, and that are never read.
 const STOP=/^(Agent Remarks|Agent|Showing|Lockbox|Owner|Seller|Directions|Listing Details|Listing Office|List Office|Compensation|Buyer Agency|Sub Agency|Exclusions|Inclusions|Disclosures|Rooms|Room|Building Info|Interior|Exterior|Utilities|Location|Taxes|Financial|HOA|Association|Parking|Lot|Contract|Sale|Copyright|Information is believed)\b/i;
@@ -58,13 +59,30 @@ const STOP=/^(Agent Remarks|Agent|Showing|Lockbox|Owner|Seller|Directions|Listin
 function escapeRe(s){return s.replace(/[.*+?^${}()|[\]\\]/g,'\\$&').replace(/\s+/g,'\\s*')}
 function tidy(s){return String(s||'').replace(/\s+/g,' ').replace(/^[\s|:;,-]+|[\s|;,-]+$/g,'').trim()}
 
-// One "Label: value" lookup. The value stops at a column gap, a new line, or "Next Label:".
+// One "Label: value" lookup. Bright often prints the label and value as separate columns
+// ("MLS #: | NJGL2079806"), so one column gap right after the colon is skipped. The value stops
+// at the next column gap or "Next Label:". A value in the last column can wrap onto the next
+// lines ("Basement Type: Daylight, Full, ... Finished, Garage Access"), so those are added on.
+const SECTIONS=/^(Location|Lot|Ground Rent|Parking|Rooms|Building Info|Interior Features|Exterior Features|Utilities|Remarks|Listing Office|Showing|Listing Details|Taxes and Assessment|Association \/ Community Info|Agent Full|Client Full)$/i;
 function grab(text,labels){
   for(const label of labels){
-    const re=new RegExp('(?:^|[\\s|])'+escapeRe(label)+'\\s*:\\s*([^|\\n]*)','i');
+    const re=new RegExp('(?:^|[\\s|;])'+escapeRe(label)+'\\s*:\\s*(?:\\|\\s*)?([^|\\n]*)(\\n?)','i');
     const m=text.match(re);
     if(!m)continue;
-    let v=m[1].replace(/\s(?:[A-Z][A-Za-z#/&.-]*(?:\s+[A-Za-z#/&.-]+){0,4})\s*:\s.*$/,'');
+    let v=m[1];
+    const cut=v.match(/\s(?:[A-Z][A-Za-z#/&.-]*(?:\s+[A-Za-z#/&.-]+){0,4})\s*:\s.*$/);
+    if(cut)v=v.slice(0,cut.index);
+    else if(m[2]){
+      const rest=text.slice(m.index+m[0].length).split('\n');
+      for(const line of rest.slice(0,6)){
+        const t=line.trim();
+        if(!t||t.includes('|')||SECTIONS.test(t)||STOP.test(t))break;
+        const next=t.search(/;?\s*[A-Z][A-Za-z#/&.\s-]{0,30}:/);
+        if(next===0)break;
+        if(next>0){v+=' '+t.slice(0,next);break}
+        v+=' '+t;
+      }
+    }
     v=tidy(v);
     if(v)return v;
   }
@@ -106,14 +124,14 @@ function remarks(lines){
   for(let i=0;i<lines.length;i++){
     const m=lines[i].match(/^(?:.*\|\s*)?(?:Public Remarks|Public|Remarks)\s*:\s*(.*)$/i);
     if(!m||/agent/i.test(lines[i].split(':')[0]))continue;
-    const parts=[m[1].split(' | ')[0]];
+    const parts=[m[1].replace(/^\|\s*/,'').split(' | ')[0]];
     for(let j=i+1;j<lines.length&&parts.join(' ').length<6000;j++){
       const line=lines[j].trim();
       if(!line)continue;
       if(STOP.test(line)||/^[A-Z][A-Za-z#/&.\s-]{1,40}:\s/.test(line))break;
       parts.push(line.split(' | ')[0]);
     }
-    const out=tidy(parts.join(' '));
+    const out=tidy(parts.join(' ').replace(/\s*[\u2014\u2013]\s*/g,', '));
     if(out.length>20)return out.slice(0,6000);
   }
   return '';
@@ -137,6 +155,21 @@ function headerStatus(lines){
   }
   return '';
 }
+function headerPrice(lines){
+  for(const raw of lines.slice(0,12)){
+    const parts=raw.split(' | ').map((x)=>x.trim());
+    if(parts.length<2||!STREET.test(parts[0]))continue;
+    const hit=parts.slice(1).find((x)=>/^\$[\d,]+$/.test(x));
+    if(hit)return money(hit);
+  }
+  return null;
+}
+function lotText(v){
+  const m=String(v||'').match(/([\d.]+)\s*a\s*\/\s*([\d,]+)\s*sf/i);
+  if(!m)return v;
+  return Number(m[1])+' acres ('+Number(m[2].replace(/,/g,'')).toLocaleString('en-US')+' sq ft)';
+}
+function titleCase(v){return /[a-z]/.test(v)?v:String(v||'').toLowerCase().replace(/\b[a-z]/g,(c)=>c.toUpperCase())}
 function county(v){return tidy(String(v||'').replace(/,?\s*NJ\b.*$/i,'').replace(/\s+County$/i,''))}
 function office(v){return tidy(String(v||'').replace(/\(.*$/,'').replace(/\s+\d{3}[-.)\s]*\d{3}[-.\s]\d{4}.*$/,''))}
 function agent(v){return tidy(String(v||'').replace(/\(.*$/,'').replace(/\s+\d{3}[-.)\s]*\d{3}[-.\s]\d{4}.*$/,'').replace(/\S+@\S+/g,''))}
@@ -149,24 +182,24 @@ function parseText(lines){
   const features=[];
   for(const [label,...keys] of FEATURES){
     const v=grab(text,keys);
-    if(v&&v.length<=300)features.push({label,value:v});
+    if(v)features.push({label,value:v.length<=300?v:v.slice(0,300).replace(/[,;][^,;]*$/,'')});
   }
   return {
     mls_number:(grab(text,LABELS.mls_number).match(/[A-Z]{2,6}\d{4,12}/i)||[''])[0].toUpperCase(),
     status:statusKey(grab(text,LABELS.status))||headerStatus(lines),
-    price:money(grab(text,LABELS.price)),
+    price:money(grab(text,LABELS.price))||headerPrice(lines),
     address:where.address,unit:where.unit,city:where.city,zip:where.zip,
     county:county(grab(text,LABELS.county)),
     beds:num(grab(text,LABELS.beds)),
     baths_full:b.full,baths_half:b.half,
     sqft:sqft?Math.round(num(sqft)):null,
-    lot:grab(text,LABELS.lot),
+    lot:lotText(grab(text,LABELS.lot)),
     year_built:num(grab(text,LABELS.year_built)),
     property_type:grab(text,LABELS.property_type),
     style:grab(text,LABELS.style),
     annual_tax:money(grab(text,LABELS.annual_tax)),
     school_district:grab(text,LABELS.school_district),
-    subdivision:grab(text,LABELS.subdivision),
+    subdivision:titleCase(grab(text,LABELS.subdivision)),
     list_date:isoDate(grab(text,LABELS.list_date)),
     agent_name:agent(grab(text,LABELS.agent_name)),
     brokerage:office(grab(text,LABELS.brokerage)),
@@ -261,8 +294,9 @@ async function read(file){
     try{photos.push(...await pagePhotos(pdfjs,page))}catch(_){/* photos are a bonus; the text still works */}
   }
   doc.destroy();
+  const biggest=Math.max(0,...photos.map((ph)=>ph.area));
   const blobs=[];
-  for(const ph of photos){
+  for(const ph of photos.filter((x)=>x.area>=biggest*0.5)){
     const blob=await new Promise((resolve)=>ph.canvas.toBlob(resolve,'image/jpeg',0.9));
     if(blob)blobs.push(blob);
   }

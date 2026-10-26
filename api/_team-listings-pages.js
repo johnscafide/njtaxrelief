@@ -25,7 +25,7 @@ function factsLine(l) {
 }
 function street(l) { return l.address + (l.unit ? ` #${l.unit}` : ''); }
 function place(l) { return `${l.city}, NJ${l.zip ? ' ' + l.zip : ''}`; }
-function brokerLine(l) { return `${esc(l.brokerage || 'Opus Elite Real Estate')}, ${BROKER_WORDS}`; }
+function brokerLine(l) { return `${esc(l.brokerage || 'Opus Elite Real Estate of NJ, LLC')}, ${BROKER_WORDS}`; }
 
 // The town's CO and tax pages, when the listing's town matches one of ours.
 function townPages(l) {
@@ -58,7 +58,7 @@ function indexPage(listings, status) {
     if (key && !n) return '';
     return `<a class="chip${key === (status || '') ? ' on' : ''}" href="/listings${key ? `?status=${key}` : ''}"${key === (status || '') ? ' aria-current="page"' : ''}>${label} <span class="n">${n}</span></a>`;
   }).join('') + '</nav>';
-  const brokerages = [...new Set(listings.map((l) => l.brokerage || 'Opus Elite Real Estate'))];
+  const brokerages = [...new Set(listings.map((l) => l.brokerage || 'Opus Elite Real Estate of NJ, LLC'))];
   const out = `<h1 class="town">Our team’s listings</h1>
 <p class="meta">${listings.length ? `${listings.length} ${listings.length === 1 ? 'home' : 'homes'} in South Jersey` : 'South Jersey homes from our team'}</p>
 ${listings.length > 3 ? chips : ''}
