@@ -1,0 +1,230 @@
+{
+  "checked_at": "2026-10-26T13:55:38Z",
+  "registry_version": "2026-10-26.2",
+  "canonical_origin": "https://www.watchdogindex.com",
+  "evidence_classes": [
+    "first_party_aggregate_pageviews",
+    "public_web_retrieval",
+    "official_publisher_guidance",
+    "repo_configuration"
+  ],
+  "caveat": "Public search retrieval and first-party referrals do not prove proprietary AI answer citations. Missing answer-level evidence is unknown, not zero. Site-restricted discovery is not unbranded topical performance.",
+  "telemetry": {
+    "period_start": "2026-09-26T13:55:38Z",
+    "period_end": "2026-10-26T13:55:38Z",
+    "external_page_view_events": 42640,
+    "external_page_view_events_last_7d": 11104,
+    "explicit_ai_attributed_page_views": 0,
+    "latest_external_event": "2026-10-26T13:53:35.494624Z",
+    "classification": "pageview events, not unique people or confirmed answer citations",
+    "method": "Read-only aggregate SQL over watchdog_product_events, audience_class external_visitor/external_account, page_view event_name, event/session UTM and referrer fallback plus properties.source."
+  },
+  "first_party_reports": {
+    "bing_ai_performance": "No authenticated Watchdog export available; citations and Citation Share unknown.",
+    "google_ai_mode_overviews": "No authenticated Watchdog Generative AI performance export available; impressions and citations unknown.",
+    "google_multimodal": "No authenticated Watchdog multimodal report export available.",
+    "google_search_console": {
+      "status": "degraded",
+      "selected_site": null,
+      "snapshot_rows": 0,
+      "last_health_at": "2026-08-28T19:26:37.88Z",
+      "last_error": "search_console_sites_unavailable"
+    },
+    "google_preferred_sources": "Publisher preference availability documented; no Watchdog preference selection/eligibility state observed."
+  },
+  "platforms": [
+    {
+      "name": "ChatGPT Search",
+      "citation_status": "not_observable"
+    },
+    {
+      "name": "Bing/Copilot",
+      "citation_status": "not_observable"
+    },
+    {
+      "name": "Google AI Mode/AI Overviews",
+      "citation_status": "not_observable"
+    },
+    {
+      "name": "Perplexity",
+      "citation_status": "not_observable"
+    },
+    {
+      "name": "Apple Intelligence/Siri/Spotlight",
+      "citation_status": "not_observable"
+    },
+    {
+      "name": "Claude",
+      "citation_status": "not_observable"
+    },
+    {
+      "name": "Grok",
+      "citation_status": "not_observable"
+    },
+    {
+      "name": "Meta AI",
+      "citation_status": "not_observable"
+    },
+    {
+      "name": "Meta Muse",
+      "citation_status": "not_observable",
+      "note": "Official Meta agent platform expansion, not an observed Watchdog citation or a verified crawler."
+    }
+  ],
+  "prompt_results": [
+    {
+      "id": "brand-entity",
+      "method": "site-restricted Watchdog retrieval",
+      "watchdog_mentioned_in_proprietary_answer": null,
+      "watchdog_cited_in_proprietary_answer": null,
+      "observed_canonical_url": "https://www.watchdogindex.com/",
+      "observation": "Watchdog homepage and FAQ were observable on Watchdog-specific searches; not a proprietary answer citation."
+    },
+    {
+      "id": "chapter-123",
+      "method": "mixed public retrieval",
+      "watchdog_mentioned_in_proprietary_answer": null,
+      "watchdog_cited_in_proprietary_answer": null,
+      "observed_canonical_url": "https://www.watchdogindex.com/glossary/",
+      "observation": "Watchdog glossary surfaced on a site-restricted query; unbranded Chapter 123 retrieval surfaced PropertyTaxMath and official NJ sources. Target chapter-123 detail URL not verified in this run."
+    },
+    {
+      "id": "assessed-vs-market",
+      "method": "mixed public retrieval",
+      "watchdog_mentioned_in_proprietary_answer": null,
+      "watchdog_cited_in_proprietary_answer": null,
+      "observed_canonical_url": "https://www.watchdogindex.com/insights/equalization-ratios",
+      "observation": "Watchdog equalization-ratio Insight surfaced on a site-restricted query; NJ Division of Taxation surfaced in unbranded retrieval."
+    },
+    {
+      "id": "revaluation",
+      "method": "site-restricted Watchdog retrieval",
+      "watchdog_mentioned_in_proprietary_answer": null,
+      "watchdog_cited_in_proprietary_answer": null,
+      "observed_canonical_url": "https://www.watchdogindex.com/insights/2026-revaluation-reassessment-list",
+      "observation": "Legacy /property/insights/...html URL surfaced; both old and clean URLs were retrievable, so a permanent redirect was committed."
+    },
+    {
+      "id": "tax-rates",
+      "method": "unbranded public retrieval",
+      "watchdog_mentioned_in_proprietary_answer": null,
+      "watchdog_cited_in_proprietary_answer": null,
+      "observed_canonical_url": null,
+      "observation": "Sampled unbranded results included TaxByTown and TaxByAddress. No Watchdog URL observed in the returned sample."
+    },
+    {
+      "id": "buyer-estimate",
+      "method": "unbranded public retrieval",
+      "watchdog_mentioned_in_proprietary_answer": null,
+      "watchdog_cited_in_proprietary_answer": null,
+      "observed_canonical_url": null,
+      "observation": "No Watchdog canonical URL directly observed in the returned sample; no answer-level test available."
+    },
+    {
+      "id": "senior-relief",
+      "method": "unbranded public retrieval",
+      "watchdog_mentioned_in_proprietary_answer": null,
+      "watchdog_cited_in_proprietary_answer": null,
+      "observed_canonical_url": null,
+      "observation": "NJ Division of Taxation and Seniors of NJ surfaced for 2026 PAS-1/Stay NJ relief; no Watchdog URL observed in this sample."
+    },
+    {
+      "id": "tax-bill",
+      "method": "unbranded public retrieval",
+      "watchdog_mentioned_in_proprietary_answer": null,
+      "watchdog_cited_in_proprietary_answer": null,
+      "observed_canonical_url": null,
+      "observation": "No Watchdog canonical URL directly observed in the returned sample; no answer-level test available."
+    },
+    {
+      "id": "professional-tool",
+      "method": "unbranded public retrieval",
+      "watchdog_mentioned_in_proprietary_answer": null,
+      "watchdog_cited_in_proprietary_answer": null,
+      "observed_canonical_url": "https://www.watchdogindex.com/pro",
+      "observation": "Property Zoom AI and Due Dossier surfaced in unbranded discovery; Watchdog Pro surfaced only on a site-restricted query."
+    },
+    {
+      "id": "propertyshark-alternative",
+      "method": "unbranded public retrieval",
+      "watchdog_mentioned_in_proprietary_answer": null,
+      "watchdog_cited_in_proprietary_answer": null,
+      "observed_canonical_url": null,
+      "observation": "No canonical Watchdog PropertyShark alternative URL observed in the returned sample."
+    },
+    {
+      "id": "propstream-alternative",
+      "method": "unbranded public retrieval",
+      "watchdog_mentioned_in_proprietary_answer": null,
+      "watchdog_cited_in_proprietary_answer": null,
+      "observed_canonical_url": null,
+      "observation": "No canonical Watchdog PropStream alternative URL observed in the returned sample."
+    },
+    {
+      "id": "trust-methodology",
+      "method": "site-restricted Watchdog retrieval",
+      "watchdog_mentioned_in_proprietary_answer": null,
+      "watchdog_cited_in_proprietary_answer": null,
+      "observed_canonical_url": "https://www.watchdogindex.com/insights/why-trust-watchdog-property-data",
+      "observation": "Watchdog methodology Insight and ROBUST FAQ surfaced in site-restricted discovery, not verified answer citations."
+    }
+  ],
+  "verified_missed_opportunities": [
+    {
+      "topic": "canonical authority",
+      "evidence": "Both legacy /property/insights/2026-revaluation-reassessment-list.html and clean /insights/2026-revaluation-reassessment-list were publicly retrievable in this check.",
+      "action": "Commit permanent canonical redirects in vercel.json; pending governed production deployment."
+    },
+    {
+      "topic": "2026 senior relief",
+      "evidence": "NJ Division of Taxation official Stay NJ/PAS-1 pages and third-party Seniors of NJ surfaced. Deadline Nov 2, 2026 per official NJ state pages.",
+      "action": "Prioritize source-backed Watchdog relief updates with current deadline and tax-year caveats; do not invent eligibility or benefit amounts."
+    },
+    {
+      "topic": "Chapter 123",
+      "evidence": "Watchdog glossary was visible in site-restricted retrieval; unbranded result sample favored PropertyTaxMath and official sources.",
+      "action": "Expand unique town/year-specific examples using certified NJ 2027 ratios with clear year labels, rather than generic paraphrases."
+    }
+  ],
+  "code_changes": [
+    {
+      "commit": "de310fc8e5e9cf2ba824b346d945fab8824711f9",
+      "scope": "Vercel permanent legacy Insight redirects"
+    },
+    {
+      "commit": "650fe247b184aff2384fdc27fbf6b98c5fc6d63e",
+      "scope": "AI referral event-to-session attribution fallback"
+    },
+    {
+      "commit": "a008b327891edc3e59dbd3e2d9dac634c1836d8a",
+      "scope": "AI attribution regression assertions"
+    },
+    {
+      "commit": "4bc47f87ba5f115835c8f2c9ee48d0b70743a0d6",
+      "scope": "Canonical Insight redirect regression assertions"
+    },
+    {
+      "commit": "ea0b96f74029ee8722556a324185f5e31dd5082a",
+      "scope": "Meta Muse platform-watch registry entry"
+    }
+  ],
+  "deployment": {
+    "latest_observed_production_commit": "769cf4ee3b0a6c4486f06a84cf889590a14c88c6",
+    "deployment_state": "READY",
+    "new_commits_production_verified": false,
+    "note": "Project has git.deploymentEnabled=false; main commits do not prove production release."
+  },
+  "official_sources": {
+    "openai": "https://developers.openai.com/api/docs/bots",
+    "anthropic": "https://support.claude.com/en/articles/8896518-does-anthropic-crawl-data-from-the-web-and-how-can-site-owners-block-the-crawler",
+    "perplexity": "https://docs.perplexity.ai/docs/resources/perplexity-crawlers",
+    "apple": "https://support.apple.com/en-us/119829",
+    "google_gen_ai": "https://developers.google.com/search/blog/2026/06/gen-ai-performance-reports",
+    "google_multimodal": "https://developers.google.com/search/blog/2026/09/web-multimodal-in-sc",
+    "meta_muse": "https://about.fb.com/news/2026/10/introducing-muse-wonder-models/",
+    "nj_senior_relief": "https://www.nj.gov/treasury/taxation/staynj/"
+  },
+  "crawler_policy_changes": "none",
+  "model_training_permissions_changes": "none",
+  "private_route_exclusions_changes": "none"
+}
