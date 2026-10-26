@@ -243,5 +243,14 @@
     "database_updated_at": "2026-10-26T14:01:27.899901Z",
     "verification": "Live Watchdog URL fetched via connected Vercel and returned HTTP 200 with corrected '564 municipalities' text.",
     "training_policy_unchanged": true
-  }
+  },
+  "measurement_limitations": [
+    {
+      "component": "developer AI Discovery dashboard",
+      "finding": "Current product-analytics-report query reads only the newest 5,000 external page_view events before AI attribution.",
+      "observed_external_pageviews_30d": 42640,
+      "consequence": "Dashboard's 30D AI-referral count is a truncated sample, not exhaustive. Today's 0 uses independent uncapped SQL.",
+      "next_action": "Replace 5,000-row client-side attribution scan with indexed SQL aggregation or equivalent scoped query; test on >5,000 events."
+    }
+  ]
 }
