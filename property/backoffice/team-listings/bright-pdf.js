@@ -27,6 +27,7 @@ const LABELS={
   school_district:['School District'],
   subdivision:['Subdivision','Subdiv / Neigh','Neighborhood'],
   county:['County'],
+  tax_id:['Tax ID #','Tax ID','Tax ID Number','Parcel Number'],
   list_date:['Listing Entry Date','Listing Agreement Date','List Date','Listing Date','Listed On'],
   agent_name:['List Agent','Listing Agent'],
   brokerage:['List Office','Listing Office']
@@ -191,6 +192,7 @@ function parseText(lines){
     price:money(grab(text,LABELS.price))||headerPrice(lines),
     address:where.address,unit:where.unit,city:where.city,zip:where.zip,
     county:county(grab(text,LABELS.county)),
+    tax_id:(grab(text,LABELS.tax_id).match(/^[0-9A-Z][0-9A-Z .-]{4,40}/i)||[''])[0].trim(),
     beds:num(grab(text,LABELS.beds)),
     baths_full:b.full,baths_half:b.half,
     sqft:sqft?Math.round(num(sqft)):null,

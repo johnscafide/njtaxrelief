@@ -7,6 +7,8 @@
 // The Bright MLS printout is read in the browser (team-listings.js); only the public fields it
 // finds are sent here. The PDF itself is never uploaded or kept.
 const crypto = require('crypto');
+const fs = require('fs');
+const path = require('path');
 
 const SUPABASE_URL = process.env.SUPABASE_URL || process.env.NEXT_PUBLIC_SUPABASE_URL || 'https://uvkvaxljhhngydvlrzom.supabase.co';
 const SERVICE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY || '';
@@ -19,7 +21,8 @@ const MAX_PHOTOS = 40;
 const STATUSES = new Set(['coming_soon', 'active', 'under_contract', 'pending', 'sold', 'off_market']);
 const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
 const EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-const FIELDS = 'id,slug,mls_number,status,address,unit,city,state,zip,county,price,beds,baths_full,baths_half,sqft,lot,year_built,property_type,style,annual_tax,school_district,subdivision,remarks,features,photos,list_date,agent_user_id,agent_name,brokerage,published,created_at,updated_at';
+const FIELDS = 'id,slug,mls_number,status,address,unit,city,state,zip,county,price,beds,baths_full,baths_half,sqft,lot,year_built,property_type,style,annual_tax,school_district,subdivision,remarks,features,photos,list_date,agent_user_id,agent_name,brokerage,tax_id,pams_pin,published,created_at,updated_at';
+const COUNTY_CODES = { atlantic: '01', bergen: '02', burlington: '03', camden: '04', 'cape may': '05', cumberland: '06', essex: '07', gloucester: '08', hudson: '09', hunterdon: '10', mercer: '11', middlesex: '12', monmouth: '13', morris: '14', ocean: '15', passaic: '16', salem: '17', somerset: '18', sussex: '19', union: '20', warren: '21' };
 
 function requestHost(req) { return String(req.headers['x-forwarded-host'] || req.headers.host || '').split(',')[0].trim().toLowerCase().replace(/:\d+$/, ''); }
 function allowedHost(host) { return ALLOWED_HOSTS.has(host) || host.endsWith('.vercel.app') || host === 'localhost' || host === '127.0.0.1'; }
@@ -112,12 +115,60 @@ function cleanListing(input) {
     list_date: cleanDate(l.list_date),
     agent_name: text(l.agent_name, 120) || null,
     brokerage: text(l.brokerage, 120) || 'Opus Elite Real Estate of NJ, LLC',
+    tax_id: text(l.tax_id, 40).toUpperCase() || null,
     published: l.published !== false
   };
   if (mls && !/^[A-Z0-9-]{4,20}$/.test(mls)) return { error: 'That MLS number doesn’t look right.' };
   if (row.address.length < 3) return { error: 'Add the street address.' };
   if (!row.city) return { error: 'Add the town.' };
   return { row };
+}
+
+function countyCode(county) { return COUNTY_CODES[String(county || '').toLowerCase().replace(/,.*$/, '').replace(/\s+county$/, '').trim()] || ''; }
+// Bright prints the NJ tax ID as town-block-lot(-qualifier), for example "18-00048 01-00073"
+// (town 18, block 48.01, lot 73). With the county that makes the state parcel ID "0818_48.01_73".
+function pinFromTaxId(taxId, county) {
+  const cc = countyCode(county);
+  const parts = String(taxId || '').trim().split(/\s*-\s*/);
+  if (!cc || parts.length < 3 || !/^\d{1,2}$/.test(parts[0])) return '';
+  const piece = (s) => {
+    const [whole, dec] = String(s).trim().split(/[\s.]+/);
+    if (!/^\d+[A-Z]?$/i.test(whole || '')) return '';
+    const w = whole.replace(/^0+(?=\d)/, '').toUpperCase();
+    return dec && /[1-9]/.test(dec) ? `${w}.${dec}` : w;
+  };
+  const block = piece(parts[1]), lot = piece(parts[2]);
+  if (!block || !lot) return '';
+  const qual = parts[3] ? text(parts[3], 20).toUpperCase().replace(/[^0-9A-Z.]/g, '') : '';
+  return `${cc}${parts[0].padStart(2, '0')}_${block}_${lot}${qual ? `_${qual}` : ''}`;
+}
+const STREET_WORDS = { AVENUE: 'AVE', AV: 'AVE', COURT: 'CT', ROAD: 'RD', STREET: 'ST', DRIVE: 'DR', LANE: 'LN', PLACE: 'PL', BOULEVARD: 'BLVD', TERRACE: 'TER', CIRCLE: 'CIR', PARKWAY: 'PKWY', HIGHWAY: 'HWY', TRAIL: 'TRL', NORTH: 'N', SOUTH: 'S', EAST: 'E', WEST: 'W' };
+function streetKey(s) { return String(s || '').toUpperCase().replace(/[.,#]/g, ' ').split(/\s+/).filter(Boolean).map((w) => STREET_WORDS[w] || w).join(' '); }
+let townFile = null;
+function zipTowns(zip, city) {
+  if (!townFile) { try { townFile = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'co', 'towns.json'), 'utf8')); } catch (_) { townFile = {}; } }
+  const byCity = Object.entries(townFile.aliases || {}).find(([k]) => k.toLowerCase() === String(city || '').toLowerCase());
+  return new Set([...((townFile.zips || {})[zip] || []), ...(byCity ? byCity[1] : [])]);
+}
+// The Watchdog parcel for a listing: from the tax ID when Bright gave one, else by street address
+// in the listing's county and ZIP. Empty when nothing matches exactly once.
+async function findPin(row) {
+  try {
+    const fromId = pinFromTaxId(row.tax_id, row.county);
+    if (fromId && (await rest(`property_lookups?select=pams_pin&pams_pin=eq.${encodeURIComponent(fromId)}`)).length) return fromId;
+    const cc = countyCode(row.county);
+    const key = streetKey(row.address);
+    const m = key.match(/^(\d+[A-Z]?) (?:([NSEW]) )?(\S+)/);
+    if (!cc || !m) return '';
+    const long = { N: 'NORTH', S: 'SOUTH', E: 'EAST', W: 'WEST' };
+    const starts = m[2] ? [`${m[1]} ${m[2]} ${m[3]}`, `${m[1]} ${long[m[2]]} ${m[3]}`] : [`${m[1]} ${m[3]}`];
+    const rows = [];
+    for (const s of starts) rows.push(...await rest(`property_lookups?select=pams_pin,address&address=like.${encodeURIComponent(s)}*&county=not.is.null&pams_pin=like.${cc}*&limit=40`));
+    let hits = rows.filter((r) => streetKey(r.address) === key);
+    const towns = zipTowns(row.zip, row.city);
+    if (hits.length > 1 && towns.size) hits = hits.filter((r) => towns.has(String(r.pams_pin).slice(0, 4)));
+    return hits.length === 1 ? hits[0].pams_pin : '';
+  } catch (_) { return ''; }
 }
 
 async function uniqueSlug(base, id) {
@@ -157,6 +208,8 @@ async function save(access, body) {
   }
   if (!row.agent_name) row.agent_name = existing ? existing.agent_name : access.name;
   row.slug = await uniqueSlug(slugify([row.address, row.unit, row.city, row.zip].filter(Boolean).join(' ')), id);
+  const sameHome = existing && existing.pams_pin && existing.address === row.address && existing.city === row.city && (existing.tax_id || null) === row.tax_id;
+  row.pams_pin = sameHome ? existing.pams_pin : (await findPin(row)) || null;
   row.updated_at = new Date().toISOString();
   let saved;
   if (existing) {
@@ -253,4 +306,4 @@ module.exports = async function handler(req, res) {
     return res.status(500).json({ error: 'Something went wrong saving that. Please try again.' });
   }
 };
-module.exports._test = { cleanListing, slugify, cleanPhotos, PHOTO_PREFIX };
+module.exports._test = { cleanListing, slugify, cleanPhotos, pinFromTaxId, streetKey, zipTowns, PHOTO_PREFIX };

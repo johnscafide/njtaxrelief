@@ -12,7 +12,7 @@ const MAX_SIDE=2048;
 const LIVE=new Set(['coming_soon','active','under_contract','pending']);
 const STALE_DAYS=14;
 const STATUS_LABEL={coming_soon:'Coming soon',active:'For sale',under_contract:'Under contract',pending:'Pending',sold:'Sold',off_market:'Off market'};
-const FIELDS=['mls_number','status','price','address','unit','city','zip','county','beds','baths_full','baths_half','sqft','lot','year_built','property_type','style','annual_tax','school_district','subdivision','list_date','agent_name','brokerage','remarks'];
+const FIELDS=['mls_number','status','price','address','unit','city','zip','county','tax_id','beds','baths_full','baths_half','sqft','lot','year_built','property_type','style','annual_tax','school_district','subdivision','list_date','agent_name','brokerage','remarks'];
 
 const $=(id)=>document.getElementById(id);
 const state={owner:false,name:'',userId:'',listings:[],filter:'live',editing:null,photos:[],busy:false};
