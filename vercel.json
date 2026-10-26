@@ -292,7 +292,12 @@
     },
     {
       "source": "/property/insights.html",
-      "destination": "/property/insights/",
+      "destination": "/insights",
+      "permanent": true
+    },
+    {
+      "source": "/property/insights/:slug.html",
+      "destination": "/insights/:slug",
       "permanent": true
     },
     {
@@ -622,12 +627,12 @@
     },
     {
       "source": "/insights.html",
-      "destination": "/property/insights/",
+      "destination": "/insights",
       "permanent": true
     },
     {
       "source": "/insights/:slug.html",
-      "destination": "/property/insights/:slug.html",
+      "destination": "/insights/:slug",
       "permanent": true
     }
   ],
