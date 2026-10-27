@@ -12,7 +12,7 @@ const AVATAR={cx:193,r:128};
 const HEAD={nameInkX:359,nameInkW:437,nameBase:130,handleInkX:360,handleInkW:384,handleBase:201,badge:68,badgeTop:71,badgeGap:22};
 const BODY={inkX:82,maxRight:1040,sample:'A lot of confidence',sampleW:942,firstBase:201,pitch:122,descent:22,minK:.4};
 const MARGIN=110;
-const TEXT='#000000',MUTED='#555456',X_BLUE='#1d9bf0',META_BLUE='#0095f6',META_MUTED='#999999';
+const TEXT='#000000',X_BLUE='#1d9bf0',META_BLUE='#0095f6';
 const X_BADGE='M20.396 11c-.018-.646-.215-1.275-.57-1.816-.354-.54-.852-.972-1.438-1.246.223-.607.27-1.264.14-1.897-.131-.634-.437-1.218-.882-1.687-.47-.445-1.053-.75-1.687-.882-.633-.13-1.29-.083-1.897.14-.273-.587-.704-1.086-1.245-1.44S11.647 1.62 11 1.604c-.646.017-1.273.213-1.813.568s-.969.854-1.24 1.44c-.608-.223-1.267-.272-1.902-.14-.635.13-1.22.436-1.69.882-.445.47-.749 1.055-.878 1.688-.13.633-.08 1.29.144 1.896-.587.274-1.087.705-1.443 1.245-.356.54-.555 1.17-.574 1.817.02.647.218 1.276.574 1.817.356.54.856.972 1.443 1.245-.224.606-.274 1.263-.144 1.896.13.634.433 1.218.877 1.688.47.443 1.054.747 1.687.878.633.132 1.29.084 1.897-.136.274.586.705 1.084 1.246 1.439.54.354 1.17.551 1.816.569.647-.016 1.276-.213 1.817-.567s.972-.854 1.245-1.44c.604.239 1.266.296 1.903.164.636-.132 1.22-.447 1.68-.907.46-.46.776-1.044.908-1.681s.075-1.299-.165-1.903c.586-.274 1.084-.705 1.439-1.246.354-.54.551-1.17.569-1.816z';
 const X_CHECK='M9.662 14.85l-3.429-3.428 1.293-1.302 2.072 2.072 4.4-4.794 1.347 1.246z';
 const ICONS={
@@ -27,6 +27,17 @@ const $=(id)=>document.getElementById(id);
 const els={};
 let photo=null;
 let font=null;
+let colors={bg:'#ffffff',text:TEXT};
+
+function hexRgb(hex){
+  const n=parseInt(hex.slice(1),16);
+  return [n>>16&255,n>>8&255,n&255];
+}
+
+function mix(a,b,amount){
+  const x=hexRgb(a),y=hexRgb(b);
+  return '#'+x.map((v,i)=>Math.round(v*amount+y[i]*(1-amount)).toString(16).padStart(2,'0')).join('');
+}
 
 function hasAppleFont(ctx){
   const probe='A lot of confidence @johnvscafide';
@@ -161,8 +172,8 @@ function drawDots(ctx,cx,cy,gap,r,color){
   for(const dx of [-gap,0,gap]){ctx.beginPath();ctx.arc(cx+dx,cy,r,0,Math.PI*2);ctx.fill()}
 }
 
-function blank(ctx){
-  ctx.fillStyle='#ffffff';
+function blank(ctx,bg){
+  ctx.fillStyle=bg;
   ctx.fillRect(0,0,W,H);
   ctx.textBaseline='alphabetic';
   ctx.textAlign='left';
@@ -185,20 +196,20 @@ function layoutX(ctx,text){
 function drawX(ctx,text){
   const {k,lines,originX,height}=layoutX(ctx,text);
   const top=Math.round((H-height)*.4);
-  blank(ctx);
+  blank(ctx,colors.bg);
   drawAvatar(ctx,AVATAR.cx,top+AVATAR.r,AVATAR.r);
 
-  ctx.fillStyle=TEXT;
+  ctx.fillStyle=colors.text;
   setFont(ctx,font.name,font.nameSize);
   const name=ink(ctx,NAME);
   ctx.fillText(NAME,HEAD.nameInkX+name.left,top+HEAD.nameBase);
   drawXBadge(ctx,HEAD.nameInkX+name.width+HEAD.badgeGap,top+HEAD.badgeTop,HEAD.badge);
 
-  ctx.fillStyle=MUTED;
+  ctx.fillStyle=mix(colors.text,colors.bg,.67);
   setFont(ctx,font.handle,font.handleSize);
   ctx.fillText(HANDLE,HEAD.handleInkX+ink(ctx,HANDLE).left,top+HEAD.handleBase);
 
-  ctx.fillStyle=TEXT;
+  ctx.fillStyle=colors.text;
   setFont(ctx,font.body,font.bodySize*k,font.tracking);
   const first=top+AVATAR.r*2+BODY.firstBase*k;
   lines.forEach((line,i)=>ctx.fillText(line,originX,first+i*BODY.pitch*k));
@@ -209,32 +220,32 @@ function drawThreads(ctx,text){
   const body=fitText(ctx,text,{weight:400,size:72,minSize:30,lineHeight:lh,width:right-textX,height:H-2*MARGIN-300});
   const height=r*2-10+body.height+40+60;
   const top=Math.round((H-height)*.42);
-  blank(ctx);
+  blank(ctx,colors.bg);
   drawAvatar(ctx,left+r,top+r,r);
 
   const nameBase=top+52;
-  ctx.fillStyle=TEXT;
+  ctx.fillStyle=colors.text;
   setFont(ctx,700,nameSize);
   ctx.fillText(USER,textX,nameBase);
   const nameW=ctx.measureText(USER).width;
   drawMetaBadge(ctx,textX+nameW+12,nameBase-36,40);
-  ctx.fillStyle=META_MUTED;
+  ctx.fillStyle=mix(colors.text,colors.bg,.4);
   setFont(ctx,400,nameSize);
   ctx.fillText('1h',textX+nameW+12+40+18,nameBase);
-  drawDots(ctx,right-24,nameBase-14,14,4.5,TEXT);
+  drawDots(ctx,right-24,nameBase-14,14,4.5,colors.text);
 
-  ctx.fillStyle=TEXT;
+  ctx.fillStyle=colors.text;
   setFont(ctx,400,body.size,font.tracking);
   const first=nameBase+18+body.size*lh*.95;
   body.lines.forEach((line,i)=>ctx.fillText(line,textX,first+i*body.size*lh));
 
   const iconY=first+(body.lines.length-1)*body.size*lh+body.size*.3+40;
-  ['heart','comment','repost','send'].forEach((name,i)=>drawIcon(ctx,name,textX-4+i*112,iconY,56,TEXT));
+  ['heart','comment','repost','send'].forEach((name,i)=>drawIcon(ctx,name,textX-4+i*112,iconY,56,colors.text));
 }
 
 function drawInstagram(ctx,text){
   const headH=140,img=W,r=46;
-  blank(ctx);
+  blank(ctx,'#ffffff');
   drawAvatar(ctx,36+r,headH/2,r);
   ctx.fillStyle=TEXT;
   setFont(ctx,700,38);
@@ -243,11 +254,14 @@ function drawInstagram(ctx,text){
   drawMetaBadge(ctx,nameX+ctx.measureText(USER).width+10,headH/2-17,34);
   drawDots(ctx,W-60,headH/2,13,4.5,TEXT);
 
-  ctx.fillStyle='#f4f1ea';
+  ctx.fillStyle=colors.bg;
   ctx.fillRect(0,headH,W,img);
+  ctx.fillStyle='#dbdbdb';
+  ctx.fillRect(0,headH,W,1);
+  ctx.fillRect(0,headH+img-1,W,1);
   const pad=110;
   const body=fitText(ctx,text,{weight:font.body,size:96,minSize:36,lineHeight:1.18,width:W-pad*2,height:img-pad*2});
-  ctx.fillStyle=TEXT;
+  ctx.fillStyle=colors.text;
   setFont(ctx,font.body,body.size,font.tracking);
   const first=headH+(img-body.height)/2+body.size*.9;
   body.lines.forEach((line,i)=>ctx.fillText(line,pad,first+i*body.size*1.18));
@@ -264,7 +278,14 @@ function style(){
   return picked&&STYLES[picked.value]?picked.value:'x';
 }
 
+function readColors(){
+  const valid=(v,fallback)=>/^#[0-9a-f]{6}$/i.test(v)?v.toLowerCase():fallback;
+  colors={bg:valid(els.bg.value,'#ffffff'),text:valid(els.color.value,TEXT)};
+  document.querySelectorAll('[data-qi-bg]').forEach((b)=>b.setAttribute('aria-pressed',String(b.dataset.qiBg===colors.bg&&b.dataset.qiText===colors.text)));
+}
+
 function draw(){
+  readColors();
   const ctx=els.canvas.getContext('2d');
   STYLES[style()](ctx,els.text.value.trim());
 }
@@ -307,6 +328,8 @@ function init(){
   els.canvas=$('qi-canvas');
   els.text=$('qi-text');
   els.download=$('qi-download');
+  els.bg=$('qi-bg');
+  els.color=$('qi-color');
   Promise.all([loadPhoto(),loadFonts()]).then(()=>{
     pickFont(els.canvas.getContext('2d'));
     draw();
@@ -314,6 +337,16 @@ function init(){
   els.text.addEventListener('input',()=>{if(font)draw()});
   document.querySelectorAll('input[name="qi-style"]').forEach((input)=>input.addEventListener('change',()=>{if(font)draw()}));
   els.download.addEventListener('click',()=>{if(font)download()});
+  [els.bg,els.color].forEach((input)=>input.addEventListener('input',()=>{if(font)draw()}));
+  document.querySelectorAll('[data-qi-bg]').forEach((button)=>{
+    button.style.background=button.dataset.qiBg;
+    button.style.color=button.dataset.qiText;
+  });
+  document.querySelectorAll('[data-qi-bg]').forEach((button)=>button.addEventListener('click',()=>{
+    els.bg.value=button.dataset.qiBg;
+    els.color.value=button.dataset.qiText;
+    if(font)draw();
+  }));
 }
 
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);
