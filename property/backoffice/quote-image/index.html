@@ -10,7 +10,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@400;500;600;700;800&family=Inter:wght@400;500;700&display=swap">
   <link rel="stylesheet" href="/property/backoffice/backoffice-board.css?v=20260928a">
-  <link rel="stylesheet" href="/property/backoffice/quote-image/quote-image.css?v=20261025a">
+  <link rel="stylesheet" href="/property/backoffice/quote-image/quote-image.css?v=20261027a">
 </head>
 <body class="bo-body" data-bo-page="quote-image">
   <a class="bo-skip" href="#bo-main">Skip to content</a>
@@ -48,6 +48,22 @@
           <label><input type="radio" name="qi-style" value="threads"> Threads</label>
           <label><input type="radio" name="qi-style" value="instagram"> Instagram</label>
         </fieldset>
+        <fieldset class="qi-colors">
+          <legend class="qi-label">Colors</legend>
+          <div class="qi-swatches">
+            <button type="button" class="qi-swatch" data-qi-bg="#ffffff" data-qi-text="#000000" aria-label="White with black text">Aa</button>
+            <button type="button" class="qi-swatch" data-qi-bg="#000000" data-qi-text="#ffffff" aria-label="Black with white text">Aa</button>
+            <button type="button" class="qi-swatch" data-qi-bg="#15202b" data-qi-text="#f7f9f9" aria-label="Dark blue with white text">Aa</button>
+            <button type="button" class="qi-swatch" data-qi-bg="#f4f1ea" data-qi-text="#000000" aria-label="Cream with black text">Aa</button>
+            <button type="button" class="qi-swatch" data-qi-bg="#0e2248" data-qi-text="#ffffff" aria-label="Navy with white text">Aa</button>
+            <button type="button" class="qi-swatch" data-qi-bg="#1d9bf0" data-qi-text="#ffffff" aria-label="Blue with white text">Aa</button>
+          </div>
+          <div class="qi-pickers">
+            <label><input type="color" id="qi-bg" value="#ffffff"> Background</label>
+            <label><input type="color" id="qi-color" value="#000000"> Text</label>
+            <label><input type="color" id="qi-highlight" value="#1d9bf0"> *Highlight*</label>
+          </div>
+        </fieldset>
         <label class="qi-label" for="qi-text">Your text</label>
         <textarea id="qi-text" rows="7" maxlength="600">A lot of confidence
 is just deciding
@@ -55,6 +71,7 @@ not to over-explain
 yourself.</textarea>
         <div class="qi-actions">
           <button class="bo-btn bo-btn-primary" id="qi-download" type="button">Download PNG</button>
+          <button class="bo-btn bo-btn-ghost" id="qi-copy" type="button" hidden>Copy image</button>
         </div>
       </section>
 
@@ -67,6 +84,6 @@ yourself.</textarea>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
   <script src="/property/js/access-guard.js"></script>
   <script src="/property/backoffice/backoffice-shell.js?v=20260930a" defer></script>
-  <script src="/property/backoffice/quote-image/quote-image.js?v=20261025a" defer></script>
+  <script src="/property/backoffice/quote-image/quote-image.js?v=20261027a" defer></script>
 </body>
 </html>
