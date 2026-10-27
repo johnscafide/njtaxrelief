@@ -1,0 +1,259 @@
+{
+ "municipality_code": "0515",
+ "municipality": "Wildwood Crest Borough",
+ "county": "CAPE MAY",
+ "resale_co": {
+  "status": "required",
+  "name": "Certificate of Zoning Use Compliance (Borough Code Chapter 86, Zoning Use Compliance Certificate)",
+  "issued_by": "Office of Zoning Administration (Zoning Official)",
+  "contact_name": "Rick Allen",
+  "contact_title": "Zoning Official",
+  "lead_time": "Ten or more days before settlement for the lowest fee",
+  "valid_for": "",
+  "requirements": [
+   "Zoning use compliance review confirming the current use (single family, two-family, multi-family, condo and so on) is permitted or a lawful pre-existing nonconforming use",
+   "Application lists the property owner, the prospective buyer and the settlement date"
+  ],
+  "fees": [
+   {
+    "label": "Zoning use compliance, ten or more days before settlement",
+    "amount": "$50",
+    "quote": "$50 Ten or more days prior to settlement",
+    "source_url": "https://wildwoodcrest.org/cp/tinymce/data/files/Application%20for%20Certificate%20of%20Zoning%20Use%20Compliance%20updated%20July%202023.pdf",
+    "verified": true
+   },
+   {
+    "label": "Zoning use compliance, 9 to 5 days before settlement",
+    "amount": "$70",
+    "quote": "$70 9-5 days prior to settlement",
+    "source_url": "https://wildwoodcrest.org/cp/tinymce/data/files/Application%20for%20Certificate%20of%20Zoning%20Use%20Compliance%20updated%20July%202023.pdf",
+    "verified": true
+   },
+   {
+    "label": "Zoning use compliance, four or fewer days before settlement",
+    "amount": "$125",
+    "quote": "$125 Four or fewer days prior to settlement",
+    "source_url": "https://wildwoodcrest.org/cp/tinymce/data/files/Application%20for%20Certificate%20of%20Zoning%20Use%20Compliance%20updated%20July%202023.pdf",
+    "verified": true
+   }
+  ],
+  "how_to_apply": "Fill out the Borough's Application for Certificate of Zoning Use Compliance (updated July 2023): property, block and lot, applicant, owner, prospective buyer, settlement date and current use. File it with the fee at the Office of Zoning Administration, Borough Hall, 6101 Pacific Avenue, Wildwood Crest. Apply ten or more days before settlement for the lowest fee.",
+  "application_url": "https://wildwoodcrest.org/cp/tinymce/data/files/Application%20for%20Certificate%20of%20Zoning%20Use%20Compliance%20updated%20July%202023.pdf",
+  "department_url": "https://wildwoodcrest.org/planningzoning.php",
+  "phone": "609-729-8090",
+  "email": "rallen@wildwoodcrest.org",
+  "evidence": [
+   {
+    "url": "https://wildwoodcrest.org/cp/tinymce/data/files/Application%20for%20Certificate%20of%20Zoning%20Use%20Compliance%20updated%20July%202023.pdf",
+    "quote": "Borough of Wildwood Crest Office of Zoning Administration 6101 Pacific Avenue, Wildwood Crest, NJ 08260 Phone (609) 729-8089 E: rallen@wildwoodcrest.org Rick Allen, Zoning Official Application for Certificate of Zoning Use Compliance",
+    "doc_date": "2023-07",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://wildwoodcrest.org/cp/tinymce/data/files/Application%20for%20Certificate%20of%20Zoning%20Use%20Compliance%20updated%20July%202023.pdf",
+    "quote": "Prospective Buyer",
+    "doc_date": "2023-07",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://wildwoodcrest.org/planningzoning.php",
+    "quote": "Rick Allen , Zoning Official Phone: (609) 729-8090 | Fax: (609) 522-7380 Email: rallen@wildwoodcrest.org",
+    "doc_date": "2026-10-27 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://wildwoodcrest.org/planningzoning.php",
+    "quote": "Application For Certificate of Zoning Compliance (updated July 2023)",
+    "doc_date": "2026-10-27 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://ecode360.com/36124429",
+    "quote": "Chapter 86: Zoning Use Compliance Certificate - Borough of Wildwood Crest, NJ",
+    "doc_date": "(search result title, 2026-10-27)",
+    "via": "search_snippet",
+    "verified": null
+   },
+   {
+    "url": "https://ecode360.com/36091719",
+    "quote": "Chapter 39: Land Use Procedures - Borough of Wildwood Crest, NJ",
+    "doc_date": "(search result title, 2026-10-27)",
+    "via": "search_snippet",
+    "verified": null
+   }
+  ],
+  "confidence": "medium",
+  "notes": "Changed from not_found to required. The Borough code has a Chapter 86, 'Zoning Use Compliance Certificate' (ecode360, blocked to direct reading). Web search results of that chapter say no one may sell or transfer title to a structure, part of a structure, lot or unit without first getting a certificate of zoning use compliance from the Zoning Officer confirming the use is permitted or a lawful pre-existing nonconforming use, that a buyer may not take title or occupy without it, and that it also helps the Tax Assessor keep records; Chapter 39 says the Zoning Officer enforces the Chapter 86 application. The exact ordinance wording could not be read, so it is not quoted; confidence is medium until the text or the Zoning Office confirms. The Borough's own application asks for the prospective buyer and settlement date, and its fee rises as settlement gets closer, which fits a sale certificate. A separate Mercantile version of the form is for rental and business licenses; the rental license page says 'A Certificate of Zoning Use Compliance is required for all new applicants, change in applicant or change of use' (rental rule). The form gives phone (609) 729-8089 (the Land Use / Construction office line); the Planning/Zoning page lists (609) 729-8090 for Rick Allen. The Construction Office (Richard Allen, Construction Official, 609-729-8089) issues Certificates of Occupancy only for building projects. Last pass put the fire bureau fees in this section by mistake; they are now only under fire_cert."
+ },
+ "fire_cert": {
+  "requirements": [
+   "On-site inspection by the Borough Fire Prevention & Inspection Bureau; do not apply until everything is in place",
+   "Smoke alarms in each sleeping room/area, outside (within 10 feet of) each sleeping room/area, and on every level including attics",
+   "Hardwired smoke alarms must be replaced if older than 10 years after the date of manufacture; battery smoke alarms must be the 10-year sealed battery type",
+   "CO alarms outside (within 10 feet of) each sleeping room/area and on every level when there are fuel-burning appliances or an attached garage",
+   "Fire extinguisher, minimum 2A:10BC, new (current year) or tagged by a licensed fire protection agent, for each cooking area, hung in a visible location or labeled cabinet (form still lists it)",
+   "Failure to apply and have the inspection before closing carries a $1000.00 penalty to the owner"
+  ],
+  "authorities": [
+   {
+    "name": "Borough of Wildwood Crest Fire Prevention & Inspection Bureau",
+    "type": "municipal_fire_bureau",
+    "area_served": "Entire borough",
+    "lead_time": "More than 10 business days before settlement for the lowest fee; the inspector inspects as soon as possible after the application is received",
+    "fees": [
+     {
+      "label": "Application received more than 10 business days before settlement",
+      "amount": "$50.00",
+      "quote": "$50.00 application is received more than 10 business days prior to settlement",
+      "source_url": "https://wildwoodcrest.org/fileupload/CSACMAPEC-application%202026.pdf",
+      "verified": true
+     },
+     {
+      "label": "Application received 4 to 10 business days before settlement",
+      "amount": "$90.00",
+      "quote": "$90.00 application is received between 4 and 10 business days prior to settlement",
+      "source_url": "https://wildwoodcrest.org/fileupload/CSACMAPEC-application%202026.pdf",
+      "verified": true
+     },
+     {
+      "label": "Application received less than 4 business days before settlement",
+      "amount": "$160.00",
+      "quote": "$160.00 application is received less than 4 business days prior to settlement",
+      "source_url": "https://wildwoodcrest.org/fileupload/CSACMAPEC-application%202026.pdf",
+      "verified": true
+     },
+     {
+      "label": "Re-inspection",
+      "amount": "$50.00",
+      "quote": "$50.00 Re-inspection fee",
+      "source_url": "https://wildwoodcrest.org/fileupload/CSACMAPEC-application%202026.pdf",
+      "verified": true
+     },
+     {
+      "label": "Fire Code Status Report (search for existing violations, fees and penalties)",
+      "amount": "$50.00",
+      "quote": "$50.00 Fire Code Status Report (search for Existing Violations, Fees and Penalties )",
+      "source_url": "https://wildwoodcrest.org/fileupload/CSACMAPEC-application%202026.pdf",
+      "verified": true
+     },
+     {
+      "label": "Certificate copy (can be reissued for a resale if the last inspection was within 6 months of settlement)",
+      "amount": "$25.00",
+      "quote": "$25.00 Certificate Copy (Can be reissued and used for a property transfer (resale) if the last",
+      "source_url": "https://wildwoodcrest.org/fileupload/CSACMAPEC-application%202026.pdf",
+      "verified": true
+     },
+     {
+      "label": "Penalty for not applying and inspecting before closing",
+      "amount": "$1000.00",
+      "quote": "FAILURE to apply for CSACMAPFEC and have the inspection prior to closing will result in a one thousand dollar ($1000.00) penalty to be assessed to the property owner.",
+      "source_url": "https://wildwoodcrest.org/fileupload/CSACMAPEC-application%202026.pdf",
+      "verified": true
+     }
+    ],
+    "how_to_apply": "Fill out the Application for a Certificate of Smoke Alarm, Carbon Monoxide Alarm and Portable Fire Extinguisher Compliance (CSACMAPFEC): property type, settlement date, key, access code or appointment, seller/agent, settlement agency, seller and buyer. Submit it with a check payable to the Fire Prevention Bureau at 6101 Pacific Avenue, Wildwood Crest, NJ 08260, and choose to have the certificate mailed or picked up.",
+    "application_url": "https://wildwoodcrest.org/fileupload/CSACMAPEC-application%202026.pdf",
+    "department_url": "https://wildwoodcrest.org/fireprevention.php",
+    "contact_name": "Michael Neill",
+    "contact_title": "Fire & Temporary Housing Official",
+    "phone": "609-729-8083",
+    "email": "mneill@wildwoodcrest.org",
+    "evidence": [
+     {
+      "url": "https://wildwoodcrest.org/fileupload/CSACMAPEC-application%202026.pdf",
+      "quote": "Borough of Wildwood Crest Fire Prevention & Inspection Bureau 6101 Pacific Avenue Wildwood Crest, New Jersey 08260 Office - 609-729-5152",
+      "doc_date": "2026-04 (PDF dated April 2, 2026)",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://wildwoodcrest.org/fileupload/CSACMAPEC-application%202026.pdf",
+      "quote": "Fee Schedule: (made payable to Fire Prevention Bureau)",
+      "doc_date": "2026-04",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://wildwoodcrest.org/fileupload/CSACMAPEC-application%202026.pdf",
+      "quote": "Once it is received the fire inspector will conduct the inspection as soon as possible.",
+      "doc_date": "2026-04",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://wildwoodcrest.org/fireprevention.php",
+      "quote": "the Bureau also conducts inspections of one- and two-family dwellings prior to any change in occupancy (sale, lease, etc.).",
+      "doc_date": "2026-10-27 (page fetched)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://wildwoodcrest.org/fireprevention.php",
+      "quote": "APPLICATION FOR CERTIFICATION OF SMOKE ALARM, CARBON MONOXIDE ALARM & PORTABLE FIRE EXTINGUISHER COMPLIANCE ( For Resale Properties )",
+      "doc_date": "2026-10-27 (page fetched)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://wildwoodcrest.org/fireprevention.php",
+      "quote": "Neill , Fire & Temporary Housing Official Phone: 609-729-8083 Email: mneill@wildwoodcrest.org",
+      "doc_date": "2026-10-27 (page fetched)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://wildwoodcrest.org/images/Fire%20Prevention%20Fee%20Ordinance%20May%202020.pdf",
+      "quote": "Single-family and two-family dwellings pursuant to N.J.A.C. 5:18-2.3 shall be inspected and charged a fee upon sale or change of tenant, as follows:",
+      "doc_date": "2020-05 (Ordinance No. 1289; scanned)",
+      "via": "pdf",
+      "verified": null
+     },
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "F Wildwood Crest Borough",
+      "doc_date": "2026-07",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "LEAID: 0515-001 Enf Auth. Fire Dept Fire Official Mike Neill Phone (609) 729-5152 Addr: 6101 Pacific Ave",
+      "doc_date": "2026-07 (survey date 7/13/2026)",
+      "via": "state_directory",
+      "verified": null
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "Email mneill@wildwoodcrest.org",
+      "doc_date": "2026-07 (survey date 7/13/2026)",
+      "via": "state_directory",
+      "verified": null
+     }
+    ],
+    "confidence": "high"
+   }
+  ],
+  "notes": "NJ DCA lists Wildwood Crest's fire code enforcing agency as its fire department (F). The Fire Prevention page links the 2026 application. The form (April 2026) still lists a portable fire extinguisher even though P.L.2025, c.19 dropped it from state law; confirm with the Bureau. The Borough's fee ordinance (Ordinance No. 1289, posted as 'Fire Prevention Fee Ordinance May 2020', section 35-18 E) sets the sale fees at $50.00 (ten or more business days), $90.00 (four to ten), $161.00 (fewer than four) and $50.00 re-inspection; the 2026 form prints $160.00 for the shortest tier, so confirm which applies. The Bureau office number on the form is 609-729-5152; the Fire Prevention page lists 609-729-8083 for Michael Neill. It is not clear whether the $50.00 Fire Code Status Report is needed for a 1-2 family sale."
+ },
+ "other_items": [],
+ "open_questions": [
+  "Confirm with the Zoning Office (609-729-8090) that the Chapter 86 Certificate of Zoning Use Compliance is needed on every 1-2 family sale and whether any transfers are exempt.",
+  "Is the shortest-notice smoke certificate fee $160.00 (2026 form) or $161.00 (Ordinance No. 1289)?",
+  "Is the $50.00 Fire Code Status Report required for 1-2 family sales, and is a fire extinguisher still checked after P.L.2025, c.19?"
+ ],
+ "checked_at": "2026-10-27",
+ "verification": {
+  "fees": 10,
+  "fee_ok": 10,
+  "fee_bad": 0,
+  "fee_unchecked": 0,
+  "quotes": 16,
+  "q_ok": 11,
+  "q_bad": 0,
+  "q_unchecked": 5
+ }
+}

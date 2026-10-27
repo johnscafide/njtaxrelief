@@ -239,31 +239,12 @@
    ]
   },
   {
-   "code": "0415",
-   "town": "Gloucester Township",
-   "county": "Camden",
-   "live": true,
-   "needs": [
-    "co_required"
-   ]
-  },
-  {
    "code": "0419",
    "town": "Hi-Nella Borough",
    "county": "Camden",
    "live": true,
    "needs": [
     "co_required"
-   ]
-  },
-  {
-   "code": "0428",
-   "town": "Pine Hill Borough",
-   "county": "Camden",
-   "live": true,
-   "needs": [
-    "co_required",
-    "co_contact"
    ]
   },
   {
@@ -324,15 +305,6 @@
   {
    "code": "0513",
    "town": "West Wildwood Borough",
-   "county": "Cape May",
-   "live": false,
-   "needs": [
-    "co_required"
-   ]
-  },
-  {
-   "code": "0515",
-   "town": "Wildwood Crest Borough",
    "county": "Cape May",
    "live": false,
    "needs": [

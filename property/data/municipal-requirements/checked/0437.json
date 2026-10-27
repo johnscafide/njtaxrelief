@@ -2,94 +2,128 @@
  "municipality_code": "0437",
  "municipality": "Woodlynne Borough",
  "county": "CAMDEN",
- "checked_at": "2026-10-06",
  "resale_co": {
   "status": "required",
-  "name": "Certificate of Inspection for Resale",
-  "issued_by": "Borough of Woodlynne Construction Official",
+  "name": "Certificate of Inspection for Resale (resale certificate of occupancy)",
+  "issued_by": "Borough of Woodlynne Construction Official (form); the Borough code also calls for a zoning certificate of occupancy from the Zoning Officer on a change of occupants by sale",
   "lead_time": "",
   "valid_for": "",
   "requirements": [
-   "Inspection for resale is marked pass or fail by the Construction Official",
-   "Any building, plumbing, electrical or fire permits the Construction Official requires must be completed before the final Certificate of Occupancy"
+   "Inspection for resale, marked pass or fail by the Construction Official",
+   "Any building, plumbing, electrical or fire permits the Construction Official requires must be completed before the final Certificate of Occupancy",
+   "Under the Borough code, the new owner must get a certificate of occupancy from the Zoning Officer showing the intended use meets Borough zoning"
   ],
   "fees": [
    {
-    "label": "Application fee",
+    "label": "Application for Certificate of Inspection for Resale",
     "amount": "$96.00",
     "quote": "Application Fee $96.00",
-    "source_url": "https://www.woodlynnenj.org/_files/ugd/b7bd99_79e91dc4d3fa4e6a9fcbfd5848ff3881.pdf",
+    "source_url": "https://www.woodlynnenj.org/_files/ugd/b7bd99_eff4bcd5931549398dc38abfbdfb47b2.pdf",
     "verified": null
    }
   ],
-  "how_to_apply": "Fill out the Application for Certificate of Inspection for Resale (address, owner, agent, emergency contact) and return it to the Borough of Woodlynne, 200 Cooper Ave., Woodlynne, NJ 08107, or fax it to 856-962-8763. Contact David Munoz at 856-962-8300 ext. 219.",
-  "application_url": "https://www.woodlynnenj.org/_files/ugd/b7bd99_79e91dc4d3fa4e6a9fcbfd5848ff3881.pdf",
+  "how_to_apply": "Fill out the Application for Certificate of Inspection for Resale (building address, owner, agent or contractor, email) and return it to the Borough of Woodlynne, 200 Cooper Ave., Woodlynne, NJ 08107, or fax it to 856-962-8763. Contact Bill Lunemann at 856-962-8300 ext. 219.",
+  "application_url": "https://www.woodlynnenj.org/_files/ugd/b7bd99_eff4bcd5931549398dc38abfbdfb47b2.pdf",
   "department_url": "https://www.woodlynnenj.org/code-enforcement",
   "phone": "856-962-8300 ext. 219",
-  "email": "woodlynnedavid@comcast.net",
+  "email": "William.lunemann@woodlynne.org",
+  "contact_name": "Bill Lunemann",
+  "contact_title": "Contact named on the resale application (no title shown)",
   "evidence": [
    {
-    "url": "https://www.woodlynnenj.org/_files/ugd/b7bd99_79e91dc4d3fa4e6a9fcbfd5848ff3881.pdf",
+    "url": "https://www.woodlynnenj.org/_files/ugd/b7bd99_eff4bcd5931549398dc38abfbdfb47b2.pdf",
     "quote": "Application for Certificate of Inspection for Resale",
-    "doc_date": "",
+    "doc_date": "2026-09-30 (PDF created)",
     "via": "pdf",
     "verified": null
    },
    {
-    "url": "https://www.woodlynnenj.org/_files/ugd/b7bd99_79e91dc4d3fa4e6a9fcbfd5848ff3881.pdf",
+    "url": "https://www.woodlynnenj.org/_files/ugd/b7bd99_eff4bcd5931549398dc38abfbdfb47b2.pdf",
     "quote": "PERMIT(S) REQUIRED FOR FINAL CERTIFICATE OF OCCUPANCY",
-    "doc_date": "",
+    "doc_date": "2026-09-30 (PDF created)",
+    "via": "pdf",
+    "verified": null
+   },
+   {
+    "url": "https://www.woodlynnenj.org/_files/ugd/b7bd99_eff4bcd5931549398dc38abfbdfb47b2.pdf",
+    "quote": "Phone (856) 962-8300 ext. 219",
+    "doc_date": "2026-09-30 (PDF created)",
     "via": "pdf",
     "verified": null
    },
    {
     "url": "https://www.woodlynnenj.org/code-enforcement",
     "quote": "Resale Application",
-    "doc_date": "",
+    "doc_date": "2026-10-20 (page fetched)",
     "via": "page",
     "verified": true
+   },
+   {
+    "url": "https://ecode360.com/35957746",
+    "quote": "Whenever any premises will suffer a change of occupants, by reason of sale or lease of same, the new owner or lessor thereof must apply for and obtain a certificate of occupancy from the Zoning Officer certifying that the intended use of the premises conforms to the zoning regulations of the Borough of Woodlynne.",
+    "doc_date": "1993-12-09 (Ord. No. 1993-13)",
+    "via": "page",
+    "verified": null
    }
   ],
   "confidence": "medium",
-  "notes": "The only source is the Borough's scanned, undated one-page resale application linked as 'Resale Application' on the Code Enforcement and Forms pages; quotes were read from the page image. It does not list inspection items, a validity period, a lead time, or re-inspection fees. The Borough code on ecode360 could not be opened, so the ordinance behind the form was not checked. The contact email is a comcast.net address printed on the official form. Woodlynne also runs a separate annual rental Fire / Housing inspection ($150 per unit, $30 late fee, $25 cancellation fee per unit) for rental properties; that is a rental program, not the resale certificate."
+  "notes": "The Borough posted a new resale application on its Code Enforcement and Fire Department pages (PDF created September 30, 2026). The fee is still $96.00, but the contact changed from David Munoz (woodlynnedavid@comcast.net) to Bill Lunemann, William.lunemann@woodlynne.org, ext. 219; the email uses woodlynne.org, not the woodlynnenj.org website domain, so confirm it. The form is a scanned image, so quotes were read from the page image and may not be machine-checkable. It lists no inspection checklist, validity period, lead time or re-inspection fee. Borough code section 480-2A(1) (read on ecode360) requires the new owner to get a zoning certificate of occupancy on a change of occupants by sale; for 4 or more units a separate property maintenance CO is also needed. Code chapter 526 still sets a $25 Borough smoke detector inspection fee before sale (Ord. 1989-1), but smoke certificates are now handled by NJ DCA, so that fee is not listed. Woodlynne also runs a rental program (Chapter 494 and a rental application on the same page); that is not a resale requirement."
  },
  "fire_cert": {
-  "requirements": [],
+  "requirements": [
+   "Smoke alarms and carbon monoxide alarms as required by N.J.A.C. 5:70-4.19 for 1 and 2 family homes (the Borough and DCA pages found do not list the details)"
+  ],
   "authorities": [
    {
     "name": "NJ Department of Community Affairs, Division of Fire Safety, Bureau of Fire Code Enforcement",
     "type": "state_dca",
     "area_served": "Entire borough",
-    "lead_time": "",
+    "lead_time": "Fee depends on how many business days before the change of occupant the request is received: more than 10 business days for the lowest fee.",
     "fees": [
      {
-      "label": "Smoke/CO certificate, application more than 10 business days before change of occupant (state fee rule, 2017)",
+      "label": "Smoke/CO certificate (CSACMAPFEC), request received more than 10 business days before the change of occupant",
       "amount": "$45.00",
-      "quote": "1. Requests for a CSDCMAC received more than 10 business days prior to the change of occupant: $45.00;",
-      "source_url": "https://www.nj.gov/dca/divisions/dfs/codes/regulations/adopted_amendment_5_10_2.9.pdf",
-      "verified": null
+      "quote": "Requests for a CSACMAPFEC received more than 10 business days prior to the change of occupant: $45.00",
+      "source_url": "https://www.nj.gov/dca/divisions/dfs/codes/regulations/r.2018%20d.074%20(50%20n.j.r.%20729(a)).pdf",
+      "verified": true
      },
      {
-      "label": "Smoke/CO certificate, application 4 to 10 business days before change of occupant (state fee rule, 2017)",
+      "label": "Request received 4 to 10 business days before the change of occupant",
       "amount": "$90.00",
-      "quote": "2. Requests for a CSDCMAC received four to 10 business days prior to the change of occupant: $90.00; and",
-      "source_url": "https://www.nj.gov/dca/divisions/dfs/codes/regulations/adopted_amendment_5_10_2.9.pdf",
-      "verified": null
+      "quote": "Requests for a CSACMAPFEC received four to 10 business days prior to the change of occupant: $90.00",
+      "source_url": "https://www.nj.gov/dca/divisions/dfs/codes/regulations/r.2018%20d.074%20(50%20n.j.r.%20729(a)).pdf",
+      "verified": true
      },
      {
-      "label": "Smoke/CO certificate, application fewer than 4 business days before change of occupant (state fee rule, 2017)",
+      "label": "Request received fewer than 4 business days before the change of occupant",
       "amount": "$161.00",
-      "quote": "3. Requests for a CSDCMAC received fewer than four business days prior to the change of occupant: $161.00.",
-      "source_url": "https://www.nj.gov/dca/divisions/dfs/codes/regulations/adopted_amendment_5_10_2.9.pdf",
-      "verified": null
+      "quote": "Requests for a CSACMAPFEC received fewer than four business days prior to the change of occupant: $161.00",
+      "source_url": "https://www.nj.gov/dca/divisions/dfs/codes/regulations/r.2018%20d.074%20(50%20n.j.r.%20729(a)).pdf",
+      "verified": true
      }
     ],
-    "how_to_apply": "Apply and pay online through the NJ DCA service portal using 'Apply for Smoke Certification'.",
+    "how_to_apply": "Apply, schedule and pay online through the NJ DCA fire service portal (firesolutions.dca.nj.gov), using 'Apply for Smoke Certification'.",
     "application_url": "https://firesolutions.dca.nj.gov/ultra-fire-home/smoke-application-create/",
     "department_url": "https://www.nj.gov/dca/dfs/offices/bfce.shtml",
     "phone": "609-633-6106",
     "email": "",
+    "contact_name": "Louis Kilmer",
+    "contact_title": "Bureau Chief, Bureau of Fire Code Enforcement (listed as the state fire official for this town in the DCA fire directory)",
     "evidence": [
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "LEAID: 0437-999 Woodlynne Boro SMOKE DETECTOR COMPLIANCE Name: NJ Division of Fire Safety Enf Auth. State Fire Official Louis Kilmer Phone (609) 633-6132",
+      "doc_date": "2026-09-03 (directory PDF; survey 3/14/2023)",
+      "via": "state_directory",
+      "verified": null
+     },
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "S Woodlynne Borough",
+      "doc_date": "2026-07",
+      "via": "pdf",
+      "verified": true
+     },
      {
       "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/state_towns%207_17_26.pdf",
       "quote": "WOODLYNNE BORO 0437 SC",
@@ -105,9 +139,23 @@
       "verified": true
      },
      {
-      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
-      "quote": "LEAID: 0437-999 Woodlynne Boro SMOKE DETECTOR COMPLIANCE Enf Auth. State ... Name: NJ Division of Fire Safety ... Addr: PO Box 809 ... Trenton NJ 08625 ... Fire Official Louis Kilmer NJ Division Fire Safety PO Box 809 ... Phone (609) 633-6132 Phone JUVENILE FIRESETTERS PROGRAM",
-      "doc_date": "2026-09-03 (directory PDF dated; fire department survey 3/14/2023)",
+      "url": "https://www.nj.gov/dca/dfs/offices/bfce.shtml",
+      "quote": "Louis Kilmer, Bureau Chief CPM",
+      "doc_date": "2026-10-20 (page fetched)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/offices/bfce.shtml",
+      "quote": "Phone: (609) 633-6106",
+      "doc_date": "2026-10-20 (page fetched)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/divisions/dfs/codes/regulations/r.2018%20d.074%20(50%20n.j.r.%20729(a)).pdf",
+      "quote": "Requests for a CSACMAPFEC received more than 10 business days prior to the change of occupant: $45.00",
+      "doc_date": "2018 (NJ Register, 50 N.J.R. 729(a))",
       "via": "pdf",
       "verified": true
      }
@@ -115,22 +163,35 @@
     "confidence": "high"
    }
   ],
-  "notes": "The DCA state-towns list (revised 7/17/2026) marks Woodlynne as a town where the state issues smoke certs, and the DCA fire directory lists the enforcing authority as the State (LEAID 0437-999). The Borough website has no smoke certificate page. The DCA fee figures come from the state rule N.J.A.C. 5:70-2.9(d) as published in the NJ Register on October 2, 2017 and posted on the DCA site; the DCA portal computes the fee at checkout and the current amount was not visible without applying. The phone number is the DCA Bureau of Fire Code Enforcement chief line listed on the DCA bureau page; the directory lists 609-633-6132 for the state fire official."
+  "notes": "The DCA state-towns list (revised 7/17/2026), the July 2026 LEA registry (code S) and the DCA fire directory (LEAID 0437-999, State) all show NJ DCA issues smoke/CO certificates in Woodlynne. The Borough website has no smoke certificate page. Fees are the state fees in N.J.A.C. 5:70-2.9(d) as published in the NJ Register (50 N.J.R. 729(a)). Borough code chapter 526 still describes a $25 local smoke detector inspection before sale; it appears superseded by state enforcement. The 2025 state law (P.L.2025, c.19) dropped the portable fire extinguisher from the sale certificate."
  },
- "other_items": [],
- "open_questions": [
-  "What the Woodlynne resale inspection covers, how long the certificate is valid, lead time and re-inspection fees; the form lists none of these.",
-  "Date of the $96.00 resale application form (undated scan).",
-  "Confirm the current DCA smoke certificate fee charged at checkout on the DCA portal; the only DCA-published fee text found is the 2017 N.J.A.C. 5:70-2.9 amendment."
+ "other_items": [
+  {
+   "label": "Zoning certificate of occupancy",
+   "detail": "On a change of occupants by sale, the new owner must get a certificate of occupancy from the Zoning Officer confirming the use meets Borough zoning (Code section 480-2A(1)). It may be the same document as the resale certificate; confirm with the Borough.",
+   "source_url": "https://ecode360.com/35957746"
+  },
+  {
+   "label": "Open permits",
+   "detail": "Any building, plumbing, electrical or fire permits the Construction Official requires must be completed before the final Certificate of Occupancy.",
+   "source_url": "https://www.woodlynnenj.org/_files/ugd/b7bd99_eff4bcd5931549398dc38abfbdfb47b2.pdf"
+  }
  ],
+ "open_questions": [
+  "What the resale inspection covers, how long the certificate is valid, lead time and re-inspection fees; the form lists none of these.",
+  "Whether the $96.00 resale application also covers the zoning certificate of occupancy in Code section 480-2A(1).",
+  "Confirm the new contact email William.lunemann@woodlynne.org (domain differs from the Borough website).",
+  "Confirm the current DCA charge shown at checkout on the DCA portal."
+ ],
+ "checked_at": "2026-10-20",
  "verification": {
   "fees": 4,
-  "fee_ok": 0,
+  "fee_ok": 3,
   "fee_bad": 0,
-  "fee_unchecked": 4,
-  "quotes": 6,
-  "q_ok": 4,
+  "fee_unchecked": 1,
+  "quotes": 12,
+  "q_ok": 7,
   "q_bad": 0,
-  "q_unchecked": 2
+  "q_unchecked": 5
  }
 }

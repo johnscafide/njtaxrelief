@@ -2,7 +2,7 @@
  "municipality_code": "1107",
  "municipality": "Lawrence Township",
  "county": "MERCER",
- "checked_at": "2026-09-30",
+ "checked_at": "2026-10-27",
  "resale_co": {
   "status": "required",
   "name": "Certificate of Inspection (Property Transfer Application, Division of Housing)",
@@ -132,14 +132,14 @@
    },
    {
     "url": "https://www.lawrencetwp.com/departments/division-of-housing",
-    "quote": "Email kbarkalow@lawrencetwp.com Phone Numbers 609.844.7032",
+    "quote": "email: kbarkalow@lawrencetwp.com tel: 609.844.7032",
     "doc_date": "",
     "via": "page",
     "verified": true
    }
   ],
   "confidence": "high",
-  "notes": "There is no fee for a re-inspection. Lawrence calls the resale certificate a Certificate of Inspection, issued by the Division of Housing (the FAQ explains a Certificate of Occupancy is a construction document). The Property Transfer Application is a December 2020 scan; the Pre-Inspection Checklist is dated February 2026. The seller is normally responsible, but for as-is, bank-owned or foreclosure sales the buyer may be. A separate rental Certificate of Inspection ($75, needed at each tenant change) and a lead-in-rentals program apply to rentals only, not sales. The Housing and Fire Marshal pages both list kbarkalow@lawrencetwp.com as the office email."
+  "notes": "There is no fee for a re-inspection. Lawrence calls the resale certificate a Certificate of Inspection, issued by the Division of Housing (the FAQ explains a Certificate of Occupancy is a construction document). The Property Transfer Application is a December 2020 scan; the Pre-Inspection Checklist is dated February 2026. The seller is normally responsible, but for as-is, bank-owned or foreclosure sales the buyer may be. A separate rental Certificate of Inspection ($75, needed at each tenant change) and a lead-in-rentals program apply to rentals only, not sales. The Housing and Fire Marshal pages both list kbarkalow@lawrencetwp.com as the office email. Rechecked October 27, 2026: the Housing and Fire Marshal pages only changed the layout of their contact boxes; the email (kbarkalow@lawrencetwp.com) and phones (609.844.7032 Housing, 609.844.7018 Fire Marshal) are the same."
  },
  "fire_cert": {
   "requirements": [
@@ -215,7 +215,7 @@
      },
      {
       "url": "https://www.lawrencetwp.com/departments/firemarshal",
-      "quote": "Email kbarkalow@lawrencetwp.com Phone Numbers 609.844.7018",
+      "quote": "email: kbarkalow@lawrencetwp.com tel: 609.844.7018",
       "doc_date": "",
       "via": "page",
       "verified": true
@@ -239,21 +239,21 @@
       "quote": "LEAID: 1107-001 Enf Auth. Municipal Fire Official Edward C Tencza Phone (609) 844-7021",
       "doc_date": "2026 (survey date 1/9/2026)",
       "via": "state_directory",
-      "verified": true
+      "verified": null
      },
      {
       "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
       "quote": "Email ETencza@lawrencetwp.com",
       "doc_date": "2026",
       "via": "state_directory",
-      "verified": true
+      "verified": null
      },
      {
       "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
       "quote": "Phone (609) 844-7018 SMOKE DETECTOR COMPLIANCE Lawence Twp Fire Prev",
       "doc_date": "2026",
       "via": "state_directory",
-      "verified": true
+      "verified": null
      }
     ],
     "confidence": "high"
@@ -293,8 +293,8 @@
   "fee_bad": 0,
   "fee_unchecked": 0,
   "quotes": 22,
-  "q_ok": 22,
+  "q_ok": 19,
   "q_bad": 0,
-  "q_unchecked": 0
+  "q_unchecked": 3
  }
 }

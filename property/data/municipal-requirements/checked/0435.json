@@ -2,11 +2,10 @@
  "municipality_code": "0435",
  "municipality": "Waterford Township",
  "county": "CAMDEN",
- "checked_at": "2026-10-06",
  "resale_co": {
   "status": "required",
   "name": "Residential Reoccupancy Inspection (Residential Resale Inspection); Certificate of Inspection",
-  "issued_by": "Waterford Township (form posted by the Construction & Zoning Enforcement office; inspections under the Township fire official)",
+  "issued_by": "Waterford Township (form posted by the Construction & Zoning Enforcement office; the Township code lists it as a fire prevention smoke and CO inspection fee)",
   "lead_time": "Apply at least 10 days before settlement for the lowest fee",
   "valid_for": "30 days",
   "requirements": [
@@ -18,45 +17,45 @@
    "Passed water and septic certifications must be submitted before the certificate is released",
    "A house with a cesspool cannot be sold until a septic system is installed; if a new system is needed, show money in escrow",
    "Secondary power (meter and electrical panels) and all utilities on and working (listed on the 2025 form)",
-   "No bulk trash or debris left at the property or curb (2025 form says the certificate will not be issued otherwise)",
-   "Do not take Township trash and recycling carts",
-   "Uninhabitable 'as is' sales need a notarized letter and are referred to the Construction Office (2025 form)"
+   "Do not take Township trash and recycling carts and do not leave trash at the curb"
   ],
   "fees": [
    {
     "label": "Inspection, applied 10 days before settlement",
     "amount": "$75",
-    "quote": "10 DAYS PRIOR, $75",
+    "quote": "10 DAYS PRIOR - $75",
     "source_url": "https://waterfordtwp.org/wp-content/uploads/2026/08/Reoccupy-APPLICATION.pdf",
     "verified": true
    },
    {
     "label": "Inspection, applied 4 to 9 days before settlement",
     "amount": "$125",
-    "quote": "4, 9 DAYS PRIOR, $125",
+    "quote": "4-9 DAYS PRIOR - $125",
     "source_url": "https://waterfordtwp.org/wp-content/uploads/2026/08/Reoccupy-APPLICATION.pdf",
     "verified": true
    },
    {
     "label": "Inspection, applied 2 to 3 days before settlement",
     "amount": "$200",
-    "quote": "2, 3 DAYS PRIOR, $200",
+    "quote": "2-3 DAYS PRIOR - $200",
     "source_url": "https://waterfordtwp.org/wp-content/uploads/2026/08/Reoccupy-APPLICATION.pdf",
     "verified": true
    },
    {
     "label": "Re-inspection",
     "amount": "$50",
-    "quote": "Re-Inspection Fee, $50",
+    "quote": "Re-Inspection Fee - $50",
     "source_url": "https://waterfordtwp.org/wp-content/uploads/2026/08/Reoccupy-APPLICATION.pdf",
     "verified": true
    }
   ],
-  "how_to_apply": "Fill out the Residential Reoccupancy Form (block, lot, settlement date, lock box code and location, owner, buyer and realtor contacts) and submit it to Waterford Township, 2131 Auburn Ave, Atco, NJ 08004. Pay by cash, check or money order. Include passed water and septic certifications.",
+  "how_to_apply": "Fill out the Residential Reoccupancy Inspection form (settlement date, block, lot, lock box code and location, owner, buyer and realtor contacts) and submit it to Waterford Township, 2131 Auburn Ave, Atco, NJ 08004. Pay by cash, check or money order. Include passed water and septic certifications.",
   "application_url": "https://waterfordtwp.org/wp-content/uploads/2026/08/Reoccupy-APPLICATION.pdf",
   "department_url": "https://waterfordtwp.org/departments/construction-zoning-enforcement/",
   "phone": "856-768-2300 ext. 307",
   "email": "fireofficial@waterfordtwp.org",
+  "contact_name": "Craig Fallstick",
+  "contact_title": "Fire Official (DCA fire directory); the Township form gives no named contact",
   "evidence": [
    {
     "url": "https://waterfordtwp.org/wp-content/uploads/2026/08/Reoccupy-APPLICATION.pdf",
@@ -80,15 +79,29 @@
     "verified": true
    },
    {
-    "url": "https://waterfordtwp.org/wp-content/uploads/2025/08/Scanner@Waterfordtwp.org_20250820_102823.pdf",
-    "quote": "****APPLICATION MUST BE RECEIVED AT LEAST TEN (10) DAYS PRIOR TO SETTLEMENT****",
-    "doc_date": "2025-08-20",
+    "url": "https://waterfordtwp.org/departments/construction-zoning-enforcement/",
+    "quote": "Residential Reoccupancy Form",
+    "doc_date": "2026-10-20 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://waterfordtwp.org/wp-content/uploads/2025/09/NEW-CO.pdf",
+    "quote": "856-768-2300 EXT 307",
+    "doc_date": "2025-09 (upload date)",
     "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://ecode360.com/7192375",
+    "quote": "Smoke detector and CO detector inspections. Smoke detector inspections to be conducted on all one- and two-family residential dwellings for resale, change of occupancy, and annual inspection for rental units.",
+    "doc_date": "2025-08-13 (section last amended by Ord. No. 2025-11)",
+    "via": "page",
     "verified": null
    }
   ],
   "confidence": "medium",
-  "notes": "Waterford uses one combined Residential Resale / Reoccupancy Inspection. It is a Uniform Fire Code smoke and CO alarm inspection plus Township items (water and septic certifications, cesspool rule, utilities, house number), and the form calls the result both a 'Certificate of Inspection' and the 'CO'. The same fee covers both, so do not add it again for the fire certificate. The fee tiers say 'days prior', not business days. The form lists a 'No Show / No Answer at Door' charge but no amount. The Township code (ecode360, Chapter WA0490) could not be opened, so the ordinance text behind the form was not checked. Landlord registration is a separate rental program."
+  "notes": "Waterford uses one combined Residential Reoccupancy / Resale Inspection. Township Code section 124-7A(7) (read on ecode360; section 124-7 last amended 8-13-2025 by Ord. No. 2025-11) sets it as a smoke detector and CO detector inspection fee of $75 (ten days or more), $125 (four to nine days) and $200 (two to three days), matching the form, so the code fee is not listed again. The form adds Township items (water and septic certifications, cesspool rule, house number) and calls the result a 'Certificate of Inspection' and the 'CO'. The same fee covers the fire certificate; pay once. The tiers say 'days prior', not business days. The form lists a 'No Show / No Answer at Door' charge with no amount. An older 2025 version (NEW-CO.pdf) with the same fees and the ext. 307 phone is still online. Township Code Chapter 137 Article II (1977) also makes the seller responsible for smoke detectors on any sale. Landlord registration is a separate rental program."
  },
  "fire_cert": {
   "requirements": [
@@ -104,39 +117,41 @@
     "lead_time": "Apply at least 10 days before settlement for the lowest fee; certificate good for 30 days",
     "fees": [
      {
-      "label": "Same combined resale/reoccupancy inspection fee, applied 10 days before settlement (pay once)",
+      "label": "Same combined reoccupancy inspection fee (pay once), applied 10 days before settlement",
       "amount": "$75",
-      "quote": "10 DAYS PRIOR, $75",
+      "quote": "10 DAYS PRIOR - $75",
       "source_url": "https://waterfordtwp.org/wp-content/uploads/2026/08/Reoccupy-APPLICATION.pdf",
       "verified": true
      },
      {
-      "label": "Same combined inspection fee, applied 4 to 9 days before settlement (pay once)",
+      "label": "Same combined reoccupancy inspection fee (pay once), applied 4 to 9 days before settlement",
       "amount": "$125",
-      "quote": "4, 9 DAYS PRIOR, $125",
+      "quote": "4-9 DAYS PRIOR - $125",
       "source_url": "https://waterfordtwp.org/wp-content/uploads/2026/08/Reoccupy-APPLICATION.pdf",
       "verified": true
      },
      {
-      "label": "Same combined inspection fee, applied 2 to 3 days before settlement (pay once)",
+      "label": "Same combined reoccupancy inspection fee (pay once), applied 2 to 3 days before settlement",
       "amount": "$200",
-      "quote": "2, 3 DAYS PRIOR, $200",
+      "quote": "2-3 DAYS PRIOR - $200",
       "source_url": "https://waterfordtwp.org/wp-content/uploads/2026/08/Reoccupy-APPLICATION.pdf",
       "verified": true
      },
      {
       "label": "Re-inspection",
       "amount": "$50",
-      "quote": "Re-Inspection Fee, $50",
+      "quote": "Re-Inspection Fee - $50",
       "source_url": "https://waterfordtwp.org/wp-content/uploads/2026/08/Reoccupy-APPLICATION.pdf",
       "verified": true
      }
     ],
-    "how_to_apply": "Use the Township Residential Reoccupancy Form; the smoke and CO alarm certificate is issued from that inspection.",
+    "how_to_apply": "Use the Township Residential Reoccupancy Inspection form; the smoke and CO alarm certificate is issued from that inspection.",
     "application_url": "https://waterfordtwp.org/wp-content/uploads/2026/08/Reoccupy-APPLICATION.pdf",
     "department_url": "https://waterfordtwp.org/departments/construction-zoning-enforcement/",
     "phone": "856-768-2300",
     "email": "fireofficial@waterfordtwp.org",
+    "contact_name": "Craig Fallstick",
+    "contact_title": "Fire Official",
     "evidence": [
      {
       "url": "https://waterfordtwp.org/wp-content/uploads/2026/08/Reoccupy-APPLICATION.pdf",
@@ -146,16 +161,30 @@
       "verified": true
      },
      {
-      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
-      "quote": "LEAID: 0435-001 Waterford Twp SMOKE DETECTOR COMPLIANCE Enf Auth. Municipal ... Name: Waterford Twp Fire Prev ... Addr: 2131 Auburn Ave ... Atco NJ 08004 ... Fire Official Craig Fallstick 1231 Auburn Ave ... Phone (856) 768-2300 Phone JUVENILE FIRESETTERS PROGRAM",
-      "doc_date": "2026-09-03 (directory PDF dated; fire department survey 8/17/2026)",
-      "via": "pdf",
-      "verified": true
+      "url": "https://ecode360.com/7192375",
+      "quote": "Ten days or more: $75.",
+      "doc_date": "2025-08-13 (Ord. No. 2025-11)",
+      "via": "page",
+      "verified": null
+     },
+     {
+      "url": "https://ecode360.com/7192448",
+      "quote": "The transferor of any dwelling unit is responsible for installation of said detection devices.",
+      "doc_date": "1977-05-25 (Ord. No. 77-6)",
+      "via": "page",
+      "verified": null
      },
      {
       "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
-      "quote": "Email fireofficial@waterfordtwp.org",
-      "doc_date": "2026-08-17 (survey date for Waterford entry)",
+      "quote": "LEAID: 0435-001 Waterford Twp SMOKE DETECTOR COMPLIANCE Name: Waterford Twp Fire Prev Enf Auth. Municipal Addr: 2131 Auburn Ave Fire Official Craig Fallstick Phone (856) 768-2300 Email fireofficial@waterfordtwp.org",
+      "doc_date": "2026-09-03 (directory PDF; survey 8/17/2026)",
+      "via": "state_directory",
+      "verified": null
+     },
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "Berlin Borough is the LEA for Waterford Township. AS OF APRIL2025 NO LONGER A SHARED SERVICE",
+      "doc_date": "2026-07",
       "via": "pdf",
       "verified": true
      }
@@ -163,7 +192,7 @@
     "confidence": "medium"
    }
   ],
-  "notes": "The DCA directory lists Waterford's local enforcing agency as municipal with smoke detector compliance handled by 'Waterford Twp Fire Prev'; Waterford is not on the DCA state smoke cert list. The Township form does not name which office staffs the inspection; it gives 856-768-2300 ext. 307 (2025 version). The DCA directory entry also mentions an 'SSA with Berlin Boro' whose scope is unclear. The form does not mention the portable fire extinguisher required by N.J.A.C. 5:70-2.3."
+  "notes": "The DCA directory lists Waterford's fire code enforcing agency as municipal, with smoke detector compliance handled by 'Waterford Twp Fire Prev' and Fire Official Craig Fallstick. The July 2026 LEA registry says the old Berlin Borough shared service ended in April 2025, although the directory entry still mentions an 'SSA with Berlin Boro'. Waterford is not on the DCA state smoke cert list. The Construction page lists a Township Fire Inspector and fire inspection hours (Mon and Wed, 3 to 6 pm), but does not say which office staffs the reoccupancy inspection. The form does not mention a portable fire extinguisher, which the 2025 state law (P.L.2025, c.19) dropped from the sale certificate."
  },
  "other_items": [
   {
@@ -180,17 +209,17 @@
  "open_questions": [
   "Which office (fire official or construction/zoning) performs the inspection and where the form is dropped off; confirm at 856-768-2300.",
   "Amount of the 'No Show / No Answer at Door' charge.",
-  "Whether the inspection checks the portable fire extinguisher required by state rule.",
-  "Township ordinance text (ecode360) behind the form could not be checked."
+  "Whether the re-inspection fee of $50 is set in the Township code (section 124-7A(7) lists only the three tiers)."
  ],
+ "checked_at": "2026-10-20",
  "verification": {
   "fees": 8,
   "fee_ok": 8,
   "fee_bad": 0,
   "fee_unchecked": 0,
-  "quotes": 7,
-  "q_ok": 6,
+  "quotes": 11,
+  "q_ok": 7,
   "q_bad": 0,
-  "q_unchecked": 1
+  "q_unchecked": 4
  }
 }

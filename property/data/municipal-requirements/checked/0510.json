@@ -2,94 +2,129 @@
  "municipality_code": "0510",
  "municipality": "Stone Harbor Borough",
  "county": "CAPE MAY",
- "checked_at": "2026-09-30",
  "resale_co": {
   "status": "required",
   "name": "Certificate of Title Transfer (zoning and flood conformance inspection)",
-  "issued_by": "Office of Code Enforcement (Construction Office), Zoning Official / Flood Plain Administrator",
-  "contact_name": "Rick Allen",
-  "contact_title": "Construction Official and Flood Plain Administrator",
+  "issued_by": "Office of Code Enforcement, Zoning Officer (Zoning Official / Flood Plain Administrator)",
+  "contact_name": "Matthew Steich",
+  "contact_title": "Zoning Official/Code Officer/Community Development Director (signs the title transfer certificate)",
   "lead_time": "",
-  "valid_for": "",
+  "valid_for": "180 days after issuance, for one transfer only (Code Section 214-7)",
   "requirements": [
-   "Zoning conformance inspection",
+   "Zoning conformance inspection: the structure or unit must comply with Chapter 560, Zoning",
    "Flood conformance inspection against the required design flood elevation (DFE + 2 or 11 feet), with the assessed value of the structure recorded",
-   "Inspector enters with the realtor's key; if no realtor or manager is listed, the owner must set an appointment during the inspection week"
+   "Inspector enters with the realtor's key; if no realtor or manager is listed, the owner must set an appointment during the inspection week",
+   "Not required for transfers of new construction when the original certificate of occupancy was issued within 18 months of the transfer"
   ],
   "fees": [
    {
     "label": "Zoning fee",
     "amount": "$50.00",
     "quote": "ZONING FEE: $50.00",
-    "source_url": "https://stoneharbornj.org/wp-content/uploads/2023/04/APPLICATION-FOR-CERTIFICATE-OF-TITLE-TRANSFER.pdf",
-    "verified": true
+    "source_url": "https://stoneharbornj.org/wp-content/uploads/2026/10/Cert-of-title-transfer.pdf",
+    "verified": null
    },
    {
     "label": "Flood inspection fee",
     "amount": "$50.00",
     "quote": "FLOOD INSPECTION FEE: $50.00",
-    "source_url": "https://stoneharbornj.org/wp-content/uploads/2023/04/APPLICATION-FOR-CERTIFICATE-OF-TITLE-TRANSFER.pdf",
-    "verified": true
+    "source_url": "https://stoneharbornj.org/wp-content/uploads/2026/10/Cert-of-title-transfer.pdf",
+    "verified": null
    },
    {
     "label": "Total due",
     "amount": "$100.00",
     "quote": "TOTAL DUE: $100.00",
-    "source_url": "https://stoneharbornj.org/wp-content/uploads/2023/04/APPLICATION-FOR-CERTIFICATE-OF-TITLE-TRANSFER.pdf",
-    "verified": true
+    "source_url": "https://stoneharbornj.org/wp-content/uploads/2026/10/Cert-of-title-transfer.pdf",
+    "verified": null
    }
   ],
-  "how_to_apply": "Fill out the Application for Certificate of Title Transfer (property address, block and lot, seller, purchaser, agent, scheduled closing date) and submit it with payment (check or cash) to the Office of Code Enforcement, Borough Hall first floor, 9508 Second Avenue, Stone Harbor, NJ 08247. Listing a realtor lets the official use the realtor's key.",
-  "application_url": "https://stoneharbornj.org/wp-content/uploads/2023/04/APPLICATION-FOR-CERTIFICATE-OF-TITLE-TRANSFER.pdf",
+  "how_to_apply": "Fill out the Application for Certificate of Title Transfer (property address, block and lot, seller, purchaser, agent, scheduled closing date) and submit it with payment (check or cash) to the Office of Code Enforcement, Borough Hall, 9508 Second Avenue, Stone Harbor, NJ 08247 (609-368-6814, MSTEICH@SHNJ.ORG). Listing a realtor lets the official use the realtor's key. Office open to the public Monday to Friday 8:30 a.m. to 1:30 p.m.",
+  "application_url": "https://stoneharbornj.org/wp-content/uploads/2026/10/Cert-of-title-transfer.pdf",
   "department_url": "https://stoneharbornj.org/departments/construction/",
   "phone": "609-368-6814",
-  "email": "AllenR@shnj.org",
+  "email": "MSteich@shnj.org",
   "evidence": [
    {
-    "url": "https://stoneharbornj.org/wp-content/uploads/2023/04/APPLICATION-FOR-CERTIFICATE-OF-TITLE-TRANSFER.pdf",
-    "quote": "APPLICATION FOR CERTIFICATE OF TITLE TRANSFER THE BOROUGH OF STONE HARBOR OFFICE OF CODE ENFORCEMENT",
-    "doc_date": "2023-04",
-    "via": "pdf",
-    "verified": true
-   },
-   {
-    "url": "https://stoneharbornj.org/wp-content/uploads/2023/04/APPLICATION-FOR-CERTIFICATE-OF-TITLE-TRANSFER.pdf",
-    "quote": "This application authoriizes the Zoning Official/Flood Plain Administrator to enter your property for a transfer inspection.",
-    "doc_date": "2023-04",
-    "via": "pdf",
-    "verified": true
-   },
-   {
-    "url": "https://stoneharbornj.org/wp-content/uploads/2023/04/APPLICATION-FOR-CERTIFICATE-OF-TITLE-TRANSFER.pdf",
-    "quote": "Per Stone Harbor Municipal Code: Chapter 214",
-    "doc_date": "2023-04",
-    "via": "pdf",
-    "verified": true
-   },
-   {
-    "url": "https://web.archive.org/web/20250713195307/http://stoneharbornj.org/departments/construction/",
-    "quote": "Phone 609-368-6814",
-    "doc_date": "2025-07-13 (archive capture of the Construction page)",
+    "url": "https://ecode360.com/10812862",
+    "quote": "No person, persons or organization of persons shall sell or transfer title to any structure, portion of structure or unit",
+    "doc_date": "2026-10-27 (page fetched)",
     "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://ecode360.com/10812862",
+    "quote": "Applications for a certificate of title transfer shall be submitted to the Zoning Officer of the Borough of Stone Harbor",
+    "doc_date": "2026-10-27 (page fetched)",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://ecode360.com/10812862",
+    "quote": "A certificate of title transfer shall be valid for a period of 180 days after issuance",
+    "doc_date": "2026-10-27 (page fetched)",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://ecode360.com/10812862",
+    "quote": "A certificate of title transfer is not required for transfers of new construction,",
+    "doc_date": "2026-10-27 (page fetched)",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://ecode360.com/10812862",
+    "quote": "The fee for a certificate of title transfer shall be $50 per unit",
+    "doc_date": "2026-10-27 (page fetched)",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://stoneharbornj.org/wp-content/uploads/2026/10/Cert-of-title-transfer.pdf",
+    "quote": "APPLICATION FOR CERTIFICATE OF TITLE TRANSFER THE BOROUGH OF STONE HARBOR OFFICE OF CODE ENFORCEMENT",
+    "doc_date": "April 2023 form, re-posted 2026-10-16 (PDF date)",
+    "via": "pdf",
+    "verified": null
+   },
+   {
+    "url": "https://stoneharbornj.org/wp-content/uploads/2026/10/Cert-of-title-transfer.pdf",
+    "quote": "MATT STEICH, ZONING OFFICIAL",
+    "doc_date": "2026-10-16 (PDF date)",
+    "via": "pdf",
+    "verified": null
+   },
+   {
+    "url": "https://stoneharbornj.org/wp-content/uploads/2023/04/APPLICATION-FOR-CERTIFICATE-OF-TITLE-TRANSFER.pdf",
+    "quote": "ZONING FEE: $50.00 FLOOD INSPECTION FEE: $50.00 TOTAL DUE: $100.00",
+    "doc_date": "APRIL 2023",
+    "via": "pdf",
     "verified": true
    },
    {
-    "url": "https://web.archive.org/web/20250713195307/http://stoneharbornj.org/departments/construction/",
-    "quote": "Flood Plain Administrator Rick Allen, AllenR@shnj.org",
-    "doc_date": "2025-07-13 (archive capture)",
+    "url": "https://stoneharbornj.org/departments/construction/",
+    "quote": "Phone 609-368-6814",
+    "doc_date": "2026-10-27 (page fetched)",
     "via": "page",
     "verified": true
    },
    {
     "url": "https://stoneharbornj.org/departments/construction/",
-    "quote": "Construction Official Rick Allen-",
-    "doc_date": "2026-09-30 (live page fetched; emails hidden by the site)",
+    "quote": "Zoning Official/Code Officer/ Community Development Director Matthew Steich",
+    "doc_date": "2026-10-27 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://stoneharbornj.org/departments/construction/",
+    "quote": "Construction Official Rick Allen",
+    "doc_date": "2026-10-27 (page fetched)",
     "via": "page",
     "verified": true
    }
   ],
-  "confidence": "medium",
-  "notes": "The Borough's Office of Code Enforcement posts an Application for Certificate of Title Transfer (April 2023) under Municipal Code Chapter 214: a zoning and flood conformance inspection tied to the scheduled closing date, $50 zoning plus $50 flood inspection, $100 total. The form itself does not use the word 'required', and the Borough code (ecode360 ST2163) could not be opened to confirm the exact rule, so confidence is medium. The form lists an older official (Ray Poudrier, PoudrierR@SHNJ.org); the current Construction page names Rick Allen as Construction Official and Flood Plain Administrator and Matthew Steich as Zoning Official/Code Officer/Community Development Director (his email is hidden on the live page and is not recorded). Rick Allen's email is from a July 2025 archive copy of the Construction page. Office hours: Monday to Friday 8:30 a.m. to 1:30 p.m. The live site's main pages sit behind a bot check; PDFs and the Construction page could still be read. Stone Harbor also runs a rental license and rental fire inspection program through the Fire Prevention Bureau (single family: rental license $200 plus fire inspection $100); that is for rentals only, not sales."
+  "confidence": "high",
+  "notes": "Borough Code Chapter 214 (Certificate of Title Transfer, read in full through the ecode360 print view) bars selling or transferring title to any structure or unit without a certificate of title transfer from the Zoning Officer, who inspects for compliance with Chapter 560, Zoning. The certificate is good for 180 days and one transfer. New construction is exempt when the original CO was issued within 18 months of the transfer. Violations carry a fine of not less than $100 (Section 214-8). The code sets the fee at $50 per unit, which matches the zoning fee on the form; the form adds a $50 flood inspection fee, for $100 total. In October 2026 the Construction page started linking a re-posted copy of the April 2023 form (Cert-of-title-transfer.pdf, a scan) that names Matt Steich, Zoning Official, and MSTEICH@SHNJ.ORG instead of Ray Poudrier; fees are unchanged. The older text copy of the form (2023/04 upload) is still online and shows the same fees. Rick Allen is Construction Official, Building/Mechanical Sub-code Official and Flood Plain Administrator (AllenR@shnj.org). Stone Harbor also runs a rental license and rental fire inspection program through the Fire Prevention Bureau (single family: rental license $200 plus fire inspection $100); that is for rentals only, not sales."
  },
  "fire_cert": {
   "requirements": [
@@ -156,13 +191,6 @@
       "quote": "When units are found  to be noncompliant, a $25.00 re-inspection fee is applied.",
       "source_url": "https://stoneharbornj.org/wp-content/uploads/2022/10/CSACMAPFEC-2022.pdf",
       "verified": true
-     },
-     {
-      "label": "Penalty for closing or leasing before the certificate is issued",
-      "amount": "$500.00",
-      "quote": "THE PENALTY FOR CLOSING OR LEASING BEFORE CSACMAPFEC IS ISSUED IS $500.00.",
-      "source_url": "https://stoneharbornj.org/wp-content/uploads/2022/10/CSACMAPFEC-2022.pdf",
-      "verified": true
      }
     ],
     "how_to_apply": "Fill out the CSACMAPFEC application (owner, buyer, block and lot, agent, settlement date, key or appointment details) and submit it with a check or money order payable to 'Borough of Stone Harbor' to the Stone Harbor Fire Prevention Bureau, 9508 Second Avenue, Stone Harbor, NJ 08247. The Bureau inspects before issuing the certificate.",
@@ -204,7 +232,7 @@
      {
       "url": "https://stoneharbornj.org/departments/stone-harbor-public-safety/stone-harbor-fire-prevention-bureau/",
       "quote": "Acting Fire Official Mike Gihorski",
-      "doc_date": "2026-09-30 (live page fetched)",
+      "doc_date": "2026-10-27 (page fetched)",
       "via": "page",
       "verified": true
      },
@@ -220,41 +248,47 @@
       "quote": "LEAID: 0510-001 Enf Auth. Fire Dept Fire Official Michael Gihorski Phone (609) 368-5102",
       "doc_date": "2025-03 (survey date 3/6/2025)",
       "via": "state_directory",
-      "verified": true
+      "verified": null
      },
      {
       "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
       "quote": "Email fireofficial@shnj.org",
       "doc_date": "2025-03 (survey date 3/6/2025)",
       "via": "state_directory",
-      "verified": true
+      "verified": null
      }
     ],
     "confidence": "high"
    }
   ],
-  "notes": "NJ DCA lists Stone Harbor's fire code enforcing agency as its fire department (F). The Borough's Fire Prevention Bureau page (live, September 2026) names Acting Fire Official Mike Gihorski; a December 2025 archive copy named Fire Official Roger W. Stanford at (609) 368-5102 Ext 709. The Bureau page hides email addresses, so the email shown is from the NJ DCA fire directory (survey 3/6/2025). The application is dated October 2022 and still requires a fire extinguisher despite P.L.2025, c.19; confirm with the Bureau. Three-unit and larger tiers ($80.00, $130.00, $185.00, plus $15.00 per unit over 3) are on the form but not listed above because they do not apply to 1-2 family homes."
+  "notes": "NJ DCA lists Stone Harbor's fire code enforcing agency as its fire department (F). The Borough's Fire Prevention Bureau page (live, October 2026) names Acting Fire Official Mike Gihorski; a December 2025 archive copy named Fire Official Roger W. Stanford at (609) 368-5102 Ext 709. The Bureau page hides email addresses, so the email shown is from the NJ DCA fire directory (survey 3/6/2025). The application is dated October 2022 and still requires a fire extinguisher despite P.L.2025, c.19; confirm with the Bureau. Three-unit and larger tiers ($80.00, $130.00, $185.00, plus $15.00 per unit over 3) are on the form but not listed above because they do not apply to 1-2 family homes. Closing or leasing before the certificate is issued carries a $500.00 penalty (shown on the form; listed under requirements, not as a fee)."
  },
  "other_items": [
   {
    "label": "Open permits closed",
    "detail": "All open Uniform Construction Code permits must be closed before settlement (Fire Prevention Bureau guide).",
    "source_url": "https://stoneharbornj.org/wp-content/uploads/2022/10/CSACMAPFEC-2022.pdf"
+  },
+  {
+   "label": "Certificate of Title Transfer (zoning and flood)",
+   "detail": "Required before any sale or title transfer under Borough Code Chapter 214; separate $100 application to the Office of Code Enforcement. See resale_co.",
+   "source_url": "https://ecode360.com/10812862"
   }
  ],
  "open_questions": [
-  "Exact wording of Borough Code Chapter 214 on when the Certificate of Title Transfer is required (ecode360 could not be opened).",
-  "Whether the April 2023 title transfer fees ($50 zoning, $50 flood) and the October 2022 smoke certificate fees are still current.",
+  "Whether the flood inspection fee ($50.00) is still charged, since the code names only the $50 per unit certificate fee.",
+  "Whether the October 2022 smoke certificate fees are still current.",
   "Whether the Fire Prevention Bureau still checks for a fire extinguisher after P.L.2025, c.19."
  ],
+ "checked_at": "2026-10-27",
  "verification": {
-  "fees": 11,
-  "fee_ok": 11,
+  "fees": 10,
+  "fee_ok": 7,
   "fee_bad": 0,
-  "fee_unchecked": 0,
-  "quotes": 14,
-  "q_ok": 14,
+  "fee_unchecked": 3,
+  "quotes": 19,
+  "q_ok": 10,
   "q_bad": 0,
-  "q_unchecked": 0
+  "q_unchecked": 9
  }
 }

@@ -2,7 +2,6 @@
  "municipality_code": "0424",
  "municipality": "Merchantville Borough",
  "county": "CAMDEN",
- "checked_at": "2026-10-06",
  "resale_co": {
   "status": "required",
   "name": "Resale Inspection / Resale Certificate",
@@ -15,7 +14,7 @@
    "Sidewalks and driveways level and free of trip hazards",
    "Smoke alarm on each level including basement; 10-year sealed lithium battery type",
    "CO detector within 10 feet of sleeping areas (plug-in or battery OK)",
-   "2A:10BC fire extinguisher in a cabinet or on a hanger within 10 feet of the kitchen",
+   "2A:10BC fire extinguisher in a cabinet or on a hanger within 10 feet of the kitchen (form still lists it)",
    "Handrail on stairs with more than 4 risers; guards on surfaces more than 30 inches above grade",
    "Exterior surfaces painted or protected and in good repair",
    "Yard free of excess weeds, rubbish and garbage",
@@ -36,6 +35,13 @@
     "quote": "Fee: $50.00 Re-Inspection Fee: $10.00",
     "source_url": "https://www.merchantvillenj.gov/RESALE%20PAPERWORK%201-2026.pdf?t=202601211210300",
     "verified": true
+   },
+   {
+    "label": "Resale re-inspection under Borough Code 25-14 (first re-inspection no charge; this is the second and later)",
+    "amount": "$25",
+    "quote": "Second and subsequent reinspections$25",
+    "source_url": "https://ecode360.com/34599243",
+    "verified": null
    }
   ],
   "how_to_apply": "Complete the Resale Inspection Application (includes the smoke detector certificate application) and bring it to the Borough Clerk's office at 1 W. Maple Avenue to pay the fee. Code Enforcement then contacts the applicant to schedule the inspection.",
@@ -47,26 +53,56 @@
    {
     "url": "https://www.merchantvillenj.gov/government/code_enforcement_and_rental_inspection.php",
     "quote": "Before the sale of all residential properties, you are required to obtain a Resale Inspection, including smoke detector compliance. Please bring your completed application to the clerk's office with you to pay the required fee. The Applicant will be contacted to schedule an inspection.",
-    "doc_date": "",
+    "doc_date": "2026-10-20 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.merchantvillenj.gov/government/code_enforcement_and_rental_inspection.php",
+    "quote": "If you have any questions, please contact the Office of Code Enforcement and Rental Housing Inspection at 609-413-0010.",
+    "doc_date": "2026-10-20 (page fetched)",
     "via": "page",
     "verified": true
    },
    {
     "url": "https://www.merchantvillenj.gov/RESALE%20PAPERWORK%201-2026.pdf?t=202601211210300",
     "quote": "Resale Certificates are only valid for 6 months after passed inspection.",
-    "doc_date": "2026-01",
+    "doc_date": "2026-01-21 (PDF modified)",
     "via": "pdf",
     "verified": true
+   },
+   {
+    "url": "https://www.merchantvillenj.gov/RESALE%20PAPERWORK%201-2026.pdf?t=202601211210300",
+    "quote": "Failure to comply with code requirements may delay or deny issuance of the Certificate of Occupancy and fines issued.",
+    "doc_date": "2026-01-21",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://ecode360.com/47312219",
+    "quote": "Prior to the resale of all residential and commercial properties within the Borough of Merchantville, a resale certificate from the Code Enforcement Office shall be required.",
+    "doc_date": "Code 60B-41, adopted 3-10-2025 by Ord. No. 25-03 (ecode360, legislation through 07-14-2025)",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://ecode360.com/34599243",
+    "quote": "Residential resale inspection fee$50 per unit ($300 max.)",
+    "doc_date": "Code 25-14, amended through 7-14-2025 by Ord. No. 25-08",
+    "via": "page",
+    "verified": null
    }
   ],
   "confidence": "high",
-  "notes": "Application packet is titled 'RESALE PAPERWORK 1-2026' (PDF modified January 2026). It asks the intended use of the property, including whether it will be a Community Supervised Living Residence. Failing to comply may delay or deny the Certificate of Occupancy and fines may be issued. The older 'Resale-Paperwork-3-13-23.pdf' link is dead (404). Rental units need separate registration and a rental inspection/CO before each new tenant (Chapter 60B), which is a rental program, not resale. Vacant properties must be registered (fees $500 to $3,500 per 6-month term). Code Inspector email codeenforcement@merchantvillenj.gov; Property Maintenance Officer Kevin Patti, kpatti@merchantvillenj.gov. The resale checklist pages list office phone 856-662-2474."
+  "notes": "Re-checked October 20, 2026; the Borough page still links 'RESALE PAPERWORK 1-2026' (PDF modified January 21, 2026) with the same fees. New this round: the Borough code was read on ecode360. Code Chapter 60B, Article VI (Resale of Property, Ord. No. 25-03, March 10, 2025) requires a resale certificate from the Code Enforcement Office before the resale of all residential and commercial properties, after a Code Official inspection and a Fire Official check of smoke alarms, CO detectors and fire extinguishers. Code 60B-43 and 25-14 set the resale fee at $50 per unit ($300 max.), matching the form. Reinspection conflict: the form says $10.00, but Code 25-14 says the first reinspection is free and the second and later cost $25; both are listed. The packet asks the intended use of the property, including whether it will be a Community Supervised Living Residence. Rental units need separate registration and a rental inspection/CO before each new tenant (Chapter 60B / rental program), not a resale item. Vacant properties must be registered. Contacts from the page: Code Inspector Tom Connelly, codeenforcement@merchantvillenj.gov, 609-413-0010 (Borough Hall, Tuesday to Friday 8:30 to 4:30); Property Maintenance Officer Kevin Patti, kpatti@merchantvillenj.gov, Niagara Fire Station, 22 East Park Avenue, (856) 488-0404. The resale checklist pages list office phone 856-662-2474.",
+  "contact_name": "Tom Connelly",
+  "contact_title": "Code Inspector (Property Maintenance Officer: Kevin Patti, kpatti@merchantvillenj.gov)"
  },
  "fire_cert": {
   "requirements": [
    "Each smoke alarm must be a 10-year sealed lithium battery detector, on every level including basements",
    "CO detector within 10 feet of sleeping areas",
-   "2A:10BC extinguisher in an approved cabinet or on a hanger within 10 feet of the kitchen"
+   "2A:10BC extinguisher in an approved cabinet or on a hanger within 10 feet of the kitchen (form still lists it)"
   ],
   "authorities": [
    {
@@ -127,9 +163,23 @@
      {
       "url": "https://www.merchantvillenj.gov/government/code_enforcement_and_rental_inspection.php",
       "quote": "Before the sale of all residential properties, you are required to obtain a Resale Inspection, including smoke detector compliance.",
-      "doc_date": "",
+      "doc_date": "2026-10-20 (page fetched)",
       "via": "page",
       "verified": true
+     },
+     {
+      "url": "https://ecode360.com/47312220",
+      "quote": "Additionally, the Fire Official or designee shall inspect the property for conformance with New Jersey P.L. 1991, c. 92,",
+      "doc_date": "Code 60B-42A, Ord. No. 25-03 (March 10, 2025)",
+      "via": "page",
+      "verified": null
+     },
+     {
+      "url": "https://ecode360.com/34642977",
+      "quote": "Requests for CSDCMAC received more than 10 business days prior to the change of occupant: $35.00.",
+      "doc_date": "Code 29-8E, amended 3-10-2025 by Ord. No. 25-04",
+      "via": "page",
+      "verified": null
      },
      {
       "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
@@ -146,10 +196,12 @@
       "verified": true
      }
     ],
-    "confidence": "high"
+    "confidence": "high",
+    "contact_name": "Kevin Patti",
+    "contact_title": "Fire Official and Property Maintenance Officer"
    }
   ],
-  "notes": "DCA LEA Registry (July 2026) lists Merchantville's Uniform Fire Code enforcing agency as 'F' (Fire Department). The Borough's Property Maintenance Officer (Kevin Patti) works from the Niagara Fire Station at 22 E. Park Ave and the Fire Chief is also listed as Kevin Patti, so the Borough smoke certificate form appears to be processed through this combined office. The smoke/CO/extinguisher certificate is issued by the Borough (Code Enforcement Official), bundled with the resale inspection. The smoke form carries a '09/20' revision mark but is included in the January 2026 resale packet. The Merchantville Fire Department (Niagara Fire Company, 22 E. Park Ave, 856-488-0404) is the firefighting company; no separate fire district resale process was found."
+  "notes": "DCA LEA Registry (July 2026) lists Merchantville's Uniform Fire Code enforcing agency as 'F' (Fire Department). The Fire Official (Kevin Patti) is also the Borough's Property Maintenance Officer, working from the Niagara Fire Station at 22 E. Park Ave, and the smoke/CO/extinguisher certificate is applied for with the resale inspection at the Clerk's office. Borough Code 29-8E (amended March 10, 2025) and 25-14 set the same $35 / $70 / $125 tiers and $10 reinspection as the form, so they are not listed twice. These are below the current state amounts ($45 / $90 / $161) but are what the Borough form and code show. The form and code still name a fire extinguisher; the state dropped it from the sale certificate in February 2025 (P.L.2025, c.19), so confirm with the office. The smoke form carries a '09/20' revision mark but is in the January 2026 packet."
  },
  "other_items": [
   {
@@ -160,16 +212,18 @@
  ],
  "open_questions": [
   "No stated lead time for the resale inspection itself.",
-  "Could not open the Borough code on ecode360 to confirm the ordinance fee amounts."
+  "Resale reinspection fee: $10.00 on the form, or free for the first and $25 for later reinspections under Code 25-14?",
+  "Does the Borough still require a fire extinguisher for the resale and smoke certificates after P.L.2025, c.19?"
  ],
+ "checked_at": "2026-10-20",
  "verification": {
-  "fees": 6,
+  "fees": 7,
   "fee_ok": 6,
   "fee_bad": 0,
-  "fee_unchecked": 0,
-  "quotes": 7,
-  "q_ok": 7,
+  "fee_unchecked": 1,
+  "quotes": 13,
+  "q_ok": 9,
   "q_bad": 0,
-  "q_unchecked": 0
+  "q_unchecked": 4
  }
 }

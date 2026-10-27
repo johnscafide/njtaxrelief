@@ -2,7 +2,7 @@
  "municipality_code": "1404",
  "municipality": "Chatham Borough",
  "county": "MORRIS",
- "checked_at": "2026-10-04",
+ "checked_at": "2026-10-27",
  "resale_co": {
   "status": "required",
   "name": "Residential Certificate of Continuing Occupancy (CCO)",
@@ -24,18 +24,11 @@
     "quote": "Fee: $100",
     "source_url": "https://www.chathamborough.org/applications/156-continuing-certificate-of-occupancy-permit-residential-property-application-fillable-form/file",
     "verified": true
-   },
-   {
-    "label": "Certificate of continued occupancy (Borough Code §111-4)",
-    "amount": "$100",
-    "quote": "The fee for a certificate of continued occupancy shall be $100.",
-    "source_url": "https://ecode360.com/6792203",
-    "verified": null
    }
   ],
   "how_to_apply": "Fill in the Residential CCO Application, attach the open-permit summary, Tax Collector and Utilities Clerk sign-offs and the inspection checklist, and submit it to the Borough Clerk's Office, 54 Fairmount Avenue, with $100 by check or cash payable to Borough of Chatham. The Clerk's Office schedules the Thursday inspection and issues the CCO once the signed checklist and proof of closed permits are in.",
   "application_url": "https://www.chathamborough.org/applications/156-continuing-certificate-of-occupancy-permit-residential-property-application-fillable-form/file",
-  "department_url": "https://www.chathamborough.org/departments/construction",
+  "department_url": "https://www.chathamborough.org/departments/zoning-engineering-construction",
   "phone": "973-635-0674 ext.210",
   "email": "clerkadmin@chathamborough.org",
   "contact_name": "Hillary Singer",
@@ -77,23 +70,37 @@
     "verified": true
    },
    {
-    "url": "https://www.chathamborough.org/departments/construction",
-    "quote": "CCO inspections are handled by",
-    "doc_date": "2026-10-04 (page fetched)",
+    "url": "https://www.chathamborough.org/departments/zoning-engineering-construction",
+    "quote": "CCO inspections are handled by Hillary Singer, Assistant to the Borough Clerk 973-635-0674 ext.210 clerkadmin@chathamborough.org",
+    "doc_date": "2026-10-27 (page fetched)",
     "via": "page",
     "verified": true
    },
    {
-    "url": "https://www.chathamborough.org/departments/construction",
-    "quote": "Hillary Singer, Assistant to the Borough Clerk",
-    "doc_date": "2026-10-04 (page fetched)",
-    "via": "page",
-    "verified": true
-   },
-   {
-    "url": "https://www.chathamborough.org/departments/construction",
+    "url": "https://www.chathamborough.org/departments/zoning-engineering-construction",
     "quote": "All CCO application require ALL open permits to closed and ALL utilities to be current.",
-    "doc_date": "2026-10-04 (page fetched)",
+    "doc_date": "2026-10-27 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.chathamborough.org/departments/zoning-engineering-construction",
+    "quote": "The application process time for CCO applications is two-three weeks from the date the application is submitted not including time and time of inspection.",
+    "doc_date": "2026-10-27 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.chathamborough.org/departments/zoning-engineering-construction",
+    "quote": "The Certificate of Continued Occupancy (CCO) will be issued at the time the Clerk's Office has received the completed & signed inspection checklist and proof that all construction permits have been closed.",
+    "doc_date": "2026-10-27 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.chathamborough.org/departments/clerk",
+    "quote": "Hillary Singer Assistant to the Municipal Clerk",
+    "doc_date": "2026-10-27 (page fetched)",
     "via": "page",
     "verified": true
    },
@@ -113,7 +120,7 @@
    }
   ],
   "confidence": "high",
-  "notes": "The Borough's residential CCO form covers both sales and rentals and includes the smoke and CO check. The Borough Code fee (§111-4) and the lead service line section (§267-25, proof of replacement needed for a certificate of occupancy or continuing occupancy on sale) were seen only in ecode360 search results. No ordinance sentence requiring a CCO on every sale was read in full, but the Borough application and web page treat it as required for sales. Rental-only items on the form (rental registration, liability insurance, lead-safe certificate with $50 filing fee) do not apply to a sale. Construction permits for Chatham Borough are handled by the Madison Building Department."
+  "notes": "The Borough's residential CCO form covers both sales and rentals and includes the smoke and CO check. The Borough Code fee (§111-4) and the lead service line section (§267-25, proof of replacement needed for a certificate of occupancy or continuing occupancy on sale) were seen only in ecode360 search results. No ordinance sentence requiring a CCO on every sale was read in full, but the Borough application and web page treat it as required for sales. Rental-only items on the form (rental registration, liability insurance, lead-safe certificate with $50 filing fee) do not apply to a sale. Construction permits for Chatham Borough are handled by the Madison Building Department. Re-checked 2026-10-27: the old Construction page (/departments/construction) now returns 404, though the home page menu still links it. The same CCO text, with Hillary Singer as the CCO contact, is now on the Zoning, Engineering & Construction page (/departments/zoning-engineering-construction). The Clerk's page lists her as Assistant to the Municipal Clerk, 973.635.0674 ext. 210. The Madison Building Department, which issues construction permits for Chatham Borough, has moved temporarily to 29 Prospect Street, Madison (973-593-3064) for at least a year."
  },
  "fire_cert": {
   "requirements": [
@@ -162,14 +169,14 @@
      {
       "url": "https://www.chathamborough.org/departments/fire-prevention",
       "quote": "Scott Loyek, Fire Marshall",
-      "doc_date": "2026-10-04 (page fetched)",
+      "doc_date": "2026-10-27 (page fetched)",
       "via": "page",
       "verified": true
      },
      {
       "url": "https://www.chathamborough.org/departments/fire-prevention",
       "quote": "Phone: 973-701-6815",
-      "doc_date": "2026-10-04 (page fetched)",
+      "doc_date": "2026-10-27 (page fetched)",
       "via": "page",
       "verified": true
      },
@@ -225,12 +232,12 @@
   "How long is the CCO valid if the closing moves?"
  ],
  "verification": {
-  "fees": 3,
+  "fees": 2,
   "fee_ok": 2,
   "fee_bad": 0,
-  "fee_unchecked": 1,
-  "quotes": 16,
-  "q_ok": 13,
+  "fee_unchecked": 0,
+  "quotes": 18,
+  "q_ok": 15,
   "q_bad": 0,
   "q_unchecked": 3
  }

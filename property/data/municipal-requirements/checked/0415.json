@@ -2,33 +2,61 @@
  "municipality_code": "0415",
  "municipality": "Gloucester Township",
  "county": "CAMDEN",
- "checked_at": "2026-09-30",
  "resale_co": {
-  "status": "not_found",
+  "status": "not_required",
   "name": "",
   "issued_by": "",
   "lead_time": "",
   "valid_for": "",
   "requirements": [],
   "fees": [],
-  "how_to_apply": "",
+  "how_to_apply": "Nothing to apply for from the Township for a resale of a home. The Township's Community Development and Planning page says a certificate of occupancy from the construction office is not required for re-sales and tells sellers to get the smoke detector certification from the local fire district (see fire certificate). The rental certificate of compliance (Chapter 59A) applies only when a rental unit changes tenants.",
   "application_url": "",
   "department_url": "https://glotwp.com/department/community-development-planning/",
   "phone": "856-374-3500",
   "email": "",
-  "evidence": [],
-  "confidence": "low",
-  "notes": "The Community Development and Planning page lists about 40 construction and zoning forms but no resale CO, continued occupancy or housing resale inspection form; the only 'Certificate of Occupancy' form is the state UCC F270 construction CO for permitted work. The township code (ecode360 GL0340) could not be opened. The township did not state that no resale CO is needed, so status is not found. The lead URL in leads.json points to Gloucester City, not Gloucester Township."
+  "evidence": [
+   {
+    "url": "https://glotwp.com/department/community-development-planning/",
+    "quote": "For re-sales of homes in Gloucester Township, a certificate of occupancy from the construction office is not required. Please contact your local fire department to obtain the required smoke detector certification:",
+    "doc_date": "2026-09-10 (page posted September 10, 2026; fetched 2026-10-20)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://glotwp.com/department/community-development-planning/",
+    "quote": "Community Development and Planning Phone: 856-374-3500",
+    "doc_date": "2026-10-20 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://ecode360.com/42578344",
+    "quote": "A certificate of rental housing and property maintenance compliance is required in the Township of Gloucester every time a residential rental unit changes tenants, users or occupants.",
+    "doc_date": "Chapter 59A Rental Housing and Property Maintenance Compliance, Section 59A-9 (read 2026-10-13)",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://ecode360.com/42577522",
+    "quote": "This chapter shall apply to major subdivisions as defined in the Township Subdivision Ordinance.",
+    "doc_date": "Chapter 42 Certificates of Occupancy, Section 42-7 (read 2026-10-13)",
+    "via": "page",
+    "verified": null
+   }
+  ],
+  "confidence": "high",
+  "notes": "Re-checked 2026-10-20. New this check: the Township's Community Development and Planning page (posted September 10, 2026) now says in writing that a certificate of occupancy from the construction office is not required for re-sales of homes, and lists the six fire districts to call for the smoke detector certification. That settles the status as not required with high confidence. It matches what the code showed last week (read through the ecode360 print view, Township of Gloucester code GL0340): Chapter 42 'Certificates of Occupancy' only covers new homes in major subdivisions; Chapter 59A requires a certificate of rental housing and property maintenance compliance each time a rental unit changes tenants (a rental program, not a resale requirement); Chapter 59 (Housing Code) and Chapter 67A (Property Maintenance) have no sale provision; and neither fee chapter (Chapter 51, Chapter A201) lists a resale fee. The 'Application for a Certificate of Occupancy' on the page is the state construction CO form (UCC F270) for permitted work. The fire district phone list on that page differs from the district sites in places: District #2 856-939-2090 (the district's own page gives 856-282-3370 ext. 124), District #3 Blenheim 856-227-0552, District #4 856-227-7731 (the district's page gives 856-227-7037). The ordinance lead URL in the town pack points to Gloucester City, not Gloucester Township."
  },
  "fire_cert": {
   "requirements": [
    "Districts 1, 2, 4 and 5: CO alarms must be less than 7 years old",
-   "Districts 1, 4 and 5: smoke alarms older than 10 years not accepted; battery alarms must be 10-year sealed (hardwired exempt); hardwired alarms cannot be replaced with battery alarms",
+   "Districts 1, 4 and 5: smoke alarms older than 10 years not accepted; battery alarms must be 10-year sealed (hardwired exempt); hardwired alarms cannot be replaced with battery alarms. District 6: hardwired units more than 10 years old must be replaced",
    "Basement smoke alarm at the bottom of the stairwell on the ceiling (not between joists); hallway alarms within 10 feet of all bedroom doors",
    "House numbers at least 4 inches high, contrasting color, permanently on the house and visible from the street (mailbox or light post numbers not accepted)",
    "Homes with a secondary power source (solar, generator, battery storage) need a non-handwritten 'CAUTION: MULTIPLE SOURCES OF POWER' label within 18 inches of the main electrical panel and the electric meter",
-   "District 5 checklist: alarm type follows the year the house was built (for example 1991 to present: hardwired interconnected alarms with battery backup on every level and in each bedroom)",
-   "Current 2025-2026 district forms do not list a fire extinguisher (District 6's 2026 affidavit title still says 'Portable Fire Extinguisher' but its checklist has no extinguisher item)"
+   "District 5 checklist: alarm type follows the year the house was built (for example 1991 to present: hardwired interconnected alarms with battery backup on every level and in each bedroom); hardwired fire alarm systems need an NFPA 72 test report at the inspection",
+   "Current district forms do not list a fire extinguisher (District 6's 2026 affidavit title still says 'Portable Fire Extinguisher' but its checklist has no extinguisher item)"
   ],
   "authorities": [
    {
@@ -85,9 +113,25 @@
       "doc_date": "2025-08",
       "via": "pdf",
       "verified": true
+     },
+     {
+      "url": "https://glotwpnjfd1.gov/fire-marshall",
+      "quote": "Harry D. Woods",
+      "doc_date": "2026-10-20 (page read; site resets plain downloads)",
+      "via": "page",
+      "verified": null
+     },
+     {
+      "url": "https://glotwpnjfd1.gov/district-forms",
+      "quote": "GTFD1 Smoke Detector v.2025",
+      "doc_date": "2026-10-20 (page read; links the 08-2025 application)",
+      "via": "page",
+      "verified": null
      }
     ],
-    "confidence": "high"
+    "confidence": "high",
+    "contact_name": "Harry D. Woods",
+    "contact_title": "Fire Official"
    },
    {
     "name": "Gloucester Township Fire District #2 Bureau of Fire Prevention (Chews Landing Fire Department)",
@@ -126,46 +170,62 @@
      {
       "url": "https://gtfd2.org/?page_id=4",
       "quote": "The following information, documents and pay scale only pertain to properties located within Gloucester Twp. Fire District #2 as updated March 26, 2025.",
-      "doc_date": "2025-04 (page updated April 17, 2025)",
+      "doc_date": "2025-04 (page updated April 17, 2025; fetched 2026-10-20)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://gtfd2.org/?page_id=4",
+      "quote": "Kenneth Young - Fire Official, Gloucester Township Fire District #2 43 Somerdale Road Blackwood, NJ 08012 856-282-3370 ext. 124",
+      "doc_date": "2026-10-20 (page fetched)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://gtfd2.org/?page_id=4",
+      "quote": "A two hour time frame will be given for your inspection appointment.",
+      "doc_date": "2026-10-20 (page fetched)",
       "via": "page",
       "verified": true
      },
      {
       "url": "https://gtfd2.org/wp-content/uploads/2025/04/Application-CO-Insp.docx",
       "quote": "Applications received under 4 days will be completed as manpower permits.",
-      "doc_date": "2025-04-16",
+      "doc_date": "2025-04-16 (Word file, 'updated 4/16/2025')",
       "via": "page",
       "verified": true
      }
     ],
-    "confidence": "high"
+    "confidence": "high",
+    "contact_name": "Kenneth Young",
+    "contact_title": "Fire Official"
    },
    {
     "name": "NJ DCA Division of Fire Safety, Bureau of Fire Code Enforcement (for Gloucester Township Fire District #3, Blenheim)",
     "type": "state_dca",
     "area_served": "Fire District #3 (Blenheim area). Check the property's fire district at https://wipp.edmundsassoc.com/Wipp/?wippid=0415",
-    "lead_time": "More than 10 business days before closing for the lowest fee",
+    "lead_time": "More than 10 business days before the change of occupant for the lowest fee",
     "fees": [
      {
-      "label": "More than 10 business days before closing",
-      "amount": "$45",
-      "quote": "If you are applying for a certificate more than ten business days from the closing date the fee is $45 dollars",
-      "source_url": "https://firesolutions.dca.nj.gov/ultra-fire-home/smoke-application-create/",
-      "verified": null
+      "label": "Request received more than 10 business days before the change of occupant",
+      "amount": "$45.00",
+      "quote": "Requests for a CSACMAPFEC received more than 10 business days prior to the change of occupant: $45.00",
+      "source_url": "https://www.nj.gov/dca/divisions/dfs/codes/regulations/r.2018%20d.074%20(50%20n.j.r.%20729(a)).pdf",
+      "verified": true
      },
      {
-      "label": "4 to 10 business days before closing",
-      "amount": "$90",
-      "quote": "if applying 4 to 10 business days from the closing date the fee is $90",
-      "source_url": "https://firesolutions.dca.nj.gov/ultra-fire-home/smoke-application-create/",
-      "verified": null
+      "label": "Request received 4 to 10 business days before the change of occupant",
+      "amount": "$90.00",
+      "quote": "Requests for a CSACMAPFEC received four to 10 business days prior to the change of occupant: $90.00",
+      "source_url": "https://www.nj.gov/dca/divisions/dfs/codes/regulations/r.2018%20d.074%20(50%20n.j.r.%20729(a)).pdf",
+      "verified": true
      },
      {
-      "label": "Less than 4 business days before closing",
-      "amount": "$161",
-      "quote": "if the closing date is less than four business days the fee is $161.",
-      "source_url": "https://firesolutions.dca.nj.gov/ultra-fire-home/smoke-application-create/",
-      "verified": null
+      "label": "Request received fewer than 4 business days before the change of occupant",
+      "amount": "$161.00",
+      "quote": "Requests for a CSACMAPFEC received fewer than four business days prior to the change of occupant: $161.00",
+      "source_url": "https://www.nj.gov/dca/divisions/dfs/codes/regulations/r.2018%20d.074%20(50%20n.j.r.%20729(a)).pdf",
+      "verified": true
      }
     ],
     "how_to_apply": "Apply online through the DCA Fire Safety portal ('Apply For Smoke Certification'). The applicant checks off each placement and operating requirement, pays by e-check or credit card before submitting, and the certificate is emailed once the fee is paid and any required inspections are done. A valid email address is required. Electric-heat homes with no CO requirement should email BFCE_CSDCMAC@dca.nj.gov.",
@@ -190,10 +250,17 @@
      },
      {
       "url": "https://firesolutions.dca.nj.gov/ultra-fire-home/smoke-application-create/",
-      "quote": "Please complete the following information to apply for a Certificate of Smoke Alarm, Carbon Monoxide Alarm, and Secondary Power Source Identification Label Compliance (CSACMASPSIL). You will be required to pay, via e-check or credit card, before you can submit this application.",
-      "doc_date": "",
+      "quote": "Start Your Smoke Certification Application",
+      "doc_date": "2026-10-13 (page fetched)",
       "via": "page",
-      "verified": null
+      "verified": true
+     },
+     {
+      "url": "https://glotwp.com/department/community-development-planning/",
+      "quote": "Fire District #3 Blenheim 856-227-0552",
+      "doc_date": "2026-10-20 (page fetched)",
+      "via": "page",
+      "verified": true
      }
     ],
     "confidence": "high"
@@ -201,7 +268,7 @@
    {
     "name": "Gloucester Township Fire District #4 Bureau of Fire Prevention (Blackwood Fire Company)",
     "type": "fire_district",
-    "area_served": "Fire District #4 (Blackwood area). Check the property's fire district at https://wipp.edmundsassoc.com/Wipp/?wippid=0415",
+    "area_served": "Fire District #4 (Blackwood area). The property record on the Township's tax lookup shows 'FIRE DISTRICT=F04' under Special Taxing Districts (https://wipp.edmundsassoc.com/Wipp/?wippid=0415)",
     "lead_time": "10 or more business days before settlement for the lowest fee",
     "fees": [
      {
@@ -233,7 +300,7 @@
       "verified": true
      }
     ],
-    "how_to_apply": "Download the Smoke Detector/CO application, and mail it with cash or check payable to GTFD4 to 14 West Central Avenue, Blackwood, NJ 08012. To schedule, email fm84@gtfd4.org or call 856-227-7037 with the address, preferred dates and a contact phone. Office hours Monday to Thursday 8 am to 4 pm.",
+    "how_to_apply": "Download the Smoke Detector / CO Application (linked from the Bureau of Fire Prevention page), and send it with cash or check payable to GTFD4 to 14 West Central Avenue, Blackwood, NJ 08012. To schedule, call 856-227-7037 or email fm84@gtfd4.org with the property address, contact information and preferred dates. Office hours Monday to Thursday 8 am to 4 pm.",
     "application_url": "https://gtfd4.org/s/CO-App.pdf",
     "department_url": "https://gtfd4.org/fire-prevention",
     "phone": "856-227-7037",
@@ -241,20 +308,50 @@
     "evidence": [
      {
       "url": "https://gtfd4.org/fire-prevention",
-      "quote": "Our Bureau of Fire Prevention handles inspections for smoke alarms, property sales (CO inspections), rental units, and commercial businesses.",
-      "doc_date": "2026-01 (page last updated January 2026)",
+      "quote": "Application for smoke detector and carbon monoxide certification.",
+      "doc_date": "2026-10-20 (page fetched)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://gtfd4.org/fire-prevention",
+      "quote": "Contact the Bureau of Fire Prevention to schedule an inspection,",
+      "doc_date": "2026-10-20 (page fetched)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://gtfd4.org/fire-prevention",
+      "quote": "Captain Brandon M. O'Connor serves as Fire Official for Gloucester Township Fire District No. 4.",
+      "doc_date": "2026-10-20 (page fetched)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://gtfd4.org/fire-prevention",
+      "quote": "Office 14 W. Central Avenue Blackwood, NJ 08012 Office Hours Monday-Thursday 8:00 AM-4:00 PM Phone (856) 227-7037 Email fm84@gtfd4.org",
+      "doc_date": "2026-10-20 (page fetched)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://gtfd4.org/fire-prevention",
+      "quote": "Properties in Gloucester Township Fire District No. 4 will display FIRE DISTRICT=F04 .",
+      "doc_date": "2026-10-20 (page fetched)",
       "via": "page",
       "verified": true
      },
      {
       "url": "https://gtfd4.org/s/CO-App.pdf",
       "quote": "Please include cash/check made payable to:  GTFD4",
-      "doc_date": "2025-06 (file timestamp)",
+      "doc_date": "2025-06 (file timestamp; same file as the one the new page links on static1.squarespace.com)",
       "via": "pdf",
       "verified": true
      }
     ],
-    "confidence": "high"
+    "confidence": "high",
+    "contact_name": "Brandon M. O'Connor",
+    "contact_title": "Captain, Fire Official"
    },
    {
     "name": "Gloucester Township Fire District #5 Bureau of Fire Prevention (Lambs Terrace Fire Company)",
@@ -291,7 +388,7 @@
       "verified": null
      }
     ],
-    "how_to_apply": "Download the Smoke Application from the district's Forms & Applications page and mail it with cash or check payable to GTFD5 to 1781 Sicklerville Rd., Sicklerville, NJ 08081 (fax 856-374-0424).",
+    "how_to_apply": "Download the Smoke Application (SmokeCOCertApp.pdf) from the district's Forms & Applications page and mail it with cash or check payable to GTFD5 to 1781 Sicklerville Rd., Sicklerville, NJ 08081 (fax 856-374-0424). The same page links an Inspection Checklist (April 2025) with alarm rules by year built.",
     "application_url": "http://www.glotwpfiredistrict5.com/forms/SmokeCOCertApp.pdf",
     "department_url": "http://www.glotwpfiredistrict5.com/forms-applications.php",
     "phone": "856-228-0678",
@@ -300,12 +397,35 @@
      {
       "url": "http://www.glotwpfiredistrict5.com/forms/SmokeCOCertApp.pdf",
       "quote": "GLOUCESTER TOWNSHIP FIRE DISTRICT 5 BUREAU OF FIRE PREVENTION",
-      "doc_date": "undated scan",
+      "doc_date": "undated 1-page scan (fees read by eye on 2026-10-20)",
       "via": "pdf",
+      "verified": null
+     },
+     {
+      "url": "http://www.glotwpfiredistrict5.com/fire-official-inspectors.php",
+      "quote": "Steve Schwegel - Fire Official/UFD",
+      "doc_date": "2026-10-20 (page fetched)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "http://www.glotwpfiredistrict5.com/forms/Inspchecklist.pdf",
+      "quote": "Carbon monoxide alarm(s) must be less than 7 years old and operational.",
+      "doc_date": "2025-04-14 (PDF date)",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "LEAID: 0415-005 Gloucester Twp Dist #5 ... Enf Auth. District Addr: 1781 Sicklerville Rd ... Fire Official Steven Schwegel, Jr. Phone (856) 228-0678 ... Email sschwegel@lambsfire.com",
+      "doc_date": "2026-09-03 (directory PDF)",
+      "via": "state_directory",
       "verified": null
      }
     ],
-    "confidence": "medium"
+    "confidence": "medium",
+    "contact_name": "Steve Schwegel",
+    "contact_title": "Fire Official/UFD"
    },
    {
     "name": "Gloucester Township Fire District No. 6 Bureau of Fire Prevention (Erial)",
@@ -323,7 +443,7 @@
      {
       "label": "4 to 9 business days before settlement",
       "amount": "$70.00",
-      "quote": "Applications received 4, 9 business days prior to settlement $70.00",
+      "quote": "Applications received 4-9 business days prior to settlement $70.00",
       "source_url": "https://gtfd6.com/wp-content/uploads/2026/08/residential-smoke-inspection.pdf",
       "verified": true
      },
@@ -354,28 +474,45 @@
       "doc_date": "2026-08",
       "via": "pdf",
       "verified": true
+     },
+     {
+      "url": "https://gtfd6.com/wp-content/uploads/2026/08/residential-smoke-inspection.pdf",
+      "quote": "Affidavits and certifications are processed once per week at this time.",
+      "doc_date": "2026-08",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "LEAID: 0415-006 Gloucester Twp Dist #6 ... Enf Auth. District Addr: 1946 Williamstown Rd ... Fire Official James Gordon, Sr",
+      "doc_date": "2026-09-03 (directory PDF)",
+      "via": "state_directory",
+      "verified": null
      }
     ],
-    "confidence": "high"
+    "confidence": "high",
+    "contact_name": "James Gordon, Sr",
+    "contact_title": "Fire Official (per NJ DCA directory)"
    }
   ],
-  "notes": "Gloucester Township has six fire districts, and the right one depends on the address: look up the property on the township's Edmunds page (https://wipp.edmundsassoc.com/Wipp/?wippid=0415); the fire district appears in the 'Special Taxing Districts' block. District 3 (Blenheim) has no local fire code enforcing agency; the NJ DCA Division of Fire Safety issues smoke certificates there (DCA registry code 'S', and DCA's state-enforced towns list marks it 'SC = Smoke Certs'). Fees differ by district: Districts 2 and 6 charge $35/$70/$125; Districts 1, 4 and 5 and DCA charge $45/$90/$161. The township website also hosts an outdated District 1 form from 2014 (https://glotwp.com/downloads/General/District1.pdf, $35/$70/$125 with an extinguisher requirement); District 1's own current form is dated 08-2025. District 5's form is an undated scan. The DCA fire directory lists District 5 fire official email sschwegel@lambsfire.com; not added as the district's own site does not show it."
+  "notes": "Gloucester Township has six fire districts, and the right one depends on the address: look up the property on the Township's Edmunds page (https://wipp.edmundsassoc.com/Wipp/?wippid=0415); the fire district appears in the 'Special Taxing Districts' block. The Township's Community Development page (September 2026) also lists a phone number for each district. District 3 (Blenheim) has no local fire code enforcing agency; the NJ DCA Division of Fire Safety issues smoke certificates there (DCA registry code 'S', and DCA's state-enforced towns list marks it 'SC = Smoke Certs'). Fees differ by district: Districts 2 and 6 charge $35/$70/$125; Districts 1, 4 and 5 and DCA charge $45/$90/$161. Re-checked 2026-10-20: all six district forms are the same files as last week and the fees are unchanged. District 2's application is a Word file (.docx, updated 4/16/2025); its fee rows were re-read by hand from the file text on 2026-10-20 and are unchanged, but an automatic check that reads the raw .docx bytes cannot find them, so a 'not found' result on those three District 2 fees means the checker could not read the file, not that the fees changed. District 2 has no PDF or web-page copy of its fee table. District 2 also posts a 'CO Information Sheet' (Word file) with placement rules. District 5's form is a one-page scan; its fees were read by eye on 2026-10-20 and are unchanged. District 5's page also links 'Smoke Pass Fail' (Smoke42025.pdf), which returns a 404. District 1's site resets plain downloads but its forms page still links the 08-2025 application; its Fire Marshall page names Harry D. Woods. The DCA fire directory lists District 5 fire official email sschwegel@lambsfire.com and District 6 fire official James Gordon, Sr (jgordon6231@yahoo.com, a personal address, not added); the district sites do not show these emails. The Township website also hosts an outdated District 1 form from 2014 (https://glotwp.com/downloads/General/District1.pdf, $35/$70/$125 with an extinguisher requirement); District 1's own current form is dated 08-2025."
  },
  "other_items": [],
  "open_questions": [
-  "Whether Gloucester Township requires any township resale CO or housing inspection could not be confirmed (no form or page found; code on ecode360 blocked).",
   "Exact street boundaries of each fire district are not published; use the Edmunds property lookup.",
   "District 2 and District 6 forms do not state a re-inspection fee.",
-  "District 3's own website (gtfd3.com, redirecting to blenheimfire.com) is behind a captcha and could not be read."
+  "District 3's own website (gtfd3.com, redirecting to blenheimfire.com) is behind a captcha and could not be read; DCA handles its smoke certificates.",
+  "Phone numbers for Districts 2 and 4 on the Township page differ from the districts' own pages; use the district pages."
  ],
+ "checked_at": "2026-10-20",
  "verification": {
   "fees": 21,
-  "fee_ok": 14,
+  "fee_ok": 17,
   "fee_bad": 0,
-  "fee_unchecked": 7,
-  "quotes": 12,
-  "q_ok": 10,
+  "fee_unchecked": 4,
+  "quotes": 30,
+  "q_ok": 23,
   "q_bad": 0,
-  "q_unchecked": 2
+  "q_unchecked": 7
  }
 }

@@ -2,15 +2,14 @@
  "municipality_code": "0430",
  "municipality": "Runnemede Borough",
  "county": "CAMDEN",
- "checked_at": "2026-09-30",
  "resale_co": {
   "status": "required",
   "name": "Certificate of Continued Occupancy (CCO)",
-  "issued_by": "Office of Code Enforcement / Construction and Code Enforcement",
+  "issued_by": "Borough of Runnemede Office of Code Enforcement (Construction and Code Enforcement)",
   "lead_time": "Apply at least 10 working days before settlement or occupancy",
   "valid_for": "Application expires 90 days after inspection if the CCO has not been issued",
   "requirements": [
-   "House number visible from the street, at least 4 inches tall",
+   "House number visible from the street, at least 4 inches tall, Arabic numerals",
    "Steps free of cracks and trip hazards, even treads and risers, closed risers (4 inch ball rule)",
    "Sidewalks, aprons and driveways level with no cracks or lifts over 1/2 inch; driveway parking surface must be impervious (no stone or gravel)",
    "Graspable handrail on steps with 4 or more risers; guardrails where porch, landing or stairs are over 30 inches above grade",
@@ -22,7 +21,8 @@
    "Window glass intact; electric service cable secured; damaged wiring and fixtures replaced",
    "Approved chimney cap",
    "Zoning and construction permits for additions, pools, sheds, garages, decks and fences; open permits must be closed",
-   "Swimming pool: bonding/grounding certificate from a licensed NJ electrician dated within 30 days of the application, plus pool affidavit"
+   "Swimming pool: bonding/grounding certificate from a licensed NJ electrician dated within 30 days of the application, plus pool affidavit",
+   "All work must be completed before the certificate can be issued"
   ],
   "fees": [
    {
@@ -30,14 +30,14 @@
     "amount": "$100.00",
     "quote": "Certificate of Continued Occupancy Application Residential Dwelling Fee: $100.00 $25.00 Fee after first reinspection",
     "source_url": "https://runnemedenj.org/documents/add-document/department-documents/construction/certificate-of-continued-occupancy/69-construction-form-residential-cco/file",
-    "verified": null
+    "verified": true
    },
    {
     "label": "Reinspection, after the first reinspection (residential)",
     "amount": "$25.00",
     "quote": "Fee: $100.00 $25.00 Fee after first reinspection",
     "source_url": "https://runnemedenj.org/documents/add-document/department-documents/construction/certificate-of-continued-occupancy/69-construction-form-residential-cco/file",
-    "verified": null
+    "verified": true
    },
    {
     "label": "Commercial / Multi Family CCO application (may apply to a 2-family sale; not confirmed)",
@@ -47,25 +47,48 @@
     "verified": true
    }
   ],
-  "how_to_apply": "Download the Residential CCO application (3 pages, including a swimming pool affidavit), complete it, and submit it with a check to the Office of Code Enforcement, 24 N. Black Horse Pike, Runnemede, NJ 08078. Call 856-939-2815 with questions.",
+  "how_to_apply": "Download the Residential CCO application (3 pages, including a swimming pool affidavit), check 'Buyer/Sale', complete it, and submit it with a check to the Office of Code Enforcement, 24 N. Black Horse Pike, Runnemede, NJ 08078, at least 10 working days before settlement. Call 856-939-2815 with questions; Code Enforcement is also at 856-939-5161 x1006.",
   "application_url": "https://runnemedenj.org/documents/add-document/department-documents/construction/certificate-of-continued-occupancy/69-construction-form-residential-cco/file",
   "department_url": "https://runnemedenj.org/departments/construction",
   "phone": "856-939-2815",
   "email": "",
+  "contact_name": "Keith Raveling",
+  "contact_title": "Construction Official",
   "evidence": [
    {
     "url": "https://runnemedenj.org/documents/add-document/department-documents/construction/certificate-of-continued-occupancy/68-exterior-compliance-requirements-for-a-certificate-of-continued-occupancy-for-the-sale-of-a-single-family-dwelling/file",
-    "quote": "EXTERIOR COMPLIANCE REQUIREMENTS Certificate of Continued Occupancy for the sale of a single-family dwelling. FORM ISSUE DATE, 07/17/2020",
-    "doc_date": "2020-07 (form issue date; file re-saved 2025-05)",
+    "quote": "EXTERIOR COMPLIANCE REQUIREMENTS",
+    "doc_date": "2020-07-17 (form issue date)",
     "via": "pdf",
-    "verified": null
+    "verified": true
    },
    {
     "url": "https://runnemedenj.org/documents/add-document/department-documents/construction/certificate-of-continued-occupancy/69-construction-form-residential-cco/file",
-    "quote": "Application must be submitted at least 10 Working days prior to settlement or occupancy date. All work must be completed before a Certificate can be issued. Application expires 90 days after inspection, if the Certificate of Continued Occupancy has not been issued",
+    "quote": "Application must be submitted at least 10 Working days prior to settlement or occupancy date.",
     "doc_date": "2022-05 (file re-saved 2025-05)",
     "via": "pdf",
-    "verified": null
+    "verified": true
+   },
+   {
+    "url": "https://runnemedenj.org/documents/add-document/department-documents/construction/certificate-of-continued-occupancy/69-construction-form-residential-cco/file",
+    "quote": "Application expires 90 days after inspection, if the Certificate of Continued Occupancy has not been issued",
+    "doc_date": "2022-05",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://runnemedenj.org/documents/add-document/department-documents/construction/certificate-of-continued-occupancy/69-construction-form-residential-cco/file",
+    "quote": "All construction permits shall be closed out before the Certificate of Continued Occupancy is issued",
+    "doc_date": "2022-05",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://runnemedenj.org/documents/add-document/department-documents/construction/certificate-of-continued-occupancy/72-certificate-of-continued-occupancy-requirement-for-rental-commercial-properties/file",
+    "quote": "Certificate of Continued Occupancy for Commercial or Multi Family sale or Rental for Single/ Duplex dwelling or Apartment.",
+    "doc_date": "",
+    "via": "pdf",
+    "verified": true
    },
    {
     "url": "https://runnemedenj.org/departments/construction",
@@ -73,14 +96,21 @@
     "doc_date": "",
     "via": "page",
     "verified": true
+   },
+   {
+    "url": "https://runnemedenj.org/departments/construction",
+    "quote": "Construction Official : Keith Raveling",
+    "doc_date": "",
+    "via": "page",
+    "verified": true
    }
   ],
   "confidence": "medium",
-  "notes": "The residential CCO application has a 'Buyer/Sale' or 'Rental/Tenant' checkbox, and the borough publishes an exterior-only compliance list for the sale of a single-family dwelling. A separate interior and exterior list applies to rentals, commercial, and multi-family sales, so a 2-family sale may fall under the Commercial/Multi Family form ($150) and the fuller interior list; this was not confirmed. The municipal code (ecode360 RU0329) could not be opened, so the ordinance text requiring the CCO on sale was not read directly. Code Enforcement: 856-939-5161 x1006. Construction Official: Keith Raveling."
+  "notes": "The borough's construction page lists the CCO forms, including 'Exterior Compliance Requirements for a Certificate of Continued Occupancy for the Sale of a Single Family Dwelling' (form issue date 07/17/2020); the PDF's title line uses special ligature characters, so only its heading is quoted. The residential CCO application has a 'Buyer/Sale' or 'Rental/Tenant' checkbox. A separate interior and exterior list covers commercial or multi-family sales and rentals of single/duplex dwellings, so a 2-family (duplex) sale may fall under the Commercial/Multi Family form ($150) and the fuller list; not confirmed. No town code section requiring the CCO on sale was found in the ecode360 chapters reviewed (Housing, Property Maintenance, Property Registration, Fire Prevention); the Uniform Construction Code chapter sets the state-model CCO fee ($174, or $120 for one- and two-family homes under 5,000 sq ft), which differs from the $100 on the borough's resale form. Code Enforcement: 856-939-5161 x1006. Construction Clerk: Dianne Aupperle. Zoning Officer: Bernard Moore."
  },
  "fire_cert": {
   "requirements": [
-   "Smoke alarm requirements depend on the year the home was built (pre-1977 battery alarms on each level; later eras need 120V hardwired, interconnected alarms as listed in the borough table)",
+   "Smoke alarm requirements depend on the year the home was built (pre-1977 battery alarms on each level including the basement, within 10 feet of bedroom doors; later eras need 120V hardwired, and later interconnected, alarms as listed in the borough table)",
    "Where no alarms exist or battery alarms are being replaced, use 10-year sealed battery alarms; hardwired alarms cannot be replaced with battery alarms",
    "Smoke alarms must not be over 10 years old from date of manufacture",
    "Alarms must be mounted with proper hardware; nails, thumbtacks, tape or Velcro are not acceptable",
@@ -94,7 +124,7 @@
     "name": "Runnemede Bureau of Fire Prevention, Office of the Fire Marshal",
     "type": "municipal_fire_bureau",
     "area_served": "Entire borough",
-    "lead_time": "Schedule at least 8 days ahead for the lowest fee",
+    "lead_time": "Schedule at least 8 days ahead for the lowest fee (March 2025 application)",
     "fees": [
      {
       "label": "Appointment scheduled at least 8 days before inspection",
@@ -120,43 +150,66 @@
      {
       "label": "Penalty for not obtaining the certificate before sale or change of occupancy",
       "amount": "$500",
-      "quote": "must obtain a CSACMAPFEC inspection prior to the sale or change of occupancy or be subject to a $500 fine",
+      "quote": "inspection prior to the sale or change of occupancy or be subject to a $500 fine",
       "source_url": "https://web.archive.org/web/20250803120942/https://runnemedenj.org/wp-content/uploads/2025/03/CSDCMAC-Application-2025.pdf",
       "verified": true
      }
     ],
-    "how_to_apply": "Request a Smoke Detector & Carbon Monoxide Alarm inspection through the borough's SDL online portal (linked from the Fire Prevention / Inspections page). The March 2025 paper application said fees are payable to the Borough of Runnemede by check or money order, no refunds.",
-    "application_url": "",
+    "how_to_apply": "Request a Smoke Detector & Carbon Monoxide Alarm inspection through the borough's SDL online portal, linked from the Fire Prevention / Inspections page (the portal needs a free citizen login). The March 2025 paper application said fees are payable to the Borough of Runnemede by check or money order, no refunds.",
+    "application_url": "https://www.sdlportal.com/towns/nj/camden/runnemede/requests/smokeAlarm",
     "department_url": "https://runnemedenj.org/public-safety/fire-prevention",
     "phone": "856-939-2817",
-    "email": "",
+    "email": "Mkearney@runnemedenj.org",
+    "contact_name": "Michael Kearney",
+    "contact_title": "Captain / Fire Official",
     "evidence": [
      {
       "url": "https://runnemedenj.org/documents/add-document/department-documents/fire-prevention/847-requirements-for-smoke-alarms-for-one-and-two-family-residences/file",
-      "quote": "To apply for a Smoke Detector & Carbon Monoxide Alarm inspection, scan the code below: Or visit www.runnemedenj.org/public-safety/fire-prevention",
+      "quote": "At the time of change of occupancy by way of sale, lease or rent of a residential dwelling, the smoke detectors shall remain in compliance from the time when the house or building was built",
       "doc_date": "2026-02",
       "via": "pdf",
-      "verified": null
+      "verified": true
      },
      {
       "url": "https://runnemedenj.org/documents/add-document/department-documents/fire-prevention/847-requirements-for-smoke-alarms-for-one-and-two-family-residences/file",
       "quote": "As of February 2025, due to a change in the New Jersey Uniform Fire Code, a fire extinguisher is no longer required in residential properties when obtaining a Certificate of Smoke and Carbon Monoxide Alarm for a change of ownership or tenancy.",
       "doc_date": "2026-02",
       "via": "pdf",
-      "verified": null
+      "verified": true
+     },
+     {
+      "url": "https://runnemedenj.org/documents/add-document/department-documents/fire-prevention/847-requirements-for-smoke-alarms-for-one-and-two-family-residences/file",
+      "quote": "Captain / Fire Official",
+      "doc_date": "2026-02",
+      "via": "pdf",
+      "verified": true
      },
      {
       "url": "https://web.archive.org/web/20250803120942/https://runnemedenj.org/wp-content/uploads/2025/03/CSDCMAC-Application-2025.pdf",
       "quote": "Fees Payable to: Borough of Runnemede (Check or Money Order) NO REFUNDS",
-      "doc_date": "2025-03",
+      "doc_date": "2025-03 (Internet Archive copy captured 2025-08-03)",
       "via": "pdf",
       "verified": true
+     },
+     {
+      "url": "https://runnemedenj.org/public-safety/fire-prevention",
+      "quote": "Smoke Detector & Carbon Monoxide Alarm Inspection Requests",
+      "doc_date": "",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "LEAID: 0430-001 Runnemede Boro F Prev SMOKE DETECTOR COMPLIANCE Name: Runnemede Boro Fire Prev Addr: 24 N Black Horse Pk Runnemede NJ 08078 Enf Auth. Municipal Fire Official Michael Kearney Phone (856) 939-2817 ... Email Mkearney@runnemedenj.org",
+      "doc_date": "2026-05 (survey date 5/22/2026)",
+      "via": "state_directory",
+      "verified": null
      }
     ],
     "confidence": "medium"
    }
   ],
-  "notes": "Fees come from the borough's March 2025 application PDF, which is no longer on the live site (the old runnemedenj.org/wp-content URL now returns 404); it was read from the Internet Archive copy captured 2025-08-03. The live 'Smoke Detector & Carbon Monoxide Alarm Inspection Requests' link now redirects to the SDL portal (https://www.sdlportal.com/towns/nj/camden/runnemede/requests/smokeAlarm), which requires a citizen login, so current fees could not be re-confirmed. Fire Prevention page lists (856) 939-5161; the fire marshal documents list 856-939-2817 (Captain / Fire Official Michael Kearney). The borough's claim that extinguishers are no longer required since February 2025 differs from the brief's state baseline and should be checked against the current N.J.A.C. 5:70."
+  "notes": "Fees come from the borough's March 2025 application PDF, which is no longer on the live site; it was read from the Internet Archive copy captured 2025-08-03. The live 'Smoke Detector & Carbon Monoxide Alarm Inspection Requests' link on the Fire Prevention and Construction pages now opens the SDL citizen portal login, so current fees could not be re-confirmed. The borough's general line is (856) 939-5161; the Fire Marshal's documents and the NJ DCA fire directory list 856-939-2817 and Mkearney@runnemedenj.org for Captain / Fire Official Michael Kearney."
  },
  "other_items": [
   {
@@ -174,16 +227,17 @@
   "Which CCO form and fee applies to a 2-family (duplex) sale: Residential ($100) or Commercial/Multi Family ($150)?",
   "Whether the single-family sale inspection is exterior-only (as the published list suggests) or also interior.",
   "Current fire certificate fees in the SDL portal (last confirmed fees are from the March 2025 paper application).",
-  "Ordinance text (ecode360) not readable."
+  "Which town ordinance requires the CCO on sale (not found in the code chapters reviewed)."
  ],
+ "checked_at": "2026-10-20",
  "verification": {
   "fees": 7,
-  "fee_ok": 5,
+  "fee_ok": 7,
   "fee_bad": 0,
-  "fee_unchecked": 2,
-  "quotes": 6,
-  "q_ok": 2,
+  "fee_unchecked": 0,
+  "quotes": 13,
+  "q_ok": 12,
   "q_bad": 0,
-  "q_unchecked": 4
+  "q_unchecked": 1
  }
 }

@@ -2,7 +2,6 @@
  "municipality_code": "0408",
  "municipality": "Camden City",
  "county": "CAMDEN",
- "checked_at": "2026-09-30",
  "resale_co": {
   "status": "required",
   "name": "Camden Resale Occupancy Certificate (C.R.O.C.); formerly Certificate of Continued Occupancy (C.C.O.)",
@@ -13,7 +12,8 @@
    "Zoning permit and zoning approval before the application is accepted",
    "Building, electrical, plumbing and fire inspections by the Building Bureau",
    "All open building permits must be closed before the inspection",
-   "General inspection of the visible parts of the building for Uniform Construction Code violations"
+   "General inspection of the visible parts of the building for Uniform Construction Code violations",
+   "Separate smoke/CO certificate from the Fire Marshal (the $200 fee does not include the fire safety fee)"
   ],
   "fees": [
    {
@@ -24,18 +24,11 @@
     "verified": true
    },
    {
-    "label": "CCO application fee (form)",
-    "amount": "$200.00",
-    "quote": "CCO FEE: $200.00",
-    "source_url": "https://www.camdennj.gov/wp-content/uploads/2022/05/BB-CCO-App.pdf",
-    "verified": "eye"
-   },
-   {
-    "label": "Name change on the CCO",
+    "label": "Name change on the certificate",
     "amount": "$37.00",
     "quote": "ANY NAME CHANGE $37.00",
     "source_url": "https://www.camdennj.gov/wp-content/uploads/2022/05/BB-CCO-App.pdf",
-    "verified": "eye"
+    "verified": null
    },
    {
     "label": "Penalty if the buyer closes without the certificate (up to)",
@@ -45,11 +38,13 @@
     "verified": true
    }
   ],
-  "how_to_apply": "First apply for a zoning permit (Zoning, City Hall Room 224, 856-757-7214). After zoning approval, submit the application to the Building Bureau, City Hall Room 403, 520 Market Street (856-757-7032). The seller is responsible for applying; the buyer may apply as the seller's agent with written permission, and the certificate is issued to the buyer. Building Bureau visits are by appointment only (call the day before) and inspection requests must be made by email. The posted form is the 2022 CCO application; no separate C.R.O.C. form was found.",
+  "how_to_apply": "First apply for a zoning permit (Zoning, City Hall Room 224, 856-757-7214). After zoning approval, submit the application to the Building Bureau, City Hall Room 403, 520 Market Street (856-757-7032). The seller is responsible for applying; the buyer may apply as the seller's agent with written permission, and the certificate is issued to the buyer. Building Bureau visits are by appointment only (call the day before) and permit applications and inspection requests go by email. The posted form is still the 2022 CCO application; no separate C.R.O.C. form was found.",
   "application_url": "https://www.camdennj.gov/wp-content/uploads/2022/05/BB-CCO-App.pdf",
   "department_url": "https://www.camdennj.gov/construction-building-bureau/",
   "phone": "856-757-7032",
-  "email": "",
+  "email": "JaRizzo@camdennj.gov",
+  "contact_name": "James Rizzo",
+  "contact_title": "Construction Official",
   "evidence": [
    {
     "url": "https://www.camdennj.gov/faq-items/what-is-a-c-r-o-c/",
@@ -66,9 +61,23 @@
     "verified": true
    },
    {
+    "url": "https://www.camdennj.gov/faq-items/what-is-a-c-r-o-c/",
+    "quote": "However, the certificate goes to the BUYER NOT THE SELLER.",
+    "doc_date": "2025-05",
+    "via": "page",
+    "verified": true
+   },
+   {
     "url": "https://www.camdennj.gov/building-bureau-faqs/",
     "quote": "Steps to obtain a C.C.O. which is optional and by request only",
     "doc_date": "2025-05",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.camdennj.gov/building-bureau-faqs/",
+    "quote": "It is also necessary to “close out” all existing open permits prior to the CCO inspection.",
+    "doc_date": "2025-02",
     "via": "page",
     "verified": true
    },
@@ -78,10 +87,31 @@
     "doc_date": "2026-09 (page updated September 25, 2026)",
     "via": "page",
     "verified": true
+   },
+   {
+    "url": "https://www.camdennj.gov/wp-content/uploads/2022/05/BB-CCO-App.pdf",
+    "quote": "CCO FEE: $200.00",
+    "doc_date": "2022-05 (upload folder)",
+    "via": "pdf",
+    "verified": null
+   },
+   {
+    "url": "https://www.camdennj.gov/wp-content/uploads/2026/09/Construction-Employees-v2.pdf",
+    "quote": "JaRizzo@camdennj.gov",
+    "doc_date": "2026-09 (upload folder)",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://ecode360.com/28217842",
+    "quote": "The owner of any residential property shall obtain an occupancy permit prior to the sale of such property involving a new occupancy of any unit of dwelling space, provided that no occupancy permit shall be required for the sale of vacant properties but shall be required at such time as a new occupancy occurs.",
+    "doc_date": "2026-10-20 (page fetched)",
+    "via": "page",
+    "verified": null
    }
   ],
   "confidence": "medium",
-  "notes": "As of May 2025 the City's FAQ calls the required resale certificate a Camden Resale Occupancy Certificate (C.R.O.C.), $200, required before any sale or conveyance, and relabels the older Certificate of Continued Occupancy (C.C.O.) as 'optional and by request only'. An older FAQ entry on the same page still says a CCO is required before sale, and the Building Bureau still links only the 2022 CCO application. Treat the C.R.O.C. as the current requirement and confirm the form with the Building Bureau. The certificate goes to the buyer, and a buyer who closes without it is liable for penalties up to $2,000. If the property is not habitable, the buyer can sign an 'Agreement Not to Occupy' (https://www.camdennj.gov/wp-content/uploads/2025/05/AGREEMENT-NOT-TO-OCCUPY-V05-2025.pdf). Rentals and tenant changes go through the Housing Department (856-757-7075), a separate program. Construction Official: James Rizzo."
+  "notes": "As of May 2025 the City's FAQ calls the required resale certificate a Camden Resale Occupancy Certificate (C.R.O.C.), $200, required before any sale or conveyance, and relabels the older Certificate of Continued Occupancy (C.C.O.) as 'optional and by request only'. An older FAQ entry on the same page still says a CCO is required before sale, and the Building Bureau still links only the 2022 CCO application (CCO FEE: $200.00, same amount). Treat the C.R.O.C. as the current requirement and confirm the form with the Building Bureau. The City code (read on ecode360) also requires an occupancy permit from Code Enforcement before the sale of residential property with a new occupancy (Section 620-39), and its fee tables list older amounts that do not match the City's pages (Section 620-22G: $75 selling fee; Chapter 270 fee table: 'Certificate of continued occupancy' $264). The City's own $200 is used here. If the property is not habitable, the buyer can sign an 'Agreement Not to Occupy' (https://www.camdennj.gov/wp-content/uploads/2025/05/AGREEMENT-NOT-TO-OCCUPY-V05-2025.pdf). Rentals and tenant changes go through the Housing Department (856-757-7075), a separate program. Construction Official James Rizzo's email is from the Building Bureau contact directory (September 2026)."
  },
  "fire_cert": {
   "requirements": [
@@ -90,7 +120,7 @@
    "Basement alarm at the bottom of the stairwell on the ceiling (not between joists); hallway alarm within 10 feet of all bedroom doors",
    "Hardwired smoke alarms and CO alarms must be less than 10 years old and working",
    "CO alarm in the hallway within 10 feet of all bedrooms; not in switched outlets or outlets at floor molding",
-   "Fire extinguisher within 10 feet of the kitchen in the path of exit, mounted on a bracket, minimum rating 2A-10B:C, under 10 pounds",
+   "Fire extinguisher within 10 feet of the kitchen in the path of exit, mounted on a bracket, minimum rating 2A-10B:C, under 10 pounds (form still lists it)",
    "House numbers at least 4 inches, contrasting, fixed to the house and visible from the street (numbers on a light post or mailbox not accepted)",
    "Monitored low-voltage fire alarm systems must be tested by an alarm contractor, with the certification given to the inspector"
   ],
@@ -99,7 +129,7 @@
     "name": "Camden Fire Department, Office of the Fire Marshal",
     "type": "municipal_fire_bureau",
     "area_served": "Entire city",
-    "lead_time": "Submit the request 3 to 4 weeks before settlement; 8 or more calendar days ahead for the lowest fee",
+    "lead_time": "Submit the request 3 to 4 weeks before settlement; 8 or more calendar days ahead for the lowest fee. Certificates are valid for 90 days.",
     "fees": [
      {
       "label": "Request received 8 or more calendar days before settlement",
@@ -130,9 +160,9 @@
       "verified": true
      },
      {
-      "label": "Senior discount (sellers 62 and over, first inspection, proof of age required)",
+      "label": "Senior discount (sellers 62 and over, off the first inspection fee, proof of age required)",
       "amount": "$30.00",
-      "quote": "Sellers age 62 & over may deduct $30.00 from the first inspection fee, PROOF OF AGE REQUIRED",
+      "quote": "Sellers age 62 & over may deduct $30.00 from the first inspection fee",
       "source_url": "https://www.camdennj.gov/wp-content/uploads/2024/08/Residential-Resale-Requirements.pdf",
       "verified": true
      }
@@ -142,10 +172,12 @@
     "department_url": "https://www.camdennj.gov/fire-marshal/",
     "phone": "856-757-7531",
     "email": "RaBarker@camdennj.gov",
+    "contact_name": "Joseph Tull",
+    "contact_title": "Chief Fire Marshal (Fire Official); resale requests go to Raymond Barker",
     "evidence": [
      {
       "url": "https://www.camdennj.gov/wp-content/uploads/2024/08/Residential-Resale-Requirements.pdf",
-      "quote": "Residential Resale Requirements for One & Two Family Dwellings Certificate of Smoke Detector, Fire Extinguisher & Carbon Monoxide Alarm Compliance",
+      "quote": "Residential Resale Requirements for One & Two Family Dwellings",
       "doc_date": "2024-08 (upload folder)",
       "via": "pdf",
       "verified": true
@@ -165,6 +197,34 @@
       "verified": true
      },
      {
+      "url": "https://www.camdennj.gov/wp-content/uploads/2025/07/New-Residitial-request-from-2025V2.pdf",
+      "quote": "Joseph Tull, Chief Fire Marshal",
+      "doc_date": "2025-07",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.camdennj.gov/fire-marshal/",
+      "quote": "The Chief Fire Marshal serves as the Fire Official and Fire Sub-Code Official for the City of Camden.",
+      "doc_date": "2026-07 (page updated July 27, 2026)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://ecode360.com/28217020",
+      "quote": "The fee for a request for a CSDCMAC received more than 10 business days prior to property settlement or change of occupant shall be $50.",
+      "doc_date": "2026-10-20 (page fetched)",
+      "via": "page",
+      "verified": null
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "LEAID: 0408-001 Camden City SMOKE DETECTOR COMPLIANCE Name: Camden City Fire Prev Enf Auth. Fire Dept Addr: 4 N 3rd St Fire Official Joseph Tull, Sr. Phone (856) 757-7531 Email JoTull@camdennj.gov",
+      "doc_date": "2026-05 (survey date 5/22/2026)",
+      "via": "state_directory",
+      "verified": null
+     },
+     {
       "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
       "quote": "F Camden City",
       "doc_date": "2026-07 (LEA registry as of June 30, 2026; key: F = Fire Department)",
@@ -175,33 +235,35 @@
     "confidence": "high"
    }
   ],
-  "notes": "The 2025 request form and the 2024 requirements sheet list the same fees ($64.00, $115.00, $162.00; re-inspection $35.00). The middle tier is worded 'seven (7) calendar days or more' on the City sheet, which appears to mean 4 to 7 days; confirm with the Fire Marshal. The C.R.O.C. FAQ also says the building certificate fee does not include the $64.00 fire safety fee. Certificates are valid for 90 days. The 2024 sheet says requests 'must be submitted using the online form located at ci.camden.nj.us'; the current site posts the request form as a PDF. Chief Fire Marshal: Joseph Tull (JoTull@Camdennj.gov). Older emails on the 2024 sheet use the ci.camden.nj.us domain."
+  "notes": "The 2025 request form and the 2024 requirements sheet list the same fees ($64.00, $115.00, $162.00; re-inspection $35.00). The middle tier is worded 'seven (7) calendar days or more' on the City sheet, which appears to mean 4 to 7 days; confirm with the Fire Marshal. The City code (Section 363-12, read on ecode360) still lists older amounts ($50, $100 and $140 by business days before settlement); the Fire Marshal's posted sheet and form amounts are used here. The 2024 requirements sheet still lists a fire extinguisher, which the state dropped from the sale certificate in February 2025 (P.L.2025, c.19), while the 2025 request form names only smoke and carbon monoxide alarms; confirm whether the extinguisher is still checked. The C.R.O.C. FAQ says the building certificate fee does not include the $64.00 fire safety fee. The 2024 sheet says requests 'must be submitted using the online form located at ci.camden.nj.us'; the current site posts the request form as a PDF. Chief Fire Marshal Joseph Tull: JoTull@camdennj.gov."
  },
  "other_items": [
   {
    "label": "Zoning approval first",
    "detail": "A zoning permit and approval are required before the Building Bureau accepts the CCO/C.R.O.C. application. Zoning: City Hall Room 224, 856-757-7214.",
-   "source_url": "https://www.camdennj.gov/faq-items/steps-to-obtain-a-c-c-o/"
+   "source_url": "https://www.camdennj.gov/building-bureau-faqs/"
   },
   {
    "label": "Open permits closed",
    "detail": "All existing open building permits must be closed out before the CCO inspection; no certificate is issued while permits are open.",
-   "source_url": "https://www.camdennj.gov/faq-items/what-is-a-c-c-o/"
+   "source_url": "https://www.camdennj.gov/building-bureau-faqs/"
   }
  ],
  "open_questions": [
-  "Whether a separate C.R.O.C. application form exists (only the 2022 CCO application is posted) and whether the C.R.O.C. inspection scope differs from the old CCO.",
+  "Is there a separate C.R.O.C. application form (only the 2022 CCO application is posted), and does the C.R.O.C. inspection scope differ from the old CCO?",
   "Exact day range for the $115.00 fire tier (the City wording is ambiguous).",
-  "Validity period of the issued C.R.O.C. (only the 6-month application window is stated)."
+  "Does the Fire Marshal still require a fire extinguisher after P.L.2025, c.19? The 2024 sheet lists one.",
+  "How long is the issued C.R.O.C. valid? Only the 6-month application window is stated."
  ],
+ "checked_at": "2026-10-20",
  "verification": {
-  "fees": 9,
-  "fee_ok": 9,
+  "fees": 8,
+  "fee_ok": 7,
   "fee_bad": 0,
-  "fee_unchecked": 0,
-  "quotes": 8,
-  "q_ok": 8,
+  "fee_unchecked": 1,
+  "quotes": 17,
+  "q_ok": 13,
   "q_bad": 0,
-  "q_unchecked": 0
+  "q_unchecked": 4
  }
 }

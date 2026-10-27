@@ -2,7 +2,6 @@
  "municipality_code": "0432",
  "municipality": "Stratford Borough",
  "county": "CAMDEN",
- "checked_at": "2026-09-30",
  "resale_co": {
   "status": "not_found",
   "name": "",
@@ -16,73 +15,100 @@
   "department_url": "https://stratfordnj.org/code-enforcement/",
   "phone": "856-783-0600",
   "email": "codeenforcement@stratfordnj.org",
+  "contact_name": "",
+  "contact_title": "Borough Code Enforcement office (no named official on the page)",
   "evidence": [
    {
-    "url": "https://library.municode.com/nj/stratford_borough/codes/code_of_ordinances",
-    "quote": "No person, group of persons, association, partnership or corporation or any combination thereof who owns, manages, conducts or operates a dwelling unit shall rent, lease, let, sublet or permit the same to be occupied or re-rented by another without first securing from the public officer of the borough a certificate of occupancy for said dwelling unit.",
-    "doc_date": "2016-09 (code codified through Ord. 2016:11; section 15.04.065)",
+    "url": "https://stratfordnj.org/borough-forms/",
+    "quote": "Smoke and Fire Certificates of Occupancy",
+    "doc_date": "2026-07-13 (page last modified)",
     "via": "page",
-    "verified": null
+    "verified": true
    },
    {
-    "url": "https://stratfordnj.org/borough-forms/",
-    "quote": "Smoke and Fire Certificates of Occupancy General Information instructions (pdf) Application application (link)",
-    "doc_date": "",
+    "url": "https://stratfordnj.org/code-enforcement/",
+    "quote": "Code Enforcement 307 Union Avenue  Stratford, NJ 08084 Phone:  (856) 783-0600 Email: codeenforcement@stratfordnj.org",
+    "doc_date": "2026-10-20 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://stratfordnj.org/code-enforcement/",
+    "quote": "A property which is in foreclosure AND vacant must be registered with the Borough of Stratford",
+    "doc_date": "2026-10-20 (page fetched)",
     "via": "page",
     "verified": true
    }
   ],
   "confidence": "low",
-  "notes": "No municipal resale CO for 1-2 family sales was found. The Borough code on Municode (codified only through 2016) has a certificate of occupancy for rental units (section 15.04.065, $40 fee) but no resale inspection. The Borough forms page lists only the smoke/fire certificate (handled by NJ DCA) for sales. A code search for 'resale', 'transfer of title' and 'prior to the sale' found only the fire code sections. Silence is not proof, so status is not_found. Sections 16.28.030 and 17.52.500 mention 'change of ownership' in a site plan context but expressly say 'A site plan is not required for single-family or two-dwelling unit buildings.'"
+  "notes": "No Borough resale Certificate of Occupancy or resale inspection for 1-2 family homes was found. The Borough forms page (updated July 2026) lists only the 'Smoke and Fire Certificates of Occupancy', which the Borough now sends to NJ DCA, plus rental registration, zoning permits and a zoning verification letter request. The Code Enforcement page covers property maintenance and vacant property registration only. The 2026 ordinance index (Ord. 01-2026 to 08-2026) has nothing on resale inspections. The Borough code is on Municode, which blocked every fetch this time; an earlier check reported a rental certificate of occupancy (section 15.04.065, rental units only) and no resale inspection, but that could not be re-read now. Silence is not proof, so status stays not_found. The annual rental registration and rental certificate are rental programs, not resale requirements."
  },
  "fire_cert": {
-  "requirements": [],
+  "requirements": [
+   "Smoke alarms and carbon monoxide alarms as required by N.J.A.C. 5:70-4.19 for 1 and 2 family homes (the Borough and DCA pages found do not list the details)"
+  ],
   "authorities": [
    {
     "name": "NJ Department of Community Affairs, Division of Fire Safety, Bureau of Fire Code Enforcement",
     "type": "state_dca",
     "area_served": "Entire borough",
-    "lead_time": "",
+    "lead_time": "Fee depends on how many business days before the change of occupant the request is received: more than 10 business days for the lowest fee.",
     "fees": [
      {
-      "label": "Smoke/CO certificate, application more than 10 business days before change of occupant (state fee rule, 2017)",
+      "label": "Smoke/CO certificate (CSACMAPFEC), request received more than 10 business days before the change of occupant",
       "amount": "$45.00",
-      "quote": "1. Requests for a CSDCMAC received more than 10 business days prior to the change of occupant: $45.00;",
-      "source_url": "https://www.nj.gov/dca/divisions/dfs/codes/regulations/adopted_amendment_5_10_2.9.pdf",
-      "verified": null
+      "quote": "Requests for a CSACMAPFEC received more than 10 business days prior to the change of occupant: $45.00",
+      "source_url": "https://www.nj.gov/dca/divisions/dfs/codes/regulations/r.2018%20d.074%20(50%20n.j.r.%20729(a)).pdf",
+      "verified": true
      },
      {
-      "label": "Smoke/CO certificate, application 4 to 10 business days before change of occupant (state fee rule, 2017)",
+      "label": "Request received 4 to 10 business days before the change of occupant",
       "amount": "$90.00",
-      "quote": "2. Requests for a CSDCMAC received four to 10 business days prior to the change of occupant: $90.00; and",
-      "source_url": "https://www.nj.gov/dca/divisions/dfs/codes/regulations/adopted_amendment_5_10_2.9.pdf",
-      "verified": null
+      "quote": "Requests for a CSACMAPFEC received four to 10 business days prior to the change of occupant: $90.00",
+      "source_url": "https://www.nj.gov/dca/divisions/dfs/codes/regulations/r.2018%20d.074%20(50%20n.j.r.%20729(a)).pdf",
+      "verified": true
      },
      {
-      "label": "Smoke/CO certificate, application fewer than 4 business days before change of occupant (state fee rule, 2017)",
+      "label": "Request received fewer than 4 business days before the change of occupant",
       "amount": "$161.00",
-      "quote": "3. Requests for a CSDCMAC received fewer than four business days prior to the change of occupant: $161.00.",
-      "source_url": "https://www.nj.gov/dca/divisions/dfs/codes/regulations/adopted_amendment_5_10_2.9.pdf",
-      "verified": null
+      "quote": "Requests for a CSACMAPFEC received fewer than four business days prior to the change of occupant: $161.00",
+      "source_url": "https://www.nj.gov/dca/divisions/dfs/codes/regulations/r.2018%20d.074%20(50%20n.j.r.%20729(a)).pdf",
+      "verified": true
      }
     ],
-    "how_to_apply": "Apply and pay online through the NJ DCA service portal: click 'Apply for Smoke Certification' at firesolutions.dca.nj.gov.",
+    "how_to_apply": "Apply, schedule and pay online through the NJ DCA fire service portal (firesolutions.dca.nj.gov), using 'Apply for Smoke Certification'.",
     "application_url": "https://firesolutions.dca.nj.gov/ultra-fire-home/smoke-application-create/",
     "department_url": "https://www.nj.gov/dca/dfs/offices/bfce.shtml",
     "phone": "609-633-6106",
     "email": "",
+    "contact_name": "Louis Kilmer",
+    "contact_title": "Bureau Chief, Bureau of Fire Code Enforcement (listed as the state fire official for this town in the DCA fire directory)",
     "evidence": [
      {
       "url": "https://stratfordnj.org/pdf/forms/DCA-Smoke-Fire-CO.pdf",
-      "quote": "All Certificates of Occupancy for the Borough of Stratford will now be handled by the New Jersey Department of Community Affairs (DCA). You can access their service portal at: https://firesolutions.dca.nj.gov/",
-      "doc_date": "2025-06 (file last modified)",
+      "quote": "All Certificates of Occupancy for the Borough of Stratford will now be handled by the New Jersey Department of Community Affairs (DCA).",
+      "doc_date": "",
       "via": "pdf",
       "verified": true
      },
      {
       "url": "https://stratfordnj.org/pdf/forms/DCA-Smoke-Fire-CO.pdf",
       "quote": "Click on “Apply for Smoke Certification” This will take you to the online form where you can schedule and pay for your Certificate of Occupancy.",
-      "doc_date": "2025-06 (file last modified)",
+      "doc_date": "",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "LEAID: 0432-001 Stratford Boro SMOKE DETECTOR COMPLIANCE Name: NJ Division of Fire Safety Enf Auth. State Fire Official Louis Kilmer Phone (609) 633-6132",
+      "doc_date": "2026-09-03 (directory PDF; survey 2/2/2023)",
+      "via": "state_directory",
+      "verified": null
+     },
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "S Stratford Borough",
+      "doc_date": "2026-07",
       "via": "pdf",
       "verified": true
      },
@@ -99,25 +125,47 @@
       "doc_date": "2026-07-17",
       "via": "pdf",
       "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/offices/bfce.shtml",
+      "quote": "Louis Kilmer, Bureau Chief CPM",
+      "doc_date": "2026-10-20 (page fetched)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/offices/bfce.shtml",
+      "quote": "Phone: (609) 633-6106",
+      "doc_date": "2026-10-20 (page fetched)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/divisions/dfs/codes/regulations/r.2018%20d.074%20(50%20n.j.r.%20729(a)).pdf",
+      "quote": "Requests for a CSACMAPFEC received more than 10 business days prior to the change of occupant: $45.00",
+      "doc_date": "2018 (NJ Register, 50 N.J.R. 729(a))",
+      "via": "pdf",
+      "verified": true
      }
     ],
     "confidence": "high"
    }
   ],
-  "notes": "The DCA state-towns list (revised 7/17/2026) marks Stratford as a town where the state handles smoke certs, matching the Borough's own notice. The Borough code (section 8.20.110, 2006 amendments) still shows an old local Bureau of Fire Safety fee schedule ($45 / $70 / $125); that local schedule appears superseded by the move to DCA and is not listed as a current fee. The DCA fee figures come from the state rule N.J.A.C. 5:70-2.9(d) as published in the NJ Register on October 2, 2017 and posted on the DCA site; the DCA portal computes the fee at checkout and the current portal amount was not visible without applying. DCA Bureau of Fire Code Enforcement phone is the bureau chief line listed on the DCA page."
+  "notes": "The Borough's own notice sends all smoke/fire certificates to NJ DCA, and the DCA state-towns list (revised 7/17/2026) and the July 2026 LEA registry (code S) agree that the State is the enforcing agency. Fees are the state fees in N.J.A.C. 5:70-2.9(d) as published in the NJ Register (50 N.J.R. 729(a)); the DCA portal shows the charge at checkout. The DCA fire directory lists (609) 633-6132 for the state fire official; the Bureau page lists (609) 633-6106. An older local Bureau of Fire Safety fee schedule in the Borough code appears superseded by the move to DCA and is not listed. The 2025 state law (P.L.2025, c.19) dropped the portable fire extinguisher from the sale certificate."
  },
  "other_items": [],
  "open_questions": [
-  "Confirm with Stratford Code Enforcement (856-783-0600) that no resale CO or resale inspection is required for 1-2 family sales; the online code is only current through 2016 and the Borough has adopted ordinances since.",
-  "Confirm the current DCA smoke certificate fee charged at checkout on the DCA portal; the only DCA-published fee text found is the 2017 N.J.A.C. 5:70-2.9 amendment."
+  "Confirm with Stratford Code Enforcement (856-783-0600) that no Borough resale CO or resale inspection is required for 1-2 family sales; the Municode code could not be opened this time.",
+  "Confirm the current DCA charge shown at checkout on the DCA portal."
  ],
+ "checked_at": "2026-10-20",
  "verification": {
   "fees": 3,
-  "fee_ok": 0,
+  "fee_ok": 3,
   "fee_bad": 0,
-  "fee_unchecked": 3,
-  "quotes": 6,
-  "q_ok": 5,
+  "fee_unchecked": 0,
+  "quotes": 12,
+  "q_ok": 11,
   "q_bad": 0,
   "q_unchecked": 1
  }

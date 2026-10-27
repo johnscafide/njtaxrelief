@@ -2,98 +2,142 @@
  "municipality_code": "0425",
  "municipality": "Mount Ephraim Borough",
  "county": "CAMDEN",
- "checked_at": "2026-09-30",
  "resale_co": {
   "status": "required",
   "name": "Resale Certificate of Occupancy (Certificate of Continued Occupancy)",
-  "issued_by": "Construction / Zoning / Code Enforcement Office",
-  "lead_time": "Application and fee must be received before an inspection can be scheduled; no set number of days published",
+  "issued_by": "Borough of Mount Ephraim Construction / Zoning / Code Enforcement Office (Enforcement Officer is the Construction Code Official or designee)",
+  "lead_time": "Application and fee must be received before an inspection can be scheduled. Resale CO inspections are done on Tuesdays between 4:00 and 4:30 by appointment. Town code says the inspection is done within a reasonable time, not more than 20 days after a complete application.",
   "valid_for": "",
   "requirements": [
-   "Exterior: visible 911 house number, steps, walkways, ramps, guardrails, handrails",
-   "Exterior: obstructions and hazards, perimeter grading, gutters, spouts and splash blocks",
-   "Basement or crawl space: foundation openings, secure weatherproof accesses, vapor barrier, mold",
-   "Sump pump: electrical connection, backflow preventer, discharge",
-   "Interior: infestation (mice, insects), handrails, guardrails, bathroom venting (fan or window)",
-   "GFCI receptacles in kitchen and bath",
-   "Garage, flooring, kitchen, bath condition",
-   "Switch and receptacle covers, electrical fixtures, panel box and panel covers, A/C disconnect",
-   "Window glass, operable egress windows, window guards",
-   "Water heater: chimney connection, relief valve and floor discharge",
-   "Water pipes, drain pipes, fixtures, toilet mounting, hot and cold water controls",
-   "Heating system",
-   "All open permits must be closed before the CO is issued"
+   "Visible 911 house number, at least 4 inches tall, visible from the street",
+   "Sidewalks safe and free of hazards; no raised sidewalks or deteriorated concrete",
+   "Driveways and aprons: asphalt or macadam only for driveways; a deteriorated asphalt apron must be replaced with concrete",
+   "Handrails where there are three or more steps; steps 30 inches above grade need handrails on both sides; no more than 4 inch spacing between spindles",
+   "Porches with no perimeter railings must have railings installed (no more than 4 inch spindle spacing)",
+   "Peeling or chipping exterior paint scraped and repainted; unpainted exterior surfaces painted",
+   "Broken window panes repaired",
+   "Exterior electrical open splices or improperly installed fixtures corrected",
+   "Gutters and downspouts properly installed",
+   "Any hazardous condition the inspector finds must be corrected",
+   "Work done without permits may be cited and must be permitted and inspected",
+   "Open permits must be closed out (final inspections passed and certificate obtained)",
+   "Separate smoke alarm / CO alarm certificate from the Regional Fire Prevention Alliance before settlement"
   ],
   "fees": [
    {
-    "label": "Single family dwelling resale CO",
+    "label": "Single family dwelling resale CO (2026 application)",
     "amount": "$120.00",
-    "quote": "Single Family Dwelling RESALE FEE= $120.00",
-    "source_url": "https://web.archive.org/web/20211229005949/https://mountephraim-nj.com/wp-content/uploads/2021/10/Application-for-Resale-CO-inspection.pdf",
-    "verified": true
-   },
-   {
-    "label": "Certificate of continued occupancy, 1-2 family residence under 5,000 sq ft (Ordinance 2024-15)",
-    "amount": "$120",
-    "quote": "b) Fee for certificate of continued occupancy: $120.",
-    "source_url": "https://web.archive.org/web/20241112171805/https://mountephraim-nj.com/wp-content/uploads/2021/02/Ord.-2024-15-Construction-Codes-Uniform.pdf",
+    "quote": "FEE= $120.00",
+    "source_url": "https://web.archive.org/web/20260301203838/https://mountephraim-nj.com/wp-content/uploads/2026/02/Application-for-Resale-CO-Inspection.pdf",
     "verified": null
    },
    {
-    "label": "Reinspection, 1-2 family residence (Ordinance 2024-15 certificate of occupancy section)",
+    "label": "Reinspection (2026 application)",
+    "amount": "$25.00",
+    "quote": "REINSPECTION FEE= $25.00",
+    "source_url": "https://web.archive.org/web/20260301203838/https://mountephraim-nj.com/wp-content/uploads/2026/02/Application-for-Resale-CO-Inspection.pdf",
+    "verified": null
+   },
+   {
+    "label": "Reinspection fee in town code, 1-2 family residences under 5,000 sq ft (Ord. 2024-15; differs from the $25 on the form)",
     "amount": "$50",
-    "quote": "a) Minimum fee: $100; reinspection fee: $50.",
-    "source_url": "https://web.archive.org/web/20241112171805/https://mountephraim-nj.com/wp-content/uploads/2021/02/Ord.-2024-15-Construction-Codes-Uniform.pdf",
+    "quote": "Minimum fee: $100; reinspection fee: $50.",
+    "source_url": "https://ecode360.com/30453572",
     "verified": null
    }
   ],
-  "how_to_apply": "Complete the Application for Resale CO Inspection and submit it with the fee (cash or check payable to 'Borough of Mount Ephraim'). If mailing, address it to 'Attn: Construction', 121 S. Black Horse Pike, Mount Ephraim, NJ 08059. After the office receives the form and payment, call to schedule the inspection. Contact 856-931-1546 ext. 205 or tweiss@mountephraim-nj.com.",
-  "application_url": "",
+  "how_to_apply": "Complete the borough's Application for Certificate of Single Family Dwelling RESALE and submit it with the $120 fee (cash or check payable to 'Borough of Mount Ephraim'). If mailing, address it to 'Attn: Construction', 121 S. Black Horse Pike, Mount Ephraim, NJ 08059. After the office receives the form and payment, call to schedule the inspection (Tuesdays 4:00 to 4:30 by appointment). Separately, schedule the smoke/CO inspection with the Regional Fire Prevention Alliance before settlement. The form also offers a 'Change of ownership ONLY' certificate with no inspection, but no one can occupy the property until the full CO is issued.",
+  "application_url": "https://web.archive.org/web/20260301203838/https://mountephraim-nj.com/wp-content/uploads/2026/02/Application-for-Resale-CO-Inspection.pdf",
   "department_url": "https://www.mountephraim-nj.com/page/construction-office-zoning-resale-inspections/",
-  "phone": "856-931-1546 ext. 205",
-  "email": "tweiss@mountephraim-nj.com",
+  "phone": "856-931-1546",
+  "email": "tmartin@mountephraim-nj.com",
+  "contact_name": "",
+  "contact_title": "",
   "evidence": [
    {
-    "url": "https://web.archive.org/web/20211229005949/https://mountephraim-nj.com/wp-content/uploads/2021/10/Application-for-Resale-CO-inspection.pdf",
-    "quote": "*Please Note*: No CO will be issued until all open permits have been closed. Application and fee must be received prior to scheduling any inspection.",
-    "doc_date": "2021-10",
-    "via": "pdf",
-    "verified": true
+    "url": "https://ecode360.com/30453557",
+    "quote": "Prior to the sale of any residential premises involving a new occupancy, the Enforcement Officer shall issue a certificate of continued occupancy in accordance with the standards set forth in Subsection A of this section.",
+    "doc_date": "2008-11-06 (Ord. No. 14-08)",
+    "via": "page",
+    "verified": null
    },
    {
-    "url": "https://web.archive.org/web/20211229010006/https://mountephraim-nj.com/wp-content/uploads/2021/10/Resale-Inspection-Checklist-003.pdf",
-    "quote": "REGISTRATION AND INSPECTION CHECKLIST FOR RESALE APPLICATION FOR CONTINUED CERTIFICATE OF OCCUPANCY $120.00 FOR INITIAL INSPECTION",
-    "doc_date": "2021-10",
-    "via": "pdf",
-    "verified": true
+    "url": "https://ecode360.com/30453559",
+    "quote": "The Enforcement Officer shall conduct an inspection of said residential building or portion thereof which is to be sold, within a reasonable time, not exceeding 20 days after completion of said application",
+    "doc_date": "2008-11-06 (Ord. No. 14-08)",
+    "via": "page",
+    "verified": null
    },
    {
-    "url": "https://web.archive.org/web/20241112171805/https://mountephraim-nj.com/wp-content/uploads/2021/02/Ord.-2024-15-Construction-Codes-Uniform.pdf",
-    "quote": "Exceptions: one- and two-family residences less than 5,000 square feet in area and less than 30 feet in height. a) Minimum fee: $100; reinspection fee: $50. b) Fee for certificate of continued occupancy: $120.",
-    "doc_date": "2024-11 (introduced November 6, 2024; adoption date blank on this copy)",
+    "url": "https://ecode360.com/30453560",
+    "quote": "In the event that any violations are found to exist, there shall be no new occupancy or use of the premises until the criteria has been satisfied for the issuance of the certificate of continued occupancy.",
+    "doc_date": "2008-11-06 (Ord. No. 14-08)",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://ecode360.com/30453572",
+    "quote": "Fee for certificate of continued occupancy: $120.",
+    "doc_date": "2024-12-04 (Ord. No. 2024-15)",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://web.archive.org/web/20260301203838/https://mountephraim-nj.com/wp-content/uploads/2026/02/Application-for-Resale-CO-Inspection.pdf",
+    "quote": "Please Note: CO inspections are done on Tuesdays between 4:00-4:30 by appointment.",
+    "doc_date": "2026-02 (uploaded February 2026; Internet Archive copy captured 2026-03-01)",
     "via": "pdf",
     "verified": null
+   },
+   {
+    "url": "https://web.archive.org/web/20260301203838/https://mountephraim-nj.com/wp-content/uploads/2026/02/Application-for-Resale-CO-Inspection.pdf",
+    "quote": "Application and fee must be received prior to scheduling any inspection.",
+    "doc_date": "2026-02",
+    "via": "pdf",
+    "verified": null
+   },
+   {
+    "url": "https://web.archive.org/web/20260301203838/https://mountephraim-nj.com/wp-content/uploads/2026/02/Application-for-Resale-CO-Inspection.pdf",
+    "quote": "Email: tmartin@mountephraim-nj.com",
+    "doc_date": "2026-02",
+    "via": "pdf",
+    "verified": null
+   },
+   {
+    "url": "https://web.archive.org/web/20260301204218/https://mountephraim-nj.com/wp-content/uploads/2026/02/Resale-Inspection-Checklist.pdf",
+    "quote": "Residential Home Resale Inspection Checklist-explanation and requirements.",
+    "doc_date": "2026-02 (Internet Archive copy captured 2026-03-01)",
+    "via": "pdf",
+    "verified": null
+   },
+   {
+    "url": "https://web.archive.org/web/20211229005949/https://mountephraim-nj.com/wp-content/uploads/2021/10/Application-for-Resale-CO-inspection.pdf",
+    "quote": "APPLICANT MUST CONTACT THE REGIONAL FIRE ALLIANCE TO SCHEDULE A SMOKE DETECTOR, CO DETECTOR AND FIRE INSPECTION PRIOR TO SETTLEMENT.",
+    "doc_date": "2021-10 (historical form)",
+    "via": "pdf",
+    "verified": true
    }
   ],
-  "confidence": "medium",
-  "notes": "The borough's current website (www.mountephraim-nj.com, including the 'Construction Office, Zoning & Resale Inspections' page) is behind a bot challenge and could not be read. All evidence comes from Internet Archive copies of official borough PDFs: the October 2021 resale application and checklist, and Ordinance 2024-15 (Chapter 127 fees). The 2021 application also offers a 'Change of Ownership ONLY' certificate with no inspection, but states no one can occupy the property until the full CO is issued. The application points applicants to the Regional Fire Alliance for the separate smoke/CO/fire inspection. A current direct application link could not be confirmed, so application_url is left blank. Rental registration ordinances (2024-11, 2024-13) exist but were not reviewed."
+  "confidence": "high",
+  "notes": "The requirement is in town code Chapter 121, Certificate of Continued Occupancy (Ord. 14-08 of 11-6-2008), read in full through the ecode360 print view. Chapter 121 covers one-, two- and three-family homes, duplexes, townhouses and condominiums, but not rental units governed by Chapter 319 (Rental Property Registration). Fees are set in Chapter 127, section 127-2, as amended 12-4-2024 by Ord. No. 2024-15: $120 for a certificate of continued occupancy for one- and two-family residences under 5,000 square feet and under 30 feet tall ($174 for other buildings), and $30 for a temporary CO. The code lists a $50 reinspection fee while the February 2026 application says $25, so confirm which applies. The borough's current site (www.mountephraim-nj.com) sits behind a bot challenge and could not be read, so the February 2026 application and checklist were read from Internet Archive copies of the borough's own upload folder; both are scanned images, so quotes were transcribed from the page images. The 2026 application lists only a single family resale; no separate 2-family form was found. The 2026 checklist is an exterior list (plus permits); the older 2021 checklist also had interior, basement, plumbing, electrical and heating items. Office contact changed from tweiss@mountephraim-nj.com (2021 form) to tmartin@mountephraim-nj.com (2026 form); the 2026 form shows the main number 856-931-1546 without an extension. Rental registration (Ch. 319, Ord. 2024-11/2024-13) and Ord. 2025-01 (lead-based paint inspections, which by state law applies to rentals) are rental items, not resale requirements; they were not reviewed in detail."
  },
  "fire_cert": {
   "requirements": [
-   "Smoke alarms by construction date: pre-1975 homes need 10-year sealed battery alarms on each level including basement; newer homes need AC powered interconnected alarms per the era table",
+   "Smoke alarms by construction date: pre-1975 homes need 10-year sealed battery alarms on each level including the basement; newer homes need AC powered interconnected alarms per the era table on the form",
+   "Smoke alarms on every level, outside sleeping areas, and at the bottom of basement stairwells",
    "All smoke alarms must be less than 10 years old; someone must take them down and check the date on the back, and undated alarms must be replaced",
-   "Low voltage (alarm company) fire alarm systems must be tested by an alarm contractor before inspection, with the certification shown to the inspector",
-   "CO alarm within 10 feet of sleeping areas if the home has a fuel burning appliance, fireplace or attached garage; CO alarms must be less than 7 years old",
+   "Low voltage (alarm company) fire alarm systems must be tested by an alarm contractor before the inspection, with the certification shown to the inspector",
+   "CO alarm outside of but within 10 feet of all sleeping areas if the home has a fuel burning appliance, fireplace or garage; CO alarms must be less than 7 years old",
    "House numbers: Arabic numerals at least 3 inches tall, contrasting, mounted at least 60 inches above ground and visible from the street",
-   "Secondary power source warning label within 18 inches of the main electrical panel and meter if there is a generator, solar, or battery storage",
+   "Secondary power source warning label (wording like 'CAUTION MULTIPLE SOURCES OF POWER', not handwritten) within 18 inches of the main electrical panel and meter if there is a generator, solar panels or battery storage",
    "Everything must be done before the inspector arrives; an adult (18+) must be present at the start of the time block"
   ],
   "authorities": [
    {
-    "name": "Regional Fire Prevention Alliance (Barrington)",
+    "name": "Regional Fire Prevention Alliance (run by Barrington Borough)",
     "type": "municipal_fire_bureau",
     "area_served": "Entire borough (the Alliance serves Barrington, Hi-Nella, Lawnside, Mt. Ephraim and Oaklyn)",
-    "lead_time": "14 or more business days before the change of occupant for the lowest fee; weekends, holidays and the settlement date do not count",
+    "lead_time": "14 or more business days before the change of occupant for the lowest fee; weekends, holidays and the settlement date do not count. Inspections are scheduled Monday to Friday, 9am to 2pm. Certificates are valid 6 months and are not transferable.",
     "fees": [
      {
       "label": "Request received 14+ business days before change of occupant",
@@ -138,17 +182,33 @@
       "verified": true
      }
     ],
-    "how_to_apply": "Fill out the Regional Fire Prevention Alliance smoke detector certification application and email it to firealliance@barringtonboro.com, or print it and drop it in the mailbox at 205 Haines Avenue, Barrington, NJ 08007. Include a check or money order payable to 'Regional Fire Prevention Alliance'. Walk-in office hours Tuesday to Friday 8am to 2pm.",
+    "how_to_apply": "Fill out the Regional Fire Prevention Alliance smoke alarm certification application (fillable PDF) and email it to firealliance@barringtonboro.com, or print it and drop it in the mailbox at 205 Haines Avenue, Barrington, NJ 08007. Include a check or money order payable to 'Regional Fire Prevention Alliance'. Walk-in office hours are Tuesday to Friday, 8am to 2pm. Fees are non-refundable.",
     "application_url": "https://barringtonboro.com/wp-content/uploads/2025/11/Barrington-Smoke-Doc-update-Fillable-pdf.pdf",
     "department_url": "https://barringtonboro.com/regional-fire-prevention-alliance/",
     "phone": "856-547-0991",
     "email": "firealliance@barringtonboro.com",
+    "contact_name": "Nick D'Alonzo",
+    "contact_title": "Fire Official (fire code questions: fireofficial@barringtonboro.com)",
     "evidence": [
      {
       "url": "https://barringtonboro.com/regional-fire-prevention-alliance/",
       "quote": "The Regional Fire Prevention Alliance of Barrington, New Jersey serves the Municipalities of Barrington, Hi-Nella, Lawnside, Mt. Ephraim and Oaklyn.",
       "doc_date": "",
       "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://barringtonboro.com/regional-fire-prevention-alliance/",
+      "quote": "Fire Inspections are Scheduled/completed Monday-Friday 9am-2pm.",
+      "doc_date": "",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://barringtonboro.com/wp-content/uploads/2025/11/Barrington-Smoke-Doc-update-Fillable-pdf.pdf",
+      "quote": "Inspection is required per NJ Fire Code 5:70-2.3 for the selling, renting, or change of occupancy in one or two family homes.",
+      "doc_date": "2025-11",
+      "via": "pdf",
       "verified": true
      },
      {
@@ -159,9 +219,30 @@
       "verified": true
      },
      {
+      "url": "https://barringtonboro.com/wp-content/uploads/2025/11/Barrington-Smoke-Doc-update-Fillable-pdf.pdf",
+      "quote": "A CHECK OR MONEY ORDER PAYABLE TO “REGIONAL FIRE PREVENTION ALLIANCE” MUST ACCOMPANY THIS APPLICATION.",
+      "doc_date": "2025-11",
+      "via": "pdf",
+      "verified": true
+     },
+     {
       "url": "https://web.archive.org/web/20211229005949/https://mountephraim-nj.com/wp-content/uploads/2021/10/Application-for-Resale-CO-inspection.pdf",
-      "quote": "APPLICANT MUST CONTACT THE REGIONAL FIRE ALLIANCE TO SCHEDULE A SMOKE DETECTOR, CO DETECTOR AND FIRE INSPECTION PRIOR TO SETTLEMENT. TO CONTACT THE REGIONAL FIRE ALLIANCE, CALL 856-547-0991.",
-      "doc_date": "2021-10",
+      "quote": "TO CONTACT THE REGIONAL FIRE ALLIANCE, CALL 856-547-0991.",
+      "doc_date": "2021-10 (historical borough form)",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "LEAID: 0425-001 Mount Ephraim Boro SMOKE DETECTOR COMPLIANCE Name: Regional Fire Prev Alliance Addr: 205 Haines Ave Barrington NJ 08007 Enf Auth. Municipal Fire Official Nicholas D'Alonzo Phone (856) 547-0991",
+      "doc_date": "2026-08 (survey date 8/5/2026)",
+      "via": "state_directory",
+      "verified": null
+     },
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "Barrington Borough is the LEA for Hi Nella, Lawnside, Mt Ephraim and Oaklyn Boroughs.",
+      "doc_date": "2026-07",
       "via": "pdf",
       "verified": true
      }
@@ -169,34 +250,36 @@
     "confidence": "high"
    }
   ],
-  "notes": "The Regional Fire Prevention Alliance is a shared fire prevention bureau run out of Barrington Borough; it is not a fire district. Its November 2025 application is titled 'Certificate of Smoke Alarm and Carbon Monoxide Alarm and Secondary Power Source Identification Label Compliance (CSACMASPSIL)' and no longer lists a fire extinguisher requirement; its December 2022 version required a 2-A:10-BC extinguisher and listed a $600 penalty. Certificates are valid 6 months and not transferable. Office moved from 219 Clements Bridge Road (2022 form) to 205 Haines Avenue, Barrington. Fire code questions: Fire Official Nick D'Alonzo, fireofficial@barringtonboro.com."
+  "notes": "The Regional Fire Prevention Alliance is a shared fire prevention bureau run out of Barrington Borough under a shared service agreement; it is not a fire district. Its November 2025 application covers smoke alarms, CO alarms and the secondary power source label (CSACMASPSIL) and does not list a fire extinguisher requirement, which matches the 2025 state change (P.L.2025, c.19); an older December 2022 version required a 2-A:10-BC extinguisher. The form only mentions extinguishers in a reminder to check for recalled devices. Office: 205 Haines Avenue, Barrington. Fire code questions: Fire Official Nick D'Alonzo, fireofficial@barringtonboro.com; the NJ DCA fire directory lists him at ndalonzo@barringtonboro.com, (856) 547-0991. The borough also posted a copy of the Alliance form on its own site in February 2026 (Barrington-Smoke-Fillable.pdf)."
  },
  "other_items": [
   {
-   "label": "Open permits must be closed",
-   "detail": "No CO will be issued until all open permits have been closed.",
-   "source_url": "https://web.archive.org/web/20211229005949/https://mountephraim-nj.com/wp-content/uploads/2021/10/Application-for-Resale-CO-inspection.pdf"
+   "label": "Open permits and work done without permits",
+   "detail": "Open permits must be closed out (remaining inspections passed and the certificate obtained), and work done without permits may be cited during the resale inspection.",
+   "source_url": "https://web.archive.org/web/20260301204218/https://mountephraim-nj.com/wp-content/uploads/2026/02/Resale-Inspection-Checklist.pdf"
   },
   {
    "label": "Temporary certificate of occupancy fee",
-   "detail": "Ordinance 2024-15 sets $30 for the first issuance and renewal of a temporary certificate of occupancy.",
-   "source_url": "https://web.archive.org/web/20241112171805/https://mountephraim-nj.com/wp-content/uploads/2021/02/Ord.-2024-15-Construction-Codes-Uniform.pdf"
+   "detail": "Town code sets $30 for the first issuance and renewal of a temporary certificate of occupancy.",
+   "source_url": "https://ecode360.com/30453572"
   }
  ],
  "open_questions": [
-  "Current resale CO page on www.mountephraim-nj.com could not be read (bot challenge); fee and process should be re-confirmed there or by phone.",
-  "Whether Ordinance 2024-15 was adopted as introduced (adoption date blank on the archived copy).",
-  "Fee and form for a 2-family resale (2021 application lists only single family resale).",
-  "Current direct link to the resale CO application on the new borough site."
+  "Which reinspection fee applies: $25 (February 2026 application) or $50 (town code section 127-2 as amended by Ord. 2024-15)?",
+  "Fee and form for a 2-family resale (the 2026 application lists only single family).",
+  "Whether the current resale inspection is exterior only (the 2026 checklist is exterior) or still includes interior items.",
+  "Current direct link to the application on the borough's new website (the site could not be read; the archived copy of the borough's upload was used).",
+  "Who handles resale COs now (the 2026 form lists tmartin@mountephraim-nj.com; no name or title published)."
  ],
+ "checked_at": "2026-10-20",
  "verification": {
   "fees": 9,
-  "fee_ok": 7,
+  "fee_ok": 6,
   "fee_bad": 0,
-  "fee_unchecked": 2,
-  "quotes": 6,
-  "q_ok": 5,
+  "fee_unchecked": 3,
+  "quotes": 17,
+  "q_ok": 8,
   "q_bad": 0,
-  "q_unchecked": 1
+  "q_unchecked": 9
  }
 }

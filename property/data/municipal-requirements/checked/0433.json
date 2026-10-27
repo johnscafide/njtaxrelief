@@ -2,7 +2,6 @@
  "municipality_code": "0433",
  "municipality": "Tavistock Borough",
  "county": "CAMDEN",
- "checked_at": "2026-10-06",
  "resale_co": {
   "status": "not_found",
   "name": "",
@@ -16,17 +15,33 @@
   "department_url": "https://tavistocknj.org/whos-who/",
   "phone": "856-429-0039",
   "email": "clerk@tavistocknj.org",
+  "contact_name": "Denise K. Moules",
+  "contact_title": "Municipal Clerk / CFO",
   "evidence": [
    {
     "url": "https://tavistocknj.org/wp-content/uploads/2025/05/2024-Tavistock-Minutes-12-19-2024.pdf",
-    "quote": "Resolution #34-2024 Authorizing Shared Service Agreement with Haddonfield - Construction",
+    "quote": "Resolution #34-2024     Authorizing Shared Service Agreement with Haddonfield - Construction",
     "doc_date": "2024-12-19",
     "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://tavistocknj.org/wp-content/uploads/2026/05/2026-Tavistock-Minutes-2-24-2026.pdf",
+    "quote": "Res #18-2026 Authorizing Shared Service Agreement with the Borough of Haddonfield",
+    "doc_date": "2026-02-24",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://tavistocknj.org/whos-who/",
+    "quote": "Municipal Clerk / CFO Denise K. Moules",
+    "doc_date": "2026-10-20 (page fetched)",
+    "via": "page",
     "verified": true
    }
   ],
   "confidence": "low",
-  "notes": "Tavistock is a 0.28 square mile borough (mostly the Tavistock Country Club) with almost no homes. Its website has no code book, no construction page and no resale CO information. Construction services are provided by the Borough of Haddonfield under a shared service agreement (Resolution #34-2024). No Tavistock ordinance requiring a resale CO was found, and Haddonfield's own resale rules apply to Haddonfield properties, not automatically to Tavistock. Office support is shared with Barrington (clerk Denise K. Moules)."
+  "notes": "Tavistock is a 0.28 square mile borough, mostly the Tavistock Country Club, with very few homes. Its website has no code book, construction page or resale CO information. Haddonfield provides construction and fire services under shared service agreements (Resolutions #33-2024 and #34-2024, renewed in general terms by Resolution #18-2026 on February 24, 2026). No Tavistock ordinance requiring a resale CO was found, and Haddonfield's own resale rules are Haddonfield Borough Code sections that apply to Haddonfield properties, not automatically to Tavistock. The Borough phone 856-429-0039 is on the Borough home page; office support is shared with Barrington."
  },
  "fire_cert": {
   "requirements": [],
@@ -37,52 +52,69 @@
     "area_served": "Entire borough",
     "lead_time": "",
     "fees": [],
-    "how_to_apply": "Contact the Haddonfield Fire Official (Ernest F. Busch) or the Haddonfield Construction and Zoning Office, Room 104, Haddonfield Borough Hall, which receives smoke detector compliance forms and payment for Haddonfield. Confirm the Tavistock process and fee before applying.",
+    "how_to_apply": "Contact the Haddonfield Fire Official (Ernest F. Busch) or the Haddonfield Construction and Zoning Office, Room 104, Haddonfield Borough Hall, which takes smoke detector compliance forms and payment for Haddonfield. Confirm the Tavistock process and fee before applying.",
     "application_url": "",
     "department_url": "https://www.haddonfieldnj.org/government/departments/fire_department/smoke_detector___sidewalk_inspection_requests/index.php",
     "phone": "856-429-4308",
     "email": "ebusch@haddonfield-nj.gov",
+    "contact_name": "Ernest F. Busch",
+    "contact_title": "Fire Official (Haddonfield, listed for Tavistock in the DCA fire directory)",
     "evidence": [
      {
       "url": "https://tavistocknj.org/wp-content/uploads/2025/05/2024-Tavistock-Minutes-12-19-2024.pdf",
-      "quote": "Resolution #33-2024 Authorizing Shared Service Agreement with Haddonfield - Fire Services",
+      "quote": "Resolution #33-2024     Authorizing Shared Service Agreement with Haddonfield - Fire Services",
       "doc_date": "2024-12-19",
       "via": "pdf",
       "verified": true
      },
      {
-      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
-      "quote": "LEAID: 0433-001 Tavistock Boro SMOKE DETECTOR COMPLIANCE Enf Auth. Municipal ... Name: Haddonfield Boro ... Addr: 15 N Haddon Ave ... Haddonfield NJ 08033 ... Fire Official Ernest F Busch 15 N Haddon Ave ... Phone (856) 429-4700 Phone JUVENILE FIRESETTERS PROGRAM",
-      "doc_date": "2026-09-03 (directory PDF dated; fire department survey 5/18/2026)",
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "Haddonfield Borough is the LEA for Tavistock Borough.",
+      "doc_date": "2026-07",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "M Tavistock Borough",
+      "doc_date": "2026-07",
       "via": "pdf",
       "verified": true
      },
      {
       "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
-      "quote": "SSA with Haddonfield Boro",
-      "doc_date": "2026-05-18 (survey date for Tavistock entry)",
-      "via": "pdf",
+      "quote": "LEAID: 0433-001 Tavistock Boro SMOKE DETECTOR COMPLIANCE Name: Haddonfield Boro Enf Auth. Municipal Addr: 15 N Haddon Ave Fire Official Ernest F Busch SSA with Haddonfield Boro Phone (856) 429-4308 Email ebusch@haddonfield-nj.gov",
+      "doc_date": "2026-09-03 (directory PDF; survey 5/18/2026)",
+      "via": "state_directory",
+      "verified": null
+     },
+     {
+      "url": "https://www.haddonfieldnj.org/government/departments/fire_department/smoke_detector___sidewalk_inspection_requests/index.php",
+      "quote": "The Construction and Zoning Office, Rm. 104 in Borough Hall, receives the forms and payment for these services.",
+      "doc_date": "2026-10-20 (page fetched)",
+      "via": "page",
       "verified": true
      }
     ],
     "confidence": "medium"
    }
   ],
-  "notes": "The DCA fire department directory lists Tavistock's local enforcing agency (LEAID 0433-001) as municipal, with Haddonfield's fire official Ernest F. Busch and a shared service agreement with Haddonfield. Tavistock is not on the DCA list of towns where the state issues smoke certs. Haddonfield's web page publishes a tiered smoke/CO certificate fee for Haddonfield properties under Haddonfield Borough Code section 114-8(B); no source was found showing that the same fee applies to Tavistock properties, so no fee is listed here. The directory text is extracted from a table layout, so the quotes are joined field labels and values from the Tavistock entry."
+  "notes": "The July 2026 LEA registry says Haddonfield Borough is the fire code enforcing agency for Tavistock, and the DCA fire directory lists Haddonfield's fire official Ernest F. Busch for Tavistock (smoke detector compliance phone (856) 429-4700, office (856) 429-4308). Tavistock is not on the DCA list of state smoke cert towns. Haddonfield's page publishes $56 / $125 / $201 smoke and CO fees and a portable fire extinguisher rule under Haddonfield Borough Code section 114-8(B) for Haddonfield properties; no source ties that fee to Tavistock properties, so no fee is listed here. The 2025 state law (P.L.2025, c.19) dropped the extinguisher from the state sale certificate."
  },
  "other_items": [],
  "open_questions": [
-  "Which fee Haddonfield charges for a smoke/CO/extinguisher certificate on a Tavistock property, and whether the Haddonfield form is used.",
+  "Which fee Haddonfield charges for a smoke/CO certificate on a Tavistock property, and whether the Haddonfield form is used.",
   "Whether Tavistock has any resale CO or inspection ordinance; no Tavistock code book was found online. Ask the Borough Clerk (clerk@tavistocknj.org)."
  ],
+ "checked_at": "2026-10-20",
  "verification": {
   "fees": 0,
   "fee_ok": 0,
   "fee_bad": 0,
   "fee_unchecked": 0,
-  "quotes": 4,
-  "q_ok": 4,
+  "quotes": 8,
+  "q_ok": 7,
   "q_bad": 0,
-  "q_unchecked": 0
+  "q_unchecked": 1
  }
 }

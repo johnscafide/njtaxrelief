@@ -2,7 +2,7 @@
  "municipality_code": "1704",
  "municipality": "Elsinboro Township",
  "county": "SALEM",
- "checked_at": "2026-09-30",
+ "checked_at": "2026-10-20",
  "resale_co": {
   "status": "required",
   "name": "Certificate of Occupancy for Change in Occupancy (Certificate of Continued Occupancy)",
@@ -38,7 +38,7 @@
     "verified": null
    }
   ],
-  "how_to_apply": "Fill out the Township's Application for Certificate of Occupancy for Change in Occupancy (property, current owner, buyer, both realtors, type of dwelling and rooms) and have the seller's realtor or owner sign it. The application is not complete until the owner or realtor calls the Housing/Zoning Officer at 935-2200 to schedule the inspection. Housing and zoning hours are Thursday 3pm to 4pm at the Municipal Building, 619 Salem Ft-Elfsborg Rd, Salem.",
+  "how_to_apply": "Fill out the Township's Application for Certificate of Occupancy for Change in Occupancy (property, current owner, buyer, both realtors, type of dwelling and rooms) and have the seller's realtor or owner sign it. The application is not complete until the owner or realtor calls the Housing/Zoning Officer at 935-2200 to schedule the inspection. Zoning and housing hours are Thursday 3pm to 4pm (construction hours are now Wednesday 4:30pm to 6:00pm) at the Municipal Building, 619 Salem Ft-Elfsborg Rd, Salem.",
   "application_url": "https://assets.zyrosite.com/Hk1eZdfjLtvdh0WU/coapplication-M5puFZ2iiXlZcJ53.pdf",
   "department_url": "https://elsinborotownship.com/elsinboro-township-departments",
   "phone": "856-935-2200",
@@ -68,9 +68,44 @@
     "verified": null
    },
    {
+    "url": "https://ecode360.com/40415147",
+    "quote": "nor shall any person, firm or corporation purchasing or acquiring a dwelling unit, in any manner, occupy a dwelling unit or permit it to be occupied by others without first securing a certificate of occupancy from the Township Housing Officer.",
+    "doc_date": "1977-11-07 (Ord. No. 77-9); page fetched 2026-10-20",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://ecode360.com/40415147",
+    "quote": "No certificate of occupancy for a home built before 1979 can be issued without an inspection certificate (lead-safe or lead-free) from a State of New Jersey approved and licensed lead inspector.",
+    "doc_date": "2022-10-03 (Ord. No. 2022-04)",
+    "via": "page",
+    "verified": null
+   },
+   {
     "url": "https://elsinborotownship.com/elsinboro-township-departments",
-    "quote": "Construction, Zoning and Housing Email: inspector@elsinborotownship.com Hours Construction - Thursday 12:00pm- 1:30pm Zoning and Housing - Thursday 3pm-4pm",
-    "doc_date": "2026-09-30 (page fetched)",
+    "quote": "Construction, Zoning and Housing Andy Hoglen",
+    "doc_date": "2026-10-20 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://elsinborotownship.com/elsinboro-township-departments",
+    "quote": "inspector@elsinborotownship.com",
+    "doc_date": "2026-10-20 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://elsinborotownship.com/elsinboro-township-departments",
+    "quote": "Construction - Wednesday 4:30pm- 6:00pm",
+    "doc_date": "2026-10-20 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://elsinborotownship.com/elsinboro-township-departments",
+    "quote": "Zoning and Housing - Thursday 3pm-4pm",
+    "doc_date": "2026-10-20 (page fetched)",
     "via": "page",
     "verified": true
    },
@@ -82,8 +117,8 @@
     "verified": true
    }
   ],
-  "confidence": "medium",
-  "notes": "The application form is a scanned PDF with no text layer; Claude read it page by page (2026-09-30). It is undated and bundles a 2005 DCA memo on fire extinguishers. The instructions page has handwritten notes ('Deleted' next to the septic certification, '2A10BC' next to the extinguisher, 'Near Bedrooms' and 'Each Level' next to the alarms); handwritten notes are weak evidence, so septic is left out of requirements and the extinguisher is flagged as predating P.L.2025, c.19 (February 3, 2025). The Township website names no Housing/Zoning Officer; the 2026 reorganization minutes appoint Andy Hoglen as Zoning and Housing Official and as Construction and Building Subcode Official. No direct phone for him is listed; the Township's main number 856-935-2200 is the scheduling number on the form, and the Officials page lists 'Building Inspector/Zoning Officer 856-935-2200'. The Township code is on ecode360 (EL6582) and could not be opened, so Ordinances 77-9 and 79-3 were not read. No lead time or validity period is stated."
+  "confidence": "high",
+  "notes": "The Departments page now names Andy Hoglen under 'Construction, Zoning and Housing' (inspector@elsinborotownship.com), matching the 2026 reorganization minutes, and construction hours moved to Wednesday 4:30pm to 6:00pm; zoning and housing hours are still Thursday 3pm to 4pm. The CO Application on the Forms page is the same file as before. This time Township Code Chapter 145, Occupancy Certificates (Ord. No. 77-9 of 11-7-1977), was read through the ecode360 print view: §145-1 says a buyer may not occupy a dwelling unit, or let others occupy it, without first getting a certificate of occupancy from the Township Housing Officer, and §145-2 requires compliance with all Township building, plumbing, electrical, zoning, health, fire and housing ordinances. §145-4 (Ord. 2022-04) adds lead-based paint rules for rentals and says no CO for a home built before 1979 can be issued without a lead-safe or lead-free certificate; the section is written about rental units, so whether it applies to an owner-occupied sale is unclear. Chapter 68 (Fees) lists no certificate of occupancy fee; the $30.00 inspection and $30.00 reinspection fees come from the application form. The application form is a scanned PDF with no text layer, read visually. It is undated and bundles a 2005 DCA memo on fire extinguishers. The instructions page has handwritten notes ('Deleted' next to the septic certification, '2A10BC' next to the extinguisher); handwritten notes are weak evidence, so septic is left out of requirements and the extinguisher is flagged as predating P.L.2025, c.19 (February 3, 2025). No direct phone for the Housing Officer is listed; the Township's main number 856-935-2200 is the scheduling number on the form, and the Officials page lists 'Building Inspector/Zoning Officer 856-935-2200'. No lead time or validity period is stated."
  },
  "fire_cert": {
   "requirements": [
@@ -112,11 +147,18 @@
       "verified": null
      },
      {
+      "url": "https://ecode360.com/40415147",
+      "quote": "fire or fire prevention, and minimum housing standards",
+      "doc_date": "1977-11-07 (Ord. No. 77-9); page fetched 2026-10-20",
+      "via": "page",
+      "verified": null
+     },
+     {
       "url": "https://firesolutions.dca.nj.gov/_odata/firedistricts",
       "quote": "\"ultra_name\":\"ELSINBORO TWP-001\",\"ultra_firedistrictcode\":\"4004\" ... \"ultra_firejurisdiction\":{ \"Name\":\"State\",\"Value\":240000000 },\"ultra_smokecertexempt\":true",
       "doc_date": "2026-09-30 (live portal data)",
       "via": "page",
-      "verified": null
+      "verified": true
      },
      {
       "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/state_towns%207_17_26.pdf",
@@ -154,7 +196,7 @@
       "quote": "Elsinboro Township1703 LEAID: 1703-999 Enf Auth. State Fire Official Louis Kilmer Phone (609)633-6132 Addr: PO Box 809 Trenton NJ 08625-0809",
       "doc_date": "2026-03 (survey date 3/9/2026)",
       "via": "state_directory",
-      "verified": true
+      "verified": null
      }
     ],
     "confidence": "low"
@@ -172,11 +214,17 @@
    "label": "Chimney certification",
    "detail": "Required for all fossil fuel systems; the visual inspection can be done by a heating contractor or chimney sweep.",
    "source_url": "https://assets.zyrosite.com/Hk1eZdfjLtvdh0WU/coapplication-M5puFZ2iiXlZcJ53.pdf"
+  },
+  {
+   "label": "Lead-safe or lead-free certificate (pre-1979 homes, rental rule)",
+   "detail": "Township Code §145-4 says no certificate of occupancy for a home built before 1979 can be issued without a lead-safe or lead-free certificate from a state-licensed lead inspector. The section is written for rental units under P.L.2021, c.182; ask whether the Township applies it to owner-occupied sales.",
+   "source_url": "https://ecode360.com/40415147"
   }
  ],
  "open_questions": [
   "Who issues the smoke and carbon monoxide certificate for Elsinboro: the Township Housing/Zoning Officer as part of the certificate of occupancy, or the NJ DCA? What is the fee?",
   "Is the septic certification still required (it is crossed out by hand as 'Deleted' on the instructions page)?",
+  "Does the Township apply the §145-4 lead-safe or lead-free certificate rule to owner-occupied sales of pre-1979 homes, or only to rentals?",
   "Does the Township still check for a fire extinguisher after P.L.2025, c.19?",
   "How far ahead of closing should the certificate of occupancy be requested, and how long is it valid?"
  ],
@@ -185,9 +233,9 @@
   "fee_ok": 0,
   "fee_bad": 0,
   "fee_unchecked": 2,
-  "quotes": 10,
-  "q_ok": 5,
+  "quotes": 16,
+  "q_ok": 8,
   "q_bad": 0,
-  "q_unchecked": 5
+  "q_unchecked": 8
  }
 }

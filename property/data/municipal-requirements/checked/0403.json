@@ -2,7 +2,7 @@
  "municipality_code": "0403",
  "municipality": "Barrington Borough",
  "county": "CAMDEN",
- "checked_at": "2026-09-30",
+ "checked_at": "2026-10-20",
  "resale_co": {
   "status": "required",
   "name": "Continued Certificate of Inspection on Residential Home Resales (resale CO)",
@@ -13,7 +13,7 @@
    "House number visible from the street, at least 4 inches tall",
    "Sidewalks safe, no raised or deteriorated concrete",
    "Deteriorated asphalt driveway aprons must be replaced with concrete",
-   "Handrails on steps with 3 or more risers (both sides if over 30 inches above grade); spindles no more than 4 inches apart",
+   "Handrails on steps with 3 or more steps (both sides if over 30 inches above grade); spindles no more than 4 inches apart",
    "Porches without perimeter railings must get railings",
    "Peeling or chipping exterior paint scraped and repainted; unpainted surfaces painted",
    "Broken window panes repaired",
@@ -21,7 +21,7 @@
    "Gutters and downspouts connected and in place",
    "Any other hazardous condition the inspector finds must be corrected",
    "Separate sump pump inspection by the Superintendent of Public Works",
-   "Separate smoke and CO detector inspection by the Regional Fire Prevention Alliance"
+   "Separate smoke and CO detector inspection by the Regional Fire Prevention Alliance (additional fee)"
   ],
   "fees": [
    {
@@ -29,67 +29,69 @@
     "amount": "$100.00",
     "quote": "Request for C/O Received 14+ business days prior to settlement - $100.00",
     "source_url": "http://barringtonboro.com/wp-content/uploads/2026/05/CO-Application-1-fillable.pdf",
-    "verified": "eye"
+    "verified": null
    },
    {
     "label": "Resale CO, request received 13 to 6 business days before settlement",
     "amount": "$150.00",
     "quote": "Request for C/O Received 13-6 business days prior to settlement - $150.00",
     "source_url": "http://barringtonboro.com/wp-content/uploads/2026/05/CO-Application-1-fillable.pdf",
-    "verified": "eye"
+    "verified": null
    },
    {
     "label": "Resale CO, request received 5 business days or less before settlement",
     "amount": "$200.00",
     "quote": "Request for C/O Received 5 business days or less prior to settlement - $200.00",
     "source_url": "http://barringtonboro.com/wp-content/uploads/2026/05/CO-Application-1-fillable.pdf",
-    "verified": "eye"
+    "verified": null
    },
    {
     "label": "Each re-inspection",
     "amount": "$50.00",
     "quote": "Each subsequent re-inspection - $50.00",
     "source_url": "http://barringtonboro.com/wp-content/uploads/2026/05/CO-Application-1-fillable.pdf",
-    "verified": "eye"
-   },
-   {
-    "label": "Sump pump inspection (included in the base resale inspection fee)",
-    "amount": "$100",
-    "quote": "(Fee for sump pump inspection is included in the $100 inspection)",
-    "source_url": "https://barringtonboro.com/borough-services/construction/",
-    "verified": true
+    "verified": null
    }
   ],
-  "how_to_apply": "Download and fill out the Application and Checklist for Continued Certificate of Inspection on Residential Home Resales and submit it to the Construction Department at the Borough Municipal Building, 229 Trenton Avenue. Also call Public Works (856-547-2486) to schedule the sump pump inspection and the Regional Fire Prevention Alliance (856-547-0991) for the smoke and CO inspection.",
+  "how_to_apply": "Download and fill out the Application and Checklist for Continued Certificate of Inspection on Residential Home Resales and submit it to the Construction Department at the Borough Municipal Building, 229 Trenton Avenue (856-547-0706; Monday to Thursday 8:30 a.m. to 4:00 p.m., Friday 8:30 a.m. to 12:00 p.m.). Also call Public Works (Mike Ciocco, 856-547-2486) to schedule the sump pump inspection and the Regional Fire Prevention Alliance (856-547-0991) for the smoke and CO inspection.",
   "application_url": "http://barringtonboro.com/wp-content/uploads/2026/05/CO-Application-1-fillable.pdf",
   "department_url": "https://barringtonboro.com/borough-services/construction/",
   "phone": "856-547-0706",
   "email": "constructionofficial@barringtonboro.com",
+  "contact_name": "Phil Azzari",
+  "contact_title": "Construction Official and Building Sub-Code Official",
   "evidence": [
    {
     "url": "https://barringtonboro.com/borough-services/construction/",
     "quote": "The Certificate of Inspection program for residential re-sales has resumed. The new CO inspection application form and explanations are now available here.",
-    "doc_date": "",
+    "doc_date": "2026-10-20 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://barringtonboro.com/borough-services/construction/",
+    "quote": "Phil Azzari, Construction Official and Building Sub-Code Official",
+    "doc_date": "2026-10-20 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://barringtonboro.com/borough-services/construction/",
+    "quote": "(Fee for sump pump inspection is included in the $100 inspection)",
+    "doc_date": "2026-10-20 (page fetched)",
     "via": "page",
     "verified": true
    },
    {
     "url": "http://barringtonboro.com/wp-content/uploads/2026/05/CO-Application-1-fillable.pdf",
     "quote": "APPLICATION AND CHECKLIST FOR CONTINUED CERTIFICATE OF INSPECTION ON RESIDENTIAL HOME RESALES",
-    "doc_date": "2026-05 (upload folder)",
+    "doc_date": "2026-05-20 (PDF modified May 20, 2026; scanned)",
     "via": "pdf",
-    "verified": "eye"
-   },
-   {
-    "url": "http://barringtonboro.com/wp-content/uploads/2026/05/CO-Application-1-fillable.pdf",
-    "quote": "ADDITIONAL INSPECTIONS REQUIRED Sump Pump Inspection, a sump pump inspection will be performed by the Superintendent of Public Works.",
-    "doc_date": "2026-05",
-    "via": "pdf",
-    "verified": "eye"
+    "verified": null
    }
   ],
   "confidence": "high",
-  "notes": "The 2026 application is a scanned form, read visually. An older 2010 Borough form (http://barringtonboro.com/wp-content/uploads/2010/12/resale_inspection_form.pdf) listed $75.00 for the initial inspection and $50.00 per re-inspection with a longer interior checklist; it is superseded by the 2026 form and should not be used. The web page still says the sump pump inspection is included in the $100 inspection, matching the 14+ day tier. Office hours: Monday to Thursday 8:30 a.m. to 4:00 p.m., Friday 8:30 a.m. to 12:00 p.m. Validity period of the certificate is not stated."
+  "notes": "Re-checked 2026-10-20: the Construction page and the 2026 application are unchanged. The application is a scanned form with no text layer, so its fee lines were read visually and a text script cannot check them. The web page says the sump pump inspection is included in the $100 inspection (the 14+ day tier); that line is noted here rather than counted as a separate fee. An older 2010 Borough form ($75 initial, $50 re-inspection) is superseded. The page now names Phil Azzari as Construction Official and Building Sub-Code Official (constructionofficial@barringtonboro.com); Albert Hallworth is Building Sub-Code Inspector. Construction inspections are routinely Tuesdays and Thursdays. The Borough also runs a vacant property registration (not a sale item). No town code section for the resale program was found online; validity of the certificate is not stated."
  },
  "fire_cert": {
   "requirements": [
@@ -98,7 +100,7 @@
    "CO alarm within 10 feet of all sleeping areas if the home has a fuel-burning appliance, fireplace or garage; CO alarms must be less than 7 years old",
    "Monitored low-voltage fire alarm systems must be tested by an alarm contractor before the inspection, with a copy of the certification for the inspector",
    "House numbers: Arabic numerals at least 3 inches tall, contrasting, at least 60 inches above ground, visible from the street",
-   "Secondary power source label (for example 'CAUTION MULTIPLE SOURCES OF POWER', not handwritten) within 18 inches of the main electrical panel and meter when the home has a generator, solar panels or battery storage",
+   "Secondary power source label (wording like 'CAUTION MULTIPLE SOURCES OF POWER', not handwritten) within 18 inches of the main electrical panel and meter when the home has a generator, solar panels or battery storage",
    "Person over 18 must meet the inspector at the start of the time block"
   ],
   "authorities": [
@@ -144,30 +146,32 @@
       "verified": true
      }
     ],
-    "how_to_apply": "Fill out the Alliance smoke detector certification application and email it to firealliance@barringtonboro.com, or print it and drop it in the mailbox at 205 Haines Avenue, Barrington. Include a check or money order payable to 'Regional Fire Prevention Alliance'. Fees are non-refundable. Walk-in office hours are Tuesday to Friday 8 a.m. to 2 p.m.",
+    "how_to_apply": "Fill out the Alliance smoke detector certification application and email it to firealliance@barringtonboro.com, or print it and drop it in the mailbox at 205 Haines Avenue, Barrington. Include a check or money order payable to 'Regional Fire Prevention Alliance'. Fees are non-refundable. Walk-in office hours are Tuesday to Friday 8 a.m. to 2 p.m.; inspections are scheduled Monday to Friday 9 a.m. to 2 p.m.",
     "application_url": "http://barringtonboro.com/wp-content/uploads/2025/11/Barrington-Smoke-Doc-update-Fillable-pdf.pdf",
     "department_url": "https://barringtonboro.com/regional-fire-prevention-alliance/",
     "phone": "856-547-0991",
     "email": "firealliance@barringtonboro.com",
+    "contact_name": "Nick D'Alonzo",
+    "contact_title": "Fire Official (fireofficial@barringtonboro.com)",
     "evidence": [
      {
       "url": "https://barringtonboro.com/regional-fire-prevention-alliance/",
       "quote": "The Regional Fire Prevention Alliance of Barrington, New Jersey serves the Municipalities of Barrington, Hi-Nella, Lawnside, Mt. Ephraim and Oaklyn.",
-      "doc_date": "",
+      "doc_date": "2026-10-20 (page fetched)",
       "via": "page",
       "verified": true
      },
      {
       "url": "http://barringtonboro.com/wp-content/uploads/2025/11/Barrington-Smoke-Doc-update-Fillable-pdf.pdf",
-      "quote": "Inspection is required per NJ Fire Code 5:70-2.3 for the selling, renting, or change of occupancy in one or two family homes. Inspection Must occur Prior to Settlement or change of Occupancy",
-      "doc_date": "2025-11 (upload folder)",
+      "quote": "Inspection is required per NJ Fire Code 5:70-2.3 for the selling, renting, or change of occupancy in one or two family homes.",
+      "doc_date": "2025-11-06 (PDF modified Nov 6, 2025)",
       "via": "pdf",
       "verified": true
      },
      {
       "url": "http://barringtonboro.com/wp-content/uploads/2025/11/Barrington-Smoke-Doc-update-Fillable-pdf.pdf",
       "quote": "CERTIFICATIONS ARE VALID FOR 6 MONTHS and are Non transferable. FEES ARE NON-REFUNDABLE.",
-      "doc_date": "2025-11",
+      "doc_date": "2025-11-06",
       "via": "pdf",
       "verified": true
      },
@@ -177,32 +181,47 @@
       "doc_date": "2026-07 (LEA registry as of June 30, 2026)",
       "via": "pdf",
       "verified": true
+     },
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "M Barrington Borough",
+      "doc_date": "2026-07 (LEA registry as of June 30, 2026); key: M = Municipality",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "Fire Official Nicholas D'Alonzo",
+      "doc_date": "2022-09-07 (survey date)",
+      "via": "state_directory",
+      "verified": null
      }
     ],
     "confidence": "high"
    }
   ],
-  "notes": "The Alliance form is titled Certificate of Smoke Alarm and Carbon Monoxide Alarm and Secondary Power Source Identification Label Compliance (CSACMASPSIL). Certificates are valid for 6 months. The form states a $500 per occurrence penalty for change of ownership without the certificate. The form does not list a portable fire extinguisher requirement but tells applicants to check for recalled extinguishers; the state extinguisher rule still applies. Fire Official: Nick D'Alonzo, fireofficial@barringtonboro.com. The Alliance is run out of Barrington and serves five towns; 'municipal_fire_bureau' is the closest type."
+  "notes": "Re-checked 2026-10-20; the Alliance page and form (Nov 2025) are unchanged. The form is titled Certificate of Smoke Alarm and Carbon Monoxide Alarm and Secondary Power Source Identification Label Compliance (CSACMASPSIL). Certificates are valid for 6 months. The form states a $500 per occurrence penalty for change of ownership without the certificate. The form does not require a portable fire extinguisher (consistent with P.L.2025, c.19) but tells applicants to check for recalled extinguishers. The DCA fire directory (survey 9/7/2022) lists Fire Official Nicholas D'Alonzo, 205 Haines Avenue, (856) 547-0991, ndalonzo@barringtonboro.com. The Alliance is run out of Barrington and serves five towns; 'municipal_fire_bureau' is the closest type."
  },
  "other_items": [
   {
    "label": "Sump pump inspection",
-   "detail": "Performed by the Superintendent of Public Works; call Mike Ciocco at 856-547-2486. Included in the $100 resale inspection fee per the Borough web page.",
+   "detail": "Performed by the Superintendent of Public Works; call Mike Ciocco at 856-547-2486. The Borough page says its fee is included in the $100 resale inspection.",
    "source_url": "https://barringtonboro.com/borough-services/construction/"
   }
  ],
  "open_questions": [
   "How long the resale certificate of inspection stays valid is not stated.",
-  "The web page says the sump pump inspection is included in the '$100 inspection' but the 2026 form has $150 and $200 rush tiers; unclear if the sump pump is included in those tiers too (likely yes)."
+  "The web page says the sump pump inspection is included in the '$100 inspection' but the 2026 form has $150 and $200 rush tiers; is the sump pump included in those tiers too?",
+  "Which Borough ordinance sets the resale inspection program and fees? Not found online."
  ],
  "verification": {
-  "fees": 10,
-  "fee_ok": 10,
+  "fees": 9,
+  "fee_ok": 5,
   "fee_bad": 0,
-  "fee_unchecked": 0,
-  "quotes": 7,
-  "q_ok": 7,
+  "fee_unchecked": 4,
+  "quotes": 10,
+  "q_ok": 8,
   "q_bad": 0,
-  "q_unchecked": 0
+  "q_unchecked": 2
  }
 }

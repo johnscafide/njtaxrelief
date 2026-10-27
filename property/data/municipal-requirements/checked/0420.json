@@ -2,7 +2,6 @@
  "municipality_code": "0420",
  "municipality": "Laurel Springs Borough",
  "county": "CAMDEN",
- "checked_at": "2026-10-06",
  "resale_co": {
   "status": "required",
   "name": "Certificate of Property Compliance (CPC)",
@@ -53,27 +52,50 @@
    {
     "url": "https://www.laurelsprings-nj.com/1213/Fire-Prevention-Property-Maintenance",
     "quote": "Whenever there shall occur a change in occupancy in any residential property, including one- and two-family homes and apartments, a new certificate of property compliance shall be required. A change in occupancy shall occur in an apartment by a change in tenant or by the execution of a new lease with a new tenant, and in all other dwelling units by sale or lease.",
-    "doc_date": "",
+    "doc_date": "2026-10-20 (page fetched)",
     "via": "page",
     "verified": true
    },
    {
     "url": "https://www.laurelsprings-nj.com/1213/Fire-Prevention-Property-Maintenance",
     "quote": "In the case of the resale of a property, both a Certificate of Property Compliance and Fire Safety are required.",
-    "doc_date": "",
+    "doc_date": "2026-10-20 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.laurelsprings-nj.com/1213/Fire-Prevention-Property-Maintenance",
+    "quote": "Payment  - must be received at Borough Hall before the inspector(s) are notified via email.",
+    "doc_date": "2026-10-20 (page fetched)",
     "via": "page",
     "verified": true
    },
    {
     "url": "https://www.laurelsprings-nj.com/DocumentCenter/View/389/Certificate-of-Property-Compliance",
     "quote": "Certificates of Property Compliance expire 45 days from the date of inspection",
-    "doc_date": "2026-08",
+    "doc_date": "2026-08-18 (PDF)",
     "via": "pdf",
     "verified": true
+   },
+   {
+    "url": "https://www.laurelsprings-nj.com/DocumentCenter/View/389/Certificate-of-Property-Compliance",
+    "quote": "Does owner possess a valid lead-safe certificate for this property?",
+    "doc_date": "2026-08-18",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://ecode360.com/12440450",
+    "quote": "Whenever there shall occur a change in occupancy in any residential property, including one- and two-family homes and apartments, a new certificate of occupancy shall be required.",
+    "doc_date": "Code 193-4B, amended 9-8-2025 by Ord. No. 901-2025 (ecode360, legislation through 07-13-2026)",
+    "via": "page",
+    "verified": null
    }
   ],
   "confidence": "high",
-  "notes": "The page says to see the Annual Fee Schedule for pricing; the form leaves fee amounts blank for staff to fill in, so fees here come from the Fire Prevention / Property Maintenance page. The CPC form asks whether the owner has a valid lead-safe certificate. The Inspector may issue a Conditional CPC letter allowing construction permits first, with no occupancy during construction; both CPC and Fire Safety applications and fees must be filed first. Property Maintenance Officer: Dominic Krawchuk (dkrawchuk@laurelsprings-nj.com); Permit Clerk: Cindy Cheeseman (ccheeseman@laurelsprings-nj.com). Rental CPC has the same fee tiers (rental program)."
+  "notes": "Re-checked October 20, 2026; page, forms and fees unchanged. Borough Code 193-4B (Property Maintenance, read on ecode360) requires a new certificate on any change in occupancy, including sale of a one- or two-family home, with application at least 10 days before the change; 193-4C says fees are in the Annual Fee Ordinance and depend on time left before the new occupant. Ord. No. 901-2025 (Sept 8, 2025) added 193-4B(4): an extension may be granted for a property in uninhabitable disrepair once all forms and fees are filed and no one lives there; the buyer then pulls permits and must pass a property compliance inspection before occupancy. The page says to see the Annual Fee Schedule; the forms leave fee amounts blank for staff, so fees here come from the Fire Prevention / Property Maintenance page. The Inspector may issue a Conditional CPC letter allowing construction permits first, with no occupancy during construction. Contacts (mailto links on the page): Property Maintenance Officer Dominic Krawchuk (dkrawchuk@laurelsprings-nj.com); Permit Clerk Cindy Cheeseman (ccheeseman@laurelsprings-nj.com). Rental CPC has the same fee tiers (rental program). Code 193 also has vacant property registration ($500 initial).",
+  "contact_name": "Dominic Krawchuk",
+  "contact_title": "Property Maintenance Officer"
  },
  "fire_cert": {
   "requirements": [
@@ -123,16 +145,37 @@
      {
       "url": "https://www.laurelsprings-nj.com/1213/Fire-Prevention-Property-Maintenance",
       "quote": "In the case of the resale of a property, both a Certificate of Property Compliance and Fire Safety are required.",
-      "doc_date": "",
+      "doc_date": "2026-10-20 (page fetched)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://www.laurelsprings-nj.com/1213/Fire-Prevention-Property-Maintenance",
+      "quote": "Kenneth J. Cheeseman Fire Marshal",
+      "doc_date": "2026-10-20 (page fetched)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://www.laurelsprings-nj.com/1359/Fire-Safety-Requirements-Smoke-Detectors",
+      "quote": "The State of New Jersey requires that you obtain a Certificate of Smoke Detector and Carbon Monoxide Alarm Compliance in order to sell, rent or lease a home.",
+      "doc_date": "2026-10-20 (page fetched)",
       "via": "page",
       "verified": true
      },
      {
       "url": "https://www.laurelsprings-nj.com/DocumentCenter/View/390/Fire-Safety-Certificate-of-Compliance-PDF",
       "quote": "Certifications of Compliance expire 45 days from the date of inspection",
-      "doc_date": "2026-08",
+      "doc_date": "2026-08-18 (PDF)",
       "via": "pdf",
       "verified": true
+     },
+     {
+      "url": "https://ecode360.com/12439949",
+      "quote": "The certificate shall be obtained from the Fire Official of the Borough of Laurel Springs.",
+      "doc_date": "Code 137-11A, added 4-4-2005 by Ord. No. 644-2005",
+      "via": "page",
+      "verified": null
      },
      {
       "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
@@ -149,10 +192,12 @@
       "verified": true
      }
     ],
-    "confidence": "high"
+    "confidence": "high",
+    "contact_name": "Kenneth J. Cheeseman",
+    "contact_title": "Fire Marshal"
    }
   ],
-  "notes": "Fire Marshal: Kenneth J. Cheeseman, 856-784-0500 ext. 25. The DCA LEA Registry (July 2026) lists Laurel Springs' enforcing agency type as 'F' (Fire Department); the Borough website runs it as the combined Office of Fire Prevention and Property Maintenance. The fire certificate expires 45 days from inspection, which is shorter than the usual state 6 months. The Fire Safety form only checks smoke and CO detectors; no extinguisher rules are published."
+  "notes": "Fire Marshal: Kenneth J. Cheeseman, 856-784-0500 ext. 25, kcheeseman@laurelsprings-nj.com. The DCA LEA Registry (July 2026) lists Laurel Springs as 'F' (Fire Department); the Borough runs it as the combined Office of Fire Prevention and Property Maintenance. Borough Code 137-11B (Ord. No. 644-2005) still lists older smoke certificate fees of $35 / $70 / $125 (more than 10, 4 to 10, and under 4 business days); the Borough page shows the current $45 / $90 / $161, which match the state fees, so the page amounts are used. The fire certificate expires 45 days from inspection, shorter than the usual state 6 months. The Fire Safety form checks only smoke and CO detectors; no extinguisher rule is published, although the Code 137 Article II title still mentions fire extinguishers."
  },
  "other_items": [
   {
@@ -168,17 +213,18 @@
  ],
  "open_questions": [
   "Re-inspection fees are not published.",
-  "The Annual Fee Schedule referenced on the page was not found online; fees come from the department web page.",
-  "Portable fire extinguisher requirement is not mentioned on the Borough's fire safety materials."
+  "The Annual Fee Schedule referenced on the page and in Code 193-4C was not found online; fees come from the department web page.",
+  "Borough Code 137-11B still shows $35 / $70 / $125 for the smoke certificate; confirm the page amounts ($45 / $90 / $161) are what is charged."
  ],
+ "checked_at": "2026-10-20",
  "verification": {
   "fees": 6,
   "fee_ok": 6,
   "fee_bad": 0,
   "fee_unchecked": 0,
-  "quotes": 7,
-  "q_ok": 7,
+  "quotes": 13,
+  "q_ok": 11,
   "q_bad": 0,
-  "q_unchecked": 0
+  "q_unchecked": 2
  }
 }

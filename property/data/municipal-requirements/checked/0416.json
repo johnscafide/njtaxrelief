@@ -2,7 +2,6 @@
  "municipality_code": "0416",
  "municipality": "Haddon Township",
  "county": "CAMDEN",
- "checked_at": "2026-09-30",
  "resale_co": {
   "status": "required",
   "name": "Certificate of Compliance (COC) / Temporary Certificate of Compliance (TCOC), Residential Resale Inspection (Township Code Chapter 186)",
@@ -33,70 +32,70 @@
     "amount": "$150",
     "quote": "For COC applications submitted more than 14 business days prior to the date change of ownership occurs or the date of change of occupancy, the fee is $150",
     "source_url": "https://www.haddontwp.com/wp-content/uploads/2026/06/Resale-Tenant-Change-Inspection-Form.pdf",
-    "verified": null
+    "verified": true
    },
    {
     "label": "COC application more than 7 but less than 13 business days before",
     "amount": "$175",
     "quote": "For COC applications submitted more than 7 business days but less than 13 business days prior to the date of change of ownership occurs or the date of change of occupancy, the fee is $175.",
     "source_url": "https://www.haddontwp.com/wp-content/uploads/2026/06/Resale-Tenant-Change-Inspection-Form.pdf",
-    "verified": null
+    "verified": true
    },
    {
     "label": "COC application more than 4 but less than 6 business days before",
     "amount": "$200",
     "quote": "For COC applications submitted more than 4 business days but less than 6 business days prior to the date of change of ownership occurs or the date of change of occupancy, the fee is $200.",
     "source_url": "https://www.haddontwp.com/wp-content/uploads/2026/06/Resale-Tenant-Change-Inspection-Form.pdf",
-    "verified": null
+    "verified": true
    },
    {
     "label": "COC application less than 4 business days before",
     "amount": "$225",
     "quote": "For COC applications submitted less than 4 business days prior to the date of change of ownership occurs or the date of change of occupancy, the fee is $225.",
     "source_url": "https://www.haddontwp.com/wp-content/uploads/2026/06/Resale-Tenant-Change-Inspection-Form.pdf",
-    "verified": null
+    "verified": true
    },
    {
     "label": "COC application after the change of ownership",
     "amount": "$250",
     "quote": "For COC applications submitted after the date change of ownership occurs or the date of change of occupancy, the fee is $250.",
     "source_url": "https://www.haddontwp.com/wp-content/uploads/2026/06/Resale-Tenant-Change-Inspection-Form.pdf",
-    "verified": null
+    "verified": true
    },
    {
     "label": "Re-inspection (paid before re-inspection is scheduled)",
     "amount": "$25.00",
     "quote": "Re-Inspection fee of $25.00 will be collected for additional inspections, prior to re-inspection being scheduled.",
     "source_url": "https://www.haddontwp.com/wp-content/uploads/2026/06/Resale-Tenant-Change-Inspection-Form.pdf",
-    "verified": null
+    "verified": true
    },
    {
     "label": "First re-inspection after a Temporary COC",
     "amount": "$25",
     "quote": "The fee for the first re-inspection after issuance of a TCOC is $25.",
     "source_url": "https://www.haddontwp.com/wp-content/uploads/2026/06/Resale-Tenant-Change-Inspection-Form.pdf",
-    "verified": null
+    "verified": true
    },
    {
     "label": "Second re-inspection after a Temporary COC",
     "amount": "$50",
     "quote": "The fee for the second re-inspection after issuance of a TCOC is $50.",
     "source_url": "https://www.haddontwp.com/wp-content/uploads/2026/06/Resale-Tenant-Change-Inspection-Form.pdf",
-    "verified": null
+    "verified": true
    },
    {
     "label": "Third re-inspection after a Temporary COC",
     "amount": "$75",
     "quote": "The fee for the third re-inspection after issuance of a TCOC is $75.",
     "source_url": "https://www.haddontwp.com/wp-content/uploads/2026/06/Resale-Tenant-Change-Inspection-Form.pdf",
-    "verified": null
+    "verified": true
    },
    {
     "label": "Fourth or later re-inspection after a Temporary COC, each",
     "amount": "$100",
     "quote": "The fee for a fourth or subsequent re-inspection after issuance of a TCOC is $100 for each such re-inspection.",
     "source_url": "https://www.haddontwp.com/wp-content/uploads/2026/06/Resale-Tenant-Change-Inspection-Form.pdf",
-    "verified": null
+    "verified": true
    }
   ],
   "how_to_apply": "Download the Residential Resale / Tenant Change Inspection Application (PDF) or use the township's online GovPilot form (https://main.govpilot.com/web/public/474cdd15-dbc_Rental-Resale-Township-of-Haddon?uid=7071&ust=NJ&pu=1&id=0). Submit it with a check or money order payable to 'Township of Haddon' to the Annex Building, 10 Reeve Ave., at least 14 business days before closing. Questions: Ryan Sheppard, rsheppard@haddontwp.com.",
@@ -108,73 +107,142 @@
    {
     "url": "https://www.haddontwp.com/wp-content/uploads/2026/06/Resale-Tenant-Change-Inspection-Form.pdf",
     "quote": "A Residential Property Inspection MUST be completed and a COC or Temporary COC MUST be issued PRIOR to closing per Township of Haddon Municipal Code Chapter 186-6 Article 3B.",
-    "doc_date": "2026-06",
+    "doc_date": "2026-06-22 (PDF date)",
     "via": "pdf",
-    "verified": null
+    "verified": true
    },
    {
     "url": "https://www.haddontwp.com/wp-content/uploads/2026/06/Resale-Tenant-Change-Inspection-Form.pdf",
     "quote": "If a COC or Temp COC is not issued prior to closing, a $2,500 fine may be issued to the buyer, seller and realtors.",
-    "doc_date": "2026-06",
+    "doc_date": "2026-06-22",
     "via": "pdf",
-    "verified": null
+    "verified": true
+   },
+   {
+    "url": "https://www.haddontwp.com/wp-content/uploads/2026/06/Resale-Tenant-Change-Inspection-Form.pdf",
+    "quote": "If the change does not occur within six (6) months, a new application, fee & inspection will be required.",
+    "doc_date": "2026-06-22",
+    "via": "pdf",
+    "verified": true
    },
    {
     "url": "https://www.haddontwp.com/departmets/construction-office/",
     "quote": "All applications must be in and paid for at least 14 business days in advance of closing date.",
-    "doc_date": "",
+    "doc_date": "2026-10-20 (page fetched)",
     "via": "page",
     "verified": true
+   },
+   {
+    "url": "https://www.haddontwp.com/departmets/construction-office/",
+    "quote": "All Property Resale Inspections are done on Mondays and Wednesdays from 8:00 AM - 10:00 AM.",
+    "doc_date": "2026-10-20 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.haddontwp.com/departmets/construction-office/",
+    "quote": "Ryan Sheppard Resale Inspector Ext. 6276 rsheppard@haddontwp.com",
+    "doc_date": "2026-10-20 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://ecode360.com/36013747",
+    "quote": "a certificate of compliance (COC) shall be required prior to the change of ownership or change of occupancy of any residential property",
+    "doc_date": "Section 186-6B; read 2026-10-20",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://ecode360.com/36013747",
+    "quote": "Applications filed pursuant to this article shall be delivered to the enforcing officer not less than 30 days prior to the date that the property is scheduled to be sold or occupied by a new tenant/occupant.",
+    "doc_date": "Section 186-6; read 2026-10-20",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://ecode360.com/36013771",
+    "quote": "A TCOC may be issued for a period not to exceed 60 days, in the sole discretion of the enforcing officer.",
+    "doc_date": "Section 186-9; read 2026-10-20",
+    "via": "page",
+    "verified": null
    }
   ],
   "confidence": "high",
-  "notes": "Fee tiers are quoted as published in the township's Chapter 111 fee amendment printed on the form; the tier wording leaves gaps (for example exactly 13 or 14 business days, or 6 to 7 business days) that the form does not explain. Rentals have extra lead-based paint rules ($100 if the township does the visual inspection, $20 if a private report is submitted); these do not apply to owner sales. Code Official's office for checklist questions: 856-833-6276. Inspections: inspections@haddontwp.com."
+  "notes": "Fee tiers are quoted from the Chapter 111 fee amendment printed on the township's June 2026 form. New this check: Chapter 186 and Section 111-42 of the township code were read through the ecode360 print view. The code version of the fee tiers says 'days' (not business days) and closes the gaps the form leaves: more than 14 days $150, more than 7 but less than 14 days $175, more than 4 but less than 7 days $200, less than 4 days $225, after the change of ownership $250 (same amounts as the form). Section 186-6 says applications go in not less than 30 days before the sale, while the form and web page ask for 14 business days; ask which the office uses. A Temporary COC needs a notarized buyer letter, allows no move-in, and lasts no more than 60 days (Section 186-9). Rentals have extra lead-based paint rules ($100 if the township does the visual inspection, $20 if a private report is submitted); these do not apply to owner sales. Code Official's office for checklist questions: 856-833-6276. Construction inspections: inspections@haddontwp.com. The online GovPilot version of the form is linked from the Construction & Zoning page.",
+  "contact_name": "Ryan Sheppard",
+  "contact_title": "Resale Inspector (also Fire Marshal / Investigator)"
  },
  "fire_cert": {
   "requirements": [
-   "Smoke alarms no more than 10 years old; 10-year sealed battery units where battery units are allowed; hardwired alarms cannot be replaced with battery alarms",
+   "Smoke alarms on every level on the ceiling, at the base of basement stairs and within 10 feet of all bedrooms; no more than 10 years old; 10-year sealed battery where battery units are allowed; hardwired alarms cannot be replaced with battery alarms",
    "CO alarms less than 10 years old, in the hallway within 10 feet of all bedrooms",
-   "Homes with a low-voltage fire alarm system must have it tested by a certified alarm contractor before the inspection and show the certificate"
+   "Homes with a low-voltage fire alarm system must have it tested by a certified alarm contractor before the inspection and show the certificate",
+   "House numbers at least 4 inches, numerals only, contrasting, on the house (not doors or mailboxes)",
+   "The Fire Marshal page says sale inspections check fire extinguishers too, but the June 2026 resale form and checklist do not list one"
   ],
   "authorities": [
    {
-    "name": "Haddon Township Construction & Zoning Office / Code Official (smoke and CO check done as part of the township Resale COC inspection)",
+    "name": "Haddon Township Bureau of Fire Prevention (Fire Marshal Office); the smoke/CO check is part of the township Resale COC inspection",
     "type": "municipal_fire_bureau",
     "area_served": "Entire township",
     "lead_time": "At least 14 business days before closing",
     "fees": [],
-    "how_to_apply": "No separate smoke certificate application or fee was found. The Residential Resale / Tenant Change Inspection Application covers the smoke/CO (CSDCMAC) check together with the COC; see the resale_co fees ($150 and up).",
+    "how_to_apply": "No separate smoke certificate application or fee was found. The Fire Marshal Office says it inspects all homes for sale for smoke alarms, CO alarms and fire extinguishers, and the township's Residential Resale / Tenant Change Inspection Application covers that (CSDCMAC) check together with the COC; see the resale_co fees ($150 and up). Submit the application with payment to the Annex Building, 10 Reeve Ave., at least 14 business days before closing.",
     "application_url": "https://www.haddontwp.com/wp-content/uploads/2026/06/Resale-Tenant-Change-Inspection-Form.pdf",
-    "department_url": "https://www.haddontwp.com/departmets/construction-office/",
-    "phone": "856-833-6265",
+    "department_url": "https://www.haddontwp.com/departmets/fire-marshall/",
+    "phone": "856-833-6276",
     "email": "rsheppard@haddontwp.com",
     "evidence": [
      {
       "url": "https://www.haddontwp.com/wp-content/uploads/2026/06/Resale-Tenant-Change-Inspection-Form.pdf",
       "quote": "I understand that any change of ownership/occupancy including storage of personal property may not occur, prior to successful inspection & possession of a (CSDCMAC) inspection.",
-      "doc_date": "2026-06",
+      "doc_date": "2026-06-22",
       "via": "pdf",
-      "verified": null
+      "verified": true
      },
      {
-      "url": "https://www.haddontwp.com/wp-content/uploads/2026/06/Resale-Tenant-Change-Inspection-Form.pdf",
-      "quote": "A Certificate of Compliance Inspection Certificate will only be issued when the premises inspected are consistent/in compliance with The Township of Haddon’s Land Use and International Property Maintenance Code & NJUFC & International Fire Code - NJ Edition.",
-      "doc_date": "2026-06",
+      "url": "https://www.haddontwp.com/departmets/fire-marshall/",
+      "quote": "Inspect all homes for sale to ensure smoke detectors, carbon monoxide alarms, and fire extinguishers are installed and operating.",
+      "doc_date": "2026-10-20 (page fetched)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://www.haddontwp.com/departmets/fire-marshall/",
+      "quote": "LOCAL ENFORCING AGENCY FOR: Haddon Township (Westmont, West Collingswood Heights, West Collingswood Extension) & Audubon Park.",
+      "doc_date": "2026-10-20 (page fetched)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://www.haddontwp.com/departmets/fire-marshall/",
+      "quote": "Office: (856) 833-6276",
+      "doc_date": "2026-10-20 (page fetched)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "M Haddon Township",
+      "doc_date": "2026-07 (as of June 30, 2026)",
       "via": "pdf",
-      "verified": null
+      "verified": true
      },
      {
       "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
       "quote": "Haddon Twp Constr",
-      "doc_date": "2026 (DCA Fire Department/LEA Directory, smoke detector compliance contact for Haddon Township)",
+      "doc_date": "2026-09-03 (DCA directory, smoke detector compliance contact for Haddon Township; fire official William A Behnke)",
       "via": "pdf",
       "verified": true
      }
     ],
-    "confidence": "medium"
+    "confidence": "high",
+    "contact_name": "William Behnke",
+    "contact_title": "Chief Fire Marshal / Official"
    }
   ],
-  "notes": "The DCA Uniform Fire Code registry (July 2026) lists Haddon Township as a municipal (M) enforcing agency, and the DCA Fire Department/LEA Directory lists 'Haddon Twp Constr' at 10 Reeve Av (856-854-1176) as the smoke detector compliance contact, Fire Official William A Behnke. The township Fire Marshal Office page (https://www.haddontwp.com/departmets/fire-marshall/) is behind a bot-check page and could not be read, so it is not confirmed whether the Fire Marshal also issues a separate certificate. The 2026 resale form does not mention a fire extinguisher."
+  "notes": "New this check: the Fire Marshal Office page can now be read. It says the Bureau of Fire Prevention inspects all homes for sale for smoke detectors, CO alarms and fire extinguishers, and that it is the local enforcing agency for Haddon Township and Audubon Park. Fire Marshals listed: William Behnke, Chief Fire Marshal / Official (ext. 6269, wbehnke@haddontwp.com) and Ryan Sheppard, Fire Marshal / Investigator (ext. 6276, rsheppard@haddontwp.com), who is also the Resale Inspector on the Construction & Zoning page. No separate smoke certificate form or fee is posted; the check is part of the resale COC. The DCA LEA registry (July 2026) lists Haddon Township as M (municipal), and the DCA directory lists 'Haddon Twp Constr' at 10 Reeve Av (856-854-1176) as the smoke detector compliance contact. The page's mention of fire extinguishers predates or ignores the 2025 state law (P.L.2025, c.19) that dropped the extinguisher from the sale requirement; the 2026 form does not list one."
  },
  "other_items": [
   {
@@ -189,17 +257,18 @@
   }
  ],
  "open_questions": [
-  "Whether the Haddon Township Fire Marshal issues a separate smoke/CO certificate or fee (Fire Marshal page blocked by a bot check).",
-  "How to read the gaps in the COC fee tiers (exactly 13-14 or 6-7 business days)."
+  "Whether a fire extinguisher is still checked at the sale inspection (the Fire Marshal page says yes; the 2026 form does not list one; state law dropped it in 2025).",
+  "Which deadline the office uses: 14 business days (form and web page) or 30 days (Section 186-6), and whether the fee tiers count business days (form) or calendar days (code)."
  ],
+ "checked_at": "2026-10-20",
  "verification": {
   "fees": 10,
-  "fee_ok": 0,
+  "fee_ok": 10,
   "fee_bad": 0,
-  "fee_unchecked": 10,
-  "quotes": 6,
-  "q_ok": 2,
+  "fee_unchecked": 0,
+  "quotes": 15,
+  "q_ok": 12,
   "q_bad": 0,
-  "q_unchecked": 4
+  "q_unchecked": 3
  }
 }

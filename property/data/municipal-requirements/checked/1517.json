@@ -2,7 +2,7 @@
  "municipality_code": "1517",
  "municipality": "Little Egg Harbor Township",
  "county": "OCEAN",
- "checked_at": "2026-09-30",
+ "checked_at": "2026-10-27",
  "resale_co": {
   "status": "required",
   "name": "Existing Structure Certificate of Occupancy (resale)",
@@ -106,7 +106,7 @@
    },
    {
     "url": "https://www.leht.com/construction/",
-    "quote": "rpiszar@leht.com",
+    "quote": "Ronald Piszar, Construction Official/Fire Sub-Code Official (609) 296-7241 ext. 618",
     "doc_date": "2026-08",
     "via": "page",
     "verified": true
@@ -120,7 +120,7 @@
    }
   ],
   "confidence": "high",
-  "notes": "The same application covers resale ($60), rental ($50) and short-term rental ($50) inspections; the fee table was read visually from the scanned form (revised 2/24/2026). The Zoning & Code Enforcement page also lists Frederick Cramer, Housing Inspector, (609) 296-7241 ext.161, and zoning@leht.com / codeenforcement@leht.com. Rentals also need a Rental Mercantile License, liability insurance and a Landlord Filing Statement, and short-term rentals have their own application (Ordinance 2023-05); those are rental rules, not sale rules. Lead time and how long the certificate is valid are not stated."
+  "notes": "The same application covers resale ($60), rental ($50) and short-term rental ($50) inspections; the fee table was read visually from the scanned form (revised 2/24/2026). The Zoning & Code Enforcement page also lists Frederick Cramer, Housing Inspector, (609) 296-7241 ext.161, and zoning@leht.com / codeenforcement@leht.com. Rentals also need a Rental Mercantile License, liability insurance and a Landlord Filing Statement, and short-term rentals have their own application (Ordinance 2023-05); those are rental rules, not sale rules. Lead time and how long the certificate is valid are not stated. Re-checked 2026-10-27: Ronald Piszar is still listed on the Construction page with ext. 618. His email is still rpiszar@leht.com, but the page now hides it behind the website's email protection (it shows as '[email protected]' in the page text and decodes to rpiszar@leht.com in the link), so it cannot be matched as plain text. The application PDF (revised 2/24/2026) is unchanged at the same link."
  },
  "fire_cert": {
   "requirements": [
@@ -191,7 +191,7 @@
       "quote": "LEAID: 1516-999 Enf Auth. State Fire Official Louis Kilmer Phone (609)633-6132",
       "doc_date": "2026-06-25 (latest survey date among the three LEHT fire company pages; directory code 1516 = Little Egg Harbor)",
       "via": "state_directory",
-      "verified": true
+      "verified": null
      },
      {
       "url": "https://www.leht.com/construction/",
@@ -238,8 +238,8 @@
   "fee_bad": 0,
   "fee_unchecked": 3,
   "quotes": 17,
-  "q_ok": 9,
+  "q_ok": 8,
   "q_bad": 0,
-  "q_unchecked": 8
+  "q_unchecked": 9
  }
 }
