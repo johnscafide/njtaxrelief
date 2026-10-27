@@ -2,12 +2,12 @@
  "municipality_code": "0404",
  "municipality": "Bellmawr Borough",
  "county": "CAMDEN",
- "checked_at": "2026-09-30",
+ "checked_at": "2026-10-20",
  "resale_co": {
   "status": "required",
   "name": "Residential Certificate of Occupancy (Resale or Change of Ownership)",
   "issued_by": "Bellmawr Construction/Zoning/Code Enforcement Office",
-  "lead_time": "Must be obtained before settlement; application and payment are required before an inspection is scheduled (no specific number of days published)",
+  "lead_time": "Must be obtained before settlement; the office calls to schedule the inspection once the application is approved (no number of days published; the code says inspection within five working days of the application)",
   "valid_for": "30 days from issuance",
   "requirements": [
    "House number visible from the street, at least 4 inches tall",
@@ -23,7 +23,8 @@
    "Bedroom windows open easily for escape; no double-keyed deadbolts",
    "Water heater with proper relief valve and discharge pipe to 2 to 6 inches above the floor; no leaks",
    "Heating system working",
-   "Smoke alarms on each floor including basement (10-year sealed battery); CO alarms near bedrooms if there is a gas or oil appliance; ABC extinguisher no larger than 10 lbs within 10 feet of the kitchen",
+   "Smoke alarms on each floor including basement (10-year sealed battery); CO alarms near bedrooms if there is a gas or oil appliance",
+   "ABC fire extinguisher no larger than 10 lbs within 10 feet of the kitchen (form still lists it)",
    "Work done without permits and open permits must be resolved"
   ],
   "fees": [
@@ -56,43 +57,59 @@
     "verified": true
    }
   ],
-  "how_to_apply": "Fill out the Residential Certificate of Occupancy Application and bring or mail it (addressed 'Attn: Construction') to the Construction Office, 21 E. Browning Road, Bellmawr, with cash (exact) or a check payable to Borough of Bellmawr. No credit cards in the office. All taxes, grass cuts, liens and open permits must be paid or closed before the application is accepted. The office calls to schedule the inspection once approved. Inspections are by lockbox or a 2 to 3 pm or 3 to 4 pm window. After passing, email to request the certificate or pick it up from the bin outside the Construction Office.",
+  "how_to_apply": "Fill out the Application for Certificate of Occupancy for Residential (check 'Single Family Dwelling RESALE') and bring or mail it (addressed 'Attn: Construction') to the Construction Office, 21 E. Browning Road, Bellmawr, with exact cash or a check payable to Borough of Bellmawr. All taxes, grass cuts, liens and open permits must be paid or closed before the application is accepted. The office calls to schedule the inspection once approved. Inspections are by lockbox or a 2 to 3 pm or 3 to 4 pm window. After passing, email to request the certificate or pick it up from the bin outside the Construction Office.",
   "application_url": "https://bellmawr.com/DocumentCenter/View/143/Residential-Certificate-of-Occupancy-Application-Resale-or-Change-of-Ownership-for-Duplex-Triplex-Also-PDF",
   "department_url": "https://www.bellmawr.com/172/Certificates-of-Occupancy",
   "phone": "856-933-1286",
   "email": "ConstructionOffice@Bellmawr.com",
+  "contact_name": "Greg Conti",
+  "contact_title": "Certificates of Occupancy, Housing & Rental (also Mike McDonough, Certificates of Occupancy, Housing & Rental Inspections)",
   "evidence": [
    {
     "url": "https://www.bellmawr.com/172/Certificates-of-Occupancy",
     "quote": "Must be obtained prior to settlement.",
-    "doc_date": "",
+    "doc_date": "2026-10-20 (page fetched)",
     "via": "page",
     "verified": true
    },
    {
     "url": "https://bellmawr.com/DocumentCenter/View/143/Residential-Certificate-of-Occupancy-Application-Resale-or-Change-of-Ownership-for-Duplex-Triplex-Also-PDF",
     "quote": "CO’S ARE VALID FOR 30 DAYS OF ISSUANCE",
-    "doc_date": "",
+    "doc_date": "2026-04-09 (PDF created April 9, 2026)",
     "via": "pdf",
     "verified": true
    },
    {
     "url": "https://bellmawr.com/DocumentCenter/View/143/Residential-Certificate-of-Occupancy-Application-Resale-or-Change-of-Ownership-for-Duplex-Triplex-Also-PDF",
-    "quote": "This cert is for every time a home changes ownership. Even If a buyer purchases a home to rehab and sell it’s still required since it’s changing ownership.",
-    "doc_date": "",
+    "quote": "This cert is for every time a home changes ownership.",
+    "doc_date": "2026-04-09",
     "via": "pdf",
     "verified": true
    },
    {
     "url": "https://bellmawr.com/DocumentCenter/View/143/Residential-Certificate-of-Occupancy-Application-Resale-or-Change-of-Ownership-for-Duplex-Triplex-Also-PDF",
     "quote": "FEE is $100: cash_______ OR CHECK #:____________",
-    "doc_date": "",
+    "doc_date": "2026-04-09",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://ecode360.com/29125219",
+    "quote": "All buildings or structures used, occupied or offered for occupancy as dwelling units or as apartments on a lease or rental basis shall be inspected by the Construction Official or his representative on every initial occupancy, change in ownership or change of occupancy after the effective date of this article.",
+    "doc_date": "2026-10-20 (page fetched)",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://www.bellmawr.com/DocumentCenter/View/141/Certificate-of-Occupancy-Checklist-For-Residential-Resales-and-Rentals-PDF",
+    "quote": "Fire Extinguisher - The extinguisher should consist of an ABC type, rated no larger than 10lbs and be located within 10 feet of the kitchen area.",
+    "doc_date": "2026-04-09 (PDF created April 9, 2026)",
     "via": "pdf",
     "verified": true
    }
   ],
   "confidence": "high",
-  "notes": "The application also has a 'Change of Ownership ONLY' option: no inspection, valid 30 days, but no one may occupy the property until a full CO is issued. Buying a property that is already a rental or duplex is treated as a resale. Rental tenant changes are a separate program (inspection, $100). Published inspection days are inconsistent: the CO page says Tuesdays and Thursdays, the application says Monday to Thursday, and the staff listings say Monday/Thursday (Greg Conti) and Tuesday/Wednesday (Mike McDonough, mmcdonough@bellmawr.com). The checklist is the Borough's Home C.O. Inspection Checklist (DocumentCenter/View/141)."
+  "notes": "Re-checked 2026-10-20; the CO page, the application (April 2026) and the Home C.O. Inspection Checklist (April 2026) are unchanged in substance. Authority: Borough Code Chapter 341, Property Maintenance, Section 341-13 (inspection on every change in ownership; no owner, agent or broker may sell, rent or lease a dwelling unit without a certificate of occupancy), read on ecode360 through its print view. The code fee section (Chapter 210) points back to Chapter 341 and does not list a separate amount, so the page fees are used. The application also has a 'Change of Ownership ONLY' option: no inspection, valid 30 days, but no one may occupy the property until a full CO is issued. Buying a property that is already a rental or duplex is treated as a resale. Rental tenant changes are a separate program. Published inspection days differ: the CO page says Tuesdays and Thursdays, the application says Monday to Thursday, and the staff listings say Monday/Thursday (Greg Conti) and Tuesday/Wednesday (Mike McDonough). The Borough checklist still lists a fire extinguisher, while the Fire Department smoke/CO form says it is no longer required since February 2025."
  },
  "fire_cert": {
   "requirements": [
@@ -102,7 +119,8 @@
    "Alarms mounted with proper hardware; nails, tacks, tape or Velcro not accepted; 3 feet from fan blades and HVAC vents",
    "CO alarm outside sleeping areas, no more than 10 feet from any bedroom",
    "Monitored alarm systems in homes built 1977 or later must be kept working",
-   "Borough CO checklist asks for an ABC extinguisher no larger than 10 lbs within 10 feet of the kitchen"
+   "Secondary power source label within 18 inches of the main electrical panel and meter (generator, solar panels, battery storage)",
+   "Fire extinguisher no longer required for the smoke/CO certificate as of February 2025 (per Fire Department form)"
   ],
   "authorities": [
    {
@@ -115,62 +133,71 @@
       "label": "Smoke/CO certificate, appointment scheduled at least 10 days ahead",
       "amount": "$70.00",
       "quote": "$70.00 Appointment scheduled at least 10 prior to Inspection",
-      "source_url": "https://www.bellmawr.com/DocumentCenter/View/1564/Smoke-DetectorCarbon-Monoxcide-Alarm-Application-PDF",
-      "verified": true
+      "source_url": "https://www.bellmawr.com/DocumentCenter/View/1562/Smoke-DetectorCarbon-Monoxcide-Alarm-Application-PDF",
+      "verified": null
      },
      {
       "label": "Smoke/CO certificate, scheduled less than 10 but more than 4 days ahead",
       "amount": "$100.00",
       "quote": "$100.00 Appointment scheduled less than 10 Days but more than 4 days prior to Inspection",
-      "source_url": "https://www.bellmawr.com/DocumentCenter/View/1564/Smoke-DetectorCarbon-Monoxcide-Alarm-Application-PDF",
-      "verified": true
+      "source_url": "https://www.bellmawr.com/DocumentCenter/View/1562/Smoke-DetectorCarbon-Monoxcide-Alarm-Application-PDF",
+      "verified": null
      },
      {
       "label": "Smoke/CO certificate, scheduled less than 4 days ahead",
       "amount": "$140.00",
       "quote": "$140.00 Appointment scheduled less than 4 days prior to Inspection",
-      "source_url": "https://www.bellmawr.com/DocumentCenter/View/1564/Smoke-DetectorCarbon-Monoxcide-Alarm-Application-PDF",
-      "verified": true
+      "source_url": "https://www.bellmawr.com/DocumentCenter/View/1562/Smoke-DetectorCarbon-Monoxcide-Alarm-Application-PDF",
+      "verified": null
      },
      {
       "label": "Reinspection",
       "amount": "$50.00",
       "quote": "$50.00 Reinspection Fee",
-      "source_url": "https://www.bellmawr.com/DocumentCenter/View/1564/Smoke-DetectorCarbon-Monoxcide-Alarm-Application-PDF",
-      "verified": true
+      "source_url": "https://www.bellmawr.com/DocumentCenter/View/1562/Smoke-DetectorCarbon-Monoxcide-Alarm-Application-PDF",
+      "verified": null
      },
      {
       "label": "No-show for appointment",
       "amount": "$50.00",
       "quote": "$50.00 Failure to show for appointment",
-      "source_url": "https://www.bellmawr.com/DocumentCenter/View/1564/Smoke-DetectorCarbon-Monoxcide-Alarm-Application-PDF",
-      "verified": true
+      "source_url": "https://www.bellmawr.com/DocumentCenter/View/1562/Smoke-DetectorCarbon-Monoxcide-Alarm-Application-PDF",
+      "verified": null
      }
     ],
     "how_to_apply": "Fill out page 1 of the Bureau of Fire Prevention Certification of Smoke Detector and Carbon Monoxide Alarm Compliance application and return it with a check or money order payable to Borough of Bellmawr (no refunds). Pay separately from the CO fee. Office: 21 E. Browning Road; Fire Marshal's Office 856-933-1313 ext. 1239.",
-    "application_url": "https://www.bellmawr.com/DocumentCenter/View/1564/Smoke-DetectorCarbon-Monoxcide-Alarm-Application-PDF",
+    "application_url": "https://www.bellmawr.com/DocumentCenter/View/1562/Smoke-DetectorCarbon-Monoxcide-Alarm-Application-PDF",
     "department_url": "https://bellmawrfire.com/homepage/fire-marshals-office/",
     "phone": "856-933-1313 ext. 1239",
     "email": "rfowler@bellmawr.com",
+    "contact_name": "Rob Fowler",
+    "contact_title": "Fire Marshal",
     "evidence": [
      {
-      "url": "https://www.bellmawr.com/DocumentCenter/View/1564/Smoke-DetectorCarbon-Monoxcide-Alarm-Application-PDF",
+      "url": "https://www.bellmawr.com/DocumentCenter/View/1562/Smoke-DetectorCarbon-Monoxcide-Alarm-Application-PDF",
       "quote": "Certification of Smoke Detector & Carbon Monoxide Alarm Compliance",
-      "doc_date": "",
+      "doc_date": "2026-04-10 (PDF created April 10, 2026)",
       "via": "pdf",
-      "verified": true
+      "verified": null
+     },
+     {
+      "url": "https://www.bellmawr.com/DocumentCenter/View/1562/Smoke-DetectorCarbon-Monoxcide-Alarm-Application-PDF",
+      "quote": "As of February 2025, due to a change in the New Jersey Uniform Fire Code, a fire extinguisher is no longer required in residential properties when obtaining a Certificate of Smoke and Carbon Monoxide Alarm for a change of ownership or tenancy.",
+      "doc_date": "2026-04-10",
+      "via": "pdf",
+      "verified": null
      },
      {
       "url": "https://bellmawr.com/DocumentCenter/View/143/Residential-Certificate-of-Occupancy-Application-Resale-or-Change-of-Ownership-for-Duplex-Triplex-Also-PDF",
       "quote": "Please note: CO payment and Fire payment must be submitted as separate payments.",
-      "doc_date": "",
+      "doc_date": "2026-04-09",
       "via": "pdf",
       "verified": true
      },
      {
       "url": "https://bellmawrfire.com/homepage/fire-marshals-office/",
-      "quote": "Fire Marshal’s Office, (856) 933-1313 X1239",
-      "doc_date": "",
+      "quote": "Fire Marshal’s Office - (856) 933-1313 X1239",
+      "doc_date": "2026-10-20 (page fetched)",
       "via": "page",
       "verified": true
      },
@@ -180,12 +207,19 @@
       "doc_date": "2026-07 (LEA registry as of June 30, 2026); key: M = Municipality",
       "via": "pdf",
       "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "Fire Official Robert T Fowler",
+      "doc_date": "2026-05-26 (survey date)",
+      "via": "state_directory",
+      "verified": null
      }
     ],
     "confidence": "medium"
    }
   ],
-  "notes": "Conflicting Borough statements: the Certificates of Occupancy page says 'No separate fire/smoke - all in one (see checklist).' and the CO checklist covers smoke, CO and extinguisher items, yet the same page links the Fire Department's separate smoke/CO application with its own fee schedule, and the CO application says CO and fire payments must be separate. Most likely the CO and fire inspections are requested together but paid separately. The Fire Department application is undated. Search snippets suggest an older Borough ordinance with a $50 lowest tier; not verified, not used. Fire Marshal Rob Fowler (rfowler@bellmawr.com); inspectors Patrick Slemmer and Shawn Fanslau."
+  "notes": "The Borough CO page now links the smoke/CO form as DocumentCenter/View/1562 (same file as the View/1564 link used before; dated April 10, 2026). Conflicting Borough statements remain: the CO page says 'No separate fire/smoke - all in one (see checklist).', yet it links the Fire Department's separate smoke/CO application with its own fee schedule, and the CO application says CO and fire payments must be separate. Most likely both are requested together but paid separately. The DCA fire directory (survey 5/26/2026) lists Fire Official Robert T Fowler with the smoke detector compliance contact as 'Bellmawr Boro Constr Office', 21 E Browning Rd, (856) 933-1286. Inspectors: Patrick Slemmer (Fire Inspector 3-A) and Shawn Fanslau (Fire Inspector 3-B)."
  },
  "other_items": [
   {
@@ -200,18 +234,18 @@
   }
  ],
  "open_questions": [
-  "Whether the fire/smoke certificate is truly separate from the CO (Fire Department application and separate payment) or folded into the CO inspection ('all in one') is unclear from the Borough's own pages. Confirm with the Construction Office (856-933-1286) or Fire Marshal (856-933-1313 ext. 1239).",
-  "Exact inspection days vary across Borough pages.",
-  "The Borough code fee section could not be opened on ecode360."
+  "Is the smoke/CO certificate truly separate from the CO (separate Fire Department form and payment) or folded into the CO inspection ('all in one')? Confirm with the Construction Office (856-933-1286) or Fire Marshal (856-933-1313 ext. 1239).",
+  "Does the Construction Office still check for a fire extinguisher at resale (its checklist lists one; the Fire Department form says it is no longer required)?",
+  "Exact inspection days vary across Borough pages."
  ],
  "verification": {
   "fees": 9,
-  "fee_ok": 9,
+  "fee_ok": 4,
   "fee_bad": 0,
-  "fee_unchecked": 0,
-  "quotes": 8,
+  "fee_unchecked": 5,
+  "quotes": 12,
   "q_ok": 8,
   "q_bad": 0,
-  "q_unchecked": 0
+  "q_unchecked": 4
  }
 }

@@ -20,35 +20,49 @@
   "evidence": [
    {
     "url": "https://www.denvillenj.gov/departments/selling_your_house.php",
-    "quote": "The only inspection required to sell your house is a Smoke Detector Inspection , which also includes carbon monoxide detectors and a fire extinguisher in the kitchen.",
-    "doc_date": "2026-10-04 (page fetched)",
+    "quote": "The only inspection required to sell your house is a",
+    "doc_date": "2026-10-20 (page fetched)",
     "via": "page",
     "verified": true
    },
    {
     "url": "https://www.denvillenj.gov/departments/selling_your_house.php",
-    "quote": "BEFORE YOU CLOSE: All open permits should be closed out before you transfer your property.",
-    "doc_date": "2026-10-04 (page fetched)",
+    "quote": "which also includes carbon monoxide detectors and a fire extinguisher in the kitchen.",
+    "doc_date": "2026-10-20 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.denvillenj.gov/departments/selling_your_house.php",
+    "quote": "All open permits should be closed out before you transfer your property.",
+    "doc_date": "2026-10-20 (page fetched)",
     "via": "page",
     "verified": true
    },
    {
     "url": "https://www.denvillenj.gov/departments/construction.php",
     "quote": "Fire Inspections (resale): ext. 257",
-    "doc_date": "2026-10-04 (page fetched)",
+    "doc_date": "2026-10-20 (page fetched)",
     "via": "page",
     "verified": true
    },
    {
     "url": "https://www.denvillenj.gov/departments/construction.php",
     "quote": "Construction Official",
-    "doc_date": "2026-10-04 (page fetched)",
+    "doc_date": "2026-10-20 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.denvillenj.gov/departments/construction.php",
+    "quote": "Sal Poli",
+    "doc_date": "2026-10-20 (page fetched)",
     "via": "page",
     "verified": true
    }
   ],
   "confidence": "high",
-  "notes": "The Township's Selling Your House page (Construction Department) says the smoke detector inspection is the only inspection required to sell a house. The Fire Prevention form is titled \"Application For CCO Inspections\", but it is the smoke/CO certificate, not a building resale CO."
+  "notes": "The Township's Selling Your House page (Construction Department, last updated August 10) says the Smoke Detector Inspection is the only inspection required to sell a house. The Fire Prevention form is titled \"Application For CCO Inspections\", but it is the smoke/CO certificate, not a building resale CO. Construction Official Sal Poli is at (973) 625-8300 ext. 251 (Construction page)."
  },
  "fire_cert": {
   "requirements": [
@@ -57,7 +71,7 @@
    "CO alarm in the immediate vicinity of sleeping areas (UL 2034, NFPA 720) unless the home has no fuel-burning device or attached garage",
    "Low-voltage alarm systems: monitoring contact, account and password, plus certification from an alarm technician",
    "Portable fire extinguisher 2A-10B:C, no more than 10 pounds, serviced and tagged within 12 months or with a recent purchase receipt; owner's manual left for the new occupant (form still lists it)",
-   "Secondary power source label (\"Caution: Multiple Sources Of Power\") within 18 inches of the main panel and the meter, if the home has a generator, solar panels or battery storage"
+   "Secondary power source label (\"Caution: Multiple Sources Of Power\") within 18 inches of the main panel and the meter, if the home has a generator, solar panels or battery storage (listed in the Affidavit packet)"
   ],
   "authorities": [
    {
@@ -70,21 +84,21 @@
       "label": "Smoke/CO resale inspection, more than 10 business days before change of occupant",
       "amount": "$35",
       "quote": "Request received more than 10 business days prior to change of occupant- $35",
-      "source_url": "https://www.denvillenj.gov/docs/FirePrevention/Application%20For%20CCO%20Inspections%20%20.pdf",
+      "source_url": "https://www.denvillenj.gov/docs/FirePrevention/Application%20For%20CCO%20Inspections.pdf",
       "verified": true
      },
      {
       "label": "4 to 10 business days before change of occupant",
       "amount": "$70",
       "quote": "Request received 4 to 10 business days prior to change of occupant- $70",
-      "source_url": "https://www.denvillenj.gov/docs/FirePrevention/Application%20For%20CCO%20Inspections%20%20.pdf",
+      "source_url": "https://www.denvillenj.gov/docs/FirePrevention/Application%20For%20CCO%20Inspections.pdf",
       "verified": true
      },
      {
       "label": "Fewer than 4 business days",
       "amount": "$125",
       "quote": "Request received fewer than 4 business days- $125",
-      "source_url": "https://www.denvillenj.gov/docs/FirePrevention/Application%20For%20CCO%20Inspections%20%20.pdf",
+      "source_url": "https://www.denvillenj.gov/docs/FirePrevention/Application%20For%20CCO%20Inspections.pdf",
       "verified": true
      },
      {
@@ -97,7 +111,7 @@
      {
       "label": "Township fee schedule: 4 to 10 days' notice",
       "amount": "$70.00",
-      "quote": "4–10 days' notice $70.00",
+      "quote": "4-10 days' notice $70.00",
       "source_url": "https://www.denvillenj.gov/administration/fee_schedule.php",
       "verified": true
      },
@@ -109,8 +123,8 @@
       "verified": true
      }
     ],
-    "how_to_apply": "Fill out the Application For CCO Inspections (Form Center, Fire Prevention) and email it to fireprevention@denvillenj.org or drop it off or mail it to Denville Town Hall, 1 St. Mary's Place. Checks payable to Denville Township Fire Prevention. To schedule call (973) 625-8300 ext. 257.",
-    "application_url": "https://www.denvillenj.gov/docs/FirePrevention/Application%20For%20CCO%20Inspections%20%20.pdf",
+    "how_to_apply": "Fill out the Application For CCO Inspections (Form Center, Fire Prevention section) and email it to fireprevention@denvillenj.org or mail it to 1 St. Mary's Place, Denville NJ. Checks payable to Denville Township Fire Prevention. To schedule call (973) 625-8300 ext. 257 (office hours Wed to Fri, 8:00 am to 4:00 pm).",
+    "application_url": "https://www.denvillenj.gov/docs/FirePrevention/Application%20For%20CCO%20Inspections.pdf",
     "department_url": "https://www.denvillenj.gov/departments/fire_prevention.php",
     "phone": "(973) 625-8300 ext. 257",
     "email": "fireprevention@denvillenj.org",
@@ -120,21 +134,42 @@
      {
       "url": "https://www.denvillenj.gov/departments/fire_prevention.php",
       "quote": "Smoke detector inspections are good for 6 months.",
-      "doc_date": "2026-10-04 (page fetched)",
+      "doc_date": "2026-10-20 (page fetched)",
       "via": "page",
       "verified": true
      },
      {
       "url": "https://www.denvillenj.gov/departments/fire_prevention.php",
       "quote": "Carmine Ruta",
-      "doc_date": "2026-10-04 (page fetched)",
+      "doc_date": "2026-10-20 (page fetched)",
       "via": "page",
       "verified": true
      },
      {
-      "url": "https://www.denvillenj.gov/docs/FirePrevention/Application%20For%20CCO%20Inspections%20%20.pdf",
-      "quote": "*Please send completed application to fireprevention@denvillenj.org or drop off in person",
-      "doc_date": "",
+      "url": "https://www.denvillenj.gov/departments/fire_prevention.php",
+      "quote": "Don Leyhan & Rich Yobs",
+      "doc_date": "2026-10-20 (page fetched)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://www.denvillenj.gov/administration/fee_schedule.php",
+      "quote": "Contact Fire Official Carmine Ruta at (973) 625-8300 ext. 257",
+      "doc_date": "2026-10-20 (page fetched)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://www.denvillenj.gov/docs/FirePrevention/Application%20For%20CCO%20Inspections.pdf",
+      "quote": "Please send completed application to fireprevention@denvillenj.org",
+      "doc_date": "2026-10-16 (PDF created)",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.denvillenj.gov/docs/FirePrevention/Application%20For%20CCO%20Inspections.pdf",
+      "quote": "Request received more than 10 business days prior to change of occupant- $35",
+      "doc_date": "2026-10-16 (PDF created)",
       "via": "pdf",
       "verified": true
      },
@@ -155,7 +190,7 @@
      {
       "url": "https://www.denvillenj.gov/departments/selling_your_house.php",
       "quote": "Call (973) 625-8300 ext. 257",
-      "doc_date": "2026-10-04 (page fetched)",
+      "doc_date": "2026-10-20 (page fetched)",
       "via": "page",
       "verified": true
      },
@@ -172,12 +207,19 @@
       "doc_date": "2026-07",
       "via": "pdf",
       "verified": true
+     },
+     {
+      "url": "https://www.denvillenj.gov/docs/FirePrevention/Affidavit%20application%20rev2.pdf",
+      "quote": "Label must be installed within 18 inches of the main electrical panel and electrical meter.",
+      "doc_date": "",
+      "via": "pdf",
+      "verified": true
      }
     ],
     "confidence": "high"
    }
   ],
-  "notes": "Fees match on the application and the Township fee schedule page. The Township page names Fire Official Carmine Ruta; the state directory (survey 3/27/2026) lists Connor Mc Guinness. The Form Center also posts a notarized Smoke/CO/Fire Extinguisher Affidavit with the CCO packet; when it is accepted is not explained. The requirements still list the portable fire extinguisher, which state law (P.L.2025, c.19) removed from the sale certificate in February 2025; confirm with the Bureau."
+  "notes": "The CCO application PDF was re-posted in the Form Center under a new file name (Application For CCO Inspections.pdf, created October 16, 2026); the old link with extra spaces in the name now returns not found. Fees did not change ($35 / $70 / $125) and match the Township fee schedule page. The new form says to email the application or mail it to 1 St. Mary's Place. The Township pages name Fire Official Carmine Ruta and inspectors Don Leyhan and Rich Yobs; the state directory (survey 3/27/2026) still lists Connor Mc Guinness. The separate Affidavit application (rev2) adds the Secondary Power Source label guidance and the notarized Smoke/CO/Fire Extinguisher Affidavit; when the affidavit is accepted is not explained. The forms still list the portable fire extinguisher, which state law (P.L.2025, c.19) removed from the sale certificate in February 2025; confirm with the Bureau."
  },
  "other_items": [
   {
@@ -191,14 +233,14 @@
   "When is the notarized Smoke/CO/Fire Extinguisher Affidavit used instead of, or in addition to, the inspection?",
   "Is there a reinspection fee? None is published."
  ],
- "checked_at": "2026-10-04",
+ "checked_at": "2026-10-20",
  "verification": {
   "fees": 6,
   "fee_ok": 6,
   "fee_bad": 0,
   "fee_unchecked": 0,
-  "quotes": 12,
-  "q_ok": 11,
+  "quotes": 18,
+  "q_ok": 17,
   "q_bad": 0,
   "q_unchecked": 1
  }

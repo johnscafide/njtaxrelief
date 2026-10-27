@@ -15,7 +15,8 @@
    "Carbon monoxide detectors within 10 feet of sleeping quarters, working, under 7 years old (standalone) or 10 years (combination)",
    "Monitored fire alarm systems must be made available for testing, with a certificate of inspection",
    "Checklist items include working doors and keyless deadbolts, GFCI in bathrooms, covered electrical boxes and plates, 4-inch house numbers, handrails on stairs over four risers, unbroken operable windows, safe sidewalk/driveway/apron/foundation, heating system and flue, water heater overflow pipe, metal dryer vent, minimum 60 amp service, sump pump on a dedicated receptacle",
-   "Application states the future owner's name and address and who will allow entry"
+   "Application states the future owner's name and address and who will allow entry",
+   "All utilities (gas, electric, water) must be on at the time of the inspection (2026 Housing checklist)"
   ],
   "fees": [
    {
@@ -61,13 +62,13 @@
     "verified": null
    }
   ],
-  "how_to_apply": "Apply in writing to the Borough inspector (Housing Division, 47 Broad Street, Eatontown) with the buyer's information and pay the fee with the application. The inspector issues the certificate if no violations exist; otherwise the owner is told in writing what must be fixed. No online application form was found; the Borough's new 'Thinking of Selling Your House?' page says 'Coming soon!'. Housing email: housing@eatontownnj.com.",
-  "application_url": "",
+  "how_to_apply": "Apply online for a Resale inspection through the Borough's SDL Portal (https://www.sdlportal.com/towns/nj/monmouth/eatontown/requests/certificate; an account is needed), then pay online with the link on the Borough's 'Apply for a CO - Housing' sheet, or drop off a check at the Housing office on the 2nd floor of Borough Hall, 47 Broad Street. Fees are paid with the application before any inspection. The sheet and the 2026 Housing checklist are on the Borough's Applications & Forms page (Housing section). Questions: 732-860-5513 or ayates@eatontownnj.com.",
+  "application_url": "https://files.heygov.com/eatontownnj.com/file_01m5mhcqvn8t9ebhbr91fvzv77/Apply%20for%20a%20CO%20-%20Housing.pdf",
   "department_url": "https://www.eatontownnj.com/departments/building-construction",
-  "phone": "732-389-7616",
-  "email": "housing@eatontownnj.com",
-  "contact_name": "Nicholas Cosentino",
-  "contact_title": "Housing Officer",
+  "phone": "732-860-5513",
+  "email": "ayates@eatontownnj.com",
+  "contact_name": "Ashley Yates",
+  "contact_title": "Housing Department contact named on the CO application sheet (listed as Technical Assistant / Administrative Assistant on Borough pages)",
   "evidence": [
    {
     "url": "https://ecode360.com/7639663",
@@ -100,34 +101,69 @@
    {
     "url": "https://www.eatontownnj.com/departments/building-construction",
     "quote": "Nicholas Cosentino Housing Officer",
-    "doc_date": "2026-10-13 (page fetched)",
+    "doc_date": "2026-10-27 (page fetched)",
     "via": "page",
     "verified": true
    },
    {
     "url": "https://www.eatontownnj.com/departments/building-construction",
     "quote": "John Bowen Housing Officer",
-    "doc_date": "2026-10-13 (page fetched)",
+    "doc_date": "2026-10-27 (page fetched)",
     "via": "page",
     "verified": true
    },
    {
     "url": "https://www.eatontownnj.com/departments/building-construction",
     "quote": "Note: Please do not schedule any closings prior to final building inspections.",
-    "doc_date": "2026-10-13 (page fetched)",
+    "doc_date": "2026-10-27 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://files.heygov.com/eatontownnj.com/file_01m5mhcqvn8t9ebhbr91fvzv77/Apply%20for%20a%20CO%20-%20Housing.pdf",
+    "quote": "Please click the link below to apply for a Resale, rental, or Multiple Dwelling Inspection.",
+    "doc_date": "2026-10-22 (PDF modified)",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://files.heygov.com/eatontownnj.com/file_01m5mhcqvn8t9ebhbr91fvzv77/Apply%20for%20a%20CO%20-%20Housing.pdf",
+    "quote": "You can also drop off a check to the Housing office, located on the 2nd floor of the Borough Hall.",
+    "doc_date": "2026-10-22 (PDF modified)",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://files.heygov.com/eatontownnj.com/file_01m5mhcqvn8t9ebhbr91fvzv77/Apply%20for%20a%20CO%20-%20Housing.pdf",
+    "quote": "If you have any questions, please feel free to contact our office at 732-860-5513 or ayates@eatontownnj.com",
+    "doc_date": "2026-10-22 (PDF modified)",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://files.heygov.com/eatontownnj.com/file_01m3nqvm14pzvd9zh8z76kx5j4/EATONTOWN%20HOUSING%20CHECKLIST%202026.pdf",
+    "quote": "All utilities (gas, electric, water) must be operational at the time of the inspection.",
+    "doc_date": "2026 (checklist title)",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.eatontownnj.com/applications-forms",
+    "quote": "Housing Apply for a CO - Housing General Affidavit Eatontown - Basement Eatontown Housing Checklist 2026",
+    "doc_date": "2026-10-27 (page fetched)",
     "via": "page",
     "verified": true
    },
    {
     "url": "https://www.eatontownnj.com/thinking-of-selling-your-house",
     "quote": "Thinking of Selling Your House? Coming soon!",
-    "doc_date": "2026-10-13 (page fetched)",
+    "doc_date": "2026-10-27 (page fetched)",
     "via": "page",
     "verified": true
    }
   ],
   "confidence": "high",
-  "notes": "Re-checked 2026-10-13. The Borough moved its website to a new layout: the old pages /161/Building-Construction and /194/Bureau-of-Fire-Safety now return 404, and the current pages are /departments/building-construction and /departments/fire-prevention-bureau. The Building / Construction page still lists Housing Officers Nicholas Cosentino and John Bowen. Nicholas Cosentino's email and phone links go to housing@eatontownnj.com and 732-389-7616 (the numbers are in the links, not in the visible text); the department's visible contact is co@eatontownnj.com, (732) 389-7619. The page also asks that no closings be scheduled before final building inspections. The Land Use, Zoning & Code Enforcement page links a new 'Thinking of Selling Your House?' page, which only says 'Coming soon!' as of 2026-10-13; watch it for a future application or checklist. Chapter 116 (Ord. No. 17-2026, adopted August 26, 2026) was re-read in full through ecode360's print view and is unchanged. It combines the town habitability inspection and the state smoke/CO certificate into one certificate. The fee section lists both a timing-based one and two family schedule ($100 / $135 / $200) and a flat '$200 for transfer of residential properties (lawful two-family homes charged separately)'; it is unclear which applies to a sale, so confirm with the Housing Division. The code also gives two validity periods (60 days in §116-6B and six months for CSDCMAC inspections in §116-6A). Fire extinguishers and lead-based paint certifications are listed for rentals only."
+  "notes": "Re-checked 2026-10-27. The Borough's Applications & Forms page now has a Housing section with an 'Apply for a CO - Housing' sheet (PDF modified October 22, 2026) and an 'Eatontown Housing Checklist 2026'. The sheet sends applicants to the SDL Portal for a Resale, rental or Multiple Dwelling Inspection (the portal needs a login, so its form and fee screen could not be read), then to an online payment link, or a check can be dropped off at the Housing office. It lists the Housing Department at (732) 860-5513 and ayates@eatontownnj.com; the 2026 checklist header lists (732) 389-7616. The checklist covers one/two family sales and rentals and requires utilities on at inspection; peeling paint, plumbing, appliances, screens and lead paint items are marked rentals only. The Building / Construction page still lists Housing Officers Nicholas Cosentino and John Bowen (housing@eatontownnj.com link), and asks that no closings be scheduled before final building inspections. The 'Thinking of Selling Your House?' page still says 'Coming soon!'. Chapter 116 (Ord. No. 17-2026, adopted August 26, 2026) could not be re-read this time (ecode360 blocked); the quotes are from the full print-view read on 2026-10-13. It combines the town habitability inspection and the state smoke/CO certificate into one certificate. The fee section lists both a timing-based one and two family schedule ($100 / $135 / $200) and a flat '$200 for transfer of residential properties (lawful two-family homes charged separately)'; it is unclear which applies to a sale, so confirm with the Housing Division. The code also gives two validity periods (60 days in §116-6B and six months for CSDCMAC inspections in §116-6A). Fire extinguishers and lead-based paint certifications are listed for rentals only."
  },
  "fire_cert": {
   "requirements": [
@@ -172,13 +208,13 @@
       "verified": null
      }
     ],
-    "how_to_apply": "The smoke/CO certificate is not applied for separately: Eatontown issues one combined certificate after its habitability inspection (see resale certificate).",
+    "how_to_apply": "The smoke/CO certificate is not applied for separately: Eatontown issues one combined certificate after its Housing inspection, applied for through the SDL Portal (see resale certificate). The Bureau of Fire Safety page points to the Applications & Forms page to obtain a Local Certificate of Occupancy.",
     "application_url": "",
-    "department_url": "https://www.eatontownnj.com/departments/fire-prevention-bureau",
+    "department_url": "https://www.eatontownnj.com/departments/bureau-of-fire-safety",
     "phone": "732-389-7620",
-    "email": "prenaldi@eatontownnj.com",
-    "contact_name": "Patrick A. Renaldi",
-    "contact_title": "Fire Marshal",
+    "email": "fireprev@EatontownNJ.com",
+    "contact_name": "Patrick Renaldi",
+    "contact_title": "Fire Marshal (also listed as Chief Code Enforcement Officer)",
     "evidence": [
      {
       "url": "https://ecode360.com/7639663",
@@ -202,16 +238,37 @@
       "verified": null
      },
      {
-      "url": "https://www.eatontownnj.com/departments/fire-prevention-bureau",
-      "quote": "Patrick Renaldi Fire Marshal",
-      "doc_date": "2026-10-13 (page fetched)",
+      "url": "https://www.eatontownnj.com/departments/bureau-of-fire-safety",
+      "quote": "To apply for a fire permit, register a new business with the Fire Prevention Bureau, or obtain a Local Certificate of Occupancy, please visit our Applications and Forms page located on the Borough homepage to access the required forms, documentation, and application information.",
+      "doc_date": "2026-10-27 (page fetched)",
       "via": "page",
       "verified": true
      },
      {
-      "url": "https://www.eatontownnj.com/departments/fire-prevention-bureau",
-      "quote": "Email fireprev@EatontownNJ.com Phone (732) 389-7620",
-      "doc_date": "2026-10-13 (page fetched)",
+      "url": "https://www.eatontownnj.com/departments/bureau-of-fire-safety",
+      "quote": "Patrick Renaldi Fire Marshal Phone: (732) 720-2582 Email: prenaldi@eatontownnj.com",
+      "doc_date": "2026-10-27 (page fetched)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://www.eatontownnj.com/departments/bureau-of-fire-safety",
+      "quote": "fireprev@EatontownNJ.com",
+      "doc_date": "2026-10-27 (page fetched)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://www.eatontownnj.com/departments/bureau-of-fire-safety",
+      "quote": "(732) 389-7620",
+      "doc_date": "2026-10-27 (page fetched)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://www.eatontownnj.com/departments/land-use-zoning-and-code-enforcement",
+      "quote": "Patrick Renaldi Chief Code Enforcement Officer",
+      "doc_date": "2026-10-27 (page fetched)",
       "via": "page",
       "verified": true
      },
@@ -233,7 +290,7 @@
     "confidence": "high"
    }
   ],
-  "notes": "The state fire directory lists the Eatontown Housing office (47 Broad St, (732) 389-7615) as the smoke detector compliance office, with Fire Marshal Patrick Renaldi as fire official. Under the August 2026 ordinance the smoke/CO certificate is issued together with the certificate of occupancy, so the fees shown are the same combined fees. The old Bureau of Fire Safety page (/194/) is gone; the new Fire Prevention Bureau page lists Fire Marshal Patrick Renaldi (prenaldi@eatontownnj.com), inspectors Brian Pericone and Todd Feiter, and the bureau contact fireprev@EatontownNJ.com, (732) 389-7620. It describes annual commercial inspections and says nothing about resale smoke/CO certificates."
+  "notes": "The state fire directory lists the Eatontown Housing office (47 Broad St, (732) 389-7615) as the smoke detector compliance office, with Fire Marshal Patrick Renaldi as fire official. Under the August 2026 ordinance the smoke/CO certificate is issued together with the certificate of occupancy, so the fees shown are the same combined fees. The Fire Prevention Bureau page cited before (/departments/fire-prevention-bureau) is gone (404); the Borough's current page is /departments/bureau-of-fire-safety. It lists Fire Marshal Patrick Renaldi ((732) 720-2582, prenaldi@eatontownnj.com), Administrative Assistant Ashley Yates ((732) 389-7615, ayates@eatontownnj.com), inspectors Todd Feiter and Brian Pericone, and the bureau contact fireprev@EatontownNJ.com, (732) 389-7620. The Land Use, Zoning & Code Enforcement page lists Patrick Renaldi as Chief Code Enforcement Officer."
  },
  "other_items": [
   {
@@ -245,16 +302,17 @@
  "open_questions": [
   "For a one or two family sale, does the Borough charge the timing-based fee ($100/$135/$200) or the flat $200 'transfer of residential properties' fee, and how are two-family homes charged?",
   "Is the certificate valid 60 days or six months?",
-  "Is there an online or PDF application for the new Chapter 116 process?"
+  "What fee does the SDL Portal charge for a one or two family resale inspection (the portal needs a login)?",
+  "Which Housing phone is current: 732-860-5513 (CO application sheet) or 732-389-7616 (2026 checklist)?"
  ],
- "checked_at": "2026-10-13",
+ "checked_at": "2026-10-27",
  "verification": {
   "fees": 10,
   "fee_ok": 0,
   "fee_bad": 0,
   "fee_unchecked": 10,
-  "quotes": 15,
-  "q_ok": 7,
+  "quotes": 23,
+  "q_ok": 15,
   "q_bad": 0,
   "q_unchecked": 8
  }

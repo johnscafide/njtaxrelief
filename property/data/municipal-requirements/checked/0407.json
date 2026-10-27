@@ -2,14 +2,18 @@
  "municipality_code": "0407",
  "municipality": "Brooklawn Borough",
  "county": "CAMDEN",
- "checked_at": "2026-09-30",
  "resale_co": {
   "status": "required",
   "name": "Continued Certificate of Occupancy / Housing Inspection (Residential Dwelling Resale)",
-  "issued_by": "Borough of Brooklawn Construction/Zoning/Code Enforcement",
-  "lead_time": "Application and fee must be received before any inspection is scheduled; no set number of days published",
+  "issued_by": "Borough of Brooklawn Construction/Zoning/Code Enforcement (Construction Code Official)",
+  "lead_time": "Application and fee must be received before an inspection is scheduled. Inspections are by appointment on Tuesday and Thursday, 10:00 am to 12:00 pm. The Borough code says the inspection is made within 5 working days of the written application.",
   "valid_for": "",
-  "requirements": [],
+  "requirements": [
+   "Inspection of the dwelling by the Construction Code Official or his representative for fitness for habitation and compliance with Borough ordinances (Housing Standards, Chapter 98)",
+   "Smoke detector within 10 feet of each sleeping area (Borough code), plus the state smoke and carbon monoxide alarm rules checked before any certificate is issued",
+   "Exterior housing code and exterior property area inspection on the sale of residential property (Chapter 114); repairs due within 30 days of notice",
+   "Inspection checklist is said to be attached to the application but is not posted online"
+  ],
   "fees": [
    {
     "label": "Residential dwelling resale CO",
@@ -26,15 +30,45 @@
     "verified": null
    }
   ],
-  "how_to_apply": "Fill out the Application for Continued Certificate of Occupancy/Housing Inspection (check 'Residential Dwelling RESALE') and bring or mail it with the fee (cash or check payable to Borough of Brooklawn, mailed 'Attn: Construction') to 301 Christiana St., Brooklawn. Then call the office to schedule. Inspections are by appointment only, Tuesday and Thursday 10:00 am to 12:00 pm. The report can be mailed, picked up or emailed.",
+  "how_to_apply": "Fill out the Application for Continued Certificate of Occupancy/Housing Inspection (check 'Residential Dwelling RESALE') and bring or mail it with the fee (cash or check payable to Borough of Brooklawn; mail to 'Attn: Construction') to 301 Christiana St., Brooklawn, NJ 08030. Then call the office to schedule the inspection. The report can be mailed, picked up or emailed.",
   "application_url": "https://brooklawn-nj.com/wp-content/uploads/2023/07/CO-APP000.pdf",
   "department_url": "https://brooklawn-nj.com/departments/construction/",
   "phone": "856-456-0750 ext. 105",
   "email": "mperry@brooklawn-nj.com",
+  "contact_name": "Melissa Perry",
+  "contact_title": "Construction Secretary (schedules all inspections); Construction Official: Mark Laggy",
   "evidence": [
    {
+    "url": "https://ecode360.com/9408563",
+    "quote": "No owner, agent, broker or person shall sell, rent or lease or allow any person or persons to occupy or live in, as an owner, tenant or otherwise, any dwelling unit or apartment unless a certificate of occupancy certifying that the dwelling unit or apartment is fit for human habitation and that the dwelling unit or apartment is in compliance with all other ordinances of the Borough of Brooklawn shall have first been obtained from the Construction Code Official or his representative.",
+    "doc_date": "2026-10-20 (page fetched)",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://ecode360.com/9408563",
+    "quote": "The owner of the subject property or agent, broker or person in charge of said property shall be responsible to make written application for inspection.",
+    "doc_date": "2026-10-20 (page fetched)",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://ecode360.com/9408696",
+    "quote": "It is hereby determined that an exterior housing code inspection and an exterior property area inspection, as defined in the International Property Maintenance Code of 2009, shall be required on the sale and/or resale of residential properties within the boundaries of the Borough of Brooklawn.",
+    "doc_date": "2026-10-20 (page fetched)",
+    "via": "page",
+    "verified": null
+   },
+   {
     "url": "https://brooklawn-nj.com/wp-content/uploads/2023/07/CO-APP000.pdf",
-    "quote": "CO Inspections for both Rental Properties / Residential Sales or Commercial Properties are completed on Tuesday & Thursday between 10:00 am -12:00 pm by appointment only Application and fee must be received prior to scheduling any Inspection",
+    "quote": "CO Inspections for both Rental Properties / Residential Sales or Commercial Properties are completed on Tuesday & Thursday between 10:00 am -12:00 pm by appointment only",
+    "doc_date": "2023-07 (upload folder)",
+    "via": "pdf",
+    "verified": null
+   },
+   {
+    "url": "https://brooklawn-nj.com/wp-content/uploads/2023/07/CO-APP000.pdf",
+    "quote": "Application and fee must be received prior to scheduling any Inspection",
     "doc_date": "2023-07 (upload folder)",
     "via": "pdf",
     "verified": null
@@ -42,29 +76,84 @@
    {
     "url": "https://brooklawn-nj.com/frequently-used-forms",
     "quote": "Application for Continued Certificate of Occupancy/Housing Inspection",
-    "doc_date": "",
+    "doc_date": "2026-10-20 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://brooklawn-nj.com/departments/construction/",
+    "quote": "The Construction Secretary schedules all inspections.",
+    "doc_date": "2026-10-20 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://brooklawn-nj.com/departments/construction/",
+    "quote": "mperry@brooklawn-nj.com",
+    "doc_date": "2026-10-20 (page fetched)",
     "via": "page",
     "verified": true
    }
   ],
-  "confidence": "medium",
-  "notes": "The application is a scanned form, read visually. It lists a resale fee and inspection schedule for residential sales, which shows the Borough inspects on resale, but no Borough page or ordinance text found states in plain words that the certificate is mandatory; the Borough code on ecode360 could not be opened. The form refers to an attached inspection checklist that is not posted online, so inspection items are not listed. Commercial resale is $120.00 and a change of tenant is $100.00 (rental program). Construction Secretary: Melissa Perry."
+  "confidence": "high",
+  "notes": "New this check: the Borough code (read in full on ecode360) settles that the CO is mandatory. Section 98-8 requires an inspection on every change in ownership and bars selling or letting anyone occupy a dwelling without a certificate of occupancy from the Construction Code Official. Section 114-3 separately requires an exterior housing code and exterior property inspection on sale or resale. The code still lists older fees ($65 initial inspection and certificate, $25 per reinspection in Section 98-8H; $30 exterior inspection in Section 114-3B), while the Borough's application form lists $100.00 for a residential resale and $50.00 for a re-inspection; the form amounts are treated as current. The application form is a scanned image, read visually. Commercial resale is $120.00 and change of tenant is $100.00 (rental program, Chapter 116). Construction Official: Mark Laggy (Borough Construction page)."
  },
  "fire_cert": {
-  "requirements": [],
+  "requirements": [
+   "Smoke and carbon monoxide alarms meeting N.J.A.C. 5:70-4.19 for any 1 or 2 family home being sold (Borough code Section 84-10)",
+   "Carbon monoxide alarm meeting UL 2034 unless the home has no fuel-burning appliance and no attached garage",
+   "Borough housing code: at least one smoke detector within 10 feet of each sleeping area"
+  ],
   "authorities": [
    {
-    "name": "Brooklawn Borough fire official (Fire Department is the local enforcing agency)",
+    "name": "Borough of Brooklawn Construction Office (smoke detector compliance listed under the Borough construction office; fire code agency is the Brooklawn Bureau of Fire Prevention)",
     "type": "municipal_fire_bureau",
     "area_served": "Entire borough",
     "lead_time": "",
     "fees": [],
-    "how_to_apply": "No smoke/CO certificate form or fee schedule was found on the Borough website. Contact the Borough office at 856-456-0750.",
+    "how_to_apply": "No separate smoke/CO certificate form or fee is posted. The state fire directory lists smoke detector compliance under the Brooklawn Borough construction office at 301 Christiana St., (856) 456-0750, and the Borough code says that where a municipal CO inspection exists, the CO is not issued until the home meets the smoke and CO alarm rules. Ask the construction office whether the resale CO inspection covers the smoke/CO certificate or whether a separate application and fee are needed.",
     "application_url": "",
-    "department_url": "https://brooklawn-nj.com/departments/public-safety/fire/",
+    "department_url": "https://brooklawn-nj.com/departments/construction/",
     "phone": "856-456-0750",
     "email": "",
+    "contact_name": "Timothy O'Donnell",
+    "contact_title": "Fire Official (NJ DCA fire directory)",
     "evidence": [
+     {
+      "url": "https://ecode360.com/9408194",
+      "quote": "Before any Use Group R-3 or R-4 structure is sold, leased or otherwise made subject to a change or occupancy for residential purposes, the owner shall obtain a certificate of smoke detector and carbon monoxide alarm compliance (CSDCMAC), evidencing compliance with N.J.A.C. 5:70-4.19, from the appropriate enforcing agency.",
+      "doc_date": "2026-10-20 (page fetched)",
+      "via": "page",
+      "verified": null
+     },
+     {
+      "url": "https://ecode360.com/9408194",
+      "quote": "Where a municipality has existing inspection or approval requirements under a property maintenance or other municipal code, a CSDCMAC shall not be required; provided, however, that the agency responsible for the enforcement of that code shall not issue any certificate of inspection or occupancy or other approval under such municipal code until it has determined that the dwelling complies with the requirements of N.J.A.C. 5:70-4.19.",
+      "doc_date": "2026-10-20 (page fetched)",
+      "via": "page",
+      "verified": null
+     },
+     {
+      "url": "https://ecode360.com/9408194",
+      "quote": "The application shall be accompanied by the appropriate fee as set forth in N.J.A.C. 5:70-2.9(d).",
+      "doc_date": "2026-10-20 (page fetched)",
+      "via": "page",
+      "verified": null
+     },
+     {
+      "url": "https://ecode360.com/9408180",
+      "quote": "The local enforcement agency shall be the Bureau of Fire Prevention, which is hereby created in the Brooklawn Fire Company.",
+      "doc_date": "2026-10-20 (page fetched)",
+      "via": "page",
+      "verified": null
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "LEAID: 0407-001 Brooklawn Boro SMOKE DETECTOR COMPLIANCE Name: Brooklawn Boro Constr Enf Auth. Fire Dept Addr: 301 Christiana St Fire Official Timothy O'Donnell Phone (856) 456-0750",
+      "doc_date": "2026-03 (survey date 3/19/2026)",
+      "via": "state_directory",
+      "verified": null
+     },
      {
       "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
       "quote": "F Brooklawn Borough",
@@ -76,29 +165,36 @@
     "confidence": "medium"
    }
   ],
-  "notes": "The NJ DCA LEA Registry (July 2026) lists Brooklawn's Uniform Fire Code agency as its fire department (code F). The Borough fire page describes the volunteer Brooklawn Fire Company but has no resale smoke certificate information. Search result summaries suggest the Borough code requires a certificate of smoke detector compliance from the Borough fire official before occupancy, but the actual code text and fees could not be verified (ecode360 blocked), so no fee is listed."
+  "notes": "The Borough fire code chapter (Section 84-10) says that where a municipal inspection program exists, a separate smoke/CO certificate is not required, but the CO cannot issue until the home meets the smoke and CO alarm rules. Brooklawn has such a program (the resale CO), and the state fire directory lists the Borough construction office as the smoke detector compliance contact, so in practice the resale CO inspection appears to cover the smoke/CO check; this is not stated on a Borough page. Where a separate certificate is issued, the code ties the fee to the state schedule in N.J.A.C. 5:70-2.9(d); no Borough fee sheet is posted, so no fee is listed. The Borough code still names the certificate a smoke detector and carbon monoxide alarm certificate with no fire extinguisher, which matches the 2025 state law change (P.L.2025, c.19). The fire directory email for Timothy O'Donnell is cut off (salemcountynj.g...), so it is not listed. The Brooklawn Fire Company (volunteer, 110 South Wilson Ave, non-emergency 856-456-2102) has no resale information on its Borough page."
  },
  "other_items": [
   {
+   "label": "Exterior inspection on sale",
+   "detail": "Borough code Section 114-3 requires an exterior housing code and exterior property area inspection on the sale or resale of residential property, with repairs within 30 days of notice. The code lists a $30 fee paid once to the Administrative Office of Code Enforcement; it is not clear whether this is now part of the $100.00 resale CO.",
+   "source_url": "https://ecode360.com/9408696"
+  },
+  {
    "label": "Water final reading",
-   "detail": "Water final reading request is $25.00, payable by check to Borough of Brooklawn, cash or money order. The form adds: 'If settlement date is within 3 days from the date of application, the fee is $100.00'; it is unclear whether that $100.00 applies to the water reading or the CO.",
+   "detail": "The CO application includes a water final reading request: $25.00, by check payable to Borough of Brooklawn, cash or money order. The form adds 'If settlement date is within 3 days from the date of application, the fee is $100.00'; it does not say whether that applies to the water reading or to the CO.",
    "source_url": "https://brooklawn-nj.com/wp-content/uploads/2023/07/CO-APP000.pdf"
   }
  ],
  "open_questions": [
-  "Brooklawn smoke/CO/extinguisher certificate fee, form and contact were not found online.",
-  "Whether the '$100.00 if settlement is within 3 days' note on the CO form is a rush fee for the water final reading or for the CO.",
-  "Inspection checklist for the resale CO is not posted online.",
-  "Validity period of the resale CO is not stated."
+  "Does the resale CO inspection cover the smoke/CO alarm certificate, or must the seller get a separate certificate (and what fee)?",
+  "Is the '$100.00 if settlement is within 3 days' note on the form a rush fee for the water final reading or for the CO?",
+  "Is the $30 exterior inspection in Section 114-3 still charged separately from the $100.00 resale CO?",
+  "How long is the resale CO valid? Not stated.",
+  "The inspection checklist mentioned on the application is not posted online."
  ],
+ "checked_at": "2026-10-20",
  "verification": {
   "fees": 2,
   "fee_ok": 0,
   "fee_bad": 0,
   "fee_unchecked": 2,
-  "quotes": 3,
-  "q_ok": 2,
+  "quotes": 14,
+  "q_ok": 4,
   "q_bad": 0,
-  "q_unchecked": 1
+  "q_unchecked": 10
  }
 }

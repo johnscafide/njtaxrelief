@@ -2,7 +2,6 @@
  "municipality_code": "0508",
  "municipality": "Ocean City",
  "county": "CAPE MAY",
- "checked_at": "2026-09-30",
  "resale_co": {
   "status": "required",
   "name": "Zoning Compliance Certification (homes built after January 1, 1996 only)",
@@ -148,7 +147,7 @@
       "quote": "LEAID: 0508-999 Enf Auth. State Fire Official Louis Kilmer Phone (609)633-6132",
       "doc_date": "2025-02-13 (survey date)",
       "via": "state_directory",
-      "verified": true
+      "verified": null
      }
     ],
     "confidence": "high"
@@ -168,14 +167,15 @@
   "Whether the City still requires a fire extinguisher for sales after P.L.2025, c.19 (the requirements sheet is dated February 2024; the 2025 sale form does not mention one).",
   "Name of the fire prevention official who signs the certificates."
  ],
+ "checked_at": "2026-10-27",
  "verification": {
   "fees": 2,
   "fee_ok": 2,
   "fee_bad": 0,
   "fee_unchecked": 0,
   "quotes": 12,
-  "q_ok": 12,
+  "q_ok": 11,
   "q_bad": 0,
-  "q_unchecked": 0
+  "q_unchecked": 1
  }
 }

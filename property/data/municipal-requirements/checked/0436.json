@@ -2,44 +2,44 @@
  "municipality_code": "0436",
  "municipality": "Winslow Township",
  "county": "CAMDEN",
- "checked_at": "2026-09-30",
  "resale_co": {
   "status": "required",
   "name": "Resale Certificate / Certificate of Continued Occupancy (CCO)",
-  "issued_by": "Winslow Township Construction Office (Housing Office)",
-  "lead_time": "Payment must come with the application; check payments need a 10 working day hold before the inspection can be done",
+  "issued_by": "Winslow Township Construction Official (Housing Office)",
+  "lead_time": "Payment must come with the application; check payments need a 10 working day hold before the inspection. The code says the inspection is made within 10 working days of a complete application and fee.",
   "valid_for": "",
   "requirements": [
    "Well water: passing test by an NJDEP certified lab (Private Well Testing Act), or Camden County Health Dept. letter of approval for a new well",
    "Septic: Camden County Health Dept. letter of compliance (no future action), or certificate of compliance for a new system",
-   "Property must comply with all Township and State codes and ordinances (the office links the 2015 International Property Maintenance Code)",
+   "Property must comply with all Township and State codes and ordinances (the Township adopts the International Property Maintenance Code)",
    "Sidewalks and driveway aprons are the owner's responsibility and must meet Township ordinances",
    "All open permits closed with final inspections (for example water heater, A/C, furnace, finished basement)",
    "Dwelling must be fit for human habitation",
    "Certificate issued only when all requirements are met",
-   "Separate fire (smoke/CO) certificate from the Winslow Township Fire District is also required"
+   "Separate fire (smoke/CO) certificate from the Winslow Township Fire District is also required",
+   "The buyer may take over the seller's responsibility for the certificate with a written waiver filed with the Construction Official"
   ],
   "fees": [
    {
     "label": "Residential inspection (includes 1 free re-inspection)",
     "amount": "$100",
-    "quote": "Inspection Fees: Residential $100 (includes 1 free re-inspection) Commercial $200 (includes 1 free re-inspection)",
+    "quote": "Inspection Fees: Residential $100 (includes 1 free re-inspection)",
     "source_url": "https://www.winslowtownship.com/filestorage/3308/3536/3538/3540/RESALECERTIFICATE.pdf",
-    "verified": "eye"
+    "verified": null
    },
    {
     "label": "Commercial inspection (includes 1 free re-inspection)",
     "amount": "$200",
-    "quote": "Inspection Fees: Residential $100 (includes 1 free re-inspection) Commercial $200 (includes 1 free re-inspection)",
+    "quote": "Commercial $200 (includes 1 free re-inspection)",
     "source_url": "https://www.winslowtownship.com/filestorage/3308/3536/3538/3540/RESALECERTIFICATE.pdf",
-    "verified": "eye"
+    "verified": null
    },
    {
     "label": "Each re-inspection after the first free re-inspection",
     "amount": "$50",
     "quote": "Re-inspection fee: $50 each, after the first free re-inspection",
     "source_url": "https://www.winslowtownship.com/filestorage/3308/3536/3538/3540/RESALECERTIFICATE.pdf",
-    "verified": "eye"
+    "verified": null
    }
   ],
   "how_to_apply": "Complete the Resale Certificate Application (seller, buyer, both agents, settlement date, block and lot) and submit it with payment to the Housing Office, Township of Winslow, 125 South Route 73, Braddock, NJ 08037. Attach well and septic certifications if they apply. Schedule the inspection by calling 609-567-0700, option 5 (Monday to Friday, 8:30 am to 4:30 pm).",
@@ -47,11 +47,20 @@
   "department_url": "https://www.winslowtownship.com/content/3298/3503/default.aspx",
   "phone": "609-567-0700 option 5",
   "email": "construction@winslowtownship.com",
+  "contact_name": "",
+  "contact_title": "Construction Official (office email; no name on the page)",
   "evidence": [
    {
     "url": "https://www.winslowtownship.com/content/3298/3503/default.aspx",
     "quote": "Our office also performs rental inspections and CCO inspections for resale property, Monday thru Friday.",
-    "doc_date": "",
+    "doc_date": "2026-10-20 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.winslowtownship.com/content/3298/3503/default.aspx",
+    "quote": "Rental & Resale CCO Inspection Scheduling",
+    "doc_date": "2026-10-20 (page fetched)",
     "via": "page",
     "verified": true
    },
@@ -60,25 +69,39 @@
     "quote": "4. A Certificate of Occupancy will only be issued when all the requirements are met",
     "doc_date": "2025-03-26 (upload date shown on Township page)",
     "via": "pdf",
-    "verified": "eye"
+    "verified": null
    },
    {
     "url": "https://www.winslowtownship.com/filestorage/3308/3536/3538/3540/RESALECERTIFICATE.pdf",
     "quote": "CHECK PAYMENTS REQUIRE A 10-WORKING-DAY HOLD BEFORE INPECTION CAN BE PERFORMED TO VERIFY FUNDS.",
     "doc_date": "2025-03-26 (upload date shown on Township page)",
     "via": "pdf",
-    "verified": "eye"
+    "verified": null
    },
    {
-    "url": "https://www.ecode360.com/35704976",
+    "url": "https://ecode360.com/35704976",
     "quote": "Certificates of continued occupancy shall be required for human habitation of all existing dwelling units in the Township of Winslow before a change in occupancy can occur.",
-    "doc_date": "",
-    "via": "search_snippet",
+    "doc_date": "2025-02-25 (Ord. No. O-2025-006)",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://ecode360.com/35704976",
+    "quote": "An application to the Township Construction Official shall be accompanied by a fee of $100 for residential dwellings and $200 for commercial dwellings.",
+    "doc_date": "2025-02-25 (Ord. No. O-2025-006)",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://ecode360.com/35704976",
+    "quote": "There shall be no fee for the first reinspection; for all subsequent inspections, there shall be a $50 reinspection fee.",
+    "doc_date": "2019-09-10 (Ord. No. O-2019-018)",
+    "via": "page",
     "verified": null
    }
   ],
   "confidence": "high",
-  "notes": "Confirms the existing Watchdog data: residential $100 including 1 free re-inspection, commercial $200 including 1 free re-inspection, $50 for each re-inspection after the free one. The form is a scanned one-page PDF (uploaded 3/26/2025); quotes were read from the page image. A search snippet of the Township code (ecode360) says the fee was set by Ord. O-2019-018 (9-10-2019), but the code page itself could not be opened. The form does not state a validity period or a minimum lead time other than the 10 working day hold on checks. A separate rental registration and rental inspection program exists."
+  "notes": "The Township code chapter (read in full on ecode360 this time) was renamed from 'Certificates of Continued Occupancy' to 'Resale Certificates' on 2-25-2025 by Ord. No. O-2025-006. It sets the same $100 residential / $200 commercial fee and $50 for each re-inspection after the first free one as the form, so the code fees are not listed again. The code says the Construction Official inspects within 10 working days of a complete application and fee and sends written notice of violations; violators face a $250 to $1,000 penalty. The form is a scanned one-page PDF (uploaded 3/26/2025), so its quotes were read from the page image. No validity period is stated. A separate rental registration and rental inspection program exists."
  },
  "fire_cert": {
   "requirements": [
@@ -141,11 +164,13 @@
       "verified": true
      }
     ],
-    "how_to_apply": "Apply online on the Fire District website and then pay through the linked Edmunds WIPP payment page, or download the packet and fax it to 609-561-5823, or apply in person at the Fire District Office, 9 Cedar Brook Road, Sicklerville (Monday to Friday, 9 am to 5 pm). Staff call within 24 hours to schedule. Inspections are on Tuesdays and Thursdays in a morning or afternoon block. Pay by check (payable to Winslow Township Fire District), credit card, debit card or money order. All fees are non-refundable.",
+    "how_to_apply": "Apply online on the Fire District website and then pay through the linked Edmunds WIPP payment page, or download the packet and fax it to 609-561-5823, or apply in person at the Fire District Office, 9 Cedar Brook Road, Sicklerville (Monday to Friday, 9 am to 5 pm). Staff contact you to schedule. Inspections are on Tuesdays and Thursdays in a morning or afternoon block. Pay by check (payable to Winslow Township Fire District), credit card, debit card or money order. All fees are non-refundable.",
     "application_url": "https://winslowtwpfd.org/online-resale-application",
     "department_url": "https://winslowtwpfd.org/fire-marshal-office",
     "phone": "609-561-4225",
     "email": "firedistrict@winslowtwpfd.org",
+    "contact_name": "Joseph G. Hahn",
+    "contact_title": "Fire Official (Winslow Township and Chesilhurst Borough)",
     "evidence": [
      {
       "url": "https://winslowtwpfd.org/vertical/sites/%7B2458775F-59B7-4354-B7A0-12D3BE8EC490%7D/uploads/Smoke_Application_2025.pdf",
@@ -156,8 +181,15 @@
      },
      {
       "url": "https://winslowtwpfd.org/vertical/sites/%7B2458775F-59B7-4354-B7A0-12D3BE8EC490%7D/uploads/Smoke_Application_2025.pdf",
-      "quote": "it is recommended that the applicant and/or representative apply for this inspection 3, 4 weeks prior to an anticipated closing/move- in date.",
+      "quote": "it is recommended that the applicant and/or representative apply for this inspection 3 - 4 weeks prior to an anticipated closing/move-in date.",
       "doc_date": "2025-06-05 (revised)",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://winslowtwpfd.org/vertical/sites/%7B2458775F-59B7-4354-B7A0-12D3BE8EC490%7D/uploads/CSDCMACPFE_Instructions_4.15.2025.pdf",
+      "quote": "Questions? Call the Winslow Township Fire Marshal at 609-561-4225 or e-mail at firedistrict@winslowtwpfd.org for more information.",
+      "doc_date": "2025-04-15 (file name)",
       "via": "pdf",
       "verified": true
      },
@@ -166,27 +198,48 @@
       "quote": "Separate CO & Fire Cert Inspection required: Winslow Fire Dept 609-561-4225 online application www.winslowtwpfd.org",
       "doc_date": "2025-03-26 (upload date shown on Township page)",
       "via": "pdf",
-      "verified": "eye"
+      "verified": null
+     },
+     {
+      "url": "https://winslowtwpfd.org/online-resale-application",
+      "quote": "ONCE YOU SUBMIT YOUR APPLICATION PLEASE CLICK THE  LINK  TO MAKE PAYMENT FOR YOUR INSPECTION.",
+      "doc_date": "2026-10-20 (page fetched)",
+      "via": "page",
+      "verified": true
      },
      {
       "url": "https://winslowtwpfd.org/history",
       "quote": "the township voters were asked to vote on a referendum to establish a fire district that would be comprised of the boundaries of the Township of Winslow.",
-      "doc_date": "",
+      "doc_date": "2026-10-20 (page fetched)",
       "via": "page",
       "verified": true
      },
      {
       "url": "https://winslowtwpfd.org/fire-marshal-office",
       "quote": "In January 2024, Joseph Hahn was sworn in as the Fire Official for Winslow Township and the Borough of Chesilhurst.",
-      "doc_date": "",
+      "doc_date": "2026-10-20 (page fetched)",
       "via": "page",
       "verified": true
+     },
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "D Winslow Township",
+      "doc_date": "2026-07",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "LEAID: 0436-001 Winslow Twp SMOKE DETECTOR COMPLIANCE Name: Winslow Twp Fire Prev Enf Auth. District Addr: 9 Cedar Brook Rd Sicklerville NJ 08081 Fire Official Joseph G Hahn Phone (609) 561-4225 Email josephh@winslowtwpfd.org",
+      "doc_date": "2026-09-03 (directory PDF; survey 2/6/2026)",
+      "via": "state_directory",
+      "verified": null
      }
     ],
     "confidence": "high"
    }
   ],
-  "notes": "Winslow has one fire district, Winslow Township Fire District No. 1, whose boundaries are the whole township (formed 1989 from nine former station companies). The DCA fire directory lists a single local enforcing agency (LEAID 0436-001, district) for the township, covering both the Winslow Township Fire Department and the separate state-run Ancora Fire Department at Ancora Psychiatric Hospital; Ancora is not a separate fire district for home sales. The instructions PDF (4.15.2025) and application packet (revised 06/05/25) give the same amounts; the packet words the first tier as '8-14 Days notice'. The senior line reads 'Senior Citizen's Discount ... $30.00' and does not say whether $30 is the reduced fee or the amount taken off. The online form states a penalty of $100 to $2,500 per occurrence for a change of ownership or occupancy without the certificate (N.J.A.C. 5:70-2.3). The packet title and instructions do not mention the portable fire extinguisher, although the instructions file name references CSDCMACPFE."
+  "notes": "Winslow has one fire district, Winslow Township Fire District No. 1, whose boundaries are the whole township (LEA registry code D). The DCA fire directory lists a single local enforcing agency (LEAID 0436-001) and also shows the separate state-run Ancora Fire Department at Ancora Psychiatric Hospital; Ancora is not a separate fire district for home sales. The instructions PDF (4.15.2025) and application packet (revised 06/05/25) give the same amounts; the packet words the first tier as '8-14 Days notice'. The senior line does not say whether $30 is the reduced fee or the amount taken off. The online form states a penalty of $100 to $2,500 per occurrence for a change of ownership or occupancy without the certificate (N.J.A.C. 5:70-2.3). Fire Official Hahn's direct email (josephh@winslowtwpfd.org) is in the DCA directory. The packet does not mention a portable fire extinguisher, which the 2025 state law (P.L.2025, c.19) dropped from the sale certificate."
  },
  "other_items": [
   {
@@ -206,18 +259,18 @@
   }
  ],
  "open_questions": [
-  "Validity period of the Township CCO and any minimum lead time are not stated on the form.",
-  "Whether the $30.00 senior line is the senior fee or a discount amount.",
-  "Whether the Fire District inspection checks the portable fire extinguisher required by state rule."
+  "Validity period of the Township resale certificate is not stated on the form or in the code.",
+  "Whether the $30.00 senior line is the senior fee or a discount amount."
  ],
+ "checked_at": "2026-10-20",
  "verification": {
   "fees": 9,
-  "fee_ok": 9,
+  "fee_ok": 6,
   "fee_bad": 0,
-  "fee_unchecked": 0,
-  "quotes": 9,
-  "q_ok": 8,
+  "fee_unchecked": 3,
+  "quotes": 16,
+  "q_ok": 9,
   "q_bad": 0,
-  "q_unchecked": 1
+  "q_unchecked": 7
  }
 }

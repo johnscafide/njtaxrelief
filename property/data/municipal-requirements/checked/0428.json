@@ -2,47 +2,110 @@
  "municipality_code": "0428",
  "municipality": "Pine Hill Borough",
  "county": "CAMDEN",
- "checked_at": "2026-09-30",
  "resale_co": {
-  "status": "not_found",
-  "name": "",
-  "issued_by": "",
-  "lead_time": "",
-  "valid_for": "",
-  "requirements": [],
-  "fees": [],
-  "how_to_apply": "",
-  "application_url": "",
-  "department_url": "https://www.pinehillboronj.com/departments/construction-office/",
-  "phone": "",
-  "email": "",
-  "evidence": [
+  "status": "required",
+  "name": "Continued Certificate of Occupancy (resale C.O.)",
+  "issued_by": "Borough of Pine Hill (town code names the Construction Official; the borough's Construction Office page sends resale C.O. requests to the Pine Hill Fire Department / Fire District)",
+  "lead_time": "Town code: inspection within five working days after the application and fee are received.",
+  "valid_for": "Town code: an application is valid for six months from filing; after that a new application and fee are needed.",
+  "requirements": [
+   "Town code: the home must comply with state and borough building, plumbing, electrical, zoning, health, safety, fire and minimum housing standards (including the International Property Maintenance Code) before the certificate is issued",
+   "Violations found at inspection are grounds to deny the certificate",
+   "A temporary certificate of compliance may be issued for up to 30 days for minor violations, but not where conditions make the home uninhabitable or unsafe",
+   "In practice the borough points sellers to the Pine Hill Fire District smoke alarm, CO alarm and fire extinguisher inspection (see fire_cert)"
+  ],
+  "fees": [
    {
-    "url": "https://web.archive.org/web/20240718161949/https://www.pinehillboronj.com/departments/construction-office/",
-    "quote": "To obtain a Certificate of Occupancy (C.O.) for the resale of a property, please contact the Pine Hill Fire Department: (856) 783-8666.",
-    "doc_date": "2024-07 (Internet Archive copy of the borough Construction Office page)",
-    "via": "page",
-    "verified": true
+    "label": "Continued certificate of occupancy (town code section 10-1.10b10(c))",
+    "amount": "$150",
+    "quote": "Continued certificate of occupancy $150.",
+    "source_url": "https://ecode360.com/35591560",
+    "verified": null
+   },
+   {
+    "label": "Temporary certificate of occupancy, issuance or renewal (section 10-1.10b10(d))",
+    "amount": "$50",
+    "quote": "The fee for the issuance and the renewal of a temporary certificate of occupancy $50.",
+    "source_url": "https://ecode360.com/35591561",
+    "verified": null
    }
   ],
-  "confidence": "low",
-  "notes": "No separate borough housing or property maintenance resale inspection was found. The borough's Construction Office page (July 2024 archived copy; the live site is behind a captcha) sends sellers to the Pine Hill Fire Department for a 'Certificate of Occupancy (C.O.) for the resale of a property', and the Pine Hill Fire District #1 resale paperwork covers only smoke alarms, CO alarms and the fire extinguisher. So in practice the resale 'C.O.' in Pine Hill appears to be the fire district's smoke/CO certificate (see fire_cert). Rentals are different: all residential rentals must be registered and inspected before occupancy and on each change of occupancy (Certificate of Habitability through the Construction Office, Technical Assistant Lisa Kensil, 856-783-7400 x202). The municipal code (ecode360 PI4111) could not be opened to confirm whether any resale ordinance exists."
+  "how_to_apply": "The borough's Construction Office page says to contact the Pine Hill Fire Department at (856) 783-8666 to obtain a Certificate of Occupancy for the resale of a property. Confirm with the borough whether a separate Construction Office continued C.O. (town code fee $150) is also required, or whether the fire district certificate is the resale C.O. Construction Office paperwork can be dropped off and picked up daily 8:30 am to 4:00 pm; Construction Official James Gallagher, (856) 783-7400 x 208.",
+  "application_url": "",
+  "department_url": "https://www.pinehillboronj.com/departments/construction-office/",
+  "phone": "856-783-8666",
+  "email": "",
+  "contact_name": "",
+  "contact_title": "",
+  "evidence": [
+   {
+    "url": "https://www.pinehillboronj.com/departments/construction-office/",
+    "quote": "To obtain a Certificate of Occupancy (C.O.) for the resale of a property, please contact the Pine Hill Fire Department: (856) 783-8666.",
+    "doc_date": "",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://ecode360.com/35591545",
+    "quote": "No person, group of persons, associations, partnerships or corporations, or any combination thereof, who own, manage, conduct or operate a dwelling unit shall sell, rent, lease, sublet or permit the same to be occupied or rented",
+    "doc_date": "",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://ecode360.com/35591545",
+    "quote": "without first securing from the Construction Official a certificate of occupancy or a continued certificate of occupancy for said dwelling unit.",
+    "doc_date": "",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://ecode360.com/35591542",
+    "quote": "Shall mean and include any conveyance or transfer of title, whether voluntary or involuntary, of real estate.",
+    "doc_date": "",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://ecode360.com/35591553",
+    "quote": "within five working days from the receipt of such application and the payment of the proper fees.",
+    "doc_date": "",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://ecode360.com/35591562",
+    "quote": "An application for a certificate of occupancy or continued certificate of occupancy shall be valid for six months from the date the application is filed.",
+    "doc_date": "",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://ecode360.com/35591557",
+    "quote": "All applications for the issuance of a certificate of occupancy or continued certificate of occupancy as well as any applications for reinspection of property for the issuance of a certificate of occupancy or continued certificate of occupancy shall be accompanied by the fee stated herein.",
+    "doc_date": "",
+    "via": "page",
+    "verified": null
+   }
+  ],
+  "confidence": "medium",
+  "notes": "Changed from not_found: Pine Hill's town code, Chapter 10, section 10-1.10 (Certificates of Occupancy and Fees), read through the ecode360 print view, bars selling a dwelling unit without first getting a certificate of occupancy or continued certificate of occupancy from the Construction Official, and defines 'sale' as any transfer of title. The live borough Construction Office page, however, sends resale C.O. requests to the Pine Hill Fire Department (856-783-8666, which is also the fire district business office number), and the fire district's resale packet covers only smoke alarms, CO alarms and the fire extinguisher. So it is unclear whether the borough runs a separate Construction Office resale inspection with the $150 code fee, or treats the fire district certificate as the resale C.O.; confidence is medium until confirmed by phone. The code's reinspection sentence says reinspection requests must also be accompanied by the fee. Rentals are separate: rental units must be registered (section 10-1.10b13) and need a Certificate of Habitability through the Construction Office (Technical Assistant Lisa Kensil, 856-783-7400 x 202)."
  },
  "fire_cert": {
   "requirements": [
-   "Power to the house must be on before scheduling, or an approved Special Circumstance form (extra fee, plus a follow-up inspection or electrician letter before anyone moves in)",
+   "Power to the house must be on before scheduling, or an approved Special Circumstance form (extra fee, plus a follow-up inspection before anyone moves in)",
    "Smoke alarm on every level within 15 feet of the bedrooms",
    "Smoke alarms older than 10 years must be replaced before inspection",
    "Hardwired smoke alarms must stay and cannot be replaced with battery alarms",
-   "CO alarm in the hallway within 10 feet of all bedroom doors; CO alarms older than 7 years must be replaced; not plugged into switched outlets or near floor molding",
-   "Fire extinguisher rated 2A10BC (5 lbs), brand new or dated/tagged for the current year, mounted visibly within 10 feet of the kitchen or toward an exit from the kitchen"
+   "CO alarm in the hallway within 10 feet of all bedroom doors; CO alarms older than 7 years must be replaced; not plugged into switched outlets or outlets against floor molding",
+   "Fire extinguisher rated 2A10BC (5 lbs), brand new or dated/tagged for the current year, mounted visibly within 10 feet of the kitchen or toward an exit from the kitchen (form still lists it)"
   ],
   "authorities": [
    {
     "name": "Pine Hill Fire District #1, Bureau of Fire Prevention",
     "type": "fire_district",
-    "area_served": "Borough of Pine Hill (coverage of the former Pine Valley Borough area not stated on the district site)",
-    "lead_time": "More than 10 business days before the inspection date for the lowest fee; inspections are done one day a week",
+    "area_served": "Borough of Pine Hill (the LEA registry notes the former Pine Valley Borough was absorbed into Pine Hill; the district site does not say how it treats former Pine Valley addresses)",
+    "lead_time": "More than 10 business days before the inspection date for the lowest fee; inspections are done one day a week. Form and payment must be received before an appointment is scheduled.",
     "fees": [
      {
       "label": "More than 10 business days before inspection",
@@ -87,15 +150,31 @@
       "verified": true
      }
     ],
-    "how_to_apply": "Fill out the application in the Smoke Detector Inspection Packet and mail it or drop it off with a check or money order (no cash) at the Bureau of Fire Prevention, 1109 Erial Road, Pine Hill, NJ 08021. The form and payment must be received before an appointment is scheduled; the office then contacts you. If dropping off, put it in the mailbox and send a follow-up email. The office is part time, so email firemarshal@pinehillfiredistrict.com for a faster reply. Fees are non-refundable.",
+    "how_to_apply": "Fill out the application in the Smoke Detector Inspection Packet and mail it or drop it off with a check or money order (no cash) at the Bureau of Fire Prevention, 1109 Erial Road, Pine Hill, NJ 08021. The form and payment must be received before an appointment is scheduled; the office then contacts you. If dropping off, put it in the mailbox and send a follow-up email. The office is part time and voicemail is not checked daily, so email firemarshal@pinehillfiredistrict.com for a faster reply. Fees are non-refundable.",
     "application_url": "https://pinehillfiredistrict.com/wp-content/uploads/2025/11/Smoke-Detector-Inspection-Packet.pdf",
     "department_url": "https://pinehillfiredistrict.com/department-list/inspection-office/",
     "phone": "856-784-0030",
     "email": "firemarshal@pinehillfiredistrict.com",
+    "contact_name": "Robert Fowler Jr.",
+    "contact_title": "Fire Marshal",
     "evidence": [
      {
       "url": "https://pinehillfiredistrict.com/wp-content/uploads/2025/11/Smoke-Detector-Inspection-Packet.pdf",
       "quote": "Application for Certification of Smoke Detector and carbon Monoxide Alarm Compliance as required by N.J.A.C 5:70-2.3, based upon the amount of time remaining before the date of inspection as follows:",
+      "doc_date": "2025-11",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://pinehillfiredistrict.com/wp-content/uploads/2025/11/Smoke-Detector-Inspection-Packet.pdf",
+      "quote": "NOTE: COMPLETED FORM AND PAYMENT MUST BE SUBMITTED PRIOR TO SCHEDULING AN APPOINTMENT",
+      "doc_date": "2025-11",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://pinehillfiredistrict.com/wp-content/uploads/2025/11/Smoke-Detector-Inspection-Packet.pdf",
+      "quote": "Inspections are conducted one day each week.",
       "doc_date": "2025-11",
       "via": "pdf",
       "verified": true
@@ -108,38 +187,54 @@
       "verified": true
      },
      {
-      "url": "https://web.archive.org/web/20240718161949/https://www.pinehillboronj.com/departments/construction-office/",
-      "quote": "To obtain a Certificate of Occupancy (C.O.) for the resale of a property, please contact the Pine Hill Fire Department: (856) 783-8666.",
-      "doc_date": "2024-07",
+      "url": "https://pinehillfiredistrict.com/department-list/inspection-office/",
+      "quote": "Robert Fowler Jr., Fire Marshal",
+      "doc_date": "",
       "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "LEAID: 0428-001 Pine Hill Borough Fire Dist #1 SMOKE DETECTOR COMPLIANCE Name: Pine Hill Boro Fire Dist #1 Addr: 1109 Erial Rd Pine Hill NJ 08021 Enf Auth. District Fire Official Robert Fowler",
+      "doc_date": "2026-03 (survey date 3/5/2026)",
+      "via": "state_directory",
+      "verified": null
+     },
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "Note: Pine Valley Borough (M) has been dissolved and absorbed by Pine Hill Borough (D).",
+      "doc_date": "2026-07",
+      "via": "pdf",
       "verified": true
      }
     ],
     "confidence": "high"
    }
   ],
-  "notes": "Pine Hill Fire District #1 is a separate fire district (Board of Fire Commissioners) at 1109 Erial Road. Fire Marshal Robert Fowler Jr.; Fire Inspector Nicholas Woods (inspector@pinehillfiredistrict.com). Office line 856-784-0030 goes to voicemail and is not checked daily; the district business office is 856-783-8666. The 2025 packet still requires a fire extinguisher. Former Pine Valley Borough (merged into Pine Hill in 2022): no statement was found on either the borough or fire district site about whether the district's resale inspection covers the former Pine Valley area or whether different rules apply there; verify with the fire district before relying on this for a Pine Valley address."
+  "notes": "Pine Hill Fire District #1 is a separate fire district (Board of Fire Commissioners) at 1109 Erial Road. Fire Marshal Robert Fowler Jr.; Fire Inspector Nicholas Woods (inspector@pinehillfiredistrict.com). Office line 856-784-0030 goes to voicemail and is not checked daily; the district business office is 856-783-8666. The November 2025 packet still requires a fire extinguisher, which the state dropped from the sale certificate in February 2025 (P.L.2025, c.19), so confirm with the district. The NJ DCA fire directory lists a second smoke compliance phone, (856) 784-3993."
  },
  "other_items": [
   {
-   "label": "Rental registration and inspection (if the buyer will rent)",
-   "detail": "All residential rental properties must be registered and inspected before occupancy, then annually or on each change of occupancy.",
-   "source_url": "https://web.archive.org/web/20240419192204/https://www.pinehillboronj.com/rental-properties/"
+   "label": "Rental registration and Certificate of Habitability (if the buyer will rent)",
+   "detail": "Rental dwelling units must be registered with the borough, and a new owner of a registered rental must notify the borough within 10 days after receiving the deed; a Certificate of Habitability for rentals comes from the Construction Office.",
+   "source_url": "https://ecode360.com/35591571"
   }
  ],
  "open_questions": [
-  "Whether Pine Hill has any borough resale inspection ordinance beyond the fire district certificate (ecode360 not readable; live borough site behind captcha).",
-  "Whether Pine Hill Fire District #1 serves the former Pine Valley Borough area, and whether any different resale rules apply there.",
-  "Certificate validity period not published by the fire district."
+  "Does the borough Construction Office still issue a separate continued C.O. on resale (town code section 10-1.10, $150), or is the Pine Hill Fire District smoke/CO certificate the only resale certificate in practice?",
+  "Whether Pine Hill Fire District #1 handles addresses in the former Pine Valley Borough area, and whether any different resale rules apply there.",
+  "Does the fire district still require a fire extinguisher after P.L.2025, c.19?",
+  "Smoke/CO certificate validity period is not published by the fire district."
  ],
+ "checked_at": "2026-10-20",
  "verification": {
-  "fees": 6,
+  "fees": 8,
   "fee_ok": 6,
   "fee_bad": 0,
-  "fee_unchecked": 0,
-  "quotes": 4,
-  "q_ok": 4,
+  "fee_unchecked": 2,
+  "quotes": 14,
+  "q_ok": 7,
   "q_bad": 0,
-  "q_unchecked": 0
+  "q_unchecked": 7
  }
 }

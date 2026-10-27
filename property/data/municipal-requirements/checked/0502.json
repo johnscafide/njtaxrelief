@@ -2,64 +2,159 @@
  "municipality_code": "0502",
  "municipality": "Cape May",
  "county": "CAPE MAY",
- "checked_at": "2026-09-30",
  "resale_co": {
   "status": "required",
-  "name": "Certificate of Zoning Compliance (transfer of title)",
-  "issued_by": "Construction & Zoning Office (Zoning Officer)",
-  "lead_time": "",
-  "valid_for": "",
+  "name": "Certificate of Continued Occupancy, Certificate of Zoning Compliance and Certificate of Flood Damage Prevention Compliance (transfer of title)",
+  "issued_by": "City of Cape May Construction & Zoning Office (Construction Official, Zoning Officer and Floodplain Manager)",
+  "lead_time": "Apply at least 15 business days before the transfer of title",
+  "valid_for": "Certificate of continued occupancy and flood certificate: 2 years from issuance (the continued occupancy certificate expires on the date of transfer)",
   "requirements": [
-   "Zoning compliance review of the property's use and number of units before transfer of title"
+   "Certificate of Continued Occupancy (Code Section 199-7): inspection showing no work done without a construction permit, no open construction permits, and no unsafe or unsanitary conditions, blocked exits or fire hazards",
+   "Certificate of Zoning Compliance (Code Section 199-5): inspection confirming no change of use and that the use and number of units comply with the Zoning Ordinance; the certificate also gives notice of the property's historic district status",
+   "Certificate of Flood Damage Prevention Compliance (Code Section 199-6): checks the minimum number of flood vents; a flood elevation certificate must be submitted if the property is in a flood zone (one issued on or after January 1, 2010 is accepted)",
+   "Violations found must be fixed before closing, unless the buyer signs an acknowledgment, assumes the risk and agrees to fix them within 30 days (30 business days for the flood certificate) after closing",
+   "Exceptions: new construction with a certificate of occupancy issued within 2 years of the transfer, transfers without payment to a related person or entity, buyer certifies demolition within 90 days, and foreclosure transfers to a lender",
+   "Separate smoke/CO certificate from the Bureau of Fire Prevention (see fire certificate)"
   ],
   "fees": [
    {
     "label": "Certificate of Zoning Compliance application",
     "amount": "$85.00",
-    "quote": "Applicant's Signature: ____________________  Phone: ________________ Fee: $85.00",
+    "quote": "Fee: $85.00",
     "source_url": "https://evocloud-prod3-public.s3.us-east-2.amazonaws.com/3/media/734.pdf",
     "verified": true
+   },
+   {
+    "label": "Certificate of Flood Damage Prevention Compliance application",
+    "amount": "$85",
+    "quote": "FEE: $85",
+    "source_url": "https://www.capemaycity.com/media/Flood%20Information/Flood%20Damage%20Prevention%20Compliance%20Application%202020.pdf",
+    "verified": true
+   },
+   {
+    "label": "Certificate of Continued Occupancy (Code Section 199-8A(7))",
+    "amount": "$85",
+    "quote": "The fee for a Certificate of Continued Occupancy shall be $85, plus $50 for each subcode inspection.",
+    "source_url": "https://ecode360.com/6658125",
+    "verified": null
+   },
+   {
+    "label": "Certificate of Continued Occupancy, each subcode inspection (Code Section 199-8A(7))",
+    "amount": "$50",
+    "quote": "The fee for a Certificate of Continued Occupancy shall be $85, plus $50 for each subcode inspection.",
+    "source_url": "https://ecode360.com/6658125",
+    "verified": null
    }
   ],
-  "how_to_apply": "Fill out the Certificate of Zoning Compliance Application (block, lot, zoning district, current and new owners, use, number of units, settlement date) and submit it with the $85.00 fee to the Construction & Zoning Office, City Hall, 643 Washington Street, Cape May, NJ 08204.",
+  "how_to_apply": "Submit the Certificate of Zoning Compliance Application (block, lot, zoning district, current and new owners, use, number of units, settlement date) and the Certificate of Flood Damage Prevention Compliance Application (with an elevation certificate if the property is in a flood zone), each with its fee, to the Construction & Zoning Office, City Hall, 643 Washington Street, Cape May, NJ 08204, at least 15 business days before closing. No separate Certificate of Continued Occupancy form was found online; ask the Construction Office (609-884-9555, construction@capemaycity.com) how to request it.",
   "application_url": "https://evocloud-prod3-public.s3.us-east-2.amazonaws.com/3/media/734.pdf",
   "department_url": "https://www.capemaycity.com/departments/ConstructionZoning",
-  "phone": "609-884-9556",
-  "email": "bbritton@capemaycity.com",
-  "contact_name": "Bruce Britton",
-  "contact_title": "Zoning Officer",
+  "phone": "609-884-9555",
+  "email": "construction@capemaycity.com",
+  "contact_name": "Lou Vito Jr",
+  "contact_title": "Plumbing Subcode Official / Construction Official",
   "evidence": [
    {
+    "url": "https://ecode360.com/6658125",
+    "quote": "Transfer of building, structures, or units. No person or entity shall sell or transfer title to any building, structure, portion of structure, or unit in a structure until such person or entity shall have first requested and obtained a certificate of continued occupancy certifying as follows:",
+    "doc_date": "2025-10-07 (Ord. No. 577-2025, latest amendment to Chapter 199)",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://ecode360.com/6658125",
+    "quote": "The purpose of this section is to require an inspection of buildings, structures, or units prior to the transfer of title to determine (i) that there are no violations of law or orders of the Construction Official, and (ii) that no unsafe or unsanitary conditions have been found.",
+    "doc_date": "2016-08-16 (Ord. No. 308-2016)",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://ecode360.com/6658125",
+    "quote": "A certificate of continued occupancy shall be valid for two years from the date of issuance and shall expire on the date of transfer (subject to any obligation to correct any deficiencies post-closing).",
+    "doc_date": "2016-08-16 (Ord. No. 308-2016)",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://ecode360.com/6658125",
+    "quote": "Transfer of building, structures, or units. No person or entity shall sell or transfer title to any building, structure, portion of structure, or unit in a structure until such person or entity shall have first requested and obtained a certificate of zoning compliance certifying the following:",
+    "doc_date": "2025-10-07 (Ord. No. 577-2025)",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://ecode360.com/6658125",
+    "quote": "The fee for a Certificate of Zoning Compliance shall be $75.",
+    "doc_date": "2016-08-16 (Ord. No. 308-2016)",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://ecode360.com/6658125",
+    "quote": "All applications for a Certificate of Zoning Compliance, a Certificate of Compliance with Flood Damage Prevention Ordinance and Certificate of Continued Occupancy shall be submitted not less than 15 business days prior to the transfer of title.",
+    "doc_date": "2016-08-16 (Ord. No. 308-2016)",
+    "via": "page",
+    "verified": null
+   },
+   {
     "url": "https://evocloud-prod3-public.s3.us-east-2.amazonaws.com/3/media/734.pdf",
-    "quote": "The information below is necessary for the issuance of a Certificate of Zoning Compliance for the transfer of title to any building, structure or unit, within the City of Cape May. The Certificate of Zoning Compliance will be issued in accordance with Section 199-5., of the City of Cape May Code.",
+    "quote": "The information below is necessary for the issuance of a Certificate of Zoning Compliance for the transfer of title to any building, structure or unit, within the City of Cape May.",
     "doc_date": "2018-05 (form footer 05/2018)",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.capemaycity.com/media/Flood%20Information/Flood%20Damage%20Prevention%20Compliance%20Application%202020.pdf",
+    "quote": "No person or entity shall sell or transfer title to any building, structure, portion of structure, or unit in a structure until such person or entity shall have first requested and obtained a Certificate of Flood Damage Prevention Compliance.",
+    "doc_date": "2017-10 (form footer 10/2017; PDF modified 2020-10-26)",
     "via": "pdf",
     "verified": true
    },
    {
     "url": "https://www.capemaycity.com/forms-center",
     "quote": "Certificate of Zoning Compliance Application",
-    "doc_date": "",
+    "doc_date": "2026-10-27 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.capemaycity.com/forms-center",
+    "quote": "Flood Damage Prevention Compliance Application",
+    "doc_date": "2026-10-27 (page fetched)",
     "via": "page",
     "verified": true
    },
    {
     "url": "https://www.capemaycity.com/departments/ConstructionZoning",
-    "quote": "Zoning Officer Bruce Britton 609-884-9556 bbritton@capemaycity.com",
-    "doc_date": "",
+    "quote": "Plumbing Subcode Official / Construction Official",
+    "doc_date": "2026-10-27 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.capemaycity.com/departments/ConstructionZoning",
+    "quote": "louv@capemaycity.com",
+    "doc_date": "2026-10-27 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.capemaycity.com/departments/ConstructionZoning",
+    "quote": "bbritton@capemaycity.com",
+    "doc_date": "2026-10-27 (page fetched)",
     "via": "page",
     "verified": true
    },
    {
     "url": "https://www.capemaycity.com/departments/ConstructionZoning",
     "quote": "***FOR PERMIT AND INSPECTION REQUEST - 609-884-9555***",
-    "doc_date": "",
+    "doc_date": "2026-10-27 (page fetched)",
     "via": "page",
     "verified": true
    }
   ],
-  "confidence": "medium",
-  "notes": "The City requires a Certificate of Zoning Compliance for the transfer of title to any building, structure or unit (City Code Section 199-5, per the City's own application form dated 05/2018, fee $85.00). This is a zoning certificate, not a building or housing inspection; no separate resale certificate of occupancy or housing inspection was found on the Construction & Zoning or Code Enforcement pages. The form lists phone 609-884-9561 for Construction & Zoning (the Construction page now lists 609-884-9561 for the Historic Preservation Commission and 609-884-9555 as the main office line). The Construction Official is Lou Vito Jr (Plumbing Subcode Official / Construction Official, 609-884-9560, louv@capemaycity.com); office email construction@capemaycity.com. The code itself (ecode360 CA1942) could not be opened, so lead time and whether an inspection is done are not confirmed. The Fire Prevention Bureau also runs annual rental/business fire inspections (Ord. No. 364-2018); that is a rental program, not a resale requirement."
+  "confidence": "high",
+  "notes": "City Code Chapter 199 (ecode360 CA1942, read in full through the print view) requires three certificates before title to any building or unit is sold or transferred: a Certificate of Zoning Compliance (Section 199-5, amended by Ord. No. 577-2025 on 10-7-2025), a Certificate of Flood Damage Prevention Compliance (Section 199-6) and a Certificate of Continued Occupancy (Section 199-7, added by Ord. No. 308-2016). The prior record only had the zoning certificate; the continued occupancy and flood certificates were missed. Fees: the City's zoning form (05/2018) and flood form (10/2017) each show $85, while the code (Section 199-8A(5) and (6)) still lists $75 for each; the forms are used here and the gap is an open question. The continued occupancy fee ($85 plus $50 per subcode inspection) is from the code only; no City form for it was found. Contacts: Construction Official Lou Vito Jr (609-884-9560, louv@capemaycity.com); Zoning Officer Bruce Britton (609-884-9556, bbritton@capemaycity.com); Technical Assistant Megan Long (609-884-9555, mlong@capemaycity.com); office email construction@capemaycity.com. The zoning form lists 609-884-9561, which the Construction page now shows as the Historic Preservation Commission line; the flood form lists 609-884-9545. The Fire Prevention Bureau's annual rental and business inspections (Ord. No. 364-2018, Section 247-9) are a rental program, not a resale requirement."
  },
  "fire_cert": {
   "requirements": [
@@ -72,7 +167,7 @@
     "name": "City of Cape May Bureau of Fire Prevention",
     "type": "municipal_fire_bureau",
     "area_served": "Entire city",
-    "lead_time": "Apply more than 10 business days before settlement for the lowest fee",
+    "lead_time": "Apply more than 10 business days before settlement for the lowest fee. The certificate is valid for 180 days from the inspection and is not transferable.",
     "fees": [
      {
       "label": "Smoke/CO certificate (1-2 family), application received more than 10 business days from settlement",
@@ -105,6 +200,20 @@
     "contact_title": "Fire Official",
     "evidence": [
      {
+      "url": "https://ecode360.com/6658355",
+      "quote": "Beginning in 2018, and continuing for each year thereafter, all 1 & 2 Family Dwellings shall be inspected prior to the sale of property.",
+      "doc_date": "2025-02-19 (Ord. No. 549-2025)",
+      "via": "page",
+      "verified": null
+     },
+     {
+      "url": "https://ecode360.com/6658355",
+      "quote": "Certificates of Smoke Alarm, Carbon Monoxide Alarm and Portable Fire Extinguisher Compliance (CSACMAPFEC), issued by the Bureau of Fire Prevention, are valid for 180 days from the time of inspection and are not transferable.",
+      "doc_date": "2025-02-19 (Ord. No. 549-2025)",
+      "via": "page",
+      "verified": null
+     },
+     {
       "url": "https://www.capemaycity.com/media/Fire%20Prevention/Sale%20of%20Property%20Form.pdf",
       "quote": "Certificate of Smoke Alarm, Carbon Monoxide Alarm, and Portable Fire Extinguisher Compliance (Choose this option for 1 to 2 family dwellings)",
       "doc_date": "2025-03-18 (PDF created)",
@@ -121,14 +230,14 @@
      {
       "url": "https://www.capemaycity.com/departments/FirePrevention",
       "quote": "Fire Official Mark Barham 609-884-9587 mbarham@capemaycity.com",
-      "doc_date": "",
+      "doc_date": "2026-10-27 (page fetched)",
       "via": "page",
       "verified": true
      },
      {
       "url": "https://www.capemaycity.com/departments/FirePrevention",
       "quote": "Main Line/Scheduling # 609-884-9599",
-      "doc_date": "",
+      "doc_date": "2026-10-27 (page fetched)",
       "via": "page",
       "verified": true
      },
@@ -158,34 +267,40 @@
       "quote": "LEAID: 0502-001 Enf Auth. Municipal Fire Official Mark C Barham Phone (609) 884-9599",
       "doc_date": "2026-07-22 (survey date)",
       "via": "state_directory",
-      "verified": true
+      "verified": null
      }
     ],
     "confidence": "high"
    }
   ],
-  "notes": "The City is the local fire enforcing agency (DCA registry code M). Fees are printed on the Bureau's Sale of Property Form (PDF created 2025-03-18). The form also lists a Status of Fire Code letter at $125.00 for other uses (multiple dwellings, hotels, businesses); that is not the 1-2 family certificate. The Bureau office is at 712 Washington Street in the fire house. Other staff: Administrative Clerk Nancy Mohan (609-884-9599, fireprevention@capemaycity.com); Fire Inspectors Chris Larcombe (609-957-5382) and Casey Hunt (609-957-5318)."
+  "notes": "The City is the local fire enforcing agency (DCA registry code M). Fees are printed on the Bureau's Sale of Property Form (PDF created 2025-03-18) and match City Code Section 247-8 (amended 2-19-2025 by Ord. No. 549-2025), which also says the certificate is valid 180 days from inspection and is not transferable. The form also lists a Status of Fire Code letter at $125.00 for other uses (multiple dwellings, hotels, businesses); that is not the 1-2 family certificate. The Bureau office is at 712 Washington Street in the fire house. Other staff: Administrative Clerk Nancy Mohan (609-884-9599, fireprevention@capemaycity.com); Fire Inspectors Chris Larcombe (609-957-5382) and Casey Hunt (609-957-5318). The form and the code section title still name a portable fire extinguisher, but the Bureau page says extinguishers are no longer required in 1-2 family homes for sales or rentals (P.L.2025, c.19)."
  },
  "other_items": [
   {
-   "label": "Certificate of Zoning Compliance for transfer of title",
-   "detail": "$85.00 application to the Construction & Zoning Office (form dated 05/2018); see resale_co.",
-   "source_url": "https://evocloud-prod3-public.s3.us-east-2.amazonaws.com/3/media/734.pdf"
+   "label": "Certificate of Zoning Compliance and Certificate of Flood Damage Prevention Compliance",
+   "detail": "Both are required before transfer of title along with the Certificate of Continued Occupancy (see resale_co). The flood certificate needs a flood elevation certificate if the property is in a flood zone.",
+   "source_url": "https://ecode360.com/6658125"
+  },
+  {
+   "label": "Open construction permits",
+   "detail": "The Certificate of Continued Occupancy certifies there are no open construction permits and no work done without a permit, so open permits should be closed before closing.",
+   "source_url": "https://ecode360.com/6658125"
   }
  ],
  "open_questions": [
-  "Lead time and processing time for the Certificate of Zoning Compliance, and whether the $85.00 fee (2018 form) is current.",
-  "Whether the zoning officer inspects the property for the Certificate of Zoning Compliance or reviews records only.",
-  "Whether any water/sewer final reading is required at sale (not found on the Water & Sewer page)."
+  "The zoning and flood forms show $85 each, but City Code Section 199-8 lists $75 for each; confirm the current fee with the Construction & Zoning Office (609-884-9555).",
+  "How to request the Certificate of Continued Occupancy (no City form was found online) and how many $50 subcode inspections a typical 1-2 family home needs.",
+  "Whether any water/sewer final reading is required at sale (not found in Chapter 510 or on the Water & Sewer page)."
  ],
+ "checked_at": "2026-10-27",
  "verification": {
-  "fees": 4,
-  "fee_ok": 4,
+  "fees": 7,
+  "fee_ok": 5,
   "fee_bad": 0,
-  "fee_unchecked": 0,
-  "quotes": 12,
-  "q_ok": 12,
+  "fee_unchecked": 2,
+  "quotes": 24,
+  "q_ok": 15,
   "q_bad": 0,
-  "q_unchecked": 0
+  "q_unchecked": 9
  }
 }

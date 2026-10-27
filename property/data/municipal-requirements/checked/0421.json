@@ -2,7 +2,6 @@
  "municipality_code": "0421",
  "municipality": "Lawnside Borough",
  "county": "CAMDEN",
- "checked_at": "2026-10-06",
  "resale_co": {
   "status": "required",
   "name": "Certificate of Occupancy (Resale / Rental)",
@@ -12,7 +11,7 @@
   "requirements": [
    "Working smoke alarm on each level and in every bedroom",
    "CO alarm within 10 feet of sleeping areas",
-   "ABC extinguisher (2.5 lb) mounted within 10 feet of the cooking area",
+   "ABC extinguisher (2.5 lb) mounted within 10 feet of the cooking area (form still lists it)",
    "Heater and roof certification from a NJ licensed contractor (resale only); a private home inspection or a new roof or heater under permit in the last 5 years is accepted instead",
    "Heater/chimney connection secure; water heater relief valve pipe 2 to 6 inches from the floor",
    "Sump pump may not discharge into the sewer line",
@@ -55,47 +54,84 @@
   "email": "m.hauser@lawnside.net",
   "evidence": [
    {
+    "url": "https://ecode360.com/35982076",
+    "quote": "It shall be unlawful to use or permit the use of any structure or building or part of the structure or building that presently exists in the Borough of Lawnside or any structure or building that has had a change in ownership or a change in occupancy, if that portion of the structure has been leased or sold, until a certificate allowing the new occupancy and/or use shall have been applied for by the owner or the owner's agent and such certificate issued by the Construction Code Official.",
+    "doc_date": "Code 53-5, added 5-5-2004 by Ord. No. 07-FY2004; fees amended 12-7-2022 by Ord. No. 14-2022 (ecode360, legislation through 06-03-2026)",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://ecode360.com/35982076",
+    "quote": "Residential building, per unit: $75.",
+    "doc_date": "Code 53-5B(1)(d), Ord. No. 14-2022",
+    "via": "page",
+    "verified": null
+   },
+   {
     "url": "https://www.lawnside.net/DocumentCenter/View/412/Certificate-of-Occupancy-Application-PDF",
     "quote": "NOTE: This Dwelling Is Not To Be Occupied Until A Cerificate Of Occupancy Is Issued By The Construction Code Department Of The Borough Of Lawnside.",
-    "doc_date": "2022-12",
+    "doc_date": "2022-12-16 (PDF)",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.lawnside.net/DocumentCenter/View/412/Certificate-of-Occupancy-Application-PDF",
+    "quote": "Please Allow Ten (10) Business Days For Inspection To Be Completed.",
+    "doc_date": "2022-12-16",
     "via": "pdf",
     "verified": true
    },
    {
     "url": "https://www.lawnside.net/DocumentCenter/View/412/Certificate-of-Occupancy-Application-PDF",
     "quote": "All Work That Is Related To Open Construction Permits Must Be Completed And Permit Closed Out Prior To The Issuance Of A Certicate Of Occupancy.",
-    "doc_date": "2022-12",
+    "doc_date": "2022-12-16",
     "via": "pdf",
     "verified": true
    },
    {
     "url": "https://www.lawnside.net/DocumentCenter/View/412/Certificate-of-Occupancy-Application-PDF",
     "quote": "A Heater and Roof Certification (Resale Only) must be provided by a NJ. Licensed Contractor.",
-    "doc_date": "2022-12",
+    "doc_date": "2022-12-16",
     "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.lawnside.net/DocumentCenter/View/412/Certificate-of-Occupancy-Application-PDF",
+    "quote": "PRIMARY CONTACT: Email Marian Hauser m.hauser@lawnside.net",
+    "doc_date": "2022-12-16",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.lawnside.net/1204/Construction-Department",
+    "quote": "lawn side inspections Email",
+    "doc_date": "2026-10-20 (page fetched)",
+    "via": "page",
     "verified": true
    }
   ],
-  "confidence": "medium",
-  "notes": "Application is from December 2022 (Borough Ordinance No. 14-2022 fees). The form covers both resale and rental; inspections follow the 2015 International Property Maintenance Code and are visual only. The Construction Department page also lists lawnsideinspections@lawnside.net. Rental properties also need a Landlord Mercantile License and Rental Unit Registration (rental program). No explicit web page statement that a CO is required on every sale was found; status is based on the official application."
+  "confidence": "high",
+  "notes": "Re-checked October 20, 2026. The Borough code on ecode360 (Chapter 53, section 53-5, read in full through the print view) requires a certificate of occupancy or certificate of continued occupancy after any change of ownership, applied for by the owner or owner's agent and issued by the Construction Code Official; repairs needed for the certificate are the current owner's responsibility. Code 53-5B (Ord. No. 14-2022) sets the same $75 per unit fee (initial inspection plus one reinspection), $75 extra reinspection and $25 per day violation fine as the application, so those are not listed twice. Inspections follow the 2015 International Property Maintenance Code (the code text cites BOCA 1993) and are visual only. The CO application is dated December 2022 and is still linked from the Borough site. The Construction Department page now shows only the email lawnsideinspections@lawnside.net; the phone (856) 573-6214 and Marian Hauser's email come from the application. Code 109 also offers an optional $25 informational inspection or status report for a prospective purchaser; that is not the resale CO. Rental properties also need a Landlord Mercantile License and Rental Unit Registration (rental program).",
+  "contact_name": "Marian Hauser",
+  "contact_title": "Primary contact named on the Construction Office CO application"
  },
  "fire_cert": {
   "requirements": [
    "All smoke alarms (hardwired and battery) must be less than 10 years old; take them down and check the date, replace if undated",
-   "Smoke alarm type by build year: pre-1975 homes need 10-year sealed battery alarms on each level; newer homes need hardwired, interconnected alarms per the year-built chart",
-   "Smoke alarm in each sleeping area plus one outside each sleeping area within 10 feet (local ordinance 172-8 B)",
-   "CO alarm outside of and near all sleeping areas if there is a fuel-burning appliance, fireplace or garage; CO alarms must be less than 7 years old",
+   "Smoke alarm type by build year: pre-1975 homes need 10-year sealed battery alarms on each level including the basement; newer homes need AC powered, interconnected alarms per the year-built chart",
+   "Borough Code 70-6B(4): a working smoke detector and CO detector in each sleeping area, plus one outside each sleeping area within 10 feet",
+   "CO alarm outside of but within 10 feet of all sleeping areas if there is a fuel-burning appliance, fireplace or garage; CO alarms must be less than 7 years old",
    "Low-voltage alarm systems must be tested by an alarm contractor before the inspection, with the certificate shown to the inspector",
    "House numbers: Arabic numerals at least 3 inches, contrasting, at least 60 inches above ground, visible from the street",
    "Homes with a secondary power source (solar, generator, battery storage) need a printed label within 18 inches of the main panel and meter, like \"CAUTION MULTIPLE SOURCES OF POWER\"",
-   "Fire extinguisher (June 2025 form): fully charged 2-A:10-BC in or within 10 feet of the kitchen, visible, mounted no higher than 5 feet, and either under 1 year old or tagged by a NJ certified fire equipment contractor"
+   "Fire extinguisher (form still lists it on the June 2025 version posted by Lawnside, and Code 70-6B still names extinguisher inspections): fully charged 2-A:10-BC in or within 10 feet of the kitchen"
   ],
   "authorities": [
    {
     "name": "Regional Fire Prevention Alliance (Borough of Barrington Bureau of Fire Prevention)",
     "type": "municipal_fire_bureau",
     "area_served": "Serves Barrington, Hi-Nella, Lawnside, Mt. Ephraim and Oaklyn; covers the entire borough",
-    "lead_time": "Lowest fee with 14 or more business days notice before the change of occupant (weekends, holidays and the settlement date do not count)",
+    "lead_time": "Lowest fee with 14 or more business days notice before the change of occupant (weekends, holidays and the settlement date do not count). The Alliance form says certificates are valid 6 months; Borough Code 70-6B(3) says 90 days.",
     "fees": [
      {
       "label": "Request received 14+ business days before change of occupant",
@@ -140,32 +176,67 @@
     "email": "firealliance@barringtonboro.com",
     "evidence": [
      {
+      "url": "https://ecode360.com/36320110",
+      "quote": "Smoke detector, carbon monoxide detector and portable fire extinguisher inspections, to be conducted on all one- and two-family residential dwellings for resale being sold in the Borough, shall be charged as follows:",
+      "doc_date": "Code 70-6B, amended 4-2-2025 by Ord. No. 01-2025 (ecode360)",
+      "via": "page",
+      "verified": null
+     },
+     {
+      "url": "https://ecode360.com/36320110",
+      "quote": "A certificate is valid for a period of 90 days from the date of issuance.",
+      "doc_date": "Code 70-6B(3)",
+      "via": "page",
+      "verified": null
+     },
+     {
+      "url": "https://ecode360.com/35985317",
+      "quote": "The local enforcing agency shall be the Regional Fire Prevention Alliance.",
+      "doc_date": "Code 70-3",
+      "via": "page",
+      "verified": null
+     },
+     {
       "url": "https://barringtonboro.com/regional-fire-prevention-alliance/",
       "quote": "The Regional Fire Prevention Alliance of Barrington, New Jersey serves the Municipalities of Barrington, Hi-Nella, Lawnside, Mt. Ephraim and Oaklyn.",
-      "doc_date": "",
+      "doc_date": "2026-10-20 (page fetched)",
       "via": "page",
       "verified": true
      },
      {
       "url": "https://barringtonboro.com/wp-content/uploads/2025/11/Barrington-Smoke-Doc-update-Fillable-pdf.pdf",
-      "quote": "Inspection is required per NJ Fire Code 5:70-2.3 for the selling, renting, or change of occupancy in one or two family homes. Inspection Must occur Prior to Settlement or change of Occupancy",
-      "doc_date": "2025-11",
+      "quote": "Inspection is required per NJ Fire Code 5:70-2.3 for the selling, renting, or change of occupancy in one or two family homes.",
+      "doc_date": "2025-11-06 (PDF modified)",
       "via": "pdf",
       "verified": true
      },
      {
       "url": "https://barringtonboro.com/wp-content/uploads/2025/11/Barrington-Smoke-Doc-update-Fillable-pdf.pdf",
       "quote": "A CHECK OR MONEY ORDER PAYABLE TO “REGIONAL FIRE PREVENTION ALLIANCE” MUST ACCOMPANY THIS APPLICATION.",
-      "doc_date": "2025-11",
+      "doc_date": "2025-11-06",
       "via": "pdf",
       "verified": true
      },
      {
       "url": "https://barringtonboro.com/wp-content/uploads/2025/11/Barrington-Smoke-Doc-update-Fillable-pdf.pdf",
       "quote": "CERTIFICATIONS ARE VALID FOR 6 MONTHS and are Non transferable. FEES ARE NON-REFUNDABLE.",
-      "doc_date": "2025-11",
+      "doc_date": "2025-11-06",
       "via": "pdf",
       "verified": true
+     },
+     {
+      "url": "https://www.lawnside.net/DocumentCenter/View/412/Certificate-of-Occupancy-Application-PDF",
+      "quote": "NOTE: You must also contact the Regional Fire Prevention Alliance in Barrington, NJ to schedule a Fire Certification Inspection, www.Barringtonboro.com., firealliance@barringtonboro.com or 856-547-0991.",
+      "doc_date": "2022-12-16",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.lawnside.net/DocumentCenter/View/464/Smoke-Alarm-Detector-Application-for-2025-PDF",
+      "quote": "“Serving the Municipalities of Barrington, Hi-Nella, Lawnside, Mt. Ephraim and Oaklyn”",
+      "doc_date": "2025-08-21 (scanned PDF, version 06/2025)",
+      "via": "pdf",
+      "verified": null
      },
      {
       "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
@@ -175,20 +246,6 @@
       "verified": true
      },
      {
-      "url": "https://www.lawnside.net/DocumentCenter/View/412/Certificate-of-Occupancy-Application-PDF",
-      "quote": "NOTE: You must also contact the Regional Fire Prevention Alliance in Barrington, NJ to schedule a Fire Certification Inspection, www.Barringtonboro.com., firealliance@barringtonboro.com or 856-547-0991.",
-      "doc_date": "2022-12",
-      "via": "pdf",
-      "verified": true
-     },
-     {
-      "url": "https://www.lawnside.net/DocumentCenter/View/464/Smoke-Alarm-Detector-Application-for-2025-PDF",
-      "quote": "“Serving the Municipalities of Barrington, Hi-Nella, Lawnside, Mt. Ephraim and Oaklyn”",
-      "doc_date": "version 06/2025",
-      "via": "pdf",
-      "verified": null
-     },
-     {
       "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
       "quote": "LEAID: 0421-001 Lawnside Boro SMOKE DETECTOR COMPLIANCE Enf Auth. Municipal ... Name: Regional Fire Prev Alliance ... Addr: 205 Haines Ave ... Barrington NJ 08007 ... Fire Official Nicholas D'Alonzo 205 Haines Ave ... Phone (856) 547-0991 Phone JUVENILE FIRESETTERS PROGRAM",
       "doc_date": "2026-09-03 (directory PDF dated; fire department survey 5/19/2026)",
@@ -196,10 +253,12 @@
       "verified": true
      }
     ],
-    "confidence": "high"
+    "confidence": "high",
+    "contact_name": "Nick D'Alonzo",
+    "contact_title": "Fire Official (fire code questions: fireofficial@barringtonboro.com)"
    }
   ],
-  "notes": "Two versions of the Alliance form were found with the same fees. The Barrington-hosted November 2025 version is titled a Smoke Alarm, CO Alarm and Secondary Power Source Identification Label (CSACMASPSIL) application and omits the extinguisher section; it states a $500 penalty. The June 2025 version hosted by Lawnside is titled CSACMAPFEC, includes the extinguisher rules, and states a $600 penalty. Walk-in office hours Tuesday to Friday 8am to 2pm; inspections Monday to Friday 9am to 2pm. Fire Official Nick D'Alonzo, fireofficial@barringtonboro.com. Lawnside's website links to the June 2025 version (Smoke Alarm/Detector Application for 2025). DCA fire directory lists Fire Official Nicholas D'Alonzo for this borough."
+  "notes": "Lawnside's own code (Chapter 70, read on ecode360) names the Regional Fire Prevention Alliance as the local enforcing agency and sets the same resale smoke/CO fees as the Alliance form ($66 / $74 / $106 / $171 and a $50 reinspection), so the code amounts are not listed twice. Validity conflict: the Alliance's November 2025 form says certificates are valid 6 months; Code 70-6B(3) says 90 days. The November 2025 form on the Alliance page has no extinguisher section (in line with P.L.2025, c.19) and states a $500 penalty; the June 2025 version posted on Lawnside's site (scanned, not machine-readable) includes extinguisher rules and a $600 penalty. The Borough CO checklist separately asks for a 2.5 lb ABC extinguisher within 10 feet of the cooking area. Walk-in office hours Tuesday to Friday 8am to 2pm; inspections Monday to Friday 9am to 2pm. DCA fire directory lists Fire Official Nicholas D'Alonzo (ndalonzo@barringtonboro.com) with an SSA with Barrington Borough."
  },
  "other_items": [
   {
@@ -214,17 +273,20 @@
   }
  ],
  "open_questions": [
-  "CO fee sheet dates from December 2022; confirm $75 is still current.",
-  "CO validity period not stated."
+  "CO fee sheet and code fees date from December 2022 (Ord. No. 14-2022); confirm $75 is still current.",
+  "How long the Borough CO is valid is not stated.",
+  "Is the smoke/CO certificate valid 6 months (Alliance form) or 90 days (Borough Code 70-6B(3))?",
+  "Does the Alliance or the Borough CO inspection still require a fire extinguisher after P.L.2025, c.19?"
  ],
+ "checked_at": "2026-10-20",
  "verification": {
   "fees": 8,
-  "fee_ok": 5,
+  "fee_ok": 8,
   "fee_bad": 0,
-  "fee_unchecked": 3,
-  "quotes": 11,
-  "q_ok": 6,
+  "fee_unchecked": 0,
+  "quotes": 19,
+  "q_ok": 13,
   "q_bad": 0,
-  "q_unchecked": 5
+  "q_unchecked": 6
  }
 }

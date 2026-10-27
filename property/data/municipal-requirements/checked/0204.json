@@ -2,7 +2,7 @@
  "municipality_code": "0204",
  "municipality": "Bogota Borough",
  "county": "BERGEN",
- "checked_at": "2026-10-04",
+ "checked_at": "2026-10-20",
  "resale_co": {
   "status": "required",
   "name": "Certificate of Continued Occupancy (CCO)",
@@ -45,30 +45,37 @@
     "verified": null
    }
   ],
-  "how_to_apply": "Print and fill in the Borough's Certificate of Continued Occupancy (CCO) Permit Application and file it with the Building Department at Borough Hall, 375 Larch Avenue, Bogota, NJ 07603, with the fee. Apply more than 20 business days before closing to pay the base fee.",
-  "application_url": "https://www.bogotanj.gov/_files/ugd/8d609e_2346f3c07d424c37807d86013e6fad2d.pdf",
-  "department_url": "https://www.bogotanj.gov/building-department",
+  "how_to_apply": "Print and fill in the Borough's Certificate of Continued Occupancy (CCO) Permit Application (Building Department page or Forms page) and file it with the Building Department at the Bogota Municipal Building, 375 Larch Avenue, Bogota, NJ 07603, with the fee. Apply more than 20 business days before closing to pay the base fee. Office hours: Monday, Wednesday and Thursday 9:00am to 5:15pm, Tuesday 11:00am to 7:00pm, Friday 9:00am to 12:00pm.",
+  "application_url": "https://www.bogotanj.gov/_files/ugd/8d609e_050480fbed154e0fbcaa41c19bd4b2e9.pdf",
+  "department_url": "https://www.bogotanj.gov/bldgdept",
   "phone": "201-342-1736 x224",
-  "email": "bldgdept@bogotaonline.org",
+  "email": "ctedesco@bogotanj.gov",
   "contact_name": "Arthur Sopelsa",
-  "contact_title": "Construction Code and Zoning Official",
+  "contact_title": "Construction Code and Zoning Official (Building Department staff contact: Crissy Tedesco)",
   "evidence": [
    {
     "url": "https://www.bogotanj.gov/forms",
     "quote": "(CCO) Permit Application",
-    "doc_date": "2026-10-04 (page fetched)",
+    "doc_date": "2026-10-20 (page fetched)",
     "via": "page",
     "verified": true
    },
    {
-    "url": "https://www.bogotanj.gov/_files/ugd/8d609e_2346f3c07d424c37807d86013e6fad2d.pdf",
+    "url": "https://www.bogotanj.gov/bldgdept",
+    "quote": "Certificate of Continued Occupancy (CCO) Permit Application",
+    "doc_date": "2026-10-20 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.bogotanj.gov/_files/ugd/8d609e_050480fbed154e0fbcaa41c19bd4b2e9.pdf",
     "quote": "NO CLOSING IS TO TAKE PLACE WITHOUT THE COMPLETED CERTIFICATE OF INSPECTION!!!",
     "doc_date": "",
     "via": "pdf",
     "verified": null
    },
    {
-    "url": "https://www.bogotanj.gov/_files/ugd/8d609e_2346f3c07d424c37807d86013e6fad2d.pdf",
+    "url": "https://www.bogotanj.gov/_files/ugd/8d609e_050480fbed154e0fbcaa41c19bd4b2e9.pdf",
     "quote": "SMOKE DETECTOR - CARBON MONOXIDE - FIRE EXTINGUISHER CERTIFICATION",
     "doc_date": "",
     "via": "pdf",
@@ -76,42 +83,63 @@
    },
    {
     "url": "https://ecode360.com/34713647",
-    "quote": "Fees for certificate of continuing occupancy (C.C.O.) – existing building – shall be based upon the amount of time remaining before the change of occupant is expected as follows:",
-    "doc_date": "2026-10-04 (page fetched)",
+    "quote": "Fees for certificate of continuing occupancy (C.C.O.) - existing building - shall be based upon the amount of time remaining before the change of occupant is expected as follows:",
+    "doc_date": "2026-10-20 (page fetched)",
     "via": "page",
     "verified": null
    },
    {
     "url": "https://ecode360.com/34713647",
     "quote": "The fees for a temporary, ninety (90) day maximum, nonextendable certificate of occupancy shall be one-half (1/2) of the above fee schedule plus one hundred twenty (120%) percent bond in the sum of the unfinished work.",
-    "doc_date": "2026-10-04 (page fetched)",
+    "doc_date": "2026-10-20 (page fetched)",
     "via": "page",
     "verified": null
    },
    {
-    "url": "https://www.bogotanj.gov/building-department",
+    "url": "https://www.bogotanj.gov/bldgdept",
     "quote": "Construction Code and Zoning Official",
-    "doc_date": "2026-10-04 (page fetched)",
+    "doc_date": "2026-10-20 (page fetched)",
     "via": "page",
     "verified": true
    },
    {
-    "url": "https://www.bogotanj.gov/building-department",
+    "url": "https://www.bogotanj.gov/bldgdept",
     "quote": "Arthur Sopelsa",
-    "doc_date": "2026-10-04 (page fetched)",
+    "doc_date": "2026-10-20 (page fetched)",
     "via": "page",
     "verified": true
    },
    {
-    "url": "https://www.bogotanj.gov/building-department",
+    "url": "https://www.bogotanj.gov/bldgdept",
     "quote": "201-342-1736 x224",
-    "doc_date": "2026-10-04 (page fetched)",
+    "doc_date": "2026-10-20 (page fetched)",
     "via": "page",
     "verified": true
+   },
+   {
+    "url": "https://www.bogotanj.gov/bldgdept",
+    "quote": "Crissy Tedesco",
+    "doc_date": "2026-10-20 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.bogotanj.gov/bldgdept",
+    "quote": "11:00am - 7:00pm (Tuesday)",
+    "doc_date": "2026-10-20 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://ecode360.com/34713647",
+    "quote": "Sale or rental of:",
+    "doc_date": "2026-10-20 (page fetched)",
+    "via": "page",
+    "verified": null
    }
   ],
   "confidence": "medium",
-  "notes": "The Borough's Building Department posts a 'Certificate of Continued Occupancy (CCO) Permit Application'; the linked PDF is a scanned Borough form titled 'Application - Smoke Detector - Carbon Monoxide - Fire Extinguisher Certification' and says no closing may take place without the completed certificate of inspection. Borough Code §9-1.3 (read through the ecode360 print view) sets C.C.O. fees for the 'Sale or rental of' one- and two-family dwellings, scaled by how early the request is made. No separate code section was found that spells out what the CCO inspection covers beyond the smoke/CO form, so the scope is unclear. The Borough is moving its website and email from bogotaonline.org to bogotanj.gov (expected by October 15, 2026); the bldgdept@bogotaonline.org address may change. Rental-only items (annual fire registration of non-owner-occupied one-family and all two-family homes under §16-3.3, R-1 $100 and R-2 $150 a year) are not resale requirements."
+  "notes": "The Building Department page moved from /building-department to /bldgdept on the new bogotanj.gov site. It still names Construction Code and Zoning Official Arthur Sopelsa at 201-342-1736 x224 and now lists Crissy Tedesco as Building Department staff, with a contact link to ctedesco@bogotanj.gov (the old bldgdept@bogotaonline.org address is no longer shown). The CCO Permit Application now has a new file link, but it is the same scanned Borough form as before (titled 'Application - Smoke Detector - Carbon Monoxide - Fire Extinguisher Certification'), which says no closing may take place without the completed certificate of inspection. Borough Code §9-1.3a5 (read through the ecode360 print view) sets C.C.O. fees for the 'Sale or rental of' one- and two-family dwellings, scaled by how early the request is made. No separate code section was found that spells out what the CCO inspection covers beyond the smoke/CO form, so the scope is unclear. Rental-only items (annual fire registration of non-owner-occupied one-family and all two-family homes under §16-3.3) are not resale requirements."
  },
  "fire_cert": {
   "requirements": [
@@ -141,16 +169,16 @@
       "verified": null
      }
     ],
-    "how_to_apply": "File the Borough's CCO / smoke detector, carbon monoxide and fire extinguisher certification application with the Building Department at 375 Larch Avenue. Questions about alarm rules can go to the Fire Prevention Bureau at 31 Fairview Avenue.",
-    "application_url": "https://www.bogotanj.gov/_files/ugd/8d609e_2346f3c07d424c37807d86013e6fad2d.pdf",
+    "how_to_apply": "File the Borough's CCO / smoke detector, carbon monoxide and fire extinguisher certification application with the Building Department at 375 Larch Avenue. Questions about alarm rules can go to the Fire Prevention Bureau at 31 Fairview Avenue (Monday to Friday, 8:00am to 2:30pm).",
+    "application_url": "https://www.bogotanj.gov/_files/ugd/8d609e_050480fbed154e0fbcaa41c19bd4b2e9.pdf",
     "department_url": "https://www.bogotanj.gov/fire-prevention",
     "phone": "201-646-0801",
-    "email": "fireprevention@bogotaonline.org",
+    "email": "dklima@bogotanj.gov",
     "contact_name": "Daniel Klima",
     "contact_title": "Fire Marshal (Fire Official)",
     "evidence": [
      {
-      "url": "https://www.bogotanj.gov/_files/ugd/8d609e_2346f3c07d424c37807d86013e6fad2d.pdf",
+      "url": "https://www.bogotanj.gov/_files/ugd/8d609e_050480fbed154e0fbcaa41c19bd4b2e9.pdf",
       "quote": "SMOKE DETECTOR - CARBON MONOXIDE - FIRE EXTINGUISHER CERTIFICATION",
       "doc_date": "",
       "via": "pdf",
@@ -159,14 +187,21 @@
      {
       "url": "https://www.bogotanj.gov/fire-prevention",
       "quote": "Daniel Klima",
-      "doc_date": "2026-10-04 (page fetched)",
+      "doc_date": "2026-10-20 (page fetched)",
       "via": "page",
       "verified": true
      },
      {
       "url": "https://www.bogotanj.gov/fire-prevention",
       "quote": "201-646-0801",
-      "doc_date": "2026-10-04 (page fetched)",
+      "doc_date": "2026-10-20 (page fetched)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://www.bogotanj.gov/fire-prevention",
+      "quote": "8:00am - 2:30pm (Monday - Friday)",
+      "doc_date": "2026-10-20 (page fetched)",
       "via": "page",
       "verified": true
      },
@@ -174,6 +209,13 @@
       "url": "https://ecode360.com/34716012",
       "quote": "The local enforcing agency shall be the Bogota Bureau of Fire Prevention, which is hereby created.",
       "doc_date": "2025-05-15 (Ord. No. 1633)",
+      "via": "page",
+      "verified": null
+     },
+     {
+      "url": "https://ecode360.com/34716012",
+      "quote": "other than one and two family owner occupied dwellings used exclusively for dwelling purposes",
+      "doc_date": "2026-10-20 (page fetched)",
       "via": "page",
       "verified": null
      },
@@ -195,7 +237,7 @@
     "confidence": "medium"
    }
   ],
-  "notes": "The NJ DCA fire directory lists the Bogota Borough Building Department at 375 Larch Avenue as the smoke detector compliance office, which matches the Borough's posted form. The Fire Prevention Bureau page (Fire Marshal Daniel Klima, 201-646-0801) lists only a 'Carbon Monoxide Certification' self-test form, which is an owner certification for registered rentals, not the sale certificate. No separate smoke certificate fee was found; the CCO fee appears to cover it. State law (P.L.2025, c.19, signed February 3, 2025) dropped the portable fire extinguisher from the state sale certificate. The Borough form still lists a fire extinguisher, so confirm with the office."
+  "notes": "The NJ DCA fire directory lists the Bogota Borough Building Department at 375 Larch Avenue as the smoke detector compliance office, which matches the Borough's posted form. The Fire Prevention Bureau page (Fire Marshal Daniel Klima, 201-646-0801, contact link dklima@bogotanj.gov) lists only a 'Carbon Monoxide Certificate' form, which is an owner certification for registered rentals, not the sale certificate. Borough Code §16-3.3a says the Bureau enforces the fire code in all buildings other than one and two family owner occupied dwellings, so the sale certificate runs through the Building Department CCO. No separate smoke certificate fee was found; the CCO fee appears to cover it. State law (P.L.2025, c.19, signed February 3, 2025) dropped the portable fire extinguisher from the state sale certificate. The Borough form still lists a fire extinguisher, so confirm with the office."
  },
  "other_items": [
   {
@@ -215,9 +257,9 @@
   "fee_ok": 0,
   "fee_bad": 0,
   "fee_unchecked": 6,
-  "quotes": 14,
-  "q_ok": 7,
+  "quotes": 20,
+  "q_ok": 11,
   "q_bad": 0,
-  "q_unchecked": 7
+  "q_unchecked": 9
  }
 }

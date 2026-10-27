@@ -2,7 +2,7 @@
  "municipality_code": "1533",
  "municipality": "Tuckerton Borough",
  "county": "OCEAN",
- "checked_at": "2026-09-30",
+ "checked_at": "2026-10-20",
  "resale_co": {
   "status": "required",
   "name": "Resale inspection (Residential Resale / Rental Inspection)",
@@ -14,21 +14,21 @@
    "Home clean and move-in ready: trash, debris and hazardous material removed; paint, flooring, siding, roofing, windows and screens in good condition",
    "Attached garage: 1/2 inch drywall on walls next to living space and on attic ceilings; two layers of type X drywall under living space above the garage; metal or rated doors in separation walls, including attic access",
    "Stairs with graspable handrails and closed risers; decks and landings 30 inches or more above grade need 36 inch guardrails with openings under 4 inches",
-   "Smoke detectors to code (at least one per level in older homes and one within 10 feet of each bedroom) and CO detector within 10 feet of all bedrooms",
+   "Smoke detectors to code (at least one per floor level in older homes and one within 10 feet of each bedroom) and CO detector within 10 feet of all bedrooms",
    "Anti-tip device on the range",
    "Electrical: no exposed wires, panel labeled, all boxes covered",
    "Plumbing: water heater relief valve piped to within 6 inches of the floor; heating equipment properly vented",
    "House numbers at least 4 inches near the front door (not on the door) and contrasting",
-   "Well water test by the Board of Health (if on a well)",
-   "Flood elevation certificate in a special flood hazard area",
-   "Chimney caps on all fireplaces; chimney, woodstove, fireplace and heat and hot water certificates from professionals",
-   "Lead paint certificate if built before 1978; bulkhead certificate (waterfront)",
-   "Portable fire extinguisher, minimum 2A:10BC, 2.5 to 10 lb dry chemical, within 10 feet of the kitchen",
-   "No sleeping space on the third floor in Tuckerton Meadows or in second-floor loft areas in Bartletts Landing"
+   "Chimney caps on all fireplaces",
+   "For resales: well water test by the Board of Health (if on a well), Elevation Certificate and Septic Certificate (checklist marks these 'For resales and rentals')",
+   "Bulkhead certificate if the bulkhead is in questionable repair (decided the day of inspection)",
+   "Portable fire extinguisher, minimum 2A:10B:C, 2 1/2 to 10 lb dry chemical, within 10 feet of the kitchen (form still lists it)",
+   "No sleeping space on the third floor in Tuckerton Meadows or in second-floor loft areas in Bartletts Landing",
+   "Owner signs that all checklist items were checked"
   ],
   "fees": [],
-  "how_to_apply": "Fill out the Borough's Rental/Resale Application packet (check 'Resale Inspection', give closing date and access or lock box instructions), attach the required professional certifications (well and septic, chimneys, woodstoves, fireplaces, heat and hot water, elevation, and lead paint for homes built before 1978), and submit it to Construction & Code Enforcement, 420 East Main Street (609-296-4916). Cash, check or money order only. Inspections are Fridays only.",
-  "application_url": "https://tuckertonborough.com/wp-content/uploads/2026/05/Rental-and-Resale-2026.pdf",
+  "how_to_apply": "Fill out the Borough's Rental/Resale Application packet (fillable PDF, updated 10/2026; check 'Resale Inspection', give closing date and access or lock box instructions), attach the required professional certifications, and submit it to Construction & Code Enforcement, 420 East Main Street (609-296-4916, Monday to Friday 8:30 am to 3:30 pm). Cash, check or money order only. Inspections are Fridays only.",
+  "application_url": "https://tuckertonborough.com/wp-content/uploads/2026/10/Rental-and-Resale-2026-Fillable.pdf",
   "department_url": "https://tuckertonborough.com/government/departments/construction-and-code-enforcement/",
   "phone": "609-296-4916",
   "email": "",
@@ -36,50 +36,78 @@
   "contact_title": "Code Enforcement Officer / Housing Official",
   "evidence": [
    {
-    "url": "https://tuckertonborough.com/wp-content/uploads/2026/05/Rental-and-Resale-2026.pdf",
-    "quote": "RESALE / RENTAL Tuckerton Borough 420 East Main Street Tuckerton, NJ 08087 INSPECTIONS PERFORMED FRIDAYS ONLY Joe Ventresca Code Enforcement Residential Resale / Rental Inspection Checklist",
-    "doc_date": "updated 5/26/2026 (per Forms page); scanned",
+    "url": "https://tuckertonborough.com/wp-content/uploads/2026/10/Rental-and-Resale-2026-Fillable.pdf",
+    "quote": "Residential Resale / Rental Inspection Checklist",
+    "doc_date": "2026-10-13 (PDF created; Forms page says UPDATED 10/2026)",
     "via": "pdf",
-    "verified": null
+    "verified": true
    },
    {
-    "url": "https://tuckertonborough.com/wp-content/uploads/2026/05/Rental-and-Resale-2026.pdf",
-    "quote": "Please check one RESALE INSPECTION: RENTAL INSPECTION:",
-    "doc_date": "updated 5/26/2026; scanned",
+    "url": "https://tuckertonborough.com/wp-content/uploads/2026/10/Rental-and-Resale-2026-Fillable.pdf",
+    "quote": "INSPECTIONS PERFORMED FRIDAYS ONLY",
+    "doc_date": "2026-10-13 (PDF created; Forms page says UPDATED 10/2026)",
     "via": "pdf",
-    "verified": null
+    "verified": true
    },
    {
-    "url": "https://tuckertonborough.com/wp-content/uploads/2026/05/Rental-and-Resale-2026.pdf",
-    "quote": "Attach all Required Certifications: Well &Septic (Well Water Test must be completed by the Board of Health) Chimneys, Woodstoves, Fireplaces, Heat & Hot Water Systems, Elevation, Lead Paint if your home was built prior to 1978 (All Must be completed by Professionals)",
-    "doc_date": "updated 5/26/2026; scanned",
+    "url": "https://tuckertonborough.com/wp-content/uploads/2026/10/Rental-and-Resale-2026-Fillable.pdf",
+    "quote": "Joe Ventresca, Code Enforcement",
+    "doc_date": "2026-10-13 (PDF created; Forms page says UPDATED 10/2026)",
     "via": "pdf",
-    "verified": null
+    "verified": true
+   },
+   {
+    "url": "https://tuckertonborough.com/wp-content/uploads/2026/10/Rental-and-Resale-2026-Fillable.pdf",
+    "quote": "Attach all Required Certifications: Well & Septic (Well Water Test must be completed by the Board of Health),",
+    "doc_date": "2026-10-13 (PDF created; Forms page says UPDATED 10/2026)",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://tuckertonborough.com/wp-content/uploads/2026/10/Rental-and-Resale-2026-Fillable.pdf",
+    "quote": "Water test required for well water by Board of Health.",
+    "doc_date": "2026-10-13 (PDF created; Forms page says UPDATED 10/2026)",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://tuckertonborough.com/wp-content/uploads/2026/10/Rental-and-Resale-2026-Fillable.pdf",
+    "quote": "to be determined the day of inspection",
+    "doc_date": "2026-10-13 (PDF created; Forms page says UPDATED 10/2026)",
+    "via": "pdf",
+    "verified": true
    },
    {
     "url": "https://tuckertonborough.com/government/departments/construction-and-code-enforcement/forms/",
-    "quote": "Rental & Resale Inspection Checklist - updated 5/26/2026",
-    "doc_date": "",
+    "quote": "Rental & Resale Inspection Checklist",
+    "doc_date": "2026-10-20 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://tuckertonborough.com/government/departments/construction-and-code-enforcement/forms/",
+    "quote": "UPDATED 10/2026",
+    "doc_date": "2026-10-20 (page fetched)",
     "via": "page",
     "verified": true
    },
    {
     "url": "https://tuckertonborough.com/government/departments/construction-and-code-enforcement/",
-    "quote": "Code Enforcement Officers: James McAndrew JMCANDREW@TuckertonBorough.com Joe Ventresca Larry Ditzel",
-    "doc_date": "",
+    "quote": "Code Enforcement Officers:",
+    "doc_date": "2026-10-20 (page fetched)",
     "via": "page",
     "verified": true
    },
    {
     "url": "https://tuckertonborough.com/government/departments/construction-and-code-enforcement/",
-    "quote": "Building, Zoning & Code Enforcement Telephone: 609-296-4916 Or 609-296-2447 Office Hours: Monday thru Friday, 8:30 am to 3:30 pm",
-    "doc_date": "",
+    "quote": "Building, Zoning & Code Enforcement Telephone: 609-296-4916 Or 609-296-2447",
+    "doc_date": "2026-10-20 (page fetched)",
     "via": "page",
     "verified": true
    }
   ],
   "confidence": "medium",
-  "notes": "Tuckerton's 2026 Rental/Resale packet combines the fire certificate application (page 1), the smoke/CO requirements (page 2), a resale or rental inspection application (page 3) and Code Enforcement's 21-item 'Residential Resale / Rental Inspection Checklist' (page 4), so a housing inspection on resale is part of the process. The ordinance itself was not viewed (ecode360). The only fee schedule in the packet ($75 / $150 / $225, non-refundable) is stated for the fire certificate inspection (see fire certificate); the packet does not say whether the resale housing checklist has a separate fee, and page 3 has a blank 'Re-inspection Fee' line. The packet is a scanned image; quotes were read from the page images. The Borough web page links Joe Ventresca's name to the Technical Assistant's address (LCranmer@TuckertonBorough.com, Lindsay Cranmer, Technical Assistant to Construction Officials), so no personal email is listed for him. Other contacts: Code Enforcement Officer and Deputy Zoning Officer James McAndrew (JMCANDREW@TuckertonBorough.com, 609-296-3254)."
+  "notes": "The Forms page now links a new typed, fillable 'Rental & Resale Inspection Checklist' packet (UPDATED 10/2026; PDF created October 13, 2026) in place of the May 2026 scan. It still has four pages: the fire certificate application (page 1), the smoke/CO requirements (page 2), the resale or rental inspection application (page 3) and Code Enforcement's 21-item 'Residential Resale / Rental Inspection Checklist' (page 4), so a housing inspection on resale is part of the process. What changed: the checklist now marks which certificates apply. Chimney, woodstove, fireplace, heat and hot water and lead paint certificates are 'For rentals only'; the well water test, Elevation Certificate and Septic Certificate are 'For resales and rentals'; the bulkhead certificate is only needed if the bulkhead looks to be in questionable repair. Page 3 still asks to attach all certifications in one line, so confirm which ones a resale really needs. A $50.00 re-inspection fee is now printed (see fire certificate). The ordinance itself was not viewed (ecode360). The packet does not show a separate fee for the resale housing checklist. The Borough web page links Joe Ventresca's name to the Technical Assistant's address (LCranmer@TuckertonBorough.com, Lindsay Cranmer), so no personal email is listed for him. Other contacts: Code Enforcement Officer and Deputy Zoning Officer James McAndrew (JMCANDREW@TuckertonBorough.com, 609-296-3254)."
  },
  "fire_cert": {
   "requirements": [
@@ -87,7 +115,8 @@
    "Since January 1, 2019 battery smoke alarms must be 10-year sealed units; all non-sealed battery detectors must be replaced; hardwired alarms from original construction may not be replaced with battery alarms",
    "Smoke detectors not within 3 feet of a kitchen or bathroom, not within 20 feet of a flame-producing device, and not within 4 inches of a corner or lower than 12 inches from the ceiling on a wall",
    "CO alarm within 10 feet of the sleeping areas",
-   "Portable fire extinguisher still on the May 2026 Borough form: minimum 2A:10BC, 2.5 to 10 lb dry chemical, within 10 feet of the kitchen"
+   "Portable fire extinguisher still on the October 2026 Borough form: minimum 2A:10B:C, 2 1/2 to 10 lb dry chemical, within 10 feet of the kitchen",
+   "If detectors cannot be reached, provide a ladder or a notarized letter stating they are in good working condition"
   ],
   "authorities": [
    {
@@ -99,27 +128,34 @@
      {
       "label": "Inspection done more than 10 business days after the application is received",
       "amount": "$75.00",
-      "quote": "$75.00- Inspection will be done more than 10 business days after the application is received.",
-      "source_url": "https://tuckertonborough.com/wp-content/uploads/2026/05/Rental-and-Resale-2026.pdf",
-      "verified": null
+      "quote": "$75.00 - Inspection will be done more than 10 business days after the application is received.",
+      "source_url": "https://tuckertonborough.com/wp-content/uploads/2026/10/Rental-and-Resale-2026-Fillable.pdf",
+      "verified": true
      },
      {
       "label": "Inspection done 4 to 10 business days after the application is received",
       "amount": "$150.00",
       "quote": "$150.00 - Inspection will be done 4 to 10 business days after the application is received.",
-      "source_url": "https://tuckertonborough.com/wp-content/uploads/2026/05/Rental-and-Resale-2026.pdf",
-      "verified": null
+      "source_url": "https://tuckertonborough.com/wp-content/uploads/2026/10/Rental-and-Resale-2026-Fillable.pdf",
+      "verified": true
      },
      {
       "label": "Inspection done 1 to 4 business days after the application is received",
       "amount": "$225.00",
       "quote": "$225.00 - Inspection will be done 1 to 4 business days after the application is received.",
-      "source_url": "https://tuckertonborough.com/wp-content/uploads/2026/05/Rental-and-Resale-2026.pdf",
-      "verified": null
+      "source_url": "https://tuckertonborough.com/wp-content/uploads/2026/10/Rental-and-Resale-2026-Fillable.pdf",
+      "verified": true
+     },
+     {
+      "label": "Re-inspection after a failed inspection",
+      "amount": "$50.00",
+      "quote": "There is a $50.00 re-inspection fee if the inspection is failed.",
+      "source_url": "https://tuckertonborough.com/wp-content/uploads/2026/10/Rental-and-Resale-2026-Fillable.pdf",
+      "verified": true
      }
     ],
-    "how_to_apply": "Fill out page 1 of the Borough's Rental/Resale Application (inspection address, owners, buyers, contact person, closing date) and bring it with the non-refundable fee to 420 East Main Street, Tuckerton (609-296-4916). Cash, check or money order only. Inspections are Fridays only.",
-    "application_url": "https://tuckertonborough.com/wp-content/uploads/2026/05/Rental-and-Resale-2026.pdf",
+    "how_to_apply": "Fill out page 1 of the Borough's Rental/Resale Application (fillable PDF, updated 10/2026: inspection address, owners, buyers, contact person, closing date) and bring it with the non-refundable fee to 420 East Main Street, Tuckerton (609-296-4916). Cash, check or money order only. Inspections are Fridays only. A failed inspection costs $50.00 to re-inspect.",
+    "application_url": "https://tuckertonborough.com/wp-content/uploads/2026/10/Rental-and-Resale-2026-Fillable.pdf",
     "department_url": "https://tuckertonborough.com/government/departments/construction-and-code-enforcement/",
     "phone": "609-296-4916",
     "email": "PReed@TuckertonBorough.com",
@@ -127,30 +163,51 @@
     "contact_title": "Construction Official, Zoning Official, Fire Protection Subcode Official and Fire Protection Inspector",
     "evidence": [
      {
-      "url": "https://tuckertonborough.com/wp-content/uploads/2026/05/Rental-and-Resale-2026.pdf",
-      "quote": "BOROUGH OF TUCKERTON Fire Prevention 420 East Main Street Tuckerton, New Jersey 08087 (609) 296-4916 Phil Reed Joseph Ventresca Housing Official RENTAL/RESALE APPLICATION Certification of smoke detector, carbon monoxide alarm and portable fire extinguisher compliance.",
-      "doc_date": "updated 5/26/2026; scanned",
+      "url": "https://tuckertonborough.com/wp-content/uploads/2026/10/Rental-and-Resale-2026-Fillable.pdf",
+      "quote": "Certification of smoke detector, carbon monoxide alarm and portable fire extinguisher compliance",
+      "doc_date": "2026-10-13 (PDF created; Forms page says UPDATED 10/2026)",
       "via": "pdf",
-      "verified": null
+      "verified": true
      },
      {
-      "url": "https://tuckertonborough.com/wp-content/uploads/2026/05/Rental-and-Resale-2026.pdf",
-      "quote": "Upon the change of ownership (resale) of any real property a Fire Certificate must be applied for, for the inspection of Smoke Detectors, Carbon Monoxide Detectors and Fire Extinguishers only. This inspection must be done prior to the ability of the new owners to occupancy said dwelling.",
-      "doc_date": "updated 5/26/2026; scanned",
+      "url": "https://tuckertonborough.com/wp-content/uploads/2026/10/Rental-and-Resale-2026-Fillable.pdf",
+      "quote": "Upon the change of ownership (resale) of any real property, a Fire Certificate must be applied for, for the inspection of Smoke Detectors, Carbon Monoxide Detectors and Fire Extinguishers only.",
+      "doc_date": "2026-10-13 (PDF created; Forms page says UPDATED 10/2026)",
       "via": "pdf",
-      "verified": null
+      "verified": true
      },
      {
-      "url": "https://tuckertonborough.com/wp-content/uploads/2026/05/Rental-and-Resale-2026.pdf",
+      "url": "https://tuckertonborough.com/wp-content/uploads/2026/10/Rental-and-Resale-2026-Fillable.pdf",
+      "quote": "This inspection must be done prior to the new owners occupying said dwelling.",
+      "doc_date": "2026-10-13 (PDF created; Forms page says UPDATED 10/2026)",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://tuckertonborough.com/wp-content/uploads/2026/10/Rental-and-Resale-2026-Fillable.pdf",
       "quote": "WE ONLY ACCEPT CASH, CHECK, OR MONEY ORDER",
-      "doc_date": "updated 5/26/2026; scanned",
+      "doc_date": "2026-10-13 (PDF created; Forms page says UPDATED 10/2026)",
       "via": "pdf",
-      "verified": null
+      "verified": true
+     },
+     {
+      "url": "https://tuckertonborough.com/wp-content/uploads/2026/10/Rental-and-Resale-2026-Fillable.pdf",
+      "quote": "please provide a ladder or a notarized letter stating they are in good working condition.",
+      "doc_date": "2026-10-13 (PDF created; Forms page says UPDATED 10/2026)",
+      "via": "pdf",
+      "verified": true
      },
      {
       "url": "https://tuckertonborough.com/government/departments/construction-and-code-enforcement/",
-      "quote": "Zoning Official, Construction Official, Building Sub-Code,Fire Protection Sub-Code Official, Building Inspector, Mechanical Subcode and Fire Protection Inspector: Phil Reed PReed@TuckertonBorough.com Office: 609-296-4916 Or 609-296-2447",
-      "doc_date": "",
+      "quote": "Phil Reed",
+      "doc_date": "2026-10-20 (page fetched)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://tuckertonborough.com/government/departments/construction-and-code-enforcement/",
+      "quote": "PReed@TuckertonBorough.com",
+      "doc_date": "2026-10-20 (page fetched)",
       "via": "page",
       "verified": true
      },
@@ -172,32 +229,34 @@
     "confidence": "high"
    }
   ],
-  "notes": "The July 2026 LEA registry lists the NJ DCA Division of Fire Safety (S) as Tuckerton's fire code enforcing agency, but the DCA's list of state-enforced towns (revised 7/17/2026) shows 'TUCKERTON 1532' without the 'SC' (smoke certs) mark, and the Borough's own 2026 Rental/Resale packet has the Borough's Fire Prevention office issue the smoke/CO certificate. So sellers use the Borough, not the DCA online portal. Tuckerton has no separate page in the state fire directory. The Borough's fees ($75 / $150 / $225) are higher than the state DCA schedule. The form still requires a fire extinguisher although P.L.2025, c.19 removed it from the state requirement; it also does not mention the new secondary power source label."
+  "notes": "The July 2026 LEA registry lists the NJ DCA Division of Fire Safety (S) as Tuckerton's fire code enforcing agency, but the DCA's list of state-enforced towns (revised 7/17/2026) shows 'TUCKERTON 1532' without the 'SC' (smoke certs) mark, and the Borough's own 2026 Rental/Resale packet has the Borough's Fire Prevention office issue the smoke/CO certificate. So sellers use the Borough, not the DCA online portal. Tuckerton has no separate page in the state fire directory. The Borough's fees ($75 / $150 / $225) are higher than the state DCA schedule. The October 2026 form adds a $50.00 re-inspection fee for a failed inspection; the $75 / $150 / $225 tiers did not change. The form still requires a fire extinguisher although P.L.2025, c.19 removed it from the state requirement; it also does not mention the new secondary power source label."
  },
  "other_items": [
   {
-   "label": "Professional certifications",
-   "detail": "Attach well and septic (well water test by the Board of Health), chimney, woodstove, fireplace, heat and hot water, elevation, and lead paint (homes built before 1978) certifications, all done by professionals.",
-   "source_url": "https://tuckertonborough.com/wp-content/uploads/2026/05/Rental-and-Resale-2026.pdf"
+   "label": "Professional certifications for resales",
+   "detail": "The October 2026 checklist lists a well water test by the Board of Health (if on a well), an Elevation Certificate and a Septic Certificate for resales and rentals. Chimney, woodstove, fireplace, heat and hot water and lead paint certificates are now marked for rentals only.",
+   "source_url": "https://tuckertonborough.com/wp-content/uploads/2026/10/Rental-and-Resale-2026-Fillable.pdf"
   },
   {
    "label": "Bulkhead certificate (waterfront)",
-   "detail": "The resale checklist lists a bulkhead certificate and bulkhead condition for waterfront lots.",
-   "source_url": "https://tuckertonborough.com/wp-content/uploads/2026/05/Rental-and-Resale-2026.pdf"
+   "detail": "Needed only if the bulkhead is in questionable repair, decided on the day of inspection.",
+   "source_url": "https://tuckertonborough.com/wp-content/uploads/2026/10/Rental-and-Resale-2026-Fillable.pdf"
   }
  ],
  "open_questions": [
-  "Whether the resale housing inspection has its own fee separate from the $75 / $150 / $225 fire certificate fee, and the re-inspection fee amount.",
-  "How long the resale approval and fire certificate stay valid."
+  "Whether the resale housing inspection has its own fee separate from the $75 / $150 / $225 fire certificate fee.",
+  "Is the Elevation Certificate needed for every resale, or only for homes in a flood hazard area? Is a Septic Certificate needed for homes on public sewer?",
+  "How long the resale approval and fire certificate stay valid.",
+  "Does the Borough still require the fire extinguisher after P.L.2025, c.19?"
  ],
  "verification": {
-  "fees": 3,
-  "fee_ok": 0,
+  "fees": 4,
+  "fee_ok": 4,
   "fee_bad": 0,
-  "fee_unchecked": 3,
-  "quotes": 12,
-  "q_ok": 6,
+  "fee_unchecked": 0,
+  "quotes": 19,
+  "q_ok": 19,
   "q_bad": 0,
-  "q_unchecked": 6
+  "q_unchecked": 0
  }
 }

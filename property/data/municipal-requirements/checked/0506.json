@@ -2,7 +2,6 @@
  "municipality_code": "0506",
  "municipality": "Middle Township",
  "county": "CAPE MAY",
- "checked_at": "2026-09-30",
  "resale_co": {
   "status": "not_required",
   "name": "",
@@ -22,7 +21,7 @@
    {
     "url": "https://middletownship.com/departments/contruction/",
     "quote": "Please be advised that the Township of Middle DOES NOT issue a Certificate of Occupancy or a Zoning Certificate for the transfer of a property/business nor for the renting of a property. The only time a Certificate of Occupancy is issued is at the origination of the building, change of use, reconstruction or an addition per the Uniform Construction Code 5:23-2.24.",
-    "doc_date": "2026-03 (page updated 2026-03-17)",
+    "doc_date": "2026-03-17 (page updated; fetched 2026-10-27)",
     "via": "page",
     "verified": true
    },
@@ -159,7 +158,7 @@
       "quote": "LEAID: 0506-004 Enf Auth. District Fire Official Douglas Greenberg Phone (609) 465-8710 Addr: 115 Mechanic St Cape May Courthouse NJ 08210 Email greenbergdm@cmchfire.com",
       "doc_date": "2026-08-17 (survey date)",
       "via": "state_directory",
-      "verified": true
+      "verified": null
      }
     ],
     "confidence": "high"
@@ -177,14 +176,15 @@
  "open_questions": [
   "Whether the fire bureau will keep enforcing the fire extinguisher item after P.L.2025, c.19."
  ],
+ "checked_at": "2026-10-27",
  "verification": {
   "fees": 4,
   "fee_ok": 4,
   "fee_bad": 0,
   "fee_unchecked": 0,
   "quotes": 12,
-  "q_ok": 12,
+  "q_ok": 11,
   "q_bad": 0,
-  "q_unchecked": 0
+  "q_unchecked": 1
  }
 }

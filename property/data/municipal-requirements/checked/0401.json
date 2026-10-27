@@ -2,20 +2,21 @@
  "municipality_code": "0401",
  "municipality": "Audubon Borough",
  "county": "CAMDEN",
+ "checked_at": "2026-10-20",
  "resale_co": {
   "status": "required",
   "name": "Certificate of Occupancy for Sale or Resale of Property",
-  "issued_by": "Borough of Audubon (requests handled by the Administrative Assistant to the Superintendent of Public Works; interior fire inspection by the Fire Marshal, exterior inspection by the Borough)",
-  "lead_time": "Submit the request at least 15 business days before settlement; inspections and responses typically take 7 to 10 business days",
+  "issued_by": "Borough of Audubon (requests handled by the Administrative Assistant to the Superintendent of Public Works; interior fire inspection by the Fire Marshal, exterior property inspection by the Borough)",
+  "lead_time": "Give at least 15 business days' notice before settlement; inspections and responses typically take 7 to 10 business days",
   "valid_for": "90 days from the date of issuance",
   "requirements": [
    "Two inspections must both pass: an interior fire inspection and an exterior property inspection",
-   "Sidewalks, walkways, driveways, driveway aprons, steps and pavers must be free of cracks, raised or uneven surfaces, deterioration and trip hazards",
-   "Ramping a raised sidewalk joint is not an acceptable repair",
+   "Sidewalks, walkways, driveways, driveway aprons, steps and pavers must be safe, free of cracks, raised or uneven surfaces, deterioration and trip hazards",
+   "Ramping a raised sidewalk joint is not an acceptable repair (grind the joint down or replace the block)",
    "Smoke and CO detectors must be UL listed, have a 10-year sealed battery, and be no more than 10 years old",
-   "Hardwired smoke alarms cannot be swapped for battery units; hardwired units must be interconnected and working",
-   "Smoke detector on every level (basement, each floor, and a finished or used attic) and in every bedroom",
-   "Working smoke and CO detector within 10 feet of all bedrooms",
+   "Hardwired smoke alarms cannot be replaced with battery units; hardwired units must be interconnected and working",
+   "Smoke detector on every level (basement, each floor, and an attic that is finished, used as living space or has ceiling fans) and in every bedroom",
+   "Working smoke and CO detector within 10 feet of all bedrooms (combination units allowed)",
    "House numbers at least 4 inches tall, contrasting, visible from the street",
    "No double-cylinder (keyed both sides) deadbolts on exit doors; exits must open from inside without a key",
    "Sump pumps, roof drains and other discharges may not be connected to the sanitary sewer",
@@ -30,52 +31,47 @@
     "verified": true
    },
    {
-    "label": "Interior fire inspection (paid separately)",
-    "amount": "$25",
-    "quote": "Interior Fire Inspection: $25",
-    "source_url": "https://www.audubonnj.com/constructionzoning/resale-certificate-of-occupancy-info",
-    "verified": true
-   },
-   {
-    "label": "Exterior inspection, per 2026 application form (separate check or money order)",
+    "label": "Exterior inspection, per 2026 application form (exact cash, check or money order)",
     "amount": "$50.00",
-    "quote": "Cash: Submit the exact amount, $50.00 (exterior) and $25.00 (fire). The Borough does not provide change.",
-    "source_url": "https://www.audubonnj.com/fs/resource-manager/view/a9f9ee38-a0fd-4f3f-9fa3-1dc8f825f14f",
-    "verified": true
-   },
-   {
-    "label": "Fire inspection, per 2026 application form (separate check or money order)",
-    "amount": "$25.00",
-    "quote": "Cash: Submit the exact amount, $50.00 (exterior) and $25.00 (fire). The Borough does not provide change.",
+    "quote": "$50.00 (exterior) and $25.00 (fire). The Borough does not provide change.",
     "source_url": "https://www.audubonnj.com/fs/resource-manager/view/a9f9ee38-a0fd-4f3f-9fa3-1dc8f825f14f",
     "verified": true
    }
   ],
-  "how_to_apply": "Only the seller or the seller's agent (attorney, agent or property manager) may request; buyers and buyers' agents cannot. Fill out the 2026 CO application (or email the seller name, property address, closing date and whether there is a sump pump) to Kristen Melvin at k.melvin@audubonnj.com. Pay with two separate payments ($50 exterior and $25 fire) by check or money order payable to Borough of Audubon, or exact cash. No credit, debit or online payments. Payments can be mailed, brought in person, or left in the black vestibule lockbox marked Attention: CO. Call the Construction Office first to make sure all permits are closed.",
+  "how_to_apply": "Only the seller or the seller's representative (attorney, agent or property manager) may request; buyers and buyers' agents cannot. Send the 2026 CO application (or an email with the seller name, property address, closing date and whether there is a sump pump) to Kristen Melvin at k.melvin@audubonnj.com. Pay two separate payments ($50 exterior and $25 fire) by check or money order payable to Borough of Audubon, or exact cash. No credit, debit or online payments. Payments can be mailed, brought in person, or left in the black vestibule lockbox marked Attention: CO. Call the Construction Office first ((856) 547-6312, n.bicking@audubonnj.com) to make sure all permits are closed.",
   "application_url": "https://www.audubonnj.com/fs/resource-manager/view/a9f9ee38-a0fd-4f3f-9fa3-1dc8f825f14f",
   "department_url": "https://www.audubonnj.com/constructionzoning/resale-certificate-of-occupancy-info",
-  "phone": "856-547-1240 ext. 110",
+  "phone": "856-547-1240 option 3, or 856-547-0710 ext. 110",
   "email": "k.melvin@audubonnj.com",
+  "contact_name": "Kristen Melvin",
+  "contact_title": "Administrative Assistant to the Superintendent of Public Works",
   "evidence": [
    {
     "url": "https://www.audubonnj.com/constructionzoning/resale-certificate-of-occupancy-info",
     "quote": "A Certificate of Occupancy (CO) is required for the sale or resale of all residential and non-residential properties in the Borough of Audubon, whether occupied or vacant.",
-    "doc_date": "",
+    "doc_date": "2026-10-20 (page fetched)",
     "via": "page",
     "verified": true
    },
    {
     "url": "https://www.audubonnj.com/constructionzoning/resale-certificate-of-occupancy-info",
     "quote": "Certificates of Occupancy are valid for 90 days from the date of issuance.",
-    "doc_date": "",
+    "doc_date": "2026-10-20 (page fetched)",
     "via": "page",
     "verified": true
    },
    {
-    "url": "https://www.audubonnj.com/fs/resource-manager/view/05c9a18f-ba4c-4afa-972c-de7cac87ec93",
-    "quote": "Certificate of Occupancy is required for the sale or resale of all residential and non-residential",
-    "doc_date": "2026-07-07 (PDF created July 7, 2026; cites Ordinance #2015-4)",
-    "via": "pdf",
+    "url": "https://www.audubonnj.com/constructionzoning/resale-certificate-of-occupancy-info",
+    "quote": "Please submit your request at least 15 business days before settlement.",
+    "doc_date": "2026-10-20 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.audubonnj.com/constructionzoning/resale-certificate-of-occupancy-info",
+    "quote": "Administrative Assistant to the Superintendent of Public Works",
+    "doc_date": "2026-10-20 (page fetched)",
+    "via": "page",
     "verified": true
    },
    {
@@ -87,14 +83,21 @@
    },
    {
     "url": "https://www.audubonnj.com/fs/resource-manager/view/a9f9ee38-a0fd-4f3f-9fa3-1dc8f825f14f",
-    "quote": "Municipal Code: Chapter 105, Article VII, Sec. 105-296, Certificate of Occupancy (CO) required before title transfer on all residential and commercial properties within the Borough of Audubon.",
-    "doc_date": "2026 (file name CO-ResaleApplication2026)",
+    "quote": "Buyers may NOT order or submit a CO inspection request.",
+    "doc_date": "2026-07-20 (PDF created July 20, 2026)",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.audubonnj.com/fs/resource-manager/view/e9dda18d-4497-4c03-868c-72c15b7fdb3b",
+    "quote": "Ramping is not an acceptable repair method and will result in a failed inspection.",
+    "doc_date": "2026-07-07 (PDF created July 7, 2026)",
     "via": "pdf",
     "verified": true
    }
   ],
   "confidence": "high",
-  "notes": "Authority is Ordinance 2015-4, Borough Code Section 105-296. The Borough pages say commercial properties do not need a CO before settlement, but the 2026 application form says a CO is required on residential and commercial properties; this does not affect 1-2 family homes. One Borough page says there is no application to complete (email request), while the resale CO page links a 2026 application form; either route goes to the same contact. The form also asks whether the property is being flipped. A 30-day temporary CO is issued only in exceptional cases such as severe weather or contractor shortages. Exterior inspection does not require anyone present; the fire inspection happens on Thursday mornings only and someone must meet the Fire Marshal or provide a lockbox code. Phone listed as 856-547-1240 option 3 or ext. 110, and 856-547-0710 ext. 110. Re-check 2026-10-06: the Borough CO information sheet and fire requirements sheet (both PDFs generated July 7, 2026) say the same thing as before; fees ($50 exterior, $25 fire), contact and 90-day validity are unchanged. The sheets use large first letters, and the PDF text layer moves each paragraph's first letter out of place (for example \"A Certificate\" reads as \"Certificate ... A properties\", and \"Fire inspections\" loses its \"F\"). The old quotes therefore could not be found by text search; they were replaced with verbatim pieces that avoid the displaced letters."
+  "notes": "Authority is Ordinance 2015-4 (adopted June 23, 2015), Borough Code Section 105-296. Re-check 2026-10-20: the resale CO page, the information sheet, the fire and exterior requirement sheets (July 7, 2026) and the application form (now dated July 20, 2026) all agree: $50 exterior plus $25 fire, two separate payments, 15 business days' notice, valid 90 days. The $25 fire inspection fee is part of the CO process and is listed under the fire certificate below so it is not counted twice; the total for the CO is $75. The Borough pages say commercial properties do not need a CO before settlement, but the application form says a CO is required on residential and commercial properties; this does not affect 1-2 family homes. The information sheet says no formal application is required (email request), while the resale CO page links the application form; either route goes to the same contact. The form also asks whether the property is being flipped. A 30-day temporary CO is issued only in exceptional cases such as severe weather or contractor shortages. The exterior inspection does not require anyone present; the fire inspection is Thursday mornings only. The Borough PDFs use large first letters and their text layer moves the first letter of some paragraphs, so quotes were chosen to avoid those letters."
  },
  "fire_cert": {
   "requirements": [
@@ -104,14 +107,14 @@
    "Smoke and CO alarm within 10 feet of all bedrooms (combination units allowed)",
    "House numbers at least 4 inches tall and visible from the street",
    "No double-cylinder deadbolts on exit doors",
-   "Fire inspections are Thursday mornings only; someone must be present or a lockbox code provided"
+   "Fire inspections are Thursday mornings only; someone must meet the Fire Marshal or provide a lockbox code"
   ],
   "authorities": [
    {
-    "name": "Audubon Fire Marshal's Office",
+    "name": "Audubon Fire Marshal's Office (Audubon Borough Fire Prevention)",
     "type": "municipal_fire_bureau",
     "area_served": "Entire borough",
-    "lead_time": "Part of the resale CO request; submit at least 15 business days before settlement",
+    "lead_time": "Requested with the resale CO; give at least 15 business days' notice before settlement",
     "fees": [
      {
       "label": "Interior fire inspection (resale)",
@@ -121,7 +124,7 @@
       "verified": true
      },
      {
-      "label": "Fire inspection, requirements sheet",
+      "label": "Fire inspection, information sheet",
       "amount": "$25",
       "quote": "Fees: $50 Exterior Inspection | $25 Fire Inspection (Two separate payments are required)",
       "source_url": "https://www.audubonnj.com/fs/resource-manager/view/05c9a18f-ba4c-4afa-972c-de7cac87ec93",
@@ -130,20 +133,15 @@
     ],
     "how_to_apply": "Requested together with the resale CO through Kristen Melvin (k.melvin@audubonnj.com, 856-547-1240 ext. 110). Pay the $25 fire fee as its own check, money order or exact cash, separate from the $50 exterior fee.",
     "application_url": "https://www.audubonnj.com/fs/resource-manager/view/a9f9ee38-a0fd-4f3f-9fa3-1dc8f825f14f",
-    "department_url": "https://www.audubonnj.com/fs/resource-manager/view/683dc676-1b13-445c-9e63-e74ff15a5309",
+    "department_url": "https://www.audubonnj.com/constructionzoning/resale-certificate-of-occupancy-info",
     "phone": "856-547-0710 ext. 117",
     "email": "",
+    "contact_name": "Ernest F Busch",
+    "contact_title": "Fire Official (per NJ DCA fire directory)",
     "evidence": [
      {
       "url": "https://www.audubonnj.com/fs/resource-manager/view/05c9a18f-ba4c-4afa-972c-de7cac87ec93",
       "quote": "State law requires a fire inspection before any sale, and failure to comply may result in state fines.",
-      "doc_date": "2026-07-07 (PDF created July 7, 2026)",
-      "via": "pdf",
-      "verified": true
-     },
-     {
-      "url": "https://www.audubonnj.com/fs/resource-manager/view/683dc676-1b13-445c-9e63-e74ff15a5309",
-      "quote": "inspections occur on Thursday mornings only. A responsible person must be available to",
       "doc_date": "2026-07-07 (PDF created July 7, 2026)",
       "via": "pdf",
       "verified": true
@@ -157,8 +155,8 @@
      },
      {
       "url": "https://www.audubonnj.com/constructionzoning/resale-certificate-of-occupancy-info",
-      "quote": "Fire Marshal's Office\nPhone: 856-547-0710 ext. 117",
-      "doc_date": "",
+      "quote": "Phone: 856-547-0710 ext. 117",
+      "doc_date": "2026-10-20 (page fetched)",
       "via": "page",
       "verified": true
      },
@@ -168,12 +166,19 @@
       "doc_date": "2026-07 (LEA registry as of June 30, 2026); key: M = Municipality",
       "via": "pdf",
       "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "Fire Official Ernest F Busch",
+      "doc_date": "(no survey date shown)",
+      "via": "state_directory",
+      "verified": null
      }
     ],
     "confidence": "high"
    }
   ],
-  "notes": "The Borough folds the state smoke/CO/extinguisher certificate into its resale CO as the 'Interior Fire Inspection'. The Borough's fire requirements sheet does not mention the portable fire extinguisher; the state rule still applies. The type 'municipal_fire_bureau' is inferred from the Borough-run Fire Marshal's Office on the Borough phone system."
+  "notes": "The Borough folds the state smoke/CO certificate into its resale CO as the 'Interior Fire Inspection'. The Borough fire requirements sheet does not list a portable fire extinguisher, which matches the 2025 state law (P.L.2025, c.19) that dropped the extinguisher from the sale certificate. The NJ DCA fire directory lists the LEA as 'Audubon Boro Fire Prev', 606 W. Nicholson Rd., Fire Official Ernest F Busch, phone (856) 546-5399, email ebusch@haddonfield-nj.gov (a Haddonfield address, so the Borough office line is the practical contact). The Borough page gives the Fire Marshal's Office as 856-547-0710 ext. 117."
  },
  "other_items": [
   {
@@ -193,19 +198,18 @@
   }
  ],
  "open_questions": [
-  "Reinspection fee is not published; the Borough only says a re-inspection is required when violations are found.",
-  "Whether the Borough accepts the state DCA smoke certificate form or issues its own certificate is not stated.",
-  "Could not open the ordinance text (Section 105-296) on ecode360 to confirm fees in code."
+  "Is there a reinspection fee? The Borough only says a re-inspection is required when violations are found.",
+  "Does the Borough issue its own smoke/CO certificate or the state form as part of the CO? Not stated.",
+  "Section 105-296 itself was not read; the Borough's posted sheets were used for fees and rules."
  ],
- "checked_at": "2026-10-06",
  "verification": {
-  "fees": 6,
-  "fee_ok": 6,
+  "fees": 4,
+  "fee_ok": 4,
   "fee_bad": 0,
   "fee_unchecked": 0,
-  "quotes": 10,
-  "q_ok": 10,
+  "quotes": 12,
+  "q_ok": 11,
   "q_bad": 0,
-  "q_unchecked": 0
+  "q_unchecked": 1
  }
 }
