@@ -27,7 +27,7 @@ const $=(id)=>document.getElementById(id);
 const els={};
 let photo=null;
 let font=null;
-let colors={bg:'#ffffff',text:TEXT};
+let colors={bg:'#ffffff',text:TEXT,highlight:X_BLUE};
 
 function hexRgb(hex){
   const n=parseInt(hex.slice(1),16);
@@ -71,32 +71,79 @@ function pickFont(ctx){
   font.handleSize=fitSize(ctx,font.handle,HANDLE,HEAD.handleInkW);
 }
 
-function wrap(ctx,text,maxWidth){
+function parse(text){
+  const stars=[...text].reduce((list,ch,i)=>(ch==='*'?list.concat(i):list),[]);
+  const literal=stars.length%2?stars[stars.length-1]:-1;
+  const paras=[[]];
+  let word=[],on=false;
+  const push=(ch)=>{
+    const last=word[word.length-1];
+    if(last&&last.hl===on)last.t+=ch;else word.push({t:ch,hl:on});
+  };
+  const endWord=()=>{if(word.length)paras[paras.length-1].push(word);word=[]};
+  [...text].forEach((ch,i)=>{
+    if(ch==='*'&&i!==literal){on=!on;return}
+    if(ch==='\n'){endWord();paras.push([]);return}
+    if(/\s/.test(ch)){endWord();return}
+    push(ch);
+  });
+  endWord();
+  return paras;
+}
+
+function segFont(ctx,f,hl){
+  setFont(ctx,hl?Math.max(700,f.weight):f.weight,f.size,f.tracking);
+}
+
+function wordWidth(ctx,word,f){
+  return word.reduce((sum,seg)=>{segFont(ctx,f,seg.hl);return sum+ctx.measureText(seg.t).width},0);
+}
+
+function lineWidth(ctx,line,f){
+  if(!line.length)return 0;
+  segFont(ctx,f,false);
+  const space=ctx.measureText(' ').width;
+  return line.reduce((sum,word)=>sum+wordWidth(ctx,word,f),0)+space*(line.length-1);
+}
+
+function wrap(ctx,text,maxWidth,f){
   const lines=[];
-  for(const para of text.split('\n')){
-    const words=para.split(/\s+/).filter(Boolean);
-    if(!words.length){lines.push('');continue}
-    let line='';
+  for(const words of parse(text)){
+    if(!words.length){lines.push([]);continue}
+    let line=[];
     for(const word of words){
-      const next=line?line+' '+word:word;
-      if(!line||ctx.measureText(next).width<=maxWidth){line=next;continue}
+      if(!line.length||lineWidth(ctx,line.concat([word]),f)<=maxWidth){line.push(word);continue}
       lines.push(line);
-      line=word;
+      line=[word];
     }
     lines.push(line);
   }
-  while(lines.length&&!lines[lines.length-1])lines.pop();
+  while(lines.length&&!lines[lines.length-1].length)lines.pop();
   return lines;
+}
+
+function drawLine(ctx,line,x,y,f){
+  segFont(ctx,f,false);
+  const space=ctx.measureText(' ').width;
+  for(const word of line){
+    for(const seg of word){
+      segFont(ctx,f,seg.hl);
+      ctx.fillStyle=seg.hl?colors.highlight:colors.text;
+      ctx.fillText(seg.t,x,y);
+      x+=ctx.measureText(seg.t).width;
+    }
+    x+=space;
+  }
 }
 
 function fitText(ctx,text,opts){
   let size=opts.size;
   for(;;){
-    setFont(ctx,opts.weight,size,font.tracking);
-    const lines=wrap(ctx,text,opts.width);
-    const widest=Math.max(0,...lines.map((l)=>ctx.measureText(l).width));
+    const f={weight:opts.weight,size,tracking:font.tracking};
+    const lines=wrap(ctx,text,opts.width,f);
+    const widest=Math.max(0,...lines.map((l)=>lineWidth(ctx,l,f)));
     const height=Math.max(1,lines.length)*size*opts.lineHeight;
-    if((widest<=opts.width&&height<=opts.height)||size<=opts.minSize)return {size,lines,height};
+    if((widest<=opts.width&&height<=opts.height)||size<=opts.minSize)return {size,lines,height,f};
     size=Math.max(opts.minSize,size-2);
   }
 }
@@ -185,16 +232,17 @@ function layoutX(ctx,text){
     setFont(ctx,font.body,font.bodySize*k,font.tracking);
     const originX=BODY.inkX+ctx.measureText('A').actualBoundingBoxLeft;
     const maxWidth=BODY.maxRight-originX;
-    const lines=wrap(ctx,text,maxWidth);
-    const widest=Math.max(0,...lines.map((l)=>ctx.measureText(l).width));
+    const f={weight:font.body,size:font.bodySize*k,tracking:font.tracking};
+    const lines=wrap(ctx,text,maxWidth,f);
+    const widest=Math.max(0,...lines.map((l)=>lineWidth(ctx,l,f)));
     const height=AVATAR.r*2+(BODY.firstBase+Math.max(0,lines.length-1)*BODY.pitch+BODY.descent)*k;
-    if((widest<=maxWidth&&height<=H-MARGIN*2)||k<=BODY.minK)return {k,lines,originX,height};
+    if((widest<=maxWidth&&height<=H-MARGIN*2)||k<=BODY.minK)return {k,lines,originX,height,f};
     k=Math.round((k-.02)*100)/100;
   }
 }
 
 function drawX(ctx,text){
-  const {k,lines,originX,height}=layoutX(ctx,text);
+  const {k,lines,originX,height,f}=layoutX(ctx,text);
   const top=Math.round((H-height)*.4);
   blank(ctx,colors.bg);
   drawAvatar(ctx,AVATAR.cx,top+AVATAR.r,AVATAR.r);
@@ -209,10 +257,8 @@ function drawX(ctx,text){
   setFont(ctx,font.handle,font.handleSize);
   ctx.fillText(HANDLE,HEAD.handleInkX+ink(ctx,HANDLE).left,top+HEAD.handleBase);
 
-  ctx.fillStyle=colors.text;
-  setFont(ctx,font.body,font.bodySize*k,font.tracking);
   const first=top+AVATAR.r*2+BODY.firstBase*k;
-  lines.forEach((line,i)=>ctx.fillText(line,originX,first+i*BODY.pitch*k));
+  lines.forEach((line,i)=>drawLine(ctx,line,originX,first+i*BODY.pitch*k,f));
 }
 
 function drawThreads(ctx,text){
@@ -234,10 +280,8 @@ function drawThreads(ctx,text){
   ctx.fillText('1h',textX+nameW+12+40+18,nameBase);
   drawDots(ctx,right-24,nameBase-14,14,4.5,colors.text);
 
-  ctx.fillStyle=colors.text;
-  setFont(ctx,400,body.size,font.tracking);
   const first=nameBase+18+body.size*lh*.95;
-  body.lines.forEach((line,i)=>ctx.fillText(line,textX,first+i*body.size*lh));
+  body.lines.forEach((line,i)=>drawLine(ctx,line,textX,first+i*body.size*lh,body.f));
 
   const iconY=first+(body.lines.length-1)*body.size*lh+body.size*.3+40;
   ['heart','comment','repost','send'].forEach((name,i)=>drawIcon(ctx,name,textX-4+i*112,iconY,56,colors.text));
@@ -261,10 +305,8 @@ function drawInstagram(ctx,text){
   ctx.fillRect(0,headH+img-1,W,1);
   const pad=110;
   const body=fitText(ctx,text,{weight:font.body,size:96,minSize:36,lineHeight:1.18,width:W-pad*2,height:img-pad*2});
-  ctx.fillStyle=colors.text;
-  setFont(ctx,font.body,body.size,font.tracking);
   const first=headH+(img-body.height)/2+body.size*.9;
-  body.lines.forEach((line,i)=>ctx.fillText(line,pad,first+i*body.size*1.18));
+  body.lines.forEach((line,i)=>drawLine(ctx,line,pad,first+i*body.size*1.18,body.f));
 
   const iconY=headH+img+(H-headH-img-64)/2;
   ['heart','comment','send'].forEach((name,i)=>drawIcon(ctx,name,32+i*96,iconY,64,TEXT));
@@ -280,7 +322,7 @@ function style(){
 
 function readColors(){
   const valid=(v,fallback)=>/^#[0-9a-f]{6}$/i.test(v)?v.toLowerCase():fallback;
-  colors={bg:valid(els.bg.value,'#ffffff'),text:valid(els.color.value,TEXT)};
+  colors={bg:valid(els.bg.value,'#ffffff'),text:valid(els.color.value,TEXT),highlight:valid(els.highlight.value,X_BLUE)};
   document.querySelectorAll('[data-qi-bg]').forEach((b)=>b.setAttribute('aria-pressed',String(b.dataset.qiBg===colors.bg&&b.dataset.qiText===colors.text)));
 }
 
@@ -310,6 +352,14 @@ function download(){
   },'image/png');
 }
 
+function copy(){
+  draw();
+  const label=els.copy.textContent;
+  const done=(text)=>{els.copy.textContent=text;setTimeout(()=>{els.copy.textContent=label},2000)};
+  const png=new Promise((resolve,reject)=>els.canvas.toBlob((blob)=>blob?resolve(blob):reject(new Error('no image')),'image/png'));
+  navigator.clipboard.write([new ClipboardItem({'image/png':png})]).then(()=>done('Copied'),()=>done('Copy failed, use Download'));
+}
+
 function loadPhoto(){
   return new Promise((resolve)=>{
     const img=new Image();
@@ -330,6 +380,8 @@ function init(){
   els.download=$('qi-download');
   els.bg=$('qi-bg');
   els.color=$('qi-color');
+  els.highlight=$('qi-highlight');
+  els.copy=$('qi-copy');
   Promise.all([loadPhoto(),loadFonts()]).then(()=>{
     pickFont(els.canvas.getContext('2d'));
     draw();
@@ -337,7 +389,11 @@ function init(){
   els.text.addEventListener('input',()=>{if(font)draw()});
   document.querySelectorAll('input[name="qi-style"]').forEach((input)=>input.addEventListener('change',()=>{if(font)draw()}));
   els.download.addEventListener('click',()=>{if(font)download()});
-  [els.bg,els.color].forEach((input)=>input.addEventListener('input',()=>{if(font)draw()}));
+  if(window.ClipboardItem&&navigator.clipboard&&navigator.clipboard.write){
+    els.copy.hidden=false;
+    els.copy.addEventListener('click',()=>{if(font)copy()});
+  }
+  [els.bg,els.color,els.highlight].forEach((input)=>input.addEventListener('input',()=>{if(font)draw()}));
   document.querySelectorAll('[data-qi-bg]').forEach((button)=>{
     button.style.background=button.dataset.qiBg;
     button.style.color=button.dataset.qiText;
