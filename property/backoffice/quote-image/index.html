@@ -8,9 +8,9 @@
   <title>Quote Image | Watchdog Backoffice</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@400;500;600;700;800&family=Inter:wght@400;500;700&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@400;500;600;700;800&family=Inter:wght@400;500;700&family=Caveat:wght@600&display=swap">
   <link rel="stylesheet" href="/property/backoffice/backoffice-board.css?v=20260928a">
-  <link rel="stylesheet" href="/property/backoffice/quote-image/quote-image.css?v=20261027a">
+  <link rel="stylesheet" href="/property/backoffice/quote-image/quote-image.css?v=20261029a">
 </head>
 <body class="bo-body" data-bo-page="quote-image">
   <a class="bo-skip" href="#bo-main">Skip to content</a>
@@ -64,6 +64,28 @@
             <label><input type="color" id="qi-highlight" value="#1d9bf0"> *Highlight*</label>
           </div>
         </fieldset>
+        <fieldset class="qi-extras">
+          <legend class="qi-label">Extras</legend>
+          <div class="qi-extra-row">
+            <label class="bo-btn bo-btn-ghost" for="qi-photos">Add photos to post</label>
+            <input class="bo-sr" id="qi-photos" type="file" accept="image/*" multiple>
+            <button class="qi-link" id="qi-photos-clear" type="button" hidden>Remove photos</button>
+          </div>
+          <div class="qi-extra-row">
+            <label class="bo-btn bo-btn-ghost" for="qi-background">Background photo</label>
+            <input class="bo-sr" id="qi-background" type="file" accept="image/*">
+            <button class="qi-link" id="qi-background-clear" type="button" hidden>Remove background</button>
+          </div>
+          <label class="qi-extra-row qi-range" id="qi-dim-row" hidden>Darken photo <input type="range" id="qi-dim" min="0" max="80" step="5" value="35"></label>
+          <div class="qi-extra-row qi-checks">
+            <label><input type="checkbox" id="qi-liked"> Liked</label>
+            <label><input type="checkbox" id="qi-saved"> Saved</label>
+          </div>
+          <div class="qi-extra-row qi-sign">
+            <input type="text" id="qi-signature" maxlength="40" placeholder="Signature" aria-label="Signature">
+            <label><input type="checkbox" id="qi-script" checked> Handwritten</label>
+          </div>
+        </fieldset>
         <label class="qi-label" for="qi-text">Your text</label>
         <textarea id="qi-text" rows="7" maxlength="600">A lot of confidence
 is just deciding
@@ -84,6 +106,6 @@ yourself.</textarea>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
   <script src="/property/js/access-guard.js"></script>
   <script src="/property/backoffice/backoffice-shell.js?v=20260930a" defer></script>
-  <script src="/property/backoffice/quote-image/quote-image.js?v=20261027a" defer></script>
+  <script src="/property/backoffice/quote-image/quote-image.js?v=20261029a" defer></script>
 </body>
 </html>
