@@ -402,15 +402,19 @@ function drawInstagram(ctx,text){
   drawMetaBadge(ctx,nameX+ctx.measureText(USER).width+10,headH/2-17,34);
   drawDots(ctx,W-60,headH/2,13,4.5,TEXT);
 
-  const squarePhoto=extras.photos[0]||extras.background;
-  paintArea(ctx,0,headH,W,img,colors.bg,squarePhoto,extras.photos.length&&!text?0:extras.dim);
+  const squarePhoto=extras.background;
+  paintArea(ctx,0,headH,W,img,colors.bg,squarePhoto,extras.dim);
   ctx.fillStyle='#dbdbdb';
   ctx.fillRect(0,headH,W,1);
   ctx.fillRect(0,headH+img-1,W,1);
-  const pad=110;
-  const body=fitText(ctx,text,{weight:font.body,size:96,minSize:36,lineHeight:1.18,width:W-pad*2,height:img-pad*2});
-  const first=headH+(img-body.height)/2+body.size*.9;
-  body.lines.forEach((line,i)=>drawLine(ctx,line,pad,first+i*body.size*1.18,body.f));
+  const pad=extras.photos.length?80:110,lh=1.18,gap=text?40:0;
+  const sig=extras.signature.trim()?60:0;
+  const mh=Math.min(mediaHeight(W-pad*2),Math.round(img*.5));
+  const body=text?fitText(ctx,text,{weight:font.body,size:96,minSize:30,lineHeight:lh,width:W-pad*2,height:img-pad*2-sig-(mh?mh+gap:0)}):{lines:[],height:0};
+  const blockTop=headH+(img-sig-(body.height+(mh?gap+mh:0)))/2;
+  const first=blockTop+(body.size||0)*.9;
+  body.lines.forEach((line,i)=>drawLine(ctx,line,pad,first+i*body.size*lh,body.f));
+  if(mh)drawMedia(ctx,pad,blockTop+body.height+gap,W-pad*2,mh);
 
   drawSignature(ctx,W-48,headH+img-40,squarePhoto?'rgba(255,255,255,.88)':mix(colors.text,colors.bg,.6));
 
@@ -420,13 +424,6 @@ function drawInstagram(ctx,text){
     drawIcon(ctx,name,32+i*96,iconY,64,on?META_RED:TEXT,on);
   });
   drawIcon(ctx,'bookmark',W-32-64,iconY,64,TEXT,extras.saved);
-  const count=extras.photos.length;
-  for(let i=0;i<count&&count>1;i++){
-    ctx.fillStyle=i?'#c7c7c7':META_BLUE;
-    ctx.beginPath();
-    ctx.arc(W/2+(i-(count-1)/2)*22,iconY+32,6,0,Math.PI*2);
-    ctx.fill();
-  }
 }
 
 const STYLES={x:drawX,threads:drawThreads,instagram:drawInstagram};
@@ -450,7 +447,7 @@ function readExtras(){
   extras.script=els.script.checked;
   els.photosClear.hidden=!extras.photos.length;
   els.backgroundClear.hidden=!extras.background;
-  els.dimRow.hidden=!extras.background&&!(style()==='instagram'&&extras.photos.length);
+  els.dimRow.hidden=!extras.background;
 }
 
 function draw(){
