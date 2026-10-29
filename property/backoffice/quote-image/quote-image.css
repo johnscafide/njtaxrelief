@@ -21,6 +21,19 @@
 .qi-pickers{display:flex;flex-wrap:wrap;gap:16px;margin-top:12px}
 .qi-pickers label{display:inline-flex;align-items:center;gap:8px;color:var(--bo-ink);font:600 14px/1 var(--bo-font);cursor:pointer}
 .qi-pickers input{width:44px;height:44px;padding:2px;border:1px solid var(--bo-line-strong);border-radius:8px;background:#fff;cursor:pointer}
+.qi-extras{display:grid;gap:12px;margin:0 0 18px;padding:0;border:0}
+.qi-extras legend{padding:0}
+.qi-extra-row{display:flex;flex-wrap:wrap;align-items:center;gap:12px}
+.qi-extra-row[hidden]{display:none}
+.qi-extra-row .bo-btn{cursor:pointer}
+.qi-extra-row:has(input[type=file]:focus-visible) .bo-btn{outline:3px solid var(--bo-focus);outline-offset:2px}
+.qi-link{min-height:44px;padding:0 4px;border:0;background:none;color:var(--bo-blue);font:600 14px/1 var(--bo-font);text-decoration:underline;cursor:pointer}
+.qi-range,.qi-checks label,.qi-sign label{color:var(--bo-ink);font:600 14px/1 var(--bo-font)}
+.qi-checks label,.qi-sign label{display:inline-flex;align-items:center;gap:8px;min-height:44px;cursor:pointer}
+.qi-checks input,.qi-sign input[type=checkbox],.qi-range input{accent-color:var(--bo-navy)}
+.qi-range input{flex:1 1 160px;max-width:240px}
+.qi-sign input[type=text]{flex:1 1 200px;min-height:44px;box-sizing:border-box;padding:0 12px;border:1px solid var(--bo-line-strong);border-radius:10px;background:#fff;color:var(--bo-ink);font:400 16px/1 var(--bo-font)}
+.qi-sign input[type=text]:focus-visible{outline:3px solid var(--bo-focus);outline-offset:1px}
 .qi-form textarea{display:block;width:100%;box-sizing:border-box;padding:14px;border:1px solid var(--bo-line-strong);border-radius:10px;background:#fff;color:var(--bo-ink);font:400 18px/1.45 var(--bo-font);resize:vertical}
 .qi-form textarea:focus-visible{outline:3px solid var(--bo-focus);outline-offset:1px}
 .qi-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px}
