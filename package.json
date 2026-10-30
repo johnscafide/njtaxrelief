@@ -39,6 +39,7 @@
     "test:site-search": "node property/tests/site-search-contract.mjs",
     "test:co-town-pages": "node property/tests/co-town-pages-contract.mjs",
     "test:team-listings": "node property/tests/team-listings-contract.mjs",
+    "test:link-pages": "node property/tests/link-pages-contract.mjs",
     "test:tax-town-pages": "node property/tests/tax-town-pages-contract.mjs",
     "test:games": "node property/tests/watchdog-games-contract.mjs",
     "test:municipal-requirements-unchecked": "node property/tests/municipal-requirements-unchecked-contract.mjs",

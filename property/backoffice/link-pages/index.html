@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="en" data-access-require="standard">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="robots" content="noindex,nofollow,noarchive">
+  <meta name="referrer" content="same-origin">
+  <title>Link Pages | Watchdog Backoffice</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@400;500;600;700;800&display=swap">
+  <link rel="stylesheet" href="/property/backoffice/backoffice-board.css?v=20260928a">
+  <link rel="stylesheet" href="/property/backoffice/link-pages/link-pages.css?v=20261030a">
+</head>
+<body class="bo-body" data-bo-page="link-pages">
+  <a class="bo-skip" href="#bo-main">Skip to content</a>
+
+  <header class="bo-shell">
+    <div class="bo-shell-bar">
+      <a class="bo-brand" href="/backoffice"><span class="bo-mark" aria-hidden="true">W</span><span class="bo-brand-text"><b>Watchdog</b><small>Backoffice</small></span></a>
+      <nav class="bo-nav" aria-label="Backoffice">
+        <a href="/backoffice#leads" data-bo-dev-only hidden>Leads</a>
+        <a href="/backoffice#leadiq" data-bo-dev-only hidden>LeadIQ Tools</a>
+        <a href="/backoffice/reviews" data-bo-dev-only hidden>Application Reviews <span class="bo-review-badge" data-bo-badge="reviews" hidden><span data-bo-badge-count>0</span><span class="bo-sr"> waiting</span></span></a>
+        <a href="/backoffice/professional-verifications" data-bo-dev-only hidden>Professional Reviews <span class="bo-review-badge" data-bo-badge="professional" hidden><span data-bo-badge-count>0</span><span class="bo-sr"> waiting</span></span></a>
+        <a href="/backoffice/town-info" data-bo-dev-only hidden>Town Info <span class="bo-review-badge" data-bo-badge="town" hidden><span data-bo-badge-count>0</span><span class="bo-sr"> waiting</span></span></a>
+        <a href="/backoffice/realestate" data-bo-dev-only hidden>Real Estate OS</a>
+        <a href="/backoffice/image-cleaner" data-bo-dev-only hidden>Image Cleaner</a>
+        <a href="/backoffice/quote-image" data-bo-dev-only hidden>Quote Image</a>
+        <a href="/backoffice/team-listings">Team Listings</a>
+        <a href="/backoffice/link-pages" aria-current="page">Link Pages</a>
+      </nav>
+      <div class="bo-shell-session">
+        <button type="button" class="bo-btn bo-btn-ghost bo-lock" data-bo-lock>Lock Backoffice</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="bo-page lp-main" id="bo-main" tabindex="-1">
+    <header class="lp-topbar">
+      <h1>Link Pages</h1>
+      <div class="lp-topbar-tools">
+        <label class="lp-field lp-inline" id="lp-pick-wrap" hidden>Page
+          <select id="lp-pick"></select>
+        </label>
+        <button class="bo-btn bo-btn-ghost" id="lp-new" type="button">New page</button>
+      </div>
+    </header>
+
+    <p class="lp-blocked" id="lp-blocked" hidden></p>
+
+    <div class="lp-app" id="lp-app" hidden>
+      <form class="lp-editor" id="lp-form" novalidate autocomplete="off">
+        <section class="lp-panel">
+          <h2>Your link</h2>
+          <div class="lp-slug">
+            <span class="lp-slug-pre">watchdogindex.com/links/</span>
+            <input id="lp-slug" aria-label="Your link" maxlength="40" spellcheck="false" placeholder="heather">
+          </div>
+          <p class="lp-status" id="lp-slug-status" role="status" aria-live="polite"></p>
+          <label class="lp-check"><input type="checkbox" id="lp-published" checked> Page is live</label>
+          <div class="lp-row-btns" id="lp-share" hidden>
+            <button class="bo-btn bo-btn-ghost" type="button" id="lp-copy">Copy link</button>
+            <a class="bo-btn bo-btn-ghost" id="lp-open" target="_blank" rel="noopener">Open page</a>
+            <button class="bo-btn bo-btn-ghost" type="button" id="lp-qr">Download QR code</button>
+          </div>
+          <p class="lp-stats" id="lp-stats"></p>
+        </section>
+
+        <section class="lp-panel">
+          <h2>Profile</h2>
+          <div class="lp-avatar">
+            <div class="lp-avatar-img" id="lp-photo-preview"></div>
+            <div class="lp-row-btns">
+              <label class="bo-btn bo-btn-ghost" for="lp-photo-input">Upload photo</label>
+              <input class="bo-sr" id="lp-photo-input" type="file" accept="image/jpeg,image/png,image/webp,image/heic,image/heif">
+              <button class="bo-btn bo-btn-ghost" type="button" id="lp-photo-remove" hidden>Remove</button>
+            </div>
+          </div>
+          <div class="lp-grid">
+            <label class="lp-field lp-full">Name<input name="profile.name" maxlength="80"></label>
+            <label class="lp-field lp-full">Bio<textarea name="profile.bio" rows="3" maxlength="240"></textarea></label>
+            <label class="lp-field">Photo shape
+              <select name="profile.photo_shape"><option value="circle">Circle</option><option value="rounded">Rounded</option><option value="square">Square</option></select>
+            </label>
+            <label class="lp-field">Photo ring
+              <select name="profile.ring"><option value="none">None</option><option value="accent">Highlight color</option><option value="gradient">Color mix</option></select>
+            </label>
+          </div>
+          <label class="lp-check"><input type="checkbox" name="profile.verified"> Show a check mark on the photo</label>
+        </section>
+
+        <section class="lp-panel">
+          <h2>Links</h2>
+          <ul class="lp-blocks" id="lp-blocks"></ul>
+          <div class="lp-add" role="group" aria-label="Add">
+            <button class="bo-btn bo-btn-primary" type="button" data-add="link">Add link</button>
+            <button class="bo-btn bo-btn-ghost" type="button" data-add="heading">Header</button>
+            <button class="bo-btn bo-btn-ghost" type="button" data-add="text">Text</button>
+            <button class="bo-btn bo-btn-ghost" type="button" data-add="photo">Photo</button>
+            <button class="bo-btn bo-btn-ghost" type="button" data-add="countdown">Countdown</button>
+          </div>
+        </section>
+
+        <section class="lp-panel">
+          <h2>Social icons</h2>
+          <ul class="lp-socials" id="lp-socials"></ul>
+          <div class="lp-add">
+            <button class="bo-btn bo-btn-ghost" type="button" id="lp-add-social">Add social icon</button>
+            <label class="lp-field lp-inline">Show them
+              <select name="social_spot"><option value="top">Under your bio</option><option value="bottom">At the bottom</option></select>
+            </label>
+          </div>
+        </section>
+
+        <section class="lp-panel">
+          <h2>Look</h2>
+          <div class="lp-presets" id="lp-presets" role="group" aria-label="Themes"></div>
+          <div class="lp-grid">
+            <label class="lp-field">Font<select name="theme.font" id="lp-font"></select></label>
+            <label class="lp-field">Button style
+              <select name="theme.button_style"><option value="fill">Filled</option><option value="outline">Outline</option><option value="soft">Soft</option></select>
+            </label>
+            <label class="lp-field">Corners
+              <select name="theme.corners"><option value="square">Square</option><option value="rounded">Rounded</option><option value="round">Round</option></select>
+            </label>
+            <label class="lp-field lp-color">Background<input type="color" name="theme.bg"></label>
+            <label class="lp-field lp-color">Fade to
+              <span class="lp-color-row"><input type="checkbox" id="lp-fade" aria-label="Fade the background"><input type="color" name="theme.bg2"></span>
+            </label>
+            <label class="lp-field lp-color">Text<input type="color" name="theme.text"></label>
+            <label class="lp-field lp-color">Buttons<input type="color" name="theme.button"></label>
+            <label class="lp-field lp-color">Button text<input type="color" name="theme.button_text"></label>
+            <label class="lp-field lp-color">Highlight<input type="color" name="theme.accent"></label>
+          </div>
+          <h3>Background photo</h3>
+          <div class="lp-bgphoto">
+            <div class="lp-bg-thumb" id="lp-bg-preview"></div>
+            <div class="lp-row-btns">
+              <label class="bo-btn bo-btn-ghost" for="lp-bg-input">Upload</label>
+              <input class="bo-sr" id="lp-bg-input" type="file" accept="image/jpeg,image/png,image/webp,image/heic,image/heif">
+              <button class="bo-btn bo-btn-ghost" type="button" id="lp-bg-remove" hidden>Remove</button>
+            </div>
+            <label class="lp-field lp-dim" id="lp-dim-wrap" hidden>Darken<input type="range" name="theme.bg_dim" min="0" max="80" step="5"></label>
+          </div>
+        </section>
+
+        <section class="lp-panel">
+          <h2>Small print</h2>
+          <label class="lp-field">Bottom of the page<textarea name="footer" rows="3" maxlength="300" placeholder="NJ Real Estate License #...&#10;Opus Elite Real Estate"></textarea></label>
+        </section>
+
+        <div class="lp-savebar">
+          <p class="lp-status" id="lp-save-status" role="status" aria-live="polite"></p>
+          <button class="bo-btn bo-btn-ghost lp-delete" type="button" id="lp-delete" hidden>Delete page</button>
+          <button class="bo-btn bo-btn-primary" type="submit" id="lp-save">Save</button>
+        </div>
+      </form>
+
+      <aside class="lp-preview" aria-label="Preview">
+        <div class="lp-phone"><iframe id="lp-frame" title="Page preview"></iframe></div>
+      </aside>
+    </div>
+  </main>
+
+  <div class="bo-toast" id="lp-toast" role="status" aria-live="polite" hidden></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+  <script src="/property/js/access-guard.js"></script>
+  <script src="/property/backoffice/backoffice-shell.js?v=20260930a" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js" integrity="sha512-CNgIRecGo7nphbeZ04Sc13ka07paqdeTu0WR1IM4kNcpmBAUSHSQX0FslNhTDadL4O5SAGapGt4FodqL8My0mA==" crossorigin="anonymous" referrerpolicy="no-referrer" defer></script>
+  <script src="/property/backoffice/link-pages/link-page-render.js?v=20261030a" defer></script>
+  <script src="/property/backoffice/link-pages/link-pages.js?v=20261030a" defer></script>
+</body>
+</html>

@@ -58,6 +58,13 @@
     "api/watchdog-team-listings.js": {
       "includeFiles": "co/towns.json"
     },
+    "api/watchdog-link-pages.js": {
+      "includeFiles": "property/backoffice/link-pages/link-page-render.js"
+    },
+    "api/link-page.js": {
+      "includeFiles": "{property/backoffice/link-pages/link-page-render.js,co/index.html}",
+      "maxDuration": 10
+    },
     "api/team-listings-page.js": {
       "includeFiles": "{property/data/town-tax/bills.json,tax-rates.json,property/data/home-feed-towns.json,property/data/municipal-requirements/approvals.json,property/data/municipal-requirements/checked/*.json,co/towns.json,co/index.html}",
       "maxDuration": 10
@@ -683,6 +690,14 @@
     {
       "source": "/backoffice/team-listings",
       "destination": "/property/backoffice/team-listings/index.html"
+    },
+    {
+      "source": "/backoffice/link-pages/",
+      "destination": "/property/backoffice/link-pages/index.html"
+    },
+    {
+      "source": "/backoffice/link-pages",
+      "destination": "/property/backoffice/link-pages/index.html"
     },
     {
       "source": "/town-needs",
