@@ -211,12 +211,12 @@ function blockBody(b){
   if(b.type==='link')return [
     el('div',{class:'lp-grid'},
       blockField(b,'label','Title',{maxlength:80,wide:true}),
-      blockField(b,'url','Link',{maxlength:500,placeholder:'https://',type:'url',wide:true}),
+      blockField(b,'url','Link',{maxlength:500,placeholder:'Website, email or phone number',wide:true}),
       blockField(b,'tag','Small text above the title',{maxlength:40,wide:true})),
     el('div',{class:'lp-block-opts'},blockPhoto(b,'image','thumb','Link photo'),blockCheck(b,'featured','Highlight this link'))];
   if(b.type==='heading')return [blockField(b,'text','Header',{maxlength:80})];
   if(b.type==='text')return [blockField(b,'text','Text',{maxlength:500,rows:3})];
-  if(b.type==='photo')return [blockPhoto(b,'image','photo','Photo'),el('div',{class:'lp-grid'},blockField(b,'url','Link (optional)',{maxlength:500,placeholder:'https://',type:'url'}),blockField(b,'alt','What’s in the photo',{maxlength:120}))];
+  if(b.type==='photo')return [blockPhoto(b,'image','photo','Photo'),el('div',{class:'lp-grid'},blockField(b,'url','Link (optional)',{maxlength:500,placeholder:'Website, email or phone number'}),blockField(b,'alt','What’s in the photo',{maxlength:120}))];
   if(b.type==='countdown')return [el('div',{class:'lp-grid'},blockField(b,'title','Title',{maxlength:80}),blockField(b,'date','Counts down to (NJ time)',{type:'datetime-local'}))];
   return [];
 }
@@ -256,6 +256,7 @@ function addBlock(type){
 }
 
 // ---------- socials ----------
+function hint(network){const n=LP.NETWORKS[network];return n.contact==='email'?'Email address':n.contact==='phone'?'Phone number':n.url?'@handle or link':'https://'}
 function renderSocials(){
   const list=content().socials;
   const taps=state.page.stats&&state.page.stats.taps||{};
@@ -263,9 +264,9 @@ function renderSocials(){
     const pick=el('select',{'aria-label':'Site'});
     pick.append(...Object.entries(LP.NETWORKS).map(([k,n])=>el('option',{value:k,text:n.label})));
     pick.value=s.network;
-    const input=el('input',{'aria-label':'Handle or link',maxlength:300,placeholder:LP.NETWORKS[s.network].url?'@handle or link':'https://'});
+    const input=el('input',{'aria-label':'Handle or link',maxlength:300,placeholder:hint(s.network)});
     input.value=s.url||'';
-    pick.addEventListener('change',()=>{s.network=pick.value;input.placeholder=LP.NETWORKS[s.network].url?'@handle or link':'https://';changed()});
+    pick.addEventListener('change',()=>{s.network=pick.value;input.placeholder=hint(s.network);changed()});
     input.addEventListener('input',()=>{s.url=input.value;changed()});
     const count=taps[s.id];
     return el('li',null,pick,input,count?el('span',{class:'lp-taps',text:count+(count===1?' tap':' taps')}):null,el('span',{class:'lp-tools'},

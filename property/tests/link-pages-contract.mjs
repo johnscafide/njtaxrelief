@@ -34,7 +34,10 @@ must(page.blocks.length === 4 && page.blocks[0].url === 'https://opuselitesj.com
 must(!/\u2014/.test(page.profile.bio), 'Typed em dashes are swapped out.');
 must(page.theme.bg === LP.PRESETS.blush.bg && page.theme.text === '#123456', 'Bad colors fall back to the theme.');
 must(page.socials.length === 1 && page.socials[0].url === 'https://www.instagram.com/heather', 'Only known social sites are kept.');
-must(LP.cleanPage({ profile: { name: 'X' }, blocks: [{ type: 'link', label: 'Call', url: 'tel:555' }] }, ours).errors.length === 1, 'Phone links are refused with a message.');
+must(LP.linkUrl('(856) 555-0101') === 'tel:+18565550101' && LP.linkUrl('tel:856-555-0101') === 'tel:+18565550101' && LP.linkUrl('heather@example.com') === 'mailto:heather@example.com', 'Phone numbers and emails turn into tap-to-call and email links.');
+must(LP.linkUrl('tel:555') === '' && LP.linkUrl('mailto:nope') === '' && LP.linkUrl('javascript:alert(1)') === '', 'Bad phone, email and script links are refused.');
+must(LP.socialUrl('email', 'a@b.co') === 'mailto:a@b.co' && LP.socialUrl('phone', '856.555.0101') === 'tel:+18565550101', 'Email and phone icons.');
+must(LP.cleanPage({ profile: { name: 'X' }, blocks: [{ type: 'link', label: 'Call', url: 'tel:555' }] }, ours).errors.length === 1, 'Short phone numbers are refused with a message.');
 must(LP.cleanPage({ profile: { name: '' } }, ours).errors[0] === 'Add your name.', 'A name is required.');
 
 const html = LP.renderPage(page, { slug: 'heather', story: '<!--\n\n Hi There -->\n', now: Date.UTC(2026, 9, 30) });
@@ -44,7 +47,7 @@ must(!html.includes('Hidden'), 'Hidden links stay off the page.');
 must(html.includes('fa-instagram') && html.includes('brands.min.css'), 'Social icons draw.');
 must(html.includes('data-slug="heather"') && html.includes('/api/link-page') && html.includes('rel="canonical" href="https://www.watchdogindex.com/links/heather"'), 'The public page counts views and has a canonical link.');
 must(/Hi There/.test(html), 'Public link pages carry John’s story comment.');
-must(!/tel:|mailto:/i.test(html) && !/\u2014/.test(html), 'No phone or email links and no em dashes.');
+must(!/\u2014/.test(html), 'No em dashes.');
 must(!/Inter|Plus Jakarta|Poppins|Playfair/.test(JSON.stringify(LP.FONTS)), 'Only fonts John allows.');
 must(!LP.renderPage(LP.cleanPage({ profile: { name: 'X' }, blocks: [{ type: 'countdown', title: 'Old', date: '2020-01-01T00:00' }] }, ours).page, {}).includes('lp-count"'), 'Past countdowns are left off.');
 must(LP.njTime('2026-07-01T12:00') === Date.UTC(2026, 6, 1, 16) && LP.njTime('2026-12-01T12:00') === Date.UTC(2026, 11, 1, 17), 'Countdown dates are NJ time.');

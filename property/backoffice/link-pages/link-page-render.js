@@ -31,7 +31,9 @@ const NETWORKS = {
   pinterest: { label: 'Pinterest', icon: 'fa-pinterest', url: (h) => `https://www.pinterest.com/${h}` },
   snapchat: { label: 'Snapchat', icon: 'fa-snapchat', url: (h) => `https://www.snapchat.com/add/${h}` },
   spotify: { label: 'Spotify', icon: 'fa-spotify', url: null },
-  website: { label: 'Website', icon: '', url: null }
+  website: { label: 'Website', icon: '', url: null },
+  email: { label: 'Email', icon: '', url: null, contact: 'email' },
+  phone: { label: 'Phone', icon: '', url: null, contact: 'phone' }
 };
 
 const FONTS = {
@@ -68,7 +70,26 @@ function noDash(s) { return String(s).replace(/\s*\u2014\s*/g, ', '); }
 function color(v, fallback) { const s = String(v || '').trim(); return COLOR.test(s) ? s.toLowerCase() : fallback; }
 function pick(v, list, fallback) { return list.includes(v) ? v : fallback; }
 
-// Only web links. Phone, email and text links are left out on purpose (site contact rule).
+// Phone and email links (John OK'd them for link pages on Oct 30 2026). Takes a typed email,
+// phone number, mailto: or tel: link. Returns '' when it isn't one.
+function contactUrl(v, kind) {
+  const s = String(v == null ? '' : v).trim().slice(0, 200);
+  const email = s.replace(/^mailto:/i, '').split('?')[0];
+  if ((!kind || kind === 'email') && /^[^\s@<>"']+@[^\s@<>"']+\.[a-z]{2,}$/i.test(email)) return 'mailto:' + email;
+  if ((!kind || kind === 'phone') && /^(tel:|\+?[\d\s().-]+$)/i.test(s)) {
+    let d = s.replace(/^tel:/i, '').replace(/[^\d+]/g, '');
+    if (/^\d{10}$/.test(d)) d = '+1' + d;
+    else if (/^1\d{10}$/.test(d)) d = '+' + d;
+    if (/^\+\d{8,15}$/.test(d)) return 'tel:' + d;
+  }
+  return '';
+}
+function linkUrl(v) {
+  const raw = String(v == null ? '' : v).trim();
+  if (/^(mailto|tel):/i.test(raw) || /@/.test(raw) && !/^https?:/i.test(raw) || /^\+?[\d\s().-]{10,}$/.test(raw)) return contactUrl(raw);
+  return cleanUrl(raw);
+}
+// Web links only.
 function cleanUrl(v) {
   let s = String(v == null ? '' : v).trim().slice(0, 500);
   if (!s) return '';
@@ -87,6 +108,7 @@ function socialUrl(network, value) {
   const n = NETWORKS[network];
   const raw = String(value == null ? '' : value).trim();
   if (!n || !raw) return '';
+  if (n.contact) return contactUrl(raw, n.contact);
   const handle = raw.replace(/^@+/, '');
   if (n.url && !/[/:]/.test(raw) && /^[A-Za-z0-9._-]{1,60}$/.test(handle)) return n.url(handle);
   return cleanUrl(raw);
@@ -132,10 +154,10 @@ function cleanPage(input, photoOk) {
     const base = { id: uid(b.id), type: b.type, hidden: b.hidden === true };
     if (b.type === 'link') {
       const label = noDash(text(b.label, 80));
-      const url = cleanUrl(b.url);
+      const url = linkUrl(b.url);
       if (!label && !String(b.url || '').trim()) return;
       if (!label) errors.push(`Link ${i + 1} needs a title.`);
-      if (!url) errors.push(`Check the web address for “${label || `link ${i + 1}`}”. It needs to be a website link.`);
+      if (!url) errors.push(`Check the link for “${label || `link ${i + 1}`}”. It needs to be a website, email or phone number.`);
       blocks.push(Object.assign(base, { label, tag: noDash(text(b.tag, 40)), url, image: okPhoto(b.image) ? String(b.image) : '', featured: b.featured === true }));
     } else if (b.type === 'heading') {
       const t = noDash(text(b.text, 80));
@@ -145,8 +167,8 @@ function cleanPage(input, photoOk) {
       if (t) blocks.push(Object.assign(base, { text: t }));
     } else if (b.type === 'photo') {
       if (!okPhoto(b.image)) return;
-      const url = String(b.url || '').trim() ? cleanUrl(b.url) : '';
-      if (String(b.url || '').trim() && !url) errors.push('Check the web address on your photo. It needs to be a website link.');
+      const url = String(b.url || '').trim() ? linkUrl(b.url) : '';
+      if (String(b.url || '').trim() && !url) errors.push('Check the link on your photo. It needs to be a website, email or phone number.');
       blocks.push(Object.assign(base, { image: String(b.image), url, alt: noDash(text(b.alt, 120)) }));
     } else if (b.type === 'countdown') {
       const date = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}$/.test(String(b.date || '')) ? String(b.date) : '';
@@ -207,6 +229,8 @@ function njTime(local) {
 }
 
 const GLOBE = '<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.7 3.8 5.7 3.8 9s-1.3 6.3-3.8 9c-2.5-2.7-3.8-5.7-3.8-9S9.5 5.7 12 3z"/></svg>';
+const MAIL = '<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>';
+const PHONE = '<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></svg>';
 const CHECK = '<svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>';
 
 function css(theme) {
@@ -264,7 +288,7 @@ function socialList(page, preview) {
   const target = preview ? ' target="_blank"' : '';
   return `<ul class="lp-social">${page.socials.map((s) => {
     const n = NETWORKS[s.network];
-    const icon = n.icon ? `<i class="fa-brands ${n.icon}" aria-hidden="true"></i>` : GLOBE;
+    const icon = n.icon ? `<i class="fa-brands ${n.icon}" aria-hidden="true"></i>` : n.contact === 'email' ? MAIL : n.contact === 'phone' ? PHONE : GLOBE;
     return `<li><a href="${esc(s.url)}" rel="noopener me"${target} data-i="${esc(s.id)}" aria-label="${esc(n.label)}">${icon}</a></li>`;
   }).join('')}</ul>`;
 }
@@ -349,5 +373,5 @@ ${p.social_spot === 'bottom' ? socials : ''}${p.footer ? `<p class="lp-foot">${l
 </html>`;
 }
 
-return { ORIGIN, SLUG, NETWORKS, FONTS, PRESETS, CORNERS, BUTTON_STYLES, PHOTO_SHAPES, RINGS, MAX_BLOCKS, MAX_SOCIALS, cleanPage, cleanUrl, socialUrl, renderPage, blankPage, newId, esc, njTime, stripLabel };
+return { ORIGIN, SLUG, NETWORKS, FONTS, PRESETS, CORNERS, BUTTON_STYLES, PHOTO_SHAPES, RINGS, MAX_BLOCKS, MAX_SOCIALS, cleanPage, cleanUrl, linkUrl, contactUrl, socialUrl, renderPage, blankPage, newId, esc, njTime, stripLabel };
 });
