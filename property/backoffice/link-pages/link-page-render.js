@@ -64,7 +64,7 @@ function esc(v) {
 function text(v, n) { return String(v == null ? '' : v).replace(/[\u0000-\u001f\u007f]+/g, ' ').replace(/\s+/g, ' ').trim().slice(0, n); }
 function longText(v, n) { return String(v == null ? '' : v).replace(/\r\n?/g, '\n').replace(/[\u0000-\u0009\u000b-\u001f\u007f]+/g, ' ').replace(/[ \t]+/g, ' ').replace(/\n{3,}/g, '\n\n').trim().slice(0, n); }
 // Em dashes are never shown on the site; typed ones become a comma.
-function noDash(s) { return String(s).replace(/\s*—\s*/g, ', '); }
+function noDash(s) { return String(s).replace(/\s*\u2014\s*/g, ', '); }
 function color(v, fallback) { const s = String(v || '').trim(); return COLOR.test(s) ? s.toLowerCase() : fallback; }
 function pick(v, list, fallback) { return list.includes(v) ? v : fallback; }
 

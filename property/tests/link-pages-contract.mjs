@@ -15,7 +15,7 @@ must(LP.socialUrl('instagram', '@heather.sells') === 'https://www.instagram.com/
 must(LP.socialUrl('instagram', 'https://instagram.com/x') === 'https://instagram.com/x', 'Full social links are kept.');
 
 const input = {
-  profile: { name: 'Heather <b>', bio: 'Homes — South Jersey', photo, verified: true, ring: 'gradient' },
+  profile: { name: 'Heather <b>', bio: 'Homes \u2014 South Jersey', photo, verified: true, ring: 'gradient' },
   blocks: [
     { id: 'aaa', type: 'link', label: 'Search homes', url: 'opuselitesj.com', featured: true, image: 'https://evil.example/x.jpg' },
     { id: 'bbb', type: 'link', label: '', url: '' },
@@ -31,7 +31,7 @@ const input = {
 const { page, errors } = LP.cleanPage(input, ours);
 must(!errors.length, 'A good page has no errors: ' + errors.join(' '));
 must(page.blocks.length === 4 && page.blocks[0].url === 'https://opuselitesj.com/' && page.blocks[0].image === '', 'Empty links and unknown blocks drop, outside photos are refused.');
-must(!/—/.test(page.profile.bio), 'Typed em dashes are swapped out.');
+must(!/\u2014/.test(page.profile.bio), 'Typed em dashes are swapped out.');
 must(page.theme.bg === LP.PRESETS.blush.bg && page.theme.text === '#123456', 'Bad colors fall back to the theme.');
 must(page.socials.length === 1 && page.socials[0].url === 'https://www.instagram.com/heather', 'Only known social sites are kept.');
 must(LP.cleanPage({ profile: { name: 'X' }, blocks: [{ type: 'link', label: 'Call', url: 'tel:555' }] }, ours).errors.length === 1, 'Phone links are refused with a message.');
@@ -44,7 +44,7 @@ must(!html.includes('Hidden'), 'Hidden links stay off the page.');
 must(html.includes('fa-instagram') && html.includes('brands.min.css'), 'Social icons draw.');
 must(html.includes('data-slug="heather"') && html.includes('/api/link-page') && html.includes('rel="canonical" href="https://www.watchdogindex.com/links/heather"'), 'The public page counts views and has a canonical link.');
 must(/Hi There/.test(html), 'Public link pages carry John’s story comment.');
-must(!/tel:|mailto:/i.test(html) && !/—/.test(html), 'No phone or email links and no em dashes.');
+must(!/tel:|mailto:/i.test(html) && !/\u2014/.test(html), 'No phone or email links and no em dashes.');
 must(!/Inter|Plus Jakarta|Poppins|Playfair/.test(JSON.stringify(LP.FONTS)), 'Only fonts John allows.');
 must(!LP.renderPage(LP.cleanPage({ profile: { name: 'X' }, blocks: [{ type: 'countdown', title: 'Old', date: '2020-01-01T00:00' }] }, ours).page, {}).includes('lp-count"'), 'Past countdowns are left off.');
 must(LP.njTime('2026-07-01T12:00') === Date.UTC(2026, 6, 1, 16) && LP.njTime('2026-12-01T12:00') === Date.UTC(2026, 11, 1, 17), 'Countdown dates are NJ time.');
