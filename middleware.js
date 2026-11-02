@@ -39,6 +39,9 @@ const AUTOMATION_UA = /\b(?:curl|wget|python-requests|scrapy|go-http-client|libw
 const ROOT_STATIC_PAGES = new Set(['/move', '/contact', '/search', '/agent', '/lender', '/attorney', '/investor', '/developer/communications', '/transaction', '/transaction/shared', '/account/profile', '/account/professional-profile', '/agent/listing-prep', '/agent/buyers', '/agent/open-house', '/agent/training', '/open-house', '/client-room', '/preview', '/preview/home', '/co']);
 const ROOT_COMPAT_REDIRECTS = new Map([['/contact.html', '/contact']]);
 const LEGACY_FAQ_PATHS = new Set(['/property/faq','/property/faq/','/property/faq.html','/property/faq/index.html']);
+// Canonicalize only public Insight HTML aliases. Never redirect the /property/ implementation namespace wholesale.
+const LEGACY_INSIGHT_HTML_PATH = /^\/property\/insights\/([a-z0-9][a-z0-9-]{0,118})\.html$/i;
+const ROOT_INSIGHT_HTML_PATH = /^\/insights\/([a-z0-9][a-z0-9-]{0,118})\.html$/i;
 const LEGACY_PUBLIC_REDIRECTS = new Map([
 ['/property/privacy','/privacy'],['/property/privacy/','/privacy'],['/property/privacy/index.html','/privacy'],['/property/terms','/terms'],['/property/terms/','/terms'],['/property/terms/index.html','/terms'],['/property/refunds','/refunds'],['/property/refunds/','/refunds'],['/property/refunds/index.html','/refunds'],['/property/support','/support'],['/property/support/','/support'],['/property/support/index.html','/support'],['/property/data-deletion','/data-deletion'],['/property/data-deletion/','/data-deletion'],['/property/data-deletion/index.html','/data-deletion']]);
 function isReservedRootPath(pathname){return RESERVED_ROOT_PREFIXES.some(prefix=>pathname===prefix||pathname.startsWith(`${prefix}/`));}
@@ -89,6 +92,11 @@ if(url.pathname==='/alerts/confirm'||url.pathname==='/alerts/unsubscribe'){const
 if(PROPERTY_PAGE_PATH.test(url.pathname)){const destination=new URL('/api/watchdog-property-page',request.url);destination.searchParams.set('path',url.pathname);return rewrite(destination);}
 if(ROOT_COMPAT_REDIRECTS.has(url.pathname))return redirectCanonical(request,url,ROOT_COMPAT_REDIRECTS.get(url.pathname));
 if(LEGACY_FAQ_PATHS.has(url.pathname))return redirectCanonical(request,url,'/faq');
+// Middleware handles these before the /property/ static bypass; Vercel's parameterized redirect alone can fall through to the branded 404.
+const legacyInsightMatch=url.pathname.match(LEGACY_INSIGHT_HTML_PATH);
+if(legacyInsightMatch)return redirectCanonical(request,url,`/insights/${legacyInsightMatch[1].toLowerCase()}`);
+const rootInsightMatch=url.pathname.match(ROOT_INSIGHT_HTML_PATH);
+if(rootInsightMatch)return redirectCanonical(request,url,`/insights/${rootInsightMatch[1].toLowerCase()}`);
 if(LEGACY_PUBLIC_REDIRECTS.has(url.pathname))return redirectCanonical(request,url,LEGACY_PUBLIC_REDIRECTS.get(url.pathname));
 // One public homepage identity: exact legacy /property entry URLs permanently resolve to the canonical root. Do not redirect the /property/* implementation namespace.
 if(url.pathname==='/property'||url.pathname==='/property/')return redirectCanonical(request,url,'/');
