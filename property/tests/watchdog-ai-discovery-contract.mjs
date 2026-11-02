@@ -65,6 +65,9 @@ assert.match(commandCenter, /data-developer-only="true"/);
 assert.match(commandCenter, /product-analytics-report/);
 assert.match(commandCenter, /ai-discovery-benchmark\.json/);
 assert.match(commandCenter, /Ordinary Google and Bing search traffic is deliberately not relabeled as AI/);
+assert.match(commandCenter, /newest 5,000 external page views/);
+assert.match(commandCenter, /AI referrals · sampled/);
+assert.doesNotMatch(commandCenter, /AI referrals · 30D/);
 
 const routing = JSON.parse(await readFile(new URL('../../vercel.json', import.meta.url), 'utf8'));
 for (const [source, destination] of [
