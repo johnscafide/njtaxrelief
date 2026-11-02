@@ -1,0 +1,233 @@
+{
+  "checked_at": "2026-11-02T14:18:48Z",
+  "registry_version": "2026-11-02.1",
+  "canonical_origin": "https://www.watchdogindex.com",
+  "evidence_policy": "Only direct answer-level citations, official platform reports, and first-party AI referral telemetry count as proprietary evidence. Public search result sampling is not an answer-engine citation test. Missing evidence means unknown, not zero.",
+  "first_party_analytics": {
+    "window_start": "2026-10-03T14:18:48Z",
+    "window_end": "2026-11-02T14:18:48Z",
+    "external_pageview_events": 46633,
+    "explicit_ai_attributed_external_pageviews": 0,
+    "latest_external_event": "2026-11-02T14:01:31.313803Z",
+    "method": "Read-only uncapped SQL on watchdog_product_events, event_name=page_view, external_visitor/external_account, event/session UTM and referrer plus explicit source fields.",
+    "classification": "pageview events, not unique users, citation counts or AI impressions"
+  },
+  "measurement": {
+    "bing_ai_performance": "No authenticated Watchdog citation/cited-page/Topics Portfolio export available.",
+    "google_search_console_snapshots": 0,
+    "google_generatve_ai_and_multimodal": "No Watchdog first-party export available; account-level inclusion and Preferred Sources status unverified.",
+    "chatgpt_perplexity_apple_claude_grok_meta": "No proprietary Watchdog answer citation directly observed; status unknown."
+  },
+  "platforms": [
+    {
+      "name": "ChatGPT Search",
+      "citation_status": "not_observable"
+    },
+    {
+      "name": "Bing/Copilot AI Performance",
+      "citation_status": "not_observable"
+    },
+    {
+      "name": "Google AI Overviews/AI Mode/Preferred Sources",
+      "citation_status": "not_observable"
+    },
+    {
+      "name": "Perplexity",
+      "citation_status": "not_observable"
+    },
+    {
+      "name": "Apple Intelligence/Siri/Spotlight",
+      "citation_status": "not_observable"
+    },
+    {
+      "name": "Claude",
+      "citation_status": "not_observable"
+    },
+    {
+      "name": "Grok",
+      "citation_status": "not_observable"
+    },
+    {
+      "name": "Meta AI",
+      "citation_status": "not_observable"
+    },
+    {
+      "name": "Meta Muse",
+      "citation_status": "not_observable"
+    }
+  ],
+  "prompt_results": [
+    {
+      "id": "brand-entity",
+      "method": "branded_public_retrieval",
+      "canonical_url_observed": "https://www.watchdogindex.com/faq",
+      "watchdog_mentioned_in_proprietary_answer": null,
+      "watchdog_cited_in_proprietary_answer": null,
+      "note": "Watchdog FAQ appeared in brand/ROBUST public retrieval; no proprietary answer citation."
+    },
+    {
+      "id": "chapter-123",
+      "method": "unbranded_public_retrieval",
+      "canonical_url_observed": null,
+      "watchdog_mentioned_in_proprietary_answer": null,
+      "watchdog_cited_in_proprietary_answer": null,
+      "note": "NJREAP, PropertyTaxMath, taxappealmanual and NJ assessment sources appeared in sampled public results; Watchdog not observed in this sample."
+    },
+    {
+      "id": "assessed-vs-market",
+      "method": "unbranded_public_retrieval",
+      "canonical_url_observed": null,
+      "watchdog_mentioned_in_proprietary_answer": null,
+      "watchdog_cited_in_proprietary_answer": null,
+      "note": "NJ Division of Taxation surfaced in sampled public retrieval; no Watchdog result observed."
+    },
+    {
+      "id": "revaluation",
+      "method": "canonical_direct_check",
+      "canonical_url_observed": "https://www.watchdogindex.com/insights/2026-revaluation-reassessment-list",
+      "watchdog_mentioned_in_proprietary_answer": null,
+      "watchdog_cited_in_proprietary_answer": null,
+      "note": "Canonical article directly returned HTTP 200. Legacy HTML alias returned HTTP 404, not a redirect. Direct fetch is not a generic search citation."
+    },
+    {
+      "id": "tax-rates",
+      "method": "unbranded_public_retrieval",
+      "canonical_url_observed": null,
+      "watchdog_mentioned_in_proprietary_answer": null,
+      "watchdog_cited_in_proprietary_answer": null,
+      "note": "TaxByTown and NJ property-tax sources surfaced; no Watchdog URL observed in returned sample."
+    },
+    {
+      "id": "buyer-estimate",
+      "method": "unbranded_public_retrieval",
+      "canonical_url_observed": null,
+      "watchdog_mentioned_in_proprietary_answer": null,
+      "watchdog_cited_in_proprietary_answer": null,
+      "note": "No Watchdog URL observed in returned sample; no proprietary answer access."
+    },
+    {
+      "id": "senior-relief",
+      "method": "unbranded_public_retrieval",
+      "canonical_url_observed": null,
+      "watchdog_mentioned_in_proprietary_answer": null,
+      "watchdog_cited_in_proprietary_answer": null,
+      "note": "NJ Division of Taxation, Treasury PAS-1 and Kiplinger surfaced; 2025 filing deadline Nov 2, 2026."
+    },
+    {
+      "id": "tax-bill",
+      "method": "unbranded_public_retrieval",
+      "canonical_url_observed": null,
+      "watchdog_mentioned_in_proprietary_answer": null,
+      "watchdog_cited_in_proprietary_answer": null,
+      "note": "No Watchdog URL observed in returned sample; no proprietary answer access."
+    },
+    {
+      "id": "professional-tool",
+      "method": "unbranded_public_retrieval",
+      "canonical_url_observed": "https://www.watchdogindex.com/agent",
+      "watchdog_mentioned_in_proprietary_answer": null,
+      "watchdog_cited_in_proprietary_answer": null,
+      "note": "Watchdog's public /agent page surfaced in unbranded professional property-tool retrieval alongside competing permit/property-intelligence vendors."
+    },
+    {
+      "id": "propertyshark-alternative",
+      "method": "unbranded_public_retrieval",
+      "canonical_url_observed": null,
+      "watchdog_mentioned_in_proprietary_answer": null,
+      "watchdog_cited_in_proprietary_answer": null,
+      "note": "No Watchdog alternative page observed in returned sample."
+    },
+    {
+      "id": "propstream-alternative",
+      "method": "unbranded_public_retrieval",
+      "canonical_url_observed": null,
+      "watchdog_mentioned_in_proprietary_answer": null,
+      "watchdog_cited_in_proprietary_answer": null,
+      "note": "No Watchdog alternative page observed in returned sample."
+    },
+    {
+      "id": "trust-methodology",
+      "method": "branded_public_retrieval",
+      "canonical_url_observed": "https://www.watchdogindex.com/faq",
+      "watchdog_mentioned_in_proprietary_answer": null,
+      "watchdog_cited_in_proprietary_answer": null,
+      "note": "Watchdog FAQ surfaced with ROBUST framework details in branded public retrieval; not an AI answer citation."
+    }
+  ],
+  "verified_findings": [
+    {
+      "type": "canonical_alias",
+      "legacy_url": "https://www.watchdogindex.com/property/insights/2026-revaluation-reassessment-list.html",
+      "legacy_status": 404,
+      "canonical_url": "https://www.watchdogindex.com/insights/2026-revaluation-reassessment-list",
+      "canonical_status": 200,
+      "explanation": "Parameterized vercel.json redirect existed but middleware/static handling fell through to branded 404; explicit middleware canonical redirect committed, not yet live-verified."
+    },
+    {
+      "type": "dashboard_coverage",
+      "dashboard": "/analytics/ai-discovery",
+      "limitation": "Edge function selects only newest 5,000 external pageview rows within requested period before computing AI attribution; 30-day external events exceeded 46,000.",
+      "action": "UI now explicitly labels sampled counts; full SQL aggregation remains a separate implementation task."
+    },
+    {
+      "type": "perplexity_official_guidance",
+      "finding": "PerplexityBot handles search/index; Perplexity-User is a separate user-initiated fetcher generally ignoring robots.txt. Public WAF access should use official published IP guidance.",
+      "action": "Benchmark registry updated; no crawler-policy or model-training permission change."
+    },
+    {
+      "type": "nj_relief_deadline",
+      "finding": "Official NJ Treasury 2025 PAS-1/ANCHOR/Senior Freeze/Stay NJ application deadline is November 2, 2026; avoid publishing a date-relative statement that will become stale tomorrow.",
+      "source": "https://www.nj.gov/treasury/taxation/relief.shtml"
+    }
+  ],
+  "code_changes": [
+    {
+      "commit": "07140237372b4440f45530f2d5683e81b2dffc1e",
+      "scope": "middleware explicit 308 legacy and root Insight .html canonical redirects"
+    },
+    {
+      "commit": "257e85828eb91fae47d4b3b97ff8fbd1232e625e",
+      "scope": "canonical Insight middleware route-order regression assertions"
+    },
+    {
+      "commit": "94379e2dc51bfd2647bea8a61a90f96f333ef300",
+      "scope": "developer AI Discovery UI sample coverage disclosure"
+    },
+    {
+      "commit": "326d79baed23be03e12092800e80c37cc6fd6b8d",
+      "scope": "sample coverage regression assertions; AI discovery contract passed on this commit"
+    },
+    {
+      "commit": "37bab709351e083646951759449520aa2a222a8b",
+      "scope": "benchmark registry v2026-11-02.1; Perplexity-User and opportunities"
+    }
+  ],
+  "deployment": {
+    "state": "not_yet_production_verified",
+    "latest_observed_ready_production_commit": "b8a7793d02da8cabc9c03b33727fc57289502fdb",
+    "legacy_alias_status_before_fix": 404,
+    "production_release": "governed; no release forced"
+  },
+  "official_sources": {
+    "openai": "https://developers.openai.com/api/docs/bots",
+    "bing": "https://blogs.bing.com/webmaster/2026/10/introducing-topics-portfolio-beta-in-ai-performance/",
+    "google_ai": "https://developers.google.com/search/blog/2026/06/gen-ai-performance-reports",
+    "google_multimodal": "https://developers.google.com/search/blog/2026/09/web-multimodal-in-sc",
+    "google_search_guidance": "https://developers.google.com/search/docs/appearance/ai-features",
+    "perplexity": "https://docs.perplexity.ai/docs/resources/perplexity-crawlers",
+    "anthropic": "https://support.claude.com/en/articles/8896518-does-anthropic-crawl-data-from-the-web-and-how-can-site-owners-block-the-crawler",
+    "apple": "https://support.apple.com/en-us/119829",
+    "meta_muse": "https://about.fb.com/news/2026/10/introducing-muse-wonder-models/",
+    "nj_relief": "https://www.nj.gov/treasury/taxation/relief.shtml"
+  },
+  "crawler_policy_changes": "none",
+  "model_training_permission_changes": "none",
+  "private_route_exclusion_changes": "none",
+  "next_actions": [
+    "Deploy middleware canonical alias fix through existing governed production release and verify 308+Location, query string preservation, canonical 200, private routes unaffected.",
+    "Replace 5k client-side scan with indexed database aggregation, retain developer authorization, and test >5k external events.",
+    "Restore Google Search Console selected property and dedicated Generative AI/multimodal exports.",
+    "Export authenticated Bing AI Performance Topics Portfolio/cited URLs and grounding queries.",
+    "Publish year-specific original NJ assessment and Chapter 123 examples with certified official sources."
+  ]
+}
