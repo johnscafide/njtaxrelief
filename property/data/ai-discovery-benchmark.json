@@ -1,5 +1,5 @@
 {
-  "version": "2026-11-02.1",
+  "version": "2026-11-02.2",
   "canonical_brand": "Watchdog",
   "canonical_origin": "https://www.watchdogindex.com",
   "purpose": "Measure whether answer engines recognize, cite, and correctly describe Watchdog for high-value New Jersey property questions without treating unobservable proprietary UI behavior as fact.",
@@ -12,7 +12,7 @@
         "manual_citation_benchmark",
         "agent_accessibility"
       ],
-      "discovery_control": "OAI-SearchBot for ChatGPT Search; GPTBot training permissions are separate. Allow legitimate retrieval through robots/CDN/WAF. ChatGPT Search referrals may carry utm_source=chatgpt.com. Atlas was retired by OpenAI in August 2026; use current ChatGPT browser/Work agent accessibility guidance instead."
+      "discovery_control": "OAI-SearchBot for ChatGPT Search; GPTBot training permissions are separate. Allow legitimate retrieval through robots/CDN/WAF. ChatGPT Search referrals may carry utm_source=chatgpt.com. Atlas was retired by OpenAI in August 2026; use current ChatGPT browser/Work agent accessibility guidance instead. ChatGPT-User is a user-triggered fetcher, not the automatic Search crawler; robots rules may not apply. Official: https://developers.openai.com/api/docs/bots"
     },
     {
       "id": "microsoft_copilot",
@@ -46,7 +46,7 @@
         "ai_referral_analytics",
         "manual_citation_benchmark"
       ],
-      "discovery_control": "PerplexityBot is the documented search/index crawler and is not used for foundation-model training. Perplexity-User is a separate user-initiated fetcher that generally ignores robots.txt; verify public-page WAF access using Perplexity's published IP ranges. Do not infer citations from fetches or change training permissions.",
+      "discovery_control": "PerplexityBot for automatic search discovery; Perplexity-User is a documented user-triggered fetcher that generally ignores robots.txt, and should be handled through verified IP/WAF allowlists when appropriate. Neither is a foundation-model-training crawler. Official: https://docs.perplexity.ai/docs/resources/perplexity-crawlers",
       "official_sources": [
         "https://docs.perplexity.ai/docs/resources/perplexity-crawlers"
       ]
