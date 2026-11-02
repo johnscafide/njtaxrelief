@@ -23,7 +23,7 @@
         "manual_citation_benchmark",
         "bing_ai_topics_portfolio"
       ],
-      "discovery_control": "Bingbot; Bing AI Performance is authoritative first-party citation evidence when available. Use IndexNow to accelerate changed-URL discovery. Bing Topics Portfolio (Beta, announced 2026-10-13) offers directional topic opportunity/competitor evidence; do not label estimates as verified citations."
+      "discovery_control": "Bingbot; Bing AI Performance is authoritative first-party citation evidence when available. Use IndexNow to accelerate changed-URL discovery. Bing Topics Portfolio (Beta, announced 2026-10-13) offers directional topic opportunity/competitor evidence; do not label estimates as verified citations. Microsoft announced new independent AI Training and AI Grounding publisher preferences on 2026-10-30, adopting the IETF AI Preferences draft __usage_ai-training robots group and Bingbot page-level ai-training / ai-grounding directives (Allow, Disallow, DisallowExtended). Effective on recrawl from 2027-02-01; old NoArchive/NoCache controls sunset for this purpose after 2027-03-01. Grounding restrictions reduce AI answer visibility; do not apply automatically. For sites using legacy restrictions, evaluate transition before 2027-03-01. Official: https://blogs.bing.com/search/2026/10/your-content-your-choice-clearer-preferences-for-training-and-grounding/"
     },
     {
       "id": "google_ai",
@@ -258,7 +258,8 @@
     "Keep search/retrieval crawler permissions separate from model-training crawler permissions whenever a platform documents distinct controls.",
     "llms.txt is optional metadata for consumers that support it; never describe it as required by Google or as a ranking boost.",
     "User-triggered agents/fetchers, AI referral click-throughs, generic web-search results and estimated topic opportunity scores must not be recorded as confirmed AI answer citations.",
-    "Treat Meta Muse agent navigation, platform launches and model API availability as platform-watch evidence only; do not infer Watchdog citations or invent a Muse crawler user-agent."
+    "Treat Meta Muse agent navigation, platform launches and model API availability as platform-watch evidence only; do not infer Watchdog citations or invent a Muse crawler user-agent.",
+    "Microsoft 2026-10-30 AI Training/Grounding preferences are independent from crawl/index eligibility; preserve grounding visibility and do not change training or licensing permissions without an explicit Watchdog policy decision."
   ],
   "opportunity_watch": [
     {
@@ -289,6 +290,12 @@
       "id": "ai-referral-dashboard-5k-sample",
       "status": "verified_dashboard_limitation; disclosure_committed_not_production_verified",
       "note": "Developer dashboard queries newest 5,000 external page views for 30-day AI attribution; 46,633 external pageviews occurred during 2026-10-03 to 2026-11-02. The UI now labels its count as sampled; implement uncapped server-side aggregation before using dashboard counts as exhaustive."
+    },
+    {
+      "id": "insights-canonical-404-2026-11-02",
+      "status": "critical_verified_production_regression",
+      "target_url": "https://www.watchdogindex.com/insights/equalization-ratios",
+      "note": "2026-11-02 live authenticated Vercel fetch: 14 of 15 /insights/ URLs in production sitemap return branded HTTP 404 with noindex, while /api/insight?slug=equalization-ratios and other tested article slugs return HTTP 200 and Supabase holds 16 published insights. Likely clean-route adapter/legacy redirect conflict: vercel.json redirects /property/insights/:slug.html to /insights/:slug while the legacy source adapter fetches those same candidates and no direct /insights/:slug -> /api/insight route is present. Repair canonical article routing and verify all sitemap article URLs before further citation optimization. Generic web search cached article copies are not live HTTP proof."
     }
   ]
 }
