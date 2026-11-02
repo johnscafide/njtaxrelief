@@ -1,6 +1,6 @@
 {
   "checked_at": "2026-11-02T14:18:48Z",
-  "registry_version": "2026-11-02.1",
+  "registry_version": "2026-11-02.3",
   "canonical_origin": "https://www.watchdogindex.com",
   "evidence_policy": "Only direct answer-level citations, official platform reports, and first-party AI referral telemetry count as proprietary evidence. Public search result sampling is not an answer-engine citation test. Missing evidence means unknown, not zero.",
   "first_party_analytics": {
@@ -84,10 +84,10 @@
     {
       "id": "revaluation",
       "method": "canonical_direct_check",
-      "canonical_url_observed": "https://www.watchdogindex.com/insights/2026-revaluation-reassessment-list",
+      "canonical_url_observed": null,
       "watchdog_mentioned_in_proprietary_answer": null,
       "watchdog_cited_in_proprietary_answer": null,
-      "note": "Canonical article directly returned HTTP 200. Legacy HTML alias returned HTTP 404, not a redirect. Direct fetch is not a generic search citation."
+      "note": "Production live Vercel fetch returned HTTP 404 for clean /insights/2026-revaluation-reassessment-list and legacy alias; /api/insight?slug=equalization-ratios returned 200. Cached public search article copies are not live status proof."
     },
     {
       "id": "tax-rates",
@@ -160,8 +160,8 @@
       "legacy_url": "https://www.watchdogindex.com/property/insights/2026-revaluation-reassessment-list.html",
       "legacy_status": 404,
       "canonical_url": "https://www.watchdogindex.com/insights/2026-revaluation-reassessment-list",
-      "canonical_status": 200,
-      "explanation": "Parameterized vercel.json redirect existed but middleware/static handling fell through to branded 404; explicit middleware canonical redirect committed, not yet live-verified."
+      "canonical_status": 404,
+      "explanation": "Both legacy alias and clean canonical /insights/:slug returned branded 404 in production despite /api/insight?slug=... returning 200. Explicit alias redirects and canonical API rewrite committed, pending governed release."
     },
     {
       "type": "dashboard_coverage",
@@ -178,6 +178,19 @@
       "type": "nj_relief_deadline",
       "finding": "Official NJ Treasury 2025 PAS-1/ANCHOR/Senior Freeze/Stay NJ application deadline is November 2, 2026; avoid publishing a date-relative statement that will become stale tomorrow.",
       "source": "https://www.nj.gov/treasury/taxation/relief.shtml"
+    },
+    {
+      "type": "critical_public_article_route",
+      "severity": "critical",
+      "live_status": "14 of 15 sitemap article URLs reportedly 404 in separate live audit; three sampled clean canonical /insights/:slug pages independently confirmed branded HTTP 404 via connected Vercel; /api/insight?slug=equalization-ratios returned HTTP 200.",
+      "action": "Added guarded middleware rewrite for /insights/:slug to /api/insight?slug=... before branded 404, excluding admin/new/edit/draft/settings/preview/api. Regression test committed; release and full sitemap verification still required.",
+      "source": "https://www.watchdogindex.com/insights/equalization-ratios"
+    },
+    {
+      "type": "google_future_training_policy",
+      "source": "https://developers.google.com/search/blog/2026/10/ai-training-control",
+      "finding": "Google announced October 30, 2026 planned 2027 AIPREF shared robots.txt training-policy token. Opt-out may imply Google-Extended disallow absent explicit setting, affecting Gemini Apps grounding eligibility.",
+      "action": "Registry watch only. No token, robots, Google-Extended, training or model-reuse permission changed without owner approval."
     }
   ],
   "code_changes": [
@@ -200,13 +213,26 @@
     {
       "commit": "37bab709351e083646951759449520aa2a222a8b",
       "scope": "benchmark registry v2026-11-02.1; Perplexity-User and opportunities"
+    },
+    {
+      "commit": "7fcb1cadfda8b1f0eca3004f52da359c0abb073b",
+      "scope": "canonical /insights/:slug source-backed API rewrite; admin/private exclusions"
+    },
+    {
+      "commit": "0cbe55c8c5d1c5f4bf62a5da0795c3768760e3de",
+      "scope": "canonical Insight routing and admin-exclusion test"
+    },
+    {
+      "commit": "a736e3c44dc8f4541c91a3246e169d65f04dc2e2",
+      "scope": "registry v2026-11-02.3; Google 2027 AIPREF future training-policy watch"
     }
   ],
   "deployment": {
     "state": "not_yet_production_verified",
     "latest_observed_ready_production_commit": "b8a7793d02da8cabc9c03b33727fc57289502fdb",
     "legacy_alias_status_before_fix": 404,
-    "production_release": "governed; no release forced"
+    "production_release": "governed; no release forced",
+    "clean_canonical_status_before_fix": 404
   },
   "official_sources": {
     "openai": "https://developers.openai.com/api/docs/bots",
@@ -218,12 +244,14 @@
     "anthropic": "https://support.claude.com/en/articles/8896518-does-anthropic-crawl-data-from-the-web-and-how-can-site-owners-block-the-crawler",
     "apple": "https://support.apple.com/en-us/119829",
     "meta_muse": "https://about.fb.com/news/2026/10/introducing-muse-wonder-models/",
-    "nj_relief": "https://www.nj.gov/treasury/taxation/relief.shtml"
+    "nj_relief": "https://www.nj.gov/treasury/taxation/relief.shtml",
+    "google_aipref": "https://developers.google.com/search/blog/2026/10/ai-training-control"
   },
   "crawler_policy_changes": "none",
   "model_training_permission_changes": "none",
   "private_route_exclusion_changes": "none",
   "next_actions": [
+    "CRITICAL: release and live-verify clean /insights/:slug article routing across all sitemap entries; canonical articles currently branded 404 despite healthy /api/insight endpoint.",
     "Deploy middleware canonical alias fix through existing governed production release and verify 308+Location, query string preservation, canonical 200, private routes unaffected.",
     "Replace 5k client-side scan with indexed database aggregation, retain developer authorization, and test >5k external events.",
     "Restore Google Search Console selected property and dedicated Generative AI/multimodal exports.",
