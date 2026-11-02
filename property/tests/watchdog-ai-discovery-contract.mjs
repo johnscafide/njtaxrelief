@@ -86,6 +86,12 @@ for (const [source, destination] of [
 // The canonical middleware redirect must run before the /property/ implementation bypass.
 assert.match(middleware, /LEGACY_INSIGHT_HTML_PATH/);
 assert.match(middleware, /ROOT_INSIGHT_HTML_PATH/);
+assert.match(middleware, /PUBLIC_INSIGHT_SLUG_PATH/);
+assert.match(middleware, /INSIGHT_RESERVED_SEGMENTS/);
+assert.match(middleware, /'admin'/);
+assert.match(middleware, /new URL\('\/api\/insight',request\.url\)/);
+assert.match(middleware, /destination\.search=url\.search/);
+assert.ok(middleware.indexOf('const publicInsightMatch=url.pathname.match(PUBLIC_INSIGHT_SLUG_PATH)') < middleware.indexOf("if(url.pathname.startsWith('/property/'))return next()"));
 assert.match(middleware, /legacyInsightMatch\[1\]\.toLowerCase\(\)/);
 assert.match(middleware, /rootInsightMatch\[1\]\.toLowerCase\(\)/);
 assert.ok(middleware.indexOf('const legacyInsightMatch=url.pathname.match(LEGACY_INSIGHT_HTML_PATH)') < middleware.indexOf("if(url.pathname.startsWith('/property/'))return next()"));
