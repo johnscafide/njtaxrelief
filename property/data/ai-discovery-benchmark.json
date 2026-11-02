@@ -1,5 +1,5 @@
 {
-  "version": "2026-11-02.2",
+  "version": "2026-11-02.3",
   "canonical_brand": "Watchdog",
   "canonical_origin": "https://www.watchdogindex.com",
   "purpose": "Measure whether answer engines recognize, cite, and correctly describe Watchdog for high-value New Jersey property questions without treating unobservable proprietary UI behavior as fact.",
@@ -109,7 +109,7 @@
         "platform_watch",
         "ai_referral_analytics"
       ],
-      "discovery_control": "Adopt documented crawler/indexing contracts only. Track machine-readable content-use standards, but keep search/retrieval permission separate from model-training/reuse policy. Monitor Web Bot Auth for verified user-triggered fetchers and Cloudflare Content Signals (search, ai-input, ai-train, experimental use); never silently grant training or reuse permissions."
+      "discovery_control": "Adopt documented crawler/indexing contracts only. Track machine-readable content-use standards, but keep search/retrieval permission separate from model-training/reuse policy. Monitor Web Bot Auth for verified user-triggered fetchers and Cloudflare Content Signals (search, ai-input, ai-train, experimental use); never silently grant training or reuse permissions. Google announced 2026-10-30 its plan to support an AIPREF shared robots.txt AI-training policy token in 2027; this is a future training/reuse control, not a search-crawler requirement. A broad opt-out may be treated as Google-Extended disallow unless Google-Extended is explicitly specified, potentially affecting Gemini Apps grounding. Owner approval is mandatory before adopting any training-policy signal."
     }
   ],
   "publisher_surfaces": [
@@ -259,7 +259,8 @@
     "llms.txt is optional metadata for consumers that support it; never describe it as required by Google or as a ranking boost.",
     "User-triggered agents/fetchers, AI referral click-throughs, generic web-search results and estimated topic opportunity scores must not be recorded as confirmed AI answer citations.",
     "Treat Meta Muse agent navigation, platform launches and model API availability as platform-watch evidence only; do not infer Watchdog citations or invent a Muse crawler user-agent.",
-    "Microsoft 2026-10-30 AI Training/Grounding preferences are independent from crawl/index eligibility; preserve grounding visibility and do not change training or licensing permissions without an explicit Watchdog policy decision."
+    "Microsoft 2026-10-30 AI Training/Grounding preferences are independent from crawl/index eligibility; preserve grounding visibility and do not change training or licensing permissions without an explicit Watchdog policy decision.",
+    "Do not adopt the proposed AIPREF shared AI-training policy token or modify Google-Extended based on discoverability goals alone; the owner must separately approve training/reuse policy."
   ],
   "opportunity_watch": [
     {
@@ -296,6 +297,12 @@
       "status": "critical_verified_production_regression",
       "target_url": "https://www.watchdogindex.com/insights/equalization-ratios",
       "note": "2026-11-02 live authenticated Vercel fetch: 14 of 15 /insights/ URLs in production sitemap return branded HTTP 404 with noindex, while /api/insight?slug=equalization-ratios and other tested article slugs return HTTP 200 and Supabase holds 16 published insights. Likely clean-route adapter/legacy redirect conflict: vercel.json redirects /property/insights/:slug.html to /insights/:slug while the legacy source adapter fetches those same candidates and no direct /insights/:slug -> /api/insight route is present. Repair canonical article routing and verify all sitemap article URLs before further citation optimization. Generic web search cached article copies are not live HTTP proof."
+    },
+    {
+      "id": "aipref-shared-training-control-2027",
+      "status": "official_2026-10-30_future_training_policy; no_change_without_owner_approval",
+      "source": "https://developers.google.com/search/blog/2026/10/ai-training-control",
+      "note": "Google plans shared AIPREF training-policy token support in robots.txt in 2027. A shared training opt-out without explicit Google-Extended could be interpreted as Google-Extended disallow; explicit Google-Extended allow may preserve Gemini Apps grounding. No token or training-policy change is authorized."
     }
   ]
 }
