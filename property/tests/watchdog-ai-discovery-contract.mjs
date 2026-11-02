@@ -1,14 +1,15 @@
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 
-const [collector, routeGuard, insightApi, insightsIndex, reportFn, benchmark, commandCenter] = await Promise.all([
+const [collector, routeGuard, insightApi, insightsIndex, reportFn, benchmark, commandCenter, middleware] = await Promise.all([
   readFile(new URL('../js/ai-referral-analytics.js', import.meta.url), 'utf8'),
   readFile(new URL('../../api/watchdog-index-page-contact-safe.js', import.meta.url), 'utf8'),
   readFile(new URL('../../api/insight.js', import.meta.url), 'utf8'),
   readFile(new URL('../insights/index.html', import.meta.url), 'utf8'),
   readFile(new URL('../../supabase/functions/product-analytics-report/index.ts', import.meta.url), 'utf8'),
   readFile(new URL('../data/ai-discovery-benchmark.json', import.meta.url), 'utf8'),
-  readFile(new URL('../analytics/ai-discovery/index.html', import.meta.url), 'utf8')
+  readFile(new URL('../analytics/ai-discovery/index.html', import.meta.url), 'utf8'),
+  readFile(new URL('../../middleware.js', import.meta.url), 'utf8')
 ]);
 
 assert.match(collector, /navigator\.globalPrivacyControl === true/);
@@ -77,5 +78,14 @@ for (const [source, destination] of [
   assert.equal(redirect.destination, destination);
   assert.equal(redirect.permanent, true);
 }
+
+// Parameterized Vercel redirects alone previously fell through to a branded 404.
+// The canonical middleware redirect must run before the /property/ implementation bypass.
+assert.match(middleware, /LEGACY_INSIGHT_HTML_PATH/);
+assert.match(middleware, /ROOT_INSIGHT_HTML_PATH/);
+assert.match(middleware, /legacyInsightMatch\[1\]\.toLowerCase\(\)/);
+assert.match(middleware, /rootInsightMatch\[1\]\.toLowerCase\(\)/);
+assert.ok(middleware.indexOf('const legacyInsightMatch=url.pathname.match(LEGACY_INSIGHT_HTML_PATH)') < middleware.indexOf("if(url.pathname.startsWith('/property/'))return next()"));
+assert.ok(middleware.indexOf('const rootInsightMatch=url.pathname.match(ROOT_INSIGHT_HTML_PATH)') < middleware.indexOf("if(url.pathname.startsWith('/property/'))return next()"));
 
 console.log(`Watchdog AI discovery contract PASS (${registry.platforms.length} platforms, ${registry.prompts.length} benchmark prompts)`);
