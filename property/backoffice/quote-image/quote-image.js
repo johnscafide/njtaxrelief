@@ -30,7 +30,7 @@ const els={};
 let photo=null;
 let font=null;
 let colors={bg:'#ffffff',text:TEXT,highlight:X_BLUE};
-let extras={photos:[],background:null,dim:.35,liked:false,saved:false,signature:'',script:true};
+let extras={photos:[],background:null,dim:.35,liked:false,saved:false,signature:'',script:true,counts:{}};
 
 function hexRgb(hex){
   const n=parseInt(hex.slice(1),16);
@@ -276,6 +276,36 @@ function drawMedia(ctx,x,y,w,h){
   ctx.restore();
 }
 
+function shortCount(raw){
+  const v=String(raw||'').trim();
+  if(!/^\d[\d,]*$/.test(v))return v;
+  const n=Number(v.replace(/,/g,''));
+  const cut=(x,unit)=>(x<10?Math.floor(x*10)/10:Math.floor(x))+unit;
+  if(n>=1e6)return cut(n/1e6,'M');
+  if(n>=1e4||(n>=1e3&&n%1000!==0))return cut(n/1e3,'K');
+  if(n>=1e3)return (n/1e3)+'K';
+  return String(n);
+}
+
+function hasCounts(){
+  return Object.values(extras.counts).some(Boolean);
+}
+
+function iconRow(ctx,items,x,y,size,gap,fontSize){
+  setFont(ctx,500,fontSize);
+  for(const item of items){
+    drawIcon(ctx,item.name,x,y,size,item.color,item.on);
+    x+=size;
+    const label=shortCount(extras.counts[item.count]);
+    if(label){
+      ctx.fillStyle=item.textColor||item.color;
+      ctx.fillText(label,x+fontSize*.3,y+size/2+fontSize*.36);
+      x+=fontSize*.3+ctx.measureText(label).width;
+    }
+    x+=gap;
+  }
+}
+
 function drawSignature(ctx,right,bottom,color){
   const text=extras.signature.trim();
   if(!text)return;
@@ -317,7 +347,7 @@ function layoutX(ctx,text){
 }
 
 function showXActions(){
-  return extras.liked||extras.saved;
+  return extras.liked||extras.saved||hasCounts();
 }
 
 function drawX(ctx,text){
@@ -347,9 +377,17 @@ function drawX(ctx,text){
   }
   if(showXActions()){
     const muted=mix(colors.text,colors.bg,.67),size=52,step=(BODY.maxRight-BODY.inkX-size)/4;
+    const counts={comment:'comments',repost:'reposts',heart:'likes'};
+    setFont(ctx,500,40);
     ['comment','repost','heart','bookmark','share'].forEach((name,i)=>{
       const on=(name==='heart'&&extras.liked)||(name==='bookmark'&&extras.saved);
-      drawIcon(ctx,name,BODY.inkX+i*step,y+48,size,on?(name==='heart'?X_PINK:X_BLUE):muted,on);
+      const color=on?(name==='heart'?X_PINK:X_BLUE):muted;
+      drawIcon(ctx,name,BODY.inkX+i*step,y+48,size,color,on);
+      const label=shortCount(extras.counts[counts[name]]);
+      if(label){
+        ctx.fillStyle=color;
+        ctx.fillText(label,BODY.inkX+i*step+size+12,y+48+size/2+14);
+      }
     });
   }
   drawSignature(ctx,W-56,H-48,extras.background?'rgba(255,255,255,.88)':mix(colors.text,colors.bg,.6));
@@ -384,10 +422,17 @@ function drawThreads(ctx,text){
     drawMedia(ctx,textX,iconY-10,right-textX,mh);
     iconY+=mh+20;
   }
-  ['heart','comment','repost','send'].forEach((name,i)=>{
-    const on=name==='heart'&&extras.liked;
-    drawIcon(ctx,name,textX-4+i*112,iconY,56,on?META_RED:colors.text,on);
-  });
+  if(hasCounts()){
+    iconRow(ctx,[['heart','likes'],['comment','comments'],['repost','reposts'],['send','shares']].map(([name,count])=>{
+      const on=name==='heart'&&extras.liked;
+      return {name,count,on,color:on?META_RED:colors.text,textColor:mix(colors.text,colors.bg,.6)};
+    }),textX-4,iconY,56,56,38);
+  }else{
+    ['heart','comment','repost','send'].forEach((name,i)=>{
+      const on=name==='heart'&&extras.liked;
+      drawIcon(ctx,name,textX-4+i*112,iconY,56,on?META_RED:colors.text,on);
+    });
+  }
   drawSignature(ctx,W-56,H-48,extras.background?'rgba(255,255,255,.88)':mix(colors.text,colors.bg,.6));
 }
 
@@ -419,13 +464,21 @@ function drawInstagram(ctx,text){
   drawSignature(ctx,W-48,headH+img-40,squarePhoto?'rgba(255,255,255,.88)':mix(colors.text,colors.bg,.6));
 
   const iconY=headH+img+(H-headH-img-64)/2;
-  ['heart','comment','send'].forEach((name,i)=>{
-    const on=name==='heart'&&extras.liked;
-    drawIcon(ctx,name,32+i*96,iconY,64,on?META_RED:TEXT,on);
-  });
+  if(hasCounts()){
+    iconRow(ctx,[['heart','likes'],['comment','comments'],['send','shares']].map(([name,count])=>{
+      const on=name==='heart'&&extras.liked;
+      return {name,count,on,color:on?META_RED:TEXT,textColor:TEXT};
+    }),32,iconY,64,48,40);
+  }else{
+    ['heart','comment','send'].forEach((name,i)=>{
+      const on=name==='heart'&&extras.liked;
+      drawIcon(ctx,name,32+i*96,iconY,64,on?META_RED:TEXT,on);
+    });
+  }
   drawIcon(ctx,'bookmark',W-32-64,iconY,64,TEXT,extras.saved);
 }
 
+const COUNTS=['likes','comments','reposts','shares'];
 const STYLES={x:drawX,threads:drawThreads,instagram:drawInstagram};
 
 function style(){
@@ -445,6 +498,8 @@ function readExtras(){
   extras.saved=els.saved.checked;
   extras.signature=els.signature.value;
   extras.script=els.script.checked;
+  extras.counts={};
+  for(const key of COUNTS)extras.counts[key]=els.counts[key].value.trim().slice(0,8);
   els.photosClear.hidden=!extras.photos.length;
   els.backgroundClear.hidden=!extras.background;
   els.dimRow.hidden=!extras.background;
@@ -554,6 +609,8 @@ function init(){
   els.saved=$('qi-saved');
   els.signature=$('qi-signature');
   els.script=$('qi-script');
+  els.counts={};
+  for(const key of COUNTS)els.counts[key]=$('qi-'+key);
   Promise.all([loadPhoto(),loadFonts()]).then(()=>{
     pickFont(els.canvas.getContext('2d'));
     draw();
@@ -565,7 +622,7 @@ function init(){
     els.copy.hidden=false;
     els.copy.addEventListener('click',()=>{if(font)copy()});
   }
-  [els.bg,els.color,els.highlight,els.dim,els.signature].forEach((input)=>input.addEventListener('input',()=>{if(font)draw()}));
+  [els.bg,els.color,els.highlight,els.dim,els.signature,...COUNTS.map((key)=>els.counts[key])].forEach((input)=>input.addEventListener('input',()=>{if(font)draw()}));
   [els.liked,els.saved,els.script].forEach((input)=>input.addEventListener('change',()=>{if(font)draw()}));
   els.photos.addEventListener('change',pickPhotos);
   els.background.addEventListener('change',pickBackground);
