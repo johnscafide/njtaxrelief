@@ -42,6 +42,9 @@ const LEGACY_FAQ_PATHS = new Set(['/property/faq','/property/faq/','/property/fa
 // Canonicalize only public Insight HTML aliases. Never redirect the /property/ implementation namespace wholesale.
 const LEGACY_INSIGHT_HTML_PATH = /^\/property\/insights\/([a-z0-9][a-z0-9-]{0,118})\.html$/i;
 const ROOT_INSIGHT_HTML_PATH = /^\/insights\/([a-z0-9][a-z0-9-]{0,118})\.html$/i;
+// Published Insight article slugs are served by the source-backed API. Private/admin paths stay untouched.
+const PUBLIC_INSIGHT_SLUG_PATH = /^\/insights\/([a-z0-9][a-z0-9-]{1,99})\/?$/i;
+const INSIGHT_RESERVED_SEGMENTS = new Set(['admin','new','edit','draft','settings','preview','api']);
 const LEGACY_PUBLIC_REDIRECTS = new Map([
 ['/property/privacy','/privacy'],['/property/privacy/','/privacy'],['/property/privacy/index.html','/privacy'],['/property/terms','/terms'],['/property/terms/','/terms'],['/property/terms/index.html','/terms'],['/property/refunds','/refunds'],['/property/refunds/','/refunds'],['/property/refunds/index.html','/refunds'],['/property/support','/support'],['/property/support/','/support'],['/property/support/index.html','/support'],['/property/data-deletion','/data-deletion'],['/property/data-deletion/','/data-deletion'],['/property/data-deletion/index.html','/data-deletion']]);
 function isReservedRootPath(pathname){return RESERVED_ROOT_PREFIXES.some(prefix=>pathname===prefix||pathname.startsWith(`${prefix}/`));}
@@ -97,6 +100,14 @@ const legacyInsightMatch=url.pathname.match(LEGACY_INSIGHT_HTML_PATH);
 if(legacyInsightMatch)return redirectCanonical(request,url,`/insights/${legacyInsightMatch[1].toLowerCase()}`);
 const rootInsightMatch=url.pathname.match(ROOT_INSIGHT_HTML_PATH);
 if(rootInsightMatch)return redirectCanonical(request,url,`/insights/${rootInsightMatch[1].toLowerCase()}`);
+// Directly serve canonical /insights/<slug> pages. Without this rewrite the clean URL can return branded 404 even while /api/insight?slug=<slug> is healthy.
+const publicInsightMatch=url.pathname.match(PUBLIC_INSIGHT_SLUG_PATH);
+if(publicInsightMatch&&!INSIGHT_RESERVED_SEGMENTS.has(publicInsightMatch[1].toLowerCase())){
+  const destination=new URL('/api/insight',request.url);
+  destination.search=url.search;
+  destination.searchParams.set('slug',publicInsightMatch[1].toLowerCase());
+  return rewrite(destination);
+}
 if(LEGACY_PUBLIC_REDIRECTS.has(url.pathname))return redirectCanonical(request,url,LEGACY_PUBLIC_REDIRECTS.get(url.pathname));
 // One public homepage identity: exact legacy /property entry URLs permanently resolve to the canonical root. Do not redirect the /property/* implementation namespace.
 if(url.pathname==='/property'||url.pathname==='/property/')return redirectCanonical(request,url,'/');
