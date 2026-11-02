@@ -1,5 +1,5 @@
 {
-  "version": "2026-10-26.2",
+  "version": "2026-11-02.1",
   "canonical_brand": "Watchdog",
   "canonical_origin": "https://www.watchdogindex.com",
   "purpose": "Measure whether answer engines recognize, cite, and correctly describe Watchdog for high-value New Jersey property questions without treating unobservable proprietary UI behavior as fact.",
@@ -46,7 +46,10 @@
         "ai_referral_analytics",
         "manual_citation_benchmark"
       ],
-      "discovery_control": "PerplexityBot"
+      "discovery_control": "PerplexityBot is the documented search/index crawler and is not used for foundation-model training. Perplexity-User is a separate user-initiated fetcher that generally ignores robots.txt; verify public-page WAF access using Perplexity's published IP ranges. Do not infer citations from fetches or change training permissions.",
+      "official_sources": [
+        "https://docs.perplexity.ai/docs/resources/perplexity-crawlers"
+      ]
     },
     {
       "id": "apple_intelligence",
@@ -275,6 +278,17 @@
       "status": "official_platform_expansion; no_watchdog_citation_evidence",
       "source": "https://about.fb.com/news/2026/10/introducing-muse-wonder-models/",
       "note": "Meta announced Muse Wonder models on 2026-10-12 and Muse for Small Business on 2026-09-29. Monitor user-initiated browsing/accessibility and first-party referrals if attributable, but no robots changes absent official crawler policy."
+    },
+    {
+      "id": "legacy-insight-alias-404",
+      "status": "verified_live_404; middleware_fix_committed_not_production_verified",
+      "source": "https://www.watchdogindex.com/property/insights/2026-revaluation-reassessment-list.html",
+      "note": "On 2026-11-02 production returned branded 404 for legacy /property/insights/:slug.html and /insights/:slug.html despite canonical redirects declared in vercel.json. Middleware canonical 308 handlers committed; verify production after governed release, preserving /property/ implementation paths."
+    },
+    {
+      "id": "ai-referral-dashboard-5k-sample",
+      "status": "verified_dashboard_limitation; disclosure_committed_not_production_verified",
+      "note": "Developer dashboard queries newest 5,000 external page views for 30-day AI attribution; 46,633 external pageviews occurred during 2026-10-03 to 2026-11-02. The UI now labels its count as sampled; implement uncapped server-side aggregation before using dashboard counts as exhaustive."
     }
   ]
 }
