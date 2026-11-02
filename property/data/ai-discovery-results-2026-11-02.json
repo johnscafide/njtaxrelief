@@ -191,6 +191,12 @@
       "source": "https://developers.google.com/search/blog/2026/10/ai-training-control",
       "finding": "Google announced October 30, 2026 planned 2027 AIPREF shared robots.txt training-policy token. Opt-out may imply Google-Extended disallow absent explicit setting, affecting Gemini Apps grounding eligibility.",
       "action": "Registry watch only. No token, robots, Google-Extended, training or model-reuse permission changed without owner approval."
+    },
+    {
+      "type": "microsoft_2027_training_grounding_preferences",
+      "source": "https://blogs.bing.com/search/2026/10/your-content-your-choice-clearer-preferences-for-training-and-grounding/",
+      "finding": "Microsoft announced Oct 30 independent AI Training and page-level AI Grounding preferences, effective on recrawl Feb 1 2027, with legacy NoArchive/NoCache transition by March 1 2027. ai-grounding:disallow or disallowextended reduces AI answer visibility but does not affect ordinary Bing search eligibility.",
+      "action": "Tracked only. No robots, page-level grounding, training or licensing preference changed without owner decision."
     }
   ],
   "code_changes": [
@@ -245,7 +251,9 @@
     "apple": "https://support.apple.com/en-us/119829",
     "meta_muse": "https://about.fb.com/news/2026/10/introducing-muse-wonder-models/",
     "nj_relief": "https://www.nj.gov/treasury/taxation/relief.shtml",
-    "google_aipref": "https://developers.google.com/search/blog/2026/10/ai-training-control"
+    "google_aipref": "https://developers.google.com/search/blog/2026/10/ai-training-control",
+    "microsoft_training_grounding": "https://blogs.bing.com/search/2026/10/your-content-your-choice-clearer-preferences-for-training-and-grounding/",
+    "google_inline_links": "https://blog.google/products-and-platforms/products/search/updates-ai-mode-overviews-explore-web/"
   },
   "crawler_policy_changes": "none",
   "model_training_permission_changes": "none",
