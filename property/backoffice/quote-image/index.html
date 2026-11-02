@@ -10,7 +10,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@400;500;600;700;800&family=Inter:wght@400;500;700&family=Caveat:wght@600&display=swap">
   <link rel="stylesheet" href="/property/backoffice/backoffice-board.css?v=20260928a">
-  <link rel="stylesheet" href="/property/backoffice/quote-image/quote-image.css?v=20261029a">
+  <link rel="stylesheet" href="/property/backoffice/quote-image/quote-image.css?v=20261102a">
 </head>
 <body class="bo-body" data-bo-page="quote-image">
   <a class="bo-skip" href="#bo-main">Skip to content</a>
@@ -82,6 +82,12 @@
             <label><input type="checkbox" id="qi-liked"> Liked</label>
             <label><input type="checkbox" id="qi-saved"> Saved</label>
           </div>
+          <div class="qi-extra-row qi-counts">
+            <label>Likes <input type="text" id="qi-likes" inputmode="numeric" maxlength="8" autocomplete="off"></label>
+            <label>Comments <input type="text" id="qi-comments" inputmode="numeric" maxlength="8" autocomplete="off"></label>
+            <label>Reposts <input type="text" id="qi-reposts" inputmode="numeric" maxlength="8" autocomplete="off"></label>
+            <label>Shares <input type="text" id="qi-shares" inputmode="numeric" maxlength="8" autocomplete="off"></label>
+          </div>
           <div class="qi-extra-row qi-sign">
             <input type="text" id="qi-signature" maxlength="40" placeholder="Signature" aria-label="Signature">
             <label><input type="checkbox" id="qi-script" checked> Handwritten</label>
@@ -107,6 +113,6 @@ yourself.</textarea>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
   <script src="/property/js/access-guard.js"></script>
   <script src="/property/backoffice/backoffice-shell.js?v=20260930a" defer></script>
-  <script src="/property/backoffice/quote-image/quote-image.js?v=20261029a" defer></script>
+  <script src="/property/backoffice/quote-image/quote-image.js?v=20261102a" defer></script>
 </body>
 </html>
