@@ -10,7 +10,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@400;500;600;700;800&family=Inter:wght@400;500;700&family=Caveat:wght@600&display=swap">
   <link rel="stylesheet" href="/property/backoffice/backoffice-board.css?v=20260928a">
-  <link rel="stylesheet" href="/property/backoffice/quote-image/quote-image.css?v=20261102a">
+  <link rel="stylesheet" href="/property/backoffice/quote-image/quote-image.css?v=20261103a">
 </head>
 <body class="bo-body" data-bo-page="quote-image">
   <a class="bo-skip" href="#bo-main">Skip to content</a>
@@ -48,6 +48,15 @@
           <label><input type="radio" name="qi-style" value="x" checked> X</label>
           <label><input type="radio" name="qi-style" value="threads"> Threads</label>
           <label><input type="radio" name="qi-style" value="instagram"> Instagram</label>
+          <label><input type="radio" name="qi-style" value="notes"> Notes</label>
+          <label><input type="radio" name="qi-style" value="messages"> Text messages</label>
+          <label><input type="radio" name="qi-style" value="card"> Big text</label>
+        </fieldset>
+        <fieldset class="qi-styles">
+          <legend class="qi-label">Size</legend>
+          <label><input type="radio" name="qi-size" value="portrait" checked> 4:5</label>
+          <label><input type="radio" name="qi-size" value="square"> Square</label>
+          <label><input type="radio" name="qi-size" value="story"> Story</label>
         </fieldset>
         <fieldset class="qi-colors">
           <legend class="qi-label">Colors</legend>
@@ -78,11 +87,11 @@
             <button class="qi-link" id="qi-background-clear" type="button" hidden>Remove background</button>
           </div>
           <label class="qi-extra-row qi-range" id="qi-dim-row" hidden>Darken photo <input type="range" id="qi-dim" min="0" max="80" step="5" value="35"></label>
-          <div class="qi-extra-row qi-checks">
+          <div class="qi-extra-row qi-checks" id="qi-checks">
             <label><input type="checkbox" id="qi-liked"> Liked</label>
-            <label><input type="checkbox" id="qi-saved"> Saved</label>
+            <label id="qi-saved-label"><input type="checkbox" id="qi-saved"> Saved</label>
           </div>
-          <div class="qi-extra-row qi-counts">
+          <div class="qi-extra-row qi-counts" id="qi-counts">
             <label>Likes <input type="text" id="qi-likes" inputmode="numeric" maxlength="8" autocomplete="off"></label>
             <label>Comments <input type="text" id="qi-comments" inputmode="numeric" maxlength="8" autocomplete="off"></label>
             <label>Reposts <input type="text" id="qi-reposts" inputmode="numeric" maxlength="8" autocomplete="off"></label>
@@ -93,6 +102,8 @@
             <label><input type="checkbox" id="qi-script" checked> Handwritten</label>
           </div>
         </fieldset>
+        <label class="qi-label" for="qi-question">Question</label>
+        <input class="qi-input" type="text" id="qi-question" maxlength="200" placeholder="Optional" autocomplete="off">
         <label class="qi-label" for="qi-text">Your text</label>
         <textarea id="qi-text" rows="7" maxlength="600">A lot of confidence
 is just deciding
@@ -101,11 +112,17 @@ yourself.</textarea>
         <div class="qi-actions">
           <button class="bo-btn bo-btn-primary" id="qi-download" type="button">Download PNG</button>
           <button class="bo-btn bo-btn-ghost" id="qi-copy" type="button" hidden>Copy image</button>
+          <button class="bo-btn bo-btn-ghost" id="qi-add-slide" type="button">Add slide</button>
         </div>
       </section>
 
       <section class="qi-panel qi-preview">
         <canvas id="qi-canvas" width="1122" height="1402" role="img" aria-label="Preview of the post image"></canvas>
+        <div class="qi-slides" id="qi-slides" hidden>
+          <button class="bo-btn bo-btn-ghost" id="qi-prev" type="button">Previous</button>
+          <span id="qi-slide-label" aria-live="polite">Slide 1 of 1</span>
+          <button class="bo-btn bo-btn-ghost" id="qi-next" type="button">Next</button>
+        </div>
       </section>
     </div>
   </main>
@@ -113,6 +130,6 @@ yourself.</textarea>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
   <script src="/property/js/access-guard.js"></script>
   <script src="/property/backoffice/backoffice-shell.js?v=20260930a" defer></script>
-  <script src="/property/backoffice/quote-image/quote-image.js?v=20261102a" defer></script>
+  <script src="/property/backoffice/quote-image/quote-image.js?v=20261103a" defer></script>
 </body>
 </html>
