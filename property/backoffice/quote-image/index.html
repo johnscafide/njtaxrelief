@@ -10,7 +10,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@400;500;600;700;800&family=Inter:wght@400;500;700&family=Caveat:wght@600&display=swap">
   <link rel="stylesheet" href="/property/backoffice/backoffice-board.css?v=20260928a">
-  <link rel="stylesheet" href="/property/backoffice/quote-image/quote-image.css?v=20261103a">
+  <link rel="stylesheet" href="/property/backoffice/quote-image/quote-image.css?v=20261103b">
 </head>
 <body class="bo-body" data-bo-page="quote-image">
   <a class="bo-skip" href="#bo-main">Skip to content</a>
@@ -40,6 +40,20 @@
     <header class="qi-topbar">
       <h1>Quote Image</h1>
     </header>
+
+    <section class="qi-panel qi-trends" aria-labelledby="qi-trends-title">
+      <div class="qi-trends-head">
+        <h2 id="qi-trends-title">Trending now</h2>
+        <span class="qi-trends-updated" id="qi-trends-updated" aria-live="polite"></span>
+        <button class="qi-link" id="qi-trends-refresh" type="button">Refresh</button>
+      </div>
+      <div class="qi-tabs" role="tablist" aria-label="Trend source">
+        <button type="button" role="tab" aria-selected="true" data-qi-tab="us">US searches</button>
+        <button type="button" role="tab" aria-selected="false" data-qi-tab="nj">NJ searches</button>
+        <button type="button" role="tab" aria-selected="false" data-qi-tab="money">Money and homes news</button>
+      </div>
+      <ol class="qi-trend-list" id="qi-trend-list" role="tabpanel" aria-labelledby="qi-trends-title"></ol>
+    </section>
 
     <div class="qi-grid">
       <section class="qi-panel qi-form">
@@ -130,6 +144,6 @@ yourself.</textarea>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
   <script src="/property/js/access-guard.js"></script>
   <script src="/property/backoffice/backoffice-shell.js?v=20260930a" defer></script>
-  <script src="/property/backoffice/quote-image/quote-image.js?v=20261103a" defer></script>
+  <script src="/property/backoffice/quote-image/quote-image.js?v=20261103b" defer></script>
 </body>
 </html>

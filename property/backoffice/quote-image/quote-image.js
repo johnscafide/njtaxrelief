@@ -866,6 +866,66 @@ function pickBackground(){
   });
 }
 
+const TRENDS_API='/api/watchdog-trends';
+let trends=null,trendTab='us';
+
+function ago(time){
+  if(!time)return '';
+  const mins=Math.max(1,Math.round((Date.now()-time)/60000));
+  if(mins<60)return `${mins}m ago`;
+  const hours=Math.round(mins/60);
+  return hours<48?`${hours}h ago`:`${Math.round(hours/24)}d ago`;
+}
+
+function el(tagName,className,text){
+  const node=document.createElement(tagName);
+  if(className)node.className=className;
+  if(text)node.textContent=text;
+  return node;
+}
+
+function link(story,label){
+  const a=el('a','',label);
+  a.href=story.url;
+  a.target='_blank';
+  a.rel='noopener noreferrer';
+  return a;
+}
+
+function showTrends(){
+  const list=els.trendList;
+  list.replaceChildren();
+  document.querySelectorAll('[data-qi-tab]').forEach((b)=>b.setAttribute('aria-selected',String(b.dataset.qiTab===trendTab)));
+  if(!trends){list.append(el('li','qi-trend-empty','Loading...'));return}
+  if(trends.error){list.append(el('li','qi-trend-empty','Trends are unavailable right now. Try Refresh.'));return}
+  const rows=trends[trendTab]||[];
+  if(!rows.length){list.append(el('li','qi-trend-empty','Nothing here right now.'));return}
+  for(const row of rows){
+    const li=el('li');
+    if(trendTab==='money'){
+      li.append(el('strong','',row.title),el('span','qi-trend-meta',[row.topic,row.source,ago(row.published)].filter(Boolean).join(' \u00b7 ')),link(row,'Read it'));
+    }else{
+      li.append(el('strong','',row.topic),el('span','qi-trend-meta',[row.traffic?`${row.traffic} searches`:'',ago(row.started)].filter(Boolean).join(' \u00b7 ')));
+      for(const story of row.news)li.append(link(story,`${story.title}${story.source?` (${story.source})`:''}`));
+    }
+    list.append(li);
+  }
+}
+
+function loadTrends(){
+  trends=null;
+  els.trendsUpdated.textContent='';
+  showTrends();
+  fetch(TRENDS_API,{headers:{Accept:'application/json'}})
+    .then((r)=>r.ok?r.json():Promise.reject(new Error(String(r.status))))
+    .then((data)=>{
+      trends=data;
+      els.trendsUpdated.textContent=data.updated?`Updated ${new Date(data.updated).toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit'})}`:'';
+      showTrends();
+    })
+    .catch(()=>{trends={error:true};showTrends()});
+}
+
 function loadPhoto(){
   return new Promise((resolve)=>{
     const img=new Image();
@@ -907,6 +967,11 @@ function init(){
   els.prev=$('qi-prev');
   els.next=$('qi-next');
   els.addSlide=$('qi-add-slide');
+  els.trendList=$('qi-trend-list');
+  els.trendsUpdated=$('qi-trends-updated');
+  $('qi-trends-refresh').addEventListener('click',loadTrends);
+  document.querySelectorAll('[data-qi-tab]').forEach((b)=>b.addEventListener('click',()=>{trendTab=b.dataset.qiTab;showTrends()}));
+  loadTrends();
   els.counts={};
   for(const key of COUNTS)els.counts[key]=$('qi-'+key);
   Promise.all([loadPhoto(),loadFonts()]).then(()=>{
