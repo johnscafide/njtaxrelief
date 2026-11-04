@@ -435,20 +435,21 @@ function drawMedia(ctx,x,y,w,h){
   }else if(dh)dh=Math.min(dh,h);
   else ph=h;
   if(ph)drawPhotos(ctx,x,y,w,ph);
-  if(dh){
-    const top=y+(ph?ph+30:0);
-    let f=dataBase(w),lay=layoutData(ctx,w,f);
-    if(lay.h>dh){f*=dh/lay.h;lay=layoutData(ctx,w,f)}
-    if(extras.background&&dataStyle!=='table'){
-      ctx.save();
-      roundRect(ctx,x-f*.6,top-f*.6,w+f*1.2,lay.h+f*1.2,Math.min(28,f));
-      ctx.fillStyle=colors.bg;
-      ctx.globalAlpha=.9;
-      ctx.fill();
-      ctx.restore();
-    }
-    lay.draw(x,top);
+  if(dh)drawData(ctx,x,y+(ph?ph+30:0),w,dh);
+}
+
+function drawData(ctx,x,top,w,dh){
+  let f=dataBase(w),lay=layoutData(ctx,w,f);
+  if(lay.h>dh){f*=dh/lay.h;lay=layoutData(ctx,w,f)}
+  if(extras.background&&dataStyle!=='table'){
+    ctx.save();
+    roundRect(ctx,x-f*.6,top-f*.6,w+f*1.2,lay.h+f*1.2,Math.min(28,f));
+    ctx.fillStyle=colors.bg;
+    ctx.globalAlpha=.9;
+    ctx.fill();
+    ctx.restore();
   }
+  lay.draw(x,top);
 }
 
 function drawPhotos(ctx,x,y,w,h){
@@ -920,8 +921,52 @@ function drawCard(ctx,text,q){
   drawCounter(ctx,muted);
 }
 
+function centerLines(ctx,fit,y,lh,color){
+  fit.lines.forEach((line,i)=>drawLine(ctx,line,(W-lineWidth(ctx,line,fit.f))/2,y+fit.size*.9+i*fit.size*lh,fit.f,color));
+}
+
+function drawPhotoLook(ctx,text,q){
+  blank(ctx,colors.bg);
+  paintArea(ctx,0,0,W,H,colors.bg,extras.background,extras.dim);
+  const pad=88,width=W-pad*2,top0=104,footer=130,gap=48;
+  const avail=H-top0-footer;
+  const muted=extras.background?'rgba(255,255,255,.8)':mix(colors.text,colors.bg,.6);
+  const paras=text.split(/\n[ \t]*\n/).map((t)=>t.trim()).filter(Boolean);
+  const head=paras[0]||'',tail=paras.slice(1).join('\n');
+  const list=extras.photos;
+  let ph=0;
+  if(list.length){
+    const aspect=list.length>1?1.2:Math.min(1.9,Math.max(.8,list[0].naturalWidth/list[0].naturalHeight));
+    ph=Math.round(Math.min(width/aspect,avail*(head||tail?.56:.9)));
+  }
+  const dh=data.length?Math.min(Math.round(avail*(ph?.28:.6)),Math.round(layoutData(ctx,width,dataBase(width)).h)):0;
+  const mh=ph+dh+(ph&&dh?30:0);
+  const qb=measureQ(ctx,q,width,38),qh=qb.h?qb.h+32:0;
+  const room=avail-qh-mh-(mh&&head?gap:0)-(mh&&tail?gap:0)-(!mh&&head&&tail?gap:0);
+  const headRoom=tail?room*.62:room,tailRoom=head?room-headRoom:room;
+  const hf=head?fitText(ctx,head,{weight:700,size:mh?84:120,minSize:30,lineHeight:1.12,width,height:headRoom}):null;
+  const tf=tail?fitText(ctx,tail,{weight:font.body,size:mh?48:60,minSize:26,lineHeight:1.3,width,height:tailRoom}):null;
+  const used=qh+(hf?hf.height:0)+(tf?tf.height:0)+mh+(mh&&hf?gap:0)+(mh&&tf?gap:0)+(!mh&&hf&&tf?gap:0);
+  let y=top0+Math.max(0,(avail-used)/2);
+  drawQ(ctx,qb,pad,y,width);
+  y+=qh;
+  if(hf){centerLines(ctx,hf,y,1.12);y+=hf.height+(mh||tf?gap:0)}
+  if(ph){drawPhotos(ctx,pad,y,width,ph);y+=ph+(dh?30:0)}
+  if(dh){drawData(ctx,pad,y,width,dh);y+=dh}
+  if(mh&&tf)y+=gap;
+  if(tf)centerLines(ctx,tf,y,1.3,extras.background?'#ffffff':colors.text);
+  ctx.save();
+  ctx.textAlign='center';
+  ctx.fillStyle=muted;
+  setFont(ctx,500,30);
+  ctx.fillText(HANDLE,W/2,H-60);
+  ctx.restore();
+  drawSignature(ctx,W-56,H-50,muted);
+  drawCounter(ctx,muted);
+}
+
 const COUNTS=['likes','comments','reposts','shares'];
-const STYLES={x:drawX,threads:drawThreads,instagram:drawInstagram,notes:drawNotes,messages:drawMessages,card:drawCard};
+const STYLES={x:drawX,threads:drawThreads,instagram:drawInstagram,notes:drawNotes,messages:drawMessages,card:drawCard,photo:drawPhotoLook};
 const FEED=['x','threads','instagram'];
 
 function style(){
