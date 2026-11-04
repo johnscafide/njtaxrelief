@@ -1292,6 +1292,139 @@ function drawGradient(ctx,_text,q){
   drawCounter(ctx,muted);
 }
 
+const GROUP_COLORS=['#ff9f45','#c9cfdc','#f472b6','#67e8f9','#a78bfa'];
+
+function drawRanked(ctx,_text,q){
+  paintGradient(ctx);
+  const accent=colors.highlight,muted='rgba(255,255,255,.72)',faint='rgba(255,255,255,.55)';
+  let avg=null;
+  const kept=[];
+  for(const line of (slideRaw||'').replace(/\r/g,'').split('\n')){
+    const m=/^\s*(average[^|\t]*?)[:\s]+([-+]?\$?\d[\d,]*\.?\d*\s*[%KMB]?)\s*$/i.exec(line);
+    if(m&&!/\t|\|/.test(line)){avg={label:line.trim().replace(/\s*:\s*/,', '),value:numberOf(m[2])};continue}
+    kept.push(line);
+  }
+  const parts=gradientParts(kept.join('\n'));
+  let rows=data.map((r)=>{
+    const lab=String(r[0]||'').split(';').map((t)=>t.trim());
+    return {label:lab[0].replace(/\*/g,''),tag:lab.slice(1).join(' '),valueText:String(r[1]||'').replace(/\*/g,'').trim(),value:numberOf(r[1]||''),group:String(r[2]||'').trim()};
+  });
+  if(rows.length&&Number.isNaN(rows[0].value))rows=rows.slice(1);
+  rows=rows.filter((r)=>!Number.isNaN(r.value));
+  const groups=[];
+  rows.forEach((r)=>{if(r.group&&!groups.includes(r.group))groups.push(r.group)});
+  const colorOf=(g)=>{const i=groups.indexOf(g);return i<=0?accent:GROUP_COLORS[(i-1)%GROUP_COLORS.length]};
+  let head=parts.head;
+  if(head&&!head.includes('*')){
+    const ls=head.split('\n');
+    if(ls.length>1)head=ls.slice(0,-1).join('\n')+'\n*'+ls[ls.length-1]+'*';
+  }
+  const pad=58,w=W-pad*2,top0=64;
+  const hf={weight:800,size:84,tracking:-.025};
+  let hl=head?wrap(ctx,head,w,hf):[];
+  while(hf.size>40&&(hl.length>3||hl.some((l)=>lineWidth(ctx,l,hf)>w))){hf.size-=2;hl=wrap(ctx,head,w,hf)}
+  const sf={weight:font.body,size:32,tracking:font.tracking};
+  const sl=parts.sub?wrap(ctx,parts.sub,w*.86,sf):[];
+  const nf={weight:font.body,size:22,tracking:font.tracking};
+  const brandW=(()=>{setFont(ctx,700,24);return ctx.measureText(HANDLE).width+36})();
+  const nl=parts.notes?wrap(ctx,parts.notes,w-brandW-40,nf):[];
+  const closing=parts.closing?wrap(ctx,parts.closing,w,{weight:600,size:28,tracking:font.tracking}):[];
+  let y=top0;
+  const qb=measureQ(ctx,q,w,32);
+  if(qb.h){drawQ(ctx,qb,pad,y,w);y+=qb.h+24}
+  hl.forEach((l)=>{drawLine(ctx,l,pad,y+hf.size*.88,hf,'#ffffff',accent);y+=hf.size*1.02});
+  if(sl.length){y+=18;sl.forEach((l)=>{drawLine(ctx,l,pad,y+sf.size*.92,sf,muted,'#ffffff');y+=sf.size*1.3})}
+  const showLegend=groups.length>1||avg;
+  if(showLegend){
+    y+=30;
+    let lx=pad;
+    setFont(ctx,600,24);
+    ctx.textAlign='left';
+    groups.forEach((g)=>{
+      if(groups.length<2)return;
+      ctx.fillStyle=colorOf(g);
+      roundRect(ctx,lx,y,20,20,4);ctx.fill();
+      ctx.fillStyle='#ffffff';
+      ctx.fillText(g,lx+30,y+18);
+      lx+=30+ctx.measureText(g).width+34;
+    });
+    if(avg){
+      ctx.strokeStyle='rgba(255,255,255,.75)';ctx.lineWidth=2;ctx.setLineDash([4,4]);
+      ctx.beginPath();ctx.moveTo(lx+4,y-2);ctx.lineTo(lx+4,y+22);ctx.stroke();ctx.setLineDash([]);
+      ctx.fillStyle='#ffffff';
+      ctx.fillText(avg.label,lx+18,y+18);
+    }
+    y+=20;
+  }
+  const footH=(nl.length?nl.length*nf.size*1.35:30)+40;
+  const closeH=closing.length?closing.length*28*1.3+24:0;
+  const areaTop=y+(showLegend?30:34),areaBottom=H-pad-footH-closeH-10;
+  const n=Math.max(1,rows.length);
+  const rowH=Math.min(H>1500?92:72,(areaBottom-areaTop)/n);
+  const lf=Math.max(15,Math.min(H>1500?40:34,rowH*.6)),tf=Math.max(12,lf*.5);
+  setFont(ctx,800,lf);
+  const valW=Math.max(90,...rows.map((r)=>ctx.measureText(r.valueText).width))+8;
+  const rankW=lf*1.7;
+  let labelW=0;
+  rows.forEach((r)=>{setFont(ctx,800,lf);let lw=ctx.measureText(r.label).width;if(r.tag){setFont(ctx,600,tf);lw+=ctx.measureText(r.tag).width+lf*.4}labelW=Math.max(labelW,lw)});
+  const barX=pad+rankW+Math.min(w*.5,Math.max(w*.3,labelW+24));
+  const barR=W-pad-valW-24,barW=Math.max(60,barR-barX);
+  const max=Math.max(avg?avg.value:0,...rows.map((r)=>r.value))/.94||1;
+  const barH=Math.max(8,rowH*.42);
+  rows.forEach((r,i)=>{
+    const cy=areaTop+i*rowH+rowH/2;
+    ctx.textAlign='left';
+    setFont(ctx,600,lf*.78);
+    ctx.fillStyle=faint;
+    ctx.fillText(String(i+1),pad,cy+lf*.3);
+    setFont(ctx,800,lf);
+    ctx.fillStyle='#ffffff';
+    const label=fitCell(ctx,r.label,barX-pad-rankW-16);
+    ctx.fillText(label,pad+rankW,cy+lf*.33);
+    if(r.tag){
+      const lw=ctx.measureText(label).width;
+      setFont(ctx,600,tf);
+      ctx.fillStyle=faint;
+      if('letterSpacing' in ctx)ctx.letterSpacing=(tf*.08)+'px';
+      if(pad+rankW+lw+lf*.4+ctx.measureText(r.tag).width<barX-12)ctx.fillText(r.tag,pad+rankW+lw+lf*.4,cy+lf*.33);
+      if('letterSpacing' in ctx)ctx.letterSpacing='0px';
+    }
+    ctx.fillStyle='rgba(255,255,255,.09)';
+    roundRect(ctx,barX,cy-barH/2,barW,barH,Math.min(6,barH/2));ctx.fill();
+    ctx.fillStyle=colorOf(r.group);
+    roundRect(ctx,barX,cy-barH/2,Math.max(barH,barW*Math.max(0,r.value)/max),barH,Math.min(6,barH/2));ctx.fill();
+    setFont(ctx,800,lf);
+    ctx.fillStyle='#ffffff';
+    ctx.textAlign='right';
+    ctx.fillText(r.valueText,W-pad,cy+lf*.33);
+  });
+  if(avg&&rows.length){
+    const ax=barX+barW*avg.value/max;
+    ctx.save();
+    ctx.strokeStyle='rgba(255,255,255,.7)';ctx.lineWidth=2;ctx.setLineDash([5,6]);
+    ctx.beginPath();ctx.moveTo(ax,areaTop-10);ctx.lineTo(ax,areaTop+rows.length*rowH+4);ctx.stroke();
+    ctx.restore();
+  }
+  let by=areaTop+rows.length*rowH+24;
+  ctx.textAlign='left';
+  closing.forEach((l)=>{drawLine(ctx,l,pad,by+28,{weight:600,size:28,tracking:font.tracking},'#ffffff',accent);by+=28*1.3});
+  const footTop=H-pad-footH+14;
+  ctx.fillStyle='rgba(255,255,255,.22)';
+  ctx.fillRect(pad,footTop,w,2);
+  let ny=footTop+24;
+  nl.forEach((l)=>{drawLine(ctx,l,pad,ny+nf.size*.9,nf,faint,'#ffffff');ny+=nf.size*1.35});
+  ctx.textAlign='right';
+  setFont(ctx,700,24);
+  ctx.fillStyle='#ffffff';
+  const brandY=footTop+24+Math.max(nf.size,(nl.length*nf.size*1.35)/2);
+  ctx.fillText(HANDLE,W-pad,brandY);
+  ctx.fillStyle=accent;
+  ctx.beginPath();ctx.arc(W-pad-ctx.measureText(HANDLE).width-16,brandY-8,8,0,Math.PI*2);ctx.fill();
+  ctx.textAlign='left';
+  drawSignature(ctx,W-56,H-20,muted);
+  drawCounter(ctx,muted);
+}
+
 let layers=[],selected=null,drag=null;
 
 function layerBox(ctx,l){
@@ -1366,7 +1499,7 @@ function selectLayer(l){
 }
 
 function addTextLayer(){
-  const l={type:'text',text:'Your text',x:W/2,y:H/2,size:72,rot:0,color:style()==='gradient'||extras.background?'#ffffff':colors.text,bold:true,slide:shown};
+  const l={type:'text',text:'Your text',x:W/2,y:H/2,size:72,rot:0,color:style()==='gradient'||style()==='ranked'||extras.background?'#ffffff':colors.text,bold:true,slide:shown};
   layers.push(l);
   draw();
   selectLayer(l);
@@ -1475,7 +1608,7 @@ function initLayers(){
 }
 
 const COUNTS=['likes','comments','reposts','shares'];
-const STYLES={x:drawX,threads:drawThreads,instagram:drawInstagram,notes:drawNotes,messages:drawMessages,card:drawCard,photo:drawPhotoLook,grid:drawGrid,gradient:drawGradient};
+const STYLES={x:drawX,threads:drawThreads,instagram:drawInstagram,notes:drawNotes,messages:drawMessages,card:drawCard,photo:drawPhotoLook,grid:drawGrid,gradient:drawGradient,ranked:drawRanked};
 const FEED=['x','threads','instagram'];
 
 function style(){
@@ -1504,8 +1637,9 @@ function readExtras(){
   els.checksRow.hidden=!(feed||style()==='messages');
   els.savedLabel.hidden=!feed;
   els.countsRow.hidden=!feed;
-  els.gradients.hidden=style()!=='gradient';
-  els.solidSwatches.hidden=style()==='gradient';
+  const dark=style()==='gradient'||style()==='ranked';
+  els.gradients.hidden=!dark;
+  els.solidSwatches.hidden=dark;
   document.querySelectorAll('[data-qi-grad]').forEach((b)=>b.setAttribute('aria-pressed',String(b.dataset.qiGrad===gradient)));
   question=els.question.value.trim();
 }
@@ -1741,9 +1875,9 @@ function init(){
     });
   });
   document.querySelectorAll('input[name="qi-style"]').forEach((input)=>input.addEventListener('change',()=>{
-    if(input.value==='gradient'&&input.checked&&els.highlight.value.toLowerCase()===X_BLUE)els.highlight.value=GRADIENTS[gradient].accent;
+    if((input.value==='gradient'||input.value==='ranked')&&input.checked&&els.highlight.value.toLowerCase()===X_BLUE)els.highlight.value=GRADIENTS[gradient].accent;
     const accents=Object.values(GRADIENTS).map((g)=>g.accent);
-    if(input.value!=='gradient'&&input.checked&&accents.includes(els.highlight.value.toLowerCase()))els.highlight.value=X_BLUE;
+    if(input.value!=='gradient'&&input.value!=='ranked'&&input.checked&&accents.includes(els.highlight.value.toLowerCase()))els.highlight.value=X_BLUE;
   }));
   initLayers();
   els.counts={};
