@@ -10,7 +10,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@400;500;600;700;800&family=Inter:wght@400;500;700&family=Caveat:wght@600&display=swap">
   <link rel="stylesheet" href="/property/backoffice/backoffice-board.css?v=20260928a">
-  <link rel="stylesheet" href="/property/backoffice/quote-image/quote-image.css?v=20261103b">
+  <link rel="stylesheet" href="/property/backoffice/quote-image/quote-image.css?v=20261104a">
 </head>
 <body class="bo-body" data-bo-page="quote-image">
   <a class="bo-skip" href="#bo-main">Skip to content</a>
@@ -111,6 +111,12 @@
             <label>Reposts <input type="text" id="qi-reposts" inputmode="numeric" maxlength="8" autocomplete="off"></label>
             <label>Shares <input type="text" id="qi-shares" inputmode="numeric" maxlength="8" autocomplete="off"></label>
           </div>
+          <fieldset class="qi-extra-row qi-data">
+            <legend class="bo-sr">Show table rows as</legend>
+            <label><input type="radio" name="qi-data" value="table" checked> Table</label>
+            <label><input type="radio" name="qi-data" value="bars"> Bar chart</label>
+            <label><input type="radio" name="qi-data" value="stats"> Big numbers</label>
+          </fieldset>
           <div class="qi-extra-row qi-sign">
             <input type="text" id="qi-signature" maxlength="40" placeholder="Signature" aria-label="Signature">
             <label><input type="checkbox" id="qi-script" checked> Handwritten</label>
@@ -127,6 +133,7 @@ yourself.</textarea>
           <button class="bo-btn bo-btn-primary" id="qi-download" type="button">Download PNG</button>
           <button class="bo-btn bo-btn-ghost" id="qi-copy" type="button" hidden>Copy image</button>
           <button class="bo-btn bo-btn-ghost" id="qi-add-slide" type="button">Add slide</button>
+          <button class="bo-btn bo-btn-ghost" id="qi-add-table" type="button">Add table</button>
         </div>
       </section>
 
@@ -144,6 +151,6 @@ yourself.</textarea>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
   <script src="/property/js/access-guard.js"></script>
   <script src="/property/backoffice/backoffice-shell.js?v=20260930a" defer></script>
-  <script src="/property/backoffice/quote-image/quote-image.js?v=20261103b" defer></script>
+  <script src="/property/backoffice/quote-image/quote-image.js?v=20261104a" defer></script>
 </body>
 </html>
