@@ -965,8 +965,135 @@ function drawPhotoLook(ctx,text,q){
   drawCounter(ctx,muted);
 }
 
+function starsOf(text){
+  const t=text.replace(/\*/g,'').trim();
+  if(/^[★☆]+$/.test(t))return {on:(t.match(/★/g)||[]).length,of:t.length};
+  const m=/^(\d(?:\.5)?)\s*(?:\/\s*5\s*)?stars?$/i.exec(t);
+  return m&&Number(m[1])<=5?{on:Number(m[1]),of:5}:null;
+}
+
+function starPath(ctx,cx,cy,r){
+  ctx.beginPath();
+  for(let k=0;k<10;k++){
+    const a=-Math.PI/2+k*Math.PI/5,rad=k%2?r*.45:r;
+    ctx.lineTo(cx+Math.cos(a)*rad,cy+Math.sin(a)*rad);
+  }
+  ctx.closePath();
+}
+
+function drawStars(ctx,stars,cx,cy,size,color){
+  const gap=size*.18,total=stars.of*size+(stars.of-1)*gap;
+  let x=cx-total/2+size/2;
+  for(let k=0;k<stars.of;k++){
+    const fill=Math.max(0,Math.min(1,stars.on-k));
+    ctx.save();
+    starPath(ctx,x,cy,size/2);
+    ctx.strokeStyle=color;
+    ctx.lineWidth=Math.max(1.5,size*.07);
+    ctx.lineJoin='round';
+    ctx.stroke();
+    if(fill>0){
+      ctx.clip();
+      ctx.fillStyle=color;
+      ctx.fillRect(x-size/2,cy-size/2,size*fill,size);
+    }
+    ctx.restore();
+    x+=size+gap;
+  }
+}
+
+function inkOn(hex){
+  const [r,g,b]=hexRgb(hex);
+  return r*.299+g*.587+b*.114>150?'#111111':'#ffffff';
+}
+
+function gridLayout(ctx,w,maxH,f){
+  const cols=Math.max(...data.map((r)=>r.length)),gap=8,pad=f*.55,lh=1.25;
+  const want=[...Array(cols)].map((_,c)=>Math.max(f*3,...data.map((r,i)=>{
+    const cell=r[c]||'',st=i>0&&starsOf(cell);
+    if(st)return st.of*f*.95+pad*2;
+    setFont(ctx,i===0||c===0?700:font.body,f);
+    return Math.min(ctx.measureText(cell.replace(/\*/g,'')).width,f*9)+pad*2;
+  })));
+  const room=w-gap*(cols-1),sum=want.reduce((a,b)=>a+b,0);
+  const widths=want.map((v)=>v*room/sum);
+  let ok=true;
+  const cells=data.map((row,i)=>[...Array(cols)].map((_,c)=>{
+    const raw=row[c]||'',st=i>0&&starsOf(raw);
+    const cf={weight:i===0||c===0?700:font.body,size:f,tracking:font.tracking};
+    if(st){if(st.of*f*.95>widths[c]-pad)ok=false;return {stars:st,lines:[],f:cf}}
+    const lines=wrap(ctx,raw,widths[c]-pad*2,cf);
+    if(lines.some((l)=>lineWidth(ctx,l,cf)>widths[c]-pad*2+1))ok=false;
+    return {lines,f:cf};
+  }));
+  const heights=cells.map((row)=>Math.max(f*2.4,...row.map((cell)=>Math.max(1,cell.lines.length)*f*lh+pad*2)));
+  let h=heights.reduce((a,b)=>a+b,0)+gap*(heights.length-1);
+  if(h>maxH)ok=false;
+  else{const k=Math.min(2,(maxH-gap*(heights.length-1))/(h-gap*(heights.length-1)));for(let i=0;i<heights.length;i++)heights[i]*=k;h=heights.reduce((a,b)=>a+b,0)+gap*(heights.length-1)}
+  return {ok,h,draw(x,y){
+    const head=colors.highlight,body=mix(colors.highlight,colors.bg,.16),headInk=inkOn(head);
+    let top=y;
+    cells.forEach((row,i)=>{
+      let cx=x;
+      row.forEach((cell,c)=>{
+        ctx.fillStyle=i===0?head:body;
+        roundRect(ctx,cx,top,widths[c],heights[i],8);
+        ctx.fill();
+        const mid=top+heights[i]/2;
+        if(cell.stars)drawStars(ctx,cell.stars,cx+widths[c]/2,mid,f*.8,colors.text);
+        else{
+          const n=cell.lines.length,first=mid-(n*f*lh)/2+f*.9;
+          cell.lines.forEach((line,j)=>drawLine(ctx,line,cx+(widths[c]-lineWidth(ctx,line,cell.f))/2,first+j*f*lh,cell.f,i===0?headInk:colors.text,i===0?headInk:colors.highlight));
+        }
+        cx+=widths[c]+gap;
+      });
+      top+=heights[i]+gap;
+    });
+  }};
+}
+
+function drawGrid(ctx,text,q){
+  blank(ctx,colors.bg);
+  paintArea(ctx,0,0,W,H,colors.bg,extras.background,extras.dim);
+  const pad=56,r=118,headTop=60;
+  const muted=extras.background?'rgba(255,255,255,.8)':mix(colors.text,colors.bg,.6);
+  ctx.save();
+  ctx.beginPath();
+  ctx.arc(pad+r,headTop+r,r+10,0,Math.PI*2);
+  ctx.fillStyle=colors.highlight;
+  ctx.fill();
+  ctx.restore();
+  drawAvatar(ctx,pad+r,headTop+r,r);
+  const hx=pad+r*2+44,hw=W-hx-pad;
+  const head=text.toUpperCase();
+  if(head){
+    const roomH=data.length?r*2+20:H-headTop*2-140;
+    const hf=fitText(ctx,head,{weight:800,size:data.length?96:120,minSize:34,lineHeight:1.02,width:hw,height:roomH});
+    const y0=headTop+(data.length?Math.max(0,(r*2-hf.height)/2):0);
+    hf.lines.forEach((line,i)=>drawLine(ctx,line,hx,y0+hf.size*.86+i*hf.size*1.02,hf.f,extras.background?'#ffffff':colors.text));
+  }
+  let y=headTop+r*2+48;
+  const qb=measureQ(ctx,q,W-pad*2,38);
+  drawQ(ctx,qb,pad,y,W-pad*2);
+  if(qb.h)y+=qb.h+28;
+  if(data.length){
+    const maxH=H-y-110;
+    let f=52,lay=gridLayout(ctx,W-pad*2,maxH,f);
+    while(!lay.ok&&f>16){f-=1;lay=gridLayout(ctx,W-pad*2,maxH,f)}
+    lay.draw(pad,y);
+  }
+  ctx.save();
+  ctx.textAlign='center';
+  ctx.fillStyle=muted;
+  setFont(ctx,500,30);
+  ctx.fillText(HANDLE,W/2,H-48);
+  ctx.restore();
+  drawSignature(ctx,W-56,H-40,muted);
+  drawCounter(ctx,muted);
+}
+
 const COUNTS=['likes','comments','reposts','shares'];
-const STYLES={x:drawX,threads:drawThreads,instagram:drawInstagram,notes:drawNotes,messages:drawMessages,card:drawCard,photo:drawPhotoLook};
+const STYLES={x:drawX,threads:drawThreads,instagram:drawInstagram,notes:drawNotes,messages:drawMessages,card:drawCard,photo:drawPhotoLook,grid:drawGrid};
 const FEED=['x','threads','instagram'];
 
 function style(){
