@@ -2,10 +2,9 @@
  "municipality_code": "0613",
  "municipality": "Upper Deerfield Township",
  "county": "CUMBERLAND",
- "checked_at": "2026-09-30",
  "resale_co": {
   "status": "required",
-  "name": "Certificate of Occupancy (Continued Certificate of Occupancy / certificate of property compliance)",
+  "name": "Certificate of Occupancy on sale (Township Code section 303-6, certificate of inspection upon sale or lease; also called Continued Certificate of Occupancy / certificate of property compliance)",
   "issued_by": "Upper Deerfield Township (Housing Officer and Fire Marshal inspections)",
   "lead_time": "Request the inspection 5 or more business days before closing for the lower fee",
   "valid_for": "",
@@ -40,6 +39,13 @@
     "doc_date": "2026-09-17 (adopted; first reading September 3, 2026)",
     "via": "pdf",
     "verified": true
+   },
+   {
+    "url": "https://ecode360.com/14804477",
+    "quote": "Certificate of inspection upon sale or lease",
+    "doc_date": "(search result snippet: heading of section 303-6 in Chapter 303, Article II Inspection and Registration of Property)",
+    "via": "search_snippet",
+    "verified": null
    },
    {
     "url": "https://upperdeerfield.com/wp-content/uploads/2026/09/ORD-892-final-Notice-Amending-Certificate-of-Occupancy.pdf",
@@ -79,20 +85,27 @@
    {
     "url": "https://upperdeerfield.com/administration/housing-zoning/",
     "quote": "Housing Officer Anthony Lamanteer tlamanteer@upperdeerfield.com",
-    "doc_date": "2026-09-30 (page fetched)",
+    "doc_date": "2026-11-03 (page fetched)",
     "via": "page",
     "verified": true
    },
    {
     "url": "https://upperdeerfield.com/administration/housing-zoning/",
     "quote": "Phone: 856-455-9591 Fax: 856-451-5006",
-    "doc_date": "2026-09-30 (page fetched)",
+    "doc_date": "2026-11-03 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://upperdeerfield.com/administration/directory-of-officials/",
+    "quote": "Tony Lamanteer, Jr. Housing Officer tlamanteer@upperdeerfield.com 856-455-9591",
+    "doc_date": "2026-11-03 (page fetched)",
     "via": "page",
     "verified": true
    }
   ],
   "confidence": "medium",
-  "notes": "Township Code Chapter 303, Article II (Inspection and Registration of Property) calls for a certificate of occupancy under section 303-6; Ordinance 892 (adopted September 17, 2026, notice of final adoption published September 18, 2026) sets the residential fee by how many business days before closing the request is received. The section 303-6 text itself (ecode360 UP0623) could not be opened, so what exactly triggers the certificate is taken from the ordinance's closing-date fee tiers and Resolution 21-66, which describes a Continued Certificate of Occupancy inspection on sales under township ordinance. Ordinance 892 takes effect 'in the time and manner prescribed by law', which for a regular ordinance is normally 20 days after the notice of final adoption (about October 8, 2026); before then the older fee may apply (the February 5, 2026 minutes give the prior fee as $75.00). The February 19, 2026 minutes say the fee rose because the state now requires two certifications, from housing and from the Fire Marshal, so the one CO fee appears to cover both inspections. The same minutes note a CO is required for all rental properties before a tenant moves in. No application form, checklist or validity period is posted. Resolution 21-66 (March 2021) let buyers accept a seller self-certification in place of the Township inspection during COVID; it is not known whether that option is still used. The Housing & Zoning page lists 'Anthony Lamanteer'; the directory of officials lists 'Tony Lamanteer, Jr.' as Housing Officer and Zoning Officer; a different person, Anthony Lamanteer (alamanteer@upperdeerfield.com), sits on the Township Committee."
+  "notes": "Township Code Chapter 303, Article II (Inspection and Registration of Property) calls for a certificate of occupancy under section 303-6; a search result shows that section's heading as 'Certificate of inspection upon sale or lease' (the ecode360 text itself, UP0623, cannot be opened directly, so the full wording was not read). Ordinance 892 (adopted September 17, 2026; notice of final adoption published September 18, 2026) sets the residential fee by how many business days before closing the request is received. Ordinance 892 takes effect 'in the time and manner prescribed by law', which for a regular ordinance is normally 20 days after the notice of final adoption (about October 8, 2026), so the $100 / $150 fees should now apply; the February 5, 2026 minutes give the old fee as $75.00. The February 19, 2026 minutes say the fee rose because the state now requires two certifications, from housing and from the Fire Marshal, so the one CO fee appears to cover both inspections. The February 5, 2026 minutes also note a CO is required for all rental properties before a tenant moves in. No application form, checklist or validity period is posted; the Housing & Zoning page has only zoning and sign permit forms, and the October 2026 minutes and agendas add nothing. Resolution 21-66 (March 2021) let buyers accept a seller self-certification in place of the Township inspection during COVID; it is not known whether that option is still used. The Housing & Zoning page lists 'Anthony Lamanteer'; the directory of officials lists 'Tony Lamanteer, Jr.' as Housing Officer and Zoning Officer; a different person, Anthony Lamanteer (alamanteer@upperdeerfield.com), sits on the Township Committee. Tony Lamanteer, Jr. is also listed as Zoning Officer on Lawrence Township's land use page."
  },
  "fire_cert": {
   "requirements": [],
@@ -129,14 +142,14 @@
      {
       "url": "https://upperdeerfield.com/public-safety/fire-safety/",
       "quote": "Fire Safety Official Chris Williams, Director Manuel Aquilar, Deputy Phone: 856-451-3811 Ext. 143",
-      "doc_date": "2026-09-30 (page fetched)",
+      "doc_date": "2026-11-03 (page fetched)",
       "via": "page",
       "verified": true
      },
      {
       "url": "https://upperdeerfield.com/administration/directory-of-officials/",
       "quote": "Chris Williams Fire Inspector/Fire Marshall cwilliams@upperdeerfield.com 856-455-9591",
-      "doc_date": "2026-09-30 (page fetched)",
+      "doc_date": "2026-11-03 (page fetched)",
       "via": "page",
       "verified": true
      },
@@ -163,31 +176,39 @@
      },
      {
       "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
-      "quote": "LEAID: 0613-001 Enf Auth. Municipal Fire Official Christopher Williams Phone (856) 455-9591 Addr: State Hwy 77 Seabrook NJ 08302 Email cwilliams@upperdeerfield.com Upper Deerfield Twp Fire Prev",
+      "quote": "Fire Official Christopher Williams Phone (856) 451-3811",
       "doc_date": "2026-05-18 (latest survey date on the three Upper Deerfield pages)",
       "via": "state_directory",
-      "verified": true
+      "verified": null
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "Email cwilliams@upperdeerfield.com",
+      "doc_date": "2026-05-18 (latest survey date on the three Upper Deerfield pages)",
+      "via": "state_directory",
+      "verified": null
      }
     ],
     "confidence": "medium"
    }
   ],
-  "notes": "The Township is the local fire enforcing agency (registry code M). Its smoke/CO certification for 1-2 family sales is tied to the Township's Continued Certificate of Occupancy: Resolution 21-66 treats the smoke detector, CO alarm and extinguisher certification as part of the CCO inspection, and the February 19, 2026 minutes say the new CO fee (Ordinance 892) covers the two certifications from housing and the Fire Marshal. No separate smoke certificate form or fee is posted, so the fees above are the combined CO fees, not a separate fire fee. The 2021 resolution still names the portable fire extinguisher; the state law of February 3, 2025 (P.L.2025, c.19) removed it from the state requirement, and no current Township checklist was found. Contact numbers: the directory of officials and the state directory give 856-455-9591 for Chris Williams; the Fire Safety page gives 856-451-3811 Ext. 143. Upper Deerfield's construction office also serves Deerfield, Fairfield, Greenwich, Hopewell, Lawrence, Shiloh and Stow Creek, but that is construction code work, not fire code enforcement for those towns."
+  "notes": "The Township is the local fire enforcing agency (registry code M). Its smoke/CO certification for 1-2 family sales is tied to the Township's Continued Certificate of Occupancy: Resolution 21-66 treats the smoke detector, CO alarm and extinguisher certification as part of the CCO inspection, and the February 19, 2026 minutes say the new CO fee (Ordinance 892) covers the two certifications from housing and the Fire Marshal. No separate smoke certificate form or fee is posted, so the fees above are the combined CO fees, not a separate fire fee. The 2021 resolution still names the portable fire extinguisher; the state law of February 3, 2025 (P.L.2025, c.19) removed it from the state requirement, and no current Township checklist was found. Contact numbers: the directory of officials gives 856-455-9591 for Chris Williams; the Fire Safety page gives 856-451-3811 Ext. 143; the state fire directory gives (856) 451-3811 in the smoke detector compliance block and (856) 455-9591 as his office phone. Upper Deerfield's construction office also serves Deerfield, Fairfield, Greenwich, Hopewell, Lawrence, Shiloh and Stow Creek, but that is construction code work, not fire code enforcement for those towns."
  },
  "other_items": [],
  "open_questions": [
-  "When does the new Ordinance 892 fee ($100 / $150) take effect (normally 20 days after the September 18, 2026 notice), and is the $75 fee used until then?",
+  "Confirm the Ordinance 892 fee ($100 with 5 or more business days' notice, $150 with 4 or fewer) is now being charged; it should have taken effect around October 8, 2026.",
   "Is there an application form, inspection checklist or validity period for the Certificate of Occupancy? None is posted.",
   "Is the seller self-certification option from Resolution 21-66 (COVID era) still offered?"
  ],
+ "checked_at": "2026-11-03",
  "verification": {
   "fees": 4,
   "fee_ok": 4,
   "fee_bad": 0,
   "fee_unchecked": 0,
-  "quotes": 14,
+  "quotes": 17,
   "q_ok": 14,
   "q_bad": 0,
-  "q_unchecked": 0
+  "q_unchecked": 3
  }
 }

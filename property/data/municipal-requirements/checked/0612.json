@@ -2,7 +2,6 @@
  "municipality_code": "0612",
  "municipality": "Stow Creek Township",
  "county": "CUMBERLAND",
- "checked_at": "2026-09-30",
  "resale_co": {
   "status": "required",
   "name": "Certificate of Occupancy (sale property)",
@@ -72,14 +71,14 @@
    {
     "url": "https://stowcreektwp.org/planning-zoning-and-housing/",
     "quote": "Zoning Officer: Neal Sheppard Phone: 856-455-8640 Email: Zoninghousing@stowcreektwp.org",
-    "doc_date": "2026-09-30 (page fetched)",
+    "doc_date": "2026-11-03 (page fetched)",
     "via": "page",
     "verified": true
    },
    {
     "url": "https://stowcreektwp.org/planning-zoning-and-housing/",
     "quote": "Mail your Zoning and C.O. application fees. Stow Creek Township Attn: Zoning/Housing Department PO box 308 Shiloh, NJ 08353 Email copies of the Zoning or CO application and check to the Zoning Officer.",
-    "doc_date": "2026-09-30 (page fetched)",
+    "doc_date": "2026-11-03 (page fetched)",
     "via": "page",
     "verified": true
    },
@@ -92,7 +91,7 @@
    }
   ],
   "confidence": "high",
-  "notes": "The Township's Land Development Ordinance (section 4.7 D) requires a certificate of occupancy on the sale or change of ownership of any property with a dwelling, and also on a change of occupants. The Certificate of Occupancy Application (October 2025) has a 'Sale Property' box and a $50.00 fee. The inspection list is the Township's 'most common Housing Inspection Violations' sheet (not a full checklist). An older 2024 version of the application listed the Housing Officer at (609)381-0828 and 900 Main Street; the current form and page give 856-455-8640 and PO Box 308. Building permits come from the Upper Deerfield Township construction office (856-455-9591) under a shared service. The Township also has a landlord rental registration."
+  "notes": "The Township's Land Development Ordinance (section 4.7 D) requires a certificate of occupancy on the sale or change of ownership of any property with a dwelling, and also on a change of occupants. The Certificate of Occupancy Application (October 2025) has a 'Sale Property' box and a $50.00 fee. The inspection list is the Township's 'most common Housing Inspection Violations' sheet (not a full checklist). An older 2024 version of the application listed the Housing Officer at (609)381-0828 and 900 Main Street; the current form and page give 856-455-8640 and PO Box 308. Building permits come from the Upper Deerfield Township construction office (856-455-9591) under a shared service. The Township also has a landlord rental registration. Re-checked November 3, 2026: the Planning, Zoning and Housing page, the October 2025 application and the common violations list are unchanged; the page also lists a $15 zoning permit application fee (zoning permits only). The 2025 Land Development Ordinance PDF is too large to re-open online, so its quotes are carried from the last check."
  },
  "fire_cert": {
   "requirements": [
@@ -133,14 +132,14 @@
       "verified": true
      },
      {
-      "label": "Re-inspection for a failed or no-show inspection: same fee as the initial inspection tier",
+      "label": "Re-inspection for a failed or no-show inspection: same fee as the initial inspection tier ($45.00, $90.00 or $161.00)",
       "amount": "$45.00 to $161.00",
-      "quote": "Requests received 10 business days or more prior to settlement date or change of occupant $45.00 ... Requests received fewer than 4 business days prior to settlement date or change of occupant $161.00 ... *Re-inspection for failed or no-show inspections shall be the same fee scheduled as initial inspection. *",
+      "quote": "*Re-inspection for failed or no-show inspections shall be the same fee scheduled as initial inspection. *",
       "source_url": "https://static1.squarespace.com/static/51cc4632e4b06e55251db119/t/691f23865714647f5f7c666a/1763648390990/Occupancy+%26+Smoke+Certificates.pdf",
       "verified": true
      }
     ],
-    "how_to_apply": "Fill out the online 'CO and Smoke Certification Application' (Google Form) linked from the Bridgeton Fire Department's Uniform Fire Code page and pick Stow Creek Township as the municipality. Payment is by check or money order payable to the City of Bridgeton Fire Department (the form says an online payment link will be on the invoice). The certificate is valid for 90 days. Questions: firedepartment@cityofbridgeton.com or 856-451-0090 (guideline sheet) / (856) 451-0091 (Bureau of Fire Prevention).",
+    "how_to_apply": "Fill out the online 'CO and Smoke Certification Application' (Google Form) linked from the Bridgeton Fire Department's Uniform Fire Code page and pick Stow Creek Township as the municipality. Payment is by check or money order payable to the City of Bridgeton Fire Department, due at or before the inspection (the form says an online payment link will be on the invoice). The certificate is valid for 90 days. Questions: firedepartment@cityofbridgeton.com or 856-451-0090 (guideline sheet) / (856) 451-0091 (Bureau of Fire Prevention).",
     "application_url": "https://forms.gle/oWLh33S1kuggYuRQ8",
     "department_url": "http://www.bridgetonfire.com/uniform-fire-code",
     "phone": "856-451-0091",
@@ -151,20 +150,34 @@
      {
       "url": "http://www.bridgetonfire.com/uniform-fire-code",
       "quote": "The City of Bridgeton Fire Department is the local enforcing agency who is responsible for the enforcement of the Uniform Fire Safety Act within the City of Bridgeton, Hopewell Township, Greenwich Township, Stow Creek Township, Shiloh Borough, Fairfield Township, Downe Township, and Alloway Township.",
-      "doc_date": "2026-09-30 (page fetched)",
+      "doc_date": "2026-11-03 (page fetched)",
       "via": "page",
       "verified": true
      },
      {
       "url": "http://www.bridgetonfire.com/uniform-fire-code",
       "quote": "Jack Justice Jr. serves as the appointed fire official overseeing a staff of 3 full time fire inspectors, as well as 4 part time fire inspectors. Inspectors work varying schedules, so if you need to contact them utilize their email or contact the Bureau of Fire Prevention at (856) 451-0091.",
-      "doc_date": "2026-09-30 (page fetched)",
+      "doc_date": "2026-11-03 (page fetched)",
       "via": "page",
       "verified": true
      },
      {
       "url": "https://static1.squarespace.com/static/51cc4632e4b06e55251db119/t/691f23865714647f5f7c666a/1763648390990/Occupancy+%26+Smoke+Certificates.pdf",
-      "quote": "Residential, Resale and New Occupant requirements for one- & two-family dwellings. All requests must be submitted 2-3 weeks before the settlement date via the form on bridgetonfire.com. For any questions, please email firedepartment@cityofbridgeton.com or call The City of Bridgeton Fire Department at 856-451-0090 during normal business hours.",
+      "quote": "Residential, Resale and New Occupant requirements for one- & two-family dwellings",
+      "doc_date": "2025-11-20 (PDF created)",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://static1.squarespace.com/static/51cc4632e4b06e55251db119/t/691f23865714647f5f7c666a/1763648390990/Occupancy+%26+Smoke+Certificates.pdf",
+      "quote": "All requests must be submitted 2-3 weeks before the settlement date via the form on bridgetonfire.com.",
+      "doc_date": "2025-11-20 (PDF created)",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://static1.squarespace.com/static/51cc4632e4b06e55251db119/t/691f23865714647f5f7c666a/1763648390990/Occupancy+%26+Smoke+Certificates.pdf",
+      "quote": "For any questions, please email firedepartment@cityofbridgeton.com or call The City of Bridgeton Fire Department at 856-451-0090 during normal business hours.",
       "doc_date": "2025-11-20 (PDF created)",
       "via": "pdf",
       "verified": true
@@ -185,24 +198,59 @@
      },
      {
       "url": "https://forms.gle/oWLh33S1kuggYuRQ8",
-      "quote": "What municipality is the property located in? ... Stow Creek Township",
-      "doc_date": "2026-09-30 (form fetched)",
+      "quote": "What municipality is the property located in?",
+      "doc_date": "2026-11-03 (form fetched)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://forms.gle/oWLh33S1kuggYuRQ8",
+      "quote": "Stow Creek Township",
+      "doc_date": "2026-11-03 (form fetched; listed as a municipality choice)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://forms.gle/oWLh33S1kuggYuRQ8",
+      "quote": "Payment is due before the completion of the inspection- check or money order payable to City of Bridgeton Fire Department.",
+      "doc_date": "2026-11-03 (form fetched)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://forms.gle/oWLh33S1kuggYuRQ8",
+      "quote": "A link for online payment will be on your invoice.",
+      "doc_date": "2026-11-03 (form fetched)",
       "via": "page",
       "verified": true
      },
      {
       "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
-      "quote": "F Stow Creek Township ... Bridgeton City is the LEA for Downe, Fairfield, Greenwich, Hopewell Twp, Stowe Creek Township and Shiloh Borough.",
+      "quote": "F Stow Creek Township",
+      "doc_date": "2026-07 (registry as of June 30, 2026)",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "Bridgeton City is the LEA for Downe, Fairfield, Greenwich, Hopewell Twp, Stowe Creek Township and Shiloh",
       "doc_date": "2026-07 (registry as of June 30, 2026)",
       "via": "pdf",
       "verified": true
      },
      {
       "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
-      "quote": "LEAID: 0612-001 Enf Auth. Fire Dept Fire Official Jack Justice, Jr. Phone (856) 451-0091 Addr: 181 E Commerce St Bridgeton City NJ 08302 Email firedepartment@cityofbridgeton.com Bridgeton City Fire Dept",
+      "quote": "Fire Official Jack Justice, Jr. Phone (856) 451-0091",
       "doc_date": "2026-04-30 (survey date)",
       "via": "state_directory",
-      "verified": true
+      "verified": null
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "Name: Bridgeton City Fire Dept",
+      "doc_date": "2026-04-30 (survey date)",
+      "via": "state_directory",
+      "verified": null
      }
     ],
     "confidence": "high"
@@ -240,14 +288,15 @@
  "open_questions": [
   "How far before closing should the CO application be filed, and is there a reinspection fee? Not stated on the form or page."
  ],
+ "checked_at": "2026-11-03",
  "verification": {
   "fees": 5,
   "fee_ok": 5,
   "fee_bad": 0,
   "fee_unchecked": 0,
-  "quotes": 15,
-  "q_ok": 15,
+  "quotes": 22,
+  "q_ok": 20,
   "q_bad": 0,
-  "q_unchecked": 0
+  "q_unchecked": 2
  }
 }

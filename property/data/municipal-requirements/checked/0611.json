@@ -2,7 +2,6 @@
  "municipality_code": "0611",
  "municipality": "Shiloh Borough",
  "county": "CUMBERLAND",
- "checked_at": "2026-09-30",
  "resale_co": {
   "status": "required",
   "name": "Certificate of Occupancy for a new occupant of an existing building (zoning permit first)",
@@ -58,13 +57,13 @@
    {
     "url": "https://upperdeerfield.com/administration/construction-code/",
     "quote": "Services provided to Deerfield, Fairfield, Greenwich, Hopewell, Lawrence, Shiloh, Stow Creek & Upper Deerfield",
-    "doc_date": "2026-09-30 (page fetched)",
+    "doc_date": "2026-11-03 (page fetched)",
     "via": "page",
     "verified": true
    }
   ],
   "confidence": "low",
-  "notes": "The only Borough source found is the scanned Development Ordinance of 1979 as amended June 1, 1999 (read page by page from the image; no text layer). Section 4.17 says a zoning permit must be issued before a certificate of occupancy goes to a new occupant of an existing building, and sets fees of $10 for a zoning permit and $25 per dwelling unit for a certificate of occupancy. It does not use the words sale or resale, and no current resale form, checklist or fee sheet is posted, so the status is required with low confidence and the 1999 fees may be out of date. The Borough's Housing Code Official and Construction Code Official are Upper Deerfield Township staff (Teresa Warburton, 856-455-9591) under a shared service. Zoning Officer: the Other Officials page (updated February 2025) lists Norman Hetzell, 856-332-7332, while the Planning - Zoning page (updated September 2026) lists Daniel Lowe as Zoning Officer on the board. Neighboring Stow Creek Township, which shares the Housing office pattern, does require a CO on sale."
+  "notes": "Re-checked November 3, 2026: the Borough's Ordinances page still posts only the 1999 Development Ordinance, and the posted minutes and agendas (2022 to the 2025 reorganization agenda) say nothing about resale certificates. The only Borough source found is the scanned Development Ordinance of 1979 as amended June 1, 1999 (read page by page from the image; no text layer). Section 4.17 (page 36 of the scan) says a zoning permit must be issued before a certificate of occupancy goes to a new occupant of an existing building, and sets fees of $10 for a zoning permit and $25 per dwelling unit for a certificate of occupancy. It does not use the words sale or resale, and no current resale form, checklist or fee sheet is posted, so the status is required with low confidence and the 1999 fees may be out of date. The Borough's Housing Code Official and Construction Code Official are Upper Deerfield Township staff (Teresa Warburton, 856-455-9591) under a shared service. Zoning Officer: the Other Officials page (updated February 2025) lists Norman Hetzell, 856-332-7332, while the Planning - Zoning page (updated September 28, 2026) lists Daniel Lowe as Zoning Officer on the board. Neighboring Stow Creek Township, which shares the Housing office pattern, does require a CO on sale."
  },
  "fire_cert": {
   "requirements": [
@@ -105,14 +104,14 @@
       "verified": true
      },
      {
-      "label": "Re-inspection for a failed or no-show inspection: same fee as the initial inspection tier",
+      "label": "Re-inspection for a failed or no-show inspection: same fee as the initial inspection tier ($45.00, $90.00 or $161.00)",
       "amount": "$45.00 to $161.00",
-      "quote": "Requests received 10 business days or more prior to settlement date or change of occupant $45.00 ... Requests received fewer than 4 business days prior to settlement date or change of occupant $161.00 ... *Re-inspection for failed or no-show inspections shall be the same fee scheduled as initial inspection. *",
+      "quote": "*Re-inspection for failed or no-show inspections shall be the same fee scheduled as initial inspection. *",
       "source_url": "https://static1.squarespace.com/static/51cc4632e4b06e55251db119/t/691f23865714647f5f7c666a/1763648390990/Occupancy+%26+Smoke+Certificates.pdf",
       "verified": true
      }
     ],
-    "how_to_apply": "Fill out the online 'CO and Smoke Certification Application' (Google Form) linked from the Bridgeton Fire Department's Uniform Fire Code page and pick Shiloh Borough as the municipality. Payment is by check or money order payable to the City of Bridgeton Fire Department (the form says an online payment link will be on the invoice). The certificate is valid for 90 days. Questions: firedepartment@cityofbridgeton.com or 856-451-0090 (guideline sheet) / (856) 451-0091 (Bureau of Fire Prevention).",
+    "how_to_apply": "Fill out the online 'CO and Smoke Certification Application' (Google Form) linked from the Bridgeton Fire Department's Uniform Fire Code page and pick Shiloh Borough as the municipality. Payment is by check or money order payable to the City of Bridgeton Fire Department, due at or before the inspection (the form says an online payment link will be on the invoice). The certificate is valid for 90 days. Questions: firedepartment@cityofbridgeton.com or 856-451-0090 (guideline sheet) / (856) 451-0091 (Bureau of Fire Prevention).",
     "application_url": "https://forms.gle/oWLh33S1kuggYuRQ8",
     "department_url": "http://www.bridgetonfire.com/uniform-fire-code",
     "phone": "856-451-0091",
@@ -123,20 +122,34 @@
      {
       "url": "http://www.bridgetonfire.com/uniform-fire-code",
       "quote": "The City of Bridgeton Fire Department is the local enforcing agency who is responsible for the enforcement of the Uniform Fire Safety Act within the City of Bridgeton, Hopewell Township, Greenwich Township, Stow Creek Township, Shiloh Borough, Fairfield Township, Downe Township, and Alloway Township.",
-      "doc_date": "2026-09-30 (page fetched)",
+      "doc_date": "2026-11-03 (page fetched)",
       "via": "page",
       "verified": true
      },
      {
       "url": "http://www.bridgetonfire.com/uniform-fire-code",
       "quote": "Jack Justice Jr. serves as the appointed fire official overseeing a staff of 3 full time fire inspectors, as well as 4 part time fire inspectors. Inspectors work varying schedules, so if you need to contact them utilize their email or contact the Bureau of Fire Prevention at (856) 451-0091.",
-      "doc_date": "2026-09-30 (page fetched)",
+      "doc_date": "2026-11-03 (page fetched)",
       "via": "page",
       "verified": true
      },
      {
       "url": "https://static1.squarespace.com/static/51cc4632e4b06e55251db119/t/691f23865714647f5f7c666a/1763648390990/Occupancy+%26+Smoke+Certificates.pdf",
-      "quote": "Residential, Resale and New Occupant requirements for one- & two-family dwellings. All requests must be submitted 2-3 weeks before the settlement date via the form on bridgetonfire.com. For any questions, please email firedepartment@cityofbridgeton.com or call The City of Bridgeton Fire Department at 856-451-0090 during normal business hours.",
+      "quote": "Residential, Resale and New Occupant requirements for one- & two-family dwellings",
+      "doc_date": "2025-11-20 (PDF created)",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://static1.squarespace.com/static/51cc4632e4b06e55251db119/t/691f23865714647f5f7c666a/1763648390990/Occupancy+%26+Smoke+Certificates.pdf",
+      "quote": "All requests must be submitted 2-3 weeks before the settlement date via the form on bridgetonfire.com.",
+      "doc_date": "2025-11-20 (PDF created)",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://static1.squarespace.com/static/51cc4632e4b06e55251db119/t/691f23865714647f5f7c666a/1763648390990/Occupancy+%26+Smoke+Certificates.pdf",
+      "quote": "For any questions, please email firedepartment@cityofbridgeton.com or call The City of Bridgeton Fire Department at 856-451-0090 during normal business hours.",
       "doc_date": "2025-11-20 (PDF created)",
       "via": "pdf",
       "verified": true
@@ -157,24 +170,59 @@
      },
      {
       "url": "https://forms.gle/oWLh33S1kuggYuRQ8",
-      "quote": "What municipality is the property located in? ... Shiloh Borough",
-      "doc_date": "2026-09-30 (form fetched)",
+      "quote": "What municipality is the property located in?",
+      "doc_date": "2026-11-03 (form fetched)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://forms.gle/oWLh33S1kuggYuRQ8",
+      "quote": "Shiloh Borough",
+      "doc_date": "2026-11-03 (form fetched; listed as a municipality choice)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://forms.gle/oWLh33S1kuggYuRQ8",
+      "quote": "Payment is due before the completion of the inspection- check or money order payable to City of Bridgeton Fire Department.",
+      "doc_date": "2026-11-03 (form fetched)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://forms.gle/oWLh33S1kuggYuRQ8",
+      "quote": "A link for online payment will be on your invoice.",
+      "doc_date": "2026-11-03 (form fetched)",
       "via": "page",
       "verified": true
      },
      {
       "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
-      "quote": "F Shiloh Borough ... Bridgeton City is the LEA for Downe, Fairfield, Greenwich, Hopewell Twp, Stowe Creek Township and Shiloh Borough.",
+      "quote": "F Shiloh Borough",
+      "doc_date": "2026-07 (registry as of June 30, 2026)",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "Bridgeton City is the LEA for Downe, Fairfield, Greenwich, Hopewell Twp, Stowe Creek Township and Shiloh",
       "doc_date": "2026-07 (registry as of June 30, 2026)",
       "via": "pdf",
       "verified": true
      },
      {
       "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
-      "quote": "LEAID: 0611-001 Enf Auth. Fire Dept Fire Official Jack Justice, Jr. Phone (856) 451-0091 Addr: 181 E Commerce St Bridgeton City NJ 08302 Email firedepartment@cityofbridgeton.com Bridgeton City Fire Dept",
+      "quote": "Fire Official Jack Justice, Jr. Phone (856) 451-0091",
       "doc_date": "2026-04-30 (survey date on the Hopewell-Stow Creek Fire Co page; the Shiloh Boro Fire Dept page has no survey date)",
       "via": "state_directory",
-      "verified": true
+      "verified": null
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "Name: Bridgeton City Fire Dept",
+      "doc_date": "2026-04-30 (survey date on the Hopewell-Stow Creek Fire Co page; the Shiloh Boro Fire Dept page has no survey date)",
+      "via": "state_directory",
+      "verified": null
      }
     ],
     "confidence": "high"
@@ -194,14 +242,15 @@
   "Is the certificate of occupancy fee still $25 per dwelling unit and the zoning permit fee $10 (1999 amounts)?",
   "Who is the current Zoning Officer (Norman Hetzell on the February 2025 Other Officials page, Daniel Lowe on the September 2026 Planning - Zoning page)?"
  ],
+ "checked_at": "2026-11-03",
  "verification": {
   "fees": 6,
   "fee_ok": 4,
   "fee_bad": 0,
   "fee_unchecked": 2,
-  "quotes": 12,
-  "q_ok": 11,
+  "quotes": 19,
+  "q_ok": 16,
   "q_bad": 0,
-  "q_unchecked": 1
+  "q_unchecked": 3
  }
 }
