@@ -1,0 +1,188 @@
+{
+ "municipality_code": "0603",
+ "municipality": "Deerfield Township",
+ "county": "CUMBERLAND",
+ "resale_co": {
+  "status": "not_required",
+  "name": "",
+  "issued_by": "",
+  "lead_time": "",
+  "valid_for": "",
+  "requirements": [],
+  "fees": [],
+  "how_to_apply": "No Township resale certificate is needed. The seller still needs the Fire Marshal's smoke detector / CO certificate (see fire section), and septic and well test results go to the Cumberland County Department of Health.",
+  "application_url": "",
+  "department_url": "https://sites.google.com/view/deerfieldtownship/departments/zoning-code",
+  "phone": "(856) 455-3200",
+  "email": "zoning@deerfieldtownship.org",
+  "contact_name": "Melissa Shinn",
+  "contact_title": "Zoning Official, Code Enforcement",
+  "evidence": [
+   {
+    "url": "https://sites.google.com/view/deerfieldtownship/departments/zoning-code",
+    "quote": "The Fire Marshal is required to inspect and issue a permit for the resale or rental of Deerfield Township property per state law. A resale is the private sale of a house to another person. Nothing is required from the township to sell your home or for the buyer to purchase a home. Other regulations (septic and well tests, etc) will still apply.",
+    "doc_date": "2026-09-30 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://sites.google.com/view/deerfieldtownship/departments/zoning-code",
+    "quote": "Zoning Official, Code Enforcement Melissa Shinn Hours: Thursdays from 3-6pm and Fridays from 8-2pm by appointment only. (856) 455-3200 or email zoning@deerfieldtownship.org",
+    "doc_date": "2026-09-30",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://sites.google.com/view/deerfieldtownship/departments/construction",
+    "quote": "Deerfield Township is currently served by the Upper Deerfield Township Construction Office",
+    "doc_date": "2026-09-30",
+    "via": "page",
+    "verified": true
+   }
+  ],
+  "confidence": "high",
+  "notes": "The Township's official site (http://www.deerfieldtownship.org redirects to its Google Sites page) states on the Zoning & Code Enforcement page that nothing is required from the Township to sell or buy a home; only the Fire Marshal's resale inspection (state law) applies, plus septic and well tests. Rental registration is still required (residential fee $50, business $125, state form); that is a rental program. Construction permits are handled by the Upper Deerfield Township Construction Office ((856) 455-9591). The Township Code (ecode360 DE0850) was read this time. Chapter 148 (Property Maintenance, 2013) lists a 'Certificate of occupancy/inspection: $25' fee under IPMC section 103.5 but does not tie it to a sale, and Chapter 163 (Smoke Detectors, 1990) says a home may not be sold until it has the required smoke detectors and tells the Tax Collector to remind sellers of an inspection by the 'Housing Official'. These older sections do not change what the Township page says (nothing is required from the Township to sell); the fire inspection is now done by the Fire Marshal under Chapter 93."
+ },
+ "fire_cert": {
+  "requirements": [
+   "Approved and tested smoke detectors and carbon monoxide alarms, certified before the sale is final (Township Code 93-8)",
+   "The Fire Prevention Bureau no longer accepts the Certification in Lieu of Inspection; an in-person inspection by the Fire Marshal is required",
+   "Portable fire extinguisher (form still lists it: the Township's application is titled Smoke Detector, Carbon Monoxide & Fire Extinguisher Application, and Code 93-8E still names the certificate for it)"
+  ],
+  "authorities": [
+   {
+    "name": "Deerfield Township Fire Prevention Bureau (Fire Marshal)",
+    "type": "municipal_fire_bureau",
+    "area_served": "Entire township",
+    "lead_time": "The fee depends on how early the request is received: more than 10 business days before the change of occupant for the lowest fee. The certificate must be obtained before the sale is final.",
+    "fees": [
+     {
+      "label": "Smoke/CO certificate (CSACMAPFEC), request received more than 10 business days before the change of occupant (Township Code 93-8E(1))",
+      "amount": "$45",
+      "quote": "Requests for a CSACMAPFEC (certificate of smoke alarm, carbon monoxide alarm and portable fire extinguisher compliance) received more than 10 business days prior to the change of occupant: $45.",
+      "source_url": "https://ecode360.com/5054578",
+      "verified": true
+     },
+     {
+      "label": "Request received 4 to 10 business days before the change of occupant (Township Code 93-8E(2))",
+      "amount": "$90",
+      "quote": "Requests for a CSACMAPFEC received four to 10 business days prior to the change of occupant: $90.",
+      "source_url": "https://ecode360.com/5054578",
+      "verified": true
+     },
+     {
+      "label": "Request received fewer than 4 business days before the change of occupant (Township Code 93-8E(3))",
+      "amount": "$161",
+      "quote": "Requests for a CSACMAPFEC received fewer than four business days prior to the change of occupant: $161.",
+      "source_url": "https://ecode360.com/5054578",
+      "verified": true
+     }
+    ],
+    "how_to_apply": "Pick up the Smoke Detector, Carbon Monoxide & Fire Extinguisher Application at the Township Building (736 Landis Avenue, Rosenhayn), complete it and return it with the fee so the Fire Marshal can arrange an in-person inspection. The page says to mail the notarized form to Deerfield Township Hall c/o Fire Marshal, PO Box 350, Rosenhayn, NJ 08352. Fees are $45, $90 or $161 depending on how many business days before the change of occupant the request is received (Township Code 93-8E).",
+    "application_url": "",
+    "department_url": "https://sites.google.com/view/deerfieldtownship/departments/fire-marshal",
+    "phone": "(856) 455-3200",
+    "email": "firemarshal@deerfieldtownship.org",
+    "contact_name": "Christopher Williams",
+    "contact_title": "Fire Marshal (Fire Official)",
+    "evidence": [
+     {
+      "url": "https://sites.google.com/view/deerfieldtownship/departments/fire-marshal",
+      "quote": "The Deerfield Township Fire Prevention Bureau will no longer be accepting the Certification in Lieu of Inspection. Residents will now return to the former procedure of obtaining the Smoke Detector, Carbon Monoxide & Fire Extinguisher Application available at the Township Building, completing the form and returning it with the appropriate fee so an in-person inspection can be arranged by the Fire Marshall.",
+      "doc_date": "2026-09-30 (page fetched)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://sites.google.com/view/deerfieldtownship/departments/fire-marshal",
+      "quote": "Please mail notarized form to Deerfield Township Hall c/o Fire Marshal, PO Box 350, Rosenhayn, NJ 08352",
+      "doc_date": "2026-09-30",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://ecode360.com/5054578",
+      "quote": "In accordance with N.J.A.C. 5:70-4.19 of the Uniform Fire Code, all one- and two-family dwellings shall be certified to have had installed approved and tested smoke detectors and carbon monoxide alarms at the time of sale of the property.",
+      "doc_date": "Amended 9-21-2022 by Ord. No. 2022-3",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://ecode360.com/5054578",
+      "quote": "It shall be the responsibility of the owner or his agent to obtain the proper certification of smoke detector and carbon monoxide alarm installation before the sale is final.",
+      "doc_date": "Amended 9-21-2022 by Ord. No. 2022-3",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://ecode360.com/5054578",
+      "quote": "A certificate will be issued after an inspection or certification of compliance has been completed.",
+      "doc_date": "Amended 9-21-2022 by Ord. No. 2022-3",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://sites.google.com/view/deerfieldtownship/departments/fire-marshal",
+      "quote": "Township Fire Marshall Christopher Williams",
+      "doc_date": "2026-09-30",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://sites.google.com/view/deerfieldtownship/officials",
+      "quote": "Fire Marshall Christopher Williams",
+      "doc_date": "2026-09-30 (name links to firemarshal@deerfieldtownship.org)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://sites.google.com/view/deerfieldtownship/contact",
+      "quote": "Main Phone: (856) 455-3200",
+      "doc_date": "2026-09-30",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "F Deerfield Township",
+      "doc_date": "2026-07 (registry as of June 30, 2026)",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "LEAID: 0603-001 Enf Auth. Fire Dept Fire Official Christopher E Williams Phone (856) 455-3200 Addr: PO Box 350 Rosenhayn NJ 08352 ... Email firemarshal@deerfieldtownship.org",
+      "doc_date": "2025-06 (survey date 6/4/2025)",
+      "via": "state_directory",
+      "verified": null
+     }
+    ],
+    "confidence": "high"
+   }
+  ],
+  "notes": "Deerfield Township (registry code F) is its own fire enforcing agency; the Fire Marshal inspects and issues the resale smoke/CO certificate. Fees come from Township Code 93-8E (Ord. 2022-3, September 21, 2022), read in full through the ecode360 print view: $45 / $90 / $161 by business days before the change of occupant, the same as the state schedule. 93-8C still lists other people who may certify (architects, title company employees, real estate agents and others), but the Township page says the Certification in Lieu of Inspection is no longer accepted. Township Code 93-7 also lists a $25 fire registration fee for 'R-A non-owner-occupied 1 and 2 units', inspected and charged only upon sale or change of tenant; that applies to non-owner-occupied (rental) homes. The Township's application name still includes the fire extinguisher, which state law dropped on February 3, 2025 (P.L.2025, c.19); whether the Fire Marshal still checks one is not confirmed. No re-inspection fee or validity period is published. The Fire Marshal's email is linked from his name on the Officials page and printed in the state fire directory."
+ },
+ "other_items": [
+  {
+   "label": "Septic and well tests",
+   "detail": "Septic and well test results should be forwarded to the Cumberland County Department of Health.",
+   "source_url": "https://sites.google.com/view/deerfieldtownship/departments/zoning-code"
+  }
+ ],
+ "open_questions": [
+  "Is there a re-inspection fee, and how long is the smoke/CO certificate valid?",
+  "Does the Fire Marshal still require a fire extinguisher after P.L.2025, c.19?",
+  "Must the application really be notarized (the page mentions a notarized form in the same note that ends the Certification in Lieu of Inspection)?"
+ ],
+ "checked_at": "2026-11-03",
+ "verification": {
+  "fees": 3,
+  "fee_ok": 3,
+  "fee_bad": 0,
+  "fee_unchecked": 0,
+  "quotes": 13,
+  "q_ok": 12,
+  "q_bad": 0,
+  "q_unchecked": 1
+ }
+}

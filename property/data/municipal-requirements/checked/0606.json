@@ -2,7 +2,6 @@
  "municipality_code": "0606",
  "municipality": "Greenwich Township",
  "county": "CUMBERLAND",
- "checked_at": "2026-09-30",
  "resale_co": {
   "status": "required",
   "name": "Continued Certificate of Occupancy (housing inspection)",
@@ -26,7 +25,15 @@
    "Work done without permits must be permitted and finaled",
    "Passing County Health Department water test and septic certification (or waiver), and a passing fire inspection report from the Bridgeton Fire Department"
   ],
-  "fees": [],
+  "fees": [
+   {
+    "label": "Certificate of Continued Occupancy (Township Code 12-2.3)",
+    "amount": "$50.00",
+    "quote": "Certificate of Continued Occupancy: $50.00.",
+    "source_url": "https://ecode360.com/36607601",
+    "verified": true
+   }
+  ],
   "how_to_apply": "Fill out the Township's Application for Continued Certificate of Occupancy (owner, seller's agent, buyer's agent, owner's future address) and pay at the time of application by cash, check or money order payable to Greenwich Township. The Township building is not regularly staffed; mail to Greenwich Township, P.O. Box 64, Greenwich, NJ 08323, or contact the Zoning / Code Enforcement Officer. The fee amounts are blank on the posted form.",
   "application_url": "http://www.historicgreenwichnj.org/wp-content/uploads/2022/05/CO.pdf",
   "department_url": "https://www.historicgreenwichnj.org/planning-documents/",
@@ -35,6 +42,27 @@
   "contact_name": "Neal Sheppard",
   "contact_title": "Zoning / Code Enforcement Officer",
   "evidence": [
+   {
+    "url": "https://ecode360.com/36607599",
+    "quote": "No person shall sell or transfer any structure within the Township of Greenwich unless a Certificate of Continued Occupancy certifying that the structure is in compliance with all provisions of the current version of the International Property Maintenance Code, 2006 edition, and all other applicable ordinances of the Township of Greenwich has been issued.",
+    "doc_date": "Ord. No. 2015-21",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://ecode360.com/36607600",
+    "quote": "No Certificate of Continued Occupancy shall be issued by the Township of Greenwich until the Zoning Officer determines that all structures were built in conformance with the applicable ordinances of the Township",
+    "doc_date": "Ord. No. 2015-21",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://ecode360.com/36607601",
+    "quote": "Application forms for Certificates of Continued Occupancy may be obtained at the Offices of the Code Enforcement Officer.",
+    "doc_date": "Ord. No. 2015-21",
+    "via": "page",
+    "verified": true
+   },
    {
     "url": "https://www.historicgreenwichnj.org/planning-documents/",
     "quote": "General Planning Documents, Ordinances, and Forms Certificate of Occupancy Application Certificate of Occupancy Application Common Housing Violations Common Violations",
@@ -85,8 +113,8 @@
     "verified": true
    }
   ],
-  "confidence": "low",
-  "notes": "Greenwich posts an Application for Continued Certificate of Occupancy (asks for the seller's agent, the buyer's agent and the owner's future address, so it is used for sales) and a December 2025 list of common housing inspection violations that requires County water and septic certifications and a Bridgeton fire inspection report. No Township page states in words that a CCO is required on every sale, and no fee is published: the form's fee lines are blank and the 'Fee Schedule 2023' section on the Planning Documents page is empty. The Township Code is on ecode360 (GR4098) and could not be opened. The form uses the same wording as Commercial Township's CCO form. Construction permits are handled by Teresa Warburton (856-455-9591, twarburton@upperdeerfield.com) at the Upper Deerfield Construction Office."
+  "confidence": "high",
+  "notes": "Township Code 12-2.1 (Ord. 2015-21) says no structure may be sold or transferred unless a Certificate of Continued Occupancy has been issued showing it meets the 2006 International Property Maintenance Code and Township ordinances; the Zoning Officer must first find that all structures were built in conformance (12-2.2). The fee is $50.00 (12-2.3). The code was read in full through the ecode360 print view (GR4098). The Township also posts the Application for Continued Certificate of Occupancy (scanned 2022 form; fee lines blank) and a December 2025 list of common housing inspection violations that requires County water and septic certifications and a Bridgeton fire inspection report. The 'Fee Schedule 2023' section on the Planning Documents page is still empty. The Uniform Construction Code fee schedule in Township Code 5-1.2 separately lists 'Certificate of Continued Occupancy. Residential: $35'; that is a construction office fee, so confirm with the Zoning Officer whether only the $50.00 applies. Township Code 5-1.1 names Hopewell Township (Cumberland) as the construction enforcing agency, while the Township directory last listed the Upper Deerfield Construction Office (856-455-9591). Vacant and abandoned properties must be registered (12-3); that is not a resale item."
  },
  "fire_cert": {
   "requirements": [
@@ -137,6 +165,13 @@
     "contact_title": "Fire Official and Chief of Department",
     "evidence": [
      {
+      "url": "https://ecode360.com/36607478",
+      "quote": "Smoke detectors and carbon monoxide alarms shall be inspected by the Bridgeton Fire Prevention Bureau or its representative of the City of Bridgeton, and Certificates of Approval with respect to the operation thereof shall be issued by the same under the subject Shared Services Agreement.",
+      "doc_date": "Township Code 6-1.8c (Ord. No. 2013-9)",
+      "via": "page",
+      "verified": true
+     },
+     {
       "url": "http://www.bridgetonfire.com/uniform-fire-code",
       "quote": "The City of Bridgeton Fire Department is the local enforcing agency who is responsible for the enforcement of the Uniform Fire Safety Act within the City of Bridgeton, Hopewell Township, Greenwich Township, Stow Creek Township, Shiloh Borough, Fairfield Township, Downe Township, and Alloway Township.",
       "doc_date": "2026-09-30 (page fetched)",
@@ -145,7 +180,7 @@
      },
      {
       "url": "https://static1.squarespace.com/static/51cc4632e4b06e55251db119/t/691f23865714647f5f7c666a/1763648390990/Occupancy+%26+Smoke+Certificates.pdf",
-      "quote": "Residential, Resale and New Occupant requirements for one- & two-family dwellings. All requests must be submitted 2-3 weeks before the settlement date via the form on bridgetonfire.com.",
+      "quote": "All requests must be submitted 2-3 weeks before the settlement date via the form on bridgetonfire.com.",
       "doc_date": "2025-11-20 (PDF created)",
       "via": "pdf",
       "verified": true
@@ -204,7 +239,7 @@
       "quote": "Email justicej@cityofbridgeton.com",
       "doc_date": "2026 (directory)",
       "via": "state_directory",
-      "verified": true
+      "verified": null
      },
      {
       "url": "https://www.historicgreenwichnj.org/planning-documents/",
@@ -253,13 +288,13 @@
       "quote": "LEAID: 0606-001 Enf Auth. Fire Dept Fire Official Jack Justice, Jr. Phone (856) 451-0091 Addr: 181 East Commerce Street Bridgeton NJ 08302 ... Email firedepartment@cityofbridgeton.com ... SSA with Bridgeton City",
       "doc_date": "2026-05 (survey date 5/18/2026)",
       "via": "state_directory",
-      "verified": true
+      "verified": null
      }
     ],
     "confidence": "high"
    }
   ],
-  "notes": "The Township's Planning Documents page says the City of Bridgeton Fire Department's Fire Marshal's Office does the smoke/CO certification inspections for Greenwich, and the Bridgeton online application lists Greenwich Township. The Township directory names Brittany Snyder of the Bridgeton Fire Marshal's Office as Greenwich's Fire Marshal; she is listed in the Bridgeton Bureau of Fire Prevention with the email snyderb@cityofbridgeton.com (linked from her name on the Bridgeton Department page). Jack Justice Jr. is the appointed Fire Official. Fees, lead time and 90-day validity come from the Bridgeton Bureau's guideline sheet (created November 20, 2025)."
+  "notes": "The Township's Planning Documents page says the City of Bridgeton Fire Department's Fire Marshal's Office does the smoke/CO certification inspections for Greenwich, and the Bridgeton online application lists Greenwich Township. The Township directory names Brittany Snyder of the Bridgeton Fire Marshal's Office as Greenwich's Fire Marshal; she is listed in the Bridgeton Bureau of Fire Prevention with the email snyderb@cityofbridgeton.com (linked from her name on the Bridgeton Department page). Jack Justice Jr. is the appointed Fire Official. Fees, lead time and 90-day validity come from the Bridgeton Bureau's guideline sheet (created November 20, 2025). Township Code 6-1.8c confirms the Bridgeton Fire Prevention Bureau inspects and issues the smoke/CO certificates under the shared services agreement, with the fee per the current City of Bridgeton ordinance."
  },
  "other_items": [
   {
@@ -279,17 +314,19 @@
   }
  ],
  "open_questions": [
-  "Is the Continued Certificate of Occupancy required on every 1-2 family sale (Township Code GR4098 could not be read)?",
-  "CCO inspection and re-inspection fees, lead time and validity."
+  "Is the CCO fee just the $50.00 in Township Code 12-2.3, or is the $35 construction CCO fee (5-1.2) also charged? Is there a re-inspection fee?",
+  "Lead time and validity of the CCO.",
+  "Which construction office now serves Greenwich (Township Code 5-1.1 names Hopewell Township; the directory listed Upper Deerfield)?"
  ],
+ "checked_at": "2026-11-03",
  "verification": {
-  "fees": 3,
-  "fee_ok": 3,
+  "fees": 4,
+  "fee_ok": 4,
   "fee_bad": 0,
   "fee_unchecked": 0,
-  "quotes": 24,
-  "q_ok": 22,
+  "quotes": 28,
+  "q_ok": 24,
   "q_bad": 0,
-  "q_unchecked": 2
+  "q_unchecked": 4
  }
 }

@@ -2,7 +2,7 @@
  "municipality_code": "1714",
  "municipality": "Upper Pittsgrove Township",
  "county": "SALEM",
- "checked_at": "2026-10-06",
+ "checked_at": "2026-11-03",
  "resale_co": {
   "status": "required",
   "name": "Certificate of Compliance (COC), also called Certificate of Occupancy; Pre-Occupancy Inspection for sales",
@@ -40,18 +40,46 @@
     "verified": true
    }
   ],
-  "how_to_apply": "Fill in the Upper Pittsgrove Township Pre-Occupancy Application, SALES Only (revised 03/30/2026) and mail it with a check payable to Upper Pittsgrove Township to the Township Housing Office, or leave it in the drop box at the Municipal Building, 431 Route 77, Elmer. The Smoke/CO certificate is a separate $25 application to the Bureau of Fire Prevention. Zoning Office hours are Tuesday 10 a.m. to 11:30 a.m.",
+  "how_to_apply": "Fill in the Upper Pittsgrove Township Pre-Occupancy Application, SALES Only (revised 03/30/2026) and mail it with a check payable to Upper Pittsgrove Township to the Township Housing Office, or bring it to the Municipal Building, 431 Route 77, Elmer. The Smoke/CO alarms inspection is a separate $25.00 application to the Bureau of Fire Prevention. Zoning Office hours are now Wednesday 10 a.m. to 12 p.m.",
   "application_url": "https://upperpittsgrovenj.org/wp-content/uploads/2026/03/Pre-Occupancy-SALES-Application.pdf",
   "department_url": "https://upperpittsgrovenj.org/zoning-and-construction/",
   "phone": "856-358-8500",
   "email": "zoningofficer@upperpittsgrovenj.org",
-  "contact_name": "Tanya Timberman",
+  "contact_name": "Andy Hoglen",
   "contact_title": "Zoning & Housing Official",
   "evidence": [
    {
     "url": "https://upperpittsgrovenj.org/zoning-and-construction/",
     "quote": "UPT ordinance requires a COC (Certificate of Compliance) on residential or commercial rental properties whenever occupants change; therefore, a new COC is also required prior to the sale of a property.",
-    "doc_date": "2026-09-30 (page fetched)",
+    "doc_date": "2026-11-03 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://upperpittsgrovenj.org/zoning-and-construction/",
+    "quote": "Certificate of Compliance Application $25 fee",
+    "doc_date": "2026-11-03 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://upperpittsgrovenj.org/zoning-and-construction/",
+    "quote": "Zoning Office Hours Wednesday 10 a.m.-12 p.m.",
+    "doc_date": "2026-11-03 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://upperpittsgrovenj.org/zoning-and-construction/",
+    "quote": "Zoning & Housing Official Andy Hoglen",
+    "doc_date": "2026-11-03 (page fetched; email decoded from the page's Cloudflare email protection)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://upperpittsgrovenj.org/zoning-and-construction/",
+    "quote": "(T) 856-358-8500 (F) 856-358-1160",
+    "doc_date": "2026-11-03 (page fetched)",
     "via": "page",
     "verified": true
    },
@@ -64,69 +92,62 @@
    },
    {
     "url": "https://upperpittsgrovenj.org/wp-content/uploads/2026/03/Pre-Occupancy-SALES-Application.pdf",
-    "quote": "To assure Upper Pittsgrove Township Housing Department that Ordinance 2005-7 is in compliance, the above information must be submitted to this department prior to issuance of the \"Certificate of Occupancy\".",
+    "quote": "To assure Upper Pittsgrove Township Housing Department that Ordinance 2005-7 is in compliance, the above information must be submitted to this department prior to issuance of the “Certificate of Occupancy”.",
     "doc_date": "2026-03-30",
     "via": "pdf",
     "verified": true
    },
    {
-    "url": "https://upperpittsgrovenj.org/zoning-and-construction/",
-    "quote": "Zoning Office Hours Tuesday 10 a.m.-11:30 a.m. Zoning Office Address 431 Route 77 Elmer, NJ 08318 Zoning Office Contact (T) 856-358-8500 (F) 856-358-1160 Zoning & Housing Official Tanya Timberman",
-    "doc_date": "2026-09-30 (page fetched; email decoded from the page's Cloudflare email protection)",
-    "via": "page",
-    "verified": true
-   },
-   {
     "url": "https://upperpittsgrovenj.org/wp-content/uploads/2026/03/CO-Inspection-Checklist.pdf",
-    "quote": "Upper Pittsgrove Township Certificate of Occupancy ~ Inspection Checklist",
+    "quote": "Certificate of Occupancy ~ Inspection Checklist",
     "doc_date": "2026-03 (upload folder)",
     "via": "pdf",
     "verified": true
    }
   ],
   "confidence": "high",
-  "notes": "The Township Zoning and Construction page says a new Certificate of Compliance (also called a Certificate of Occupancy) is required before the sale of a property, and posts a Pre-Occupancy Application for sales (revised 03/30/2026): $25 inspection and $25 re-inspection if needed, check payable to Upper Pittsgrove Township, with the CO issued in the buyer's name. The sales form says to mail it to \"Upper Pittsgrove Township Housing Office 431 Route 40 Elmer, NJ 08313\", while the Township office is at 431 Route 77, Elmer, NJ 08318; confirm the mailing address. No lead time or validity period is published. The Zoning & Housing Official email zoningofficer@upperpittsgrovenj.org was decoded from the page's Cloudflare email protection. Building permits are handled by the Pittsgrove Township Construction Office (Chuck Hughes, Construction Officer). Rentals also need a COC on every change of occupant, a landlord registration and, for homes built before 1979, a lead-safe certificate."
+  "notes": "The Township Zoning and Construction page says a new Certificate of Compliance (also called a Certificate of Occupancy) is required before the sale of a property, and posts a Pre-Occupancy Application for sales (revised 03/30/2026): $25 inspection and $25 re-inspection if needed, check payable to Upper Pittsgrove Township, with the CO issued in the buyer's name. Changed since the last check: the Zoning & Housing Official listed on the page is now Andy Hoglen (was Tanya Timberman), and Zoning Office hours are now Wednesday 10 a.m. to 12 p.m. (were Tuesday 10 a.m. to 11:30 a.m.). The CO Inspection Checklist PDF still prints \"Housing Official: Tanya Timberman\". The email zoningofficer@upperpittsgrovenj.org is the one linked under Andy Hoglen (decoded from the page's Cloudflare email protection); Zoning Secretary Linda Stephens is linked to clerk@upperpittsgrovenj.org. The sales form says to mail it to \"Upper Pittsgrove Township Housing Office 431 Route 40 Elmer, NJ 08313\", while the Township office is at 431 Route 77, Elmer, NJ 08318; confirm the mailing address. No lead time or validity period is published. Building permits are handled by the Pittsgrove Township Construction Office (Chuck Hughes, Construction Officer). Rentals also need a COC on every change of occupant, a landlord registration and, for homes built before 1979, a lead-safe certificate; those are rental items, not resale items."
  },
  "fire_cert": {
   "requirements": [
-   "10-year sealed battery smoke alarms on every level (or hardwired where required); basement alarm at the bottom of the stairwell at ceiling level",
-   "A 10-year sealed smoke alarm in every bedroom (Township rule); hardwired alarms cannot be replaced with battery alarms",
-   "Smoke and CO alarms must be less than 10 years old and working",
-   "CO alarm in the hallway within 10 feet of all bedrooms",
-   "A low-voltage fire alarm system must be tested and certified by an alarm contractor before the inspection; bring the certificate",
+   "10-year sealed battery alarms or hardwired alarms on every level of the dwelling; an alarm at the bottom of the basement stairwell at ceiling level",
+   "Alarms in the hallways within 10 feet of all bedrooms, and a smoke alarm in every bedroom",
+   "Smoke and CO alarms must be UL listed, less than 10 years old, working and installed per the maker's instructions; plug-in, battery or hardwired alarms are allowed, but hardwired alarms cannot be replaced with battery alarms",
+   "Do not plug alarms into switched outlets or outlets at the floor molding",
+   "A low-voltage fire alarm system must be tested and approved by an alarm contractor before the inspection; show the alarm certification to the inspector",
    "House numbers at least 4 inches high, contrasting color, permanently fixed and visible from the street",
-   "Homes with solar, a generator or battery storage need a permanent printed label (for example \"Caution: Multiple Sources of Power\") at the main electrical panel and the electric meter",
-   "The Township CO checklist still lists a fire extinguisher mounted in the kitchen"
+   "Homes with solar, a generator or battery storage need a permanent printed label (wording like \"Caution: Multiple Sources of Power\") at the main electrical panel and the electric meter",
+   "The Township Housing CO checklist (separate from this form) still lists a fire extinguisher mounted in the kitchen"
   ],
   "authorities": [
    {
     "name": "Township of Upper Pittsgrove Bureau of Fire Prevention",
     "type": "municipal_fire_bureau",
     "area_served": "Entire township",
-    "lead_time": "Payment must be received before the inspection.",
+    "lead_time": "Payment is due at the time of the inspection. No lead time or validity period is published.",
     "fees": [
      {
-      "label": "Certificate of Smoke/Carbon Monoxide Detector Compliance inspection",
+      "label": "Smoke and carbon monoxide alarms inspection application",
       "amount": "$25.00",
-      "quote": "Current Fee - $25.00",
-      "source_url": "https://upperpittsgrovenj.org/wp-content/uploads/2026/04/Smoke-and-CO-Application-Guidelines.pdf",
+      "quote": "Application Fee: $25.00*",
+      "source_url": "https://upperpittsgrovenj.org/wp-content/uploads/2026/10/Alarms-Inspection-Application-and-Guidelines.pdf",
       "verified": true
      },
      {
       "label": "Re-inspection for a failed or no-show inspection (same as the initial inspection fee)",
       "amount": "$25.00",
-      "quote": "Fee for Inspection - $25.00 ... *Re-inspection for failed or no-show inspections shall be the same fee scheduled as initial inspection. *",
-      "source_url": "https://upperpittsgrovenj.org/wp-content/uploads/2026/04/Smoke-and-CO-Application-Guidelines.pdf",
+      "quote": "*Re-inspection for failed or no-show inspections shall be the same fee scheduled as the initial inspection.",
+      "source_url": "https://upperpittsgrovenj.org/wp-content/uploads/2026/10/Alarms-Inspection-Application-and-Guidelines.pdf",
       "verified": true
      }
     ],
-    "how_to_apply": "Fill in the Township Certificate of Smoke/Carbon Monoxide Detector Compliance application and pay $25.00 by check or money order payable to the Upper Pittsgrove Bureau of Fire Prevention before the inspection. Questions go to upperpittsgrovefm@outlook.com or 856-358-8500.",
-    "application_url": "https://upperpittsgrovenj.org/wp-content/uploads/2026/04/Smoke-and-CO-Application-Guidelines.pdf",
+    "how_to_apply": "Fill in the Township Bureau of Fire Prevention Smoke and Carbon Monoxide Alarms Inspection Application (revised 2026, posted October 2026) with the owner, applicant and realtor details. Pay $25.00 at the time of the inspection by exact cash, check or money order payable to Upper Pittsgrove Township Bureau of Fire Prevention. Questions go to upperpittsgrovefm@outlook.com or 856-358-8500.",
+    "application_url": "https://upperpittsgrovenj.org/wp-content/uploads/2026/10/Alarms-Inspection-Application-and-Guidelines.pdf",
     "department_url": "https://upperpittsgrovenj.org/zoning-and-construction/",
     "phone": "856-358-8500",
     "email": "upperpittsgrovefm@outlook.com",
     "contact_name": "Tim O'Donnell",
-    "contact_title": "Fire & Safety Official and Smoke Detectors Inspector (Fire Official in the state fire directory)",
+    "contact_title": "Smoke/CO Alarms Inspector on the Township page; Fire & Safety Official (Fire Official in the state fire directory)",
     "evidence": [
      {
       "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
@@ -136,45 +157,66 @@
       "verified": true
      },
      {
-      "url": "https://upperpittsgrovenj.org/wp-content/uploads/2026/04/Smoke-and-CO-Application-Guidelines.pdf",
-      "quote": "Township of Upper Pittsgrove Bureau of Fire Prevention 431 Route 77 Elmer, NJ 08318 ... Certificate of Smoke/Carbon Monoxide Detector Compliance (as required by N.J.A.C. 5:70-2.3)",
-      "doc_date": "2026-04 (upload folder)",
+      "url": "https://upperpittsgrovenj.org/wp-content/uploads/2026/10/Alarms-Inspection-Application-and-Guidelines.pdf",
+      "quote": "SMOKE AND CARBON MONOXIDE ALARMS INSPECTION APPLICATION",
+      "doc_date": "2026-10-28 (PDF created; form says Revised 2026)",
       "via": "pdf",
       "verified": true
      },
      {
-      "url": "https://upperpittsgrovenj.org/wp-content/uploads/2026/04/Smoke-and-CO-Application-Guidelines.pdf",
-      "quote": "Payment must be made in the form of check or money order made payable to Upper Pittsgrove Bureau of Fire Prevention and must be received prior to the inspection.",
-      "doc_date": "2026-04",
+      "url": "https://upperpittsgrovenj.org/wp-content/uploads/2026/10/Alarms-Inspection-Application-and-Guidelines.pdf",
+      "quote": "Residential, Resale, and New-Occupant Requirements for One- and Two-Family Dwellings",
+      "doc_date": "2026-10-28",
       "via": "pdf",
       "verified": true
      },
      {
-      "url": "https://upperpittsgrovenj.org/wp-content/uploads/2026/04/Smoke-and-CO-Application-Guidelines.pdf",
-      "quote": "For any questions, please email upperpittsgrovefm@outlook.com or call the office at 856-358-8500.",
-      "doc_date": "2026-04",
+      "url": "https://upperpittsgrovenj.org/wp-content/uploads/2026/10/Alarms-Inspection-Application-and-Guidelines.pdf",
+      "quote": "Payment is due at the time of the inspection via exact cash, check, or money order made payable to",
+      "doc_date": "2026-10-28",
       "via": "pdf",
       "verified": true
      },
      {
-      "url": "https://upperpittsgrovenj.org/wp-content/uploads/2026/03/Pre-Occupancy-SALES-Application.pdf",
-      "quote": "Smoke Detector / Carbon Monoxide Inspection Fee = $25 See Separate Form for Details",
-      "doc_date": "2026-03-30",
+      "url": "https://upperpittsgrovenj.org/wp-content/uploads/2026/10/Alarms-Inspection-Application-and-Guidelines.pdf",
+      "quote": "856-358-8500 ~ upperpittsgrovefm@outlook.com",
+      "doc_date": "2026-10-28",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://upperpittsgrovenj.org/wp-content/uploads/2026/10/Alarms-Inspection-Application-and-Guidelines.pdf",
+      "quote": "A smoke alarm is in EVERY bedroom.",
+      "doc_date": "2026-10-28",
       "via": "pdf",
       "verified": true
      },
      {
       "url": "https://upperpittsgrovenj.org/zoning-and-construction/",
-      "quote": "Smoke Detectors Inspector Tim O'Donnell",
-      "doc_date": "2026-09-30 (page fetched; email decoded from the page's Cloudflare email protection)",
+      "quote": "Smoke/Carbon Monoxide Detector Inspection Application and Guidelines",
+      "doc_date": "2026-11-03 (page fetched)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://upperpittsgrovenj.org/zoning-and-construction/",
+      "quote": "Smoke/CO Alarms Inspector Tim O’Donnell",
+      "doc_date": "2026-11-03 (page fetched; email decoded from the page's Cloudflare email protection)",
       "via": "page",
       "verified": true
      },
      {
       "url": "https://upperpittsgrovenj.org/emergency-services/",
-      "quote": "Fire & Safety Official Tim O'Donnell",
-      "doc_date": "2026-09-30 (page fetched)",
+      "quote": "Fire & Safety Official Tim O’Donnell",
+      "doc_date": "2026-11-03 (page fetched)",
       "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://upperpittsgrovenj.org/wp-content/uploads/2026/03/Pre-Occupancy-SALES-Application.pdf",
+      "quote": "Smoke Detector / Carbon Monoxide Inspection Fee = $25",
+      "doc_date": "2026-03-30",
+      "via": "pdf",
       "verified": true
      },
      {
@@ -182,13 +224,13 @@
       "quote": "LEAID: 1714-001 Enf Auth. Municipal Fire Official Timothy J O'Donnell Phone (856) 358-8500 Addr: 431 Rte 77 Elmer NJ 08318 ... Upper Pittsgrove Twp",
       "doc_date": "2026-05 (survey date 5/18/2026; directory code 1714)",
       "via": "state_directory",
-      "verified": true
+      "verified": null
      }
     ],
     "confidence": "high"
    }
   ],
-  "notes": "Upper Pittsgrove enforces the fire code locally (LEA registry code M). The Township Bureau of Fire Prevention runs its own Certificate of Smoke/Carbon Monoxide Detector Compliance ($25.00, form posted April 2026), and the state fire directory (listed there as Upper Pittsgrove Township 1714) names Fire Official Timothy J O'Donnell at (856) 358-8500 with Upper Pittsgrove Twp for smoke detector compliance; the directory's email for him is cut off, so the Bureau email printed on the Township form (upperpittsgrovefm@outlook.com, also on the Township website) is used. The form header prints the email without the @ sign; page 2 prints it in full. The Bureau form covers smoke alarms, CO alarms and the secondary power source label and does not list a fire extinguisher, matching the 2025 state change (P.L.2025, c.19), but the Township Housing CO checklist still lists a fire extinguisher mounted in the kitchen."
+  "notes": "Upper Pittsgrove enforces the fire code locally (LEA registry code M). The old April 2026 smoke/CO guidelines PDF (Smoke-and-CO-Application-Guidelines.pdf) now returns not found. The Zoning and Construction page now links a new Bureau of Fire Prevention form, \"Smoke and Carbon Monoxide Alarms Inspection Application\" (PDF created October 28, 2026, marked Revised 2026). The fee is unchanged at $25.00 with the same fee for a re-inspection after a failed or no-show inspection. What changed: payment is now due at the time of the inspection (the old form said it had to be received before the inspection), and exact cash is now accepted along with check or money order, payable to Upper Pittsgrove Township Bureau of Fire Prevention. The state fire directory (survey 5/18/2026) names Fire Official Timothy J O'Donnell at (856) 358-8500; the Township page lists him as Smoke/CO Alarms Inspector with the email upperpittsgrovefm@outlook.com. The new Bureau form does not list a fire extinguisher, matching the 2025 state change (P.L.2025, c.19), but the Township Housing CO checklist still lists a fire extinguisher mounted in the kitchen."
  },
  "other_items": [
   {
@@ -204,15 +246,16 @@
  ],
  "open_questions": [
   "What is the correct mailing address for the sales application (the form prints 431 Route 40, Elmer 08313; the office is 431 Route 77, Elmer 08318)?",
-  "How far before closing should the pre-occupancy and smoke/CO inspections be booked, and how long are the certificates valid?"
+  "How far before closing should the pre-occupancy and smoke/CO inspections be booked, and how long are the certificates valid?",
+  "Does the Housing CO inspection still check for a kitchen fire extinguisher (the checklist lists one) now that the state dropped it from the sale certificate?"
  ],
  "verification": {
   "fees": 4,
   "fee_ok": 4,
   "fee_bad": 0,
   "fee_unchecked": 0,
-  "quotes": 13,
-  "q_ok": 12,
+  "quotes": 19,
+  "q_ok": 18,
   "q_bad": 0,
   "q_unchecked": 1
  }

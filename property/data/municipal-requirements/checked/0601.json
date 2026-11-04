@@ -2,12 +2,11 @@
  "municipality_code": "0601",
  "municipality": "Bridgeton",
  "county": "CUMBERLAND",
- "checked_at": "2026-09-30",
  "resale_co": {
   "status": "required",
   "name": "Resale Certificate of Property Compliance (CPC)",
   "issued_by": "Department of Housing, Code Enforcement & Rent Leveling (Code Enforcement Office)",
-  "lead_time": "",
+  "lead_time": "The fee depends on how early the request is received: more than 10 business days before closing for the lowest fee. Request the inspection before the date of sale.",
   "valid_for": "",
   "requirements": [
    "Inspection under the 2015 International Property Maintenance Code (the City's checklist is a general guide, not a full list)",
@@ -25,17 +24,31 @@
   ],
   "fees": [
    {
-    "label": "Certificate of Property Compliance, first inspection (fee listed on the Housing page for the Certificate of Property Compliance; the page does not say whether it covers sale CPCs as well as rental CPCs)",
+    "label": "Resale Certificate of Property Compliance / inspection, request received more than 10 business days before closing (City Code 149-20A(1))",
     "amount": "$35",
-    "quote": "** Effective July 14th, 2025, the fees for Certificate of Property Compliance will be as follows: First Inspection $35 Re-inspections $18",
-    "source_url": "https://www.cityofbridgetonnj.gov/187/Housing-Code-Enforcement-Rent-Leveling",
+    "quote": "Requests for a certificate of property compliance/inspection received more than 10 business days prior to the closing date: $35.",
+    "source_url": "https://ecode360.com/6903833",
     "verified": true
    },
    {
-    "label": "Certificate of Property Compliance, each re-inspection (same note as above)",
-    "amount": "$18",
-    "quote": "** Effective July 14th, 2025, the fees for Certificate of Property Compliance will be as follows: First Inspection $35 Re-inspections $18",
-    "source_url": "https://www.cityofbridgetonnj.gov/187/Housing-Code-Enforcement-Rent-Leveling",
+    "label": "Request received 4 to 10 business days before closing (City Code 149-20A(2))",
+    "amount": "$70",
+    "quote": "Requests for a certificate of property compliance/inspection received four to 10 business days prior to the closing date: $70.",
+    "source_url": "https://ecode360.com/6903833",
+    "verified": true
+   },
+   {
+    "label": "Request received fewer than 4 business days before closing (City Code 149-20A(3))",
+    "amount": "$125",
+    "quote": "Requests for a certificate of property compliance/inspection received fewer than four business days prior to the closing date: $125.",
+    "source_url": "https://ecode360.com/6903833",
+    "verified": true
+   },
+   {
+    "label": "Each additional re-inspection (one re-inspection is included in the base fee)",
+    "amount": "$40",
+    "quote": "One reinspection is included in the base fee. Each additional reinspection: $40.",
+    "source_url": "https://ecode360.com/6903833",
     "verified": true
    }
   ],
@@ -58,6 +71,41 @@
     "url": "https://www.cityofbridgetonnj.gov/187/Housing-Code-Enforcement-Rent-Leveling",
     "quote": "the Code Enforcement Office also handles the registration of rental units, home sales, vacant or abandoned property, and follow-up on property maintenance complaints.",
     "doc_date": "2026-09-30",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://ecode360.com/31436751",
+    "quote": "No owner or agent thereof shall hereafter sell or convey, whether legal or equitable title, any dwelling or dwelling unit, or premises, except vacant land, unless prior to such sale or conveyance a certificate of inspection/certificate of property compliance has been obtained from the Code Enforcement Officer.",
+    "doc_date": "Amended 10-3-2023 by Ord. No. 23-35; 5-21-2024 by Ord. No. 24-11",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://ecode360.com/31436751",
+    "quote": "The owner, buyer, or agent shall request an inspection prior to the date of sale and shall ensure that the dwelling is accessible for the inspection.",
+    "doc_date": "Amended 5-21-2024 by Ord. No. 24-11",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://ecode360.com/31436751",
+    "quote": "If, at the time of inspection, the property does not meet all the requirements necessary to obtain a certificate of property compliance and the dwelling unit is unoccupied, a certificate of inspection may be issued in lieu of the certificate of property compliance if applicable provisions for the certificate of inspection have been satisfied.",
+    "doc_date": "Amended 5-21-2024 by Ord. No. 24-11",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://ecode360.com/6903833",
+    "quote": "Residential property sales and residential rental property sales certificate of inspection or certificate of property compliance fee under §265-32 shall be as follows:",
+    "doc_date": "Amended through 6-17-2025 by Ord. No. 25-10",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://ecode360.com/46784552",
+    "quote": "The per inspection fee for an initial inspection of a rental unit to obtain a Certificate of Property Compliance shall be $35.",
+    "doc_date": "Amended 6-17-2025 by Ord. No. 25-10",
     "via": "page",
     "verified": true
    },
@@ -104,8 +152,8 @@
     "verified": true
    }
   ],
-  "confidence": "medium",
-  "notes": "The City's Housing page says a resale Certificate of Property Compliance (CPC) must be filed with the Code Enforcement Office on the sale of any property, and the CPC application has a 'Seller' / 'SALE APPLICATION' box. The only published CPC fee is the Housing page note 'Effective July 14th, 2025 ... First Inspection $35, Re-inspections $18'; the same page says rental CPC fees are covered by the annual rental registration, so the $35 fee most likely applies to sales, but the page does not say so outright. Web search summaries of the City Code on ecode360 (BR1941) mentioned other resale fee amounts, but the code could not be opened and no exact text was seen, so those amounts are not used. No lead time or validity period is published. The CPC application's second page describes the State lead-safe inspection law (P.L.2021, c.182) and lead inspection fees for rental units; that is a rental requirement. Rental registration ($45 per unit by March 1, $75 after) is a rental program, not a resale item."
+  "confidence": "high",
+  "notes": "City Code Chapter 265, Article V (Sale of Residential Property, 265-32) says no dwelling may be sold or conveyed unless a certificate of inspection or certificate of property compliance has first been obtained from the Code Enforcement Officer, and after a sale no one may occupy the home without a certificate of property compliance. If an unoccupied home fails, a certificate of inspection may be issued instead. Resale fees are in City Code 149-20A, tiered by business days before closing ($35 / $70 / $125, one re-inspection included, $40 for each extra re-inspection). The code text (Chapters 149 and 265) was read in full through the ecode360 print view. The Housing page note 'Effective July 14th, 2025 ... First Inspection $35, Re-inspections $18' matches City Code 149-20F, which covers rental units only (Ord. 25-10, June 17, 2025), so it is not used as the resale fee. Under 265-32C, real estate agents are treated as the owner's agent and can be charged if the certificate is not obtained. The CPC application's second page describes the State lead-safe inspection law (P.L.2021, c.182) for rental units; that is a rental requirement. Rental registration ($45 per year by March 1, $75 after) is a rental program. City Code 149-34 also lists 'certificate of property compliance' fees ($120 per residential unit) in the Uniform Construction Code fee schedule; those are construction certificates, not the resale CPC."
  },
  "fire_cert": {
   "requirements": [
@@ -164,7 +212,7 @@
      },
      {
       "url": "https://static1.squarespace.com/static/51cc4632e4b06e55251db119/t/691f23865714647f5f7c666a/1763648390990/Occupancy+%26+Smoke+Certificates.pdf",
-      "quote": "Residential, Resale and New Occupant requirements for one- & two-family dwellings. All requests must be submitted 2-3 weeks before the settlement date via the form on bridgetonfire.com.",
+      "quote": "All requests must be submitted 2-3 weeks before the settlement date via the form on bridgetonfire.com.",
       "doc_date": "2025-11-20 (PDF created)",
       "via": "pdf",
       "verified": true
@@ -223,7 +271,7 @@
       "quote": "Email justicej@cityofbridgeton.com",
       "doc_date": "2026 (directory)",
       "via": "state_directory",
-      "verified": true
+      "verified": null
      },
      {
       "url": "http://www.bridgetonfire.com/department",
@@ -244,28 +292,35 @@
       "quote": "LEAID: 0601-001 Enf Auth. Fire Dept Fire Official Jack Justice, Jr. Phone (856) 451-0091 Addr: 181 E Commerce St ... Email firedepartment@cityofbridgeton.com",
       "doc_date": "2026-01 (survey date 1/12/2026)",
       "via": "state_directory",
-      "verified": true
+      "verified": null
      }
     ],
     "confidence": "high"
    }
   ],
-  "notes": "The City of Bridgeton Fire Department (registry code F) is the local fire enforcing agency and issues the resale smoke/CO certificate through its Bureau of Fire Prevention at 1 Orange Street. Fees, lead time and the 90-day validity come from the Bureau's 'Occupancy & Smoke Certificates' guideline sheet (created November 20, 2025) and match the online application form. The guideline sheet does not list a fire extinguisher (in line with P.L.2025, c.19) but does require 10-year sealed battery alarms and the secondary power source label. The middle fee tier is printed as '7 business days prior'; the gap between 4 and 10 days is not spelled out. Jack Justice Jr.'s email (justicej@cityofbridgeton.com) is linked from his name on the Department page and printed in the state fire directory; the Bureau's general address is firedepartment@cityofbridgeton.com."
+  "notes": "The City of Bridgeton Fire Department (registry code F) is the local fire enforcing agency and issues the resale smoke/CO certificate through its Bureau of Fire Prevention at 1 Orange Street. Fees, lead time and the 90-day validity come from the Bureau's 'Occupancy & Smoke Certificates' guideline sheet (created November 20, 2025) and match the online application form. The guideline sheet does not list a fire extinguisher (in line with P.L.2025, c.19) but does require 10-year sealed battery alarms and the secondary power source label. The middle fee tier is printed as '7 business days prior'; the gap between 4 and 10 days is not spelled out. Jack Justice Jr.'s email (justicej@cityofbridgeton.com) is linked from his name on the Department page and printed in the state fire directory; the Bureau's general address is firedepartment@cityofbridgeton.com. City Code 149-15A also lists a $30 annual fire registration fee for 'R-A non-owner-occupied 1 and 2 units', which is inspected and charged only upon sale or change of tenant; this applies to non-owner-occupied (rental) homes and is separate from the smoke/CO certificate."
  },
- "other_items": [],
- "open_questions": [
-  "Does the $35 first inspection / $18 re-inspection Certificate of Property Compliance fee (effective July 14, 2025) apply to resale CPCs, and are there rush tiers by days before closing?",
-  "How far before closing should the resale CPC be filed, and how long is it valid?",
-  "Does the City require a water/sewer final reading or any other sign-off for a sale? Nothing was published on the Water & Sewer page."
+ "other_items": [
+  {
+   "label": "Final water meter reading",
+   "detail": "The City charges for a final meter reading by how early it is requested: $35 more than 10 business days before closing, $70 for 4 to 10 business days, $125 for fewer than 4 business days (City Code 149-35H). The fee is paid with the final water bill.",
+   "source_url": "https://ecode360.com/31436418"
+  }
  ],
+ "open_questions": [
+  "How long is the resale Certificate of Property Compliance valid after it is issued?",
+  "Is the Housing Office's posted $35 / $18 CPC fee (effective July 14, 2025) charged for sales, or only for rentals as City Code 149-20F says?",
+  "Does the resale inspection still check for a fire extinguisher (it is on the 2021 checklist)?"
+ ],
+ "checked_at": "2026-11-03",
  "verification": {
-  "fees": 5,
-  "fee_ok": 5,
+  "fees": 7,
+  "fee_ok": 7,
   "fee_bad": 0,
   "fee_unchecked": 0,
-  "quotes": 21,
-  "q_ok": 21,
+  "quotes": 26,
+  "q_ok": 24,
   "q_bad": 0,
-  "q_unchecked": 0
+  "q_unchecked": 2
  }
 }

@@ -2,16 +2,17 @@
  "municipality_code": "0233",
  "municipality": "Mahwah Township",
  "county": "BERGEN",
- "checked_at": "2026-10-04",
+ "checked_at": "2026-11-03",
  "resale_co": {
   "status": "required",
-  "name": "Certificate of Continued Occupancy (CCO), residential, selling a home",
+  "name": "Certificate of Continued Occupancy (CCO), now called Inspection Prior to Sale (IPS) on Township pages",
   "issued_by": "Township of Mahwah Building Department (Construction Code Official)",
   "lead_time": "The code says CCOs are issued or denied within 10 days of filing the application. The code also requires the CCO before the property is listed.",
   "valid_for": "One year from the date of issuance, provided there is no material change in the physical status of the premises",
   "requirements": [
    "Required for one- and two-family dwellings before the property is listed, and on transfer of title (homes with 3 or more units are exempt)",
-   "Visual inspection by the Construction Code Official, who may call in subcode officials, the Water Department and the Department of Health",
+   "Visual inspection only (per the Inspection Prior to Sale form) by the Construction Code Official, who may call in subcode officials, the Water Department and the Department of Health",
+   "Check with the Health Department before applying that there are no septic system, cesspool or well tank issues",
    "Inspection covers items such as pools, electric fixtures and wiring, plumbing fixtures and water heaters, heating and ventilation, the building exterior and other hazards",
    "Any additions or construction done without permits must have permit fees paid before the CCO is issued",
    "Separate smoke/CO certificate from Fire Prevention (not part of the CCO inspection)",
@@ -19,15 +20,15 @@
   ],
   "fees": [
    {
-    "label": "Certificate of Continued Occupancy, residential (selling a home)",
+    "label": "Inspection Prior to Sale (CCO), residential",
     "amount": "$175",
-    "quote": "A fee of $175 shall be charged for each certificate of continued occupancy in accordance with §10-1.3b of the Township Code.",
-    "source_url": "https://ecode360.com/49703411",
-    "verified": null
+    "quote": "Fee: $175",
+    "source_url": "https://www.mahwahtwp.org/DocumentCenter/View/9597/CCO-4-Inspection-Prior-to-Sale",
+    "verified": true
    }
   ],
-  "how_to_apply": "Apply on the Township's CCO form through the Building Department (Department of Inspections), 475 Corporate Drive, 201-529-5757. The CCO form itself was not found online; call the Building Department for it.",
-  "application_url": "",
+  "how_to_apply": "Fill in the Township's Inspection Prior to Sale form (owner, block and lot, realtor, phone, email) and return it with the $175 fee (check, e-check or charge) to the Building Department (Department of Inspections), 475 Corporate Drive, Mahwah, 201-529-5757. Check with the Health Department first that there are no septic, cesspool or well tank issues. The inspection is visual only.",
+  "application_url": "https://www.mahwahtwp.org/DocumentCenter/View/9597/CCO-4-Inspection-Prior-to-Sale",
   "department_url": "https://www.mahwahtwp.org/159/Construction-Office-Department-of-Inspec",
   "phone": "201-529-5757",
   "email": "avero@mahwahtwp.org",
@@ -35,71 +36,92 @@
   "contact_title": "Construction Code Official / Building Subcode",
   "evidence": [
    {
-    "url": "https://ecode360.com/49703411",
-    "quote": "A certificate of continued occupancy shall be required in the following occurrences:",
-    "doc_date": "2026-10-04 (page fetched)",
+    "url": "https://www.mahwahtwp.org/DocumentCenter/View/9597/CCO-4-Inspection-Prior-to-Sale",
+    "quote": "INSPECTION PRIOR TO SALE",
+    "doc_date": "Date Printed: 7/27/2026 (file created 2025-08-21, modified 2026-08-03)",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.mahwahtwp.org/DocumentCenter/View/9597/CCO-4-Inspection-Prior-to-Sale",
+    "quote": "VISUAL INSPECTION ONLY",
+    "doc_date": "Date Printed: 7/27/2026",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.mahwahtwp.org/DocumentCenter/View/9597/CCO-4-Inspection-Prior-to-Sale",
+    "quote": "Fee: $175",
+    "doc_date": "Date Printed: 7/27/2026",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.mahwahtwp.org/DocumentCenter/View/9597/CCO-4-Inspection-Prior-to-Sale",
+    "quote": "NOTE: PLEASE CHECK WITH THE HEALTH DEPT. MAKE SURE YOU HAVE NO ISSUES WITH EITHER A SEPTIC SYSTEM, CESSPOOL OR WELL TANK BEFORE APPLYING FOR INSPECTION.",
+    "doc_date": "Date Printed: 7/27/2026",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.mahwahtwp.org/157/Fire-Prevention",
+    "quote": "As of August 25, 2025, the building department instituted an inspection Prior to Sale (IPS), which is not part of this Fire Prevention inspection compliance.",
+    "doc_date": "2026-11-03 (page fetched)",
     "via": "page",
-    "verified": null
+    "verified": true
+   },
+   {
+    "url": "https://www.mahwahtwp.org/157/Fire-Prevention",
+    "quote": "Any questions or concerns about the CCO should be directed towards the building department and the Construction Official.",
+    "doc_date": "2026-11-03 (page fetched)",
+    "via": "page",
+    "verified": true
    },
    {
     "url": "https://ecode360.com/49703411",
-    "quote": "Before said property is listed.",
-    "doc_date": "2026-10-04 (page fetched)",
+    "quote": "A certificate of continued occupancy shall be required in the following occurrences:",
+    "doc_date": "2026-10-04 (read in the prior check; ecode360 blocked this check)",
     "via": "page",
-    "verified": null
+    "verified": true
    },
    {
     "url": "https://ecode360.com/49703411",
     "quote": "Transfer of title to real property in the Township of Mahwah containing a building or permanent structure of any kind.",
-    "doc_date": "2026-10-04 (page fetched)",
+    "doc_date": "2026-10-04 (read in the prior check)",
     "via": "page",
-    "verified": null
-   },
-   {
-    "url": "https://ecode360.com/49703411",
-    "quote": "A fee of $175 shall be charged for each certificate of continued occupancy in accordance with §10-1.3b of the Township Code.",
-    "doc_date": "2026-10-04 (page fetched)",
-    "via": "page",
-    "verified": null
+    "verified": true
    },
    {
     "url": "https://ecode360.com/49703411",
     "quote": "A certificate of continued occupancy shall be deemed valid for one year from the date of issuance, provided that there is no material change in the physical status of the premises.",
-    "doc_date": "2026-10-04 (page fetched)",
+    "doc_date": "2026-10-04 (read in the prior check)",
     "via": "page",
-    "verified": null
+    "verified": true
    },
    {
     "url": "https://ecode360.com/49703411",
     "quote": "No owner shall permit the sale of premises covered by this section unless the requisite certificate of continued occupancy has been issued.",
-    "doc_date": "2026-10-04 (page fetched)",
+    "doc_date": "2026-10-04 (read in the prior check)",
     "via": "page",
-    "verified": null
+    "verified": true
    },
    {
-    "url": "https://ecode360.com/34810206",
-    "quote": "Certificate of Continued Occupancy - CCO Residential - Selling a Home $175",
-    "doc_date": "2026-10-04 (page fetched)",
-    "via": "page",
-    "verified": null
-   },
-   {
-    "url": "https://www.mahwahtwp.org/157/Fire-Prevention",
-    "quote": "As of August 25, 2025, the building department instituted a CCO inspection, which is not part of this Fire Prevention inspection compliance.",
-    "doc_date": "2026-10-04 (page fetched)",
+    "url": "https://ecode360.com/49703411",
+    "quote": "Before said property is listed.",
+    "doc_date": "2026-10-04 (read in the prior check)",
     "via": "page",
     "verified": true
    },
    {
     "url": "https://www.mahwahtwp.org/159/Construction-Office-Department-of-Inspec",
     "quote": "Phone: 201-529-5757, x284, x235 or x288",
-    "doc_date": "2026-10-04 (page fetched)",
+    "doc_date": "2026-11-03 (page fetched)",
     "via": "page",
     "verified": true
    }
   ],
   "confidence": "high",
-  "notes": "Mahwah added a Certificate of Continued Occupancy requirement by Ord. No. 2065 (added 8-4-2025, Code 10-10), and the Fire Prevention page says the Building Department began CCO inspections on August 25, 2025. It applies to one- and two-family homes before listing and on transfer of title, costs $175, must be issued or denied within 10 days, and is valid for one year. If the CCO is denied, the Construction Code Official may allow the transfer if the buyer certifies in writing that violations will be corrected and an escrow is set up. The Township's older Certificate of Occupancy page still says no CCO is required for a tenant rental; that statement is about rentals only. Ordinance text was read through the ecode360 print view."
+  "notes": "What changed: the Township now calls the sale inspection an \"Inspection Prior to Sale\" (IPS). The Fire Prevention page sentence now reads \"instituted an inspection Prior to Sale (IPS)\" instead of \"instituted a CCO inspection\", and still says CCO questions go to the Building Department. The Construction Office menu now links an Inspection Prior to Sale form (DocumentCenter 9597, named CCO-4-Inspection-Prior-to-Sale, Date Printed 7/27/2026): visual inspection only, Fee $175, payable by check, e-check or charge. This is the CCO form that was missing last time. The program itself and its $175 fee look unchanged. The rules come from Code 10-10 (Ord. No. 2065, added 8-4-2025): one- and two-family homes need the certificate before listing and on transfer of title, it is issued or denied within 10 days, is valid for one year, and costs $175 (also in the fee schedule, ecode360.com/34810206: \"Certificate of Continued Occupancy - CCO Residential - Selling a Home $175\"). ecode360 blocked fetches this check, so the code quotes are carried over from the October 4, 2026 read and were not re-read; no newer amendment showed in search results. If the CCO is denied, the Construction Code Official may allow the transfer if the buyer certifies in writing that violations will be corrected and an escrow is set up. The Township's Certificate of Occupancy page still says no CCO is required for a tenant rental; that is about rentals only."
  },
  "fire_cert": {
   "requirements": [
@@ -125,7 +147,7 @@
       "verified": true
      }
     ],
-    "how_to_apply": "Download the Mahwah Fire Prevention Smoke Inspection Packet (or pick one up at the Building Department), complete the application and affidavit, and return it with $90 cash or check payable to Township of Mahwah to Fire Prevention, 475 Corporate Drive. Then call or stop in to schedule the inspection.",
+    "how_to_apply": "Download the Mahwah Fire Prevention Smoke Inspection Packet (or pick one up at the Building Department), complete the application and affidavit, and return it with $90 cash or check payable to \"Township of Mahwah\" to Fire Prevention, 475 Corporate Drive. Then call or stop in to schedule the inspection.",
     "application_url": "https://www.mahwahtwp.org/DocumentCenter/View/9113",
     "department_url": "https://www.mahwahtwp.org/157/Fire-Prevention",
     "phone": "201-529-5757 ext. 275",
@@ -136,21 +158,21 @@
      {
       "url": "https://www.mahwahtwp.org/157/Fire-Prevention",
       "quote": "Another task performed by Fire Prevention is the certification of the operation of smoke detectors required by the State of New Jersey when a home is sold or there is a change of tenant.",
-      "doc_date": "2026-10-04 (page fetched)",
+      "doc_date": "2026-11-03 (page fetched)",
       "via": "page",
       "verified": true
      },
      {
       "url": "https://www.mahwahtwp.org/157/Fire-Prevention",
       "quote": "As of February 15, 2025, the portable fire extinguisher requirement has been removed.",
-      "doc_date": "2026-10-04 (page fetched)",
+      "doc_date": "2026-11-03 (page fetched)",
       "via": "page",
       "verified": true
      },
      {
       "url": "https://www.mahwahtwp.org/DocumentCenter/View/9113",
       "quote": "A fee of $90 shall accompany the application.",
-      "doc_date": "2022-08-18 (file created; updated after 2025-08-25)",
+      "doc_date": "Updated 20-Oct-2025 (PDF modified 2026-03-20)",
       "via": "pdf",
       "verified": true
      },
@@ -158,6 +180,13 @@
       "url": "https://www.mahwahtwp.org/DocumentCenter/View/9113",
       "quote": "If the change of occupant does not occur within 6 months, a new application shall be required.",
       "doc_date": "",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.mahwahtwp.org/DocumentCenter/View/9113",
+      "quote": "As of August 25, 2025, the building department is now requiring a CCO inspection, which is separate from the Fire Prevention smoke inspection requirement.",
+      "doc_date": "Updated 20-Oct-2025",
       "via": "pdf",
       "verified": true
      },
@@ -173,12 +202,12 @@
       "quote": "Certificate of Smoke Detector Installation: $90.",
       "doc_date": "2026-10-04 (page fetched)",
       "via": "page",
-      "verified": null
+      "verified": true
      },
      {
       "url": "https://www.mahwahtwp.org/157/Fire-Prevention",
       "quote": "Phone: 201.529.5757 Ext 275",
-      "doc_date": "2026-10-04 (page fetched)",
+      "doc_date": "2026-11-03 (page fetched)",
       "via": "page",
       "verified": true
      },
@@ -200,7 +229,7 @@
     "confidence": "high"
    }
   ],
-  "notes": "The Township's Fire Prevention Bureau issues the smoke/CO certificate for a flat $90 (same in Code 12-1.8g); no tiered late fee is published. The Fire Prevention page says the portable fire extinguisher requirement was removed as of February 15, 2025, though the packet's form title still names it. The packet says the Building Department's CCO inspection is separate from the smoke inspection. The NJ DCA LEA registry lists Mahwah as a municipal (M) enforcing agency and the state fire directory (survey 7/22/2026) lists Fire Official Michael R Roe. Fire Prevention FAQs are at https://www.mahwahtwp.org/402/FAQs (not checked)."
+  "notes": "The Township's Fire Prevention Bureau issues the smoke/CO certificate for a flat $90 (same in Code 12-1.8g); no tiered late fee is published. The Fire Prevention page says the portable fire extinguisher requirement was removed as of February 15, 2025, though the packet's form title still names it. The Fire Prevention page's packet links now point to DocumentCenter/View/9559, which returned not found on November 3, 2026; the packet at DocumentCenter/View/9113 (marked Updated 20-Oct-2025) still opens and is cited. The NJ DCA LEA registry lists Mahwah as a municipal (M) enforcing agency and the state fire directory (survey 7/22/2026) lists Fire Official Michael R Roe."
  },
  "other_items": [
   {
@@ -217,21 +246,27 @@
    "label": "Water Department and Health inspection",
    "detail": "The CCO inspection may include the Water Department and the Department of Health.",
    "source_url": "https://ecode360.com/49703411"
+  },
+  {
+   "label": "Health Department check (septic, cesspool, well)",
+   "detail": "The Inspection Prior to Sale form asks sellers to check with the Health Department that there are no septic system, cesspool or well tank issues before applying.",
+   "source_url": "https://www.mahwahtwp.org/DocumentCenter/View/9597/CCO-4-Inspection-Prior-to-Sale"
   }
  ],
  "open_questions": [
-  "Where is the CCO application form, and how far ahead of listing or closing should it be filed?",
-  "Is there a CCO reinspection fee or a temporary/conditional CCO with escrow, and how is the escrow amount set?",
-  "Does the CCO really have to be obtained before the home is listed for sale, and how is that enforced?"
+  "How far ahead of listing or closing should the Inspection Prior to Sale be filed, and is there a reinspection fee?",
+  "Is a temporary or conditional CCO with buyer escrow available, and how is the escrow amount set?",
+  "Does the CCO really have to be obtained before the home is listed for sale, and how is that enforced?",
+  "The Fire Prevention page's packet link (DocumentCenter 9559) is broken; is the 9113 packet still the current one?"
  ],
  "verification": {
   "fees": 2,
-  "fee_ok": 1,
+  "fee_ok": 2,
   "fee_bad": 0,
-  "fee_unchecked": 1,
-  "quotes": 18,
-  "q_ok": 9,
+  "fee_unchecked": 0,
+  "quotes": 22,
+  "q_ok": 21,
   "q_bad": 0,
-  "q_unchecked": 9
+  "q_unchecked": 1
  }
 }

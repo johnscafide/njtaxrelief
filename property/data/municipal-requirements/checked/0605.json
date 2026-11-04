@@ -2,7 +2,6 @@
  "municipality_code": "0605",
  "municipality": "Fairfield Township",
  "county": "CUMBERLAND",
- "checked_at": "2026-09-30",
  "resale_co": {
   "status": "required",
   "name": "Certificate of Continued Occupancy (Sales Inspection / Sales Registration)",
@@ -128,7 +127,7 @@
    }
   ],
   "confidence": "medium",
-  "notes": "No Township page says in one sentence that every home sale needs a certificate, but the Zoning Office fee list charges $75.00 for a 'Certificate of Continued Occupancy (Click for SALES form)' and $75.00 for 'Transfer of Ownership', warns of a waiting period to get a C/O on a previously owned home, and links a Sales Inspection Form covering houses, apartments and trailers; mobile home sellers must get a certificate of approval before sale. The two sales forms are scans (June 2023, and November 2022 marked revised 8/28/2023) and were read visually. The Zoning Office page names Clarence Dixon as Enforcement Officer (Tuesday to Thursday, 9 AM to 2 PM) while the Township Directory lists Mark Benjamin as Code Enforcement / Housing Inspector; the Directory is used here. Rental units must be registered and inspected every year (revised Ordinance 9-4); that is a rental program. Construction permits are handled by the Upper Deerfield Township Construction Office (856-455-9591). The live site only answers over plain http."
+  "notes": "No Township page says in one sentence that every home sale needs a certificate, but the Zoning Office fee list charges $75.00 for a 'Certificate of Continued Occupancy (Click for SALES form)' and $75.00 for 'Transfer of Ownership', warns of a waiting period to get a C/O on a previously owned home, and links a Sales Inspection Form covering houses, apartments and trailers; mobile home sellers must get a certificate of approval before sale. The two sales forms are scans (June 2023, and November 2022 marked revised 8/28/2023) and were read visually. The Zoning Office page names Clarence Dixon as Enforcement Officer (Tuesday to Thursday, 9 AM to 2 PM) while the Township Directory lists Mark Benjamin as Code Enforcement / Housing Inspector; the Directory is used here. Rental units must be registered and inspected every year (revised Ordinance 9-4); that is a rental program. Construction permits are handled by the Upper Deerfield Township Construction Office (856-455-9591). The live site only answers over plain http. The Township Code (ecode360 FA3553, confirmed as Fairfield Township, Cumberland County) has no chapter on resale certificates; the sales inspection rests on the Zoning Office fee list and forms."
  },
  "fire_cert": {
   "requirements": [
@@ -179,6 +178,13 @@
     "contact_title": "Fire Official and Chief of Department",
     "evidence": [
      {
+      "url": "https://ecode360.com/48097620",
+      "quote": "Smoke detector and carbon monoxide alarm inspections, and issuance of certificates of approval, shall be performed by the Bridgeton Fire Prevention Bureau under the shared services agreement. Fees shall be as per the City of Bridgeton Code, as amended.",
+      "doc_date": "Township Code 252-8C (2026-11-03 page fetched)",
+      "via": "page",
+      "verified": true
+     },
+     {
       "url": "http://www.bridgetonfire.com/uniform-fire-code",
       "quote": "The City of Bridgeton Fire Department is the local enforcing agency who is responsible for the enforcement of the Uniform Fire Safety Act within the City of Bridgeton, Hopewell Township, Greenwich Township, Stow Creek Township, Shiloh Borough, Fairfield Township, Downe Township, and Alloway Township.",
       "doc_date": "2026-09-30 (page fetched)",
@@ -187,7 +193,7 @@
      },
      {
       "url": "https://static1.squarespace.com/static/51cc4632e4b06e55251db119/t/691f23865714647f5f7c666a/1763648390990/Occupancy+%26+Smoke+Certificates.pdf",
-      "quote": "Residential, Resale and New Occupant requirements for one- & two-family dwellings. All requests must be submitted 2-3 weeks before the settlement date via the form on bridgetonfire.com.",
+      "quote": "All requests must be submitted 2-3 weeks before the settlement date via the form on bridgetonfire.com.",
       "doc_date": "2025-11-20 (PDF created)",
       "via": "pdf",
       "verified": true
@@ -246,7 +252,7 @@
       "quote": "Email justicej@cityofbridgeton.com",
       "doc_date": "2026 (directory)",
       "via": "state_directory",
-      "verified": true
+      "verified": null
      },
      {
       "url": "http://fairfieldtownshipnj.org/departments/bureau-of-fire-protection/",
@@ -281,13 +287,13 @@
       "quote": "LEAID: 0605-001 Enf Auth. Fire Dept Fire Official Jack Justice, Jr. Phone (856) 451-0091 Addr: 181 E Commerce St Bridgeton NJ 08302 ... Email firedepartment@cityofbridgeton.com ... SSA with Bridgeton City",
       "doc_date": "2025-07 (survey date 7/31/2025)",
       "via": "state_directory",
-      "verified": true
+      "verified": null
      }
     ],
     "confidence": "high"
    }
   ],
-  "notes": "The Township's Bureau of Fire Protection page says the City of Bridgeton Fire Department's Fire Marshal's Office does the smoke/CO certification inspections for Fairfield Township, and the Bridgeton online application lists Fairfield Township. Fees, lead time and 90-day validity come from the Bridgeton Bureau's guideline sheet (created November 20, 2025). The Township's own sales inspection also checks smoke and CO detectors and (on the 2023 form) a mounted fire extinguisher, although state law dropped the extinguisher from the fire certificate on February 3, 2025 (P.L.2025, c.19)."
+  "notes": "The Township's Bureau of Fire Protection page says the City of Bridgeton Fire Department's Fire Marshal's Office does the smoke/CO certification inspections for Fairfield Township, and the Bridgeton online application lists Fairfield Township. Fees, lead time and 90-day validity come from the Bridgeton Bureau's guideline sheet (created November 20, 2025). The Township's own sales inspection also checks smoke and CO detectors and (on the 2023 form) a mounted fire extinguisher, although state law dropped the extinguisher from the fire certificate on February 3, 2025 (P.L.2025, c.19). Township Code 252-8C also says the Bridgeton Fire Prevention Bureau does the smoke detector and CO alarm inspections and issues the certificates under the shared services agreement, with fees per the City of Bridgeton Code."
  },
  "other_items": [
   {
@@ -299,21 +305,28 @@
    "label": "Heating certification",
    "detail": "Listed as item 21 on the sales inspection form.",
    "source_url": "http://fairfieldtownshipnj.org/wp-content/uploads/2023/06/20230622124137835-2.pdf"
+  },
+  {
+   "label": "Sewer connection on sale",
+   "detail": "Where a public sewer line runs in the street or easement in front of the home, the owner must connect to it no later than the sale or other transfer of title, and no certificate of occupancy is issued until the connection and fees are arranged and proof is given to the Township Clerk (Township Code 375-2).",
+   "source_url": "https://ecode360.com/33606359"
   }
  ],
  "open_questions": [
   "How long is the minimum waiting period for a C/O on a previously owned home, and how long is it valid?",
   "Is the $75 'Transfer of Ownership' fee charged in addition to the $75 sales Certificate of Continued Occupancy, or is it the same fee?",
-  "Does the Township still check for a fire extinguisher at the sales inspection after P.L.2025, c.19?"
+  "Does the Township still check for a fire extinguisher at the sales inspection after P.L.2025, c.19?",
+  "Does the sewer connection rule (Township Code 375-2) apply to the property being sold?"
  ],
+ "checked_at": "2026-11-03",
  "verification": {
   "fees": 7,
   "fee_ok": 5,
   "fee_bad": 0,
   "fee_unchecked": 2,
-  "quotes": 24,
-  "q_ok": 21,
+  "quotes": 25,
+  "q_ok": 20,
   "q_bad": 0,
-  "q_unchecked": 3
+  "q_unchecked": 5
  }
 }
