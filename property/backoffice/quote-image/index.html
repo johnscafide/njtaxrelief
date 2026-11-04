@@ -10,7 +10,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@400;500;600;700;800&family=Inter:wght@400;500;700&family=Caveat:wght@600&display=swap">
   <link rel="stylesheet" href="/property/backoffice/backoffice-board.css?v=20260928a">
-  <link rel="stylesheet" href="/property/backoffice/quote-image/quote-image.css?v=20261104d">
+  <link rel="stylesheet" href="/property/backoffice/quote-image/quote-image.css?v=20261104e">
 </head>
 <body class="bo-body" data-bo-page="quote-image">
   <a class="bo-skip" href="#bo-main">Skip to content</a>
@@ -61,6 +61,7 @@
               <label><input type="radio" name="qi-style" value="photo"> Photo</label>
               <label><input type="radio" name="qi-style" value="grid"> Big table</label>
               <label><input type="radio" name="qi-style" value="gradient"> Gradient</label>
+              <label><input type="radio" name="qi-style" value="ranked"> Ranked chart</label>
             </fieldset>
             <fieldset class="qi-seg">
               <legend class="qi-label">Size</legend>
@@ -75,7 +76,7 @@
           <summary>Text</summary>
           <div class="qi-sec-body">
             <label class="qi-label" for="qi-text">Your text</label>
-            <textarea class="qi-textarea" id="qi-text" rows="8" maxlength="1200">A lot of confidence
+            <textarea class="qi-textarea" id="qi-text" rows="8" maxlength="4000">A lot of confidence
 is just deciding
 not to over-explain
 yourself.</textarea>
@@ -223,6 +224,6 @@ yourself.</textarea>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
   <script src="/property/js/access-guard.js"></script>
   <script src="/property/backoffice/backoffice-shell.js?v=20260930a" defer></script>
-  <script src="/property/backoffice/quote-image/quote-image.js?v=20261104d" defer></script>
+  <script src="/property/backoffice/quote-image/quote-image.js?v=20261104e" defer></script>
 </body>
 </html>
