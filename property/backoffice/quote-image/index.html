@@ -10,7 +10,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@400;500;600;700;800&family=Inter:wght@400;500;700&family=Caveat:wght@600&display=swap">
   <link rel="stylesheet" href="/property/backoffice/backoffice-board.css?v=20260928a">
-  <link rel="stylesheet" href="/property/backoffice/quote-image/quote-image.css?v=20261104c">
+  <link rel="stylesheet" href="/property/backoffice/quote-image/quote-image.css?v=20261104d">
 </head>
 <body class="bo-body" data-bo-page="quote-image">
   <a class="bo-skip" href="#bo-main">Skip to content</a>
@@ -39,7 +39,171 @@
   <main class="bo-page qi-main" id="bo-main" tabindex="-1">
     <header class="qi-topbar">
       <h1>Quote Image</h1>
+      <div class="qi-top-actions">
+        <button class="bo-btn bo-btn-ghost" id="qi-copy" type="button" hidden>Copy image</button>
+        <button class="bo-btn bo-btn-primary" id="qi-download" type="button">Download PNG</button>
+      </div>
     </header>
+
+    <div class="qi-workspace">
+      <div class="qi-sidebar">
+        <details class="qi-sec" open>
+          <summary>Look</summary>
+          <div class="qi-sec-body">
+            <fieldset class="qi-tiles">
+              <legend class="bo-sr">Style</legend>
+              <label><input type="radio" name="qi-style" value="x" checked> X</label>
+              <label><input type="radio" name="qi-style" value="threads"> Threads</label>
+              <label><input type="radio" name="qi-style" value="instagram"> Instagram</label>
+              <label><input type="radio" name="qi-style" value="notes"> Notes</label>
+              <label><input type="radio" name="qi-style" value="messages"> Text messages</label>
+              <label><input type="radio" name="qi-style" value="card"> Big text</label>
+              <label><input type="radio" name="qi-style" value="photo"> Photo</label>
+              <label><input type="radio" name="qi-style" value="grid"> Big table</label>
+              <label><input type="radio" name="qi-style" value="gradient"> Gradient</label>
+            </fieldset>
+            <fieldset class="qi-seg">
+              <legend class="qi-label">Size</legend>
+              <label><input type="radio" name="qi-size" value="portrait" checked> 4:5</label>
+              <label><input type="radio" name="qi-size" value="square"> Square</label>
+              <label><input type="radio" name="qi-size" value="story"> Story</label>
+            </fieldset>
+          </div>
+        </details>
+
+        <details class="qi-sec" open>
+          <summary>Text</summary>
+          <div class="qi-sec-body">
+            <label class="qi-label" for="qi-text">Your text</label>
+            <textarea class="qi-textarea" id="qi-text" rows="8" maxlength="1200">A lot of confidence
+is just deciding
+not to over-explain
+yourself.</textarea>
+            <div class="qi-row">
+              <button class="bo-btn bo-btn-ghost" id="qi-add-slide" type="button">Add slide</button>
+              <button class="bo-btn bo-btn-ghost" id="qi-add-table" type="button">Add table</button>
+            </div>
+            <fieldset class="qi-seg qi-data">
+              <legend class="qi-label">Show table as</legend>
+              <label><input type="radio" name="qi-data" value="table" checked> Table</label>
+              <label><input type="radio" name="qi-data" value="bars"> Bar chart</label>
+              <label><input type="radio" name="qi-data" value="stats"> Big numbers</label>
+            </fieldset>
+            <label class="qi-label" for="qi-question">Question</label>
+            <input class="qi-input" type="text" id="qi-question" maxlength="200" placeholder="Optional" autocomplete="off">
+          </div>
+        </details>
+
+        <details class="qi-sec" open>
+          <summary>Colors</summary>
+          <div class="qi-sec-body">
+            <div class="qi-gradients" id="qi-gradients" hidden>
+              <span class="qi-label">Gradient</span>
+              <div class="qi-swatches">
+                <button type="button" class="qi-swatch qi-grad" data-qi-grad="midnight" aria-label="Midnight gradient"></button>
+                <button type="button" class="qi-swatch qi-grad" data-qi-grad="violet" aria-label="Violet gradient"></button>
+                <button type="button" class="qi-swatch qi-grad" data-qi-grad="emerald" aria-label="Emerald gradient"></button>
+                <button type="button" class="qi-swatch qi-grad" data-qi-grad="sunset" aria-label="Sunset gradient"></button>
+                <button type="button" class="qi-swatch qi-grad" data-qi-grad="ocean" aria-label="Ocean gradient"></button>
+                <button type="button" class="qi-swatch qi-grad" data-qi-grad="graphite" aria-label="Graphite gradient"></button>
+              </div>
+            </div>
+            <div class="qi-swatches" id="qi-solid-swatches">
+              <button type="button" class="qi-swatch" data-qi-bg="#ffffff" data-qi-text="#000000" aria-label="White with black text">Aa</button>
+              <button type="button" class="qi-swatch" data-qi-bg="#000000" data-qi-text="#ffffff" aria-label="Black with white text">Aa</button>
+              <button type="button" class="qi-swatch" data-qi-bg="#15202b" data-qi-text="#f7f9f9" aria-label="Dark blue with white text">Aa</button>
+              <button type="button" class="qi-swatch" data-qi-bg="#f4f1ea" data-qi-text="#000000" aria-label="Cream with black text">Aa</button>
+              <button type="button" class="qi-swatch" data-qi-bg="#0e2248" data-qi-text="#ffffff" aria-label="Navy with white text">Aa</button>
+              <button type="button" class="qi-swatch" data-qi-bg="#1d9bf0" data-qi-text="#ffffff" aria-label="Blue with white text">Aa</button>
+            </div>
+            <div class="qi-pickers">
+              <label><input type="color" id="qi-bg" value="#ffffff"> Background</label>
+              <label><input type="color" id="qi-color" value="#000000"> Text</label>
+              <label><input type="color" id="qi-highlight" value="#1d9bf0"> *Highlight*</label>
+            </div>
+          </div>
+        </details>
+
+        <details class="qi-sec" open>
+          <summary>Text boxes and stickers</summary>
+          <div class="qi-sec-body">
+            <div class="qi-row">
+              <button class="bo-btn bo-btn-ghost" id="qi-add-text" type="button">Add text box</button>
+              <label class="bo-btn bo-btn-ghost qi-file" for="qi-sticker">Add sticker image</label>
+              <input class="bo-sr" id="qi-sticker" type="file" accept="image/*" multiple>
+            </div>
+            <div class="qi-layer-panel" id="qi-layer-panel" hidden>
+              <label class="qi-label" for="qi-layer-text" id="qi-layer-text-label">Box text</label>
+              <textarea class="qi-textarea" id="qi-layer-text" rows="3" maxlength="300"></textarea>
+              <div class="qi-row" id="qi-layer-style">
+                <label class="qi-inline"><input type="color" id="qi-layer-color" value="#000000"> Color</label>
+                <label class="qi-inline"><input type="checkbox" id="qi-layer-bold" checked> Bold</label>
+              </div>
+              <div class="qi-row">
+                <button class="bo-btn bo-btn-ghost" id="qi-layer-center" type="button">Center</button>
+                <button class="bo-btn bo-btn-ghost" id="qi-layer-front" type="button">Bring to front</button>
+                <button class="bo-btn bo-btn-ghost qi-danger" id="qi-layer-delete" type="button">Delete</button>
+              </div>
+            </div>
+          </div>
+        </details>
+
+        <details class="qi-sec">
+          <summary>Photos</summary>
+          <div class="qi-sec-body">
+            <div class="qi-row">
+              <label class="bo-btn bo-btn-ghost qi-file" for="qi-photos">Add photos to post</label>
+              <input class="bo-sr" id="qi-photos" type="file" accept="image/*" multiple>
+              <button class="qi-link" id="qi-photos-clear" type="button" hidden>Remove photos</button>
+            </div>
+            <div class="qi-row">
+              <label class="bo-btn bo-btn-ghost qi-file" for="qi-background">Background photo</label>
+              <input class="bo-sr" id="qi-background" type="file" accept="image/*">
+              <button class="qi-link" id="qi-background-clear" type="button" hidden>Remove background</button>
+            </div>
+            <label class="qi-row qi-range" id="qi-dim-row" hidden>Darken photo <input type="range" id="qi-dim" min="0" max="80" step="5" value="35"></label>
+          </div>
+        </details>
+
+        <details class="qi-sec">
+          <summary>Post details</summary>
+          <div class="qi-sec-body">
+            <div class="qi-row qi-checks" id="qi-checks">
+              <label class="qi-inline"><input type="checkbox" id="qi-liked"> Liked</label>
+              <label class="qi-inline" id="qi-saved-label"><input type="checkbox" id="qi-saved"> Saved</label>
+            </div>
+            <div class="qi-counts" id="qi-counts">
+              <label>Likes <input type="text" id="qi-likes" inputmode="numeric" maxlength="8" autocomplete="off"></label>
+              <label>Comments <input type="text" id="qi-comments" inputmode="numeric" maxlength="8" autocomplete="off"></label>
+              <label>Reposts <input type="text" id="qi-reposts" inputmode="numeric" maxlength="8" autocomplete="off"></label>
+              <label>Shares <input type="text" id="qi-shares" inputmode="numeric" maxlength="8" autocomplete="off"></label>
+            </div>
+            <div class="qi-row qi-sign">
+              <input type="text" id="qi-signature" maxlength="40" placeholder="Signature" aria-label="Signature">
+              <label class="qi-inline"><input type="checkbox" id="qi-script" checked> Handwritten</label>
+            </div>
+          </div>
+        </details>
+      </div>
+
+      <section class="qi-canvas-col" aria-label="Preview">
+        <div class="qi-stage" id="qi-stage">
+          <canvas id="qi-canvas" width="1122" height="1402" role="img" aria-label="Preview of the post image"></canvas>
+          <div class="qi-layer-box" id="qi-layer-box" hidden>
+            <span class="qi-handle qi-handle-rotate" data-qi-handle="rotate" title="Rotate"></span>
+            <span class="qi-handle qi-h-nw" data-qi-handle="scale" title="Resize"></span>
+            <span class="qi-handle qi-h-ne" data-qi-handle="scale" title="Resize"></span>
+            <span class="qi-handle qi-h-sw" data-qi-handle="scale" title="Resize"></span>
+            <span class="qi-handle qi-h-se" data-qi-handle="scale" title="Resize"></span>
+          </div>
+        </div>
+        <div class="qi-slides" id="qi-slides" hidden>
+          <button class="bo-btn bo-btn-ghost" id="qi-prev" type="button">Previous</button>
+          <span id="qi-slide-label" aria-live="polite">Slide 1 of 1</span>
+          <button class="bo-btn bo-btn-ghost" id="qi-next" type="button">Next</button>
+        </div>
+      </section>
+    </div>
 
     <section class="qi-panel qi-trends" aria-labelledby="qi-trends-title">
       <div class="qi-trends-head">
@@ -54,105 +218,11 @@
       </div>
       <ol class="qi-trend-list" id="qi-trend-list" role="tabpanel" aria-labelledby="qi-trends-title"></ol>
     </section>
-
-    <div class="qi-grid">
-      <section class="qi-panel qi-form">
-        <fieldset class="qi-styles">
-          <legend class="qi-label">Style</legend>
-          <label><input type="radio" name="qi-style" value="x" checked> X</label>
-          <label><input type="radio" name="qi-style" value="threads"> Threads</label>
-          <label><input type="radio" name="qi-style" value="instagram"> Instagram</label>
-          <label><input type="radio" name="qi-style" value="notes"> Notes</label>
-          <label><input type="radio" name="qi-style" value="messages"> Text messages</label>
-          <label><input type="radio" name="qi-style" value="card"> Big text</label>
-          <label><input type="radio" name="qi-style" value="photo"> Photo</label>
-          <label><input type="radio" name="qi-style" value="grid"> Big table</label>
-        </fieldset>
-        <fieldset class="qi-styles">
-          <legend class="qi-label">Size</legend>
-          <label><input type="radio" name="qi-size" value="portrait" checked> 4:5</label>
-          <label><input type="radio" name="qi-size" value="square"> Square</label>
-          <label><input type="radio" name="qi-size" value="story"> Story</label>
-        </fieldset>
-        <fieldset class="qi-colors">
-          <legend class="qi-label">Colors</legend>
-          <div class="qi-swatches">
-            <button type="button" class="qi-swatch" data-qi-bg="#ffffff" data-qi-text="#000000" aria-label="White with black text">Aa</button>
-            <button type="button" class="qi-swatch" data-qi-bg="#000000" data-qi-text="#ffffff" aria-label="Black with white text">Aa</button>
-            <button type="button" class="qi-swatch" data-qi-bg="#15202b" data-qi-text="#f7f9f9" aria-label="Dark blue with white text">Aa</button>
-            <button type="button" class="qi-swatch" data-qi-bg="#f4f1ea" data-qi-text="#000000" aria-label="Cream with black text">Aa</button>
-            <button type="button" class="qi-swatch" data-qi-bg="#0e2248" data-qi-text="#ffffff" aria-label="Navy with white text">Aa</button>
-            <button type="button" class="qi-swatch" data-qi-bg="#1d9bf0" data-qi-text="#ffffff" aria-label="Blue with white text">Aa</button>
-          </div>
-          <div class="qi-pickers">
-            <label><input type="color" id="qi-bg" value="#ffffff"> Background</label>
-            <label><input type="color" id="qi-color" value="#000000"> Text</label>
-            <label><input type="color" id="qi-highlight" value="#1d9bf0"> *Highlight*</label>
-          </div>
-        </fieldset>
-        <fieldset class="qi-extras">
-          <legend class="qi-label">Extras</legend>
-          <div class="qi-extra-row">
-            <label class="bo-btn bo-btn-ghost" for="qi-photos">Add photos to post</label>
-            <input class="bo-sr" id="qi-photos" type="file" accept="image/*" multiple>
-            <button class="qi-link" id="qi-photos-clear" type="button" hidden>Remove photos</button>
-          </div>
-          <div class="qi-extra-row">
-            <label class="bo-btn bo-btn-ghost" for="qi-background">Background photo</label>
-            <input class="bo-sr" id="qi-background" type="file" accept="image/*">
-            <button class="qi-link" id="qi-background-clear" type="button" hidden>Remove background</button>
-          </div>
-          <label class="qi-extra-row qi-range" id="qi-dim-row" hidden>Darken photo <input type="range" id="qi-dim" min="0" max="80" step="5" value="35"></label>
-          <div class="qi-extra-row qi-checks" id="qi-checks">
-            <label><input type="checkbox" id="qi-liked"> Liked</label>
-            <label id="qi-saved-label"><input type="checkbox" id="qi-saved"> Saved</label>
-          </div>
-          <div class="qi-extra-row qi-counts" id="qi-counts">
-            <label>Likes <input type="text" id="qi-likes" inputmode="numeric" maxlength="8" autocomplete="off"></label>
-            <label>Comments <input type="text" id="qi-comments" inputmode="numeric" maxlength="8" autocomplete="off"></label>
-            <label>Reposts <input type="text" id="qi-reposts" inputmode="numeric" maxlength="8" autocomplete="off"></label>
-            <label>Shares <input type="text" id="qi-shares" inputmode="numeric" maxlength="8" autocomplete="off"></label>
-          </div>
-          <fieldset class="qi-extra-row qi-data">
-            <legend class="bo-sr">Show table rows as</legend>
-            <label><input type="radio" name="qi-data" value="table" checked> Table</label>
-            <label><input type="radio" name="qi-data" value="bars"> Bar chart</label>
-            <label><input type="radio" name="qi-data" value="stats"> Big numbers</label>
-          </fieldset>
-          <div class="qi-extra-row qi-sign">
-            <input type="text" id="qi-signature" maxlength="40" placeholder="Signature" aria-label="Signature">
-            <label><input type="checkbox" id="qi-script" checked> Handwritten</label>
-          </div>
-        </fieldset>
-        <label class="qi-label" for="qi-question">Question</label>
-        <input class="qi-input" type="text" id="qi-question" maxlength="200" placeholder="Optional" autocomplete="off">
-        <label class="qi-label" for="qi-text">Your text</label>
-        <textarea id="qi-text" rows="7" maxlength="600">A lot of confidence
-is just deciding
-not to over-explain
-yourself.</textarea>
-        <div class="qi-actions">
-          <button class="bo-btn bo-btn-primary" id="qi-download" type="button">Download PNG</button>
-          <button class="bo-btn bo-btn-ghost" id="qi-copy" type="button" hidden>Copy image</button>
-          <button class="bo-btn bo-btn-ghost" id="qi-add-slide" type="button">Add slide</button>
-          <button class="bo-btn bo-btn-ghost" id="qi-add-table" type="button">Add table</button>
-        </div>
-      </section>
-
-      <section class="qi-panel qi-preview">
-        <canvas id="qi-canvas" width="1122" height="1402" role="img" aria-label="Preview of the post image"></canvas>
-        <div class="qi-slides" id="qi-slides" hidden>
-          <button class="bo-btn bo-btn-ghost" id="qi-prev" type="button">Previous</button>
-          <span id="qi-slide-label" aria-live="polite">Slide 1 of 1</span>
-          <button class="bo-btn bo-btn-ghost" id="qi-next" type="button">Next</button>
-        </div>
-      </section>
-    </div>
   </main>
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
   <script src="/property/js/access-guard.js"></script>
   <script src="/property/backoffice/backoffice-shell.js?v=20260930a" defer></script>
-  <script src="/property/backoffice/quote-image/quote-image.js?v=20261104c" defer></script>
+  <script src="/property/backoffice/quote-image/quote-image.js?v=20261104d" defer></script>
 </body>
 </html>
