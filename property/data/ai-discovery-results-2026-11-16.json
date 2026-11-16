@@ -1,0 +1,151 @@
+{
+  "date": "2026-11-16",
+  "registry_version": "2026-11-02.3",
+  "methodology": "12 fixed prompts; observable public retrieval only, not proprietary answer engine answers. First-party analytics uncapped SQL; referral != citation.",
+  "first_party_30d": {
+    "window_start_utc": "2026-10-17T14:00:00Z",
+    "window_end_utc": "2026-11-16T15:00:00Z",
+    "external_page_view_events": 47446,
+    "explicit_ai_attributed_page_views": 0,
+    "last_external_event_utc": "2026-11-16T14:27:42Z",
+    "search_console_snapshots": 0,
+    "source": "watchdog_product_events; event_name=page_view; audience_class=external_visitor; event/session referrer and UTM fields",
+    "note": "Counts events not unique people; unknown/referrer-stripped traffic not classified as AI."
+  },
+  "public_retrieval": {
+    "canonical_revaluation_url": "https://www.watchdogindex.com/insights/2026-revaluation-reassessment-list",
+    "legacy_alias": "https://www.watchdogindex.com/property/insights/2026-revaluation-reassessment-list.html",
+    "result": "Web fetch on 2026-11-16 returned article text at canonical and reported legacy alias redirected to canonical; fetch crawl date 2026-11-10, not an independently measured HTTP status on Nov 16.",
+    "missed_opportunity": "Official NJ 2027 Chapter 123 ratios are available, while generic search surfaces specialized competing calculators."
+  },
+  "platforms": [
+    "ChatGPT Search",
+    "Bing/Copilot AI Performance",
+    "Google AI Mode/Overviews/Preferred Sources",
+    "Perplexity",
+    "Apple Intelligence/Siri/Spotlight",
+    "Claude",
+    "Grok",
+    "Meta AI",
+    "Meta Muse"
+  ],
+  "citation_status": "not_observable_without_direct_answer_or_first_party_report",
+  "prompts": [
+    {
+      "id": "brand-entity",
+      "answer_engine_citation": "not_observable",
+      "watchdog_mentioned_in_proprietary_answer": null,
+      "watchdog_cited_in_proprietary_answer": null,
+      "canonical_url_cited": null,
+      "public_retrieval": "No directly observable platform-answer citation for this prompt; no positive or negative proprietary ranking assigned."
+    },
+    {
+      "id": "chapter-123",
+      "answer_engine_citation": "not_observable",
+      "watchdog_mentioned_in_proprietary_answer": null,
+      "watchdog_cited_in_proprietary_answer": null,
+      "canonical_url_cited": null,
+      "public_retrieval": "Official NJ Chapter 123 definitions and NJREAP competing calculator surfaced; missed 2027 certified municipality-specific comparison opportunity."
+    },
+    {
+      "id": "assessed-vs-market",
+      "answer_engine_citation": "not_observable",
+      "watchdog_mentioned_in_proprietary_answer": null,
+      "watchdog_cited_in_proprietary_answer": null,
+      "canonical_url_cited": null,
+      "public_retrieval": "No directly observable platform-answer citation for this prompt; no positive or negative proprietary ranking assigned."
+    },
+    {
+      "id": "revaluation",
+      "answer_engine_citation": "not_observable",
+      "watchdog_mentioned_in_proprietary_answer": null,
+      "watchdog_cited_in_proprietary_answer": null,
+      "canonical_url_cited": null,
+      "public_retrieval": "Canonical Watchdog revaluation Insight text retrievable; legacy alias resolves to clean URL in web fetch. Search retrieval is not an AI citation."
+    },
+    {
+      "id": "tax-rates",
+      "answer_engine_citation": "not_observable",
+      "watchdog_mentioned_in_proprietary_answer": null,
+      "watchdog_cited_in_proprietary_answer": null,
+      "canonical_url_cited": null,
+      "public_retrieval": "No directly observable platform-answer citation for this prompt; no positive or negative proprietary ranking assigned."
+    },
+    {
+      "id": "buyer-estimate",
+      "answer_engine_citation": "not_observable",
+      "watchdog_mentioned_in_proprietary_answer": null,
+      "watchdog_cited_in_proprietary_answer": null,
+      "canonical_url_cited": null,
+      "public_retrieval": "No directly observable platform-answer citation for this prompt; no positive or negative proprietary ranking assigned."
+    },
+    {
+      "id": "senior-relief",
+      "answer_engine_citation": "not_observable",
+      "watchdog_mentioned_in_proprietary_answer": null,
+      "watchdog_cited_in_proprietary_answer": null,
+      "canonical_url_cited": null,
+      "public_retrieval": "No directly observable platform-answer citation for this prompt; no positive or negative proprietary ranking assigned."
+    },
+    {
+      "id": "tax-bill",
+      "answer_engine_citation": "not_observable",
+      "watchdog_mentioned_in_proprietary_answer": null,
+      "watchdog_cited_in_proprietary_answer": null,
+      "canonical_url_cited": null,
+      "public_retrieval": "No directly observable platform-answer citation for this prompt; no positive or negative proprietary ranking assigned."
+    },
+    {
+      "id": "professional-tool",
+      "answer_engine_citation": "not_observable",
+      "watchdog_mentioned_in_proprietary_answer": null,
+      "watchdog_cited_in_proprietary_answer": null,
+      "canonical_url_cited": null,
+      "public_retrieval": "No directly observable platform-answer citation for this prompt; no positive or negative proprietary ranking assigned."
+    },
+    {
+      "id": "propertyshark-alternative",
+      "answer_engine_citation": "not_observable",
+      "watchdog_mentioned_in_proprietary_answer": null,
+      "watchdog_cited_in_proprietary_answer": null,
+      "canonical_url_cited": null,
+      "public_retrieval": "No directly observable platform-answer citation for this prompt; no positive or negative proprietary ranking assigned."
+    },
+    {
+      "id": "propstream-alternative",
+      "answer_engine_citation": "not_observable",
+      "watchdog_mentioned_in_proprietary_answer": null,
+      "watchdog_cited_in_proprietary_answer": null,
+      "canonical_url_cited": null,
+      "public_retrieval": "No directly observable platform-answer citation for this prompt; no positive or negative proprietary ranking assigned."
+    },
+    {
+      "id": "trust-methodology",
+      "answer_engine_citation": "not_observable",
+      "watchdog_mentioned_in_proprietary_answer": null,
+      "watchdog_cited_in_proprietary_answer": null,
+      "canonical_url_cited": null,
+      "public_retrieval": "No directly observable platform-answer citation for this prompt; no positive or negative proprietary ranking assigned."
+    }
+  ],
+  "official_guidance": [
+    "https://developers.openai.com/api/docs/bots",
+    "https://blogs.bing.com/search/2026/10/your-content-your-choice-clearer-preferences-for-training-and-grounding/",
+    "https://developers.google.com/search/blog/2026/05/a-new-resource-for-optimizing",
+    "https://developers.google.com/search/blog/2026/10/ai-training-control",
+    "https://www.nj.gov/treasury/taxation/lpt/statdata.shtml"
+  ],
+  "changes": {
+    "crawler_permissions": "none",
+    "training_permissions": "none",
+    "private_routes": "unchanged",
+    "production_deployment": "none"
+  },
+  "priorities": [
+    "Verify canonical Insight URLs and redirects with fresh HTTP response codes and sitemap-wide test",
+    "Replace 5000-event AI Discovery dashboard sample with exhaustive aggregation",
+    "Restore GSC property connection and obtain Google generative AI/multimodal exports",
+    "Obtain authenticated Bing AI Performance and Topics Portfolio",
+    "Publish sourced tax-year-2027 Chapter 123 municipality evidence without overwriting 2026 data"
+  ]
+}
