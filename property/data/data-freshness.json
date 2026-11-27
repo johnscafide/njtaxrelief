@@ -1,6 +1,6 @@
 {
   "schema_version": 3,
-  "generated_at": "2026-11-26T19:07:33.099912+00:00",
+  "generated_at": "2026-11-27T19:02:49.131493+00:00",
   "overall_status": "failed",
   "definitions": {
     "live_health": "Endpoint/service health was probed. This does not mean every property has a matching record.",
@@ -24,14 +24,14 @@
       "live": true,
       "note": "Change-detection landing page for new Abstract of Ratables, equalization, residential statistics, tax-rate and related annual publications. A page change is an alert, not automatic approval of new data.",
       "health": {
-        "checked_at": "2026-11-26T19:06:27.876541+00:00",
+        "checked_at": "2026-11-27T19:02:40.288075+00:00",
         "healthcheck_url": "https://www.nj.gov/treasury/taxation/lpt/statdata.shtml",
         "http_status": 200,
         "content_type": "text/html",
-        "content_sha256": "8884683cb78d45b8bd9e0dda0c3701311119e8e95f6cbb9bffef5c70bfd69674",
+        "content_sha256": "505b17dca054fa73b697f4e11e1a58b774c399a5f5b0009f96531f221a952d50",
         "last_modified_header": null,
         "etag": null,
-        "latency_ms": 332,
+        "latency_ms": 81,
         "semantic_error": null
       }
     },
@@ -45,7 +45,7 @@
       "records_or_files": 564,
       "minimum": 550,
       "changed": false,
-      "last_modified": "2026-11-26T19:06:25.340290+00:00",
+      "last_modified": "2026-11-27T19:02:38.247915+00:00",
       "cadence": "annual",
       "source_url": "https://www.nj.gov/treasury/taxation/pdf/lpt/CoefficientDeviations.pdf",
       "live": false
@@ -60,7 +60,7 @@
       "records_or_files": 558,
       "minimum": 500,
       "changed": false,
-      "last_modified": "2026-11-26T19:06:25.591960+00:00",
+      "last_modified": "2026-11-27T19:02:38.508109+00:00",
       "cadence": "annual",
       "source_url": "https://www.nj.gov/treasury/taxation/lpt/statdata.shtml",
       "live": false
@@ -75,7 +75,7 @@
       "records_or_files": 10,
       "minimum": 8,
       "changed": false,
-      "last_modified": "2026-11-26T19:06:25.283552+00:00",
+      "last_modified": "2026-11-27T19:02:38.190915+00:00",
       "cadence": "annual",
       "source_url": "https://www.nj.gov/treasury/taxation/lpt/lpt-appeal.shtml",
       "live": false
@@ -90,7 +90,7 @@
       "records_or_files": 567,
       "minimum": 500,
       "changed": false,
-      "last_modified": "2026-11-26T19:06:25.578960+00:00",
+      "last_modified": "2026-11-27T19:02:38.494914+00:00",
       "cadence": "annual",
       "source_url": "https://www.nj.gov/treasury/taxation/lpt/statdata.shtml",
       "live": false
@@ -105,7 +105,7 @@
       "records_or_files": 536,
       "minimum": 350,
       "changed": false,
-      "last_modified": "2026-11-26T19:06:25.577960+00:00",
+      "last_modified": "2026-11-27T19:02:38.494914+00:00",
       "cadence": "quarterly",
       "source_url": "https://www.nj.gov/treasury/taxation/lpt/sr1a.shtml",
       "live": false
@@ -120,7 +120,7 @@
       "records_or_files": 21,
       "minimum": 21,
       "changed": false,
-      "last_modified": "2026-11-26T19:06:25.572960+00:00",
+      "last_modified": "2026-11-27T19:02:38.488914+00:00",
       "cadence": "quarterly",
       "source_url": "https://www.nj.gov/treasury/taxation/lpt/statdata.shtml",
       "live": false
@@ -135,7 +135,7 @@
       "records_or_files": 564,
       "minimum": 200,
       "changed": false,
-      "last_modified": "2026-11-26T19:06:25.279960+00:00",
+      "last_modified": "2026-11-27T19:02:38.187915+00:00",
       "cadence": "annual",
       "source_url": "https://www.nj.gov/treasury/taxation/lpt/statdata.shtml",
       "live": false
@@ -150,7 +150,7 @@
       "records_or_files": 564,
       "minimum": 560,
       "changed": false,
-      "last_modified": "2026-11-26T19:06:25.316960+00:00",
+      "last_modified": "2026-11-27T19:02:38.223915+00:00",
       "cadence": "annual",
       "source_url": "https://www.nj.gov/dca/dlgs/Property_Tax_info.shtml",
       "live": false
@@ -165,7 +165,7 @@
       "records_or_files": 564,
       "minimum": 564,
       "changed": false,
-      "last_modified": "2026-11-26T19:06:25.343960+00:00",
+      "last_modified": "2026-11-27T19:02:38.252915+00:00",
       "cadence": "annual",
       "source_url": "https://www.nj.gov/dca/dlgs/taxabatementkit.shtml",
       "live": false
@@ -201,14 +201,14 @@
       "source_url": "https://data.nj.gov/Reference-Data/NJ-Construction-Permit-Data/w9se-dmra",
       "live": true,
       "health": {
-        "checked_at": "2026-11-26T19:06:39.988164+00:00",
+        "checked_at": "2026-11-27T19:02:41.963296+00:00",
         "healthcheck_url": "https://data.nj.gov/Reference-Data/NJ-Construction-Permit-Data/w9se-dmra",
         "http_status": 200,
         "content_type": "text/html; charset=utf-8",
-        "content_sha256": "fff06d3bfca732058b13e5ad70e2e7a74973cf69c81ce17767b7c54718ee767b",
+        "content_sha256": "bc1214de09816c4b9c3571295e230e2c7673ad3e920be448bbc34b4dd00cf7a4",
         "last_modified_header": null,
-        "etag": "W/\"cd31a8833fd6f4d2a6e5b97ddacb7233\"",
-        "latency_ms": 6163,
+        "etag": "W/\"37e788e805ad78471847664ea34744d4\"",
+        "latency_ms": 391,
         "semantic_error": null
       }
     },
@@ -227,14 +227,14 @@
       "source_url": "https://mapsdep.nj.gov/arcgis/rest/services/Features/Environmental_NJEMS/MapServer/0",
       "live": true,
       "health": {
-        "checked_at": "2026-11-26T19:06:46.614793+00:00",
+        "checked_at": "2026-11-27T19:02:42.470717+00:00",
         "healthcheck_url": "https://mapsdep.nj.gov/arcgis/rest/services/Features/Environmental_NJEMS/MapServer/0?f=json",
         "http_status": 200,
         "content_type": "application/json; charset=UTF-8",
         "content_sha256": "9b2e55b887698f9a6e74671d915c0743245df825df4631ac7c3a1ff533e8acd0",
         "last_modified_header": null,
-        "etag": "\"9e4a2492\"",
-        "latency_ms": 141,
+        "etag": "\"98ae36d7\"",
+        "latency_ms": 74,
         "semantic_error": null
       }
     },
@@ -253,14 +253,14 @@
       "source_url": "https://mapsdep.nj.gov/arcgis/rest/services/Features/Environmental/MapServer/40",
       "live": true,
       "health": {
-        "checked_at": "2026-11-26T19:06:46.871174+00:00",
+        "checked_at": "2026-11-27T19:02:42.607382+00:00",
         "healthcheck_url": "https://mapsdep.nj.gov/arcgis/rest/services/Features/Environmental/MapServer/40?f=json",
         "http_status": 200,
         "content_type": "application/json; charset=UTF-8",
         "content_sha256": "ca6a2bc0d4b38adb97908fea6c8662e33a1b79fe9a2c0c5373c80efae4167a7a",
         "last_modified_header": null,
-        "etag": "\"70afb927\"",
-        "latency_ms": 137,
+        "etag": "\"11ccd625\"",
+        "latency_ms": 67,
         "semantic_error": null
       }
     },
@@ -279,14 +279,14 @@
       "source_url": "https://mapsdep.nj.gov/arcgis/rest/services/Applications/RSP_Query_Layers/MapServer/5",
       "live": true,
       "health": {
-        "checked_at": "2026-11-26T19:06:47.153777+00:00",
+        "checked_at": "2026-11-27T19:02:42.736505+00:00",
         "healthcheck_url": "https://mapsdep.nj.gov/arcgis/rest/services/Applications/RSP_Query_Layers/MapServer/5?f=json",
         "http_status": 200,
         "content_type": "application/json; charset=UTF-8",
         "content_sha256": "649cab79fbbfc22a3373e702e522d9944bfd80fa1ce9b41479403682937fde29",
         "last_modified_header": null,
-        "etag": "\"88dc6932\"",
-        "latency_ms": 363,
+        "etag": "\"80354371\"",
+        "latency_ms": 81,
         "semantic_error": null
       }
     },
@@ -299,20 +299,20 @@
       "action": "health_checked",
       "records_or_files": 1,
       "minimum": 1,
-      "changed": false,
+      "changed": true,
       "last_modified": null,
       "cadence": "as published",
       "source_url": "https://mapsdep.nj.gov/arcgis/rest/services/Features/Environmental_NJEMS/MapServer/9",
       "live": true,
       "health": {
-        "checked_at": "2026-11-26T19:06:47.635361+00:00",
+        "checked_at": "2026-11-27T19:02:42.911190+00:00",
         "healthcheck_url": "https://mapsdep.nj.gov/arcgis/rest/services/Features/Environmental_NJEMS/MapServer/9?f=json",
         "http_status": 200,
         "content_type": "application/json; charset=UTF-8",
-        "content_sha256": "091929285d3352a13edd0896bdbae641e6414adbe792a9231e5eb4ecc37f3d64",
+        "content_sha256": "42250dbaa4a5c768c4bf8e615f50a9b855c8222fbb54aa6f3bf74727bbef2e1b",
         "last_modified_header": null,
-        "etag": "\"9e4a2492\"",
-        "latency_ms": 116,
+        "etag": "\"98ae36d7\"",
+        "latency_ms": 69,
         "semantic_error": null
       }
     },
@@ -332,14 +332,14 @@
       "live": true,
       "warning": "Reference screening only; NJDEP states only promulgated 1:2400 Tidelands maps locate the legally valid riparian claim line.",
       "health": {
-        "checked_at": "2026-11-26T19:06:47.860748+00:00",
+        "checked_at": "2026-11-27T19:02:43.048962+00:00",
         "healthcheck_url": "https://mapsdep.nj.gov/arcgis/rest/services/Features/Hydrography/MapServer/30?f=json",
         "http_status": 200,
         "content_type": "application/json; charset=UTF-8",
-        "content_sha256": "51fc3f7919aae3a99f225e7efc4560b4ed21c495944a684a95e62def47e0c17c",
+        "content_sha256": "3461c4b75d054efd51cbb92e9f25ebd8d9227b51301b4acf293e0db9b63a17fe",
         "last_modified_header": null,
-        "etag": "\"21469ae8\"",
-        "latency_ms": 139,
+        "etag": "\"ec173047\"",
+        "latency_ms": 113,
         "semantic_error": null
       }
     },
@@ -358,14 +358,14 @@
       "source_url": "https://mapsdep.nj.gov/arcgis/rest/services/Applications/RSP_Query_Layers/MapServer/6",
       "live": true,
       "health": {
-        "checked_at": "2026-11-26T19:06:48.338790+00:00",
+        "checked_at": "2026-11-27T19:02:43.292641+00:00",
         "healthcheck_url": "https://mapsdep.nj.gov/arcgis/rest/services/Applications/RSP_Query_Layers/MapServer/6?f=json",
         "http_status": 200,
         "content_type": "application/json; charset=UTF-8",
         "content_sha256": "ae339346833103af82f8c093adf29f95ee6357a1e42f89235ff22012f19928ab",
         "last_modified_header": null,
-        "etag": "\"88dc6932\"",
-        "latency_ms": 112,
+        "etag": "\"80354371\"",
+        "latency_ms": 80,
         "semantic_error": null
       }
     },
@@ -384,14 +384,14 @@
       "source_url": "https://mapsdep.nj.gov/arcgis/rest/services/Applications/RSP_Query_Layers/MapServer/7",
       "live": true,
       "health": {
-        "checked_at": "2026-11-26T19:06:48.612594+00:00",
+        "checked_at": "2026-11-27T19:02:43.481699+00:00",
         "healthcheck_url": "https://mapsdep.nj.gov/arcgis/rest/services/Applications/RSP_Query_Layers/MapServer/7?f=json",
         "http_status": 200,
         "content_type": "application/json; charset=UTF-8",
         "content_sha256": "2f63b7ba967e87be41a0ec4ffe9885328f95bb56c5bbddf9deb6d485bda428fc",
         "last_modified_header": null,
-        "etag": "\"88dc6932\"",
-        "latency_ms": 117,
+        "etag": "\"80354371\"",
+        "latency_ms": 64,
         "semantic_error": null
       }
     },
@@ -411,14 +411,14 @@
       "live": true,
       "warning": "Screening result only; regulatory mapping and written rules control.",
       "health": {
-        "checked_at": "2026-11-26T19:06:48.864982+00:00",
+        "checked_at": "2026-11-27T19:02:43.597902+00:00",
         "healthcheck_url": "https://mapsdep.nj.gov/arcgis/rest/services/Features/Hydrography/MapServer/43?f=json",
         "http_status": 200,
         "content_type": "application/json; charset=UTF-8",
         "content_sha256": "e213ff7f73da1361213abdf094304e30f84fe8d7a49a43343e3230d89aaea1d2",
         "last_modified_header": null,
-        "etag": "\"21469ae8\"",
-        "latency_ms": 317,
+        "etag": "\"ec173047\"",
+        "latency_ms": 116,
         "semantic_error": null
       }
     },
@@ -437,14 +437,14 @@
       "source_url": "https://mapsdep.nj.gov/arcgis/rest/services/Features/Hydrography/MapServer/48",
       "live": true,
       "health": {
-        "checked_at": "2026-11-26T19:06:49.517492+00:00",
+        "checked_at": "2026-11-27T19:02:43.780889+00:00",
         "healthcheck_url": "https://mapsdep.nj.gov/arcgis/rest/services/Features/Hydrography/MapServer/48?f=json",
         "http_status": 200,
         "content_type": "application/json; charset=UTF-8",
         "content_sha256": "029d03885b33329c75a82bbccfde809d1b8151f86db5a0ffa339771eae0e68ef",
         "last_modified_header": null,
-        "etag": "\"21469ae8\"",
-        "latency_ms": 327,
+        "etag": "\"ec173047\"",
+        "latency_ms": 717,
         "semantic_error": null
       }
     },
@@ -457,21 +457,21 @@
       "action": "health_checked",
       "records_or_files": 1,
       "minimum": 1,
-      "changed": false,
+      "changed": true,
       "last_modified": null,
       "cadence": "historic reference",
       "source_url": "https://mapsdep.nj.gov/arcgis/rest/services/Features/Land_lu/MapServer/2",
       "live": true,
       "warning": "2012 reference data; not a regulatory wetlands delineation.",
       "health": {
-        "checked_at": "2026-11-26T19:06:50.036926+00:00",
+        "checked_at": "2026-11-27T19:02:44.652457+00:00",
         "healthcheck_url": "https://mapsdep.nj.gov/arcgis/rest/services/Features/Land_lu/MapServer/2?f=json",
         "http_status": 200,
         "content_type": "application/json; charset=UTF-8",
-        "content_sha256": "fbcbcf4c8c13fb1a8f41379b073eaa3fc91edd0319064f15c27b7e69b8bee078",
+        "content_sha256": "28350d98aefb9fe634dbba66f5371235d8140822e4573578188a6be27d93bdc4",
         "last_modified_header": null,
-        "etag": "\"101bc8c5\"",
-        "latency_ms": 192,
+        "etag": "\"d5a5bb49\"",
+        "latency_ms": 110,
         "semantic_error": null
       }
     },
@@ -490,14 +490,14 @@
       "source_url": "https://mapsdep.nj.gov/arcgis/rest/services/Features/Land/MapServer/79",
       "live": true,
       "health": {
-        "checked_at": "2026-11-26T19:06:50.341460+00:00",
+        "checked_at": "2026-11-27T19:02:44.839871+00:00",
         "healthcheck_url": "https://mapsdep.nj.gov/arcgis/rest/services/Features/Land/MapServer/79?f=json",
         "http_status": 200,
         "content_type": "application/json; charset=UTF-8",
         "content_sha256": "325e3d09d80bf7c3e2c69b2a3c8fee4e31afcb15df328b3c5907a3cb325795e0",
         "last_modified_header": null,
-        "etag": "\"2446a5a4\"",
-        "latency_ms": 140,
+        "etag": "\"ea531550\"",
+        "latency_ms": 131,
         "semantic_error": null
       }
     },
@@ -510,21 +510,21 @@
       "action": "health_checked",
       "records_or_files": 1,
       "minimum": 1,
-      "changed": false,
+      "changed": true,
       "last_modified": null,
       "cadence": "as published",
       "source_url": "https://mapsdep.nj.gov/arcgis/rest/services/Features/Geology/MapServer",
       "live": true,
       "warning": "Screening data only. Layer metadata, mapped features and applicable professional/regulatory review control.",
       "health": {
-        "checked_at": "2026-11-26T19:06:50.603959+00:00",
+        "checked_at": "2026-11-27T19:02:45.044779+00:00",
         "healthcheck_url": "https://mapsdep.nj.gov/arcgis/rest/services/Features/Geology/MapServer?f=json",
         "http_status": 200,
         "content_type": "application/json; charset=UTF-8",
-        "content_sha256": "41561173ed8abe5e370a46f0e2c60ce6d5bf4ff581444c4a95a23e058dec3392",
+        "content_sha256": "31768721c7b00c1ad4551a4332439f0c4aebc5d099356c5523de6773c182b7fd",
         "last_modified_header": null,
-        "etag": "\"5aa84f4e\"",
-        "latency_ms": 112,
+        "etag": "\"8692beb9\"",
+        "latency_ms": 83,
         "semantic_error": null
       }
     },
@@ -544,14 +544,14 @@
       "live": true,
       "warning": "Screening data only. Flood, wellhead and water-resource determinations require the governing map, rule or agency record.",
       "health": {
-        "checked_at": "2026-11-26T19:06:50.836714+00:00",
+        "checked_at": "2026-11-27T19:02:45.200688+00:00",
         "healthcheck_url": "https://mapsdep.nj.gov/arcgis/rest/services/Features/Hydrography/MapServer?f=json",
         "http_status": 200,
         "content_type": "application/json; charset=UTF-8",
-        "content_sha256": "b033a913707f86d1abb26a3fe179c51983ad73d5af0fb5aa16a017e5673a26b9",
+        "content_sha256": "fdff36db0b4a88fa05fb98bda45ea0f4c05b4382bf4589b5faa1e1e4fa04b8d1",
         "last_modified_header": null,
-        "etag": "\"21469ae8\"",
-        "latency_ms": 140,
+        "etag": "\"ec173047\"",
+        "latency_ms": 53,
         "semantic_error": null
       }
     },
@@ -571,14 +571,14 @@
       "live": true,
       "warning": "Public screening context only; mapped historic, archaeological, wetlands and open-space features are not legal determinations.",
       "health": {
-        "checked_at": "2026-11-26T19:06:51.106247+00:00",
+        "checked_at": "2026-11-27T19:02:45.360733+00:00",
         "healthcheck_url": "https://mapsdep.nj.gov/arcgis/rest/services/Features/Land/MapServer?f=json",
         "http_status": 200,
         "content_type": "application/json; charset=UTF-8",
-        "content_sha256": "7b6631ba378e82e1459c0ec3b6545a016ffd5f26c5491ef32f4a78853efe00f1",
+        "content_sha256": "25132fa53b896d6a7cdfbe3bb6538f894853c3afcd476fdb18c16f79d6d70bfa",
         "last_modified_header": null,
-        "etag": "\"2446a5a4\"",
-        "latency_ms": 139,
+        "etag": "\"ea531550\"",
+        "latency_ms": 79,
         "semantic_error": null
       }
     },
@@ -592,7 +592,7 @@
       "records_or_files": 564,
       "minimum": 50,
       "changed": false,
-      "last_modified": "2026-11-26T19:06:25.313960+00:00",
+      "last_modified": "2026-11-27T19:02:38.220915+00:00",
       "cadence": "annual",
       "source_url": "https://www.nj.gov/dca/dlps/hss/annualreporting/Affordable%20Housing%20Municipal%20Status%20Report%207-1-26.xlsx",
       "live": false
@@ -613,14 +613,14 @@
       "live": true,
       "warning": "DCA publishes the Fourth Round calculations as non-binding guidance. Watchdog presents published values and does not make a legal determination of municipal affordable-housing obligation.",
       "health": {
-        "checked_at": "2026-11-26T19:07:22.642771+00:00",
+        "checked_at": "2026-11-27T19:02:46.673710+00:00",
         "healthcheck_url": "https://www.nj.gov/dca/dlps/4th_Round_Numbers.shtml",
         "http_status": 200,
         "content_type": "text/html",
-        "content_sha256": "aae063956b62dbe3a7408c5818eb9d6f9cf718799b08b52db4dc5e344da523f0",
+        "content_sha256": "3df8d3abd37a5bac3b57502d0e99af4429f7409bfac80236adc8590df3a16dc7",
         "last_modified_header": null,
         "etag": null,
-        "latency_ms": 548,
+        "latency_ms": 104,
         "semantic_error": null
       }
     },
@@ -640,14 +640,14 @@
       "live": true,
       "warning": "Selected municipality-entered AHMS data; the DCA workbook states it is not comprehensive and is presented as-is without DCA accuracy certification. Watchdog does not infer legal compliance. HUD-subsidized units, LMI cost burden and affordable_units_pipeline remain unavailable from this workbook.",
       "health": {
-        "checked_at": "2026-11-26T19:07:23.394437+00:00",
+        "checked_at": "2026-11-27T19:02:46.900905+00:00",
         "healthcheck_url": "https://www.nj.gov/dca/dlps/hss/MuniStatusReporting.shtml",
         "http_status": 200,
         "content_type": "text/html",
-        "content_sha256": "6c18df2d6c2f766d06ba873aa8f4386cfa98579d01583ca70cb3bdf0dcd13a18",
+        "content_sha256": "414cf4ee7482af5c7eca9fd654ad76cd3ed0aa2b45ad6f0f10cb277869557f25",
         "last_modified_header": null,
         "etag": null,
-        "latency_ms": 408,
+        "latency_ms": 55,
         "semantic_error": null
       }
     },
@@ -667,14 +667,14 @@
       "live": true,
       "warning": "Viewer as of 2025-08-21; 2024 is the workbook-designated latest published annual data year. 2025 placeholder columns are not treated as published annual observations. Permit/development facts are not legal, zoning, code-compliance, construction-completion, appraisal, lending, insurance, eligibility, or transaction determinations.",
       "health": {
-        "checked_at": "2026-11-26T19:07:24.324723+00:00",
+        "checked_at": "2026-11-27T19:02:47.191400+00:00",
         "healthcheck_url": "https://www.nj.gov/dca/codes/reporter/Development_Trend_Viewer.xlsb",
         "http_status": 200,
         "content_type": "text/plain",
         "content_sha256": "0c65840e9c88c2cd3244532e19faf3daa640b9d2126d32e8a6019bd5ec257c69",
         "last_modified_header": "Thu, 28 Aug 2025 13:02:38 GMT",
         "etag": "\"9c3feb-68b0536e\"",
-        "latency_ms": 1161,
+        "latency_ms": 149,
         "semantic_error": null
       }
     },
@@ -694,14 +694,14 @@
       "live": true,
       "note": "2025 remains the latest statewide General Tax Rate table listed by NJ Division of Taxation as of 2026-09-22. Do not label a projected 2026 rate as published.",
       "health": {
-        "checked_at": "2026-11-26T19:07:25.831427+00:00",
+        "checked_at": "2026-11-27T19:02:47.465898+00:00",
         "healthcheck_url": "https://www.nj.gov/treasury/taxation/lpt/statdata.shtml",
         "http_status": 200,
         "content_type": "text/html",
-        "content_sha256": "e99464e401367384fbcced29fd8c2ba4ae8e9f8907645bc6704dbb63da2820bc",
+        "content_sha256": "23a34a914f2249e9fe38cc12f1d10053f62308ce313a8d62b41765397cc6d459",
         "last_modified_header": null,
         "etag": null,
-        "latency_ms": 248,
+        "latency_ms": 87,
         "semantic_error": null
       }
     },
@@ -721,14 +721,14 @@
       "live": true,
       "note": "Certified for use in tax year 2026; amended by NJ Tax Court January 30, 2026.",
       "health": {
-        "checked_at": "2026-11-26T19:07:26.607695+00:00",
+        "checked_at": "2026-11-27T19:02:47.713170+00:00",
         "healthcheck_url": "https://nj.gov/treasury/taxation/pdf/lpt/chap123/2026CH123.pdf",
         "http_status": 200,
         "content_type": "application/pdf",
         "content_sha256": "2d2e7257a179eab0334923441f05790c925773df4849d008ef92dd61b6b78df5",
         "last_modified_header": "Tue, 03 Mar 2026 12:58:23 GMT",
         "etag": "\"51593-69a6daef\"",
-        "latency_ms": 840,
+        "latency_ms": 280,
         "semantic_error": null
       }
     },
@@ -747,14 +747,14 @@
       "source_url": "https://www.nj.gov/treasury/taxation/pdf/lpt/2026StateEq.pdf",
       "live": true,
       "health": {
-        "checked_at": "2026-11-26T19:07:28.144514+00:00",
+        "checked_at": "2026-11-27T19:02:48.126407+00:00",
         "healthcheck_url": "https://www.nj.gov/treasury/taxation/pdf/lpt/2026StateEq.pdf",
         "http_status": 200,
         "content_type": "application/pdf",
         "content_sha256": "db5f050acd35e718b3ea35d675de3059dc18f9e653f54e3dd0ad4d0a5a1199de",
         "last_modified_header": "Wed, 22 Jul 2026 14:17:42 GMT",
         "etag": "\"188c78-6a60d106\"",
-        "latency_ms": 1863,
+        "latency_ms": 250,
         "semantic_error": null
       }
     },
@@ -774,14 +774,14 @@
       "live": true,
       "note": "NJ currently exposes 2026 county equalization tables.",
       "health": {
-        "checked_at": "2026-11-26T19:07:30.462653+00:00",
+        "checked_at": "2026-11-27T19:02:48.486234+00:00",
         "healthcheck_url": "https://www.nj.gov/treasury/taxation/lpt/county_equalized.shtml",
         "http_status": 200,
         "content_type": "text/html",
-        "content_sha256": "4e0071caa1616d2e3ecde0cb515c337d5ddf08e7a1c3ac13501f5b4b5cf6e0bd",
+        "content_sha256": "de3ae3818a4903e2171c19efca2e2b69cd70fb9b414a51104025305a55780451",
         "last_modified_header": null,
         "etag": null,
-        "latency_ms": 1213,
+        "latency_ms": 90,
         "semantic_error": null
       }
     },
@@ -800,14 +800,14 @@
       "source_url": "https://www.nj.gov/treasury/taxation/lpt/statdata.shtml",
       "live": true,
       "health": {
-        "checked_at": "2026-11-26T19:07:31.928614+00:00",
+        "checked_at": "2026-11-27T19:02:48.679804+00:00",
         "healthcheck_url": "https://www.nj.gov/treasury/taxation/lpt/statdata.shtml",
         "http_status": 200,
         "content_type": "text/html",
-        "content_sha256": "2df3da3fcde89ed191aa31c5516aaa7881102d578dce6f3b53249a0bcc2d4c9d",
+        "content_sha256": "b82d916b657b59038938930e900b6538f7c04a89b4cc4bc68189f461d8d6e2be",
         "last_modified_header": null,
         "etag": null,
-        "latency_ms": 407,
+        "latency_ms": 116,
         "semantic_error": null
       }
     },
@@ -827,14 +827,14 @@
       "live": true,
       "note": "2026 User-Friendly Budget Database is published; use it for levy/budget context, not as a certified parcel tax rate.",
       "health": {
-        "checked_at": "2026-11-26T19:07:32.526178+00:00",
+        "checked_at": "2026-11-27T19:02:48.871827+00:00",
         "healthcheck_url": "https://www.nj.gov/dca/dlgs/programs/mc_budgets.shtml",
         "http_status": 200,
         "content_type": "text/html",
-        "content_sha256": "2fc784d4dd1c3cc48b1bbbb99bd5c45920ae9333b2c43d25f8b727b63fb8e125",
+        "content_sha256": "0c572d7bbc3017aa183c91a0214a69e5dc07d2bbf8874c723d85e30c283a0d6f",
         "last_modified_header": null,
         "etag": null,
-        "latency_ms": 189,
+        "latency_ms": 96,
         "semantic_error": null
       }
     },
@@ -853,14 +853,14 @@
       "source_url": "https://www.nj.gov/dca/dlgs/Fast.shtml",
       "live": true,
       "health": {
-        "checked_at": "2026-11-26T19:07:32.897036+00:00",
+        "checked_at": "2026-11-27T19:02:49.059990+00:00",
         "healthcheck_url": "https://www.nj.gov/dca/dlgs/Fast.shtml",
         "http_status": 200,
         "content_type": "text/html",
-        "content_sha256": "96981266643fe846af40e5e07abac36272fa6ba1c04ee43bd19cba205199e6e3",
+        "content_sha256": "a7b7eb220f4cbcff17b1d0558f3c1710ada1750be05160463654f3c1190eaccf",
         "last_modified_header": null,
         "etag": null,
-        "latency_ms": 202,
+        "latency_ms": 71,
         "semantic_error": null
       }
     }
@@ -869,12 +869,12 @@
     {
       "dataset": "cod-history",
       "stage": "refresh",
-      "error": "Command '['node', 'property/scripts/parse-cod-pdf.js', '/tmp/njptr-refresh-6a3pr69d/source.download']' returned non-zero exit status 1."
+      "error": "Command '['node', 'property/scripts/parse-cod-pdf.js', '/tmp/njptr-refresh-tm229gg4/source.download']' returned non-zero exit status 1."
     },
     {
       "dataset": "affordable-housing-status",
       "stage": "refresh",
-      "error": "Command '['python3', 'property/scripts/parse_affordable_housing.py', '/tmp/njptr-refresh-rynfkksx/source.download', 'property/data/affordable-housing.json']' returned non-zero exit status 1."
+      "error": "Command '['python3', 'property/scripts/parse_affordable_housing.py', '/tmp/njptr-refresh-45m555s2/source.download', 'property/data/affordable-housing.json']' returned non-zero exit status 1."
     }
   ]
 }
